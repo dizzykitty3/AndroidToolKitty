@@ -20,7 +20,7 @@ public class CommonUtils {
     }
 
     public static void debugLog(@NonNull String logEvent) {
-        Log.d("com.example.myapplication", logEvent);
+        Log.d("me.dizzykitty3.androidtoolkitty", logEvent);
     }
 
     public static void showToast(@NonNull Context context, @NonNull String toastText) {
