@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Android ToolKitty</string>
+    <string name="msg001_clear_clipboard">Clear clipboard</string>
+    <string name="msg002_clipboard_group_name">Clipboard</string>
+    <string name="msg003_auto_clear_clipboard_setting">Clear clipboard on app launch</string>
+    <string name="msg004_settings_group_name">Settings</string>
+    <string name="msg005_use_toast_setting">Use toast instead of snackbar</string>
+
+    <string name="key001_auto_clear_clipboard_switch_state">auto_clear_clipboard_switch_state</string>
+    <string name="key002_use_toast_switch_state">use_toast_switch_state</string>
+</resources>
