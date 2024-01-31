@@ -50,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
             isAutoClearClipboard = isChecked;
             editor.putBoolean(String.valueOf(R.string.key001_auto_clear_clipboard_switch_state), isChecked);
             editor.apply();
+
+            if (isChecked) {
+                CommonUtils.debugLog("auto clear clipboard setting switch is now: on");
+            } else {
+                CommonUtils.debugLog("auto clear clipboard setting switch is now: off");
+            }
         });
 
         // Settings group
