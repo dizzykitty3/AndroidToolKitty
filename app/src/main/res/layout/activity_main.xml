@@ -23,7 +23,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:contentPadding="20dp">
+                app:contentPadding="@dimen/padding_cardview_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/msg002_clipboard_group_name"
-                        android:textSize="30sp" />
+                        android:textSize="@dimen/text_size_title" />
 
                     <View
                         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/msg001_clear_clipboard"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/text_size_normal" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/auto_clear_clipboard_setting_switch"
@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
                         android:text="@string/msg003_auto_clear_clipboard_setting"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/text_size_normal" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -69,7 +69,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:contentPadding="20dp">
+                app:contentPadding="@dimen/padding_cardview_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -85,7 +85,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/msg006_google_map_group_name"
-                        android:textSize="30sp" />
+                        android:textSize="@dimen/text_size_title" />
 
                     <View
                         android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/msg007_enter_coordinates_latitude"
                             android:inputType="number"
-                            android:textSize="18sp" />
+                            android:textSize="@dimen/text_size_normal" />
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/input_lng"
@@ -110,7 +110,7 @@
                             android:layout_height="wrap_content"
                             android:hint="@string/msg007_enter_coordinates_latitude"
                             android:inputType="number"
-                            android:textSize="18sp" />
+                            android:textSize="@dimen/text_size_normal" />
                     </LinearLayout>
 
                     <com.google.android.material.button.MaterialButton
@@ -118,7 +118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/msg008_open_google_maps"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/text_size_normal" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -129,7 +129,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:contentPadding="20dp">
+                app:contentPadding="@dimen/padding_cardview_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -145,7 +145,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/msg010_unicode_group_name"
-                        android:textSize="30sp" />
+                        android:textSize="@dimen/text_size_title" />
 
                     <View
                         android:layout_width="match_parent"
@@ -156,20 +156,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/msg011"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/text_size_normal" />
 
                     <TextView
                         android:id="@+id/output_unicode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/text_size_normal" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/unicode_convert_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/msg012"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/text_size_normal" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -181,7 +181,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:contentPadding="20dp">
+                app:contentPadding="@dimen/padding_cardview_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -197,7 +197,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/msg004_settings_group_name"
-                        android:textSize="30sp" />
+                        android:textSize="@dimen/text_size_title" />
 
                     <View
                         android:layout_width="match_parent"
@@ -209,7 +209,7 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
                         android:text="@string/msg005_use_toast_setting"
-                        android:textSize="18sp" />
+                        android:textSize="@dimen/text_size_normal" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>

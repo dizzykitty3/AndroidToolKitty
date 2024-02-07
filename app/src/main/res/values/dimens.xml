@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_cardview_content">15dp</dimen>
+
+    <dimen name="text_size_title">25sp</dimen>
+    <dimen name="text_size_normal">15sp</dimen>
+</resources>
