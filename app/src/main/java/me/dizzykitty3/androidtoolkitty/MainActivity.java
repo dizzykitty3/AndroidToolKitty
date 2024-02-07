@@ -29,12 +29,12 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setLifecycleOwner(this);
         sharedPreferences = getSharedPreferences(String.valueOf(R.string.app_name), MODE_PRIVATE);
-        var editor = sharedPreferences.edit();
+        final var editor = sharedPreferences.edit();
         clipboardUtils = new ClipboardUtils(this);
         getSharedPreferencesValues();
 
         // Clipboard group
-        var clearClipboardButton = binding.clearClipboardButton;
+        final var clearClipboardButton = binding.clearClipboardButton;
         clearClipboardButton.setOnClickListener(v -> {
             clipboardUtils.clearClipboard();
             Utils.debugLog(CLIPBOARD_CLEARED);
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        var autoClearClipboardSettingSwitch = binding.autoClearClipboardSettingSwitch;
+        final var autoClearClipboardSettingSwitch = binding.autoClearClipboardSettingSwitch;
         autoClearClipboardSettingSwitch.setChecked(isAutoClearClipboard);
         autoClearClipboardSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             isAutoClearClipboard = isChecked;
@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Google Maps group
-        var latInputEditText = binding.inputLat;
-        var lngInputEditText = binding.inputLng;
-        var openGoogleMapsButton = binding.openGoogleMapsButton;
+        final var latInputEditText = binding.inputLat;
+        final var lngInputEditText = binding.inputLng;
+        final var openGoogleMapsButton = binding.openGoogleMapsButton;
         openGoogleMapsButton.setOnClickListener(v -> {
             String latitude = Objects.requireNonNull(latInputEditText.getText()).toString();
             String longitude = Objects.requireNonNull(lngInputEditText.getText()).toString();
@@ -70,19 +70,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Unicode group
-        var unicodeInputEditText = binding.inputUnicode;
-        var convertUnicodeButton = binding.unicodeConvertButton;
-        var unicodeOutputTextView = binding.outputUnicode;
+        final var unicodeInputEditText = binding.inputUnicode;
+        final var convertUnicodeButton = binding.unicodeConvertButton;
+        final var unicodeOutputTextView = binding.outputUnicode;
         convertUnicodeButton.setOnClickListener(v -> {
-            var unicode = Objects.requireNonNull(unicodeInputEditText.getText()).toString();
-            var result = Utils.convertUnicodeToCharacter(unicode);
+            final var unicode = Objects.requireNonNull(unicodeInputEditText.getText()).toString();
+            final var result = Utils.convertUnicodeToCharacter(unicode);
             unicodeOutputTextView.setText(result);
             clipboardUtils.copyTextToClipboard(result);
             Utils.showToast(this, result + " copied to clipboard");
         });
 
         // Settings group
-        var useToastSettingSwitch = binding.useToastSettingSwitch;
+        final var useToastSettingSwitch = binding.useToastSettingSwitch;
         useToastSettingSwitch.setChecked(isUseToast);
         useToastSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             isUseToast = isChecked;
@@ -100,10 +100,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openGoogleMaps(String latitude, String longitude) {
-        var coordinates = latitude + "," + longitude;
-        var gmmIntentUri = Uri.parse("geo:" + coordinates + "?q=" + coordinates);
+        final var coordinates = latitude + "," + longitude;
+        final var gmmIntentUri = Uri.parse("geo:" + coordinates + "?q=" + coordinates);
 
-        var mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        final var mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
 
         if (mapIntent.resolveActivity(getPackageManager()) != null) {
@@ -111,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Utils.showToast(this, "Google Maps app is not installed");
             Utils.debugLog("Google Maps app is not installed");
-            var playStoreUri = Uri.parse("market://details?id=com.google.android.apps.maps");
-            var playStoreIntent = new Intent(Intent.ACTION_VIEW, playStoreUri);
+            final var playStoreUri = Uri.parse("market://details?id=com.google.android.apps.maps");
+            final var playStoreIntent = new Intent(Intent.ACTION_VIEW, playStoreUri);
 
             if (playStoreIntent.resolveActivity(getPackageManager()) != null) {
                 startActivity(playStoreIntent);

@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Objects;
 
 public class Utils {
+    private static final String INVALID_INPUT = "invalid input";
     private static Toast currentToast;
     private static Snackbar currentSnackbar;
 
@@ -42,19 +43,19 @@ public class Utils {
 
     public static String convertUnicodeToCharacter(String unicode) {
         final var length = unicode.length();
-        if (length % 4 != 0) return "invalid input";
+        if (length % 4 != 0) return INVALID_INPUT;
 
         try {
-            var stringBuilder = new StringBuilder();
+            final var stringBuilder = new StringBuilder();
             for (int i = 0; i < unicode.length(); i += 4) {
-                var hexValue = unicode.substring(i, i + 4);
-                var decimalValue = Integer.parseInt(hexValue, 16);
+                final var hexValue = unicode.substring(i, i + 4);
+                final var decimalValue = Integer.parseInt(hexValue, 16);
                 stringBuilder.append((char) decimalValue);
             }
             return stringBuilder.toString();
         } catch (Exception e) {
             debugLog("convert unicode to character error, e: " + e);
         }
-        return "invalid input";
+        return INVALID_INPUT;
     }
 }
