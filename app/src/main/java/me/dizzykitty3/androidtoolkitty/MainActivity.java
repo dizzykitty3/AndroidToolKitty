@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // google map group
+        // Google Maps group
         var latInputEditText = binding.inputLat;
         var lngInputEditText = binding.inputLng;
         var openGoogleMapsButton = binding.openGoogleMapsButton;
@@ -68,9 +68,6 @@ public class MainActivity extends AppCompatActivity {
             String longitude = Objects.requireNonNull(lngInputEditText.getText()).toString();
             openGoogleMaps("".equals(latitude) ? "0" : latitude, "".equals(longitude) ? "0" : longitude);
         });
-
-        var openGoogleMapsButtonTest = binding.openGoogleMapsButtonTest;
-        openGoogleMapsButtonTest.setOnClickListener(v -> openGoogleMaps(null, null));
 
         // Settings group
         var useToastSettingSwitch = binding.useToastSettingSwitch;

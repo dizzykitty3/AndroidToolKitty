@@ -113,14 +113,6 @@
                         android:layout_height="wrap_content"
                         android:text="@string/msg008_open_google_maps"
                         android:textSize="18sp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/open_google_maps_button_test"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Open Google Maps Test"
-                        android:textSize="18sp" />
-
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
