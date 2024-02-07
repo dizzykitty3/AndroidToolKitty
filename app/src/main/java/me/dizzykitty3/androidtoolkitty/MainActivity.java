@@ -1,13 +1,14 @@
 package me.dizzykitty3.androidtoolkitty;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-import com.google.android.material.materialswitch.MaterialSwitch;
+import java.util.Objects;
 
 import me.dizzykitty3.androidtoolkitty.databinding.ActivityMainBinding;
 
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         getSharedPreferencesValues();
 
         // Clipboard group
-        Button clearClipboardButton = binding.clearClipboardButton;
+        var clearClipboardButton = binding.clearClipboardButton;
         clearClipboardButton.setOnClickListener(v -> {
             clipboardUtils.clearClipboard();
             CommonUtils.debugLog(CLIPBOARD_CLEARED);
@@ -44,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 CommonUtils.showSnackbar(binding.getRoot(), CLIPBOARD_CLEARED);
             }
         });
-        MaterialSwitch autoClearClipboardSettingSwitch = binding.autoClearClipboardSettingSwitch;
+
+        var autoClearClipboardSettingSwitch = binding.autoClearClipboardSettingSwitch;
         autoClearClipboardSettingSwitch.setChecked(isAutoClearClipboard);
         autoClearClipboardSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             isAutoClearClipboard = isChecked;
@@ -58,8 +60,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // google map group
+        var latInputEditText = binding.inputLat;
+        var lngInputEditText = binding.inputLng;
+        var openGoogleMapsButton = binding.openGoogleMapsButton;
+        openGoogleMapsButton.setOnClickListener(v -> {
+            String latitude = Objects.requireNonNull(latInputEditText.getText()).toString();
+            String longitude = Objects.requireNonNull(lngInputEditText.getText()).toString();
+            openGoogleMaps("".equals(latitude) ? "0" : latitude, "".equals(longitude) ? "0" : longitude);
+        });
+
+        var openGoogleMapsButtonTest = binding.openGoogleMapsButtonTest;
+        openGoogleMapsButtonTest.setOnClickListener(v -> openGoogleMaps(null, null));
+
         // Settings group
-        MaterialSwitch useToastSettingSwitch = binding.useToastSettingSwitch;
+        var useToastSettingSwitch = binding.useToastSettingSwitch;
         useToastSettingSwitch.setChecked(isUseToast);
         useToastSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             isUseToast = isChecked;
@@ -106,6 +121,30 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         if (binding != null) {
             binding.unbind();
+        }
+    }
+
+    private void openGoogleMaps(String latitude, String longitude) {
+        var coordinates = latitude + "," + longitude;
+        var gmmIntentUri = Uri.parse("geo:" + coordinates + "?q=" + coordinates);
+
+        var mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            CommonUtils.showToast(this, "Google Maps app is not installed");
+            CommonUtils.debugLog("Google Maps app is not installed");
+            var playStoreUri = Uri.parse("market://details?id=com.google.android.apps.maps");
+            var playStoreIntent = new Intent(Intent.ACTION_VIEW, playStoreUri);
+
+            if (playStoreIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(playStoreIntent);
+            } else {
+                CommonUtils.showToast(this, "Google Play Store app is not installed");
+                CommonUtils.debugLog("Google Play Store app is not installed");
+            }
         }
     }
 }

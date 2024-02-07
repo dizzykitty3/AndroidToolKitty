@@ -5,6 +5,10 @@
     <string name="msg003_auto_clear_clipboard_setting">Clear clipboard on app launch</string>
     <string name="msg004_settings_group_name">Settings</string>
     <string name="msg005_use_toast_setting">Use toast instead of snackbar</string>
+    <string name="msg006_google_map_group_name">Google Maps SDK</string>
+    <string name="msg007_enter_coordinates_latitude">Enter latitude</string>
+    <string name="msg008_open_google_maps">Open Google Maps</string>
+    <string name="msg009_enter_coordinates_longitude">Enter longitude</string>
 
     <string name="key001_auto_clear_clipboard_switch_state">auto_clear_clipboard_switch_state</string>
     <string name="key002_use_toast_switch_state">use_toast_switch_state</string>

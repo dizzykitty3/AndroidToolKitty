@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="10dp"
-        android:paddingTop="40dp"
+        android:paddingTop="20dp"
+        android:scrollbars="none"
         tools:context=".MainActivity">
 
         <LinearLayout
@@ -22,7 +23,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:contentPadding="20dp">
+                app:contentPadding="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -42,19 +43,22 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="10dp" />
+                        android:layout_height="18dp" />
 
-                    <Button
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/clear_clipboard_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/msg001_clear_clipboard" />
+                        android:text="@string/msg001_clear_clipboard"
+                        android:textSize="18sp" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/auto_clear_clipboard_setting_switch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/msg003_auto_clear_clipboard_setting" />
+                        android:background="?attr/selectableItemBackground"
+                        android:text="@string/msg003_auto_clear_clipboard_setting"
+                        android:textSize="18sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -77,6 +81,68 @@
                         android:layout_height="10dp" />
 
                     <TextView
+                        android:id="@+id/google_map_group_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/msg006_google_map_group_name"
+                        android:textSize="30sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="18dp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_lat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/msg007_enter_coordinates_latitude"
+                        android:inputType="number"
+                        android:textSize="18sp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_lng"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/msg007_enter_coordinates_latitude"
+                        android:inputType="number"
+                        android:textSize="18sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/open_google_maps_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/msg008_open_google_maps"
+                        android:textSize="18sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/open_google_maps_button_test"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Open Google Maps Test"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentPadding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="18dp" />
+
+                    <TextView
                         android:id="@+id/settings_group_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -91,7 +157,9 @@
                         android:id="@+id/use_toast_setting_switch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/msg005_use_toast_setting" />
+                        android:background="?attr/selectableItemBackground"
+                        android:text="@string/msg005_use_toast_setting"
+                        android:textSize="18sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
