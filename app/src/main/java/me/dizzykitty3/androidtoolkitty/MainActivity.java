@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -21,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean isAutoClearClipboard;
     private boolean isUseToast;
     private SharedPreferences sharedPreferences;
-    private TextView unicodeOutputTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
         var clearClipboardButton = binding.clearClipboardButton;
         clearClipboardButton.setOnClickListener(v -> {
             clipboardUtils.clearClipboard();
-            CommonUtils.debugLog(CLIPBOARD_CLEARED);
+            Utils.debugLog(CLIPBOARD_CLEARED);
             if (isUseToast) {
-                CommonUtils.showToast(this, CLIPBOARD_CLEARED);
+                Utils.showToast(this, CLIPBOARD_CLEARED);
             } else {
-                CommonUtils.showSnackbar(binding.getRoot(), CLIPBOARD_CLEARED);
+                Utils.showSnackbar(binding.getRoot(), CLIPBOARD_CLEARED);
             }
         });
 
@@ -55,9 +53,9 @@ public class MainActivity extends AppCompatActivity {
             editor.apply();
 
             if (isChecked) {
-                CommonUtils.debugLog("auto clear clipboard setting switch is now: on");
+                Utils.debugLog("auto clear clipboard setting switch is now: on");
             } else {
-                CommonUtils.debugLog("auto clear clipboard setting switch is now: off");
+                Utils.debugLog("auto clear clipboard setting switch is now: off");
             }
         });
 
@@ -74,8 +72,14 @@ public class MainActivity extends AppCompatActivity {
         // Unicode group
         var unicodeInputEditText = binding.inputUnicode;
         var convertUnicodeButton = binding.unicodeConvertButton;
-        unicodeOutputTextView = binding.outputUnicode;
-        convertUnicodeButton.setOnClickListener(v -> convertUnicode(Objects.requireNonNull(unicodeInputEditText.getText()).toString()));
+        var unicodeOutputTextView = binding.outputUnicode;
+        convertUnicodeButton.setOnClickListener(v -> {
+            var unicode = Objects.requireNonNull(unicodeInputEditText.getText()).toString();
+            var result = Utils.convertUnicodeToCharacter(unicode);
+            unicodeOutputTextView.setText(result);
+            clipboardUtils.copyTextToClipboard(result);
+            Utils.showToast(this, result + " copied to clipboard");
+        });
 
         // Settings group
         var useToastSettingSwitch = binding.useToastSettingSwitch;
@@ -86,13 +90,37 @@ public class MainActivity extends AppCompatActivity {
             editor.apply();
 
             if (isChecked) {
-                CommonUtils.showToast(this, "toast would look like this");
-                CommonUtils.debugLog("use toast setting switch is now: on");
+                Utils.showToast(this, "toast would look like this");
+                Utils.debugLog("use toast setting switch is now: on");
             } else {
-                CommonUtils.showSnackbar(binding.getRoot(), "snackbar would look like this");
-                CommonUtils.debugLog("use toast setting switch is now: off");
+                Utils.showSnackbar(binding.getRoot(), "snackbar would look like this");
+                Utils.debugLog("use toast setting switch is now: off");
             }
         });
+    }
+
+    private void openGoogleMaps(String latitude, String longitude) {
+        var coordinates = latitude + "," + longitude;
+        var gmmIntentUri = Uri.parse("geo:" + coordinates + "?q=" + coordinates);
+
+        var mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            Utils.showToast(this, "Google Maps app is not installed");
+            Utils.debugLog("Google Maps app is not installed");
+            var playStoreUri = Uri.parse("market://details?id=com.google.android.apps.maps");
+            var playStoreIntent = new Intent(Intent.ACTION_VIEW, playStoreUri);
+
+            if (playStoreIntent.resolveActivity(getPackageManager()) != null) {
+                startActivity(playStoreIntent);
+            } else {
+                Utils.showToast(this, "Google Play Store app is not installed");
+                Utils.debugLog("Google Play Store app is not installed");
+            }
+        }
     }
 
     private void getSharedPreferencesValues() {
@@ -111,11 +139,11 @@ public class MainActivity extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus && (isAutoClearClipboard)) {
             clipboardUtils.clearClipboard();
-            CommonUtils.debugLog(AUTO_CLIPBOARD_CLEARED);
+            Utils.debugLog(AUTO_CLIPBOARD_CLEARED);
             if (isUseToast) {
-                CommonUtils.showToast(this, AUTO_CLIPBOARD_CLEARED);
+                Utils.showToast(this, AUTO_CLIPBOARD_CLEARED);
             } else {
-                CommonUtils.showSnackbar(binding.getRoot(), AUTO_CLIPBOARD_CLEARED);
+                Utils.showSnackbar(binding.getRoot(), AUTO_CLIPBOARD_CLEARED);
             }
         }
     }
@@ -126,36 +154,5 @@ public class MainActivity extends AppCompatActivity {
         if (binding != null) {
             binding.unbind();
         }
-    }
-
-    private void openGoogleMaps(String latitude, String longitude) {
-        var coordinates = latitude + "," + longitude;
-        var gmmIntentUri = Uri.parse("geo:" + coordinates + "?q=" + coordinates);
-
-        var mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-
-        if (mapIntent.resolveActivity(getPackageManager()) != null) {
-            startActivity(mapIntent);
-        } else {
-            CommonUtils.showToast(this, "Google Maps app is not installed");
-            CommonUtils.debugLog("Google Maps app is not installed");
-            var playStoreUri = Uri.parse("market://details?id=com.google.android.apps.maps");
-            var playStoreIntent = new Intent(Intent.ACTION_VIEW, playStoreUri);
-
-            if (playStoreIntent.resolveActivity(getPackageManager()) != null) {
-                startActivity(playStoreIntent);
-            } else {
-                CommonUtils.showToast(this, "Google Play Store app is not installed");
-                CommonUtils.debugLog("Google Play Store app is not installed");
-            }
-        }
-    }
-
-    private void convertUnicode(String unicode) {
-        var result = UnicodeUtils.convertUnicodeToCharacter(unicode);
-        unicodeOutputTextView.setText(result);
-        clipboardUtils.copyTextToClipboard(result);
-        CommonUtils.showToast(this, result + "copied to clipboard");
     }
 }

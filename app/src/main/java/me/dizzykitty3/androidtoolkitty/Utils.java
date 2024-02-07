@@ -7,15 +7,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Objects;
 
-public class CommonUtils {
+public class Utils {
     private static Toast currentToast;
     private static Snackbar currentSnackbar;
 
-    private CommonUtils() {
+    private Utils() {
         // Empty
     }
 
@@ -35,7 +36,17 @@ public class CommonUtils {
         if (Objects.nonNull(currentSnackbar) && currentSnackbar.isShown()) {
             currentSnackbar.dismiss();
         }
-        currentSnackbar = Snackbar.make(view, snackbarText, Snackbar.LENGTH_SHORT);
+        currentSnackbar = Snackbar.make(view, snackbarText, BaseTransientBottomBar.LENGTH_SHORT);
         currentSnackbar.show();
+    }
+
+    public static String convertUnicodeToCharacter(String unicode) {
+        var stringBuilder = new StringBuilder();
+        for (int i = 0; i < unicode.length(); i += 4) {
+            var hexValue = unicode.substring(i, i + 4);
+            var decimalValue = Integer.parseInt(hexValue, 16);
+            stringBuilder.append((char) decimalValue);
+        }
+        return stringBuilder.toString();
     }
 }
