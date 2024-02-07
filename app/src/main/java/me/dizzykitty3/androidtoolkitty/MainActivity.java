@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     private boolean isAutoClearClipboard;
     private boolean isUseToast;
     private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setLifecycleOwner(this);
         sharedPreferences = getSharedPreferences(String.valueOf(R.string.app_name), MODE_PRIVATE);
-        editor = sharedPreferences.edit();
+        var editor = sharedPreferences.edit();
         clipboardUtils = new ClipboardUtils(this);
         getSharedPreferencesValues();
 
