@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isAutoClearClipboard;
     private boolean isUseToast;
     private SharedPreferences sharedPreferences;
+    private TextView unicodeOutputTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
             String longitude = Objects.requireNonNull(lngInputEditText.getText()).toString();
             openGoogleMaps("".equals(latitude) ? "0" : latitude, "".equals(longitude) ? "0" : longitude);
         });
+
+        // Unicode group
+        var unicodeInputEditText = binding.inputUnicode;
+        var convertUnicodeButton = binding.unicodeConvertButton;
+        unicodeOutputTextView = binding.outputUnicode;
+        convertUnicodeButton.setOnClickListener(v -> convertUnicode(unicodeInputEditText.getText().toString()));
 
         // Settings group
         var useToastSettingSwitch = binding.useToastSettingSwitch;
@@ -142,5 +150,12 @@ public class MainActivity extends AppCompatActivity {
                 CommonUtils.debugLog("Google Play Store app is not installed");
             }
         }
+    }
+
+    private void convertUnicode(String unicode) {
+        var result = UnicodeUtils.convertUnicodeToCharacter(unicode);
+        unicodeOutputTextView.setText(result);
+        clipboardUtils.copyTextToClipboard(result);
+        CommonUtils.showToast(this, result + "copied to clipboard");
     }
 }

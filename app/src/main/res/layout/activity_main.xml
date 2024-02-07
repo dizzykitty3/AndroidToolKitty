@@ -132,6 +132,59 @@
 
                     <View
                         android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
+                    <TextView
+                        android:id="@+id/unicode_group_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/msg010_unicode_group_name"
+                        android:textSize="30sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="18dp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/input_unicode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/msg011"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/output_unicode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Temp"
+                        android:textSize="18sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/unicode_convert_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/msg012"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentPadding="20dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
                         android:layout_height="18dp" />
 
                     <TextView

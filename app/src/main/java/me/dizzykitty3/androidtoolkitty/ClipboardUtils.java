@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty;
 
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 
@@ -13,9 +14,15 @@ public class ClipboardUtils {
     }
 
     public void clearClipboard() {
-        final ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        final var clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         if (clipboard.hasPrimaryClip()) {
             clipboard.clearPrimaryClip();
         }
+    }
+
+    public void copyTextToClipboard(String text) {
+        final var clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("label", text);
+        clipboard.setPrimaryClip(clip);
     }
 }
