@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         var unicodeInputEditText = binding.inputUnicode;
         var convertUnicodeButton = binding.unicodeConvertButton;
         unicodeOutputTextView = binding.outputUnicode;
-        convertUnicodeButton.setOnClickListener(v -> convertUnicode(unicodeInputEditText.getText().toString()));
+        convertUnicodeButton.setOnClickListener(v -> convertUnicode(Objects.requireNonNull(unicodeInputEditText.getText()).toString()));
 
         // Settings group
         var useToastSettingSwitch = binding.useToastSettingSwitch;
