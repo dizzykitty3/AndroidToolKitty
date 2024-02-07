@@ -41,12 +41,20 @@ public class Utils {
     }
 
     public static String convertUnicodeToCharacter(String unicode) {
-        var stringBuilder = new StringBuilder();
-        for (int i = 0; i < unicode.length(); i += 4) {
-            var hexValue = unicode.substring(i, i + 4);
-            var decimalValue = Integer.parseInt(hexValue, 16);
-            stringBuilder.append((char) decimalValue);
+        final var length = unicode.length();
+        if (length % 4 != 0) return "invalid input";
+
+        try {
+            var stringBuilder = new StringBuilder();
+            for (int i = 0; i < unicode.length(); i += 4) {
+                var hexValue = unicode.substring(i, i + 4);
+                var decimalValue = Integer.parseInt(hexValue, 16);
+                stringBuilder.append((char) decimalValue);
+            }
+            return stringBuilder.toString();
+        } catch (Exception e) {
+            debugLog("convert unicode to character error, e: " + e);
         }
-        return stringBuilder.toString();
+        return "invalid input";
     }
 }
