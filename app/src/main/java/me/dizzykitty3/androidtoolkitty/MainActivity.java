@@ -75,7 +75,16 @@ public class MainActivity extends AppCompatActivity {
         final var unicodeOutputTextView = binding.outputUnicode;
         convertUnicodeButton.setOnClickListener(v -> {
             final var unicode = Objects.requireNonNull(unicodeInputEditText.getText()).toString();
-            final var result = Utils.convertUnicodeToCharacter(unicode);
+            if (unicode.length() == 0) {
+                return;
+            }
+            String result;
+            try {
+                result = Utils.convertUnicodeToCharacter(unicode);
+            } catch (Exception e) {
+                Utils.showToast(this, e.getMessage() != null ? e.getMessage() : "Unknown error occurred");
+                return;
+            }
             unicodeOutputTextView.setText(result);
             clipboardUtils.copyTextToClipboard(result);
             Utils.showToast(this, result + " copied to clipboard");

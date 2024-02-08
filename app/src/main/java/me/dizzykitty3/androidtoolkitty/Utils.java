@@ -41,10 +41,9 @@ public class Utils {
         currentSnackbar.show();
     }
 
-    public static String convertUnicodeToCharacter(String unicode) {
+    public static String convertUnicodeToCharacter(String unicode) throws Exception{
         final var length = unicode.length();
-        if (length % 4 != 0) return INVALID_INPUT;
-
+        if (length % 4 != 0) throw new Exception("The length of the input is not a multiple of 4");
         try {
             final var stringBuilder = new StringBuilder();
             for (int i = 0; i < unicode.length(); i += 4) {
@@ -54,8 +53,7 @@ public class Utils {
             }
             return stringBuilder.toString();
         } catch (Exception e) {
-            debugLog("convert unicode to character error, e: " + e);
+            throw new Exception("Invalid input");
         }
-        return INVALID_INPUT;
     }
 }
