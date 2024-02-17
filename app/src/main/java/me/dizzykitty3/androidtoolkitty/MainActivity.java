@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -20,22 +21,39 @@ public class MainActivity extends AppCompatActivity {
     private boolean isAutoClearClipboard;
     private boolean isUseToast;
     private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        init();
+    }
 
-        // Core
+    private void init() {
+        initCore();
+        getSharedPreferencesValues();
+        initClipboardGroup();
+        initGoogleMapsGroup();
+        initUnicodeGroup();
+        initSettingsGroup();
+    }
+
+    private void initCore() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setLifecycleOwner(this);
         sharedPreferences = getSharedPreferences(String.valueOf(R.string.app_name), MODE_PRIVATE);
-        final var editor = sharedPreferences.edit();
+        editor = sharedPreferences.edit();
         clipboardUtils = new ClipboardUtils(this);
         getSharedPreferencesValues();
+    }
 
-        // Clipboard group
-        final var clearClipboardButton = binding.clearClipboardButton;
-        clearClipboardButton.setOnClickListener(v -> {
+    private void getSharedPreferencesValues() {
+        isAutoClearClipboard = sharedPreferences.getBoolean(String.valueOf(R.string.key001_auto_clear_clipboard_switch_state), false);
+        isUseToast = sharedPreferences.getBoolean(String.valueOf(R.string.key002_use_toast_switch_state), false);
+    }
+
+    private void initClipboardGroup() {
+        binding.clearClipboardButton.setOnClickListener(v -> {
             clipboardUtils.clearClipboard();
             Utils.debugLog(CLIPBOARD_CLEARED);
             if (isUseToast) {
@@ -45,9 +63,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final var autoClearClipboardSettingSwitch = binding.autoClearClipboardSettingSwitch;
-        autoClearClipboardSettingSwitch.setChecked(isAutoClearClipboard);
-        autoClearClipboardSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.autoClearClipboardSettingSwitch.setChecked(isAutoClearClipboard);
+        binding.autoClearClipboardSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             isAutoClearClipboard = isChecked;
             editor.putBoolean(String.valueOf(R.string.key001_auto_clear_clipboard_switch_state), isChecked);
             editor.apply();
@@ -58,23 +75,19 @@ public class MainActivity extends AppCompatActivity {
                 Utils.debugLog("auto clear clipboard setting switch is now: off");
             }
         });
+    }
 
-        // Google Maps group
-        final var latInputEditText = binding.inputLat;
-        final var lngInputEditText = binding.inputLng;
-        final var openGoogleMapsButton = binding.openGoogleMapsButton;
-        openGoogleMapsButton.setOnClickListener(v -> {
-            String latitude = Objects.requireNonNull(latInputEditText.getText()).toString();
-            String longitude = Objects.requireNonNull(lngInputEditText.getText()).toString();
+    private void initGoogleMapsGroup() {
+        binding.openGoogleMapsButton.setOnClickListener(v -> {
+            String latitude = Objects.requireNonNull(binding.latitudeTextInput.getText()).toString();
+            String longitude = Objects.requireNonNull(binding.longitudeTextInput.getText()).toString();
             openGoogleMaps("".equals(latitude) ? "0" : latitude, "".equals(longitude) ? "0" : longitude);
         });
+    }
 
-        // Unicode group
-        final var unicodeInputEditText = binding.inputUnicode;
-        final var convertUnicodeButton = binding.unicodeConvertButton;
-        final var unicodeOutputTextView = binding.outputUnicode;
-        convertUnicodeButton.setOnClickListener(v -> {
-            final var unicode = Objects.requireNonNull(unicodeInputEditText.getText()).toString();
+    private void initUnicodeGroup() {
+        binding.convertToCharacterButton.setOnClickListener(v -> {
+            final var unicode = Objects.requireNonNull(binding.unicodeTextInput.getText()).toString();
             if (unicode.length() == 0) {
                 return;
             }
@@ -85,15 +98,15 @@ public class MainActivity extends AppCompatActivity {
                 Utils.showToast(this, e.getMessage() != null ? e.getMessage() : "Unknown error occurred");
                 return;
             }
-            unicodeOutputTextView.setText(result);
+            binding.unicodeOutputTextView.setText(result);
             clipboardUtils.copyTextToClipboard(result);
             Utils.showToast(this, result + " copied to clipboard");
         });
+    }
 
-        // Settings group
-        final var useToastSettingSwitch = binding.useToastSettingSwitch;
-        useToastSettingSwitch.setChecked(isUseToast);
-        useToastSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+    private void initSettingsGroup() {
+        binding.useToastSettingSwitch.setChecked(isUseToast);
+        binding.useToastSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             isUseToast = isChecked;
             editor.putBoolean(String.valueOf(R.string.key002_use_toast_switch_state), isChecked);
             editor.apply();
@@ -108,33 +121,30 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void openGoogleMaps(String latitude, String longitude) {
+    private void openGoogleMaps(@NonNull final String latitude, @NonNull final String longitude) {
         final var coordinates = latitude + "," + longitude;
         final var gmmIntentUri = Uri.parse("geo:" + coordinates + "?q=" + coordinates);
 
         final var mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
 
-        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+        if (Objects.nonNull(mapIntent.resolveActivity(getPackageManager()))) {
             startActivity(mapIntent);
-        } else {
-            Utils.showToast(this, "Google Maps app is not installed");
-            Utils.debugLog("Google Maps app is not installed");
-            final var playStoreUri = Uri.parse("market://details?id=com.google.android.apps.maps");
-            final var playStoreIntent = new Intent(Intent.ACTION_VIEW, playStoreUri);
-
-            if (playStoreIntent.resolveActivity(getPackageManager()) != null) {
-                startActivity(playStoreIntent);
-            } else {
-                Utils.showToast(this, "Google Play Store app is not installed");
-                Utils.debugLog("Google Play Store app is not installed");
-            }
+            return;
         }
+        Utils.showToastAndRecordLog(this, "Google Maps app is not installed");
+        openCertainAppOnPlayStore("com.google.android.apps.maps");
     }
 
-    private void getSharedPreferencesValues() {
-        isAutoClearClipboard = sharedPreferences.getBoolean(String.valueOf(R.string.key001_auto_clear_clipboard_switch_state), false);
-        isUseToast = sharedPreferences.getBoolean(String.valueOf(R.string.key002_use_toast_switch_state), false);
+    private void openCertainAppOnPlayStore(@NonNull final String packageName) {
+        final var playStoreUri = Uri.parse("market://details?id=" + packageName);
+        final var playStoreIntent = new Intent(Intent.ACTION_VIEW, playStoreUri);
+
+        if (Objects.nonNull(playStoreIntent.resolveActivity(getPackageManager()))) {
+            startActivity(playStoreIntent);
+            return;
+        }
+        Utils.showToastAndRecordLog(this, "Google Play Store app is not installed");
     }
 
     @Override

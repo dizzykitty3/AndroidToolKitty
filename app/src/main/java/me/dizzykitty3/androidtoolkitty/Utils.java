@@ -13,7 +13,6 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.Objects;
 
 public class Utils {
-    private static final String INVALID_INPUT = "invalid input";
     private static Toast currentToast;
     private static Snackbar currentSnackbar;
 
@@ -33,6 +32,11 @@ public class Utils {
         currentToast.show();
     }
 
+    public static void showToastAndRecordLog(@NonNull Context context, @NonNull String event) {
+        debugLog(event);
+        showToast(context, event);
+    }
+
     public static void showSnackbar(@NonNull View view, @NonNull String snackbarText) {
         if (Objects.nonNull(currentSnackbar) && currentSnackbar.isShown()) {
             currentSnackbar.dismiss();
@@ -41,12 +45,12 @@ public class Utils {
         currentSnackbar.show();
     }
 
-    public static String convertUnicodeToCharacter(String unicode) throws Exception{
+    public static String convertUnicodeToCharacter(String unicode) throws Exception {
         final var length = unicode.length();
         if (length % 4 != 0) throw new Exception("The length of the input is not a multiple of 4");
         try {
             final var stringBuilder = new StringBuilder();
-            for (int i = 0; i < unicode.length(); i += 4) {
+            for (int i = 0; i < length; i += 4) {
                 final var hexValue = unicode.substring(i, i + 4);
                 final var decimalValue = Integer.parseInt(hexValue, 16);
                 stringBuilder.append((char) decimalValue);

@@ -35,7 +35,7 @@
                         android:layout_height="10dp" />
 
                     <TextView
-                        android:id="@+id/clipboard_card_name"
+                        android:id="@+id/clipboard_group_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/msg002_clipboard_group_name"
@@ -97,7 +97,7 @@
                         android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/input_lat"
+                            android:id="@+id/latitude_text_input"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="@string/msg007_enter_coordinates_latitude"
@@ -105,10 +105,10 @@
                             android:textSize="@dimen/text_size_normal" />
 
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/input_lng"
+                            android:id="@+id/longitude_text_input"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="@string/msg007_enter_coordinates_latitude"
+                            android:hint="@string/msg009_enter_coordinates_longitude"
                             android:inputType="number"
                             android:textSize="@dimen/text_size_normal" />
                     </LinearLayout>
@@ -152,23 +152,23 @@
                         android:layout_height="18dp" />
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/input_unicode"
+                        android:id="@+id/unicode_text_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/msg011"
+                        android:hint="@string/msg011_enter_unicode_hint"
                         android:textSize="@dimen/text_size_normal" />
 
                     <TextView
-                        android:id="@+id/output_unicode"
+                        android:id="@+id/unicode_output_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="@dimen/text_size_normal" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/unicode_convert_button"
+                        android:id="@+id/convert_to_character_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/msg012"
+                        android:text="@string/msg012_convert_to_character"
                         android:textSize="@dimen/text_size_normal" />
 
                 </LinearLayout>
@@ -215,7 +215,7 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="150dp" />
+                android:layout_height="200dp" />
         </LinearLayout>
     </ScrollView>
 </layout>
