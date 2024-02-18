@@ -91,16 +91,14 @@ public class MainActivity extends AppCompatActivity {
             if (unicode.length() == 0) {
                 return;
             }
-            String result;
             try {
-                result = Utils.convertUnicodeToCharacter(unicode);
+                var result = Utils.convertUnicodeToCharacter(unicode);
+                binding.unicodeOutputTextView.setText(result);
+                clipboardUtils.copyTextToClipboard(result);
+                Utils.showToast(this, result + " copied to clipboard");
             } catch (Exception e) {
                 Utils.showToast(this, e.getMessage() != null ? e.getMessage() : "Unknown error occurred");
-                return;
             }
-            binding.unicodeOutputTextView.setText(result);
-            clipboardUtils.copyTextToClipboard(result);
-            Utils.showToast(this, result + " copied to clipboard");
         });
     }
 
