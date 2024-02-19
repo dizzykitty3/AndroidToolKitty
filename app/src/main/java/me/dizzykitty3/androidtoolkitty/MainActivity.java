@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences(String.valueOf(R.string.app_name), MODE_PRIVATE);
         editor = sharedPreferences.edit();
         clipboardUtils = new ClipboardUtils(this);
-        getSharedPreferencesValues();
     }
 
     private void getSharedPreferencesValues() {
@@ -154,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if (hasFocus && (isAutoClearClipboard)) {
+        if (hasFocus && isAutoClearClipboard) {
             clipboardUtils.clearClipboard();
             Utils.debugLog(AUTO_CLIPBOARD_CLEARED);
             if (isUseToast) {
@@ -168,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (binding != null) {
+        if (Objects.nonNull(binding)) {
             binding.unbind();
         }
     }

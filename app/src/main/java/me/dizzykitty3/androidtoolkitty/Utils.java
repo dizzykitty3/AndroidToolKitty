@@ -20,21 +20,21 @@ public class Utils {
         // Empty
     }
 
+    public static void showToastAndRecordLog(@NonNull Context context, @NonNull String event) {
+        debugLog(event);
+        showToast(context, event);
+    }
+
     public static void debugLog(@NonNull String logEvent) {
         Log.d("me.dizzykitty3.androidtoolkitty", logEvent);
     }
 
     public static void showToast(@NonNull Context context, @NonNull String toastText) {
-        if (currentToast != null) {
+        if (Objects.nonNull(currentToast)) {
             currentToast.cancel();
         }
         currentToast = Toast.makeText(context, toastText, Toast.LENGTH_SHORT);
         currentToast.show();
-    }
-
-    public static void showToastAndRecordLog(@NonNull Context context, @NonNull String event) {
-        debugLog(event);
-        showToast(context, event);
     }
 
     public static void showSnackbar(@NonNull View view, @NonNull String snackbarText) {
