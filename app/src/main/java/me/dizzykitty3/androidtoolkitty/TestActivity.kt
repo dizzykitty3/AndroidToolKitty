@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -39,7 +41,7 @@ fun DialogContent() {
     var text by remember { mutableStateOf(TextFieldValue()) }
 
     Column(
-        modifier = Modifier.padding(16.dp)
+        modifier = Modifier.padding(14.dp)
     ) {
         TextField(
             value = text,
@@ -47,12 +49,18 @@ fun DialogContent() {
             label = { Text("Enter your text") }
         )
 
-        Button(onClick = { /* Confirm button logic here */ }) {
-            Text("Confirm")
-        }
+        Row(
+            modifier = Modifier.padding(14.dp)
+        ) {
+            Button(onClick = { /* Confirm button logic here */ }) {
+                Text("Confirm")
+            }
 
-        Button(onClick = { /* Cancel button logic here */ }) {
-            Text("Cancel")
+            Spacer(modifier = Modifier.padding(10.dp))
+
+            Button(onClick = { /* Cancel button logic here */ }) {
+                Text("Cancel")
+            }
         }
     }
 }
