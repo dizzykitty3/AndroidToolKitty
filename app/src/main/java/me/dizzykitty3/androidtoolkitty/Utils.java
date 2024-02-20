@@ -1,6 +1,8 @@
 package me.dizzykitty3.androidtoolkitty;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -18,23 +20,6 @@ public class Utils {
 
     private Utils() {
         // Empty
-    }
-
-    public static void showToastAndRecordLog(@NonNull Context context, @NonNull String event) {
-        debugLog(event);
-        showToast(context, event);
-    }
-
-    public static void debugLog(@NonNull String logEvent) {
-        Log.d("me.dizzykitty3.androidtoolkitty", logEvent);
-    }
-
-    public static void showToast(@NonNull Context context, @NonNull String toastText) {
-        if (Objects.nonNull(currentToast)) {
-            currentToast.cancel();
-        }
-        currentToast = Toast.makeText(context, toastText, Toast.LENGTH_SHORT);
-        currentToast.show();
     }
 
     public static void showSnackbar(@NonNull View view, @NonNull String snackbarText) {
@@ -59,5 +44,48 @@ public class Utils {
         } catch (Exception e) {
             throw new Exception("Invalid input");
         }
+    }
+
+    public static void openGoogleMaps(@NonNull Context context, @NonNull final String latitude, @NonNull final String longitude) {
+        final var coordinates = latitude + "," + longitude;
+        final var gmmIntentUri = Uri.parse("geo:" + coordinates + "?q=" + coordinates);
+
+        final var mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+
+        if (Objects.nonNull(mapIntent.resolveActivity(context.getPackageManager()))) {
+            context.startActivity(mapIntent);
+            return;
+        }
+        Utils.showToastAndRecordLog(context, "Google Maps app is not installed");
+        openCertainAppOnPlayStore(context, "com.google.android.apps.maps");
+    }
+
+    public static void showToastAndRecordLog(@NonNull Context context, @NonNull String event) {
+        debugLog(event);
+        showToast(context, event);
+    }
+
+    private static void openCertainAppOnPlayStore(@NonNull Context context, @NonNull final String packageName) {
+        final var playStoreUri = Uri.parse("market://details?id=" + packageName);
+        final var playStoreIntent = new Intent(Intent.ACTION_VIEW, playStoreUri);
+
+        if (Objects.nonNull(playStoreIntent.resolveActivity(context.getPackageManager()))) {
+            context.startActivity(playStoreIntent);
+            return;
+        }
+        Utils.showToastAndRecordLog(context, "Google Play Store app is not installed");
+    }
+
+    public static void debugLog(@NonNull String logEvent) {
+        Log.d("me.dizzykitty3.androidtoolkitty", logEvent);
+    }
+
+    public static void showToast(@NonNull Context context, @NonNull String toastText) {
+        if (Objects.nonNull(currentToast)) {
+            currentToast.cancel();
+        }
+        currentToast = Toast.makeText(context, toastText, Toast.LENGTH_SHORT);
+        currentToast.show();
     }
 }

@@ -1,11 +1,8 @@
 package me.dizzykitty3.androidtoolkitty;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
@@ -80,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         binding.openGoogleMapsButton.setOnClickListener(v -> {
             String latitude = Objects.requireNonNull(binding.latitudeTextInput.getText()).toString();
             String longitude = Objects.requireNonNull(binding.longitudeTextInput.getText()).toString();
-            openGoogleMaps("".equals(latitude) ? "0" : latitude, "".equals(longitude) ? "0" : longitude);
+            Utils.openGoogleMaps(this, "".equals(latitude) ? "0" : latitude, "".equals(longitude) ? "0" : longitude);
         });
     }
 
@@ -116,32 +113,6 @@ public class MainActivity extends AppCompatActivity {
                 Utils.debugLog("use toast setting switch is now: off");
             }
         });
-    }
-
-    private void openGoogleMaps(@NonNull final String latitude, @NonNull final String longitude) {
-        final var coordinates = latitude + "," + longitude;
-        final var gmmIntentUri = Uri.parse("geo:" + coordinates + "?q=" + coordinates);
-
-        final var mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
-
-        if (Objects.nonNull(mapIntent.resolveActivity(getPackageManager()))) {
-            startActivity(mapIntent);
-            return;
-        }
-        Utils.showToastAndRecordLog(this, "Google Maps app is not installed");
-        openCertainAppOnPlayStore("com.google.android.apps.maps");
-    }
-
-    private void openCertainAppOnPlayStore(@NonNull final String packageName) {
-        final var playStoreUri = Uri.parse("market://details?id=" + packageName);
-        final var playStoreIntent = new Intent(Intent.ACTION_VIEW, playStoreUri);
-
-        if (Objects.nonNull(playStoreIntent.resolveActivity(getPackageManager()))) {
-            startActivity(playStoreIntent);
-            return;
-        }
-        Utils.showToastAndRecordLog(this, "Google Play Store app is not installed");
     }
 
     @Override
