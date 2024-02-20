@@ -12,9 +12,9 @@ import me.dizzykitty3.androidtoolkitty.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     private static final String CLIPBOARD_CLEARED = "clipboard cleared";
-    private static final String AUTO_CLIPBOARD_CLEARED = "clipboard cleared automatically";
+    private static final String CLIPBOARD_CLEARED_AUTOMATICALLY = "clipboard cleared automatically";
     private static final String KEY_AUTO_CLEAR_CLIPBOARD = "key_auto_clear_clipboard";
-    private static final String KEY_IS_USE_TOAST = "key_is_use_toast";
+    //    private static final String KEY_IS_USE_TOAST = "key_is_use_toast";
     private ActivityMainBinding binding;
     private ClipboardUtils clipboardUtils;
     private boolean isAutoClearClipboard;
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         initClipboardGroup();
         initGoogleMapsGroup();
         initUnicodeGroup();
-        initSettingsGroup();
+//        initSettingsGroup();
     }
 
     private void initCore() {
@@ -47,18 +47,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void getSharedPreferencesValues() {
         isAutoClearClipboard = sharedPreferences.getBoolean(KEY_AUTO_CLEAR_CLIPBOARD, false);
-        isUseToast = sharedPreferences.getBoolean(KEY_IS_USE_TOAST, false);
+//        isUseToast = sharedPreferences.getBoolean(KEY_IS_USE_TOAST, false);
     }
 
     private void initClipboardGroup() {
         binding.clearClipboardButton.setOnClickListener(v -> {
             clipboardUtils.clearClipboard();
-            Utils.debugLog(CLIPBOARD_CLEARED);
-            if (isUseToast) {
-                Utils.showToast(this, CLIPBOARD_CLEARED);
-            } else {
-                Utils.showSnackbar(binding.getRoot(), CLIPBOARD_CLEARED);
-            }
+            Utils.showToastAndRecordLog(this, CLIPBOARD_CLEARED);
         });
 
         binding.autoClearClipboardSettingSwitch.setChecked(isAutoClearClipboard);
@@ -100,22 +95,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initSettingsGroup() {
-        binding.useToastSettingSwitch.setChecked(isUseToast);
-        binding.useToastSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            isUseToast = isChecked;
-            editor.putBoolean(KEY_IS_USE_TOAST, isChecked);
-            editor.apply();
-
-            if (isChecked) {
-                Utils.showToast(this, "toast would look like this");
-                Utils.debugLog("use toast setting switch is now: on");
-            } else {
-                Utils.showSnackbar(binding.getRoot(), "snackbar would look like this");
-                Utils.debugLog("use toast setting switch is now: off");
-            }
-        });
-    }
+//    private void initSettingsGroup() {
+//        binding.useToastSettingSwitch.setChecked(isUseToast);
+//        binding.useToastSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
+//            isUseToast = isChecked;
+//            editor.putBoolean(KEY_IS_USE_TOAST, isChecked);
+//            editor.apply();
+//
+//            if (isChecked) {
+//                Utils.showToast(this, "toast would look like this");
+//                Utils.debugLog("use toast setting switch is now: on");
+//            } else {
+//                Utils.showSnackbar(binding.getRoot(), "snackbar would look like this");
+//                Utils.debugLog("use toast setting switch is now: off");
+//            }
+//        });
+//    }
 
     @Override
     protected void onResume() {
@@ -128,12 +123,7 @@ public class MainActivity extends AppCompatActivity {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus && isAutoClearClipboard) {
             clipboardUtils.clearClipboard();
-            Utils.debugLog(AUTO_CLIPBOARD_CLEARED);
-            if (isUseToast) {
-                Utils.showToast(this, AUTO_CLIPBOARD_CLEARED);
-            } else {
-                Utils.showSnackbar(binding.getRoot(), AUTO_CLIPBOARD_CLEARED);
-            }
+            Utils.showToastAndRecordLog(this, CLIPBOARD_CLEARED_AUTOMATICALLY);
         }
     }
 
