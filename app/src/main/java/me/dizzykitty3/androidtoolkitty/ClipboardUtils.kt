@@ -9,6 +9,7 @@ class ClipboardUtils(private val context: Context) {
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         if (clipboard.hasPrimaryClip()) {
             clipboard.clearPrimaryClip()
+            Utils.showToastAndRecordLog(context, "clipboard cleared automatically")
         }
     }
 

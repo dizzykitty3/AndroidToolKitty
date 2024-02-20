@@ -13,7 +13,6 @@ import me.dizzykitty3.androidtoolkitty.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     private static final String CLIPBOARD_CLEARED = "clipboard cleared";
-    private static final String CLIPBOARD_CLEARED_AUTOMATICALLY = "clipboard cleared automatically";
     private static final String KEY_AUTO_CLEAR_CLIPBOARD = "key_auto_clear_clipboard";
     private ActivityMainBinding binding;
     private ClipboardUtils clipboardUtils;
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-        autoClearClipboard();
     }
 
     private void init() {
@@ -35,13 +33,6 @@ public class MainActivity extends AppCompatActivity {
         initGoogleMapsGroup();
         initUnicodeGroup();
         initTestGroup();
-    }
-
-    private void autoClearClipboard() {
-        if (isAutoClearClipboard) {
-            clipboardUtils.clearClipboard();
-            Utils.showToastAndRecordLog(this, CLIPBOARD_CLEARED_AUTOMATICALLY);
-        }
     }
 
     private void initCore() {
@@ -107,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getSharedPreferencesValues();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus && isAutoClearClipboard) {
+            clipboardUtils.clearClipboard();
+        }
     }
 
     @Override
