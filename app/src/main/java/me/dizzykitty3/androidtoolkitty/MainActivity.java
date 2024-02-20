@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
+        autoClearClipboard();
     }
 
     private void init() {
@@ -34,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
         initGoogleMapsGroup();
         initUnicodeGroup();
         initTestGroup();
+    }
+
+    private void autoClearClipboard() {
+        if (isAutoClearClipboard) {
+            clipboardUtils.clearClipboard();
+            Utils.showToastAndRecordLog(this, CLIPBOARD_CLEARED_AUTOMATICALLY);
+        }
     }
 
     private void initCore() {
@@ -59,12 +67,7 @@ public class MainActivity extends AppCompatActivity {
             isAutoClearClipboard = isChecked;
             editor.putBoolean(KEY_AUTO_CLEAR_CLIPBOARD, isChecked);
             editor.apply();
-
-            if (isChecked) {
-                Utils.debugLog("auto clear clipboard setting switch is now: on");
-            } else {
-                Utils.debugLog("auto clear clipboard setting switch is now: off");
-            }
+            Utils.debugLog(isChecked ? "auto clear clipboard is now: on" : "auto clear clipboard is now: off");
         });
     }
 
@@ -104,15 +107,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         getSharedPreferencesValues();
-    }
-
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus && isAutoClearClipboard) {
-            clipboardUtils.clearClipboard();
-            Utils.showToastAndRecordLog(this, CLIPBOARD_CLEARED_AUTOMATICALLY);
-        }
     }
 
     @Override
