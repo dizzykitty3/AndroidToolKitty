@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         initClipboardGroup();
         initGoogleMapsGroup();
         initUnicodeGroup();
+//        initTestGroup();
     }
 
     private void initCore() {
@@ -90,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+//    private void initTestGroup() {
+//        binding.testButton.setOnClickListener(v -> {
+//            Intent intent = new Intent(this, TestActivityKt.class);
+//            startActivity(intent);
+//        });
+//    }
 
     @Override
     protected void onResume() {
