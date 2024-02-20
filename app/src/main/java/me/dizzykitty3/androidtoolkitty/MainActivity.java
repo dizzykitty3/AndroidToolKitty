@@ -13,6 +13,8 @@ import me.dizzykitty3.androidtoolkitty.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     private static final String CLIPBOARD_CLEARED = "clipboard cleared";
     private static final String AUTO_CLIPBOARD_CLEARED = "clipboard cleared automatically";
+    private static final String KEY_AUTO_CLEAR_CLIPBOARD = "key_auto_clear_clipboard";
+    private static final String KEY_IS_USE_TOAST = "key_is_use_toast";
     private ActivityMainBinding binding;
     private ClipboardUtils clipboardUtils;
     private boolean isAutoClearClipboard;
@@ -38,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
     private void initCore() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.setLifecycleOwner(this);
-        sharedPreferences = getSharedPreferences(String.valueOf(R.string.app_name), MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("Android ToolKitty", MODE_PRIVATE);
         editor = sharedPreferences.edit();
         clipboardUtils = new ClipboardUtils(this);
     }
 
     private void getSharedPreferencesValues() {
-        isAutoClearClipboard = sharedPreferences.getBoolean(String.valueOf(R.string.key001_auto_clear_clipboard_switch_state), false);
-        isUseToast = sharedPreferences.getBoolean(String.valueOf(R.string.key002_use_toast_switch_state), false);
+        isAutoClearClipboard = sharedPreferences.getBoolean(KEY_AUTO_CLEAR_CLIPBOARD, false);
+        isUseToast = sharedPreferences.getBoolean(KEY_IS_USE_TOAST, false);
     }
 
     private void initClipboardGroup() {
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         binding.autoClearClipboardSettingSwitch.setChecked(isAutoClearClipboard);
         binding.autoClearClipboardSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             isAutoClearClipboard = isChecked;
-            editor.putBoolean(String.valueOf(R.string.key001_auto_clear_clipboard_switch_state), isChecked);
+            editor.putBoolean(KEY_AUTO_CLEAR_CLIPBOARD, isChecked);
             editor.apply();
 
             if (isChecked) {
@@ -102,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         binding.useToastSettingSwitch.setChecked(isUseToast);
         binding.useToastSettingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             isUseToast = isChecked;
-            editor.putBoolean(String.valueOf(R.string.key002_use_toast_switch_state), isChecked);
+            editor.putBoolean(KEY_IS_USE_TOAST, isChecked);
             editor.apply();
 
             if (isChecked) {
