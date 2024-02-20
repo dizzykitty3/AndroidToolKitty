@@ -3,8 +3,8 @@
     <string name="msg001_clear_clipboard">Clear clipboard</string>
     <string name="msg002_clipboard_group_name">Clipboard</string>
     <string name="msg003_auto_clear_clipboard_setting">Clear clipboard on app launch</string>
-    <string name="msg004_settings_group_name">Settings</string>
-    <string name="msg005_use_toast_setting">Use toast instead of snackbar</string>
+    <string name="msg004_settings_group_name">test</string>
+    <string name="msg005_use_toast_setting">test switch</string>
     <string name="msg006_google_map_group_name">Google Maps</string>
     <string name="msg007_enter_coordinates_latitude">Enter latitude</string>
     <string name="msg008_open_google_maps">Open Google Maps</string>

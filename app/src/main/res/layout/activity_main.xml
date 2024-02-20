@@ -32,7 +32,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="10dp" />
+                        android:layout_height="@dimen/padding_title_top" />
 
                     <TextView
                         android:id="@+id/clipboard_group_name"
@@ -43,7 +43,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="18dp" />
+                        android:layout_height="@dimen/padding_title_bottom" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/clear_clipboard_button"
@@ -64,7 +64,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="@dimen/padding_cardview_spaces" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -78,7 +78,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="10dp" />
+                        android:layout_height="@dimen/padding_title_top" />
 
                     <TextView
                         android:id="@+id/google_map_group_name"
@@ -89,7 +89,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="18dp" />
+                        android:layout_height="@dimen/padding_title_bottom" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -124,7 +124,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="@dimen/padding_cardview_spaces" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -138,7 +138,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="10dp" />
+                        android:layout_height="@dimen/padding_title_top" />
 
                     <TextView
                         android:id="@+id/unicode_group_name"
@@ -149,7 +149,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="18dp" />
+                        android:layout_height="@dimen/padding_title_bottom" />
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/unicode_text_input"
@@ -176,7 +176,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp" />
+                android:layout_height="@dimen/padding_cardview_spaces" />
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
@@ -190,7 +190,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="18dp" />
+                        android:layout_height="@dimen/padding_title_top" />
 
                     <TextView
                         android:id="@+id/settings_group_name"
@@ -201,7 +201,7 @@
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="10dp" />
+                        android:layout_height="@dimen/padding_title_bottom" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
                         android:id="@+id/use_toast_setting_switch"
@@ -215,7 +215,7 @@
 
             <View
                 android:layout_width="wrap_content"
-                android:layout_height="200dp" />
+                android:layout_height="@dimen/padding_void" />
         </LinearLayout>
     </ScrollView>
 </layout>

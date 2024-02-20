@@ -8,25 +8,14 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import java.util.Objects;
 
 public class Utils {
     private static Toast currentToast;
-    private static Snackbar currentSnackbar;
 
     private Utils() {
         // Empty
     }
-
-//    public static void showSnackbar(@NonNull View view, @NonNull String snackbarText) {
-//        if (Objects.nonNull(currentSnackbar) && currentSnackbar.isShown()) {
-//            currentSnackbar.dismiss();
-//        }
-//        currentSnackbar = Snackbar.make(view, snackbarText, BaseTransientBottomBar.LENGTH_SHORT);
-//        currentSnackbar.show();
-//    }
 
     public static String convertUnicodeToCharacter(String unicode) throws Exception {
         final var length = unicode.length();
