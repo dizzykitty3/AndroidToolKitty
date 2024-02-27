@@ -66,21 +66,21 @@ public class MainActivity extends AppCompatActivity {
         binding.openGoogleMapsButton.setOnClickListener(v -> {
             String latitude = Objects.requireNonNull(binding.latitudeTextInput.getText()).toString();
             String longitude = Objects.requireNonNull(binding.longitudeTextInput.getText()).toString();
-            Utils.openGoogleMaps(this, "".equals(latitude) ? "0" : latitude, "".equals(longitude) ? "0" : longitude);
+            Utils.openGoogleMaps(this, latitude.isEmpty() ? "0" : latitude, longitude.isEmpty() ? "0" : longitude);
         });
     }
 
     private void initUnicodeGroup() {
         binding.convertToCharacterButton.setOnClickListener(v -> {
             final var unicode = Objects.requireNonNull(binding.unicodeTextInput.getText()).toString();
-            if (unicode.length() == 0) {
+            if (unicode.isEmpty()) {
                 return;
             }
             try {
                 var result = Utils.convertUnicodeToCharacter(unicode);
                 binding.unicodeOutputTextView.setText(result);
                 clipboardUtils.copyTextToClipboard(result);
-                Utils.showToast(this, result + " copied to clipboard");
+                Utils.showToast(this, result + " copied");
             } catch (Exception e) {
                 Utils.showToast(this, e.getMessage() != null ? e.getMessage() : "Unknown error occurred");
             }
