@@ -2,6 +2,7 @@
 
 package me.dizzykitty3.androidtoolkitty
 
+import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
@@ -27,7 +28,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
 
 class TestActivity : ComponentActivity() {
@@ -46,24 +47,27 @@ class TestActivity : ComponentActivity() {
 
 @Composable
 fun MyLayout() {
+    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
+    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+
     Column(
-        modifier = Modifier.padding(14.dp)
+        modifier = Modifier.padding(cardPadding)
     ) {
         ClipboardGroup(LocalContext.current) // Clear clipboard
         Spacer(
-            modifier = Modifier.padding(5.dp)
+            modifier = Modifier.padding(spacerPadding)
         )
         SystemSettingsGroup(LocalContext.current) // Open certain system setting pages
         Spacer(
-            modifier = Modifier.padding(5.dp)
+            modifier = Modifier.padding(spacerPadding)
         )
         UnicodeGroup() // Convert unicode to characters and vise versa
         Spacer(
-            modifier = Modifier.padding(5.dp)
+            modifier = Modifier.padding(spacerPadding)
         )
         GoogleMapsGroup() // Opens Google Maps with the specified latitude and longitude
         Spacer(
-            modifier = Modifier.padding(5.dp)
+            modifier = Modifier.padding(spacerPadding)
         )
         TestLayout() // Integer variable recomposition
     }
@@ -71,6 +75,9 @@ fun MyLayout() {
 
 @Composable
 fun ClipboardGroup(context: Context) {
+    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
+    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -78,7 +85,7 @@ fun ClipboardGroup(context: Context) {
 
         Column(
             modifier = Modifier
-                .padding(14.dp)
+                .padding(cardPadding)
                 .clickable { expanded = !expanded }
         ) {
             Text(
@@ -89,7 +96,7 @@ fun ClipboardGroup(context: Context) {
             AnimatedVisibility(expanded) {
                 Column {
                     Spacer(
-                        modifier = Modifier.padding(5.dp)
+                        modifier = Modifier.padding(spacerPadding)
                     )
                     Button(
                         onClick = {
@@ -107,6 +114,9 @@ fun ClipboardGroup(context: Context) {
 
 @Composable
 fun SystemSettingsGroup(context: Context) {
+    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
+    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -114,7 +124,7 @@ fun SystemSettingsGroup(context: Context) {
 
         Column(
             modifier = Modifier
-                .padding(14.dp)
+                .padding(cardPadding)
                 .clickable { expanded = !expanded }
         ) {
             Text(
@@ -125,7 +135,7 @@ fun SystemSettingsGroup(context: Context) {
             AnimatedVisibility(expanded) {
                 Column {
                     Spacer(
-                        modifier = Modifier.padding(5.dp)
+                        modifier = Modifier.padding(spacerPadding)
                     )
                     Button(
                         onClick = {
@@ -196,6 +206,9 @@ fun SystemSettingsGroup(context: Context) {
 
 @Composable
 fun UnicodeGroup() {
+    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
+    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+
     var clicks by remember { mutableIntStateOf(0) }
 
     Card(
@@ -205,7 +218,7 @@ fun UnicodeGroup() {
 
         Column(
             modifier = Modifier
-                .padding(14.dp)
+                .padding(cardPadding)
                 .clickable { expanded = !expanded }
         ) {
             Text(
@@ -216,7 +229,7 @@ fun UnicodeGroup() {
             AnimatedVisibility(expanded) {
                 Column {
                     Spacer(
-                        modifier = Modifier.padding(5.dp)
+                        modifier = Modifier.padding(spacerPadding)
                     )
                     // Contents here
                 }
@@ -227,6 +240,9 @@ fun UnicodeGroup() {
 
 @Composable
 fun GoogleMapsGroup() {
+    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
+    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+
     var clicks by remember { mutableIntStateOf(0) }
 
     Card(
@@ -236,7 +252,7 @@ fun GoogleMapsGroup() {
 
         Column(
             modifier = Modifier
-                .padding(14.dp)
+                .padding(cardPadding)
                 .clickable { expanded = !expanded }
         ) {
             Text(
@@ -247,7 +263,7 @@ fun GoogleMapsGroup() {
             AnimatedVisibility(expanded) {
                 Column {
                     Spacer(
-                        modifier = Modifier.padding(5.dp)
+                        modifier = Modifier.padding(spacerPadding)
                     )
                     // Contents here
                 }
@@ -258,6 +274,9 @@ fun GoogleMapsGroup() {
 
 @Composable
 fun TestLayout() {
+    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
+    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+
     var clicks by remember { mutableIntStateOf(0) }
 
     Card(
@@ -267,7 +286,7 @@ fun TestLayout() {
 
         Column(
             modifier = Modifier
-                .padding(14.dp)
+                .padding(cardPadding)
                 .clickable { expanded = !expanded }
         ) {
             Text(
@@ -278,7 +297,7 @@ fun TestLayout() {
             AnimatedVisibility(expanded) {
                 Column {
                     Spacer(
-                        modifier = Modifier.padding(5.dp)
+                        modifier = Modifier.padding(spacerPadding)
                     )
                     ClickCounter(
                         clicks = clicks,
@@ -302,9 +321,14 @@ fun ClickCounter(clicks: Int, onClick: () -> Unit) {
 }
 
 // Example code: compose clickable card
+@Suppress("unused")
 @SuppressWarnings("unused")
+@SuppressLint("unused")
 @Composable
 fun Example() {
+    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
+    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+
     var clicks by remember { mutableIntStateOf(0) }
 
     Card(
@@ -314,7 +338,7 @@ fun Example() {
 
         Column(
             modifier = Modifier
-                .padding(14.dp)
+                .padding(cardPadding)
                 .clickable { expanded = !expanded }
         ) {
             Text(
@@ -325,7 +349,7 @@ fun Example() {
             AnimatedVisibility(expanded) {
                 Column {
                     Spacer(
-                        modifier = Modifier.padding(5.dp)
+                        modifier = Modifier.padding(spacerPadding)
                     )
                     // Contents here
                 }

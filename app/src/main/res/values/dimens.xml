@@ -7,4 +7,8 @@
 
     <dimen name="text_size_title">20sp</dimen>
     <dimen name="text_size_normal">14sp</dimen>
+
+    // Compose
+    <dimen name="compose_padding_card">14dp</dimen>
+    <dimen name="compose_padding_spacer">5dp</dimen>
 </resources>
