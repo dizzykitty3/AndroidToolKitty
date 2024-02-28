@@ -10,6 +10,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -44,8 +45,13 @@ class TestActivity : ComponentActivity() {
 
 @Composable
 fun MyLayout() {
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(
+        modifier = Modifier.padding(14.dp)
+    ) {
         ClipboardGroup(LocalContext.current)
+        Spacer(
+            modifier = Modifier.padding(14.dp)
+        )
         SystemSettingsGroup(LocalContext.current)
     }
 }
@@ -53,7 +59,10 @@ fun MyLayout() {
 @Composable
 fun TestLayout() {
     var clicks by remember { mutableIntStateOf(0) }
-    Column(modifier = Modifier.padding(16.dp)) {
+
+    Column(
+        modifier = Modifier.padding(14.dp)
+    ) {
         Text(text = "test")
         ClickCounter(clicks = clicks, onClick = { clicks++ })
     }
@@ -61,24 +70,35 @@ fun TestLayout() {
 
 @Composable
 fun ClipboardGroup(context: Context) {
-    Card(modifier = Modifier.fillMaxWidth()) {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
         var expanded by remember { mutableStateOf(true) }
+
         Column(
             modifier = Modifier
-                .padding(16.dp)
-                .clickable { expanded = !expanded }) {
+                .padding(14.dp)
+                .clickable { expanded = !expanded }
+        ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = "Clipboard",
                 style = MaterialTheme.typography.titleLarge,
             )
             AnimatedVisibility(expanded) {
-                Button(
-                    onClick = {
-                        ClipboardUtils(context).clearClipboard()
-                        Utils.showToastAndRecordLog(context, "clipboard cleared")
+                Column {
+                    Spacer(
+                        modifier = Modifier.padding(5.dp)
+                    )
+                    Button(
+                        onClick = {
+                            ClipboardUtils(context).clearClipboard()
+                            Utils.showToastAndRecordLog(context, "clipboard cleared")
+                        }
+                    ) {
+                        Text(text = "Clear clipboard")
                     }
-                ) { Text(text = "Clear clipboard") }
+                }
             }
         }
     }
@@ -86,57 +106,101 @@ fun ClipboardGroup(context: Context) {
 
 @Composable
 fun SystemSettingsGroup(context: Context) {
-    Text(text = "Android System Settings")
-    Button(
-        onClick = {
-            val intent = Intent(Settings.ACTION_DISPLAY_SETTINGS)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-        }
-    ) { Text(text = "Open display settings") }
-    Button(
-        onClick = {
-            val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-        }
-    ) { Text(text = "Open locale settings") }
-    Button(
-        onClick = {
-            val intent = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-        }
-    ) { Text(text = "Open default apps settings") }
-    Button(
-        onClick = {
-            val intent = Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-        }
-    ) { Text(text = "Open bluetooth settings") }
-    Button(
-        onClick = {
-            val contentResolver: ContentResolver = context.contentResolver
-            val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
-            Utils.showToast(
-                context,
-                if (isAutoTime == 1) "set time automatically is on" else "set time automatically is off"
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        var expanded by remember { mutableStateOf(true) }
+
+        Column(
+            modifier = Modifier
+                .padding(14.dp)
+                .clickable { expanded = !expanded })
+        {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Android System Settings",
+                style = MaterialTheme.typography.titleLarge,
             )
+            AnimatedVisibility(expanded) {
+                Column {
+                    Spacer(
+                        modifier = Modifier.padding(5.dp)
+                    )
+                    Button(
+                        onClick = {
+                            val intent = Intent(Settings.ACTION_DISPLAY_SETTINGS)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(intent)
+                        }
+                    ) {
+                        Text(text = "Open display settings")
+                    }
+                    Button(
+                        onClick = {
+                            val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(intent)
+                        }
+                    ) {
+                        Text(text = "Open locale settings")
+                    }
+                    Button(
+                        onClick = {
+                            val intent = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(intent)
+                        }
+                    ) {
+                        Text(text = "Open default apps settings")
+                    }
+                    Button(
+                        onClick = {
+                            val intent = Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(intent)
+                        }
+                    ) {
+                        Text(text = "Open bluetooth settings")
+                    }
+                    Button(
+                        onClick = {
+                            val contentResolver: ContentResolver = context.contentResolver
+                            val isAutoTime =
+                                Settings.Global.getInt(
+                                    contentResolver,
+                                    Settings.Global.AUTO_TIME,
+                                    0
+                                )
+                            Utils.showToast(
+                                context,
+                                if (isAutoTime == 1) "set time automatically is on" else "set time automatically is off"
+                            )
+                        }
+                    ) {
+                        Text(text = "Check is \"set time automatically\" on")
+                    }
+                    Button(
+                        onClick = {
+                            val intent = Intent(Settings.ACTION_DATE_SETTINGS)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(intent)
+                        }
+                    ) {
+                        Text(text = "Open date settings")
+                    }
+                }
+            }
         }
-    ) { Text(text = "Check is \"set time automatically\" on") }
-    Button(
-        onClick = {
-            val intent = Intent(Settings.ACTION_DATE_SETTINGS)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-        }
-    ) { Text(text = "Open date settings") }
+    }
 }
 
 @Composable
-fun ClickCounter(clicks: Int, onClick: () -> Unit) {
+fun ClickCounter(
+    clicks: Int, onClick: () -> Unit
+) {
     Button(onClick = onClick) {
-        Text(text = "I've been clicked $clicks times")
+        Text(
+            text = "I've been clicked $clicks times"
+        )
     }
 }
