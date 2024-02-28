@@ -5,6 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import java.util.Objects
 
 object Utils {
@@ -75,5 +77,17 @@ object Utils {
         }
         currentToast = Toast.makeText(context, toastText, Toast.LENGTH_SHORT)
         currentToast!!.show()
+    }
+
+    @JvmStatic
+    fun calculateYearProgress(): Float {
+        val currentDate = LocalDate.now()
+        val startOfYear = LocalDate.of(currentDate.year, 1, 1)
+        val endOfYear = LocalDate.of(currentDate.year, 12, 31)
+
+        val totalDaysInYear = startOfYear.until(endOfYear, ChronoUnit.DAYS)
+        val daysPassed = startOfYear.until(currentDate, ChronoUnit.DAYS)
+
+        return daysPassed.toFloat() / totalDaysInYear.toFloat()
     }
 }

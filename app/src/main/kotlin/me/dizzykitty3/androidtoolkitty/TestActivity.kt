@@ -32,13 +32,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.input.KeyboardType
+import me.dizzykitty3.androidtoolkitty.Utils.calculateYearProgress
 import me.dizzykitty3.androidtoolkitty.Utils.convertUnicodeToCharacter
 import me.dizzykitty3.androidtoolkitty.Utils.openGoogleMaps
 import me.dizzykitty3.androidtoolkitty.Utils.showToast
 import me.dizzykitty3.androidtoolkitty.Utils.showToastAndRecordLog
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
-import java.time.LocalDate
-import java.time.temporal.ChronoUnit
 
 class TestActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -136,17 +135,6 @@ fun YearProgress() {
             }
         }
     }
-}
-
-fun calculateYearProgress(): Float {
-    val currentDate = LocalDate.now()
-    val startOfYear = LocalDate.of(currentDate.year, 1, 1)
-    val endOfYear = LocalDate.of(currentDate.year, 12, 31)
-
-    val totalDaysInYear = startOfYear.until(endOfYear, ChronoUnit.DAYS)
-    val daysPassed = startOfYear.until(currentDate, ChronoUnit.DAYS)
-
-    return daysPassed.toFloat() / totalDaysInYear.toFloat()
 }
 
 @Composable
