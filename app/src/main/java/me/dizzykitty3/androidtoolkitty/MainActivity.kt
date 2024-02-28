@@ -69,8 +69,8 @@ class MainActivity : AppCompatActivity() {
             val longitude = Objects.requireNonNull(binding!!.longitudeTextInput.text).toString()
             openGoogleMaps(
                 this,
-                if (latitude.isEmpty()) "0" else latitude,
-                if (longitude.isEmpty()) "0" else longitude
+                latitude.ifEmpty { "0" },
+                longitude.ifEmpty { "0" }
             )
         }
     }
