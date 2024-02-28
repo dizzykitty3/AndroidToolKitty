@@ -8,12 +8,18 @@ import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
-
 
 class TestActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,9 +35,17 @@ class TestActivity : ComponentActivity() {
 
 @Composable
 fun MyLayout() {
-    Column {
+    var clicks by remember { mutableIntStateOf(0) }
+
+    Column(
+        modifier = Modifier.padding(16.dp)
+    ) {
         ClipboardGroup(LocalContext.current)
         SystemSettingsGroup(LocalContext.current)
+
+        ClickCounter(clicks = clicks, onClick = {
+            clicks++
+        })
     }
 }
 
@@ -50,11 +64,10 @@ fun ClipboardGroup(context: Context) {
     }
 }
 
-
 @Composable
 fun SystemSettingsGroup(context: Context) {
     Text(
-        text = "System Settings"
+        text = "Android System Settings"
     )
     Button(
         onClick = {
@@ -96,15 +109,10 @@ fun SystemSettingsGroup(context: Context) {
         onClick = {
             val contentResolver: ContentResolver = context.contentResolver
             val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
-            if (isAutoTime == 1) {
-                // Auto time is enabled
-                // Do something here
-                Utils.showToast(context, "set time automatically is on")
-            } else {
-                // Auto time is disabled
-                // Do something else here
-                Utils.showToast(context, "set time automatically is off")
-            }
+            Utils.showToast(
+                context,
+                if (isAutoTime == 1) "set time automatically is on" else "set time automatically is off"
+            )
         }
     ) {
         Text("Check is \"set time automatically\" on")
@@ -118,5 +126,11 @@ fun SystemSettingsGroup(context: Context) {
     ) {
         Text("Open date settings")
     }
+}
 
+@Composable
+fun ClickCounter(clicks: Int, onClick: () -> Unit) {
+    Button(onClick = onClick) {
+        Text("I've been clicked $clicks times")
+    }
 }
