@@ -1,8 +1,5 @@
-@file:Suppress("UNUSED_VARIABLE")
-
 package me.dizzykitty3.androidtoolkitty
 
-import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
@@ -319,8 +316,6 @@ fun ClickCounter(clicks: Int, onClick: () -> Unit) {
 
 // Example code: compose clickable card
 @Suppress("unused")
-@SuppressWarnings("unused")
-@SuppressLint("unused")
 @Composable
 fun Example() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
