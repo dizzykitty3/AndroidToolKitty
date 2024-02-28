@@ -3,13 +3,14 @@ package me.dizzykitty3.androidtoolkitty
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import me.dizzykitty3.androidtoolkitty.Utils.showToastAndRecordLog
 
 class ClipboardUtils(private val context: Context) {
     fun clearClipboard() {
         val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         if (clipboard.hasPrimaryClip()) {
             clipboard.clearPrimaryClip()
-            Utils.showToastAndRecordLog(context, "clipboard cleared automatically")
+            showToastAndRecordLog(context, "clipboard cleared automatically")
         }
     }
 

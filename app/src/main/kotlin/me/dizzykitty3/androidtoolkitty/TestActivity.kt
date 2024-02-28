@@ -53,23 +53,24 @@ fun MyLayout() {
     Column(
         modifier = Modifier.padding(cardPadding)
     ) {
-        ClipboardGroup(LocalContext.current) // Clear clipboard
-        Spacer(
-            modifier = Modifier.padding(spacerPadding)
-        )
-        SystemSettingsGroup(LocalContext.current) // Open certain system setting pages
-        Spacer(
-            modifier = Modifier.padding(spacerPadding)
-        )
-        UnicodeGroup() // Convert unicode to characters and vise versa
-        Spacer(
-            modifier = Modifier.padding(spacerPadding)
-        )
-        GoogleMapsGroup() // Opens Google Maps with the specified latitude and longitude
-        Spacer(
-            modifier = Modifier.padding(spacerPadding)
-        )
-        TestLayout() // Integer variable recomposition
+        // Clear clipboard
+        ClipboardGroup(LocalContext.current)
+        Spacer(modifier = Modifier.padding(spacerPadding))
+
+        // Open certain system setting pages
+        SystemSettingsGroup(LocalContext.current)
+        Spacer(modifier = Modifier.padding(spacerPadding))
+
+        // Convert unicode to characters and vise versa
+        UnicodeGroup()
+        Spacer(modifier = Modifier.padding(spacerPadding))
+
+        // Opens Google Maps with the specified latitude and longitude
+        GoogleMapsGroup()
+        Spacer(modifier = Modifier.padding(spacerPadding))
+
+        // Integer variable recomposition
+        TestLayout()
     }
 }
 
@@ -209,8 +210,6 @@ fun UnicodeGroup() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
 
-    var clicks by remember { mutableIntStateOf(0) }
-
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -242,8 +241,6 @@ fun UnicodeGroup() {
 fun GoogleMapsGroup() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
-
-    var clicks by remember { mutableIntStateOf(0) }
 
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -328,8 +325,6 @@ fun ClickCounter(clicks: Int, onClick: () -> Unit) {
 fun Example() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
-
-    var clicks by remember { mutableIntStateOf(0) }
 
     Card(
         modifier = Modifier.fillMaxWidth()
