@@ -27,7 +27,10 @@ class TestActivity : ComponentActivity() {
 
         setContent {
             MyApplicationTheme {
-                MyLayout()
+                Column {
+                    MyLayout()
+                    TestLayout()
+                }
             }
         }
     }
@@ -35,14 +38,22 @@ class TestActivity : ComponentActivity() {
 
 @Composable
 fun MyLayout() {
-    var clicks by remember { mutableIntStateOf(0) }
-
     Column(
         modifier = Modifier.padding(16.dp)
     ) {
         ClipboardGroup(LocalContext.current)
         SystemSettingsGroup(LocalContext.current)
+    }
+}
 
+@Composable
+fun TestLayout() {
+    var clicks by remember { mutableIntStateOf(0) }
+
+    Column(
+        modifier = Modifier.padding(16.dp)
+    ) {
+        Text(text = "test")
         ClickCounter(clicks = clicks, onClick = {
             clicks++
         })
