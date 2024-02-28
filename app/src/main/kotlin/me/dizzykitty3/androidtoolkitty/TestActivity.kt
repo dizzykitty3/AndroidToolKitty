@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -38,9 +39,7 @@ class TestActivity : ComponentActivity() {
 
         setContent {
             MyApplicationTheme {
-                Column {
-                    MyLayout()
-                }
+                MyLayout()
             }
         }
     }
@@ -51,27 +50,37 @@ fun MyLayout() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
 
-    Column(
+    LazyColumn(
         modifier = Modifier.padding(cardPadding)
     ) {
-        // Clear clipboard
-        ClipboardGroup(LocalContext.current)
-        Spacer(modifier = Modifier.padding(spacerPadding))
+        item {
+            // Clear clipboard
+            ClipboardGroup(LocalContext.current)
+            Spacer(modifier = Modifier.padding(spacerPadding))
+        }
 
-        // Open certain system setting pages
-        SystemSettingsGroup(LocalContext.current)
-        Spacer(modifier = Modifier.padding(spacerPadding))
+        item {
+            // Open certain system setting pages
+            SystemSettingsGroup(LocalContext.current)
+            Spacer(modifier = Modifier.padding(spacerPadding))
+        }
 
-        // Convert unicode to characters and vise versa
-        UnicodeGroup()
-        Spacer(modifier = Modifier.padding(spacerPadding))
+        item {
+            // Convert unicode to characters and vice versa
+            UnicodeGroup()
+            Spacer(modifier = Modifier.padding(spacerPadding))
+        }
 
-        // Opens Google Maps with the specified latitude and longitude
-        GoogleMapsGroup()
-        Spacer(modifier = Modifier.padding(spacerPadding))
+        item {
+            // Opens Google Maps with the specified latitude and longitude
+            GoogleMapsGroup()
+            Spacer(modifier = Modifier.padding(spacerPadding))
+        }
 
-        // Integer variable recomposition
-        TestLayout()
+        item {
+            // Integer variable recomposition
+            TestLayout()
+        }
     }
 }
 
