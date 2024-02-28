@@ -10,12 +10,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -26,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
 
 class TestActivity : ComponentActivity() {
@@ -223,11 +227,35 @@ fun UnicodeGroup() {
                 style = MaterialTheme.typography.titleLarge
             )
             AnimatedVisibility(expanded) {
+                var latitude by remember { mutableStateOf("") }
+                var longitude by remember { mutableStateOf("") }
+
                 Column {
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
                     )
-                    // Contents here
+                    Row {
+                        OutlinedTextField(
+                            value = latitude,
+                            onValueChange = { latitude = it },
+                            label = { Text("Latitude") },
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f)
+                                .padding(end = spacerPadding)
+                        )
+                        OutlinedTextField(
+                            value = longitude,
+                            onValueChange = { longitude = it },
+                            label = { Text("Longitude") },
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f)
+                                .padding(start = spacerPadding)
+                        )
+                    }
                 }
             }
         }
