@@ -36,7 +36,6 @@ class TestActivity : ComponentActivity() {
             MyApplicationTheme {
                 Column {
                     MyLayout()
-                    TestLayout()
                 }
             }
         }
@@ -50,21 +49,13 @@ fun MyLayout() {
     ) {
         ClipboardGroup(LocalContext.current)
         Spacer(
-            modifier = Modifier.padding(14.dp)
+            modifier = Modifier.padding(5.dp)
         )
         SystemSettingsGroup(LocalContext.current)
-    }
-}
-
-@Composable
-fun TestLayout() {
-    var clicks by remember { mutableIntStateOf(0) }
-
-    Column(
-        modifier = Modifier.padding(14.dp)
-    ) {
-        Text(text = "test")
-        ClickCounter(clicks = clicks, onClick = { clicks++ })
+        Spacer(
+            modifier = Modifier.padding(5.dp)
+        )
+        TestLayout()
     }
 }
 
@@ -83,7 +74,7 @@ fun ClipboardGroup(context: Context) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = "Clipboard",
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.titleLarge
             )
             AnimatedVisibility(expanded) {
                 Column {
@@ -114,12 +105,12 @@ fun SystemSettingsGroup(context: Context) {
         Column(
             modifier = Modifier
                 .padding(14.dp)
-                .clickable { expanded = !expanded })
-        {
+                .clickable { expanded = !expanded }
+        ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = "Android System Settings",
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.titleLarge
             )
             AnimatedVisibility(expanded) {
                 Column {
@@ -165,12 +156,11 @@ fun SystemSettingsGroup(context: Context) {
                     Button(
                         onClick = {
                             val contentResolver: ContentResolver = context.contentResolver
-                            val isAutoTime =
-                                Settings.Global.getInt(
-                                    contentResolver,
-                                    Settings.Global.AUTO_TIME,
-                                    0
-                                )
+                            val isAutoTime = Settings.Global.getInt(
+                                contentResolver,
+                                Settings.Global.AUTO_TIME,
+                                0
+                            )
                             Utils.showToast(
                                 context,
                                 if (isAutoTime == 1) "set time automatically is on" else "set time automatically is off"
@@ -195,12 +185,80 @@ fun SystemSettingsGroup(context: Context) {
 }
 
 @Composable
-fun ClickCounter(
-    clicks: Int, onClick: () -> Unit
-) {
+fun TestLayout() {
+    var clicks by remember { mutableIntStateOf(0) }
+
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        var expanded by remember { mutableStateOf(true) }
+
+        Column(
+            modifier = Modifier
+                .padding(14.dp)
+                .clickable { expanded = !expanded }
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "test",
+                style = MaterialTheme.typography.titleLarge
+            )
+            AnimatedVisibility(expanded) {
+                Column {
+                    Spacer(
+                        modifier = Modifier.padding(5.dp)
+                    )
+                    ClickCounter(
+                        clicks = clicks,
+                        onClick = {
+                            clicks++
+                        }
+                    )
+                }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun ClickCounter(clicks: Int, onClick: () -> Unit) {
     Button(onClick = onClick) {
         Text(
             text = "I've been clicked $clicks times"
         )
+    }
+}
+
+// Example code: compose clickable card
+@SuppressWarnings("unused")
+@Composable
+fun Example() {
+    var clicks by remember { mutableIntStateOf(0) }
+
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        var expanded by remember { mutableStateOf(true) }
+
+        Column(
+            modifier = Modifier
+                .padding(14.dp)
+                .clickable { expanded = !expanded }
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "// title here",
+                style = MaterialTheme.typography.titleLarge
+            )
+            AnimatedVisibility(expanded) {
+                Column {
+                    Spacer(
+                        modifier = Modifier.padding(5.dp)
+                    )
+                    // Contents here
+                }
+            }
+        }
     }
 }
