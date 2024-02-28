@@ -33,7 +33,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.Utils.convertUnicodeToCharacter
+import me.dizzykitty3.androidtoolkitty.Utils.openGoogleMaps
 import me.dizzykitty3.androidtoolkitty.Utils.showToast
+import me.dizzykitty3.androidtoolkitty.Utils.showToastAndRecordLog
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
@@ -174,8 +176,7 @@ fun ClipboardGroup(context: Context) {
                     )
                     Button(
                         onClick = {
-                            ClipboardUtils(context).clearClipboard()
-                            Utils.showToastAndRecordLog(context, "clipboard cleared")
+                            onClearClipboardButton(context)
                         }
                     ) {
                         Text(text = "Clear clipboard")
@@ -184,6 +185,11 @@ fun ClipboardGroup(context: Context) {
             }
         }
     }
+}
+
+fun onClearClipboardButton(context: Context) {
+    ClipboardUtils(context).clearClipboard()
+    showToastAndRecordLog(context, "clipboard cleared")
 }
 
 @Composable
@@ -334,16 +340,7 @@ fun UnicodeGroup(context: Context) {
                     )
                     Button(
                         onClick = {
-                            if (unicode.isEmpty()) return@Button
-                            try {
-                                val result = convertUnicodeToCharacter(unicode)
-                                showToast(context, "$result copied")
-                            } catch (e: Exception) {
-                                showToast(
-                                    context,
-                                    (if (e.message != null) e.message else "Unknown error occurred")!!
-                                )
-                            }
+                            onClickConvertButton(context, unicode)
                         }
                     ) {
                         Text(text = "Convert")
@@ -351,6 +348,16 @@ fun UnicodeGroup(context: Context) {
                 }
             }
         }
+    }
+}
+
+fun onClickConvertButton(context: Context, unicode: String) {
+    if (unicode.isEmpty()) return
+    try {
+        val result = convertUnicodeToCharacter(unicode)
+        showToast(context, "$result copied")
+    } catch (e: Exception) {
+        showToast(context, (if (e.message != null) e.message else "Unknown error occurred")!!)
     }
 }
 
@@ -409,10 +416,7 @@ fun GoogleMapsGroup(context: Context) {
                     )
                     Button(
                         onClick = {
-                            Utils.openGoogleMaps(
-                                context,
-                                latitude.ifEmpty { "0" },
-                                longitude.ifEmpty { "0" })
+                            onClickOpenGoogleMapsButton(context, latitude, longitude)
                         }
                     ) {
                         Text(text = "Open Google Maps")
@@ -421,6 +425,10 @@ fun GoogleMapsGroup(context: Context) {
             }
         }
     }
+}
+
+fun onClickOpenGoogleMapsButton(context: Context, latitude: String, longitude: String) {
+    openGoogleMaps(context, latitude.ifEmpty { "0" }, longitude.ifEmpty { "0" })
 }
 
 @Composable
