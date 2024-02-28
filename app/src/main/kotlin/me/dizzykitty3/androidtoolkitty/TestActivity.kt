@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -34,6 +35,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.Utils.convertUnicodeToCharacter
 import me.dizzykitty3.androidtoolkitty.Utils.showToast
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
+import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 class TestActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +58,12 @@ fun MyLayout() {
     LazyColumn(
         modifier = Modifier.padding(cardPadding)
     ) {
+        item {
+            // Clear clipboard
+            YearProgress()
+            Spacer(modifier = Modifier.padding(spacerPadding))
+        }
+
         item {
             // Clear clipboard
             ClipboardGroup(LocalContext.current)
@@ -84,6 +93,58 @@ fun MyLayout() {
             TestLayout()
         }
     }
+}
+
+@Composable
+fun YearProgress() {
+    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
+    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        var expanded by remember { mutableStateOf(true) }
+
+        Column(
+            modifier = Modifier
+                .padding(cardPadding)
+                .clickable { expanded = !expanded }
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Year Progress",
+                style = MaterialTheme.typography.titleLarge
+            )
+            AnimatedVisibility(expanded) {
+                Column {
+                    Spacer(
+                        modifier = Modifier.padding(spacerPadding)
+                    )
+                    LinearProgressIndicator(
+                        progress = { calculateYearProgress() },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(
+                        modifier = Modifier.padding(spacerPadding)
+                    )
+                    Text(
+                        text = "${calculateYearProgress() * 100}%"
+                    )
+                }
+            }
+        }
+    }
+}
+
+fun calculateYearProgress(): Float {
+    val currentDate = LocalDate.now()
+    val startOfYear = LocalDate.of(currentDate.year, 1, 1)
+    val endOfYear = LocalDate.of(currentDate.year, 12, 31)
+
+    val totalDaysInYear = startOfYear.until(endOfYear, ChronoUnit.DAYS)
+    val daysPassed = startOfYear.until(currentDate, ChronoUnit.DAYS)
+
+    return daysPassed.toFloat() / totalDaysInYear.toFloat()
 }
 
 @Composable
