@@ -1,3 +1,5 @@
+@file:Suppress("UNUSED_VARIABLE")
+
 package me.dizzykitty3.androidtoolkitty
 
 import android.content.ContentResolver
@@ -47,15 +49,23 @@ fun MyLayout() {
     Column(
         modifier = Modifier.padding(14.dp)
     ) {
-        ClipboardGroup(LocalContext.current)
+        ClipboardGroup(LocalContext.current) // Clear clipboard
         Spacer(
             modifier = Modifier.padding(5.dp)
         )
-        SystemSettingsGroup(LocalContext.current)
+        SystemSettingsGroup(LocalContext.current) // Open certain system setting pages
         Spacer(
             modifier = Modifier.padding(5.dp)
         )
-        TestLayout()
+        UnicodeGroup() // Convert unicode to characters and vise versa
+        Spacer(
+            modifier = Modifier.padding(5.dp)
+        )
+        GoogleMapsGroup() // Opens Google Maps with the specified latitude and longitude
+        Spacer(
+            modifier = Modifier.padding(5.dp)
+        )
+        TestLayout() // Integer variable recomposition
     }
 }
 
@@ -185,6 +195,68 @@ fun SystemSettingsGroup(context: Context) {
 }
 
 @Composable
+fun UnicodeGroup() {
+    var clicks by remember { mutableIntStateOf(0) }
+
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        var expanded by remember { mutableStateOf(true) }
+
+        Column(
+            modifier = Modifier
+                .padding(14.dp)
+                .clickable { expanded = !expanded }
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Unicode",
+                style = MaterialTheme.typography.titleLarge
+            )
+            AnimatedVisibility(expanded) {
+                Column {
+                    Spacer(
+                        modifier = Modifier.padding(5.dp)
+                    )
+                    // Contents here
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun GoogleMapsGroup() {
+    var clicks by remember { mutableIntStateOf(0) }
+
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        var expanded by remember { mutableStateOf(true) }
+
+        Column(
+            modifier = Modifier
+                .padding(14.dp)
+                .clickable { expanded = !expanded }
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Google Maps",
+                style = MaterialTheme.typography.titleLarge
+            )
+            AnimatedVisibility(expanded) {
+                Column {
+                    Spacer(
+                        modifier = Modifier.padding(5.dp)
+                    )
+                    // Contents here
+                }
+            }
+        }
+    }
+}
+
+@Composable
 fun TestLayout() {
     var clicks by remember { mutableIntStateOf(0) }
 
@@ -219,7 +291,6 @@ fun TestLayout() {
         }
     }
 }
-
 
 @Composable
 fun ClickCounter(clicks: Int, onClick: () -> Unit) {
