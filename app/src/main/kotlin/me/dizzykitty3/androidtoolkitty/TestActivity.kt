@@ -31,6 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.input.KeyboardType
+import me.dizzykitty3.androidtoolkitty.Utils.convertUnicodeToCharacter
+import me.dizzykitty3.androidtoolkitty.Utils.showToast
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
 
 class TestActivity : ComponentActivity() {
@@ -67,13 +69,13 @@ fun MyLayout() {
 
         item {
             // Convert unicode to characters and vice versa
-            UnicodeGroup()
+            UnicodeGroup(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
             // Opens Google Maps with the specified latitude and longitude
-            GoogleMapsGroup()
+            GoogleMapsGroup(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
@@ -192,7 +194,7 @@ fun SystemSettingsGroup(context: Context) {
                                 Settings.Global.AUTO_TIME,
                                 0
                             )
-                            Utils.showToast(
+                            showToast(
                                 context,
                                 if (isAutoTime == 1) "set time automatically is on" else "set time automatically is off"
                             )
@@ -216,7 +218,7 @@ fun SystemSettingsGroup(context: Context) {
 }
 
 @Composable
-fun UnicodeGroup() {
+fun UnicodeGroup(context: Context) {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
 
@@ -233,6 +235,82 @@ fun UnicodeGroup() {
             Text(
                 modifier = Modifier.fillMaxWidth(),
                 text = "Unicode",
+                style = MaterialTheme.typography.titleLarge
+            )
+            AnimatedVisibility(expanded) {
+                var unicode by remember { mutableStateOf("") }
+                var character by remember { mutableStateOf("") }
+
+                Column {
+                    Spacer(
+                        modifier = Modifier.padding(spacerPadding)
+                    )
+                    Text(
+                        text = "Enter the last four digits of each Unicode like \"00610062\" (drop \\u)"
+                    )
+                    Row {
+                        OutlinedTextField(
+                            value = unicode,
+                            onValueChange = { unicode = it },
+                            label = { Text("Unicode") },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f)
+                                .padding(end = spacerPadding)
+                        )
+                        OutlinedTextField(
+                            value = character,
+                            onValueChange = { character = it },
+                            label = { Text("Character") },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(1f)
+                                .padding(start = spacerPadding)
+                        )
+                    }
+                    Spacer(
+                        modifier = Modifier.padding(spacerPadding)
+                    )
+                    Button(
+                        onClick = {
+                            if (unicode.isEmpty()) return@Button
+                            try {
+                                val result = convertUnicodeToCharacter(unicode)
+                                showToast(context, "$result copied")
+                            } catch (e: Exception) {
+                                showToast(
+                                    context,
+                                    (if (e.message != null) e.message else "Unknown error occurred")!!
+                                )
+                            }
+                        }
+                    ) {
+                        Text(text = "Convert")
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun GoogleMapsGroup(context: Context) {
+    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
+    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        var expanded by remember { mutableStateOf(true) }
+
+        Column(
+            modifier = Modifier
+                .padding(cardPadding)
+                .clickable { expanded = !expanded }
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Google Maps",
                 style = MaterialTheme.typography.titleLarge
             )
             AnimatedVisibility(expanded) {
@@ -265,38 +343,19 @@ fun UnicodeGroup() {
                                 .padding(start = spacerPadding)
                         )
                     }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun GoogleMapsGroup() {
-    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
-    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
-
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        var expanded by remember { mutableStateOf(true) }
-
-        Column(
-            modifier = Modifier
-                .padding(cardPadding)
-                .clickable { expanded = !expanded }
-        ) {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = "Google Maps",
-                style = MaterialTheme.typography.titleLarge
-            )
-            AnimatedVisibility(expanded) {
-                Column {
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
                     )
-                    // Contents here
+                    Button(
+                        onClick = {
+                            Utils.openGoogleMaps(
+                                context,
+                                latitude.ifEmpty { "0" },
+                                longitude.ifEmpty { "0" })
+                        }
+                    ) {
+                        Text(text = "Open Google Maps")
+                    }
                 }
             }
         }
@@ -382,5 +441,6 @@ fun Example() {
                 }
             }
         }
+
     }
 }
