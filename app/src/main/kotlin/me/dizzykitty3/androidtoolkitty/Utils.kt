@@ -74,7 +74,7 @@ object Utils {
     }
 
     @JvmStatic
-    fun showToast(context: Context, toastText: String) {
+    fun showToast(context: Context, toastText: String?) {
         if (Objects.nonNull(currentToast)) {
             currentToast!!.cancel()
         }

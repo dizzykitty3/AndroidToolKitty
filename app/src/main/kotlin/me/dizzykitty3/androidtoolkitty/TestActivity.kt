@@ -55,6 +55,7 @@ class TestActivity : ComponentActivity() {
         }
     }
 }
+
 @Composable
 fun MyLayout() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
@@ -273,7 +274,7 @@ fun SystemSettingsCard(context: Context) {
                             )
                             showToast(
                                 context,
-                                if (isAutoTime == 1) "set time automatically is on" else "set time automatically is off"
+                                if (isAutoTime == 1) "set time automatically is ON" else "set time automatically is OFF"
                             )
                         }
                     ) {
@@ -379,7 +380,7 @@ fun onClickConvertButton(context: Context, unicode: String) {
         ClipboardUtils(context).copyTextToClipboard(result)
         showToast(context, "$result copied")
     } catch (e: Exception) {
-        showToast(context, (if (e.message != null) e.message else "Unknown error occurred")!!)
+        showToast(context, e.message?.ifEmpty { "Unknown error occurred" })
     }
 }
 
