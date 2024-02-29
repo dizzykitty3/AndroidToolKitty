@@ -42,7 +42,6 @@ import me.dizzykitty3.androidtoolkitty.Utils.showToast
 import me.dizzykitty3.androidtoolkitty.Utils.showToastAndRecordLog
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
 
-
 class TestActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,7 +99,7 @@ fun MyLayout() {
 }
 
 /**
- * Displays a Year Progress Card.
+ * Displays year progress indicator
  */
 @Composable
 fun YearProgressCard() {

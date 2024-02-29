@@ -35,9 +35,9 @@ object Utils {
     @JvmStatic
     fun openGoogleMaps(context: Context, latitude: String, longitude: String) {
         val coordinates = "$latitude,$longitude"
-        val gmmIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
+        val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
 
-        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+        val mapIntent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         mapIntent.setPackage("com.google.android.apps.maps")
 
         if (Objects.nonNull(mapIntent.resolveActivity(context.packageManager))) {
@@ -56,7 +56,9 @@ object Utils {
 
     @JvmStatic
     fun openCertainAppOnPlayStore(context: Context, packageName: String) {
-        val playStoreUri = Uri.parse("market://details?id=$packageName")
+        var mutablePackageName = packageName
+        if (!packageName.contains(".")) mutablePackageName = "com.$packageName"
+        val playStoreUri = Uri.parse("market://details?id=$mutablePackageName")
         val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
 
         if (Objects.nonNull(playStoreIntent.resolveActivity(context.packageManager))) {
