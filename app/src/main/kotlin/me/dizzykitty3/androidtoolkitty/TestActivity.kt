@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -31,6 +32,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.Utils.calculateYearProgress
 import me.dizzykitty3.androidtoolkitty.Utils.convertUnicodeToCharacter
@@ -39,6 +41,7 @@ import me.dizzykitty3.androidtoolkitty.Utils.openGoogleMaps
 import me.dizzykitty3.androidtoolkitty.Utils.showToast
 import me.dizzykitty3.androidtoolkitty.Utils.showToastAndRecordLog
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
+
 
 class TestActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -308,7 +311,7 @@ fun UnicodeCard(context: Context) {
                         modifier = Modifier.padding(spacerPadding)
                     )
                     Text(
-                        text = "Enter the last four digits of each Unicode like \"00610062\" (drop \\u)"
+                        text = "The last 4 digits of each Unicode like \"00610062\""
                     )
                     Row {
                         OutlinedTextField(
@@ -318,7 +321,15 @@ fun UnicodeCard(context: Context) {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .weight(1f)
-                                .padding(end = spacerPadding)
+                                .padding(end = spacerPadding),
+                            keyboardOptions = KeyboardOptions.Default.copy(
+                                imeAction = ImeAction.Done
+                            ),
+                            keyboardActions = KeyboardActions(
+                                onDone = {
+                                    onClickConvertButton(context, unicode)
+                                }
+                            )
                         )
                         OutlinedTextField(
                             value = character,
@@ -389,21 +400,37 @@ fun GoogleMapsCard(context: Context) {
                             value = latitude,
                             onValueChange = { latitude = it },
                             label = { Text("Latitude") },
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .weight(1f)
-                                .padding(end = spacerPadding)
+                                .padding(end = spacerPadding),
+                            keyboardOptions = KeyboardOptions.Default.copy(
+                                keyboardType = KeyboardType.Number,
+                                imeAction = ImeAction.Done
+                            ),
+                            keyboardActions = KeyboardActions(
+                                onDone = {
+                                    onClickOpenGoogleMapsButton(context, latitude, longitude)
+                                }
+                            )
                         )
                         OutlinedTextField(
                             value = longitude,
                             onValueChange = { longitude = it },
                             label = { Text("Longitude") },
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .weight(1f)
-                                .padding(start = spacerPadding)
+                                .padding(start = spacerPadding),
+                            keyboardOptions = KeyboardOptions.Default.copy(
+                                keyboardType = KeyboardType.Number,
+                                imeAction = ImeAction.Done
+                            ),
+                            keyboardActions = KeyboardActions(
+                                onDone = {
+                                    onClickOpenGoogleMapsButton(context, latitude, longitude)
+                                }
+                            )
                         )
                     }
                     Spacer(
@@ -457,7 +484,15 @@ fun OpenCertainAppOnPlayStoreCard(context: Context) {
                         value = packageName,
                         onValueChange = { packageName = it },
                         label = { Text("Package Name") },
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            imeAction = ImeAction.Done
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onDone = {
+                                openCertainAppOnPlayStore(context, packageName)
+                            }
+                        )
                     )
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
@@ -554,6 +589,5 @@ fun Example() {
                 }
             }
         }
-
     }
 }
