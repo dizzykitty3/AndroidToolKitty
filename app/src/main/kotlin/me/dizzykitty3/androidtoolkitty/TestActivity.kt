@@ -25,6 +25,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -321,7 +322,7 @@ fun UnicodeCard(context: Context) {
             AnimatedVisibility(expanded) {
                 Column {
                     var unicode by remember { mutableStateOf("") }
-                    var character by remember { mutableStateOf("") }
+                    val characters = remember { mutableStateOf("") }
 
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
@@ -343,13 +344,13 @@ fun UnicodeCard(context: Context) {
                             ),
                             keyboardActions = KeyboardActions(
                                 onDone = {
-                                    onClickConvertButton(context, unicode)
+                                    onClickConvertButton(context, unicode, characters)
                                 }
                             )
                         )
                         OutlinedTextField(
-                            value = character,
-                            onValueChange = { character = it },
+                            value = characters.value, // Access the value property of MutableState
+                            onValueChange = {}, // This field is read-only
                             label = { Text("Character") },
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -362,7 +363,7 @@ fun UnicodeCard(context: Context) {
                     )
                     Button(
                         onClick = {
-                            onClickConvertButton(context, unicode)
+                            onClickConvertButton(context, unicode, characters)
                         }
                     ) {
                         Text(text = "Convert")
@@ -373,10 +374,11 @@ fun UnicodeCard(context: Context) {
     }
 }
 
-fun onClickConvertButton(context: Context, unicode: String) {
+fun onClickConvertButton(context: Context, unicode: String, characterField: MutableState<String>) {
     if (unicode.isEmpty()) return
     try {
         val result = convertUnicodeToCharacter(unicode)
+        characterField.value = result
         ClipboardUtils(context).copyTextToClipboard(result)
         showToast(context, "$result copied")
     } catch (e: Exception) {
