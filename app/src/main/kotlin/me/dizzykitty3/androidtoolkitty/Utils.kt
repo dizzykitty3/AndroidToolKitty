@@ -54,7 +54,7 @@ object Utils {
         showToast(context, event)
     }
 
-    private fun openCertainAppOnPlayStore(context: Context, packageName: String) {
+    fun openCertainAppOnPlayStore(context: Context, packageName: String) {
         val playStoreUri = Uri.parse("market://details?id=$packageName")
         val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
 

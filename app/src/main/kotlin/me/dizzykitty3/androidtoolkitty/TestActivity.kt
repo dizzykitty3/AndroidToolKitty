@@ -34,6 +34,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.Utils.calculateYearProgress
 import me.dizzykitty3.androidtoolkitty.Utils.convertUnicodeToCharacter
+import me.dizzykitty3.androidtoolkitty.Utils.openCertainAppOnPlayStore
 import me.dizzykitty3.androidtoolkitty.Utils.openGoogleMaps
 import me.dizzykitty3.androidtoolkitty.Utils.showToast
 import me.dizzykitty3.androidtoolkitty.Utils.showToastAndRecordLog
@@ -61,43 +62,49 @@ fun MyLayout() {
     ) {
         item {
             // Clear clipboard
-            YearProgress()
+            YearProgressCard()
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
             // Clear clipboard
-            ClipboardGroup(LocalContext.current)
+            ClipboardCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
             // Open certain system setting pages
-            SystemSettingsGroup(LocalContext.current)
+            SystemSettingsCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
-            // Convert unicode to characters and vice versa
-            UnicodeGroup(LocalContext.current)
+            // Convert Unicode to characters and vice versa
+            UnicodeCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
             // Opens Google Maps with the specified latitude and longitude
-            GoogleMapsGroup(LocalContext.current)
+            GoogleMapsCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
-            // Integer variable recomposition
-            TestLayout()
+            // Open a certain app on Google Play Store
+            OpenCertainAppOnPlayStoreCard(LocalContext.current)
+            Spacer(modifier = Modifier.padding(spacerPadding))
+        }
+
+        item {
+            // Integer variable recomposition feature test
+            TestCard()
         }
     }
 }
 
 @Composable
-fun YearProgress() {
+fun YearProgressCard() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
 
@@ -138,7 +145,7 @@ fun YearProgress() {
 }
 
 @Composable
-fun ClipboardGroup(context: Context) {
+fun ClipboardCard(context: Context) {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
 
@@ -181,7 +188,7 @@ fun onClearClipboardButton(context: Context) {
 }
 
 @Composable
-fun SystemSettingsGroup(context: Context) {
+fun SystemSettingsCard(context: Context) {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
 
@@ -273,7 +280,7 @@ fun SystemSettingsGroup(context: Context) {
 }
 
 @Composable
-fun UnicodeGroup(context: Context) {
+fun UnicodeCard(context: Context) {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
 
@@ -350,7 +357,7 @@ fun onClickConvertButton(context: Context, unicode: String) {
 }
 
 @Composable
-fun GoogleMapsGroup(context: Context) {
+fun GoogleMapsCard(context: Context) {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
 
@@ -420,7 +427,56 @@ fun onClickOpenGoogleMapsButton(context: Context, latitude: String, longitude: S
 }
 
 @Composable
-fun TestLayout() {
+fun OpenCertainAppOnPlayStoreCard(context: Context) {
+    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
+    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        var expanded by remember { mutableStateOf(true) }
+
+        Column(
+            modifier = Modifier
+                .padding(cardPadding)
+                .clickable { expanded = !expanded }
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "Open app on Google Play",
+                style = MaterialTheme.typography.titleLarge
+            )
+            AnimatedVisibility(expanded) {
+                var packageName by remember { mutableStateOf("") }
+
+                Column {
+                    Spacer(
+                        modifier = Modifier.padding(spacerPadding)
+                    )
+                    OutlinedTextField(
+                        value = packageName,
+                        onValueChange = { packageName = it },
+                        label = { Text("Package Name") },
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                    Spacer(
+                        modifier = Modifier.padding(spacerPadding)
+                    )
+                    Button(
+                        onClick = {
+                            openCertainAppOnPlayStore(context, packageName)
+                        }
+                    ) {
+                        Text(text = "Open on Google Play")
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun TestCard() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
 
