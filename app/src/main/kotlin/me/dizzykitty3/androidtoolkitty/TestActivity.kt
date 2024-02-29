@@ -36,6 +36,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.Utils.calculateYearProgress
 import me.dizzykitty3.androidtoolkitty.Utils.convertUnicodeToCharacter
 import me.dizzykitty3.androidtoolkitty.Utils.openCertainAppOnPlayStore
@@ -96,6 +97,11 @@ fun MyLayout() {
 
         item {
             TestCard()
+            Spacer(modifier = Modifier.padding(spacerPadding))
+        }
+
+        item {
+            Spacer(modifier = Modifier.padding(100.dp))
         }
     }
 }
@@ -114,12 +120,12 @@ fun YearProgressCard() {
         var expanded by remember { mutableStateOf(true) }
 
         Column(
-            modifier = Modifier
-                .padding(cardPadding)
-                .clickable { expanded = !expanded }
+            modifier = Modifier.padding(cardPadding)
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded },
                 text = "Year Progress",
                 style = MaterialTheme.typography.titleLarge
             )
@@ -158,12 +164,12 @@ fun ClipboardCard(context: Context) {
         var expanded by remember { mutableStateOf(true) }
 
         Column(
-            modifier = Modifier
-                .padding(cardPadding)
-                .clickable { expanded = !expanded }
+            modifier = Modifier.padding(cardPadding)
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded },
                 text = "Clipboard",
                 style = MaterialTheme.typography.titleLarge
             )
@@ -216,12 +222,12 @@ fun SystemSettingsCard(context: Context) {
         var expanded by remember { mutableStateOf(true) }
 
         Column(
-            modifier = Modifier
-                .padding(cardPadding)
-                .clickable { expanded = !expanded }
+            modifier = Modifier.padding(cardPadding)
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded },
                 text = "Android System Settings",
                 style = MaterialTheme.typography.titleLarge
             )
@@ -311,12 +317,12 @@ fun UnicodeCard(context: Context) {
         var expanded by remember { mutableStateOf(true) }
 
         Column(
-            modifier = Modifier
-                .padding(cardPadding)
-                .clickable { expanded = !expanded }
+            modifier = Modifier.padding(cardPadding)
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded },
                 text = "Unicode",
                 style = MaterialTheme.typography.titleLarge
             )
@@ -399,12 +405,12 @@ fun GoogleMapsCard(context: Context) {
         var expanded by remember { mutableStateOf(true) }
 
         Column(
-            modifier = Modifier
-                .padding(cardPadding)
-                .clickable { expanded = !expanded }
+            modifier = Modifier.padding(cardPadding)
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded },
                 text = "Google Maps",
                 style = MaterialTheme.typography.titleLarge
             )
@@ -488,12 +494,12 @@ fun OpenCertainAppOnPlayStoreCard(context: Context) {
         var expanded by remember { mutableStateOf(true) }
 
         Column(
-            modifier = Modifier
-                .padding(cardPadding)
-                .clickable { expanded = !expanded }
+            modifier = Modifier.padding(cardPadding)
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded },
                 text = "Open app on Google Play",
                 style = MaterialTheme.typography.titleLarge
             )
@@ -550,12 +556,12 @@ fun TestCard() {
         var expanded by remember { mutableStateOf(true) }
 
         Column(
-            modifier = Modifier
-                .padding(cardPadding)
-                .clickable { expanded = !expanded }
+            modifier = Modifier.padding(cardPadding)
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded },
                 text = "test",
                 style = MaterialTheme.typography.titleLarge
             )
@@ -598,12 +604,12 @@ fun Example() {
         var expanded by remember { mutableStateOf(true) }
 
         Column(
-            modifier = Modifier
-                .padding(cardPadding)
-                .clickable { expanded = !expanded }
+            modifier = Modifier.padding(cardPadding)
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable { expanded = !expanded },
                 text = "// title here",
                 style = MaterialTheme.typography.titleLarge
             )
