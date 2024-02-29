@@ -6,10 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import me.dizzykitty3.androidtoolkitty.Utils.convertUnicodeToCharacter
 import me.dizzykitty3.androidtoolkitty.Utils.debugLog
-import me.dizzykitty3.androidtoolkitty.Utils.openGoogleMaps
-import me.dizzykitty3.androidtoolkitty.Utils.showToast
 import me.dizzykitty3.androidtoolkitty.Utils.showToastAndRecordLog
 import me.dizzykitty3.androidtoolkitty.databinding.ActivityMainBinding
 import java.util.Objects
@@ -30,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         initCore()
         sharedPreferencesValues
         initClipboardGroup()
-        initGoogleMapsGroup()
-        initUnicodeGroup()
         initTestGroup()
     }
 
@@ -60,35 +55,6 @@ class MainActivity : AppCompatActivity() {
             editor!!.putBoolean(KEY_AUTO_CLEAR_CLIPBOARD, isChecked)
             editor!!.apply()
             debugLog(if (isChecked) "auto clear clipboard is now: on" else "auto clear clipboard is now: off")
-        }
-    }
-
-    private fun initGoogleMapsGroup() {
-        binding!!.openGoogleMapsButton.setOnClickListener { _: View? ->
-            val latitude = Objects.requireNonNull(binding!!.latitudeTextInput.text).toString()
-            val longitude = Objects.requireNonNull(binding!!.longitudeTextInput.text).toString()
-            openGoogleMaps(
-                this,
-                latitude.ifEmpty { "0" },
-                longitude.ifEmpty { "0" }
-            )
-        }
-    }
-
-    private fun initUnicodeGroup() {
-        binding!!.convertToCharacterButton.setOnClickListener { _: View? ->
-            val unicode = Objects.requireNonNull(binding!!.unicodeTextInput.text).toString()
-            if (unicode.isEmpty()) {
-                return@setOnClickListener
-            }
-            try {
-                val result = convertUnicodeToCharacter(unicode)
-                binding!!.unicodeOutputTextView.text = result
-                clipboardUtils!!.copyTextToClipboard(result)
-                showToast(this, "$result copied")
-            } catch (e: Exception) {
-                showToast(this, (if (e.message != null) e.message else "Unknown error occurred")!!)
-            }
         }
     }
 

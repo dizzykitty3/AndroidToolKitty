@@ -4,11 +4,4 @@
     <string name="msg002_clipboard_group_name">Clipboard</string>
     <string name="msg003_auto_clear_clipboard_setting">Clear clipboard on app launch</string>
     <string name="msg004_settings_group_name">test</string>
-    <string name="msg006_google_map_group_name">Google Maps</string>
-    <string name="msg007_enter_coordinates_latitude">Enter latitude</string>
-    <string name="msg008_open_google_maps">Open Google Maps</string>
-    <string name="msg009_enter_coordinates_longitude">Enter longitude</string>
-    <string name="msg010_unicode_group_name">Unicode</string>
-    <string name="msg011_enter_unicode_hint">Enter the last four digits of each Unicode like 00610062 (drop \\u)</string>
-    <string name="msg012_convert_to_character">Convert to character(s)</string>
 </resources>

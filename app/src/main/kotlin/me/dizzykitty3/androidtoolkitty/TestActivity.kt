@@ -376,6 +376,7 @@ fun onClickConvertButton(context: Context, unicode: String) {
     if (unicode.isEmpty()) return
     try {
         val result = convertUnicodeToCharacter(unicode)
+        ClipboardUtils(context).copyTextToClipboard(result)
         showToast(context, "$result copied")
     } catch (e: Exception) {
         showToast(context, (if (e.message != null) e.message else "Unknown error occurred")!!)
