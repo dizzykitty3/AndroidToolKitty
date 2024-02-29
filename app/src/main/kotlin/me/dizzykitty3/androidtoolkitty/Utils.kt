@@ -54,6 +54,7 @@ object Utils {
         showToast(context, event)
     }
 
+    @JvmStatic
     fun openCertainAppOnPlayStore(context: Context, packageName: String) {
         val playStoreUri = Uri.parse("market://details?id=$packageName")
         val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)

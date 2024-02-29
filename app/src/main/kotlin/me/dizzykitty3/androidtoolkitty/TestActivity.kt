@@ -64,48 +64,44 @@ fun MyLayout() {
         modifier = Modifier.padding(cardPadding)
     ) {
         item {
-            // Clear clipboard
             YearProgressCard()
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
-            // Clear clipboard
             ClipboardCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
-            // Open certain system setting pages
             SystemSettingsCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
-            // Convert Unicode to characters and vice versa
             UnicodeCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
-            // Opens Google Maps with the specified latitude and longitude
             GoogleMapsCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
-            // Open a certain app on Google Play Store
             OpenCertainAppOnPlayStoreCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
 
         item {
-            // Integer variable recomposition feature test
             TestCard()
         }
     }
 }
 
+/**
+ * Displays a Year Progress Card.
+ */
 @Composable
 fun YearProgressCard() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
@@ -147,6 +143,9 @@ fun YearProgressCard() {
     }
 }
 
+/**
+ * Clear clipboard
+ */
 @Composable
 fun ClipboardCard(context: Context) {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
@@ -190,6 +189,9 @@ fun onClearClipboardButton(context: Context) {
     showToastAndRecordLog(context, "clipboard cleared")
 }
 
+/**
+ * Open certain system setting pages
+ */
 @Composable
 fun SystemSettingsCard(context: Context) {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
@@ -282,6 +284,9 @@ fun SystemSettingsCard(context: Context) {
     }
 }
 
+/**
+ * Convert Unicode to characters and vice versa
+ */
 @Composable
 fun UnicodeCard(context: Context) {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
@@ -367,6 +372,9 @@ fun onClickConvertButton(context: Context, unicode: String) {
     }
 }
 
+/**
+ * Opens Google Maps with the specified latitude and longitude
+ */
 @Composable
 fun GoogleMapsCard(context: Context) {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
@@ -453,6 +461,9 @@ fun onClickOpenGoogleMapsButton(context: Context, latitude: String, longitude: S
     openGoogleMaps(context, latitude.ifEmpty { "0" }, longitude.ifEmpty { "0" })
 }
 
+/**
+ * Open a certain app on Google Play Store
+ */
 @Composable
 fun OpenCertainAppOnPlayStoreCard(context: Context) {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
@@ -510,6 +521,9 @@ fun OpenCertainAppOnPlayStoreCard(context: Context) {
     }
 }
 
+/**
+ * Integer variable recomposition feature test
+ */
 @Composable
 fun TestCard() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
