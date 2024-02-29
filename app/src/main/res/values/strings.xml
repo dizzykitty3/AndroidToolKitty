@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Android ToolKitty</string>
-    <string name="msg001_clear_clipboard">Clear clipboard</string>
-    <string name="msg002_clipboard_group_name">Clipboard</string>
-    <string name="msg003_auto_clear_clipboard_setting">Clear clipboard on app launch</string>
-    <string name="msg004_settings_group_name">test</string>
+    <string name="clear_clipboard">Clear clipboard</string>
+    <string name="clipboard">Clipboard</string>
+    <string name="clear_clipboard_on_app_launch">Clear clipboard on app launch</string>
+    <string name="test">test</string>
+    <string name="try_compose">try compose</string>
 </resources>

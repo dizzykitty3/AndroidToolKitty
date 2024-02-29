@@ -38,7 +38,7 @@
                         android:id="@+id/clipboard_group_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/msg002_clipboard_group_name"
+                        android:text="@string/clipboard"
                         android:textSize="@dimen/text_size_title" />
 
                     <View
@@ -49,7 +49,7 @@
                         android:id="@+id/clear_clipboard_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/msg001_clear_clipboard"
+                        android:text="@string/clear_clipboard"
                         android:textSize="@dimen/text_size_normal" />
 
                     <com.google.android.material.materialswitch.MaterialSwitch
@@ -57,7 +57,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="?attr/selectableItemBackground"
-                        android:text="@string/msg003_auto_clear_clipboard_setting"
+                        android:text="@string/clear_clipboard_on_app_launch"
                         android:textSize="@dimen/text_size_normal" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -84,7 +84,7 @@
                         android:id="@+id/settings_group_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/msg004_settings_group_name"
+                        android:text="@string/test"
                         android:textSize="@dimen/text_size_title" />
 
                     <View
@@ -95,7 +95,7 @@
                         android:id="@+id/test_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="try compose"
+                        android:text="@string/try_compose"
                         android:textSize="@dimen/text_size_normal" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
