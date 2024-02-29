@@ -48,7 +48,6 @@ import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
 class TestActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             MyApplicationTheme {
                 MyLayout()
@@ -56,7 +55,6 @@ class TestActivity : ComponentActivity() {
         }
     }
 }
-
 @Composable
 fun MyLayout() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
@@ -69,37 +67,30 @@ fun MyLayout() {
             YearProgressCard()
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
-
         item {
             ClipboardCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
-
         item {
             SystemSettingsCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
-
         item {
             UnicodeCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
-
         item {
             GoogleMapsCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
-
         item {
             OpenCertainAppOnPlayStoreCard(LocalContext.current)
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
-
         item {
             TestCard()
             Spacer(modifier = Modifier.padding(spacerPadding))
         }
-
         item {
             Spacer(modifier = Modifier.padding(100.dp))
         }
@@ -117,7 +108,6 @@ fun YearProgressCard() {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
@@ -162,7 +152,6 @@ fun ClipboardCard(context: Context) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
@@ -176,7 +165,6 @@ fun ClipboardCard(context: Context) {
                 style = MaterialTheme.typography.titleLarge
             )
             AnimatedVisibility(expanded) {
-
                 Column {
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
@@ -222,7 +210,6 @@ fun SystemSettingsCard(context: Context) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
@@ -318,7 +305,6 @@ fun UnicodeCard(context: Context) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
@@ -343,7 +329,6 @@ fun UnicodeCard(context: Context) {
                         text = "The last 4 digits of each Unicode like \"00610062\""
                     )
                     Row {
-
                         OutlinedTextField(
                             value = unicode,
                             onValueChange = { unicode = it },
@@ -408,7 +393,6 @@ fun GoogleMapsCard(context: Context) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
@@ -556,12 +540,9 @@ fun TestCard() {
     val cardPadding = dimensionResource(R.dimen.compose_padding_card)
     val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
 
-    var clicks by remember { mutableIntStateOf(0) }
-
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
@@ -576,6 +557,8 @@ fun TestCard() {
             )
             AnimatedVisibility(expanded) {
                 Column {
+                    var clicks by remember { mutableIntStateOf(0) }
+
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
                     )
