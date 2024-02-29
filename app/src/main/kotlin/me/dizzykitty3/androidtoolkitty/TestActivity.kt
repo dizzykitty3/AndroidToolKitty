@@ -117,11 +117,12 @@ fun YearProgressCard() {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-        var expanded by remember { mutableStateOf(true) }
 
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
+            var expanded by remember { mutableStateOf(true) }
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -161,11 +162,12 @@ fun ClipboardCard(context: Context) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-        var expanded by remember { mutableStateOf(true) }
 
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
+            var expanded by remember { mutableStateOf(true) }
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -174,7 +176,6 @@ fun ClipboardCard(context: Context) {
                 style = MaterialTheme.typography.titleLarge
             )
             AnimatedVisibility(expanded) {
-                var checked by remember { mutableStateOf(true) }
 
                 Column {
                     Spacer(
@@ -190,6 +191,8 @@ fun ClipboardCard(context: Context) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+                        var checked by remember { mutableStateOf(true) }
+
                         Text(text = "test switch")
                         Spacer(modifier = Modifier.weight(1f))
                         Switch(
@@ -219,11 +222,12 @@ fun SystemSettingsCard(context: Context) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-        var expanded by remember { mutableStateOf(true) }
 
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
+            var expanded by remember { mutableStateOf(true) }
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -314,11 +318,12 @@ fun UnicodeCard(context: Context) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-        var expanded by remember { mutableStateOf(true) }
 
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
+            var expanded by remember { mutableStateOf(true) }
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -327,10 +332,10 @@ fun UnicodeCard(context: Context) {
                 style = MaterialTheme.typography.titleLarge
             )
             AnimatedVisibility(expanded) {
-                var unicode by remember { mutableStateOf("") }
-                var character by remember { mutableStateOf("") }
-
                 Column {
+                    var unicode by remember { mutableStateOf("") }
+                    var character by remember { mutableStateOf("") }
+
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
                     )
@@ -338,6 +343,7 @@ fun UnicodeCard(context: Context) {
                         text = "The last 4 digits of each Unicode like \"00610062\""
                     )
                     Row {
+
                         OutlinedTextField(
                             value = unicode,
                             onValueChange = { unicode = it },
@@ -402,11 +408,12 @@ fun GoogleMapsCard(context: Context) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-        var expanded by remember { mutableStateOf(true) }
 
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
+            var expanded by remember { mutableStateOf(true) }
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -415,10 +422,10 @@ fun GoogleMapsCard(context: Context) {
                 style = MaterialTheme.typography.titleLarge
             )
             AnimatedVisibility(expanded) {
-                var latitude by remember { mutableStateOf("") }
-                var longitude by remember { mutableStateOf("") }
-
                 Column {
+                    var latitude by remember { mutableStateOf("") }
+                    var longitude by remember { mutableStateOf("") }
+
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
                     )
@@ -491,11 +498,12 @@ fun OpenCertainAppOnPlayStoreCard(context: Context) {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-        var expanded by remember { mutableStateOf(true) }
 
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
+            var expanded by remember { mutableStateOf(true) }
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -504,9 +512,9 @@ fun OpenCertainAppOnPlayStoreCard(context: Context) {
                 style = MaterialTheme.typography.titleLarge
             )
             AnimatedVisibility(expanded) {
-                var packageName by remember { mutableStateOf("") }
-
                 Column {
+                    var packageName by remember { mutableStateOf("") }
+
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
                     )
@@ -553,11 +561,12 @@ fun TestCard() {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-        var expanded by remember { mutableStateOf(true) }
 
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
+            var expanded by remember { mutableStateOf(true) }
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -601,11 +610,12 @@ fun Example() {
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-        var expanded by remember { mutableStateOf(true) }
 
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {
+            var expanded by remember { mutableStateOf(true) }
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
