@@ -22,6 +22,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,6 +30,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -166,6 +168,8 @@ fun ClipboardCard(context: Context) {
                 style = MaterialTheme.typography.titleLarge
             )
             AnimatedVisibility(expanded) {
+                var checked by remember { mutableStateOf(true) }
+
                 Column {
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
@@ -176,6 +180,16 @@ fun ClipboardCard(context: Context) {
                         }
                     ) {
                         Text(text = "Clear clipboard")
+                    }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(text = "test switch")
+                        Spacer(modifier = Modifier.weight(1f))
+                        Switch(
+                            checked = checked,
+                            onCheckedChange = { checked = it }
+                        )
                     }
                 }
             }
