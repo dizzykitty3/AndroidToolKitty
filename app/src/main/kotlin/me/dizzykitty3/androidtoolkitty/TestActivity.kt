@@ -38,6 +38,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import me.dizzykitty3.androidtoolkitty.Utils.calculateDaysPassed
+import me.dizzykitty3.androidtoolkitty.Utils.calculateTotalDaysInYear
 import me.dizzykitty3.androidtoolkitty.Utils.calculateYearProgress
 import me.dizzykitty3.androidtoolkitty.Utils.convertUnicodeToCharacter
 import me.dizzykitty3.androidtoolkitty.Utils.openCertainAppOnPlayStore
@@ -124,6 +126,8 @@ fun YearProgressCard() {
             )
             AnimatedVisibility(expanded) {
                 Column {
+                    var showProgressIndicator by remember { mutableStateOf(true) }
+
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
                     )
@@ -134,8 +138,15 @@ fun YearProgressCard() {
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
                     )
+                    val textToShow =
+                        if (showProgressIndicator) "${calculateYearProgress() * 100}%" else "${calculateDaysPassed()} / ${calculateTotalDaysInYear()}"
                     Text(
-                        text = "${calculateYearProgress() * 100}%"
+                        text = textToShow,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                showProgressIndicator = !showProgressIndicator
+                            }
                     )
                 }
             }

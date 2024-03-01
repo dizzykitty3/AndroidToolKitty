@@ -83,14 +83,22 @@ object Utils {
     }
 
     @JvmStatic
-    fun calculateYearProgress(): Float {
+    fun calculateDaysPassed(): Long {
+        val currentDate = LocalDate.now()
+        val startOfYear = LocalDate.of(currentDate.year, 1, 1)
+        return startOfYear.until(currentDate, ChronoUnit.DAYS)
+    }
+
+    @JvmStatic
+    fun calculateTotalDaysInYear(): Long {
         val currentDate = LocalDate.now()
         val startOfYear = LocalDate.of(currentDate.year, 1, 1)
         val endOfYear = LocalDate.of(currentDate.year, 12, 31)
+        return startOfYear.until(endOfYear, ChronoUnit.DAYS)
+    }
 
-        val totalDaysInYear = startOfYear.until(endOfYear, ChronoUnit.DAYS)
-        val daysPassed = startOfYear.until(currentDate, ChronoUnit.DAYS)
-
-        return daysPassed.toFloat() / totalDaysInYear.toFloat()
+    @JvmStatic
+    fun calculateYearProgress(): Float {
+        return calculateDaysPassed().toFloat() / calculateTotalDaysInYear().toFloat()
     }
 }
