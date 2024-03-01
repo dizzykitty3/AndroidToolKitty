@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Android ToolKitty</string>
-    <string name="clear_clipboard">Clear clipboard</string>
     <string name="clipboard">Clipboard</string>
     <string name="clear_clipboard_on_app_launch">Clear clipboard on app launch</string>
     <string name="test">test</string>

@@ -7,7 +7,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import me.dizzykitty3.androidtoolkitty.Utils.debugLog
-import me.dizzykitty3.androidtoolkitty.Utils.showToastAndRecordLog
 import me.dizzykitty3.androidtoolkitty.databinding.ActivityMainBinding
 import java.util.Objects
 
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initCore() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-        binding!!.setLifecycleOwner(this)
+        binding!!.lifecycleOwner = this
         sharedPreferences = getSharedPreferences("Android ToolKitty", MODE_PRIVATE)
         editor = sharedPreferences!!.edit()
         clipboardUtils = ClipboardUtils(this)
@@ -44,11 +43,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     private fun initClipboardGroup() {
-        binding!!.clearClipboardButton.setOnClickListener { _: View? ->
-            clipboardUtils!!.clearClipboard()
-            showToastAndRecordLog(this, CLIPBOARD_CLEARED)
-        }
-
         binding!!.autoClearClipboardSettingSwitch.isChecked = isAutoClearClipboard
         binding!!.autoClearClipboardSettingSwitch.setOnCheckedChangeListener { _, isChecked: Boolean ->
             isAutoClearClipboard = isChecked
@@ -85,7 +79,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val CLIPBOARD_CLEARED = "clipboard cleared"
         private const val KEY_AUTO_CLEAR_CLIPBOARD = "key_auto_clear_clipboard"
     }
 }
