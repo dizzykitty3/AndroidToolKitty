@@ -94,7 +94,7 @@ object Utils {
         val currentDate = LocalDate.now()
         val startOfYear = LocalDate.of(currentDate.year, 1, 1)
         val endOfYear = LocalDate.of(currentDate.year, 12, 31)
-        return startOfYear.until(endOfYear, ChronoUnit.DAYS)
+        return startOfYear.until(endOfYear, ChronoUnit.DAYS) + 1
     }
 
     @JvmStatic
