@@ -391,14 +391,14 @@ fun UnicodeCard(context: Context) {
 }
 
 fun onClickConvertButton(context: Context, unicode: String, characterField: MutableState<String>) {
-    if (unicode.isEmpty()) return
+    if (unicode.isBlank()) return
     try {
         val result = convertUnicodeToCharacter(unicode)
         characterField.value = result
         ClipboardUtils(context).copyTextToClipboard(result)
         showToast(context, "$result copied")
     } catch (e: Exception) {
-        showToast(context, e.message?.ifEmpty { "Unknown error occurred" })
+        showToast(context, e.message?.ifBlank { "Unknown error occurred" })
     }
 }
 
@@ -488,7 +488,7 @@ fun GoogleMapsCard(context: Context) {
 }
 
 fun onClickOpenGoogleMapsButton(context: Context, latitude: String, longitude: String) {
-    openGoogleMaps(context, latitude.ifEmpty { "0" }, longitude.ifEmpty { "0" })
+    openGoogleMaps(context, latitude.ifBlank { "0" }, longitude.ifBlank { "0" })
 }
 
 /**

@@ -56,6 +56,7 @@ object Utils {
 
     @JvmStatic
     fun openCertainAppOnPlayStore(context: Context, packageName: String) {
+        if (packageName.isBlank()) return
         var mutablePackageName = packageName
         if (!packageName.contains(".")) mutablePackageName = "com.$packageName"
         val playStoreUri = Uri.parse("market://details?id=$mutablePackageName")
