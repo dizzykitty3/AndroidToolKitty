@@ -240,6 +240,15 @@ fun SystemSettingsCard(context: Context) {
                     }
                     Button(
                         onClick = {
+                            val intent = Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(intent)
+                        }
+                    ) {
+                        Text(text = "Open auto rotate settings")
+                    }
+                    Button(
+                        onClick = {
                             val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             context.startActivity(intent)
@@ -328,7 +337,7 @@ fun UnicodeCard(context: Context) {
                         modifier = Modifier.padding(spacerPadding)
                     )
                     Text(
-                        text = "The last 4 digits of each Unicode like \"00610062\""
+                        text = "Type in the last 4 digits of each Unicode like \"00610062\""
                     )
                     Row {
                         OutlinedTextField(
