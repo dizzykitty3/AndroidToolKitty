@@ -36,6 +36,7 @@ import me.dizzykitty3.androidtoolkitty.Utils.onClearClipboardButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickCheckSetTimeAutomaticallyButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickConvertButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickOpenGoogleMapsButton
+import me.dizzykitty3.androidtoolkitty.Utils.onClickVisitButton
 import me.dizzykitty3.androidtoolkitty.Utils.openCertainAppOnPlayStore
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.SystemSettingsButton
@@ -78,6 +79,10 @@ fun MainLayout() {
         }
         item {
             ClipboardCard()
+            Spacer(modifier = spacerPadding)
+        }
+        item {
+            URLCard()
             Spacer(modifier = spacerPadding)
         }
         item {
@@ -154,6 +159,40 @@ fun ClipboardCard() {
                 checked = checked,
                 onCheckedChange = { checked = it }
             )
+        }
+    }
+}
+
+/**
+ * Visit url without inputting prefix and suffix
+ */
+@Composable
+fun URLCard() {
+    CustomCard(title = "URL") {
+        val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
+        var url by remember { mutableStateOf("") }
+        Text(
+            text = "Visit url without inputting prefix \"https//www.\" and suffix \".com\""
+        )
+        OutlinedTextField(
+            value = url,
+            onValueChange = { url = it },
+            label = { Text("URL") },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    onClickVisitButton(url)
+                }
+            )
+        )
+        Spacer(modifier = spacerPadding)
+        Button(
+            onClick = { onClickVisitButton(url) }
+        ) {
+            Text(text = "Visit")
         }
     }
 }

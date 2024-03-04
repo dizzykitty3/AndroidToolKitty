@@ -74,6 +74,26 @@ object Utils {
     }
 
     @JvmStatic
+    fun onClickVisitButton(url: String) {
+        if (url.isBlank()) return
+        var mUrl = url.trim()
+        mUrl = mUrl.replace(" ", "") // drop spaces
+        mUrl = mUrl.replace("　", "") // drop full-width spaces
+
+        val builder = StringBuilder()
+        builder.append("https://")
+        builder.append(mUrl)
+        builder.append(".com")
+        val urlResult = builder.toString()
+
+        val urlIntent = Intent(Intent.ACTION_VIEW)
+        urlIntent.data = Uri.parse(urlResult)
+        urlIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        checkContextNullSafety()
+        applicationContext!!.startActivity(urlIntent)
+    }
+
+    @JvmStatic
     fun onOpenSystemSettings(actionName: String) {
         val intent: Intent = when (actionName) {
             "display" -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
@@ -158,8 +178,8 @@ object Utils {
 
         var mPackageName = packageName
         mPackageName = mPackageName.trim()
-        mPackageName = mPackageName.replace(" ", "") // drop space
-        mPackageName = mPackageName.replace("　", "") // drop full-width space
+        mPackageName = mPackageName.replace(" ", "") // drop spaces
+        mPackageName = mPackageName.replace("　", "") // drop full-width spaces
         if (!mPackageName.contains(".")) mPackageName = "com.$mPackageName"
 
         val playStoreUri = Uri.parse("market://details?id=$mPackageName")
