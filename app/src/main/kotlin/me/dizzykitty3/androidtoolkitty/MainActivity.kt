@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApplicationTheme {
-                MyLayout()
+                MainLayout()
             }
         }
     }
@@ -61,11 +61,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyLayout() {
+fun MainLayout() {
     val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card))
     val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
     val context = LocalContext.current
-
     LazyColumn(
         modifier = cardPadding
     ) {
@@ -112,51 +111,26 @@ fun MyLayout() {
  */
 @Composable
 fun YearProgressCard() {
-    val cardPadding = dimensionResource(id = R.dimen.padding_card)
-    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
-
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier.padding(cardPadding)
-        ) {
-            var expanded by remember { mutableStateOf(true) }
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { expanded = !expanded },
-                text = "Year Progress",
-                style = MaterialTheme.typography.titleLarge
-            )
-            AnimatedVisibility(expanded) {
-                Column {
-                    var showProgressIndicator by remember { mutableStateOf(true) }
-
-                    Spacer(
-                        modifier = Modifier.padding(spacerPadding)
-                    )
-                    LinearProgressIndicator(
-                        progress = { calculateYearProgress() },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(
-                        modifier = Modifier.padding(spacerPadding)
-                    )
-                    val textToShow =
-                        if (showProgressIndicator) "${calculateYearProgress() * 100}%" else "${calculateDaysPassed()} / ${calculateTotalDaysInYear()}"
-                    Text(
-                        text = textToShow,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable {
-                                showProgressIndicator = !showProgressIndicator
-                            }
-                    )
+    CustomCard(title = "Year progress") {
+        val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
+        var showProgressIndicator by remember { mutableStateOf(true) }
+        LinearProgressIndicator(
+            progress = { calculateYearProgress() },
+            modifier = Modifier.fillMaxWidth()
+        )
+        Spacer(
+            modifier = spacerPadding
+        )
+        val textToShow =
+            if (showProgressIndicator) "${calculateYearProgress() * 100}%" else "${calculateDaysPassed()} / ${calculateTotalDaysInYear()}"
+        Text(
+            text = textToShow,
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable {
+                    showProgressIndicator = !showProgressIndicator
                 }
-            }
-        }
+        )
     }
 }
 
@@ -165,50 +139,24 @@ fun YearProgressCard() {
  */
 @Composable
 fun ClipboardCard(context: Context) {
-    val cardPadding = dimensionResource(id = R.dimen.padding_card)
-    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
-
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier.padding(cardPadding)
-        ) {
-            var expanded by remember { mutableStateOf(true) }
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { expanded = !expanded },
-                text = "Clipboard",
-                style = MaterialTheme.typography.titleLarge
-            )
-            AnimatedVisibility(expanded) {
-                Column {
-                    Spacer(
-                        modifier = Modifier.padding(spacerPadding)
-                    )
-                    Button(
-                        onClick = {
-                            onClearClipboardButton(context)
-                        }
-                    ) {
-                        Text(text = "Clear clipboard")
-                    }
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        var checked by remember { mutableStateOf(true) }
-
-                        Text(text = "test switch")
-                        Spacer(modifier = Modifier.weight(1f))
-                        Switch(
-                            checked = checked,
-                            onCheckedChange = { checked = it }
-                        )
-                    }
-                }
+    CustomCard(title = "Clipboard") {
+        Button(
+            onClick = {
+                onClearClipboardButton(context)
             }
+        ) {
+            Text(text = "Clear clipboard")
+        }
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            var checked by remember { mutableStateOf(true) }
+            Text(text = "test switch")
+            Spacer(modifier = Modifier.weight(1f))
+            Switch(
+                checked = checked,
+                onCheckedChange = { checked = it }
+            )
         }
     }
 }
@@ -218,67 +166,42 @@ fun ClipboardCard(context: Context) {
  */
 @Composable
 fun SystemSettingsCard(context: Context) {
-    val cardPadding = dimensionResource(id = R.dimen.padding_card)
-    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
-
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier.padding(cardPadding)
-        ) {
-            var expanded by remember { mutableStateOf(true) }
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { expanded = !expanded },
-                text = "Android System Settings",
-                style = MaterialTheme.typography.titleLarge
-            )
-            AnimatedVisibility(expanded) {
-                Column {
-                    Spacer(
-                        modifier = Modifier.padding(spacerPadding)
-                    )
-                    SystemSettingsButton(
-                        settingType = "display",
-                        buttonText = "Open display settings"
-                    )
-                    SystemSettingsButton(
-                        settingType = "auto_rotate",
-                        buttonText = "Open auto rotate settings"
-                    )
-                    SystemSettingsButton(
-                        settingType = "locale",
-                        buttonText = "Open locale settings"
-                    )
-                    SystemSettingsButton(
-                        settingType = "manage_default_apps",
-                        buttonText = "Open default apps settings"
-                    )
-                    SystemSettingsButton(
-                        settingType = "bluetooth",
-                        buttonText = "Open bluetooth settings"
-                    )
-                    Button(
-                        onClick = {
-                            onClickCheckSetTimeAutomatically(context)
-                        }
-                    ) {
-                        Text(text = "Check is \"set time automatically\" on")
-                    }
-                    SystemSettingsButton(
-                        settingType = "date",
-                        buttonText = "Open date settings"
-                    )
-                    SystemSettingsButton(
-                        settingType = "ignore_battery_optimization",
-                        buttonText = "Open battery optimization settings"
-                    )
-                }
+    CustomCard(title = "Android system settings") {
+        SystemSettingsButton(
+            settingType = "display",
+            buttonText = "Open display settings"
+        )
+        SystemSettingsButton(
+            settingType = "auto_rotate",
+            buttonText = "Open auto rotate settings"
+        )
+        SystemSettingsButton(
+            settingType = "locale",
+            buttonText = "Open locale settings"
+        )
+        SystemSettingsButton(
+            settingType = "manage_default_apps",
+            buttonText = "Open default apps settings"
+        )
+        SystemSettingsButton(
+            settingType = "bluetooth",
+            buttonText = "Open bluetooth settings"
+        )
+        Button(
+            onClick = {
+                onClickCheckSetTimeAutomatically(context)
             }
+        ) {
+            Text(text = "Check is \"set time automatically\" on")
         }
+        SystemSettingsButton(
+            settingType = "date",
+            buttonText = "Open date settings"
+        )
+        SystemSettingsButton(
+            settingType = "ignore_battery_optimization",
+            buttonText = "Open battery optimization settings"
+        )
     }
 }
 
@@ -287,75 +210,50 @@ fun SystemSettingsCard(context: Context) {
  */
 @Composable
 fun UnicodeCard(context: Context) {
-    val cardPadding = dimensionResource(id = R.dimen.padding_card)
-    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
-
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier.padding(cardPadding)
-        ) {
-            var expanded by remember { mutableStateOf(true) }
-
-            Text(
+    CustomCard(title = "Unicode") {
+        val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
+        var unicode by remember { mutableStateOf("") }
+        val characters = remember { mutableStateOf("") }
+        Text(
+            text = "Type in the last 4 digits of each Unicode like \"00610062\""
+        )
+        Row {
+            OutlinedTextField(
+                value = unicode,
+                onValueChange = { unicode = it },
+                label = { Text("Unicode") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { expanded = !expanded },
-                text = "Unicode",
-                style = MaterialTheme.typography.titleLarge
+                    .weight(1f)
+                    .padding(end = dimensionResource(id = R.dimen.padding_spacer)),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        onClickConvertButton(context, unicode, characters)
+                    }
+                )
             )
-            AnimatedVisibility(expanded) {
-                Column {
-                    var unicode by remember { mutableStateOf("") }
-                    val characters = remember { mutableStateOf("") }
-
-                    Spacer(
-                        modifier = Modifier.padding(spacerPadding)
-                    )
-                    Text(
-                        text = "Type in the last 4 digits of each Unicode like \"00610062\""
-                    )
-                    Row {
-                        OutlinedTextField(
-                            value = unicode,
-                            onValueChange = { unicode = it },
-                            label = { Text("Unicode") },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f)
-                                .padding(end = spacerPadding),
-                            keyboardOptions = KeyboardOptions.Default.copy(
-                                imeAction = ImeAction.Done
-                            ),
-                            keyboardActions = KeyboardActions(
-                                onDone = {
-                                    onClickConvertButton(context, unicode, characters)
-                                }
-                            )
-                        )
-                        OutlinedTextField(
-                            value = characters.value, // Access the value property of MutableState
-                            onValueChange = {}, // This field is read-only
-                            label = { Text("Character") },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f)
-                                .padding(start = spacerPadding)
-                        )
-                    }
-                    Spacer(
-                        modifier = Modifier.padding(spacerPadding)
-                    )
-                    Button(
-                        onClick = {
-                            onClickConvertButton(context, unicode, characters)
-                        }
-                    ) {
-                        Text(text = "Convert")
-                    }
-                }
+            OutlinedTextField(
+                value = characters.value, // Access the value property of MutableState
+                onValueChange = {}, // This field is read-only
+                label = { Text("Character") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(start = dimensionResource(id = R.dimen.padding_spacer))
+            )
+        }
+        Spacer(
+            modifier = spacerPadding
+        )
+        Button(
+            onClick = {
+                onClickConvertButton(context, unicode, characters)
             }
+        ) {
+            Text(text = "Convert")
         }
     }
 }
@@ -365,82 +263,57 @@ fun UnicodeCard(context: Context) {
  */
 @Composable
 fun GoogleMapsCard(context: Context) {
-    val cardPadding = dimensionResource(id = R.dimen.padding_card)
-    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
-
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier.padding(cardPadding)
-        ) {
-            var expanded by remember { mutableStateOf(true) }
-
-            Text(
+    CustomCard(title = "Google Map") {
+        val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
+        var latitude by remember { mutableStateOf("") }
+        var longitude by remember { mutableStateOf("") }
+        Row {
+            OutlinedTextField(
+                value = latitude,
+                onValueChange = { latitude = it },
+                label = { Text("Latitude") },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { expanded = !expanded },
-                text = "Google Maps",
-                style = MaterialTheme.typography.titleLarge
+                    .weight(1f)
+                    .padding(end = dimensionResource(id = R.dimen.padding_spacer)),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        onClickOpenGoogleMapsButton(context, latitude, longitude)
+                    }
+                )
             )
-            AnimatedVisibility(expanded) {
-                Column {
-                    var latitude by remember { mutableStateOf("") }
-                    var longitude by remember { mutableStateOf("") }
-
-                    Spacer(
-                        modifier = Modifier.padding(spacerPadding)
-                    )
-                    Row {
-                        OutlinedTextField(
-                            value = latitude,
-                            onValueChange = { latitude = it },
-                            label = { Text("Latitude") },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f)
-                                .padding(end = spacerPadding),
-                            keyboardOptions = KeyboardOptions.Default.copy(
-                                keyboardType = KeyboardType.Number,
-                                imeAction = ImeAction.Done
-                            ),
-                            keyboardActions = KeyboardActions(
-                                onDone = {
-                                    onClickOpenGoogleMapsButton(context, latitude, longitude)
-                                }
-                            )
-                        )
-                        OutlinedTextField(
-                            value = longitude,
-                            onValueChange = { longitude = it },
-                            label = { Text("Longitude") },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f)
-                                .padding(start = spacerPadding),
-                            keyboardOptions = KeyboardOptions.Default.copy(
-                                keyboardType = KeyboardType.Number,
-                                imeAction = ImeAction.Done
-                            ),
-                            keyboardActions = KeyboardActions(
-                                onDone = {
-                                    onClickOpenGoogleMapsButton(context, latitude, longitude)
-                                }
-                            )
-                        )
+            OutlinedTextField(
+                value = longitude,
+                onValueChange = { longitude = it },
+                label = { Text("Longitude") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .padding(start = dimensionResource(id = R.dimen.padding_spacer)),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        onClickOpenGoogleMapsButton(context, latitude, longitude)
                     }
-                    Spacer(
-                        modifier = Modifier.padding(spacerPadding)
-                    )
-                    Button(
-                        onClick = {
-                            onClickOpenGoogleMapsButton(context, latitude, longitude)
-                        }
-                    ) {
-                        Text(text = "Open Google Maps")
-                    }
-                }
+                )
+            )
+        }
+        Spacer(
+            modifier = spacerPadding
+        )
+        Button(
+            onClick = {
+                onClickOpenGoogleMapsButton(context, latitude, longitude)
             }
+        ) {
+            Text(text = "Open Google Maps")
         }
     }
 }
@@ -450,58 +323,32 @@ fun GoogleMapsCard(context: Context) {
  */
 @Composable
 fun OpenCertainAppOnPlayStoreCard(context: Context) {
-    val cardPadding = dimensionResource(id = R.dimen.padding_card)
-    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
-
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-
-        Column(
-            modifier = Modifier.padding(cardPadding)
-        ) {
-            var expanded by remember { mutableStateOf(true) }
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { expanded = !expanded },
-                text = "Open app on Google Play",
-                style = MaterialTheme.typography.titleLarge
-            )
-            AnimatedVisibility(expanded) {
-                Column {
-                    var packageName by remember { mutableStateOf("") }
-
-                    Spacer(
-                        modifier = Modifier.padding(spacerPadding)
-                    )
-                    OutlinedTextField(
-                        value = packageName,
-                        onValueChange = { packageName = it },
-                        label = { Text("Package Name") },
-                        modifier = Modifier.fillMaxWidth(),
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            imeAction = ImeAction.Done
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                                openCertainAppOnPlayStore(context, packageName)
-                            }
-                        )
-                    )
-                    Spacer(
-                        modifier = Modifier.padding(spacerPadding)
-                    )
-                    Button(
-                        onClick = {
-                            openCertainAppOnPlayStore(context, packageName)
-                        }
-                    ) {
-                        Text(text = "Open on Google Play")
-                    }
+    CustomCard(title = "Open app on Google Play") {
+        val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
+        var packageName by remember { mutableStateOf("") }
+        OutlinedTextField(
+            value = packageName,
+            onValueChange = { packageName = it },
+            label = { Text("Package Name") },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    openCertainAppOnPlayStore(context, packageName)
                 }
+            )
+        )
+        Spacer(
+            modifier = spacerPadding
+        )
+        Button(
+            onClick = {
+                openCertainAppOnPlayStore(context, packageName)
             }
+        ) {
+            Text(text = "Open on Google Play")
         }
     }
 }
@@ -511,40 +358,14 @@ fun OpenCertainAppOnPlayStoreCard(context: Context) {
  */
 @Composable
 fun TestCard() {
-    val cardPadding = dimensionResource(id = R.dimen.padding_card)
-    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
-
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier.padding(cardPadding)
-        ) {
-            var expanded by remember { mutableStateOf(true) }
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { expanded = !expanded },
-                text = "test",
-                style = MaterialTheme.typography.titleLarge
-            )
-            AnimatedVisibility(expanded) {
-                Column {
-                    var clicks by remember { mutableIntStateOf(0) }
-
-                    Spacer(
-                        modifier = Modifier.padding(spacerPadding)
-                    )
-                    ClickCounter(
-                        clicks = clicks,
-                        onClick = {
-                            clicks++
-                        }
-                    )
-                }
+    CustomCard(title = "test") {
+        var clicks by remember { mutableIntStateOf(0) }
+        ClickCounter(
+            clicks = clicks,
+            onClick = {
+                clicks++
             }
-        }
+        )
     }
 }
 
@@ -557,34 +378,30 @@ fun ClickCounter(clicks: Int, onClick: () -> Unit) {
     }
 }
 
-// Example code: compose clickable card
-@Suppress("unused")
 @Composable
-fun Example() {
-    val cardPadding = dimensionResource(id = R.dimen.padding_card)
-    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
-
+fun CustomCard(title: String, content: @Composable () -> Unit) {
+    val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card))
+    val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(
-            modifier = Modifier.padding(cardPadding)
+            modifier = cardPadding
         ) {
             var expanded by remember { mutableStateOf(true) }
-
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { expanded = !expanded },
-                text = "// title here",
+                text = title, // Custom title here
                 style = MaterialTheme.typography.titleLarge
             )
             AnimatedVisibility(expanded) {
                 Column {
                     Spacer(
-                        modifier = Modifier.padding(spacerPadding)
+                        modifier = spacerPadding
                     )
-                    // Contents here
+                    content() // Custom contents here
                 }
             }
         }
@@ -597,7 +414,6 @@ fun SystemSettingsButton(
     buttonText: String
 ) {
     val context: Context = LocalContext.current
-
     Button(
         onClick = {
             onOpenSystemSettings(context, settingType)
