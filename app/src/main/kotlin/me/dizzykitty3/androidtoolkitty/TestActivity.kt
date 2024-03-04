@@ -60,6 +60,7 @@ fun MyLayout() {
     val cardPadding = dimensionResource(id = R.dimen.padding_card)
     val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
     val spacerPaddingModifier = Modifier.padding(spacerPadding)
+    val context = LocalContext.current
 
     LazyColumn(
         modifier = Modifier.padding(cardPadding)
@@ -69,23 +70,23 @@ fun MyLayout() {
             Spacer(modifier = spacerPaddingModifier)
         }
         item {
-            ClipboardCard(LocalContext.current)
+            ClipboardCard(context)
             Spacer(modifier = spacerPaddingModifier)
         }
         item {
-            SystemSettingsCard(LocalContext.current)
+            SystemSettingsCard(context)
             Spacer(modifier = spacerPaddingModifier)
         }
         item {
-            UnicodeCard(LocalContext.current)
+            UnicodeCard(context)
             Spacer(modifier = spacerPaddingModifier)
         }
         item {
-            GoogleMapsCard(LocalContext.current)
+            GoogleMapsCard(context)
             Spacer(modifier = spacerPaddingModifier)
         }
         item {
-            OpenCertainAppOnPlayStoreCard(LocalContext.current)
+            OpenCertainAppOnPlayStoreCard(context)
             Spacer(modifier = spacerPaddingModifier)
         }
         item {

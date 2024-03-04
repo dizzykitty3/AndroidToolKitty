@@ -82,7 +82,7 @@ object Utils {
         val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
         showToast(
             context,
-            if (isAutoTime == 1) "set time automatically is ON" else "set time automatically is OFF"
+            if (isAutoTime == 1) "set time automatically is now ON" else "set time automatically is now OFF"
         )
     }
 
