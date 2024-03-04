@@ -241,41 +241,26 @@ fun SystemSettingsCard(context: Context) {
                     Spacer(
                         modifier = Modifier.padding(spacerPadding)
                     )
-                    Button(
-                        onClick = {
-                            onOpenSystemSettings(context, "display")
-                        }
-                    ) {
-                        Text(text = "Open display settings")
-                    }
-                    Button(
-                        onClick = {
-                            onOpenSystemSettings(context, "auto_rotate")
-                        }
-                    ) {
-                        Text(text = "Open auto rotate settings")
-                    }
-                    Button(
-                        onClick = {
-                            onOpenSystemSettings(context, "locale")
-                        }
-                    ) {
-                        Text(text = "Open locale settings")
-                    }
-                    Button(
-                        onClick = {
-                            onOpenSystemSettings(context, "manage_default_apps")
-                        }
-                    ) {
-                        Text(text = "Open default apps settings")
-                    }
-                    Button(
-                        onClick = {
-                            onOpenSystemSettings(context, "bluetooth")
-                        }
-                    ) {
-                        Text(text = "Open bluetooth settings")
-                    }
+                    SystemSettingsButton(
+                        settingType = "display",
+                        buttonText = "Open display settings"
+                    )
+                    SystemSettingsButton(
+                        settingType = "auto_rotate",
+                        buttonText = "Open auto rotate settings"
+                    )
+                    SystemSettingsButton(
+                        settingType = "locale",
+                        buttonText = "Open locale settings"
+                    )
+                    SystemSettingsButton(
+                        settingType = "manage_default_apps",
+                        buttonText = "Open default apps settings"
+                    )
+                    SystemSettingsButton(
+                        settingType = "bluetooth",
+                        buttonText = "Open bluetooth settings"
+                    )
                     Button(
                         onClick = {
                             onClickCheckSetTimeAutomatically(context)
@@ -283,20 +268,14 @@ fun SystemSettingsCard(context: Context) {
                     ) {
                         Text(text = "Check is \"set time automatically\" on")
                     }
-                    Button(
-                        onClick = {
-                            onOpenSystemSettings(context, "date")
-                        }
-                    ) {
-                        Text(text = "Open date settings")
-                    }
-                    Button(
-                        onClick = {
-                            onOpenSystemSettings(context, "ignore_battery_optimization")
-                        }
-                    ) {
-                        Text(text = "Open battery optimization settings")
-                    }
+                    SystemSettingsButton(
+                        settingType = "date",
+                        buttonText = "Open date settings"
+                    )
+                    SystemSettingsButton(
+                        settingType = "ignore_battery_optimization",
+                        buttonText = "Open battery optimization settings"
+                    )
                 }
             }
         }
@@ -609,5 +588,21 @@ fun Example() {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun SystemSettingsButton(
+    settingType: String,
+    buttonText: String
+) {
+    val context: Context = LocalContext.current
+
+    Button(
+        onClick = {
+            onOpenSystemSettings(context, settingType)
+        }
+    ) {
+        Text(text = buttonText)
     }
 }

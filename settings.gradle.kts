@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 
+//rootProject.name = "Android ToolKitty"
 include(":app")
