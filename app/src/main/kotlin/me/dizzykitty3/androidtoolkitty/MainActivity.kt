@@ -33,7 +33,7 @@ import me.dizzykitty3.androidtoolkitty.Utils.calculateDaysPassed
 import me.dizzykitty3.androidtoolkitty.Utils.calculateTotalDaysInYear
 import me.dizzykitty3.androidtoolkitty.Utils.calculateYearProgress
 import me.dizzykitty3.androidtoolkitty.Utils.onClearClipboardButton
-import me.dizzykitty3.androidtoolkitty.Utils.onClickCheckSetTimeAutomatically
+import me.dizzykitty3.androidtoolkitty.Utils.onClickCheckSetTimeAutomaticallyButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickConvertButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickOpenGoogleMapsButton
 import me.dizzykitty3.androidtoolkitty.Utils.openCertainAppOnPlayStore
@@ -110,7 +110,7 @@ fun MainLayout() {
 fun YearProgressCard() {
     CustomCard(title = "Year progress") {
         val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
-        var showProgressIndicator by remember { mutableStateOf(true) }
+        var isShowPercentage by remember { mutableStateOf(true) }
         LinearProgressIndicator(
             progress = { calculateYearProgress() },
             modifier = Modifier.fillMaxWidth()
@@ -119,13 +119,13 @@ fun YearProgressCard() {
             modifier = spacerPadding
         )
         val textToShow =
-            if (showProgressIndicator) "${calculateYearProgress() * 100}%" else "${calculateDaysPassed()} / ${calculateTotalDaysInYear()}"
+            if (isShowPercentage) "${calculateYearProgress() * 100}%" else "${calculateDaysPassed()} / ${calculateTotalDaysInYear()}"
         Text(
             text = textToShow,
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable {
-                    showProgressIndicator = !showProgressIndicator
+                    isShowPercentage = !isShowPercentage
                 }
         )
     }
@@ -186,7 +186,7 @@ fun SystemSettingsCard() {
         )
         Button(
             onClick = {
-                onClickCheckSetTimeAutomatically()
+                onClickCheckSetTimeAutomaticallyButton()
             }
         ) {
             Text(text = "Check is \"set time automatically\" on")

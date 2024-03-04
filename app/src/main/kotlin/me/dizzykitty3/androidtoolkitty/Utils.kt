@@ -41,9 +41,9 @@ object Utils {
     }
 
     @JvmStatic
-    fun showToastAndRecordLog(event: String) {
-        debugLog(event)
-        showToast(event)
+    fun showToastAndRecordLog(logEvent: String) {
+        debugLog(logEvent)
+        showToast(logEvent)
     }
 
     @JvmStatic
@@ -91,7 +91,7 @@ object Utils {
     }
 
     @JvmStatic
-    fun onClickCheckSetTimeAutomatically() {
+    fun onClickCheckSetTimeAutomaticallyButton() {
         checkContextNullSafety()
         val contentResolver: ContentResolver = applicationContext!!.contentResolver
         val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
@@ -144,7 +144,7 @@ object Utils {
         mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         checkContextNullSafety()
-        if (mapIntent.resolveActivity(applicationContext!!.packageManager) != null) {
+        if (Objects.nonNull(mapIntent.resolveActivity(applicationContext!!.packageManager))) {
             applicationContext?.startActivity(mapIntent)
             return
         }
@@ -156,19 +156,19 @@ object Utils {
     fun openCertainAppOnPlayStore(packageName: String) {
         if (packageName.isBlank()) return
 
-        var mutablePackageName = packageName
-        mutablePackageName = mutablePackageName.trim()
-        mutablePackageName = mutablePackageName.replace(" ", "") // drop space
-        mutablePackageName = mutablePackageName.replace("　", "") // drop full-width space
-        if (!mutablePackageName.contains(".")) mutablePackageName = "com.$mutablePackageName"
+        var mPackageName = packageName
+        mPackageName = mPackageName.trim()
+        mPackageName = mPackageName.replace(" ", "") // drop space
+        mPackageName = mPackageName.replace("　", "") // drop full-width space
+        if (!mPackageName.contains(".")) mPackageName = "com.$mPackageName"
 
-        val playStoreUri = Uri.parse("market://details?id=$mutablePackageName")
+        val playStoreUri = Uri.parse("market://details?id=$mPackageName")
         val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
         playStoreIntent.setPackage("com.android.vending")
         playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         checkContextNullSafety()
-        if (playStoreIntent.resolveActivity(applicationContext!!.packageManager) != null) {
+        if (Objects.nonNull(playStoreIntent.resolveActivity(applicationContext!!.packageManager))) {
             applicationContext!!.startActivity(playStoreIntent)
             return
         }
