@@ -1,0 +1,22 @@
+[versions]
+agp = "8.3.0"
+kotlin = "1.9.22"
+appcompat = "1.6.1"
+material = "1.11.0"
+playServicesMaps = "18.2.0"
+composeBom = "2024.02.01"
+activityCompose = "1.8.2"
+material3 = "1.2.0"
+
+[libraries]
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
+material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }

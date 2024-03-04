@@ -1,7 +1,7 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("org.jetbrains.kotlin.kapt")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.kapt)
 }
 
 android {
@@ -52,16 +52,11 @@ android {
 }
 
 dependencies {
-    implementation("androidx.appcompat:appcompat")
-    implementation("com.google.android.material:material:1.11.0")
-
-    // Google Maps
-    implementation("com.google.android.gms:play-services-maps:18.2.0")
-
-    // Compose
-    val composeBom = platform("androidx.compose:compose-bom:2024.02.01")
-    implementation(composeBom)
-    androidTestImplementation(composeBom)
-    implementation("androidx.activity:activity-compose")
-    implementation("androidx.compose.material3:material3")
+    implementation(libs.appcompat)
+    implementation(libs.material)
+    implementation(libs.play.services.maps)
+    implementation(platform(libs.compose.bom))
+    androidTestImplementation(platform(libs.compose.bom))
+    implementation(libs.activity.compose)
+    implementation(libs.material3)
 }
