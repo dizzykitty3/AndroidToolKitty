@@ -143,7 +143,10 @@ object Utils {
     fun openCertainAppOnPlayStore(context: Context, packageName: String) {
         if (packageName.isBlank()) return
         var mutablePackageName = packageName
-        if (!packageName.contains(".")) mutablePackageName = "com.$packageName"
+        mutablePackageName = mutablePackageName.trim()
+        mutablePackageName = mutablePackageName.replace(" ", "") // drop space
+        mutablePackageName = mutablePackageName.replace("　", "") // drop full-width space
+        if (!mutablePackageName.contains(".")) mutablePackageName = "com.$mutablePackageName"
         val playStoreUri = Uri.parse("market://details?id=$mutablePackageName")
         val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
 
