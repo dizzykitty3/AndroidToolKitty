@@ -1,10 +1,7 @@
 package me.dizzykitty3.androidtoolkitty
 
-import android.content.ContentResolver
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.AnimatedVisibility
@@ -25,7 +22,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -40,11 +36,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.Utils.calculateDaysPassed
 import me.dizzykitty3.androidtoolkitty.Utils.calculateTotalDaysInYear
 import me.dizzykitty3.androidtoolkitty.Utils.calculateYearProgress
-import me.dizzykitty3.androidtoolkitty.Utils.convertUnicodeToCharacter
+import me.dizzykitty3.androidtoolkitty.Utils.onClearClipboardButton
+import me.dizzykitty3.androidtoolkitty.Utils.onClickCheckSetTimeAutomatically
+import me.dizzykitty3.androidtoolkitty.Utils.onClickConvertButton
+import me.dizzykitty3.androidtoolkitty.Utils.onClickOpenGoogleMapsButton
+import me.dizzykitty3.androidtoolkitty.Utils.onOpenSystemSettings
 import me.dizzykitty3.androidtoolkitty.Utils.openCertainAppOnPlayStore
-import me.dizzykitty3.androidtoolkitty.Utils.openGoogleMaps
-import me.dizzykitty3.androidtoolkitty.Utils.showToast
-import me.dizzykitty3.androidtoolkitty.Utils.showToastAndRecordLog
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
 
 class TestActivity : ComponentActivity() {
@@ -60,39 +57,40 @@ class TestActivity : ComponentActivity() {
 
 @Composable
 fun MyLayout() {
-    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
-    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+    val cardPadding = dimensionResource(id = R.dimen.padding_card)
+    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
+    val spacerPaddingModifier = Modifier.padding(spacerPadding)
 
     LazyColumn(
         modifier = Modifier.padding(cardPadding)
     ) {
         item {
             YearProgressCard()
-            Spacer(modifier = Modifier.padding(spacerPadding))
+            Spacer(modifier = spacerPaddingModifier)
         }
         item {
             ClipboardCard(LocalContext.current)
-            Spacer(modifier = Modifier.padding(spacerPadding))
+            Spacer(modifier = spacerPaddingModifier)
         }
         item {
             SystemSettingsCard(LocalContext.current)
-            Spacer(modifier = Modifier.padding(spacerPadding))
+            Spacer(modifier = spacerPaddingModifier)
         }
         item {
             UnicodeCard(LocalContext.current)
-            Spacer(modifier = Modifier.padding(spacerPadding))
+            Spacer(modifier = spacerPaddingModifier)
         }
         item {
             GoogleMapsCard(LocalContext.current)
-            Spacer(modifier = Modifier.padding(spacerPadding))
+            Spacer(modifier = spacerPaddingModifier)
         }
         item {
             OpenCertainAppOnPlayStoreCard(LocalContext.current)
-            Spacer(modifier = Modifier.padding(spacerPadding))
+            Spacer(modifier = spacerPaddingModifier)
         }
         item {
             TestCard()
-            Spacer(modifier = Modifier.padding(spacerPadding))
+            Spacer(modifier = spacerPaddingModifier)
         }
     }
 }
@@ -102,8 +100,8 @@ fun MyLayout() {
  */
 @Composable
 fun YearProgressCard() {
-    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
-    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+    val cardPadding = dimensionResource(id = R.dimen.padding_card)
+    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
 
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -155,8 +153,8 @@ fun YearProgressCard() {
  */
 @Composable
 fun ClipboardCard(context: Context) {
-    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
-    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+    val cardPadding = dimensionResource(id = R.dimen.padding_card)
+    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
 
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -203,18 +201,13 @@ fun ClipboardCard(context: Context) {
     }
 }
 
-fun onClearClipboardButton(context: Context) {
-    ClipboardUtils(context).clearClipboard()
-    showToastAndRecordLog(context, "clipboard cleared")
-}
-
 /**
  * Open certain system setting pages
  */
 @Composable
 fun SystemSettingsCard(context: Context) {
-    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
-    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+    val cardPadding = dimensionResource(id = R.dimen.padding_card)
+    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
 
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -238,70 +231,49 @@ fun SystemSettingsCard(context: Context) {
                     )
                     Button(
                         onClick = {
-                            val intent = Intent(Settings.ACTION_DISPLAY_SETTINGS)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            context.startActivity(intent)
+                            onOpenSystemSettings(context, "display")
                         }
                     ) {
                         Text(text = "Open display settings")
                     }
                     Button(
                         onClick = {
-                            val intent = Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            context.startActivity(intent)
+                            onOpenSystemSettings(context, "auto_rotate")
                         }
                     ) {
                         Text(text = "Open auto rotate settings")
                     }
                     Button(
                         onClick = {
-                            val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            context.startActivity(intent)
+                            onOpenSystemSettings(context, "locale")
                         }
                     ) {
                         Text(text = "Open locale settings")
                     }
                     Button(
                         onClick = {
-                            val intent = Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            context.startActivity(intent)
+                            onOpenSystemSettings(context, "manage_default_apps")
                         }
                     ) {
                         Text(text = "Open default apps settings")
                     }
                     Button(
                         onClick = {
-                            val intent = Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            context.startActivity(intent)
+                            onOpenSystemSettings(context, "bluetooth")
                         }
                     ) {
                         Text(text = "Open bluetooth settings")
                     }
                     Button(
                         onClick = {
-                            val contentResolver: ContentResolver = context.contentResolver
-                            val isAutoTime = Settings.Global.getInt(
-                                contentResolver,
-                                Settings.Global.AUTO_TIME,
-                                0
-                            )
-                            showToast(
-                                context,
-                                if (isAutoTime == 1) "set time automatically is ON" else "set time automatically is OFF"
-                            )
+                            onClickCheckSetTimeAutomatically(context)
                         }
                     ) {
                         Text(text = "Check is \"set time automatically\" on")
                     }
                     Button(
                         onClick = {
-                            val intent = Intent(Settings.ACTION_DATE_SETTINGS)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                            context.startActivity(intent)
+                            onOpenSystemSettings(context, "date")
                         }
                     ) {
                         Text(text = "Open date settings")
@@ -317,8 +289,8 @@ fun SystemSettingsCard(context: Context) {
  */
 @Composable
 fun UnicodeCard(context: Context) {
-    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
-    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+    val cardPadding = dimensionResource(id = R.dimen.padding_card)
+    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
 
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -390,25 +362,13 @@ fun UnicodeCard(context: Context) {
     }
 }
 
-fun onClickConvertButton(context: Context, unicode: String, characterField: MutableState<String>) {
-    if (unicode.isBlank()) return
-    try {
-        val result = convertUnicodeToCharacter(unicode)
-        characterField.value = result
-        ClipboardUtils(context).copyTextToClipboard(result)
-        showToast(context, "$result copied")
-    } catch (e: Exception) {
-        showToast(context, e.message?.ifBlank { "Unknown error occurred" })
-    }
-}
-
 /**
  * Opens Google Maps with the specified latitude and longitude
  */
 @Composable
 fun GoogleMapsCard(context: Context) {
-    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
-    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+    val cardPadding = dimensionResource(id = R.dimen.padding_card)
+    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
 
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -487,17 +447,13 @@ fun GoogleMapsCard(context: Context) {
     }
 }
 
-fun onClickOpenGoogleMapsButton(context: Context, latitude: String, longitude: String) {
-    openGoogleMaps(context, latitude.ifBlank { "0" }, longitude.ifBlank { "0" })
-}
-
 /**
  * Open a certain app on Google Play Store
  */
 @Composable
 fun OpenCertainAppOnPlayStoreCard(context: Context) {
-    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
-    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+    val cardPadding = dimensionResource(id = R.dimen.padding_card)
+    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
 
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -557,8 +513,8 @@ fun OpenCertainAppOnPlayStoreCard(context: Context) {
  */
 @Composable
 fun TestCard() {
-    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
-    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+    val cardPadding = dimensionResource(id = R.dimen.padding_card)
+    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
 
     Card(
         modifier = Modifier.fillMaxWidth()
@@ -607,13 +563,12 @@ fun ClickCounter(clicks: Int, onClick: () -> Unit) {
 @Suppress("unused")
 @Composable
 fun Example() {
-    val cardPadding = dimensionResource(R.dimen.compose_padding_card)
-    val spacerPadding = dimensionResource(R.dimen.compose_padding_spacer)
+    val cardPadding = dimensionResource(id = R.dimen.padding_card)
+    val spacerPadding = dimensionResource(id = R.dimen.padding_spacer)
 
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
-
         Column(
             modifier = Modifier.padding(cardPadding)
         ) {

@@ -9,6 +9,6 @@
     <dimen name="text_size_normal">14sp</dimen>
 
     // Compose
-    <dimen name="compose_padding_card">16dp</dimen>
-    <dimen name="compose_padding_spacer">8dp</dimen>
+    <dimen name="padding_card">16dp</dimen>
+    <dimen name="padding_spacer">8dp</dimen>
 </resources>
