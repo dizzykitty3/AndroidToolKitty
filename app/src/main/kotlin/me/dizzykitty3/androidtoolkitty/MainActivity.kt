@@ -4,9 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,7 +13,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -40,8 +37,9 @@ import me.dizzykitty3.androidtoolkitty.Utils.onClearClipboardButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickCheckSetTimeAutomatically
 import me.dizzykitty3.androidtoolkitty.Utils.onClickConvertButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickOpenGoogleMapsButton
-import me.dizzykitty3.androidtoolkitty.Utils.onOpenSystemSettings
 import me.dizzykitty3.androidtoolkitty.Utils.openCertainAppOnPlayStore
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui.component.SystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -375,50 +373,5 @@ fun ClickCounter(clicks: Int, onClick: () -> Unit) {
         Text(
             text = "I've been clicked $clicks times"
         )
-    }
-}
-
-@Composable
-fun CustomCard(title: String, content: @Composable () -> Unit) {
-    val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card))
-    val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
-    Card(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = cardPadding
-        ) {
-            var expanded by remember { mutableStateOf(true) }
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { expanded = !expanded },
-                text = title, // Custom title here
-                style = MaterialTheme.typography.titleLarge
-            )
-            AnimatedVisibility(expanded) {
-                Column {
-                    Spacer(
-                        modifier = spacerPadding
-                    )
-                    content() // Custom contents here
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun SystemSettingsButton(
-    settingType: String,
-    buttonText: String
-) {
-    val context: Context = LocalContext.current
-    Button(
-        onClick = {
-            onOpenSystemSettings(context, settingType)
-        }
-    ) {
-        Text(text = buttonText)
     }
 }
