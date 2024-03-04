@@ -53,6 +53,11 @@ class TestActivity : ComponentActivity() {
             }
         }
     }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        ClipboardUtils(this).clearClipboard()
+    }
 }
 
 @Composable
@@ -278,6 +283,13 @@ fun SystemSettingsCard(context: Context) {
                         }
                     ) {
                         Text(text = "Open date settings")
+                    }
+                    Button(
+                        onClick = {
+                            onOpenSystemSettings(context, "ignore_battery_optimization")
+                        }
+                    ) {
+                        Text(text = "Open battery optimization settings")
                     }
                 }
             }

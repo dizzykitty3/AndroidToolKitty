@@ -70,6 +70,7 @@ object Utils {
             "manage_default_apps" -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
             "bluetooth" -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
             "date" -> Intent(Settings.ACTION_DATE_SETTINGS)
+            "ignore_battery_optimization" -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
             else -> return
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
