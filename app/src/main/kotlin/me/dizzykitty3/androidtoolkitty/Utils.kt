@@ -14,6 +14,16 @@ import java.util.Objects
 
 object Utils {
     private var currentToast: Toast? = null
+    private var applicationContext: Context? = null
+
+    @JvmStatic
+    fun init(context: Context) {
+        applicationContext = context.applicationContext
+    }
+
+    private fun checkContextNullSafety() {
+        checkNotNull(applicationContext) { "Context has not been initialized. Please call init() first." }
+    }
 
     @JvmStatic
     fun debugLog(logEvent: String) {
@@ -21,18 +31,19 @@ object Utils {
     }
 
     @JvmStatic
-    fun showToast(context: Context, toastText: String?) {
+    fun showToast(toastText: String?) {
         if (Objects.nonNull(currentToast)) {
             currentToast!!.cancel()
         }
-        currentToast = Toast.makeText(context, toastText, Toast.LENGTH_SHORT)
+        checkContextNullSafety()
+        currentToast = Toast.makeText(applicationContext, toastText, Toast.LENGTH_SHORT)
         currentToast!!.show()
     }
 
     @JvmStatic
-    fun showToastAndRecordLog(context: Context, event: String) {
+    fun showToastAndRecordLog(event: String) {
         debugLog(event)
-        showToast(context, event)
+        showToast(event)
     }
 
     @JvmStatic
@@ -56,13 +67,14 @@ object Utils {
     }
 
     @JvmStatic
-    fun onClearClipboardButton(context: Context) {
-        ClipboardUtils(context).clearClipboard()
-        showToastAndRecordLog(context, "clipboard cleared")
+    fun onClearClipboardButton() {
+        checkContextNullSafety()
+        ClipboardUtils(applicationContext).clearClipboard()
+        showToastAndRecordLog("clipboard cleared")
     }
 
     @JvmStatic
-    fun onOpenSystemSettings(context: Context, actionName: String) {
+    fun onOpenSystemSettings(actionName: String) {
         val intent: Intent = when (actionName) {
             "display" -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
             "auto_rotate" -> Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS)
@@ -74,17 +86,16 @@ object Utils {
             else -> return
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
+        checkContextNullSafety()
+        applicationContext?.startActivity(intent)
     }
 
     @JvmStatic
-    fun onClickCheckSetTimeAutomatically(context: Context) {
-        val contentResolver: ContentResolver = context.contentResolver
+    fun onClickCheckSetTimeAutomatically() {
+        checkContextNullSafety()
+        val contentResolver: ContentResolver = applicationContext!!.contentResolver
         val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
-        showToast(
-            context,
-            if (isAutoTime == 1) "set time automatically is now ON" else "set time automatically is now OFF"
-        )
+        showToast(if (isAutoTime == 1) "set time automatically is now ON" else "set time automatically is now OFF")
     }
 
     @JvmStatic
@@ -109,7 +120,6 @@ object Utils {
 
     @JvmStatic
     fun onClickConvertButton(
-        context: Context,
         unicode: String,
         characterField: MutableState<String>
     ) {
@@ -117,49 +127,56 @@ object Utils {
         try {
             val result = convertUnicodeToCharacter(unicode)
             characterField.value = result
-            ClipboardUtils(context).copyTextToClipboard(result)
-            showToast(context, "$result copied")
+            checkContextNullSafety()
+            ClipboardUtils(applicationContext).copyTextToClipboard(result)
+            showToast("$result copied")
         } catch (e: Exception) {
-            showToast(context, e.message?.ifBlank { "Unknown error occurred" })
+            showToast(e.message?.ifBlank { "Unknown error occurred" })
         }
     }
 
     @JvmStatic
-    fun openGoogleMaps(context: Context, latitude: String, longitude: String) {
+    fun openGoogleMaps(latitude: String, longitude: String) {
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
-
         val mapIntent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         mapIntent.setPackage("com.google.android.apps.maps")
+        mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-        if (Objects.nonNull(mapIntent.resolveActivity(context.packageManager))) {
-            context.startActivity(mapIntent)
+        checkContextNullSafety()
+        if (mapIntent.resolveActivity(applicationContext!!.packageManager) != null) {
+            applicationContext?.startActivity(mapIntent)
             return
         }
-        showToastAndRecordLog(context, "Google Maps app is not installed")
-        openCertainAppOnPlayStore(context, "com.google.android.apps.maps")
+        showToastAndRecordLog("Google Maps app is not installed")
+        openCertainAppOnPlayStore("com.google.android.apps.maps")
     }
 
     @JvmStatic
-    fun openCertainAppOnPlayStore(context: Context, packageName: String) {
+    fun openCertainAppOnPlayStore(packageName: String) {
         if (packageName.isBlank()) return
+
         var mutablePackageName = packageName
         mutablePackageName = mutablePackageName.trim()
         mutablePackageName = mutablePackageName.replace(" ", "") // drop space
         mutablePackageName = mutablePackageName.replace("　", "") // drop full-width space
         if (!mutablePackageName.contains(".")) mutablePackageName = "com.$mutablePackageName"
+
         val playStoreUri = Uri.parse("market://details?id=$mutablePackageName")
         val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
+        playStoreIntent.setPackage("com.android.vending")
+        playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-        if (Objects.nonNull(playStoreIntent.resolveActivity(context.packageManager))) {
-            context.startActivity(playStoreIntent)
+        checkContextNullSafety()
+        if (playStoreIntent.resolveActivity(applicationContext!!.packageManager) != null) {
+            applicationContext!!.startActivity(playStoreIntent)
             return
         }
-        showToastAndRecordLog(context, "Google Play Store app is not installed")
+        showToastAndRecordLog("Google Play Store app is not installed")
     }
 
     @JvmStatic
-    fun onClickOpenGoogleMapsButton(context: Context, latitude: String, longitude: String) {
-        openGoogleMaps(context, latitude.ifBlank { "0" }, longitude.ifBlank { "0" })
+    fun onClickOpenGoogleMapsButton(latitude: String, longitude: String) {
+        openGoogleMaps(latitude.ifBlank { return }, longitude.ifBlank { return })
     }
 }

@@ -5,18 +5,33 @@ import android.content.ClipboardManager
 import android.content.Context
 import me.dizzykitty3.androidtoolkitty.Utils.showToastAndRecordLog
 
-class ClipboardUtils(private val context: Context) {
+class ClipboardUtils(private val context: Context?) {
+    private var clipboard: ClipboardManager? = null
+
+    private fun initService() {
+        checkContextNullSafety()
+        getSystemClipboardService()
+    }
+
+    private fun checkContextNullSafety() {
+        checkNotNull(context) { "Context has not been initialized. Please call init() first." }
+    }
+
+    private fun getSystemClipboardService() {
+        clipboard = context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    }
+
     fun clearClipboard() {
-        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        if (clipboard.hasPrimaryClip()) {
-            clipboard.clearPrimaryClip()
-            showToastAndRecordLog(context, "clipboard cleared automatically")
+        initService()
+        if (clipboard!!.hasPrimaryClip()) {
+            clipboard!!.clearPrimaryClip()
+            showToastAndRecordLog("clipboard cleared automatically")
         }
     }
 
     fun copyTextToClipboard(text: String) {
-        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        initService()
         val clip = ClipData.newPlainText("label", text)
-        clipboard.setPrimaryClip(clip)
+        clipboard!!.setPrimaryClip(clip)
     }
 }

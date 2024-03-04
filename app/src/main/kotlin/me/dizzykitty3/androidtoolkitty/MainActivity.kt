@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty
 
-import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -45,6 +44,7 @@ import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Utils.init(this)
         setContent {
             MyApplicationTheme {
                 MainLayout()
@@ -62,13 +62,12 @@ class MainActivity : ComponentActivity() {
 fun MainLayout() {
     val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card))
     val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
-    val context = LocalContext.current
     LazyColumn(
         modifier = cardPadding
     ) {
         item {
             Text(
-                text = context.getString(R.string.app_name),
+                text = LocalContext.current.getString(R.string.app_name),
                 style = MaterialTheme.typography.headlineLarge
             )
             Spacer(modifier = spacerPadding)
@@ -78,23 +77,23 @@ fun MainLayout() {
             Spacer(modifier = spacerPadding)
         }
         item {
-            ClipboardCard(context)
+            ClipboardCard()
             Spacer(modifier = spacerPadding)
         }
         item {
-            SystemSettingsCard(context)
+            SystemSettingsCard()
             Spacer(modifier = spacerPadding)
         }
         item {
-            UnicodeCard(context)
+            UnicodeCard()
             Spacer(modifier = spacerPadding)
         }
         item {
-            GoogleMapsCard(context)
+            GoogleMapsCard()
             Spacer(modifier = spacerPadding)
         }
         item {
-            OpenCertainAppOnPlayStoreCard(context)
+            OpenCertainAppOnPlayStoreCard()
             Spacer(modifier = spacerPadding)
         }
         item {
@@ -136,11 +135,11 @@ fun YearProgressCard() {
  * Clear clipboard
  */
 @Composable
-fun ClipboardCard(context: Context) {
+fun ClipboardCard() {
     CustomCard(title = "Clipboard") {
         Button(
             onClick = {
-                onClearClipboardButton(context)
+                onClearClipboardButton()
             }
         ) {
             Text(text = "Clear clipboard")
@@ -163,7 +162,7 @@ fun ClipboardCard(context: Context) {
  * Open certain system setting pages
  */
 @Composable
-fun SystemSettingsCard(context: Context) {
+fun SystemSettingsCard() {
     CustomCard(title = "Android system settings") {
         SystemSettingsButton(
             settingType = "display",
@@ -187,7 +186,7 @@ fun SystemSettingsCard(context: Context) {
         )
         Button(
             onClick = {
-                onClickCheckSetTimeAutomatically(context)
+                onClickCheckSetTimeAutomatically()
             }
         ) {
             Text(text = "Check is \"set time automatically\" on")
@@ -207,7 +206,7 @@ fun SystemSettingsCard(context: Context) {
  * Convert Unicode to characters and vice versa
  */
 @Composable
-fun UnicodeCard(context: Context) {
+fun UnicodeCard() {
     CustomCard(title = "Unicode") {
         val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
         var unicode by remember { mutableStateOf("") }
@@ -229,7 +228,7 @@ fun UnicodeCard(context: Context) {
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        onClickConvertButton(context, unicode, characters)
+                        onClickConvertButton(unicode, characters)
                     }
                 )
             )
@@ -248,7 +247,7 @@ fun UnicodeCard(context: Context) {
         )
         Button(
             onClick = {
-                onClickConvertButton(context, unicode, characters)
+                onClickConvertButton(unicode, characters)
             }
         ) {
             Text(text = "Convert")
@@ -260,7 +259,7 @@ fun UnicodeCard(context: Context) {
  * Opens Google Maps with the specified latitude and longitude
  */
 @Composable
-fun GoogleMapsCard(context: Context) {
+fun GoogleMapsCard() {
     CustomCard(title = "Google Map") {
         val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
         var latitude by remember { mutableStateOf("") }
@@ -280,7 +279,7 @@ fun GoogleMapsCard(context: Context) {
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        onClickOpenGoogleMapsButton(context, latitude, longitude)
+                        onClickOpenGoogleMapsButton(latitude, longitude)
                     }
                 )
             )
@@ -298,7 +297,7 @@ fun GoogleMapsCard(context: Context) {
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        onClickOpenGoogleMapsButton(context, latitude, longitude)
+                        onClickOpenGoogleMapsButton(latitude, longitude)
                     }
                 )
             )
@@ -308,7 +307,7 @@ fun GoogleMapsCard(context: Context) {
         )
         Button(
             onClick = {
-                onClickOpenGoogleMapsButton(context, latitude, longitude)
+                onClickOpenGoogleMapsButton(latitude, longitude)
             }
         ) {
             Text(text = "Open Google Maps")
@@ -320,7 +319,7 @@ fun GoogleMapsCard(context: Context) {
  * Open a certain app on Google Play Store
  */
 @Composable
-fun OpenCertainAppOnPlayStoreCard(context: Context) {
+fun OpenCertainAppOnPlayStoreCard() {
     CustomCard(title = "Open app on Google Play") {
         val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
         var packageName by remember { mutableStateOf("") }
@@ -334,7 +333,7 @@ fun OpenCertainAppOnPlayStoreCard(context: Context) {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    openCertainAppOnPlayStore(context, packageName)
+                    openCertainAppOnPlayStore(packageName)
                 }
             )
         )
@@ -343,7 +342,7 @@ fun OpenCertainAppOnPlayStoreCard(context: Context) {
         )
         Button(
             onClick = {
-                openCertainAppOnPlayStore(context, packageName)
+                openCertainAppOnPlayStore(packageName)
             }
         ) {
             Text(text = "Open on Google Play")
