@@ -12,6 +12,7 @@ import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 import java.util.Objects
 
+
 object Utils {
     private var currentToast: Toast? = null
     private var applicationContext: Context? = null
@@ -220,14 +221,20 @@ object Utils {
         openCertainAppOnPlayStore("com.google.android.apps.maps")
     }
 
+    @Suppress("SpellCheckingInspection")
     @JvmStatic
     fun openCertainAppOnPlayStore(packageName: String) {
         if (packageName.isBlank()) return
+        val mPackageName = processString(packageName)
 
-        var mPackageName = processString(packageName)
-        if (!mPackageName.contains(".")) mPackageName = "com.$mPackageName"
-
-        val playStoreUri = Uri.parse("market://details?id=$mPackageName")
+        val playStoreUri: Uri = if (mPackageName.contains(".")) {
+            Uri.parse("market://details?id=$mPackageName")
+        } else {
+            when (mPackageName) {
+                "discord", "duolingo", "twofasapp" -> Uri.parse("market://details?id=com.$mPackageName")
+                else -> Uri.parse("market://search?q=$mPackageName")
+            }
+        }
         val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
         playStoreIntent.setPackage("com.android.vending")
         playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

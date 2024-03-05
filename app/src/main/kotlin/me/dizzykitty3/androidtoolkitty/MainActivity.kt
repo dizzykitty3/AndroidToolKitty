@@ -365,7 +365,7 @@ fun OpenCertainAppOnPlayStoreCard() {
         OutlinedTextField(
             value = packageName,
             onValueChange = { packageName = it },
-            label = { Text("Package Name") },
+            label = { Text("Package name or search") },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
