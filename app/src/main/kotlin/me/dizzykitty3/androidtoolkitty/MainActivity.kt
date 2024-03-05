@@ -30,9 +30,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withStyle
 import me.dizzykitty3.androidtoolkitty.Utils.calculateDaysPassed
 import me.dizzykitty3.androidtoolkitty.Utils.calculateTotalDaysInYear
 import me.dizzykitty3.androidtoolkitty.Utils.calculateYearProgress
@@ -367,22 +370,23 @@ fun OpenCertainAppOnPlayStoreCard() {
     CustomCard(title = "Open app on Google Play") {
         val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
         var packageName by remember { mutableStateOf("") }
+        val linkUrl = "https://support.google.com/admob/answer/9972781"
         Row {
             Text(
-                text = "What is a "
-            )
-            Text(
-                text = "package name",
-                fontStyle = FontStyle.Italic
-            )
-            Text(
-                text = "?"
+                text = buildAnnotatedString {
+                    append("what is a ")
+                    pushStringAnnotation(tag = "URL", annotation = linkUrl)
+                    withStyle(style = SpanStyle(textDecoration = TextDecoration.Underline)) {
+                        append("package name")
+                    }
+                    pop()
+                }
             )
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = "Link Icon",
                 modifier = Modifier.clickable {
-                    openUrl("https://support.google.com/admob/answer/9972781")
+                    openUrl(linkUrl)
                 }
             )
         }
