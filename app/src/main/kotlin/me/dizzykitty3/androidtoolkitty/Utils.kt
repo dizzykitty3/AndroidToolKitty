@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.compose.runtime.MutableState
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
+import java.util.Calendar
 import java.util.Objects
 
 object Utils {
@@ -45,6 +46,17 @@ object Utils {
     fun showToastAndRecordLog(logEvent: String) {
         debugLog(logEvent)
         showToast(logEvent)
+    }
+
+    @JvmStatic
+    fun greeting(): String {
+        val calendar = Calendar.getInstance()
+        val timeOfDay = calendar[Calendar.HOUR_OF_DAY]
+        return when (timeOfDay) {
+            in 5..10 -> "Good morning"
+            in 11..16 -> "Good afternoon"
+            else -> "Good evening"
+        }
     }
 
     @JvmStatic

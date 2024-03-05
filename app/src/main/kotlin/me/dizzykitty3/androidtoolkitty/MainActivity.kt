@@ -16,7 +16,6 @@ import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -28,10 +27,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextDecoration
@@ -46,7 +47,10 @@ import me.dizzykitty3.androidtoolkitty.Utils.onClickOpenGoogleMapsButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickVisitButton
 import me.dizzykitty3.androidtoolkitty.Utils.openCertainAppOnPlayStore
 import me.dizzykitty3.androidtoolkitty.Utils.openUrl
+import me.dizzykitty3.androidtoolkitty.ui.component.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui.component.GradientGreetingText
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.SystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
 
@@ -69,49 +73,45 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainLayout() {
-    val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card))
-    val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
+    val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
     LazyColumn(
         modifier = cardPadding
     ) {
         item {
-            Text(
-                text = LocalContext.current.getString(R.string.app_name),
-                style = MaterialTheme.typography.headlineLarge
-            )
-            Spacer(modifier = spacerPadding)
+            GradientGreetingText()
+            CardSpacePadding()
         }
         item {
             YearProgressCard()
-            Spacer(modifier = spacerPadding)
+            CardSpacePadding()
         }
         item {
             ClipboardCard()
-            Spacer(modifier = spacerPadding)
+            CardSpacePadding()
         }
         item {
             URLCard()
-            Spacer(modifier = spacerPadding)
+            CardSpacePadding()
         }
         item {
             SystemSettingsCard()
-            Spacer(modifier = spacerPadding)
+            CardSpacePadding()
         }
         item {
             UnicodeCard()
-            Spacer(modifier = spacerPadding)
+            CardSpacePadding()
         }
         item {
             GoogleMapsCard()
-            Spacer(modifier = spacerPadding)
+            CardSpacePadding()
         }
         item {
             OpenCertainAppOnPlayStoreCard()
-            Spacer(modifier = spacerPadding)
+            CardSpacePadding()
         }
         item {
             TestCard()
-            Spacer(modifier = spacerPadding)
+            CardSpacePadding()
         }
     }
 }
@@ -122,15 +122,12 @@ fun MainLayout() {
 @Composable
 fun YearProgressCard() {
     CustomCard(title = "Year progress") {
-        val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
         var isShowPercentage by remember { mutableStateOf(true) }
         LinearProgressIndicator(
             progress = { calculateYearProgress() },
             modifier = Modifier.fillMaxWidth()
         )
-        Spacer(
-            modifier = spacerPadding
-        )
+        SpacerPadding()
         val textToShow =
             if (isShowPercentage) "${calculateYearProgress() * 100}%" else "${calculateDaysPassed()} / ${calculateTotalDaysInYear()}"
         Text(
@@ -177,17 +174,36 @@ fun ClipboardCard() {
 @Composable
 fun URLCard() {
     CustomCard(title = "URL") {
-        val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
         var url by remember { mutableStateOf("") }
         Text(
-            text = "Visit url without inputting prefix \"https//www.\" and suffix \".com\" (or \".net\", etc.)"
+            text = buildAnnotatedString {
+                append("Visit url without inputting prefix ")
+                withStyle(
+                    style = SpanStyle(fontStyle = FontStyle.Italic, fontWeight = FontWeight.Light)
+                ) {
+                    append("www.")
+                }
+                append(" and suffix ")
+                withStyle(
+                    style = SpanStyle(fontStyle = FontStyle.Italic, fontWeight = FontWeight.Light)
+                ) {
+                    append(".com")
+                }
+                append(" (or ")
+                withStyle(
+                    style = SpanStyle(fontStyle = FontStyle.Italic, fontWeight = FontWeight.Light)
+                ) {
+                    append(".net")
+                }
+                append(", etc.)")
+            }
         )
         OutlinedTextField(
             value = url,
             onValueChange = { url = it },
             label = { Text("URL") },
             modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(
+            keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
@@ -196,7 +212,7 @@ fun URLCard() {
                 }
             )
         )
-        Spacer(modifier = spacerPadding)
+        SpacerPadding()
         Button(
             onClick = { onClickVisitButton(url) }
         ) {
@@ -255,11 +271,17 @@ fun SystemSettingsCard() {
 @Composable
 fun UnicodeCard() {
     CustomCard(title = "Unicode") {
-        val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
         var unicode by remember { mutableStateOf("") }
         val characters = remember { mutableStateOf("") }
         Text(
-            text = "Type in the last 4 digits of each Unicode like \"00610062\""
+            text = buildAnnotatedString {
+                append("Type in the last 4 digits of each Unicode like ")
+                withStyle(
+                    style = SpanStyle(fontStyle = FontStyle.Italic, fontWeight = FontWeight.Light)
+                ) {
+                    append("00610062")
+                }
+            }
         )
         Row {
             OutlinedTextField(
@@ -270,7 +292,7 @@ fun UnicodeCard() {
                     .fillMaxWidth()
                     .weight(1f)
                     .padding(end = dimensionResource(id = R.dimen.padding_spacer)),
-                keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
@@ -289,9 +311,7 @@ fun UnicodeCard() {
                     .padding(start = dimensionResource(id = R.dimen.padding_spacer))
             )
         }
-        Spacer(
-            modifier = spacerPadding
-        )
+        SpacerPadding()
         Button(
             onClick = {
                 onClickConvertButton(unicode, characters)
@@ -308,7 +328,6 @@ fun UnicodeCard() {
 @Composable
 fun GoogleMapsCard() {
     CustomCard(title = "Google Map") {
-        val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }
         Row {
@@ -320,7 +339,7 @@ fun GoogleMapsCard() {
                     .fillMaxWidth()
                     .weight(1f)
                     .padding(end = dimensionResource(id = R.dimen.padding_spacer)),
-                keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Done
                 ),
@@ -338,7 +357,7 @@ fun GoogleMapsCard() {
                     .fillMaxWidth()
                     .weight(1f)
                     .padding(start = dimensionResource(id = R.dimen.padding_spacer)),
-                keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Done
                 ),
@@ -349,9 +368,7 @@ fun GoogleMapsCard() {
                 )
             )
         }
-        Spacer(
-            modifier = spacerPadding
-        )
+        SpacerPadding()
         Button(
             onClick = {
                 onClickOpenGoogleMapsButton(latitude, longitude)
@@ -368,18 +385,32 @@ fun GoogleMapsCard() {
 @Composable
 fun OpenCertainAppOnPlayStoreCard() {
     CustomCard(title = "Open app on Google Play") {
-        val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
         var packageName by remember { mutableStateOf("") }
         val linkUrl = "https://support.google.com/admob/answer/9972781"
+        OutlinedTextField(
+            value = packageName,
+            onValueChange = { packageName = it },
+            label = { Text("Package name or search") },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    openCertainAppOnPlayStore(packageName)
+                }
+            )
+        )
+        SpacerPadding()
         Row {
             Text(
                 text = buildAnnotatedString {
                     append("what is a ")
-                    pushStringAnnotation(tag = "URL", annotation = linkUrl)
-                    withStyle(style = SpanStyle(textDecoration = TextDecoration.Underline)) {
+                    withStyle(
+                        style = SpanStyle(textDecoration = TextDecoration.Underline)
+                    ) {
                         append("package name")
                     }
-                    pop()
                 }
             )
             Icon(
@@ -390,23 +421,7 @@ fun OpenCertainAppOnPlayStoreCard() {
                 }
             )
         }
-        OutlinedTextField(
-            value = packageName,
-            onValueChange = { packageName = it },
-            label = { Text("Package name or search") },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    openCertainAppOnPlayStore(packageName)
-                }
-            )
-        )
-        Spacer(
-            modifier = spacerPadding
-        )
+        SpacerPadding()
         Button(
             onClick = {
                 openCertainAppOnPlayStore(packageName)
@@ -429,6 +444,27 @@ fun TestCard() {
             onClick = {
                 clicks++
             }
+        )
+        SpacerPadding()
+        Text(
+            text = "FontFamily.Default",
+            fontFamily = FontFamily.Default
+        )
+        Text(
+            text = "FontFamily.SansSerif",
+            fontFamily = FontFamily.SansSerif
+        )
+        Text(
+            text = "FontFamily.Serif",
+            fontFamily = FontFamily.Serif
+        )
+        Text(
+            text = "FontFamily.Monospace",
+            fontFamily = FontFamily.Monospace
+        )
+        Text(
+            text = "FontFamily.Cursive",
+            fontFamily = FontFamily.Cursive
         )
     }
 }

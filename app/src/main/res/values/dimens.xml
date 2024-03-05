@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="padding_card">16dp</dimen>
-    <dimen name="padding_spacer">8dp</dimen>
+    <dimen name="padding_card_content">20dp</dimen>
+    <dimen name="padding_card_space">10dp</dimen>
+    <dimen name="padding_spacer">5dp</dimen>
 </resources>

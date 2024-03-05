@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.kapt)
 }
 
+@Suppress("SpellCheckingInspection")
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
     compileSdk = 34
@@ -60,5 +61,5 @@ dependencies {
     androidTestImplementation(platform(libs.compose.bom))
     implementation(libs.activity.compose)
     implementation(libs.material3)
-    implementation(libs.material.icons)
+    implementation(libs.material.icons.extended)
 }
