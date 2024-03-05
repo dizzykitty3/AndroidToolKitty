@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -77,42 +78,24 @@ fun MainLayout() {
     LazyColumn(
         modifier = cardPadding
     ) {
-        item {
-            GradientGreetingText()
-            CardSpacePadding()
-        }
-        item {
-            YearProgressCard()
-            CardSpacePadding()
-        }
-        item {
-            ClipboardCard()
-            CardSpacePadding()
-        }
-        item {
-            URLCard()
-            CardSpacePadding()
-        }
-        item {
-            SystemSettingsCard()
-            CardSpacePadding()
-        }
-        item {
-            UnicodeCard()
-            CardSpacePadding()
-        }
-        item {
-            GoogleMapsCard()
-            CardSpacePadding()
-        }
-        item {
-            OpenCertainAppOnPlayStoreCard()
-            CardSpacePadding()
-        }
-        item {
-            TestCard()
-            CardSpacePadding()
-        }
+        item { GradientGreetingText() }
+        item { CardSpacePadding() }
+        item { YearProgressCard() }
+        item { CardSpacePadding() }
+        item { ClipboardCard() }
+        item { CardSpacePadding() }
+        item { URLCard() }
+        item { CardSpacePadding() }
+        item { SystemSettingsCard() }
+        item { CardSpacePadding() }
+        item { UnicodeCard() }
+        item { CardSpacePadding() }
+        item { GoogleMapsCard() }
+        item { CardSpacePadding() }
+        item { OpenCertainAppOnPlayStoreCard() }
+        item { CardSpacePadding() }
+        item { TestCard() }
+        item { CardSpacePadding() }
     }
 }
 
@@ -121,7 +104,7 @@ fun MainLayout() {
  */
 @Composable
 fun YearProgressCard() {
-    CustomCard(title = "Year progress") {
+    CustomCard(title = LocalContext.current.getString(R.string.year_progress)) {
         var isShowPercentage by remember { mutableStateOf(true) }
         LinearProgressIndicator(
             progress = { calculateYearProgress() },
@@ -129,7 +112,10 @@ fun YearProgressCard() {
         )
         SpacerPadding()
         val textToShow =
-            if (isShowPercentage) "${calculateYearProgress() * 100}%" else "${calculateDaysPassed()} / ${calculateTotalDaysInYear()}"
+            if (isShowPercentage)
+                "${calculateYearProgress() * 100}%"
+            else
+                "${calculateDaysPassed()} / ${calculateTotalDaysInYear()}"
         Text(
             text = textToShow,
             modifier = Modifier
@@ -146,13 +132,13 @@ fun YearProgressCard() {
  */
 @Composable
 fun ClipboardCard() {
-    CustomCard(title = "Clipboard") {
+    CustomCard(title = LocalContext.current.getString(R.string.clipboard)) {
         Button(
             onClick = {
                 onClearClipboardButton()
             }
         ) {
-            Text(text = "Clear clipboard")
+            Text(text = LocalContext.current.getString(R.string.clear_clipboard))
         }
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -173,35 +159,45 @@ fun ClipboardCard() {
  */
 @Composable
 fun URLCard() {
-    CustomCard(title = "URL") {
+    val c = LocalContext.current
+    CustomCard(title = c.getString(R.string.url)) {
         var url by remember { mutableStateOf("") }
         Text(
             text = buildAnnotatedString {
-                append("Visit url without inputting prefix ")
+                append(c.getString(R.string.url_input_hint_1))
                 withStyle(
-                    style = SpanStyle(fontStyle = FontStyle.Italic, fontWeight = FontWeight.Light)
+                    style = SpanStyle(
+                        fontStyle = FontStyle.Italic,
+                        fontWeight = FontWeight.Light
+                    )
                 ) {
-                    append("www.")
+                    append(" www. ")
                 }
-                append(" and suffix ")
+                append(c.getString(R.string.url_input_hint_2))
                 withStyle(
-                    style = SpanStyle(fontStyle = FontStyle.Italic, fontWeight = FontWeight.Light)
+                    style = SpanStyle(
+                        fontStyle = FontStyle.Italic,
+                        fontWeight = FontWeight.Light
+                    )
                 ) {
-                    append(".com")
+                    append(" .com ")
                 }
-                append(" (or ")
+                append(c.getString(R.string.url_input_hint_3))
                 withStyle(
-                    style = SpanStyle(fontStyle = FontStyle.Italic, fontWeight = FontWeight.Light)
+                    style = SpanStyle(
+                        fontStyle = FontStyle.Italic,
+                        fontWeight = FontWeight.Light
+                    )
                 ) {
-                    append(".net")
+                    append(" .net ")
                 }
-                append(", etc.)")
+                append(c.getString(R.string.url_input_hint_4))
             }
         )
         OutlinedTextField(
             value = url,
             onValueChange = { url = it },
-            label = { Text("URL") },
+            label = { Text(c.getString(R.string.url)) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done
@@ -216,7 +212,7 @@ fun URLCard() {
         Button(
             onClick = { onClickVisitButton(url) }
         ) {
-            Text(text = "Visit")
+            Text(text = c.getString(R.string.visit))
         }
     }
 }
@@ -226,41 +222,42 @@ fun URLCard() {
  */
 @Composable
 fun SystemSettingsCard() {
-    CustomCard(title = "Android system settings") {
+    val c = LocalContext.current
+    CustomCard(title = c.getString(R.string.android_system_settings)) {
         SystemSettingsButton(
             settingType = "display",
-            buttonText = "Open display settings"
+            buttonText = c.getString(R.string.open_display_settings)
         )
         SystemSettingsButton(
             settingType = "auto_rotate",
-            buttonText = "Open auto rotate settings"
+            buttonText = c.getString(R.string.open_auto_rotate_settings)
         )
         SystemSettingsButton(
             settingType = "locale",
-            buttonText = "Open locale settings"
+            buttonText = c.getString(R.string.open_language_settings)
         )
         SystemSettingsButton(
             settingType = "manage_default_apps",
-            buttonText = "Open default apps settings"
+            buttonText = c.getString(R.string.open_default_apps_settings)
         )
         SystemSettingsButton(
             settingType = "bluetooth",
-            buttonText = "Open bluetooth settings"
+            buttonText = c.getString(R.string.open_bluetooth_settings)
         )
         Button(
             onClick = {
                 onClickCheckSetTimeAutomaticallyButton()
             }
         ) {
-            Text(text = "Check is \"set time automatically\" on")
+            Text(text = c.getString(R.string.check_is_set_time_automatically_on))
         }
         SystemSettingsButton(
             settingType = "date",
-            buttonText = "Open date settings"
+            buttonText = c.getString(R.string.open_date_and_time_settings)
         )
         SystemSettingsButton(
             settingType = "ignore_battery_optimization",
-            buttonText = "Open battery optimization settings"
+            buttonText = c.getString(R.string.open_battery_optimization_settings)
         )
     }
 }
@@ -270,16 +267,20 @@ fun SystemSettingsCard() {
  */
 @Composable
 fun UnicodeCard() {
-    CustomCard(title = "Unicode") {
+    val c = LocalContext.current
+    CustomCard(title = c.getString(R.string.unicode)) {
         var unicode by remember { mutableStateOf("") }
         val characters = remember { mutableStateOf("") }
         Text(
             text = buildAnnotatedString {
-                append("Type in the last 4 digits of each Unicode like ")
+                append(c.getString(R.string.unicode_input_hint))
                 withStyle(
-                    style = SpanStyle(fontStyle = FontStyle.Italic, fontWeight = FontWeight.Light)
+                    style = SpanStyle(
+                        fontStyle = FontStyle.Italic,
+                        fontWeight = FontWeight.Light
+                    )
                 ) {
-                    append("00610062")
+                    append(" 00610062")
                 }
             }
         )
@@ -287,7 +288,7 @@ fun UnicodeCard() {
             OutlinedTextField(
                 value = unicode,
                 onValueChange = { unicode = it },
-                label = { Text("Unicode") },
+                label = { Text(c.getString(R.string.unicode)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -304,7 +305,7 @@ fun UnicodeCard() {
             OutlinedTextField(
                 value = characters.value, // Access the value property of MutableState
                 onValueChange = {}, // This field is read-only
-                label = { Text("Character") },
+                label = { Text(c.getString(R.string.character)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -317,7 +318,7 @@ fun UnicodeCard() {
                 onClickConvertButton(unicode, characters)
             }
         ) {
-            Text(text = "Convert")
+            Text(text = c.getString(R.string.convert))
         }
     }
 }
@@ -327,14 +328,15 @@ fun UnicodeCard() {
  */
 @Composable
 fun GoogleMapsCard() {
-    CustomCard(title = "Google Map") {
+    val c = LocalContext.current
+    CustomCard(title = c.getString(R.string.google_maps)) {
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }
         Row {
             OutlinedTextField(
                 value = latitude,
                 onValueChange = { latitude = it },
-                label = { Text("Latitude") },
+                label = { Text(c.getString(R.string.latitude)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -352,7 +354,7 @@ fun GoogleMapsCard() {
             OutlinedTextField(
                 value = longitude,
                 onValueChange = { longitude = it },
-                label = { Text("Longitude") },
+                label = { Text(c.getString(R.string.longitude)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -374,7 +376,7 @@ fun GoogleMapsCard() {
                 onClickOpenGoogleMapsButton(latitude, longitude)
             }
         ) {
-            Text(text = "Open Google Maps")
+            Text(text = c.getString(R.string.open_google_maps))
         }
     }
 }
@@ -384,13 +386,14 @@ fun GoogleMapsCard() {
  */
 @Composable
 fun OpenCertainAppOnPlayStoreCard() {
-    CustomCard(title = "Open app on Google Play") {
+    val c = LocalContext.current
+    CustomCard(title = c.getString(R.string.open_app_on_google_play)) {
         var packageName by remember { mutableStateOf("") }
         val linkUrl = "https://support.google.com/admob/answer/9972781"
         OutlinedTextField(
             value = packageName,
             onValueChange = { packageName = it },
-            label = { Text("Package name or search") },
+            label = { Text(c.getString(R.string.package_name_or_search)) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done
@@ -405,17 +408,20 @@ fun OpenCertainAppOnPlayStoreCard() {
         Row {
             Text(
                 text = buildAnnotatedString {
-                    append("what is a ")
-                    withStyle(
-                        style = SpanStyle(textDecoration = TextDecoration.Underline)
-                    ) {
-                        append("package name")
-                    }
+                    append(c.getString(R.string.whats))
+                    append(" ")
                 }
+            )
+            Text(
+                text = c.getString(R.string.package_name),
+                textDecoration = TextDecoration.Underline,
+                modifier = Modifier.clickable(
+                    onClick = { openUrl(linkUrl) }
+                )
             )
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = "Link Icon",
+                contentDescription = c.getString(R.string.content_description_link_icon_whats_package_name),
                 modifier = Modifier.clickable {
                     openUrl(linkUrl)
                 }
@@ -427,7 +433,7 @@ fun OpenCertainAppOnPlayStoreCard() {
                 openCertainAppOnPlayStore(packageName)
             }
         ) {
-            Text(text = "Open on Google Play")
+            Text(text = c.getString(R.string.open_on_google_play))
         }
     }
 }

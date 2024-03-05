@@ -82,7 +82,7 @@ object Utils {
     fun onClearClipboardButton() {
         checkContextNullSafety()
         ClipboardUtils(applicationContext).clearClipboard()
-        showToastAndRecordLog("clipboard cleared")
+        showToastAndRecordLog(applicationContext!!.getString(R.string.clipboard_cleared))
     }
 
     @JvmStatic
@@ -170,7 +170,12 @@ object Utils {
         checkContextNullSafety()
         val contentResolver: ContentResolver = applicationContext!!.contentResolver
         val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
-        showToast(if (isAutoTime == 1) "set time automatically is now ON" else "set time automatically is now OFF")
+        showToast(
+            if (isAutoTime == 1)
+                applicationContext!!.getString(R.string.set_time_automatically_is_on)
+            else
+                applicationContext!!.getString(R.string.set_time_automatically_is_off)
+        )
     }
 
     @JvmStatic
@@ -204,7 +209,7 @@ object Utils {
             characterField.value = result
             checkContextNullSafety()
             ClipboardUtils(applicationContext).copyTextToClipboard(result)
-            showToast("$result copied")
+            showToast("$result " + applicationContext!!.getString(R.string.copied));
         } catch (e: Exception) {
             showToast(e.message?.ifBlank { "Unknown error occurred" })
         }
@@ -228,7 +233,7 @@ object Utils {
             applicationContext?.startActivity(mapIntent)
             return
         }
-        showToastAndRecordLog("Google Maps app is not installed")
+        showToastAndRecordLog(applicationContext!!.getString(R.string.google_maps_app_not_installed))
         openCertainAppOnPlayStore("com.google.android.apps.maps") // Google Maps
     }
 
@@ -253,6 +258,6 @@ object Utils {
             applicationContext!!.startActivity(playStoreIntent)
             return
         }
-        showToastAndRecordLog("Google Play Store app is not installed")
+        showToastAndRecordLog(applicationContext!!.getString(R.string.google_play_store_not_installed))
     }
 }

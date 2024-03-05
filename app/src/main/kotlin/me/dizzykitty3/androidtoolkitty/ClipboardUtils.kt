@@ -25,7 +25,7 @@ class ClipboardUtils(private val context: Context?) {
         initService()
         if (clipboard!!.hasPrimaryClip()) {
             clipboard!!.clearPrimaryClip()
-            showToastAndRecordLog("clipboard cleared automatically")
+            showToastAndRecordLog(context!!.getString(R.string.clipboard_cleared_automatically))
         }
     }
 

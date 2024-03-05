@@ -41,7 +41,7 @@ fun GradientGreetingText() {
                 text = text,
                 style = TextStyle(
                     fontFamily = FontFamily.Cursive,
-                    fontWeight = FontWeight.ExtraBold,
+                    fontWeight = FontWeight.Black,
                     fontSize = 36.sp,
                     lineHeight = 40.0.sp,
                     letterSpacing = 0.0.sp
