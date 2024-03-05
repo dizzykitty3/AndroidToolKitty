@@ -12,7 +12,6 @@ import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 import java.util.Objects
 
-
 object Utils {
     private var currentToast: Toast? = null
     private var applicationContext: Context? = null
@@ -26,6 +25,7 @@ object Utils {
         checkNotNull(applicationContext) { "Context has not been initialized. Please call init() first." }
     }
 
+    @Suppress("SpellCheckingInspection")
     @JvmStatic
     fun debugLog(logEvent: String) {
         Log.d("me.dizzykitty3.androidtoolkitty", logEvent)
@@ -209,7 +209,7 @@ object Utils {
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
         val mapIntent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
-        mapIntent.setPackage("com.google.android.apps.maps")
+        mapIntent.setPackage("com.google.android.apps.maps") // Google Maps
         mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         checkContextNullSafety()
@@ -218,25 +218,23 @@ object Utils {
             return
         }
         showToastAndRecordLog("Google Maps app is not installed")
-        openCertainAppOnPlayStore("com.google.android.apps.maps")
+        openCertainAppOnPlayStore("com.google.android.apps.maps") // Google Maps
     }
 
-    @Suppress("SpellCheckingInspection")
     @JvmStatic
     fun openCertainAppOnPlayStore(packageName: String) {
         if (packageName.isBlank()) return
-        val mPackageName = processString(packageName)
+        var mPackageName = packageName
 
         val playStoreUri: Uri = if (mPackageName.contains(".")) {
+            mPackageName = processString(mPackageName)
             Uri.parse("market://details?id=$mPackageName")
         } else {
-            when (mPackageName) {
-                "discord", "duolingo", "twofasapp" -> Uri.parse("market://details?id=com.$mPackageName")
-                else -> Uri.parse("market://search?q=$mPackageName")
-            }
+            mPackageName = mPackageName.trim()
+            Uri.parse("market://search?q=$mPackageName")
         }
         val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
-        playStoreIntent.setPackage("com.android.vending")
+        playStoreIntent.setPackage("com.android.vending") // Google Play Store
         playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         checkContextNullSafety()

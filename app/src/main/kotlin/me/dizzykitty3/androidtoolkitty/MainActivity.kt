@@ -11,7 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -27,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.Utils.calculateDaysPassed
@@ -38,6 +42,7 @@ import me.dizzykitty3.androidtoolkitty.Utils.onClickConvertButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickOpenGoogleMapsButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickVisitButton
 import me.dizzykitty3.androidtoolkitty.Utils.openCertainAppOnPlayStore
+import me.dizzykitty3.androidtoolkitty.Utils.openUrl
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.SystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
@@ -362,6 +367,25 @@ fun OpenCertainAppOnPlayStoreCard() {
     CustomCard(title = "Open app on Google Play") {
         val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
         var packageName by remember { mutableStateOf("") }
+        Row {
+            Text(
+                text = "What is a "
+            )
+            Text(
+                text = "package name",
+                fontStyle = FontStyle.Italic
+            )
+            Text(
+                text = "?"
+            )
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = "Link Icon",
+                modifier = Modifier.clickable {
+                    openUrl("https://support.google.com/admob/answer/9972781")
+                }
+            )
+        }
         OutlinedTextField(
             value = packageName,
             onValueChange = { packageName = it },

@@ -20,11 +20,12 @@ android {
 
     buildTypes {
         debug {
+            isMinifyEnabled = true
             applicationIdSuffix = ".debug"
         }
 
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -59,4 +60,5 @@ dependencies {
     androidTestImplementation(platform(libs.compose.bom))
     implementation(libs.activity.compose)
     implementation(libs.material3)
+    implementation(libs.material.icons)
 }
