@@ -172,7 +172,7 @@ fun URLCard() {
         val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
         var url by remember { mutableStateOf("") }
         Text(
-            text = "Visit url without inputting prefix \"https//www.\" and suffix \".com\""
+            text = "Visit url without inputting prefix \"https//www.\" and suffix \".com\" (or \".net\", etc.)"
         )
         OutlinedTextField(
             value = url,

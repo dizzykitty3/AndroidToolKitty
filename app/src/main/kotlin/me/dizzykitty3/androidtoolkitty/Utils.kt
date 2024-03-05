@@ -74,20 +74,63 @@ object Utils {
     }
 
     @JvmStatic
-    fun onClickVisitButton(url: String) {
-        if (url.isBlank()) return
-        var mUrl = url.trim()
-        mUrl = mUrl.replace(" ", "") // drop spaces
-        mUrl = mUrl.replace("　", "") // drop full-width spaces
+    fun onClickVisitButton(userInputUrl: String) {
+        if (userInputUrl.isBlank()) return
+        openUrl(processUrl(processString(userInputUrl)))
+    }
 
+    @JvmStatic
+    fun processString(inputString: String): String {
+        var outputString = inputString.trim()
+        outputString = outputString.replace(" ", "") // drop spaces
+        outputString = outputString.replace("　", "") // drop full-width spaces
+        return outputString
+    }
+
+    @Suppress("SpellCheckingInspection")
+    @JvmStatic
+    fun processUrl(inputUrl: String): String {
         val builder = StringBuilder()
-        builder.append("https://")
-        builder.append(mUrl)
-        builder.append(".com")
-        val urlResult = builder.toString()
+        val prefix = "https://"
+        if (inputUrl.contains(".")) return builder.append(prefix).append(inputUrl).toString()
+        val suffix: String = when (inputUrl) {
+            "remove" -> ".bg"
+            "feishu", "52pojie", "360" -> ".cn"
+            "rakuten", "dmm" -> ".co.jp"
+            "mercadolibre" -> ".com.ar"
+            "autohome", "zol", "pconline" -> ".com.cn"
+            "dailymail", "bbc" -> "co.uk"
+            "linktr" -> ".ee"
+            "shaparak" -> ".ir"
+            "livedoor", "nicovideo" -> ".jp"
+            "hitomi" -> ".la"
+            "csdn", "pixiv", "atlassian", "cnki", "doubleclick", "speedtest", "researchgate",
+            "behance", "ali213", "savefrom", "cloudfront", "bytedance", "nhentai", "daum",
+            "animeflv", "jb51", "manatoki215" -> ".net"
 
+            "line" -> ".me"
+            "yts" -> ".mx"
+            "mega" -> ".nz"
+            "wikipedia", "telegram", "archive", "mozilla", "e-hentai", "greasyfork",
+            "coursera", "craigslist" -> ".org"
+
+            "yandex", "mail", "dzen", "avito", "ok", "ozon", "wildberries", "gosulugi",
+            "ya" -> ".ru"
+
+            "notion" -> ".so"
+            "zoro", "1337x" -> ".to"
+            "twitch", "jable" -> ".tv"
+            "zoom" -> ".us"
+            "namu" -> ".wiki"
+            else -> ".com"
+        }
+        return builder.append(prefix).append(inputUrl).append(suffix).toString()
+    }
+
+    @JvmStatic
+    fun openUrl(finalUrl: String) {
         val urlIntent = Intent(Intent.ACTION_VIEW)
-        urlIntent.data = Uri.parse(urlResult)
+        urlIntent.data = Uri.parse(finalUrl)
         urlIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         checkContextNullSafety()
         applicationContext!!.startActivity(urlIntent)
@@ -156,6 +199,11 @@ object Utils {
     }
 
     @JvmStatic
+    fun onClickOpenGoogleMapsButton(latitude: String, longitude: String) {
+        openGoogleMaps(latitude.ifBlank { return }, longitude.ifBlank { return })
+    }
+
+    @JvmStatic
     fun openGoogleMaps(latitude: String, longitude: String) {
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
@@ -176,10 +224,7 @@ object Utils {
     fun openCertainAppOnPlayStore(packageName: String) {
         if (packageName.isBlank()) return
 
-        var mPackageName = packageName
-        mPackageName = mPackageName.trim()
-        mPackageName = mPackageName.replace(" ", "") // drop spaces
-        mPackageName = mPackageName.replace("　", "") // drop full-width spaces
+        var mPackageName = processString(packageName)
         if (!mPackageName.contains(".")) mPackageName = "com.$mPackageName"
 
         val playStoreUri = Uri.parse("market://details?id=$mPackageName")
@@ -193,10 +238,5 @@ object Utils {
             return
         }
         showToastAndRecordLog("Google Play Store app is not installed")
-    }
-
-    @JvmStatic
-    fun onClickOpenGoogleMapsButton(latitude: String, longitude: String) {
-        openGoogleMaps(latitude.ifBlank { return }, longitude.ifBlank { return })
     }
 }
