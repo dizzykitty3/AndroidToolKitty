@@ -412,20 +412,20 @@ fun OpenCertainAppOnPlayStoreCard() {
                     append(" ")
                 }
             )
-            Text(
-                text = c.getString(R.string.package_name),
-                textDecoration = TextDecoration.Underline,
+            Row(
                 modifier = Modifier.clickable(
                     onClick = { openUrl(linkUrl) }
                 )
-            )
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = c.getString(R.string.content_description_link_icon_whats_package_name),
-                modifier = Modifier.clickable {
-                    openUrl(linkUrl)
-                }
-            )
+            ) {
+                Text(
+                    text = c.getString(R.string.package_name),
+                    textDecoration = TextDecoration.Underline
+                )
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = c.getString(R.string.content_description_link_icon_whats_package_name)
+                )
+            }
         }
         SpacerPadding()
         Button(
@@ -453,23 +453,23 @@ fun TestCard() {
         )
         SpacerPadding()
         Text(
-            text = "FontFamily.Default",
+            text = "Default 中文测试 日本語テスト",
             fontFamily = FontFamily.Default
         )
         Text(
-            text = "FontFamily.SansSerif",
+            text = "SansSerif 中文测试 日本語テスト",
             fontFamily = FontFamily.SansSerif
         )
         Text(
-            text = "FontFamily.Serif",
+            text = "Serif 中文测试 日本語テスト",
             fontFamily = FontFamily.Serif
         )
         Text(
-            text = "FontFamily.Monospace",
+            text = "Monospace 中文测试 日本語テスト",
             fontFamily = FontFamily.Monospace
         )
         Text(
-            text = "FontFamily.Cursive",
+            text = "Cursive 中文测试 日本語テスト",
             fontFamily = FontFamily.Cursive
         )
     }
