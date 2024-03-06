@@ -8,11 +8,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -23,13 +26,15 @@ import me.dizzykitty3.androidtoolkitty.R
 @Composable
 fun CustomCard(title: String, content: @Composable () -> Unit) {
     val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
+    var expanded by remember { mutableStateOf(true) }
+    val f = LocalFocusManager.current
+    val l = LocalLifecycleOwner.current
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(
             modifier = cardPadding
         ) {
-            var expanded by remember { mutableStateOf(true) }
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -46,7 +51,14 @@ fun CustomCard(title: String, content: @Composable () -> Unit) {
             AnimatedVisibility(expanded) {
                 Column {
                     CustomSpacerPadding()
-                    content() // Custom contents here
+                    Column {
+                        DisposableEffect(key1 = l) {
+                            onDispose {
+                                f.clearFocus()
+                            }
+                        }
+                        content() // Custom contents here
+                    }
                 }
             }
         }
