@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import me.dizzykitty3.androidtoolkitty.Utils.greeting
 
 @Composable
-fun GradientGreetingText() {
+fun CustomGradientGreetingText() {
     val text = buildAnnotatedString {
         withStyle(
             style = SpanStyle(

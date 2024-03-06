@@ -8,7 +8,7 @@ import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
-fun CardSpacePadding() {
+fun CustomCardSpacePadding() {
     val cardSpacePadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_space))
     Spacer(
         modifier = cardSpacePadding

@@ -45,7 +45,7 @@ fun CustomCard(title: String, content: @Composable () -> Unit) {
             )
             AnimatedVisibility(expanded) {
                 Column {
-                    SpacerPadding()
+                    CustomSpacerPadding()
                     content() // Custom contents here
                 }
             }

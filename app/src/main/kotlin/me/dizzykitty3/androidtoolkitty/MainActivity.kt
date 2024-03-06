@@ -50,14 +50,15 @@ import me.dizzykitty3.androidtoolkitty.Utils.onClickCheckSetTimeAutomaticallyBut
 import me.dizzykitty3.androidtoolkitty.Utils.onClickConvertButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickOpenGoogleMapsButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickVisitButton
+import me.dizzykitty3.androidtoolkitty.Utils.onVisitProfile
 import me.dizzykitty3.androidtoolkitty.Utils.openCertainAppOnPlayStore
 import me.dizzykitty3.androidtoolkitty.Utils.openUrl
-import me.dizzykitty3.androidtoolkitty.ui.component.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomAnimatedProgressIndicator
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.GradientGreetingText
-import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.ui.component.SystemSettingsButton
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomCardSpacePadding
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomGradientGreetingText
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.ui.theme.MyApplicationTheme
 
 class MainActivity : ComponentActivity() {
@@ -89,24 +90,26 @@ fun MainLayout() {
     LazyColumn(
         modifier = cardPadding
     ) {
-        item { GradientGreetingText() }
-        item { CardSpacePadding() }
+        item { CustomGradientGreetingText() }
+        item { CustomCardSpacePadding() }
         item { YearProgressCard() }
-        item { CardSpacePadding() }
+        item { CustomCardSpacePadding() }
         item { ClipboardCard() }
-        item { CardSpacePadding() }
+        item { CustomCardSpacePadding() }
         item { URLCard() }
-        item { CardSpacePadding() }
+        item { CustomCardSpacePadding() }
+        item { SocialMediaProfileCard() }
+        item { CustomCardSpacePadding() }
         item { SystemSettingsCard() }
-        item { CardSpacePadding() }
+        item { CustomCardSpacePadding() }
         item { UnicodeCard() }
-        item { CardSpacePadding() }
+        item { CustomCardSpacePadding() }
         item { GoogleMapsCard() }
-        item { CardSpacePadding() }
+        item { CustomCardSpacePadding() }
         item { OpenCertainAppOnPlayStoreCard() }
-        item { CardSpacePadding() }
+        item { CustomCardSpacePadding() }
         item { TestCard() }
-        item { CardSpacePadding() }
+        item { CustomCardSpacePadding() }
     }
 }
 
@@ -117,9 +120,9 @@ fun MainLayout() {
 fun YearProgressCard() {
     CustomCard(title = LocalContext.current.getString(R.string.year_progress)) {
         var isShowPercentage by remember { mutableStateOf(true) }
-        SpacerPadding()
+        CustomSpacerPadding()
         CustomAnimatedProgressIndicator()
-        SpacerPadding()
+        CustomSpacerPadding()
         val textToShow =
             if (isShowPercentage)
                 "${(displayYearProgressPercentage(calculateYearProgress()))}%"
@@ -224,9 +227,60 @@ fun URLCard() {
                 }
             )
         )
-        SpacerPadding()
+        CustomSpacerPadding()
         Button(
             onClick = { onClickVisitButton(url) }
+        ) {
+            Text(text = c.getString(R.string.visit))
+        }
+    }
+}
+
+@Composable
+fun SocialMediaProfileCard() {
+    CustomCard(title = "Social Media Profile") {
+        var username by remember { mutableStateOf("") }
+        var platform by remember { mutableStateOf("") }
+        val c = LocalContext.current
+        val f = LocalFocusManager.current
+        val l = LocalLifecycleOwner.current
+        DisposableEffect(key1 = l) {
+            onDispose {
+                f.clearFocus()
+            }
+        }
+        Text(text = "Visit profile with id or username")
+        OutlinedTextField(
+            value = platform,
+            onValueChange = { platform = it },
+            label = { Text("platform") },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    onVisitProfile(username, platform)
+                }
+            )
+        )
+        OutlinedTextField(
+            value = username,
+            onValueChange = { username = it },
+            label = { Text("username") },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    onVisitProfile(username, platform)
+                }
+            )
+        )
+        CustomSpacerPadding()
+        Button(
+            onClick = { onVisitProfile(username, platform) }
         ) {
             Text(text = c.getString(R.string.visit))
         }
@@ -240,23 +294,23 @@ fun URLCard() {
 fun SystemSettingsCard() {
     val c = LocalContext.current
     CustomCard(title = c.getString(R.string.android_system_settings)) {
-        SystemSettingsButton(
+        CustomSystemSettingsButton(
             settingType = "display",
             buttonText = c.getString(R.string.open_display_settings)
         )
-        SystemSettingsButton(
+        CustomSystemSettingsButton(
             settingType = "auto_rotate",
             buttonText = c.getString(R.string.open_auto_rotate_settings)
         )
-        SystemSettingsButton(
+        CustomSystemSettingsButton(
             settingType = "locale",
             buttonText = c.getString(R.string.open_language_settings)
         )
-        SystemSettingsButton(
+        CustomSystemSettingsButton(
             settingType = "manage_default_apps",
             buttonText = c.getString(R.string.open_default_apps_settings)
         )
-        SystemSettingsButton(
+        CustomSystemSettingsButton(
             settingType = "bluetooth",
             buttonText = c.getString(R.string.open_bluetooth_settings)
         )
@@ -267,11 +321,11 @@ fun SystemSettingsCard() {
         ) {
             Text(text = c.getString(R.string.check_is_set_time_automatically_on))
         }
-        SystemSettingsButton(
+        CustomSystemSettingsButton(
             settingType = "date",
             buttonText = c.getString(R.string.open_date_and_time_settings)
         )
-        SystemSettingsButton(
+        CustomSystemSettingsButton(
             settingType = "ignore_battery_optimization",
             buttonText = c.getString(R.string.open_battery_optimization_settings)
         )
@@ -335,7 +389,7 @@ fun UnicodeCard() {
                     .padding(start = dimensionResource(id = R.dimen.padding_spacer))
             )
         }
-        SpacerPadding()
+        CustomSpacerPadding()
         Button(
             onClick = {
                 onClickConvertButton(unicode, characters)
@@ -400,7 +454,7 @@ fun GoogleMapsCard() {
                 )
             )
         }
-        SpacerPadding()
+        CustomSpacerPadding()
         Button(
             onClick = {
                 onClickOpenGoogleMapsButton(latitude, longitude)
@@ -441,7 +495,7 @@ fun OpenCertainAppOnPlayStoreCard() {
                 }
             )
         )
-        SpacerPadding()
+        CustomSpacerPadding()
         Row {
             Text(
                 text = buildAnnotatedString {
@@ -464,7 +518,7 @@ fun OpenCertainAppOnPlayStoreCard() {
                 )
             }
         }
-        SpacerPadding()
+        CustomSpacerPadding()
         Button(
             onClick = {
                 openCertainAppOnPlayStore(packageName)
@@ -488,7 +542,7 @@ fun TestCard() {
                 clicks++
             }
         )
-        SpacerPadding()
+        CustomSpacerPadding()
         Text(
             text = "Default 中文测试 日本語テスト",
             fontFamily = FontFamily.Default

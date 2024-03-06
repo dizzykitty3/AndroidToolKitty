@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import me.dizzykitty3.androidtoolkitty.Utils.onOpenSystemSettings
 
 @Composable
-fun SystemSettingsButton(settingType: String, buttonText: String) {
+fun CustomSystemSettingsButton(settingType: String, buttonText: String) {
     Button(
         onClick = {
             onOpenSystemSettings(settingType)

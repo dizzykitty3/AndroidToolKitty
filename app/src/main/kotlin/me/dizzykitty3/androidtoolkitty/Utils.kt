@@ -200,6 +200,12 @@ object Utils {
     }
 
     @JvmStatic
+    fun onVisitProfile(username: String, platform: String) {
+        if (username.isBlank()) return
+        if (platform.isBlank()) return
+    }
+
+    @JvmStatic
     fun onOpenSystemSettings(actionName: String) {
         val intent: Intent = when (actionName) {
             "display" -> Intent(Settings.ACTION_DISPLAY_SETTINGS)

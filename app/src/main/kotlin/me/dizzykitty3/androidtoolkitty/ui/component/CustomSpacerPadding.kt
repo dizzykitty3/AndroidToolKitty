@@ -8,7 +8,7 @@ import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
-fun SpacerPadding() {
+fun CustomSpacerPadding() {
     val spacerPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_spacer))
     Spacer(
         modifier = spacerPadding
