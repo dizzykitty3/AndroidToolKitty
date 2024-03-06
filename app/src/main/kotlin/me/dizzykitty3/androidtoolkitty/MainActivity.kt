@@ -15,7 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -54,6 +53,7 @@ import me.dizzykitty3.androidtoolkitty.Utils.onClickVisitButton
 import me.dizzykitty3.androidtoolkitty.Utils.openCertainAppOnPlayStore
 import me.dizzykitty3.androidtoolkitty.Utils.openUrl
 import me.dizzykitty3.androidtoolkitty.ui.component.CardSpacePadding
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomAnimatedProgressIndicator
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.GradientGreetingText
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
@@ -118,10 +118,7 @@ fun YearProgressCard() {
     CustomCard(title = LocalContext.current.getString(R.string.year_progress)) {
         var isShowPercentage by remember { mutableStateOf(true) }
         SpacerPadding()
-        LinearProgressIndicator(
-            progress = { calculateYearProgress() },
-            modifier = Modifier.fillMaxWidth()
-        )
+        CustomAnimatedProgressIndicator()
         SpacerPadding()
         val textToShow =
             if (isShowPercentage)
