@@ -69,7 +69,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        ClipboardUtils(this).clearClipboard()
+        if (hasFocus) ClipboardUtils(this).clearClipboard()
     }
 }
 
@@ -107,6 +107,7 @@ fun MainLayout() {
 fun YearProgressCard() {
     CustomCard(title = LocalContext.current.getString(R.string.year_progress)) {
         var isShowPercentage by remember { mutableStateOf(true) }
+        SpacerPadding()
         LinearProgressIndicator(
             progress = { calculateYearProgress() },
             modifier = Modifier.fillMaxWidth()

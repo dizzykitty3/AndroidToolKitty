@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">Android ToolKitty</string>
     <string name="clipboard_cleared_automatically">已自动清空剪贴板</string>
-    <string name="year_progress">本年进度</string>
+    <string name="year_progress">今年已过</string>
     <string name="clipboard">剪贴板</string>
     <string name="clipboard_cleared">已清空剪贴板</string>
     <string name="clear_clipboard">清空剪贴板</string>
     <string name="url">URL</string>
     <string name="url_input_hint_1">不必输入前缀</string>
     <string name="url_input_hint_2">和后缀</string>
-    <string name="url_input_hint_3">（或</string>
-    <string name="url_input_hint_4">等）快速访问网址</string>
+    <string name="url_input_hint_3">(或</string>
+    <string name="url_input_hint_4">等)快速访问网址</string>
     <string name="visit">前往</string>
     <string name="android_system_settings">Android 系统设置</string>
     <string name="open_display_settings">打开显示设置</string>
