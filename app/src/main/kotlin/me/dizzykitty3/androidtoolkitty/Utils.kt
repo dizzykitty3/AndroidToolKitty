@@ -27,9 +27,7 @@ object Utils {
 
     @Suppress("SpellCheckingInspection")
     @JvmStatic
-    fun debugLog(logEvent: String) {
-        Log.d("me.dizzykitty3.androidtoolkitty", logEvent)
-    }
+    fun debugLog(logEvent: String) = Log.d("me.dizzykitty3.androidtoolkitty", logEvent)
 
     @JvmStatic
     fun showToast(toastText: String?) {
@@ -75,6 +73,11 @@ object Utils {
     @JvmStatic
     fun calculateYearProgress(): Float {
         return calculateDaysPassed().toFloat() / calculateTotalDaysInYear().toFloat()
+    }
+
+    @JvmStatic
+    fun displayYearProgressPercentage(progress: Float): String {
+        return (progress * 100).toString().substring(0, 4)
     }
 
     @JvmStatic
@@ -245,10 +248,7 @@ object Utils {
     }
 
     @JvmStatic
-    fun onClickConvertButton(
-        unicode: String,
-        characterField: MutableState<String>
-    ) {
+    fun onClickConvertButton(unicode: String, characterField: MutableState<String>) {
         if (unicode.isBlank()) return
         try {
             val result = convertUnicodeToCharacter(unicode)
@@ -301,7 +301,7 @@ object Utils {
             GOOGLE_PLAY_STORE -> showToastAndRecordLog(applicationContext.getString(R.string.google_play_store_not_installed))
             GOOGLE_MAPS -> {
                 showToastAndRecordLog(applicationContext.getString(R.string.google_maps_app_not_installed))
-                openCertainAppOnPlayStore("com.google.android.apps.maps")
+                openCertainAppOnPlayStore(GOOGLE_MAPS)
             }
         }
     }

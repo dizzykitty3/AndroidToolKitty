@@ -41,6 +41,7 @@ import androidx.compose.ui.text.withStyle
 import me.dizzykitty3.androidtoolkitty.Utils.calculateDaysPassed
 import me.dizzykitty3.androidtoolkitty.Utils.calculateTotalDaysInYear
 import me.dizzykitty3.androidtoolkitty.Utils.calculateYearProgress
+import me.dizzykitty3.androidtoolkitty.Utils.displayYearProgressPercentage
 import me.dizzykitty3.androidtoolkitty.Utils.onClearClipboardButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickCheckSetTimeAutomaticallyButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickConvertButton
@@ -113,7 +114,7 @@ fun YearProgressCard() {
         SpacerPadding()
         val textToShow =
             if (isShowPercentage)
-                "${calculateYearProgress() * 100}%"
+                "${(displayYearProgressPercentage(calculateYearProgress()))}%"
             else
                 "${calculateDaysPassed()} / ${calculateTotalDaysInYear()}"
         Text(
