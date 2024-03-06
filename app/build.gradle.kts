@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.jetbrains.kotlin.kapt)
+//    alias(libs.plugins.jetbrains.kotlin.kapt)
 }
 
 @Suppress("SpellCheckingInspection")
@@ -40,7 +40,7 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
+//        dataBinding = true
         compose = true
     }
 
@@ -54,7 +54,6 @@ android {
 }
 
 dependencies {
-    implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.play.services.maps)
     implementation(platform(libs.compose.bom))

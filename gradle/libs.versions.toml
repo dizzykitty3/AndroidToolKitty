@@ -1,7 +1,6 @@
 [versions]
 agp = "8.3.0"
 kotlin = "1.9.22"
-appcompat = "1.6.1"
 material = "1.11.0"
 playServicesMaps = "18.2.0"
 composeBom = "2024.02.01"
@@ -10,7 +9,6 @@ material3 = "1.2.0"
 materialIconsExtended = "1.6.2"
 
 [libraries]
-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
@@ -21,4 +19,4 @@ material-icons-extended = { module = "androidx.compose.material:material-icons-e
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+#jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
