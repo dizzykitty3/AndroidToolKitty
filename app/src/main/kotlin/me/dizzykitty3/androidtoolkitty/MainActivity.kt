@@ -20,6 +20,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -28,6 +29,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -41,6 +44,7 @@ import androidx.compose.ui.text.withStyle
 import me.dizzykitty3.androidtoolkitty.Utils.calculateDaysPassed
 import me.dizzykitty3.androidtoolkitty.Utils.calculateTotalDaysInYear
 import me.dizzykitty3.androidtoolkitty.Utils.calculateYearProgress
+import me.dizzykitty3.androidtoolkitty.Utils.debugLog
 import me.dizzykitty3.androidtoolkitty.Utils.displayYearProgressPercentage
 import me.dizzykitty3.androidtoolkitty.Utils.onClearClipboardButton
 import me.dizzykitty3.androidtoolkitty.Utils.onClickCheckSetTimeAutomaticallyButton
@@ -70,6 +74,12 @@ class MainActivity : ComponentActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) ClipboardUtils(this).clearClipboard()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        currentFocus?.clearFocus()
+        debugLog("focus cleared")
     }
 }
 
@@ -162,8 +172,15 @@ fun ClipboardCard() {
 @Composable
 fun URLCard() {
     val c = LocalContext.current
+    val f = LocalFocusManager.current
+    val l = LocalLifecycleOwner.current
     CustomCard(title = c.getString(R.string.url)) {
         var url by remember { mutableStateOf("") }
+        DisposableEffect(key1 = l) {
+            onDispose {
+                f.clearFocus()
+            }
+        }
         Text(
             text = buildAnnotatedString {
                 append(c.getString(R.string.url_input_hint_1))
@@ -270,9 +287,16 @@ fun SystemSettingsCard() {
 @Composable
 fun UnicodeCard() {
     val c = LocalContext.current
+    val f = LocalFocusManager.current
+    val l = LocalLifecycleOwner.current
     CustomCard(title = c.getString(R.string.unicode)) {
         var unicode by remember { mutableStateOf("") }
         val characters = remember { mutableStateOf("") }
+        DisposableEffect(key1 = l) {
+            onDispose {
+                f.clearFocus()
+            }
+        }
         Text(
             text = buildAnnotatedString {
                 append(c.getString(R.string.unicode_input_hint))
@@ -331,9 +355,16 @@ fun UnicodeCard() {
 @Composable
 fun GoogleMapsCard() {
     val c = LocalContext.current
+    val f = LocalFocusManager.current
+    val l = LocalLifecycleOwner.current
     CustomCard(title = c.getString(R.string.google_maps)) {
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }
+        DisposableEffect(key1 = l) {
+            onDispose {
+                f.clearFocus()
+            }
+        }
         Row {
             OutlinedTextField(
                 value = latitude,
@@ -389,9 +420,16 @@ fun GoogleMapsCard() {
 @Composable
 fun OpenCertainAppOnPlayStoreCard() {
     val c = LocalContext.current
+    val f = LocalFocusManager.current
+    val l = LocalLifecycleOwner.current
     CustomCard(title = c.getString(R.string.open_app_on_google_play)) {
         var packageName by remember { mutableStateOf("") }
         val linkUrl = "https://support.google.com/admob/answer/9972781"
+        DisposableEffect(key1 = l) {
+            onDispose {
+                f.clearFocus()
+            }
+        }
         OutlinedTextField(
             value = packageName,
             onValueChange = { packageName = it },
