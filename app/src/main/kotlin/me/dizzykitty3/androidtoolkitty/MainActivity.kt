@@ -127,7 +127,7 @@ fun YearProgressCard() {
             if (isShowPercentage)
                 "${(displayYearProgressPercentage(calculateYearProgress()))}%"
             else
-                "${calculateDaysPassed()} / ${calculateTotalDaysInYear()}"
+                "${calculateDaysPassed()} / ${calculateTotalDaysInYear()} / ${calculateTotalDaysInYear() - calculateDaysPassed()} days remaining"
         Text(
             text = textToShow,
             modifier = Modifier
