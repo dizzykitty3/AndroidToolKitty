@@ -15,15 +15,11 @@ import java.util.Objects
 
 object Utils {
     private var currentToast: Toast? = null
-    private var applicationContext: Context? = null
+    private lateinit var applicationContext: Context
 
     @JvmStatic
     fun init(context: Context) {
         applicationContext = context.applicationContext
-    }
-
-    private fun checkContextNullSafety() {
-        checkNotNull(applicationContext) { "Context has not been initialized. Please call init() first." }
     }
 
     @Suppress("SpellCheckingInspection")
@@ -37,7 +33,6 @@ object Utils {
         if (Objects.nonNull(currentToast)) {
             currentToast!!.cancel()
         }
-        checkContextNullSafety()
         currentToast = Toast.makeText(applicationContext, toastText, Toast.LENGTH_SHORT)
         currentToast!!.show()
     }
@@ -80,7 +75,6 @@ object Utils {
 
     @JvmStatic
     fun onClearClipboardButton() {
-        checkContextNullSafety()
         ClipboardUtils(applicationContext).clearClipboard()
         showToastAndRecordLog(applicationContext!!.getString(R.string.clipboard_cleared))
     }
@@ -144,8 +138,7 @@ object Utils {
         val urlIntent = Intent(Intent.ACTION_VIEW)
         urlIntent.data = Uri.parse(finalUrl)
         urlIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        checkContextNullSafety()
-        applicationContext!!.startActivity(urlIntent)
+        applicationContext.startActivity(urlIntent)
     }
 
     @JvmStatic
@@ -161,20 +154,18 @@ object Utils {
             else -> return
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        checkContextNullSafety()
-        applicationContext?.startActivity(intent)
+        applicationContext.startActivity(intent)
     }
 
     @JvmStatic
     fun onClickCheckSetTimeAutomaticallyButton() {
-        checkContextNullSafety()
-        val contentResolver: ContentResolver = applicationContext!!.contentResolver
+        val contentResolver: ContentResolver = applicationContext.contentResolver
         val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
         showToast(
             if (isAutoTime == 1)
-                applicationContext!!.getString(R.string.set_time_automatically_is_on)
+                applicationContext.getString(R.string.set_time_automatically_is_on)
             else
-                applicationContext!!.getString(R.string.set_time_automatically_is_off)
+                applicationContext.getString(R.string.set_time_automatically_is_off)
         )
     }
 
@@ -207,9 +198,8 @@ object Utils {
         try {
             val result = convertUnicodeToCharacter(unicode)
             characterField.value = result
-            checkContextNullSafety()
             ClipboardUtils(applicationContext).copyTextToClipboard(result)
-            showToast("$result " + applicationContext!!.getString(R.string.copied));
+            showToast("$result " + applicationContext.getString(R.string.copied))
         } catch (e: Exception) {
             showToast(e.message?.ifBlank { "Unknown error occurred" })
         }
@@ -228,12 +218,11 @@ object Utils {
         mapIntent.setPackage("com.google.android.apps.maps") // Google Maps
         mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-        checkContextNullSafety()
-        if (Objects.nonNull(mapIntent.resolveActivity(applicationContext!!.packageManager))) {
-            applicationContext?.startActivity(mapIntent)
+        if (Objects.nonNull(mapIntent.resolveActivity(applicationContext.packageManager))) {
+            applicationContext.startActivity(mapIntent)
             return
         }
-        showToastAndRecordLog(applicationContext!!.getString(R.string.google_maps_app_not_installed))
+        showToastAndRecordLog(applicationContext.getString(R.string.google_maps_app_not_installed))
         openCertainAppOnPlayStore("com.google.android.apps.maps") // Google Maps
     }
 
@@ -253,11 +242,10 @@ object Utils {
         playStoreIntent.setPackage("com.android.vending") // Google Play Store
         playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-        checkContextNullSafety()
-        if (Objects.nonNull(playStoreIntent.resolveActivity(applicationContext!!.packageManager))) {
-            applicationContext!!.startActivity(playStoreIntent)
+        if (Objects.nonNull(playStoreIntent.resolveActivity(applicationContext.packageManager))) {
+            applicationContext.startActivity(playStoreIntent)
             return
         }
-        showToastAndRecordLog(applicationContext!!.getString(R.string.google_play_store_not_installed))
+        showToastAndRecordLog(applicationContext.getString(R.string.google_play_store_not_installed))
     }
 }
