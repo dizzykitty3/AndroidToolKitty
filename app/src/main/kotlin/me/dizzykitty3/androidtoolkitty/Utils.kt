@@ -203,6 +203,15 @@ object Utils {
     fun onVisitProfile(username: String, platform: String) {
         if (username.isBlank()) return
         if (platform.isBlank()) return
+        val prefix = when (platform) {
+            "github" -> "https://github.com/"
+            "x" -> "https://x.com/"
+            else -> {
+                showToastAndRecordLog("platform: \"$platform\" not supported yet")
+                return
+            }
+        }
+        openUrl("$prefix${dropSpaces(username)}")
     }
 
     @JvmStatic

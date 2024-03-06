@@ -236,6 +236,9 @@ fun URLCard() {
     }
 }
 
+/**
+ * Visit user profile with given username and platform
+ */
 @Composable
 fun SocialMediaProfileCard() {
     CustomCard(title = "Social Media Profile") {
@@ -250,6 +253,10 @@ fun SocialMediaProfileCard() {
             }
         }
         Text(text = "Visit profile with id or username")
+        var selectedPlatform by remember { mutableStateOf("") }
+        val platformOptions = listOf(
+            "GitHub", "X (Twitter)"
+        )
         OutlinedTextField(
             value = platform,
             onValueChange = { platform = it },
