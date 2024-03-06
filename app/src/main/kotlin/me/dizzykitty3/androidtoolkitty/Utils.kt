@@ -268,8 +268,8 @@ object Utils {
 
     @JvmStatic
     fun onClickOpenGoogleMapsButton(latitude: String, longitude: String) {
-        latitude.ifBlank { return }
-        longitude.ifBlank { return }
+        if (latitude.isBlank()) return
+        if (longitude.isBlank()) return
         openGoogleMaps(latitude, longitude)
     }
 
