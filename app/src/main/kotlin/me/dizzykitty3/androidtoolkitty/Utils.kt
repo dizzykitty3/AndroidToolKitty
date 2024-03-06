@@ -14,6 +14,9 @@ import java.time.temporal.ChronoUnit
 import java.util.Objects
 
 object Utils {
+    private const val COM_CN = ".com.cn"
+    private const val GOOGLE_MAPS = "com.google.android.apps.maps"
+    private const val GOOGLE_PLAY_STORE = "com.android.vending"
     private var currentToast: Toast? = null
     private lateinit var applicationContext: Context
 
@@ -45,8 +48,8 @@ object Utils {
 
     @JvmStatic
     fun greeting(): String {
-        val now = LocalTime.now()
-        return when (now.hour) {
+        val currentTime = LocalTime.now()
+        return when (currentTime.hour) {
             in 6..11 -> "Good morning"
             in 12..17 -> "Good afternoon"
             else -> "Good evening"
@@ -55,17 +58,18 @@ object Utils {
 
     @JvmStatic
     fun calculateDaysPassed(): Long {
-        val currentDate = LocalDate.now()
-        val startOfYear = LocalDate.of(currentDate.year, 1, 1)
-        return startOfYear.until(currentDate, ChronoUnit.DAYS)
+        return calculateDaysFromStartOfYear(LocalDate.now())
     }
 
     @JvmStatic
     fun calculateTotalDaysInYear(): Long {
         val currentDate = LocalDate.now()
-        val startOfYear = LocalDate.of(currentDate.year, 1, 1)
-        val endOfYear = LocalDate.of(currentDate.year, 12, 31)
-        return startOfYear.until(endOfYear, ChronoUnit.DAYS) + 1
+        return calculateDaysFromStartOfYear(LocalDate.of(currentDate.year, 12, 31)) + 1
+    }
+
+    private fun calculateDaysFromStartOfYear(endDate: LocalDate): Long {
+        val startOfYear = LocalDate.of(endDate.year, 1, 1)
+        return startOfYear.until(endDate, ChronoUnit.DAYS)
     }
 
     @JvmStatic
@@ -76,61 +80,112 @@ object Utils {
     @JvmStatic
     fun onClearClipboardButton() {
         ClipboardUtils(applicationContext).clearClipboard()
-        showToastAndRecordLog(applicationContext!!.getString(R.string.clipboard_cleared))
+        showToastAndRecordLog(applicationContext.getString(R.string.clipboard_cleared))
     }
 
     @JvmStatic
     fun onClickVisitButton(userInputUrl: String) {
         if (userInputUrl.isBlank()) return
-        openUrl(processUrl(processString(userInputUrl)))
+        openUrl(processUrl(dropSpaces(userInputUrl)))
     }
 
     @JvmStatic
-    fun processString(inputString: String): String {
-        var outputString = inputString.trim()
-        outputString = outputString.replace(" ", "") // drop spaces
-        outputString = outputString.replace("　", "") // drop full-width spaces
-        return outputString
+    fun dropSpaces(inputString: String): String {
+        // drop spaces (including full-width)
+        val result = inputString.trim().replace("\\s".toRegex(), "").lowercase()
+        debugLog("string process: input = $inputString, output = $result")
+        return result
     }
 
     @Suppress("SpellCheckingInspection")
     @JvmStatic
     fun processUrl(inputUrl: String): String {
-        val builder = StringBuilder()
         val prefix = "https://"
-        if (inputUrl.contains(".")) return builder.append(prefix).append(inputUrl).toString()
-        val suffix: String = when (inputUrl) {
-            "remove" -> ".bg"
-            "feishu", "52pojie", "360" -> ".cn"
-            "rakuten", "dmm" -> ".co.jp"
-            "mercadolibre" -> ".com.ar"
-            "autohome", "zol", "pconline" -> ".com.cn"
-            "dailymail", "bbc" -> "co.uk"
-            "linktr" -> ".ee"
-            "shaparak" -> ".ir"
-            "livedoor", "nicovideo" -> ".jp"
-            "hitomi" -> ".la"
-            "csdn", "pixiv", "atlassian", "cnki", "doubleclick", "speedtest", "researchgate",
-            "behance", "ali213", "savefrom", "cloudfront", "bytedance", "nhentai", "daum",
-            "animeflv", "jb51", "manatoki215" -> ".net"
+        if (inputUrl.contains(".")) return "$prefix$inputUrl"
 
-            "line" -> ".me"
-            "yts" -> ".mx"
-            "mega" -> ".nz"
-            "wikipedia", "telegram", "archive", "mozilla", "e-hentai", "greasyfork",
-            "coursera", "craigslist" -> ".org"
+        val suffixMap = mapOf(
+            // .bg
+            "remove" to ".bg",
+            // .cn
+            "feishu" to ".cn",
+            "52pojie" to "cn",
+            "360" to "cn",
+            // .co.jp
+            "rakuten" to ".co.jp",
+            "dmm" to ".co.jp",
+            // .co.ar
+            "mercadolibre" to ".co.ar",
+            // .com.cn
+            "autohome" to COM_CN, "zol" to COM_CN, "pconline" to COM_CN,
+            // .co.uk
+            "dailymail" to "co.uk", "bbc" to "co.uk",
+            // .ee
+            "linktr" to ".ee",
+            // .ir
+            "shaparak" to ".ir",
+            // .jp
+            "livedoor" to ".jp", "nicovideo" to ".jp",
+            // .la
+            "hitomi" to ".la",
+            // .net
+            "csdn" to ".net",
+            "pixiv" to ".net",
+            "atlassian" to ".net",
+            "cnki" to ".net",
+            "doubleclick" to ".net",
+            "speedtest" to ".net",
+            "researchgate" to ".net",
+            "behance" to ".net",
+            "ali213" to ".net",
+            "savefrom" to ".net",
+            "cloudfront" to ".net",
+            "bytedance" to ".net",
+            "nhentai" to ".net",
+            "daum" to ".net",
+            "animeflv" to ".net",
+            "jb51" to ".net",
+            "manatoki215" to ".net",
+            // .me
+            "line" to ".me",
+            // .mx
+            "yts" to ".mx",
+            // .nz
+            "mega" to ".nz",
+            // .org
+            "wikipedia" to ".org",
+            "telegram" to ".org",
+            "archive" to ".org",
+            "mozilla" to ".org",
+            "e-hentai" to ".org",
+            "greasyfork" to ".org",
+            "coursera" to ".org",
+            "craigslist" to ".org",
+            // .ru
+            "yandex" to ".ru",
+            "mail" to ".ru",
+            "dzen" to ".ru",
+            "avito" to ".ru",
+            "ok" to ".ru",
+            "ozon" to ".ru",
+            "wildberries" to ".ru",
+            "gosulugi" to ".ru",
+            "ya" to ".ru",
+            // .so
+            "notion" to ".so",
+            // .to
+            "zoro" to ".to",
+            "1337x" to ".to",
+            // .tv
+            "twitch" to ".tv",
+            "jable" to ".tv",
+            // .us
+            "zoom" to ".us",
+            // .wiki
+            "namu" to ".wiki",
+        )
 
-            "yandex", "mail", "dzen", "avito", "ok", "ozon", "wildberries", "gosulugi",
-            "ya" -> ".ru"
-
-            "notion" -> ".so"
-            "zoro", "1337x" -> ".to"
-            "twitch", "jable" -> ".tv"
-            "zoom" -> ".us"
-            "namu" -> ".wiki"
-            else -> ".com"
-        }
-        return builder.append(prefix).append(inputUrl).append(suffix).toString()
+        val suffix = suffixMap[inputUrl] ?: ".com"
+        return "$prefix$inputUrl$suffix"
     }
 
     @JvmStatic
@@ -170,10 +225,10 @@ object Utils {
     }
 
     @JvmStatic
-    @Throws(Exception::class)
+    @Throws(IllegalArgumentException::class)
     fun convertUnicodeToCharacter(unicode: String): String {
         val length = unicode.length
-        if (length % 4 != 0) throw Exception("The length of the input is not a multiple of 4")
+        require(length % 4 == 0) { "The length of the input is not a multiple of 4" }
         try {
             val stringBuilder = StringBuilder()
             var i = 0
@@ -184,7 +239,7 @@ object Utils {
                 i += 4
             }
             return stringBuilder.toString()
-        } catch (e: NumberFormatException) {
+        } catch (e: IllegalArgumentException) {
             throw IllegalArgumentException("Invalid Unicode string format: ", e)
         }
     }
@@ -207,7 +262,9 @@ object Utils {
 
     @JvmStatic
     fun onClickOpenGoogleMapsButton(latitude: String, longitude: String) {
-        openGoogleMaps(latitude.ifBlank { return }, longitude.ifBlank { return })
+        latitude.ifBlank { return }
+        longitude.ifBlank { return }
+        openGoogleMaps(latitude, longitude)
     }
 
     @JvmStatic
@@ -215,37 +272,37 @@ object Utils {
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
         val mapIntent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
-        mapIntent.setPackage("com.google.android.apps.maps") // Google Maps
+        mapIntent.setPackage(GOOGLE_MAPS)
         mapIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-        if (Objects.nonNull(mapIntent.resolveActivity(applicationContext.packageManager))) {
-            applicationContext.startActivity(mapIntent)
-            return
-        }
-        showToastAndRecordLog(applicationContext.getString(R.string.google_maps_app_not_installed))
-        openCertainAppOnPlayStore("com.google.android.apps.maps") // Google Maps
+        startActivity(mapIntent)
     }
 
     @JvmStatic
     fun openCertainAppOnPlayStore(packageName: String) {
         if (packageName.isBlank()) return
-        var mPackageName = packageName
 
-        val playStoreUri: Uri = if (mPackageName.contains(".")) {
-            mPackageName = processString(mPackageName)
-            Uri.parse("market://details?id=$mPackageName")
+        val playStoreUri: Uri = if (packageName.contains(".")) {
+            Uri.parse("market://details?id=${dropSpaces(packageName)}")
         } else {
-            mPackageName = mPackageName.trim()
-            Uri.parse("market://search?q=$mPackageName")
+            Uri.parse("market://search?q=${packageName.trim()}")
         }
         val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
-        playStoreIntent.setPackage("com.android.vending") // Google Play Store
+        playStoreIntent.setPackage(GOOGLE_PLAY_STORE)
         playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(playStoreIntent)
+    }
 
-        if (Objects.nonNull(playStoreIntent.resolveActivity(applicationContext.packageManager))) {
-            applicationContext.startActivity(playStoreIntent)
+    private fun startActivity(intent: Intent) {
+        if (Objects.nonNull(intent.resolveActivity(applicationContext.packageManager))) {
+            applicationContext.startActivity(intent)
             return
         }
-        showToastAndRecordLog(applicationContext.getString(R.string.google_play_store_not_installed))
+        when (intent.`package`) {
+            GOOGLE_PLAY_STORE -> showToastAndRecordLog(applicationContext.getString(R.string.google_play_store_not_installed))
+            GOOGLE_MAPS -> {
+                showToastAndRecordLog(applicationContext.getString(R.string.google_maps_app_not_installed))
+                openCertainAppOnPlayStore("com.google.android.apps.maps")
+            }
+        }
     }
 }
