@@ -33,7 +33,7 @@
     <string name="google_maps_app_not_installed">未安装谷歌地图</string>
     <string name="google_play_store_not_installed">未安装 Google Play</string>
     <string name="open_google_maps">在谷歌地图上查看此坐标</string>
-    <string name="open_app_on_google_play">在打开应用的商店详情页</string>
+    <string name="open_app_on_google_play">打开应用的商店详情页</string>
     <string name="package_name_or_search">输入包名或搜索</string>
     <string name="whats">什么是</string>
     <string name="package_name">包名</string>
