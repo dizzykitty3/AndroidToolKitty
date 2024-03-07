@@ -39,4 +39,17 @@
     <string name="package_name">package name</string>
     <string name="content_description_link_icon_whats_package_name">link icon: what\'s package name</string>
     <string name="open_on_google_play">Open on Google Play</string>
+    <string name="social_media_profile">Social media profile</string>
+    <string name="platform">platform</string>
+    <string name="username">username</string>
+    <string name="visit_profile_with_id_or_username">Visit profile with id or username</string>
+    <string name="bilibili">Bilibili</string>
+    <string name="github">GitHub</string>
+    <string name="x">X (Twitter)</string>
+    <string name="weibo">Weibo</string>
+    <string name="youtube">YouTube</string>
+    <string name="platform_not_added_yet">No platform you need here?</string>
+    <string name="open_developer_options">Open developer options</string>
+    <string name="about">About</string>
+    <string name="source_code_on_github">source code on GitHub</string>
 </resources>

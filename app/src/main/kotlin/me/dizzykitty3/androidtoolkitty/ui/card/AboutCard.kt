@@ -11,14 +11,17 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.util.Utils
 
 @Composable
 fun AboutCard() {
-    CustomCard(title = "About") {
+    val c = LocalContext.current
+    CustomCard(title = c.getString(R.string.about)) {
         val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
         Row {
             Icon(
@@ -27,7 +30,7 @@ fun AboutCard() {
             )
             Spacer(modifier = Modifier.padding(8.dp))
             Text(
-                text = "source code on GitHub",
+                text = c.getString(R.string.source_code_on_github),
                 color = MaterialTheme.colorScheme.primary,
                 textDecoration = TextDecoration.Underline,
                 modifier = Modifier.clickable {

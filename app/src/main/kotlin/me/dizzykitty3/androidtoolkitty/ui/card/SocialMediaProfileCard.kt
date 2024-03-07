@@ -14,34 +14,36 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
+import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.util.Utils.onVisitProfile
 
-@Suppress("SpellCheckingInspection")
 @Composable
 fun SocialMediaProfileCard() {
-    CustomCard(title = "Social Media Profile") {
+    val c = LocalContext.current
+    CustomCard(title = c.getString(R.string.social_media_profile)) {
         var username by remember { mutableStateOf("") }
         var platform by remember { mutableStateOf("") }
         CustomDropdownMenu(
             items = listOf(
-                "Bilibili",
-                "GitHub",
-                "X (Twitter)",
-                "Weibo",
-                "YouTube",
-                "No platform you need here?"
+                c.getString(R.string.bilibili),
+                c.getString(R.string.github),
+                c.getString(R.string.x),
+                c.getString(R.string.weibo),
+                c.getString(R.string.youtube),
+                c.getString(R.string.platform_not_added_yet),
             ),
             selectedItem = platform,
             onItemSelected = { platform = it },
-            label = "platform"
+            label = c.getString(R.string.platform)
         )
         OutlinedTextField(
             value = username,
             onValueChange = { username = it },
-            label = { Text("username") },
+            label = { Text(c.getString(R.string.username)) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
@@ -53,7 +55,7 @@ fun SocialMediaProfileCard() {
             ),
             supportingText = {
                 Text(
-                    text = "Visit profile with id or username"
+                    text = c.getString(R.string.visit_profile_with_id_or_username)
                 )
             },
             trailingIcon = {

@@ -39,4 +39,17 @@
     <string name="package_name">包名</string>
     <string name="content_description_link_icon_whats_package_name">网页链接图标：什么是包名</string>
     <string name="open_on_google_play">前往 Google Play</string>
+    <string name="social_media_profile">社交媒体主页</string>
+    <string name="platform">社交平台</string>
+    <string name="username">用户昵称</string>
+    <string name="visit_profile_with_id_or_username">通过昵称访问社交媒体主页</string>
+    <string name="bilibili">哔哩哔哩</string>
+    <string name="github">GitHub</string>
+    <string name="x">X (推特)</string>
+    <string name="weibo">微博</string>
+    <string name="youtube">YouTube</string>
+    <string name="platform_not_added_yet">这里没有我所想的社交平台</string>
+    <string name="open_developer_options">打开开发者选项</string>
+    <string name="about">关于</string>
+    <string name="source_code_on_github">在 GitHub 上查看源码</string>
 </resources>

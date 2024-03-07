@@ -50,7 +50,7 @@ fun SystemSettingsCard() {
         )
         CustomSystemSettingsButton(
             settingType = "development_settings",
-            buttonText = "developer options"
+            buttonText = c.getString(R.string.open_developer_options)
         )
     }
 }
