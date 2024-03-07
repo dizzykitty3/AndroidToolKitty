@@ -16,14 +16,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.withStyle
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.util.Utils.onClickConvertButton
 
@@ -36,14 +33,7 @@ fun UnicodeCard() {
         Text(
             text = buildAnnotatedString {
                 append(c.getString(R.string.unicode_input_hint))
-                withStyle(
-                    style = SpanStyle(
-                        fontStyle = FontStyle.Italic,
-                        fontWeight = FontWeight.Light
-                    )
-                ) {
-                    append(" 00610062")
-                }
+                CustomItalicText(" 00610062")
             }
         )
         Row {
