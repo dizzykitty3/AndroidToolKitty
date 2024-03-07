@@ -21,7 +21,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.util.Utils
 import me.dizzykitty3.androidtoolkitty.util.Utils.onClickOpenGoogleMapsButton
 
 @Composable
@@ -45,7 +44,7 @@ fun GoogleMapsCard() {
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        Utils.onClickOpenGoogleMapsButton(latitude, longitude)
+                        onClickOpenGoogleMapsButton(latitude, longitude)
                     }
                 )
             )

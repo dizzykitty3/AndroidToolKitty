@@ -25,7 +25,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.util.Utils.onClickVisitButton
 
 @Composable
-fun URLCard() {
+fun UrlCard() {
     val c = LocalContext.current
     CustomCard(title = c.getString(R.string.url)) {
         var url by remember { mutableStateOf("") }

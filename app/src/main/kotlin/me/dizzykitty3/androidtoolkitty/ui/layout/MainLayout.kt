@@ -8,15 +8,15 @@ import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.ui.card.GoogleMapsCard
+import me.dizzykitty3.androidtoolkitty.ui.card.GreetingText
 import me.dizzykitty3.androidtoolkitty.ui.card.OpenAppOnPlayStoreCard
 import me.dizzykitty3.androidtoolkitty.ui.card.SocialMediaProfileCard
 import me.dizzykitty3.androidtoolkitty.ui.card.SystemSettingsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.TestCard
-import me.dizzykitty3.androidtoolkitty.ui.card.URLCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UnicodeCard
+import me.dizzykitty3.androidtoolkitty.ui.card.UrlCard
 import me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCardSpacePadding
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomGradientGreetingText
 
 @Composable
 fun MainLayout() {
@@ -24,13 +24,13 @@ fun MainLayout() {
     LazyColumn(
         modifier = cardPadding
     ) {
-        item { CustomGradientGreetingText() }
+        item { GreetingText() }
         item { CustomCardSpacePadding() }
         item { YearProgressCard() }
         item { CustomCardSpacePadding() }
         item { ClipboardCard() }
         item { CustomCardSpacePadding() }
-        item { URLCard() }
+        item { UrlCard() }
         item { CustomCardSpacePadding() }
         item { SocialMediaProfileCard() }
         item { CustomCardSpacePadding() }

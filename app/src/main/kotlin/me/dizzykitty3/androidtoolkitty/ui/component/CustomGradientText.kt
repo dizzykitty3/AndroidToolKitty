@@ -15,10 +15,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
-import me.dizzykitty3.androidtoolkitty.util.Utils.greeting
 
 @Composable
-fun CustomGradientGreetingText() {
+fun CustomGradientText(textToDisplay: String) {
     val text = buildAnnotatedString {
         withStyle(
             style = SpanStyle(
@@ -30,7 +29,7 @@ fun CustomGradientGreetingText() {
                 )
             )
         ) {
-            append(greeting())
+            append(textToDisplay)
         }
     }
     Row {

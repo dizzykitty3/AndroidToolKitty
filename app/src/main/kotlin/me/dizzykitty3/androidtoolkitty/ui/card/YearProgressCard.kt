@@ -14,10 +14,10 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomAnimatedProgressIndicator
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.util.Utils.calculateDaysPassed
-import me.dizzykitty3.androidtoolkitty.util.Utils.calculateTotalDaysInYear
-import me.dizzykitty3.androidtoolkitty.util.Utils.calculateYearProgress
-import me.dizzykitty3.androidtoolkitty.util.Utils.displayYearProgressPercentage
+import me.dizzykitty3.androidtoolkitty.util.TextUtils.calculateDaysPassed
+import me.dizzykitty3.androidtoolkitty.util.TextUtils.calculateTotalDaysInYear
+import me.dizzykitty3.androidtoolkitty.util.TextUtils.calculateYearProgress
+import me.dizzykitty3.androidtoolkitty.util.TextUtils.displayYearProgressPercentage
 
 @Composable
 fun YearProgressCard() {
