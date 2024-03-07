@@ -23,13 +23,13 @@
     <string name="open_date_and_time_settings">Open date &amp; time settings</string>
     <string name="open_battery_optimization_settings">Open battery optimization settings</string>
     <string name="unicode">Unicode</string>
-    <string name="unicode_input_hint">last 4 digits of each, like</string>
+    <string name="unicode_input_hint">last 4 digits of each, e.g.</string>
     <string name="character">Character</string>
     <string name="copied">copied</string>
     <string name="convert">Convert</string>
     <string name="google_maps">Google Maps</string>
-    <string name="latitude">Latitude</string>
-    <string name="longitude">Longitude</string>
+    <string name="latitude">lat</string>
+    <string name="longitude">lng</string>
     <string name="google_maps_app_not_installed">Google Maps app is not installed</string>
     <string name="google_play_store_not_installed">Google Play Store app is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>
