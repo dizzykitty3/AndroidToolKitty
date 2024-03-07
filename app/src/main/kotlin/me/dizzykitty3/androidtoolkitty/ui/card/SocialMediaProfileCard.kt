@@ -20,6 +20,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.util.Utils.onVisitProfile
 
+@Suppress("SpellCheckingInspection")
 @Composable
 fun SocialMediaProfileCard() {
     val c = LocalContext.current
@@ -29,9 +30,10 @@ fun SocialMediaProfileCard() {
         Text(text = "Visit profile with id or username")
         CustomDropdownMenu(
             items = listOf(
+                "Bilibili",
                 "GitHub",
                 "X (Twitter)",
-                "Weibo 微博",
+                "Weibo",
                 "No platform you need here?"
             ),
             selectedItem = platform,

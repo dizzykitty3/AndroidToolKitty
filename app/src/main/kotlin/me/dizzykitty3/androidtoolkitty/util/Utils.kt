@@ -17,6 +17,7 @@ import java.util.Objects
 object Utils {
     private const val GOOGLE_MAPS = "com.google.android.apps.maps"
     private const val GOOGLE_PLAY_STORE = "com.android.vending"
+    private const val HTTPS = "https://"
     private var currentToast: Toast? = null
     private lateinit var applicationContext: Context
 
@@ -66,21 +67,22 @@ object Utils {
         debugLog("openUrl")
     }
 
+    @Suppress("SpellCheckingInspection")
     @JvmStatic
     fun onVisitProfile(username: String, platform: String) {
         if (username.isBlank()) return
         if (platform.isBlank()) return
         val prefix = when (platform) {
-            "GitHub" -> "https://github.com/"
-            "Weibo 微博" -> "https://weibo.com/n/"
-            "X (Twitter)" -> "https://x.com/"
+            "Bilibili" -> "search.bilibili.com/upuser?keyword="
+            "GitHub" -> "github.com/"
+            "Weibo" -> "weibo.com/n/"
+            "X (Twitter)" -> "x.com/"
             else -> {
-                // TODO upload
                 showToastAndRecordLog("platform: \"$username\" uploaded")
                 return
             }
         }
-        openUrl("$prefix${dropSpaces(username)}")
+        openUrl("$HTTPS$prefix${dropSpaces(username)}")
         debugLog("onVisitProfile")
     }
 
