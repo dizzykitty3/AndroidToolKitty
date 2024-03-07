@@ -54,6 +54,7 @@ object Utils {
     fun onClickVisitButton(userInputUrl: String) {
         if (userInputUrl.isBlank()) return
         openUrl(processUrl(dropSpaces(userInputUrl)))
+        debugLog("onClickVisitButton")
     }
 
     @JvmStatic
@@ -62,6 +63,7 @@ object Utils {
         urlIntent.data = Uri.parse(finalUrl)
         urlIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         applicationContext.startActivity(urlIntent)
+        debugLog("openUrl")
     }
 
     @JvmStatic
@@ -77,6 +79,7 @@ object Utils {
             }
         }
         openUrl("$prefix${dropSpaces(username)}")
+        debugLog("onVisitProfile")
     }
 
     @JvmStatic
@@ -93,6 +96,7 @@ object Utils {
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         applicationContext.startActivity(intent)
+        debugLog("onOpenSystemSettings: $settingType")
     }
 
     @JvmStatic
@@ -105,6 +109,7 @@ object Utils {
             else
                 applicationContext.getString(R.string.set_time_automatically_is_off)
         )
+        debugLog("onClickCheckSetTimeAutomaticallyButton")
     }
 
     @JvmStatic
@@ -114,10 +119,10 @@ object Utils {
             val result = convertUnicodeToCharacter(unicode)
             characterField.value = result
             ClipboardUtils(applicationContext).copyTextToClipboard(result)
-            showToast("$result " + applicationContext.getString(R.string.copied))
         } catch (e: Exception) {
             showToast(e.message?.ifBlank { "Unknown error occurred" })
         }
+        debugLog("onClickConvertButton")
     }
 
     @JvmStatic
@@ -125,6 +130,7 @@ object Utils {
         if (latitude.isBlank()) return
         if (longitude.isBlank()) return
         openGoogleMaps(latitude, longitude)
+        debugLog("onClickOpenGoogleMapsButton")
     }
 
     @JvmStatic
@@ -150,6 +156,7 @@ object Utils {
         playStoreIntent.setPackage(GOOGLE_PLAY_STORE)
         playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(playStoreIntent)
+        debugLog("openCertainAppOnPlayStore")
     }
 
     private fun startActivity(intent: Intent) {

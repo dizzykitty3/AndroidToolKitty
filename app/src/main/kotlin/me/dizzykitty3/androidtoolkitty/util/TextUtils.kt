@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.util
 
+import me.dizzykitty3.androidtoolkitty.util.Utils.debugLog
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
@@ -58,7 +59,10 @@ object TextUtils {
     @JvmStatic
     fun processUrl(inputUrl: String): String {
         val prefix = "https://"
-        if (inputUrl.contains(".")) return "$prefix$inputUrl"
+        if (inputUrl.contains(".")) {
+            debugLog("input url: $inputUrl")
+            return "$prefix$inputUrl"
+        }
 
         val suffixMap = mapOf(
             // .bg
@@ -142,6 +146,7 @@ object TextUtils {
         )
 
         val suffix = suffixMap[inputUrl] ?: ".com"
+        debugLog(if (suffix == ".com") "suffix = com, input url: $inputUrl, " else "suffix = $suffix")
         return "$prefix$inputUrl$suffix"
     }
 

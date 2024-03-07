@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.util.Utils.showToast
 import me.dizzykitty3.androidtoolkitty.util.Utils.showToastAndRecordLog
 
 class ClipboardUtils(private val context: Context) {
@@ -25,5 +26,6 @@ class ClipboardUtils(private val context: Context) {
         getSystemClipboardService()
         val clip = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
+        showToast("$text " + context.getString(R.string.copied))
     }
 }
