@@ -3,6 +3,9 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowOutward
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -51,6 +54,12 @@ fun SocialMediaProfileCard() {
             supportingText = {
                 Text(
                     text = "Visit profile with id or username"
+                )
+            },
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = null
                 )
             }
         )

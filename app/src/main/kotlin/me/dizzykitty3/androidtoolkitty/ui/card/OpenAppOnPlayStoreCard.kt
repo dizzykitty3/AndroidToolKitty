@@ -44,7 +44,13 @@ fun OpenAppOnPlayStoreCard() {
                 onDone = {
                     openCertainAppOnPlayStore(packageName)
                 }
-            )
+            ),
+            trailingIcon = {
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = null
+                )
+            }
         )
         CustomSpacerPadding()
         Row {

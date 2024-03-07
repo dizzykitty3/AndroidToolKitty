@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.ui.card.AboutCard
 import me.dizzykitty3.androidtoolkitty.ui.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.ui.card.GoogleMapsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.GreetingText
@@ -52,6 +53,9 @@ fun MainLayout() {
         item { CustomCardSpacePadding() }
 
         item { TestCard() }
+        item { CustomCardSpacePadding() }
+
+        item { AboutCard() }
         item { CustomCardSpacePadding() }
     }
 }
