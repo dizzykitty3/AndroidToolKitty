@@ -77,6 +77,7 @@ object Utils {
             "GitHub" -> "github.com/"
             "Weibo" -> "weibo.com/n/"
             "X (Twitter)" -> "x.com/"
+            "YouTube" -> "youtube.com/@"
             else -> {
                 showToastAndRecordLog("platform: \"$username\" uploaded")
                 return
@@ -96,6 +97,7 @@ object Utils {
             "bluetooth" -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
             "date" -> Intent(Settings.ACTION_DATE_SETTINGS)
             "ignore_battery_optimization" -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+            "development_settings" -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
             else -> return
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

@@ -9,7 +9,7 @@ object TextUtils {
     private const val COM_CN = ".com.cn"
     private const val NET = ".net"
     private const val ORG = ".org"
-    private const val RU = "ru"
+    private const val RU = ".ru"
 
     @JvmStatic
     fun greeting(): String {
@@ -55,7 +55,6 @@ object TextUtils {
         return inputString.trim().replace("\\s".toRegex(), "").lowercase()
     }
 
-    @Suppress("SpellCheckingInspection")
     @JvmStatic
     fun processUrl(inputUrl: String): String {
         val prefix = "https://"
@@ -63,7 +62,14 @@ object TextUtils {
             debugLog("input url: $inputUrl")
             return "$prefix$inputUrl"
         }
+        val suffix = getUrlSuffix(inputUrl)
+        debugLog(if (suffix == ".com") "suffix = com, input url: $inputUrl" else "suffix = $suffix")
+        return "$prefix$inputUrl$suffix"
+    }
 
+    @Suppress("SpellCheckingInspection")
+    @JvmStatic
+    fun getUrlSuffix(urlInput: String): String {
         val suffixMap = mapOf(
             // .bg
             "remove" to ".bg",
@@ -144,10 +150,7 @@ object TextUtils {
             // .wiki
             "namu" to ".wiki",
         )
-
-        val suffix = suffixMap[inputUrl] ?: ".com"
-        debugLog(if (suffix == ".com") "suffix = com, input url: $inputUrl, " else "suffix = $suffix")
-        return "$prefix$inputUrl$suffix"
+        return suffixMap[dropSpaces(urlInput)] ?: ".com"
     }
 
     @JvmStatic

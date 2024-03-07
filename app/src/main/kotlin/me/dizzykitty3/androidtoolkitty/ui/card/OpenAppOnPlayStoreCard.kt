@@ -7,7 +7,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -69,14 +68,6 @@ fun OpenAppOnPlayStoreCard() {
                     contentDescription = c.getString(R.string.content_description_link_icon_whats_package_name)
                 )
             }
-        }
-        CustomSpacerPadding()
-        Button(
-            onClick = {
-                openCertainAppOnPlayStore(packageName)
-            }
-        ) {
-            Text(text = c.getString(R.string.open_on_google_play))
         }
     }
 }

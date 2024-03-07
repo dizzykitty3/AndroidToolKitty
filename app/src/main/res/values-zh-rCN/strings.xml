@@ -23,7 +23,7 @@
     <string name="open_date_and_time_settings">打开时间与日期设置</string>
     <string name="open_battery_optimization_settings">打开电池优化设置</string>
     <string name="unicode">Unicode</string>
-    <string name="unicode_input_hint">输入各 Unicode 的最后四位，如</string>
+    <string name="unicode_input_hint">各 Unicode 的最后四位，如</string>
     <string name="character">字符</string>
     <string name="copied">已复制</string>
     <string name="convert">转换</string>

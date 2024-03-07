@@ -16,7 +16,7 @@ import me.dizzykitty3.androidtoolkitty.util.TextUtils.calculateYearProgress
 fun CustomAnimatedProgressIndicator() {
     val progress = remember { Animatable(0f) }
     val targetProgress = calculateYearProgress()
-    val durationMillis = 1500
+    val durationMillis = 2000
     LaunchedEffect(true) {
         progress.animateTo(
             targetProgress,

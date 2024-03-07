@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,13 +19,12 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.util.Utils.onClickOpenGoogleMapsButton
 
 @Composable
 fun GoogleMapsCard() {
     val c = LocalContext.current
-    CustomCard(title = c.getString(R.string.google_maps)) {
+    CustomCard(title = c.getString(R.string.open_google_maps)) {
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }
         Row {
@@ -66,14 +64,6 @@ fun GoogleMapsCard() {
                     }
                 )
             )
-        }
-        CustomSpacerPadding()
-        Button(
-            onClick = {
-                onClickOpenGoogleMapsButton(latitude, longitude)
-            }
-        ) {
-            Text(text = c.getString(R.string.open_google_maps))
         }
     }
 }

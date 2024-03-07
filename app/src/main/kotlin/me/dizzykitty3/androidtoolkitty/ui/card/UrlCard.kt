@@ -3,7 +3,6 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +17,7 @@ import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomItalicText
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.util.TextUtils
 import me.dizzykitty3.androidtoolkitty.util.Utils.onClickVisitButton
 
 @Composable
@@ -26,15 +25,6 @@ fun UrlCard() {
     val c = LocalContext.current
     CustomCard(title = c.getString(R.string.url)) {
         var url by remember { mutableStateOf("") }
-        Text(text = buildAnnotatedString {
-            append(text = c.getString(R.string.url_input_hint_1))
-            CustomItalicText(" .www ")
-            append(text = c.getString(R.string.url_input_hint_2))
-            CustomItalicText(" .com ")
-            append(text = c.getString(R.string.url_input_hint_3))
-            CustomItalicText(" .net ")
-            append(text = c.getString(R.string.url_input_hint_4))
-        })
         OutlinedTextField(
             value = url,
             onValueChange = { url = it },
@@ -47,13 +37,30 @@ fun UrlCard() {
                 onDone = {
                     onClickVisitButton(url)
                 }
-            )
+            ),
+            supportingText = {
+                Text(
+                    text = buildAnnotatedString {
+                        append(text = c.getString(R.string.url_input_hint_1))
+                        CustomItalicText(" .www ")
+                        append(text = c.getString(R.string.url_input_hint_2))
+                        CustomItalicText(" .com ")
+                        append(text = c.getString(R.string.url_input_hint_3))
+                        CustomItalicText(" .net ")
+                        append(text = c.getString(R.string.url_input_hint_4))
+                    }
+                )
+            },
+            prefix = {
+                Text(
+                    text = "https://"
+                )
+            },
+            suffix = {
+                Text(
+                    text = TextUtils.getUrlSuffix(url)
+                )
+            }
         )
-        CustomSpacerPadding()
-        Button(
-            onClick = { onClickVisitButton(url) }
-        ) {
-            Text(text = c.getString(R.string.visit))
-        }
     }
 }

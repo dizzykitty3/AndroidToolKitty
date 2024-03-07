@@ -48,5 +48,9 @@ fun SystemSettingsCard() {
             settingType = "ignore_battery_optimization",
             buttonText = c.getString(R.string.open_battery_optimization_settings)
         )
+        CustomSystemSettingsButton(
+            settingType = "development_settings",
+            buttonText = "developer options"
+        )
     }
 }
