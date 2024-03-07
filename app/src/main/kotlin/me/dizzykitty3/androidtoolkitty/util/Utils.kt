@@ -71,10 +71,12 @@ object Utils {
         if (username.isBlank()) return
         if (platform.isBlank()) return
         val prefix = when (platform) {
-            "github" -> "https://github.com/"
-            "x" -> "https://x.com/"
+            "GitHub" -> "https://github.com/"
+            "Weibo 微博" -> "https://weibo.com/n/"
+            "X (Twitter)" -> "https://x.com/"
             else -> {
-                showToastAndRecordLog("platform: \"$platform\" not supported yet")
+                // TODO upload
+                showToastAndRecordLog("platform: \"$username\" uploaded")
                 return
             }
         }

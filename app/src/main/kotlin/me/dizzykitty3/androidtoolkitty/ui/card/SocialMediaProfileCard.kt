@@ -16,8 +16,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.util.Utils
 import me.dizzykitty3.androidtoolkitty.util.Utils.onVisitProfile
 
 @Composable
@@ -26,24 +26,17 @@ fun SocialMediaProfileCard() {
     CustomCard(title = "Social Media Profile") {
         var username by remember { mutableStateOf("") }
         var platform by remember { mutableStateOf("") }
-        var selectedPlatform by remember { mutableStateOf("") }
-        val platformOptions = listOf(
-            "GitHub", "X (Twitter)"
-        )
         Text(text = "Visit profile with id or username")
-        OutlinedTextField(
-            value = platform,
-            onValueChange = { platform = it },
-            label = { Text("platform") },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
+        CustomDropdownMenu(
+            items = listOf(
+                "GitHub",
+                "X (Twitter)",
+                "Weibo 微博",
+                "No platform you need here?"
             ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    Utils.onVisitProfile(username, platform)
-                }
-            )
+            selectedItem = platform,
+            onItemSelected = { platform = it },
+            label = "platform"
         )
         OutlinedTextField(
             value = username,
