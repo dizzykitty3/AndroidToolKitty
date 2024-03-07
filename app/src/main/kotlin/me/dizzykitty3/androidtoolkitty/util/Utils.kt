@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty
+package me.dizzykitty3.androidtoolkitty.util
 
 import android.content.ContentResolver
 import android.content.Context
@@ -8,6 +8,7 @@ import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.runtime.MutableState
+import me.dizzykitty3.androidtoolkitty.R
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit

@@ -27,8 +27,8 @@ import me.dizzykitty3.androidtoolkitty.R
 fun CustomCard(title: String, content: @Composable () -> Unit) {
     val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
     var expanded by remember { mutableStateOf(true) }
-    val f = LocalFocusManager.current
-    val l = LocalLifecycleOwner.current
+    val focusManager = LocalFocusManager.current
+    val lifecycleOwner = LocalLifecycleOwner.current
     Card(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -40,7 +40,7 @@ fun CustomCard(title: String, content: @Composable () -> Unit) {
                     .fillMaxWidth()
                     .clickable { expanded = !expanded },
                 text = title, // Custom title here
-                style = TextStyle(
+                style = TextStyle.Default.copy(
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Normal,
                     fontSize = 22.sp,
@@ -52,9 +52,9 @@ fun CustomCard(title: String, content: @Composable () -> Unit) {
                 Column {
                     CustomSpacerPadding()
                     Column {
-                        DisposableEffect(key1 = l) {
+                        DisposableEffect(key1 = lifecycleOwner) {
                             onDispose {
-                                f.clearFocus()
+                                focusManager.clearFocus()
                             }
                         }
                         content() // Custom contents here

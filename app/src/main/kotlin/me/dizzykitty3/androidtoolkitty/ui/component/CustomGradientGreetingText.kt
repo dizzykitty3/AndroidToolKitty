@@ -15,7 +15,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
-import me.dizzykitty3.androidtoolkitty.Utils.greeting
+import me.dizzykitty3.androidtoolkitty.util.Utils.greeting
 
 @Composable
 fun CustomGradientGreetingText() {
@@ -39,7 +39,7 @@ fun CustomGradientGreetingText() {
         ) {
             Text(
                 text = text,
-                style = TextStyle(
+                style = TextStyle.Default.copy(
                     fontFamily = FontFamily.Cursive,
                     fontWeight = FontWeight.Black,
                     fontSize = 40.sp,
