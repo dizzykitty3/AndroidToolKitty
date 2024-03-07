@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.util.Utils
+import me.dizzykitty3.androidtoolkitty.util.Utils.openUrl
 
 @Composable
 fun AboutCard() {
@@ -34,7 +34,7 @@ fun AboutCard() {
                 color = MaterialTheme.colorScheme.primary,
                 textDecoration = TextDecoration.Underline,
                 modifier = Modifier.clickable {
-                    Utils.openUrl(sourceCodeUrl)
+                    openUrl(sourceCodeUrl)
                 }
             )
         }

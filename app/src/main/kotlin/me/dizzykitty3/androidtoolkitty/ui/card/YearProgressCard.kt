@@ -21,6 +21,7 @@ import me.dizzykitty3.androidtoolkitty.util.TextUtils.displayYearProgressPercent
 
 @Composable
 fun YearProgressCard() {
+    val c = LocalContext.current
     CustomCard(title = LocalContext.current.getString(R.string.year_progress)) {
         var isShowPercentage by remember { mutableStateOf(true) }
         CustomSpacerPadding()
@@ -30,7 +31,11 @@ fun YearProgressCard() {
             if (isShowPercentage)
                 "${(displayYearProgressPercentage(calculateYearProgress()))}%"
             else
-                "${calculateDaysPassed()} / ${calculateTotalDaysInYear()} / ${calculateTotalDaysInYear() - calculateDaysPassed()} days remaining"
+                "${calculateDaysPassed()} / ${calculateTotalDaysInYear()} / ${calculateTotalDaysInYear() - calculateDaysPassed()} ${
+                    c.getString(
+                        R.string.days_remaining
+                    )
+                }"
         Text(
             text = textToShow,
             modifier = Modifier

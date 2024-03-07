@@ -53,4 +53,6 @@
     <string name="about">关于</string>
     <string name="source_code_on_github">在 GitHub 上查看源码</string>
     <string name="submit_the_platform_you_need">提交你所想平台的名称给开发者</string>
+    <string name="days_remaining">天剩余</string>
+    <string name="uploaded">已上传</string>
 </resources>

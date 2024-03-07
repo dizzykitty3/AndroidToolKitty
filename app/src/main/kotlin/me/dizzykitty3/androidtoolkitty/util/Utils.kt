@@ -87,7 +87,13 @@ object Utils {
         if (platform.isBlank()) return
         val prefix = getProfilePrefix(platform)
         if (prefix == "") {
-            showToastAndRecordLog("platform: \"$username\" uploaded")
+            showToastAndRecordLog(
+                "${applicationContext.getString(R.string.platform)}: \"$username\" ${
+                    applicationContext.getString(
+                        R.string.uploaded
+                    )
+                }"
+            )
             return
         }
         openUrl("$HTTPS$prefix${dropSpaces(username)}")

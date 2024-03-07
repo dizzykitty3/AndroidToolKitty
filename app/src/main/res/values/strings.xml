@@ -53,4 +53,6 @@
     <string name="about">About</string>
     <string name="source_code_on_github">source code on GitHub</string>
     <string name="submit_the_platform_you_need">submit the platform you need</string>
+    <string name="days_remaining">days remaining</string>
+    <string name="uploaded">uploaded</string>
 </resources>

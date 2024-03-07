@@ -8,6 +8,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +27,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.util.Utils.openCertainAppOnPlayStore
 import me.dizzykitty3.androidtoolkitty.util.Utils.openUrl
 
+@Suppress("SpellCheckingInspection")
 @Composable
 fun OpenAppOnPlayStoreCard() {
     val c = LocalContext.current
@@ -49,6 +51,12 @@ fun OpenAppOnPlayStoreCard() {
                 Icon(
                     imageVector = Icons.Outlined.ArrowOutward,
                     contentDescription = null
+                )
+            },
+            placeholder = {
+                Text(
+                    text = "me.dizzykitty3.androidtoolkitty",
+                    style = MaterialTheme.typography.labelSmall
                 )
             }
         )
