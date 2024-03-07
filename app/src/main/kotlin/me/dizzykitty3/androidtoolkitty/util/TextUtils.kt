@@ -6,6 +6,9 @@ import java.time.temporal.ChronoUnit
 
 object TextUtils {
     private const val COM_CN = ".com.cn"
+    private const val NET = ".net"
+    private const val ORG = ".org"
+    private const val RU = "ru"
 
     @JvmStatic
     fun greeting(): String {
@@ -43,13 +46,12 @@ object TextUtils {
         return (progress * 100).toString().substring(0, 4)
     }
 
-
+    /**
+     * drop spaces, including full-width ones
+     */
     @JvmStatic
     fun dropSpaces(inputString: String): String {
-        // drop spaces (including full-width)
-        val result = inputString.trim().replace("\\s".toRegex(), "").lowercase()
-        Utils.debugLog("string process: input = $inputString, output = $result")
-        return result
+        return inputString.trim().replace("\\s".toRegex(), "").lowercase()
     }
 
     @Suppress("SpellCheckingInspection")
@@ -83,23 +85,23 @@ object TextUtils {
             // .la
             "hitomi" to ".la",
             // .net
-            "csdn" to ".net",
-            "pixiv" to ".net",
-            "atlassian" to ".net",
-            "cnki" to ".net",
-            "doubleclick" to ".net",
-            "speedtest" to ".net",
-            "researchgate" to ".net",
-            "behance" to ".net",
-            "ali213" to ".net",
-            "savefrom" to ".net",
-            "cloudfront" to ".net",
-            "bytedance" to ".net",
-            "nhentai" to ".net",
-            "daum" to ".net",
-            "animeflv" to ".net",
-            "jb51" to ".net",
-            "manatoki215" to ".net",
+            "csdn" to NET,
+            "pixiv" to NET,
+            "atlassian" to NET,
+            "cnki" to NET,
+            "doubleclick" to NET,
+            "speedtest" to NET,
+            "researchgate" to NET,
+            "behance" to NET,
+            "ali213" to NET,
+            "savefrom" to NET,
+            "cloudfront" to NET,
+            "bytedance" to NET,
+            "nhentai" to NET,
+            "daum" to NET,
+            "animeflv" to NET,
+            "jb51" to NET,
+            "manatoki215" to NET,
             // .me
             "line" to ".me",
             // .mx
@@ -107,24 +109,24 @@ object TextUtils {
             // .nz
             "mega" to ".nz",
             // .org
-            "wikipedia" to ".org",
-            "telegram" to ".org",
-            "archive" to ".org",
-            "mozilla" to ".org",
-            "e-hentai" to ".org",
-            "greasyfork" to ".org",
-            "coursera" to ".org",
-            "craigslist" to ".org",
+            "wikipedia" to ORG,
+            "telegram" to ORG,
+            "archive" to ORG,
+            "mozilla" to ORG,
+            "e-hentai" to ORG,
+            "greasyfork" to ORG,
+            "coursera" to ORG,
+            "craigslist" to ORG,
             // .ru
-            "yandex" to ".ru",
-            "mail" to ".ru",
-            "dzen" to ".ru",
-            "avito" to ".ru",
-            "ok" to ".ru",
-            "ozon" to ".ru",
-            "wildberries" to ".ru",
-            "gosulugi" to ".ru",
-            "ya" to ".ru",
+            "yandex" to RU,
+            "mail" to RU,
+            "dzen" to RU,
+            "avito" to RU,
+            "ok" to RU,
+            "ozon" to RU,
+            "wildberries" to RU,
+            "gosulugi" to RU,
+            "ya" to RU,
             // .so
             "notion" to ".so",
             // .to

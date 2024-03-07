@@ -12,6 +12,8 @@ fun CustomSystemSettingsButton(settingType: String, buttonText: String) {
             onOpenSystemSettings(settingType)
         }
     ) {
-        Text(text = buttonText)
+        Text(
+            text = buttonText
+        )
     }
 }

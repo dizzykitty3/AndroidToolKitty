@@ -80,8 +80,8 @@ object Utils {
     }
 
     @JvmStatic
-    fun onOpenSystemSettings(actionName: String) {
-        val intent: Intent = when (actionName) {
+    fun onOpenSystemSettings(settingType: String) {
+        val intent: Intent = when (settingType) {
             "display" -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
             "auto_rotate" -> Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS)
             "locale" -> Intent(Settings.ACTION_LOCALE_SETTINGS)

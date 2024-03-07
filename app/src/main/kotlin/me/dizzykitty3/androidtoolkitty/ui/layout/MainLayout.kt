@@ -26,22 +26,31 @@ fun MainLayout() {
     ) {
         item { GreetingText() }
         item { CustomCardSpacePadding() }
+
         item { YearProgressCard() }
         item { CustomCardSpacePadding() }
+
         item { ClipboardCard() }
         item { CustomCardSpacePadding() }
+
         item { UrlCard() }
         item { CustomCardSpacePadding() }
+
         item { SocialMediaProfileCard() }
         item { CustomCardSpacePadding() }
+
         item { SystemSettingsCard() }
         item { CustomCardSpacePadding() }
+
         item { UnicodeCard() }
         item { CustomCardSpacePadding() }
+
         item { GoogleMapsCard() }
         item { CustomCardSpacePadding() }
+
         item { OpenAppOnPlayStoreCard() }
         item { CustomCardSpacePadding() }
+
         item { TestCard() }
         item { CustomCardSpacePadding() }
     }
