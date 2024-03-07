@@ -52,4 +52,5 @@
     <string name="open_developer_options">打开开发者选项</string>
     <string name="about">关于</string>
     <string name="source_code_on_github">在 GitHub 上查看源码</string>
+    <string name="submit_the_platform_you_need">提交你所想平台的名称给开发者</string>
 </resources>

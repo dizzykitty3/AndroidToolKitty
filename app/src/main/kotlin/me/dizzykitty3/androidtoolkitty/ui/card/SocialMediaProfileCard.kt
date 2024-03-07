@@ -16,9 +16,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomDropdownMenu
+import me.dizzykitty3.androidtoolkitty.util.Utils.getProfilePrefix
 import me.dizzykitty3.androidtoolkitty.util.Utils.onVisitProfile
 
 @Composable
@@ -38,12 +40,23 @@ fun SocialMediaProfileCard() {
             ),
             selectedItem = platform,
             onItemSelected = { platform = it },
-            label = c.getString(R.string.platform)
+            label =
+            if (platform != c.getString(R.string.platform_not_added_yet)) {
+                c.getString(R.string.platform)
+            } else {
+                ""
+            }
         )
         OutlinedTextField(
             value = username,
             onValueChange = { username = it },
-            label = { Text(c.getString(R.string.username)) },
+            label = {
+                if (platform != c.getString(R.string.platform_not_added_yet)) {
+                    Text(c.getString(R.string.username))
+                } else {
+                    Text(c.getString(R.string.platform))
+                }
+            },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
@@ -54,9 +67,17 @@ fun SocialMediaProfileCard() {
                 }
             ),
             supportingText = {
-                Text(
-                    text = c.getString(R.string.visit_profile_with_id_or_username)
-                )
+                if (platform == "") {
+                    Text(c.getString(R.string.visit_profile_with_id_or_username))
+                } else if (platform != c.getString(R.string.platform_not_added_yet)) {
+                    Text(
+                        text = "${getProfilePrefix(platform)}$username",
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1
+                    )
+                } else {
+                    Text(c.getString(R.string.submit_the_platform_you_need))
+                }
             },
             trailingIcon = {
                 Icon(

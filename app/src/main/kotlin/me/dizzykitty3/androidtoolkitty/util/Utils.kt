@@ -69,19 +69,26 @@ object Utils {
 
     @Suppress("SpellCheckingInspection")
     @JvmStatic
+    fun getProfilePrefix(platform: String): String {
+        if (platform.isBlank()) return ""
+        return when (platform) {
+            applicationContext.getString(R.string.bilibili) -> "search.bilibili.com/upuser?keyword="
+            applicationContext.getString(R.string.github) -> "github.com/"
+            applicationContext.getString(R.string.weibo) -> "weibo.com/n/"
+            applicationContext.getString(R.string.x) -> "x.com/"
+            applicationContext.getString(R.string.youtube) -> "youtube.com/@"
+            else -> return ""
+        }
+    }
+
+    @JvmStatic
     fun onVisitProfile(username: String, platform: String) {
         if (username.isBlank()) return
         if (platform.isBlank()) return
-        val prefix = when (platform) {
-            "Bilibili" -> "search.bilibili.com/upuser?keyword="
-            "GitHub" -> "github.com/"
-            "Weibo" -> "weibo.com/n/"
-            "X (Twitter)" -> "x.com/"
-            "YouTube" -> "youtube.com/@"
-            else -> {
-                showToastAndRecordLog("platform: \"$username\" uploaded")
-                return
-            }
+        val prefix = getProfilePrefix(platform)
+        if (prefix == "") {
+            showToastAndRecordLog("platform: \"$username\" uploaded")
+            return
         }
         openUrl("$HTTPS$prefix${dropSpaces(username)}")
         debugLog("onVisitProfile")
