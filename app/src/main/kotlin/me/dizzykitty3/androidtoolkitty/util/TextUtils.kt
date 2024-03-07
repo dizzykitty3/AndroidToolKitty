@@ -6,10 +6,28 @@ import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 
 object TextUtils {
+    private const val BG = ".bg"
+    private const val CN = ".cn"
+    private const val CO_AR = ".co.ar"
+    private const val CO_JP = ".co.jp"
+    private const val CO_UK = ".co.uk"
+    private const val COM = ".com"
     private const val COM_CN = ".com.cn"
+    private const val EE = ".ee"
+    private const val IR = ".ir"
+    private const val JP = ".jp"
+    private const val LA = ".la"
     private const val NET = ".net"
+    private const val ME = ".me"
+    private const val MX = ".mx"
+    private const val NZ = ".nz"
     private const val ORG = ".org"
     private const val RU = ".ru"
+    private const val SO = ".so"
+    private const val TO = ".to"
+    private const val TV = ".tv"
+    private const val US = ".us"
+    private const val WIKI = ".wiki"
 
     @JvmStatic
     fun greeting(): String {
@@ -63,7 +81,7 @@ object TextUtils {
             return "$prefix$inputUrl"
         }
         val suffix = getUrlSuffix(inputUrl)
-        debugLog(if (suffix == ".com") "suffix = com, input url: $inputUrl" else "suffix = $suffix")
+        debugLog(if (suffix == COM) "suffix = com, input url: $inputUrl" else "suffix = $suffix")
         return "$prefix$inputUrl$suffix"
     }
 
@@ -71,30 +89,23 @@ object TextUtils {
     @JvmStatic
     fun getUrlSuffix(urlInput: String): String {
         val suffixMap = mapOf(
-            // .bg
-            "remove" to ".bg",
-            // .cn
-            "feishu" to ".cn",
-            "52pojie" to "cn",
-            "360" to "cn",
-            // .co.jp
-            "rakuten" to ".co.jp",
-            "dmm" to ".co.jp",
-            // .co.ar
-            "mercadolibre" to ".co.ar",
-            // .com.cn
-            "autohome" to COM_CN, "zol" to COM_CN, "pconline" to COM_CN,
-            // .co.uk
-            "dailymail" to "co.uk", "bbc" to "co.uk",
-            // .ee
-            "linktr" to ".ee",
-            // .ir
-            "shaparak" to ".ir",
-            // .jp
-            "livedoor" to ".jp", "nicovideo" to ".jp",
-            // .la
-            "hitomi" to ".la",
-            // .net
+            "remove" to BG,
+            "feishu" to CN,
+            "52pojie" to CN,
+            "360" to CN,
+            "mercadolibre" to CO_AR,
+            "rakuten" to CO_JP,
+            "dmm" to CO_JP,
+            "autohome" to COM_CN,
+            "zol" to COM_CN,
+            "pconline" to COM_CN,
+            "dailymail" to CO_UK,
+            "bbc" to CO_UK,
+            "linktr" to EE,
+            "shaparak" to IR,
+            "livedoor" to JP,
+            "nicovideo" to JP,
+            "hitomi" to LA,
             "csdn" to NET,
             "pixiv" to NET,
             "atlassian" to NET,
@@ -112,13 +123,9 @@ object TextUtils {
             "animeflv" to NET,
             "jb51" to NET,
             "manatoki215" to NET,
-            // .me
-            "line" to ".me",
-            // .mx
-            "yts" to ".mx",
-            // .nz
-            "mega" to ".nz",
-            // .org
+            "line" to ME,
+            "yts" to MX,
+            "mega" to NZ,
             "wikipedia" to ORG,
             "telegram" to ORG,
             "archive" to ORG,
@@ -127,7 +134,6 @@ object TextUtils {
             "greasyfork" to ORG,
             "coursera" to ORG,
             "craigslist" to ORG,
-            // .ru
             "yandex" to RU,
             "mail" to RU,
             "dzen" to RU,
@@ -137,20 +143,15 @@ object TextUtils {
             "wildberries" to RU,
             "gosulugi" to RU,
             "ya" to RU,
-            // .so
-            "notion" to ".so",
-            // .to
-            "zoro" to ".to",
-            "1337x" to ".to",
-            // .tv
-            "twitch" to ".tv",
-            "jable" to ".tv",
-            // .us
-            "zoom" to ".us",
-            // .wiki
-            "namu" to ".wiki",
+            "notion" to SO,
+            "zoro" to TO,
+            "1337x" to TO,
+            "twitch" to TV,
+            "jable" to TV,
+            "zoom" to US,
+            "namu" to WIKI,
         )
-        return suffixMap[dropSpaces(urlInput)] ?: ".com"
+        return suffixMap[dropSpaces(urlInput)] ?: COM
     }
 
     @JvmStatic
