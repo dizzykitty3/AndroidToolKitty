@@ -1,5 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -16,6 +18,7 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.onClickCheckSetTimeAutomatical
 fun SystemSettingsCard() {
     val c = LocalContext.current
     CustomCard(
+        icon = Icons.Outlined.Settings,
         title = c.getString(R.string.android_system_settings),
         isExpand = true
     ) {

@@ -3,6 +3,8 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Notes
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -24,6 +26,7 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.onClickConvertButton
 fun UnicodeCard() {
     val c = LocalContext.current
     CustomCard(
+        icon = Icons.AutoMirrored.Outlined.Notes,
         title = c.getString(R.string.unicode),
         isExpand = true
     ) {

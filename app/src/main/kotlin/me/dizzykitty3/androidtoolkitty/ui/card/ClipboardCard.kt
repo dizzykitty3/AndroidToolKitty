@@ -1,5 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ContentPasteSearch
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -13,6 +15,7 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.onClearClipboardButton
 @Composable
 fun ClipboardCard() {
     CustomCard(
+        icon = Icons.Outlined.ContentPasteSearch,
         title = LocalContext.current.getString(R.string.clipboard),
         isExpand = true
     ) {

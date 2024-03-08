@@ -5,6 +5,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -29,6 +30,7 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.onVisitProfile
 fun SocialMediaProfileCard() {
     val c = LocalContext.current
     CustomCard(
+        icon = Icons.Outlined.Person,
         title = c.getString(R.string.social_media_profile),
         isExpand = true
     ) {

@@ -7,6 +7,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
+import androidx.compose.material.icons.outlined.Shop
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -33,6 +34,7 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.openUrl
 fun OpenAppOnPlayStoreCard() {
     val c = LocalContext.current
     CustomCard(
+        icon = Icons.Outlined.Shop,
         title = c.getString(R.string.open_app_on_google_play),
         isExpand = true
     ) {

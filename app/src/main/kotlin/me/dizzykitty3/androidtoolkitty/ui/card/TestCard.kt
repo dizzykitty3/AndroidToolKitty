@@ -1,5 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.BugReport
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,7 +18,9 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 fun TestCard() {
     val text = "Android ToolKitty"
     CustomCard(
-        title = "test", isExpand = false
+        icon = Icons.Outlined.BugReport,
+        title = "test",
+        isExpand = false
     ) {
         var clicks by remember { mutableIntStateOf(0) }
         ClickCounter(

@@ -5,6 +5,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
+import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -29,6 +30,7 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.onClickVisitButton
 fun UrlCard() {
     val c = LocalContext.current
     CustomCard(
+        icon = Icons.Outlined.Link,
         title = c.getString(R.string.url),
         isExpand = true
     ) {

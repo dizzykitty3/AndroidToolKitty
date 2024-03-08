@@ -3,6 +3,8 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.HourglassTop
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -24,6 +26,7 @@ import me.dizzykitty3.androidtoolkitty.util.TextUtils.displayYearProgressPercent
 fun YearProgressCard() {
     val c = LocalContext.current
     CustomCard(
+        icon = Icons.Outlined.HourglassTop,
         title = LocalContext.current.getString(R.string.year_progress),
         isExpand = true
     ) {
