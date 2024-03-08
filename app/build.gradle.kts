@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-//    alias(libs.plugins.jetbrains.kotlin.kapt)
+    alias(libs.plugins.jetbrains.kotlin.kapt)
 }
 
 @Suppress("SpellCheckingInspection")
@@ -40,7 +40,7 @@ android {
     }
 
     buildFeatures {
-//        dataBinding = true
+        dataBinding = true
         compose = true
     }
 
@@ -61,4 +61,8 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.material3)
     implementation(libs.material.icons.extended)
+    implementation(libs.ui.tooling.preview)
+    debugImplementation(libs.ui.tooling)
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.runtime.livedata)
 }
