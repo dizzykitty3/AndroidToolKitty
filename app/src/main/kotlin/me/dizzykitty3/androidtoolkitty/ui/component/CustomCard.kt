@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.sp
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
-fun CustomCard(title: String, content: @Composable () -> Unit) {
+fun CustomCard(title: String, isExpand: Boolean, content: @Composable () -> Unit) {
     val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
-    var expanded by remember { mutableStateOf(true) }
+    var expanded by remember { mutableStateOf(isExpand) }
     val focusManager = LocalFocusManager.current
     val lifecycleOwner = LocalLifecycleOwner.current
     Card(
@@ -59,6 +59,43 @@ fun CustomCard(title: String, content: @Composable () -> Unit) {
                         }
                         content() // Custom contents here
                     }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun CustomStaticCard(title: String, content: @Composable () -> Unit) {
+    val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
+    val focusManager = LocalFocusManager.current
+    val lifecycleOwner = LocalLifecycleOwner.current
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = cardPadding
+        ) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = title, // Custom title here
+                style = TextStyle.Default.copy(
+                    fontFamily = FontFamily.Default,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 22.sp,
+                    lineHeight = 28.0.sp,
+                    letterSpacing = 0.0.sp
+                )
+            )
+            Column {
+                CustomSpacerPadding()
+                Column {
+                    DisposableEffect(key1 = lifecycleOwner) {
+                        onDispose {
+                            focusManager.clearFocus()
+                        }
+                    }
+                    content() // Custom contents here
                 }
             }
         }

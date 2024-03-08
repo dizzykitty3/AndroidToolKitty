@@ -8,24 +8,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CustomGradientText(textToDisplay: String) {
+fun CustomGradientText(textToDisplay: String, colors: List<Color>) {
     val text = buildAnnotatedString {
         withStyle(
             style = SpanStyle(
                 brush = Brush.horizontalGradient(
-                    colors = listOf(
-                        Color(0xFF9796F0),
-                        Color(0xFFFBC7D4)
-                    )
+                    colors = colors
                 )
             )
         ) {
@@ -47,5 +46,16 @@ fun CustomGradientText(textToDisplay: String) {
                 )
             )
         }
+    }
+}
+
+@Composable
+fun AnnotatedString.Builder.CustomItalicText(text: String) {
+    val italicTextStyle = SpanStyle(
+        fontStyle = FontStyle.Italic,
+        fontWeight = FontWeight.Light
+    )
+    withStyle(italicTextStyle) {
+        append(text)
     }
 }

@@ -26,7 +26,10 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.onVisitProfile
 @Composable
 fun SocialMediaProfileCard() {
     val c = LocalContext.current
-    CustomCard(title = c.getString(R.string.social_media_profile)) {
+    CustomCard(
+        title = c.getString(R.string.social_media_profile),
+        isExpand = true
+    ) {
         var username by remember { mutableStateOf("") }
         var platform by remember { mutableStateOf("") }
         CustomDropdownMenu(

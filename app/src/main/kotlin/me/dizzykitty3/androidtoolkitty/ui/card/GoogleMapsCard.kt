@@ -27,7 +27,10 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.onClickOpenGoogleMapsButton
 @Composable
 fun GoogleMapsCard() {
     val c = LocalContext.current
-    CustomCard(title = c.getString(R.string.open_google_maps)) {
+    CustomCard(
+        title = c.getString(R.string.open_google_maps),
+        isExpand = true
+    ) {
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }
         Row {

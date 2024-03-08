@@ -43,9 +43,9 @@
     <string name="platform">platform</string>
     <string name="username">username</string>
     <string name="visit_profile_with_id_or_username">Visit profile with id or username</string>
-    <string name="bilibili">Bilibili</string>
+    <string name="bilibili">Bilibili (search)</string>
     <string name="github">GitHub</string>
-    <string name="x">X (Twitter)</string>
+    <string name="x">X</string>
     <string name="weibo">Weibo</string>
     <string name="youtube">YouTube</string>
     <string name="platform_not_added_yet">No platform you need here?</string>

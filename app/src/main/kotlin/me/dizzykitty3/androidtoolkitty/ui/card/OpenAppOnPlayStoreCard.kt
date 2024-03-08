@@ -31,7 +31,10 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.openUrl
 @Composable
 fun OpenAppOnPlayStoreCard() {
     val c = LocalContext.current
-    CustomCard(title = c.getString(R.string.open_app_on_google_play)) {
+    CustomCard(
+        title = c.getString(R.string.open_app_on_google_play),
+        isExpand = true
+    ) {
         var packageName by remember { mutableStateOf("") }
         val linkUrl = "https://support.google.com/admob/answer/9972781"
         OutlinedTextField(

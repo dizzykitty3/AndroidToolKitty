@@ -26,7 +26,10 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.onClickVisitButton
 @Composable
 fun UrlCard() {
     val c = LocalContext.current
-    CustomCard(title = c.getString(R.string.url)) {
+    CustomCard(
+        title = c.getString(R.string.url),
+        isExpand = true
+    ) {
         var url by remember { mutableStateOf("") }
         OutlinedTextField(
             value = url,

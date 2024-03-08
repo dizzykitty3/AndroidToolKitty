@@ -12,7 +12,11 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.onClickCheckSetTimeAutomatical
 @Composable
 fun SystemSettingsCard() {
     val c = LocalContext.current
-    CustomCard(title = c.getString(R.string.android_system_settings)) {
+    CustomCard(
+        title = c.getString(R.string.android_system_settings),
+        isExpand = true
+    ) {
+        Text(text = "common")
         CustomSystemSettingsButton(
             settingType = "display",
             buttonText = c.getString(R.string.open_display_settings)
@@ -22,16 +26,17 @@ fun SystemSettingsCard() {
             buttonText = c.getString(R.string.open_auto_rotate_settings)
         )
         CustomSystemSettingsButton(
-            settingType = "locale",
-            buttonText = c.getString(R.string.open_language_settings)
-        )
-        CustomSystemSettingsButton(
             settingType = "manage_default_apps",
             buttonText = c.getString(R.string.open_default_apps_settings)
         )
         CustomSystemSettingsButton(
-            settingType = "bluetooth",
-            buttonText = c.getString(R.string.open_bluetooth_settings)
+            settingType = "ignore_battery_optimization",
+            buttonText = c.getString(R.string.open_battery_optimization_settings)
+        )
+        Text(text = "test")
+        CustomSystemSettingsButton(
+            settingType = "locale",
+            buttonText = c.getString(R.string.open_language_settings)
         )
         Button(
             onClick = {
@@ -43,10 +48,6 @@ fun SystemSettingsCard() {
         CustomSystemSettingsButton(
             settingType = "date",
             buttonText = c.getString(R.string.open_date_and_time_settings)
-        )
-        CustomSystemSettingsButton(
-            settingType = "ignore_battery_optimization",
-            buttonText = c.getString(R.string.open_battery_optimization_settings)
         )
         CustomSystemSettingsButton(
             settingType = "development_settings",

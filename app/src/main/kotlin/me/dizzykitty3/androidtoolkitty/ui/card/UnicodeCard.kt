@@ -23,7 +23,10 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.onClickConvertButton
 @Composable
 fun UnicodeCard() {
     val c = LocalContext.current
-    CustomCard(title = c.getString(R.string.unicode)) {
+    CustomCard(
+        title = c.getString(R.string.unicode),
+        isExpand = true
+    ) {
         var unicode by remember { mutableStateOf("") }
         val characters = remember { mutableStateOf("") }
         OutlinedTextField(

@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,27 +23,32 @@ import me.dizzykitty3.androidtoolkitty.util.TextUtils.displayYearProgressPercent
 @Composable
 fun YearProgressCard() {
     val c = LocalContext.current
-    CustomCard(title = LocalContext.current.getString(R.string.year_progress)) {
+    CustomCard(
+        title = LocalContext.current.getString(R.string.year_progress),
+        isExpand = true
+    ) {
         var isShowPercentage by remember { mutableStateOf(true) }
-        CustomSpacerPadding()
-        CustomAnimatedProgressIndicator()
-        CustomSpacerPadding()
-        val textToShow =
-            if (isShowPercentage)
-                "${(displayYearProgressPercentage(calculateYearProgress()))}%"
-            else
-                "${calculateTotalDaysInYear() - calculateDaysPassed()} ${
-                    c.getString(
-                        R.string.days_remaining
-                    )
-                }"
-        Text(
-            text = textToShow,
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable {
-                    isShowPercentage = !isShowPercentage
-                }
-        )
+        Column(
+            modifier = Modifier.clickable {
+                isShowPercentage = !isShowPercentage
+            }
+        ) {
+            CustomSpacerPadding()
+            CustomAnimatedProgressIndicator()
+            CustomSpacerPadding()
+            val textToShow =
+                if (isShowPercentage)
+                    "${(displayYearProgressPercentage(calculateYearProgress()))}%"
+                else
+                    "${calculateTotalDaysInYear() - calculateDaysPassed()} ${
+                        c.getString(
+                            R.string.days_remaining
+                        )
+                    }"
+            Text(
+                text = textToShow,
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
     }
 }

@@ -10,7 +10,10 @@ import me.dizzykitty3.androidtoolkitty.util.Utils.onClearClipboardButton
 
 @Composable
 fun ClipboardCard() {
-    CustomCard(title = LocalContext.current.getString(R.string.clipboard)) {
+    CustomCard(
+        title = LocalContext.current.getString(R.string.clipboard),
+        isExpand = true
+    ) {
         Button(
             onClick = {
                 onClearClipboardButton()

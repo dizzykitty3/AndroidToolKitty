@@ -14,16 +14,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextDecoration
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomIconAndTextPagging
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomStaticCard
 import me.dizzykitty3.androidtoolkitty.util.Utils.openUrl
 
 @Suppress("SpellCheckingInspection")
 @Composable
 fun AboutCard() {
     val c = LocalContext.current
-    CustomCard(title = c.getString(R.string.about)) {
+    CustomStaticCard(title = c.getString(R.string.about)) {
         val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
         CustomSpacerPadding()
         Row {
@@ -31,7 +31,7 @@ fun AboutCard() {
                 imageVector = Icons.Outlined.AccountCircle,
                 contentDescription = null
             )
-            CustomIconAndTextPagging()
+            CustomIconAndTextPadding()
             Text(
                 text = "dizzykitty3",
             )
@@ -42,7 +42,7 @@ fun AboutCard() {
                 imageVector = Icons.Outlined.Code,
                 contentDescription = null
             )
-            CustomIconAndTextPagging()
+            CustomIconAndTextPadding()
             Text(
                 text = c.getString(R.string.source_code_on_github),
                 color = MaterialTheme.colorScheme.primary,
@@ -58,9 +58,9 @@ fun AboutCard() {
                 imageVector = Icons.Outlined.Schedule,
                 contentDescription = null
             )
-            CustomIconAndTextPagging()
+            CustomIconAndTextPadding()
             Text(
-                text = "version 20240307"
+                text = "version 20240308"
             )
         }
     }
