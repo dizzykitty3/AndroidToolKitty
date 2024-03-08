@@ -28,8 +28,8 @@
     <string name="copied">copied</string>
     <string name="convert">Convert</string>
     <string name="google_maps">Google Maps</string>
-    <string name="latitude">lat</string>
-    <string name="longitude">lng</string>
+    <string name="latitude">latitude</string>
+    <string name="longitude">longitude</string>
     <string name="google_maps_app_not_installed">Google Maps app is not installed</string>
     <string name="google_play_store_not_installed">Google Play Store app is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>

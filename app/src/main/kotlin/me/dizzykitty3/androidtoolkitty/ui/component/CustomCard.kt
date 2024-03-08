@@ -5,7 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -29,7 +29,7 @@ fun CustomCard(title: String, isExpand: Boolean, content: @Composable () -> Unit
     var expanded by remember { mutableStateOf(isExpand) }
     val focusManager = LocalFocusManager.current
     val lifecycleOwner = LocalLifecycleOwner.current
-    Card(
+    ElevatedCard(
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(
@@ -70,7 +70,7 @@ fun CustomStaticCard(title: String, content: @Composable () -> Unit) {
     val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
     val focusManager = LocalFocusManager.current
     val lifecycleOwner = LocalLifecycleOwner.current
-    Card(
+    ElevatedCard(
         modifier = Modifier.fillMaxWidth()
     ) {
         Column(

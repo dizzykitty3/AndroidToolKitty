@@ -1,11 +1,14 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.util.Utils.onClickCheckSetTimeAutomaticallyButton
 
@@ -33,6 +36,7 @@ fun SystemSettingsCard() {
             settingType = "ignore_battery_optimization",
             buttonText = c.getString(R.string.open_battery_optimization_settings)
         )
+        CustomSpacerPadding()
         Text(text = "test")
         CustomSystemSettingsButton(
             settingType = "locale",
@@ -41,7 +45,8 @@ fun SystemSettingsCard() {
         Button(
             onClick = {
                 onClickCheckSetTimeAutomaticallyButton()
-            }
+            },
+            elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
             Text(text = c.getString(R.string.check_is_set_time_automatically_on))
         }

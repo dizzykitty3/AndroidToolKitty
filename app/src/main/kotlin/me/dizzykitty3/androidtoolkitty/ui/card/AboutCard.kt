@@ -1,18 +1,16 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextDecoration
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
@@ -37,20 +35,20 @@ fun AboutCard() {
             )
         }
         CustomSpacerPadding()
-        Row {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Icon(
                 imageVector = Icons.Outlined.Code,
                 contentDescription = null
             )
-            CustomIconAndTextPadding()
-            Text(
-                text = c.getString(R.string.source_code_on_github),
-                color = MaterialTheme.colorScheme.primary,
-                textDecoration = TextDecoration.Underline,
-                modifier = Modifier.clickable {
-                    openUrl(sourceCodeUrl)
-                }
-            )
+            TextButton(
+                onClick = { openUrl(sourceCodeUrl) }
+            ) {
+                Text(
+                    text = c.getString(R.string.source_code_on_github)
+                )
+            }
         }
         CustomSpacerPadding()
         Row {

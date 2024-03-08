@@ -10,11 +10,13 @@ import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
@@ -50,13 +52,7 @@ fun GoogleMapsCard() {
                     onDone = {
                         onClickOpenGoogleMapsButton(latitude, longitude)
                     }
-                ),
-                trailingIcon = {
-                    Icon(
-                        imageVector = Icons.Outlined.ArrowOutward,
-                        contentDescription = null
-                    )
-                }
+                )
             )
             OutlinedTextField(
                 value = longitude,
@@ -74,13 +70,21 @@ fun GoogleMapsCard() {
                     onDone = {
                         onClickOpenGoogleMapsButton(latitude, longitude)
                     }
-                ),
-                trailingIcon = {
-                    Icon(
-                        imageVector = Icons.Outlined.ArrowOutward,
-                        contentDescription = null
-                    )
-                }
+                )
+            )
+        }
+        TextButton(
+            onClick = {
+                onClickOpenGoogleMapsButton(latitude, longitude)
+            }
+        ) {
+            Text(
+                text = c.getString(R.string.open_google_maps)
+            )
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
     }

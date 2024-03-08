@@ -8,11 +8,13 @@ import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
@@ -81,13 +83,21 @@ fun SocialMediaProfileCard() {
                 } else {
                     Text(c.getString(R.string.submit_the_platform_you_need))
                 }
-            },
-            trailingIcon = {
-                Icon(
-                    imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = null
-                )
             }
         )
+        TextButton(
+            onClick = {
+                onVisitProfile(username, platform)
+            }
+        ) {
+            Text(
+                text = c.getString(R.string.visit)
+            )
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
     }
 }

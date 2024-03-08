@@ -3,9 +3,9 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,13 +42,12 @@ fun UnicodeCard() {
                     onClickConvertButton(unicode, characters)
                 }
             ),
-            placeholder = {
+            supportingText = {
                 Text(
                     text = buildAnnotatedString {
                         append(c.getString(R.string.unicode_input_hint))
                         CustomItalicText(" 00610062")
-                    },
-                    style = MaterialTheme.typography.labelSmall
+                    }
                 )
             }
         )
@@ -58,6 +57,14 @@ fun UnicodeCard() {
             label = { Text(c.getString(R.string.character)) },
             modifier = Modifier.fillMaxWidth()
         )
-//        }
+        TextButton(
+            onClick = {
+                onClickConvertButton(unicode, characters)
+            }
+        ) {
+            Text(
+                text = c.getString(R.string.convert)
+            )
+        }
     }
 }
