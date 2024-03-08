@@ -37,7 +37,7 @@ fun SystemSettingsCard() {
             buttonText = c.getString(R.string.open_battery_optimization_settings)
         )
         CustomSpacerPadding()
-        Text(text = "test")
+        Text(text = "debugging")
         CustomSystemSettingsButton(
             settingType = "locale",
             buttonText = c.getString(R.string.open_language_settings)

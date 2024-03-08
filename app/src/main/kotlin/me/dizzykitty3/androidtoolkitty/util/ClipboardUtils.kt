@@ -24,8 +24,8 @@ class ClipboardUtils(private val context: Context) {
 
     fun copyTextToClipboard(text: String) {
         getSystemClipboardService()
-        val clip = ClipData.newPlainText("copied from Android ToolKitty", text)
+        val clip = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
-        showToast("$text " + context.getString(R.string.copied))
+        showToast("$text ${context.getString(R.string.copied)}")
     }
 }
