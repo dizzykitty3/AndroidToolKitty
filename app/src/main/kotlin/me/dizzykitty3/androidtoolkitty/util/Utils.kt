@@ -77,14 +77,18 @@ object Utils {
             applicationContext.getString(R.string.weibo) -> "weibo.com/n/"
             applicationContext.getString(R.string.x) -> "x.com/"
             applicationContext.getString(R.string.youtube) -> "youtube.com/@"
+            "V2EX" -> "v2ex.com/member/"
             else -> return ""
         }
     }
 
     @JvmStatic
     fun onVisitProfile(username: String, platform: String) {
+        if (platform.isBlank()) {
+            showToast("Please choose a platform")
+            return
+        }
         if (username.isBlank()) return
-        if (platform.isBlank()) return
         val prefix = getProfilePrefix(platform)
         if (prefix == "") {
             showToastAndRecordLog(
@@ -111,6 +115,7 @@ object Utils {
             "date" -> Intent(Settings.ACTION_DATE_SETTINGS)
             "ignore_battery_optimization" -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
             "development_settings" -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
+            "captioning" -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
             else -> return
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)

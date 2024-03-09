@@ -41,6 +41,7 @@ fun SocialMediaProfileCard() {
                 c.getString(R.string.bilibili),
                 c.getString(R.string.github),
                 c.getString(R.string.x),
+                "V2EX",
                 c.getString(R.string.weibo),
                 c.getString(R.string.youtube),
                 c.getString(R.string.platform_not_added_yet),

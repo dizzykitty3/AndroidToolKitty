@@ -16,6 +16,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomStaticCard
 import me.dizzykitty3.androidtoolkitty.util.Utils.openUrl
+import me.dizzykitty3.androidtoolkitty.util.Utils.showToast
 
 @Suppress("SpellCheckingInspection")
 @Composable
@@ -31,7 +32,7 @@ fun AboutCard() {
             )
             CustomIconAndTextPadding()
             Text(
-                text = "dizzykitty3",
+                text = "Developer: dizzykitty3",
             )
         }
         CustomSpacerPadding()
@@ -43,7 +44,10 @@ fun AboutCard() {
                 contentDescription = null
             )
             TextButton(
-                onClick = { openUrl(sourceCodeUrl) }
+                onClick = {
+                    showToast("All help is greatly welcomed! :D")
+                    openUrl(sourceCodeUrl)
+                }
             ) {
                 Text(
                     text = c.getString(R.string.source_code_on_github)
@@ -58,7 +62,7 @@ fun AboutCard() {
             )
             CustomIconAndTextPadding()
             Text(
-                text = "version 20240308"
+                text = "Version 20240309"
             )
         }
     }

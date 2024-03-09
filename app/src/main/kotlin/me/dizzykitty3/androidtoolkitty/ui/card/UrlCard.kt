@@ -52,7 +52,7 @@ fun UrlCard() {
                 Text(
                     text = buildAnnotatedString {
                         append(text = c.getString(R.string.url_input_hint_1))
-                        CustomItalicText(" .www ")
+                        CustomItalicText(" www. ")
                         append(text = c.getString(R.string.url_input_hint_2))
                         CustomItalicText(" .com ")
                         append(text = c.getString(R.string.url_input_hint_3))

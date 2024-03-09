@@ -22,7 +22,7 @@ fun SystemSettingsCard() {
         title = c.getString(R.string.android_system_settings),
         isExpand = true
     ) {
-        Text(text = "common")
+        Text(text = "Common")
         CustomSystemSettingsButton(
             settingType = "display",
             buttonText = c.getString(R.string.open_display_settings)
@@ -39,8 +39,12 @@ fun SystemSettingsCard() {
             settingType = "ignore_battery_optimization",
             buttonText = c.getString(R.string.open_battery_optimization_settings)
         )
+        CustomSystemSettingsButton(
+            settingType = "captioning",
+            buttonText = "Open caption preferences"
+        )
         CustomSpacerPadding()
-        Text(text = "debugging")
+        Text(text = "Debugging")
         CustomSystemSettingsButton(
             settingType = "locale",
             buttonText = c.getString(R.string.open_language_settings)

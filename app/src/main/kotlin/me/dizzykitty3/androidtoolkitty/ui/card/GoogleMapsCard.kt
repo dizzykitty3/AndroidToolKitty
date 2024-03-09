@@ -32,7 +32,7 @@ fun GoogleMapsCard() {
     val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.Place,
-        title = c.getString(R.string.open_google_maps),
+        title = c.getString(R.string.google_maps),
         isExpand = true
     ) {
         var latitude by remember { mutableStateOf("") }
