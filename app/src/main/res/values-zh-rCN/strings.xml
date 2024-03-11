@@ -61,4 +61,6 @@
     <string name="v2ex">V2EX</string>
     <string name="please_choose_a_platform">还没有选择社交平台哦</string>
     <string name="open_caption_preferences">打开字幕偏好</string>
+    <string name="common">一般</string>
+    <string name="debugging">调试</string>
 </resources>

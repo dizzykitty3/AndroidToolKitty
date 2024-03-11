@@ -63,4 +63,6 @@
     <string name="v2ex">V2EX</string>
     <string name="please_choose_a_platform">Please choose a platform</string>
     <string name="open_caption_preferences">Open caption preferences</string>
+    <string name="common">Common</string>
+    <string name="debugging">Debugging</string>
 </resources>
