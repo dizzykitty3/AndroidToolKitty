@@ -78,17 +78,19 @@ object Utils {
             applicationContext.getString(R.string.x) -> "x.com/"
             applicationContext.getString(R.string.youtube) -> "youtube.com/@"
             "V2EX" -> "v2ex.com/member/"
+            "pixiv (arkwork)" -> "pixiv.net/en/artworks/"
+            "pixiv (user)" -> "pixiv.net/en/users/"
             else -> return ""
         }
     }
 
     @JvmStatic
     fun onVisitProfile(username: String, platform: String) {
+        if (username.isBlank()) return
         if (platform.isBlank()) {
             showToast("Please choose a platform")
             return
         }
-        if (username.isBlank()) return
         val prefix = getProfilePrefix(platform)
         if (prefix == "") {
             showToastAndRecordLog(
