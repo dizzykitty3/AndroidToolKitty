@@ -78,8 +78,8 @@ object Utils {
             applicationContext.getString(R.string.x) -> "x.com/"
             applicationContext.getString(R.string.youtube) -> "youtube.com/@"
             applicationContext.getString(R.string.v2ex) -> "v2ex.com/member/"
-            applicationContext.getString(R.string.pixiv_artwork) -> "pixiv.net/en/artworks/"
-            applicationContext.getString(R.string.pixiv_user) -> "pixiv.net/en/users/"
+            applicationContext.getString(R.string.pixiv_artwork) -> "pixiv.net/artworks/"
+            applicationContext.getString(R.string.pixiv_user) -> "pixiv.net/users/"
             else -> return ""
         }
     }
