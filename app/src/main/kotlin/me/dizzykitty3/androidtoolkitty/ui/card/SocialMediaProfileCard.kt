@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomDropdownMenu
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.util.Utils.getProfilePrefix
 import me.dizzykitty3.androidtoolkitty.util.Utils.onVisitProfile
 
@@ -36,6 +37,7 @@ fun SocialMediaProfileCard() {
     ) {
         var username by remember { mutableStateOf("") }
         var platform by remember { mutableStateOf("") }
+        CustomSpacerPadding()
         CustomDropdownMenu(
             items = listOf(
                 c.getString(R.string.bilibili),
@@ -48,14 +50,7 @@ fun SocialMediaProfileCard() {
                 c.getString(R.string.youtube),
                 c.getString(R.string.platform_not_added_yet),
             ),
-            selectedItem = platform,
-            onItemSelected = { platform = it },
-            label =
-            if (platform != c.getString(R.string.platform_not_added_yet)) {
-                c.getString(R.string.platform)
-            } else {
-                ""
-            }
+            onItemSelected = { platform = it }
         )
         OutlinedTextField(
             value = username,
