@@ -74,20 +74,19 @@ object TextUtils {
     }
 
     @JvmStatic
-    fun processUrl(inputUrl: String): String {
+    fun processUrl(urlInput: String): String {
         val prefix = "https://"
-        if (inputUrl.contains(".")) {
-            debugLog("input url: $inputUrl")
-            return "$prefix$inputUrl"
-        }
-        val suffix = getUrlSuffix(inputUrl)
-        debugLog(if (suffix == COM) "suffix = com, input url: $inputUrl" else "suffix = $suffix")
-        return "$prefix$inputUrl$suffix"
+        val suffix = getUrlSuffix(urlInput)
+        debugLog(if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
+        return "$prefix$urlInput$suffix"
     }
 
     @Suppress("SpellCheckingInspection")
     @JvmStatic
     fun getUrlSuffix(urlInput: String): String {
+        if (urlInput.contains(".")) {
+            return ""
+        }
         val suffixMap = mapOf(
             "remove" to BG,
             "feishu" to CN,
