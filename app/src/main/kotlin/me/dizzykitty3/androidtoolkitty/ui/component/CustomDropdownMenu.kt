@@ -20,7 +20,7 @@ import me.dizzykitty3.androidtoolkitty.R
 @Composable
 fun CustomDropdownMenu(
     items: List<String>,
-    onItemSelected: (String) -> Unit,
+    onItemSelected: (String) -> Unit
 ) {
     val c = LocalContext.current
     var expanded by remember { mutableStateOf(false) }

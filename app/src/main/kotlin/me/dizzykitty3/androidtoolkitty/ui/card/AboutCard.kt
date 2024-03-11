@@ -31,7 +31,7 @@ fun AboutCard() {
             )
             CustomIconAndTextPadding()
             Text(
-                text = c.getString(R.string.developer),
+                text = c.getString(R.string.developer)
             )
         }
         CustomSpacerPadding()

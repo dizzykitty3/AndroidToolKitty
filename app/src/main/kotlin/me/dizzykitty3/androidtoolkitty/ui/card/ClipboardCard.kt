@@ -10,6 +10,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.util.Utils.onClearClipboardButton
 
 @Composable
@@ -19,6 +20,11 @@ fun ClipboardCard() {
         title = LocalContext.current.getString(R.string.clipboard),
         isExpand = true
     ) {
+        val c = LocalContext.current
+        Text(
+            text = c.getString(R.string.temp1)
+        )
+        CustomSpacerPadding()
         Button(
             onClick = {
                 onClearClipboardButton()

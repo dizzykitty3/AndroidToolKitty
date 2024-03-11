@@ -48,7 +48,7 @@ fun SocialMediaProfileCard() {
                 c.getString(R.string.weibo),
                 c.getString(R.string.x),
                 c.getString(R.string.youtube),
-                c.getString(R.string.platform_not_added_yet),
+                c.getString(R.string.platform_not_added_yet)
             ),
             onItemSelected = { platform = it }
         )

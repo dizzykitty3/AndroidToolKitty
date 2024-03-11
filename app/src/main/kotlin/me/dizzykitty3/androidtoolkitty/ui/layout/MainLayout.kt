@@ -13,7 +13,6 @@ import me.dizzykitty3.androidtoolkitty.ui.card.GreetingText
 import me.dizzykitty3.androidtoolkitty.ui.card.OpenAppOnPlayStoreCard
 import me.dizzykitty3.androidtoolkitty.ui.card.SocialMediaProfileCard
 import me.dizzykitty3.androidtoolkitty.ui.card.SystemSettingsCard
-import me.dizzykitty3.androidtoolkitty.ui.card.TestCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UnicodeCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UrlCard
 import me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
@@ -58,9 +57,6 @@ fun MainLayout() {
         item { CustomCardSpacePadding() }
 
         item { OpenAppOnPlayStoreCard() }
-        item { CustomCardSpacePadding() }
-
-        item { TestCard() }
         item { CustomCardSpacePadding() }
 
         item { AboutCard() }

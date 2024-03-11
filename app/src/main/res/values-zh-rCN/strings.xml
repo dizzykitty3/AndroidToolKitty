@@ -63,4 +63,5 @@
     <string name="open_caption_preferences">打开字幕偏好</string>
     <string name="common">一般</string>
     <string name="debugging">调试</string>
+    <string name="temp1">Android ToolKitty 会在启动时为您清除剪贴板。此功能的开关会在将来版本中加入。</string>
 </resources>

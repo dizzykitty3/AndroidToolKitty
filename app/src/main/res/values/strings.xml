@@ -65,4 +65,5 @@
     <string name="open_caption_preferences">Open caption preferences</string>
     <string name="common">Common</string>
     <string name="debugging">Debugging</string>
+    <string name="temp1">Android ToolKitty will now clear your clipboard on launch. This function will be optional in the future.</string>
 </resources>
