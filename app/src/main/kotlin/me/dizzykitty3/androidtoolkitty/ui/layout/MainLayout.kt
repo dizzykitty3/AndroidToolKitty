@@ -21,9 +21,13 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomCardSpacePadding
 
 @Composable
 fun MainLayout() {
-    val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
+    val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
     LazyColumn(
-        modifier = cardPadding
+        modifier = Modifier.padding(
+            start = cardPadding,
+            end = cardPadding,
+            top = cardPadding
+        )
     ) {
         item { GreetingText() }
         item { CustomCardSpacePadding() }

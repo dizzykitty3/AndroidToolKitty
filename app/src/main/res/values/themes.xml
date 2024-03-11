@@ -4,6 +4,8 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:fitsSystemWindows">true</item>
     </style>
 
     <style name="Theme.AndroidToolKitty" parent="Base.Theme.AndroidToolKitty" />
