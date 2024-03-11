@@ -29,7 +29,6 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.util.Utils.openCertainAppOnPlayStore
 import me.dizzykitty3.androidtoolkitty.util.Utils.openUrl
 
-@Suppress("SpellCheckingInspection")
 @Composable
 fun OpenAppOnPlayStoreCard() {
     val c = LocalContext.current
@@ -55,7 +54,7 @@ fun OpenAppOnPlayStoreCard() {
             ),
             placeholder = {
                 Text(
-                    text = "me.dizzykitty3.androidtoolkitty"
+                    text = c.getString(R.string.com_android_chrome)
                 )
             }
         )

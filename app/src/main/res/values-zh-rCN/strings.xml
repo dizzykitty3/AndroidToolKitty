@@ -55,4 +55,10 @@
     <string name="submit_the_platform_you_need">提交你所想平台的名称给开发者</string>
     <string name="days_remaining">天剩余</string>
     <string name="uploaded">已上传</string>
+    <string name="all_help_welcomed">欢迎建议意见和PR！</string>
+    <string name="pixiv_artwork">pixiv (作品)</string>
+    <string name="pixiv_user">pixiv (用户)</string>
+    <string name="v2ex">V2EX</string>
+    <string name="please_choose_a_platform">还没有选择社交平台哦</string>
+    <string name="open_caption_preferences">打开字幕偏好</string>
 </resources>

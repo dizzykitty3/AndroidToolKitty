@@ -55,4 +55,12 @@
     <string name="submit_the_platform_you_need">Submit the platform you need</string>
     <string name="days_remaining">days remaining</string>
     <string name="uploaded">uploaded</string>
+    <string name="developer" translatable="false">dizzykitty3</string>
+    <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
+    <string name="com_android_chrome" translatable="false">com.android.chrome</string>
+    <string name="pixiv_artwork">pixiv (arkwork)</string>
+    <string name="pixiv_user">pixiv (user)</string>
+    <string name="v2ex">V2EX</string>
+    <string name="please_choose_a_platform">Please choose a platform</string>
+    <string name="open_caption_preferences">Open caption preferences</string>
 </resources>

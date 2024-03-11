@@ -77,9 +77,9 @@ object Utils {
             applicationContext.getString(R.string.weibo) -> "weibo.com/n/"
             applicationContext.getString(R.string.x) -> "x.com/"
             applicationContext.getString(R.string.youtube) -> "youtube.com/@"
-            "V2EX" -> "v2ex.com/member/"
-            "pixiv (arkwork)" -> "pixiv.net/en/artworks/"
-            "pixiv (user)" -> "pixiv.net/en/users/"
+            applicationContext.getString(R.string.v2ex) -> "v2ex.com/member/"
+            applicationContext.getString(R.string.pixiv_artwork) -> "pixiv.net/en/artworks/"
+            applicationContext.getString(R.string.pixiv_user) -> "pixiv.net/en/users/"
             else -> return ""
         }
     }
@@ -88,7 +88,7 @@ object Utils {
     fun onVisitProfile(username: String, platform: String) {
         if (username.isBlank()) return
         if (platform.isBlank()) {
-            showToast("Please choose a platform")
+            showToast(applicationContext.getString(R.string.please_choose_a_platform))
             return
         }
         val prefix = getProfilePrefix(platform)

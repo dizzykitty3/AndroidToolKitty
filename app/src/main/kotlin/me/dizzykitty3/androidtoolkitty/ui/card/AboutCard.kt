@@ -18,7 +18,6 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomStaticCard
 import me.dizzykitty3.androidtoolkitty.util.Utils.openUrl
 import me.dizzykitty3.androidtoolkitty.util.Utils.showToast
 
-@Suppress("SpellCheckingInspection")
 @Composable
 fun AboutCard() {
     val c = LocalContext.current
@@ -32,7 +31,7 @@ fun AboutCard() {
             )
             CustomIconAndTextPadding()
             Text(
-                text = "dizzykitty3",
+                text = c.getString(R.string.developer),
             )
         }
         CustomSpacerPadding()
@@ -45,7 +44,7 @@ fun AboutCard() {
             )
             TextButton(
                 onClick = {
-                    showToast("All help is greatly welcomed! :D")
+                    showToast(c.getString(R.string.all_help_welcomed))
                     openUrl(sourceCodeUrl)
                 }
             ) {
@@ -62,7 +61,7 @@ fun AboutCard() {
             )
             CustomIconAndTextPadding()
             Text(
-                text = "Version 20240309"
+                text = "Version 20240311"
             )
         }
     }

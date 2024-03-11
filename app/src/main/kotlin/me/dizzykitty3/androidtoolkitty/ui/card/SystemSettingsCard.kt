@@ -41,7 +41,7 @@ fun SystemSettingsCard() {
         )
         CustomSystemSettingsButton(
             settingType = "captioning",
-            buttonText = "Open caption preferences"
+            buttonText = c.getString(R.string.open_caption_preferences)
         )
         CustomSpacerPadding()
         Text(text = "Debugging")

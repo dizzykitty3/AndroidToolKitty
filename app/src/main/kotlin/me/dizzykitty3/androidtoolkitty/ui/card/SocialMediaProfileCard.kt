@@ -40,9 +40,9 @@ fun SocialMediaProfileCard() {
             items = listOf(
                 c.getString(R.string.bilibili),
                 c.getString(R.string.github),
-                "pixiv (arkwork)",
-                "pixiv (user)",
-                "V2EX",
+                c.getString(R.string.pixiv_artwork),
+                c.getString(R.string.pixiv_user),
+                c.getString(R.string.v2ex),
                 c.getString(R.string.weibo),
                 c.getString(R.string.x),
                 c.getString(R.string.youtube),
