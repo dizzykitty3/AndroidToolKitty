@@ -13,6 +13,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import me.dizzykitty3.androidtoolkitty.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -20,8 +22,9 @@ fun CustomDropdownMenu(
     items: List<String>,
     onItemSelected: (String) -> Unit,
 ) {
+    val c = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf("Platform") }
+    var selectedText by remember { mutableStateOf(c.getString(R.string.platform)) }
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = {
