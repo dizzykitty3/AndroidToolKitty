@@ -32,7 +32,7 @@ fun AboutCard() {
             )
             CustomIconAndTextPadding()
             Text(
-                text = "Developer: dizzykitty3",
+                text = "dizzykitty3",
             )
         }
         CustomSpacerPadding()
