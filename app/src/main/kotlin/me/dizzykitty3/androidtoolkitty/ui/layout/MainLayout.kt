@@ -25,10 +25,14 @@ fun MainLayout() {
     LazyColumn(
         modifier = Modifier.padding(
             start = cardPadding,
-            end = cardPadding,
-            top = cardPadding
+            end = cardPadding
         )
     ) {
+        item { CustomCardSpacePadding() }
+        item { CustomCardSpacePadding() }
+        item { CustomCardSpacePadding() }
+        item { CustomCardSpacePadding() }
+
         item { GreetingText() }
         item { CustomCardSpacePadding() }
 
@@ -60,6 +64,8 @@ fun MainLayout() {
         item { CustomCardSpacePadding() }
 
         item { AboutCard() }
+        item { CustomCardSpacePadding() }
+
         item { CustomCardSpacePadding() }
     }
 }
