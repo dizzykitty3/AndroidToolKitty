@@ -43,7 +43,7 @@
     <string name="platform">社交平台</string>
     <string name="username">用户昵称</string>
     <string name="visit_profile_with_id_or_username">通过昵称访问社交媒体主页</string>
-    <string name="bilibili">哔哩哔哩（搜索）</string>
+    <string name="bilibili_search">哔哩哔哩（搜索）</string>
     <string name="github">GitHub</string>
     <string name="x">X</string>
     <string name="weibo">微博</string>
@@ -56,12 +56,13 @@
     <string name="days_remaining">天剩余</string>
     <string name="uploaded">已上传</string>
     <string name="all_help_welcomed">欢迎建议意见和PR！</string>
-    <string name="pixiv_artwork">pixiv (作品)</string>
-    <string name="pixiv_user">pixiv (用户)</string>
+    <string name="pixiv_artwork">pixiv (作品 ID)</string>
+    <string name="pixiv_user">pixiv (用户 ID)</string>
     <string name="v2ex">V2EX</string>
     <string name="please_choose_a_platform">还没有选择社交平台哦</string>
     <string name="open_caption_preferences">打开字幕偏好</string>
     <string name="common">一般</string>
     <string name="debugging">调试</string>
     <string name="temp1">Android ToolKitty 会在启动时为您清除剪贴板。此功能的开关会在将来版本中加入。</string>
+    <string name="bilibili_user">哔哩哔哩 (用户 ID)</string>
 </resources>

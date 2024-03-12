@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.util
 
 import me.dizzykitty3.androidtoolkitty.Actions
+import me.dizzykitty3.androidtoolkitty.R
 
 object UrlUtils {
     private const val HTTPS = "https://"
@@ -112,18 +113,21 @@ object UrlUtils {
     }
 
     @Suppress("SpellCheckingInspection")
+    enum class Platform(val prefix: String, val nameResId: Int) {
+        BILIBILI_SEARCH("search.bilibili.com/upuser?keyword=", R.string.bilibili_search),
+        BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user),
+        GITHUB("github.com/", R.string.github),
+        PIXIV_ARTWORK("pixiv.net/artworks/", R.string.pixiv_artwork),
+        PIXIV_USER("pixiv.net/users/", R.string.pixiv_user),
+        V2EX("v2ex.com/member/", R.string.v2ex),
+        WEIBO("weibo.com/n/", R.string.weibo),
+        X("x.com/", R.string.x),
+        YOUTUBE("youtube.com/@", R.string.youtube),
+        PLATFORM_NOT_ADDED_YET("", R.string.platform_not_added_yet)
+    }
+
     @JvmStatic
-    fun getProfilePrefix(platformIndex: Int): String {
-        return when (platformIndex) {
-            1 -> "search.bilibili.com/upuser?keyword="
-            2 -> "github.com/"
-            3 -> "pixiv.net/artworks/"
-            4 -> "pixiv.net/users/"
-            5 -> "v2ex.com/member/"
-            6 -> "weibo.com/n/"
-            7 -> "x.com/"
-            8 -> "youtube.com/@"
-            else -> ""
-        }
+    fun getProfilePrefix(platform: Platform): String {
+        return platform.prefix
     }
 }

@@ -47,14 +47,19 @@ object Actions {
     }
 
     @JvmStatic
-    fun onVisitProfileButton(username: String, platform: Int) {
+    fun onVisitProfileButton(username: String, platformIndex: Int) {
         if (username.isBlank()) return
-        if (platform == 0) {
-            ToastUtils(applicationContext).showToast(applicationContext.getString(R.string.please_choose_a_platform))
+        val platform = UrlUtils.Platform.entries.getOrNull(platformIndex) ?: return
+        if (platform == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET) {
+            ToastUtils(applicationContext).showToastAndRecordLog(
+                "${applicationContext.getString(R.string.platform)}: \"$username\" ${
+                    applicationContext.getString(R.string.uploaded)
+                }"
+            )
             return
         }
-        val prefix = UrlUtils.getProfilePrefix(platform)
-        if (prefix == "") {
+        val prefix = platform.prefix
+        if (prefix.isEmpty()) {
             ToastUtils(applicationContext).showToastAndRecordLog(
                 "${applicationContext.getString(R.string.platform)}: \"$username\" ${
                     applicationContext.getString(

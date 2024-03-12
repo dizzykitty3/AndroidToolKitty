@@ -38,27 +38,24 @@ fun SocialMediaProfileCard() {
     ) {
         var username by remember { mutableStateOf("") }
         var platformIndex by remember { mutableIntStateOf(0) }
+        val platformList = UrlUtils.Platform.entries.map { c.getString(it.nameResId) }
         CustomSpacerPadding()
         CustomDropdownMenu(
-            items = listOf(
-                c.getString(R.string.platform), // 0
-                c.getString(R.string.bilibili),
-                c.getString(R.string.github),
-                c.getString(R.string.pixiv_artwork),
-                c.getString(R.string.pixiv_user),
-                c.getString(R.string.v2ex),
-                c.getString(R.string.weibo),
-                c.getString(R.string.x),
-                c.getString(R.string.youtube),
-                c.getString(R.string.platform_not_added_yet) // 9
-            ),
-            onItemSelected = { platformIndex = it }
+            items = platformList,
+            onItemSelected = { platformIndex = it },
+            label = {
+                if (platformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                    Text(c.getString(R.string.platform))
+                } else {
+                    Text("")
+                }
+            }
         )
         OutlinedTextField(
             value = username,
             onValueChange = { username = it },
             label = {
-                if (platformIndex != 9) {
+                if (platformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
                     Text(c.getString(R.string.username))
                 } else {
                     Text(c.getString(R.string.platform))
@@ -74,11 +71,10 @@ fun SocialMediaProfileCard() {
                 }
             ),
             supportingText = {
-                if (platformIndex == 0) {
-                    Text(c.getString(R.string.visit_profile_with_id_or_username))
-                } else if (platformIndex != 9) {
+                if (platformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                    val platform = UrlUtils.Platform.entries[platformIndex]
                     Text(
-                        text = "${UrlUtils.getProfilePrefix(platformIndex)}$username",
+                        text = "${UrlUtils.getProfilePrefix(platform)}$username",
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1
                     )

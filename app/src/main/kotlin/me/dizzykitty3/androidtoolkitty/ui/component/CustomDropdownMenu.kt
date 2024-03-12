@@ -19,7 +19,8 @@ import androidx.compose.ui.Modifier
 @Composable
 fun CustomDropdownMenu(
     items: List<String>,
-    onItemSelected: (Int) -> Unit
+    onItemSelected: (Int) -> Unit,
+    label: @Composable (() -> Unit)? = null,
 ) {
     var expanded by remember { mutableStateOf(false) }
     var selectedPosition by remember { mutableIntStateOf(0) }
@@ -41,7 +42,8 @@ fun CustomDropdownMenu(
             },
             modifier = Modifier
                 .menuAnchor()
-                .fillMaxWidth()
+                .fillMaxWidth(),
+            label = label
         )
         ExposedDropdownMenu(
             expanded = expanded,

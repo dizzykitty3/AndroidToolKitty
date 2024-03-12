@@ -43,7 +43,7 @@
     <string name="platform">Platform</string>
     <string name="username">Username</string>
     <string name="visit_profile_with_id_or_username">Visit profile with id or username</string>
-    <string name="bilibili">Bilibili (search)</string>
+    <string name="bilibili_search">Bilibili (Search)</string>
     <string name="github">GitHub</string>
     <string name="x">X</string>
     <string name="weibo">Weibo</string>
@@ -58,12 +58,13 @@
     <string name="developer" translatable="false">dizzykitty3</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="com_android_chrome" translatable="false">com.android.chrome</string>
-    <string name="pixiv_artwork">pixiv (arkwork)</string>
-    <string name="pixiv_user">pixiv (user)</string>
+    <string name="pixiv_artwork">pixiv (Arkwork ID)</string>
+    <string name="pixiv_user">pixiv (User ID)</string>
     <string name="v2ex">V2EX</string>
     <string name="please_choose_a_platform">Please choose a platform</string>
     <string name="open_caption_preferences">Open caption preferences</string>
     <string name="common">Common</string>
     <string name="debugging">Debugging</string>
     <string name="temp1">Android ToolKitty will now clear your clipboard on launch. This function will be optional in the future.</string>
+    <string name="bilibili_user">Bilibili (User ID)</string>
 </resources>
