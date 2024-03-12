@@ -8,11 +8,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSystemSettingsButton
-import me.dizzykitty3.androidtoolkitty.util.Utils.onClickCheckSetTimeAutomaticallyButton
 
 @Composable
 fun SystemSettingsCard() {
@@ -55,7 +55,7 @@ fun SystemSettingsCard() {
         )
         Button(
             onClick = {
-                onClickCheckSetTimeAutomaticallyButton()
+                Actions.onClickCheckSetTimeAutomaticallyButton()
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {

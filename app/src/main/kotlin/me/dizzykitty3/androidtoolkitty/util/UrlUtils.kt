@@ -1,11 +1,9 @@
 package me.dizzykitty3.androidtoolkitty.util
 
-import me.dizzykitty3.androidtoolkitty.util.Utils.debugLog
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.temporal.ChronoUnit
+import me.dizzykitty3.androidtoolkitty.Actions
 
-object TextUtils {
+object UrlUtils {
+    private const val HTTPS = "https://"
     private const val BG = ".bg"
     private const val CN = ".cn"
     private const val CO_AR = ".co.ar"
@@ -30,55 +28,15 @@ object TextUtils {
     private const val WIKI = ".wiki"
 
     @JvmStatic
-    fun greeting(): String {
-        val currentTime = LocalTime.now()
-        return when (currentTime.hour) {
-            in 6..11 -> "Good morning"
-            in 12..17 -> "Good afternoon"
-            else -> "Good evening"
-        }
-    }
-
-    @JvmStatic
-    fun calculateDaysPassed(): Long {
-        return calculateDaysFromStartOfYear(LocalDate.now())
-    }
-
-    @JvmStatic
-    fun calculateTotalDaysInYear(): Long {
-        val currentDate = LocalDate.now()
-        return calculateDaysFromStartOfYear(LocalDate.of(currentDate.year, 12, 31)) + 1
-    }
-
-    private fun calculateDaysFromStartOfYear(endDate: LocalDate): Long {
-        val startOfYear = LocalDate.of(endDate.year, 1, 1)
-        return startOfYear.until(endDate, ChronoUnit.DAYS)
-    }
-
-    @JvmStatic
-    fun calculateYearProgress(): Float {
-        return calculateDaysPassed().toFloat() / calculateTotalDaysInYear().toFloat()
-    }
-
-    @JvmStatic
-    fun displayYearProgressPercentage(progress: Float): String {
-        return (progress * 100).toString().substring(0, 4)
-    }
-
-    /**
-     * drop spaces, including full-width ones
-     */
-    @JvmStatic
-    fun dropSpaces(inputString: String): String {
-        return inputString.trim().replace("\\s".toRegex(), "").lowercase()
-    }
-
-    @JvmStatic
     fun processUrl(urlInput: String): String {
-        val prefix = "https://"
         val suffix = getUrlSuffix(urlInput)
-        debugLog(if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
-        return "$prefix$urlInput$suffix"
+        Actions.debugLog(
+            if (suffix == COM)
+                "suffix = com, input url: $urlInput"
+            else
+                "suffix = $suffix"
+        )
+        return "$HTTPS$urlInput$suffix"
     }
 
     @Suppress("SpellCheckingInspection")
@@ -150,26 +108,22 @@ object TextUtils {
             "zoom" to US,
             "namu" to WIKI,
         )
-        return suffixMap[dropSpaces(urlInput)] ?: COM
+        return suffixMap[StringUtils.dropSpaces(urlInput)] ?: COM
     }
 
+    @Suppress("SpellCheckingInspection")
     @JvmStatic
-    @Throws(IllegalArgumentException::class)
-    fun convertUnicodeToCharacter(unicode: String): String {
-        val length = unicode.length
-        require(length % 4 == 0) { "The length of the input is not a multiple of 4" }
-        try {
-            val stringBuilder = StringBuilder()
-            var i = 0
-            while (i < length) {
-                val hexValue = unicode.substring(i, i + 4)
-                val decimalValue = hexValue.toInt(16)
-                stringBuilder.append(decimalValue.toChar())
-                i += 4
-            }
-            return stringBuilder.toString()
-        } catch (e: IllegalArgumentException) {
-            throw IllegalArgumentException("Invalid Unicode string format: ", e)
+    fun getProfilePrefix(platformIndex: Int): String {
+        return when (platformIndex) {
+            1 -> "search.bilibili.com/upuser?keyword="
+            2 -> "github.com/"
+            3 -> "pixiv.net/artworks/"
+            4 -> "pixiv.net/users/"
+            5 -> "v2ex.com/member/"
+            6 -> "weibo.com/n/"
+            7 -> "x.com/"
+            8 -> "youtube.com/@"
+            else -> ""
         }
     }
 }

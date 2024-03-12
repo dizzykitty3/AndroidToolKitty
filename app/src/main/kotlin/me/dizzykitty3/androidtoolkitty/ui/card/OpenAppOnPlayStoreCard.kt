@@ -23,11 +23,11 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
+import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.util.Utils.openCertainAppOnPlayStore
-import me.dizzykitty3.androidtoolkitty.util.Utils.openUrl
+import me.dizzykitty3.androidtoolkitty.util.IntentUtils
 
 @Composable
 fun OpenAppOnPlayStoreCard() {
@@ -49,7 +49,7 @@ fun OpenAppOnPlayStoreCard() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    openCertainAppOnPlayStore(packageName)
+                    Actions.openAppOnPlayStore(packageName)
                 }
             ),
             placeholder = {
@@ -68,7 +68,7 @@ fun OpenAppOnPlayStoreCard() {
             )
             Row(
                 modifier = Modifier.clickable(
-                    onClick = { openUrl(linkUrl) }
+                    onClick = { IntentUtils(c).openUrl(linkUrl) }
                 )
             ) {
                 Text(
@@ -83,7 +83,7 @@ fun OpenAppOnPlayStoreCard() {
         }
         TextButton(
             onClick = {
-                openCertainAppOnPlayStore(packageName)
+                Actions.openAppOnPlayStore(packageName)
             }
         ) {
             Text(

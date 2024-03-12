@@ -17,10 +17,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomAnimatedProgressIndicator
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.util.TextUtils.calculateDaysPassed
-import me.dizzykitty3.androidtoolkitty.util.TextUtils.calculateTotalDaysInYear
-import me.dizzykitty3.androidtoolkitty.util.TextUtils.calculateYearProgress
-import me.dizzykitty3.androidtoolkitty.util.TextUtils.displayYearProgressPercentage
+import me.dizzykitty3.androidtoolkitty.util.DateUtils
 
 @Composable
 fun YearProgressCard() {
@@ -41,9 +38,9 @@ fun YearProgressCard() {
             CustomSpacerPadding()
             val textToShow =
                 if (isShowPercentage)
-                    "${(displayYearProgressPercentage(calculateYearProgress()))}%"
+                    "${(DateUtils.displayYearProgressPercentage(DateUtils.calculateYearProgress()))}%"
                 else
-                    "${calculateTotalDaysInYear() - calculateDaysPassed()} ${
+                    "${DateUtils.calculateTotalDaysInYear() - DateUtils.calculateDaysPassed()} ${
                         c.getString(
                             R.string.days_remaining
                         )

@@ -8,10 +8,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.util.Utils.onClearClipboardButton
 
 @Composable
 fun ClipboardCard() {
@@ -27,11 +27,13 @@ fun ClipboardCard() {
         CustomSpacerPadding()
         Button(
             onClick = {
-                onClearClipboardButton()
+                Actions.onClearClipboardButton()
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
-            Text(text = LocalContext.current.getString(R.string.clear_clipboard))
+            Text(
+                text = LocalContext.current.getString(R.string.clear_clipboard)
+            )
         }
     }
 }

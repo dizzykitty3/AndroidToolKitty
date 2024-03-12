@@ -83,7 +83,10 @@ fun CustomCard(
 }
 
 @Composable
-fun CustomStaticCard(title: String, content: @Composable () -> Unit) {
+fun CustomStaticCard(
+    title: String,
+    content: @Composable () -> Unit
+) {
     val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
     val focusManager = LocalFocusManager.current
     val lifecycleOwner = LocalLifecycleOwner.current

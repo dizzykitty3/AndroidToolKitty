@@ -15,13 +15,15 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomStaticCard
-import me.dizzykitty3.androidtoolkitty.util.Utils.openUrl
-import me.dizzykitty3.androidtoolkitty.util.Utils.showToast
+import me.dizzykitty3.androidtoolkitty.util.IntentUtils
+import me.dizzykitty3.androidtoolkitty.util.ToastUtils
 
 @Composable
 fun AboutCard() {
     val c = LocalContext.current
-    CustomStaticCard(title = c.getString(R.string.about)) {
+    CustomStaticCard(
+        title = c.getString(R.string.about)
+    ) {
         val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
         CustomSpacerPadding()
         Row {
@@ -44,8 +46,8 @@ fun AboutCard() {
             )
             TextButton(
                 onClick = {
-                    showToast(c.getString(R.string.all_help_welcomed))
-                    openUrl(sourceCodeUrl)
+                    ToastUtils(c).showToast(c.getString(R.string.all_help_welcomed))
+                    IntentUtils(c).openUrl(sourceCodeUrl)
                 }
             ) {
                 Text(
@@ -61,7 +63,7 @@ fun AboutCard() {
             )
             CustomIconAndTextPadding()
             Text(
-                text = "Version 20240311"
+                text = "Version 20240312"
             )
         }
     }

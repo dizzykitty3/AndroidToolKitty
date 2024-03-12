@@ -9,14 +9,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import me.dizzykitty3.androidtoolkitty.util.Utils.onOpenSystemSettings
+import me.dizzykitty3.androidtoolkitty.util.IntentUtils
 
 @Composable
-fun CustomSystemSettingsButton(settingType: String, buttonText: String) {
+fun CustomSystemSettingsButton(
+    settingType: String,
+    buttonText: String
+) {
+    val c = LocalContext.current
     Button(
         onClick = {
-            onOpenSystemSettings(settingType)
+            IntentUtils(c).openSystemSettings(settingType)
         },
         elevation = ButtonDefaults.buttonElevation(1.dp)
     ) {

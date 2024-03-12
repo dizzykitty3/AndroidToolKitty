@@ -9,22 +9,20 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import me.dizzykitty3.androidtoolkitty.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CustomDropdownMenu(
     items: List<String>,
-    onItemSelected: (String) -> Unit
+    onItemSelected: (Int) -> Unit
 ) {
-    val c = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
-    var selectedText by remember { mutableStateOf(c.getString(R.string.platform)) }
+    var selectedPosition by remember { mutableIntStateOf(0) }
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = {
@@ -33,7 +31,7 @@ fun CustomDropdownMenu(
         modifier = Modifier.fillMaxWidth()
     ) {
         OutlinedTextField(
-            value = selectedText,
+            value = items[selectedPosition],
             onValueChange = {},
             readOnly = true,
             trailingIcon = {
@@ -49,14 +47,14 @@ fun CustomDropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
-            items.forEach { item ->
+            items.forEachIndexed { index, item ->
                 DropdownMenuItem(
                     text = {
                         Text(text = item)
                     },
                     onClick = {
-                        selectedText = item
-                        onItemSelected(item)
+                        selectedPosition = index
+                        onItemSelected(index)
                         expanded = false
                     }
                 )

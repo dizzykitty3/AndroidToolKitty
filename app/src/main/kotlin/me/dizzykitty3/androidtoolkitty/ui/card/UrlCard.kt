@@ -20,11 +20,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
+import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomItalicText
-import me.dizzykitty3.androidtoolkitty.util.TextUtils
-import me.dizzykitty3.androidtoolkitty.util.Utils.onClickVisitButton
+import me.dizzykitty3.androidtoolkitty.util.UrlUtils
 
 @Composable
 fun UrlCard() {
@@ -45,7 +45,7 @@ fun UrlCard() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    onClickVisitButton(url)
+                    Actions.onClickVisitUrlButton(url)
                 }
             ),
             supportingText = {
@@ -68,13 +68,13 @@ fun UrlCard() {
             },
             suffix = {
                 Text(
-                    text = TextUtils.getUrlSuffix(url)
+                    text = UrlUtils.getUrlSuffix(url)
                 )
             }
         )
         TextButton(
             onClick = {
-                onClickVisitButton(url)
+                Actions.onClickVisitUrlButton(url)
             }
         ) {
             Text(

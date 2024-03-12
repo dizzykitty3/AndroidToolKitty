@@ -19,7 +19,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CustomGradientText(textToDisplay: String, colors: List<Color>) {
+fun CustomGradientText(
+    textToDisplay: String,
+    colors: List<Color>
+) {
     val text = buildAnnotatedString {
         withStyle(
             style = SpanStyle(
@@ -50,7 +53,9 @@ fun CustomGradientText(textToDisplay: String, colors: List<Color>) {
 }
 
 @Composable
-fun AnnotatedString.Builder.CustomItalicText(text: String) {
+fun AnnotatedString.Builder.CustomItalicText(
+    text: String
+) {
     val italicTextStyle = SpanStyle(
         fontStyle = FontStyle.Italic,
         fontWeight = FontWeight.Light

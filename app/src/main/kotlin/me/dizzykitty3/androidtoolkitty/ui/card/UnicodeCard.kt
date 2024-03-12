@@ -17,10 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
+import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomItalicText
-import me.dizzykitty3.androidtoolkitty.util.Utils.onClickConvertButton
 
 @Composable
 fun UnicodeCard() {
@@ -42,7 +42,7 @@ fun UnicodeCard() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    onClickConvertButton(unicode, characters)
+                    Actions.onClickConvertButton(unicode, characters)
                 }
             ),
             supportingText = {
@@ -62,7 +62,7 @@ fun UnicodeCard() {
         )
         TextButton(
             onClick = {
-                onClickConvertButton(unicode, characters)
+                Actions.onClickConvertButton(unicode, characters)
             }
         ) {
             Text(
