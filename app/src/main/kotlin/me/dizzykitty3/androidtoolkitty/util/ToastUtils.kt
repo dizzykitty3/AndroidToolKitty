@@ -6,14 +6,14 @@ import me.dizzykitty3.androidtoolkitty.Actions
 import java.util.Objects
 
 class ToastUtils(private val context: Context) {
-    private lateinit var currentToast: Toast
+    private var currentToast: Toast? = null
 
     fun showToast(toastText: String?) {
         if (Objects.nonNull(currentToast)) {
-            currentToast.cancel()
+            currentToast?.cancel()
         }
         currentToast = Toast.makeText(context, toastText, Toast.LENGTH_SHORT)
-        currentToast.show()
+        currentToast?.show()
     }
 
     fun showToastAndRecordLog(logEvent: String) {
