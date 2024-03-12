@@ -14,6 +14,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import me.dizzykitty3.androidtoolkitty.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,8 +24,10 @@ fun CustomDropdownMenu(
     onItemSelected: (Int) -> Unit,
     label: @Composable (() -> Unit)? = null,
 ) {
+    val c = LocalContext.current
     var expanded by remember { mutableStateOf(false) }
-    var selectedPosition by remember { mutableIntStateOf(0) }
+    val mSelectedPosition = SettingsViewModel(c).getLastTimeSelectedSocialPlatform()
+    var selectedPosition by remember { mutableIntStateOf(mSelectedPosition) }
     ExposedDropdownMenuBox(
         expanded = expanded,
         onExpandedChange = {
@@ -57,6 +61,7 @@ fun CustomDropdownMenu(
                     onClick = {
                         selectedPosition = index
                         onItemSelected(index)
+                        SettingsViewModel(c).saveSelectedSocialPlatform(index)
                         expanded = false
                     }
                 )

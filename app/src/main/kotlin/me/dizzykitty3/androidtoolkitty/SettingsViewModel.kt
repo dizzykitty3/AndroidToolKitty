@@ -12,7 +12,15 @@ class SettingsViewModel(context: Context) : ViewModel() {
 
     fun setIsAutoClearClipboard(boolean: Boolean) {
         Actions.debugLog("is auto clear clipboard = $boolean")
-        sharedPrefs.edit().putBoolean(IS_AUTO_CLEAR_CLIPBOARD, boolean).apply()
+        with(sharedPrefs.edit())
+        {
+            putBoolean(IS_AUTO_CLEAR_CLIPBOARD, boolean)
+            apply()
+        }
+    }
+
+    fun getCardExpandedState(cardId: String): Boolean {
+        return sharedPrefs.getBoolean(cardId, true)
     }
 
     fun saveCardExpandedState(cardId: String, isExpanded: Boolean) {
@@ -23,12 +31,21 @@ class SettingsViewModel(context: Context) : ViewModel() {
         }
     }
 
-    fun getCardExpandedState(cardId: String): Boolean {
-        return sharedPrefs.getBoolean(cardId, true)
+    fun getLastTimeSelectedSocialPlatform(): Int {
+        return sharedPrefs.getInt(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
+    }
+
+    fun saveSelectedSocialPlatform(lastTimePlatformIndex: Int) {
+        Actions.debugLog("last time platform index = $lastTimePlatformIndex")
+        with(sharedPrefs.edit()) {
+            putInt(LAST_TIME_SELECTED_PLATFORM_INDEX, lastTimePlatformIndex)
+            apply()
+        }
     }
 
     companion object {
         private const val PREF_NAME = "Settings"
         private const val IS_AUTO_CLEAR_CLIPBOARD = "isAutoClearClipboard"
+        private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "lastTimeSelectedPlatformIndex"
     }
 }

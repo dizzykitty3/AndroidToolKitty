@@ -23,6 +23,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
@@ -37,7 +38,8 @@ fun SocialMediaProfileCard() {
         id = "card_social_media_profile"
     ) {
         var username by remember { mutableStateOf("") }
-        var platformIndex by remember { mutableIntStateOf(0) }
+        val mPlatformIndex = SettingsViewModel(c).getLastTimeSelectedSocialPlatform()
+        var platformIndex by remember { mutableIntStateOf(mPlatformIndex) }
         val platformList = UrlUtils.Platform.entries.map { c.getString(it.nameResId) }
         CustomSpacerPadding()
         CustomDropdownMenu(

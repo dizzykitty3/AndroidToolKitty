@@ -59,16 +59,6 @@ object Actions {
             return
         }
         val prefix = platform.prefix
-        if (prefix.isEmpty()) {
-            ToastUtils(applicationContext).showToastAndRecordLog(
-                "${applicationContext.getString(R.string.platform)}: \"$username\" ${
-                    applicationContext.getString(
-                        R.string.uploaded
-                    )
-                }"
-            )
-            return
-        }
         IntentUtils(applicationContext).openUrl("$HTTPS$prefix${StringUtils.dropSpaces(username)}")
         debugLog("onVisitProfile")
     }
