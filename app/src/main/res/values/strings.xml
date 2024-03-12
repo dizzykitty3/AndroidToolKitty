@@ -68,4 +68,6 @@
     <string name="temp1">Android ToolKitty will now clear your clipboard on launch. This function will be optional in the future.</string>
     <string name="bilibili_user">Bilibili (User ID)</string>
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
+    <string name="temp2">Upload platform name function is under development ...</string>
+    <string name="temp3">Convert characters to Unicode function is under development ...</string>
 </resources>

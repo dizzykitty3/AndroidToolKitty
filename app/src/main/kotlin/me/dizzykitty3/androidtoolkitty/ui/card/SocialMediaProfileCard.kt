@@ -99,5 +99,10 @@ fun SocialMediaProfileCard() {
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
+        if (platformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+            Text(
+                text = c.getString(R.string.temp2)
+            )
+        }
     }
 }

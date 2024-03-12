@@ -66,4 +66,6 @@
     <string name="temp1">Android ToolKitty 会在启动时为您清除剪贴板。此功能的开关会在将来版本中加入。</string>
     <string name="bilibili_user">哔哩哔哩 (用户 ID)</string>
     <string name="clear_clipboard_on_launch">在启动时清除剪贴板</string>
+    <string name="temp2">提交平台名称功能仍在开发中...</string>
+    <string name="temp3">转换字符到 Unicode 功能仍在开发中...</string>
 </resources>

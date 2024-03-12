@@ -69,5 +69,8 @@ fun UnicodeCard() {
                 text = c.getString(R.string.convert)
             )
         }
+        Text(
+            text = c.getString(R.string.temp3)
+        )
     }
 }
