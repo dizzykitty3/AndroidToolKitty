@@ -32,7 +32,7 @@ fun UrlCard() {
     CustomCard(
         icon = Icons.Outlined.Link,
         title = c.getString(R.string.url),
-        isExpand = true
+        id = "card_url"
     ) {
         var url by remember { mutableStateOf("") }
         OutlinedTextField(

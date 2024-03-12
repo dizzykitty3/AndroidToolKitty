@@ -28,7 +28,7 @@ fun UnicodeCard() {
     CustomCard(
         icon = Icons.AutoMirrored.Outlined.Notes,
         title = c.getString(R.string.unicode),
-        isExpand = true
+        id = "card_unicode"
     ) {
         var unicode by remember { mutableStateOf("") }
         val characters = remember { mutableStateOf("") }

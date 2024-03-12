@@ -34,7 +34,7 @@ fun SocialMediaProfileCard() {
     CustomCard(
         icon = Icons.Outlined.Person,
         title = c.getString(R.string.social_media_profile),
-        isExpand = true
+        id = "card_social_media_profile"
     ) {
         var username by remember { mutableStateOf("") }
         var platformIndex by remember { mutableIntStateOf(0) }

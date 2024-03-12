@@ -25,7 +25,7 @@ fun YearProgressCard() {
     CustomCard(
         icon = Icons.Outlined.HourglassTop,
         title = LocalContext.current.getString(R.string.year_progress),
-        isExpand = true
+        id = "card_year_progress"
     ) {
         var isShowPercentage by remember { mutableStateOf(true) }
         Column(

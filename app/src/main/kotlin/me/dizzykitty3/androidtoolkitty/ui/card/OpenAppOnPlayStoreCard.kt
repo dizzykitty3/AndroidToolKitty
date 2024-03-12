@@ -35,7 +35,7 @@ fun OpenAppOnPlayStoreCard() {
     CustomCard(
         icon = Icons.Outlined.Shop,
         title = c.getString(R.string.open_app_on_google_play),
-        isExpand = true
+        id = "card_open_app_on_google_play"
     ) {
         var packageName by remember { mutableStateOf("") }
         val linkUrl = "https://support.google.com/admob/answer/9972781"

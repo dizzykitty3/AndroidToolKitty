@@ -26,12 +26,12 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 
 @Composable
 fun ClipboardCard() {
+    val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.ContentPasteSearch,
         title = LocalContext.current.getString(R.string.clipboard),
-        isExpand = true
+        id = "card_clipboard"
     ) {
-        val c = LocalContext.current
         val mIsAutoClearClipboard = SettingsViewModel(c).getIsAutoClearClipboard()
         var isAutoClearClipboard by remember { mutableStateOf(mIsAutoClearClipboard) }
         CustomSpacerPadding()

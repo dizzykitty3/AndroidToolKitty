@@ -33,7 +33,7 @@ fun GoogleMapsCard() {
     CustomCard(
         icon = Icons.Outlined.Place,
         title = c.getString(R.string.google_maps),
-        isExpand = true
+        id = "card_google_maps"
     ) {
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }

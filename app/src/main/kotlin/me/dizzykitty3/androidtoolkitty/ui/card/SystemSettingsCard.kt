@@ -20,7 +20,7 @@ fun SystemSettingsCard() {
     CustomCard(
         icon = Icons.Outlined.Settings,
         title = c.getString(R.string.android_system_settings),
-        isExpand = true
+        id = "card_android_system_settings"
     ) {
         Text(
             text = c.getString(R.string.common)
