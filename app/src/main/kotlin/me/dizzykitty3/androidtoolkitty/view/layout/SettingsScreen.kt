@@ -8,6 +8,7 @@ import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.view.card.AboutCard
+import me.dizzykitty3.androidtoolkitty.view.card.SettingsCard
 
 @Composable
 fun SettingsScreen() {
@@ -25,6 +26,9 @@ fun SettingsScreen() {
         item { CustomCardSpacePadding() }
 
         // Contents
+        item { SettingsCard() }
+        item { CustomCardSpacePadding() }
+
         item { AboutCard() }
         item { CustomCardSpacePadding() }
 
