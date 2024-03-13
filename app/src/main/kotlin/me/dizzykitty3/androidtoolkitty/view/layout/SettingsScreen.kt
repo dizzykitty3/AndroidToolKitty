@@ -6,7 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomBottomPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTopPadding
 import me.dizzykitty3.androidtoolkitty.view.card.AboutCard
 import me.dizzykitty3.androidtoolkitty.view.card.SettingsCard
 
@@ -20,10 +22,7 @@ fun SettingsScreen() {
         )
     ) {
         // Top
-        item { CustomCardSpacePadding() }
-        item { CustomCardSpacePadding() }
-        item { CustomCardSpacePadding() }
-        item { CustomCardSpacePadding() }
+        item { CustomTopPadding() }
 
         // Contents
         item { SettingsCard() }
@@ -33,6 +32,6 @@ fun SettingsScreen() {
         item { CustomCardSpacePadding() }
 
         // Bottom
-        item { CustomCardSpacePadding() }
+        item { CustomBottomPadding() }
     }
 }

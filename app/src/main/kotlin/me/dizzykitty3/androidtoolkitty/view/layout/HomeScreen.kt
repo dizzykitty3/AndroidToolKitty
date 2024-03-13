@@ -18,8 +18,10 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomBottomPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSingleHandModePadding
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTopPadding
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
 import me.dizzykitty3.androidtoolkitty.view.card.GreetingText
@@ -44,10 +46,7 @@ fun HomeScreen(navController: NavHostController) {
         val isSingleHandMode = SettingsViewModel().getIsSingleHandMode(c)
 
         // Top
-        item { CustomCardSpacePadding() }
-        item { CustomCardSpacePadding() }
-        item { CustomCardSpacePadding() }
-        item { CustomCardSpacePadding() }
+        item { CustomTopPadding() }
 
         // Contents
         item {
@@ -105,6 +104,6 @@ fun HomeScreen(navController: NavHostController) {
         item { CustomCardSpacePadding() }
 
         // Bottom
-        item { CustomCardSpacePadding() }
+        item { CustomBottomPadding() }
     }
 }

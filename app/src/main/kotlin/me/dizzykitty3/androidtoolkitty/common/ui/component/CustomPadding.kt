@@ -35,3 +35,13 @@ fun CustomIconAndTextPadding() {
 fun CustomSingleHandModePadding() {
     CustomPadding(dimen = R.dimen.padding_single_hand_mode)
 }
+
+@Composable
+fun CustomTopPadding() {
+    CustomPadding(dimen = R.dimen.padding_top)
+}
+
+@Composable
+fun CustomBottomPadding() {
+    CustomPadding(dimen = R.dimen.padding_bottom)
+}
