@@ -72,5 +72,5 @@
     <string name="settings">设置</string>
     <string name="collapse_all_cards">收起所有卡片</string>
     <string name="expand_all_cards">展开所有卡片</string>
-    <string name="version">"版本 v20240313"</string>
+    <string name="version">版本</string>
 </resources>

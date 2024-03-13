@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.view.card
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.Icon
@@ -10,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomIconAndTextPadding
@@ -53,6 +55,11 @@ fun AboutCard() {
                 Text(
                     text = c.getString(R.string.source_code_on_github)
                 )
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = null,
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
             }
         }
         CustomSpacerPadding()
@@ -63,7 +70,7 @@ fun AboutCard() {
             )
             CustomIconAndTextPadding()
             Text(
-                text = c.getString(R.string.version)
+                text = "${c.getString(R.string.version)} ${c.getString(R.string.version_number)}"
             )
         }
     }
