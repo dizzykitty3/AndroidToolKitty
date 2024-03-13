@@ -7,11 +7,11 @@ import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import androidx.compose.runtime.MutableState
-import me.dizzykitty3.androidtoolkitty.util.ClipboardUtils
-import me.dizzykitty3.androidtoolkitty.util.IntentUtils
-import me.dizzykitty3.androidtoolkitty.util.StringUtils
-import me.dizzykitty3.androidtoolkitty.util.ToastUtils
-import me.dizzykitty3.androidtoolkitty.util.UrlUtils
+import me.dizzykitty3.androidtoolkitty.common.util.ClipboardUtils
+import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
+import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
+import me.dizzykitty3.androidtoolkitty.common.util.UrlUtils
 
 object Actions {
     private const val HTTPS = "https://"
@@ -25,7 +25,7 @@ object Actions {
 
     @Suppress("SpellCheckingInspection")
     @JvmStatic
-    fun debugLog(logEvent: String) = Log.d("me.dizzykitty3.androidtoolkitty", logEvent)
+    fun debugLog(logMessage: String) = Log.d("me.dizzykitty3.androidtoolkitty", logMessage)
 
     @JvmStatic
     fun onClearClipboardButton() {
@@ -34,15 +34,9 @@ object Actions {
     }
 
     @JvmStatic
-    fun onClickVisitUrlButton(userInputUrl: String) {
-        if (userInputUrl.isBlank()) return
-        IntentUtils(applicationContext).openUrl(
-            UrlUtils.processUrl(
-                StringUtils.dropSpaces(
-                    userInputUrl
-                )
-            )
-        )
+    fun onClickVisitUrlButton(url: String) {
+        if (url.isBlank()) return
+        IntentUtils(applicationContext).openUrl(UrlUtils.processUrl(StringUtils.dropSpaces(url)))
         debugLog("onClickVisitButton")
     }
 
@@ -53,7 +47,9 @@ object Actions {
         if (platform == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET) {
             ToastUtils(applicationContext).showToastAndRecordLog(
                 "${applicationContext.getString(R.string.platform)}: \"$username\" ${
-                    applicationContext.getString(R.string.uploaded)
+                    applicationContext.getString(
+                        R.string.uploaded
+                    )
                 }"
             )
             return
