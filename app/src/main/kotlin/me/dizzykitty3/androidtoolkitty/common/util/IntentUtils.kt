@@ -44,7 +44,7 @@ class IntentUtils(private val c: Context) {
         c.startActivity(intent)
     }
 
-    fun startActivity(intent: Intent) {
+    private fun startActivity(intent: Intent) {
         if (Objects.nonNull(intent.resolveActivity(c.packageManager))) {
             c.startActivity(intent)
             return
