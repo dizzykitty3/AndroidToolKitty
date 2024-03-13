@@ -24,7 +24,7 @@ import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 fun SettingsCard() {
     val c = LocalContext.current
     CustomStaticCard(
-        title = "Settings"
+        title = c.getString(R.string.settings)
     ) {
         val mIsAutoClearClipboard = SettingsViewModel(c).getIsAutoClearClipboard()
         var isAutoClearClipboard by remember { mutableStateOf(mIsAutoClearClipboard) }
@@ -84,7 +84,9 @@ fun SettingsCard() {
                 isExpanded = false
             )
         }) {
-            Text(text = "Collapse all cards")
+            Text(
+                text = c.getString(R.string.collapse_all_cards)
+            )
         }
         Button(onClick = {
             SettingsViewModel(c).saveCardExpandedState(
@@ -120,7 +122,9 @@ fun SettingsCard() {
                 isExpanded = true
             )
         }) {
-            Text(text = "Expand all cards")
+            Text(
+                text = c.getString(R.string.expand_all_cards)
+            )
         }
     }
 }

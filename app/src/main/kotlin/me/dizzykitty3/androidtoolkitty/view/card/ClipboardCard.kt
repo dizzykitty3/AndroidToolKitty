@@ -37,7 +37,7 @@ fun ClipboardCard() {
         if (isShowHintText) {
             CustomSpacerPadding()
             Text(
-                text = "You can turn on \"clear clipboard on launch\" on Settings Screen"
+                text = c.getString(R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
             )
         }
     }

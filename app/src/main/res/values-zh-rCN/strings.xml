@@ -68,4 +68,9 @@
     <string name="clear_clipboard_on_launch">在启动时清除剪贴板</string>
     <string name="temp2">提交平台名称功能仍在开发中...</string>
     <string name="temp3">转换字符到 Unicode 功能仍在开发中...</string>
+    <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开\"启动时自动清空剪贴板\"功能</string>
+    <string name="settings">设置</string>
+    <string name="collapse_all_cards">收起所有卡片</string>
+    <string name="expand_all_cards">展开所有卡片</string>
+    <string name="version">"版本 v20240313"</string>
 </resources>

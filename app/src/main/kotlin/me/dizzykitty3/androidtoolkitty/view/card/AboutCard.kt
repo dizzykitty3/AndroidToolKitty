@@ -63,7 +63,7 @@ fun AboutCard() {
             )
             CustomIconAndTextPadding()
             Text(
-                text = "Version 20240312"
+                text = c.getString(R.string.version)
             )
         }
     }
