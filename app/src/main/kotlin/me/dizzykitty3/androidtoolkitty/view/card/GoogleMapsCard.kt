@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import android.content.Context
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,9 +24,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
 
 @Composable
 fun GoogleMapsCard() {
@@ -52,7 +54,7 @@ fun GoogleMapsCard() {
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        Actions.onClickOpenGoogleMapsButton(latitude, longitude)
+                        onClickOpenGoogleMapsButton(c, latitude, longitude)
                     }
                 )
             )
@@ -70,14 +72,14 @@ fun GoogleMapsCard() {
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = {
-                        Actions.onClickOpenGoogleMapsButton(latitude, longitude)
+                        onClickOpenGoogleMapsButton(c, latitude, longitude)
                     }
                 )
             )
         }
         TextButton(
             onClick = {
-                Actions.onClickOpenGoogleMapsButton(latitude, longitude)
+                onClickOpenGoogleMapsButton(c, latitude, longitude)
             }
         ) {
             Text(
@@ -90,4 +92,11 @@ fun GoogleMapsCard() {
             )
         }
     }
+}
+
+fun onClickOpenGoogleMapsButton(c: Context, latitude: String, longitude: String) {
+    if (latitude.isBlank()) return
+    if (longitude.isBlank()) return
+    IntentUtils(c).openGoogleMaps(latitude, longitude)
+    StringUtils.debugLog("onClickOpenGoogleMapsButton")
 }

@@ -43,8 +43,8 @@ fun CustomCard(
         Column(
             modifier = cardPadding
         ) {
-            val context = LocalContext.current
-            val mExpanded = SettingsViewModel(context).getCardExpandedState(id)
+            val c = LocalContext.current
+            val mExpanded = SettingsViewModel().getCardExpandedState(c, id)
             var expanded by remember { mutableStateOf(mExpanded) }
             Row {
                 Icon(
@@ -60,7 +60,7 @@ fun CustomCard(
                         .fillMaxWidth()
                         .clickable {
                             expanded = !expanded
-                            SettingsViewModel(context).saveCardExpandedState(id, expanded)
+                            SettingsViewModel().saveCardExpandedState(c, id, expanded)
                         },
                     text = title, // Custom title here
                     style = TextStyle.Default.copy(

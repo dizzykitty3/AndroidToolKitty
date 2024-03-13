@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ContentPasteSearch
 import androidx.compose.material3.Button
@@ -8,10 +9,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.common.util.ClipboardUtils
+import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
@@ -22,11 +24,11 @@ fun ClipboardCard() {
         title = c.getString(R.string.clipboard),
         id = "card_clipboard"
     ) {
-        val isShowHintText = !SettingsViewModel(c).getHaveOpenedSettingsScreen()
+        val isShowHintText = !SettingsViewModel().getHaveOpenedSettingsScreen(c)
         CustomSpacerPadding()
         Button(
             onClick = {
-                Actions.onClearClipboardButton()
+                onClearClipboardButton(c)
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
@@ -41,4 +43,9 @@ fun ClipboardCard() {
             )
         }
     }
+}
+
+fun onClearClipboardButton(c: Context) {
+    ClipboardUtils(c).clearClipboard()
+    ToastUtils(c).showToastAndRecordLog(c.getString(R.string.clipboard_cleared))
 }

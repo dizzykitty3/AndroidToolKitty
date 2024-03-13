@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import android.content.Context
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -9,6 +10,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -17,10 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
-import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.common.util.ClipboardUtils
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
+import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 
 @Composable
 fun UnicodeCard() {
@@ -42,7 +46,7 @@ fun UnicodeCard() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    Actions.onClickConvertButton(unicode, characters)
+                    onClickConvertButton(c, unicode, characters)
                 }
             ),
             supportingText = {
@@ -62,7 +66,7 @@ fun UnicodeCard() {
         )
         TextButton(
             onClick = {
-                Actions.onClickConvertButton(unicode, characters)
+                onClickConvertButton(c, unicode, characters)
             }
         ) {
             Text(
@@ -73,4 +77,16 @@ fun UnicodeCard() {
             text = c.getString(R.string.temp3)
         )
     }
+}
+
+fun onClickConvertButton(c: Context, unicode: String, characterField: MutableState<String>) {
+    if (unicode.isBlank()) return
+    try {
+        val result = StringUtils.convertUnicodeToCharacter(unicode)
+        characterField.value = result
+        ClipboardUtils(c).copyTextToClipboard(result)
+    } catch (e: Exception) {
+        ToastUtils(c).showToast(e.message?.ifBlank { "Unknown error occurred" })
+    }
+    StringUtils.debugLog("onClickConvertButton")
 }

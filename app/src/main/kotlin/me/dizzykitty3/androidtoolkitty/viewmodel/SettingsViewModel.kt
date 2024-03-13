@@ -1,68 +1,71 @@
 package me.dizzykitty3.androidtoolkitty.viewmodel
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
-import me.dizzykitty3.androidtoolkitty.Actions
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 
-class SettingsViewModel(context: Context) : ViewModel() {
-    private val sharedPrefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-
-    fun getIsAutoClearClipboard(): Boolean {
-        return sharedPrefs.getBoolean(IS_AUTO_CLEAR_CLIPBOARD, false)
+class SettingsViewModel : ViewModel() {
+    private fun getSharedPrefs(context: Context): SharedPreferences {
+        return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     }
 
-    fun setIsAutoClearClipboard(isAutoClear: Boolean) {
-        Actions.debugLog("is auto clear clipboard = $isAutoClear")
-        with(sharedPrefs.edit())
+    fun getIsAutoClearClipboard(context: Context): Boolean {
+        return getSharedPrefs(context).getBoolean(IS_AUTO_CLEAR_CLIPBOARD, false)
+    }
+
+    fun setIsAutoClearClipboard(context: Context, isAutoClear: Boolean) {
+        debugLog("is auto clear clipboard = $isAutoClear")
+        with(getSharedPrefs(context).edit())
         {
             putBoolean(IS_AUTO_CLEAR_CLIPBOARD, isAutoClear)
             apply()
         }
     }
 
-    fun getCardExpandedState(cardId: String): Boolean {
-        return sharedPrefs.getBoolean(cardId, true)
+    fun getCardExpandedState(context: Context, cardId: String): Boolean {
+        return getSharedPrefs(context).getBoolean(cardId, true)
     }
 
-    fun saveCardExpandedState(cardId: String, isExpanded: Boolean) {
-        Actions.debugLog("$cardId is expanded = $isExpanded")
-        with(sharedPrefs.edit()) {
+    fun saveCardExpandedState(context: Context, cardId: String, isExpanded: Boolean) {
+        debugLog("$cardId is expanded = $isExpanded")
+        with(getSharedPrefs(context).edit()) {
             putBoolean(cardId, isExpanded)
             apply()
         }
     }
 
-    fun getLastTimeSelectedSocialPlatform(): Int {
-        return sharedPrefs.getInt(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
+    fun getLastTimeSelectedSocialPlatform(context: Context): Int {
+        return getSharedPrefs(context).getInt(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
     }
 
-    fun saveSelectedSocialPlatform(lastTimePlatformIndex: Int) {
-        Actions.debugLog("last time platform index = $lastTimePlatformIndex")
-        with(sharedPrefs.edit()) {
+    fun saveSelectedSocialPlatform(context: Context, lastTimePlatformIndex: Int) {
+        debugLog("last time platform index = $lastTimePlatformIndex")
+        with(getSharedPrefs(context).edit()) {
             putInt(LAST_TIME_SELECTED_PLATFORM_INDEX, lastTimePlatformIndex)
             apply()
         }
     }
 
-    fun getHaveOpenedSettingsScreen(): Boolean {
-        return sharedPrefs.getBoolean(HAVE_OPENED_SETTINGS_SCREEN, false)
+    fun getHaveOpenedSettingsScreen(context: Context): Boolean {
+        return getSharedPrefs(context).getBoolean(HAVE_OPENED_SETTINGS_SCREEN, false)
     }
 
-    fun setHaveOpenedSettingsScreen(haveOpened: Boolean) {
-        Actions.debugLog("have opened settings menu = $haveOpened")
-        with(sharedPrefs.edit()) {
+    fun setHaveOpenedSettingsScreen(context: Context, haveOpened: Boolean) {
+        debugLog("have opened settings menu = $haveOpened")
+        with(getSharedPrefs(context).edit()) {
             putBoolean(HAVE_OPENED_SETTINGS_SCREEN, haveOpened)
             apply()
         }
     }
 
-    fun getIsSingleHandMode(): Boolean {
-        return sharedPrefs.getBoolean(IS_SINGLE_HAND_MODE, false)
+    fun getIsSingleHandMode(context: Context): Boolean {
+        return getSharedPrefs(context).getBoolean(IS_SINGLE_HAND_MODE, false)
     }
 
-    fun setIsSingleHandMode(isSingleHandMode: Boolean) {
-        Actions.debugLog("is single hand mode = $isSingleHandMode")
-        with(sharedPrefs.edit()) {
+    fun setIsSingleHandMode(context: Context, isSingleHandMode: Boolean) {
+        debugLog("is single hand mode = $isSingleHandMode")
+        with(getSharedPrefs(context).edit()) {
             putBoolean(IS_SINGLE_HAND_MODE, isSingleHandMode)
             apply()
         }

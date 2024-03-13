@@ -2,7 +2,7 @@ package me.dizzykitty3.androidtoolkitty.common.util
 
 import android.content.Context
 import android.widget.Toast
-import me.dizzykitty3.androidtoolkitty.Actions
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 import java.util.Objects
 
 class ToastUtils(private val context: Context) {
@@ -17,7 +17,7 @@ class ToastUtils(private val context: Context) {
     }
 
     fun showToastAndRecordLog(logEvent: String) {
-        Actions.debugLog(logEvent)
+        debugLog(logEvent)
         showToast(logEvent)
     }
 }

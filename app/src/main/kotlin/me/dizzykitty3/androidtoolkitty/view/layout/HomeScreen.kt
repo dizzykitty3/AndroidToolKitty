@@ -34,14 +34,14 @@ import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
-    val context = LocalContext.current
+    val c = LocalContext.current
     LazyColumn(
         modifier = Modifier.padding(
             start = cardPadding,
             end = cardPadding
         )
     ) {
-        val isSingleHandMode = SettingsViewModel(context).getIsSingleHandMode()
+        val isSingleHandMode = SettingsViewModel().getIsSingleHandMode(c)
 
         // Top
         item { CustomCardSpacePadding() }
@@ -62,7 +62,7 @@ fun HomeScreen(navController: NavHostController) {
                 IconButton(
                     onClick = {
                         navController.navigate("SettingsScreen")
-                        SettingsViewModel(context).setHaveOpenedSettingsScreen(true)
+                        SettingsViewModel().setHaveOpenedSettingsScreen(c, true)
                     },
                     modifier = Modifier.size(40.dp)
                 ) {

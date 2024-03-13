@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import android.content.Context
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -20,10 +21,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
-import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
 import me.dizzykitty3.androidtoolkitty.common.util.UrlUtils
 
 @Composable
@@ -45,7 +47,7 @@ fun UrlCard() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    Actions.onClickVisitUrlButton(url)
+                    onClickVisitUrlButton(c, url)
                 }
             ),
             supportingText = {
@@ -74,7 +76,7 @@ fun UrlCard() {
         )
         TextButton(
             onClick = {
-                Actions.onClickVisitUrlButton(url)
+                onClickVisitUrlButton(c, url)
             }
         ) {
             Text(
@@ -87,4 +89,10 @@ fun UrlCard() {
             )
         }
     }
+}
+
+fun onClickVisitUrlButton(c: Context, url: String) {
+    if (url.isBlank()) return
+    IntentUtils(c).openUrl(UrlUtils.processUrl(StringUtils.dropSpaces(url)))
+    StringUtils.debugLog("onClickVisitButton")
 }

@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,7 +16,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
@@ -27,15 +27,15 @@ fun SettingsCard() {
     CustomStaticCard(
         title = c.getString(R.string.settings)
     ) {
-        val mIsAutoClearClipboard = SettingsViewModel(c).getIsAutoClearClipboard()
+        val mIsAutoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(c)
         var isAutoClearClipboard by remember { mutableStateOf(mIsAutoClearClipboard) }
-        val mIsSingleHandMode = SettingsViewModel(c).getIsSingleHandMode()
+        val mIsSingleHandMode = SettingsViewModel().getIsSingleHandMode(c)
         var isSingleHandMode by remember { mutableStateOf(mIsSingleHandMode) }
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 isAutoClearClipboard = !isAutoClearClipboard
-                SettingsViewModel(c).setIsAutoClearClipboard(isAutoClearClipboard)
+                SettingsViewModel().setIsAutoClearClipboard(c, isAutoClearClipboard)
             }
         ) {
             Text(
@@ -46,7 +46,7 @@ fun SettingsCard() {
                 checked = isAutoClearClipboard,
                 onCheckedChange = {
                     isAutoClearClipboard = it
-                    SettingsViewModel(c).setIsAutoClearClipboard(it)
+                    SettingsViewModel().setIsAutoClearClipboard(c, it)
                 }
             )
         }
@@ -54,7 +54,7 @@ fun SettingsCard() {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 isSingleHandMode = !isSingleHandMode
-                SettingsViewModel(c).setIsSingleHandMode(isSingleHandMode)
+                SettingsViewModel().setIsSingleHandMode(c, isSingleHandMode)
             }
         ) {
             Text(
@@ -65,7 +65,7 @@ fun SettingsCard() {
                 checked = isSingleHandMode,
                 onCheckedChange = {
                     isSingleHandMode = it
-                    SettingsViewModel(c).setIsSingleHandMode(it)
+                    SettingsViewModel().setIsSingleHandMode(c, it)
                 }
             )
         }
@@ -74,18 +74,33 @@ fun SettingsCard() {
         CustomSpacerPadding()
         CustomSpacerPadding()
         Button(
-            onClick = { Actions.onClickAllCardsButton(isExpand = false) }
+            onClick = {
+                onClickAllCardsButton(c, false)
+            }
         ) {
             Text(
                 text = c.getString(R.string.collapse_all_cards)
             )
         }
         Button(
-            onClick = { Actions.onClickAllCardsButton(isExpand = true) }
+            onClick = {
+                onClickAllCardsButton(c, true)
+            }
         ) {
             Text(
                 text = c.getString(R.string.expand_all_cards)
             )
         }
     }
+}
+
+fun onClickAllCardsButton(c: Context, isExpand: Boolean) {
+    SettingsViewModel().saveCardExpandedState(c, "card_year_progress", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_clipboard", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_url", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_social_media_profile", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_android_system_settings", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_unicode", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_google_maps", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_open_app_on_google_play", isExpand)
 }

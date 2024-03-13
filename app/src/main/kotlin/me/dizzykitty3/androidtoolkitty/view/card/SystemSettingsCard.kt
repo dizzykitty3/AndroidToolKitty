@@ -1,5 +1,8 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import android.content.ContentResolver
+import android.content.Context
+import android.provider.Settings
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
@@ -9,11 +12,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSystemSettingsButton
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
+import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 
 @Composable
 fun SystemSettingsCard() {
@@ -58,7 +62,7 @@ fun SystemSettingsCard() {
         )
         Button(
             onClick = {
-                Actions.onClickCheckSetTimeAutomaticallyButton()
+                onClickCheckSetTimeAutomaticallyButton(c)
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
@@ -73,4 +77,16 @@ fun SystemSettingsCard() {
             buttonText = c.getString(R.string.open_developer_options)
         )
     }
+}
+
+fun onClickCheckSetTimeAutomaticallyButton(c: Context) {
+    val contentResolver: ContentResolver = c.contentResolver
+    val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
+    ToastUtils(c).showToast(
+        if (isAutoTime == 1)
+            c.getString(R.string.set_time_automatically_is_on)
+        else
+            c.getString(R.string.set_time_automatically_is_off)
+    )
+    StringUtils.debugLog("onClickCheckSetTimeAutomaticallyButton")
 }

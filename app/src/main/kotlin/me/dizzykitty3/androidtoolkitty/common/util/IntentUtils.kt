@@ -4,17 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
-import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 import java.util.Objects
 
-class IntentUtils(private val context: Context) {
+class IntentUtils(private val c: Context) {
     fun openUrl(finalUrl: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(finalUrl)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
-        Actions.debugLog("openUrl")
+        c.startActivity(intent)
+        debugLog("openUrl")
     }
 
     fun openSystemSettings(settingType: String) {
@@ -31,8 +31,8 @@ class IntentUtils(private val context: Context) {
             else -> return
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
-        Actions.debugLog("onOpenSystemSettings: $settingType")
+        c.startActivity(intent)
+        debugLog("onOpenSystemSettings: $settingType")
     }
 
     fun openGoogleMaps(latitude: String, longitude: String) {
@@ -41,27 +41,41 @@ class IntentUtils(private val context: Context) {
         val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         intent.setPackage(GOOGLE_MAPS)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
+        c.startActivity(intent)
     }
 
     fun startActivity(intent: Intent) {
-        if (Objects.nonNull(intent.resolveActivity(context.packageManager))) {
-            context.startActivity(intent)
+        if (Objects.nonNull(intent.resolveActivity(c.packageManager))) {
+            c.startActivity(intent)
             return
         }
         when (intent.`package`) {
             GOOGLE_PLAY_STORE ->
-                ToastUtils(context).showToastAndRecordLog(
-                    context.getString(R.string.google_play_store_not_installed)
+                ToastUtils(c).showToastAndRecordLog(
+                    c.getString(R.string.google_play_store_not_installed)
                 )
 
             GOOGLE_MAPS -> {
-                ToastUtils(context).showToastAndRecordLog(
-                    context.getString(R.string.google_maps_app_not_installed)
+                ToastUtils(c).showToastAndRecordLog(
+                    c.getString(R.string.google_maps_app_not_installed)
                 )
-                Actions.openAppOnPlayStore(GOOGLE_MAPS)
+                IntentUtils(c).openAppOnPlayStore(GOOGLE_MAPS)
             }
         }
+    }
+
+    fun openAppOnPlayStore(packageName: String) {
+        if (packageName.isBlank()) return
+        val playStoreUri: Uri = if (packageName.contains(".")) {
+            Uri.parse("market://details?id=${StringUtils.dropSpaces(packageName)}")
+        } else {
+            Uri.parse("market://search?q=${packageName.trim()}")
+        }
+        val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
+        playStoreIntent.setPackage(GOOGLE_PLAY_STORE)
+        playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        IntentUtils(c).startActivity(playStoreIntent)
+        debugLog("openCertainAppOnPlayStore")
     }
 
     companion object {

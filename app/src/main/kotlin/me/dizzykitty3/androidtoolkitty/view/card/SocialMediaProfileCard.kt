@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import android.content.Context
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,11 +22,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
-import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
+import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.common.util.UrlUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
@@ -38,7 +41,7 @@ fun SocialMediaProfileCard() {
         id = "card_social_media_profile"
     ) {
         var username by remember { mutableStateOf("") }
-        val mPlatformIndex = SettingsViewModel(c).getLastTimeSelectedSocialPlatform()
+        val mPlatformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(c)
         var platformIndex by remember { mutableIntStateOf(mPlatformIndex) }
         val platformList = UrlUtils.Platform.entries.map { c.getString(it.nameResId) }
         CustomSpacerPadding()
@@ -69,7 +72,7 @@ fun SocialMediaProfileCard() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    Actions.onVisitProfileButton(username, platformIndex)
+                    onVisitProfileButton(c, username, platformIndex)
                 }
             ),
             supportingText = {
@@ -87,7 +90,7 @@ fun SocialMediaProfileCard() {
         )
         TextButton(
             onClick = {
-                Actions.onVisitProfileButton(username, platformIndex)
+                onVisitProfileButton(c, username, platformIndex)
             }
         ) {
             Text(
@@ -105,4 +108,22 @@ fun SocialMediaProfileCard() {
             )
         }
     }
+}
+
+fun onVisitProfileButton(c: Context, username: String, platformIndex: Int) {
+    if (username.isBlank()) return
+    val platform = UrlUtils.Platform.entries.getOrNull(platformIndex) ?: return
+    if (platform == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET) {
+        ToastUtils(c).showToastAndRecordLog(
+            "${c.getString(R.string.platform)}: \"$username\" ${
+                c.getString(
+                    R.string.uploaded
+                )
+            }"
+        )
+        return
+    }
+    val prefix = platform.prefix
+    IntentUtils(c).openUrl("https://$prefix${StringUtils.dropSpaces(username)}")
+    StringUtils.debugLog("onVisitProfile")
 }

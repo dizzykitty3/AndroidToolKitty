@@ -1,8 +1,15 @@
 package me.dizzykitty3.androidtoolkitty.common.util
 
+import android.util.Log
 import java.time.LocalTime
 
 object StringUtils {
+    @Suppress("SpellCheckingInspection")
+    @JvmStatic
+    fun debugLog(message: String) {
+        Log.d("me.dizzykitty3.androidtoolkitty", message)
+    }
+
     @JvmStatic
     fun greeting(): String {
         val currentTime = LocalTime.now()

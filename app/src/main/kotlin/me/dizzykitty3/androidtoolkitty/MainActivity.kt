@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import me.dizzykitty3.androidtoolkitty.common.ui.theme.MyApplicationTheme
 import me.dizzykitty3.androidtoolkitty.common.util.ClipboardUtils
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 import me.dizzykitty3.androidtoolkitty.view.MainLayout
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
@@ -14,25 +15,24 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Actions.init(this)
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
                 MainLayout()
             }
         }
-        Actions.debugLog("MainActivity onCreate called")
+        debugLog("MainActivity onCreate called")
     }
 
     override fun onResume() {
         super.onResume()
         getSettingsSharedPreferences()
-        Actions.debugLog("MainActivity onResume called")
+        debugLog("MainActivity onResume called")
     }
 
     private fun getSettingsSharedPreferences() {
-        isAutoClearClipboard = SettingsViewModel(this).getIsAutoClearClipboard()
-        Actions.debugLog("MainActivity settings sp got")
+        isAutoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(this)
+        debugLog("MainActivity settings sp got")
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -44,6 +44,6 @@ class MainActivity : ComponentActivity() {
     override fun onStop() {
         super.onStop()
         currentFocus?.clearFocus() // Collapses keyboard
-        Actions.debugLog("MainActivity focus cleared")
+        debugLog("MainActivity focus cleared")
     }
 }

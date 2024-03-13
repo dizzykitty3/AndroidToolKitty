@@ -1,7 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.common.util
 
-import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 
 object UrlUtils {
     private const val HTTPS = "https://"
@@ -31,21 +31,14 @@ object UrlUtils {
     @JvmStatic
     fun processUrl(urlInput: String): String {
         val suffix = getUrlSuffix(urlInput)
-        Actions.debugLog(
-            if (suffix == COM)
-                "suffix = com, input url: $urlInput"
-            else
-                "suffix = $suffix"
-        )
+        debugLog(if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
         return "$HTTPS$urlInput$suffix"
     }
 
     @Suppress("SpellCheckingInspection")
     @JvmStatic
     fun getUrlSuffix(urlInput: String): String {
-        if (urlInput.contains(".")) {
-            return ""
-        }
+        if (urlInput.contains(".")) return ""
         val suffixMap = mapOf(
             "remove" to BG,
             "feishu" to CN,
@@ -127,7 +120,5 @@ object UrlUtils {
     }
 
     @JvmStatic
-    fun getProfilePrefix(platform: Platform): String {
-        return platform.prefix
-    }
+    fun getProfilePrefix(platform: Platform): String = platform.prefix
 }
