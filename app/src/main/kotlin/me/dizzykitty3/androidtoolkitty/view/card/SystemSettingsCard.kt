@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -45,6 +46,8 @@ fun SystemSettingsCard() {
             settingType = "captioning",
             buttonText = c.getString(R.string.open_caption_preferences)
         )
+        CustomSpacerPadding()
+        HorizontalDivider()
         CustomSpacerPadding()
         Text(
             text = c.getString(R.string.debugging)

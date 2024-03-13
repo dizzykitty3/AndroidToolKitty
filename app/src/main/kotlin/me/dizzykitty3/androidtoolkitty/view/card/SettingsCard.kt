@@ -3,8 +3,8 @@ package me.dizzykitty3.androidtoolkitty.view.card
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Button
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,16 +16,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
 fun SettingsCard() {
     val c = LocalContext.current
-    CustomCard(
-        icon = Icons.Outlined.Settings,
-        title = "Settings",
-        id = "card_settings"
+    CustomStaticCard(
+        title = "Settings"
     ) {
         val mIsAutoClearClipboard = SettingsViewModel(c).getIsAutoClearClipboard()
         var isAutoClearClipboard by remember { mutableStateOf(mIsAutoClearClipboard) }
@@ -47,6 +46,81 @@ fun SettingsCard() {
                     SettingsViewModel(c).setIsAutoClearClipboard(it)
                 }
             )
+        }
+        CustomSpacerPadding()
+        HorizontalDivider()
+        CustomSpacerPadding()
+        Button(onClick = {
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_year_progress",
+                isExpanded = false
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_clipboard",
+                isExpanded = false
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_url",
+                isExpanded = false
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_social_media_profile",
+                isExpanded = false
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_android_system_settings",
+                isExpanded = false
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_unicode",
+                isExpanded = false
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_google_maps",
+                isExpanded = false
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_open_app_on_google_play",
+                isExpanded = false
+            )
+        }) {
+            Text(text = "Collapse all cards")
+        }
+        Button(onClick = {
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_year_progress",
+                isExpanded = true
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_clipboard",
+                isExpanded = true
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_url",
+                isExpanded = true
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_social_media_profile",
+                isExpanded = true
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_android_system_settings",
+                isExpanded = true
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_unicode",
+                isExpanded = true
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_google_maps",
+                isExpanded = true
+            )
+            SettingsViewModel(c).saveCardExpandedState(
+                cardId = "card_open_app_on_google_play",
+                isExpanded = true
+            )
+        }) {
+            Text(text = "Expand all cards")
         }
     }
 }
