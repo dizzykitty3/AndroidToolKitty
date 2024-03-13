@@ -50,7 +50,7 @@ fun CustomCard(
         ) {
             Row {
                 Icon(
-                    imageVector = icon,
+                    imageVector = icon, // Custom Icon here
                     contentDescription = null,
                     modifier = Modifier.align(
                         alignment = Alignment.CenterVertically

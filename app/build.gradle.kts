@@ -65,4 +65,5 @@ dependencies {
     debugImplementation(libs.ui.tooling)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.runtime.livedata)
+    implementation(libs.navigation.compose)
 }
