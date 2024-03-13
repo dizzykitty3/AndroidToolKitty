@@ -12,6 +12,7 @@ import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
 import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.common.util.UrlUtils
+import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 object Actions {
     private const val HTTPS = "https://"
@@ -106,5 +107,41 @@ object Actions {
         playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         IntentUtils(applicationContext).startActivity(playStoreIntent)
         debugLog("openCertainAppOnPlayStore")
+    }
+
+    @JvmStatic
+    fun onClickAllCardsButton(isExpand: Boolean) {
+        SettingsViewModel(applicationContext).saveCardExpandedState(
+            cardId = "card_year_progress",
+            isExpanded = isExpand
+        )
+        SettingsViewModel(applicationContext).saveCardExpandedState(
+            cardId = "card_clipboard",
+            isExpanded = isExpand
+        )
+        SettingsViewModel(applicationContext).saveCardExpandedState(
+            cardId = "card_url",
+            isExpanded = isExpand
+        )
+        SettingsViewModel(applicationContext).saveCardExpandedState(
+            cardId = "card_social_media_profile",
+            isExpanded = isExpand
+        )
+        SettingsViewModel(applicationContext).saveCardExpandedState(
+            cardId = "card_android_system_settings",
+            isExpanded = isExpand
+        )
+        SettingsViewModel(applicationContext).saveCardExpandedState(
+            cardId = "card_unicode",
+            isExpanded = isExpand
+        )
+        SettingsViewModel(applicationContext).saveCardExpandedState(
+            cardId = "card_google_maps",
+            isExpanded = isExpand
+        )
+        SettingsViewModel(applicationContext).saveCardExpandedState(
+            cardId = "card_open_app_on_google_play",
+            isExpanded = isExpand
+        )
     }
 }
