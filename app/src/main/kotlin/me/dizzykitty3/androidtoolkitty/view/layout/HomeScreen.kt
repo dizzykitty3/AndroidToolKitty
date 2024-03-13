@@ -43,6 +43,7 @@ fun HomeScreen(navController: NavHostController) {
         item { CustomCardSpacePadding() }
         item { CustomCardSpacePadding() }
 
+        // Contents
         item {
             Row(
                 verticalAlignment = Alignment.CenterVertically

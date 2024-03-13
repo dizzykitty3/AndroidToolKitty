@@ -24,6 +24,7 @@ fun SettingsScreen() {
         item { CustomCardSpacePadding() }
         item { CustomCardSpacePadding() }
 
+        // Contents
         item { AboutCard() }
         item { CustomCardSpacePadding() }
 
