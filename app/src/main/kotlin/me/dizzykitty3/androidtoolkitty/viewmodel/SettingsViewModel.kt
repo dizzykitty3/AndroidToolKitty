@@ -56,10 +56,23 @@ class SettingsViewModel(context: Context) : ViewModel() {
         }
     }
 
+    fun getIsSingleHandMode(): Boolean {
+        return sharedPrefs.getBoolean(IS_SINGLE_HAND_MODE, false)
+    }
+
+    fun setIsSingleHandMode(isSingleHandMode: Boolean) {
+        Actions.debugLog("is single hand mode = $isSingleHandMode")
+        with(sharedPrefs.edit()) {
+            putBoolean(IS_SINGLE_HAND_MODE, isSingleHandMode)
+            apply()
+        }
+    }
+
     companion object {
         private const val PREF_NAME = "Settings"
-        private const val IS_AUTO_CLEAR_CLIPBOARD = "isAutoClearClipboard"
-        private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "lastTimeSelectedPlatformIndex"
-        private const val HAVE_OPENED_SETTINGS_SCREEN = "haveOpenedSettingsScreen"
+        private const val IS_AUTO_CLEAR_CLIPBOARD = "is_auto_clear_clipboard"
+        private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
+        private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
+        private const val IS_SINGLE_HAND_MODE = "is_single_hand_mode"
     }
 }

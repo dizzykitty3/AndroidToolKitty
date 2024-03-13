@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSingleHandModePadding
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
 import me.dizzykitty3.androidtoolkitty.view.card.GreetingText
@@ -33,12 +34,15 @@ import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
+    val context = LocalContext.current
     LazyColumn(
         modifier = Modifier.padding(
             start = cardPadding,
             end = cardPadding
         )
     ) {
+        val isSingleHandMode = SettingsViewModel(context).getIsSingleHandMode()
+
         // Top
         item { CustomCardSpacePadding() }
         item { CustomCardSpacePadding() }
@@ -50,7 +54,6 @@ fun HomeScreen(navController: NavHostController) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                val context = LocalContext.current
                 Box(
                     modifier = Modifier.weight(1f)
                 ) {
@@ -72,6 +75,10 @@ fun HomeScreen(navController: NavHostController) {
             }
         }
         item { CustomCardSpacePadding() }
+
+        if (isSingleHandMode) {
+            item { CustomSingleHandModePadding() }
+        }
 
         item { YearProgressCard() }
         item { CustomCardSpacePadding() }

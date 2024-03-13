@@ -73,4 +73,5 @@
     <string name="collapse_all_cards">收起所有卡片</string>
     <string name="expand_all_cards">展开所有卡片</string>
     <string name="version">版本</string>
+    <string name="single_hand_mode">单手模式</string>
 </resources>

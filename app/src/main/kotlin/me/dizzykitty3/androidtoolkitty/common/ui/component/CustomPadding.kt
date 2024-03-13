@@ -30,3 +30,8 @@ fun CustomSpacerPadding() {
 fun CustomIconAndTextPadding() {
     CustomPadding(dimen = R.dimen.padding_icons_and_text)
 }
+
+@Composable
+fun CustomSingleHandModePadding() {
+    CustomPadding(dimen = R.dimen.padding_single_hand_mode)
+}
