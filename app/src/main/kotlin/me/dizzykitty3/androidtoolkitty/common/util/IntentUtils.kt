@@ -65,8 +65,9 @@ class IntentUtils(private val c: Context) {
     }
 
     fun openAppOnPlayStore(packageName: String) {
-        if (packageName.isBlank()) return
-        val playStoreUri: Uri = if (packageName.contains(".")) {
+        val playStoreUri: Uri = if (packageName.isBlank()) {
+            Uri.parse("market://details?id=$GOOGLE_CHROME")
+        } else if (packageName.contains(".")) {
             Uri.parse("market://details?id=${StringUtils.dropSpaces(packageName)}")
         } else {
             Uri.parse("market://search?q=${packageName.trim()}")
@@ -81,5 +82,6 @@ class IntentUtils(private val c: Context) {
     companion object {
         private const val GOOGLE_MAPS = "com.google.android.apps.maps"
         private const val GOOGLE_PLAY_STORE = "com.android.vending"
+        private const val GOOGLE_CHROME = "com.android.chrome"
     }
 }
