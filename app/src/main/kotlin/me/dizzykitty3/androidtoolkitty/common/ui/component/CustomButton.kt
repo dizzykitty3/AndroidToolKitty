@@ -18,10 +18,10 @@ fun CustomSystemSettingsButton(
     settingType: String,
     buttonText: String
 ) {
-    val c = LocalContext.current
+    val context = LocalContext.current
     Button(
         onClick = {
-            IntentUtils(c).openSystemSettings(settingType)
+            IntentUtils(context).openSystemSettings(settingType)
         },
         elevation = ButtonDefaults.buttonElevation(1.dp)
     ) {

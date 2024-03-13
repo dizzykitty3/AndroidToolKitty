@@ -23,21 +23,21 @@ fun CustomGradientText(
     textToDisplay: String,
     colors: List<Color>
 ) {
-    val text = buildAnnotatedString {
-        withStyle(
-            style = SpanStyle(
-                brush = Brush.horizontalGradient(
-                    colors = colors
-                )
-            )
-        ) {
-            append(textToDisplay)
-        }
-    }
     Row {
         Box(
             modifier = Modifier.fillMaxWidth()
         ) {
+            val text = buildAnnotatedString {
+                withStyle(
+                    style = SpanStyle(
+                        brush = Brush.horizontalGradient(
+                            colors = colors
+                        )
+                    )
+                ) {
+                    append(textToDisplay)
+                }
+            }
             Text(
                 text = text,
                 style = TextStyle.Default.copy(

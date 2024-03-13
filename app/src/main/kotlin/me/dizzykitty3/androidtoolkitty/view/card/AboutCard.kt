@@ -24,7 +24,6 @@ fun AboutCard() {
     CustomStaticCard(
         title = c.getString(R.string.about)
     ) {
-        val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
         CustomSpacerPadding()
         Row {
             Icon(
@@ -40,6 +39,7 @@ fun AboutCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
+            val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
             Icon(
                 imageVector = Icons.Outlined.Code,
                 contentDescription = null

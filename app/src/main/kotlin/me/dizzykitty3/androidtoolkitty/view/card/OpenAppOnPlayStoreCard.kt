@@ -38,7 +38,6 @@ fun OpenAppOnPlayStoreCard() {
         id = "card_open_app_on_google_play"
     ) {
         var packageName by remember { mutableStateOf("") }
-        val linkUrl = "https://support.google.com/admob/answer/9972781"
         OutlinedTextField(
             value = packageName,
             onValueChange = { packageName = it },
@@ -60,6 +59,7 @@ fun OpenAppOnPlayStoreCard() {
         )
         CustomSpacerPadding()
         Row {
+            val linkUrl = "https://support.google.com/admob/answer/9972781"
             Text(
                 text = buildAnnotatedString {
                     append(c.getString(R.string.whats))

@@ -36,18 +36,16 @@ fun CustomCard(
     id: String,
     content: @Composable () -> Unit
 ) {
-    val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
-    val context = LocalContext.current
-    val focusManager = LocalFocusManager.current
-    val lifecycleOwner = LocalLifecycleOwner.current
-    val mExpanded = SettingsViewModel(context).getCardExpandedState(id)
-    var expanded by remember { mutableStateOf(mExpanded) }
     ElevatedCard(
         modifier = Modifier.fillMaxWidth()
     ) {
+        val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
         Column(
             modifier = cardPadding
         ) {
+            val context = LocalContext.current
+            val mExpanded = SettingsViewModel(context).getCardExpandedState(id)
+            var expanded by remember { mutableStateOf(mExpanded) }
             Row {
                 Icon(
                     imageVector = icon, // Custom Icon here
@@ -78,6 +76,8 @@ fun CustomCard(
                 Column {
                     CustomSpacerPadding()
                     Column {
+                        val lifecycleOwner = LocalLifecycleOwner.current
+                        val focusManager = LocalFocusManager.current
                         DisposableEffect(key1 = lifecycleOwner) {
                             onDispose {
                                 focusManager.clearFocus()
@@ -96,12 +96,10 @@ fun CustomStaticCard(
     title: String,
     content: @Composable () -> Unit
 ) {
-    val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
-    val focusManager = LocalFocusManager.current
-    val lifecycleOwner = LocalLifecycleOwner.current
     ElevatedCard(
         modifier = Modifier.fillMaxWidth()
     ) {
+        val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
         Column(
             modifier = cardPadding
         ) {
@@ -119,6 +117,8 @@ fun CustomStaticCard(
             Column {
                 CustomSpacerPadding()
                 Column {
+                    val lifecycleOwner = LocalLifecycleOwner.current
+                    val focusManager = LocalFocusManager.current
                     DisposableEffect(key1 = lifecycleOwner) {
                         onDispose {
                             focusManager.clearFocus()
