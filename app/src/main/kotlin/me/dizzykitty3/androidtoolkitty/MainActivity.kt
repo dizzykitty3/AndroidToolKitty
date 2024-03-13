@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import me.dizzykitty3.androidtoolkitty.common.ui.theme.MyApplicationTheme
 import me.dizzykitty3.androidtoolkitty.common.util.ClipboardUtils
-import me.dizzykitty3.androidtoolkitty.view.layout.MainLayout
+import me.dizzykitty3.androidtoolkitty.view.MainLayout
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 class MainActivity : ComponentActivity() {
