@@ -44,9 +44,22 @@ class SettingsViewModel(context: Context) : ViewModel() {
         }
     }
 
+    fun getHaveOpenedSettingsScreen(): Boolean {
+        return sharedPrefs.getBoolean(HAVE_OPENED_SETTINGS_SCREEN, false)
+    }
+
+    fun setHaveOpenedSettingsScreen(haveOpened: Boolean) {
+        Actions.debugLog("have opened settings menu = $haveOpened")
+        with(sharedPrefs.edit()) {
+            putBoolean(HAVE_OPENED_SETTINGS_SCREEN, haveOpened)
+            apply()
+        }
+    }
+
     companion object {
         private const val PREF_NAME = "Settings"
         private const val IS_AUTO_CLEAR_CLIPBOARD = "isAutoClearClipboard"
         private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "lastTimeSelectedPlatformIndex"
+        private const val HAVE_OPENED_SETTINGS_SCREEN = "haveOpenedSettingsScreen"
     }
 }

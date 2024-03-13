@@ -13,6 +13,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -27,6 +28,7 @@ import me.dizzykitty3.androidtoolkitty.view.card.SystemSettingsCard
 import me.dizzykitty3.androidtoolkitty.view.card.UnicodeCard
 import me.dizzykitty3.androidtoolkitty.view.card.UrlCard
 import me.dizzykitty3.androidtoolkitty.view.card.YearProgressCard
+import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
@@ -48,13 +50,17 @@ fun HomeScreen(navController: NavHostController) {
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                val context = LocalContext.current
                 Box(
                     modifier = Modifier.weight(1f)
                 ) {
                     GreetingText()
                 }
                 IconButton(
-                    onClick = { navController.navigate("SettingsScreen") },
+                    onClick = {
+                        navController.navigate("SettingsScreen")
+                        SettingsViewModel(context).setHaveOpenedSettingsScreen(true)
+                    },
                     modifier = Modifier.size(40.dp)
                 ) {
                     Icon(

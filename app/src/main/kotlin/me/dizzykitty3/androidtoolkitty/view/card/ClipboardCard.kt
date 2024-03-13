@@ -12,14 +12,17 @@ import me.dizzykitty3.androidtoolkitty.Actions
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
 fun ClipboardCard() {
+    val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.ContentPasteSearch,
-        title = LocalContext.current.getString(R.string.clipboard),
+        title = c.getString(R.string.clipboard),
         id = "card_clipboard"
     ) {
+        val isShowHintText = !SettingsViewModel(c).getHaveOpenedSettingsScreen()
         CustomSpacerPadding()
         Button(
             onClick = {
@@ -29,6 +32,12 @@ fun ClipboardCard() {
         ) {
             Text(
                 text = LocalContext.current.getString(R.string.clear_clipboard)
+            )
+        }
+        if (isShowHintText) {
+            CustomSpacerPadding()
+            Text(
+                text = "You can turn on \"clear clipboard on launch\" on Settings Screen"
             )
         }
     }
