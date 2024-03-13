@@ -16,7 +16,7 @@ fun MainLayout() {
             HomeScreen(navController)
         }
         composable("SettingsScreen") {
-            SettingsScreen(navController)
+            SettingsScreen()
         }
     }
 }

@@ -1,16 +1,23 @@
 package me.dizzykitty3.androidtoolkitty.view.layout
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
-import me.dizzykitty3.androidtoolkitty.view.card.AboutCard
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
 import me.dizzykitty3.androidtoolkitty.view.card.GreetingText
@@ -30,24 +37,33 @@ fun HomeScreen(navController: NavHostController) {
             end = cardPadding
         )
     ) {
+        // Top
         item { CustomCardSpacePadding() }
         item { CustomCardSpacePadding() }
         item { CustomCardSpacePadding() }
         item { CustomCardSpacePadding() }
 
-        // test
         item {
-            Button(
-                onClick = { navController.navigate("SettingsScreen") }
+            Row(
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = "Go to Settings Screen"
-                )
+                Box(
+                    modifier = Modifier.weight(1f)
+                ) {
+                    GreetingText()
+                }
+                IconButton(
+                    onClick = { navController.navigate("SettingsScreen") },
+                    modifier = Modifier.size(40.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Settings,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         }
-        item { CustomCardSpacePadding() }
-
-        item { GreetingText() }
         item { CustomCardSpacePadding() }
 
         item { YearProgressCard() }
@@ -74,9 +90,7 @@ fun HomeScreen(navController: NavHostController) {
         item { OpenAppOnPlayStoreCard() }
         item { CustomCardSpacePadding() }
 
-        item { AboutCard() }
-        item { CustomCardSpacePadding() }
-
+        // Bottom
         item { CustomCardSpacePadding() }
     }
 }
