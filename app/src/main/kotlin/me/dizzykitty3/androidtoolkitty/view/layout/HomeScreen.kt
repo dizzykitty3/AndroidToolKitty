@@ -20,7 +20,7 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomBottomPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSingleHandModePadding
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomOneHandedMode
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTopPadding
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
@@ -43,7 +43,7 @@ fun HomeScreen(navController: NavHostController) {
             end = cardPadding
         )
     ) {
-        val isSingleHandMode = SettingsViewModel().getIsSingleHandMode(c)
+        val isOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
 
         // Top
         item { CustomTopPadding() }
@@ -75,8 +75,8 @@ fun HomeScreen(navController: NavHostController) {
         }
         item { CustomCardSpacePadding() }
 
-        if (isSingleHandMode) {
-            item { CustomSingleHandModePadding() }
+        if (isOneHandedMode) {
+            item { CustomOneHandedMode() }
         }
 
         item { YearProgressCard() }

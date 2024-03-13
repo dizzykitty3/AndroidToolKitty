@@ -29,8 +29,8 @@ fun SettingsCard() {
     ) {
         val mIsAutoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(c)
         var isAutoClearClipboard by remember { mutableStateOf(mIsAutoClearClipboard) }
-        val mIsSingleHandMode = SettingsViewModel().getIsSingleHandMode(c)
-        var isSingleHandMode by remember { mutableStateOf(mIsSingleHandMode) }
+        val mIsOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
+        var isOneHandedMode by remember { mutableStateOf(mIsOneHandedMode) }
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
@@ -53,19 +53,19 @@ fun SettingsCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isSingleHandMode = !isSingleHandMode
-                SettingsViewModel().setIsSingleHandMode(c, isSingleHandMode)
+                isOneHandedMode = !isOneHandedMode
+                SettingsViewModel().setIsOneHandedMode(c, isOneHandedMode)
             }
         ) {
             Text(
-                text = c.getString(R.string.single_hand_mode)
+                text = c.getString(R.string.one_handed_mode)
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = isSingleHandMode,
+                checked = isOneHandedMode,
                 onCheckedChange = {
-                    isSingleHandMode = it
-                    SettingsViewModel().setIsSingleHandMode(c, it)
+                    isOneHandedMode = it
+                    SettingsViewModel().setIsOneHandedMode(c, it)
                 }
             )
         }
