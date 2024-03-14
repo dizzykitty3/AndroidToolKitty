@@ -31,6 +31,9 @@ fun SettingsCard() {
         var isAutoClearClipboard by remember { mutableStateOf(mIsAutoClearClipboard) }
         val mIsOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
         var isOneHandedMode by remember { mutableStateOf(mIsOneHandedMode) }
+        Text(
+            text = "Function"
+        )
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
@@ -50,6 +53,12 @@ fun SettingsCard() {
                 }
             )
         }
+        CustomSpacerPadding()
+        HorizontalDivider()
+        CustomSpacerPadding()
+        Text(
+            text = "Display"
+        )
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {

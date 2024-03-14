@@ -30,6 +30,7 @@ import me.dizzykitty3.androidtoolkitty.view.card.SocialMediaProfileCard
 import me.dizzykitty3.androidtoolkitty.view.card.SystemSettingsCard
 import me.dizzykitty3.androidtoolkitty.view.card.UnicodeCard
 import me.dizzykitty3.androidtoolkitty.view.card.UrlCard
+import me.dizzykitty3.androidtoolkitty.view.card.VolumeCard
 import me.dizzykitty3.androidtoolkitty.view.card.YearProgressCard
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
@@ -80,6 +81,9 @@ fun HomeScreen(navController: NavHostController) {
         }
 
         item { YearProgressCard() }
+        item { CustomCardSpacePadding() }
+
+        item { VolumeCard() }
         item { CustomCardSpacePadding() }
 
         item { ClipboardCard() }
