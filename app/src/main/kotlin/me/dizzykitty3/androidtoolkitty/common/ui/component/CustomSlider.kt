@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -28,21 +27,12 @@ fun CustomVolumeSlider() {
                 AudioUtils(c).setVolume(newVolume.toInt())
             },
             valueRange = volumeRange,
-            steps = maxVolume - 1,
+            steps = 2,
             colors = SliderDefaults.colors(
                 thumbColor = MaterialTheme.colorScheme.primary,
                 activeTrackColor = MaterialTheme.colorScheme.primary,
                 inactiveTrackColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3f)
             )
-        )
-        Text(
-            text = "slider value = $volume"
-        )
-        Text(
-            text = "volume = ${AudioUtils(c).getVolume()}"
-        )
-        Text(
-            text = "max volume index = ${AudioUtils(c).getMaxVolumeIndex()}"
         )
     }
 }

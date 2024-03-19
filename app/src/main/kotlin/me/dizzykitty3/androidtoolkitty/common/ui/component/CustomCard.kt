@@ -75,6 +75,7 @@ fun CustomCard(
             AnimatedVisibility(expanded) {
                 Column {
                     CustomSpacerPadding()
+                    CustomSpacerPadding()
                     Column {
                         val lifecycleOwner = LocalLifecycleOwner.current
                         val focusManager = LocalFocusManager.current
@@ -115,6 +116,7 @@ fun CustomStaticCard(
                 )
             )
             Column {
+                CustomSpacerPadding()
                 CustomSpacerPadding()
                 Column {
                     val lifecycleOwner = LocalLifecycleOwner.current

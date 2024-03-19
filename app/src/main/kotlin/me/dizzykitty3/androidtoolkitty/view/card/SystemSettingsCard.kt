@@ -8,6 +8,7 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
@@ -28,8 +29,10 @@ fun SystemSettingsCard() {
         id = "card_android_system_settings"
     ) {
         Text(
-            text = c.getString(R.string.common)
+            text = c.getString(R.string.common),
+            style = MaterialTheme.typography.titleMedium
         )
+        CustomSpacerPadding()
         CustomSystemSettingsButton(
             settingType = "display",
             buttonText = c.getString(R.string.open_display_settings)
@@ -54,8 +57,10 @@ fun SystemSettingsCard() {
         HorizontalDivider()
         CustomSpacerPadding()
         Text(
-            text = c.getString(R.string.debugging)
+            text = c.getString(R.string.debugging),
+            style = MaterialTheme.typography.titleMedium
         )
+        CustomSpacerPadding()
         CustomSystemSettingsButton(
             settingType = "locale",
             buttonText = c.getString(R.string.open_language_settings)

@@ -25,7 +25,6 @@ fun ClipboardCard() {
         id = "card_clipboard"
     ) {
         val isShowHintText = !SettingsViewModel().getHaveOpenedSettingsScreen(c)
-        CustomSpacerPadding()
         Button(
             onClick = {
                 onClearClipboardButton(c)

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,8 +33,10 @@ fun SettingsCard() {
         val mIsOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
         var isOneHandedMode by remember { mutableStateOf(mIsOneHandedMode) }
         Text(
-            text = "Function"
+            text = c.getString(R.string.function),
+            style = MaterialTheme.typography.titleMedium
         )
+        CustomSpacerPadding()
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
@@ -57,8 +60,10 @@ fun SettingsCard() {
         HorizontalDivider()
         CustomSpacerPadding()
         Text(
-            text = "Display"
+            text = c.getString(R.string.display),
+            style = MaterialTheme.typography.titleMedium
         )
+        CustomSpacerPadding()
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
@@ -78,10 +83,6 @@ fun SettingsCard() {
                 }
             )
         }
-        CustomSpacerPadding()
-        HorizontalDivider()
-        CustomSpacerPadding()
-        CustomSpacerPadding()
         Button(
             onClick = {
                 onClickAllCardsButton(c, false)
@@ -112,4 +113,5 @@ fun onClickAllCardsButton(c: Context, isExpand: Boolean) {
     SettingsViewModel().saveCardExpandedState(c, "card_unicode", isExpand)
     SettingsViewModel().saveCardExpandedState(c, "card_google_maps", isExpand)
     SettingsViewModel().saveCardExpandedState(c, "card_open_app_on_google_play", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_volume", isExpand)
 }

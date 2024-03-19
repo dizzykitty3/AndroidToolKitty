@@ -75,6 +75,10 @@
     <string name="collapse_all_cards">Collapse all cards</string>
     <string name="expand_all_cards">Expand all cards</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240313</string>
+    <string name="version_number" translatable="false">20240319</string>
     <string name="one_handed_mode">One-handed mode</string>
+    <string name="volume">Volume</string>
+    <string name="function">Function</string>
+    <string name="display">Display</string>
+    <string name="media_volume">Media volume</string>
 </resources>

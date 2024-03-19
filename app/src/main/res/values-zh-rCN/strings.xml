@@ -74,4 +74,8 @@
     <string name="expand_all_cards">展开所有卡片</string>
     <string name="version">版本</string>
     <string name="one_handed_mode">单手模式</string>
+    <string name="volume">音量</string>
+    <string name="function">功能</string>
+    <string name="display">显示</string>
+    <string name="media_volume">媒体音量</string>
 </resources>

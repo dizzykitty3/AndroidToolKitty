@@ -22,6 +22,6 @@ class AudioUtils(private val c: Context) {
 
     fun setVolume(volume: Int) {
         getSystemAudioService()
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0)
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI)
     }
 }
