@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.common.util
 
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -31,8 +32,13 @@ class IntentUtils(private val c: Context) {
             else -> return
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        c.startActivity(intent)
-        debugLog("onOpenSystemSettings: $settingType")
+        try {
+            c.startActivity(intent)
+            debugLog("onOpenSystemSettings: $settingType")
+        } catch (e: ActivityNotFoundException) {
+            ToastUtils(c).showToast("${e.message}")
+            debugLog(">>>ERROR ActivityNotFoundException<<< openSystemSettings: $e")
+        }
     }
 
     fun openGoogleMaps(latitude: String, longitude: String) {
@@ -41,13 +47,23 @@ class IntentUtils(private val c: Context) {
         val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         intent.setPackage(GOOGLE_MAPS)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        c.startActivity(intent)
+        try {
+            c.startActivity(intent)
+        } catch (e: ActivityNotFoundException) {
+            ToastUtils(c).showToast("${e.message}")
+            debugLog(">>>ERROR ActivityNotFoundException<<< openGoogleMaps: $e")
+        }
     }
 
     private fun startActivity(intent: Intent) {
         if (Objects.nonNull(intent.resolveActivity(c.packageManager))) {
-            c.startActivity(intent)
-            return
+            try {
+                c.startActivity(intent)
+                return
+            } catch (e: ActivityNotFoundException) {
+                ToastUtils(c).showToast("${e.message}")
+                debugLog(">>>ERROR ActivityNotFoundException<<< startActivity: $e")
+            }
         }
         when (intent.`package`) {
             GOOGLE_PLAY_STORE ->
@@ -75,8 +91,13 @@ class IntentUtils(private val c: Context) {
         val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
         playStoreIntent.setPackage(GOOGLE_PLAY_STORE)
         playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        IntentUtils(c).startActivity(playStoreIntent)
-        debugLog("openCertainAppOnPlayStore")
+        try {
+            IntentUtils(c).startActivity(playStoreIntent)
+            debugLog("openCertainAppOnPlayStore")
+        } catch (e: ActivityNotFoundException) {
+            ToastUtils(c).showToast("${e.message}")
+            debugLog(">>>ERROR ActivityNotFoundException<<< openCertainAppOnPlayStore: $e")
+        }
     }
 
     companion object {
