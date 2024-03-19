@@ -37,6 +37,9 @@ fun UnicodeCard() {
     ) {
         var unicode by remember { mutableStateOf("") }
         val characters = remember { mutableStateOf("") }
+        CustomTip(
+            text = c.getString(R.string.temp3)
+        )
         OutlinedTextField(
             value = unicode,
             onValueChange = { unicode = it },
@@ -74,9 +77,6 @@ fun UnicodeCard() {
                 text = c.getString(R.string.convert)
             )
         }
-        CustomTip(
-            text = c.getString(R.string.temp3)
-        )
     }
 }
 

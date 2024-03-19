@@ -44,6 +44,11 @@ fun SocialMediaProfileCard() {
         val mPlatformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(c)
         var platformIndex by remember { mutableIntStateOf(mPlatformIndex) }
         val platformList = UrlUtils.Platform.entries.map { c.getString(it.nameResId) }
+        if (platformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+            CustomTip(
+                text = c.getString(R.string.temp2)
+            )
+        }
         CustomDropdownMenu(
             items = platformList,
             onItemSelected = { platformIndex = it },
@@ -99,11 +104,6 @@ fun SocialMediaProfileCard() {
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
                 modifier = Modifier.align(Alignment.CenterVertically)
-            )
-        }
-        if (platformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-            CustomTip(
-                text = c.getString(R.string.temp2)
             )
         }
     }
