@@ -42,7 +42,7 @@ fun VolumeCard() {
                     AudioUtils(c).setVolume(newVolume.toInt())
                 },
                 valueRange = volumeRange,
-                steps = 5,
+                steps = 4, // 4 steps = 5 options
                 colors = SliderDefaults.colors(
                     thumbColor = MaterialTheme.colorScheme.primary,
                     activeTrackColor = MaterialTheme.colorScheme.primary,
