@@ -27,7 +27,7 @@ fun CustomVolumeSlider() {
                 AudioUtils(c).setVolume(newVolume.toInt())
             },
             valueRange = volumeRange,
-            steps = 2,
+            steps = 10,
             colors = SliderDefaults.colors(
                 thumbColor = MaterialTheme.colorScheme.primary,
                 activeTrackColor = MaterialTheme.colorScheme.primary,

@@ -22,6 +22,7 @@ import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.common.util.ClipboardUtils
 import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
@@ -73,7 +74,7 @@ fun UnicodeCard() {
                 text = c.getString(R.string.convert)
             )
         }
-        Text(
+        CustomTip(
             text = c.getString(R.string.temp3)
         )
     }

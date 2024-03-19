@@ -33,6 +33,7 @@ fun YearProgressCard() {
                 isShowPercentage = !isShowPercentage
             }
         ) {
+            CustomSpacerPadding()
             CustomAnimatedProgressIndicator()
             CustomSpacerPadding()
             val textToShow =

@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomDropdownMenu
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
 import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
@@ -101,7 +102,7 @@ fun SocialMediaProfileCard() {
             )
         }
         if (platformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-            Text(
+            CustomTip(
                 text = c.getString(R.string.temp2)
             )
         }
