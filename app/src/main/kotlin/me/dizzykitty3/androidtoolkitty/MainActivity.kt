@@ -43,7 +43,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onStop() {
         super.onStop()
-        currentFocus?.clearFocus() // Collapses keyboard
+        currentFocus?.clearFocus() // To collapse keyboard
         debugLog("MainActivity focus cleared")
     }
 }

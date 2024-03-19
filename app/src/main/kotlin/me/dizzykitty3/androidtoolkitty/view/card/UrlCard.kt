@@ -26,6 +26,7 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
 import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 import me.dizzykitty3.androidtoolkitty.common.util.UrlUtils
 
 @Composable
@@ -94,5 +95,5 @@ fun UrlCard() {
 fun onClickVisitUrlButton(c: Context, url: String) {
     if (url.isBlank()) return
     IntentUtils(c).openUrl(UrlUtils.processUrl(StringUtils.dropSpaces(url)))
-    StringUtils.debugLog("onClickVisitButton")
+    debugLog("onClickVisitButton")
 }

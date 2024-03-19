@@ -115,7 +115,7 @@ object UrlUtils {
         V2EX("v2ex.com/member/", R.string.v2ex),
         WEIBO("weibo.com/n/", R.string.weibo),
         X("x.com/", R.string.x),
-        YOUTUBE("youtube.com/@", R.string.youtube),
+        YOUTUBE("youtube.com/@", R.string.youtube_id),
         PLATFORM_NOT_ADDED_YET("", R.string.platform_not_added_yet)
     }
 

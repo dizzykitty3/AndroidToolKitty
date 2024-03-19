@@ -28,6 +28,7 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
 import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.common.util.UrlUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
@@ -124,5 +125,5 @@ fun onVisitProfileButton(c: Context, username: String, platformIndex: Int) {
     }
     val prefix = platform.prefix
     IntentUtils(c).openUrl("https://$prefix${StringUtils.dropSpaces(username)}")
-    StringUtils.debugLog("onVisitProfile")
+    debugLog("onVisitProfile")
 }

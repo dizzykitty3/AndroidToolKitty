@@ -17,7 +17,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSystemSettingsButton
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 
 @Composable
@@ -93,5 +93,5 @@ fun onClickCheckSetTimeAutomaticallyButton(c: Context) {
         else
             c.getString(R.string.set_time_automatically_is_off)
     )
-    StringUtils.debugLog("onClickCheckSetTimeAutomaticallyButton")
+    debugLog("onClickCheckSetTimeAutomaticallyButton")
 }
