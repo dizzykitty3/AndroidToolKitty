@@ -81,7 +81,11 @@ fun UnicodeCard() {
     }
 }
 
-fun onClickConvertButton(c: Context, unicode: String, characterField: MutableState<String>) {
+private fun onClickConvertButton(
+    c: Context,
+    unicode: String,
+    characterField: MutableState<String>
+) {
     if (unicode.isBlank()) return
     try {
         val result = StringUtils.convertUnicodeToCharacter(unicode)

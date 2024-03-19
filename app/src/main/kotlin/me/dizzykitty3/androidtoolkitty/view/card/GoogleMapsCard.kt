@@ -94,7 +94,7 @@ fun GoogleMapsCard() {
     }
 }
 
-fun onClickOpenGoogleMapsButton(c: Context, latitude: String, longitude: String) {
+private fun onClickOpenGoogleMapsButton(c: Context, latitude: String, longitude: String) {
     if (latitude.isBlank()) return
     if (longitude.isBlank()) return
     IntentUtils(c).openGoogleMaps(latitude, longitude)

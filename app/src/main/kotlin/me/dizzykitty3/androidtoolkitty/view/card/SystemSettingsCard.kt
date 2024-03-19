@@ -84,9 +84,7 @@ fun SystemSettingsCard() {
     }
 }
 
-fun onClickCheckSetTimeAutomaticallyButton(c: Context) {
-    val contentResolver: ContentResolver = c.contentResolver
-    val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
+private fun onClickCheckSetTimeAutomaticallyButton(c: Context) {
     ToastUtils(c).showToast(
         if (isAutoTime == 1)
             c.getString(R.string.set_time_automatically_is_on)

@@ -110,7 +110,7 @@ fun SocialMediaProfileCard() {
     }
 }
 
-fun onVisitProfileButton(c: Context, username: String, platformIndex: Int) {
+private fun onVisitProfileButton(c: Context, username: String, platformIndex: Int) {
     if (username.isBlank()) return
     val platform = UrlUtils.Platform.entries.getOrNull(platformIndex) ?: return
     if (platform == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET) {

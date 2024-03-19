@@ -104,7 +104,7 @@ fun SettingsCard() {
     }
 }
 
-fun onClickAllCardsButton(c: Context, isExpand: Boolean) {
+private fun onClickAllCardsButton(c: Context, isExpand: Boolean) {
     SettingsViewModel().saveCardExpandedState(c, "card_year_progress", isExpand)
     SettingsViewModel().saveCardExpandedState(c, "card_clipboard", isExpand)
     SettingsViewModel().saveCardExpandedState(c, "card_url", isExpand)

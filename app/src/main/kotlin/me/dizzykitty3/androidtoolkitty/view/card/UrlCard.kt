@@ -92,7 +92,7 @@ fun UrlCard() {
     }
 }
 
-fun onClickVisitUrlButton(c: Context, url: String) {
+private fun onClickVisitUrlButton(c: Context, url: String) {
     if (url.isBlank()) return
     IntentUtils(c).openUrl(UrlUtils.processUrl(StringUtils.dropSpaces(url)))
     debugLog("onClickVisitButton")
