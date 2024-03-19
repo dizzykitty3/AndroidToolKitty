@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.common.util.ClipboardUtils
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
@@ -37,7 +38,7 @@ fun ClipboardCard() {
         }
         if (isShowHintText) {
             CustomSpacerPadding()
-            Text(
+            CustomTip(
                 text = c.getString(R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
             )
         }

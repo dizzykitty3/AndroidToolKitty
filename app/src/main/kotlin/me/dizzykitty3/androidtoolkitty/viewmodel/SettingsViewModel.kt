@@ -71,6 +71,14 @@ class SettingsViewModel : ViewModel() {
         }
     }
 
+    fun clear(context: Context) {
+        debugLog("erase all app data")
+        with(getSharedPrefs(context).edit()) {
+            clear()
+            apply()
+        }
+    }
+
     companion object {
         private const val PREF_NAME = "Settings"
         private const val IS_AUTO_CLEAR_CLIPBOARD = "is_auto_clear_clipboard"

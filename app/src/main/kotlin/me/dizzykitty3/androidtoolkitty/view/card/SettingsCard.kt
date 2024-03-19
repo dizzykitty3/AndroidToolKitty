@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import android.app.Activity
 import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -99,6 +100,24 @@ fun SettingsCard() {
         ) {
             Text(
                 text = c.getString(R.string.expand_all_cards)
+            )
+        }
+        CustomSpacerPadding()
+        HorizontalDivider()
+        CustomSpacerPadding()
+        Text(
+            text = "Debugging",
+            style = MaterialTheme.typography.titleMedium
+        )
+        CustomSpacerPadding()
+        Button(
+            onClick = {
+                SettingsViewModel().clear(c)
+                (c as Activity).finish()
+            }
+        ) {
+            Text(
+                text = "Erase all app data"
             )
         }
     }
