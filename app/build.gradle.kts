@@ -61,8 +61,6 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.material3)
     implementation(libs.material.icons.extended)
-    implementation(libs.ui.tooling.preview)
-    debugImplementation(libs.ui.tooling)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.runtime.livedata)
     implementation(libs.navigation.compose)
