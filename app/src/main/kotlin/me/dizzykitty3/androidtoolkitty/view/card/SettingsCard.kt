@@ -18,13 +18,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
-fun SettingsCard() {
+fun SettingsCard(navController: NavHostController) {
     val c = LocalContext.current
     CustomStaticCard(
         title = c.getString(R.string.settings)
@@ -102,6 +103,15 @@ fun SettingsCard() {
                 text = c.getString(R.string.expand_all_cards)
             )
         }
+        Button(
+            onClick = {
+                navController.navigate("HideCardSettingScreen")
+            }
+        ) {
+            Text(
+                text = "Hide cards you don't need"
+            )
+        }
         CustomSpacerPadding()
         HorizontalDivider()
         CustomSpacerPadding()
@@ -125,6 +135,7 @@ fun SettingsCard() {
 
 private fun onClickAllCardsButton(c: Context, isExpand: Boolean) {
     SettingsViewModel().saveCardExpandedState(c, "card_year_progress", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_volume", isExpand)
     SettingsViewModel().saveCardExpandedState(c, "card_clipboard", isExpand)
     SettingsViewModel().saveCardExpandedState(c, "card_url", isExpand)
     SettingsViewModel().saveCardExpandedState(c, "card_social_media_profile", isExpand)
@@ -132,5 +143,4 @@ private fun onClickAllCardsButton(c: Context, isExpand: Boolean) {
     SettingsViewModel().saveCardExpandedState(c, "card_unicode", isExpand)
     SettingsViewModel().saveCardExpandedState(c, "card_google_maps", isExpand)
     SettingsViewModel().saveCardExpandedState(c, "card_open_app_on_google_play", isExpand)
-    SettingsViewModel().saveCardExpandedState(c, "card_volume", isExpand)
 }

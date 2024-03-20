@@ -5,16 +5,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomBottomPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTopPadding
-import me.dizzykitty3.androidtoolkitty.view.card.AboutCard
-import me.dizzykitty3.androidtoolkitty.view.card.SettingsCard
+import me.dizzykitty3.androidtoolkitty.view.card.HideCardSettingCard
 
 @Composable
-fun SettingsScreen(navController: NavHostController) {
+fun HideCardSettingScreen() {
     val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
     LazyColumn(
         modifier = Modifier.padding(
@@ -26,10 +24,7 @@ fun SettingsScreen(navController: NavHostController) {
         item { CustomTopPadding() }
 
         // Contents
-        item { SettingsCard(navController) }
-        item { CustomCardSpacePadding() }
-
-        item { AboutCard() }
+        item { HideCardSettingCard() }
         item { CustomCardSpacePadding() }
 
         // Bottom

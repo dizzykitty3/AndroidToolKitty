@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import me.dizzykitty3.androidtoolkitty.view.layout.HideCardSettingScreen
 import me.dizzykitty3.androidtoolkitty.view.layout.HomeScreen
 import me.dizzykitty3.androidtoolkitty.view.layout.SettingsScreen
 
@@ -18,7 +19,10 @@ fun MainLayout() {
             HomeScreen(navController)
         }
         composable("SettingsScreen") {
-            SettingsScreen()
+            SettingsScreen(navController)
+        }
+        composable("HideCardSettingScreen") {
+            HideCardSettingScreen()
         }
     }
 }
