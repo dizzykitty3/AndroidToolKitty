@@ -66,8 +66,8 @@
     <string name="temp1">Android ToolKitty 会在启动时为您清除剪贴板。此功能的开关会在将来版本中加入。</string>
     <string name="bilibili_user">哔哩哔哩 (用户 ID)</string>
     <string name="clear_clipboard_on_launch">在启动时清除剪贴板</string>
-    <string name="temp2">提交平台名称功能仍在开发中</string>
-    <string name="temp3">转换字符到 Unicode 功能仍在开发中</string>
+    <string name="temp2">【开发中功能】提交平台名称</string>
+    <string name="temp3">【开发中功能】转换字符到 Unicode</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开\"启动时自动清空剪贴板\"功能</string>
     <string name="settings">设置</string>
     <string name="collapse_all_cards">收起所有卡片</string>
@@ -80,4 +80,5 @@
     <string name="media_volume">媒体音量</string>
     <string name="erase_all_app_data">清除应用所有数据</string>
     <string name="set_time_automatically_is_off_tip">“自动设置时间”未启用。某些应用部分功能可能表现异常。</string>
+    <string name="temp4">【开发中功能】添加自定义音量选项</string>
 </resources>
