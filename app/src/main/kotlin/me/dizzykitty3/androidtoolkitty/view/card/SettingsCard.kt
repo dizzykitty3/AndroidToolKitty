@@ -142,8 +142,8 @@ fun SettingsCard(navController: NavHostController) {
         if (showDialog) {
             AlertDialog(
                 onDismissRequest = { showDialog = false },
-                title = { Text("Warning") },
-                text = { Text("This action will erase all your data, including histories, settings.\nAre you sure you want to proceed?") },
+                title = { Text(c.getString(R.string.warning)) },
+                text = { Text(c.getString(R.string.warning_erase_all_data)) },
                 confirmButton = {
                     Button(
                         onClick = {

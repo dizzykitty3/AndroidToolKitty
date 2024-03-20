@@ -84,4 +84,6 @@
     <string name="erase_all_app_data">Erase all app data</string>
     <string name="set_time_automatically_is_off_tip">\"Set time automatically\" is now OFF. You may experience some unexpected behavior while using your phone.</string>
     <string name="temp4">Add custom volume option function is under development.</string>
+    <string name="warning">Warning</string>
+    <string name="warning_erase_all_data">This action will erase all your data, including histories and settings.\n\nAre you sure you want to proceed?</string>
 </resources>
