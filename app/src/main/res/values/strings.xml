@@ -68,17 +68,19 @@
     <string name="temp1">Android ToolKitty will now clear your clipboard on launch. This function will be optional in the future.</string>
     <string name="bilibili_user">Bilibili (User ID)</string>
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
-    <string name="temp2">Upload platform name function is under development</string>
-    <string name="temp3">Convert characters to Unicode function is under development</string>
+    <string name="temp2">Upload platform name function is under development.</string>
+    <string name="temp3">Convert characters to Unicode function is under development.</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on \"clear clipboard on launch\" in Settings Screen</string>
     <string name="settings">Settings</string>
     <string name="collapse_all_cards">Collapse all cards</string>
     <string name="expand_all_cards">Expand all cards</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240319</string>
+    <string name="version_number" translatable="false">20240320</string>
     <string name="one_handed_mode">One-handed mode</string>
     <string name="volume">Volume</string>
     <string name="function">Function</string>
     <string name="display">Display</string>
     <string name="media_volume">Media volume</string>
+    <string name="erase_all_app_data">Erase all app data</string>
+    <string name="set_time_automatically_is_off_tip">\"Set time automatically\" is now OFF. You may experience some unexpected behavior while using your phone.</string>
 </resources>

@@ -26,7 +26,7 @@ fun SystemSettingsCard() {
     ) {
         if (!checkIsAutoTime(c)) {
             CustomTip(
-                text = "\"Set time automatically\" is now OFF, you may meet some unexpected behavior while using your phone."
+                text = c.getString(R.string.set_time_automatically_is_off_tip)
             )
         }
         Text(

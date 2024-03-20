@@ -78,4 +78,6 @@
     <string name="function">功能</string>
     <string name="display">显示</string>
     <string name="media_volume">媒体音量</string>
+    <string name="erase_all_app_data">清除应用所有数据</string>
+    <string name="set_time_automatically_is_off_tip">“自动设置时间”未启用。某些应用部分功能可能表现异常。</string>
 </resources>

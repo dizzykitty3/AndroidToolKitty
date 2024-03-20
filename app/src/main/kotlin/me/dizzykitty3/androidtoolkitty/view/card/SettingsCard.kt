@@ -106,7 +106,7 @@ fun SettingsCard() {
         HorizontalDivider()
         CustomSpacerPadding()
         Text(
-            text = "Debugging",
+            text = c.getString(R.string.debugging),
             style = MaterialTheme.typography.titleMedium
         )
         CustomSpacerPadding()
@@ -117,7 +117,7 @@ fun SettingsCard() {
             }
         ) {
             Text(
-                text = "Erase all app data"
+                text = c.getString(R.string.erase_all_app_data)
             )
         }
     }
