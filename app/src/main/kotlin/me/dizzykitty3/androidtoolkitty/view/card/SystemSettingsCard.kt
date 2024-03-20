@@ -43,6 +43,10 @@ fun SystemSettingsCard() {
             buttonText = c.getString(R.string.open_auto_rotate_settings)
         )
         CustomSystemSettingsButton(
+            settingType = "bluetooth",
+            buttonText = c.getString(R.string.open_bluetooth_settings)
+        )
+        CustomSystemSettingsButton(
             settingType = "manage_default_apps",
             buttonText = c.getString(R.string.open_default_apps_settings)
         )
