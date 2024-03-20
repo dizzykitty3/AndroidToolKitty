@@ -5,18 +5,18 @@ import android.content.ClipboardManager
 import android.content.Context
 import me.dizzykitty3.androidtoolkitty.R
 
-class ClipboardUtils(private val c: Context) {
+class ClipboardUtils(private val context: Context) {
     private lateinit var clipboard: ClipboardManager
 
     private fun getSystemClipboardService() {
-        clipboard = c.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     }
 
     fun clearClipboard() {
         getSystemClipboardService()
         if (clipboard.hasPrimaryClip()) {
             clipboard.clearPrimaryClip()
-            ToastUtils(c).showToastAndRecordLog(c.getString(R.string.clipboard_cleared_automatically))
+            ToastUtils(context).showToastAndRecordLog(context.getString(R.string.clipboard_cleared_automatically))
         }
     }
 
@@ -24,6 +24,6 @@ class ClipboardUtils(private val c: Context) {
         getSystemClipboardService()
         val clip = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
-        ToastUtils(c).showToast("$text ${c.getString(R.string.copied)}")
+        ToastUtils(context).showToast("$text ${context.getString(R.string.copied)}")
     }
 }

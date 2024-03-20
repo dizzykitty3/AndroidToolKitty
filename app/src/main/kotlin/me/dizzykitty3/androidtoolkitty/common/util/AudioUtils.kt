@@ -3,11 +3,11 @@ package me.dizzykitty3.androidtoolkitty.common.util
 import android.content.Context
 import android.media.AudioManager
 
-class AudioUtils(private val c: Context) {
+class AudioUtils(private val context: Context) {
     private lateinit var audioManager: AudioManager
 
     private fun getSystemAudioService() {
-        audioManager = c.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     }
 
     fun getVolume(): Int {

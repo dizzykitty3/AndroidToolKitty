@@ -9,12 +9,12 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 import java.util.Objects
 
-class IntentUtils(private val c: Context) {
+class IntentUtils(private val context: Context) {
     fun openUrl(finalUrl: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(finalUrl)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        c.startActivity(intent)
+        context.startActivity(intent)
         debugLog("openUrl")
     }
 
@@ -33,10 +33,10 @@ class IntentUtils(private val c: Context) {
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         try {
-            c.startActivity(intent)
+            context.startActivity(intent)
             debugLog("onOpenSystemSettings: $settingType")
         } catch (e: ActivityNotFoundException) {
-            ToastUtils(c).showToast("${e.message}")
+            ToastUtils(context).showToast("${e.message}")
             debugLog(">>>ERROR ActivityNotFoundException<<< openSystemSettings: $e")
         }
     }
@@ -48,34 +48,34 @@ class IntentUtils(private val c: Context) {
         intent.setPackage(GOOGLE_MAPS)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         try {
-            c.startActivity(intent)
+            context.startActivity(intent)
         } catch (e: ActivityNotFoundException) {
-            ToastUtils(c).showToast("${e.message}")
+            ToastUtils(context).showToast("${e.message}")
             debugLog(">>>ERROR ActivityNotFoundException<<< openGoogleMaps: $e")
         }
     }
 
     private fun startActivity(intent: Intent) {
-        if (Objects.nonNull(intent.resolveActivity(c.packageManager))) {
+        if (Objects.nonNull(intent.resolveActivity(context.packageManager))) {
             try {
-                c.startActivity(intent)
+                context.startActivity(intent)
                 return
             } catch (e: ActivityNotFoundException) {
-                ToastUtils(c).showToast("${e.message}")
+                ToastUtils(context).showToast("${e.message}")
                 debugLog(">>>ERROR ActivityNotFoundException<<< startActivity: $e")
             }
         }
         when (intent.`package`) {
             GOOGLE_PLAY_STORE ->
-                ToastUtils(c).showToastAndRecordLog(
-                    c.getString(R.string.google_play_store_not_installed)
+                ToastUtils(context).showToastAndRecordLog(
+                    context.getString(R.string.google_play_store_not_installed)
                 )
 
             GOOGLE_MAPS -> {
-                ToastUtils(c).showToastAndRecordLog(
-                    c.getString(R.string.google_maps_app_not_installed)
+                ToastUtils(context).showToastAndRecordLog(
+                    context.getString(R.string.google_maps_app_not_installed)
                 )
-                IntentUtils(c).openAppOnPlayStore(GOOGLE_MAPS)
+                IntentUtils(context).openAppOnPlayStore(GOOGLE_MAPS)
             }
         }
     }
@@ -92,10 +92,10 @@ class IntentUtils(private val c: Context) {
         playStoreIntent.setPackage(GOOGLE_PLAY_STORE)
         playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         try {
-            IntentUtils(c).startActivity(playStoreIntent)
+            IntentUtils(context).startActivity(playStoreIntent)
             debugLog("openCertainAppOnPlayStore")
         } catch (e: ActivityNotFoundException) {
-            ToastUtils(c).showToast("${e.message}")
+            ToastUtils(context).showToast("${e.message}")
             debugLog(">>>ERROR ActivityNotFoundException<<< openCertainAppOnPlayStore: $e")
         }
     }
