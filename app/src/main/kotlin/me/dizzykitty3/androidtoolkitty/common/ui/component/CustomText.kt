@@ -24,7 +24,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -83,7 +82,7 @@ fun CustomTip(
         ),
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFC8E6C9)
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer
         )
     ) {
         Row(
@@ -100,14 +99,8 @@ fun CustomTip(
             Text(
                 text = text,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
+                color = MaterialTheme.colorScheme.onTertiaryContainer
             )
         }
     }
-}
-
-@Preview
-@Composable
-fun CustomTipPreview() {
-    CustomTip("This is a sample tip message.")
 }

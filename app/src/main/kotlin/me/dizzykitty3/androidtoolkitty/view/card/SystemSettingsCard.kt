@@ -5,20 +5,16 @@ import android.content.Context
 import android.provider.Settings
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSystemSettingsButton
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
-import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 
 @Composable
 fun SystemSettingsCard() {
@@ -28,6 +24,11 @@ fun SystemSettingsCard() {
         title = c.getString(R.string.android_system_settings),
         id = "card_android_system_settings"
     ) {
+        if (!checkIsAutoTime(c)) {
+            CustomTip(
+                text = "\"Set time automatically\" is now OFF, you may meet some unexpected behavior while using your phone."
+            )
+        }
         Text(
             text = c.getString(R.string.common),
             style = MaterialTheme.typography.titleMedium
@@ -65,14 +66,6 @@ fun SystemSettingsCard() {
             settingType = "locale",
             buttonText = c.getString(R.string.open_language_settings)
         )
-        Button(
-            onClick = {
-                onClickCheckSetTimeAutomaticallyButton(c)
-            },
-            elevation = ButtonDefaults.buttonElevation(1.dp)
-        ) {
-            Text(text = c.getString(R.string.check_is_set_time_automatically_on))
-        }
         CustomSystemSettingsButton(
             settingType = "date",
             buttonText = c.getString(R.string.open_date_and_time_settings)
@@ -84,14 +77,8 @@ fun SystemSettingsCard() {
     }
 }
 
-fun onClickCheckSetTimeAutomaticallyButton(c: Context) {
+private fun checkIsAutoTime(c: Context): Boolean {
     val contentResolver: ContentResolver = c.contentResolver
     val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
-    ToastUtils(c).showToast(
-        if (isAutoTime == 1)
-            c.getString(R.string.set_time_automatically_is_on)
-        else
-            c.getString(R.string.set_time_automatically_is_off)
-    )
-    StringUtils.debugLog("onClickCheckSetTimeAutomaticallyButton")
+    return isAutoTime == 1
 }

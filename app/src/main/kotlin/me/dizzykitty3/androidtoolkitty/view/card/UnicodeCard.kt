@@ -25,6 +25,7 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.common.util.ClipboardUtils
 import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
+import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 
 @Composable
@@ -80,7 +81,11 @@ fun UnicodeCard() {
     }
 }
 
-fun onClickConvertButton(c: Context, unicode: String, characterField: MutableState<String>) {
+private fun onClickConvertButton(
+    c: Context,
+    unicode: String,
+    characterField: MutableState<String>
+) {
     if (unicode.isBlank()) return
     try {
         val result = StringUtils.convertUnicodeToCharacter(unicode)
@@ -89,5 +94,5 @@ fun onClickConvertButton(c: Context, unicode: String, characterField: MutableSta
     } catch (e: Exception) {
         ToastUtils(c).showToast(e.message?.ifBlank { "Unknown error occurred" })
     }
-    StringUtils.debugLog("onClickConvertButton")
+    debugLog("onClickConvertButton")
 }
