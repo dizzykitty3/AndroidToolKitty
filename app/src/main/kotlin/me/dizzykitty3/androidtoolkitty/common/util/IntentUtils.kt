@@ -3,7 +3,6 @@ package me.dizzykitty3.androidtoolkitty.common.util
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.provider.Settings
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
@@ -25,7 +24,7 @@ class IntentUtils(private val context: Context) {
     fun openSystemSettings(settingType: String) {
         val intent: Intent = when (settingType) {
             "display" -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
-            "auto_rotate" -> if (Build.VERSION.SDK_INT >= 31) Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
+            "auto_rotate" -> if (OsVersion.android12()) Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
             "locale" -> Intent(Settings.ACTION_LOCALE_SETTINGS)
             "manage_default_apps" -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
             "bluetooth" -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)

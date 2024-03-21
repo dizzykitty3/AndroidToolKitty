@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.content.ContentResolver
 import android.content.Context
-import android.os.Build
 import android.provider.Settings
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
@@ -16,6 +15,7 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
+import me.dizzykitty3.androidtoolkitty.common.util.OsVersion
 
 @Composable
 fun SystemSettingsCard() {
@@ -39,7 +39,7 @@ fun SystemSettingsCard() {
             settingType = "display",
             buttonText = c.getString(R.string.open_display_settings)
         )
-        if (Build.VERSION.SDK_INT >= 31) {
+        if (OsVersion.android12()) {
             CustomSystemSettingsButton(
                 settingType = "auto_rotate",
                 buttonText = c.getString(R.string.open_auto_rotate_settings)
