@@ -17,6 +17,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
+import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
 fun HideCardSettingCard() {
@@ -24,16 +25,39 @@ fun HideCardSettingCard() {
     CustomStaticCard(
         title = "Hide card setting"
     ) {
-        // viewmodel
-        var isShowYearProgressCard by remember { mutableStateOf(true) }
-        var isShowVolumeCard by remember { mutableStateOf(true) }
-        var isShowClipboardCard by remember { mutableStateOf(true) }
-        var isShowUrlCard by remember { mutableStateOf(true) }
-        var isShowSocialMediaProfileCard by remember { mutableStateOf(true) }
-        var isShowAndroidSystemSettingsCard by remember { mutableStateOf(true) }
-        var isShowUnicodeCard by remember { mutableStateOf(true) }
-        var isShowGoogleMapsCard by remember { mutableStateOf(true) }
-        var isShowOpenAppOnGooglePlayCard by remember { mutableStateOf(true) }
+        val isShowYearProgressCard =
+            SettingsViewModel().getCardExpandedState(c, "card_year_progress")
+        val isShowVolumeCard = SettingsViewModel().getCardExpandedState(c, "card_volume")
+        val isShowClipboardCard = SettingsViewModel().getCardExpandedState(c, "card_clipboard")
+        val isShowUrlCard = SettingsViewModel().getCardExpandedState(c, "card_url")
+        val isShowSocialMediaProfileCard =
+            SettingsViewModel().getCardExpandedState(c, "card_social_media_profile")
+        val isShowAndroidSystemSettingsCard =
+            SettingsViewModel().getCardExpandedState(c, "card_android_system_settings")
+        val isShowUnicodeCard = SettingsViewModel().getCardExpandedState(c, "card_unicode")
+        val isShowGoogleMapsCard = SettingsViewModel().getCardExpandedState(c, "card_google_maps")
+        val isShowOpenAppOnGooglePlayCard =
+            SettingsViewModel().getCardExpandedState(c, "card_open_app_on_google_play")
+        val isShowAndroidVersionsCard =
+            SettingsViewModel().getCardExpandedState(c, "card_android_versions")
+        var mIsShowYearProgressCard by remember { mutableStateOf(isShowYearProgressCard) }
+        var mIsShowVolumeCard by remember { mutableStateOf(isShowVolumeCard) }
+        var mIsShowClipboardCard by remember { mutableStateOf(isShowClipboardCard) }
+        var mIsShowUrlCard by remember { mutableStateOf(isShowUrlCard) }
+        var mIsShowSocialMediaProfileCard by remember { mutableStateOf(isShowSocialMediaProfileCard) }
+        var mIsShowAndroidSystemSettingsCard by remember {
+            mutableStateOf(
+                isShowAndroidSystemSettingsCard
+            )
+        }
+        var mIsShowUnicodeCard by remember { mutableStateOf(isShowUnicodeCard) }
+        var mIsShowGoogleMapsCard by remember { mutableStateOf(isShowGoogleMapsCard) }
+        var mIsShowOpenAppOnGooglePlayCard by remember {
+            mutableStateOf(
+                isShowOpenAppOnGooglePlayCard
+            )
+        }
+        var mIsShowAndroidVersionsCard by remember { mutableStateOf(isShowAndroidVersionsCard) }
         CustomTip(
             text = ">>>UNDER DEVELOPMENT<<<"
         )
@@ -45,8 +69,12 @@ fun HideCardSettingCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isShowYearProgressCard = !isShowYearProgressCard
-                // viewmodel
+                mIsShowYearProgressCard = !mIsShowYearProgressCard
+                SettingsViewModel().saveCardExpandedState(
+                    c,
+                    "card_year_progress",
+                    mIsShowYearProgressCard
+                )
             }
         ) {
             Text(
@@ -54,10 +82,10 @@ fun HideCardSettingCard() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = isShowYearProgressCard,
+                checked = mIsShowYearProgressCard,
                 onCheckedChange = {
-                    isShowYearProgressCard = it
-                    // viewmodel
+                    mIsShowYearProgressCard = it
+                    SettingsViewModel().saveCardExpandedState(c, "card_year_progress", it)
                 }
             )
         }
@@ -65,8 +93,8 @@ fun HideCardSettingCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isShowVolumeCard = !isShowVolumeCard
-                // viewmodel
+                mIsShowVolumeCard = !mIsShowVolumeCard
+                SettingsViewModel().saveCardExpandedState(c, "card_volume", mIsShowYearProgressCard)
             }
         ) {
             Text(
@@ -74,10 +102,10 @@ fun HideCardSettingCard() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = isShowVolumeCard,
+                checked = mIsShowVolumeCard,
                 onCheckedChange = {
-                    isShowVolumeCard = it
-                    // viewmodel
+                    mIsShowVolumeCard = it
+                    SettingsViewModel().saveCardExpandedState(c, "card_volume", it)
                 }
             )
         }
@@ -85,8 +113,12 @@ fun HideCardSettingCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isShowClipboardCard = !isShowClipboardCard
-                // viewmodel
+                mIsShowClipboardCard = !mIsShowClipboardCard
+                SettingsViewModel().saveCardExpandedState(
+                    c,
+                    "card_clipboard",
+                    mIsShowYearProgressCard
+                )
             }
         ) {
             Text(
@@ -94,10 +126,10 @@ fun HideCardSettingCard() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = isShowClipboardCard,
+                checked = mIsShowClipboardCard,
                 onCheckedChange = {
-                    isShowClipboardCard = it
-                    // viewmodel
+                    mIsShowClipboardCard = it
+                    SettingsViewModel().saveCardExpandedState(c, "card_clipboard", it)
                 }
             )
         }
@@ -105,8 +137,8 @@ fun HideCardSettingCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isShowUrlCard = !isShowUrlCard
-                // viewmodel
+                mIsShowUrlCard = !mIsShowUrlCard
+                SettingsViewModel().saveCardExpandedState(c, "card_url", mIsShowYearProgressCard)
             }
         ) {
             Text(
@@ -114,10 +146,10 @@ fun HideCardSettingCard() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = isShowUrlCard,
+                checked = mIsShowUrlCard,
                 onCheckedChange = {
-                    isShowUrlCard = it
-                    // viewmodel
+                    mIsShowUrlCard = it
+                    SettingsViewModel().saveCardExpandedState(c, "card_url", it)
                 }
             )
         }
@@ -125,8 +157,12 @@ fun HideCardSettingCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isShowSocialMediaProfileCard = !isShowSocialMediaProfileCard
-                // viewmodel
+                mIsShowSocialMediaProfileCard = !mIsShowSocialMediaProfileCard
+                SettingsViewModel().saveCardExpandedState(
+                    c,
+                    "card_social_media_profile",
+                    mIsShowYearProgressCard
+                )
             }
         ) {
             Text(
@@ -134,10 +170,10 @@ fun HideCardSettingCard() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = isShowSocialMediaProfileCard,
+                checked = mIsShowSocialMediaProfileCard,
                 onCheckedChange = {
-                    isShowSocialMediaProfileCard = it
-                    // viewmodel
+                    mIsShowSocialMediaProfileCard = it
+                    SettingsViewModel().saveCardExpandedState(c, "card_social_media_profile", it)
                 }
             )
         }
@@ -145,8 +181,12 @@ fun HideCardSettingCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isShowAndroidSystemSettingsCard = !isShowAndroidSystemSettingsCard
-                // viewmodel
+                mIsShowAndroidSystemSettingsCard = !mIsShowAndroidSystemSettingsCard
+                SettingsViewModel().saveCardExpandedState(
+                    c,
+                    "card_android_system_settings",
+                    mIsShowYearProgressCard
+                )
             }
         ) {
             Text(
@@ -154,10 +194,10 @@ fun HideCardSettingCard() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = isShowAndroidSystemSettingsCard,
+                checked = mIsShowAndroidSystemSettingsCard,
                 onCheckedChange = {
-                    isShowAndroidSystemSettingsCard = it
-                    // viewmodel
+                    mIsShowAndroidSystemSettingsCard = it
+                    SettingsViewModel().saveCardExpandedState(c, "card_android_system_settings", it)
                 }
             )
         }
@@ -165,8 +205,12 @@ fun HideCardSettingCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isShowUnicodeCard = !isShowUnicodeCard
-                // viewmodel
+                mIsShowUnicodeCard = !mIsShowUnicodeCard
+                SettingsViewModel().saveCardExpandedState(
+                    c,
+                    "card_unicode",
+                    mIsShowYearProgressCard
+                )
             }
         ) {
             Text(
@@ -174,10 +218,10 @@ fun HideCardSettingCard() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = isShowUnicodeCard,
+                checked = mIsShowUnicodeCard,
                 onCheckedChange = {
-                    isShowUnicodeCard = it
-                    // viewmodel
+                    mIsShowUnicodeCard = it
+                    SettingsViewModel().saveCardExpandedState(c, "card_unicode", it)
                 }
             )
         }
@@ -185,8 +229,12 @@ fun HideCardSettingCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isShowGoogleMapsCard = !isShowGoogleMapsCard
-                // viewmodel
+                mIsShowGoogleMapsCard = !mIsShowGoogleMapsCard
+                SettingsViewModel().saveCardExpandedState(
+                    c,
+                    "card_google_maps",
+                    mIsShowYearProgressCard
+                )
             }
         ) {
             Text(
@@ -194,10 +242,10 @@ fun HideCardSettingCard() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = isShowGoogleMapsCard,
+                checked = mIsShowGoogleMapsCard,
                 onCheckedChange = {
-                    isShowGoogleMapsCard = it
-                    // viewmodel
+                    mIsShowGoogleMapsCard = it
+                    SettingsViewModel().saveCardExpandedState(c, "card_google_maps", it)
                 }
             )
         }
@@ -205,8 +253,12 @@ fun HideCardSettingCard() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isShowOpenAppOnGooglePlayCard = !isShowOpenAppOnGooglePlayCard
-                // viewmodel
+                mIsShowOpenAppOnGooglePlayCard = !mIsShowOpenAppOnGooglePlayCard
+                SettingsViewModel().saveCardExpandedState(
+                    c,
+                    "card_open_app_on_google_play",
+                    mIsShowYearProgressCard
+                )
             }
         ) {
             Text(
@@ -214,10 +266,34 @@ fun HideCardSettingCard() {
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = isShowOpenAppOnGooglePlayCard,
+                checked = mIsShowOpenAppOnGooglePlayCard,
                 onCheckedChange = {
-                    isShowOpenAppOnGooglePlayCard = it
-                    // viewmodel
+                    mIsShowOpenAppOnGooglePlayCard = it
+                    SettingsViewModel().saveCardExpandedState(c, "card_open_app_on_google_play", it)
+                }
+            )
+        }
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.clickable {
+                mIsShowAndroidVersionsCard = !mIsShowAndroidVersionsCard
+                SettingsViewModel().saveCardExpandedState(
+                    c,
+                    "card_android_versions",
+                    mIsShowYearProgressCard
+                )
+            }
+        ) {
+            Text(
+                text = c.getString(R.string.android_versions)
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Switch(
+                checked = mIsShowAndroidVersionsCard,
+                onCheckedChange = {
+                    mIsShowAndroidVersionsCard = it
+                    SettingsViewModel().saveCardExpandedState(c, "card_android_versions", it)
                 }
             )
         }

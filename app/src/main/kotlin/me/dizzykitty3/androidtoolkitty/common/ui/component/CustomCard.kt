@@ -1,8 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.common.ui.component
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -57,14 +55,14 @@ fun CustomCard(
                         )
                     )
                     CustomIconAndTextPadding()
-                    Box(
-                        modifier = Modifier.clickable {
-                            expanded = !expanded
-                            SettingsViewModel().saveCardExpandedState(c, id, expanded)
-                        }
-                    ) {
+//                    Box(
+//                        modifier = Modifier.clickable {
+//                            expanded = !expanded
+//                            SettingsViewModel().saveCardExpandedState(c, id, expanded)
+//                        }
+//                    ) {
                         CardTitle(title = title)
-                    }
+//                    }
                 }
                 AnimatedVisibility(expanded) {
                     CardContentColumn { content() }

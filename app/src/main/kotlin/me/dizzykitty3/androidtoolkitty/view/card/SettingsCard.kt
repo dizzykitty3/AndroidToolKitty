@@ -145,4 +145,5 @@ private fun onClickAllCardsButton(c: Context, isExpand: Boolean) {
     SettingsViewModel().saveCardExpandedState(c, "card_unicode", isExpand)
     SettingsViewModel().saveCardExpandedState(c, "card_google_maps", isExpand)
     SettingsViewModel().saveCardExpandedState(c, "card_open_app_on_google_play", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_android_versions", isExpand)
 }
