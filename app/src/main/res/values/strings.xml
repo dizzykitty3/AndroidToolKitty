@@ -89,4 +89,7 @@
     <string name="open_on_other_markets">Open on other markets</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
     <string name="android_versions">Android versions</string>
+    <string name="edit_home">Edit home</string>
+    <string name="customize_my_home_page">Customize my home page</string>
+    <string name="tip_under_development">&gt;&gt;&gt; UNDER DEVELOPMENT &lt;&lt;&lt;</string>
 </resources>

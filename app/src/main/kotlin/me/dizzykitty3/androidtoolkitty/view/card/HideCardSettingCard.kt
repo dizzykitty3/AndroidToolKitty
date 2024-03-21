@@ -26,7 +26,7 @@ import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 fun HideCardSettingCard() {
     val c = LocalContext.current
     CustomStaticCard(
-        title = "Hide card setting"
+        title = c.getString(R.string.customize_my_home_page)
     ) {
         val isShowYearProgressCard =
             SettingsViewModel().getCardExpandedState(c, "card_year_progress")
@@ -62,7 +62,7 @@ fun HideCardSettingCard() {
         }
         var mIsShowAndroidVersionsCard by remember { mutableStateOf(isShowAndroidVersionsCard) }
         CustomTip(
-            text = ">>>UNDER DEVELOPMENT<<<"
+            text = c.getString(R.string.tip_under_development)
         )
         CustomSpacerPadding()
 

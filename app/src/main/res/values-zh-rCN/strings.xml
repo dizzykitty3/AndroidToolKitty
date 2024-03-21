@@ -87,4 +87,7 @@
     <string name="open_on_other_markets">在其他应用商店打开</string>
     <string name="system_settings_unsupported">此定制化系统不支持打开这项设置</string>
     <string name="android_versions">Android 版本历史</string>
+    <string name="edit_home">编辑主页面</string>
+    <string name="customize_my_home_page">自定义显示的卡片</string>
+    <string name="tip_under_development">&gt;&gt;&gt; 功能开发中 &lt;&lt;&lt;</string>
 </resources>
