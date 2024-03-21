@@ -78,24 +78,26 @@ class IntentUtils(private val context: Context) {
                 ToastUtils(context).showToastAndRecordLog(
                     context.getString(R.string.google_maps_not_installed)
                 )
-                IntentUtils(context).openAppOnPlayStore(GOOGLE_MAPS)
+                IntentUtils(context).openAppOnMarket(GOOGLE_MAPS)
             }
         }
     }
 
-    fun openAppOnPlayStore(packageName: String) {
-        val playStoreUri: Uri = if (packageName.isBlank()) {
-            Uri.parse("market://details?id=$GOOGLE_CHROME")
-        } else if (packageName.contains(".")) {
-            Uri.parse("market://details?id=${StringUtils.dropSpaces(packageName)}")
-        } else {
-            Uri.parse("market://search?q=${packageName.trim()}")
-        }
-        val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
-        playStoreIntent.setPackage(GOOGLE_PLAY)
-        playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    fun openAppOnMarket(packageName: String, isGooglePlay: Boolean = true) {
+        val marketUri: Uri = Uri.parse(
+            if (packageName.isBlank()) {
+                return
+            } else if (packageName.contains(".")) {
+                "market://details?id=${StringUtils.dropSpaces(packageName)}"
+            } else {
+                "market://search?q=${packageName.trim()}"
+            }
+        )
+        val marketIntent = Intent(Intent.ACTION_VIEW, marketUri)
+        if (isGooglePlay) marketIntent.setPackage(GOOGLE_PLAY)
+        marketIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         try {
-            IntentUtils(context).startActivity(playStoreIntent)
+            IntentUtils(context).startActivity(marketIntent)
             debugLog("openCertainAppOnPlayStore")
         } catch (e: ActivityNotFoundException) {
             ToastUtils(context).showToast("${e.message}")

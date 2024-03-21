@@ -47,14 +47,9 @@ fun OpenAppOnPlayStoreCard() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    IntentUtils(c).openAppOnPlayStore(packageName)
+                    IntentUtils(c).openAppOnMarket(packageName)
                 }
-            ),
-            placeholder = {
-                Text(
-                    text = c.getString(R.string.com_android_chrome)
-                )
-            }
+            )
         )
         CustomSpacerPadding()
         Row {
@@ -82,11 +77,25 @@ fun OpenAppOnPlayStoreCard() {
         }
         TextButton(
             onClick = {
-                IntentUtils(c).openAppOnPlayStore(packageName)
+                IntentUtils(c).openAppOnMarket(packageName)
             }
         ) {
             Text(
                 text = c.getString(R.string.open_on_google_play)
+            )
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+        TextButton(
+            onClick = {
+                IntentUtils(c).openAppOnMarket(packageName, false)
+            }
+        ) {
+            Text(
+                text = c.getString(R.string.open_on_other_markets)
             )
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
