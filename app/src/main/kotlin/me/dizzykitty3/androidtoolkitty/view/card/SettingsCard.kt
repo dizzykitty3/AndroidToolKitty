@@ -5,15 +5,11 @@ import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,9 +18,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
@@ -125,48 +121,17 @@ fun SettingsCard(navController: NavHostController) {
             style = MaterialTheme.typography.titleMedium
         )
         CustomSpacerPadding()
-        var showDialog by remember { mutableStateOf(false) }
-        Button(
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.error
-            ),
-            onClick = {
-                showDialog = true
+        CustomAlertDialogButton(
+            buttonText = c.getString(R.string.erase_all_app_data),
+            dialogMessageTitle = c.getString(R.string.warning),
+            dialogMessage = c.getString(R.string.warning_erase_all_data),
+            positiveButtonText = c.getString(R.string.clear_all_data),
+            negativeButtonText = null,
+            onClickAction = {
+                SettingsViewModel().clear(c)
+                (c as Activity).finish()
             }
-        ) {
-            Text(
-                text = c.getString(R.string.erase_all_app_data),
-                color = MaterialTheme.colorScheme.onError
-            )
-        }
-        if (showDialog) {
-            AlertDialog(
-                onDismissRequest = { showDialog = false },
-                title = { Text(c.getString(R.string.warning)) },
-                text = { Text(c.getString(R.string.warning_erase_all_data)) },
-                confirmButton = {
-                    Button(
-                        onClick = {
-                            showDialog = false
-                            SettingsViewModel().clear(c)
-                            (c as Activity).finish()
-                        }
-                    ) {
-                        Text(c.getString(R.string.clear_all_data))
-                    }
-                },
-                dismissButton = {
-                    TextButton(
-                        onClick = {
-                            showDialog = false
-                        }
-                    ) {
-                        Text(c.getString(android.R.string.cancel))
-                    }
-                },
-                modifier = Modifier.padding(16.dp)
-            )
-        }
+        )
     }
 }
 
