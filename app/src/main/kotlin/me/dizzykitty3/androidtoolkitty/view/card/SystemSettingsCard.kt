@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.content.ContentResolver
 import android.content.Context
+import android.os.Build
 import android.provider.Settings
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
@@ -38,10 +39,12 @@ fun SystemSettingsCard() {
             settingType = "display",
             buttonText = c.getString(R.string.open_display_settings)
         )
-        CustomSystemSettingsButton(
-            settingType = "auto_rotate",
-            buttonText = c.getString(R.string.open_auto_rotate_settings)
-        )
+        if (Build.VERSION.SDK_INT >= 31) {
+            CustomSystemSettingsButton(
+                settingType = "auto_rotate",
+                buttonText = c.getString(R.string.open_auto_rotate_settings)
+            )
+        }
         CustomSystemSettingsButton(
             settingType = "bluetooth",
             buttonText = c.getString(R.string.open_bluetooth_settings)
