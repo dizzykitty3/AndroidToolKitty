@@ -86,4 +86,5 @@
     <string name="clear_all_data">清除所有数据</string>
     <string name="open_on_other_markets">在其他应用商店打开</string>
     <string name="system_settings_unsupported">此定制化系统不支持打开这项设置</string>
+    <string name="android_versions">Android 版本历史</string>
 </resources>

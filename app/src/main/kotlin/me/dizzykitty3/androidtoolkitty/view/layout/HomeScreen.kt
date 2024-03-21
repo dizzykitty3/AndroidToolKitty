@@ -22,6 +22,7 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomBottomPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomOneHandedMode
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTopPadding
+import me.dizzykitty3.androidtoolkitty.view.card.AndroidVersionsCard
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
 import me.dizzykitty3.androidtoolkitty.view.card.GreetingText
@@ -105,6 +106,9 @@ fun HomeScreen(navController: NavHostController) {
         item { CustomCardSpacePadding() }
 
         item { OpenAppOnPlayStoreCard() }
+        item { CustomCardSpacePadding() }
+
+        item { AndroidVersionsCard() }
         item { CustomCardSpacePadding() }
 
         // Bottom

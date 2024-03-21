@@ -88,4 +88,5 @@
     <string name="clear_all_data">Clear all data</string>
     <string name="open_on_other_markets">Open on other markets</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
+    <string name="android_versions">Android versions</string>
 </resources>
