@@ -1,19 +1,20 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomDeveloperProfileLink
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
@@ -27,17 +28,9 @@ fun AboutCard() {
     CustomStaticCard(
         title = c.getString(R.string.about)
     ) {
+        CustomDeveloperProfileLink("dizzykitty3")
         CustomSpacerPadding()
-        Row {
-            Icon(
-                imageVector = Icons.Outlined.AccountCircle,
-                contentDescription = null
-            )
-            CustomIconAndTextPadding()
-            Text(
-                text = "dizzykitty3"
-            )
-        }
+        CustomDeveloperProfileLink("HongjieCN")
         CustomSpacerPadding()
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -47,19 +40,22 @@ fun AboutCard() {
                 imageVector = Icons.Outlined.Code,
                 contentDescription = null
             )
-            TextButton(
-                onClick = {
+            CustomIconAndTextPadding()
+            Row(
+                modifier = Modifier.clickable {
                     ToastUtils(c).showToast(c.getString(R.string.all_help_welcomed))
                     IntentUtils(c).openUrl(sourceCodeUrl)
                 }
             ) {
                 Text(
-                    text = c.getString(R.string.source_code_on_github)
+                    text = c.getString(R.string.source_code_on_github),
+                    color = MaterialTheme.colorScheme.primary
                 )
                 Icon(
                     imageVector = Icons.Outlined.ArrowOutward,
                     contentDescription = null,
-                    modifier = Modifier.align(Alignment.CenterVertically)
+                    modifier = Modifier.align(Alignment.CenterVertically),
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         }

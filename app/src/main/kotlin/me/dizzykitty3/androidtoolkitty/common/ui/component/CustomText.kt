@@ -1,11 +1,14 @@
 package me.dizzykitty3.androidtoolkitty.common.ui.component
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -13,9 +16,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -26,6 +31,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
+import me.dizzykitty3.androidtoolkitty.common.util.UrlUtils
 
 @Composable
 fun CustomGradientText(
@@ -118,4 +125,34 @@ fun CardTitle(
             letterSpacing = 0.0.sp
         )
     )
+}
+
+@Composable
+fun CustomDeveloperProfileLink(
+    name: String
+) {
+    Row {
+        val c = LocalContext.current
+        Icon(
+            imageVector = Icons.Outlined.AccountCircle,
+            contentDescription = null
+        )
+        CustomIconAndTextPadding()
+        Row(
+            modifier = Modifier.clickable {
+                IntentUtils(c).openUrl("${UrlUtils.getProfilePrefix(UrlUtils.Platform.GITHUB)}$name")
+            }
+        ) {
+            Text(
+                text = name,
+                color = MaterialTheme.colorScheme.primary
+            )
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
 }
