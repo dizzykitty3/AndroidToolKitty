@@ -13,6 +13,7 @@ object OsVersion {
 
     /**
      * Material You dynamic color
+     * Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS)
      */
     @JvmStatic
     fun android12(): Boolean = osVersion >= 31

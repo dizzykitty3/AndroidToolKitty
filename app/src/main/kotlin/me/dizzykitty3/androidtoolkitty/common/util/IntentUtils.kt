@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.common.util
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -21,6 +22,7 @@ class IntentUtils(private val context: Context) {
         debugLog("openUrl")
     }
 
+    @SuppressLint("InlinedApi")
     fun openSystemSettings(settingType: String) {
         val intent: Intent = when (settingType) {
             "display" -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
