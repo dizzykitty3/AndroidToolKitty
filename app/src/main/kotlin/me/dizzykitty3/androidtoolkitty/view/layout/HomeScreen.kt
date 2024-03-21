@@ -81,35 +81,71 @@ fun HomeScreen(navController: NavHostController) {
             item { CustomOneHandedMode() }
         }
 
-        item { YearProgressCard() }
-        item { CustomCardSpacePadding() }
+        val isShowYearProgressCard =
+            SettingsViewModel().getCardExpandedState(c, "card_year_progress")
+        val isShowVolumeCard = SettingsViewModel().getCardExpandedState(c, "card_volume")
+        val isShowClipboardCard = SettingsViewModel().getCardExpandedState(c, "card_clipboard")
+        val isShowUrlCard = SettingsViewModel().getCardExpandedState(c, "card_url")
+        val isShowSocialMediaProfileCard =
+            SettingsViewModel().getCardExpandedState(c, "card_social_media_profile")
+        val isShowAndroidSystemSettingsCard =
+            SettingsViewModel().getCardExpandedState(c, "card_android_system_settings")
+        val isShowUnicodeCard = SettingsViewModel().getCardExpandedState(c, "card_unicode")
+        val isShowGoogleMapsCard = SettingsViewModel().getCardExpandedState(c, "card_google_maps")
+        val isShowOpenAppOnGooglePlayCard =
+            SettingsViewModel().getCardExpandedState(c, "card_open_app_on_google_play")
+        val isShowAndroidVersionsCard =
+            SettingsViewModel().getCardExpandedState(c, "card_android_versions")
 
-        item { VolumeCard() }
-        item { CustomCardSpacePadding() }
+        if (isShowYearProgressCard) {
+            item { YearProgressCard() }
+            item { CustomCardSpacePadding() }
+        }
 
-        item { ClipboardCard() }
-        item { CustomCardSpacePadding() }
+        if (isShowVolumeCard) {
+            item { VolumeCard() }
+            item { CustomCardSpacePadding() }
+        }
 
-        item { UrlCard() }
-        item { CustomCardSpacePadding() }
+        if (isShowClipboardCard) {
+            item { ClipboardCard() }
+            item { CustomCardSpacePadding() }
+        }
 
-        item { SocialMediaProfileCard() }
-        item { CustomCardSpacePadding() }
+        if (isShowUrlCard) {
+            item { UrlCard() }
+            item { CustomCardSpacePadding() }
+        }
 
-        item { SystemSettingsCard() }
-        item { CustomCardSpacePadding() }
+        if (isShowSocialMediaProfileCard) {
+            item { SocialMediaProfileCard() }
+            item { CustomCardSpacePadding() }
+        }
 
-        item { UnicodeCard() }
-        item { CustomCardSpacePadding() }
+        if (isShowAndroidSystemSettingsCard) {
+            item { SystemSettingsCard() }
+            item { CustomCardSpacePadding() }
+        }
 
-        item { GoogleMapsCard() }
-        item { CustomCardSpacePadding() }
+        if (isShowUnicodeCard) {
+            item { UnicodeCard() }
+            item { CustomCardSpacePadding() }
+        }
 
-        item { OpenAppOnPlayStoreCard() }
-        item { CustomCardSpacePadding() }
+        if (isShowGoogleMapsCard) {
+            item { GoogleMapsCard() }
+            item { CustomCardSpacePadding() }
+        }
 
-        item { AndroidVersionsCard() }
-        item { CustomCardSpacePadding() }
+        if (isShowOpenAppOnGooglePlayCard) {
+            item { OpenAppOnPlayStoreCard() }
+            item { CustomCardSpacePadding() }
+        }
+
+        if (isShowAndroidVersionsCard) {
+            item { AndroidVersionsCard() }
+            item { CustomCardSpacePadding() }
+        }
 
         // Bottom
         item { CustomBottomPadding() }

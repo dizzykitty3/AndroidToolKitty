@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.common.ui.component
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,19 +8,13 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
 fun CustomCard(
@@ -42,10 +35,6 @@ fun CustomCard(
                 CardTitle(title = title)
                 CardContentColumn { content() }
             } else {
-                // If a card is expandable, param id and icon must not be null
-                val c = LocalContext.current
-                val mExpanded = SettingsViewModel().getCardExpandedState(c, id!!)
-                var expanded by remember { mutableStateOf(mExpanded) }
                 Row {
                     Icon(
                         imageVector = icon!!,
@@ -55,18 +44,9 @@ fun CustomCard(
                         )
                     )
                     CustomIconAndTextPadding()
-//                    Box(
-//                        modifier = Modifier.clickable {
-//                            expanded = !expanded
-//                            SettingsViewModel().saveCardExpandedState(c, id, expanded)
-//                        }
-//                    ) {
-                        CardTitle(title = title)
-//                    }
+                    CardTitle(title = title)
                 }
-                AnimatedVisibility(expanded) {
-                    CardContentColumn { content() }
-                }
+                CardContentColumn { content() }
             }
         }
     }
