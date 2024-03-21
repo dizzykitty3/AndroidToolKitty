@@ -104,7 +104,8 @@ fun CustomTip(
             Text(
                 text = text,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onTertiaryContainer
+                color = MaterialTheme.colorScheme.onTertiaryContainer,
+                modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
     }
