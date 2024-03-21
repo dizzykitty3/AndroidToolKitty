@@ -17,8 +17,8 @@
     <string name="open_language_settings">语言设置</string>
     <string name="open_default_apps_settings">默认应用设置</string>
     <string name="open_bluetooth_settings">蓝牙设置</string>
-    <!--    <string name="set_time_automatically_is_on">自动设置时间：开</string>-->
-    <!--    <string name="set_time_automatically_is_off">自动设置时间：关</string>-->
+    <string name="set_time_automatically_is_on">自动设置时间：开</string>
+    <string name="set_time_automatically_is_off">自动设置时间：关</string>
     <string name="check_is_set_time_automatically_on">检查“自动设置时间”是否启用</string>
     <string name="open_date_and_time_settings">时间与日期设置</string>
     <string name="open_battery_optimization_settings">电池优化设置</string>
@@ -30,8 +30,8 @@
     <string name="google_maps">谷歌地图</string>
     <string name="latitude">纬度</string>
     <string name="longitude">经度</string>
-    <string name="google_maps_app_not_installed">未安装谷歌地图</string>
-    <string name="google_play_store_not_installed">未安装 Google Play</string>
+    <string name="google_maps_not_installed">未安装谷歌地图</string>
+    <string name="google_play_not_installed">未安装 Google Play</string>
     <string name="open_google_maps">在谷歌地图上查看此坐标</string>
     <string name="open_app_on_google_play">打开应用的商店详情页</string>
     <string name="package_name_or_search">输入包名或搜索</string>
@@ -42,12 +42,12 @@
     <string name="social_media_profile">社交媒体主页</string>
     <string name="platform">社交平台</string>
     <string name="username">用户昵称</string>
-    <!--    <string name="visit_profile_with_id_or_username">通过昵称访问社交媒体主页</string>-->
+    <string name="visit_profile_with_id_or_username">通过昵称访问社交媒体主页</string>
     <string name="bilibili_search">哔哩哔哩（搜索）</string>
     <string name="github">GitHub</string>
     <string name="x">X（推特）</string>
     <string name="weibo">微博</string>
-    <string name="youtube_id">YouTube（ID）</string>
+    <string name="youtube">YouTube</string>
     <string name="platform_not_added_yet">这里没有我所想的社交平台</string>
     <string name="open_developer_options">开发者选项</string>
     <string name="about">关于</string>
@@ -59,11 +59,11 @@
     <string name="pixiv_artwork">pixiv (作品 ID)</string>
     <string name="pixiv_user">pixiv (用户 ID)</string>
     <string name="v2ex">V2EX</string>
-    <!--    <string name="please_choose_a_platform">还没有选择社交平台哦</string>-->
+    <string name="please_choose_a_platform">还没有选择社交平台哦</string>
     <string name="open_caption_preferences">字幕偏好</string>
     <string name="common">一般</string>
     <string name="debugging">调试</string>
-    <!--    <string name="temp1">Android ToolKitty 会在启动时为您清除剪贴板。此功能的开关会在将来版本中加入。</string>-->
+    <string name="temp1">Android ToolKitty 会在启动时为您清除剪贴板。此功能的开关会在将来版本中加入。</string>
     <string name="bilibili_user">哔哩哔哩 (用户 ID)</string>
     <string name="clear_clipboard_on_launch">在启动时清除剪贴板</string>
     <string name="temp2">【开发中功能】提交平台名称</string>
@@ -75,7 +75,7 @@
     <string name="version">版本</string>
     <string name="one_handed_mode">单手模式</string>
     <string name="volume">音量</string>
-    <string name="function">功能</string>
+    <string name="feature">功能</string>
     <string name="display">显示</string>
     <string name="media_volume">媒体音量</string>
     <string name="erase_all_app_data">清除应用所有数据</string>
@@ -83,4 +83,5 @@
     <string name="temp4">【开发中功能】添加自定义音量选项</string>
     <string name="warning">警告</string>
     <string name="warning_erase_all_data">此操作将清除您的所有数据，包括历史和设置。\n\n确定要继续吗？</string>
+    <string name="clear_all_data">清除所有数据</string>
 </resources>

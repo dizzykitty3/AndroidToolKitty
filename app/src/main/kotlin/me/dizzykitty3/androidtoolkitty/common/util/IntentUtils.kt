@@ -68,12 +68,12 @@ class IntentUtils(private val context: Context) {
         when (intent.`package`) {
             GOOGLE_PLAY_STORE ->
                 ToastUtils(context).showToastAndRecordLog(
-                    context.getString(R.string.google_play_store_not_installed)
+                    context.getString(R.string.google_play_not_installed)
                 )
 
             GOOGLE_MAPS -> {
                 ToastUtils(context).showToastAndRecordLog(
-                    context.getString(R.string.google_maps_app_not_installed)
+                    context.getString(R.string.google_maps_not_installed)
                 )
                 IntentUtils(context).openAppOnPlayStore(GOOGLE_MAPS)
             }

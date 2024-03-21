@@ -40,7 +40,7 @@ fun SettingsCard(navController: NavHostController) {
         val mIsOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
         var isOneHandedMode by remember { mutableStateOf(mIsOneHandedMode) }
         Text(
-            text = c.getString(R.string.function),
+            text = c.getString(R.string.feature),
             style = MaterialTheme.typography.titleMedium
         )
         CustomSpacerPadding()
@@ -152,7 +152,7 @@ fun SettingsCard(navController: NavHostController) {
                             (c as Activity).finish()
                         }
                     ) {
-                        Text(c.getString(android.R.string.ok))
+                        Text(c.getString(R.string.clear_all_data))
                     }
                 },
                 dismissButton = {

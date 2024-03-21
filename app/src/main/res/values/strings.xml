@@ -17,8 +17,8 @@
     <string name="open_language_settings">Language settings</string>
     <string name="open_default_apps_settings">Default apps settings</string>
     <string name="open_bluetooth_settings">Bluetooth settings</string>
-    <!--    <string name="set_time_automatically_is_on">\"Set time automatically\" is now ON</string>-->
-    <!--    <string name="set_time_automatically_is_off">\"Set time automatically\" is now OFF</string>-->
+    <string name="set_time_automatically_is_on">\"Set time automatically\" is ON</string>
+    <string name="set_time_automatically_is_off">\"Set time automatically\" is OFF</string>
     <string name="check_is_set_time_automatically_on">Check is \"set time automatically\" on</string>
     <string name="open_date_and_time_settings">Date &amp; time settings</string>
     <string name="open_battery_optimization_settings">Battery optimization settings</string>
@@ -30,8 +30,8 @@
     <string name="google_maps">Google Maps</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
-    <string name="google_maps_app_not_installed">Google Maps app is not installed</string>
-    <string name="google_play_store_not_installed">Google Play Store app is not installed</string>
+    <string name="google_maps_not_installed">Google Maps is not installed</string>
+    <string name="google_play_not_installed">Google Play is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>
     <string name="open_app_on_google_play">Open app on Google Play</string>
     <string name="package_name_or_search">Package name or search</string>
@@ -42,12 +42,12 @@
     <string name="social_media_profile">Social media profile</string>
     <string name="platform">Platform</string>
     <string name="username">Username</string>
-    <!--    <string name="visit_profile_with_id_or_username">Visit profile with id or username</string>-->
+    <string name="visit_profile_with_id_or_username">Visit profile with id or username</string>
     <string name="bilibili_search">Bilibili (Search)</string>
     <string name="github">GitHub</string>
-    <string name="x">X (Twitter)</string>
+    <string name="x">X (formerly Twitter)</string>
     <string name="weibo">Weibo</string>
-    <string name="youtube_id">YouTube (ID)</string>
+    <string name="youtube">YouTube</string>
     <string name="platform_not_added_yet">No platform you need here?</string>
     <string name="open_developer_options">Developer options</string>
     <string name="about">About</string>
@@ -55,35 +55,35 @@
     <string name="submit_the_platform_you_need">Submit the platform you need</string>
     <string name="days_remaining">days remaining</string>
     <string name="uploaded">uploaded</string>
-    <string name="developer" translatable="false">dizzykitty3</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="com_android_chrome" translatable="false">com.android.chrome</string>
     <string name="pixiv_artwork">pixiv (Arkwork ID)</string>
     <string name="pixiv_user">pixiv (User ID)</string>
     <string name="v2ex">V2EX</string>
-    <!--    <string name="please_choose_a_platform">Please choose a platform</string>-->
+    <string name="please_choose_a_platform">Please choose a platform</string>
     <string name="open_caption_preferences">Caption preferences</string>
     <string name="common">Common</string>
     <string name="debugging">Debugging</string>
-    <!--    <string name="temp1">Android ToolKitty will now clear your clipboard on launch. This function will be optional in the future.</string>-->
+    <string name="temp1">Android ToolKitty will now clear your clipboard on launch. This feature will be optional in the future.</string>
     <string name="bilibili_user">Bilibili (User ID)</string>
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
-    <string name="temp2">Upload platform name function is under development.</string>
-    <string name="temp3">Convert characters to Unicode function is under development.</string>
+    <string name="temp2">Upload platform name feature is under development.</string>
+    <string name="temp3">Convert characters to Unicode feature is under development.</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on \"clear clipboard on launch\" in Settings Screen</string>
     <string name="settings">Settings</string>
     <string name="collapse_all_cards">Collapse all cards</string>
     <string name="expand_all_cards">Expand all cards</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240320</string>
+    <string name="version_number" translatable="false">20240321</string>
     <string name="one_handed_mode">One-handed mode</string>
     <string name="volume">Volume</string>
-    <string name="function">Function</string>
+    <string name="feature">Feature</string>
     <string name="display">Display</string>
     <string name="media_volume">Media volume</string>
     <string name="erase_all_app_data">Erase all app data</string>
     <string name="set_time_automatically_is_off_tip">\"Set time automatically\" is now OFF. You may experience some unexpected behavior while using your phone.</string>
-    <string name="temp4">Add custom volume option function is under development.</string>
+    <string name="temp4">Add custom volume option feature is under development.</string>
     <string name="warning">Warning</string>
     <string name="warning_erase_all_data">This action will erase all your data, including histories and settings.\n\nAre you sure you want to proceed?</string>
+    <string name="clear_all_data">Clear all data</string>
 </resources>

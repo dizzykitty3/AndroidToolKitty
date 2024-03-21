@@ -20,6 +20,7 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
 import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 
+@Suppress("SpellCheckingInspection")
 @Composable
 fun AboutCard() {
     val c = LocalContext.current
@@ -34,7 +35,7 @@ fun AboutCard() {
             )
             CustomIconAndTextPadding()
             Text(
-                text = c.getString(R.string.developer)
+                text = "dizzykitty3"
             )
         }
         CustomSpacerPadding()
