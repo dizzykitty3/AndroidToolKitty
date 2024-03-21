@@ -12,7 +12,12 @@ import java.util.Objects
 class IntentUtils(private val context: Context) {
     fun openUrl(finalUrl: String) {
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(finalUrl)
+        intent.data = Uri.parse(
+            if (finalUrl.contains("https://"))
+                finalUrl
+            else
+                "https://$finalUrl"
+        )
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
         debugLog("openUrl")

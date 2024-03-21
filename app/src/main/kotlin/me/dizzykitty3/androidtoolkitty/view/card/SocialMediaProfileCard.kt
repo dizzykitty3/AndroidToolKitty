@@ -124,6 +124,6 @@ private fun onVisitProfileButton(c: Context, username: String, platformIndex: In
         return
     }
     val prefix = platform.prefix
-    IntentUtils(c).openUrl("https://$prefix${StringUtils.dropSpaces(username)}")
+    IntentUtils(c).openUrl("$prefix${StringUtils.dropSpaces(username)}")
     debugLog("onVisitProfile")
 }
