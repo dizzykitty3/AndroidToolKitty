@@ -75,7 +75,7 @@ fun AndroidVersionsCard() {
         }
         Row {
             Text(text = buildAnnotatedString {
-                Text(text = "Android 8.0")
+                Text(text = "Android 8")
                 CustomItalicText(text = " / SDK 26, Oreo")
             })
         }
@@ -87,13 +87,13 @@ fun AndroidVersionsCard() {
         }
         Row {
             Text(text = buildAnnotatedString {
-                Text(text = "Android 7.0")
+                Text(text = "Android 7")
                 CustomItalicText(text = " / SDK 24, Nougat")
             })
         }
         Row {
             Text(text = buildAnnotatedString {
-                Text(text = "Android 6.0")
+                Text(text = "Android 6")
                 CustomItalicText(text = " / SDK 23, Marshmallow")
             })
         }
@@ -105,7 +105,7 @@ fun AndroidVersionsCard() {
         }
         Row {
             Text(text = buildAnnotatedString {
-                Text(text = "Android 5.0")
+                Text(text = "Android 5")
                 CustomItalicText(text = " / SDK 21, Lollipop")
             })
         }
