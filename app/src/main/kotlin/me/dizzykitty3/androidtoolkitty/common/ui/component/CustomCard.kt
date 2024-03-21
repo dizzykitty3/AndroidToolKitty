@@ -49,6 +49,7 @@ fun CustomCard(
             }
         }
     }
+    CustomSpacerPadding()
 }
 
 @Composable

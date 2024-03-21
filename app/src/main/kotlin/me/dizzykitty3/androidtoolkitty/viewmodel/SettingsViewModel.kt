@@ -23,14 +23,14 @@ class SettingsViewModel : ViewModel() {
         }
     }
 
-    fun getCardExpandedState(context: Context, cardId: String): Boolean {
+    fun getCardShowedState(context: Context, cardId: String): Boolean {
         return getSharedPrefs(context).getBoolean(cardId, true)
     }
 
-    fun saveCardExpandedState(context: Context, cardId: String, isExpanded: Boolean) {
-        debugLog("$cardId is expanded = $isExpanded")
+    fun saveCardShowedState(context: Context, cardId: String, isShowed: Boolean) {
+        debugLog("$cardId is showed = $isShowed")
         with(getSharedPrefs(context).edit()) {
-            putBoolean(cardId, isExpanded)
+            putBoolean(cardId, isShowed)
             apply()
         }
     }

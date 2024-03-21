@@ -1,26 +1,31 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.content.Context
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
+
+const val CARD_1 = "card_year_progress"
+const val CARD_2 = "card_volume"
+const val CARD_3 = "card_clipboard"
+const val CARD_4 = "card_url"
+const val CARD_5 = "card_social_media_profile"
+const val CARD_6 = "card_android_system_settings"
+const val CARD_7 = "card_unicode"
+const val CARD_8 = "card_google_maps"
+const val CARD_9 = "card_open_app_on_google_play"
+const val CARD_10 = "card_android_versions"
 
 @Composable
 fun HideCardSettingCard() {
@@ -28,274 +33,106 @@ fun HideCardSettingCard() {
     CustomStaticCard(
         title = c.getString(R.string.customize_my_home_page)
     ) {
-        val isShowYearProgressCard =
-            SettingsViewModel().getCardExpandedState(c, "card_year_progress")
-        val isShowVolumeCard = SettingsViewModel().getCardExpandedState(c, "card_volume")
-        val isShowClipboardCard = SettingsViewModel().getCardExpandedState(c, "card_clipboard")
-        val isShowUrlCard = SettingsViewModel().getCardExpandedState(c, "card_url")
-        val isShowSocialMediaProfileCard =
-            SettingsViewModel().getCardExpandedState(c, "card_social_media_profile")
-        val isShowAndroidSystemSettingsCard =
-            SettingsViewModel().getCardExpandedState(c, "card_android_system_settings")
-        val isShowUnicodeCard = SettingsViewModel().getCardExpandedState(c, "card_unicode")
-        val isShowGoogleMapsCard = SettingsViewModel().getCardExpandedState(c, "card_google_maps")
-        val isShowOpenAppOnGooglePlayCard =
-            SettingsViewModel().getCardExpandedState(c, "card_open_app_on_google_play")
-        val isShowAndroidVersionsCard =
-            SettingsViewModel().getCardExpandedState(c, "card_android_versions")
-        var mIsShowYearProgressCard by remember { mutableStateOf(isShowYearProgressCard) }
-        var mIsShowVolumeCard by remember { mutableStateOf(isShowVolumeCard) }
-        var mIsShowClipboardCard by remember { mutableStateOf(isShowClipboardCard) }
-        var mIsShowUrlCard by remember { mutableStateOf(isShowUrlCard) }
-        var mIsShowSocialMediaProfileCard by remember { mutableStateOf(isShowSocialMediaProfileCard) }
-        var mIsShowAndroidSystemSettingsCard by remember {
-            mutableStateOf(
-                isShowAndroidSystemSettingsCard
-            )
-        }
-        var mIsShowUnicodeCard by remember { mutableStateOf(isShowUnicodeCard) }
-        var mIsShowGoogleMapsCard by remember { mutableStateOf(isShowGoogleMapsCard) }
-        var mIsShowOpenAppOnGooglePlayCard by remember {
-            mutableStateOf(
-                isShowOpenAppOnGooglePlayCard
-            )
-        }
-        var mIsShowAndroidVersionsCard by remember { mutableStateOf(isShowAndroidVersionsCard) }
-        CustomTip(
-            text = c.getString(R.string.tip_under_development)
-        )
+        val isShowCard1 = SettingsViewModel().getCardShowedState(c, CARD_1)
+        val isShowCard2 = SettingsViewModel().getCardShowedState(c, CARD_2)
+        val isShowCard3 = SettingsViewModel().getCardShowedState(c, CARD_3)
+        val isShowCard4 = SettingsViewModel().getCardShowedState(c, CARD_4)
+        val isShowCard5 = SettingsViewModel().getCardShowedState(c, CARD_5)
+        val isShowCard6 = SettingsViewModel().getCardShowedState(c, CARD_6)
+        val isShowCard7 = SettingsViewModel().getCardShowedState(c, CARD_7)
+        val isShowCard8 = SettingsViewModel().getCardShowedState(c, CARD_8)
+        val isShowCard9 = SettingsViewModel().getCardShowedState(c, CARD_9)
+        val isShowCard10 = SettingsViewModel().getCardShowedState(c, CARD_10)
+        var mIsShowCard1 by remember { mutableStateOf(isShowCard1) }
+        var mIsShowCard2 by remember { mutableStateOf(isShowCard2) }
+        var mIsShowCard3 by remember { mutableStateOf(isShowCard3) }
+        var mIsShowCard4 by remember { mutableStateOf(isShowCard4) }
+        var mIsShowCard5 by remember { mutableStateOf(isShowCard5) }
+        var mIsShowCard6 by remember { mutableStateOf(isShowCard6) }
+        var mIsShowCard7 by remember { mutableStateOf(isShowCard7) }
+        var mIsShowCard8 by remember { mutableStateOf(isShowCard8) }
+        var mIsShowCard9 by remember { mutableStateOf(isShowCard9) }
+        var mIsShowCard10 by remember { mutableStateOf(isShowCard10) }
         CustomSpacerPadding()
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                mIsShowYearProgressCard = !mIsShowYearProgressCard
-                SettingsViewModel().saveCardExpandedState(
-                    c,
-                    "card_year_progress",
-                    mIsShowYearProgressCard
-                )
-            }
-        ) {
-            Text(
-                text = c.getString(R.string.year_progress)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mIsShowYearProgressCard,
-                onCheckedChange = {
-                    mIsShowYearProgressCard = it
-                    SettingsViewModel().saveCardExpandedState(c, "card_year_progress", it)
-                }
-            )
+        CustomHideCardSettingSwitch(
+            text = c.getString(R.string.year_progress),
+            cardId = CARD_1,
+            isChecked = mIsShowCard1
+        ) { newState ->
+            mIsShowCard1 = newState
+            SettingsViewModel().saveCardShowedState(c, CARD_1, newState)
         }
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                mIsShowVolumeCard = !mIsShowVolumeCard
-                SettingsViewModel().saveCardExpandedState(c, "card_volume", mIsShowYearProgressCard)
-            }
-        ) {
-            Text(
-                text = c.getString(R.string.volume)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mIsShowVolumeCard,
-                onCheckedChange = {
-                    mIsShowVolumeCard = it
-                    SettingsViewModel().saveCardExpandedState(c, "card_volume", it)
-                }
-            )
+        CustomHideCardSettingSwitch(
+            text = c.getString(R.string.volume),
+            cardId = CARD_2,
+            isChecked = mIsShowCard2
+        ) { newState ->
+            mIsShowCard2 = newState
+            SettingsViewModel().saveCardShowedState(c, CARD_2, newState)
         }
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                mIsShowClipboardCard = !mIsShowClipboardCard
-                SettingsViewModel().saveCardExpandedState(
-                    c,
-                    "card_clipboard",
-                    mIsShowYearProgressCard
-                )
-            }
-        ) {
-            Text(
-                text = c.getString(R.string.clipboard)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mIsShowClipboardCard,
-                onCheckedChange = {
-                    mIsShowClipboardCard = it
-                    SettingsViewModel().saveCardExpandedState(c, "card_clipboard", it)
-                }
-            )
+        CustomHideCardSettingSwitch(
+            text = c.getString(R.string.clipboard),
+            cardId = CARD_3,
+            isChecked = mIsShowCard3
+        ) { newState ->
+            mIsShowCard3 = newState
+            SettingsViewModel().saveCardShowedState(c, CARD_3, newState)
         }
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                mIsShowUrlCard = !mIsShowUrlCard
-                SettingsViewModel().saveCardExpandedState(c, "card_url", mIsShowYearProgressCard)
-            }
-        ) {
-            Text(
-                text = c.getString(R.string.url)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mIsShowUrlCard,
-                onCheckedChange = {
-                    mIsShowUrlCard = it
-                    SettingsViewModel().saveCardExpandedState(c, "card_url", it)
-                }
-            )
+        CustomHideCardSettingSwitch(
+            text = c.getString(R.string.url),
+            cardId = CARD_4,
+            isChecked = mIsShowCard4
+        ) { newState ->
+            mIsShowCard4 = newState
+            SettingsViewModel().saveCardShowedState(c, CARD_4, newState)
         }
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                mIsShowSocialMediaProfileCard = !mIsShowSocialMediaProfileCard
-                SettingsViewModel().saveCardExpandedState(
-                    c,
-                    "card_social_media_profile",
-                    mIsShowYearProgressCard
-                )
-            }
-        ) {
-            Text(
-                text = c.getString(R.string.social_media_profile)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mIsShowSocialMediaProfileCard,
-                onCheckedChange = {
-                    mIsShowSocialMediaProfileCard = it
-                    SettingsViewModel().saveCardExpandedState(c, "card_social_media_profile", it)
-                }
-            )
+        CustomHideCardSettingSwitch(
+            text = c.getString(R.string.social_media_profile),
+            cardId = CARD_5,
+            isChecked = mIsShowCard5
+        ) { newState ->
+            mIsShowCard5 = newState
+            SettingsViewModel().saveCardShowedState(c, CARD_5, newState)
         }
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                mIsShowAndroidSystemSettingsCard = !mIsShowAndroidSystemSettingsCard
-                SettingsViewModel().saveCardExpandedState(
-                    c,
-                    "card_android_system_settings",
-                    mIsShowYearProgressCard
-                )
-            }
-        ) {
-            Text(
-                text = c.getString(R.string.android_system_settings)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mIsShowAndroidSystemSettingsCard,
-                onCheckedChange = {
-                    mIsShowAndroidSystemSettingsCard = it
-                    SettingsViewModel().saveCardExpandedState(c, "card_android_system_settings", it)
-                }
-            )
+        CustomHideCardSettingSwitch(
+            text = c.getString(R.string.android_system_settings),
+            cardId = CARD_6,
+            isChecked = mIsShowCard6
+        ) { newState ->
+            mIsShowCard6 = newState
+            SettingsViewModel().saveCardShowedState(c, CARD_6, newState)
         }
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                mIsShowUnicodeCard = !mIsShowUnicodeCard
-                SettingsViewModel().saveCardExpandedState(
-                    c,
-                    "card_unicode",
-                    mIsShowYearProgressCard
-                )
-            }
-        ) {
-            Text(
-                text = c.getString(R.string.unicode)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mIsShowUnicodeCard,
-                onCheckedChange = {
-                    mIsShowUnicodeCard = it
-                    SettingsViewModel().saveCardExpandedState(c, "card_unicode", it)
-                }
-            )
+        CustomHideCardSettingSwitch(
+            text = c.getString(R.string.unicode),
+            cardId = CARD_7,
+            isChecked = mIsShowCard7
+        ) { newState ->
+            mIsShowCard7 = newState
+            SettingsViewModel().saveCardShowedState(c, CARD_7, newState)
         }
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                mIsShowGoogleMapsCard = !mIsShowGoogleMapsCard
-                SettingsViewModel().saveCardExpandedState(
-                    c,
-                    "card_google_maps",
-                    mIsShowYearProgressCard
-                )
-            }
-        ) {
-            Text(
-                text = c.getString(R.string.google_maps)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mIsShowGoogleMapsCard,
-                onCheckedChange = {
-                    mIsShowGoogleMapsCard = it
-                    SettingsViewModel().saveCardExpandedState(c, "card_google_maps", it)
-                }
-            )
+        CustomHideCardSettingSwitch(
+            text = c.getString(R.string.google_maps),
+            cardId = CARD_8,
+            isChecked = mIsShowCard8
+        ) { newState ->
+            mIsShowCard8 = newState
+            SettingsViewModel().saveCardShowedState(c, CARD_8, newState)
         }
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                mIsShowOpenAppOnGooglePlayCard = !mIsShowOpenAppOnGooglePlayCard
-                SettingsViewModel().saveCardExpandedState(
-                    c,
-                    "card_open_app_on_google_play",
-                    mIsShowYearProgressCard
-                )
-            }
-        ) {
-            Text(
-                text = c.getString(R.string.open_app_on_google_play)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mIsShowOpenAppOnGooglePlayCard,
-                onCheckedChange = {
-                    mIsShowOpenAppOnGooglePlayCard = it
-                    SettingsViewModel().saveCardExpandedState(c, "card_open_app_on_google_play", it)
-                }
-            )
+        CustomHideCardSettingSwitch(
+            text = c.getString(R.string.open_app_on_google_play),
+            cardId = CARD_9,
+            isChecked = mIsShowCard9
+        ) { newState ->
+            mIsShowCard9 = newState
+            SettingsViewModel().saveCardShowedState(c, CARD_9, newState)
         }
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                mIsShowAndroidVersionsCard = !mIsShowAndroidVersionsCard
-                SettingsViewModel().saveCardExpandedState(
-                    c,
-                    "card_android_versions",
-                    mIsShowYearProgressCard
-                )
-            }
-        ) {
-            Text(
-                text = c.getString(R.string.android_versions)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mIsShowAndroidVersionsCard,
-                onCheckedChange = {
-                    mIsShowAndroidVersionsCard = it
-                    SettingsViewModel().saveCardExpandedState(c, "card_android_versions", it)
-                }
-            )
+        CustomHideCardSettingSwitch(
+            text = c.getString(R.string.android_versions),
+            cardId = CARD_10,
+            isChecked = mIsShowCard10
+        ) { newState ->
+            mIsShowCard10 = newState
+            SettingsViewModel().saveCardShowedState(c, CARD_10, newState)
         }
         CustomSpacerPadding()
         HorizontalDivider()
@@ -303,16 +140,16 @@ fun HideCardSettingCard() {
         Button(
             onClick = {
                 onClickAllCardsButton(c, false)
-                mIsShowYearProgressCard = false
-                mIsShowVolumeCard = false
-                mIsShowClipboardCard = false
-                mIsShowUrlCard = false
-                mIsShowSocialMediaProfileCard = false
-                mIsShowAndroidSystemSettingsCard = false
-                mIsShowUnicodeCard = false
-                mIsShowGoogleMapsCard = false
-                mIsShowOpenAppOnGooglePlayCard = false
-                mIsShowAndroidVersionsCard = false
+                mIsShowCard1 = false
+                mIsShowCard2 = false
+                mIsShowCard3 = false
+                mIsShowCard4 = false
+                mIsShowCard5 = false
+                mIsShowCard6 = false
+                mIsShowCard7 = false
+                mIsShowCard8 = false
+                mIsShowCard9 = false
+                mIsShowCard10 = false
             }
         ) {
             Text(
@@ -322,16 +159,16 @@ fun HideCardSettingCard() {
         Button(
             onClick = {
                 onClickAllCardsButton(c, true)
-                mIsShowYearProgressCard = true
-                mIsShowVolumeCard = true
-                mIsShowClipboardCard = true
-                mIsShowUrlCard = true
-                mIsShowSocialMediaProfileCard = true
-                mIsShowAndroidSystemSettingsCard = true
-                mIsShowUnicodeCard = true
-                mIsShowGoogleMapsCard = true
-                mIsShowOpenAppOnGooglePlayCard = true
-                mIsShowAndroidVersionsCard = true
+                mIsShowCard1 = true
+                mIsShowCard2 = true
+                mIsShowCard3 = true
+                mIsShowCard4 = true
+                mIsShowCard5 = true
+                mIsShowCard6 = true
+                mIsShowCard7 = true
+                mIsShowCard8 = true
+                mIsShowCard9 = true
+                mIsShowCard10 = true
             }
         ) {
             Text(
@@ -342,14 +179,14 @@ fun HideCardSettingCard() {
 }
 
 private fun onClickAllCardsButton(c: Context, isExpand: Boolean) {
-    SettingsViewModel().saveCardExpandedState(c, "card_year_progress", isExpand)
-    SettingsViewModel().saveCardExpandedState(c, "card_volume", isExpand)
-    SettingsViewModel().saveCardExpandedState(c, "card_clipboard", isExpand)
-    SettingsViewModel().saveCardExpandedState(c, "card_url", isExpand)
-    SettingsViewModel().saveCardExpandedState(c, "card_social_media_profile", isExpand)
-    SettingsViewModel().saveCardExpandedState(c, "card_android_system_settings", isExpand)
-    SettingsViewModel().saveCardExpandedState(c, "card_unicode", isExpand)
-    SettingsViewModel().saveCardExpandedState(c, "card_google_maps", isExpand)
-    SettingsViewModel().saveCardExpandedState(c, "card_open_app_on_google_play", isExpand)
-    SettingsViewModel().saveCardExpandedState(c, "card_android_versions", isExpand)
+    SettingsViewModel().saveCardShowedState(c, CARD_1, isExpand)
+    SettingsViewModel().saveCardShowedState(c, CARD_2, isExpand)
+    SettingsViewModel().saveCardShowedState(c, CARD_3, isExpand)
+    SettingsViewModel().saveCardShowedState(c, CARD_4, isExpand)
+    SettingsViewModel().saveCardShowedState(c, CARD_5, isExpand)
+    SettingsViewModel().saveCardShowedState(c, CARD_6, isExpand)
+    SettingsViewModel().saveCardShowedState(c, CARD_7, isExpand)
+    SettingsViewModel().saveCardShowedState(c, CARD_8, isExpand)
+    SettingsViewModel().saveCardShowedState(c, CARD_9, isExpand)
+    SettingsViewModel().saveCardShowedState(c, CARD_10, isExpand)
 }

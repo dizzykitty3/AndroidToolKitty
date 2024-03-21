@@ -36,6 +36,17 @@ import me.dizzykitty3.androidtoolkitty.view.card.VolumeCard
 import me.dizzykitty3.androidtoolkitty.view.card.YearProgressCard
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
+const val CARD_1 = "card_year_progress"
+const val CARD_2 = "card_volume"
+const val CARD_3 = "card_clipboard"
+const val CARD_4 = "card_url"
+const val CARD_5 = "card_social_media_profile"
+const val CARD_6 = "card_android_system_settings"
+const val CARD_7 = "card_unicode"
+const val CARD_8 = "card_google_maps"
+const val CARD_9 = "card_open_app_on_google_play"
+const val CARD_10 = "card_android_versions"
+
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
@@ -46,8 +57,6 @@ fun HomeScreen(navController: NavHostController) {
             end = cardPadding
         )
     ) {
-        val isOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
-
         // Top
         item { CustomTopPadding() }
 
@@ -78,78 +87,52 @@ fun HomeScreen(navController: NavHostController) {
         }
         item { CustomCardSpacePadding() }
 
+        val isOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
         if (isOneHandedMode) {
             item { CustomOneHandedMode() }
         }
 
-        val isShowYearProgressCard =
-            SettingsViewModel().getCardExpandedState(c, "card_year_progress")
-        val isShowVolumeCard = SettingsViewModel().getCardExpandedState(c, "card_volume")
-        val isShowClipboardCard = SettingsViewModel().getCardExpandedState(c, "card_clipboard")
-        val isShowUrlCard = SettingsViewModel().getCardExpandedState(c, "card_url")
-        val isShowSocialMediaProfileCard =
-            SettingsViewModel().getCardExpandedState(c, "card_social_media_profile")
-        val isShowAndroidSystemSettingsCard =
-            SettingsViewModel().getCardExpandedState(c, "card_android_system_settings")
-        val isShowUnicodeCard = SettingsViewModel().getCardExpandedState(c, "card_unicode")
-        val isShowGoogleMapsCard = SettingsViewModel().getCardExpandedState(c, "card_google_maps")
-        val isShowOpenAppOnGooglePlayCard =
-            SettingsViewModel().getCardExpandedState(c, "card_open_app_on_google_play")
-        val isShowAndroidVersionsCard =
-            SettingsViewModel().getCardExpandedState(c, "card_android_versions")
-
-        if (isShowYearProgressCard) {
+        val isShowCard1 = SettingsViewModel().getCardShowedState(c, CARD_1)
+        val isShowCard2 = SettingsViewModel().getCardShowedState(c, CARD_2)
+        val isShowCard3 = SettingsViewModel().getCardShowedState(c, CARD_3)
+        val isShowCard4 = SettingsViewModel().getCardShowedState(c, CARD_4)
+        val isShowCard5 = SettingsViewModel().getCardShowedState(c, CARD_5)
+        val isShowCard6 = SettingsViewModel().getCardShowedState(c, CARD_6)
+        val isShowCard7 = SettingsViewModel().getCardShowedState(c, CARD_7)
+        val isShowCard8 = SettingsViewModel().getCardShowedState(c, CARD_8)
+        val isShowCard9 = SettingsViewModel().getCardShowedState(c, CARD_9)
+        val isShowCard10 = SettingsViewModel().getCardShowedState(c, CARD_10)
+        if (isShowCard1) {
             item { YearProgressCard() }
-            item { CustomCardSpacePadding() }
         }
-
-        if (isShowVolumeCard) {
+        if (isShowCard2) {
             item { VolumeCard() }
-            item { CustomCardSpacePadding() }
         }
-
-        if (isShowClipboardCard) {
+        if (isShowCard3) {
             item { ClipboardCard() }
-            item { CustomCardSpacePadding() }
         }
-
-        if (isShowUrlCard) {
+        if (isShowCard4) {
             item { UrlCard() }
-            item { CustomCardSpacePadding() }
         }
-
-        if (isShowSocialMediaProfileCard) {
+        if (isShowCard5) {
             item { SocialMediaProfileCard() }
-            item { CustomCardSpacePadding() }
         }
-
-        if (isShowAndroidSystemSettingsCard) {
+        if (isShowCard6) {
             item { SystemSettingsCard() }
-            item { CustomCardSpacePadding() }
         }
-
-        if (isShowUnicodeCard) {
+        if (isShowCard7) {
             item { UnicodeCard() }
-            item { CustomCardSpacePadding() }
         }
-
-        if (isShowGoogleMapsCard) {
+        if (isShowCard8) {
             item { GoogleMapsCard() }
-            item { CustomCardSpacePadding() }
         }
-
-        if (isShowOpenAppOnGooglePlayCard) {
+        if (isShowCard9) {
             item { OpenAppOnPlayStoreCard() }
-            item { CustomCardSpacePadding() }
         }
-
-        if (isShowAndroidVersionsCard) {
+        if (isShowCard10) {
             item { AndroidVersionsCard() }
-            item { CustomCardSpacePadding() }
         }
-
         item { HomeCardEdit(navController) }
-        item { CustomCardSpacePadding() }
 
         // Bottom
         item { CustomBottomPadding() }
