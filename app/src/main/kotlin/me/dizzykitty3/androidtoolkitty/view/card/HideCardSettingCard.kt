@@ -1,8 +1,11 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.material3.Button
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -60,9 +63,6 @@ fun HideCardSettingCard() {
         var mIsShowAndroidVersionsCard by remember { mutableStateOf(isShowAndroidVersionsCard) }
         CustomTip(
             text = ">>>UNDER DEVELOPMENT<<<"
-        )
-        CustomTip(
-            text = "UI only"
         )
         CustomSpacerPadding()
 
@@ -297,5 +297,59 @@ fun HideCardSettingCard() {
                 }
             )
         }
+        CustomSpacerPadding()
+        HorizontalDivider()
+        CustomSpacerPadding()
+        Button(
+            onClick = {
+                onClickAllCardsButton(c, false)
+                mIsShowYearProgressCard = false
+                mIsShowVolumeCard = false
+                mIsShowClipboardCard = false
+                mIsShowUrlCard = false
+                mIsShowSocialMediaProfileCard = false
+                mIsShowAndroidSystemSettingsCard = false
+                mIsShowUnicodeCard = false
+                mIsShowGoogleMapsCard = false
+                mIsShowOpenAppOnGooglePlayCard = false
+                mIsShowAndroidVersionsCard = false
+            }
+        ) {
+            Text(
+                text = c.getString(R.string.hide_all_cards)
+            )
+        }
+        Button(
+            onClick = {
+                onClickAllCardsButton(c, true)
+                mIsShowYearProgressCard = true
+                mIsShowVolumeCard = true
+                mIsShowClipboardCard = true
+                mIsShowUrlCard = true
+                mIsShowSocialMediaProfileCard = true
+                mIsShowAndroidSystemSettingsCard = true
+                mIsShowUnicodeCard = true
+                mIsShowGoogleMapsCard = true
+                mIsShowOpenAppOnGooglePlayCard = true
+                mIsShowAndroidVersionsCard = true
+            }
+        ) {
+            Text(
+                text = c.getString(R.string.show_all_cards)
+            )
+        }
     }
+}
+
+private fun onClickAllCardsButton(c: Context, isExpand: Boolean) {
+    SettingsViewModel().saveCardExpandedState(c, "card_year_progress", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_volume", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_clipboard", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_url", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_social_media_profile", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_android_system_settings", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_unicode", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_google_maps", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_open_app_on_google_play", isExpand)
+    SettingsViewModel().saveCardExpandedState(c, "card_android_versions", isExpand)
 }

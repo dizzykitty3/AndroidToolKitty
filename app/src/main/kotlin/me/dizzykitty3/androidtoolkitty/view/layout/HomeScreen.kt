@@ -26,6 +26,7 @@ import me.dizzykitty3.androidtoolkitty.view.card.AndroidVersionsCard
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
 import me.dizzykitty3.androidtoolkitty.view.card.GreetingText
+import me.dizzykitty3.androidtoolkitty.view.card.HomeCardEdit
 import me.dizzykitty3.androidtoolkitty.view.card.OpenAppOnPlayStoreCard
 import me.dizzykitty3.androidtoolkitty.view.card.SocialMediaProfileCard
 import me.dizzykitty3.androidtoolkitty.view.card.SystemSettingsCard
@@ -146,6 +147,9 @@ fun HomeScreen(navController: NavHostController) {
             item { AndroidVersionsCard() }
             item { CustomCardSpacePadding() }
         }
+
+        item { HomeCardEdit(navController) }
+        item { CustomCardSpacePadding() }
 
         // Bottom
         item { CustomBottomPadding() }

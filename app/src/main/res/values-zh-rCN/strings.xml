@@ -70,8 +70,8 @@
     <string name="temp3">【开发中功能】转换字符到 Unicode</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开\"启动时自动清空剪贴板\"功能</string>
     <string name="settings">设置</string>
-    <string name="collapse_all_cards">收起所有卡片</string>
-    <string name="expand_all_cards">展开所有卡片</string>
+    <string name="hide_all_cards">隐藏所有卡片</string>
+    <string name="show_all_cards">显示所有卡片</string>
     <string name="version">版本</string>
     <string name="one_handed_mode">单手模式</string>
     <string name="volume">音量</string>
