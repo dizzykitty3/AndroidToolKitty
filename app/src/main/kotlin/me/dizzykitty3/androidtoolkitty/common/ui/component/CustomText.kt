@@ -102,3 +102,20 @@ fun CustomTip(
         }
     }
 }
+
+@Composable
+fun CardTitle(
+    title: String
+) {
+    Text(
+        modifier = Modifier.fillMaxWidth(),
+        text = title,
+        style = TextStyle.Default.copy(
+            fontFamily = FontFamily.Default,
+            fontWeight = FontWeight.Normal,
+            fontSize = 22.sp,
+            lineHeight = 28.0.sp,
+            letterSpacing = 0.0.sp
+        )
+    )
+}
