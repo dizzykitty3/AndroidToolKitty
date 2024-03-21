@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.common.util
 
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -13,13 +12,13 @@ class IntentUtils(private val context: Context) {
     fun openUrl(finalUrl: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(
-            if (finalUrl.contains("https://"))
+            if (finalUrl.contains(HTTPS))
                 finalUrl
             else
-                "https://$finalUrl"
+                "$HTTPS$finalUrl"
         )
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
+        startActivity(intent)
         debugLog("openUrl")
     }
 
@@ -38,11 +37,11 @@ class IntentUtils(private val context: Context) {
         }
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         try {
-            context.startActivity(intent)
+            startActivity(intent)
             debugLog("onOpenSystemSettings: $settingType")
-        } catch (e: ActivityNotFoundException) {
-            ToastUtils(context).showToast("${e.message}")
-            debugLog(">>>ERROR ActivityNotFoundException<<< openSystemSettings: $e")
+        } catch (e: Exception) {
+            ToastUtils(context).showToast(context.getString(R.string.system_settings_unsupported))
+            debugLog(">>>ERROR<<< openSystemSettings: $e")
         }
     }
 
@@ -53,10 +52,9 @@ class IntentUtils(private val context: Context) {
         intent.setPackage(GOOGLE_MAPS)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         try {
-            context.startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
-            ToastUtils(context).showToast("${e.message}")
-            debugLog(">>>ERROR ActivityNotFoundException<<< openGoogleMaps: $e")
+            startActivity(intent)
+        } catch (e: Exception) {
+            debugLog(">>>ERROR<<< openGoogleMaps: $e")
         }
     }
 
@@ -64,20 +62,18 @@ class IntentUtils(private val context: Context) {
         try {
             context.startActivity(intent)
             return
-        } catch (e: ActivityNotFoundException) {
-            ToastUtils(context).showToast("${e.message}")
-            debugLog(">>>ERROR ActivityNotFoundException<<< startActivity: $e")
+        } catch (e: Exception) {
+            debugLog(">>>ERROR<<< startActivity: $e")
         }
         when (intent.`package`) {
-            GOOGLE_PLAY ->
-                ToastUtils(context).showToastAndRecordLog(
-                    context.getString(R.string.google_play_not_installed)
-                )
+            GOOGLE_PLAY -> {
+                ToastUtils(context).showToast(context.getString(R.string.google_play_not_installed))
+                debugLog("Google Play not installed")
+            }
 
             GOOGLE_MAPS -> {
-                ToastUtils(context).showToastAndRecordLog(
-                    context.getString(R.string.google_maps_not_installed)
-                )
+                ToastUtils(context).showToast(context.getString(R.string.google_maps_not_installed))
+                debugLog("Google Maps not installed")
                 IntentUtils(context).openAppOnMarket(GOOGLE_MAPS)
             }
         }
@@ -97,17 +93,16 @@ class IntentUtils(private val context: Context) {
         if (isGooglePlay) marketIntent.setPackage(GOOGLE_PLAY)
         marketIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         try {
-            IntentUtils(context).startActivity(marketIntent)
-            debugLog("openCertainAppOnPlayStore")
-        } catch (e: ActivityNotFoundException) {
-            ToastUtils(context).showToast("${e.message}")
-            debugLog(">>>ERROR ActivityNotFoundException<<< openCertainAppOnPlayStore: $e")
+            startActivity(marketIntent)
+            debugLog("openAppOnMarket")
+        } catch (e: Exception) {
+            debugLog(">>>ERROR<<< openCertainAppOnPlayStore: $e")
         }
     }
 
     companion object {
+        private const val HTTPS = "https://"
         private const val GOOGLE_MAPS = "com.google.android.apps.maps"
         private const val GOOGLE_PLAY = "com.android.vending"
-        private const val GOOGLE_CHROME = "com.android.chrome"
     }
 }

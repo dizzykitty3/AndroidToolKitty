@@ -43,7 +43,7 @@ object StringUtils {
                 i += 4
             }
             return stringBuilder.toString()
-        } catch (e: IllegalArgumentException) {
+        } catch (e: Exception) {
             throw IllegalArgumentException("Invalid Unicode string format: ", e)
         }
     }
