@@ -34,8 +34,7 @@ fun UrlCard() {
     val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.Link,
-        title = c.getString(R.string.url),
-        id = "card_url"
+        title = c.getString(R.string.url)
     ) {
         var url by remember { mutableStateOf("") }
         OutlinedTextField(

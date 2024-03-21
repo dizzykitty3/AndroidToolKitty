@@ -21,8 +21,7 @@ fun ClipboardCard() {
     val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.ContentPasteSearch,
-        title = c.getString(R.string.clipboard),
-        id = "card_clipboard"
+        title = c.getString(R.string.clipboard)
     ) {
         val isShowHintText = !SettingsViewModel().getHaveOpenedSettingsScreen(c)
         if (isShowHintText) {

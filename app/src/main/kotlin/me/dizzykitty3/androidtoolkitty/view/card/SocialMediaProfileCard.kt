@@ -38,8 +38,7 @@ fun SocialMediaProfileCard() {
     val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.Person,
-        title = c.getString(R.string.social_media_profile),
-        id = "card_social_media_profile"
+        title = c.getString(R.string.social_media_profile)
     ) {
         var username by remember { mutableStateOf("") }
         val mPlatformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(c)

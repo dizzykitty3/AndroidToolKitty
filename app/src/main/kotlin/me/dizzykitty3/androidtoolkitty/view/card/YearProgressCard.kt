@@ -27,8 +27,7 @@ fun YearProgressCard() {
     val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.HourglassTop,
-        title = LocalContext.current.getString(R.string.year_progress),
-        id = "card_year_progress"
+        title = LocalContext.current.getString(R.string.year_progress)
     ) {
         var isShowPercentage by remember { mutableStateOf(true) }
         Column(

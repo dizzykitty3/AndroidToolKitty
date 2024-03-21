@@ -27,8 +27,7 @@ fun VolumeCard() {
     val c = LocalContext.current
     CustomCard(
         icon = Icons.AutoMirrored.Outlined.VolumeUp,
-        title = c.getString(R.string.volume),
-        id = "card_volume"
+        title = c.getString(R.string.volume)
     ) {
         val maxVolume = AudioUtils(c).getMaxVolumeIndex()
         val options = listOf("0", "40%", "60%")

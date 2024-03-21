@@ -20,7 +20,6 @@ import me.dizzykitty3.androidtoolkitty.R
 fun CustomCard(
     isExpandable: Boolean = true,
     icon: ImageVector?,
-    id: String?,
     title: String,
     content: @Composable () -> Unit
 ) {
@@ -60,7 +59,6 @@ fun CustomStaticCard(
     CustomCard(
         icon = null,
         title = title,
-        id = null,
         content = content,
         isExpandable = false
     )

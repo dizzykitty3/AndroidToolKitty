@@ -22,8 +22,7 @@ fun SystemSettingsCard() {
     val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.Settings,
-        title = c.getString(R.string.android_system_settings),
-        id = "card_android_system_settings"
+        title = c.getString(R.string.android_system_settings)
     ) {
         if (!checkIsAutoTime(c)) {
             CustomTip(

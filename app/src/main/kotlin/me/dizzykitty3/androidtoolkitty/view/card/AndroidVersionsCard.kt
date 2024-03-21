@@ -16,7 +16,6 @@ fun AndroidVersionsCard() {
     val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.Android,
-        id = "card_android_versions",
         title = c.getString(R.string.android_versions)
     ) {
         Row {

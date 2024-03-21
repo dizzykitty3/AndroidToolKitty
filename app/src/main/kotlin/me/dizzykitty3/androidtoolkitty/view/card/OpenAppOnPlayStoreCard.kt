@@ -33,8 +33,7 @@ fun OpenAppOnPlayStoreCard() {
     val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.Shop,
-        title = c.getString(R.string.open_app_on_google_play),
-        id = "card_open_app_on_google_play"
+        title = c.getString(R.string.open_app_on_google_play)
     ) {
         var packageName by remember { mutableStateOf("") }
         OutlinedTextField(

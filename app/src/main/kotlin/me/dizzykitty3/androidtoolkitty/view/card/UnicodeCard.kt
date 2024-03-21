@@ -33,8 +33,7 @@ fun UnicodeCard() {
     val c = LocalContext.current
     CustomCard(
         icon = Icons.AutoMirrored.Outlined.Notes,
-        title = c.getString(R.string.unicode),
-        id = "card_unicode"
+        title = c.getString(R.string.unicode)
     ) {
         var unicode by remember { mutableStateOf("") }
         val characters = remember { mutableStateOf("") }
