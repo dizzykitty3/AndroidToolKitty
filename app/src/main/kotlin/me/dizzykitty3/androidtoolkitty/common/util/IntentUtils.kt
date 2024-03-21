@@ -8,7 +8,6 @@ import android.os.Build
 import android.provider.Settings
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
-import java.util.Objects
 
 class IntentUtils(private val context: Context) {
     fun openUrl(finalUrl: String) {
@@ -62,17 +61,15 @@ class IntentUtils(private val context: Context) {
     }
 
     private fun startActivity(intent: Intent) {
-        if (Objects.nonNull(intent.resolveActivity(context.packageManager))) {
-            try {
-                context.startActivity(intent)
-                return
-            } catch (e: ActivityNotFoundException) {
-                ToastUtils(context).showToast("${e.message}")
-                debugLog(">>>ERROR ActivityNotFoundException<<< startActivity: $e")
-            }
+        try {
+            context.startActivity(intent)
+            return
+        } catch (e: ActivityNotFoundException) {
+            ToastUtils(context).showToast("${e.message}")
+            debugLog(">>>ERROR ActivityNotFoundException<<< startActivity: $e")
         }
         when (intent.`package`) {
-            GOOGLE_PLAY_STORE ->
+            GOOGLE_PLAY ->
                 ToastUtils(context).showToastAndRecordLog(
                     context.getString(R.string.google_play_not_installed)
                 )
@@ -95,7 +92,7 @@ class IntentUtils(private val context: Context) {
             Uri.parse("market://search?q=${packageName.trim()}")
         }
         val playStoreIntent = Intent(Intent.ACTION_VIEW, playStoreUri)
-        playStoreIntent.setPackage(GOOGLE_PLAY_STORE)
+        playStoreIntent.setPackage(GOOGLE_PLAY)
         playStoreIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         try {
             IntentUtils(context).startActivity(playStoreIntent)
@@ -108,7 +105,7 @@ class IntentUtils(private val context: Context) {
 
     companion object {
         private const val GOOGLE_MAPS = "com.google.android.apps.maps"
-        private const val GOOGLE_PLAY_STORE = "com.android.vending"
+        private const val GOOGLE_PLAY = "com.android.vending"
         private const val GOOGLE_CHROME = "com.android.chrome"
     }
 }

@@ -49,7 +49,7 @@ fun CustomSystemSettingsButton(
 @Composable
 fun CustomAlertDialogButton(
     buttonText: String,
-    dialogMessageTitle: String?,
+    dialogMessageTitle: String,
     dialogMessage: String,
     positiveButtonText: String?,
     negativeButtonText: String?,
@@ -76,9 +76,7 @@ fun CustomAlertDialogButton(
                 showDialog = false
             },
             title = {
-                if (dialogMessageTitle != null) {
-                    Text(text = dialogMessageTitle)
-                }
+                Text(text = dialogMessageTitle)
             },
             text = { Text(text = dialogMessage) },
             confirmButton = {

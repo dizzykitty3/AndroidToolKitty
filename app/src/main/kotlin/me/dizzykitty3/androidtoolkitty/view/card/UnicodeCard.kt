@@ -92,7 +92,7 @@ private fun onClickConvertButton(
         characterField.value = result
         ClipboardUtils(c).copyTextToClipboard(result)
     } catch (e: Exception) {
-        ToastUtils(c).showToast(e.message?.ifBlank { "Unknown error occurred" })
+        ToastUtils(c).showToast(e.message ?: "Unknown error occurred")
     }
     debugLog("onClickConvertButton")
 }

@@ -84,7 +84,7 @@ fun MyApplicationTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) { // Android 12 .. any
+    val colorScheme = if (Build.VERSION.SDK_INT >= 31) { // Android 12 .. any
         when {
             dynamicColor -> {
                 val context = LocalContext.current
