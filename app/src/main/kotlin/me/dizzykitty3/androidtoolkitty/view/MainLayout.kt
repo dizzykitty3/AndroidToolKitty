@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.view.layout.HideCardSettingScreen
 import me.dizzykitty3.androidtoolkitty.view.layout.HomeScreen
+import me.dizzykitty3.androidtoolkitty.view.layout.LuckySpinningWheelScreen
 import me.dizzykitty3.androidtoolkitty.view.layout.SettingsScreen
 
 @Composable
@@ -23,6 +24,9 @@ fun MainLayout() {
         }
         composable("HideCardSettingScreen") {
             HideCardSettingScreen()
+        }
+        composable("LuckySpinningWheelScreen") {
+            LuckySpinningWheelScreen()
         }
     }
 }
