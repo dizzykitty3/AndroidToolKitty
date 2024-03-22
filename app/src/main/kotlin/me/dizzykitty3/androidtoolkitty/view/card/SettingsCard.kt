@@ -24,6 +24,7 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAlertDialogButt
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomNoIconCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
+import me.dizzykitty3.androidtoolkitty.common.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
@@ -76,28 +77,30 @@ fun SettingsCard() {
             style = MaterialTheme.typography.titleMedium
         )
         CustomSpacerPadding()
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                mIsDynamicColor = !mIsDynamicColor
-                SettingsViewModel().setIsDynamicColor(c, mIsDynamicColor)
-            }
-        ) {
-            Text(
-                text = c.getString(R.string.material_you_dynamic_color)
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mIsDynamicColor,
-                onCheckedChange = {
-                    mIsDynamicColor = it
-                    SettingsViewModel().setIsDynamicColor(c, it)
-                    val intent = Intent(c, MainActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    c.startActivity(intent)
-                    (c as Activity).finish()
+        if (OsVersion.android12()) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.clickable {
+                    mIsDynamicColor = !mIsDynamicColor
+                    SettingsViewModel().setIsDynamicColor(c, mIsDynamicColor)
                 }
-            )
+            ) {
+                Text(
+                    text = c.getString(R.string.material_you_dynamic_color)
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Switch(
+                    checked = mIsDynamicColor,
+                    onCheckedChange = {
+                        mIsDynamicColor = it
+                        SettingsViewModel().setIsDynamicColor(c, it)
+                        val intent = Intent(c, MainActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        c.startActivity(intent)
+                        (c as Activity).finish()
+                    }
+                )
+            }
         }
         Row(
             verticalAlignment = Alignment.CenterVertically,
