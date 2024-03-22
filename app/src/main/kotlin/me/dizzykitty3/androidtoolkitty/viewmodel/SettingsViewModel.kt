@@ -71,6 +71,18 @@ class SettingsViewModel : ViewModel() {
         }
     }
 
+    fun getIsDynamicColor(context: Context): Boolean {
+        return getSharedPrefs(context).getBoolean(IS_DYNAMIC_COLOR, true)
+    }
+
+    fun setIsDynamicColor(context: Context, isDynamicColor: Boolean) {
+        debugLog("is dynamic color = $isDynamicColor")
+        with(getSharedPrefs(context).edit()) {
+            putBoolean(IS_DYNAMIC_COLOR, isDynamicColor)
+            apply()
+        }
+    }
+
     fun clear(context: Context) {
         debugLog("erase all app data")
         with(getSharedPrefs(context).edit()) {
@@ -85,5 +97,6 @@ class SettingsViewModel : ViewModel() {
         private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
         private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
         private const val IS_ONE_HANDED_MODE = "is_one_handed_mode"
+        private const val IS_DYNAMIC_COLOR = "is_dynamic_color"
     }
 }

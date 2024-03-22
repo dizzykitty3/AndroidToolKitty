@@ -17,7 +17,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyApplicationTheme {
+            MyApplicationTheme(
+                dynamicColor = SettingsViewModel().getIsDynamicColor(this)
+            ) {
                 MainLayout()
             }
         }

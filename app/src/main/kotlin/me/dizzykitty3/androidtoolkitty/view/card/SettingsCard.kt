@@ -32,6 +32,8 @@ fun SettingsCard() {
         var isAutoClearClipboard by remember { mutableStateOf(mIsAutoClearClipboard) }
         val mIsOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
         var isOneHandedMode by remember { mutableStateOf(mIsOneHandedMode) }
+        val isDynamicColor = SettingsViewModel().getIsDynamicColor(c)
+        var mIsDynamicColor by remember { mutableStateOf(isDynamicColor) }
         Text(
             text = c.getString(R.string.feature),
             style = MaterialTheme.typography.titleMedium
@@ -64,6 +66,25 @@ fun SettingsCard() {
             style = MaterialTheme.typography.titleMedium
         )
         CustomSpacerPadding()
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.clickable {
+                mIsDynamicColor = !mIsDynamicColor
+                SettingsViewModel().setIsDynamicColor(c, mIsDynamicColor)
+            }
+        ) {
+            Text(
+                text = "Material You dynamic color"
+            )
+            Spacer(modifier = Modifier.weight(1f))
+            Switch(
+                checked = mIsDynamicColor,
+                onCheckedChange = {
+                    mIsDynamicColor = it
+                    SettingsViewModel().setIsDynamicColor(c, it)
+                }
+            )
+        }
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
