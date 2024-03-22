@@ -139,7 +139,7 @@ fun HideCardSettingCard() {
         CustomSpacerPadding()
         Button(
             onClick = {
-                onClickAllCardsButton(c, false)
+                onClickChangeAllCardsButton(c, false)
                 mIsShowCard1 = false
                 mIsShowCard2 = false
                 mIsShowCard3 = false
@@ -158,7 +158,7 @@ fun HideCardSettingCard() {
         }
         Button(
             onClick = {
-                onClickAllCardsButton(c, true)
+                onClickChangeAllCardsButton(c, true)
                 mIsShowCard1 = true
                 mIsShowCard2 = true
                 mIsShowCard3 = true
@@ -178,15 +178,15 @@ fun HideCardSettingCard() {
     }
 }
 
-private fun onClickAllCardsButton(c: Context, isExpand: Boolean) {
-    SettingsViewModel().saveCardShowedState(c, CARD_1, isExpand)
-    SettingsViewModel().saveCardShowedState(c, CARD_2, isExpand)
-    SettingsViewModel().saveCardShowedState(c, CARD_3, isExpand)
-    SettingsViewModel().saveCardShowedState(c, CARD_4, isExpand)
-    SettingsViewModel().saveCardShowedState(c, CARD_5, isExpand)
-    SettingsViewModel().saveCardShowedState(c, CARD_6, isExpand)
-    SettingsViewModel().saveCardShowedState(c, CARD_7, isExpand)
-    SettingsViewModel().saveCardShowedState(c, CARD_8, isExpand)
-    SettingsViewModel().saveCardShowedState(c, CARD_9, isExpand)
-    SettingsViewModel().saveCardShowedState(c, CARD_10, isExpand)
+private fun onClickChangeAllCardsButton(c: Context, isShow: Boolean) {
+    SettingsViewModel().saveCardShowedState(c, CARD_1, isShow)
+    SettingsViewModel().saveCardShowedState(c, CARD_2, isShow)
+    SettingsViewModel().saveCardShowedState(c, CARD_3, isShow)
+    SettingsViewModel().saveCardShowedState(c, CARD_4, isShow)
+    SettingsViewModel().saveCardShowedState(c, CARD_5, isShow)
+    SettingsViewModel().saveCardShowedState(c, CARD_6, isShow)
+    SettingsViewModel().saveCardShowedState(c, CARD_7, isShow)
+    SettingsViewModel().saveCardShowedState(c, CARD_8, isShow)
+    SettingsViewModel().saveCardShowedState(c, CARD_9, isShow)
+    SettingsViewModel().saveCardShowedState(c, CARD_10, isShow)
 }
