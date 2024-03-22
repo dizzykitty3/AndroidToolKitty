@@ -28,6 +28,7 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.common.util.AudioUtils
+import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -108,7 +109,7 @@ fun VolumeCard() {
                         // Nothing
                     },
                     title = {
-                        Text(text = "${c.getString(R.string.add_custom_volume)}\n${newCustomVolume.toInt()}")
+                        Text(text = "${c.getString(R.string.add_custom_volume)}\n${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
                     },
                     text = {
                         Slider(
@@ -123,9 +124,15 @@ fun VolumeCard() {
                     confirmButton = {
                         Button(
                             onClick = {
-                                SettingsViewModel().setCustomVolume(c, newCustomVolume.toInt())
-                                mCustomVolume = newCustomVolume.toInt()
-                                showDialog = false
+                                if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0 && newCustomVolume.toInt() != 0) {
+                                    ToastUtils(c).showToast(c.getString(R.string.system_media_volume_levels_limited))
+                                    return@Button
+                                } else {
+                                    SettingsViewModel().setCustomVolume(c, newCustomVolume.toInt())
+                                    mCustomVolume = newCustomVolume.toInt()
+                                    showDialog = false
+                                    AudioUtils(c).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
+                                }
                             }
                         ) {
                             Text(
@@ -147,6 +154,12 @@ fun VolumeCard() {
                     modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))
                 )
             }
+        }
+        Button(onClick = {
+            mCustomVolume = -1
+            SettingsViewModel().setCustomVolume(c, -1)
+        }) {
+            Text(text = "test: reset")
         }
     }
 }

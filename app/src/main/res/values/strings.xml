@@ -96,4 +96,5 @@
     <string name="tip_edit_custom_volume_button">You can change value and label of custom volume button in Settings Screen.</string>
     <string name="edit_custom_volume_button">Edit custom volume button</string>
     <string name="material_you_dynamic_color">Material You dynamic color</string>
+    <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
 </resources>
