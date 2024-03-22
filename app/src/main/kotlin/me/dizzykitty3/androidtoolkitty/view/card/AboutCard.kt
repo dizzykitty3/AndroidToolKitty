@@ -16,8 +16,8 @@ import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomDeveloperProfileLink
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomIconAndTextPadding
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomNoIconCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
 import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 
@@ -25,7 +25,7 @@ import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 @Composable
 fun AboutCard() {
     val c = LocalContext.current
-    CustomStaticCard(
+    CustomNoIconCard(
         title = c.getString(R.string.about)
     ) {
         CustomDeveloperProfileLink("dizzykitty3")

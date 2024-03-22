@@ -18,14 +18,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAlertDialogButton
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomNoIconCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
 fun SettingsCard() {
     val c = LocalContext.current
-    CustomStaticCard(
+    CustomNoIconCard(
         title = c.getString(R.string.settings)
     ) {
         val mIsAutoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(c)

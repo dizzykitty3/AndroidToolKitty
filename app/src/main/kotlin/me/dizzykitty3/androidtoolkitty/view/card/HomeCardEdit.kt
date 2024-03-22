@@ -6,12 +6,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomNoIconCard
 
 @Composable
 fun HomeCardEdit(navController: NavHostController) {
     val c = LocalContext.current
-    CustomStaticCard(title = c.getString(R.string.edit_home)) {
+    CustomNoIconCard(title = c.getString(R.string.edit_home)) {
         Button(
             onClick = {
                 navController.navigate("HideCardSettingScreen")

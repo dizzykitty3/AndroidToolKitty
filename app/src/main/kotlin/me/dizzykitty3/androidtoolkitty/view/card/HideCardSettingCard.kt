@@ -12,8 +12,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomHideCardSettingSwitch
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomNoIconCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomStaticCard
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 const val CARD_1 = "card_year_progress"
@@ -30,7 +30,7 @@ const val CARD_10 = "card_android_versions"
 @Composable
 fun HideCardSettingCard() {
     val c = LocalContext.current
-    CustomStaticCard(
+    CustomNoIconCard(
         title = c.getString(R.string.customize_my_home_page)
     ) {
         val isShowCard1 = SettingsViewModel().getCardShowedState(c, CARD_1)

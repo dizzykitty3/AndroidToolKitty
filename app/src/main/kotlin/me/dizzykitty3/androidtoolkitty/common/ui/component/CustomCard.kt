@@ -18,7 +18,7 @@ import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun CustomCard(
-    isExpandable: Boolean = true,
+    hasIcon: Boolean = true,
     icon: ImageVector?,
     title: String,
     content: @Composable () -> Unit
@@ -30,7 +30,7 @@ fun CustomCard(
         Column(
             modifier = cardPadding
         ) {
-            if (!isExpandable) {
+            if (!hasIcon) {
                 CardTitle(title = title)
                 CardContentColumn { content() }
             } else {
@@ -53,7 +53,7 @@ fun CustomCard(
 }
 
 @Composable
-fun CustomStaticCard(
+fun CustomNoIconCard(
     title: String,
     content: @Composable () -> Unit
 ) {
@@ -61,7 +61,7 @@ fun CustomStaticCard(
         icon = null,
         title = title,
         content = content,
-        isExpandable = false
+        hasIcon = false
     )
 }
 
