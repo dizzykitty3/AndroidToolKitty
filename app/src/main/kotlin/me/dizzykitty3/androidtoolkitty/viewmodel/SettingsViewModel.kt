@@ -83,6 +83,18 @@ class SettingsViewModel : ViewModel() {
         }
     }
 
+    fun getCustomVolume(context: Context): Int {
+        return getSharedPrefs(context).getInt(CUSTOM_VOLUME, -1)
+    }
+
+    fun setCustomVolume(context: Context, customVolume: Int) {
+        debugLog("custom volume = $customVolume")
+        with(getSharedPrefs(context).edit()) {
+            putInt(CUSTOM_VOLUME, customVolume)
+            apply()
+        }
+    }
+
     fun clear(context: Context) {
         debugLog("erase all app data")
         with(getSharedPrefs(context).edit()) {
@@ -98,5 +110,6 @@ class SettingsViewModel : ViewModel() {
         private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
         private const val IS_ONE_HANDED_MODE = "is_one_handed_mode"
         private const val IS_DYNAMIC_COLOR = "is_dynamic_color"
+        private const val CUSTOM_VOLUME = "custom_volume"
     }
 }

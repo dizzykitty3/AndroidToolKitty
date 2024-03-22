@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -22,6 +23,8 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomNoIconCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
+import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 
@@ -60,6 +63,10 @@ fun SettingsCard() {
                     SettingsViewModel().setIsAutoClearClipboard(c, it)
                 }
             )
+        }
+        CustomTip(text = c.getString(R.string.tip_under_development))
+        Button(onClick = { ToastUtils(c).showToast(c.getString(R.string.tip_under_development)) }) {
+            Text(text = "Edit custom volume button")
         }
         CustomSpacerPadding()
         HorizontalDivider()

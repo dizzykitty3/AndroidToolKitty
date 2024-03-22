@@ -73,12 +73,14 @@ fun CustomAlertDialogButton(
         val c = LocalContext.current
         AlertDialog(
             onDismissRequest = {
-                showDialog = false
+                // Nothing
             },
             title = {
                 Text(text = dialogMessageTitle)
             },
-            text = { Text(text = dialogMessage) },
+            text = {
+                Text(text = dialogMessage)
+            },
             confirmButton = {
                 Button(
                     onClick = {
