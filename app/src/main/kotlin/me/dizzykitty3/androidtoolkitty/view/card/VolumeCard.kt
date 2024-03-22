@@ -53,7 +53,7 @@ fun VolumeCard() {
         )
         if (mCustomVolume != -1) {
             CustomTip(
-                text = "You can change value and label of custom volume button in Settings Screen"
+                text = c.getString(R.string.tip_edit_custom_volume_button)
             )
         }
         Text(
@@ -108,7 +108,7 @@ fun VolumeCard() {
                         // Nothing
                     },
                     title = {
-                        Text(text = "Add custom volume\n${newCustomVolume.toInt()}")
+                        Text(text = "${c.getString(R.string.add_custom_volume)}\n${newCustomVolume.toInt()}")
                     },
                     text = {
                         Slider(

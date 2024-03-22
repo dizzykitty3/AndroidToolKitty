@@ -66,7 +66,7 @@ fun SettingsCard() {
         }
         CustomTip(text = c.getString(R.string.tip_under_development))
         Button(onClick = { ToastUtils(c).showToast(c.getString(R.string.tip_under_development)) }) {
-            Text(text = "Edit custom volume button")
+            Text(text = c.getString(R.string.edit_custom_volume_button))
         }
         CustomSpacerPadding()
         HorizontalDivider()
@@ -84,7 +84,7 @@ fun SettingsCard() {
             }
         ) {
             Text(
-                text = "Material You dynamic color"
+                text = c.getString(R.string.material_you_dynamic_color)
             )
             Spacer(modifier = Modifier.weight(1f))
             Switch(

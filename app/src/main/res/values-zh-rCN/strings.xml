@@ -90,4 +90,8 @@
     <string name="edit_home">编辑主页面</string>
     <string name="customize_my_home_page">自定义显示的卡片</string>
     <string name="tip_under_development">&gt;&gt;&gt; 功能开发中 &lt;&lt;&lt;</string>
+    <string name="add_custom_volume">添加一个自定义音量</string>
+    <string name="tip_edit_custom_volume_button">你可以在设置界面中更改已添加的自定义音量按钮的标签和音量值。</string>
+    <string name="edit_custom_volume_button">编辑自定义音量按钮</string>
+    <string name="material_you_dynamic_color">Material You 动态主题颜色</string>
 </resources>

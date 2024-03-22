@@ -92,4 +92,8 @@
     <string name="edit_home">Edit home</string>
     <string name="customize_my_home_page">Customize my home page</string>
     <string name="tip_under_development">&gt;&gt;&gt; UNDER DEVELOPMENT &lt;&lt;&lt;</string>
+    <string name="add_custom_volume">Add custom volume</string>
+    <string name="tip_edit_custom_volume_button">You can change value and label of custom volume button in Settings Screen.</string>
+    <string name="edit_custom_volume_button">Edit custom volume button</string>
+    <string name="material_you_dynamic_color">Material You dynamic color</string>
 </resources>
