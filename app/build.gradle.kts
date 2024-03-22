@@ -64,4 +64,5 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.runtime.livedata)
     implementation(libs.navigation.compose)
+    implementation(libs.core)
 }
