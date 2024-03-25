@@ -28,6 +28,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -75,6 +76,38 @@ fun AnnotatedString.Builder.CustomItalicText(
     withStyle(italicTextStyle) {
         append(text)
     }
+}
+
+@Composable
+private fun AnnotatedString.Builder.CustomItalicText14sp(
+    text: String
+) {
+    val italicTextStyle = SpanStyle(
+        fontStyle = FontStyle.Italic,
+        fontWeight = FontWeight.Light,
+        fontSize = 14.sp
+    )
+    withStyle(italicTextStyle) {
+        append(text)
+    }
+}
+
+@Composable
+fun CustomAndroidApiLevelAndName(text: String) {
+    return Text(
+        text = buildAnnotatedString { CustomItalicText14sp(text = text) },
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis
+    )
+}
+
+@Composable
+fun CustomSingleLineText(text: String) {
+    Text(
+        text = text,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis
+    )
 }
 
 @Composable
