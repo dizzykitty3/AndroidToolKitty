@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -82,7 +83,7 @@ fun SettingsCard() {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.clickable {
                     mIsDynamicColor = !mIsDynamicColor
-                    SettingsViewModel().setIsDynamicColor(c, mIsDynamicColor)
+                    onClickDynamicColorButton(mIsDynamicColor, c)
                 }
             ) {
                 Text(
@@ -93,11 +94,7 @@ fun SettingsCard() {
                     checked = mIsDynamicColor,
                     onCheckedChange = {
                         mIsDynamicColor = it
-                        SettingsViewModel().setIsDynamicColor(c, it)
-                        val intent = Intent(c, MainActivity::class.java)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                        c.startActivity(intent)
-                        (c as Activity).finish()
+                        onClickDynamicColorButton(it, c)
                     }
                 )
             }
@@ -141,4 +138,12 @@ fun SettingsCard() {
             }
         )
     }
+}
+
+private fun onClickDynamicColorButton(isDynamicColor: Boolean, c: Context) {
+    SettingsViewModel().setIsDynamicColor(c, isDynamicColor)
+    val intent = Intent(c, MainActivity::class.java)
+    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+    c.startActivity(intent)
+    (c as Activity).finish()
 }

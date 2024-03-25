@@ -43,7 +43,7 @@ fun VolumeCard() {
         val customVolume = SettingsViewModel().getCustomVolume(c)
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
         val options = listOf(
-            "0",
+            "mute",
             "40%",
             "60%",
             if (mCustomVolume == -1) "+" else "${mCustomVolume}%"
@@ -106,7 +106,7 @@ fun VolumeCard() {
                 var newCustomVolume by remember { mutableFloatStateOf(0f) }
                 AlertDialog(
                     onDismissRequest = {
-                        // Nothing
+                        showDialog = false
                     },
                     title = {
                         Text(text = "${c.getString(R.string.add_custom_volume)}\n${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
@@ -118,7 +118,7 @@ fun VolumeCard() {
                                 newCustomVolume = it
                             },
                             valueRange = 0f..100f,
-                            steps = 19
+                            steps = 99
                         )
                     },
                     confirmButton = {

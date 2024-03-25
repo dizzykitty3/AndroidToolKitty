@@ -44,7 +44,7 @@ fun CustomAlertDialogButton(
         val c = LocalContext.current
         AlertDialog(
             onDismissRequest = {
-                // Nothing
+                showDialog = false
             },
             title = {
                 Text(text = dialogMessageTitle)
