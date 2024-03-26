@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +23,7 @@ import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
@@ -41,11 +41,7 @@ fun SettingsCard(navController: NavHostController) {
         var isOneHandedMode by remember { mutableStateOf(mIsOneHandedMode) }
         val isDynamicColor = SettingsViewModel().getIsDynamicColor(c)
         var mIsDynamicColor by remember { mutableStateOf(isDynamicColor) }
-        Text(
-            text = c.getString(R.string.feature),
-            style = MaterialTheme.typography.titleMedium
-        )
-        CustomSpacerPadding()
+        CustomGroupTitleText(c.getString(R.string.feature))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
@@ -69,11 +65,7 @@ fun SettingsCard(navController: NavHostController) {
         CustomSpacerPadding()
         HorizontalDivider()
         CustomSpacerPadding()
-        Text(
-            text = c.getString(R.string.display),
-            style = MaterialTheme.typography.titleMedium
-        )
-        CustomSpacerPadding()
+        CustomGroupTitleText(c.getString(R.string.display))
         if (OsVersion.android12()) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -117,11 +109,7 @@ fun SettingsCard(navController: NavHostController) {
         CustomSpacerPadding()
         HorizontalDivider()
         CustomSpacerPadding()
-        Text(
-            text = c.getString(R.string.debugging),
-            style = MaterialTheme.typography.titleMedium
-        )
-        CustomSpacerPadding()
+        CustomGroupTitleText(c.getString(R.string.debugging))
         CustomAlertDialogButton(
             buttonText = c.getString(R.string.erase_all_app_data),
             dialogMessageTitle = c.getString(R.string.warning),

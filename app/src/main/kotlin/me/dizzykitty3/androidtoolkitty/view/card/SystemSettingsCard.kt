@@ -6,12 +6,11 @@ import android.provider.Settings
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
@@ -48,11 +47,7 @@ fun SystemSettingsCard() {
             CustomTip(text = c.getString(R.string.set_time_automatically_is_off_tip))
         }
         if (isShowSetting1 || isShowSetting2 || isShowSetting3 || isShowSetting4 || isShowSetting5 || isShowSetting6) {
-            Text(
-                text = c.getString(R.string.common),
-                style = MaterialTheme.typography.titleMedium
-            )
-            CustomSpacerPadding()
+            CustomGroupTitleText(c.getString(R.string.common))
         }
         if (isShowSetting1) {
             CustomSystemSettingsButton(
@@ -98,11 +93,7 @@ fun SystemSettingsCard() {
             CustomSpacerPadding()
         }
         if (isShowSetting7 || isShowSetting8 || isShowSetting9) {
-            Text(
-                text = c.getString(R.string.debugging),
-                style = MaterialTheme.typography.titleMedium
-            )
-            CustomSpacerPadding()
+            CustomGroupTitleText(c.getString(R.string.debugging))
         }
         if (isShowSetting7) {
             CustomSystemSettingsButton(

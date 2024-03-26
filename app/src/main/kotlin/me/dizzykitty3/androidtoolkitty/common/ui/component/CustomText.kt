@@ -188,3 +188,14 @@ fun CustomDeveloperProfileLink(
         }
     }
 }
+
+@Composable
+fun CustomGroupTitleText(
+    text: String
+) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.titleMedium
+    )
+    CustomSpacerPadding()
+}
