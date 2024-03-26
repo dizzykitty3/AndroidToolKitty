@@ -45,9 +45,7 @@ fun UnicodeCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = {
-                    onClickConvertButton(c, unicode, characters)
-                }
+                onDone = { onClickConvertButton(c, unicode, characters) }
             ),
             supportingText = {
                 Text(
@@ -65,13 +63,9 @@ fun UnicodeCard() {
             modifier = Modifier.fillMaxWidth()
         )
         TextButton(
-            onClick = {
-                onClickConvertButton(c, unicode, characters)
-            }
+            onClick = { onClickConvertButton(c, unicode, characters) }
         ) {
-            Text(
-                text = c.getString(R.string.convert)
-            )
+            Text(text = c.getString(R.string.convert))
         }
     }
 }

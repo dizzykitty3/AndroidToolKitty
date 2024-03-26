@@ -66,9 +66,7 @@ fun AboutCard() {
                 contentDescription = null
             )
             CustomIconAndTextPadding()
-            Text(
-                text = "${c.getString(R.string.version)} ${c.getString(R.string.version_number)}"
-            )
+            Text(text = "${c.getString(R.string.version)} ${c.getString(R.string.version_number)}")
         }
     }
 }

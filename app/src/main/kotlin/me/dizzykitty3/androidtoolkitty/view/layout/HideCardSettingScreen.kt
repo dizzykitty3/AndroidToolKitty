@@ -13,6 +13,8 @@ import me.dizzykitty3.androidtoolkitty.view.card.HideAndroidSystemSettingsOption
 import me.dizzykitty3.androidtoolkitty.view.card.HideCardSettingCard
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
+private const val CARD_6 = "card_android_system_settings"
+
 @Composable
 fun HideCardSettingScreen() {
     val c = LocalContext.current
@@ -28,7 +30,7 @@ fun HideCardSettingScreen() {
 
         // Contents
         item { HideCardSettingCard() }
-        if (SettingsViewModel().getCardShowedState(c, "card_android_system_settings")) {
+        if (SettingsViewModel().getCardShowedState(c, CARD_6)) {
             item { HideAndroidSystemSettingsOption() }
         }
 

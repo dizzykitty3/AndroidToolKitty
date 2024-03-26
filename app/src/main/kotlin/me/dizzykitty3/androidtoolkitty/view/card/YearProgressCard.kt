@@ -31,9 +31,7 @@ fun YearProgressCard() {
     ) {
         var isShowPercentage by remember { mutableStateOf(true) }
         Column(
-            modifier = Modifier.clickable {
-                isShowPercentage = !isShowPercentage
-            }
+            modifier = Modifier.clickable { isShowPercentage = !isShowPercentage }
         ) {
             CustomSpacerPadding()
             CustomAnimatedProgressIndicator()

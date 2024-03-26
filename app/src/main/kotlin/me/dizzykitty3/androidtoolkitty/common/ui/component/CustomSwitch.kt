@@ -26,9 +26,7 @@ fun CustomHideCardSettingSwitch(
             SettingsViewModel().saveCardShowedState(c, cardId, !isChecked)
         }
     ) {
-        Text(
-            text = text
-        )
+        Text(text = text)
         Spacer(modifier = Modifier.weight(1f))
         Switch(
             checked = isChecked,

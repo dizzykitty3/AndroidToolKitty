@@ -52,9 +52,7 @@ fun GoogleMapsCard() {
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = {
-                        onClickOpenGoogleMapsButton(c, latitude, longitude)
-                    }
+                    onDone = { onClickOpenGoogleMapsButton(c, latitude, longitude) }
                 )
             )
             OutlinedTextField(
@@ -70,20 +68,14 @@ fun GoogleMapsCard() {
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = {
-                        onClickOpenGoogleMapsButton(c, latitude, longitude)
-                    }
+                    onDone = { onClickOpenGoogleMapsButton(c, latitude, longitude) }
                 )
             )
         }
         TextButton(
-            onClick = {
-                onClickOpenGoogleMapsButton(c, latitude, longitude)
-            }
+            onClick = { onClickOpenGoogleMapsButton(c, latitude, longitude) }
         ) {
-            Text(
-                text = c.getString(R.string.open_google_maps)
-            )
+            Text(text = c.getString(R.string.open_google_maps))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,

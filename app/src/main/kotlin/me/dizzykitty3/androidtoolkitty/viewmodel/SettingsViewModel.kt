@@ -16,8 +16,7 @@ class SettingsViewModel : ViewModel() {
 
     fun setIsAutoClearClipboard(context: Context, isAutoClear: Boolean) {
         debugLog("is auto clear clipboard = $isAutoClear")
-        with(getSharedPrefs(context).edit())
-        {
+        with(getSharedPrefs(context).edit()) {
             putBoolean(IS_AUTO_CLEAR_CLIPBOARD, isAutoClear)
             apply()
         }

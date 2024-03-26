@@ -31,9 +31,7 @@ fun CustomAlertDialogButton(
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.error
         ),
-        onClick = {
-            showDialog = true
-        }
+        onClick = { showDialog = true }
     ) {
         Text(
             text = buttonText,
@@ -43,15 +41,9 @@ fun CustomAlertDialogButton(
     if (showDialog) {
         val c = LocalContext.current
         AlertDialog(
-            onDismissRequest = {
-                showDialog = false
-            },
-            title = {
-                Text(text = dialogMessageTitle)
-            },
-            text = {
-                Text(text = dialogMessage)
-            },
+            onDismissRequest = { showDialog = false },
+            title = { Text(text = dialogMessageTitle) },
+            text = { Text(text = dialogMessage) },
             confirmButton = {
                 Button(
                     onClick = {
@@ -59,20 +51,14 @@ fun CustomAlertDialogButton(
                         onClickAction()
                     }
                 ) {
-                    Text(
-                        text = positiveButtonText ?: c.getString(android.R.string.ok)
-                    )
+                    Text(text = positiveButtonText ?: c.getString(android.R.string.ok))
                 }
             },
             dismissButton = {
                 TextButton(
-                    onClick = {
-                        showDialog = false
-                    }
+                    onClick = { showDialog = false }
                 ) {
-                    Text(
-                        text = negativeButtonText ?: c.getString(android.R.string.cancel)
-                    )
+                    Text(text = negativeButtonText ?: c.getString(android.R.string.cancel))
                 }
             },
             modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))

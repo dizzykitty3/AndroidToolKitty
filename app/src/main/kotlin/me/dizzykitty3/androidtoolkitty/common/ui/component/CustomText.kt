@@ -115,9 +115,7 @@ fun CustomTip(
     text: String
 ) {
     Card(
-        modifier = Modifier.padding(
-            bottom = 8.dp
-        ),
+        modifier = Modifier.padding(bottom = 8.dp),
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.tertiaryContainer

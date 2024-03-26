@@ -151,9 +151,7 @@ fun HideCardSettingCard() {
                 mIsShowCard10 = false
             }
         ) {
-            Text(
-                text = c.getString(R.string.hide_all_cards)
-            )
+            Text(text = c.getString(R.string.hide_all_cards))
         }
         Button(
             onClick = {
@@ -170,9 +168,7 @@ fun HideCardSettingCard() {
                 mIsShowCard10 = true
             }
         ) {
-            Text(
-                text = c.getString(R.string.show_all_cards)
-            )
+            Text(text = c.getString(R.string.show_all_cards))
         }
     }
 }

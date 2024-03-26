@@ -8,12 +8,8 @@ import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
-private fun CustomPadding(
-    dimen: Int
-) {
-    Spacer(
-        modifier = Modifier.padding(dimensionResource(id = dimen))
-    )
+private fun CustomPadding(dimen: Int) {
+    Spacer(modifier = Modifier.padding(dimensionResource(id = dimen)))
 }
 
 @Composable

@@ -13,13 +13,9 @@ fun HomeCardEdit(navController: NavHostController) {
     val c = LocalContext.current
     CustomCardNoIcon(title = c.getString(R.string.edit_home)) {
         Button(
-            onClick = {
-                navController.navigate("HideCardSettingScreen")
-            }
+            onClick = { navController.navigate("HideCardSettingScreen") }
         ) {
-            Text(
-                text = c.getString(R.string.customize_my_home_page)
-            )
+            Text(text = c.getString(R.string.customize_my_home_page))
         }
     }
 }

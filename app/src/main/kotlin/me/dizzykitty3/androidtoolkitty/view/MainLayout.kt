@@ -16,17 +16,9 @@ fun MainLayout() {
         navController = navController,
         startDestination = "HomeScreen"
     ) {
-        composable("HomeScreen") {
-            HomeScreen(navController)
-        }
-        composable("SettingsScreen") {
-            SettingsScreen(navController)
-        }
-        composable("HideCardSettingScreen") {
-            HideCardSettingScreen()
-        }
-        composable("LuckySpinningWheelScreen") {
-            LuckySpinningWheelScreen()
-        }
+        composable("HomeScreen") { HomeScreen(navController) }
+        composable("SettingsScreen") { SettingsScreen(navController) }
+        composable("HideCardSettingScreen") { HideCardSettingScreen() }
+        composable("LuckySpinningWheelScreen") { LuckySpinningWheelScreen() }
     }
 }

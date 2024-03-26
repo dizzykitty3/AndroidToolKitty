@@ -45,9 +45,7 @@ fun SocialMediaProfileCard() {
         var platformIndex by remember { mutableIntStateOf(mPlatformIndex) }
         val platformList = UrlUtils.Platform.entries.map { c.getString(it.nameResId) }
         if (platformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-            CustomTip(
-                text = c.getString(R.string.temp2)
-            )
+            CustomTip(text = c.getString(R.string.temp2))
         }
         CustomDropdownMenu(
             items = platformList,
@@ -75,9 +73,7 @@ fun SocialMediaProfileCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = {
-                    onVisitProfileButton(c, username, platformIndex)
-                }
+                onDone = { onVisitProfileButton(c, username, platformIndex) }
             ),
             supportingText = {
                 if (platformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
@@ -93,13 +89,9 @@ fun SocialMediaProfileCard() {
             }
         )
         TextButton(
-            onClick = {
-                onVisitProfileButton(c, username, platformIndex)
-            }
+            onClick = { onVisitProfileButton(c, username, platformIndex) }
         ) {
-            Text(
-                text = c.getString(R.string.visit)
-            )
+            Text(text = c.getString(R.string.visit))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,

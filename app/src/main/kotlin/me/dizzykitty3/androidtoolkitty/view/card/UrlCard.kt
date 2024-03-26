@@ -46,9 +46,7 @@ fun UrlCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = {
-                    onClickVisitUrlButton(c, url)
-                }
+                onDone = { onClickVisitUrlButton(c, url) }
             ),
             supportingText = {
                 Text(
@@ -64,24 +62,16 @@ fun UrlCard() {
                 )
             },
             prefix = {
-                Text(
-                    text = "https://"
-                )
+                Text(text = "https://")
             },
             suffix = {
-                Text(
-                    text = UrlUtils.getUrlSuffix(url)
-                )
+                Text(text = UrlUtils.getUrlSuffix(url))
             }
         )
         TextButton(
-            onClick = {
-                onClickVisitUrlButton(c, url)
-            }
+            onClick = { onClickVisitUrlButton(c, url) }
         ) {
-            Text(
-                text = c.getString(R.string.visit)
-            )
+            Text(text = c.getString(R.string.visit))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,

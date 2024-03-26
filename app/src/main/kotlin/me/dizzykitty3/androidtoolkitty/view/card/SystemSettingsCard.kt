@@ -45,9 +45,7 @@ fun SystemSettingsCard() {
         val isShowSetting8 = SettingsViewModel().getCardShowedState(c, SETTING_8)
         val isShowSetting9 = SettingsViewModel().getCardShowedState(c, SETTING_9)
         if (!checkIsAutoTime(c)) {
-            CustomTip(
-                text = c.getString(R.string.set_time_automatically_is_off_tip)
-            )
+            CustomTip(text = c.getString(R.string.set_time_automatically_is_off_tip))
         }
         if (isShowSetting1 || isShowSetting2 || isShowSetting3 || isShowSetting4 || isShowSetting5 || isShowSetting6) {
             Text(
@@ -57,7 +55,6 @@ fun SystemSettingsCard() {
             CustomSpacerPadding()
         }
         if (isShowSetting1) {
-
             CustomSystemSettingsButton(
                 settingType = "display",
                 buttonText = c.getString(R.string.open_display_settings)

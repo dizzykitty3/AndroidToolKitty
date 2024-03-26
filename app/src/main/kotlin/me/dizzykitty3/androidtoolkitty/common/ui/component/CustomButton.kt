@@ -20,14 +20,10 @@ fun CustomSystemSettingsButton(
 ) {
     val context = LocalContext.current
     Button(
-        onClick = {
-            IntentUtils(context).openSystemSettings(settingType)
-        },
+        onClick = { IntentUtils(context).openSystemSettings(settingType) },
         elevation = ButtonDefaults.buttonElevation(1.dp)
     ) {
-        Text(
-            text = buttonText
-        )
+        Text(text = buttonText)
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
             contentDescription = null,

@@ -50,13 +50,9 @@ fun VolumeCard() {
         )
         var selectedIndex by remember { mutableStateOf<Int?>(null) }
         if (mCustomVolume != -1) {
-            CustomTip(
-                text = c.getString(R.string.tip_edit_custom_volume_button)
-            )
+            CustomTip(text = c.getString(R.string.tip_edit_custom_volume_button))
         }
-        Text(
-            text = c.getString(R.string.media_volume)
-        )
+        Text(text = c.getString(R.string.media_volume))
         CustomSpacerPadding()
         SingleChoiceSegmentedButtonRow(
             modifier = Modifier.fillMaxWidth(),
@@ -79,7 +75,6 @@ fun VolumeCard() {
                             2 -> {
                                 AudioUtils(c).setVolume((0.6 * maxVolume).toInt())
                             }
-
                             3 -> {
                                 if (mCustomVolume != -1) {
                                     AudioUtils(c).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
@@ -94,9 +89,7 @@ fun VolumeCard() {
                         count = options.size
                     )
                 ) {
-                    Text(
-                        text = label
-                    )
+                    Text(text = label)
                 }
             }
             if (showDialog) {
@@ -132,20 +125,14 @@ fun VolumeCard() {
                                 }
                             }
                         ) {
-                            Text(
-                                text = c.getString(android.R.string.ok)
-                            )
+                            Text(text = c.getString(android.R.string.ok))
                         }
                     },
                     dismissButton = {
                         TextButton(
-                            onClick = {
-                                showDialog = false
-                            }
+                            onClick = { showDialog = false }
                         ) {
-                            Text(
-                                text = c.getString(android.R.string.cancel)
-                            )
+                            Text(text = c.getString(android.R.string.cancel))
                         }
                     },
                     modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))

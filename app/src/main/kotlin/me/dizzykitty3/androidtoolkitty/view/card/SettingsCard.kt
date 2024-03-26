@@ -53,9 +53,7 @@ fun SettingsCard(navController: NavHostController) {
                 SettingsViewModel().setIsAutoClearClipboard(c, isAutoClearClipboard)
             }
         ) {
-            Text(
-                text = c.getString(R.string.clear_clipboard_on_launch)
-            )
+            Text(text = c.getString(R.string.clear_clipboard_on_launch))
             Spacer(modifier = Modifier.weight(1f))
             Switch(
                 checked = isAutoClearClipboard,
@@ -84,9 +82,7 @@ fun SettingsCard(navController: NavHostController) {
                     onClickDynamicColorButton(mIsDynamicColor, c)
                 }
             ) {
-                Text(
-                    text = c.getString(R.string.material_you_dynamic_color)
-                )
+                Text(text = c.getString(R.string.material_you_dynamic_color))
                 Spacer(modifier = Modifier.weight(1f))
                 Switch(
                     checked = mIsDynamicColor,
@@ -104,9 +100,7 @@ fun SettingsCard(navController: NavHostController) {
                 SettingsViewModel().setIsOneHandedMode(c, isOneHandedMode)
             }
         ) {
-            Text(
-                text = c.getString(R.string.one_handed_mode)
-            )
+            Text(text = c.getString(R.string.one_handed_mode))
             Spacer(modifier = Modifier.weight(1f))
             Switch(
                 checked = isOneHandedMode,
@@ -117,12 +111,8 @@ fun SettingsCard(navController: NavHostController) {
             )
         }
         Button(
-            onClick = {
-                navController.navigate("HideCardSettingScreen")
-            }) {
-            Text(
-                text = c.getString(R.string.customize_my_home_page)
-            )
+            onClick = { navController.navigate("HideCardSettingScreen") }) {
+            Text(text = c.getString(R.string.customize_my_home_page))
         }
         CustomSpacerPadding()
         HorizontalDivider()

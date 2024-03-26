@@ -25,19 +25,13 @@ fun ClipboardCard() {
     ) {
         val isShowHintText = !SettingsViewModel().getHaveOpenedSettingsScreen(c)
         if (isShowHintText) {
-            CustomTip(
-                text = c.getString(R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
-            )
+            CustomTip(text = c.getString(R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen))
         }
         Button(
-            onClick = {
-                onClearClipboardButton(c)
-            },
+            onClick = { onClearClipboardButton(c) },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
-            Text(
-                text = LocalContext.current.getString(R.string.clear_clipboard)
-            )
+            Text(text = LocalContext.current.getString(R.string.clear_clipboard))
         }
     }
 }

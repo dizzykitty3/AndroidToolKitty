@@ -27,9 +27,7 @@ fun CustomDropdownMenu(
     var expanded by remember { mutableStateOf(false) }
     ExposedDropdownMenuBox(
         expanded = expanded,
-        onExpandedChange = {
-            expanded = !expanded
-        },
+        onExpandedChange = { expanded = !expanded },
         modifier = Modifier.fillMaxWidth()
     ) {
         val c = LocalContext.current
@@ -55,9 +53,7 @@ fun CustomDropdownMenu(
         ) {
             items.forEachIndexed { index, item ->
                 DropdownMenuItem(
-                    text = {
-                        Text(text = item)
-                    },
+                    text = { Text(text = item) },
                     onClick = {
                         selectedPosition = index
                         onItemSelected(index)

@@ -45,9 +45,7 @@ fun OpenAppOnPlayStoreCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = {
-                    IntentUtils(c).openAppOnMarket(packageName)
-                }
+                onDone = { IntentUtils(c).openAppOnMarket(packageName) }
             )
         )
         CustomSpacerPadding()
@@ -75,13 +73,9 @@ fun OpenAppOnPlayStoreCard() {
             }
         }
         TextButton(
-            onClick = {
-                IntentUtils(c).openAppOnMarket(packageName)
-            }
+            onClick = { IntentUtils(c).openAppOnMarket(packageName) }
         ) {
-            Text(
-                text = c.getString(R.string.open_on_google_play)
-            )
+            Text(text = c.getString(R.string.open_on_google_play))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
@@ -89,13 +83,9 @@ fun OpenAppOnPlayStoreCard() {
             )
         }
         TextButton(
-            onClick = {
-                IntentUtils(c).openAppOnMarket(packageName, false)
-            }
+            onClick = { IntentUtils(c).openAppOnMarket(packageName, false) }
         ) {
-            Text(
-                text = c.getString(R.string.open_on_other_markets)
-            )
+            Text(text = c.getString(R.string.open_on_other_markets))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
