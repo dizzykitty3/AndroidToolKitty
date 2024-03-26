@@ -49,9 +49,6 @@ fun VolumeCard() {
             if (mCustomVolume == -1) "+" else "${mCustomVolume}%"
         )
         var selectedIndex by remember { mutableStateOf<Int?>(null) }
-        CustomTip(
-            text = c.getString(R.string.temp4)
-        )
         if (mCustomVolume != -1) {
             CustomTip(
                 text = c.getString(R.string.tip_edit_custom_volume_button)

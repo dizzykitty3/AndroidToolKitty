@@ -22,7 +22,6 @@ import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomItalicText
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.common.util.ClipboardUtils
 import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
 import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
@@ -37,9 +36,6 @@ fun UnicodeCard() {
     ) {
         var unicode by remember { mutableStateOf("") }
         val characters = remember { mutableStateOf("") }
-        CustomTip(
-            text = c.getString(R.string.temp3)
-        )
         OutlinedTextField(
             value = unicode,
             onValueChange = { unicode = it },

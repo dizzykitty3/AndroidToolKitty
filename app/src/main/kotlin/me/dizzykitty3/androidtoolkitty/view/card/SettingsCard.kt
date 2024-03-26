@@ -24,7 +24,6 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.common.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
@@ -65,7 +64,6 @@ fun SettingsCard() {
                 }
             )
         }
-        CustomTip(text = c.getString(R.string.tip_under_development))
         Button(onClick = { ToastUtils(c).showToast(c.getString(R.string.tip_under_development)) }) {
             Text(text = c.getString(R.string.edit_custom_volume_button))
         }
