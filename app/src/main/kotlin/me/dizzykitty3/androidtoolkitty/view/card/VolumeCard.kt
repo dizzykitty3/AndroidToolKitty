@@ -107,8 +107,7 @@ fun VolumeCard() {
                             onValueChange = {
                                 newCustomVolume = it
                             },
-                            valueRange = 0f..100f,
-                            steps = 99
+                            valueRange = 0f..100f
                         )
                     },
                     confirmButton = {
