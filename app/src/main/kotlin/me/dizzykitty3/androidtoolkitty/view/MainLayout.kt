@@ -20,7 +20,7 @@ fun MainLayout() {
             HomeScreen(navController)
         }
         composable("SettingsScreen") {
-            SettingsScreen()
+            SettingsScreen(navController)
         }
         composable("HideCardSettingScreen") {
             HideCardSettingScreen()

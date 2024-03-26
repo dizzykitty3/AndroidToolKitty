@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAlertDialogButton
@@ -29,7 +30,7 @@ import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
-fun SettingsCard() {
+fun SettingsCard(navController: NavHostController) {
     val c = LocalContext.current
     CustomCardNoIcon(
         title = c.getString(R.string.settings)
@@ -113,6 +114,14 @@ fun SettingsCard() {
                     isOneHandedMode = it
                     SettingsViewModel().setIsOneHandedMode(c, it)
                 }
+            )
+        }
+        Button(
+            onClick = {
+                navController.navigate("HideCardSettingScreen")
+            }) {
+            Text(
+                text = c.getString(R.string.customize_my_home_page)
             )
         }
         CustomSpacerPadding()
