@@ -9,7 +9,7 @@ import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomBottomPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTopPadding
-import me.dizzykitty3.androidtoolkitty.view.card.HideAndroidSystemSettingsOption
+import me.dizzykitty3.androidtoolkitty.view.card.HideAndroidSystemSettingsOptionCard
 import me.dizzykitty3.androidtoolkitty.view.card.HideCardSettingCard
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
@@ -31,7 +31,7 @@ fun HideCardSettingScreen() {
         // Contents
         item { HideCardSettingCard() }
         if (SettingsViewModel().getCardShowedState(c, CARD_6)) {
-            item { HideAndroidSystemSettingsOption() }
+            item { HideAndroidSystemSettingsOptionCard() }
         }
 
         // Bottom

@@ -22,10 +22,10 @@ private const val SETTING_8 = "setting_date_and_time"
 private const val SETTING_9 = "setting_developer"
 
 @Composable
-fun HideAndroidSystemSettingsOption() {
+fun HideAndroidSystemSettingsOptionCard() {
     val c = LocalContext.current
     CustomCardNoIcon(
-        title = "Edit Android system settings card options"
+        title = c.getString(R.string.customize_system_settings_card),
     ) {
         val isShowSetting1 = SettingsViewModel().getCardShowedState(c, SETTING_1)
         val isShowSetting2 = SettingsViewModel().getCardShowedState(c, SETTING_2)
