@@ -22,18 +22,17 @@ import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAlertDialogButton
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomNoIconCard
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.common.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
-
 @Composable
 fun SettingsCard() {
     val c = LocalContext.current
-    CustomNoIconCard(
+    CustomCardNoIcon(
         title = c.getString(R.string.settings)
     ) {
         val mIsAutoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(c)

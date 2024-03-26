@@ -53,7 +53,7 @@ fun CustomCard(
 }
 
 @Composable
-fun CustomNoIconCard(
+fun CustomCardNoIcon(
     title: String,
     content: @Composable () -> Unit
 ) {

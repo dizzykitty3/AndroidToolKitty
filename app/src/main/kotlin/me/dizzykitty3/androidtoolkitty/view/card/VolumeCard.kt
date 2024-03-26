@@ -43,7 +43,7 @@ fun VolumeCard() {
         val customVolume = SettingsViewModel().getCustomVolume(c)
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
         val options = listOf(
-            "mute",
+            c.getString(R.string.mute),
             "40%",
             "60%",
             if (mCustomVolume == -1) "+" else "${mCustomVolume}%"

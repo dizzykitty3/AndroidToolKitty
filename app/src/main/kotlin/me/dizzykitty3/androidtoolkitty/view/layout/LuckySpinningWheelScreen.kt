@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,34 +26,61 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomBottomPadding
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTopPadding
 import kotlin.math.cos
 import kotlin.math.sin
 
 @Composable
 fun LuckySpinningWheelScreen() {
-    var selectedItem by remember { mutableStateOf("") }
-    var isSpinning by remember { mutableStateOf(false) }
-    val items = listOf("项目1", "项目2", "项目3", "项目4", "项目5")
-
-    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
-        SpinningWheel(
-            items = items,
-            isSpinning = isSpinning,
-            onItemSelected = { item ->
-                selectedItem = item
-            }
+    val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
+    LazyColumn(
+        modifier = Modifier.padding(
+            start = cardPadding,
+            end = cardPadding
         )
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = { isSpinning = !isSpinning }) {
-            Text(if (isSpinning) "停止" else "旋转")
+    ) {
+        // Top
+        item { CustomTopPadding() }
+
+        // Contents
+        item {
+            CustomCardNoIcon(title = "Lucky spinning wheel") {
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    var selectedItem by remember { mutableStateOf("") }
+                    var isSpinning by remember { mutableStateOf(false) }
+                    val items = listOf("项目1", "项目2", "项目3", "项目4", "项目5")
+                    SpinningWheel(
+                        items = items,
+                        isSpinning = isSpinning,
+                        onItemSelected = { item ->
+                            selectedItem = item
+                        }
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Button(onClick = { isSpinning = !isSpinning }) {
+                        Text(if (isSpinning) "停止" else "旋转")
+                    }
+                    if (selectedItem.isNotEmpty()) {
+                        Text(
+                            "选中的项目是：$selectedItem",
+                            modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
+                        )
+                    }
+                }
+            }
+
         }
-        if (selectedItem.isNotEmpty()) {
-            Text(
-                "选中的项目是：$selectedItem",
-                modifier = Modifier.align(alignment = Alignment.CenterHorizontally)
-            )
-        }
+
+        // Bottom
+        item { CustomBottomPadding() }
     }
 }
 

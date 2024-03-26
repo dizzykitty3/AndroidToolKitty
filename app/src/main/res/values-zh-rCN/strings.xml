@@ -95,4 +95,5 @@
     <string name="edit_custom_volume_button">编辑自定义音量按钮</string>
     <string name="material_you_dynamic_color">Material You 动态主题颜色</string>
     <string name="system_media_volume_levels_limited">系统音量阶数较少，请重新调整</string>
+    <string name="mute">静音</string>
 </resources>

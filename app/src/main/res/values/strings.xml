@@ -74,7 +74,7 @@
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240325</string>
+    <string name="version_number" translatable="false">20240326</string>
     <string name="one_handed_mode">One-handed mode</string>
     <string name="volume">Volume</string>
     <string name="feature">Feature</string>
@@ -97,4 +97,5 @@
     <string name="edit_custom_volume_button">Edit custom volume button</string>
     <string name="material_you_dynamic_color">Material You dynamic color</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
+    <string name="mute">mute</string>
 </resources>

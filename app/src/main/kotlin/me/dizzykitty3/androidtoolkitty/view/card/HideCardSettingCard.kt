@@ -11,26 +11,26 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomHideCardSettingSwitch
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomNoIconCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
-const val CARD_1 = "card_year_progress"
-const val CARD_2 = "card_volume"
-const val CARD_3 = "card_clipboard"
-const val CARD_4 = "card_url"
-const val CARD_5 = "card_social_media_profile"
-const val CARD_6 = "card_android_system_settings"
-const val CARD_7 = "card_unicode"
-const val CARD_8 = "card_google_maps"
-const val CARD_9 = "card_open_app_on_google_play"
-const val CARD_10 = "card_android_versions"
+private const val CARD_1 = "card_year_progress"
+private const val CARD_2 = "card_volume"
+private const val CARD_3 = "card_clipboard"
+private const val CARD_4 = "card_url"
+private const val CARD_5 = "card_social_media_profile"
+private const val CARD_6 = "card_android_system_settings"
+private const val CARD_7 = "card_unicode"
+private const val CARD_8 = "card_google_maps"
+private const val CARD_9 = "card_open_app_on_google_play"
+private const val CARD_10 = "card_android_versions"
 
 @Composable
 fun HideCardSettingCard() {
     val c = LocalContext.current
-    CustomNoIconCard(
+    CustomCardNoIcon(
         title = c.getString(R.string.customize_my_home_page)
     ) {
         val isShowCard1 = SettingsViewModel().getCardShowedState(c, CARD_1)
@@ -53,7 +53,6 @@ fun HideCardSettingCard() {
         var mIsShowCard8 by remember { mutableStateOf(isShowCard8) }
         var mIsShowCard9 by remember { mutableStateOf(isShowCard9) }
         var mIsShowCard10 by remember { mutableStateOf(isShowCard10) }
-        CustomSpacerPadding()
         CustomHideCardSettingSwitch(
             text = c.getString(R.string.year_progress),
             cardId = CARD_1,
