@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.kapt)
+    alias(libs.plugins.google.devtools.ksp)
 }
 
 @Suppress("SpellCheckingInspection")
@@ -11,8 +12,8 @@ android {
 
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
-        minSdk = 30 // Android 11
-        targetSdk = 34 // Android 14
+        minSdk = 30
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -65,4 +66,6 @@ dependencies {
     implementation(libs.runtime.livedata)
     implementation(libs.navigation.compose)
     implementation(libs.core)
+    implementation(libs.room.runtime)
+    ksp(libs.room.compiler)
 }
