@@ -49,9 +49,13 @@ fun CustomAlertDialogButton(
                     onClick = {
                         showDialog = false
                         onClickAction()
-                    }
+                    },
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
                 ) {
-                    Text(text = positiveButtonText ?: c.getString(android.R.string.ok))
+                    Text(
+                        text = positiveButtonText ?: c.getString(android.R.string.ok),
+                        color = MaterialTheme.colorScheme.onError
+                    )
                 }
             },
             dismissButton = {
