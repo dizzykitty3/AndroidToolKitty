@@ -9,6 +9,7 @@ import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomHideCardSettingSwitch
+import me.dizzykitty3.androidtoolkitty.common.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 private const val SETTING_1 = "setting_display"
@@ -53,13 +54,15 @@ fun HideAndroidSystemSettingsOptionCard() {
             mIsShowSetting1 = newState
             SettingsViewModel().saveCardShowedState(c, SETTING_1, newState)
         }
-        CustomHideCardSettingSwitch(
-            text = "${c.getString(R.string.open_auto_rotate_settings)} (Android 12+)",
-            cardId = SETTING_2,
-            isChecked = mIsShowSetting2
-        ) { newState ->
-            mIsShowSetting2 = newState
-            SettingsViewModel().saveCardShowedState(c, SETTING_2, newState)
+        if (OsVersion.android12()) {
+            CustomHideCardSettingSwitch(
+                text = "${c.getString(R.string.open_auto_rotate_settings)} (Android 12+)",
+                cardId = SETTING_2,
+                isChecked = mIsShowSetting2
+            ) { newState ->
+                mIsShowSetting2 = newState
+                SettingsViewModel().saveCardShowedState(c, SETTING_2, newState)
+            }
         }
         CustomHideCardSettingSwitch(
             text = c.getString(R.string.open_bluetooth_settings),
