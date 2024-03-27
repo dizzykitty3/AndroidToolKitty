@@ -58,6 +58,18 @@ class SettingsViewModel : ViewModel() {
         }
     }
 
+    fun getHaveSetCustomVolume(context: Context): Boolean {
+        return getSharedPrefs(context).getBoolean(HAVE_SET_CUSTOM_VOLUME, false)
+    }
+
+    private fun setHaveSetCustomVolume(context: Context, haveSet: Boolean) {
+        debugLog("have set volume option label = $haveSet")
+        with(getSharedPrefs(context).edit()) {
+            putBoolean(HAVE_SET_CUSTOM_VOLUME, haveSet)
+            apply()
+        }
+    }
+
     fun getIsOneHandedMode(context: Context): Boolean {
         return getSharedPrefs(context).getBoolean(IS_ONE_HANDED_MODE, false)
     }
@@ -92,6 +104,19 @@ class SettingsViewModel : ViewModel() {
             putInt(CUSTOM_VOLUME, customVolume)
             apply()
         }
+        setHaveSetCustomVolume(context, true)
+    }
+
+    fun getCustomVolumeOptionLabel(context: Context): String? {
+        return getSharedPrefs(context).getString(VOLUME_OPTION_LABEL, "")
+    }
+
+    fun setCustomVolumeOptionLabel(context: Context, customOptionLabel: String) {
+        debugLog("custom volume option label = $customOptionLabel")
+        with(getSharedPrefs(context).edit()) {
+            putString(VOLUME_OPTION_LABEL, customOptionLabel)
+            apply()
+        }
     }
 
     fun clear(context: Context) {
@@ -110,5 +135,7 @@ class SettingsViewModel : ViewModel() {
         private const val IS_ONE_HANDED_MODE = "is_one_handed_mode"
         private const val IS_DYNAMIC_COLOR = "is_dynamic_color"
         private const val CUSTOM_VOLUME = "custom_volume"
+        private const val VOLUME_OPTION_LABEL = "volume_option_label"
+        private const val HAVE_SET_CUSTOM_VOLUME = "have_set_custom_volume"
     }
 }

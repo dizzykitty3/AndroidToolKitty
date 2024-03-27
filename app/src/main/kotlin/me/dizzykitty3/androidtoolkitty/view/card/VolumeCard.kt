@@ -42,14 +42,20 @@ fun VolumeCard() {
         val maxVolume = AudioUtils(c).getMaxVolumeIndex()
         val customVolume = SettingsViewModel().getCustomVolume(c)
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
+        val customVolumeOptionLabel = SettingsViewModel().getCustomVolumeOptionLabel(c)
+        val haveSetCustomVolume = SettingsViewModel().getHaveSetCustomVolume(c)
         val options = listOf(
             c.getString(R.string.mute),
             "40%",
             "60%",
-            if (mCustomVolume == -1) "+" else "${mCustomVolume}%"
+            if (customVolumeOptionLabel != "") customVolumeOptionLabel
+            else {
+                if (mCustomVolume == -1) "+"
+                else "${mCustomVolume}%"
+            }
         )
         var selectedIndex by remember { mutableStateOf<Int?>(null) }
-        if (mCustomVolume != -1) {
+        if (haveSetCustomVolume) { // TODO improve this tip
             CustomTip(text = c.getString(R.string.tip_edit_custom_volume_button))
         }
         Text(text = c.getString(R.string.media_volume))
@@ -75,6 +81,7 @@ fun VolumeCard() {
                             2 -> {
                                 AudioUtils(c).setVolume((0.6 * maxVolume).toInt())
                             }
+
                             3 -> {
                                 if (mCustomVolume != -1) {
                                     AudioUtils(c).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
@@ -89,7 +96,7 @@ fun VolumeCard() {
                         count = options.size
                     )
                 ) {
-                    Text(text = label)
+                    Text(text = label!!)
                 }
             }
             if (showDialog) {
@@ -137,12 +144,6 @@ fun VolumeCard() {
                     modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))
                 )
             }
-        }
-        Button(onClick = {
-            mCustomVolume = -1
-            SettingsViewModel().setCustomVolume(c, -1)
-        }) {
-            Text(text = "test: reset")
         }
     }
 }
