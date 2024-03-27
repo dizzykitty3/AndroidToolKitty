@@ -85,7 +85,7 @@
     <string name="temp4">Add custom volume option feature is under development.</string>
     <string name="warning">Warning</string>
     <string name="warning_erase_all_data">This action will erase all your data, including histories and settings.\n\nAre you sure you want to proceed?</string>
-    <string name="clear_all_data">Clear all data</string>
+    <string name="erase_all_data">Erase all data</string>
     <string name="open_on_other_markets">Open on other markets</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
     <string name="android_versions">Android versions</string>
