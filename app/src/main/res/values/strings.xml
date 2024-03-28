@@ -99,4 +99,5 @@
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
     <string name="mute">mute</string>
     <string name="customize_system_settings_card">Customize Android system settings card buttons</string>
+    <string name="customize">Customize</string>
 </resources>

@@ -54,12 +54,12 @@ fun CustomAlertDialogButton(
                         onClickAction()
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.error
+                        containerColor = MaterialTheme.colorScheme.primary
                     )
                 ) {
                     Text(
                         text = positiveButtonText ?: c.getString(android.R.string.ok),
-                        color = MaterialTheme.colorScheme.onError
+                        color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
             },

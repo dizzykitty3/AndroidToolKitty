@@ -6,39 +6,25 @@ import android.content.Intent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Slider
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.text.input.ImeAction
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupTitleText
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.common.util.AudioUtils
 import me.dizzykitty3.androidtoolkitty.common.util.OsVersion
-import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
@@ -56,11 +42,8 @@ fun SettingsCard(navController: NavHostController) {
         val dynamicColor = SettingsViewModel().getIsDynamicColor(c)
         var mDynamicColor by remember { mutableStateOf(dynamicColor) }
 
-        var showVolumeDialog by remember { mutableStateOf(false) }
+        CustomGroupTitleText(c.getString(R.string.common))
 
-        var showVolumeOptionLabelDialog by remember { mutableStateOf(false) }
-
-        CustomGroupTitleText(c.getString(R.string.feature))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
@@ -80,115 +63,6 @@ fun SettingsCard(navController: NavHostController) {
                 }
             )
         }
-
-        Button(onClick = { showVolumeDialog = true }) {
-            Text(text = c.getString(R.string.edit_custom_volume_button))
-        }
-
-        if (showVolumeDialog) {
-            val maxVolume = AudioUtils(c).getMaxVolumeIndex()
-
-            var newCustomVolume by remember { mutableFloatStateOf(0f) }
-
-            AlertDialog(
-                onDismissRequest = {
-                    showVolumeDialog = false
-                },
-                title = {
-                    Text(text = "${c.getString(R.string.add_custom_volume)}\n${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
-                },
-                text = {
-                    Slider(
-                        value = newCustomVolume,
-                        onValueChange = {
-                            newCustomVolume = it
-                        },
-                        valueRange = 0f..100f
-                    )
-                },
-                confirmButton = {
-                    Button(
-                        onClick = {
-                            if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0 && newCustomVolume.toInt() != 0) {
-                                ToastUtils(c).showToast(c.getString(R.string.system_media_volume_levels_limited))
-                                return@Button
-                            } else {
-                                SettingsViewModel().setCustomVolume(c, newCustomVolume.toInt())
-                                showVolumeDialog = false
-                                AudioUtils(c).setVolume((newCustomVolume * 0.01 * maxVolume).toInt())
-                                showVolumeOptionLabelDialog = true
-                            }
-                        }
-                    ) {
-                        Text(text = c.getString(android.R.string.ok))
-                    }
-                },
-                dismissButton = {
-                    TextButton(
-                        onClick = { showVolumeDialog = false }
-                    ) {
-                        Text(text = c.getString(android.R.string.cancel))
-                    }
-                },
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))
-            )
-        }
-
-        if (showVolumeOptionLabelDialog) {
-            var optionLabel by remember { mutableStateOf("") }
-            AlertDialog(
-                onDismissRequest = {
-                    showVolumeOptionLabelDialog = false
-                },
-                title = {
-                    Text(text = "You can set a label for it")
-                },
-                text = {
-                    OutlinedTextField(
-                        value = optionLabel,
-                        onValueChange = { optionLabel = it },
-                        label = { Text(text = "Option label") },
-                        modifier = Modifier.fillMaxWidth(),
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            imeAction = ImeAction.Done
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                                SettingsViewModel().setCustomVolumeOptionLabel(
-                                    c,
-                                    optionLabel
-                                )
-                            }
-                        ),
-                        placeholder = { Text(text = "optional") }
-                    )
-                },
-                confirmButton = {
-                    Button(
-                        onClick = {
-                            SettingsViewModel().setCustomVolumeOptionLabel(c, optionLabel)
-                            showVolumeOptionLabelDialog = false
-                        }
-                    ) {
-                        Text(text = c.getString(android.R.string.ok))
-                    }
-                },
-                dismissButton = {
-                    TextButton(
-                        onClick = { showVolumeOptionLabelDialog = false }
-                    ) {
-                        Text(text = c.getString(android.R.string.cancel))
-                    }
-                },
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))
-            )
-        }
-
-        CustomSpacerPadding()
-        HorizontalDivider()
-        CustomSpacerPadding()
-
-        CustomGroupTitleText(c.getString(R.string.display))
 
         if (OsVersion.android12()) {
             Row(
@@ -228,14 +102,16 @@ fun SettingsCard(navController: NavHostController) {
             )
         }
 
+        CustomGroupDivider()
+
+        CustomGroupTitleText(c.getString(R.string.customize))
+
         Button(
             onClick = { navController.navigate("HideCardSettingScreen") }) {
             Text(text = c.getString(R.string.customize_my_home_page))
         }
 
-        CustomSpacerPadding()
-        HorizontalDivider()
-        CustomSpacerPadding()
+        CustomGroupDivider()
 
         CustomGroupTitleText(c.getString(R.string.debugging))
 

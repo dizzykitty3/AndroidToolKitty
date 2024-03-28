@@ -5,13 +5,12 @@ import android.content.Context
 import android.provider.Settings
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupTitleText
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.common.util.OsVersion
@@ -88,9 +87,7 @@ fun SystemSettingsCard() {
         if ((isShowSetting1 || isShowSetting2 || isShowSetting3 || isShowSetting4 || isShowSetting5 || isShowSetting6)
             && (isShowSetting7 || isShowSetting8 || isShowSetting9)
         ) {
-            CustomSpacerPadding()
-            HorizontalDivider()
-            CustomSpacerPadding()
+            CustomGroupDivider()
         }
         if (isShowSetting7 || isShowSetting8 || isShowSetting9) {
             CustomGroupTitleText(c.getString(R.string.debugging))
