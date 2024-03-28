@@ -2,9 +2,7 @@ package me.dizzykitty3.androidtoolkitty.view.layout
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
@@ -16,15 +14,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomBottomPadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomOneHandedMode
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTopPadding
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.view.card.AndroidVersionsCard
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
@@ -52,47 +47,35 @@ private const val CARD_10 = "card_android_versions"
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val c = LocalContext.current
-
-    val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
-    LazyColumn(
-        modifier = Modifier.padding(
-            start = cardPadding,
-            end = cardPadding
-        )
-    ) {
-        // Top
-        item { CustomTopPadding() }
-
-        // Contents
-        item {
-            Row(
-                verticalAlignment = Alignment.CenterVertically
+    CustomScreen {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Box(
+                modifier = Modifier.weight(1f)
             ) {
-                Box(
-                    modifier = Modifier.weight(1f)
-                ) {
-                    GreetingText()
-                }
-                IconButton(
-                    onClick = {
-                        navController.navigate("SettingsScreen")
-                        SettingsViewModel().setHaveOpenedSettingsScreen(c, true)
-                    },
-                    modifier = Modifier.size(40.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
+                GreetingText()
+            }
+            IconButton(
+                onClick = {
+                    navController.navigate("SettingsScreen")
+                    SettingsViewModel().setHaveOpenedSettingsScreen(c, true)
+                },
+                modifier = Modifier.size(40.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Settings,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
             }
         }
-        item { CustomCardSpacePadding() }
+
+        CustomCardSpacePadding()
 
         val isOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
         if (isOneHandedMode) {
-            item { CustomOneHandedMode() }
+            CustomOneHandedMode()
         }
 
         val cardList = listOf(
@@ -111,31 +94,26 @@ fun HomeScreen(navController: NavHostController) {
         cardList.forEach { (cardName, isShow) ->
             if (isShow) {
                 when (cardName) {
-                    CARD_1 -> item { YearProgressCard() }
-                    CARD_2 -> item { VolumeCard() }
-                    CARD_3 -> item { ClipboardCard() }
-                    CARD_4 -> item { UrlCard() }
-                    CARD_5 -> item { SocialMediaProfileCard() }
-                    CARD_6 -> item { SystemSettingsCard() }
-                    CARD_7 -> item { UnicodeCard() }
-                    CARD_8 -> item { GoogleMapsCard() }
-                    CARD_9 -> item { OpenAppOnPlayStoreCard() }
-                    CARD_10 -> item { AndroidVersionsCard() }
+                    CARD_1 -> YearProgressCard()
+                    CARD_2 -> VolumeCard()
+                    CARD_3 -> ClipboardCard()
+                    CARD_4 -> UrlCard()
+                    CARD_5 -> SocialMediaProfileCard()
+                    CARD_6 -> SystemSettingsCard()
+                    CARD_7 -> UnicodeCard()
+                    CARD_8 -> GoogleMapsCard()
+                    CARD_9 -> OpenAppOnPlayStoreCard()
+                    CARD_10 -> AndroidVersionsCard()
                 }
             }
         }
 
-        item {
-            CustomCardNoIcon(title = "test") {
-                Button(
-                    onClick = { navController.navigate("LuckySpinningWheelScreen") }
-                ) {
-                    Text(text = "Lucky spinning wheel")
-                }
+        CustomCardNoIcon(title = "test") {
+            Button(
+                onClick = { navController.navigate("LuckySpinningWheelScreen") }
+            ) {
+                Text(text = "Lucky spinning wheel")
             }
         }
-
-        // Bottom
-        item { CustomBottomPadding() }
     }
 }
