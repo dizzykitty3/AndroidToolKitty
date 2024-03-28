@@ -56,7 +56,7 @@ fun HideAndroidSystemSettingsOptionCard() {
         }
         if (OsVersion.android12()) {
             CustomHideCardSettingSwitch(
-                text = "${c.getString(R.string.open_auto_rotate_settings)} (Android 12+)",
+                text = c.getString(R.string.open_auto_rotate_settings),
                 cardId = SETTING_2,
                 isChecked = mIsShowSetting2
             ) { newState ->
