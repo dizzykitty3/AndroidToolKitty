@@ -12,6 +12,7 @@ fun CustomScreen(
     cardContent: @Composable () -> Unit
 ) {
     val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
+
     LazyColumn(
         modifier = Modifier.padding(
             start = cardPadding,

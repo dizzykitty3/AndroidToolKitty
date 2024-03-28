@@ -24,6 +24,7 @@ fun CustomAnimatedProgressIndicator() {
             animationSpec = tween(durationMillis)
         )
     }
+
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {

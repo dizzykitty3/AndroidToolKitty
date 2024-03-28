@@ -80,6 +80,7 @@ private fun CardContentColumn(
         Column {
             val lifecycleOwner = LocalLifecycleOwner.current
             val focusManager = LocalFocusManager.current
+
             DisposableEffect(key1 = lifecycleOwner) {
                 onDispose {
                     focusManager.clearFocus()

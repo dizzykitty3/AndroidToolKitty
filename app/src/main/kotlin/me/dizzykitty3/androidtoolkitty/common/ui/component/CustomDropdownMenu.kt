@@ -50,6 +50,7 @@ fun CustomDropdownMenu(
                 .fillMaxWidth(),
             label = label
         )
+
         ExposedDropdownMenu(
             expanded = expanded,
             onDismissRequest = { expanded = false }
