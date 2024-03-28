@@ -30,6 +30,7 @@ import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 @Composable
 fun UnicodeCard() {
     val c = LocalContext.current
+
     CustomCard(
         icon = Icons.AutoMirrored.Outlined.Notes,
         title = c.getString(R.string.unicode)
