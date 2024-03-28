@@ -18,6 +18,7 @@ class IntentUtils(private val context: Context) {
                 "$HTTPS$finalUrl"
         )
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
         startActivity(intent)
         debugLog("openUrl")
     }
@@ -36,7 +37,9 @@ class IntentUtils(private val context: Context) {
             "captioning" -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
             else -> return
         }
+
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
         try {
             startActivity(intent)
             debugLog("onOpenSystemSettings: $settingType")
@@ -49,9 +52,11 @@ class IntentUtils(private val context: Context) {
     fun openGoogleMaps(latitude: String, longitude: String) {
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
+
         val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         intent.setPackage(GOOGLE_MAPS)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
         try {
             startActivity(intent)
         } catch (e: Exception) {
@@ -66,6 +71,7 @@ class IntentUtils(private val context: Context) {
         } catch (e: Exception) {
             debugLog(">>>ERROR<<< startActivity: $e")
         }
+
         when (intent.`package`) {
             GOOGLE_PLAY -> {
                 ToastUtils(context).showToast(context.getString(R.string.google_play_not_installed))
@@ -89,9 +95,12 @@ class IntentUtils(private val context: Context) {
                 "market://search?q=${packageName.trim()}"
             }
         )
+
         val marketIntent = Intent(Intent.ACTION_VIEW, marketUri)
+
         if (isGooglePlay) marketIntent.setPackage(GOOGLE_PLAY)
         marketIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
         try {
             startActivity(marketIntent)
             debugLog("openAppOnMarket")

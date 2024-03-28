@@ -21,7 +21,7 @@ object StringUtils {
     }
 
     /**
-     * drop spaces, including full-width ones
+     * Drop spaces, including full-width ones.
      */
     @JvmStatic
     fun dropSpaces(inputString: String): String {
@@ -33,6 +33,7 @@ object StringUtils {
     fun convertUnicodeToCharacter(unicode: String): String {
         val length = unicode.length
         require(length % 4 == 0) { "The length of the input is not a multiple of 4" }
+
         try {
             val stringBuilder = StringBuilder()
             var i = 0

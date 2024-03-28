@@ -14,6 +14,7 @@ fun HideCardSettingScreen() {
     val c = LocalContext.current
     CustomScreen {
         HideCardSettingCard()
+
         if (SettingsViewModel().getCardShowedState(c, CARD_6)) {
             HideAndroidSystemSettingsOptionCard()
         }

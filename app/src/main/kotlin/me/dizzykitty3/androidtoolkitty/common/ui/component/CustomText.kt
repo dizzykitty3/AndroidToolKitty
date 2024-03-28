@@ -131,7 +131,9 @@ fun CustomTip(
                 contentDescription = "Tip Icon",
                 modifier = Modifier.size(24.dp)
             )
+
             CustomIconAndTextPadding()
+
             Text(
                 text = text,
                 style = MaterialTheme.typography.bodyMedium,
@@ -165,11 +167,14 @@ fun CustomDeveloperProfileLink(
 ) {
     Row {
         val c = LocalContext.current
+
         Icon(
             imageVector = Icons.Outlined.AccountCircle,
             contentDescription = null
         )
+
         CustomIconAndTextPadding()
+
         Row(
             modifier = Modifier.clickable {
                 IntentUtils(c).openUrl("${UrlUtils.getProfilePrefix(UrlUtils.Platform.GITHUB)}$name")
@@ -179,6 +184,7 @@ fun CustomDeveloperProfileLink(
                 text = name,
                 color = MaterialTheme.colorScheme.primary
             )
+
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
@@ -187,6 +193,8 @@ fun CustomDeveloperProfileLink(
             )
         }
     }
+
+    CustomSpacerPadding()
 }
 
 @Composable
@@ -197,5 +205,6 @@ fun CustomGroupTitleText(
         text = text,
         style = MaterialTheme.typography.titleMedium
     )
+
     CustomSpacerPadding()
 }

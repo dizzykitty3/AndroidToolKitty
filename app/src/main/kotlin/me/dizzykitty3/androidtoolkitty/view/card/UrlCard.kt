@@ -38,6 +38,7 @@ fun UrlCard() {
         title = c.getString(R.string.url)
     ) {
         var url by remember { mutableStateOf("") }
+
         OutlinedTextField(
             value = url,
             onValueChange = { url = it },
@@ -70,10 +71,12 @@ fun UrlCard() {
                 Text(text = UrlUtils.getUrlSuffix(url))
             }
         )
+
         TextButton(
             onClick = { onClickVisitUrlButton(c, url) }
         ) {
             Text(text = c.getString(R.string.visit))
+
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
@@ -85,6 +88,7 @@ fun UrlCard() {
 
 private fun onClickVisitUrlButton(c: Context, url: String) {
     if (url.isBlank()) return
+
     IntentUtils(c).openUrl(UrlUtils.processUrl(StringUtils.dropSpaces(url)))
     debugLog("onClickVisitButton")
 }

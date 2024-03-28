@@ -32,12 +32,14 @@ import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 @Composable
 fun GoogleMapsCard() {
     val c = LocalContext.current
+
     CustomCard(
         icon = Icons.Outlined.Place,
         title = c.getString(R.string.google_maps)
     ) {
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }
+
         Row {
             OutlinedTextField(
                 value = latitude,
@@ -55,6 +57,7 @@ fun GoogleMapsCard() {
                     onDone = { onClickOpenGoogleMapsButton(c, latitude, longitude) }
                 )
             )
+
             OutlinedTextField(
                 value = longitude,
                 onValueChange = { longitude = it },
@@ -72,10 +75,12 @@ fun GoogleMapsCard() {
                 )
             )
         }
+
         TextButton(
             onClick = { onClickOpenGoogleMapsButton(c, latitude, longitude) }
         ) {
             Text(text = c.getString(R.string.open_google_maps))
+
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
@@ -86,8 +91,8 @@ fun GoogleMapsCard() {
 }
 
 private fun onClickOpenGoogleMapsButton(c: Context, latitude: String, longitude: String) {
-    if (latitude.isBlank()) return
-    if (longitude.isBlank()) return
+    if (latitude.isBlank() || longitude.isBlank()) return
+
     IntentUtils(c).openGoogleMaps(latitude, longitude)
     debugLog("onClickOpenGoogleMapsButton")
 }

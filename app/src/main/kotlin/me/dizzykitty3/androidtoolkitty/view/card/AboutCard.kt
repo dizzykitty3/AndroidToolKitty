@@ -25,22 +25,26 @@ import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 @Composable
 fun AboutCard() {
     val c = LocalContext.current
+
     CustomCardNoIcon(
         title = c.getString(R.string.about)
     ) {
         CustomDeveloperProfileLink("dizzykitty3")
-        CustomSpacerPadding()
+
         CustomDeveloperProfileLink("HongjieCN")
-        CustomSpacerPadding()
+
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
             val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
+
             Icon(
                 imageVector = Icons.Outlined.Code,
                 contentDescription = null
             )
+
             CustomIconAndTextPadding()
+
             Row(
                 modifier = Modifier.clickable {
                     ToastUtils(c).showToast(c.getString(R.string.all_help_welcomed))
@@ -59,13 +63,17 @@ fun AboutCard() {
                 )
             }
         }
+
         CustomSpacerPadding()
+
         Row {
             Icon(
                 imageVector = Icons.Outlined.Schedule,
                 contentDescription = null
             )
+
             CustomIconAndTextPadding()
+
             Text(text = "${c.getString(R.string.version)} ${c.getString(R.string.version_number)}")
         }
     }

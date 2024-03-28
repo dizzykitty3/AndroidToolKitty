@@ -36,6 +36,7 @@ fun OpenAppOnPlayStoreCard() {
         title = c.getString(R.string.open_app_on_google_play)
     ) {
         var packageName by remember { mutableStateOf("") }
+
         OutlinedTextField(
             value = packageName,
             onValueChange = { packageName = it },
@@ -48,15 +49,19 @@ fun OpenAppOnPlayStoreCard() {
                 onDone = { IntentUtils(c).openAppOnMarket(packageName) }
             )
         )
+
         CustomSpacerPadding()
+
         Row {
             val linkUrl = "https://support.google.com/admob/answer/9972781"
+
             Text(
                 text = buildAnnotatedString {
                     append(c.getString(R.string.whats))
                     append(" ")
                 }
             )
+
             Row(
                 modifier = Modifier.clickable(
                     onClick = { IntentUtils(c).openUrl(linkUrl) }
@@ -66,6 +71,7 @@ fun OpenAppOnPlayStoreCard() {
                     text = c.getString(R.string.package_name),
                     textDecoration = TextDecoration.Underline
                 )
+
                 Icon(
                     imageVector = Icons.Outlined.ArrowOutward,
                     contentDescription = c.getString(R.string.content_description_link_icon_whats_package_name)
@@ -76,16 +82,19 @@ fun OpenAppOnPlayStoreCard() {
             onClick = { IntentUtils(c).openAppOnMarket(packageName) }
         ) {
             Text(text = c.getString(R.string.open_on_google_play))
+
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
+
         TextButton(
             onClick = { IntentUtils(c).openAppOnMarket(packageName, false) }
         ) {
             Text(text = c.getString(R.string.open_on_other_markets))
+
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,

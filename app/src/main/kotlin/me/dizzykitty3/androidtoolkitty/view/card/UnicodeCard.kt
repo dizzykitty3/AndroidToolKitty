@@ -36,6 +36,7 @@ fun UnicodeCard() {
     ) {
         var unicode by remember { mutableStateOf("") }
         val characters = remember { mutableStateOf("") }
+
         OutlinedTextField(
             value = unicode,
             onValueChange = { unicode = it },
@@ -56,12 +57,14 @@ fun UnicodeCard() {
                 )
             }
         )
+
         OutlinedTextField(
             value = characters.value,
             onValueChange = {},
             label = { Text(c.getString(R.string.character)) },
             modifier = Modifier.fillMaxWidth()
         )
+
         TextButton(
             onClick = { onClickConvertButton(c, unicode, characters) }
         ) {
@@ -76,6 +79,7 @@ private fun onClickConvertButton(
     characterField: MutableState<String>
 ) {
     if (unicode.isBlank()) return
+
     try {
         val result = StringUtils.convertUnicodeToCharacter(unicode)
         characterField.value = result

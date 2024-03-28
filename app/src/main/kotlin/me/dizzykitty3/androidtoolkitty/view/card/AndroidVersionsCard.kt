@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -23,11 +22,13 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSingleLineText
 @Composable
 fun AndroidVersionsCard() {
     val c = LocalContext.current
+
     CustomCard(
         icon = Icons.Outlined.Android,
         title = c.getString(R.string.android_versions)
     ) {
         var expanded by remember { mutableStateOf(false) }
+
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -40,6 +41,7 @@ fun AndroidVersionsCard() {
                 CustomSingleLineText(text = "Android 12L")
                 CustomSingleLineText(text = "Android 12")
             }
+
             Column(
                 modifier = Modifier.weight(0.6f)
             ) {
@@ -50,7 +52,8 @@ fun AndroidVersionsCard() {
                 CustomAndroidApiLevelAndName(text = "API 31, S")
             }
         }
-        AnimatedVisibility(visible = expanded) {
+
+        if (expanded) {
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -82,6 +85,7 @@ fun AndroidVersionsCard() {
                     CustomSingleLineText(text = "Android 2.2")
                     CustomSingleLineText(text = "Android 2.1")
                 }
+
                 Column(
                     modifier = Modifier.weight(0.6f)
                 ) {
@@ -112,6 +116,7 @@ fun AndroidVersionsCard() {
                 }
             }
         }
+
         TextButton(
             onClick = { expanded = !expanded }
         ) {

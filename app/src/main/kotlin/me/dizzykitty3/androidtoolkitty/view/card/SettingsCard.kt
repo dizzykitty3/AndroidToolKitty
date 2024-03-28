@@ -47,38 +47,49 @@ fun SettingsCard(navController: NavHostController) {
     CustomCardNoIcon(
         title = c.getString(R.string.settings)
     ) {
-        val mIsAutoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(c)
-        var isAutoClearClipboard by remember { mutableStateOf(mIsAutoClearClipboard) }
-        val mIsOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
-        var isOneHandedMode by remember { mutableStateOf(mIsOneHandedMode) }
-        val isDynamicColor = SettingsViewModel().getIsDynamicColor(c)
-        var mIsDynamicColor by remember { mutableStateOf(isDynamicColor) }
+        val autoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(c)
+        var mAutoClearClipboard by remember { mutableStateOf(autoClearClipboard) }
+
+        val oneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
+        var mOneHandedMode by remember { mutableStateOf(oneHandedMode) }
+
+        val dynamicColor = SettingsViewModel().getIsDynamicColor(c)
+        var mDynamicColor by remember { mutableStateOf(dynamicColor) }
+
         var showVolumeDialog by remember { mutableStateOf(false) }
+
         var showVolumeOptionLabelDialog by remember { mutableStateOf(false) }
+
         CustomGroupTitleText(c.getString(R.string.feature))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isAutoClearClipboard = !isAutoClearClipboard
-                SettingsViewModel().setIsAutoClearClipboard(c, isAutoClearClipboard)
+                mAutoClearClipboard = !mAutoClearClipboard
+                SettingsViewModel().setIsAutoClearClipboard(c, mAutoClearClipboard)
             }
         ) {
             Text(text = c.getString(R.string.clear_clipboard_on_launch))
+
             Spacer(modifier = Modifier.weight(1f))
+
             Switch(
-                checked = isAutoClearClipboard,
+                checked = mAutoClearClipboard,
                 onCheckedChange = {
-                    isAutoClearClipboard = it
+                    mAutoClearClipboard = it
                     SettingsViewModel().setIsAutoClearClipboard(c, it)
                 }
             )
         }
+
         Button(onClick = { showVolumeDialog = true }) {
             Text(text = c.getString(R.string.edit_custom_volume_button))
         }
+
         if (showVolumeDialog) {
             val maxVolume = AudioUtils(c).getMaxVolumeIndex()
+
             var newCustomVolume by remember { mutableFloatStateOf(0f) }
+
             AlertDialog(
                 onDismissRequest = {
                     showVolumeDialog = false
@@ -122,6 +133,7 @@ fun SettingsCard(navController: NavHostController) {
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))
             )
         }
+
         if (showVolumeOptionLabelDialog) {
             var optionLabel by remember { mutableStateOf("") }
             AlertDialog(
@@ -171,54 +183,62 @@ fun SettingsCard(navController: NavHostController) {
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))
             )
         }
+
         CustomSpacerPadding()
         HorizontalDivider()
         CustomSpacerPadding()
+
         CustomGroupTitleText(c.getString(R.string.display))
+
         if (OsVersion.android12()) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.clickable {
-                    mIsDynamicColor = !mIsDynamicColor
-                    onClickDynamicColorButton(mIsDynamicColor, c)
+                    mDynamicColor = !mDynamicColor
+                    onClickDynamicColorButton(mDynamicColor, c)
                 }
             ) {
                 Text(text = c.getString(R.string.material_you_dynamic_color))
                 Spacer(modifier = Modifier.weight(1f))
                 Switch(
-                    checked = mIsDynamicColor,
+                    checked = mDynamicColor,
                     onCheckedChange = {
-                        mIsDynamicColor = it
+                        mDynamicColor = it
                         onClickDynamicColorButton(it, c)
                     }
                 )
             }
         }
+
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                isOneHandedMode = !isOneHandedMode
-                SettingsViewModel().setIsOneHandedMode(c, isOneHandedMode)
+                mOneHandedMode = !mOneHandedMode
+                SettingsViewModel().setIsOneHandedMode(c, mOneHandedMode)
             }
         ) {
             Text(text = c.getString(R.string.one_handed_mode))
             Spacer(modifier = Modifier.weight(1f))
             Switch(
-                checked = isOneHandedMode,
+                checked = mOneHandedMode,
                 onCheckedChange = {
-                    isOneHandedMode = it
+                    mOneHandedMode = it
                     SettingsViewModel().setIsOneHandedMode(c, it)
                 }
             )
         }
+
         Button(
             onClick = { navController.navigate("HideCardSettingScreen") }) {
             Text(text = c.getString(R.string.customize_my_home_page))
         }
+
         CustomSpacerPadding()
         HorizontalDivider()
         CustomSpacerPadding()
+
         CustomGroupTitleText(c.getString(R.string.debugging))
+
         CustomAlertDialogButton(
             buttonText = c.getString(R.string.erase_all_app_data),
             dialogMessageTitle = c.getString(R.string.warning),
@@ -235,8 +255,10 @@ fun SettingsCard(navController: NavHostController) {
 
 private fun onClickDynamicColorButton(isDynamicColor: Boolean, c: Context) {
     SettingsViewModel().setIsDynamicColor(c, isDynamicColor)
+
     val intent = Intent(c, MainActivity::class.java)
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
     c.startActivity(intent)
+
     (c as Activity).finish()
 }

@@ -19,11 +19,13 @@ fun CustomSystemSettingsButton(
     buttonText: String
 ) {
     val context = LocalContext.current
+
     Button(
         onClick = { IntentUtils(context).openSystemSettings(settingType) },
         elevation = ButtonDefaults.buttonElevation(1.dp)
     ) {
         Text(text = buttonText)
+
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
             contentDescription = null,

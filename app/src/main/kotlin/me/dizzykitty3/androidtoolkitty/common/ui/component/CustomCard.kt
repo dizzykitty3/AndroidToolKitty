@@ -27,6 +27,7 @@ fun CustomCard(
         modifier = Modifier.fillMaxWidth()
     ) {
         val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
+
         Column(
             modifier = cardPadding
         ) {
@@ -42,7 +43,9 @@ fun CustomCard(
                             alignment = Alignment.CenterVertically
                         )
                     )
+
                     CustomIconAndTextPadding()
+
                     CardTitle(title = title)
                 }
                 CardContentColumn { content() }
@@ -71,7 +74,9 @@ private fun CardContentColumn(
 ) {
     Column {
         CustomSpacerPadding()
+
         CustomSpacerPadding()
+
         Column {
             val lifecycleOwner = LocalLifecycleOwner.current
             val focusManager = LocalFocusManager.current

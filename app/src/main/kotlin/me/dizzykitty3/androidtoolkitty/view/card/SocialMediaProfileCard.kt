@@ -41,28 +41,32 @@ fun SocialMediaProfileCard() {
         title = c.getString(R.string.social_media_profile)
     ) {
         var username by remember { mutableStateOf("") }
-        val mPlatformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(c)
-        var platformIndex by remember { mutableIntStateOf(mPlatformIndex) }
+
+        val platformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(c)
+        var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
+
         val platformList = UrlUtils.Platform.entries.map { c.getString(it.nameResId) }
-        if (platformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+        if (mPlatformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
             CustomTip(text = c.getString(R.string.temp2))
         }
+
         CustomDropdownMenu(
             items = platformList,
-            onItemSelected = { platformIndex = it },
+            onItemSelected = { mPlatformIndex = it },
             label = {
-                if (platformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                if (mPlatformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
                     Text(c.getString(R.string.platform))
                 } else {
                     Text("")
                 }
             }
         )
+
         OutlinedTextField(
             value = username,
             onValueChange = { username = it },
             label = {
-                if (platformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                if (mPlatformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
                     Text(c.getString(R.string.username))
                 } else {
                     Text(c.getString(R.string.platform))
@@ -73,11 +77,11 @@ fun SocialMediaProfileCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { onVisitProfileButton(c, username, platformIndex) }
+                onDone = { onVisitProfileButton(c, username, mPlatformIndex) }
             ),
             supportingText = {
-                if (platformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                    val platform = UrlUtils.Platform.entries[platformIndex]
+                if (mPlatformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                    val platform = UrlUtils.Platform.entries[mPlatformIndex]
                     Text(
                         text = "${UrlUtils.getProfilePrefix(platform)}$username",
                         overflow = TextOverflow.Ellipsis,
@@ -88,10 +92,12 @@ fun SocialMediaProfileCard() {
                 }
             }
         )
+
         TextButton(
-            onClick = { onVisitProfileButton(c, username, platformIndex) }
+            onClick = { onVisitProfileButton(c, username, mPlatformIndex) }
         ) {
             Text(text = c.getString(R.string.visit))
+
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
@@ -103,7 +109,9 @@ fun SocialMediaProfileCard() {
 
 private fun onVisitProfileButton(c: Context, username: String, platformIndex: Int) {
     if (username.isBlank()) return
+
     val platform = UrlUtils.Platform.entries.getOrNull(platformIndex) ?: return
+
     if (platform == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET) {
         ToastUtils(c).showToastAndRecordLog(
             "${c.getString(R.string.platform)}: \"$username\" ${
@@ -114,6 +122,7 @@ private fun onVisitProfileButton(c: Context, username: String, platformIndex: In
         )
         return
     }
+
     val prefix = platform.prefix
     IntentUtils(c).openUrl("$prefix${StringUtils.dropSpaces(username)}")
     debugLog("onVisitProfile")

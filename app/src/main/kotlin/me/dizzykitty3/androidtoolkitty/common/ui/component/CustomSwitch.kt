@@ -19,6 +19,7 @@ fun CustomHideCardSettingSwitch(
     onCheckedChange: (Boolean) -> Unit
 ) {
     val c = LocalContext.current
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
@@ -27,7 +28,9 @@ fun CustomHideCardSettingSwitch(
         }
     ) {
         Text(text = text)
+
         Spacer(modifier = Modifier.weight(1f))
+
         Switch(
             checked = isChecked,
             onCheckedChange = onCheckedChange

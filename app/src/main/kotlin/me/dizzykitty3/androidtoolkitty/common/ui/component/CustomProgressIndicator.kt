@@ -17,6 +17,7 @@ fun CustomAnimatedProgressIndicator() {
     val progress = remember { Animatable(0f) }
     val targetProgress = DateUtils.calculateYearProgress()
     val durationMillis = 2000
+
     LaunchedEffect(true) {
         progress.animateTo(
             targetProgress,

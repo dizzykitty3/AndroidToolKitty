@@ -26,7 +26,6 @@ import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.common.util.AudioUtils
 import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
@@ -40,10 +39,12 @@ fun VolumeCard() {
         title = c.getString(R.string.volume)
     ) {
         val maxVolume = AudioUtils(c).getMaxVolumeIndex()
+
         val customVolume = SettingsViewModel().getCustomVolume(c)
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
+
         val customVolumeOptionLabel = SettingsViewModel().getCustomVolumeOptionLabel(c)
-        val haveSetCustomVolume = SettingsViewModel().getHaveSetCustomVolume(c)
+
         val options = listOf(
             c.getString(R.string.mute),
             "40%",
@@ -54,17 +55,19 @@ fun VolumeCard() {
                 else "${mCustomVolume}%"
             }
         )
+
         var selectedIndex by remember { mutableStateOf<Int?>(null) }
-        if (haveSetCustomVolume) { // TODO improve this tip
-            CustomTip(text = c.getString(R.string.tip_edit_custom_volume_button))
-        }
+
         Text(text = c.getString(R.string.media_volume))
+
         CustomSpacerPadding()
+
         SingleChoiceSegmentedButtonRow(
             modifier = Modifier.fillMaxWidth(),
             space = SegmentedButtonDefaults.BorderWidth
         ) {
             var showDialog by remember { mutableStateOf(false) }
+
             options.forEachIndexed { index, label ->
                 SegmentedButton(
                     onClick = {
@@ -96,11 +99,13 @@ fun VolumeCard() {
                         count = options.size
                     )
                 ) {
-                    Text(text = label!!)
+                    Text(text = label.toString())
                 }
             }
+
             if (showDialog) {
                 var newCustomVolume by remember { mutableFloatStateOf(0f) }
+
                 AlertDialog(
                     onDismissRequest = {
                         showDialog = false

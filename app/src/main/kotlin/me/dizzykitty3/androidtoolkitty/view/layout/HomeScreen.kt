@@ -47,6 +47,7 @@ private const val CARD_10 = "card_android_versions"
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val c = LocalContext.current
+
     CustomScreen {
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -56,6 +57,7 @@ fun HomeScreen(navController: NavHostController) {
             ) {
                 GreetingText()
             }
+
             IconButton(
                 onClick = {
                     navController.navigate("SettingsScreen")

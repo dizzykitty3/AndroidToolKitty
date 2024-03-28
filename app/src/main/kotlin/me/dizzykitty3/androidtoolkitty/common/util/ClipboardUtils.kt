@@ -14,6 +14,7 @@ class ClipboardUtils(private val context: Context) {
 
     fun clearClipboard() {
         getSystemClipboardService()
+
         if (clipboard.hasPrimaryClip()) {
             clipboard.clearPrimaryClip()
             ToastUtils(context).showToastAndRecordLog(context.getString(R.string.clipboard_cleared_automatically))
@@ -22,6 +23,7 @@ class ClipboardUtils(private val context: Context) {
 
     fun copyTextToClipboard(text: String) {
         getSystemClipboardService()
+
         val clip = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
         ToastUtils(context).showToast("$text ${context.getString(R.string.copied)}")

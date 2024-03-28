@@ -27,6 +27,7 @@ fun CustomAlertDialogButton(
     onClickAction: () -> Unit
 ) {
     var showDialog by remember { mutableStateOf(false) }
+
     Button(
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.error
@@ -38,8 +39,10 @@ fun CustomAlertDialogButton(
             color = MaterialTheme.colorScheme.onError
         )
     }
+
     if (showDialog) {
         val c = LocalContext.current
+
         AlertDialog(
             onDismissRequest = { showDialog = false },
             title = { Text(text = dialogMessageTitle) },
@@ -50,7 +53,9 @@ fun CustomAlertDialogButton(
                         showDialog = false
                         onClickAction()
                     },
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.error
+                    )
                 ) {
                     Text(
                         text = positiveButtonText ?: c.getString(android.R.string.ok),

@@ -39,6 +39,7 @@ object UrlUtils {
     @JvmStatic
     fun getUrlSuffix(urlInput: String): String {
         if (urlInput.contains(".")) return ""
+
         val suffixMap = mapOf(
             "remove" to BG,
             "feishu" to CN,
@@ -102,6 +103,7 @@ object UrlUtils {
             "zoom" to US,
             "namu" to WIKI,
         )
+
         return suffixMap[StringUtils.dropSpaces(urlInput)] ?: COM
     }
 

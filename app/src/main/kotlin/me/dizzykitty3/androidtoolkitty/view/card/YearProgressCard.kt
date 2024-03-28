@@ -30,12 +30,16 @@ fun YearProgressCard() {
         title = LocalContext.current.getString(R.string.year_progress)
     ) {
         var isShowPercentage by remember { mutableStateOf(true) }
+
         Column(
             modifier = Modifier.clickable { isShowPercentage = !isShowPercentage }
         ) {
             CustomSpacerPadding()
+
             CustomAnimatedProgressIndicator()
+
             CustomSpacerPadding()
+
             val textToShow =
                 if (isShowPercentage)
                     "${(displayYearProgressPercentage(calculateYearProgress()))}%"

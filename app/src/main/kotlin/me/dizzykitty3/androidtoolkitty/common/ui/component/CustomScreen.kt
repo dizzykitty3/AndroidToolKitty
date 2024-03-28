@@ -18,13 +18,8 @@ fun CustomScreen(
             end = cardPadding
         )
     ) {
-        // Top
         item { CustomTopPadding() }
-
-        // Contents
         item { cardContent() }
-
-        // Bottom
         item { CustomBottomPadding() }
     }
 }
