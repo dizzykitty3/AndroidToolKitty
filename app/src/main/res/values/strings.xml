@@ -103,4 +103,7 @@
     <string name="warning_erase_all_data_1">This action will erase all your data, including</string>
     <string name="warning_erase_all_data_2">histories and settings.</string>
     <string name="warning_erase_all_data_3">Are you sure you want to proceed?</string>
+    <string name="you_can_set_a_label_for_it">You can set a label for it</string>
+    <string name="label">Label</string>
+    <string name="reset">Reset</string>
 </resources>

@@ -63,6 +63,10 @@ fun VolumeCard() {
 
         var selectedIndex by remember { mutableStateOf<Int?>(null) }
 
+        var showVolumeDialog by remember { mutableStateOf(false) }
+
+        var showVolumeOptionLabelDialog by remember { mutableStateOf(false) }
+
         Text(text = c.getString(R.string.media_volume))
 
         CustomSpacerPadding()
@@ -71,10 +75,6 @@ fun VolumeCard() {
             modifier = Modifier.fillMaxWidth(),
             space = SegmentedButtonDefaults.BorderWidth
         ) {
-            var showVolumeDialog by remember { mutableStateOf(false) }
-
-            var showVolumeOptionLabelDialog by remember { mutableStateOf(false) }
-
             options.forEachIndexed { index, label ->
                 SegmentedButton(
                     onClick = {
@@ -165,13 +165,13 @@ fun VolumeCard() {
                         showVolumeOptionLabelDialog = false
                     },
                     title = {
-                        Text(text = "You can set a label for it")
+                        Text(text = c.getString(R.string.you_can_set_a_label_for_it))
                     },
                     text = {
                         OutlinedTextField(
                             value = optionLabel,
                             onValueChange = { optionLabel = it },
-                            label = { Text(text = "Option label") },
+                            label = { Text(text = c.getString(R.string.label)) },
                             modifier = Modifier.fillMaxWidth(),
                             keyboardOptions = KeyboardOptions.Default.copy(
                                 imeAction = ImeAction.Done
@@ -183,8 +183,7 @@ fun VolumeCard() {
                                         optionLabel
                                     )
                                 }
-                            ),
-                            placeholder = { Text(text = "optional") }
+                            )
                         )
                     },
                     confirmButton = {
@@ -215,14 +214,9 @@ fun VolumeCard() {
         }
 
         Button(
-            onClick = {
-                mCustomVolume = -1
-                mCustomVolumeOptionLabel = ""
-                SettingsViewModel().setCustomVolume(c, -1)
-                SettingsViewModel().setCustomVolumeOptionLabel(c, "")
-            }
+            onClick = { showVolumeDialog = true }
         ) {
-            Text(text = "test: reset")
+            Text(text = c.getString(R.string.reset))
         }
     }
 }
