@@ -17,10 +17,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAlertDialogButton
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomBoldText
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupTitleText
@@ -118,7 +120,17 @@ fun SettingsCard(navController: NavHostController) {
         CustomAlertDialogButton(
             buttonText = c.getString(R.string.erase_all_app_data),
             dialogMessageTitle = c.getString(R.string.warning),
-            dialogMessage = c.getString(R.string.warning_erase_all_data),
+            dialogMessage = {
+                Text(
+                    text = buildAnnotatedString {
+                        append(c.getString(R.string.warning_erase_all_data_1))
+                        append(" ")
+                        CustomBoldText(c.getString(R.string.warning_erase_all_data_2))
+                        append("\n\n")
+                        append(c.getString(R.string.warning_erase_all_data_3))
+                    }
+                )
+            },
             positiveButtonText = c.getString(R.string.erase_all_data),
             negativeButtonText = null,
             onClickAction = {

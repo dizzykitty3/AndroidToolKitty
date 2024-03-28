@@ -21,7 +21,7 @@ import me.dizzykitty3.androidtoolkitty.R
 fun CustomAlertDialogButton(
     buttonText: String,
     dialogMessageTitle: String,
-    dialogMessage: String,
+    dialogMessage: @Composable () -> Unit,
     positiveButtonText: String?,
     negativeButtonText: String?,
     onClickAction: () -> Unit
@@ -46,7 +46,7 @@ fun CustomAlertDialogButton(
         AlertDialog(
             onDismissRequest = { showDialog = false },
             title = { Text(text = dialogMessageTitle) },
-            text = { Text(text = dialogMessage) },
+            text = { dialogMessage() },
             confirmButton = {
                 Button(
                     onClick = {

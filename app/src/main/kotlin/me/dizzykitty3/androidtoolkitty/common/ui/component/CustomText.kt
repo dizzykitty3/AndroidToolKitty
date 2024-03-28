@@ -66,6 +66,19 @@ fun CustomGradientText(
 }
 
 @Composable
+fun AnnotatedString.Builder.CustomBoldText(
+    text: String
+) {
+    val boldTextStyle = SpanStyle(
+        fontStyle = FontStyle.Normal,
+        fontWeight = FontWeight.Bold
+    )
+    withStyle(boldTextStyle) {
+        append(text)
+    }
+}
+
+@Composable
 fun AnnotatedString.Builder.CustomItalicText(
     text: String
 ) {
@@ -79,23 +92,9 @@ fun AnnotatedString.Builder.CustomItalicText(
 }
 
 @Composable
-private fun AnnotatedString.Builder.CustomItalicText14sp(
-    text: String
-) {
-    val italicTextStyle = SpanStyle(
-        fontStyle = FontStyle.Italic,
-        fontWeight = FontWeight.Light,
-        fontSize = 14.sp
-    )
-    withStyle(italicTextStyle) {
-        append(text)
-    }
-}
-
-@Composable
 fun CustomAndroidApiLevelAndName(text: String) {
     return Text(
-        text = buildAnnotatedString { CustomItalicText14sp(text = text) },
+        text = buildAnnotatedString { CustomItalicText(text = text) },
         maxLines = 1,
         overflow = TextOverflow.Ellipsis
     )
