@@ -51,8 +51,9 @@ private const val CARD_10 = "card_android_versions"
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
     val c = LocalContext.current
+
+    val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
     LazyColumn(
         modifier = Modifier.padding(
             start = cardPadding,
@@ -94,55 +95,42 @@ fun HomeScreen(navController: NavHostController) {
             item { CustomOneHandedMode() }
         }
 
-        val isShowCard1 = SettingsViewModel().getCardShowedState(c, CARD_1)
-        val isShowCard2 = SettingsViewModel().getCardShowedState(c, CARD_2)
-        val isShowCard3 = SettingsViewModel().getCardShowedState(c, CARD_3)
-        val isShowCard4 = SettingsViewModel().getCardShowedState(c, CARD_4)
-        val isShowCard5 = SettingsViewModel().getCardShowedState(c, CARD_5)
-        val isShowCard6 = SettingsViewModel().getCardShowedState(c, CARD_6)
-        val isShowCard7 = SettingsViewModel().getCardShowedState(c, CARD_7)
-        val isShowCard8 = SettingsViewModel().getCardShowedState(c, CARD_8)
-        val isShowCard9 = SettingsViewModel().getCardShowedState(c, CARD_9)
-        val isShowCard10 = SettingsViewModel().getCardShowedState(c, CARD_10)
-        if (isShowCard1) {
-            item { YearProgressCard() }
+        val cardList = listOf(
+            CARD_1 to SettingsViewModel().getCardShowedState(c, CARD_1),
+            CARD_2 to SettingsViewModel().getCardShowedState(c, CARD_2),
+            CARD_3 to SettingsViewModel().getCardShowedState(c, CARD_3),
+            CARD_4 to SettingsViewModel().getCardShowedState(c, CARD_4),
+            CARD_5 to SettingsViewModel().getCardShowedState(c, CARD_5),
+            CARD_6 to SettingsViewModel().getCardShowedState(c, CARD_6),
+            CARD_7 to SettingsViewModel().getCardShowedState(c, CARD_7),
+            CARD_8 to SettingsViewModel().getCardShowedState(c, CARD_8),
+            CARD_9 to SettingsViewModel().getCardShowedState(c, CARD_9),
+            CARD_10 to SettingsViewModel().getCardShowedState(c, CARD_10),
+        )
+
+        cardList.forEach { (cardName, isShow) ->
+            if (isShow) {
+                when (cardName) {
+                    CARD_1 -> item { YearProgressCard() }
+                    CARD_2 -> item { VolumeCard() }
+                    CARD_3 -> item { ClipboardCard() }
+                    CARD_4 -> item { UrlCard() }
+                    CARD_5 -> item { SocialMediaProfileCard() }
+                    CARD_6 -> item { SystemSettingsCard() }
+                    CARD_7 -> item { UnicodeCard() }
+                    CARD_8 -> item { GoogleMapsCard() }
+                    CARD_9 -> item { OpenAppOnPlayStoreCard() }
+                    CARD_10 -> item { AndroidVersionsCard() }
+                }
+            }
         }
-        if (isShowCard2) {
-            item { VolumeCard() }
-        }
-        if (isShowCard3) {
-            item { ClipboardCard() }
-        }
-        if (isShowCard4) {
-            item { UrlCard() }
-        }
-        if (isShowCard5) {
-            item { SocialMediaProfileCard() }
-        }
-        if (isShowCard6) {
-            item { SystemSettingsCard() }
-        }
-        if (isShowCard7) {
-            item { UnicodeCard() }
-        }
-        if (isShowCard8) {
-            item { GoogleMapsCard() }
-        }
-        if (isShowCard9) {
-            item { OpenAppOnPlayStoreCard() }
-        }
-        if (isShowCard10) {
-            item { AndroidVersionsCard() }
-        }
+
         item {
             CustomCardNoIcon(title = "test") {
                 Button(
-                    onClick = {
-                        navController.navigate("LuckySpinningWheelScreen")
-                    }) {
-                    Text(
-                        text = "Lucky spinning wheel"
-                    )
+                    onClick = { navController.navigate("LuckySpinningWheelScreen") }
+                ) {
+                    Text(text = "Lucky spinning wheel")
                 }
             }
         }
