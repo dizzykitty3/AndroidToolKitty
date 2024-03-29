@@ -44,6 +44,8 @@ fun VolumeCard() {
     ) {
         val maxVolume = AudioUtils(c).getMaxVolumeIndex()
 
+        val sliderIncrementFivePercent = SettingsViewModel().getIsSliderIncrementFivePercent(c)
+
         val customVolume = SettingsViewModel().getCustomVolume(c)
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
 
@@ -126,7 +128,8 @@ fun VolumeCard() {
                             onValueChange = {
                                 newCustomVolume = it
                             },
-                            valueRange = 0f..100f
+                            valueRange = 0f..100f,
+                            steps = if (sliderIncrementFivePercent) 19 else 0
                         )
                     },
                     confirmButton = {

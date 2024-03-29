@@ -58,18 +58,6 @@ class SettingsViewModel : ViewModel() {
         }
     }
 
-    fun getHaveSetCustomVolume(context: Context): Boolean {
-        return getSharedPrefs(context).getBoolean(HAVE_SET_CUSTOM_VOLUME, false)
-    }
-
-    private fun setHaveSetCustomVolume(context: Context, haveSet: Boolean) {
-        debugLog("have set volume option label = $haveSet")
-        with(getSharedPrefs(context).edit()) {
-            putBoolean(HAVE_SET_CUSTOM_VOLUME, haveSet)
-            apply()
-        }
-    }
-
     fun getIsOneHandedMode(context: Context): Boolean {
         return getSharedPrefs(context).getBoolean(IS_ONE_HANDED_MODE, false)
     }
@@ -90,6 +78,18 @@ class SettingsViewModel : ViewModel() {
         debugLog("is dynamic color = $isDynamicColor")
         with(getSharedPrefs(context).edit()) {
             putBoolean(IS_DYNAMIC_COLOR, isDynamicColor)
+            apply()
+        }
+    }
+
+    fun getIsSliderIncrementFivePercent(context: Context): Boolean {
+        return getSharedPrefs(context).getBoolean(SLIDER_INCREMENT_5_PERCENT, false)
+    }
+
+    fun setIsSliderIncrementFivePercent(context: Context, incrementFivePercent: Boolean) {
+        debugLog("is slider increment 5% = $incrementFivePercent")
+        with(getSharedPrefs(context).edit()) {
+            putBoolean(SLIDER_INCREMENT_5_PERCENT, incrementFivePercent)
             apply()
         }
     }
@@ -137,5 +137,6 @@ class SettingsViewModel : ViewModel() {
         private const val CUSTOM_VOLUME = "custom_volume"
         private const val VOLUME_OPTION_LABEL = "volume_option_label"
         private const val HAVE_SET_CUSTOM_VOLUME = "have_set_custom_volume"
+        private const val SLIDER_INCREMENT_5_PERCENT = "slider_increment_5_percent"
     }
 }

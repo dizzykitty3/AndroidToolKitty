@@ -44,7 +44,10 @@ fun SettingsCard(navController: NavHostController) {
         val dynamicColor = SettingsViewModel().getIsDynamicColor(c)
         var mDynamicColor by remember { mutableStateOf(dynamicColor) }
 
-        CustomGroupTitleText(c.getString(R.string.common))
+        val volumeSlideSteps = SettingsViewModel().getIsSliderIncrementFivePercent(c)
+        var mVolumeSlideSteps by remember { mutableStateOf(volumeSlideSteps) }
+
+        CustomGroupTitleText(c.getString(R.string.general))
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -65,6 +68,27 @@ fun SettingsCard(navController: NavHostController) {
                 }
             )
         }
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.clickable {
+                mVolumeSlideSteps = !mVolumeSlideSteps
+                SettingsViewModel().setIsSliderIncrementFivePercent(c, mVolumeSlideSteps)
+            }
+        ) {
+            Text(text = "Set slider increment to 5%")
+
+            Spacer(modifier = Modifier.weight(1f))
+
+            Switch(
+                checked = mVolumeSlideSteps,
+                onCheckedChange = {
+                    mVolumeSlideSteps = it
+                    SettingsViewModel().setIsSliderIncrementFivePercent(c, it)
+                }
+            )
+        }
+
 
         if (OsVersion.android12()) {
             Row(

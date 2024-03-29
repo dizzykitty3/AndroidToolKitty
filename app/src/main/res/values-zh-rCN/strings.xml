@@ -105,4 +105,5 @@
     <string name="label">标签</string>
     <string name="reset">重置</string>
     <string name="edit">编辑</string>
+    <string name="general">基本</string>
 </resources>
