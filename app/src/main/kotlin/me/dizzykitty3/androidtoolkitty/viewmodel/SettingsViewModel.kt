@@ -104,7 +104,6 @@ class SettingsViewModel : ViewModel() {
             putInt(CUSTOM_VOLUME, customVolume)
             apply()
         }
-        setHaveSetCustomVolume(context, true)
     }
 
     fun getCustomVolumeOptionLabel(context: Context): String? {
@@ -136,7 +135,6 @@ class SettingsViewModel : ViewModel() {
         private const val IS_DYNAMIC_COLOR = "is_dynamic_color"
         private const val CUSTOM_VOLUME = "custom_volume"
         private const val VOLUME_OPTION_LABEL = "volume_option_label"
-        private const val HAVE_SET_CUSTOM_VOLUME = "have_set_custom_volume"
         private const val SLIDER_INCREMENT_5_PERCENT = "slider_increment_5_percent"
     }
 }
