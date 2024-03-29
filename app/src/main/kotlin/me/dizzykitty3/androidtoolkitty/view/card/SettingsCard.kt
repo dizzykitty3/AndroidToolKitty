@@ -76,7 +76,7 @@ fun SettingsCard(navController: NavHostController) {
                 SettingsViewModel().setIsSliderIncrementFivePercent(c, mVolumeSlideSteps)
             }
         ) {
-            Text(text = "Set slider increment to 5%")
+            Text(text = c.getString(R.string.set_slider_increment_5))
 
             Spacer(modifier = Modifier.weight(1f))
 

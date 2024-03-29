@@ -106,4 +106,5 @@
     <string name="reset">重置</string>
     <string name="edit">编辑</string>
     <string name="general">基本</string>
+    <string name="set_slider_increment_5">将滑块增量设置为5%</string>
 </resources>
