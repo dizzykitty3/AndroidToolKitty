@@ -52,8 +52,8 @@ fun VolumeCard() {
 
         val options = listOf(
             c.getString(R.string.mute),
-            "40%",
-            "60%",
+            "30%",
+            "50%",
             if (mCustomVolumeOptionLabel != "") mCustomVolumeOptionLabel
             else {
                 if (mCustomVolume == -1) "+"
@@ -85,11 +85,11 @@ fun VolumeCard() {
                             }
 
                             1 -> {
-                                AudioUtils(c).setVolume((0.4 * maxVolume).toInt())
+                                AudioUtils(c).setVolume((0.3 * maxVolume).toInt())
                             }
 
                             2 -> {
-                                AudioUtils(c).setVolume((0.6 * maxVolume).toInt())
+                                AudioUtils(c).setVolume((0.5 * maxVolume).toInt())
                             }
 
                             3 -> {
@@ -213,10 +213,12 @@ fun VolumeCard() {
             }
         }
 
-        Button(
-            onClick = { showVolumeDialog = true }
-        ) {
-            Text(text = c.getString(R.string.reset))
+        if (mCustomVolume != -1) {
+            Button(
+                onClick = { showVolumeDialog = true }
+            ) {
+                Text(text = c.getString(R.string.edit))
+            }
         }
     }
 }

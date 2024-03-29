@@ -106,4 +106,5 @@
     <string name="you_can_set_a_label_for_it">You can set a label for it</string>
     <string name="label">Label</string>
     <string name="reset">Reset</string>
+    <string name="edit">Edit</string>
 </resources>

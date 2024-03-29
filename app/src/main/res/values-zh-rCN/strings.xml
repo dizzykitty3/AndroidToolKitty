@@ -104,4 +104,5 @@
     <string name="you_can_set_a_label_for_it">可以给此音量选项设置一个标签</string>
     <string name="label">标签</string>
     <string name="reset">重置</string>
+    <string name="edit">编辑</string>
 </resources>
