@@ -26,6 +26,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
@@ -54,7 +55,7 @@ fun VolumeCard() {
         var mCustomVolumeOptionLabel by remember { mutableStateOf(customVolumeOptionLabel) }
 
         val options = listOf(
-            c.getString(R.string.mute),
+            stringResource(R.string.mute),
             "30%",
             "50%",
             if (mCustomVolumeOptionLabel != "") mCustomVolumeOptionLabel
@@ -70,7 +71,7 @@ fun VolumeCard() {
 
         var showVolumeOptionLabelDialog by remember { mutableStateOf(false) }
 
-        Text(text = c.getString(R.string.media_volume))
+        Text(text = stringResource(R.string.media_volume))
 
         CustomSpacerPadding()
 
@@ -121,7 +122,7 @@ fun VolumeCard() {
                         showVolumeDialog = false
                     },
                     title = {
-                        Text(text = "${c.getString(R.string.add_custom_volume)}\n${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
+                        Text(text = "${stringResource(R.string.add_custom_volume)}\n${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
                     },
                     text = {
                         Slider(
@@ -147,14 +148,14 @@ fun VolumeCard() {
                                 }
                             }
                         ) {
-                            Text(text = c.getString(android.R.string.ok))
+                            Text(text = stringResource(android.R.string.ok))
                         }
                     },
                     dismissButton = {
                         TextButton(
                             onClick = { showVolumeDialog = false }
                         ) {
-                            Text(text = c.getString(android.R.string.cancel))
+                            Text(text = stringResource(android.R.string.cancel))
                         }
                     },
                     modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))
@@ -169,13 +170,13 @@ fun VolumeCard() {
                         showVolumeOptionLabelDialog = false
                     },
                     title = {
-                        Text(text = c.getString(R.string.you_can_set_a_label_for_it))
+                        Text(text = stringResource(R.string.you_can_set_a_label_for_it))
                     },
                     text = {
                         OutlinedTextField(
                             value = optionLabel,
                             onValueChange = { optionLabel = it },
-                            label = { Text(text = c.getString(R.string.label)) },
+                            label = { Text(text = stringResource(R.string.label)) },
                             modifier = Modifier.fillMaxWidth(),
                             keyboardOptions = KeyboardOptions.Default.copy(
                                 imeAction = ImeAction.Done
@@ -200,7 +201,7 @@ fun VolumeCard() {
                                 showVolumeDialog = false
                             }
                         ) {
-                            Text(text = c.getString(android.R.string.ok))
+                            Text(text = stringResource(android.R.string.ok))
                         }
                     },
                     dismissButton = {
@@ -210,7 +211,7 @@ fun VolumeCard() {
                                 showVolumeDialog = false
                             }
                         ) {
-                            Text(text = c.getString(android.R.string.cancel))
+                            Text(text = stringResource(android.R.string.cancel))
                         }
                     },
                     modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))
@@ -222,7 +223,7 @@ fun VolumeCard() {
             Button(
                 onClick = { showVolumeDialog = true }
             ) {
-                Text(text = c.getString(R.string.edit))
+                Text(text = stringResource(R.string.edit))
             }
         }
     }

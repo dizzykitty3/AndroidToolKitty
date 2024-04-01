@@ -13,7 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAndroidApiLevelAndName
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
@@ -25,8 +25,6 @@ fun AndroidVersionsCard() {
         icon = Icons.Outlined.Android,
         title = R.string.android_versions
     ) {
-        val c = LocalContext.current
-
         var expanded by remember { mutableStateOf(false) }
 
         Row(
@@ -121,9 +119,9 @@ fun AndroidVersionsCard() {
             onClick = { expanded = !expanded }
         ) {
             if (!expanded) {
-                Text(text = c.getString(R.string.show_more))
+                Text(text = stringResource(R.string.show_more))
             } else {
-                Text(text = c.getString(R.string.show_less))
+                Text(text = stringResource(R.string.show_less))
             }
         }
     }

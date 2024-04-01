@@ -22,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
@@ -44,7 +45,7 @@ fun GoogleMapsCard() {
             OutlinedTextField(
                 value = latitude,
                 onValueChange = { latitude = it },
-                label = { Text(c.getString(R.string.latitude)) },
+                label = { Text(stringResource(R.string.latitude)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -61,7 +62,7 @@ fun GoogleMapsCard() {
             OutlinedTextField(
                 value = longitude,
                 onValueChange = { longitude = it },
-                label = { Text(c.getString(R.string.longitude)) },
+                label = { Text(stringResource(R.string.longitude)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -79,7 +80,7 @@ fun GoogleMapsCard() {
         TextButton(
             onClick = { onClickOpenGoogleMapsButton(c, latitude, longitude) }
         ) {
-            Text(text = c.getString(R.string.open_google_maps))
+            Text(text = stringResource(R.string.open_google_maps))
 
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,

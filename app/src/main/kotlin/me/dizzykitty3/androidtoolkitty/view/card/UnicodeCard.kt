@@ -17,6 +17,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
@@ -41,7 +42,7 @@ fun UnicodeCard() {
         OutlinedTextField(
             value = unicode,
             onValueChange = { unicode = it },
-            label = { Text(c.getString(R.string.unicode)) },
+            label = { Text(stringResource(R.string.unicode)) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
@@ -52,7 +53,7 @@ fun UnicodeCard() {
             supportingText = {
                 Text(
                     text = buildAnnotatedString {
-                        append(c.getString(R.string.unicode_input_hint))
+                        append(stringResource(R.string.unicode_input_hint))
                         CustomItalicText(" 00610062")
                     }
                 )
@@ -62,14 +63,14 @@ fun UnicodeCard() {
         OutlinedTextField(
             value = characters.value,
             onValueChange = {},
-            label = { Text(c.getString(R.string.character)) },
+            label = { Text(stringResource(R.string.character)) },
             modifier = Modifier.fillMaxWidth()
         )
 
         TextButton(
             onClick = { onClickConvertButton(c, unicode, characters) }
         ) {
-            Text(text = c.getString(R.string.convert))
+            Text(text = stringResource(R.string.convert))
         }
     }
 }

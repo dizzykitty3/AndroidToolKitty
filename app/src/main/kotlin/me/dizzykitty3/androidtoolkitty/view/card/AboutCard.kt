@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomDeveloperProfileLink
@@ -52,7 +53,7 @@ fun AboutCard() {
                 }
             ) {
                 Text(
-                    text = c.getString(R.string.source_code_on_github),
+                    text = stringResource(R.string.source_code_on_github),
                     color = MaterialTheme.colorScheme.primary
                 )
                 Icon(
@@ -74,7 +75,7 @@ fun AboutCard() {
 
             CustomIconAndTextPadding()
 
-            Text(text = "${c.getString(R.string.version)} ${c.getString(R.string.version_number)}")
+            Text(text = "${stringResource(R.string.version)} ${stringResource(R.string.version_number)}")
         }
     }
 }

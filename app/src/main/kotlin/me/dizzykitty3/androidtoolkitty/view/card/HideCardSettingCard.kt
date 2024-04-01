@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupDivider
@@ -151,7 +152,7 @@ fun HideCardSettingCard() {
                 mIsShowCard10 = false
             }
         ) {
-            Text(text = c.getString(R.string.hide_all_cards))
+            Text(text = stringResource(R.string.hide_all_cards))
         }
 
         Button(
@@ -169,7 +170,7 @@ fun HideCardSettingCard() {
                 mIsShowCard10 = true
             }
         ) {
-            Text(text = c.getString(R.string.show_all_cards))
+            Text(text = stringResource(R.string.show_all_cards))
         }
     }
 }

@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
@@ -46,7 +47,7 @@ fun SocialMediaProfileCard() {
         val platformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(c)
         var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
 
-        val platformList = UrlUtils.Platform.entries.map { c.getString(it.nameResId) }
+        val platformList = UrlUtils.Platform.entries.map { stringResource(it.nameResId) }
         if (mPlatformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
             CustomTip(resId = R.string.temp2)
         }
@@ -56,7 +57,7 @@ fun SocialMediaProfileCard() {
             onItemSelected = { mPlatformIndex = it },
             label = {
                 if (mPlatformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                    Text(c.getString(R.string.platform))
+                    Text(stringResource(R.string.platform))
                 } else {
                     Text("")
                 }
@@ -68,9 +69,9 @@ fun SocialMediaProfileCard() {
             onValueChange = { username = it },
             label = {
                 if (mPlatformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                    Text(c.getString(R.string.username))
+                    Text(stringResource(R.string.username))
                 } else {
-                    Text(c.getString(R.string.platform))
+                    Text(stringResource(R.string.platform))
                 }
             },
             modifier = Modifier.fillMaxWidth(),
@@ -89,7 +90,7 @@ fun SocialMediaProfileCard() {
                         maxLines = 1
                     )
                 } else {
-                    Text(c.getString(R.string.submit_the_platform_you_need))
+                    Text(stringResource(R.string.submit_the_platform_you_need))
                 }
             }
         )
@@ -97,7 +98,7 @@ fun SocialMediaProfileCard() {
         TextButton(
             onClick = { onVisitProfileButton(c, username, mPlatformIndex) }
         ) {
-            Text(text = c.getString(R.string.visit))
+            Text(text = stringResource(R.string.visit))
 
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,

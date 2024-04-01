@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -43,7 +44,7 @@ fun UrlCard() {
         OutlinedTextField(
             value = url,
             onValueChange = { url = it },
-            label = { Text(c.getString(R.string.url)) },
+            label = { Text(stringResource(R.string.url)) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done,
@@ -55,13 +56,13 @@ fun UrlCard() {
             supportingText = {
                 Text(
                     text = buildAnnotatedString {
-                        append(text = c.getString(R.string.url_input_hint_1))
+                        append(text = stringResource(R.string.url_input_hint_1))
                         CustomItalicText(" www. ")
-                        append(text = c.getString(R.string.url_input_hint_2))
+                        append(text = stringResource(R.string.url_input_hint_2))
                         CustomItalicText(" .com ")
-                        append(text = c.getString(R.string.url_input_hint_3))
+                        append(text = stringResource(R.string.url_input_hint_3))
                         CustomItalicText(" .net ")
-                        append(text = c.getString(R.string.url_input_hint_4))
+                        append(text = stringResource(R.string.url_input_hint_4))
                     }
                 )
             },
@@ -76,7 +77,7 @@ fun UrlCard() {
         TextButton(
             onClick = { onClickVisitUrlButton(c, url) }
         ) {
-            Text(text = c.getString(R.string.visit))
+            Text(text = stringResource(R.string.visit))
 
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,

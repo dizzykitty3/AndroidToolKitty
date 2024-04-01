@@ -15,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
@@ -58,7 +59,7 @@ fun CustomAlertDialogButton(
                     )
                 ) {
                     Text(
-                        text = positiveButtonText ?: c.getString(android.R.string.ok),
+                        text = positiveButtonText ?: stringResource(android.R.string.ok),
                         color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
@@ -67,7 +68,7 @@ fun CustomAlertDialogButton(
                 TextButton(
                     onClick = { showDialog = false }
                 ) {
-                    Text(text = negativeButtonText ?: c.getString(android.R.string.cancel))
+                    Text(text = negativeButtonText ?: stringResource(android.R.string.cancel))
                 }
             },
             modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))

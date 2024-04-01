@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAnimatedProgressIndicator
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
@@ -45,7 +46,7 @@ fun YearProgressCard() {
                 if (isShowPercentage)
                     "${(displayYearProgressPercentage(calculateYearProgress()))}%"
                 else
-                    c.getString(
+                    stringResource(
                         R.string.days_remaining,
                         calculateTotalDaysInYear() - calculateDaysPassed()
                     )

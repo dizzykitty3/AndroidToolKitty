@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
@@ -41,7 +42,7 @@ fun OpenAppOnPlayStoreCard() {
         OutlinedTextField(
             value = packageName,
             onValueChange = { packageName = it },
-            label = { Text(c.getString(R.string.package_name_or_search)) },
+            label = { Text(stringResource(R.string.package_name_or_search)) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
@@ -58,7 +59,7 @@ fun OpenAppOnPlayStoreCard() {
 
             Text(
                 text = buildAnnotatedString {
-                    append(c.getString(R.string.whats))
+                    append(stringResource(R.string.whats))
                     append(" ")
                 }
             )
@@ -69,20 +70,20 @@ fun OpenAppOnPlayStoreCard() {
                 )
             ) {
                 Text(
-                    text = c.getString(R.string.package_name),
+                    text = stringResource(R.string.package_name),
                     textDecoration = TextDecoration.Underline
                 )
 
                 Icon(
                     imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = c.getString(R.string.content_description_link_icon_whats_package_name)
+                    contentDescription = stringResource(R.string.content_description_link_icon_whats_package_name)
                 )
             }
         }
         TextButton(
             onClick = { IntentUtils(c).openAppOnMarket(packageName) }
         ) {
-            Text(text = c.getString(R.string.open_on_google_play))
+            Text(text = stringResource(R.string.open_on_google_play))
 
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
@@ -94,7 +95,7 @@ fun OpenAppOnPlayStoreCard() {
         TextButton(
             onClick = { IntentUtils(c).openAppOnMarket(packageName, false) }
         ) {
-            Text(text = c.getString(R.string.open_on_other_markets))
+            Text(text = stringResource(R.string.open_on_other_markets))
 
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,

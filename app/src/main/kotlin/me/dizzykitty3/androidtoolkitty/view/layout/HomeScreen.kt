@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
@@ -87,7 +88,7 @@ fun HomeScreen(navController: NavHostController) {
                     || locale.contains("Hans") // zh_CN, zh_SG
                     || locale.contains("zh_CN")
                     || locale.contains("zh_SG"))
-        ) CustomTip(formattedMessage = c.getString(R.string.no_translation, locale))
+        ) CustomTip(formattedMessage = stringResource(R.string.no_translation, locale))
 
         val cardList = listOf(
             CARD_1 to SettingsViewModel().getCardShowedState(c, CARD_1),
@@ -123,7 +124,7 @@ fun HomeScreen(navController: NavHostController) {
             Button(
                 onClick = { navController.navigate("LuckySpinningWheelScreen") }
             ) {
-                Text(text = c.getString(R.string.lucky_spinning_wheel))
+                Text(text = stringResource(R.string.lucky_spinning_wheel))
             }
         }
     }
