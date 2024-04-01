@@ -112,4 +112,6 @@
     <string name="test">test</string>
     <string name="lucky_spinning_wheel">Lucky spinning wheel</string>
     <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>
+    <string name="show_more">show more</string>
+    <string name="show_less">show less</string>
 </resources>

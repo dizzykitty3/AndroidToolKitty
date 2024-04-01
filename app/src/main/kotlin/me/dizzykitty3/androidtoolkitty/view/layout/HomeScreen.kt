@@ -121,7 +121,7 @@ fun HomeScreen(navController: NavHostController) {
             Button(
                 onClick = { navController.navigate("LuckySpinningWheelScreen") }
             ) {
-                Text(text = "Lucky spinning wheel")
+                Text(text = c.getString(R.string.lucky_spinning_wheel))
             }
         }
     }
