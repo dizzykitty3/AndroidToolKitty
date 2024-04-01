@@ -52,7 +52,7 @@
     <string name="about">关于</string>
     <string name="source_code_on_github">在 GitHub 上查看源码</string>
     <string name="submit_the_platform_you_need">提交你所想平台的名称给开发者</string>
-    <string name="days_remaining">天剩余</string>
+    <string name="days_remaining">剩余 %1$d 天</string>
     <string name="uploaded">已上传</string>
     <string name="all_help_welcomed">欢迎建议意见和PR！</string>
     <string name="pixiv_artwork">pixiv (作品 ID)</string>
@@ -105,7 +105,7 @@
     <string name="reset">重置</string>
     <string name="edit">编辑</string>
     <string name="general">基本</string>
-    <string name="set_slider_increment_5">将滑块增量设置为5%</string>
+    <string name="set_slider_increment_5">将滑块增量设置为 5%</string>
     <string name="test">test</string>
     <string name="lucky_spinning_wheel">Lucky spinning wheel</string>
     <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>

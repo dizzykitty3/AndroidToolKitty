@@ -45,11 +45,10 @@ fun YearProgressCard() {
                 if (isShowPercentage)
                     "${(displayYearProgressPercentage(calculateYearProgress()))}%"
                 else
-                    "${calculateTotalDaysInYear() - calculateDaysPassed()} ${
-                        c.getString(
-                            R.string.days_remaining
-                        )
-                    }"
+                    c.getString(
+                        R.string.days_remaining,
+                        calculateTotalDaysInYear() - calculateDaysPassed()
+                    )
             Text(
                 text = textToShow,
                 modifier = Modifier.fillMaxWidth()

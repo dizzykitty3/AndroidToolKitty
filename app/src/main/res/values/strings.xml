@@ -53,7 +53,7 @@
     <string name="about">About</string>
     <string name="source_code_on_github">View source code on GitHub</string>
     <string name="submit_the_platform_you_need">Submit the platform you need</string>
-    <string name="days_remaining">days remaining</string>
+    <string name="days_remaining">%1$d days remaining</string>
     <string name="uploaded">uploaded</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="com_android_chrome" translatable="false">com.android.chrome</string>
