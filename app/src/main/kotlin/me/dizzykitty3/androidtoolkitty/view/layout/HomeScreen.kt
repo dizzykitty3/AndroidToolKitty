@@ -18,8 +18,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomOneHandedMode
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomScreen
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.view.card.AndroidVersionsCard
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
@@ -32,6 +33,7 @@ import me.dizzykitty3.androidtoolkitty.view.card.UrlCard
 import me.dizzykitty3.androidtoolkitty.view.card.VolumeCard
 import me.dizzykitty3.androidtoolkitty.view.card.YearProgressCard
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
+import java.util.Locale
 
 private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"
@@ -76,9 +78,13 @@ fun HomeScreen(navController: NavHostController) {
         CustomCardSpacePadding()
 
         val isOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
-        if (isOneHandedMode) {
-            CustomOneHandedMode()
-        }
+        if (isOneHandedMode) CustomOneHandedModePadding()
+
+        val locale = Locale.getDefault().toString()
+
+        if (!(locale.contains("en")
+                    || locale.contains("Hans")) // zh_CN, zh_SG
+        ) CustomTip("Sorry, $locale translation haven't added yet.")
 
         val cardList = listOf(
             CARD_1 to SettingsViewModel().getCardShowedState(c, CARD_1),

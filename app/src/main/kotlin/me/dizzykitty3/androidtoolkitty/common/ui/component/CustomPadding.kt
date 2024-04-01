@@ -28,7 +28,7 @@ fun CustomIconAndTextPadding() {
 }
 
 @Composable
-fun CustomOneHandedMode() {
+fun CustomOneHandedModePadding() {
     CustomPadding(dimen = R.dimen.padding_one_handed_mode)
 }
 
