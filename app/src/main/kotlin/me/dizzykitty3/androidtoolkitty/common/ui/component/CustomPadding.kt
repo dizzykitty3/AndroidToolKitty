@@ -41,8 +41,3 @@ fun CustomTopPadding() {
 fun CustomBottomPadding() {
     CustomPadding(dimen = R.dimen.padding_bottom)
 }
-
-@Composable
-fun CustomDialogPadding() {
-    CustomPadding(dimen = R.dimen.padding_dialog)
-}
