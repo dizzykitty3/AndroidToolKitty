@@ -194,6 +194,7 @@ fun VolumeCard() {
                             onClick = {
                                 SettingsViewModel().setCustomVolumeOptionLabel(c, optionLabel)
                                 mCustomVolumeOptionLabel = optionLabel
+                                selectedIndex = 3
                                 showVolumeOptionLabelDialog = false
                                 showVolumeDialog = false
                             }
