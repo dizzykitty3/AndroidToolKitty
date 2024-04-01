@@ -11,6 +11,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -50,7 +51,8 @@ private const val CARD_10 = "card_android_versions"
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    val c = LocalContext.current
+    val context = LocalContext.current
+    val settingsViewModel = remember { SettingsViewModel() }
 
     CustomScreen {
         Row(
@@ -65,7 +67,7 @@ fun HomeScreen(navController: NavHostController) {
             IconButton(
                 onClick = {
                     navController.navigate("SettingsScreen")
-                    SettingsViewModel().setHaveOpenedSettingsScreen(c, true)
+                    settingsViewModel.setHaveOpenedSettingsScreen(context, true)
                 },
                 modifier = Modifier.size(40.dp)
             ) {
@@ -79,31 +81,30 @@ fun HomeScreen(navController: NavHostController) {
 
         CustomCardSpacePadding()
 
-        val isOneHandedMode = SettingsViewModel().getIsOneHandedMode(c)
-        if (isOneHandedMode) CustomOneHandedModePadding()
+        if (settingsViewModel.getIsOneHandedMode(context)) CustomOneHandedModePadding()
 
         val locale = Locale.getDefault().toString()
-
-        if (!(locale.contains("en")
-                    || locale.contains("Hans") // zh_CN, zh_SG
-                    || locale.contains("zh_CN")
-                    || locale.contains("zh_SG"))
-        ) CustomTip(formattedMessage = stringResource(R.string.no_translation, locale))
-
-        val cardList = listOf(
-            CARD_1 to SettingsViewModel().getCardShowedState(c, CARD_1),
-            CARD_2 to SettingsViewModel().getCardShowedState(c, CARD_2),
-            CARD_3 to SettingsViewModel().getCardShowedState(c, CARD_3),
-            CARD_4 to SettingsViewModel().getCardShowedState(c, CARD_4),
-            CARD_5 to SettingsViewModel().getCardShowedState(c, CARD_5),
-            CARD_6 to SettingsViewModel().getCardShowedState(c, CARD_6),
-            CARD_7 to SettingsViewModel().getCardShowedState(c, CARD_7),
-            CARD_8 to SettingsViewModel().getCardShowedState(c, CARD_8),
-            CARD_9 to SettingsViewModel().getCardShowedState(c, CARD_9),
-            CARD_10 to SettingsViewModel().getCardShowedState(c, CARD_10),
+        if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) CustomTip(
+            formattedMessage = stringResource(
+                R.string.no_translation,
+                locale
+            )
         )
 
-        cardList.forEach { (cardName, isShow) ->
+        val cardMapping = mapOf(
+            CARD_1 to settingsViewModel.getCardShowedState(context, CARD_1),
+            CARD_2 to settingsViewModel.getCardShowedState(context, CARD_2),
+            CARD_3 to settingsViewModel.getCardShowedState(context, CARD_3),
+            CARD_4 to settingsViewModel.getCardShowedState(context, CARD_4),
+            CARD_5 to settingsViewModel.getCardShowedState(context, CARD_5),
+            CARD_6 to settingsViewModel.getCardShowedState(context, CARD_6),
+            CARD_7 to settingsViewModel.getCardShowedState(context, CARD_7),
+            CARD_8 to settingsViewModel.getCardShowedState(context, CARD_8),
+            CARD_9 to settingsViewModel.getCardShowedState(context, CARD_9),
+            CARD_10 to settingsViewModel.getCardShowedState(context, CARD_10),
+        )
+
+        cardMapping.forEach { (cardName, isShow) ->
             if (isShow) {
                 when (cardName) {
                     CARD_1 -> YearProgressCard()
