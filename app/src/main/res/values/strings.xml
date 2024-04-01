@@ -17,9 +17,6 @@
     <string name="open_language_settings">Language settings</string>
     <string name="open_default_apps_settings">Default apps settings</string>
     <string name="open_bluetooth_settings">Bluetooth settings</string>
-    <string name="set_time_automatically_is_on">\"Set time automatically\" is ON</string>
-    <string name="set_time_automatically_is_off">\"Set time automatically\" is OFF</string>
-    <string name="check_is_set_time_automatically_on">Check is \"set time automatically\" on</string>
     <string name="open_date_and_time_settings">Date &amp; time settings</string>
     <string name="open_battery_optimization_settings">Battery optimization settings</string>
     <string name="unicode">Unicode</string>
@@ -42,7 +39,6 @@
     <string name="social_media_profile">Social media profile</string>
     <string name="platform">Platform</string>
     <string name="username">Username</string>
-    <string name="visit_profile_with_id_or_username">Visit profile with id or username</string>
     <string name="bilibili_search">Bilibili (Search)</string>
     <string name="github">GitHub</string>
     <string name="x">X (formerly Twitter)</string>
@@ -53,22 +49,21 @@
     <string name="about">About</string>
     <string name="source_code_on_github">View source code on GitHub</string>
     <string name="submit_the_platform_you_need">Submit the platform you need</string>
-    <string name="days_remaining">%1$d days remaining</string>
+    <plurals name="days_remaining">
+        <item quantity="one">%1$d day remaining</item>
+        <item quantity="other">%1$d days remaining</item>
+    </plurals>
     <string name="uploaded">uploaded</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
-    <string name="com_android_chrome" translatable="false">com.android.chrome</string>
-    <string name="pixiv_artwork">pixiv (Arkwork ID)</string>
+    <string name="pixiv_artwork">pixiv (Artwork ID)</string>
     <string name="pixiv_user">pixiv (User ID)</string>
     <string name="v2ex">V2EX</string>
-    <string name="please_choose_a_platform">Please choose a platform</string>
     <string name="open_caption_preferences">Caption preferences</string>
     <string name="common">Common</string>
     <string name="debugging">Debugging</string>
-    <string name="temp1">Android ToolKitty will now clear your clipboard on launch. This feature will be optional in the future.</string>
     <string name="bilibili_user">Bilibili (User ID)</string>
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
     <string name="temp2">Upload platform name feature is under development.</string>
-    <string name="temp3">Convert characters to Unicode feature is under development.</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on \"clear clipboard on launch\" in Settings Screen</string>
     <string name="settings">Settings</string>
     <string name="hide_all_cards">Hide all cards</string>
@@ -77,24 +72,16 @@
     <string name="version_number" translatable="false">20240401</string>
     <string name="one_handed_mode">One-handed mode</string>
     <string name="volume">Volume</string>
-    <string name="feature">Feature</string>
-    <string name="display">Display</string>
     <string name="media_volume">Media volume</string>
     <string name="erase_all_app_data">Erase all app data</string>
     <string name="set_time_automatically_is_off_tip">\"Set time automatically\" is now OFF. You may experience some unexpected behavior while using your phone.</string>
-    <string name="temp4">Add custom volume option feature is under development.</string>
     <string name="warning">Warning</string>
-    <string name="warning_erase_all_data">This action will erase all your data, including histories and settings.\n\nAre you sure you want to proceed?</string>
     <string name="erase_all_data">Erase all data</string>
     <string name="open_on_other_markets">Open on other markets</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
     <string name="android_versions">Android versions</string>
-    <string name="edit_home">Edit home</string>
     <string name="customize_my_home_page">Customize my home page</string>
-    <string name="tip_under_development">&gt;&gt;&gt; UNDER DEVELOPMENT &lt;&lt;&lt;</string>
     <string name="add_custom_volume">Add custom volume</string>
-    <string name="tip_edit_custom_volume_button">You can change value and label of custom volume button in Settings Screen.</string>
-    <string name="edit_custom_volume_button">Edit custom volume button</string>
     <string name="material_you_dynamic_color">Material You dynamic color</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
     <string name="mute">mute</string>
@@ -105,7 +92,6 @@
     <string name="warning_erase_all_data_3">Are you sure you want to proceed?</string>
     <string name="you_can_set_a_label_for_it">You can set a label for it</string>
     <string name="label">Label</string>
-    <string name="reset">Reset</string>
     <string name="edit">Edit</string>
     <string name="general">General</string>
     <string name="set_slider_increment_5">Set slider increment to 5%</string>
