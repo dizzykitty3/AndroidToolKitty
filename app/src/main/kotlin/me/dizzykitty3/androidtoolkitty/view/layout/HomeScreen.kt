@@ -84,7 +84,9 @@ fun HomeScreen(navController: NavHostController) {
         val locale = Locale.getDefault().toString()
 
         if (!(locale.contains("en")
-                    || locale.contains("Hans")) // zh_CN, zh_SG
+                    || locale.contains("Hans") // zh_CN, zh_SG
+                    || locale.contains("zh_CN")
+                    || locale.contains("zh_SG"))
         ) CustomTip(formattedMessage = c.getString(R.string.no_translation, locale))
 
         val cardList = listOf(
