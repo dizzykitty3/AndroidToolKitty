@@ -31,10 +31,11 @@ import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
 fun SettingsCard(navController: NavHostController) {
-    val c = LocalContext.current
     CustomCardNoIcon(
-        title = c.getString(R.string.settings)
+        title = R.string.settings
     ) {
+        val c = LocalContext.current
+
         val autoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(c)
         var mAutoClearClipboard by remember { mutableStateOf(autoClearClipboard) }
 
@@ -47,7 +48,7 @@ fun SettingsCard(navController: NavHostController) {
         val volumeSlideSteps = SettingsViewModel().getIsSliderIncrementFivePercent(c)
         var mVolumeSlideSteps by remember { mutableStateOf(volumeSlideSteps) }
 
-        CustomGroupTitleText(c.getString(R.string.general))
+        CustomGroupTitleText(R.string.general)
 
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -130,7 +131,7 @@ fun SettingsCard(navController: NavHostController) {
 
         CustomGroupDivider()
 
-        CustomGroupTitleText(c.getString(R.string.customize))
+        CustomGroupTitleText(R.string.customize)
 
         Button(
             onClick = { navController.navigate("HideCardSettingScreen") }) {
@@ -139,7 +140,7 @@ fun SettingsCard(navController: NavHostController) {
 
         CustomGroupDivider()
 
-        CustomGroupTitleText(c.getString(R.string.debugging))
+        CustomGroupTitleText(R.string.debugging)
 
         CustomAlertDialogButton(
             buttonText = c.getString(R.string.erase_all_app_data),
@@ -149,7 +150,7 @@ fun SettingsCard(navController: NavHostController) {
                     text = buildAnnotatedString {
                         append(c.getString(R.string.warning_erase_all_data_1))
                         append(" ")
-                        CustomBoldText(c.getString(R.string.warning_erase_all_data_2))
+                        CustomBoldText(R.string.warning_erase_all_data_2)
                         append("\n\n")
                         append(c.getString(R.string.warning_erase_all_data_3))
                     }

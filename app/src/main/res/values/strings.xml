@@ -109,4 +109,7 @@
     <string name="edit">Edit</string>
     <string name="general">General</string>
     <string name="set_slider_increment_5">Set slider increment to 5%</string>
+    <string name="test">test</string>
+    <string name="lucky_spinning_wheel">Lucky spinning wheel</string>
+    <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>
 </resources>

@@ -30,11 +30,12 @@ import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
 
 @Composable
 fun OpenAppOnPlayStoreCard() {
-    val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.Shop,
-        title = c.getString(R.string.open_app_on_google_play)
+        title = R.string.open_app_on_google_play
     ) {
+        val c = LocalContext.current
+
         var packageName by remember { mutableStateOf("") }
 
         OutlinedTextField(

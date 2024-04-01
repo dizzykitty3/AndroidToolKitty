@@ -24,10 +24,11 @@ private const val SETTING_9 = "setting_developer"
 
 @Composable
 fun HideAndroidSystemSettingsOptionCard() {
-    val c = LocalContext.current
     CustomCardNoIcon(
-        title = c.getString(R.string.customize_system_settings_card),
+        title = R.string.customize_system_settings_card
     ) {
+        val c = LocalContext.current
+
         val isShowSetting1 = SettingsViewModel().getCardShowedState(c, SETTING_1)
         val isShowSetting2 = SettingsViewModel().getCardShowedState(c, SETTING_2)
         val isShowSetting3 = SettingsViewModel().getCardShowedState(c, SETTING_3)
@@ -47,7 +48,7 @@ fun HideAndroidSystemSettingsOptionCard() {
         var mIsShowSetting8 by remember { mutableStateOf(isShowSetting8) }
         var mIsShowSetting9 by remember { mutableStateOf(isShowSetting9) }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.open_display_settings),
+            resId = R.string.open_display_settings,
             cardId = SETTING_1,
             isChecked = mIsShowSetting1
         ) { newState ->
@@ -56,7 +57,7 @@ fun HideAndroidSystemSettingsOptionCard() {
         }
         if (OsVersion.android12()) {
             CustomHideCardSettingSwitch(
-                text = c.getString(R.string.open_auto_rotate_settings),
+                resId = R.string.open_auto_rotate_settings,
                 cardId = SETTING_2,
                 isChecked = mIsShowSetting2
             ) { newState ->
@@ -65,7 +66,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             }
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.open_bluetooth_settings),
+            resId = R.string.open_bluetooth_settings,
             cardId = SETTING_3,
             isChecked = mIsShowSetting3
         ) { newState ->
@@ -73,7 +74,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             SettingsViewModel().saveCardShowedState(c, SETTING_3, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.open_default_apps_settings),
+            resId = R.string.open_default_apps_settings,
             cardId = SETTING_4,
             isChecked = mIsShowSetting4
         ) { newState ->
@@ -81,7 +82,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             SettingsViewModel().saveCardShowedState(c, SETTING_4, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.open_battery_optimization_settings),
+            resId = R.string.open_battery_optimization_settings,
             cardId = SETTING_5,
             isChecked = mIsShowSetting5
         ) { newState ->
@@ -89,7 +90,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             SettingsViewModel().saveCardShowedState(c, SETTING_5, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.open_caption_preferences),
+            resId = R.string.open_caption_preferences,
             cardId = SETTING_6,
             isChecked = mIsShowSetting6
         ) { newState ->
@@ -97,7 +98,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             SettingsViewModel().saveCardShowedState(c, SETTING_6, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.open_language_settings),
+            resId = R.string.open_language_settings,
             cardId = SETTING_7,
             isChecked = mIsShowSetting7
         ) { newState ->
@@ -105,7 +106,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             SettingsViewModel().saveCardShowedState(c, SETTING_7, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.open_date_and_time_settings),
+            resId = R.string.open_date_and_time_settings,
             cardId = SETTING_8,
             isChecked = mIsShowSetting8
         ) { newState ->
@@ -113,7 +114,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             SettingsViewModel().saveCardShowedState(c, SETTING_8, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.open_developer_options),
+            resId = R.string.open_developer_options,
             cardId = SETTING_9,
             isChecked = mIsShowSetting9
         ) { newState ->

@@ -35,11 +35,12 @@ import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
 fun SocialMediaProfileCard() {
-    val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.Person,
-        title = c.getString(R.string.social_media_profile)
+        title = R.string.social_media_profile
     ) {
+        val c = LocalContext.current
+
         var username by remember { mutableStateOf("") }
 
         val platformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(c)
@@ -47,7 +48,7 @@ fun SocialMediaProfileCard() {
 
         val platformList = UrlUtils.Platform.entries.map { c.getString(it.nameResId) }
         if (mPlatformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-            CustomTip(text = c.getString(R.string.temp2))
+            CustomTip(resId = R.string.temp2)
         }
 
         CustomDropdownMenu(

@@ -28,10 +28,11 @@ private const val CARD_10 = "card_android_versions"
 
 @Composable
 fun HideCardSettingCard() {
-    val c = LocalContext.current
     CustomCardNoIcon(
-        title = c.getString(R.string.customize_my_home_page)
+        title = R.string.customize_my_home_page
     ) {
+        val c = LocalContext.current
+
         val isShowCard1 = SettingsViewModel().getCardShowedState(c, CARD_1)
         val isShowCard2 = SettingsViewModel().getCardShowedState(c, CARD_2)
         val isShowCard3 = SettingsViewModel().getCardShowedState(c, CARD_3)
@@ -53,7 +54,7 @@ fun HideCardSettingCard() {
         var mIsShowCard9 by remember { mutableStateOf(isShowCard9) }
         var mIsShowCard10 by remember { mutableStateOf(isShowCard10) }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.year_progress),
+            resId = R.string.year_progress,
             cardId = CARD_1,
             isChecked = mIsShowCard1
         ) { newState ->
@@ -61,7 +62,7 @@ fun HideCardSettingCard() {
             SettingsViewModel().saveCardShowedState(c, CARD_1, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.volume),
+            resId = R.string.volume,
             cardId = CARD_2,
             isChecked = mIsShowCard2
         ) { newState ->
@@ -69,7 +70,7 @@ fun HideCardSettingCard() {
             SettingsViewModel().saveCardShowedState(c, CARD_2, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.clipboard),
+            resId = R.string.clipboard,
             cardId = CARD_3,
             isChecked = mIsShowCard3
         ) { newState ->
@@ -77,7 +78,7 @@ fun HideCardSettingCard() {
             SettingsViewModel().saveCardShowedState(c, CARD_3, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.url),
+            resId = R.string.url,
             cardId = CARD_4,
             isChecked = mIsShowCard4
         ) { newState ->
@@ -85,7 +86,7 @@ fun HideCardSettingCard() {
             SettingsViewModel().saveCardShowedState(c, CARD_4, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.social_media_profile),
+            resId = R.string.social_media_profile,
             cardId = CARD_5,
             isChecked = mIsShowCard5
         ) { newState ->
@@ -93,7 +94,7 @@ fun HideCardSettingCard() {
             SettingsViewModel().saveCardShowedState(c, CARD_5, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.android_system_settings),
+            resId = R.string.android_system_settings,
             cardId = CARD_6,
             isChecked = mIsShowCard6
         ) { newState ->
@@ -101,7 +102,7 @@ fun HideCardSettingCard() {
             SettingsViewModel().saveCardShowedState(c, CARD_6, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.unicode),
+            resId = R.string.unicode,
             cardId = CARD_7,
             isChecked = mIsShowCard7
         ) { newState ->
@@ -109,7 +110,7 @@ fun HideCardSettingCard() {
             SettingsViewModel().saveCardShowedState(c, CARD_7, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.google_maps),
+            resId = R.string.google_maps,
             cardId = CARD_8,
             isChecked = mIsShowCard8
         ) { newState ->
@@ -117,7 +118,7 @@ fun HideCardSettingCard() {
             SettingsViewModel().saveCardShowedState(c, CARD_8, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.open_app_on_google_play),
+            resId = R.string.open_app_on_google_play,
             cardId = CARD_9,
             isChecked = mIsShowCard9
         ) { newState ->
@@ -125,7 +126,7 @@ fun HideCardSettingCard() {
             SettingsViewModel().saveCardShowedState(c, CARD_9, newState)
         }
         CustomHideCardSettingSwitch(
-            text = c.getString(R.string.android_versions),
+            resId = R.string.android_versions,
             cardId = CARD_10,
             isChecked = mIsShowCard10
         ) { newState ->

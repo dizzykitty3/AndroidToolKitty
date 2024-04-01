@@ -28,11 +28,12 @@ private const val SETTING_9 = "setting_developer"
 
 @Composable
 fun SystemSettingsCard() {
-    val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.Settings,
-        title = c.getString(R.string.android_system_settings)
+        title = R.string.android_system_settings
     ) {
+        val c = LocalContext.current
+
         val isShowSetting1 = SettingsViewModel().getCardShowedState(c, SETTING_1)
         val isShowSetting2 = SettingsViewModel().getCardShowedState(c, SETTING_2)
         val isShowSetting3 = SettingsViewModel().getCardShowedState(c, SETTING_3)
@@ -43,45 +44,45 @@ fun SystemSettingsCard() {
         val isShowSetting8 = SettingsViewModel().getCardShowedState(c, SETTING_8)
         val isShowSetting9 = SettingsViewModel().getCardShowedState(c, SETTING_9)
         if (!checkIsAutoTime(c)) {
-            CustomTip(text = c.getString(R.string.set_time_automatically_is_off_tip))
+            CustomTip(resId = R.string.set_time_automatically_is_off_tip)
         }
         if (isShowSetting1 || isShowSetting2 || isShowSetting3 || isShowSetting4 || isShowSetting5 || isShowSetting6) {
-            CustomGroupTitleText(c.getString(R.string.common))
+            CustomGroupTitleText(R.string.common)
         }
         if (isShowSetting1) {
             CustomSystemSettingsButton(
                 settingType = "display",
-                buttonText = c.getString(R.string.open_display_settings)
+                buttonText = R.string.open_display_settings
             )
         }
         if (isShowSetting2 && OsVersion.android12()) {
             CustomSystemSettingsButton(
                 settingType = "auto_rotate",
-                buttonText = c.getString(R.string.open_auto_rotate_settings)
+                buttonText = R.string.open_auto_rotate_settings
             )
         }
         if (isShowSetting3) {
             CustomSystemSettingsButton(
                 settingType = "bluetooth",
-                buttonText = c.getString(R.string.open_bluetooth_settings)
+                buttonText = R.string.open_bluetooth_settings
             )
         }
         if (isShowSetting4) {
             CustomSystemSettingsButton(
                 settingType = "manage_default_apps",
-                buttonText = c.getString(R.string.open_default_apps_settings)
+                buttonText = R.string.open_default_apps_settings
             )
         }
         if (isShowSetting5) {
             CustomSystemSettingsButton(
                 settingType = "ignore_battery_optimization",
-                buttonText = c.getString(R.string.open_battery_optimization_settings)
+                buttonText = R.string.open_battery_optimization_settings
             )
         }
         if (isShowSetting6) {
             CustomSystemSettingsButton(
                 settingType = "captioning",
-                buttonText = c.getString(R.string.open_caption_preferences)
+                buttonText = R.string.open_caption_preferences
             )
         }
         if ((isShowSetting1 || isShowSetting2 || isShowSetting3 || isShowSetting4 || isShowSetting5 || isShowSetting6)
@@ -90,24 +91,24 @@ fun SystemSettingsCard() {
             CustomGroupDivider()
         }
         if (isShowSetting7 || isShowSetting8 || isShowSetting9) {
-            CustomGroupTitleText(c.getString(R.string.debugging))
+            CustomGroupTitleText(R.string.debugging)
         }
         if (isShowSetting7) {
             CustomSystemSettingsButton(
                 settingType = "locale",
-                buttonText = c.getString(R.string.open_language_settings)
+                buttonText = R.string.open_language_settings
             )
         }
         if (isShowSetting8) {
             CustomSystemSettingsButton(
                 settingType = "date",
-                buttonText = c.getString(R.string.open_date_and_time_settings)
+                buttonText = R.string.open_date_and_time_settings
             )
         }
         if (isShowSetting9) {
             CustomSystemSettingsButton(
                 settingType = "development_settings",
-                buttonText = c.getString(R.string.open_developer_options)
+                buttonText = R.string.open_developer_options
             )
         }
     }

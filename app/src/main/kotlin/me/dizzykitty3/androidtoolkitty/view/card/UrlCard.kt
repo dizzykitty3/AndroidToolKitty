@@ -32,11 +32,12 @@ import me.dizzykitty3.androidtoolkitty.common.util.UrlUtils
 
 @Composable
 fun UrlCard() {
-    val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.Link,
-        title = c.getString(R.string.url)
+        title = R.string.url
     ) {
+        val c = LocalContext.current
+
         var url by remember { mutableStateOf("") }
 
         OutlinedTextField(

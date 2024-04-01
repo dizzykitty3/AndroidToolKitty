@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -67,14 +68,14 @@ fun CustomGradientText(
 
 @Composable
 fun AnnotatedString.Builder.CustomBoldText(
-    text: String
+    resId: Int
 ) {
     val boldTextStyle = SpanStyle(
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold
     )
     withStyle(boldTextStyle) {
-        append(text)
+        append(stringResource(id = resId))
     }
 }
 
@@ -111,7 +112,14 @@ fun CustomSingleLineText(text: String) {
 
 @Composable
 fun CustomTip(
-    text: String
+    resId: Int
+) {
+    CustomTip(formattedMessage = stringResource(id = resId))
+}
+
+@Composable
+fun CustomTip(
+    formattedMessage: String
 ) {
     Card(
         modifier = Modifier.padding(bottom = 8.dp),
@@ -134,7 +142,7 @@ fun CustomTip(
             CustomIconAndTextPadding()
 
             Text(
-                text = text,
+                text = formattedMessage,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onTertiaryContainer,
                 modifier = Modifier.align(Alignment.CenterVertically)
@@ -145,11 +153,11 @@ fun CustomTip(
 
 @Composable
 fun CardTitle(
-    title: String
+    resId: Int
 ) {
     Text(
         modifier = Modifier.fillMaxWidth(),
-        text = title,
+        text = stringResource(id = resId),
         style = TextStyle.Default.copy(
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Normal,
@@ -198,10 +206,10 @@ fun CustomDeveloperProfileLink(
 
 @Composable
 fun CustomGroupTitleText(
-    text: String
+    resId: Int
 ) {
     Text(
-        text = text,
+        text = stringResource(id = resId),
         style = MaterialTheme.typography.titleMedium
     )
 

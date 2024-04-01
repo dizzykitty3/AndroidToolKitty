@@ -24,11 +24,12 @@ import me.dizzykitty3.androidtoolkitty.common.util.DateUtils.displayYearProgress
 
 @Composable
 fun YearProgressCard() {
-    val c = LocalContext.current
     CustomCard(
         icon = Icons.Outlined.HourglassTop,
-        title = LocalContext.current.getString(R.string.year_progress)
+        title = R.string.year_progress
     ) {
+        val c = LocalContext.current
+
         var isShowPercentage by remember { mutableStateOf(true) }
 
         Column(

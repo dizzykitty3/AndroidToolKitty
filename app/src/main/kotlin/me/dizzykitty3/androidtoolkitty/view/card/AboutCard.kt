@@ -24,11 +24,11 @@ import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
 @Suppress("SpellCheckingInspection")
 @Composable
 fun AboutCard() {
-    val c = LocalContext.current
-
     CustomCardNoIcon(
-        title = c.getString(R.string.about)
+        title = R.string.about
     ) {
+        val c = LocalContext.current
+
         CustomDeveloperProfileLink("dizzykitty3")
 
         CustomDeveloperProfileLink("HongjieCN")

@@ -9,11 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
 fun CustomHideCardSettingSwitch(
-    text: String,
+    resId: Int,
     cardId: String,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
@@ -27,7 +28,7 @@ fun CustomHideCardSettingSwitch(
             SettingsViewModel().saveCardShowedState(c, cardId, !isChecked)
         }
     ) {
-        Text(text = text)
+        Text(text = stringResource(id = resId))
 
         Spacer(modifier = Modifier.weight(1f))
 

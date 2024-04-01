@@ -37,11 +37,12 @@ import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VolumeCard() {
-    val c = LocalContext.current
     CustomCard(
         icon = Icons.AutoMirrored.Outlined.VolumeUp,
-        title = c.getString(R.string.volume)
+        title = R.string.volume
     ) {
+        val c = LocalContext.current
+
         val maxVolume = AudioUtils(c).getMaxVolumeIndex()
 
         val sliderIncrementFivePercent = SettingsViewModel().getIsSliderIncrementFivePercent(c)

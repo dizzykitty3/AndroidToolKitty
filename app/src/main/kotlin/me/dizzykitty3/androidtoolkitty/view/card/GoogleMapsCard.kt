@@ -31,12 +31,12 @@ import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
 
 @Composable
 fun GoogleMapsCard() {
-    val c = LocalContext.current
-
     CustomCard(
         icon = Icons.Outlined.Place,
-        title = c.getString(R.string.google_maps)
+        title = R.string.google_maps
     ) {
+        val c = LocalContext.current
+
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }
 

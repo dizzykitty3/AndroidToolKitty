@@ -25,6 +25,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.dp
+import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomScreen
 import kotlin.math.cos
@@ -33,7 +34,7 @@ import kotlin.math.sin
 @Composable
 fun LuckySpinningWheelScreen() {
     CustomScreen {
-        CustomCardNoIcon(title = "Lucky spinning wheel") {
+        CustomCardNoIcon(title = R.string.lucky_spinning_wheel) {
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.Center

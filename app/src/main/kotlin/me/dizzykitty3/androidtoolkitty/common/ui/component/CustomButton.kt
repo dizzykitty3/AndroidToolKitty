@@ -10,13 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
 
 @Composable
 fun CustomSystemSettingsButton(
     settingType: String,
-    buttonText: String
+    buttonText: Int
 ) {
     val context = LocalContext.current
 
@@ -24,7 +25,7 @@ fun CustomSystemSettingsButton(
         onClick = { IntentUtils(context).openSystemSettings(settingType) },
         elevation = ButtonDefaults.buttonElevation(1.dp)
     ) {
-        Text(text = buttonText)
+        Text(text = stringResource(id = buttonText))
 
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,

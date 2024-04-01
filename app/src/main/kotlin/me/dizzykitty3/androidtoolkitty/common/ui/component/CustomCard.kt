@@ -20,7 +20,7 @@ import me.dizzykitty3.androidtoolkitty.R
 fun CustomCard(
     hasIcon: Boolean = true,
     icon: ImageVector?,
-    title: String,
+    title: Int,
     content: @Composable () -> Unit
 ) {
     ElevatedCard(
@@ -32,7 +32,7 @@ fun CustomCard(
             modifier = cardPadding
         ) {
             if (!hasIcon) {
-                CardTitle(title = title)
+                CardTitle(resId = title)
                 CardContentColumn { content() }
             } else {
                 Row {
@@ -46,7 +46,7 @@ fun CustomCard(
 
                     CustomIconAndTextPadding()
 
-                    CardTitle(title = title)
+                    CardTitle(resId = title)
                 }
                 CardContentColumn { content() }
             }
@@ -57,7 +57,7 @@ fun CustomCard(
 
 @Composable
 fun CustomCardNoIcon(
-    title: String,
+    title: Int,
     content: @Composable () -> Unit
 ) {
     CustomCard(

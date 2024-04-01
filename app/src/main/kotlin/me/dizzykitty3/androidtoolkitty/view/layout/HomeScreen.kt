@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomOneHandedModePadding
@@ -84,7 +85,7 @@ fun HomeScreen(navController: NavHostController) {
 
         if (!(locale.contains("en")
                     || locale.contains("Hans")) // zh_CN, zh_SG
-        ) CustomTip("Sorry, $locale translation haven't added yet.")
+        ) CustomTip(formattedMessage = c.getString(R.string.no_translation, locale))
 
         val cardList = listOf(
             CARD_1 to SettingsViewModel().getCardShowedState(c, CARD_1),
@@ -116,7 +117,7 @@ fun HomeScreen(navController: NavHostController) {
             }
         }
 
-        CustomCardNoIcon(title = "test") {
+        CustomCardNoIcon(title = R.string.test) {
             Button(
                 onClick = { navController.navigate("LuckySpinningWheelScreen") }
             ) {

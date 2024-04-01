@@ -18,15 +18,15 @@ import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
 fun ClipboardCard() {
-    val c = LocalContext.current
-
     CustomCard(
         icon = Icons.Outlined.ContentPasteSearch,
-        title = c.getString(R.string.clipboard)
+        title = R.string.clipboard
     ) {
+        val c = LocalContext.current
+
         val isShowHintText = !SettingsViewModel().getHaveOpenedSettingsScreen(c)
         if (isShowHintText) {
-            CustomTip(text = c.getString(R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen))
+            CustomTip(resId = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
         }
 
         Button(
