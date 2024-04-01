@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.content.Context
 import androidx.compose.material3.Button
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -12,8 +11,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomHideCardSettingSwitch
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 private const val CARD_1 = "card_year_progress"
@@ -133,9 +132,9 @@ fun HideCardSettingCard() {
             mIsShowCard10 = newState
             SettingsViewModel().saveCardShowedState(c, CARD_10, newState)
         }
-        CustomSpacerPadding()
-        HorizontalDivider()
-        CustomSpacerPadding()
+
+        CustomGroupDivider()
+
         Button(
             onClick = {
                 onClickChangeAllCardsButton(c, false)
@@ -153,6 +152,7 @@ fun HideCardSettingCard() {
         ) {
             Text(text = c.getString(R.string.hide_all_cards))
         }
+
         Button(
             onClick = {
                 onClickChangeAllCardsButton(c, true)
