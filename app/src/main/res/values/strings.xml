@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android ToolKitty</string>
+    <string name="app_name" translatable="false">Android ToolKitty</string>
     <string name="clipboard_cleared_automatically">Clipboard cleared automatically</string>
     <string name="year_progress">Year progress</string>
     <string name="clipboard">Clipboard</string>

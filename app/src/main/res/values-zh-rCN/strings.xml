@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">Android ToolKitty</string>
     <string name="clipboard_cleared_automatically">已自动清空剪贴板</string>
     <string name="year_progress">今年已过</string>
     <string name="clipboard">剪贴板</string>
