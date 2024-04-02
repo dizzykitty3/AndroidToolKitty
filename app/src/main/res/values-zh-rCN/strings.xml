@@ -49,7 +49,6 @@
     <string name="source_code_on_github">在 GitHub 上查看源码</string>
     <string name="submit_the_platform_you_need">提交你所想平台的名称给开发者</string>
     <plurals name="days_remaining">
-        <item quantity="one">剩余 %1$d 天</item>
         <item quantity="other">剩余 %1$d 天</item>
     </plurals>
     <string name="uploaded">已上传</string>
