@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import me.dizzykitty3.androidtoolkitty.view.layout.BluetoothDevicesScreen
 import me.dizzykitty3.androidtoolkitty.view.layout.HideCardSettingScreen
 import me.dizzykitty3.androidtoolkitty.view.layout.HomeScreen
 import me.dizzykitty3.androidtoolkitty.view.layout.LuckySpinningWheelScreen
@@ -20,5 +21,6 @@ fun MainLayout() {
         composable("SettingsScreen") { SettingsScreen(navController) }
         composable("HideCardSettingScreen") { HideCardSettingScreen() }
         composable("LuckySpinningWheelScreen") { LuckySpinningWheelScreen() }
+        composable("BluetoothDevicesScreen") { BluetoothDevicesScreen() }
     }
 }

@@ -127,6 +127,11 @@ fun HomeScreen(navController: NavHostController) {
             ) {
                 Text(text = stringResource(R.string.lucky_spinning_wheel))
             }
+            Button(
+                onClick = { navController.navigate("BluetoothDevicesScreen") }
+            ) {
+                Text(text = stringResource(id = R.string.bluetooth_devices))
+            }
         }
     }
 }
