@@ -28,7 +28,7 @@ private const val CARD_9 = "card_open_app_on_google_play"
 private const val CARD_10 = "card_android_versions"
 
 @Composable
-fun HideCardSettingCard() {
+fun EditHomePageCard() {
     CustomCardNoIcon(
         title = R.string.customize_my_home_page
     ) {

@@ -25,10 +25,10 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomOneHandedModePa
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.view.card.AndroidVersionsCard
+import me.dizzykitty3.androidtoolkitty.view.card.CheckAppOnAppMarketCard
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
 import me.dizzykitty3.androidtoolkitty.view.card.GreetingText
-import me.dizzykitty3.androidtoolkitty.view.card.OpenAppOnPlayStoreCard
 import me.dizzykitty3.androidtoolkitty.view.card.SocialMediaProfileCard
 import me.dizzykitty3.androidtoolkitty.view.card.SystemSettingsCard
 import me.dizzykitty3.androidtoolkitty.view.card.UnicodeCard
@@ -115,7 +115,7 @@ fun HomeScreen(navController: NavHostController) {
                     CARD_6 -> SystemSettingsCard()
                     CARD_7 -> UnicodeCard()
                     CARD_8 -> GoogleMapsCard()
-                    CARD_9 -> OpenAppOnPlayStoreCard()
+                    CARD_9 -> CheckAppOnAppMarketCard()
                     CARD_10 -> AndroidVersionsCard()
                 }
             }

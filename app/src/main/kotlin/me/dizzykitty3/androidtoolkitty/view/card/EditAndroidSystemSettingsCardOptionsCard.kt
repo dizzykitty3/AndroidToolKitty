@@ -23,7 +23,7 @@ private const val SETTING_8 = "setting_date_and_time"
 private const val SETTING_9 = "setting_developer"
 
 @Composable
-fun HideAndroidSystemSettingsOptionCard() {
+fun EditAndroidSystemSettingsCardOptionsCard() {
     CustomCardNoIcon(
         title = R.string.customize_system_settings_card
     ) {

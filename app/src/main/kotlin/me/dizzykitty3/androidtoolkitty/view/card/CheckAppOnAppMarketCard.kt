@@ -30,7 +30,7 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
 
 @Composable
-fun OpenAppOnPlayStoreCard() {
+fun CheckAppOnAppMarketCard() {
     CustomCard(
         icon = Icons.Outlined.Shop,
         title = R.string.open_app_on_google_play
