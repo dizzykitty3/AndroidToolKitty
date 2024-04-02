@@ -69,7 +69,7 @@
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240401</string>
+    <string name="version_number" translatable="false">20240402</string>
     <string name="one_handed_mode">One-handed mode</string>
     <string name="volume">Volume</string>
     <string name="media_volume">Media volume</string>
