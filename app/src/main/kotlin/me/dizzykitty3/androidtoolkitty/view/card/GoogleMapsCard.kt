@@ -36,7 +36,7 @@ fun GoogleMapsCard() {
         icon = Icons.Outlined.Place,
         title = R.string.google_maps
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }
@@ -55,7 +55,7 @@ fun GoogleMapsCard() {
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = { onClickOpenGoogleMapsButton(c, latitude, longitude) }
+                    onDone = { onClickOpenGoogleMapsButton(context, latitude, longitude) }
                 )
             )
 
@@ -72,13 +72,13 @@ fun GoogleMapsCard() {
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = { onClickOpenGoogleMapsButton(c, latitude, longitude) }
+                    onDone = { onClickOpenGoogleMapsButton(context, latitude, longitude) }
                 )
             )
         }
 
         TextButton(
-            onClick = { onClickOpenGoogleMapsButton(c, latitude, longitude) }
+            onClick = { onClickOpenGoogleMapsButton(context, latitude, longitude) }
         ) {
             Text(text = stringResource(R.string.open_google_maps))
 

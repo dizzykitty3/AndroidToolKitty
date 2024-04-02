@@ -23,15 +23,15 @@ fun ClipboardCard() {
         icon = Icons.Outlined.ContentPasteSearch,
         title = R.string.clipboard
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
-        val isShowHintText = !SettingsViewModel().getHaveOpenedSettingsScreen(c)
+        val isShowHintText = !SettingsViewModel().getHaveOpenedSettingsScreen(context)
         if (isShowHintText) {
             CustomTip(resId = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
         }
 
         Button(
-            onClick = { onClearClipboardButton(c) },
+            onClick = { onClearClipboardButton(context) },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
             Text(text = stringResource(R.string.clear_clipboard))

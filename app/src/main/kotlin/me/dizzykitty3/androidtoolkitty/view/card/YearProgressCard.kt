@@ -28,7 +28,7 @@ fun YearProgressCard() {
         icon = Icons.Outlined.HourglassTop,
         title = R.string.year_progress
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
         var isShowPercentage by remember { mutableStateOf(true) }
 
@@ -45,7 +45,7 @@ fun YearProgressCard() {
                 if (isShowPercentage)
                     "${(displayYearProgressPercentage(calculateYearProgress()))}%"
                 else
-                    c.resources.getQuantityString(
+                    context.resources.getQuantityString(
                         R.plurals.days_remaining,
                         (calculateTotalDaysInYear() - calculateDaysPassed()).toInt(),
                         calculateTotalDaysInYear() - calculateDaysPassed()

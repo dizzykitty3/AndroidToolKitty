@@ -34,7 +34,7 @@ fun UnicodeCard() {
         icon = Icons.AutoMirrored.Outlined.Notes,
         title = R.string.unicode
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
         var unicode by remember { mutableStateOf("") }
         val characters = remember { mutableStateOf("") }
@@ -48,7 +48,7 @@ fun UnicodeCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { onClickConvertButton(c, unicode, characters) }
+                onDone = { onClickConvertButton(context, unicode, characters) }
             ),
             supportingText = {
                 Text(
@@ -68,7 +68,7 @@ fun UnicodeCard() {
         )
 
         TextButton(
-            onClick = { onClickConvertButton(c, unicode, characters) }
+            onClick = { onClickConvertButton(context, unicode, characters) }
         ) {
             Text(text = stringResource(R.string.convert))
         }

@@ -32,18 +32,18 @@ fun HideCardSettingCard() {
     CustomCardNoIcon(
         title = R.string.customize_my_home_page
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
-        val isShowCard1 = SettingsViewModel().getCardShowedState(c, CARD_1)
-        val isShowCard2 = SettingsViewModel().getCardShowedState(c, CARD_2)
-        val isShowCard3 = SettingsViewModel().getCardShowedState(c, CARD_3)
-        val isShowCard4 = SettingsViewModel().getCardShowedState(c, CARD_4)
-        val isShowCard5 = SettingsViewModel().getCardShowedState(c, CARD_5)
-        val isShowCard6 = SettingsViewModel().getCardShowedState(c, CARD_6)
-        val isShowCard7 = SettingsViewModel().getCardShowedState(c, CARD_7)
-        val isShowCard8 = SettingsViewModel().getCardShowedState(c, CARD_8)
-        val isShowCard9 = SettingsViewModel().getCardShowedState(c, CARD_9)
-        val isShowCard10 = SettingsViewModel().getCardShowedState(c, CARD_10)
+        val isShowCard1 = SettingsViewModel().getCardShowedState(context, CARD_1)
+        val isShowCard2 = SettingsViewModel().getCardShowedState(context, CARD_2)
+        val isShowCard3 = SettingsViewModel().getCardShowedState(context, CARD_3)
+        val isShowCard4 = SettingsViewModel().getCardShowedState(context, CARD_4)
+        val isShowCard5 = SettingsViewModel().getCardShowedState(context, CARD_5)
+        val isShowCard6 = SettingsViewModel().getCardShowedState(context, CARD_6)
+        val isShowCard7 = SettingsViewModel().getCardShowedState(context, CARD_7)
+        val isShowCard8 = SettingsViewModel().getCardShowedState(context, CARD_8)
+        val isShowCard9 = SettingsViewModel().getCardShowedState(context, CARD_9)
+        val isShowCard10 = SettingsViewModel().getCardShowedState(context, CARD_10)
         var mIsShowCard1 by remember { mutableStateOf(isShowCard1) }
         var mIsShowCard2 by remember { mutableStateOf(isShowCard2) }
         var mIsShowCard3 by remember { mutableStateOf(isShowCard3) }
@@ -60,7 +60,7 @@ fun HideCardSettingCard() {
             isChecked = mIsShowCard1
         ) { newState ->
             mIsShowCard1 = newState
-            SettingsViewModel().saveCardShowedState(c, CARD_1, newState)
+            SettingsViewModel().saveCardShowedState(context, CARD_1, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.volume,
@@ -68,7 +68,7 @@ fun HideCardSettingCard() {
             isChecked = mIsShowCard2
         ) { newState ->
             mIsShowCard2 = newState
-            SettingsViewModel().saveCardShowedState(c, CARD_2, newState)
+            SettingsViewModel().saveCardShowedState(context, CARD_2, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.clipboard,
@@ -76,7 +76,7 @@ fun HideCardSettingCard() {
             isChecked = mIsShowCard3
         ) { newState ->
             mIsShowCard3 = newState
-            SettingsViewModel().saveCardShowedState(c, CARD_3, newState)
+            SettingsViewModel().saveCardShowedState(context, CARD_3, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.url,
@@ -84,7 +84,7 @@ fun HideCardSettingCard() {
             isChecked = mIsShowCard4
         ) { newState ->
             mIsShowCard4 = newState
-            SettingsViewModel().saveCardShowedState(c, CARD_4, newState)
+            SettingsViewModel().saveCardShowedState(context, CARD_4, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.social_media_profile,
@@ -92,7 +92,7 @@ fun HideCardSettingCard() {
             isChecked = mIsShowCard5
         ) { newState ->
             mIsShowCard5 = newState
-            SettingsViewModel().saveCardShowedState(c, CARD_5, newState)
+            SettingsViewModel().saveCardShowedState(context, CARD_5, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.android_system_settings,
@@ -100,7 +100,7 @@ fun HideCardSettingCard() {
             isChecked = mIsShowCard6
         ) { newState ->
             mIsShowCard6 = newState
-            SettingsViewModel().saveCardShowedState(c, CARD_6, newState)
+            SettingsViewModel().saveCardShowedState(context, CARD_6, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.unicode,
@@ -108,7 +108,7 @@ fun HideCardSettingCard() {
             isChecked = mIsShowCard7
         ) { newState ->
             mIsShowCard7 = newState
-            SettingsViewModel().saveCardShowedState(c, CARD_7, newState)
+            SettingsViewModel().saveCardShowedState(context, CARD_7, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.google_maps,
@@ -116,7 +116,7 @@ fun HideCardSettingCard() {
             isChecked = mIsShowCard8
         ) { newState ->
             mIsShowCard8 = newState
-            SettingsViewModel().saveCardShowedState(c, CARD_8, newState)
+            SettingsViewModel().saveCardShowedState(context, CARD_8, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_app_on_google_play,
@@ -124,7 +124,7 @@ fun HideCardSettingCard() {
             isChecked = mIsShowCard9
         ) { newState ->
             mIsShowCard9 = newState
-            SettingsViewModel().saveCardShowedState(c, CARD_9, newState)
+            SettingsViewModel().saveCardShowedState(context, CARD_9, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.android_versions,
@@ -132,14 +132,14 @@ fun HideCardSettingCard() {
             isChecked = mIsShowCard10
         ) { newState ->
             mIsShowCard10 = newState
-            SettingsViewModel().saveCardShowedState(c, CARD_10, newState)
+            SettingsViewModel().saveCardShowedState(context, CARD_10, newState)
         }
 
         CustomGroupDivider()
 
         Button(
             onClick = {
-                onClickChangeAllCardsButton(c, false)
+                onClickChangeAllCardsButton(context, false)
                 mIsShowCard1 = false
                 mIsShowCard2 = false
                 mIsShowCard3 = false
@@ -157,7 +157,7 @@ fun HideCardSettingCard() {
 
         Button(
             onClick = {
-                onClickChangeAllCardsButton(c, true)
+                onClickChangeAllCardsButton(context, true)
                 mIsShowCard1 = true
                 mIsShowCard2 = true
                 mIsShowCard3 = true

@@ -31,9 +31,9 @@ fun CustomDropdownMenu(
         onExpandedChange = { expanded = !expanded },
         modifier = Modifier.fillMaxWidth()
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
-        val mSelectedPosition = SettingsViewModel().getLastTimeSelectedSocialPlatform(c)
+        val mSelectedPosition = SettingsViewModel().getLastTimeSelectedSocialPlatform(context)
         var selectedPosition by remember { mutableIntStateOf(mSelectedPosition) }
 
         OutlinedTextField(
@@ -61,7 +61,7 @@ fun CustomDropdownMenu(
                     onClick = {
                         selectedPosition = index
                         onItemSelected(index)
-                        SettingsViewModel().saveSelectedSocialPlatform(c, index)
+                        SettingsViewModel().saveSelectedSocialPlatform(context, index)
                         expanded = false
                     }
                 )

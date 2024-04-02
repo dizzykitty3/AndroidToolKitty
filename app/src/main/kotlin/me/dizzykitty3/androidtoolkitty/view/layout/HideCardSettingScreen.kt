@@ -11,11 +11,11 @@ private const val CARD_6 = "card_android_system_settings"
 
 @Composable
 fun HideCardSettingScreen() {
-    val c = LocalContext.current
+    val context = LocalContext.current
     CustomScreen {
         HideCardSettingCard()
 
-        if (SettingsViewModel().getCardShowedState(c, CARD_6)) {
+        if (SettingsViewModel().getCardShowedState(context, CARD_6)) {
             HideAndroidSystemSettingsOptionCard()
         }
     }

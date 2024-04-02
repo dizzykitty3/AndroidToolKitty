@@ -173,7 +173,7 @@ fun CustomDeveloperProfileLink(
     name: String
 ) {
     Row {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
         Icon(
             imageVector = Icons.Outlined.AccountCircle,
@@ -184,7 +184,7 @@ fun CustomDeveloperProfileLink(
 
         Row(
             modifier = Modifier.clickable {
-                IntentUtils(c).openUrl("${UrlUtils.getProfilePrefix(UrlUtils.Platform.GITHUB)}$name")
+                IntentUtils(context).openUrl("${UrlUtils.getProfilePrefix(UrlUtils.Platform.GITHUB)}$name")
             }
         ) {
             Text(

@@ -27,17 +27,17 @@ fun HideAndroidSystemSettingsOptionCard() {
     CustomCardNoIcon(
         title = R.string.customize_system_settings_card
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
-        val isShowSetting1 = SettingsViewModel().getCardShowedState(c, SETTING_1)
-        val isShowSetting2 = SettingsViewModel().getCardShowedState(c, SETTING_2)
-        val isShowSetting3 = SettingsViewModel().getCardShowedState(c, SETTING_3)
-        val isShowSetting4 = SettingsViewModel().getCardShowedState(c, SETTING_4)
-        val isShowSetting5 = SettingsViewModel().getCardShowedState(c, SETTING_5)
-        val isShowSetting6 = SettingsViewModel().getCardShowedState(c, SETTING_6)
-        val isShowSetting7 = SettingsViewModel().getCardShowedState(c, SETTING_7)
-        val isShowSetting8 = SettingsViewModel().getCardShowedState(c, SETTING_8)
-        val isShowSetting9 = SettingsViewModel().getCardShowedState(c, SETTING_9)
+        val isShowSetting1 = SettingsViewModel().getCardShowedState(context, SETTING_1)
+        val isShowSetting2 = SettingsViewModel().getCardShowedState(context, SETTING_2)
+        val isShowSetting3 = SettingsViewModel().getCardShowedState(context, SETTING_3)
+        val isShowSetting4 = SettingsViewModel().getCardShowedState(context, SETTING_4)
+        val isShowSetting5 = SettingsViewModel().getCardShowedState(context, SETTING_5)
+        val isShowSetting6 = SettingsViewModel().getCardShowedState(context, SETTING_6)
+        val isShowSetting7 = SettingsViewModel().getCardShowedState(context, SETTING_7)
+        val isShowSetting8 = SettingsViewModel().getCardShowedState(context, SETTING_8)
+        val isShowSetting9 = SettingsViewModel().getCardShowedState(context, SETTING_9)
         var mIsShowSetting1 by remember { mutableStateOf(isShowSetting1) }
         var mIsShowSetting2 by remember { mutableStateOf(isShowSetting2) }
         var mIsShowSetting3 by remember { mutableStateOf(isShowSetting3) }
@@ -53,7 +53,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             isChecked = mIsShowSetting1
         ) { newState ->
             mIsShowSetting1 = newState
-            SettingsViewModel().saveCardShowedState(c, SETTING_1, newState)
+            SettingsViewModel().saveCardShowedState(context, SETTING_1, newState)
         }
         if (OsVersion.android12()) {
             CustomHideCardSettingSwitch(
@@ -62,7 +62,7 @@ fun HideAndroidSystemSettingsOptionCard() {
                 isChecked = mIsShowSetting2
             ) { newState ->
                 mIsShowSetting2 = newState
-                SettingsViewModel().saveCardShowedState(c, SETTING_2, newState)
+                SettingsViewModel().saveCardShowedState(context, SETTING_2, newState)
             }
         }
         CustomHideCardSettingSwitch(
@@ -71,7 +71,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             isChecked = mIsShowSetting3
         ) { newState ->
             mIsShowSetting3 = newState
-            SettingsViewModel().saveCardShowedState(c, SETTING_3, newState)
+            SettingsViewModel().saveCardShowedState(context, SETTING_3, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_default_apps_settings,
@@ -79,7 +79,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             isChecked = mIsShowSetting4
         ) { newState ->
             mIsShowSetting4 = newState
-            SettingsViewModel().saveCardShowedState(c, SETTING_4, newState)
+            SettingsViewModel().saveCardShowedState(context, SETTING_4, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_battery_optimization_settings,
@@ -87,7 +87,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             isChecked = mIsShowSetting5
         ) { newState ->
             mIsShowSetting5 = newState
-            SettingsViewModel().saveCardShowedState(c, SETTING_5, newState)
+            SettingsViewModel().saveCardShowedState(context, SETTING_5, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_caption_preferences,
@@ -95,7 +95,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             isChecked = mIsShowSetting6
         ) { newState ->
             mIsShowSetting6 = newState
-            SettingsViewModel().saveCardShowedState(c, SETTING_6, newState)
+            SettingsViewModel().saveCardShowedState(context, SETTING_6, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_language_settings,
@@ -103,7 +103,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             isChecked = mIsShowSetting7
         ) { newState ->
             mIsShowSetting7 = newState
-            SettingsViewModel().saveCardShowedState(c, SETTING_7, newState)
+            SettingsViewModel().saveCardShowedState(context, SETTING_7, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_date_and_time_settings,
@@ -111,7 +111,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             isChecked = mIsShowSetting8
         ) { newState ->
             mIsShowSetting8 = newState
-            SettingsViewModel().saveCardShowedState(c, SETTING_8, newState)
+            SettingsViewModel().saveCardShowedState(context, SETTING_8, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_developer_options,
@@ -119,7 +119,7 @@ fun HideAndroidSystemSettingsOptionCard() {
             isChecked = mIsShowSetting9
         ) { newState ->
             mIsShowSetting9 = newState
-            SettingsViewModel().saveCardShowedState(c, SETTING_9, newState)
+            SettingsViewModel().saveCardShowedState(context, SETTING_9, newState)
         }
     }
 }

@@ -40,11 +40,11 @@ fun SocialMediaProfileCard() {
         icon = Icons.Outlined.Person,
         title = R.string.social_media_profile
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
         var username by remember { mutableStateOf("") }
 
-        val platformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(c)
+        val platformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(context)
         var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
 
         val platformList = UrlUtils.Platform.entries.map { stringResource(it.nameResId) }
@@ -79,7 +79,7 @@ fun SocialMediaProfileCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { onVisitProfileButton(c, username, mPlatformIndex) }
+                onDone = { onVisitProfileButton(context, username, mPlatformIndex) }
             ),
             supportingText = {
                 if (mPlatformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
@@ -96,7 +96,7 @@ fun SocialMediaProfileCard() {
         )
 
         TextButton(
-            onClick = { onVisitProfileButton(c, username, mPlatformIndex) }
+            onClick = { onVisitProfileButton(context, username, mPlatformIndex) }
         ) {
             Text(text = stringResource(R.string.visit))
 

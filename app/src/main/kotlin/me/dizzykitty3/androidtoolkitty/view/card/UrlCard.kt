@@ -37,7 +37,7 @@ fun UrlCard() {
         icon = Icons.Outlined.Link,
         title = R.string.url
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
         var url by remember { mutableStateOf("") }
 
@@ -51,7 +51,7 @@ fun UrlCard() {
                 keyboardType = KeyboardType.Ascii
             ),
             keyboardActions = KeyboardActions(
-                onDone = { onClickVisitUrlButton(c, url) }
+                onDone = { onClickVisitUrlButton(context, url) }
             ),
             supportingText = {
                 Text(
@@ -75,7 +75,7 @@ fun UrlCard() {
         )
 
         TextButton(
-            onClick = { onClickVisitUrlButton(c, url) }
+            onClick = { onClickVisitUrlButton(context, url) }
         ) {
             Text(text = stringResource(R.string.visit))
 

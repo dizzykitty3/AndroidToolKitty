@@ -35,7 +35,7 @@ fun OpenAppOnPlayStoreCard() {
         icon = Icons.Outlined.Shop,
         title = R.string.open_app_on_google_play
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
         var packageName by remember { mutableStateOf("") }
 
@@ -48,7 +48,7 @@ fun OpenAppOnPlayStoreCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { IntentUtils(c).openAppOnMarket(packageName) }
+                onDone = { IntentUtils(context).openAppOnMarket(packageName) }
             )
         )
 
@@ -66,7 +66,7 @@ fun OpenAppOnPlayStoreCard() {
 
             Row(
                 modifier = Modifier.clickable(
-                    onClick = { IntentUtils(c).openUrl(linkUrl) }
+                    onClick = { IntentUtils(context).openUrl(linkUrl) }
                 )
             ) {
                 Text(
@@ -81,7 +81,7 @@ fun OpenAppOnPlayStoreCard() {
             }
         }
         TextButton(
-            onClick = { IntentUtils(c).openAppOnMarket(packageName) }
+            onClick = { IntentUtils(context).openAppOnMarket(packageName) }
         ) {
             Text(text = stringResource(R.string.open_on_google_play))
 
@@ -93,7 +93,7 @@ fun OpenAppOnPlayStoreCard() {
         }
 
         TextButton(
-            onClick = { IntentUtils(c).openAppOnMarket(packageName, false) }
+            onClick = { IntentUtils(context).openAppOnMarket(packageName, false) }
         ) {
             Text(text = stringResource(R.string.open_on_other_markets))
 

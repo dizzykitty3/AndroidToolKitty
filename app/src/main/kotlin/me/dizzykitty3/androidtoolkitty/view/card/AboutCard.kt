@@ -28,7 +28,7 @@ fun AboutCard() {
     CustomCardNoIcon(
         title = R.string.about
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
 
         CustomDeveloperProfileLink("dizzykitty3")
 
@@ -48,8 +48,8 @@ fun AboutCard() {
 
             Row(
                 modifier = Modifier.clickable {
-                    ToastUtils(c).showToast(c.getString(R.string.all_help_welcomed))
-                    IntentUtils(c).openUrl(sourceCodeUrl)
+                    ToastUtils(context).showToast(context.getString(R.string.all_help_welcomed))
+                    IntentUtils(context).openUrl(sourceCodeUrl)
                 }
             ) {
                 Text(
