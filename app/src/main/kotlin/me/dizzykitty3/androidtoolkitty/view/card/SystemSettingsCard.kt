@@ -57,11 +57,13 @@ fun SystemSettingsCard() {
             }
         }
 
-        val isShowGroupTitle1 =
-            settings.subList(0, 6).any { setting -> isShowSetting[setting.settingType] == true }
+        val isShowGroupTitle1 = settings.subList(0, 6).any { setting ->
+            isShowSetting[setting.settingType] == true
+        }
 
-        val isShowGroupTitle2 = settings.subList(6, settings.size)
-            .any { setting -> isShowSetting[setting.settingType] == true }
+        val isShowGroupTitle2 = settings.subList(6, settings.size).any { setting ->
+            isShowSetting[setting.settingType] == true
+        }
 
         if (!checkIsAutoTime(context)) CustomTip(resId = R.string.set_time_automatically_is_off_tip)
 

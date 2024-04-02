@@ -200,7 +200,6 @@ fun CustomDeveloperProfileLink(
             )
         }
     }
-
     CustomSpacerPadding()
 }
 
@@ -212,6 +211,5 @@ fun CustomGroupTitleText(
         text = stringResource(id = resId),
         style = MaterialTheme.typography.titleMedium
     )
-
     CustomSpacerPadding()
 }

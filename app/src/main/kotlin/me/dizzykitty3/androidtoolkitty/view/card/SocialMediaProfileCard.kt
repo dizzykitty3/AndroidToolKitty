@@ -48,9 +48,7 @@ fun SocialMediaProfileCard() {
         var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
 
         val platformList = UrlUtils.Platform.entries.map { stringResource(it.nameResId) }
-        if (mPlatformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-            CustomTip(resId = R.string.temp2)
-        }
+        if (mPlatformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) CustomTip(resId = R.string.temp2)
 
         CustomDropdownMenu(
             items = platformList,

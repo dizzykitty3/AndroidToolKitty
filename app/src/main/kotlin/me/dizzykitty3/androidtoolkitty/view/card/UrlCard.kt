@@ -78,7 +78,6 @@ fun UrlCard() {
             onClick = { onClickVisitUrlButton(context, url) }
         ) {
             Text(text = stringResource(R.string.visit))
-
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,

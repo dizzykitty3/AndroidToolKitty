@@ -51,9 +51,7 @@ fun OpenAppOnPlayStoreCard() {
                 onDone = { IntentUtils(context).openAppOnMarket(packageName) }
             )
         )
-
         CustomSpacerPadding()
-
         Row {
             val linkUrl = "https://support.google.com/admob/answer/9972781"
 
@@ -73,7 +71,6 @@ fun OpenAppOnPlayStoreCard() {
                     text = stringResource(R.string.package_name),
                     textDecoration = TextDecoration.Underline
                 )
-
                 Icon(
                     imageVector = Icons.Outlined.ArrowOutward,
                     contentDescription = stringResource(R.string.content_description_link_icon_whats_package_name)
@@ -84,7 +81,6 @@ fun OpenAppOnPlayStoreCard() {
             onClick = { IntentUtils(context).openAppOnMarket(packageName) }
         ) {
             Text(text = stringResource(R.string.open_on_google_play))
-
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
@@ -96,7 +92,6 @@ fun OpenAppOnPlayStoreCard() {
             onClick = { IntentUtils(context).openAppOnMarket(packageName, false) }
         ) {
             Text(text = stringResource(R.string.open_on_other_markets))
-
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,

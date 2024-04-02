@@ -29,9 +29,7 @@ fun CustomHideCardSettingSwitch(
         }
     ) {
         Text(text = stringResource(id = resId))
-
         Spacer(modifier = Modifier.weight(1f))
-
         Switch(
             checked = isChecked,
             onCheckedChange = onCheckedChange

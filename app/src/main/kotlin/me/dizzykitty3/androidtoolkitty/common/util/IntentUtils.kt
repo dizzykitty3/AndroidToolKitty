@@ -77,6 +77,7 @@ class IntentUtils(private val context: Context) {
                 ToastUtils(context).showToast(context.getString(R.string.google_play_not_installed))
                 debugLog("Google Play not installed")
             }
+
             GOOGLE_MAPS -> {
                 ToastUtils(context).showToast(context.getString(R.string.google_maps_not_installed))
                 debugLog("Google Maps not installed")

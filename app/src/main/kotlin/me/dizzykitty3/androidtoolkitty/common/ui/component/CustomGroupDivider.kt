@@ -8,4 +8,5 @@ fun CustomGroupDivider() {
     CustomSpacerPadding()
     HorizontalDivider()
     CustomSpacerPadding()
+    CustomSpacerPadding()
 }

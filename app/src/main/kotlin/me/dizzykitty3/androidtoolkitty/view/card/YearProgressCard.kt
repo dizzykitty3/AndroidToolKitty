@@ -16,7 +16,6 @@ import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAnimatedProgressIndicator
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.common.util.DateUtils.calculateDaysPassed
 import me.dizzykitty3.androidtoolkitty.common.util.DateUtils.calculateTotalDaysInYear
 import me.dizzykitty3.androidtoolkitty.common.util.DateUtils.calculateYearProgress
@@ -35,11 +34,7 @@ fun YearProgressCard() {
         Column(
             modifier = Modifier.clickable { isShowPercentage = !isShowPercentage }
         ) {
-            CustomSpacerPadding()
-
             CustomAnimatedProgressIndicator()
-
-            CustomSpacerPadding()
 
             val textToShow =
                 if (isShowPercentage)

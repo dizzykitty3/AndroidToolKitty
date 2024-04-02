@@ -59,9 +59,7 @@ fun SettingsCard(navController: NavHostController) {
             }
         ) {
             Text(text = stringResource(R.string.clear_clipboard_on_launch))
-
             Spacer(modifier = Modifier.weight(1f))
-
             Switch(
                 checked = mAutoClearClipboard,
                 onCheckedChange = {
@@ -79,9 +77,7 @@ fun SettingsCard(navController: NavHostController) {
             }
         ) {
             Text(text = stringResource(R.string.set_slider_increment_5))
-
             Spacer(modifier = Modifier.weight(1f))
-
             Switch(
                 checked = mVolumeSlideSteps,
                 onCheckedChange = {
@@ -131,7 +127,6 @@ fun SettingsCard(navController: NavHostController) {
         }
 
         CustomGroupDivider()
-
         CustomGroupTitleText(R.string.customize)
 
         Button(
@@ -140,7 +135,6 @@ fun SettingsCard(navController: NavHostController) {
         }
 
         CustomGroupDivider()
-
         CustomGroupTitleText(R.string.debugging)
 
         CustomAlertDialogButton(

@@ -28,24 +28,20 @@ fun AboutCard() {
     CustomCardNoIcon(
         title = R.string.about
     ) {
-        val context = LocalContext.current
-
         CustomDeveloperProfileLink("dizzykitty3")
-
         CustomDeveloperProfileLink("HongjieCN")
 
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
+            val context = LocalContext.current
             val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
 
             Icon(
                 imageVector = Icons.Outlined.Code,
                 contentDescription = null
             )
-
             CustomIconAndTextPadding()
-
             Row(
                 modifier = Modifier.clickable {
                     ToastUtils(context).showToast(context.getString(R.string.all_help_welcomed))
@@ -64,17 +60,13 @@ fun AboutCard() {
                 )
             }
         }
-
         CustomSpacerPadding()
-
         Row {
             Icon(
                 imageVector = Icons.Outlined.Schedule,
                 contentDescription = null
             )
-
             CustomIconAndTextPadding()
-
             Text(text = "${stringResource(R.string.version)} ${stringResource(R.string.version_number)}")
         }
     }

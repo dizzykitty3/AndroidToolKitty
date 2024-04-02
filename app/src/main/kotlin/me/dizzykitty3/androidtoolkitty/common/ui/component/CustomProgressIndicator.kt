@@ -28,10 +28,12 @@ fun CustomAnimatedProgressIndicator() {
     Column(
         modifier = Modifier.fillMaxWidth()
     ) {
+        CustomSpacerPadding()
         LinearProgressIndicator(
             progress = { progress.value },
             trackColor = MaterialTheme.colorScheme.surfaceContainer,
             modifier = Modifier.fillMaxWidth()
         )
+        CustomSpacerPadding()
     }
 }

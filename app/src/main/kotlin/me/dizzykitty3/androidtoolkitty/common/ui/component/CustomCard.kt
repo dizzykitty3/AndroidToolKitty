@@ -43,9 +43,7 @@ fun CustomCard(
                             alignment = Alignment.CenterVertically
                         )
                     )
-
                     CustomIconAndTextPadding()
-
                     CardTitle(resId = title)
                 }
                 CardContentColumn { content() }
@@ -74,9 +72,7 @@ private fun CardContentColumn(
 ) {
     Column {
         CustomSpacerPadding()
-
         CustomSpacerPadding()
-
         Column {
             val lifecycleOwner = LocalLifecycleOwner.current
             val focusManager = LocalFocusManager.current
