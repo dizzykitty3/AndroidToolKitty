@@ -6,6 +6,8 @@ import android.provider.Settings
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
@@ -13,7 +15,6 @@ import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
-import me.dizzykitty3.androidtoolkitty.common.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 private const val SETTING_1 = "setting_display"
@@ -32,90 +33,68 @@ fun SystemSettingsCard() {
         icon = Icons.Outlined.Settings,
         title = R.string.android_system_settings
     ) {
-        val c = LocalContext.current
+        val context = LocalContext.current
+        val settingsViewModel = remember { SettingsViewModel() }
 
-        val isShowSetting1 = SettingsViewModel().getCardShowedState(c, SETTING_1)
-        val isShowSetting2 = SettingsViewModel().getCardShowedState(c, SETTING_2)
-        val isShowSetting3 = SettingsViewModel().getCardShowedState(c, SETTING_3)
-        val isShowSetting4 = SettingsViewModel().getCardShowedState(c, SETTING_4)
-        val isShowSetting5 = SettingsViewModel().getCardShowedState(c, SETTING_5)
-        val isShowSetting6 = SettingsViewModel().getCardShowedState(c, SETTING_6)
-        val isShowSetting7 = SettingsViewModel().getCardShowedState(c, SETTING_7)
-        val isShowSetting8 = SettingsViewModel().getCardShowedState(c, SETTING_8)
-        val isShowSetting9 = SettingsViewModel().getCardShowedState(c, SETTING_9)
-        if (!checkIsAutoTime(c)) {
-            CustomTip(resId = R.string.set_time_automatically_is_off_tip)
+        val settings = listOf(
+            Setting(SETTING_1, R.string.open_display_settings),
+            Setting(SETTING_2, R.string.open_auto_rotate_settings),
+            Setting(SETTING_3, R.string.open_bluetooth_settings),
+            Setting(SETTING_4, R.string.open_default_apps_settings),
+            Setting(SETTING_5, R.string.open_battery_optimization_settings),
+            Setting(SETTING_6, R.string.open_caption_preferences),
+            Setting(SETTING_7, R.string.open_language_settings),
+            Setting(SETTING_8, R.string.open_date_and_time_settings),
+            Setting(SETTING_9, R.string.open_developer_options)
+        )
+
+        val isShowSetting = remember {
+            mutableStateMapOf<String, Boolean>().apply {
+                settings.forEach { setting ->
+                    this[setting.settingType] =
+                        settingsViewModel.getCardShowedState(context, setting.settingType)
+                }
+            }
         }
-        if (isShowSetting1 || isShowSetting2 || isShowSetting3 || isShowSetting4 || isShowSetting5 || isShowSetting6) {
-            CustomGroupTitleText(R.string.common)
+
+        val isShowGroupTitle1 =
+            settings.subList(0, 6).any { setting -> isShowSetting[setting.settingType] == true }
+
+        val isShowGroupTitle2 = settings.subList(6, settings.size)
+            .any { setting -> isShowSetting[setting.settingType] == true }
+
+        if (!checkIsAutoTime(context)) CustomTip(resId = R.string.set_time_automatically_is_off_tip)
+
+        if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
+
+        settings.subList(0, 6).forEach { setting ->
+            if (isShowSetting[setting.settingType] == true) {
+                CustomSystemSettingsButton(
+                    settingType = setting.settingType,
+                    buttonText = setting.buttonText
+                )
+            }
         }
-        if (isShowSetting1) {
-            CustomSystemSettingsButton(
-                settingType = "display",
-                buttonText = R.string.open_display_settings
-            )
-        }
-        if (isShowSetting2 && OsVersion.android12()) {
-            CustomSystemSettingsButton(
-                settingType = "auto_rotate",
-                buttonText = R.string.open_auto_rotate_settings
-            )
-        }
-        if (isShowSetting3) {
-            CustomSystemSettingsButton(
-                settingType = "bluetooth",
-                buttonText = R.string.open_bluetooth_settings
-            )
-        }
-        if (isShowSetting4) {
-            CustomSystemSettingsButton(
-                settingType = "manage_default_apps",
-                buttonText = R.string.open_default_apps_settings
-            )
-        }
-        if (isShowSetting5) {
-            CustomSystemSettingsButton(
-                settingType = "ignore_battery_optimization",
-                buttonText = R.string.open_battery_optimization_settings
-            )
-        }
-        if (isShowSetting6) {
-            CustomSystemSettingsButton(
-                settingType = "captioning",
-                buttonText = R.string.open_caption_preferences
-            )
-        }
-        if ((isShowSetting1 || isShowSetting2 || isShowSetting3 || isShowSetting4 || isShowSetting5 || isShowSetting6)
-            && (isShowSetting7 || isShowSetting8 || isShowSetting9)
-        ) {
-            CustomGroupDivider()
-        }
-        if (isShowSetting7 || isShowSetting8 || isShowSetting9) {
-            CustomGroupTitleText(R.string.debugging)
-        }
-        if (isShowSetting7) {
-            CustomSystemSettingsButton(
-                settingType = "locale",
-                buttonText = R.string.open_language_settings
-            )
-        }
-        if (isShowSetting8) {
-            CustomSystemSettingsButton(
-                settingType = "date",
-                buttonText = R.string.open_date_and_time_settings
-            )
-        }
-        if (isShowSetting9) {
-            CustomSystemSettingsButton(
-                settingType = "development_settings",
-                buttonText = R.string.open_developer_options
-            )
+
+        if (isShowGroupTitle1 && isShowGroupTitle2) CustomGroupDivider()
+
+        if (isShowGroupTitle2) CustomGroupTitleText(R.string.debugging)
+
+        settings.subList(6, settings.size).forEach { setting ->
+            if (isShowSetting[setting.settingType] == true) {
+                CustomSystemSettingsButton(
+                    settingType = setting.settingType,
+                    buttonText = setting.buttonText
+                )
+            }
         }
     }
 }
 
-private fun checkIsAutoTime(c: Context): Boolean {
-    val contentResolver: ContentResolver = c.contentResolver
+private fun checkIsAutoTime(context: Context): Boolean {
+    val contentResolver: ContentResolver = context.contentResolver
     val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
     return isAutoTime == 1
 }
+
+data class Setting(val settingType: String, val buttonText: Int)
