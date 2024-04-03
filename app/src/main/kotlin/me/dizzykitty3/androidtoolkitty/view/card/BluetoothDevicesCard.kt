@@ -23,6 +23,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 
+@SuppressLint("MissingPermission")
 @Composable
 fun BluetoothDevicesCard() {
     CustomCardNoIcon(title = R.string.bluetooth_devices) {
