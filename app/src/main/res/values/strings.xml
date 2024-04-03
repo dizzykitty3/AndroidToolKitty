@@ -110,4 +110,5 @@
     <string name="le">LE</string>
     <string name="dual">Dual</string>
     <string name="unknown">Unknown</string>
+    <string name="no_paired_devices">No paired devices.</string>
 </resources>

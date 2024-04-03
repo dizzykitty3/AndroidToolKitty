@@ -34,6 +34,8 @@ fun BluetoothDevicesCard() {
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }
         var pairedDevices by remember { mutableStateOf<Set<BluetoothDevice>>(emptySet()) }
 
+        var size by remember { mutableStateOf(0) }
+
         Button(
             onClick = {
                 // Check permission
@@ -49,6 +51,7 @@ fun BluetoothDevicesCard() {
                 // Show current device name and paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {
                     pairedDevices = bluetoothAdapter!!.bondedDevices
+                    size = pairedDevices.size
                     showResult = true
                     return@Button
                 }
@@ -62,10 +65,14 @@ fun BluetoothDevicesCard() {
 
         if (showResult) {
             Text(text = "${stringResource(id = R.string.current_device)}\n${bluetoothAdapter?.name}\n")
-            Text(text = stringResource(id = R.string.paired_devices))
-            pairedDevices.forEach { device ->
-                val deviceInfo = "${device.name} (${type(device.type)})\n${device.address}\n"
-                Text(text = deviceInfo)
+            if (size > 0) {
+                Text(text = stringResource(id = R.string.paired_devices))
+                pairedDevices.forEach { device ->
+                    val deviceInfo = "${device.name} (${type(device.type)})\n${device.address}\n"
+                    Text(text = deviceInfo)
+                }
+            } else {
+                Text(text = stringResource(id = R.string.no_paired_devices))
             }
         }
     }
