@@ -83,9 +83,9 @@ private fun type(type: Int): String {
 
 private fun noPermission(context: Context): Boolean {
     return if (OsVersion.android12())
-        check(context, BLE_CONNECT)
+        check(context, BT_CONNECT)
     else
-        check(context, BLE) || check(context, BLE_ADMIN)
+        check(context, BT) || check(context, BT_ADMIN)
 }
 
 private fun check(context: Context, permission: String): Boolean {
@@ -94,10 +94,10 @@ private fun check(context: Context, permission: String): Boolean {
 
 private fun requestPermission(context: Context) {
     if (OsVersion.android12()) {
-        request(context, arrayOf(BLE_CONNECT))
+        request(context, arrayOf(BT_CONNECT))
         return
     }
-    request(context, arrayOf(BLE, BLE_ADMIN))
+    request(context, arrayOf(BT, BT_ADMIN))
 }
 
 private fun request(context: Context, permission: Array<String>) {
@@ -105,7 +105,7 @@ private fun request(context: Context, permission: Array<String>) {
 }
 
 @SuppressLint("InlinedApi")
-private const val BLE_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
-private const val BLE = Manifest.permission.BLUETOOTH
-private const val BLE_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
+private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
+private const val BT = Manifest.permission.BLUETOOTH
+private const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
 private const val GRANTED = PackageManager.PERMISSION_GRANTED
