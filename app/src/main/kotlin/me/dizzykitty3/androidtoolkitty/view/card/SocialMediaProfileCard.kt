@@ -107,15 +107,15 @@ fun SocialMediaProfileCard() {
     }
 }
 
-private fun onVisitProfileButton(c: Context, username: String, platformIndex: Int) {
+private fun onVisitProfileButton(context: Context, username: String, platformIndex: Int) {
     if (username.isBlank()) return
 
     val platform = TUrl.Platform.entries.getOrNull(platformIndex) ?: return
 
     if (platform == TUrl.Platform.PLATFORM_NOT_ADDED_YET) {
-        ToastService(c).toastAndLog(
-            "${c.getString(R.string.platform)}: \"$username\" ${
-                c.getString(
+        ToastService(context).toastAndLog(
+            "${context.getString(R.string.platform)}: \"$username\" ${
+                context.getString(
                     R.string.uploaded
                 )
             }"
@@ -124,6 +124,6 @@ private fun onVisitProfileButton(c: Context, username: String, platformIndex: In
     }
 
     val prefix = platform.prefix
-    IntentService(c).openUrl("$prefix${TString.dropSpaces(username)}")
+    IntentService(context).openUrl("$prefix${TString.dropSpaces(username)}")
     debugLog("onVisitProfile")
 }

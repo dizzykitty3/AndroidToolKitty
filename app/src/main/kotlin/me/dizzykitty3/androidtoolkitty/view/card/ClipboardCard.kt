@@ -37,7 +37,7 @@ fun ClipboardCard() {
     }
 }
 
-private fun onClearClipboardButton(c: Context) {
-    ClipboardService(c).clear()
-    ToastService(c).toastAndLog(c.getString(R.string.clipboard_cleared))
+private fun onClearClipboardButton(context: Context) {
+    ClipboardService(context).clear()
+    ToastService(context).toastAndLog(context.getString(R.string.clipboard_cleared))
 }

@@ -87,9 +87,9 @@ fun UrlCard() {
     }
 }
 
-private fun onClickVisitUrlButton(c: Context, url: String) {
+private fun onClickVisitUrlButton(context: Context, url: String) {
     if (url.isBlank()) return
 
-    IntentService(c).openUrl(TUrl.processUrl(TString.dropSpaces(url)))
+    IntentService(context).openUrl(TUrl.processUrl(TString.dropSpaces(url)))
     debugLog("onClickVisitButton")
 }

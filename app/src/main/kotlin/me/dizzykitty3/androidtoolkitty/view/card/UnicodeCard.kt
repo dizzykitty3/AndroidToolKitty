@@ -76,7 +76,7 @@ fun UnicodeCard() {
 }
 
 private fun onClickConvertButton(
-    c: Context,
+    context: Context,
     unicode: String,
     characterField: MutableState<String>
 ) {
@@ -85,9 +85,9 @@ private fun onClickConvertButton(
     try {
         val result = TString.unicodeToCharacter(unicode)
         characterField.value = result
-        ClipboardService(c).copy(result)
+        ClipboardService(context).copy(result)
     } catch (e: Exception) {
-        ToastService(c).toast(e.message ?: "Unknown error occurred")
+        ToastService(context).toast(e.message ?: "Unknown error occurred")
     }
     debugLog("onClickConvertButton")
 }

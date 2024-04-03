@@ -161,12 +161,12 @@ fun SettingsCard(navController: NavHostController) {
     }
 }
 
-private fun onClickDynamicColorButton(isDynamicColor: Boolean, c: Context) {
-    SettingsViewModel().setIsDynamicColor(c, isDynamicColor)
+private fun onClickDynamicColorButton(isDynamicColor: Boolean, context: Context) {
+    SettingsViewModel().setIsDynamicColor(context, isDynamicColor)
 
-    val intent = Intent(c, MainActivity::class.java)
+    val intent = Intent(context, MainActivity::class.java)
     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-    c.startActivity(intent)
+    context.startActivity(intent)
 
-    (c as Activity).finish()
+    (context as Activity).finish()
 }
