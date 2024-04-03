@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -91,6 +92,7 @@ private fun request(context: Context, permission: Array<String>) {
     ActivityCompat.requestPermissions(context as Activity, permission, 1)
 }
 
+@SuppressLint("InlinedApi")
 private const val BLE_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 private const val BLE = Manifest.permission.BLUETOOTH
 private const val BLE_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
