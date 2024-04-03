@@ -99,8 +99,12 @@
     <string name="show_less">收起</string>
     <string name="bluetooth_devices">蓝牙设备</string>
     <string name="bluetooth_disabled">蓝牙未开启</string>
-    <string name="show_paired_devices">显示已配对的设备</string>
+    <string name="show_paired_devices">查看已配对的设备</string>
     <string name="current_device">当前设备：</string>
     <string name="paired_devices">已配对的设备：</string>
     <string name="permission_not_granted">权限未取得</string>
+    <string name="classic">经典</string>
+    <string name="le">低功耗</string>
+    <string name="dual">双模</string>
+    <string name="unknown">未知</string>
 </resources>

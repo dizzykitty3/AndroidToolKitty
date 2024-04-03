@@ -106,4 +106,8 @@
     <string name="current_device">Current device:</string>
     <string name="paired_devices">Paired devices:</string>
     <string name="permission_not_granted">Permission not granted</string>
+    <string name="classic">Classic</string>
+    <string name="le">LE</string>
+    <string name="dual">Dual</string>
+    <string name="unknown">Unknown</string>
 </resources>

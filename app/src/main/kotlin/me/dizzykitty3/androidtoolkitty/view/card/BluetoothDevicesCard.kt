@@ -64,10 +64,20 @@ fun BluetoothDevicesCard() {
             Text(text = "${stringResource(id = R.string.current_device)}\n${bluetoothAdapter?.name}\n")
             Text(text = stringResource(id = R.string.paired_devices))
             pairedDevices.forEach { device ->
-                val deviceInfo = "${device.name} (${device.address})\n"
+                val deviceInfo = "${device.name} (${type(device.type)})\n${device.address}\n"
                 Text(text = deviceInfo)
             }
         }
+    }
+}
+
+@Composable
+private fun type(type: Int): String {
+    return when (type) {
+        1 -> stringResource(id = R.string.classic)
+        2 -> stringResource(id = R.string.le)
+        3 -> stringResource(id = R.string.dual)
+        else -> stringResource(id = R.string.unknown)
     }
 }
 
