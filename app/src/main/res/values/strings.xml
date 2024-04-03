@@ -69,7 +69,7 @@
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240402</string>
+    <string name="version_number" translatable="false">20240403</string>
     <string name="one_handed_mode">One-handed mode</string>
     <string name="volume">Volume</string>
     <string name="media_volume">Media volume</string>
@@ -101,4 +101,8 @@
     <string name="show_more">show more</string>
     <string name="show_less">show less</string>
     <string name="bluetooth_devices">Bluetooth devices</string>
+    <string name="bluetooth_disabled">Bluetooth disabled</string>
+    <string name="show_paired_devices">Show paired devices</string>
+    <string name="current_device">Current device:</string>
+    <string name="paired_devices">Paired devices:</string>
 </resources>

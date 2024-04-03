@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
@@ -34,6 +35,7 @@ fun BluetoothDevicesCard() {
         var pairedDevices by remember { mutableStateOf<Set<BluetoothDevice>>(emptySet()) }
 
         Button(onClick = {
+            // Check permission
             if (ActivityCompat.checkSelfPermission(
                     context,
                     permission
@@ -43,10 +45,12 @@ fun BluetoothDevicesCard() {
                 return@Button
             }
 
+            // Get system service
             val bluetoothManager =
                 context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
             bluetoothAdapter = bluetoothManager.adapter
 
+            // Show current device name and paired devices' name and MAC address
             if (bluetoothAdapter!!.isEnabled) {
                 pairedDevices = bluetoothAdapter!!.bondedDevices
                 if (!showName) showName = true
@@ -54,17 +58,19 @@ fun BluetoothDevicesCard() {
                 return@Button
             }
 
-            ToastUtils(context).showToast("ble disabled")
+            // When Bluetooth is OFF
+            ToastUtils(context).showToast(context.getString(R.string.bluetooth_disabled))
         }) {
-            Text(text = "show paired devices")
+            Text(text = stringResource(id = R.string.show_paired_devices))
         }
 
-        if (showName) Text(text = "current device:\n${bluetoothAdapter?.name}\naddress:${bluetoothAdapter?.address}\n")
+        if (showName)
+            Text(text = "${stringResource(id = R.string.current_device)}\n${bluetoothAdapter?.name}\n")
 
         if (showText) {
-            Text(text = "paired devices:")
+            Text(text = stringResource(id = R.string.paired_devices))
             pairedDevices.forEach { device ->
-                val deviceInfo = "Device Name: ${device.name}\nMAC Address: ${device.address}\n"
+                val deviceInfo = "${device.name} (${device.address})\n"
                 Text(text = deviceInfo)
             }
         }

@@ -43,7 +43,7 @@ fun AndroidVersionsCard() {
             Column(
                 modifier = Modifier.weight(0.6f)
             ) {
-                CustomAndroidApiLevelAndName(text = "VanillaIceCream")
+                CustomAndroidApiLevelAndName(text = "API 35, VanillaIceCream")
                 CustomAndroidApiLevelAndName(text = "API 34, UpsideDownCake")
                 CustomAndroidApiLevelAndName(text = "API 33, Tiramisu")
                 CustomAndroidApiLevelAndName(text = "API 32, Sv2")

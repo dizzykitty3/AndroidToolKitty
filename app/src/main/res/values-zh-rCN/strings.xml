@@ -98,4 +98,8 @@
     <string name="show_more">展开</string>
     <string name="show_less">收起</string>
     <string name="bluetooth_devices">Bluetooth devices</string>
+    <string name="bluetooth_disabled">Bluetooth disabled</string>
+    <string name="show_paired_devices">Show paired devices</string>
+    <string name="current_device">Current device:</string>
+    <string name="paired_devices">Paired devices:</string>
 </resources>
