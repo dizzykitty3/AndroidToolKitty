@@ -30,6 +30,8 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupTitleT
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
+private const val EDIT_HOME_PAGE_SCREEN = "EditHomePageScreen"
+
 @Composable
 fun SettingsCard(navController: NavHostController) {
     CustomCardNoIcon(
@@ -130,7 +132,7 @@ fun SettingsCard(navController: NavHostController) {
         CustomGroupTitleText(R.string.customize)
 
         Button(
-            onClick = { navController.navigate("HideCardSettingScreen") }) {
+            onClick = { navController.navigate(EDIT_HOME_PAGE_SCREEN) }) {
             Text(text = stringResource(R.string.customize_my_home_page))
         }
 

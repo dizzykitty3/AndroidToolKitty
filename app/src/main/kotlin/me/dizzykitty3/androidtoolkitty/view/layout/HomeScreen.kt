@@ -38,6 +38,9 @@ import me.dizzykitty3.androidtoolkitty.view.card.YearProgressCard
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 import java.util.Locale
 
+private const val SETTINGS_SCREEN = "SettingsScreen"
+private const val LUCKY_SPINNING_WHEEL_SCREEN = "LuckySpinningWheelScreen"
+private const val BLUETOOTH_DEVICES_SCREEN = "BluetoothDevicesScreen"
 private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"
 private const val CARD_3 = "card_clipboard"
@@ -66,7 +69,7 @@ fun HomeScreen(navController: NavHostController) {
 
             IconButton(
                 onClick = {
-                    navController.navigate("SettingsScreen")
+                    navController.navigate(SETTINGS_SCREEN)
                     settingsViewModel.setHaveOpenedSettingsScreen(context, true)
                 },
                 modifier = Modifier.size(40.dp)
@@ -123,12 +126,12 @@ fun HomeScreen(navController: NavHostController) {
 
         CustomCardNoIcon(title = R.string.test) {
             Button(
-                onClick = { navController.navigate("LuckySpinningWheelScreen") }
+                onClick = { navController.navigate(LUCKY_SPINNING_WHEEL_SCREEN) }
             ) {
                 Text(text = stringResource(R.string.lucky_spinning_wheel))
             }
             Button(
-                onClick = { navController.navigate("BluetoothDevicesScreen") }
+                onClick = { navController.navigate(BLUETOOTH_DEVICES_SCREEN) }
             ) {
                 Text(text = stringResource(id = R.string.bluetooth_devices))
             }

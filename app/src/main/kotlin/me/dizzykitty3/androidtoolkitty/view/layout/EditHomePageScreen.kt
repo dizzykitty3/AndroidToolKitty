@@ -10,7 +10,7 @@ import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 private const val CARD_6 = "card_android_system_settings"
 
 @Composable
-fun HideCardSettingScreen() {
+fun EditHomePageScreen() {
     val context = LocalContext.current
     CustomScreen {
         EditHomePageCard()
