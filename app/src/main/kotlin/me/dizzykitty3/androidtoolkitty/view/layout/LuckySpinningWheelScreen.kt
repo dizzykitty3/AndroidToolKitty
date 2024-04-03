@@ -26,8 +26,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomScreen
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomScreen
 import kotlin.math.cos
 import kotlin.math.sin
 

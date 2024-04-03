@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.common.ui.component
+package me.dizzykitty3.androidtoolkitty.foundation.ui_component
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding

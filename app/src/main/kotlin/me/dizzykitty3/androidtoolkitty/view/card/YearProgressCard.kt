@@ -14,12 +14,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAnimatedProgressIndicator
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.common.util.DateUtils.calculateDaysPassed
-import me.dizzykitty3.androidtoolkitty.common.util.DateUtils.calculateTotalDaysInYear
-import me.dizzykitty3.androidtoolkitty.common.util.DateUtils.calculateYearProgress
-import me.dizzykitty3.androidtoolkitty.common.util.DateUtils.displayYearProgressPercentage
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomAnimatedProgressIndicator
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TDate.daysPassed
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TDate.totalDaysInYear
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TDate.yearProgress
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TDate.yearProgressPercentage
 
 @Composable
 fun YearProgressCard() {
@@ -38,12 +38,12 @@ fun YearProgressCard() {
 
             val textToShow =
                 if (isShowPercentage)
-                    "${(displayYearProgressPercentage(calculateYearProgress()))}%"
+                    "${(yearProgressPercentage(yearProgress()))}%"
                 else
                     context.resources.getQuantityString(
                         R.plurals.days_remaining,
-                        (calculateTotalDaysInYear() - calculateDaysPassed()).toInt(),
-                        calculateTotalDaysInYear() - calculateDaysPassed()
+                        (totalDaysInYear() - daysPassed()).toInt(),
+                        totalDaysInYear() - daysPassed()
                     )
             Text(
                 text = textToShow,

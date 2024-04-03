@@ -18,8 +18,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
-import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
 
 @Composable
 fun BluetoothDevicesCard() {
@@ -36,8 +36,7 @@ fun BluetoothDevicesCard() {
 
         Button(onClick = {
             // Check permission
-            if (ActivityCompat.checkSelfPermission(
-                    context,
+            if (ActivityCompat.checkSelfPermission(context,
                     permission
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
@@ -59,7 +58,7 @@ fun BluetoothDevicesCard() {
             }
 
             // When Bluetooth is OFF
-            ToastUtils(context).showToast(context.getString(R.string.bluetooth_disabled))
+            ToastService(context).toast(context.getString(R.string.bluetooth_disabled))
         }) {
             Text(text = stringResource(id = R.string.show_paired_devices))
         }

@@ -3,7 +3,7 @@ package me.dizzykitty3.androidtoolkitty.viewmodel
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 
 class SettingsViewModel : ViewModel() {
     private fun getSharedPrefs(context: Context): SharedPreferences {

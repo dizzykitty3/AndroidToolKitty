@@ -10,11 +10,11 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupDivider
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupTitleText
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSystemSettingsButton
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupDivider
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupTitleText
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSystemSettingsButton
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 private const val SETTING_1 = "setting_display"

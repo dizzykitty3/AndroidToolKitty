@@ -22,12 +22,12 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomAlertDialogButton
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomBoldText
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupDivider
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupTitleText
-import me.dizzykitty3.androidtoolkitty.common.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomAlertDialogButton
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomBoldText
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupDivider
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupTitleText
+import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable

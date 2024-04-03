@@ -26,9 +26,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 
 @Composable
 fun GoogleMapsCard() {
@@ -91,9 +91,9 @@ fun GoogleMapsCard() {
     }
 }
 
-private fun onClickOpenGoogleMapsButton(c: Context, latitude: String, longitude: String) {
+private fun onClickOpenGoogleMapsButton(context: Context, latitude: String, longitude: String) {
     if (latitude.isBlank() || longitude.isBlank()) return
 
-    IntentUtils(c).openGoogleMaps(latitude, longitude)
+    IntentService(context).openGoogleMaps(latitude, longitude)
     debugLog("onClickOpenGoogleMapsButton")
 }

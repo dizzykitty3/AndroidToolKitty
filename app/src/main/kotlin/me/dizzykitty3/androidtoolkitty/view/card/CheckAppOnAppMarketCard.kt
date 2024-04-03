@@ -25,9 +25,9 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
 
 @Composable
 fun CheckAppOnAppMarketCard() {
@@ -48,7 +48,7 @@ fun CheckAppOnAppMarketCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { IntentUtils(context).openAppOnMarket(packageName) }
+                onDone = { IntentService(context).openAppOnMarket(packageName) }
             )
         )
         CustomSpacerPadding()
@@ -64,7 +64,7 @@ fun CheckAppOnAppMarketCard() {
 
             Row(
                 modifier = Modifier.clickable(
-                    onClick = { IntentUtils(context).openUrl(linkUrl) }
+                    onClick = { IntentService(context).openUrl(linkUrl) }
                 )
             ) {
                 Text(
@@ -78,7 +78,7 @@ fun CheckAppOnAppMarketCard() {
             }
         }
         TextButton(
-            onClick = { IntentUtils(context).openAppOnMarket(packageName) }
+            onClick = { IntentService(context).openAppOnMarket(packageName) }
         ) {
             Text(text = stringResource(R.string.open_on_google_play))
             Icon(
@@ -89,7 +89,7 @@ fun CheckAppOnAppMarketCard() {
         }
 
         TextButton(
-            onClick = { IntentUtils(context).openAppOnMarket(packageName, false) }
+            onClick = { IntentService(context).openAppOnMarket(packageName, false) }
         ) {
             Text(text = stringResource(R.string.open_on_other_markets))
             Icon(

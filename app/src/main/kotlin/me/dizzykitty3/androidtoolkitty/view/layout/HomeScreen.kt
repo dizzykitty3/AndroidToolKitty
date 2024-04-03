@@ -19,11 +19,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardSpacePadding
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomOneHandedModePadding
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomScreen
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardSpacePadding
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomOneHandedModePadding
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomScreen
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
 import me.dizzykitty3.androidtoolkitty.view.card.AndroidVersionsCard
 import me.dizzykitty3.androidtoolkitty.view.card.CheckAppOnAppMarketCard
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard

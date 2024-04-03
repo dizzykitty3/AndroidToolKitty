@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.common.ui.component
+package me.dizzykitty3.androidtoolkitty.foundation.ui_component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -33,8 +33,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
-import me.dizzykitty3.androidtoolkitty.common.util.UrlUtils
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 
 @Composable
 fun CustomGradientText(
@@ -138,9 +138,7 @@ fun CustomTip(
                 contentDescription = "Tip Icon",
                 modifier = Modifier.size(24.dp)
             )
-
             CustomIconAndTextPadding()
-
             Text(
                 text = formattedMessage,
                 style = MaterialTheme.typography.bodyMedium,
@@ -179,12 +177,10 @@ fun CustomDeveloperProfileLink(
             imageVector = Icons.Outlined.AccountCircle,
             contentDescription = null
         )
-
         CustomIconAndTextPadding()
-
         Row(
             modifier = Modifier.clickable {
-                IntentUtils(context).openUrl("${UrlUtils.getProfilePrefix(UrlUtils.Platform.GITHUB)}$name")
+                IntentService(context).openUrl("${TUrl.profilePrefix(TUrl.Platform.GITHUB)}$name")
             }
         ) {
             Text(

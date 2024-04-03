@@ -11,9 +11,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomGroupDivider
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomHideCardSettingSwitch
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupDivider
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 private const val CARD_1 = "card_year_progress"
@@ -33,17 +33,18 @@ fun EditHomePageCard() {
         title = R.string.customize_my_home_page
     ) {
         val context = LocalContext.current
+        val settingsViewModel = remember { SettingsViewModel() }
 
-        val isShowCard1 = SettingsViewModel().getCardShowedState(context, CARD_1)
-        val isShowCard2 = SettingsViewModel().getCardShowedState(context, CARD_2)
-        val isShowCard3 = SettingsViewModel().getCardShowedState(context, CARD_3)
-        val isShowCard4 = SettingsViewModel().getCardShowedState(context, CARD_4)
-        val isShowCard5 = SettingsViewModel().getCardShowedState(context, CARD_5)
-        val isShowCard6 = SettingsViewModel().getCardShowedState(context, CARD_6)
-        val isShowCard7 = SettingsViewModel().getCardShowedState(context, CARD_7)
-        val isShowCard8 = SettingsViewModel().getCardShowedState(context, CARD_8)
-        val isShowCard9 = SettingsViewModel().getCardShowedState(context, CARD_9)
-        val isShowCard10 = SettingsViewModel().getCardShowedState(context, CARD_10)
+        val isShowCard1 = settingsViewModel.getCardShowedState(context, CARD_1)
+        val isShowCard2 = settingsViewModel.getCardShowedState(context, CARD_2)
+        val isShowCard3 = settingsViewModel.getCardShowedState(context, CARD_3)
+        val isShowCard4 = settingsViewModel.getCardShowedState(context, CARD_4)
+        val isShowCard5 = settingsViewModel.getCardShowedState(context, CARD_5)
+        val isShowCard6 = settingsViewModel.getCardShowedState(context, CARD_6)
+        val isShowCard7 = settingsViewModel.getCardShowedState(context, CARD_7)
+        val isShowCard8 = settingsViewModel.getCardShowedState(context, CARD_8)
+        val isShowCard9 = settingsViewModel.getCardShowedState(context, CARD_9)
+        val isShowCard10 = settingsViewModel.getCardShowedState(context, CARD_10)
         var mIsShowCard1 by remember { mutableStateOf(isShowCard1) }
         var mIsShowCard2 by remember { mutableStateOf(isShowCard2) }
         var mIsShowCard3 by remember { mutableStateOf(isShowCard3) }
@@ -60,7 +61,7 @@ fun EditHomePageCard() {
             isChecked = mIsShowCard1
         ) { newState ->
             mIsShowCard1 = newState
-            SettingsViewModel().saveCardShowedState(context, CARD_1, newState)
+            settingsViewModel.saveCardShowedState(context, CARD_1, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.volume,
@@ -68,7 +69,7 @@ fun EditHomePageCard() {
             isChecked = mIsShowCard2
         ) { newState ->
             mIsShowCard2 = newState
-            SettingsViewModel().saveCardShowedState(context, CARD_2, newState)
+            settingsViewModel.saveCardShowedState(context, CARD_2, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.clipboard,
@@ -76,7 +77,7 @@ fun EditHomePageCard() {
             isChecked = mIsShowCard3
         ) { newState ->
             mIsShowCard3 = newState
-            SettingsViewModel().saveCardShowedState(context, CARD_3, newState)
+            settingsViewModel.saveCardShowedState(context, CARD_3, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.url,
@@ -84,7 +85,7 @@ fun EditHomePageCard() {
             isChecked = mIsShowCard4
         ) { newState ->
             mIsShowCard4 = newState
-            SettingsViewModel().saveCardShowedState(context, CARD_4, newState)
+            settingsViewModel.saveCardShowedState(context, CARD_4, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.social_media_profile,
@@ -92,7 +93,7 @@ fun EditHomePageCard() {
             isChecked = mIsShowCard5
         ) { newState ->
             mIsShowCard5 = newState
-            SettingsViewModel().saveCardShowedState(context, CARD_5, newState)
+            settingsViewModel.saveCardShowedState(context, CARD_5, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.android_system_settings,
@@ -100,7 +101,7 @@ fun EditHomePageCard() {
             isChecked = mIsShowCard6
         ) { newState ->
             mIsShowCard6 = newState
-            SettingsViewModel().saveCardShowedState(context, CARD_6, newState)
+            settingsViewModel.saveCardShowedState(context, CARD_6, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.unicode,
@@ -108,7 +109,7 @@ fun EditHomePageCard() {
             isChecked = mIsShowCard7
         ) { newState ->
             mIsShowCard7 = newState
-            SettingsViewModel().saveCardShowedState(context, CARD_7, newState)
+            settingsViewModel.saveCardShowedState(context, CARD_7, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.google_maps,
@@ -116,7 +117,7 @@ fun EditHomePageCard() {
             isChecked = mIsShowCard8
         ) { newState ->
             mIsShowCard8 = newState
-            SettingsViewModel().saveCardShowedState(context, CARD_8, newState)
+            settingsViewModel.saveCardShowedState(context, CARD_8, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_app_on_google_play,
@@ -124,7 +125,7 @@ fun EditHomePageCard() {
             isChecked = mIsShowCard9
         ) { newState ->
             mIsShowCard9 = newState
-            SettingsViewModel().saveCardShowedState(context, CARD_9, newState)
+            settingsViewModel.saveCardShowedState(context, CARD_9, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.android_versions,
@@ -132,7 +133,7 @@ fun EditHomePageCard() {
             isChecked = mIsShowCard10
         ) { newState ->
             mIsShowCard10 = newState
-            SettingsViewModel().saveCardShowedState(context, CARD_10, newState)
+            settingsViewModel.saveCardShowedState(context, CARD_10, newState)
         }
 
         CustomGroupDivider()

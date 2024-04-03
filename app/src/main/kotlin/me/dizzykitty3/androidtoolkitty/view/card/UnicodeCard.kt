@@ -21,12 +21,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomItalicText
-import me.dizzykitty3.androidtoolkitty.common.util.ClipboardUtils
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
-import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.ClipboardService
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 
 @Composable
 fun UnicodeCard() {
@@ -83,11 +83,11 @@ private fun onClickConvertButton(
     if (unicode.isBlank()) return
 
     try {
-        val result = StringUtils.convertUnicodeToCharacter(unicode)
+        val result = TString.unicodeToCharacter(unicode)
         characterField.value = result
-        ClipboardUtils(c).copyTextToClipboard(result)
+        ClipboardService(c).copy(result)
     } catch (e: Exception) {
-        ToastUtils(c).showToast(e.message ?: "Unknown error occurred")
+        ToastService(c).toast(e.message ?: "Unknown error occurred")
     }
     debugLog("onClickConvertButton")
 }

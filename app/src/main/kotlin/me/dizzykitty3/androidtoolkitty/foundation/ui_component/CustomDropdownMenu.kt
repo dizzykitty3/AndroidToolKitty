@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.common.ui.component
+package me.dizzykitty3.androidtoolkitty.foundation.ui_component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DropdownMenuItem
@@ -32,8 +32,9 @@ fun CustomDropdownMenu(
         modifier = Modifier.fillMaxWidth()
     ) {
         val context = LocalContext.current
+        val settingsViewModel = remember { SettingsViewModel() }
 
-        val mSelectedPosition = SettingsViewModel().getLastTimeSelectedSocialPlatform(context)
+        val mSelectedPosition = settingsViewModel.getLastTimeSelectedSocialPlatform(context)
         var selectedPosition by remember { mutableIntStateOf(mSelectedPosition) }
 
         OutlinedTextField(
@@ -61,7 +62,7 @@ fun CustomDropdownMenu(
                     onClick = {
                         selectedPosition = index
                         onItemSelected(index)
-                        SettingsViewModel().saveSelectedSocialPlatform(context, index)
+                        settingsViewModel.saveSelectedSocialPlatform(context, index)
                         expanded = false
                     }
                 )

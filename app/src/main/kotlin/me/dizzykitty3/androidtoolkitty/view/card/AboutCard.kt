@@ -15,12 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCardNoIcon
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomDeveloperProfileLink
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomIconAndTextPadding
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
-import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomDeveloperProfileLink
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
 
 @Suppress("SpellCheckingInspection")
 @Composable
@@ -44,8 +44,8 @@ fun AboutCard() {
             CustomIconAndTextPadding()
             Row(
                 modifier = Modifier.clickable {
-                    ToastUtils(context).showToast(context.getString(R.string.all_help_welcomed))
-                    IntentUtils(context).openUrl(sourceCodeUrl)
+                    ToastService(context).toast(context.getString(R.string.all_help_welcomed))
+                    IntentService(context).openUrl(sourceCodeUrl)
                 }
             ) {
                 Text(

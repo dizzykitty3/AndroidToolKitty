@@ -24,12 +24,12 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomItalicText
-import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
-import me.dizzykitty3.androidtoolkitty.common.util.UrlUtils
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 
 @Composable
 fun UrlCard() {
@@ -70,7 +70,7 @@ fun UrlCard() {
                 Text(text = "https://")
             },
             suffix = {
-                Text(text = UrlUtils.getUrlSuffix(url))
+                Text(text = TUrl.urlSuffix(url))
             }
         )
 
@@ -90,6 +90,6 @@ fun UrlCard() {
 private fun onClickVisitUrlButton(c: Context, url: String) {
     if (url.isBlank()) return
 
-    IntentUtils(c).openUrl(UrlUtils.processUrl(StringUtils.dropSpaces(url)))
+    IntentService(c).openUrl(TUrl.processUrl(TString.dropSpaces(url)))
     debugLog("onClickVisitButton")
 }

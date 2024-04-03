@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import me.dizzykitty3.androidtoolkitty.common.ui.theme.MyApplicationTheme
-import me.dizzykitty3.androidtoolkitty.common.util.ClipboardUtils
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.ClipboardService
+import me.dizzykitty3.androidtoolkitty.foundation.theme.MyApplicationTheme
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 import me.dizzykitty3.androidtoolkitty.view.MainLayout
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus and isAutoClearClipboard) // Clipboard operations require window focus
-            ClipboardUtils(this).clearClipboard()
+            ClipboardService(this).clear()
     }
 
     override fun onStop() {

@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.common.ui.component
+package me.dizzykitty3.androidtoolkitty.foundation.ui_component
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween
@@ -10,12 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import me.dizzykitty3.androidtoolkitty.common.util.DateUtils
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TDate
 
 @Composable
 fun CustomAnimatedProgressIndicator() {
     val progress = remember { Animatable(0f) }
-    val targetProgress = DateUtils.calculateYearProgress()
+    val targetProgress = TDate.yearProgress()
     val durationMillis = 2000
 
     LaunchedEffect(true) {

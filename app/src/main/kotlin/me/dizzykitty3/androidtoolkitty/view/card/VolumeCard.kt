@@ -29,10 +29,10 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.common.util.AudioUtils
-import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.AudioService
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,7 +44,7 @@ fun VolumeCard() {
     ) {
         val context = LocalContext.current
 
-        val maxVolume = AudioUtils(context).getMaxVolumeIndex()
+        val maxVolume = AudioService(context).maxVolumeIndex()
 
         val sliderIncrementFivePercent =
             SettingsViewModel().getIsSliderIncrementFivePercent(context)
@@ -86,20 +86,20 @@ fun VolumeCard() {
                         selectedIndex = index
                         when (index) {
                             0 -> {
-                                AudioUtils(context).setVolume(0)
+                                AudioService(context).setVolume(0)
                             }
 
                             1 -> {
-                                AudioUtils(context).setVolume((0.3 * maxVolume).toInt())
+                                AudioService(context).setVolume((0.3 * maxVolume).toInt())
                             }
 
                             2 -> {
-                                AudioUtils(context).setVolume((0.5 * maxVolume).toInt())
+                                AudioService(context).setVolume((0.5 * maxVolume).toInt())
                             }
 
                             3 -> {
                                 if (mCustomVolume != -1) {
-                                    AudioUtils(context).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
+                                    AudioService(context).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
                                 } else
                                     showVolumeDialog = true
                             }
@@ -139,7 +139,7 @@ fun VolumeCard() {
                         Button(
                             onClick = {
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0 && newCustomVolume.toInt() != 0) {
-                                    ToastUtils(context).showToast(context.getString(R.string.system_media_volume_levels_limited))
+                                    ToastService(context).toast(context.getString(R.string.system_media_volume_levels_limited))
                                     return@Button
                                 } else {
                                     SettingsViewModel().setCustomVolume(
@@ -148,7 +148,7 @@ fun VolumeCard() {
                                     )
                                     mCustomVolume = newCustomVolume.toInt()
                                     showVolumeOptionLabelDialog = true
-                                    AudioUtils(context).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
+                                    AudioService(context).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
                                 }
                             }
                         ) {

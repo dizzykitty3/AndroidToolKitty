@@ -1,15 +1,8 @@
-package me.dizzykitty3.androidtoolkitty.common.util
+package me.dizzykitty3.androidtoolkitty.foundation.utils
 
-import android.util.Log
 import java.time.LocalTime
 
-object StringUtils {
-    @Suppress("SpellCheckingInspection")
-    @JvmStatic
-    fun debugLog(message: String) {
-        Log.d("me.dizzykitty3.androidtoolkitty", message)
-    }
-
+object TString {
     @JvmStatic
     fun greeting(): String {
         val currentTime = LocalTime.now()
@@ -30,7 +23,7 @@ object StringUtils {
 
     @JvmStatic
     @Throws(IllegalArgumentException::class)
-    fun convertUnicodeToCharacter(unicode: String): String {
+    fun unicodeToCharacter(unicode: String): String {
         val length = unicode.length
         require(length % 4 == 0) { "The length of the input is not a multiple of 4" }
 

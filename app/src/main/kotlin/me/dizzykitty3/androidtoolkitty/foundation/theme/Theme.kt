@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.common.ui.theme
+package me.dizzykitty3.androidtoolkitty.foundation.theme
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -13,7 +13,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import me.dizzykitty3.androidtoolkitty.common.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 
 private val DarkColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,

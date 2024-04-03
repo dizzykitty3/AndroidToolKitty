@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.common.util
+package me.dizzykitty3.androidtoolkitty.foundation.context_service
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,17 +6,14 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
+import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 
-class IntentUtils(private val context: Context) {
+class IntentService(private val context: Context) {
     fun openUrl(finalUrl: String) {
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(
-            if (finalUrl.contains(HTTPS))
-                finalUrl
-            else
-                "$HTTPS$finalUrl"
-        )
+        intent.data = Uri.parse(if (finalUrl.contains(HTTPS)) finalUrl else "$HTTPS$finalUrl")
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         startActivity(intent)
@@ -44,7 +41,7 @@ class IntentUtils(private val context: Context) {
             startActivity(intent)
             debugLog("onOpenSystemSettings: $settingType")
         } catch (e: Exception) {
-            ToastUtils(context).showToast(context.getString(R.string.system_settings_unsupported))
+            ToastService(context).toast(context.getString(R.string.system_settings_unsupported))
             debugLog(">>>ERROR<<< openSystemSettings: $e")
         }
     }
@@ -74,14 +71,14 @@ class IntentUtils(private val context: Context) {
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
-                ToastUtils(context).showToast(context.getString(R.string.google_play_not_installed))
+                ToastService(context).toast(context.getString(R.string.google_play_not_installed))
                 debugLog("Google Play not installed")
             }
 
             GOOGLE_MAPS -> {
-                ToastUtils(context).showToast(context.getString(R.string.google_maps_not_installed))
+                ToastService(context).toast(context.getString(R.string.google_maps_not_installed))
                 debugLog("Google Maps not installed")
-                IntentUtils(context).openAppOnMarket(GOOGLE_MAPS)
+                IntentService(context).openAppOnMarket(GOOGLE_MAPS)
             }
         }
     }
@@ -91,14 +88,13 @@ class IntentUtils(private val context: Context) {
             if (packageName.isBlank()) {
                 return
             } else if (packageName.contains(".")) {
-                "market://details?id=${StringUtils.dropSpaces(packageName)}"
+                "market://details?id=${TString.dropSpaces(packageName)}"
             } else {
                 "market://search?q=${packageName.trim()}"
             }
         )
 
         val marketIntent = Intent(Intent.ACTION_VIEW, marketUri)
-
         if (isGooglePlay) marketIntent.setPackage(GOOGLE_PLAY)
         marketIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 

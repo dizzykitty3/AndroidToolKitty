@@ -24,14 +24,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomDropdownMenu
-import me.dizzykitty3.androidtoolkitty.common.ui.component.CustomTip
-import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils
-import me.dizzykitty3.androidtoolkitty.common.util.StringUtils.debugLog
-import me.dizzykitty3.androidtoolkitty.common.util.ToastUtils
-import me.dizzykitty3.androidtoolkitty.common.util.UrlUtils
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomDropdownMenu
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
@@ -47,14 +47,14 @@ fun SocialMediaProfileCard() {
         val platformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(context)
         var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
 
-        val platformList = UrlUtils.Platform.entries.map { stringResource(it.nameResId) }
-        if (mPlatformIndex == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) CustomTip(resId = R.string.temp2)
+        val platformList = TUrl.Platform.entries.map { stringResource(it.nameResId) }
+        if (mPlatformIndex == TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) CustomTip(resId = R.string.temp2)
 
         CustomDropdownMenu(
             items = platformList,
             onItemSelected = { mPlatformIndex = it },
             label = {
-                if (mPlatformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
                     Text(stringResource(R.string.platform))
                 } else {
                     Text("")
@@ -66,7 +66,7 @@ fun SocialMediaProfileCard() {
             value = username,
             onValueChange = { username = it },
             label = {
-                if (mPlatformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
                     Text(stringResource(R.string.username))
                 } else {
                     Text(stringResource(R.string.platform))
@@ -80,10 +80,10 @@ fun SocialMediaProfileCard() {
                 onDone = { onVisitProfileButton(context, username, mPlatformIndex) }
             ),
             supportingText = {
-                if (mPlatformIndex != UrlUtils.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                    val platform = UrlUtils.Platform.entries[mPlatformIndex]
+                if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                    val platform = TUrl.Platform.entries[mPlatformIndex]
                     Text(
-                        text = "${UrlUtils.getProfilePrefix(platform)}$username",
+                        text = "${TUrl.profilePrefix(platform)}$username",
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1
                     )
@@ -110,10 +110,10 @@ fun SocialMediaProfileCard() {
 private fun onVisitProfileButton(c: Context, username: String, platformIndex: Int) {
     if (username.isBlank()) return
 
-    val platform = UrlUtils.Platform.entries.getOrNull(platformIndex) ?: return
+    val platform = TUrl.Platform.entries.getOrNull(platformIndex) ?: return
 
-    if (platform == UrlUtils.Platform.PLATFORM_NOT_ADDED_YET) {
-        ToastUtils(c).showToastAndRecordLog(
+    if (platform == TUrl.Platform.PLATFORM_NOT_ADDED_YET) {
+        ToastService(c).toastAndLog(
             "${c.getString(R.string.platform)}: \"$username\" ${
                 c.getString(
                     R.string.uploaded
@@ -124,6 +124,6 @@ private fun onVisitProfileButton(c: Context, username: String, platformIndex: In
     }
 
     val prefix = platform.prefix
-    IntentUtils(c).openUrl("$prefix${StringUtils.dropSpaces(username)}")
+    IntentService(c).openUrl("$prefix${TString.dropSpaces(username)}")
     debugLog("onVisitProfile")
 }

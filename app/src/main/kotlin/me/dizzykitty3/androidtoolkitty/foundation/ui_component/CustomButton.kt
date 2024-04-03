@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.common.ui.component
+package me.dizzykitty3.androidtoolkitty.foundation.ui_component
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import me.dizzykitty3.androidtoolkitty.common.util.IntentUtils
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 
 @Composable
 fun CustomSystemSettingsButton(
@@ -22,7 +22,7 @@ fun CustomSystemSettingsButton(
     val context = LocalContext.current
 
     Button(
-        onClick = { IntentUtils(context).openSystemSettings(settingType) },
+        onClick = { IntentService(context).openSystemSettings(settingType) },
         elevation = ButtonDefaults.buttonElevation(1.dp)
     ) {
         Text(text = stringResource(id = buttonText))
