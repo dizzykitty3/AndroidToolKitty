@@ -105,4 +105,5 @@
     <string name="show_paired_devices">Show paired devices</string>
     <string name="current_device">Current device:</string>
     <string name="paired_devices">Paired devices:</string>
+    <string name="permission_not_granted">Permission not granted</string>
 </resources>

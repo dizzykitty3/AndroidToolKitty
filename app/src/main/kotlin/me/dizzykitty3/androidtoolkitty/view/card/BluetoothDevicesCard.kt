@@ -38,6 +38,7 @@ fun BluetoothDevicesCard() {
             onClick = {
                 // Check permission
                 if (noPermission(context)) {
+                    ToastService(context).toast(context.getString(R.string.permission_not_granted))
                     requestPermission(context)
                     return@Button
                 }
