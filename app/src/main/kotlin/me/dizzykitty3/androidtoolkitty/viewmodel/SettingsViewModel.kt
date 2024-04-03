@@ -95,7 +95,7 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun getCustomVolume(context: Context): Int {
-        return getSharedPrefs(context).getInt(CUSTOM_VOLUME, -1)
+        return getSharedPrefs(context).getInt(CUSTOM_VOLUME, Int.MIN_VALUE)
     }
 
     fun setCustomVolume(context: Context, customVolume: Int) {

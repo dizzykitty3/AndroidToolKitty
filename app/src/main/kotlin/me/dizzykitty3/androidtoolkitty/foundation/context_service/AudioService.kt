@@ -10,6 +10,11 @@ class AudioService(private val context: Context) {
         audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     }
 
+    fun volume(): Int {
+        audioService()
+        return audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+    }
+
     fun maxVolumeIndex(): Int {
         audioService()
         return audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)

@@ -44,6 +44,7 @@ fun VolumeCard() {
     ) {
         val context = LocalContext.current
 
+        val currentVolume = AudioService(context).volume()
         val maxVolume = AudioService(context).maxVolumeIndex()
 
         val sliderIncrementFivePercent =
@@ -61,12 +62,22 @@ fun VolumeCard() {
             "50%",
             if (mCustomVolumeOptionLabel != "") mCustomVolumeOptionLabel
             else {
-                if (mCustomVolume == -1) "+"
+                if (mCustomVolume < 0) "+"
                 else "${mCustomVolume}%"
             }
         )
 
-        var selectedIndex by remember { mutableStateOf<Int?>(null) }
+        var selectedIndex by remember {
+            mutableStateOf(
+                when (currentVolume) {
+                    0 -> 0
+                    (0.3 * maxVolume).toInt() -> 1
+                    (0.5 * maxVolume).toInt() -> 2
+                    (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
+                    else -> null
+                }
+            )
+        }
 
         var showVolumeDialog by remember { mutableStateOf(false) }
 
@@ -98,7 +109,7 @@ fun VolumeCard() {
                             }
 
                             3 -> {
-                                if (mCustomVolume != -1) {
+                                if (mCustomVolume > 0) {
                                     AudioService(context).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
                                 } else
                                     showVolumeDialog = true
@@ -223,7 +234,7 @@ fun VolumeCard() {
             }
         }
 
-        if (mCustomVolume != -1) {
+        if (mCustomVolume > 0) {
             Button(
                 onClick = { showVolumeDialog = true }
             ) {
