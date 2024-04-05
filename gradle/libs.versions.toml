@@ -3,12 +3,10 @@ agp = "8.3.1"
 kotlin = "1.9.23"
 material = "1.11.0"
 playServicesMaps = "18.2.0"
-composeBom = "2024.03.00"
+composeBom = "2024.04.00"
 activityCompose = "1.8.2"
 material3 = "1.2.1"
-materialIconsExtended = "1.6.4"
-lifecycleViewmodelCompose = "2.7.0"
-runtimeLivedata = "1.6.4"
+materialIconsExtended = "1.6.5"
 navigationCompose = "2.7.7"
 core = "1.12.0"
 room = "2.6.1"
@@ -21,8 +19,6 @@ compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeB
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "runtimeLivedata" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 core = { module = "androidx.core:core-ktx", version.ref = "core" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
@@ -31,5 +27,4 @@ room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-jetbrains-kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

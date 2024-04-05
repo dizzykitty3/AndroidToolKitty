@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.jetbrains.kotlin.kapt)
     alias(libs.plugins.google.devtools.ksp)
 }
 
@@ -41,7 +40,6 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
         compose = true
     }
 
@@ -62,8 +60,6 @@ dependencies {
     implementation(libs.activity.compose)
     implementation(libs.material3)
     implementation(libs.material.icons.extended)
-    implementation(libs.lifecycle.viewmodel.compose)
-    implementation(libs.runtime.livedata)
     implementation(libs.navigation.compose)
     implementation(libs.core)
     implementation(libs.room.runtime)
