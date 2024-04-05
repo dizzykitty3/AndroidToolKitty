@@ -9,8 +9,10 @@ import android.content.Context
 import android.content.pm.PackageManager
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -30,11 +32,12 @@ fun BluetoothDevicesCard() {
         val context = LocalContext.current
 
         var showResult by remember { mutableStateOf(false) }
+        var showDetail by remember { mutableStateOf(false) }
 
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }
         var pairedDevices by remember { mutableStateOf<Set<BluetoothDevice>>(emptySet()) }
 
-        var size by remember { mutableStateOf(0) }
+        var size by remember { mutableIntStateOf(0) }
 
         Button(
             onClick = {
@@ -70,6 +73,12 @@ fun BluetoothDevicesCard() {
                 pairedDevices.forEach { device ->
                     val deviceInfo = "${device.name} (${type(device.type)})\n${device.address}\n"
                     Text(text = deviceInfo)
+                    TextButton(
+                        onClick = { showDetail = true }
+                    ) {
+                        Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
+                    }
+                    if (showDetail) Text(text = stringResource(id = R.string.bluetooth_devices_types))
                 }
             } else {
                 Text(text = stringResource(id = R.string.no_paired_devices))

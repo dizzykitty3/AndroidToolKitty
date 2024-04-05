@@ -107,12 +107,14 @@
     <string name="show_paired_devices">Show paired devices</string>
     <string name="current_device">Current device:</string>
     <string name="paired_devices">Paired devices:</string>
-    <string name="permission_not_granted">Permission not granted</string>
-    <string name="classic">Classic</string>
-    <string name="le">LE</string>
+    <string name="permission_not_granted">Permission not granted.</string>
+    <string name="classic">BT</string>
+    <string name="le">BLE</string>
     <string name="dual">Dual</string>
     <string name="unknown">Unknown</string>
     <string name="no_paired_devices">No paired devices.</string>
+    <string name="what_is_bt_ble_and_dual">What is BT, BLE, and Dual?</string>
+    <string name="bluetooth_devices_types">Classic Bluetooth (BT): This is the familiar type used for things like headsets, speakers, and file transfers. It offers good range and speed but consumes more power.\n\nBluetooth Low Energy (BLE): This newer version is designed for lower power consumption and is ideal for devices that need long battery life, like fitness trackers and smart home sensors. It has a shorter range and slower data transfer rate compared to Classic Bluetooth.\n\nDual: Some devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
 
     <!--Settings screen: settings-->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
