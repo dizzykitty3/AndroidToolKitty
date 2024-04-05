@@ -73,13 +73,13 @@ fun BluetoothDevicesCard() {
                 pairedDevices.forEach { device ->
                     val deviceInfo = "${device.name} (${type(device.type)})\n${device.address}\n"
                     Text(text = deviceInfo)
-                    TextButton(
-                        onClick = { showDetail = true }
-                    ) {
-                        Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
-                    }
-                    if (showDetail) Text(text = stringResource(id = R.string.bluetooth_devices_types))
                 }
+                TextButton(
+                    onClick = { showDetail = true }
+                ) {
+                    Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
+                }
+                if (showDetail) Text(text = stringResource(id = R.string.bluetooth_devices_types))
             } else {
                 Text(text = stringResource(id = R.string.no_paired_devices))
             }
