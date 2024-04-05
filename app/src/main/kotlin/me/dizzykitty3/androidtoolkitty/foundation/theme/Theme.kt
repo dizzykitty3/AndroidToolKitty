@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.foundation.theme
 import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -86,22 +87,19 @@ fun MyApplicationTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    val colorScheme = if (OsVersion.android12()) {
-        when {
-            dynamicColor -> {
-                val context = LocalContext.current
-                if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-            }
-
-            darkTheme -> DarkColorScheme
-            else -> LightColorScheme
-        }
-    } else {
-        when {
+    @Composable
+    fun OsVersion.colorScheme(darkTheme: Boolean, dynamicColor: Boolean): ColorScheme {
+        val context = LocalContext.current
+        return when {
+            this.android12() && dynamicColor -> if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(
+                context
+            )
             darkTheme -> DarkColorScheme
             else -> LightColorScheme
         }
     }
+
+    val colorScheme = OsVersion.colorScheme(darkTheme, dynamicColor)
 
     val view = LocalView.current
     if (!view.isInEditMode) {
