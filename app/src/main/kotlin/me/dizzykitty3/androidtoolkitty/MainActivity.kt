@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,6 +17,7 @@ import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 class MainActivity : ComponentActivity() {
     private var isAutoClearClipboard = false
 
+    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
