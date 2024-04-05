@@ -20,7 +20,7 @@ private const val LUCKY_SPINNING_WHEEL_SCREEN = "LuckySpinningWheelScreen"
 private const val BLUETOOTH_DEVICES_SCREEN = "BluetoothDevicesScreen"
 
 @Composable
-fun MainLayout() {
+fun NavHostLayout() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,

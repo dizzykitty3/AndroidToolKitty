@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.ClipboardService
 import me.dizzykitty3.androidtoolkitty.foundation.theme.MyApplicationTheme
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
-import me.dizzykitty3.androidtoolkitty.view.MainLayout
+import me.dizzykitty3.androidtoolkitty.view.NavHostLayout
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme(
                 dynamicColor = SettingsViewModel().getIsDynamicColor(this)
             ) {
-                MainLayout()
+                NavHostLayout()
             }
         }
         debugLog("MainActivity onCreate called")
