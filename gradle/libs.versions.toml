@@ -8,7 +8,7 @@ activityCompose = "1.8.2"
 material3 = "1.2.1"
 materialIconsExtended = "1.6.5"
 navigationCompose = "2.7.7"
-core = "1.12.0"
+coreKtx = "1.12.0"
 room = "2.6.1"
 ksp = "1.9.23-1.0.19"
 
@@ -20,7 +20,7 @@ activity-compose = { module = "androidx.activity:activity-compose", version.ref 
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
-core = { module = "androidx.core:core-ktx", version.ref = "core" }
+core = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
