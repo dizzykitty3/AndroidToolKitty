@@ -1,41 +1,42 @@
 <resources>
     <string name="app_name" translatable="false">Android ToolKitty</string>
-    <string name="clipboard_cleared_automatically">Clipboard cleared automatically</string>
+
+    <!--Home screen: top tip-->
+    <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>
+
+    <!--Home screen: year progress-->
     <string name="year_progress">Year progress</string>
+    <plurals name="days_remaining">
+        <item quantity="one">%1$d day remaining</item>
+        <item quantity="other">%1$d days remaining</item>
+    </plurals>
+
+    <!--Home screen: volume-->
+    <string name="volume">Volume</string>
+    <string name="media_volume">Media volume</string>
+    <string name="mute">mute</string>
+    <string name="add_custom_volume">Add custom volume</string>
+    <string name="you_can_set_a_label_for_it">You can set a label for it</string>
+    <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
+    <string name="label">Label</string>
+    <string name="edit">Edit</string>
+
+    <!--Home screen: clipboard-->
     <string name="clipboard">Clipboard</string>
-    <string name="clipboard_cleared">Clipboard cleared</string>
     <string name="clear_clipboard">Clear clipboard</string>
+    <string name="clipboard_cleared">Clipboard cleared</string>
+    <string name="clipboard_cleared_automatically">Clipboard cleared automatically</string>
+    <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on \"clear clipboard on launch\" in Settings Screen</string>
+
+    <!--Home screen: url-->
     <string name="url">URL</string>
     <string name="url_input_hint_1">Visit url without inputting prefix</string>
     <string name="url_input_hint_2">and suffix</string>
     <string name="url_input_hint_3">(or</string>
     <string name="url_input_hint_4">, etc.)</string>
     <string name="visit">Visit</string>
-    <string name="android_system_settings">Android system settings</string>
-    <string name="open_display_settings">Display settings</string>
-    <string name="open_auto_rotate_settings">Auto rotate settings</string>
-    <string name="open_language_settings">Language settings</string>
-    <string name="open_default_apps_settings">Default apps settings</string>
-    <string name="open_bluetooth_settings">Bluetooth settings</string>
-    <string name="open_date_and_time_settings">Date &amp; time settings</string>
-    <string name="open_battery_optimization_settings">Battery optimization settings</string>
-    <string name="unicode">Unicode</string>
-    <string name="unicode_input_hint">Last 4 digits of each, e.g.</string>
-    <string name="character">Character</string>
-    <string name="copied">copied</string>
-    <string name="convert">Convert</string>
-    <string name="google_maps">Google Maps</string>
-    <string name="latitude">Latitude</string>
-    <string name="longitude">Longitude</string>
-    <string name="google_maps_not_installed">Google Maps is not installed</string>
-    <string name="google_play_not_installed">Google Play is not installed</string>
-    <string name="open_google_maps">Open Google Maps</string>
-    <string name="open_app_on_google_play">Open app on Google Play</string>
-    <string name="package_name_or_search">Package name or search</string>
-    <string name="whats">What\'s</string>
-    <string name="package_name">package name</string>
-    <string name="content_description_link_icon_whats_package_name">link icon: what\'s package name</string>
-    <string name="open_on_google_play">Open on Google Play</string>
+
+    <!--Home screen: social media profile-->
     <string name="social_media_profile">Social media profile</string>
     <string name="platform">Platform</string>
     <string name="username">Username</string>
@@ -45,61 +46,62 @@
     <string name="weibo">Weibo</string>
     <string name="youtube">YouTube</string>
     <string name="platform_not_added_yet">No platform you need here?</string>
-    <string name="open_developer_options">Developer options</string>
-    <string name="about">About</string>
-    <string name="source_code_on_github">View source code on GitHub</string>
     <string name="submit_the_platform_you_need">Submit the platform you need</string>
-    <plurals name="days_remaining">
-        <item quantity="one">%1$d day remaining</item>
-        <item quantity="other">%1$d days remaining</item>
-    </plurals>
     <string name="uploaded">uploaded</string>
-    <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="pixiv_artwork">pixiv (Artwork ID)</string>
     <string name="pixiv_user">pixiv (User ID)</string>
     <string name="v2ex">V2EX</string>
+    <string name="bilibili_user">Bilibili (User ID)</string>
+    <string name="temp2">Upload platform name feature is under development.</string>
+
+    <!--Home screen: android system settings-->
+    <string name="android_system_settings">Android system settings</string>
+    <string name="open_display_settings">Display settings</string>
+    <string name="open_auto_rotate_settings">Auto rotate settings</string>
+    <string name="open_language_settings">Language settings</string>
+    <string name="open_default_apps_settings">Default apps settings</string>
+    <string name="open_bluetooth_settings">Bluetooth settings</string>
+    <string name="open_date_and_time_settings">Date &amp; time settings</string>
+    <string name="open_battery_optimization_settings">Battery optimization settings</string>
+    <string name="open_developer_options">Developer options</string>
     <string name="open_caption_preferences">Caption preferences</string>
     <string name="common">Common</string>
     <string name="debugging">Debugging</string>
-    <string name="bilibili_user">Bilibili (User ID)</string>
-    <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
-    <string name="temp2">Upload platform name feature is under development.</string>
-    <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on \"clear clipboard on launch\" in Settings Screen</string>
-    <string name="settings">Settings</string>
-    <string name="hide_all_cards">Hide all cards</string>
-    <string name="show_all_cards">Show all cards</string>
-    <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240403</string>
-    <string name="one_handed_mode">One-handed mode</string>
-    <string name="volume">Volume</string>
-    <string name="media_volume">Media volume</string>
-    <string name="erase_all_app_data">Erase all app data</string>
     <string name="set_time_automatically_is_off_tip">\"Set time automatically\" is now OFF. You may experience some unexpected behavior while using your phone.</string>
-    <string name="warning">Warning</string>
-    <string name="erase_all_data">Erase all data</string>
-    <string name="open_on_other_markets">Open on other markets</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
+
+    <!--Home screen: unicode-->
+    <string name="unicode">Unicode</string>
+    <string name="unicode_input_hint">Last 4 digits of each, e.g.</string>
+    <string name="character">Character</string>
+    <string name="copied">copied</string>
+    <string name="convert">Convert</string>
+
+    <!--Home screen: google maps-->
+    <string name="google_maps">Google Maps</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="google_maps_not_installed">Google Maps is not installed</string>
+    <string name="google_play_not_installed">Google Play is not installed</string>
+    <string name="open_google_maps">Open Google Maps</string>
+
+    <!--Home screen: open app on google play-->
+    <string name="open_app_on_google_play">Open app on Google Play</string>
+    <string name="package_name_or_search">Package name or search</string>
+    <string name="whats">What\'s</string>
+    <string name="package_name">package name</string>
+    <string name="content_description_link_icon_whats_package_name">link icon: what\'s package name</string>
+    <string name="open_on_google_play">Open on Google Play</string>
+    <string name="open_on_other_markets">Open on other markets</string>
+
+    <!--Home screen: android versions-->
     <string name="android_versions">Android versions</string>
-    <string name="customize_my_home_page">Customize my home page</string>
-    <string name="add_custom_volume">Add custom volume</string>
-    <string name="material_you_dynamic_color">Material You dynamic color</string>
-    <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
-    <string name="mute">mute</string>
-    <string name="customize_system_settings_card">Customize \"Android system settings\" card options</string>
-    <string name="customize">Customize</string>
-    <string name="warning_erase_all_data_1">This action will erase all your data, including</string>
-    <string name="warning_erase_all_data_2">histories and settings.</string>
-    <string name="warning_erase_all_data_3">Are you sure you want to proceed?</string>
-    <string name="you_can_set_a_label_for_it">You can set a label for it</string>
-    <string name="label">Label</string>
-    <string name="edit">Edit</string>
-    <string name="general">General</string>
-    <string name="set_slider_increment_5">Set slider increment to 5%</string>
-    <string name="test">test</string>
-    <string name="lucky_spinning_wheel">Lucky spinning wheel</string>
-    <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>
     <string name="show_more">show more</string>
     <string name="show_less">show less</string>
+
+    <!--Home screen: test-->
+    <string name="test">test</string>
+    <string name="lucky_spinning_wheel">Lucky spinning wheel</string>
     <string name="bluetooth_devices">Bluetooth devices</string>
     <string name="bluetooth_disabled">Bluetooth disabled</string>
     <string name="show_paired_devices">Show paired devices</string>
@@ -111,4 +113,30 @@
     <string name="dual">Dual</string>
     <string name="unknown">Unknown</string>
     <string name="no_paired_devices">No paired devices.</string>
+
+    <!--Settings screen: settings-->
+    <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
+    <string name="settings">Settings</string>
+    <string name="hide_all_cards">Hide all cards</string>
+    <string name="show_all_cards">Show all cards</string>
+    <string name="one_handed_mode">One-handed mode</string>
+    <string name="erase_all_app_data">Erase all app data</string>
+    <string name="warning">Warning</string>
+    <string name="erase_all_data">Erase all data</string>
+    <string name="customize_my_home_page">Customize my home page</string>
+    <string name="material_you_dynamic_color">Material You dynamic color</string>
+    <string name="customize_system_settings_card">Customize \"Android system settings\" card options</string>
+    <string name="customize">Customize</string>
+    <string name="warning_erase_all_data_1">This action will erase all your data, including</string>
+    <string name="warning_erase_all_data_2">histories and settings.</string>
+    <string name="warning_erase_all_data_3">Are you sure you want to proceed?</string>
+    <string name="general">General</string>
+    <string name="set_slider_increment_5">Set slider increment to 5%</string>
+
+    <!--Settings screen: about-->
+    <string name="about">About</string>
+    <string name="source_code_on_github">View source code on GitHub</string>
+    <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
+    <string name="version">Version</string>
+    <string name="version_number" translatable="false">20240403</string>
 </resources>
