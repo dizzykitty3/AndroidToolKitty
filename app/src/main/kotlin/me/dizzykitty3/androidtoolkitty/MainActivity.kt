@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.ClipboardService
 import me.dizzykitty3.androidtoolkitty.foundation.theme.MyApplicationTheme
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
@@ -20,7 +23,9 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme(
                 dynamicColor = SettingsViewModel().getIsDynamicColor(this)
             ) {
-                NavHostLayout()
+                Scaffold(modifier = Modifier.fillMaxSize()) {
+                    NavHostLayout()
+                }
             }
         }
         debugLog("MainActivity onCreate called")
