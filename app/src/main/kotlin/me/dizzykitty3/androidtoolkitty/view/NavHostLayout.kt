@@ -25,7 +25,7 @@ fun NavHostLayout() {
     NavHost(
         navController = navController,
         startDestination = HOME_SCREEN,
-        enterTransition = { fadeIn(animationSpec = tween(durationMillis = 700)) },
+        enterTransition = { fadeIn(animationSpec = tween(durationMillis = 100)) },
         exitTransition = { fadeOut(animationSpec = tween(durationMillis = 100)) }
     ) {
         composable(HOME_SCREEN) { HomeScreen(navController) }
