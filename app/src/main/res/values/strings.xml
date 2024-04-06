@@ -140,5 +140,5 @@
     <string name="source_code_on_github">View source code on GitHub</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240405</string>
+    <string name="version_number" translatable="false">20240406</string>
 </resources>
