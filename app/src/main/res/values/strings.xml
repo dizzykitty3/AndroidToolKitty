@@ -108,8 +108,8 @@
     <string name="current_device">Current device:</string>
     <string name="paired_devices">Paired devices:</string>
     <string name="permission_not_granted">Permission not granted.</string>
-    <string name="classic">BT</string>
-    <string name="le">BLE</string>
+    <string name="bt">BT</string>
+    <string name="ble">BLE</string>
     <string name="dual">Dual</string>
     <string name="unknown">Unknown</string>
     <string name="no_paired_devices">No paired devices.</string>

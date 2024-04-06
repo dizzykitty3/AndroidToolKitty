@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -25,7 +24,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
@@ -172,8 +170,7 @@ fun VolumeCard() {
                         ) {
                             Text(text = stringResource(android.R.string.cancel))
                         }
-                    },
-                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))
+                    }
                 )
             }
 
@@ -228,8 +225,7 @@ fun VolumeCard() {
                         ) {
                             Text(text = stringResource(android.R.string.cancel))
                         }
-                    },
-                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))
+                    }
                 )
             }
         }

@@ -103,8 +103,8 @@
     <string name="current_device">当前设备：</string>
     <string name="paired_devices">已配对的设备：</string>
     <string name="permission_not_granted">请授予相关权限</string>
-    <string name="classic">经典</string>
-    <string name="le">低功耗</string>
+    <string name="bt">经典</string>
+    <string name="ble">低功耗</string>
     <string name="dual">双模</string>
     <string name="unknown">未知</string>
     <string name="no_paired_devices">当前没有已配对的设备。</string>

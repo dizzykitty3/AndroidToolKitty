@@ -7,7 +7,10 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.content.pm.PackageManager
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -32,7 +35,7 @@ fun BluetoothDevicesCard() {
         val context = LocalContext.current
 
         var showResult by remember { mutableStateOf(false) }
-        var showDetail by remember { mutableStateOf(false) }
+        var showDialog by remember { mutableStateOf(false) }
 
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }
         var pairedDevices by remember { mutableStateOf<Set<BluetoothDevice>>(emptySet()) }
@@ -75,11 +78,29 @@ fun BluetoothDevicesCard() {
                     Text(text = deviceInfo)
                 }
                 TextButton(
-                    onClick = { showDetail = true }
+                    onClick = { showDialog = true }
                 ) {
                     Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
                 }
-                if (showDetail) Text(text = stringResource(id = R.string.bluetooth_devices_types))
+                if (showDialog) {
+                    AlertDialog(
+                        onDismissRequest = { showDialog = false },
+                        text = { Text(text = stringResource(id = R.string.bluetooth_devices_types)) },
+                        confirmButton = {
+                            Button(
+                                onClick = { showDialog = false },
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.primary
+                                )
+                            ) {
+                                Text(
+                                    text = stringResource(android.R.string.ok),
+                                    color = MaterialTheme.colorScheme.onPrimary
+                                )
+                            }
+                        }
+                    )
+                }
             } else {
                 Text(text = stringResource(id = R.string.no_paired_devices))
             }
@@ -90,8 +111,8 @@ fun BluetoothDevicesCard() {
 @Composable
 private fun type(type: Int): String {
     return when (type) {
-        1 -> stringResource(id = R.string.classic)
-        2 -> stringResource(id = R.string.le)
+        1 -> stringResource(id = R.string.bt)
+        2 -> stringResource(id = R.string.ble)
         3 -> stringResource(id = R.string.dual)
         else -> stringResource(id = R.string.unknown)
     }

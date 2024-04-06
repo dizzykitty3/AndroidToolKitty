@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.foundation.ui_component
 
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -12,10 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun CustomAlertDialogButton(
@@ -67,8 +63,7 @@ fun CustomAlertDialogButton(
                 ) {
                     Text(text = negativeButtonText ?: stringResource(android.R.string.cancel))
                 }
-            },
-            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_dialog))
+            }
         )
     }
 }
