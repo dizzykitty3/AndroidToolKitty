@@ -65,7 +65,8 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.material.icons.extended)
     implementation(libs.navigation.compose)
-    implementation(libs.coreKtx)
+    implementation(libs.core.ktx)
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
+    implementation(libs.datastore.preferences)
 }

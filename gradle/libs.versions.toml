@@ -11,6 +11,7 @@ navigationCompose = "2.7.7"
 coreKtx = "1.12.0"
 room = "2.6.1"
 ksp = "1.9.23-1.0.19"
+datastorePreferences = "1.0.0"
 
 [libraries]
 material = { module = "com.google.android.material:material", version.ref = "material" }
@@ -20,9 +21,10 @@ activity-compose = { module = "androidx.activity:activity-compose", version.ref 
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
-coreKtx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
