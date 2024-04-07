@@ -28,6 +28,12 @@ import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 
+@SuppressLint("InlinedApi")
+private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
+private const val BT = Manifest.permission.BLUETOOTH
+private const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
+private const val GRANTED = PackageManager.PERMISSION_GRANTED
+
 @SuppressLint("MissingPermission")
 @Composable
 fun BluetoothDevicesCard() {
@@ -140,9 +146,3 @@ private fun requestPermission(context: Context) {
 private fun request(context: Context, permission: Array<String>) {
     ActivityCompat.requestPermissions(context as Activity, permission, 1)
 }
-
-@SuppressLint("InlinedApi")
-private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
-private const val BT = Manifest.permission.BLUETOOTH
-private const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
-private const val GRANTED = PackageManager.PERMISSION_GRANTED

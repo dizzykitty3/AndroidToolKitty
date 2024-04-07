@@ -11,6 +11,21 @@ import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 
 class IntentService(private val context: Context) {
+    companion object {
+        private const val HTTPS = "https://"
+        private const val GOOGLE_MAPS = "com.google.android.apps.maps"
+        private const val GOOGLE_PLAY = "com.android.vending"
+        private const val SETTING_1 = "setting_display"
+        private const val SETTING_2 = "setting_auto_rotate"
+        private const val SETTING_3 = "setting_bluetooth"
+        private const val SETTING_4 = "setting_default_apps"
+        private const val SETTING_5 = "setting_battery_optimization"
+        private const val SETTING_6 = "setting_caption"
+        private const val SETTING_7 = "setting_locale"
+        private const val SETTING_8 = "setting_date_and_time"
+        private const val SETTING_9 = "setting_developer"
+    }
+
     fun openUrl(finalUrl: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(if (finalUrl.contains(HTTPS)) finalUrl else "$HTTPS$finalUrl")
@@ -104,20 +119,5 @@ class IntentService(private val context: Context) {
         } catch (e: Exception) {
             debugLog(">>>ERROR<<< openCertainAppOnPlayStore: $e")
         }
-    }
-
-    companion object {
-        private const val HTTPS = "https://"
-        private const val GOOGLE_MAPS = "com.google.android.apps.maps"
-        private const val GOOGLE_PLAY = "com.android.vending"
-        private const val SETTING_1 = "setting_display"
-        private const val SETTING_2 = "setting_auto_rotate"
-        private const val SETTING_3 = "setting_bluetooth"
-        private const val SETTING_4 = "setting_default_apps"
-        private const val SETTING_5 = "setting_battery_optimization"
-        private const val SETTING_6 = "setting_caption"
-        private const val SETTING_7 = "setting_locale"
-        private const val SETTING_8 = "setting_date_and_time"
-        private const val SETTING_9 = "setting_developer"
     }
 }

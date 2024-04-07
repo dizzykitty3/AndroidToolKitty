@@ -6,6 +6,18 @@ import androidx.lifecycle.ViewModel
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 
 class SettingsViewModel : ViewModel() {
+    companion object {
+        private const val PREF_NAME = "Settings"
+        private const val IS_AUTO_CLEAR_CLIPBOARD = "is_auto_clear_clipboard"
+        private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
+        private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
+        private const val IS_ONE_HANDED_MODE = "is_one_handed_mode"
+        private const val IS_DYNAMIC_COLOR = "is_dynamic_color"
+        private const val CUSTOM_VOLUME = "custom_volume"
+        private const val VOLUME_OPTION_LABEL = "volume_option_label"
+        private const val SLIDER_INCREMENT_5_PERCENT = "slider_increment_5_percent"
+    }
+
     private fun getSharedPrefs(context: Context): SharedPreferences {
         return context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     }
@@ -124,17 +136,5 @@ class SettingsViewModel : ViewModel() {
             clear()
             apply()
         }
-    }
-
-    companion object {
-        private const val PREF_NAME = "Settings"
-        private const val IS_AUTO_CLEAR_CLIPBOARD = "is_auto_clear_clipboard"
-        private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
-        private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
-        private const val IS_ONE_HANDED_MODE = "is_one_handed_mode"
-        private const val IS_DYNAMIC_COLOR = "is_dynamic_color"
-        private const val CUSTOM_VOLUME = "custom_volume"
-        private const val VOLUME_OPTION_LABEL = "volume_option_label"
-        private const val SLIDER_INCREMENT_5_PERCENT = "slider_increment_5_percent"
     }
 }
