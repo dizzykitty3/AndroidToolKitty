@@ -5,13 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
+import android.util.Log
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 
 class IntentService(private val context: Context) {
     companion object {
+        private const val TAG = "IntentService"
         private const val HTTPS = "https://"
         private const val GOOGLE_MAPS = "com.google.android.apps.maps"
         private const val GOOGLE_PLAY = "com.android.vending"
@@ -32,7 +33,7 @@ class IntentService(private val context: Context) {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         startActivity(intent)
-        debugLog("openUrl")
+        Log.d(TAG, "openUrl")
     }
 
     @SuppressLint("InlinedApi")
@@ -54,10 +55,10 @@ class IntentService(private val context: Context) {
 
         try {
             startActivity(intent)
-            debugLog("onOpenSystemSettings: $settingType")
+            Log.d(TAG, "onOpenSystemSettings: $settingType")
         } catch (e: Exception) {
             ToastService(context).toast(context.getString(R.string.system_settings_unsupported))
-            debugLog(">>>ERROR<<< openSystemSettings: $e")
+            Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
         }
     }
 
@@ -71,28 +72,30 @@ class IntentService(private val context: Context) {
 
         try {
             startActivity(intent)
+            Log.d(TAG, "openGoogleMaps")
         } catch (e: Exception) {
-            debugLog(">>>ERROR<<< openGoogleMaps: $e")
+            Log.e(TAG, ">>>ERROR<<< openGoogleMaps: $e")
         }
     }
 
     private fun startActivity(intent: Intent) {
         try {
             context.startActivity(intent)
+            Log.d(TAG, "startActivity")
             return
         } catch (e: Exception) {
-            debugLog(">>>ERROR<<< startActivity: $e")
+            Log.e(TAG, ">>>ERROR<<< startActivity: $e")
         }
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
                 ToastService(context).toast(context.getString(R.string.google_play_not_installed))
-                debugLog("Google Play not installed")
+                Log.i(TAG, "Google Play not installed")
             }
 
             GOOGLE_MAPS -> {
                 ToastService(context).toast(context.getString(R.string.google_maps_not_installed))
-                debugLog("Google Maps not installed")
+                Log.i(TAG, "Google Maps not installed")
                 IntentService(context).openAppOnMarket(GOOGLE_MAPS)
             }
         }
@@ -115,9 +118,9 @@ class IntentService(private val context: Context) {
 
         try {
             startActivity(marketIntent)
-            debugLog("openAppOnMarket")
+            Log.d(TAG, "openAppOnMarket")
         } catch (e: Exception) {
-            debugLog(">>>ERROR<<< openCertainAppOnPlayStore: $e")
+            Log.e(TAG, ">>>ERROR<<< openCertainAppOnPlayStore: $e")
         }
     }
 }

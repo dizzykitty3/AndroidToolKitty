@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -29,10 +30,11 @@ import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
+
+private const val TAG = "SocialMediaProfileCard"
 
 @Composable
 fun SocialMediaProfileCard() {
@@ -125,5 +127,5 @@ private fun onVisitProfileButton(context: Context, username: String, platformInd
 
     val prefix = platform.prefix
     IntentService(context).openUrl("$prefix${TString.dropSpaces(username)}")
-    debugLog("onVisitProfile")
+    Log.d(TAG, "onVisitProfile")
 }

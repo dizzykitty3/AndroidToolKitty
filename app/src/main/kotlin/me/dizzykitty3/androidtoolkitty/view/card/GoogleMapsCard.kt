@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -28,7 +29,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
+
+private const val TAG = "GoogleMapsCard"
 
 @Composable
 fun GoogleMapsCard() {
@@ -95,5 +97,5 @@ private fun onClickOpenGoogleMapsButton(context: Context, latitude: String, long
     if (latitude.isBlank() || longitude.isBlank()) return
 
     IntentService(context).openGoogleMaps(latitude, longitude)
-    debugLog("onClickOpenGoogleMapsButton")
+    Log.d(TAG, "onClickOpenGoogleMapsButton")
 }

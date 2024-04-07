@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -10,11 +11,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.ClipboardService
 import me.dizzykitty3.androidtoolkitty.foundation.theme.MyApplicationTheme
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 import me.dizzykitty3.androidtoolkitty.view.NavHostLayout
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 class MainActivity : ComponentActivity() {
+    companion object {
+        private const val TAG = "MainActivity"
+    }
+
     private var isAutoClearClipboard = false
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -30,18 +34,18 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        debugLog("MainActivity onCreate called")
+        Log.d(TAG, " onCreate called")
     }
 
     override fun onResume() {
         super.onResume()
         getSettingsSharedPreferences()
-        debugLog("MainActivity onResume called")
+        Log.d(TAG, " onResume called")
     }
 
     private fun getSettingsSharedPreferences() {
         isAutoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(this)
-        debugLog("MainActivity settings sp got")
+        Log.d(TAG, " settings sp got")
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -53,6 +57,6 @@ class MainActivity : ComponentActivity() {
     override fun onStop() {
         super.onStop()
         currentFocus?.clearFocus() // To collapse keyboard
-        debugLog("MainActivity focus cleared")
+        Log.d(TAG, " focus cleared")
     }
 }

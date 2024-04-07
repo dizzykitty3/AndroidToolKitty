@@ -1,9 +1,10 @@
 package me.dizzykitty3.androidtoolkitty.foundation.utils
 
+import android.util.Log
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 
 object TUrl {
+    private const val TAG = "TUrl"
     private const val HTTPS = "https://"
     private const val BG = ".bg"
     private const val CN = ".cn"
@@ -31,7 +32,7 @@ object TUrl {
     @JvmStatic
     fun processUrl(urlInput: String): String {
         val suffix = urlSuffix(urlInput)
-        debugLog(if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
+        Log.d(TAG, if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
         return "$HTTPS$urlInput$suffix"
     }
 

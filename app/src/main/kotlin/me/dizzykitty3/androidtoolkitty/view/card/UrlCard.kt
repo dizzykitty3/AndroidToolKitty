@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -27,9 +28,10 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomItalicText
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
+
+private const val TAG = "UrlCard"
 
 @Composable
 fun UrlCard() {
@@ -91,5 +93,5 @@ private fun onClickVisitUrlButton(context: Context, url: String) {
     if (url.isBlank()) return
 
     IntentService(context).openUrl(TUrl.processUrl(TString.dropSpaces(url)))
-    debugLog("onClickVisitButton")
+    Log.d(TAG, "onClickVisitButton")
 }

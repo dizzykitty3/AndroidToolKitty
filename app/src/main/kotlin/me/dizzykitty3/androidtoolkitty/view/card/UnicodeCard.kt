@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -25,8 +26,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.context_service.ClipboardServi
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomItalicText
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
+
+private const val TAG = "UnicodeCard"
 
 @Composable
 fun UnicodeCard() {
@@ -89,5 +91,5 @@ private fun onClickConvertButton(
     } catch (e: Exception) {
         ToastService(context).toast(e.message ?: "Unknown error occurred")
     }
-    debugLog("onClickConvertButton")
+    Log.d(TAG, "onClickConvertButton")
 }

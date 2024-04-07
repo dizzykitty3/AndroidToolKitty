@@ -2,11 +2,12 @@ package me.dizzykitty3.androidtoolkitty.viewmodel
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 
 class SettingsViewModel : ViewModel() {
     companion object {
+        private const val TAG = "SettingsViewModel"
         private const val PREF_NAME = "Settings"
         private const val IS_AUTO_CLEAR_CLIPBOARD = "is_auto_clear_clipboard"
         private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
@@ -27,7 +28,7 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun setIsAutoClearClipboard(context: Context, isAutoClear: Boolean) {
-        debugLog("is auto clear clipboard = $isAutoClear")
+        Log.d(TAG, "is auto clear clipboard = $isAutoClear")
         with(getSharedPrefs(context).edit()) {
             putBoolean(IS_AUTO_CLEAR_CLIPBOARD, isAutoClear)
             apply()
@@ -39,7 +40,7 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun saveCardShowedState(context: Context, cardId: String, isShowed: Boolean) {
-        debugLog("$cardId is showed = $isShowed")
+        Log.d(TAG, "$cardId is showed = $isShowed")
         with(getSharedPrefs(context).edit()) {
             putBoolean(cardId, isShowed)
             apply()
@@ -51,7 +52,7 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun saveSelectedSocialPlatform(context: Context, lastTimePlatformIndex: Int) {
-        debugLog("last time platform index = $lastTimePlatformIndex")
+        Log.d(TAG, "last time platform index = $lastTimePlatformIndex")
         with(getSharedPrefs(context).edit()) {
             putInt(LAST_TIME_SELECTED_PLATFORM_INDEX, lastTimePlatformIndex)
             apply()
@@ -63,7 +64,7 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun setHaveOpenedSettingsScreen(context: Context, haveOpened: Boolean) {
-        debugLog("have opened settings menu = $haveOpened")
+        Log.d(TAG, "have opened settings menu = $haveOpened")
         with(getSharedPrefs(context).edit()) {
             putBoolean(HAVE_OPENED_SETTINGS_SCREEN, haveOpened)
             apply()
@@ -75,7 +76,7 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun setIsOneHandedMode(context: Context, isOneHandedMode: Boolean) {
-        debugLog("is single hand mode = $isOneHandedMode")
+        Log.d(TAG, "is single hand mode = $isOneHandedMode")
         with(getSharedPrefs(context).edit()) {
             putBoolean(IS_ONE_HANDED_MODE, isOneHandedMode)
             apply()
@@ -87,7 +88,7 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun setIsDynamicColor(context: Context, isDynamicColor: Boolean) {
-        debugLog("is dynamic color = $isDynamicColor")
+        Log.d(TAG, "is dynamic color = $isDynamicColor")
         with(getSharedPrefs(context).edit()) {
             putBoolean(IS_DYNAMIC_COLOR, isDynamicColor)
             apply()
@@ -99,7 +100,7 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun setIsSliderIncrementFivePercent(context: Context, incrementFivePercent: Boolean) {
-        debugLog("is slider increment 5% = $incrementFivePercent")
+        Log.d(TAG, "is slider increment 5% = $incrementFivePercent")
         with(getSharedPrefs(context).edit()) {
             putBoolean(SLIDER_INCREMENT_5_PERCENT, incrementFivePercent)
             apply()
@@ -111,7 +112,7 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun setCustomVolume(context: Context, customVolume: Int) {
-        debugLog("custom volume = $customVolume")
+        Log.d(TAG, "custom volume = $customVolume")
         with(getSharedPrefs(context).edit()) {
             putInt(CUSTOM_VOLUME, customVolume)
             apply()
@@ -123,7 +124,7 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun setCustomVolumeOptionLabel(context: Context, customOptionLabel: String) {
-        debugLog("custom volume option label = $customOptionLabel")
+        Log.d(TAG, "custom volume option label = $customOptionLabel")
         with(getSharedPrefs(context).edit()) {
             putString(VOLUME_OPTION_LABEL, customOptionLabel)
             apply()
@@ -131,7 +132,7 @@ class SettingsViewModel : ViewModel() {
     }
 
     fun clear(context: Context) {
-        debugLog("erase all app data")
+        Log.d(TAG, "erase all app data")
         with(getSharedPrefs(context).edit()) {
             clear()
             apply()

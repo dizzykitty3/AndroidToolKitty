@@ -1,14 +1,18 @@
 package me.dizzykitty3.androidtoolkitty.foundation.context_service
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TLog.debugLog
 
 class ToastService(private val context: Context) {
+    companion object {
+        private const val TAG = "ToastService"
+    }
+
     fun toast(toastText: String) = Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show()
 
     fun toastAndLog(logEvent: String) {
-        debugLog(logEvent)
+        Log.d(TAG, logEvent)
         toast(logEvent)
     }
 }
