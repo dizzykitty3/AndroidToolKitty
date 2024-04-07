@@ -1,7 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.widget.Toast
-import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -60,7 +60,8 @@ fun LuckyWheelCard() {
 
         val currentRotationDegrees by animateFloatAsState(
             targetValue = targetRotationDegrees,
-            animationSpec = tween(durationMillis = 1000, easing = LinearEasing), label = ""
+            animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = ""
+
         )
 
         LaunchedEffect(currentRotationDegrees) {
