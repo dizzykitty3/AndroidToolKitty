@@ -57,15 +57,15 @@ android {
 }
 
 dependencies {
-    implementation(libs.material)
+    implementation(libs.material) // Theme.Material3.DynamicColors.DayNight
     implementation(libs.play.services.maps)
     implementation(platform(libs.compose.bom))
     androidTestImplementation(platform(libs.compose.bom))
-    implementation(libs.activity.compose)
+    implementation(libs.activity.compose) // ComponentActivity, setContent, enableEdgeToEdge
     implementation(libs.material3)
     implementation(libs.material.icons.extended)
-    implementation(libs.navigation.compose)
-    implementation(libs.core.ktx)
+    implementation(libs.navigation.compose) // NavHostController
+    implementation(libs.core.ktx) // WindowCompat, ActivityCompat
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
     implementation(libs.datastore.preferences)
