@@ -52,6 +52,8 @@ fun LuckyWheelCard() {
 
         val primaryColor = MaterialTheme.colorScheme.primary
         val secondaryColor = MaterialTheme.colorScheme.secondary
+        val tertiaryColor = MaterialTheme.colorScheme.tertiary
+        val colors = listOf(primaryColor, secondaryColor, tertiaryColor)
 
         // 定义项目列表
         val items = listOf("条目1", "条目2", "条目3", "条目4", "条目5", "条目6")
@@ -70,7 +72,8 @@ fun LuckyWheelCard() {
                 val arrowAngle = 270
                 val itemsCount = items.size
                 val anglePerItem = 360f / itemsCount
-                val selectedIndex = (((360 - normalizedRotationDegrees + arrowAngle) % 360) / anglePerItem).toInt() % itemsCount
+                val selectedIndex =
+                    (((360 - normalizedRotationDegrees + arrowAngle) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
                 Toast.makeText(context, "Selected: $selected", Toast.LENGTH_SHORT).show()
@@ -88,8 +91,8 @@ fun LuckyWheelCard() {
                 items.indices.forEach { index ->
                     val startAngle = (360f / items.size * index + currentRotationDegrees) % 360
                     val sweepAngle = 360f / items.size
-                    val color =
-                        if (index % 2 == 0) secondaryColor else primaryColor
+                    val colorIndex = index % 3
+                    val color = colors[colorIndex]
                     drawArc(
                         color = color,
                         startAngle = startAngle,
@@ -132,7 +135,7 @@ fun LuckyWheelCard() {
                     lineTo(center.x + 10, center.y - radius)
                     close()
                 }
-                drawPath(path, androidx.compose.ui.graphics.Color.Red)
+                drawPath(path, primaryColor)
             }
 
             Button(onClick = {
