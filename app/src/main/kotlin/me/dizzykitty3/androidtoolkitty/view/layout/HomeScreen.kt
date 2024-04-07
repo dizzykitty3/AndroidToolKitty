@@ -29,6 +29,7 @@ import me.dizzykitty3.androidtoolkitty.view.card.CheckAppOnAppMarketCard
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
 import me.dizzykitty3.androidtoolkitty.view.card.GreetingText
+import me.dizzykitty3.androidtoolkitty.view.card.LuckyWheelCard
 import me.dizzykitty3.androidtoolkitty.view.card.SocialMediaProfileCard
 import me.dizzykitty3.androidtoolkitty.view.card.SystemSettingsCard
 import me.dizzykitty3.androidtoolkitty.view.card.UnicodeCard
@@ -51,6 +52,7 @@ private const val CARD_7 = "card_unicode"
 private const val CARD_8 = "card_google_maps"
 private const val CARD_9 = "card_open_app_on_google_play"
 private const val CARD_10 = "card_android_versions"
+private const val CARD_11 = "card_lucky_wheel"
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
@@ -105,6 +107,7 @@ fun HomeScreen(navController: NavHostController) {
             CARD_8 to settingsViewModel.getCardShowedState(context, CARD_8),
             CARD_9 to settingsViewModel.getCardShowedState(context, CARD_9),
             CARD_10 to settingsViewModel.getCardShowedState(context, CARD_10),
+            CARD_11 to settingsViewModel.getCardShowedState(context, CARD_11),
         )
 
         cardMapping.forEach { (cardName, isShow) ->
@@ -120,6 +123,7 @@ fun HomeScreen(navController: NavHostController) {
                     CARD_8 -> GoogleMapsCard()
                     CARD_9 -> CheckAppOnAppMarketCard()
                     CARD_10 -> AndroidVersionsCard()
+                    CARD_11 -> LuckyWheelCard()
                 }
             }
         }
