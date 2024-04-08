@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -24,11 +23,11 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowRight
-import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.outlined.Casino
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -55,6 +54,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import kotlin.math.cos
 import kotlin.math.sin
@@ -64,7 +64,7 @@ import kotlin.random.Random
 fun LuckyWheelCard() {
     // 使用CustomCard布局展示幸运轮盘
     CustomCard(
-        icon = Icons.AutoMirrored.Outlined.MenuBook,
+        icon = Icons.Outlined.Casino,
         title = R.string.lucky_spinning_wheel
     ) {
         // 初始化轮盘项目列表
@@ -84,9 +84,9 @@ fun LuckyWheelCard() {
         // Material Design颜色主题
         val colors = List(3) { index ->
             when (index) {
-                0 -> MaterialTheme.colorScheme.primary
-                1 -> MaterialTheme.colorScheme.secondary
-                else -> MaterialTheme.colorScheme.tertiary
+                0 -> MaterialTheme.colorScheme.primaryContainer
+                1 -> MaterialTheme.colorScheme.secondaryContainer
+                else -> MaterialTheme.colorScheme.tertiaryContainer
             }
         }
 
@@ -109,7 +109,7 @@ fun LuckyWheelCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                Toast.makeText(context, "Selected: $selected", Toast.LENGTH_SHORT).show()
+                ToastService(context).toast("Selected: $selected")
                 rotationDegrees = targetRotationDegrees % 360
             }
         }
