@@ -60,14 +60,16 @@ import kotlin.random.Random
 
 @Composable
 fun LuckyWheelCard() {
+    // 使用CustomCard布局展示幸运轮盘
     CustomCard(
         icon = Icons.AutoMirrored.Outlined.MenuBook,
         title = R.string.lucky_spinning_wheel
     ) {
-        // 定义项目列表
+        // 初始化轮盘项目列表
         var items by remember { mutableStateOf(listOf("条目1", "条目2", "条目3", "条目4", "条目5", "条目6")) }
 
         val context = LocalContext.current
+        // 记住画笔设置，避免每次绘制时重新创建
         val paint = remember {
             android.graphics.Paint().apply {
                 color = android.graphics.Color.BLACK
@@ -77,29 +79,32 @@ fun LuckyWheelCard() {
         }
         var hasRotated by remember { mutableStateOf(false) }
 
-        // 颜色设置
-        val primaryColor = MaterialTheme.colorScheme.primary
-        val secondaryColor = MaterialTheme.colorScheme.secondary
-        val tertiaryColor = MaterialTheme.colorScheme.tertiary
-        val colors = listOf(primaryColor, secondaryColor, tertiaryColor)
+        // Material Design颜色主题
+        val colors = List(3) { index ->
+            when (index) {
+                0 -> MaterialTheme.colorScheme.primary
+                1 -> MaterialTheme.colorScheme.secondary
+                else -> MaterialTheme.colorScheme.tertiary
+            }
+        }
 
+        // 记忆旋转度数，用于控制动画
         var rotationDegrees by remember { mutableFloatStateOf(0f) }
         var targetRotationDegrees by remember { mutableFloatStateOf(0f) }
+        // 动画状态管理
         val currentRotationDegrees by animateFloatAsState(
             targetValue = targetRotationDegrees,
-            animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = ""
-
+            animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = "",
         )
 
-        // 计算指向元素
+        // 当动画结束时，计算并显示选中的项目
         LaunchedEffect(currentRotationDegrees) {
             if (currentRotationDegrees == targetRotationDegrees && hasRotated) {
                 val normalizedRotationDegrees = targetRotationDegrees % 360
-                val arrowAngle = 270
                 val itemsCount = items.size
                 val anglePerItem = 360f / itemsCount
                 val selectedIndex =
-                    (((360 - normalizedRotationDegrees + arrowAngle) % 360) / anglePerItem).toInt() % itemsCount
+                    (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
                 Toast.makeText(context, "Selected: $selected", Toast.LENGTH_SHORT).show()
@@ -111,14 +116,14 @@ fun LuckyWheelCard() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // 绘制转盘
             Canvas(modifier = Modifier.size(300.dp)) {
                 val center = Offset(size.width / 2, size.height / 2)
                 val radius = size.minDimension / 2
                 items.indices.forEach { index ->
                     val startAngle = (360f / items.size * index + currentRotationDegrees) % 360
                     val sweepAngle = 360f / items.size
-                    val colorIndex = index % 3
-                    val color = colors[colorIndex]
+                    val color = colors[index % colors.size]
                     drawArc(
                         color = color,
                         startAngle = startAngle,
@@ -128,26 +133,23 @@ fun LuckyWheelCard() {
                         topLeft = Offset(center.x - radius, center.y - radius)
                     )
 
-                    // 计算并绘制分隔线
+                    // 绘制分隔线
                     val endAngleRad = Math.toRadians((startAngle + sweepAngle).toDouble()).toFloat()
-                    val lineStart = center
                     val lineEnd = Offset(
                         center.x + radius * cos(endAngleRad),
                         center.y + radius * sin(endAngleRad)
                     )
                     drawLine(
                         color = Color.Black,
-                        start = lineStart,
+                        start = center,
                         end = lineEnd,
-                        strokeWidth = 2f // 根据需要调整分隔线的宽度
+                        strokeWidth = 2f
                     )
                 }
 
-                // 绘制文字
+                // 绘制项目文本
                 items.forEachIndexed { index, item ->
-                    val textAngleRad =
-                        Math.toRadians((360f / items.size * index + currentRotationDegrees + 360f / items.size / 2) % 360.toDouble())
-                            .toFloat()
+                    val textAngleRad = Math.toRadians((360f / items.size * index + currentRotationDegrees + 360f / items.size / 2) % 360.toDouble()).toFloat()
                     val textRadius = radius * 0.7f
                     drawContext.canvas.nativeCanvas.drawText(
                         item,
@@ -157,17 +159,17 @@ fun LuckyWheelCard() {
                     )
                 }
 
-                // 绘制箭头
-                val path = Path().apply {
-                    moveTo(center.x, center.y - radius - 15) // 此处假设“radius + 15”足以将箭头放在转盘外侧
-                    lineTo(center.x - 10, center.y - radius - 30) // 箭头底部的一个角，稍微更远离圆心
-                    lineTo(center.x + 10, center.y - radius - 30) // 箭头底部的另一个角
+                // 绘制指示箭头
+                val arrowPath = Path().apply {
+                    moveTo(center.x, center.y - radius - 15)
+                    lineTo(center.x - 10, center.y - radius - 30)
+                    lineTo(center.x + 10, center.y - radius - 30)
                     close()
                 }
-                drawPath(path, primaryColor)
+                drawPath(arrowPath, Color.Black)
             }
 
-            // 底部按钮
+            // 旋转按钮
             Button(onClick = {
                 hasRotated = true
                 val randomBaseCircles = 3
@@ -176,6 +178,7 @@ fun LuckyWheelCard() {
             }) {
                 Text(text = "开始旋转")
             }
+            // 可扩展列表，用于显示和修改项目列表
             ExpandableList(
                 items = items,
                 onItemsChange = { updatedItems -> items = updatedItems }
@@ -186,19 +189,21 @@ fun LuckyWheelCard() {
 
 @Composable
 fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
+    // 标记列表是否展开
     var expanded by remember { mutableStateOf(false) }
-    // 用于追踪哪个元素正在被编辑
+    // 正在编辑的元素索引，-1表示没有元素处于编辑状态
     var editingIndex by remember { mutableIntStateOf(-1) }
-    // 编辑中的文本
+    // 编辑中的文本列表，用于暂存编辑时的文本更改
     val editingText = remember { mutableStateListOf<String>().also { list -> items.forEach { list.add(it) } } }
 
+    // 当items更新时，同时更新编辑中的文本列表
     LaunchedEffect(items) {
         editingText.clear()
         editingText.addAll(items)
     }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        // 折叠/展开的横条
+        // 折叠/展开的头部，点击切换展开状态
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -213,16 +218,16 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                 text = items.joinToString(", "),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.weight(1f) // 让文本组件使用可用空间，但留下足够的空间给箭头图标
+                modifier = Modifier.weight(1f)
             )
             Icon(
                 imageVector = if (expanded) Icons.Default.ArrowDropDown else Icons.AutoMirrored.Filled.ArrowRight,
                 contentDescription = "Expand",
-                modifier = Modifier.padding(start = 8.dp) // 为箭头和文本之间提供一些空间
+                modifier = Modifier.padding(start = 8.dp)
             )
         }
 
-        // 当折叠状态为展开时显示的列表
+        // 展开状态下显示的可编辑列表
         AnimatedVisibility(visible = expanded) {
             Column {
                 LazyColumn(modifier = Modifier.heightIn(max = 200.dp)) {
@@ -236,6 +241,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                                 .background(Color(0xFFEEEEEE))
                                 .padding(8.dp)
                         ) {
+                            // 编辑状态显示输入框，否则显示文本
                             if (editingIndex == index) {
                                 TextField(
                                     value = editingText[index],
@@ -248,7 +254,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                                     modifier = Modifier.clickable {
                                         val updatedList = items.toMutableList().also { it[index] = editingText[index] }
                                         onItemsChange(updatedList)
-                                        editingIndex = -1 // 结束编辑状态
+                                        editingIndex = -1
                                     }
                                 )
                             } else {
@@ -257,7 +263,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                                     modifier = Modifier
                                         .weight(1f)
                                         .clickable {
-                                            editingIndex = index // 进入编辑状态
+                                            editingIndex = index
                                         }
                                 )
                                 Icon(
@@ -265,43 +271,46 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                                     contentDescription = "Remove",
                                     modifier = Modifier.clickable {
                                         val newList = items.toMutableList().apply { removeAt(index) }
-                                        if (index == editingIndex) {
-                                            editingIndex = -1 // 重置编辑状态
-                                        } else if (index < editingIndex) {
-                                            editingIndex -= 1 // 调整编辑索引
-                                        }
                                         onItemsChange(newList)
+                                        // 重置或调整编辑索引
+                                        if (index == editingIndex) {
+                                            editingIndex = -1
+                                        } else if (index < editingIndex) {
+                                            editingIndex -= 1
+                                        }
                                     }
                                 )
                             }
                         }
                     }
                 }
-                Spacer(modifier = Modifier.height(8.dp)) // 添加一点间距
+                Spacer(modifier = Modifier.height(8.dp))
+                // 添加新元素的按钮
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(10.dp)) // 应用圆角矩形
-                        .background(Color(0xFFEEEEEE)) // 设置背景色
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(Color(0xFFEEEEEE))
                         .clickable {
-                            val newItem = "新条目${items.size + 1}" // 创建新项目的文本
-                            val updatedItems = items + newItem // 将新项目添加到当前项目列表中
-                            onItemsChange(updatedItems) // 通过回调更新上层组件的items列表
-                            editingText.add(newItem)
+                            val newItem = "新条目${items.size + 1}"
+                            val updatedItems = items + newItem
+                            onItemsChange(updatedItems)
+                            editingText.add(newItem) // 同时更新编辑中的文本列表
                         }
                         .padding(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center // 图标居中
+                    horizontalArrangement = Arrangement.Center
                 ) {
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = "Add",
-                        modifier = Modifier.size(24.dp) // 设置图标大小
+                        modifier = Modifier.size(24.dp)
                     )
                 }
             }
         }
     }
 }
+
 
 
