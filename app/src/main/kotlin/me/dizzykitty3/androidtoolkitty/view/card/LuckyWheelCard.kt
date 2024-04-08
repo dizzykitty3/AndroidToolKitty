@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -24,11 +23,11 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowRight
-import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.outlined.Casino
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -55,6 +54,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import kotlin.math.cos
 import kotlin.math.sin
@@ -64,7 +64,7 @@ import kotlin.random.Random
 fun LuckyWheelCard() {
     // 使用CustomCard布局展示幸运轮盘
     CustomCard(
-        icon = Icons.AutoMirrored.Outlined.MenuBook,
+        icon = Icons.Outlined.Casino,
         title = R.string.lucky_spinning_wheel
     ) {
         // 初始化轮盘项目列表
@@ -85,8 +85,8 @@ fun LuckyWheelCard() {
         val colors = List(3) { index ->
             when (index) {
                 0 -> MaterialTheme.colorScheme.primary
-                1 -> MaterialTheme.colorScheme.secondary
-                else -> MaterialTheme.colorScheme.tertiary
+                1 -> MaterialTheme.colorScheme.inversePrimary
+                else -> MaterialTheme.colorScheme.secondary
             }
         }
 
@@ -109,7 +109,7 @@ fun LuckyWheelCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                Toast.makeText(context, "Selected: $selected", Toast.LENGTH_SHORT).show()
+                ToastService(context).toast("Selected: $selected")
                 rotationDegrees = targetRotationDegrees % 360
             }
         }
@@ -118,6 +118,8 @@ fun LuckyWheelCard() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            val primary = MaterialTheme.colorScheme.primary
+
             // 绘制转盘
             Canvas(modifier = Modifier.size(300.dp)) {
                 val center = Offset(size.width / 2, size.height / 2)
@@ -168,7 +170,7 @@ fun LuckyWheelCard() {
                     lineTo(center.x + 10, center.y - radius - 30)
                     close()
                 }
-                drawPath(arrowPath, Color.Black)
+                drawPath(arrowPath, primary)
             }
 
             // 旋转按钮
@@ -223,7 +225,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                 .clickable { expanded = !expanded }
                 .padding(8.dp)
                 .clip(RoundedCornerShape(10.dp))
-                .background(Color(0xFFEEEEEE))
+                .background(MaterialTheme.colorScheme.surfaceVariant)
                 .padding(8.dp)
         ) {
             Text(
@@ -250,7 +252,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                                 .fillMaxWidth()
                                 .padding(4.dp)
                                 .clip(RoundedCornerShape(10.dp))
-                                .background(Color(0xFFEEEEEE))
+                                .background(MaterialTheme.colorScheme.surfaceVariant)
                                 .padding(8.dp)
                         ) {
                             // 编辑状态显示输入框，否则显示文本
@@ -303,7 +305,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(10.dp))
-                        .background(Color(0xFFEEEEEE))
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
                         .clickable {
                             val newItem = "新条目${items.size + 1}"
                             val updatedItems = items + newItem
