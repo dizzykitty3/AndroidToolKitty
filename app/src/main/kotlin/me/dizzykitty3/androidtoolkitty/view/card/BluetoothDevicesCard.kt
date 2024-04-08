@@ -72,7 +72,7 @@ fun BluetoothDevicesCard() {
                 // Get system service
                 bluetoothAdapter = BluetoothService(context).bluetoothAdapter()
 
-                // Show current device name and paired devices' name and MAC address
+                // Show current device name, paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {
                     pairedDevices = bluetoothAdapter!!.bondedDevices
                     size = pairedDevices.size
