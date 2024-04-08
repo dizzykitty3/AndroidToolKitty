@@ -9,9 +9,9 @@
     <string name="debugging">Debugging</string>
     <string name="show_more">show more</string>
     <string name="show_less">show less</string>
-    <string name="permission_not_granted">Permission not granted.</string>
+    <string name="tap_allow_to_continue">Tap \"Allow\" to continue</string>
     <string name="unknown">Unknown</string>
-    <string name="check_permission">Check permission</string>
+    <string name="manually_grant">Manually grant</string>
     <string name="warning">Warning</string>
 
     <!--Home screen: top tip-->
