@@ -34,18 +34,18 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        Log.d(TAG, " onCreate called")
+        Log.d(TAG, "onCreate called")
     }
 
     override fun onResume() {
         super.onResume()
         getSettingsSharedPreferences()
-        Log.d(TAG, " onResume called")
+        Log.d(TAG, "onResume called")
     }
 
     private fun getSettingsSharedPreferences() {
         isAutoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(this)
-        Log.d(TAG, " settings sp got")
+        Log.d(TAG, "settings sp got")
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -57,6 +57,6 @@ class MainActivity : ComponentActivity() {
     override fun onStop() {
         super.onStop()
         currentFocus?.clearFocus() // To collapse keyboard
-        Log.d(TAG, " focus cleared")
+        Log.d(TAG, "focus cleared")
     }
 }
