@@ -1,5 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -231,10 +233,15 @@ fun VolumeCard() {
         }
 
         if (mCustomVolume > 0) {
-            Button(
-                onClick = { showVolumeDialog = true }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.End
             ) {
-                Text(text = stringResource(R.string.edit))
+                Button(
+                    onClick = { showVolumeDialog = true }
+                ) {
+                    Text(text = stringResource(R.string.edit))
+                }
             }
         }
     }
