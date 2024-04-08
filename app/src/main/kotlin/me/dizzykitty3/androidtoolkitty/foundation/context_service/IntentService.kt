@@ -1,11 +1,13 @@
 package me.dizzykitty3.androidtoolkitty.foundation.context_service
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
+import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
@@ -141,5 +143,12 @@ class IntentService(private val context: Context) {
         } catch (e: Exception) {
             Log.e(TAG, ">>>ERROR<<< openCertainAppOnPlayStore: $e")
         }
+    }
+
+    fun restartApp() {
+        val intent = Intent(context, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        context.startActivity(intent)
+        (context as Activity).finish()
     }
 }
