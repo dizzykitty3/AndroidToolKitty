@@ -89,17 +89,23 @@ fun BluetoothDevicesCard() {
 
         if (showResult) {
             Text(text = "${stringResource(id = R.string.current_device)}\n${bluetoothAdapter?.name}\n")
-            if (size > 0) {
+
+            if (size == 0) {
+                Text(text = stringResource(id = R.string.no_paired_devices))
+            } else {
                 Text(text = stringResource(id = R.string.paired_devices))
+
                 pairedDevices.forEach { device ->
                     val deviceInfo = "${device.name} (${type(device.type)})\n${device.address}\n"
                     Text(text = deviceInfo)
                 }
+
                 TextButton(
                     onClick = { showDialog = true }
                 ) {
                     Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
                 }
+
                 if (showDialog) {
                     AlertDialog(
                         onDismissRequest = { showDialog = false },
@@ -119,8 +125,6 @@ fun BluetoothDevicesCard() {
                         }
                     )
                 }
-            } else {
-                Text(text = stringResource(id = R.string.no_paired_devices))
             }
         }
     }
