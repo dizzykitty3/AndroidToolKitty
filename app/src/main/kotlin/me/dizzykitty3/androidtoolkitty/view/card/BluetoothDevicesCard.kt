@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.content.pm.PackageManager
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -19,6 +20,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -30,6 +32,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.SnackbarService
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 
 @SuppressLint("InlinedApi")
@@ -96,8 +99,12 @@ fun BluetoothDevicesCard() {
                 Text(text = stringResource(id = R.string.paired_devices))
 
                 pairedDevices.forEach { device ->
-                    val deviceInfo = "${device.name} (${type(device.type)})\n${device.address}\n"
-                    Text(text = deviceInfo)
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(text = "${device.name} (${type(device.type)})")
+                        CustomIconPopup(device.address)
+                    }
                 }
 
                 TextButton(

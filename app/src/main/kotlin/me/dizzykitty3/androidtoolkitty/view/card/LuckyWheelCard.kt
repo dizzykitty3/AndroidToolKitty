@@ -85,8 +85,8 @@ fun LuckyWheelCard() {
         val colors = List(3) { index ->
             when (index) {
                 0 -> MaterialTheme.colorScheme.primary
-                1 -> MaterialTheme.colorScheme.tertiary
-                else -> MaterialTheme.colorScheme.surfaceBright
+                1 -> MaterialTheme.colorScheme.inversePrimary
+                else -> MaterialTheme.colorScheme.secondary
             }
         }
 
@@ -225,7 +225,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                 .clickable { expanded = !expanded }
                 .padding(8.dp)
                 .clip(RoundedCornerShape(10.dp))
-                .background(Color(0xFFEEEEEE))
+                .background(MaterialTheme.colorScheme.surfaceVariant)
                 .padding(8.dp)
         ) {
             Text(
@@ -252,7 +252,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                                 .fillMaxWidth()
                                 .padding(4.dp)
                                 .clip(RoundedCornerShape(10.dp))
-                                .background(Color(0xFFEEEEEE))
+                                .background(MaterialTheme.colorScheme.surfaceVariant)
                                 .padding(8.dp)
                         ) {
                             // 编辑状态显示输入框，否则显示文本
@@ -305,7 +305,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(10.dp))
-                        .background(Color(0xFFEEEEEE))
+                        .background(MaterialTheme.colorScheme.surfaceVariant)
                         .clickable {
                             val newItem = "新条目${items.size + 1}"
                             val updatedItems = items + newItem
