@@ -101,7 +101,11 @@
 
     <!--Home screen: test-->
     <string name="test">test</string>
+
+    <!--Home screen: lucky spinning wheel-->
     <string name="lucky_spinning_wheel">Lucky spinning wheel</string>
+
+    <!--Home screen: bluetooth devices-->
     <string name="bluetooth_devices">Bluetooth devices</string>
     <string name="bluetooth_disabled">Bluetooth disabled</string>
     <string name="show_paired_devices">Show paired devices</string>
