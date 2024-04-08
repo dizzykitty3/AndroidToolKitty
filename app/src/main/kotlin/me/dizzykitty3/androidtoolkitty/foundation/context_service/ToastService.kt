@@ -9,7 +9,7 @@ class ToastService(private val context: Context) {
         private const val TAG = "ToastService"
     }
 
-    fun toast(toastText: String) = Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show()
+    fun toast(message: String) = Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 
     fun toastAndLog(logEvent: String) {
         Log.d(TAG, logEvent)

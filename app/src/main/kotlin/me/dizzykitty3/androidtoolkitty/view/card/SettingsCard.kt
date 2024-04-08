@@ -1,12 +1,13 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
+import android.view.View
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,12 +17,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.SnackbarService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomBoldText
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
@@ -38,6 +42,7 @@ fun SettingsCard(navController: NavHostController) {
         title = R.string.settings
     ) {
         val context = LocalContext.current
+        val view = LocalView.current
 
         val autoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(context)
         var mAutoClearClipboard by remember { mutableStateOf(autoClearClipboard) }
@@ -50,6 +55,8 @@ fun SettingsCard(navController: NavHostController) {
 
         val volumeSlideSteps = SettingsViewModel().getIsSliderIncrementFivePercent(context)
         var mVolumeSlideSteps by remember { mutableStateOf(volumeSlideSteps) }
+
+        val primary = MaterialTheme.colorScheme.primary.toArgb()
 
         CustomGroupTitleText(R.string.general)
 
@@ -95,7 +102,7 @@ fun SettingsCard(navController: NavHostController) {
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.clickable {
                     mDynamicColor = !mDynamicColor
-                    onClickDynamicColorButton(mDynamicColor, context)
+                    onClickDynamicColorButton(mDynamicColor, primary, view)
                 }
             ) {
                 Text(text = stringResource(R.string.material_you_dynamic_color))
@@ -104,7 +111,7 @@ fun SettingsCard(navController: NavHostController) {
                     checked = mDynamicColor,
                     onCheckedChange = {
                         mDynamicColor = it
-                        onClickDynamicColorButton(it, context)
+                        onClickDynamicColorButton(it, primary, view)
                     }
                 )
             }
@@ -163,12 +170,20 @@ fun SettingsCard(navController: NavHostController) {
     }
 }
 
-private fun onClickDynamicColorButton(isDynamicColor: Boolean, context: Context) {
+private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view: View) {
+    val context = view.context
     SettingsViewModel().setIsDynamicColor(context, isDynamicColor)
 
-    val intent = Intent(context, MainActivity::class.java)
-    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-    context.startActivity(intent)
+    SnackbarService(view).snackbar(
+        message = "Requires restart, do it now?",
+        buttonText = "Restart",
+        buttonColor = color,
+        buttonClickListener = {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
 
-    (context as Activity).finish()
+            (context as Activity).finish()
+        }
+    )
 }
