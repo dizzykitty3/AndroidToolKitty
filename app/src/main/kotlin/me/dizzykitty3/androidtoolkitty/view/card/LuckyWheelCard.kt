@@ -241,8 +241,8 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                                     imageVector = Icons.Default.Check,
                                     contentDescription = "Done",
                                     modifier = Modifier.clickable {
-                                        val newList = items.toMutableList().apply { removeAt(index) }
-                                        onItemsChange(newList)
+                                        val updatedList = items.toMutableList().also { it[index] = editingText[index] }
+                                        onItemsChange(updatedList)
                                         editingIndex = -1 // 结束编辑状态
                                     }
                                 )
