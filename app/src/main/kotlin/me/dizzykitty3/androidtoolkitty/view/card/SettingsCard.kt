@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.app.Activity
-import android.content.Intent
 import android.view.View
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -23,8 +22,8 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
-import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.SnackbarService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomBoldText
@@ -175,15 +174,9 @@ private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view:
     SettingsViewModel().setIsDynamicColor(context, isDynamicColor)
 
     SnackbarService(view).snackbar(
-        message = "Requires restart, do it now?",
-        buttonText = "Restart",
+        message = context.getString(R.string.requires_restart_do_it_now),
+        buttonText = context.getString(R.string.restart),
         buttonColor = color,
-        buttonClickListener = {
-            val intent = Intent(context, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-
-            (context as Activity).finish()
-        }
+        buttonClickListener = { IntentService(context).restartApp() }
     )
 }

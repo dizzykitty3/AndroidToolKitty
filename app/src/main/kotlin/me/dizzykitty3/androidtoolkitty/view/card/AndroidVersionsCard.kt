@@ -14,10 +14,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomAndroidApiLevelAndName
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSingleLineText
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomItalicText
 
 @Composable
 fun AndroidVersionsCard() {
@@ -33,21 +34,21 @@ fun AndroidVersionsCard() {
             Column(
                 modifier = Modifier.weight(0.4f)
             ) {
-                CustomSingleLineText(text = "Android 15")
-                CustomSingleLineText(text = "Android 14")
-                CustomSingleLineText(text = "Android 13")
-                CustomSingleLineText(text = "Android 12L")
-                CustomSingleLineText(text = "Android 12")
+                AndroidVersion(text = "Android 15")
+                AndroidVersion(text = "Android 14")
+                AndroidVersion(text = "Android 13")
+                AndroidVersion(text = "Android 12L")
+                AndroidVersion(text = "Android 12")
             }
 
             Column(
                 modifier = Modifier.weight(0.6f)
             ) {
-                CustomAndroidApiLevelAndName(text = "API 35, VanillaIceCream")
-                CustomAndroidApiLevelAndName(text = "API 34, UpsideDownCake")
-                CustomAndroidApiLevelAndName(text = "API 33, Tiramisu")
-                CustomAndroidApiLevelAndName(text = "API 32, Sv2")
-                CustomAndroidApiLevelAndName(text = "API 31, S")
+                AndroidApiLevelAndName(text = "API 35, VanillaIceCream")
+                AndroidApiLevelAndName(text = "API 34, UpsideDownCake")
+                AndroidApiLevelAndName(text = "API 33, Tiramisu")
+                AndroidApiLevelAndName(text = "API 32, Sv2")
+                AndroidApiLevelAndName(text = "API 31, S")
             }
         }
 
@@ -58,59 +59,59 @@ fun AndroidVersionsCard() {
                 Column(
                     modifier = Modifier.weight(0.4f)
                 ) {
-                    CustomSingleLineText(text = "Android 11")
-                    CustomSingleLineText(text = "Android 10")
-                    CustomSingleLineText(text = "Android 9")
-                    CustomSingleLineText(text = "Android 8.1")
-                    CustomSingleLineText(text = "Android 8")
-                    CustomSingleLineText(text = "Android 7.1.1")
-                    CustomSingleLineText(text = "Android 7")
-                    CustomSingleLineText(text = "Android 6")
-                    CustomSingleLineText(text = "Android 5.1")
-                    CustomSingleLineText(text = "Android 5")
-                    CustomSingleLineText(text = "Android 4.4W")
-                    CustomSingleLineText(text = "Android 4.4")
-                    CustomSingleLineText(text = "Android 4.3")
-                    CustomSingleLineText(text = "Android 4.2")
-                    CustomSingleLineText(text = "Android 4.1")
-                    CustomSingleLineText(text = "Android 4.0.3")
-                    CustomSingleLineText(text = "Android 4.0")
-                    CustomSingleLineText(text = "Android 3.2")
-                    CustomSingleLineText(text = "Android 3.1")
-                    CustomSingleLineText(text = "Android 3.0")
-                    CustomSingleLineText(text = "Android 2.3.3")
-                    CustomSingleLineText(text = "Android 2.3")
-                    CustomSingleLineText(text = "Android 2.2")
-                    CustomSingleLineText(text = "Android 2.1")
+                    AndroidVersion(text = "Android 11")
+                    AndroidVersion(text = "Android 10")
+                    AndroidVersion(text = "Android 9")
+                    AndroidVersion(text = "Android 8.1")
+                    AndroidVersion(text = "Android 8")
+                    AndroidVersion(text = "Android 7.1.1")
+                    AndroidVersion(text = "Android 7")
+                    AndroidVersion(text = "Android 6")
+                    AndroidVersion(text = "Android 5.1")
+                    AndroidVersion(text = "Android 5")
+                    AndroidVersion(text = "Android 4.4W")
+                    AndroidVersion(text = "Android 4.4")
+                    AndroidVersion(text = "Android 4.3")
+                    AndroidVersion(text = "Android 4.2")
+                    AndroidVersion(text = "Android 4.1")
+                    AndroidVersion(text = "Android 4.0.3")
+                    AndroidVersion(text = "Android 4.0")
+                    AndroidVersion(text = "Android 3.2")
+                    AndroidVersion(text = "Android 3.1")
+                    AndroidVersion(text = "Android 3.0")
+                    AndroidVersion(text = "Android 2.3.3")
+                    AndroidVersion(text = "Android 2.3")
+                    AndroidVersion(text = "Android 2.2")
+                    AndroidVersion(text = "Android 2.1")
                 }
 
                 Column(
                     modifier = Modifier.weight(0.6f)
                 ) {
-                    CustomAndroidApiLevelAndName(text = "API 30, R")
-                    CustomAndroidApiLevelAndName(text = "API 29, Q")
-                    CustomAndroidApiLevelAndName(text = "API 28, Pie")
-                    CustomAndroidApiLevelAndName(text = "API 27, Oreo")
-                    CustomAndroidApiLevelAndName(text = "API 26, Oreo")
-                    CustomAndroidApiLevelAndName(text = "API 25, Nougat")
-                    CustomAndroidApiLevelAndName(text = "API 24, Nougat")
-                    CustomAndroidApiLevelAndName(text = "API 23, Marshmallow")
-                    CustomAndroidApiLevelAndName(text = "API 22, Lollipop")
-                    CustomAndroidApiLevelAndName(text = "API 21, Lollipop")
-                    CustomAndroidApiLevelAndName(text = "API 20, KitKat Wear")
-                    CustomAndroidApiLevelAndName(text = "API 19, KitKat")
-                    CustomAndroidApiLevelAndName(text = "API 18, Jelly Bean")
-                    CustomAndroidApiLevelAndName(text = "API 17, Jelly Bean")
-                    CustomAndroidApiLevelAndName(text = "API 16, Jelly Bean")
-                    CustomAndroidApiLevelAndName(text = "API 15, IceCreamSandwich")
-                    CustomAndroidApiLevelAndName(text = "API 14, IceCreamSandwich")
-                    CustomAndroidApiLevelAndName(text = "API 13, Honeycomb")
-                    CustomAndroidApiLevelAndName(text = "API 12, Honeycomb")
-                    CustomAndroidApiLevelAndName(text = "API 11, Honeycomb")
-                    CustomAndroidApiLevelAndName(text = "API 10, Gingerbread")
-                    CustomAndroidApiLevelAndName(text = "API 9, Gingerbread")
-                    CustomAndroidApiLevelAndName(text = "API 8, Froyo")
-                    CustomAndroidApiLevelAndName(text = "API 7, Eclair")
+                    AndroidApiLevelAndName(text = "API 30, R")
+                    AndroidApiLevelAndName(text = "API 29, Q")
+                    AndroidApiLevelAndName(text = "API 28, Pie")
+                    AndroidApiLevelAndName(text = "API 27, Oreo")
+                    AndroidApiLevelAndName(text = "API 26, Oreo")
+                    AndroidApiLevelAndName(text = "API 25, Nougat")
+                    AndroidApiLevelAndName(text = "API 24, Nougat")
+                    AndroidApiLevelAndName(text = "API 23, Marshmallow")
+                    AndroidApiLevelAndName(text = "API 22, Lollipop")
+                    AndroidApiLevelAndName(text = "API 21, Lollipop")
+                    AndroidApiLevelAndName(text = "API 20, KitKat Wear")
+                    AndroidApiLevelAndName(text = "API 19, KitKat")
+                    AndroidApiLevelAndName(text = "API 18, Jelly Bean")
+                    AndroidApiLevelAndName(text = "API 17, Jelly Bean")
+                    AndroidApiLevelAndName(text = "API 16, Jelly Bean")
+                    AndroidApiLevelAndName(text = "API 15, IceCreamSandwich")
+                    AndroidApiLevelAndName(text = "API 14, IceCreamSandwich")
+                    AndroidApiLevelAndName(text = "API 13, Honeycomb")
+                    AndroidApiLevelAndName(text = "API 12, Honeycomb")
+                    AndroidApiLevelAndName(text = "API 11, Honeycomb")
+                    AndroidApiLevelAndName(text = "API 10, Gingerbread")
+                    AndroidApiLevelAndName(text = "API 9, Gingerbread")
+                    AndroidApiLevelAndName(text = "API 8, Froyo")
+                    AndroidApiLevelAndName(text = "API 7, Eclair")
                 }
             }
         }
@@ -125,4 +126,22 @@ fun AndroidVersionsCard() {
             }
         }
     }
+}
+
+@Composable
+private fun AndroidApiLevelAndName(text: String) {
+    Text(
+        text = buildAnnotatedString { CustomItalicText(text = text) },
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis
+    )
+}
+
+@Composable
+private fun AndroidVersion(text: String) {
+    Text(
+        text = text,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis
+    )
 }

@@ -1,14 +1,11 @@
 package me.dizzykitty3.androidtoolkitty.foundation.ui_component
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.AccountCircle
-import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -20,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -29,12 +25,9 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 
 @Composable
 fun CustomGradientText(
@@ -93,24 +86,6 @@ fun AnnotatedString.Builder.CustomItalicText(
 }
 
 @Composable
-fun CustomAndroidApiLevelAndName(text: String) {
-    return Text(
-        text = buildAnnotatedString { CustomItalicText(text = text) },
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis
-    )
-}
-
-@Composable
-fun CustomSingleLineText(text: String) {
-    Text(
-        text = text,
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis
-    )
-}
-
-@Composable
 fun CustomTip(
     resId: Int
 ) {
@@ -147,56 +122,6 @@ fun CustomTip(
             )
         }
     }
-}
-
-@Composable
-fun CardTitle(
-    resId: Int
-) {
-    Text(
-        modifier = Modifier.fillMaxWidth(),
-        text = stringResource(id = resId),
-        style = TextStyle.Default.copy(
-            fontFamily = FontFamily.Default,
-            fontWeight = FontWeight.Normal,
-            fontSize = 22.sp,
-            lineHeight = 28.0.sp,
-            letterSpacing = 0.0.sp
-        )
-    )
-}
-
-@Composable
-fun CustomDeveloperProfileLink(
-    name: String
-) {
-    Row {
-        val context = LocalContext.current
-
-        Icon(
-            imageVector = Icons.Outlined.AccountCircle,
-            contentDescription = null
-        )
-        CustomIconAndTextPadding()
-        Row(
-            modifier = Modifier.clickable {
-                IntentService(context).openUrl("${TUrl.profilePrefix(TUrl.Platform.GITHUB)}$name")
-            }
-        ) {
-            Text(
-                text = name,
-                color = MaterialTheme.colorScheme.primary
-            )
-
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = null,
-                modifier = Modifier.align(Alignment.CenterVertically),
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
-    }
-    CustomSpacerPadding()
 }
 
 @Composable

@@ -111,14 +111,14 @@ object TUrl {
     @Suppress("SpellCheckingInspection")
     enum class Platform(val prefix: String, val nameResId: Int) {
         BILIBILI_SEARCH("search.bilibili.com/upuser?keyword=", R.string.bilibili_search),
-        BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user),
+        BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
         GITHUB("github.com/", R.string.github),
-        PIXIV_ARTWORK("pixiv.net/artworks/", R.string.pixiv_artwork),
-        PIXIV_USER("pixiv.net/users/", R.string.pixiv_user),
+        PIXIV_ARTWORK("pixiv.net/artworks/", R.string.pixiv_artwork_id),
+        PIXIV_USER("pixiv.net/users/", R.string.pixiv_user_id),
         V2EX("v2ex.com/member/", R.string.v2ex),
         WEIBO("weibo.com/n/", R.string.weibo),
         X("x.com/", R.string.x),
-        YOUTUBE("youtube.com/@", R.string.youtube),
+        YOUTUBE("youtube.com/@", R.string.youtube_id),
         PLATFORM_NOT_ADDED_YET("", R.string.platform_not_added_yet)
     }
 

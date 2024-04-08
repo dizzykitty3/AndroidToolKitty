@@ -19,11 +19,15 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.BluetoothService
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.SnackbarService
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
@@ -39,6 +43,7 @@ private const val GRANTED = PackageManager.PERMISSION_GRANTED
 fun BluetoothDevicesCard() {
     CustomCardNoIcon(title = R.string.bluetooth_devices) {
         val context = LocalContext.current
+        val view = LocalView.current
 
         var showResult by remember { mutableStateOf(false) }
         var showDialog by remember { mutableStateOf(false) }
@@ -48,11 +53,18 @@ fun BluetoothDevicesCard() {
 
         var size by remember { mutableIntStateOf(0) }
 
+        val primary = MaterialTheme.colorScheme.primary.toArgb()
+
         Button(
             onClick = {
                 // Check permission
                 if (noPermission(context)) {
-                    ToastService(context).toast(context.getString(R.string.permission_not_granted))
+                    SnackbarService(view).snackbar(
+                        message = context.getString(R.string.tap_allow_to_continue),
+                        buttonText = context.getString(R.string.manually_grant),
+                        buttonColor = primary,
+                        buttonClickListener = { IntentService(context).openPermissionPage() }
+                    )
                     requestPermission(context)
                     return@Button
                 }
@@ -60,7 +72,7 @@ fun BluetoothDevicesCard() {
                 // Get system service
                 bluetoothAdapter = BluetoothService(context).bluetoothAdapter()
 
-                // Show current device name and paired devices' name and MAC address
+                // Show current device name, paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {
                     pairedDevices = bluetoothAdapter!!.bondedDevices
                     size = pairedDevices.size
@@ -77,17 +89,23 @@ fun BluetoothDevicesCard() {
 
         if (showResult) {
             Text(text = "${stringResource(id = R.string.current_device)}\n${bluetoothAdapter?.name}\n")
-            if (size > 0) {
+
+            if (size == 0) {
+                Text(text = stringResource(id = R.string.no_paired_devices))
+            } else {
                 Text(text = stringResource(id = R.string.paired_devices))
+
                 pairedDevices.forEach { device ->
                     val deviceInfo = "${device.name} (${type(device.type)})\n${device.address}\n"
                     Text(text = deviceInfo)
                 }
+
                 TextButton(
                     onClick = { showDialog = true }
                 ) {
                     Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
                 }
+
                 if (showDialog) {
                     AlertDialog(
                         onDismissRequest = { showDialog = false },
@@ -107,8 +125,6 @@ fun BluetoothDevicesCard() {
                         }
                     )
                 }
-            } else {
-                Text(text = stringResource(id = R.string.no_paired_devices))
             }
         }
     }
