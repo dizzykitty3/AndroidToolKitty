@@ -28,9 +28,6 @@ class IntentService(private val context: Context) {
         private const val SETTING_8 = "setting_date_and_time"
         private const val SETTING_9 = "setting_developer"
         private const val PACKAGE = "package"
-
-        @Suppress("SpellCheckingInspection")
-        private const val ANDROID_TOOLKITTY = "me.dizzykitty3.androidtoolkitty"
     }
 
     fun openUrl(finalUrl: String) {
@@ -70,7 +67,7 @@ class IntentService(private val context: Context) {
 
     fun openPermissionPage() {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        val uri = Uri.fromParts(PACKAGE, ANDROID_TOOLKITTY, null)
+        val uri = Uri.fromParts(PACKAGE, context.packageName, null)
         intent.setData(uri)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
