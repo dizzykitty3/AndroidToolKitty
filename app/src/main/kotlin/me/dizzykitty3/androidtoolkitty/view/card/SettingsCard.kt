@@ -175,8 +175,8 @@ private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view:
     SettingsViewModel().setIsDynamicColor(context, isDynamicColor)
 
     SnackbarService(view).snackbar(
-        message = "Requires restart, do it now?",
-        buttonText = "Restart",
+        message = context.getString(R.string.requires_restart_do_it_now),
+        buttonText = context.getString(R.string.restart),
         buttonColor = color,
         buttonClickListener = {
             val intent = Intent(context, MainActivity::class.java)
