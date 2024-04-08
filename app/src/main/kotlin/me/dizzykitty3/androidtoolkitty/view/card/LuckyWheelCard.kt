@@ -22,10 +22,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowRight
 import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.filled.ArrowRight
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.Button
@@ -136,7 +136,7 @@ fun LuckyWheelCard() {
                         center.y + radius * sin(endAngleRad)
                     )
                     drawLine(
-                        color = androidx.compose.ui.graphics.Color.Black,
+                        color = Color.Black,
                         start = lineStart,
                         end = lineEnd,
                         strokeWidth = 2f // 根据需要调整分隔线的宽度
@@ -192,6 +192,11 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
     // 编辑中的文本
     val editingText = remember { mutableStateListOf<String>().also { list -> items.forEach { list.add(it) } } }
 
+    LaunchedEffect(items) {
+        editingText.clear()
+        editingText.addAll(items)
+    }
+
     Column(modifier = Modifier.padding(16.dp)) {
         // 折叠/展开的横条
         Row(
@@ -211,7 +216,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                 modifier = Modifier.weight(1f) // 让文本组件使用可用空间，但留下足够的空间给箭头图标
             )
             Icon(
-                imageVector = if (expanded) Icons.Default.ArrowDropDown else Icons.Default.ArrowRight,
+                imageVector = if (expanded) Icons.Default.ArrowDropDown else Icons.AutoMirrored.Filled.ArrowRight,
                 contentDescription = "Expand",
                 modifier = Modifier.padding(start = 8.dp) // 为箭头和文本之间提供一些空间
             )
@@ -260,8 +265,12 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                                     contentDescription = "Remove",
                                     modifier = Modifier.clickable {
                                         val newList = items.toMutableList().apply { removeAt(index) }
+                                        if (index == editingIndex) {
+                                            editingIndex = -1 // 重置编辑状态
+                                        } else if (index < editingIndex) {
+                                            editingIndex -= 1 // 调整编辑索引
+                                        }
                                         onItemsChange(newList)
-                                        if (index == editingIndex) editingIndex = -1 // 如果删除的是正在编辑的元素
                                     }
                                 )
                             }
@@ -278,6 +287,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                             val newItem = "新条目${items.size + 1}" // 创建新项目的文本
                             val updatedItems = items + newItem // 将新项目添加到当前项目列表中
                             onItemsChange(updatedItems) // 通过回调更新上层组件的items列表
+                            editingText.add(newItem)
                         }
                         .padding(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
