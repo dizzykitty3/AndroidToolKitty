@@ -25,6 +25,10 @@ class IntentService(private val context: Context) {
         private const val SETTING_7 = "setting_locale"
         private const val SETTING_8 = "setting_date_and_time"
         private const val SETTING_9 = "setting_developer"
+        private const val PACKAGE = "package"
+
+        @Suppress("SpellCheckingInspection")
+        private const val ANDROID_TOOLKITTY = "me.dizzykitty3.androidtoolkitty"
     }
 
     fun openUrl(finalUrl: String) {
@@ -59,6 +63,21 @@ class IntentService(private val context: Context) {
         } catch (e: Exception) {
             ToastService(context).toast(context.getString(R.string.system_settings_unsupported))
             Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
+        }
+    }
+
+    fun openPermissionPage() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts(PACKAGE, ANDROID_TOOLKITTY, null)
+        intent.setData(uri)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
+        try {
+            startActivity(intent)
+            Log.d(TAG, "openPermissionPage")
+        } catch (e: Exception) {
+            ToastService(context).toast(context.getString(R.string.system_settings_unsupported))
+            Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
         }
     }
 

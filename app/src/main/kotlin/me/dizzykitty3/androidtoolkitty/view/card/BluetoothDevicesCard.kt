@@ -19,11 +19,15 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.BluetoothService
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.context_service.SnackbarService
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
@@ -39,6 +43,7 @@ private const val GRANTED = PackageManager.PERMISSION_GRANTED
 fun BluetoothDevicesCard() {
     CustomCardNoIcon(title = R.string.bluetooth_devices) {
         val context = LocalContext.current
+        val view = LocalView.current
 
         var showResult by remember { mutableStateOf(false) }
         var showDialog by remember { mutableStateOf(false) }
@@ -48,11 +53,18 @@ fun BluetoothDevicesCard() {
 
         var size by remember { mutableIntStateOf(0) }
 
+        val primary = MaterialTheme.colorScheme.primary.toArgb()
+
         Button(
             onClick = {
                 // Check permission
                 if (noPermission(context)) {
-                    ToastService(context).toast(context.getString(R.string.permission_not_granted))
+                    SnackbarService(view).snackbar(
+                        message = context.getString(R.string.permission_not_granted),
+                        buttonText = context.getString(R.string.check_permission),
+                        buttonColor = primary,
+                        buttonClickListener = { IntentService(context).openPermissionPage() }
+                    )
                     requestPermission(context)
                     return@Button
                 }
