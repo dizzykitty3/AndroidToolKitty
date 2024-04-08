@@ -93,7 +93,7 @@ fun CustomTip(
 }
 
 @Composable
-private fun CustomTip(
+fun CustomTip(
     formattedMessage: String
 ) {
     Card(
