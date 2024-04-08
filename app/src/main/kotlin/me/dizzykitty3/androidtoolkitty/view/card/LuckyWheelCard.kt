@@ -84,9 +84,9 @@ fun LuckyWheelCard() {
         // Material Design颜色主题
         val colors = List(3) { index ->
             when (index) {
-                0 -> MaterialTheme.colorScheme.primaryContainer
-                1 -> MaterialTheme.colorScheme.secondaryContainer
-                else -> MaterialTheme.colorScheme.tertiaryContainer
+                0 -> MaterialTheme.colorScheme.primary
+                1 -> MaterialTheme.colorScheme.tertiary
+                else -> MaterialTheme.colorScheme.surfaceBright
             }
         }
 
@@ -118,6 +118,8 @@ fun LuckyWheelCard() {
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            val primary = MaterialTheme.colorScheme.primary
+
             // 绘制转盘
             Canvas(modifier = Modifier.size(300.dp)) {
                 val center = Offset(size.width / 2, size.height / 2)
@@ -168,7 +170,7 @@ fun LuckyWheelCard() {
                     lineTo(center.x + 10, center.y - radius - 30)
                     close()
                 }
-                drawPath(arrowPath, Color.Black)
+                drawPath(arrowPath, primary)
             }
 
             // 旋转按钮
