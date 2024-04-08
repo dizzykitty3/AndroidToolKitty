@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.view.card
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.Schedule
@@ -18,9 +19,9 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomDeveloperProfileLink
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 
 @Suppress("SpellCheckingInspection")
 @Composable
@@ -28,8 +29,8 @@ fun AboutCard() {
     CustomCardNoIcon(
         title = R.string.about
     ) {
-        CustomDeveloperProfileLink("dizzykitty3")
-        CustomDeveloperProfileLink("HongjieCN")
+        DeveloperProfileLink("dizzykitty3")
+        DeveloperProfileLink("HongjieCN")
 
         Row(
             verticalAlignment = Alignment.CenterVertically
@@ -70,4 +71,37 @@ fun AboutCard() {
             Text(text = "${stringResource(R.string.version)} ${stringResource(R.string.version_number)}")
         }
     }
+}
+
+@Composable
+private fun DeveloperProfileLink(
+    name: String
+) {
+    Row {
+        val context = LocalContext.current
+
+        Icon(
+            imageVector = Icons.Outlined.AccountCircle,
+            contentDescription = null
+        )
+        CustomIconAndTextPadding()
+        Row(
+            modifier = Modifier.clickable {
+                IntentService(context).openUrl("${TUrl.profilePrefix(TUrl.Platform.GITHUB)}$name")
+            }
+        ) {
+            Text(
+                text = name,
+                color = MaterialTheme.colorScheme.primary
+            )
+
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
+    CustomSpacerPadding()
 }
