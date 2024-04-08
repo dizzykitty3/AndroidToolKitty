@@ -42,7 +42,7 @@
     <string name="github">GitHub</string>
     <string name="x">X（推特）</string>
     <string name="weibo">微博</string>
-    <string name="youtube">YouTube</string>
+    <string name="youtube_id">YouTube (UID)</string>
     <string name="platform_not_added_yet">这里没有我所想的社交平台</string>
     <string name="open_developer_options">开发者选项</string>
     <string name="requires_restart_do_it_now">这将需要重启 APP</string>
@@ -55,13 +55,13 @@
     </plurals>
     <string name="uploaded">已上传</string>
     <string name="all_help_welcomed">欢迎建议意见和PR！</string>
-    <string name="pixiv_artwork">pixiv (作品 ID)</string>
-    <string name="pixiv_user">pixiv (用户 ID)</string>
+    <string name="pixiv_artwork_id">pixiv (作品 ID)</string>
+    <string name="pixiv_user_id">pixiv (用户 ID)</string>
     <string name="v2ex">V2EX</string>
     <string name="open_caption_preferences">字幕偏好</string>
     <string name="common">一般</string>
     <string name="debugging">调试</string>
-    <string name="bilibili_user">哔哩哔哩 (用户 ID)</string>
+    <string name="bilibili_user_id">哔哩哔哩 (用户 UID)</string>
     <string name="clear_clipboard_on_launch">在启动时清除剪贴板</string>
     <string name="temp2">【开发中功能】提交平台名称</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开\"启动时自动清空剪贴板\"功能</string>
