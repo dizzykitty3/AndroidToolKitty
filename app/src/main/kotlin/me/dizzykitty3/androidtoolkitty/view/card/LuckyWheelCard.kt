@@ -20,12 +20,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowRight
 import androidx.compose.material.icons.automirrored.outlined.MenuBook
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.ArrowRight
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material3.Button
@@ -50,6 +51,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
@@ -195,11 +197,21 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
     var editingIndex by remember { mutableIntStateOf(-1) }
     // 编辑中的文本列表，用于暂存编辑时的文本更改
     val editingText = remember { mutableStateListOf<String>().also { list -> items.forEach { list.add(it) } } }
+    val listState = rememberLazyListState()
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     // 当items更新时，同时更新编辑中的文本列表
     LaunchedEffect(items) {
         editingText.clear()
         editingText.addAll(items)
+    }
+
+    // 当editingIndex或items的大小改变时，触发滚动到最新条目的逻辑
+    LaunchedEffect(editingIndex, items.size) {
+        if (editingIndex >= 0) {
+            listState.animateScrollToItem(index = editingIndex)
+            keyboardController?.show()
+        }
     }
 
     Column(modifier = Modifier.padding(16.dp)) {
@@ -221,7 +233,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                 modifier = Modifier.weight(1f)
             )
             Icon(
-                imageVector = if (expanded) Icons.Default.ArrowDropDown else Icons.AutoMirrored.Filled.ArrowRight,
+                imageVector = if (expanded) Icons.Default.ArrowDropDown else Icons.Default.ArrowRight,
                 contentDescription = "Expand",
                 modifier = Modifier.padding(start = 8.dp)
             )
@@ -230,7 +242,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
         // 展开状态下显示的可编辑列表
         AnimatedVisibility(visible = expanded) {
             Column {
-                LazyColumn(modifier = Modifier.heightIn(max = 200.dp)) {
+                LazyColumn(state = listState, modifier = Modifier.heightIn(max = 200.dp)) {
                     itemsIndexed(items) { index, item ->
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
@@ -246,7 +258,8 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                                 TextField(
                                     value = editingText[index],
                                     onValueChange = { editingText[index] = it },
-                                    modifier = Modifier.weight(1f)
+                                    modifier = Modifier.weight(1f),
+                                    singleLine = true
                                 )
                                 Icon(
                                     imageVector = Icons.Default.Check,
@@ -295,7 +308,8 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                             val newItem = "新条目${items.size + 1}"
                             val updatedItems = items + newItem
                             onItemsChange(updatedItems)
-                            editingText.add(newItem) // 同时更新编辑中的文本列表
+                            editingText.add(newItem)
+                            editingIndex = items.size // 设置新添加的条目为编辑状态
                         }
                         .padding(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
