@@ -19,9 +19,9 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.foundation.utils.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
-import me.dizzykitty3.androidtoolkitty.foundation.utils.ToastService
 
 @Suppress("SpellCheckingInspection")
 @Composable
@@ -45,8 +45,8 @@ fun AboutCard() {
             CustomIconAndTextPadding()
             Row(
                 modifier = Modifier.clickable {
-                    ToastService.toast(context.getString(R.string.all_help_welcomed))
-                    IntentService.openUrl(sourceCodeUrl)
+                    TToast.toast(context.getString(R.string.all_help_welcomed))
+                    TIntent.openUrl(sourceCodeUrl)
                 }
             ) {
                 Text(
@@ -85,7 +85,7 @@ private fun DeveloperProfileLink(
         CustomIconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
-                IntentService.openUrl("${TUrl.profilePrefix(TUrl.Platform.GITHUB)}$name")
+                TIntent.openUrl("${TUrl.profilePrefix(TUrl.Platform.GITHUB)}$name")
             }
         ) {
             Text(

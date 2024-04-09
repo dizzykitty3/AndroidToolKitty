@@ -10,7 +10,7 @@ import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-object IntentService {
+object TIntent {
     private const val TAG = "IntentService"
     private const val HTTPS = "https://"
     private const val GOOGLE_MAPS = "com.google.android.apps.maps"
@@ -58,7 +58,7 @@ object IntentService {
             startActivity(intent)
             Log.d(TAG, "onOpenSystemSettings: $settingType")
         } catch (e: Exception) {
-            ToastService.toast(app.getString(R.string.system_settings_unsupported))
+            TToast.toast(app.getString(R.string.system_settings_unsupported))
             Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
         }
     }
@@ -74,7 +74,7 @@ object IntentService {
             startActivity(intent)
             Log.d(TAG, "openPermissionPage")
         } catch (e: Exception) {
-            ToastService.toast(app.getString(R.string.system_settings_unsupported))
+            TToast.toast(app.getString(R.string.system_settings_unsupported))
             Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
         }
     }
@@ -108,12 +108,12 @@ object IntentService {
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
-                ToastService.toast(app.getString(R.string.google_play_not_installed))
+                TToast.toast(app.getString(R.string.google_play_not_installed))
                 Log.i(TAG, "Google Play not installed")
             }
 
             GOOGLE_MAPS -> {
-                ToastService.toast(app.getString(R.string.google_maps_not_installed))
+                TToast.toast(app.getString(R.string.google_maps_not_installed))
                 Log.i(TAG, "Google Maps not installed")
                 openAppOnMarket(GOOGLE_MAPS)
             }

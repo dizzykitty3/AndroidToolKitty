@@ -26,7 +26,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.foundation.utils.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 
 @Composable
 fun CheckAppOnAppMarketCard() {
@@ -45,7 +45,7 @@ fun CheckAppOnAppMarketCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { IntentService.openAppOnMarket(packageName) }
+                onDone = { TIntent.openAppOnMarket(packageName) }
             )
         )
         CustomSpacerPadding()
@@ -61,7 +61,7 @@ fun CheckAppOnAppMarketCard() {
 
             Row(
                 modifier = Modifier.clickable(
-                    onClick = { IntentService.openUrl(linkUrl) }
+                    onClick = { TIntent.openUrl(linkUrl) }
                 )
             ) {
                 Text(
@@ -75,7 +75,7 @@ fun CheckAppOnAppMarketCard() {
             }
         }
         TextButton(
-            onClick = { IntentService.openAppOnMarket(packageName) }
+            onClick = { TIntent.openAppOnMarket(packageName) }
         ) {
             Text(text = stringResource(R.string.open_on_google_play))
             Icon(
@@ -86,7 +86,7 @@ fun CheckAppOnAppMarketCard() {
         }
 
         TextButton(
-            onClick = { IntentService.openAppOnMarket(packageName, false) }
+            onClick = { TIntent.openAppOnMarket(packageName, false) }
         ) {
             Text(text = stringResource(R.string.open_on_other_markets))
             Icon(

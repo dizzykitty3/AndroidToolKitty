@@ -4,7 +4,7 @@ import android.util.Log
 import android.widget.Toast
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-object ToastService {
+object TToast {
     private const val TAG = "ToastService"
 
     @JvmStatic

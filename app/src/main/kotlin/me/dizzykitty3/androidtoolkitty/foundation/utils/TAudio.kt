@@ -4,7 +4,7 @@ import android.content.Context
 import android.media.AudioManager
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-object AudioService {
+object TAudio {
     private lateinit var audioManager: AudioManager
 
     private fun audioService() {

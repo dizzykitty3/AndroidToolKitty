@@ -35,8 +35,8 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.foundation.utils.AudioService
-import me.dizzykitty3.androidtoolkitty.foundation.utils.ToastService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TAudio
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,8 +50,8 @@ fun VolumeCard() {
 
         val settingsViewModel = remember { SettingsViewModel }
 
-        val currentVolume = AudioService.volume()
-        val maxVolume = AudioService.maxVolumeIndex()
+        val currentVolume = TAudio.volume()
+        val maxVolume = TAudio.maxVolumeIndex()
 
         val sliderIncrementFivePercent =
             settingsViewModel.getIsSliderIncrementFivePercent()
@@ -103,20 +103,20 @@ fun VolumeCard() {
                         selectedIndex = index
                         when (index) {
                             0 -> {
-                                AudioService.setVolume(0)
+                                TAudio.setVolume(0)
                             }
 
                             1 -> {
-                                AudioService.setVolume((0.3 * maxVolume).toInt())
+                                TAudio.setVolume((0.3 * maxVolume).toInt())
                             }
 
                             2 -> {
-                                AudioService.setVolume((0.5 * maxVolume).toInt())
+                                TAudio.setVolume((0.5 * maxVolume).toInt())
                             }
 
                             3 -> {
                                 if (mCustomVolume > 0) {
-                                    AudioService.setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
+                                    TAudio.setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
                                 } else
                                     showVolumeDialog = true
                             }
@@ -156,14 +156,14 @@ fun VolumeCard() {
                         Button(
                             onClick = {
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0 && newCustomVolume.toInt() != 0) {
-                                    ToastService.toast(context.getString(R.string.system_media_volume_levels_limited))
+                                    TToast.toast(context.getString(R.string.system_media_volume_levels_limited))
                                     return@Button
                                 } else {
                                     settingsViewModel.setCustomVolume(newCustomVolume.toInt())
                                     mCustomVolume = newCustomVolume.toInt()
                                     showVolumeOptionLabelDialog = true
                                     selectedIndex = 3
-                                    AudioService.setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
+                                    TAudio.setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
                                 }
                             }
                         ) {

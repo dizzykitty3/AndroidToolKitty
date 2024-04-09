@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import me.dizzykitty3.androidtoolkitty.foundation.theme.MyApplicationTheme
-import me.dizzykitty3.androidtoolkitty.foundation.utils.ClipboardService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TClipboard
 import me.dizzykitty3.androidtoolkitty.view.NavHostLayout
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus and isAutoClearClipboard) // Clipboard operations require window focus
-            ClipboardService.clear()
+            TClipboard.clear()
     }
 
     override fun onStop() {

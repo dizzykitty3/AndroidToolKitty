@@ -5,7 +5,7 @@ import android.bluetooth.BluetoothManager
 import android.content.Context
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-object BluetoothService {
+object TBluetooth {
     private lateinit var bluetoothManager: BluetoothManager
 
     private fun bluetoothService() {

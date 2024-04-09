@@ -28,10 +28,10 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
-import me.dizzykitty3.androidtoolkitty.foundation.utils.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
-import me.dizzykitty3.androidtoolkitty.foundation.utils.ToastService
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 private const val TAG = "SocialMediaProfileCard"
@@ -115,7 +115,7 @@ private fun onVisitProfileButton(context: Context, username: String, platformInd
     val platform = TUrl.Platform.entries.getOrNull(platformIndex) ?: return
 
     if (platform == TUrl.Platform.PLATFORM_NOT_ADDED_YET) {
-        ToastService.toastAndLog(
+        TToast.toastAndLog(
             "${context.getString(R.string.platform)}: \"$username\" ${
                 context.getString(
                     R.string.uploaded
@@ -126,6 +126,6 @@ private fun onVisitProfileButton(context: Context, username: String, platformInd
     }
 
     val prefix = platform.prefix
-    IntentService.openUrl("$prefix${TString.dropSpaces(username)}")
+    TIntent.openUrl("$prefix${TString.dropSpaces(username)}")
     Log.d(TAG, "onVisitProfile")
 }

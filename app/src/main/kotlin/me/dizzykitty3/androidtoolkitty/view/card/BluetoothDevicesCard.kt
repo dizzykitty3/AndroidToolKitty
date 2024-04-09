@@ -30,11 +30,11 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconPopup
-import me.dizzykitty3.androidtoolkitty.foundation.utils.BluetoothService
-import me.dizzykitty3.androidtoolkitty.foundation.utils.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
-import me.dizzykitty3.androidtoolkitty.foundation.utils.SnackbarService
-import me.dizzykitty3.androidtoolkitty.foundation.utils.ToastService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TBluetooth
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TSnackbar
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 
 @SuppressLint("InlinedApi")
 private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
@@ -63,18 +63,18 @@ fun BluetoothDevicesCard() {
             onClick = {
                 // Check permission
                 if (noPermission()) {
-                    SnackbarService(view).snackbar(
+                    TSnackbar(view).snackbar(
                         message = context.getString(R.string.tap_allow_to_continue),
                         buttonText = context.getString(R.string.manually_grant),
                         buttonColor = primary,
-                        buttonClickListener = { IntentService.openPermissionPage() }
+                        buttonClickListener = { TIntent.openPermissionPage() }
                     )
                     requestPermission()
                     return@Button
                 }
 
                 // Get system service
-                bluetoothAdapter = BluetoothService.bluetoothAdapter()
+                bluetoothAdapter = TBluetooth.bluetoothAdapter()
 
                 // Show current device name, paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {
@@ -85,7 +85,7 @@ fun BluetoothDevicesCard() {
                 }
 
                 // When Bluetooth is OFF
-                ToastService.toast(context.getString(R.string.bluetooth_disabled))
+                TToast.toast(context.getString(R.string.bluetooth_disabled))
             }
         ) {
             Text(text = stringResource(id = R.string.show_paired_devices))

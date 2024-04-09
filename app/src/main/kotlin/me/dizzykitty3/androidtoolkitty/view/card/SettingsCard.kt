@@ -32,9 +32,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
-import me.dizzykitty3.androidtoolkitty.foundation.utils.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
-import me.dizzykitty3.androidtoolkitty.foundation.utils.SnackbarService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TSnackbar
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 private const val EDIT_HOME_PAGE_SCREEN = "EditHomePageScreen"
@@ -185,10 +185,10 @@ private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view:
     val context = view.context
     SettingsViewModel.setIsDynamicColor(isDynamicColor)
 
-    SnackbarService(view).snackbar(
+    TSnackbar(view).snackbar(
         message = context.getString(R.string.requires_restart_do_it_now),
         buttonText = context.getString(R.string.restart),
         buttonColor = color,
-        buttonClickListener = { IntentService.restartApp() }
+        buttonClickListener = { TIntent.restartApp() }
     )
 }

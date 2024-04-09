@@ -13,8 +13,8 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
-import me.dizzykitty3.androidtoolkitty.foundation.utils.ClipboardService
-import me.dizzykitty3.androidtoolkitty.foundation.utils.ToastService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TClipboard
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
@@ -38,6 +38,6 @@ fun ClipboardCard() {
 }
 
 private fun onClearClipboardButton(context: Context) {
-    ClipboardService.clear()
-    ToastService.toastAndLog(context.getString(R.string.clipboard_cleared))
+    TClipboard.clear()
+    TToast.toastAndLog(context.getString(R.string.clipboard_cleared))
 }

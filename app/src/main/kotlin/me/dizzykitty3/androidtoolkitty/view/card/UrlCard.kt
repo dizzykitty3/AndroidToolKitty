@@ -25,7 +25,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomItalicText
-import me.dizzykitty3.androidtoolkitty.foundation.utils.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 
@@ -88,6 +88,6 @@ fun UrlCard() {
 private fun onClickVisitUrlButton(url: String) {
     if (url.isBlank()) return
 
-    IntentService.openUrl(TUrl.processUrl(TString.dropSpaces(url)))
+    TIntent.openUrl(TUrl.processUrl(TString.dropSpaces(url)))
     Log.d(TAG, "onClickVisitButton")
 }
