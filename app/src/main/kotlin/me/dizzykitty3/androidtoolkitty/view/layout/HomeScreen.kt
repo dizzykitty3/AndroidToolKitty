@@ -19,7 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomScreen
@@ -128,7 +128,7 @@ fun HomeScreen(navController: NavHostController) {
             }
         }
 
-        CustomCardNoIcon(title = R.string.test) {
+        CustomCard(title = R.string.test) {
             Button(
                 onClick = { navController.navigate(LUCKY_SPINNING_WHEEL_SCREEN) }
             ) {

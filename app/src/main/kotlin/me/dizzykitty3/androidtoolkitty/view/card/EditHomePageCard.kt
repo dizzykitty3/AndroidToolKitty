@@ -11,7 +11,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
@@ -29,7 +29,7 @@ private const val CARD_10 = "card_android_versions"
 
 @Composable
 fun EditHomePageCard() {
-    CustomCardNoIcon(
+    CustomCard(
         title = R.string.customize_my_home_page
     ) {
         val context = LocalContext.current

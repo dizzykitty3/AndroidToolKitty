@@ -27,7 +27,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.SnackbarService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomBoldText
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
@@ -37,7 +37,7 @@ private const val EDIT_HOME_PAGE_SCREEN = "EditHomePageScreen"
 
 @Composable
 fun SettingsCard(navController: NavHostController) {
-    CustomCardNoIcon(
+    CustomCard(
         title = R.string.settings
     ) {
         val context = LocalContext.current

@@ -7,7 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
@@ -24,7 +24,7 @@ private const val SETTING_9 = "setting_developer"
 
 @Composable
 fun EditAndroidSystemSettingsCardOptionsCard() {
-    CustomCardNoIcon(
+    CustomCard(
         title = R.string.customize_system_settings_card
     ) {
         val context = LocalContext.current

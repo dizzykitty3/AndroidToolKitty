@@ -31,7 +31,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.context_service.BluetoothServi
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.SnackbarService
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 
@@ -44,7 +44,7 @@ private const val GRANTED = PackageManager.PERMISSION_GRANTED
 @SuppressLint("MissingPermission")
 @Composable
 fun BluetoothDevicesCard() {
-    CustomCardNoIcon(title = R.string.bluetooth_devices) {
+    CustomCard(title = R.string.bluetooth_devices) {
         val context = LocalContext.current
         val view = LocalView.current
 
