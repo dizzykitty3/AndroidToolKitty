@@ -20,12 +20,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomBoldText
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
@@ -44,7 +44,6 @@ fun SettingsCard(navController: NavHostController) {
     CustomCard(
         title = R.string.settings
     ) {
-        val context = LocalContext.current
         val view = LocalView.current
 
         val settingsViewModel = remember { SettingsViewModel }
@@ -176,7 +175,7 @@ fun SettingsCard(navController: NavHostController) {
             negativeButtonText = null,
             onClickAction = {
                 settingsViewModel.clear()
-                (context as Activity).finish()
+                (app.baseContext as Activity).finish()
             }
         )
     }
