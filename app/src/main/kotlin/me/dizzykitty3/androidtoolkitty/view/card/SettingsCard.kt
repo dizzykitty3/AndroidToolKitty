@@ -5,7 +5,10 @@ import android.view.View
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -30,6 +33,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomBoldText
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupTitleText
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
@@ -138,7 +142,14 @@ fun SettingsCard(navController: NavHostController) {
         CustomGroupTitleText(R.string.customize)
 
         Button(
-            onClick = { navController.navigate(EDIT_HOME_PAGE_SCREEN) }) {
+            onClick = { navController.navigate(EDIT_HOME_PAGE_SCREEN) }
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Edit,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+            CustomIconAndTextPadding()
             Text(text = stringResource(R.string.customize_my_home_page))
         }
 
