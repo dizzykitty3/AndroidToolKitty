@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty.foundation.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
@@ -145,10 +146,10 @@ object TIntent {
     }
 
     @JvmStatic
-    fun restartApp() {
+    fun restartApp(context: Context) {
         val intent = Intent(app, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         app.startActivity(intent)
-        (app.baseContext as Activity).finish()
+        (context as Activity).finish()
     }
 }
