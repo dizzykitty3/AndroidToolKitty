@@ -24,6 +24,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomOneHandedMo
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
 import me.dizzykitty3.androidtoolkitty.view.card.AndroidVersionsCard
+import me.dizzykitty3.androidtoolkitty.view.card.BluetoothDevicesCard
 import me.dizzykitty3.androidtoolkitty.view.card.CheckAppOnAppMarketCard
 import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
@@ -52,6 +53,7 @@ private const val CARD_8 = "card_google_maps"
 private const val CARD_9 = "card_open_app_on_google_play"
 private const val CARD_10 = "card_android_versions"
 private const val CARD_11 = "card_lucky_wheel"
+private const val CARD_12 = "card_bluetooth_devices"
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
@@ -106,6 +108,7 @@ fun HomeScreen(navController: NavHostController) {
             CARD_9 to settingsViewModel.getCardShowedState(CARD_9),
             CARD_10 to settingsViewModel.getCardShowedState(CARD_10),
             CARD_11 to settingsViewModel.getCardShowedState(CARD_11),
+            CARD_12 to settingsViewModel.getCardShowedState(CARD_12)
         )
 
         cardMapping.forEach { (cardName, isShow) ->
@@ -122,6 +125,7 @@ fun HomeScreen(navController: NavHostController) {
                     CARD_9 -> CheckAppOnAppMarketCard()
                     CARD_10 -> AndroidVersionsCard()
                     CARD_11 -> LuckyWheelCard()
+                    CARD_12 -> BluetoothDevicesCard()
                 }
             }
         }
@@ -138,5 +142,19 @@ fun HomeScreen(navController: NavHostController) {
                 Text(text = stringResource(id = R.string.bluetooth_devices))
             }
         }
+    }
+}
+
+@Composable
+fun LuckySpinningWheelScreen() {
+    CustomScreen {
+        LuckyWheelCard()
+    }
+}
+
+@Composable
+fun BluetoothDevicesScreen() {
+    CustomScreen {
+        BluetoothDevicesCard()
     }
 }

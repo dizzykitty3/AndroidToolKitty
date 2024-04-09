@@ -25,9 +25,10 @@ private const val CARD_8 = "card_google_maps"
 private const val CARD_9 = "card_open_app_on_google_play"
 private const val CARD_10 = "card_android_versions"
 private const val CARD_11 = "card_lucky_wheel"
+private const val CARD_12 = "card_bluetooth_devices"
 
 @Composable
-fun EditHomePageCard() {
+fun EditHomeScreenCard() {
     CustomCard(
         title = R.string.customize_my_home_page
     ) {
@@ -44,6 +45,8 @@ fun EditHomePageCard() {
         val isShowCard9 = settingsViewModel.getCardShowedState(CARD_9)
         val isShowCard10 = settingsViewModel.getCardShowedState(CARD_10)
         val isShowCard11 = settingsViewModel.getCardShowedState(CARD_11)
+        val isShowCard12 = settingsViewModel.getCardShowedState(CARD_12)
+
         var mIsShowCard1 by remember { mutableStateOf(isShowCard1) }
         var mIsShowCard2 by remember { mutableStateOf(isShowCard2) }
         var mIsShowCard3 by remember { mutableStateOf(isShowCard3) }
@@ -55,6 +58,8 @@ fun EditHomePageCard() {
         var mIsShowCard9 by remember { mutableStateOf(isShowCard9) }
         var mIsShowCard10 by remember { mutableStateOf(isShowCard10) }
         var mIsShowCard11 by remember { mutableStateOf(isShowCard11) }
+        var mIsShowCard12 by remember { mutableStateOf(isShowCard12) }
+
         CustomHideCardSettingSwitch(
             resId = R.string.year_progress,
             cardId = CARD_1,
@@ -143,6 +148,14 @@ fun EditHomePageCard() {
             mIsShowCard11 = newState
             settingsViewModel.saveCardShowedState(CARD_11, newState)
         }
+        CustomHideCardSettingSwitch(
+            resId = R.string.bluetooth_devices,
+            cardId = CARD_12,
+            isChecked = mIsShowCard12
+        ) { newState ->
+            mIsShowCard12 = newState
+            settingsViewModel.saveCardShowedState(CARD_12, newState)
+        }
 
         CustomGroupDivider()
 
@@ -160,6 +173,7 @@ fun EditHomePageCard() {
                 mIsShowCard9 = false
                 mIsShowCard10 = false
                 mIsShowCard11 = false
+                mIsShowCard12 = false
             }
         ) {
             Text(text = stringResource(R.string.hide_all_cards))
@@ -179,6 +193,7 @@ fun EditHomePageCard() {
                 mIsShowCard9 = true
                 mIsShowCard10 = true
                 mIsShowCard11 = true
+                mIsShowCard12 = true
             }
         ) {
             Text(text = stringResource(R.string.show_all_cards))
@@ -198,7 +213,8 @@ private fun onClickChangeAllCardsButton(isShow: Boolean) {
         CARD_8,
         CARD_9,
         CARD_10,
-        CARD_11
+        CARD_11,
+        CARD_12
     )
     val settingsViewModel = SettingsViewModel
 
