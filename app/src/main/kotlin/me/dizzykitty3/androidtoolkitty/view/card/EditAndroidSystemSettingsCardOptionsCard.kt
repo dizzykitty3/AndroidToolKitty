@@ -5,7 +5,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomHideCardSettingSwitch
@@ -27,7 +26,6 @@ fun EditAndroidSystemSettingsCardOptionsCard() {
     CustomCard(
         title = R.string.customize_system_settings_card
     ) {
-        val context = LocalContext.current
         val settingsViewModel = remember { SettingsViewModel }
 
         val isShowSetting1 = settingsViewModel.getCardShowedState(SETTING_1)

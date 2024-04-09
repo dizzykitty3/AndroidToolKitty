@@ -7,7 +7,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
@@ -32,7 +31,6 @@ fun EditHomePageCard() {
     CustomCard(
         title = R.string.customize_my_home_page
     ) {
-        val context = LocalContext.current
         val settingsViewModel = remember { SettingsViewModel }
 
         val isShowCard1 = settingsViewModel.getCardShowedState(CARD_1)

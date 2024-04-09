@@ -7,7 +7,6 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
@@ -33,7 +32,6 @@ fun SystemSettingsCard() {
         icon = Icons.Outlined.Settings,
         title = R.string.android_system_settings
     ) {
-        val context = LocalContext.current
         val settingsViewModel = remember { SettingsViewModel }
 
         val settings = listOf(

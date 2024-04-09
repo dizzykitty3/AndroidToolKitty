@@ -14,7 +14,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,7 +30,6 @@ fun CustomDropdownMenu(
         onExpandedChange = { expanded = !expanded },
         modifier = Modifier.fillMaxWidth()
     ) {
-        val context = LocalContext.current
         val settingsViewModel = remember { SettingsViewModel }
 
         val mSelectedPosition = settingsViewModel.getLastTimeSelectedSocialPlatform()

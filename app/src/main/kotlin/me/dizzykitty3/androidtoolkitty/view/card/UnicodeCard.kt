@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
-import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
@@ -17,7 +16,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
@@ -36,8 +34,6 @@ fun UnicodeCard() {
         icon = Icons.AutoMirrored.Outlined.Notes,
         title = R.string.unicode
     ) {
-        val context = LocalContext.current
-
         var unicode by remember { mutableStateOf("") }
         val characters = remember { mutableStateOf("") }
 
@@ -50,7 +46,7 @@ fun UnicodeCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { onClickConvertButton(context, unicode, characters) }
+                onDone = { onClickConvertButton(unicode, characters) }
             ),
             supportingText = {
                 Text(
@@ -70,7 +66,7 @@ fun UnicodeCard() {
         )
 
         TextButton(
-            onClick = { onClickConvertButton(context, unicode, characters) }
+            onClick = { onClickConvertButton(unicode, characters) }
         ) {
             Text(text = stringResource(R.string.convert))
         }
@@ -78,7 +74,6 @@ fun UnicodeCard() {
 }
 
 private fun onClickConvertButton(
-    context: Context,
     unicode: String,
     characterField: MutableState<String>
 ) {
