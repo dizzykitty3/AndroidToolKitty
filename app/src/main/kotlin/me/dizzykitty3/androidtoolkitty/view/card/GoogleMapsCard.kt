@@ -25,8 +25,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.utils.IntentService
 
 private const val TAG = "GoogleMapsCard"
 

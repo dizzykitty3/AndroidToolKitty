@@ -28,13 +28,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.BluetoothService
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.SnackbarService
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconPopup
+import me.dizzykitty3.androidtoolkitty.foundation.utils.BluetoothService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.utils.SnackbarService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.ToastService
 
 @SuppressLint("InlinedApi")
 private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT

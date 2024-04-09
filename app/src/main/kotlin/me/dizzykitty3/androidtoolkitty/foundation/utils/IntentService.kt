@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.context_service
+package me.dizzykitty3.androidtoolkitty.foundation.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -9,8 +9,6 @@ import android.util.Log
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
-import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 
 object IntentService {
     private const val TAG = "IntentService"

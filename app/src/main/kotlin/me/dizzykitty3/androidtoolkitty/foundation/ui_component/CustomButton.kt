@@ -11,7 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
+import me.dizzykitty3.androidtoolkitty.foundation.utils.IntentService
 
 @Composable
 fun CustomSystemSettingsButton(

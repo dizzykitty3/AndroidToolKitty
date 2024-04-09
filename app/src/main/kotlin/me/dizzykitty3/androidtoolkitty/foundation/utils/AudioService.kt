@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.context_service
+package me.dizzykitty3.androidtoolkitty.foundation.utils
 
 import android.content.Context
 import android.media.AudioManager

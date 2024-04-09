@@ -23,9 +23,9 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.foundation.utils.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 

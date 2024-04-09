@@ -16,12 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.utils.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
+import me.dizzykitty3.androidtoolkitty.foundation.utils.ToastService
 
 @Suppress("SpellCheckingInspection")
 @Composable
