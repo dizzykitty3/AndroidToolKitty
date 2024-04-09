@@ -25,12 +25,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
@@ -46,7 +46,7 @@ fun SocialMediaProfileCard() {
 
         var username by remember { mutableStateOf("") }
 
-        val platformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(context)
+        val platformIndex = SettingsViewModel.getLastTimeSelectedSocialPlatform()
         var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
 
         val platformList = TUrl.Platform.entries.map { stringResource(it.nameResId) }
@@ -115,7 +115,7 @@ private fun onVisitProfileButton(context: Context, username: String, platformInd
     val platform = TUrl.Platform.entries.getOrNull(platformIndex) ?: return
 
     if (platform == TUrl.Platform.PLATFORM_NOT_ADDED_YET) {
-        ToastService(context).toastAndLog(
+        TToast.toastAndLog(
             "${context.getString(R.string.platform)}: \"$username\" ${
                 context.getString(
                     R.string.uploaded
@@ -126,6 +126,6 @@ private fun onVisitProfileButton(context: Context, username: String, platformInd
     }
 
     val prefix = platform.prefix
-    IntentService(context).openUrl("$prefix${TString.dropSpaces(username)}")
+    TIntent.openUrl("$prefix${TString.dropSpaces(username)}")
     Log.d(TAG, "onVisitProfile")
 }

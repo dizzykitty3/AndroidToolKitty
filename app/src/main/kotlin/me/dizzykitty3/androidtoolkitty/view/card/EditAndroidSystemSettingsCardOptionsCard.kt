@@ -5,9 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
@@ -24,21 +23,20 @@ private const val SETTING_9 = "setting_developer"
 
 @Composable
 fun EditAndroidSystemSettingsCardOptionsCard() {
-    CustomCardNoIcon(
+    CustomCard(
         title = R.string.customize_system_settings_card
     ) {
-        val context = LocalContext.current
-        val settingsViewModel = remember { SettingsViewModel() }
+        val settingsViewModel = remember { SettingsViewModel }
 
-        val isShowSetting1 = settingsViewModel.getCardShowedState(context, SETTING_1)
-        val isShowSetting2 = settingsViewModel.getCardShowedState(context, SETTING_2)
-        val isShowSetting3 = settingsViewModel.getCardShowedState(context, SETTING_3)
-        val isShowSetting4 = settingsViewModel.getCardShowedState(context, SETTING_4)
-        val isShowSetting5 = settingsViewModel.getCardShowedState(context, SETTING_5)
-        val isShowSetting6 = settingsViewModel.getCardShowedState(context, SETTING_6)
-        val isShowSetting7 = settingsViewModel.getCardShowedState(context, SETTING_7)
-        val isShowSetting8 = settingsViewModel.getCardShowedState(context, SETTING_8)
-        val isShowSetting9 = settingsViewModel.getCardShowedState(context, SETTING_9)
+        val isShowSetting1 = settingsViewModel.getCardShowedState(SETTING_1)
+        val isShowSetting2 = settingsViewModel.getCardShowedState(SETTING_2)
+        val isShowSetting3 = settingsViewModel.getCardShowedState(SETTING_3)
+        val isShowSetting4 = settingsViewModel.getCardShowedState(SETTING_4)
+        val isShowSetting5 = settingsViewModel.getCardShowedState(SETTING_5)
+        val isShowSetting6 = settingsViewModel.getCardShowedState(SETTING_6)
+        val isShowSetting7 = settingsViewModel.getCardShowedState(SETTING_7)
+        val isShowSetting8 = settingsViewModel.getCardShowedState(SETTING_8)
+        val isShowSetting9 = settingsViewModel.getCardShowedState(SETTING_9)
         var mIsShowSetting1 by remember { mutableStateOf(isShowSetting1) }
         var mIsShowSetting2 by remember { mutableStateOf(isShowSetting2) }
         var mIsShowSetting3 by remember { mutableStateOf(isShowSetting3) }
@@ -54,7 +52,7 @@ fun EditAndroidSystemSettingsCardOptionsCard() {
             isChecked = mIsShowSetting1
         ) { newState ->
             mIsShowSetting1 = newState
-            settingsViewModel.saveCardShowedState(context, SETTING_1, newState)
+            settingsViewModel.saveCardShowedState(SETTING_1, newState)
         }
         if (OsVersion.android12()) {
             CustomHideCardSettingSwitch(
@@ -63,7 +61,7 @@ fun EditAndroidSystemSettingsCardOptionsCard() {
                 isChecked = mIsShowSetting2
             ) { newState ->
                 mIsShowSetting2 = newState
-                settingsViewModel.saveCardShowedState(context, SETTING_2, newState)
+                settingsViewModel.saveCardShowedState(SETTING_2, newState)
             }
         }
         CustomHideCardSettingSwitch(
@@ -72,7 +70,7 @@ fun EditAndroidSystemSettingsCardOptionsCard() {
             isChecked = mIsShowSetting3
         ) { newState ->
             mIsShowSetting3 = newState
-            settingsViewModel.saveCardShowedState(context, SETTING_3, newState)
+            settingsViewModel.saveCardShowedState(SETTING_3, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_default_apps_settings,
@@ -80,7 +78,7 @@ fun EditAndroidSystemSettingsCardOptionsCard() {
             isChecked = mIsShowSetting4
         ) { newState ->
             mIsShowSetting4 = newState
-            settingsViewModel.saveCardShowedState(context, SETTING_4, newState)
+            settingsViewModel.saveCardShowedState(SETTING_4, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_battery_optimization_settings,
@@ -88,7 +86,7 @@ fun EditAndroidSystemSettingsCardOptionsCard() {
             isChecked = mIsShowSetting5
         ) { newState ->
             mIsShowSetting5 = newState
-            settingsViewModel.saveCardShowedState(context, SETTING_5, newState)
+            settingsViewModel.saveCardShowedState(SETTING_5, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_caption_preferences,
@@ -96,7 +94,7 @@ fun EditAndroidSystemSettingsCardOptionsCard() {
             isChecked = mIsShowSetting6
         ) { newState ->
             mIsShowSetting6 = newState
-            settingsViewModel.saveCardShowedState(context, SETTING_6, newState)
+            settingsViewModel.saveCardShowedState(SETTING_6, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_language_settings,
@@ -104,7 +102,7 @@ fun EditAndroidSystemSettingsCardOptionsCard() {
             isChecked = mIsShowSetting7
         ) { newState ->
             mIsShowSetting7 = newState
-            settingsViewModel.saveCardShowedState(context, SETTING_7, newState)
+            settingsViewModel.saveCardShowedState(SETTING_7, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_date_and_time_settings,
@@ -112,7 +110,7 @@ fun EditAndroidSystemSettingsCardOptionsCard() {
             isChecked = mIsShowSetting8
         ) { newState ->
             mIsShowSetting8 = newState
-            settingsViewModel.saveCardShowedState(context, SETTING_8, newState)
+            settingsViewModel.saveCardShowedState(SETTING_8, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.open_developer_options,
@@ -120,7 +118,7 @@ fun EditAndroidSystemSettingsCardOptionsCard() {
             isChecked = mIsShowSetting9
         ) { newState ->
             mIsShowSetting9 = newState
-            settingsViewModel.saveCardShowedState(context, SETTING_9, newState)
+            settingsViewModel.saveCardShowedState(SETTING_9, newState)
         }
     }
 }

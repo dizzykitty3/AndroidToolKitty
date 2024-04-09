@@ -19,15 +19,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 
 @Composable
 fun CheckAppOnAppMarketCard() {
@@ -35,8 +34,6 @@ fun CheckAppOnAppMarketCard() {
         icon = Icons.Outlined.Shop,
         title = R.string.open_app_on_google_play
     ) {
-        val context = LocalContext.current
-
         var packageName by remember { mutableStateOf("") }
 
         OutlinedTextField(
@@ -48,7 +45,7 @@ fun CheckAppOnAppMarketCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { IntentService(context).openAppOnMarket(packageName) }
+                onDone = { TIntent.openAppOnMarket(packageName) }
             )
         )
         CustomSpacerPadding()
@@ -64,7 +61,7 @@ fun CheckAppOnAppMarketCard() {
 
             Row(
                 modifier = Modifier.clickable(
-                    onClick = { IntentService(context).openUrl(linkUrl) }
+                    onClick = { TIntent.openUrl(linkUrl) }
                 )
             ) {
                 Text(
@@ -78,7 +75,7 @@ fun CheckAppOnAppMarketCard() {
             }
         }
         TextButton(
-            onClick = { IntentService(context).openAppOnMarket(packageName) }
+            onClick = { TIntent.openAppOnMarket(packageName) }
         ) {
             Text(text = stringResource(R.string.open_on_google_play))
             Icon(
@@ -89,7 +86,7 @@ fun CheckAppOnAppMarketCard() {
         }
 
         TextButton(
-            onClick = { IntentService(context).openAppOnMarket(packageName, false) }
+            onClick = { TIntent.openAppOnMarket(packageName, false) }
         ) {
             Text(text = stringResource(R.string.open_on_other_markets))
             Icon(

@@ -50,13 +50,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -71,7 +70,6 @@ fun LuckyWheelCard() {
         // 初始化轮盘项目列表
         var items by remember { mutableStateOf(listOf("条目1", "条目2", "条目3", "条目4", "条目5", "条目6")) }
 
-        val context = LocalContext.current
         // 记住画笔设置，避免每次绘制时重新创建
         val paint = remember {
             android.graphics.Paint().apply {
@@ -110,7 +108,7 @@ fun LuckyWheelCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                ToastService(context).toast("Selected: $selected")
+                TToast.toast("Selected: $selected")
                 rotationDegrees = targetRotationDegrees % 360
             }
         }

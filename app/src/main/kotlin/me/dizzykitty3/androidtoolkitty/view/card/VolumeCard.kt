@@ -7,9 +7,11 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.VolumeUp
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
@@ -24,15 +26,17 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.AudioService
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TAudio
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -44,16 +48,18 @@ fun VolumeCard() {
     ) {
         val context = LocalContext.current
 
-        val currentVolume = AudioService(context).volume()
-        val maxVolume = AudioService(context).maxVolumeIndex()
+        val settingsViewModel = remember { SettingsViewModel }
+
+        val currentVolume = TAudio.volume()
+        val maxVolume = TAudio.maxVolumeIndex()
 
         val sliderIncrementFivePercent =
-            SettingsViewModel().getIsSliderIncrementFivePercent(context)
+            settingsViewModel.getIsSliderIncrementFivePercent()
 
-        val customVolume = SettingsViewModel().getCustomVolume(context)
+        val customVolume = settingsViewModel.getCustomVolume()
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
 
-        val customVolumeOptionLabel = SettingsViewModel().getCustomVolumeOptionLabel(context)
+        val customVolumeOptionLabel = settingsViewModel.getCustomVolumeOptionLabel()
         var mCustomVolumeOptionLabel by remember { mutableStateOf(customVolumeOptionLabel) }
 
         val options = listOf(
@@ -97,20 +103,20 @@ fun VolumeCard() {
                         selectedIndex = index
                         when (index) {
                             0 -> {
-                                AudioService(context).setVolume(0)
+                                TAudio.setVolume(0)
                             }
 
                             1 -> {
-                                AudioService(context).setVolume((0.3 * maxVolume).toInt())
+                                TAudio.setVolume((0.3 * maxVolume).toInt())
                             }
 
                             2 -> {
-                                AudioService(context).setVolume((0.5 * maxVolume).toInt())
+                                TAudio.setVolume((0.5 * maxVolume).toInt())
                             }
 
                             3 -> {
                                 if (mCustomVolume > 0) {
-                                    AudioService(context).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
+                                    TAudio.setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
                                 } else
                                     showVolumeDialog = true
                             }
@@ -150,16 +156,14 @@ fun VolumeCard() {
                         Button(
                             onClick = {
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0 && newCustomVolume.toInt() != 0) {
-                                    ToastService(context).toast(context.getString(R.string.system_media_volume_levels_limited))
+                                    TToast.toast(context.getString(R.string.system_media_volume_levels_limited))
                                     return@Button
                                 } else {
-                                    SettingsViewModel().setCustomVolume(
-                                        context,
-                                        newCustomVolume.toInt()
-                                    )
+                                    settingsViewModel.setCustomVolume(newCustomVolume.toInt())
                                     mCustomVolume = newCustomVolume.toInt()
                                     showVolumeOptionLabelDialog = true
-                                    AudioService(context).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
+                                    selectedIndex = 3
+                                    TAudio.setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
                                 }
                             }
                         ) {
@@ -182,6 +186,7 @@ fun VolumeCard() {
                 AlertDialog(
                     onDismissRequest = {
                         showVolumeOptionLabelDialog = false
+                        showVolumeDialog = false
                     },
                     title = {
                         Text(text = stringResource(R.string.you_can_set_a_label_for_it))
@@ -197,10 +202,10 @@ fun VolumeCard() {
                             ),
                             keyboardActions = KeyboardActions(
                                 onDone = {
-                                    SettingsViewModel().setCustomVolumeOptionLabel(
-                                        context,
-                                        optionLabel
-                                    )
+                                    settingsViewModel.setCustomVolumeOptionLabel(optionLabel)
+                                    mCustomVolumeOptionLabel = optionLabel
+                                    showVolumeOptionLabelDialog = false
+                                    showVolumeDialog = false
                                 }
                             )
                         )
@@ -208,24 +213,16 @@ fun VolumeCard() {
                     confirmButton = {
                         Button(
                             onClick = {
-                                SettingsViewModel().setCustomVolumeOptionLabel(context, optionLabel)
+                                settingsViewModel.setCustomVolumeOptionLabel(optionLabel)
                                 mCustomVolumeOptionLabel = optionLabel
-                                selectedIndex = 3
                                 showVolumeOptionLabelDialog = false
                                 showVolumeDialog = false
                             }
                         ) {
-                            Text(text = stringResource(android.R.string.ok))
-                        }
-                    },
-                    dismissButton = {
-                        TextButton(
-                            onClick = {
-                                showVolumeOptionLabelDialog = false
-                                showVolumeDialog = false
-                            }
-                        ) {
-                            Text(text = stringResource(android.R.string.cancel))
+                            if (optionLabel == "")
+                                Text(text = stringResource(id = R.string.skip))
+                            else
+                                Text(text = stringResource(id = android.R.string.ok))
                         }
                     }
                 )
@@ -240,6 +237,12 @@ fun VolumeCard() {
                 Button(
                     onClick = { showVolumeDialog = true }
                 ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Edit,
+                        contentDescription = null,
+                        modifier = Modifier.align(Alignment.CenterVertically)
+                    )
+                    CustomIconAndTextPadding()
                     Text(text = stringResource(R.string.edit))
                 }
             }

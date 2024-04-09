@@ -24,8 +24,7 @@ import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun CustomCard(
-    hasIcon: Boolean = true,
-    icon: ImageVector?,
+    icon: ImageVector? = null,
     title: Int,
     content: @Composable () -> Unit
 ) {
@@ -37,13 +36,13 @@ fun CustomCard(
         Column(
             modifier = cardPadding
         ) {
-            if (!hasIcon) {
+            if (icon == null) {
                 CardTitle(resId = title)
                 CardContent { content() }
             } else {
                 Row {
                     Icon(
-                        imageVector = icon!!,
+                        imageVector = icon,
                         contentDescription = null,
                         modifier = Modifier.align(
                             alignment = Alignment.CenterVertically
@@ -57,19 +56,6 @@ fun CustomCard(
         }
     }
     CustomSpacerPadding()
-}
-
-@Composable
-fun CustomCardNoIcon(
-    title: Int,
-    content: @Composable () -> Unit
-) {
-    CustomCard(
-        icon = null,
-        title = title,
-        content = content,
-        hasIcon = false
-    )
 }
 
 @Composable

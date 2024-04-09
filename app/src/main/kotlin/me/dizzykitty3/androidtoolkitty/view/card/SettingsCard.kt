@@ -5,7 +5,10 @@ import android.view.View
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -23,36 +26,38 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.SnackbarService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomBoldText
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupTitleText
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TSnackbar
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 private const val EDIT_HOME_PAGE_SCREEN = "EditHomePageScreen"
 
 @Composable
 fun SettingsCard(navController: NavHostController) {
-    CustomCardNoIcon(
+    CustomCard(
         title = R.string.settings
     ) {
-        val context = LocalContext.current
         val view = LocalView.current
 
-        val autoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(context)
+        val settingsViewModel = remember { SettingsViewModel }
+
+        val autoClearClipboard = settingsViewModel.getIsAutoClearClipboard()
         var mAutoClearClipboard by remember { mutableStateOf(autoClearClipboard) }
 
-        val oneHandedMode = SettingsViewModel().getIsOneHandedMode(context)
+        val oneHandedMode = settingsViewModel.getIsOneHandedMode()
         var mOneHandedMode by remember { mutableStateOf(oneHandedMode) }
 
-        val dynamicColor = SettingsViewModel().getIsDynamicColor(context)
+        val dynamicColor = settingsViewModel.getIsDynamicColor()
         var mDynamicColor by remember { mutableStateOf(dynamicColor) }
 
-        val volumeSlideSteps = SettingsViewModel().getIsSliderIncrementFivePercent(context)
+        val volumeSlideSteps = settingsViewModel.getIsSliderIncrementFivePercent()
         var mVolumeSlideSteps by remember { mutableStateOf(volumeSlideSteps) }
 
         val primary = MaterialTheme.colorScheme.primary.toArgb()
@@ -63,7 +68,7 @@ fun SettingsCard(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mAutoClearClipboard = !mAutoClearClipboard
-                SettingsViewModel().setIsAutoClearClipboard(context, mAutoClearClipboard)
+                settingsViewModel.setIsAutoClearClipboard(mAutoClearClipboard)
             }
         ) {
             Text(text = stringResource(R.string.clear_clipboard_on_launch))
@@ -72,7 +77,7 @@ fun SettingsCard(navController: NavHostController) {
                 checked = mAutoClearClipboard,
                 onCheckedChange = {
                     mAutoClearClipboard = it
-                    SettingsViewModel().setIsAutoClearClipboard(context, it)
+                    settingsViewModel.setIsAutoClearClipboard(it)
                 }
             )
         }
@@ -81,7 +86,7 @@ fun SettingsCard(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mVolumeSlideSteps = !mVolumeSlideSteps
-                SettingsViewModel().setIsSliderIncrementFivePercent(context, mVolumeSlideSteps)
+                settingsViewModel.setIsSliderIncrementFivePercent(mVolumeSlideSteps)
             }
         ) {
             Text(text = stringResource(R.string.set_slider_increment_5))
@@ -90,7 +95,7 @@ fun SettingsCard(navController: NavHostController) {
                 checked = mVolumeSlideSteps,
                 onCheckedChange = {
                     mVolumeSlideSteps = it
-                    SettingsViewModel().setIsSliderIncrementFivePercent(context, it)
+                    settingsViewModel.setIsSliderIncrementFivePercent(it)
                 }
             )
         }
@@ -120,7 +125,7 @@ fun SettingsCard(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mOneHandedMode = !mOneHandedMode
-                SettingsViewModel().setIsOneHandedMode(context, mOneHandedMode)
+                settingsViewModel.setIsOneHandedMode(mOneHandedMode)
             }
         ) {
             Text(text = stringResource(R.string.one_handed_mode))
@@ -129,7 +134,7 @@ fun SettingsCard(navController: NavHostController) {
                 checked = mOneHandedMode,
                 onCheckedChange = {
                     mOneHandedMode = it
-                    SettingsViewModel().setIsOneHandedMode(context, it)
+                    settingsViewModel.setIsOneHandedMode(it)
                 }
             )
         }
@@ -138,12 +143,21 @@ fun SettingsCard(navController: NavHostController) {
         CustomGroupTitleText(R.string.customize)
 
         Button(
-            onClick = { navController.navigate(EDIT_HOME_PAGE_SCREEN) }) {
+            onClick = { navController.navigate(EDIT_HOME_PAGE_SCREEN) }
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Edit,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+            CustomIconAndTextPadding()
             Text(text = stringResource(R.string.customize_my_home_page))
         }
 
         CustomGroupDivider()
         CustomGroupTitleText(R.string.debugging)
+
+        val context = LocalContext.current
 
         CustomAlertDialogButton(
             buttonText = stringResource(R.string.erase_all_app_data),
@@ -162,7 +176,7 @@ fun SettingsCard(navController: NavHostController) {
             positiveButtonText = stringResource(R.string.erase_all_data),
             negativeButtonText = null,
             onClickAction = {
-                SettingsViewModel().clear(context)
+                settingsViewModel.clear()
                 (context as Activity).finish()
             }
         )
@@ -171,12 +185,12 @@ fun SettingsCard(navController: NavHostController) {
 
 private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view: View) {
     val context = view.context
-    SettingsViewModel().setIsDynamicColor(context, isDynamicColor)
+    SettingsViewModel.setIsDynamicColor(isDynamicColor)
 
-    SnackbarService(view).snackbar(
+    TSnackbar(view).snackbar(
         message = context.getString(R.string.requires_restart_do_it_now),
         buttonText = context.getString(R.string.restart),
         buttonColor = color,
-        buttonClickListener = { IntentService(context).restartApp() }
+        buttonClickListener = { TIntent.restartApp(context) }
     )
 }

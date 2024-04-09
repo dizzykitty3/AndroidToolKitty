@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
-import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
@@ -19,15 +18,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 
@@ -39,8 +37,6 @@ fun UrlCard() {
         icon = Icons.Outlined.Link,
         title = R.string.url
     ) {
-        val context = LocalContext.current
-
         var url by remember { mutableStateOf("") }
 
         OutlinedTextField(
@@ -53,7 +49,7 @@ fun UrlCard() {
                 keyboardType = KeyboardType.Ascii
             ),
             keyboardActions = KeyboardActions(
-                onDone = { onClickVisitUrlButton(context, url) }
+                onDone = { onClickVisitUrlButton(url) }
             ),
             supportingText = {
                 Text(
@@ -77,7 +73,7 @@ fun UrlCard() {
         )
 
         TextButton(
-            onClick = { onClickVisitUrlButton(context, url) }
+            onClick = { onClickVisitUrlButton(url) }
         ) {
             Text(text = stringResource(R.string.visit))
             Icon(
@@ -89,9 +85,9 @@ fun UrlCard() {
     }
 }
 
-private fun onClickVisitUrlButton(context: Context, url: String) {
+private fun onClickVisitUrlButton(url: String) {
     if (url.isBlank()) return
 
-    IntentService(context).openUrl(TUrl.processUrl(TString.dropSpaces(url)))
+    TIntent.openUrl(TUrl.processUrl(TString.dropSpaces(url)))
     Log.d(TAG, "onClickVisitButton")
 }

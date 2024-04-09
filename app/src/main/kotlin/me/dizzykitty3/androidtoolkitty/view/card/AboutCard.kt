@@ -16,17 +16,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardNoIcon
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 
 @Suppress("SpellCheckingInspection")
 @Composable
 fun AboutCard() {
-    CustomCardNoIcon(
+    CustomCard(
         title = R.string.about
     ) {
         DeveloperProfileLink("dizzykitty3")
@@ -45,8 +45,8 @@ fun AboutCard() {
             CustomIconAndTextPadding()
             Row(
                 modifier = Modifier.clickable {
-                    ToastService(context).toast(context.getString(R.string.all_help_welcomed))
-                    IntentService(context).openUrl(sourceCodeUrl)
+                    TToast.toast(context.getString(R.string.all_help_welcomed))
+                    TIntent.openUrl(sourceCodeUrl)
                 }
             ) {
                 Text(
@@ -78,8 +78,6 @@ private fun DeveloperProfileLink(
     name: String
 ) {
     Row {
-        val context = LocalContext.current
-
         Icon(
             imageVector = Icons.Outlined.AccountCircle,
             contentDescription = null
@@ -87,7 +85,7 @@ private fun DeveloperProfileLink(
         CustomIconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
-                IntentService(context).openUrl("${TUrl.profilePrefix(TUrl.Platform.GITHUB)}$name")
+                TIntent.openUrl("${TUrl.profilePrefix(TUrl.Platform.GITHUB)}$name")
             }
         ) {
             Text(

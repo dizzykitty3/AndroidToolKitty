@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.context_service
+package me.dizzykitty3.androidtoolkitty.foundation.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -9,27 +9,25 @@ import android.provider.Settings
 import android.util.Log
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
+import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-class IntentService(private val context: Context) {
-    companion object {
-        private const val TAG = "IntentService"
-        private const val HTTPS = "https://"
-        private const val GOOGLE_MAPS = "com.google.android.apps.maps"
-        private const val GOOGLE_PLAY = "com.android.vending"
-        private const val SETTING_1 = "setting_display"
-        private const val SETTING_2 = "setting_auto_rotate"
-        private const val SETTING_3 = "setting_bluetooth"
-        private const val SETTING_4 = "setting_default_apps"
-        private const val SETTING_5 = "setting_battery_optimization"
-        private const val SETTING_6 = "setting_caption"
-        private const val SETTING_7 = "setting_locale"
-        private const val SETTING_8 = "setting_date_and_time"
-        private const val SETTING_9 = "setting_developer"
-        private const val PACKAGE = "package"
-    }
+object TIntent {
+    private const val TAG = "IntentService"
+    private const val HTTPS = "https://"
+    private const val GOOGLE_MAPS = "com.google.android.apps.maps"
+    private const val GOOGLE_PLAY = "com.android.vending"
+    private const val SETTING_1 = "setting_display"
+    private const val SETTING_2 = "setting_auto_rotate"
+    private const val SETTING_3 = "setting_bluetooth"
+    private const val SETTING_4 = "setting_default_apps"
+    private const val SETTING_5 = "setting_battery_optimization"
+    private const val SETTING_6 = "setting_caption"
+    private const val SETTING_7 = "setting_locale"
+    private const val SETTING_8 = "setting_date_and_time"
+    private const val SETTING_9 = "setting_developer"
+    private const val PACKAGE = "package"
 
+    @JvmStatic
     fun openUrl(finalUrl: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(if (finalUrl.contains(HTTPS)) finalUrl else "$HTTPS$finalUrl")
@@ -40,6 +38,7 @@ class IntentService(private val context: Context) {
     }
 
     @SuppressLint("InlinedApi")
+    @JvmStatic
     fun openSystemSettings(settingType: String) {
         val intent: Intent = when (settingType) {
             SETTING_1 -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
@@ -60,14 +59,15 @@ class IntentService(private val context: Context) {
             startActivity(intent)
             Log.d(TAG, "onOpenSystemSettings: $settingType")
         } catch (e: Exception) {
-            ToastService(context).toast(context.getString(R.string.system_settings_unsupported))
+            TToast.toast(app.getString(R.string.system_settings_unsupported))
             Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
         }
     }
 
+    @JvmStatic
     fun openPermissionPage() {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        val uri = Uri.fromParts(PACKAGE, context.packageName, null)
+        val uri = Uri.fromParts(PACKAGE, app.packageName, null)
         intent.setData(uri)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
@@ -75,11 +75,12 @@ class IntentService(private val context: Context) {
             startActivity(intent)
             Log.d(TAG, "openPermissionPage")
         } catch (e: Exception) {
-            ToastService(context).toast(context.getString(R.string.system_settings_unsupported))
+            TToast.toast(app.getString(R.string.system_settings_unsupported))
             Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
         }
     }
 
+    @JvmStatic
     fun openGoogleMaps(latitude: String, longitude: String) {
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
@@ -96,9 +97,10 @@ class IntentService(private val context: Context) {
         }
     }
 
+    @JvmStatic
     private fun startActivity(intent: Intent) {
         try {
-            context.startActivity(intent)
+            app.startActivity(intent)
             Log.d(TAG, "startActivity")
             return
         } catch (e: Exception) {
@@ -107,18 +109,19 @@ class IntentService(private val context: Context) {
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
-                ToastService(context).toast(context.getString(R.string.google_play_not_installed))
+                TToast.toast(app.getString(R.string.google_play_not_installed))
                 Log.i(TAG, "Google Play not installed")
             }
 
             GOOGLE_MAPS -> {
-                ToastService(context).toast(context.getString(R.string.google_maps_not_installed))
+                TToast.toast(app.getString(R.string.google_maps_not_installed))
                 Log.i(TAG, "Google Maps not installed")
-                IntentService(context).openAppOnMarket(GOOGLE_MAPS)
+                openAppOnMarket(GOOGLE_MAPS)
             }
         }
     }
 
+    @JvmStatic
     fun openAppOnMarket(packageName: String, isGooglePlay: Boolean = true) {
         val marketUri: Uri = Uri.parse(
             if (packageName.isBlank()) {
@@ -142,10 +145,11 @@ class IntentService(private val context: Context) {
         }
     }
 
-    fun restartApp() {
-        val intent = Intent(context, MainActivity::class.java)
+    @JvmStatic
+    fun restartApp(context: Context) {
+        val intent = Intent(app, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
+        app.startActivity(intent)
         (context as Activity).finish()
     }
 }

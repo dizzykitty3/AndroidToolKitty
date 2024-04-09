@@ -11,9 +11,9 @@ import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 
 private val DarkColorScheme = darkColorScheme(
@@ -89,10 +89,9 @@ fun MyApplicationTheme(
 ) {
     @Composable
     fun OsVersion.colorScheme(darkTheme: Boolean, dynamicColor: Boolean): ColorScheme {
-        val context = LocalContext.current
         return when {
-            this.android12() && dynamicColor -> if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(
-                context
+            this.android12() && dynamicColor -> if (darkTheme) dynamicDarkColorScheme(app) else dynamicLightColorScheme(
+                app
             )
             darkTheme -> DarkColorScheme
             else -> LightColorScheme

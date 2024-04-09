@@ -11,10 +11,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.ClipboardService
-import me.dizzykitty3.androidtoolkitty.foundation.context_service.ToastService
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TClipboard
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 @Composable
@@ -25,7 +25,7 @@ fun ClipboardCard() {
     ) {
         val context = LocalContext.current
 
-        val isShowHintText = !SettingsViewModel().getHaveOpenedSettingsScreen(context)
+        val isShowHintText = !SettingsViewModel.getHaveOpenedSettingsScreen()
         if (isShowHintText) CustomTip(resId = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
         Button(
@@ -38,6 +38,6 @@ fun ClipboardCard() {
 }
 
 private fun onClearClipboardButton(context: Context) {
-    ClipboardService(context).clear()
-    ToastService(context).toastAndLog(context.getString(R.string.clipboard_cleared))
+    TClipboard.clear()
+    TToast.toastAndLog(context.getString(R.string.clipboard_cleared))
 }

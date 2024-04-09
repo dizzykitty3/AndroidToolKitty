@@ -1,16 +1,18 @@
-package me.dizzykitty3.androidtoolkitty.foundation.context_service
+package me.dizzykitty3.androidtoolkitty.foundation.utils
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
+import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-class BluetoothService(private val context: Context) {
+object TBluetooth {
     private lateinit var bluetoothManager: BluetoothManager
 
     private fun bluetoothService() {
-        bluetoothManager = context.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+        bluetoothManager = app.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     }
 
+    @JvmStatic
     fun bluetoothAdapter(): BluetoothAdapter {
         bluetoothService()
         return bluetoothManager.adapter
