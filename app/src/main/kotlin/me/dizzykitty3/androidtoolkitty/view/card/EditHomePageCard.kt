@@ -177,14 +177,11 @@ fun EditHomePageCard() {
 }
 
 private fun onClickChangeAllCardsButton(context: Context, isShow: Boolean) {
-    SettingsViewModel().saveCardShowedState(context, CARD_1, isShow)
-    SettingsViewModel().saveCardShowedState(context, CARD_2, isShow)
-    SettingsViewModel().saveCardShowedState(context, CARD_3, isShow)
-    SettingsViewModel().saveCardShowedState(context, CARD_4, isShow)
-    SettingsViewModel().saveCardShowedState(context, CARD_5, isShow)
-    SettingsViewModel().saveCardShowedState(context, CARD_6, isShow)
-    SettingsViewModel().saveCardShowedState(context, CARD_7, isShow)
-    SettingsViewModel().saveCardShowedState(context, CARD_8, isShow)
-    SettingsViewModel().saveCardShowedState(context, CARD_9, isShow)
-    SettingsViewModel().saveCardShowedState(context, CARD_10, isShow)
+    val cardList =
+        listOf(CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6, CARD_7, CARD_8, CARD_9, CARD_10)
+    val settingsViewModel = SettingsViewModel()
+
+    for (card in cardList) {
+        settingsViewModel.saveCardShowedState(context, card, isShow)
+    }
 }
