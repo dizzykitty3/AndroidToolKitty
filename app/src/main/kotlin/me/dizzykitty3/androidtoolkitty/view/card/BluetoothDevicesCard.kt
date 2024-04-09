@@ -27,6 +27,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.BluetoothService
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.IntentService
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.SnackbarService
@@ -61,14 +62,14 @@ fun BluetoothDevicesCard() {
         Button(
             onClick = {
                 // Check permission
-                if (noPermission(context)) {
+                if (noPermission()) {
                     SnackbarService(view).snackbar(
                         message = context.getString(R.string.tap_allow_to_continue),
                         buttonText = context.getString(R.string.manually_grant),
                         buttonColor = primary,
                         buttonClickListener = { IntentService.openPermissionPage() }
                     )
-                    requestPermission(context)
+                    requestPermission()
                     return@Button
                 }
 
@@ -147,23 +148,23 @@ private fun type(type: Int): String {
     }
 }
 
-private fun noPermission(context: Context): Boolean {
+private fun noPermission(): Boolean {
     return if (OsVersion.android12())
-        check(context, BT_CONNECT)
+        check(BT_CONNECT)
     else
-        check(context, BT) || check(context, BT_ADMIN)
+        check(BT) || check(BT_ADMIN)
 }
 
-private fun check(context: Context, permission: String): Boolean {
-    return ActivityCompat.checkSelfPermission(context, permission) != GRANTED
+private fun check(permission: String): Boolean {
+    return ActivityCompat.checkSelfPermission(app, permission) != GRANTED
 }
 
-private fun requestPermission(context: Context) {
+private fun requestPermission() {
     if (OsVersion.android12()) {
-        request(context, arrayOf(BT_CONNECT))
+        request(app, arrayOf(BT_CONNECT))
         return
     }
-    request(context, arrayOf(BT, BT_ADMIN))
+    request(app, arrayOf(BT, BT_ADMIN))
 }
 
 private fun request(context: Context, permission: Array<String>) {

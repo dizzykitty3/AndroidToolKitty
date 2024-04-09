@@ -47,16 +47,18 @@ fun SettingsCard(navController: NavHostController) {
         val context = LocalContext.current
         val view = LocalView.current
 
-        val autoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(context)
+        val settingsViewModel = remember { SettingsViewModel }
+
+        val autoClearClipboard = settingsViewModel.getIsAutoClearClipboard()
         var mAutoClearClipboard by remember { mutableStateOf(autoClearClipboard) }
 
-        val oneHandedMode = SettingsViewModel().getIsOneHandedMode(context)
+        val oneHandedMode = settingsViewModel.getIsOneHandedMode()
         var mOneHandedMode by remember { mutableStateOf(oneHandedMode) }
 
-        val dynamicColor = SettingsViewModel().getIsDynamicColor(context)
+        val dynamicColor = settingsViewModel.getIsDynamicColor()
         var mDynamicColor by remember { mutableStateOf(dynamicColor) }
 
-        val volumeSlideSteps = SettingsViewModel().getIsSliderIncrementFivePercent(context)
+        val volumeSlideSteps = settingsViewModel.getIsSliderIncrementFivePercent()
         var mVolumeSlideSteps by remember { mutableStateOf(volumeSlideSteps) }
 
         val primary = MaterialTheme.colorScheme.primary.toArgb()
@@ -67,7 +69,7 @@ fun SettingsCard(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mAutoClearClipboard = !mAutoClearClipboard
-                SettingsViewModel().setIsAutoClearClipboard(context, mAutoClearClipboard)
+                settingsViewModel.setIsAutoClearClipboard(mAutoClearClipboard)
             }
         ) {
             Text(text = stringResource(R.string.clear_clipboard_on_launch))
@@ -76,7 +78,7 @@ fun SettingsCard(navController: NavHostController) {
                 checked = mAutoClearClipboard,
                 onCheckedChange = {
                     mAutoClearClipboard = it
-                    SettingsViewModel().setIsAutoClearClipboard(context, it)
+                    settingsViewModel.setIsAutoClearClipboard(it)
                 }
             )
         }
@@ -85,7 +87,7 @@ fun SettingsCard(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mVolumeSlideSteps = !mVolumeSlideSteps
-                SettingsViewModel().setIsSliderIncrementFivePercent(context, mVolumeSlideSteps)
+                settingsViewModel.setIsSliderIncrementFivePercent(mVolumeSlideSteps)
             }
         ) {
             Text(text = stringResource(R.string.set_slider_increment_5))
@@ -94,7 +96,7 @@ fun SettingsCard(navController: NavHostController) {
                 checked = mVolumeSlideSteps,
                 onCheckedChange = {
                     mVolumeSlideSteps = it
-                    SettingsViewModel().setIsSliderIncrementFivePercent(context, it)
+                    settingsViewModel.setIsSliderIncrementFivePercent(it)
                 }
             )
         }
@@ -124,7 +126,7 @@ fun SettingsCard(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mOneHandedMode = !mOneHandedMode
-                SettingsViewModel().setIsOneHandedMode(context, mOneHandedMode)
+                settingsViewModel.setIsOneHandedMode(mOneHandedMode)
             }
         ) {
             Text(text = stringResource(R.string.one_handed_mode))
@@ -133,7 +135,7 @@ fun SettingsCard(navController: NavHostController) {
                 checked = mOneHandedMode,
                 onCheckedChange = {
                     mOneHandedMode = it
-                    SettingsViewModel().setIsOneHandedMode(context, it)
+                    settingsViewModel.setIsOneHandedMode(it)
                 }
             )
         }
@@ -173,7 +175,7 @@ fun SettingsCard(navController: NavHostController) {
             positiveButtonText = stringResource(R.string.erase_all_data),
             negativeButtonText = null,
             onClickAction = {
-                SettingsViewModel().clear(context)
+                settingsViewModel.clear()
                 (context as Activity).finish()
             }
         )
@@ -182,7 +184,7 @@ fun SettingsCard(navController: NavHostController) {
 
 private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view: View) {
     val context = view.context
-    SettingsViewModel().setIsDynamicColor(context, isDynamicColor)
+    SettingsViewModel.setIsDynamicColor(isDynamicColor)
 
     SnackbarService(view).snackbar(
         message = context.getString(R.string.requires_restart_do_it_now),

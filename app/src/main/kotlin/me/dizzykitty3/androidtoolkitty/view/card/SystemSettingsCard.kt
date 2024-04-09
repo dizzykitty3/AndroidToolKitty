@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
 import android.content.ContentResolver
-import android.content.Context
 import android.provider.Settings
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
@@ -10,6 +9,7 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupTitleText
@@ -34,7 +34,7 @@ fun SystemSettingsCard() {
         title = R.string.android_system_settings
     ) {
         val context = LocalContext.current
-        val settingsViewModel = remember { SettingsViewModel() }
+        val settingsViewModel = remember { SettingsViewModel }
 
         val settings = listOf(
             Setting(SETTING_1, R.string.open_display_settings),
@@ -52,7 +52,7 @@ fun SystemSettingsCard() {
             mutableStateMapOf<String, Boolean>().apply {
                 settings.forEach { setting ->
                     this[setting.settingType] =
-                        settingsViewModel.getCardShowedState(context, setting.settingType)
+                        settingsViewModel.getCardShowedState(setting.settingType)
                 }
             }
         }
@@ -65,7 +65,7 @@ fun SystemSettingsCard() {
             isShowSetting[setting.settingType] == true
         }
 
-        if (!checkIsAutoTime(context)) CustomTip(resId = R.string.set_time_automatically_is_off_tip)
+        if (!checkIsAutoTime()) CustomTip(resId = R.string.set_time_automatically_is_off_tip)
 
         if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
 
@@ -93,8 +93,8 @@ fun SystemSettingsCard() {
     }
 }
 
-private fun checkIsAutoTime(context: Context): Boolean {
-    val contentResolver: ContentResolver = context.contentResolver
+private fun checkIsAutoTime(): Boolean {
+    val contentResolver: ContentResolver = app.contentResolver
     val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
     return isAutoTime == 1
 }

@@ -21,13 +21,13 @@ fun CustomHideCardSettingSwitch(
     onCheckedChange: (Boolean) -> Unit
 ) {
     val context = LocalContext.current
-    val settingsViewModel = remember { SettingsViewModel() }
+    val settingsViewModel = remember { SettingsViewModel }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
             onCheckedChange(!isChecked)
-            settingsViewModel.saveCardShowedState(context, cardId, !isChecked)
+            settingsViewModel.saveCardShowedState(cardId, !isChecked)
         }
     ) {
         Text(text = stringResource(id = resId))

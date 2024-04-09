@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -56,8 +55,7 @@ private const val CARD_11 = "card_lucky_wheel"
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    val context = LocalContext.current
-    val settingsViewModel = remember { SettingsViewModel() }
+    val settingsViewModel = remember { SettingsViewModel }
 
     CustomScreen {
         Row(
@@ -72,7 +70,7 @@ fun HomeScreen(navController: NavHostController) {
             IconButton(
                 onClick = {
                     navController.navigate(SETTINGS_SCREEN)
-                    settingsViewModel.setHaveOpenedSettingsScreen(context, true)
+                    settingsViewModel.setHaveOpenedSettingsScreen(true)
                 },
                 modifier = Modifier.size(40.dp)
             ) {
@@ -86,7 +84,7 @@ fun HomeScreen(navController: NavHostController) {
 
         CustomCardSpacePadding()
 
-        if (settingsViewModel.getIsOneHandedMode(context)) CustomOneHandedModePadding()
+        if (settingsViewModel.getIsOneHandedMode()) CustomOneHandedModePadding()
 
         val locale = Locale.getDefault().toString()
         if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) CustomTip(
@@ -97,17 +95,17 @@ fun HomeScreen(navController: NavHostController) {
         )
 
         val cardMapping = mapOf(
-            CARD_1 to settingsViewModel.getCardShowedState(context, CARD_1),
-            CARD_2 to settingsViewModel.getCardShowedState(context, CARD_2),
-            CARD_3 to settingsViewModel.getCardShowedState(context, CARD_3),
-            CARD_4 to settingsViewModel.getCardShowedState(context, CARD_4),
-            CARD_5 to settingsViewModel.getCardShowedState(context, CARD_5),
-            CARD_6 to settingsViewModel.getCardShowedState(context, CARD_6),
-            CARD_7 to settingsViewModel.getCardShowedState(context, CARD_7),
-            CARD_8 to settingsViewModel.getCardShowedState(context, CARD_8),
-            CARD_9 to settingsViewModel.getCardShowedState(context, CARD_9),
-            CARD_10 to settingsViewModel.getCardShowedState(context, CARD_10),
-            CARD_11 to settingsViewModel.getCardShowedState(context, CARD_11),
+            CARD_1 to settingsViewModel.getCardShowedState(CARD_1),
+            CARD_2 to settingsViewModel.getCardShowedState(CARD_2),
+            CARD_3 to settingsViewModel.getCardShowedState(CARD_3),
+            CARD_4 to settingsViewModel.getCardShowedState(CARD_4),
+            CARD_5 to settingsViewModel.getCardShowedState(CARD_5),
+            CARD_6 to settingsViewModel.getCardShowedState(CARD_6),
+            CARD_7 to settingsViewModel.getCardShowedState(CARD_7),
+            CARD_8 to settingsViewModel.getCardShowedState(CARD_8),
+            CARD_9 to settingsViewModel.getCardShowedState(CARD_9),
+            CARD_10 to settingsViewModel.getCardShowedState(CARD_10),
+            CARD_11 to settingsViewModel.getCardShowedState(CARD_11),
         )
 
         cardMapping.forEach { (cardName, isShow) ->

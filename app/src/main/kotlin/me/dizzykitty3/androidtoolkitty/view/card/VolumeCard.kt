@@ -48,16 +48,18 @@ fun VolumeCard() {
     ) {
         val context = LocalContext.current
 
+        val settingsViewModel = remember { SettingsViewModel }
+
         val currentVolume = AudioService.volume()
         val maxVolume = AudioService.maxVolumeIndex()
 
         val sliderIncrementFivePercent =
-            SettingsViewModel().getIsSliderIncrementFivePercent(context)
+            settingsViewModel.getIsSliderIncrementFivePercent()
 
-        val customVolume = SettingsViewModel().getCustomVolume(context)
+        val customVolume = settingsViewModel.getCustomVolume()
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
 
-        val customVolumeOptionLabel = SettingsViewModel().getCustomVolumeOptionLabel(context)
+        val customVolumeOptionLabel = settingsViewModel.getCustomVolumeOptionLabel()
         var mCustomVolumeOptionLabel by remember { mutableStateOf(customVolumeOptionLabel) }
 
         val options = listOf(
@@ -157,10 +159,7 @@ fun VolumeCard() {
                                     ToastService.toast(context.getString(R.string.system_media_volume_levels_limited))
                                     return@Button
                                 } else {
-                                    SettingsViewModel().setCustomVolume(
-                                        context,
-                                        newCustomVolume.toInt()
-                                    )
+                                    settingsViewModel.setCustomVolume(newCustomVolume.toInt())
                                     mCustomVolume = newCustomVolume.toInt()
                                     showVolumeOptionLabelDialog = true
                                     selectedIndex = 3
@@ -203,10 +202,7 @@ fun VolumeCard() {
                             ),
                             keyboardActions = KeyboardActions(
                                 onDone = {
-                                    SettingsViewModel().setCustomVolumeOptionLabel(
-                                        context,
-                                        optionLabel
-                                    )
+                                    settingsViewModel.setCustomVolumeOptionLabel(optionLabel)
                                     mCustomVolumeOptionLabel = optionLabel
                                     showVolumeOptionLabelDialog = false
                                     showVolumeDialog = false
@@ -217,7 +213,7 @@ fun VolumeCard() {
                     confirmButton = {
                         Button(
                             onClick = {
-                                SettingsViewModel().setCustomVolumeOptionLabel(context, optionLabel)
+                                settingsViewModel.setCustomVolumeOptionLabel(optionLabel)
                                 mCustomVolumeOptionLabel = optionLabel
                                 showVolumeOptionLabelDialog = false
                                 showVolumeDialog = false

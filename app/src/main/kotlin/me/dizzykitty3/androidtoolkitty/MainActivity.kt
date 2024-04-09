@@ -9,7 +9,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.foundation.context_service.ClipboardService
 import me.dizzykitty3.androidtoolkitty.foundation.theme.MyApplicationTheme
 import me.dizzykitty3.androidtoolkitty.view.NavHostLayout
@@ -28,7 +27,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme(
-                dynamicColor = SettingsViewModel().getIsDynamicColor(app)
+                dynamicColor = SettingsViewModel.getIsDynamicColor()
             ) {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
                     NavHostLayout()
@@ -45,7 +44,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun getSettingsSharedPreferences() {
-        isAutoClearClipboard = SettingsViewModel().getIsAutoClearClipboard(this)
+        isAutoClearClipboard = SettingsViewModel.getIsAutoClearClipboard()
         Log.d(TAG, "settings sp got")
     }
 

@@ -46,7 +46,7 @@ fun SocialMediaProfileCard() {
 
         var username by remember { mutableStateOf("") }
 
-        val platformIndex = SettingsViewModel().getLastTimeSelectedSocialPlatform(context)
+        val platformIndex = SettingsViewModel.getLastTimeSelectedSocialPlatform()
         var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
 
         val platformList = TUrl.Platform.entries.map { stringResource(it.nameResId) }
