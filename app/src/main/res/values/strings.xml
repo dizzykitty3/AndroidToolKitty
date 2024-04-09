@@ -31,6 +31,7 @@
     <string name="add_custom_volume">Add custom volume</string>
     <string name="you_can_set_a_label_for_it">You can set a label for it</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
+    <string name="skip">Skip</string>
 
     <!--Home screen: clipboard-->
     <string name="clipboard">Clipboard</string>

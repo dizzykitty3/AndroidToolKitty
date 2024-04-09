@@ -159,6 +159,7 @@ fun VolumeCard() {
                                     )
                                     mCustomVolume = newCustomVolume.toInt()
                                     showVolumeOptionLabelDialog = true
+                                    selectedIndex = 3
                                     AudioService(context).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
                                 }
                             }
@@ -182,6 +183,7 @@ fun VolumeCard() {
                 AlertDialog(
                     onDismissRequest = {
                         showVolumeOptionLabelDialog = false
+                        showVolumeDialog = false
                     },
                     title = {
                         Text(text = stringResource(R.string.you_can_set_a_label_for_it))
@@ -201,6 +203,9 @@ fun VolumeCard() {
                                         context,
                                         optionLabel
                                     )
+                                    mCustomVolumeOptionLabel = optionLabel
+                                    showVolumeOptionLabelDialog = false
+                                    showVolumeDialog = false
                                 }
                             )
                         )
@@ -210,22 +215,14 @@ fun VolumeCard() {
                             onClick = {
                                 SettingsViewModel().setCustomVolumeOptionLabel(context, optionLabel)
                                 mCustomVolumeOptionLabel = optionLabel
-                                selectedIndex = 3
                                 showVolumeOptionLabelDialog = false
                                 showVolumeDialog = false
                             }
                         ) {
-                            Text(text = stringResource(android.R.string.ok))
-                        }
-                    },
-                    dismissButton = {
-                        TextButton(
-                            onClick = {
-                                showVolumeOptionLabelDialog = false
-                                showVolumeDialog = false
-                            }
-                        ) {
-                            Text(text = stringResource(android.R.string.cancel))
+                            if (optionLabel == "")
+                                Text(text = stringResource(id = R.string.skip))
+                            else
+                                Text(text = stringResource(id = android.R.string.ok))
                         }
                     }
                 )
