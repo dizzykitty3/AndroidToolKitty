@@ -48,6 +48,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -171,14 +172,24 @@ fun LuckyWheelCard() {
                     close()
                 }
                 drawPath(arrowPath, primary)
+
+                // 绘制圆盘外边缘
+                drawCircle(
+                    color = Color.Black,
+                    radius = radius,
+                    center = center,
+                    style = Stroke(width = 4f)
+                )
             }
 
             // 旋转按钮
             Button(onClick = {
-                hasRotated = true
-                val randomBaseCircles = 3
-                val fineTunedAngle = Random.nextInt(360)
-                targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
+                if (items.isNotEmpty()) {
+                    hasRotated = true
+                    val randomBaseCircles = 3
+                    val fineTunedAngle = Random.nextInt(360)
+                    targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
+                }
             }) {
                 Text(text = "开始旋转")
             }
