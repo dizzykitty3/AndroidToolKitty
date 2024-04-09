@@ -109,7 +109,7 @@ fun LuckyWheelCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                ToastService(context).toast("Selected: $selected")
+                ToastService.toast("Selected: $selected")
                 rotationDegrees = targetRotationDegrees % 360
             }
         }

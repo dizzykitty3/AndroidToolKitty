@@ -45,8 +45,8 @@ fun AboutCard() {
             CustomIconAndTextPadding()
             Row(
                 modifier = Modifier.clickable {
-                    ToastService(context).toast(context.getString(R.string.all_help_welcomed))
-                    IntentService(context).openUrl(sourceCodeUrl)
+                    ToastService.toast(context.getString(R.string.all_help_welcomed))
+                    IntentService.openUrl(sourceCodeUrl)
                 }
             ) {
                 Text(
@@ -78,8 +78,6 @@ private fun DeveloperProfileLink(
     name: String
 ) {
     Row {
-        val context = LocalContext.current
-
         Icon(
             imageVector = Icons.Outlined.AccountCircle,
             contentDescription = null
@@ -87,7 +85,7 @@ private fun DeveloperProfileLink(
         CustomIconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
-                IntentService(context).openUrl("${TUrl.profilePrefix(TUrl.Platform.GITHUB)}$name")
+                IntentService.openUrl("${TUrl.profilePrefix(TUrl.Platform.GITHUB)}$name")
             }
         ) {
             Text(

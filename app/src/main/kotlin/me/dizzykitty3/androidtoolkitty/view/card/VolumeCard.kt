@@ -48,8 +48,8 @@ fun VolumeCard() {
     ) {
         val context = LocalContext.current
 
-        val currentVolume = AudioService(context).volume()
-        val maxVolume = AudioService(context).maxVolumeIndex()
+        val currentVolume = AudioService.volume()
+        val maxVolume = AudioService.maxVolumeIndex()
 
         val sliderIncrementFivePercent =
             SettingsViewModel().getIsSliderIncrementFivePercent(context)
@@ -101,20 +101,20 @@ fun VolumeCard() {
                         selectedIndex = index
                         when (index) {
                             0 -> {
-                                AudioService(context).setVolume(0)
+                                AudioService.setVolume(0)
                             }
 
                             1 -> {
-                                AudioService(context).setVolume((0.3 * maxVolume).toInt())
+                                AudioService.setVolume((0.3 * maxVolume).toInt())
                             }
 
                             2 -> {
-                                AudioService(context).setVolume((0.5 * maxVolume).toInt())
+                                AudioService.setVolume((0.5 * maxVolume).toInt())
                             }
 
                             3 -> {
                                 if (mCustomVolume > 0) {
-                                    AudioService(context).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
+                                    AudioService.setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
                                 } else
                                     showVolumeDialog = true
                             }
@@ -154,7 +154,7 @@ fun VolumeCard() {
                         Button(
                             onClick = {
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0 && newCustomVolume.toInt() != 0) {
-                                    ToastService(context).toast(context.getString(R.string.system_media_volume_levels_limited))
+                                    ToastService.toast(context.getString(R.string.system_media_volume_levels_limited))
                                     return@Button
                                 } else {
                                     SettingsViewModel().setCustomVolume(
@@ -164,7 +164,7 @@ fun VolumeCard() {
                                     mCustomVolume = newCustomVolume.toInt()
                                     showVolumeOptionLabelDialog = true
                                     selectedIndex = 3
-                                    AudioService(context).setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
+                                    AudioService.setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
                                 }
                             }
                         ) {

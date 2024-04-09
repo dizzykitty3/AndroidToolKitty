@@ -87,9 +87,9 @@ private fun onClickConvertButton(
     try {
         val result = TString.unicodeToCharacter(unicode)
         characterField.value = result
-        ClipboardService(context).copy(result)
+        ClipboardService.copy(result)
     } catch (e: Exception) {
-        ToastService(context).toast(e.message ?: "Unknown error occurred")
+        ToastService.toast(e.message ?: "Unknown error occurred")
     }
     Log.d(TAG, "onClickConvertButton")
 }

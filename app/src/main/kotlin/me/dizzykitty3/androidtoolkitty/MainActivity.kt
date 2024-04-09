@@ -52,7 +52,7 @@ class MainActivity : ComponentActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus and isAutoClearClipboard) // Clipboard operations require window focus
-            ClipboardService(this).clear()
+            ClipboardService.clear()
     }
 
     override fun onStop() {

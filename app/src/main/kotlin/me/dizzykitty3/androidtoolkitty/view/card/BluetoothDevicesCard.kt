@@ -66,14 +66,14 @@ fun BluetoothDevicesCard() {
                         message = context.getString(R.string.tap_allow_to_continue),
                         buttonText = context.getString(R.string.manually_grant),
                         buttonColor = primary,
-                        buttonClickListener = { IntentService(context).openPermissionPage() }
+                        buttonClickListener = { IntentService.openPermissionPage() }
                     )
                     requestPermission(context)
                     return@Button
                 }
 
                 // Get system service
-                bluetoothAdapter = BluetoothService(context).bluetoothAdapter()
+                bluetoothAdapter = BluetoothService.bluetoothAdapter()
 
                 // Show current device name, paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {
@@ -84,7 +84,7 @@ fun BluetoothDevicesCard() {
                 }
 
                 // When Bluetooth is OFF
-                ToastService(context).toast(context.getString(R.string.bluetooth_disabled))
+                ToastService.toast(context.getString(R.string.bluetooth_disabled))
             }
         ) {
             Text(text = stringResource(id = R.string.show_paired_devices))

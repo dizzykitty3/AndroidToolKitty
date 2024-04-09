@@ -115,7 +115,7 @@ private fun onVisitProfileButton(context: Context, username: String, platformInd
     val platform = TUrl.Platform.entries.getOrNull(platformIndex) ?: return
 
     if (platform == TUrl.Platform.PLATFORM_NOT_ADDED_YET) {
-        ToastService(context).toastAndLog(
+        ToastService.toastAndLog(
             "${context.getString(R.string.platform)}: \"$username\" ${
                 context.getString(
                     R.string.uploaded
@@ -126,6 +126,6 @@ private fun onVisitProfileButton(context: Context, username: String, platformInd
     }
 
     val prefix = platform.prefix
-    IntentService(context).openUrl("$prefix${TString.dropSpaces(username)}")
+    IntentService.openUrl("$prefix${TString.dropSpaces(username)}")
     Log.d(TAG, "onVisitProfile")
 }

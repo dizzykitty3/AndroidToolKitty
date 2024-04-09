@@ -188,6 +188,6 @@ private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view:
         message = context.getString(R.string.requires_restart_do_it_now),
         buttonText = context.getString(R.string.restart),
         buttonColor = color,
-        buttonClickListener = { IntentService(context).restartApp() }
+        buttonClickListener = { IntentService.restartApp() }
     )
 }

@@ -1,16 +1,16 @@
 package me.dizzykitty3.androidtoolkitty.foundation.context_service
 
-import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-class ToastService(private val context: Context) {
-    companion object {
+object ToastService {
         private const val TAG = "ToastService"
-    }
 
-    fun toast(message: String) = Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    @JvmStatic
+    fun toast(message: String) = Toast.makeText(app, message, Toast.LENGTH_SHORT).show()
 
+    @JvmStatic
     fun toastAndLog(logEvent: String) {
         Log.d(TAG, logEvent)
         toast(logEvent)

@@ -2,18 +2,17 @@ package me.dizzykitty3.androidtoolkitty.foundation.context_service
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 
-class IntentService(private val context: Context) {
-    companion object {
+object IntentService {
         private const val TAG = "IntentService"
         private const val HTTPS = "https://"
         private const val GOOGLE_MAPS = "com.google.android.apps.maps"
@@ -28,8 +27,8 @@ class IntentService(private val context: Context) {
         private const val SETTING_8 = "setting_date_and_time"
         private const val SETTING_9 = "setting_developer"
         private const val PACKAGE = "package"
-    }
 
+    @JvmStatic
     fun openUrl(finalUrl: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(if (finalUrl.contains(HTTPS)) finalUrl else "$HTTPS$finalUrl")
@@ -40,6 +39,7 @@ class IntentService(private val context: Context) {
     }
 
     @SuppressLint("InlinedApi")
+    @JvmStatic
     fun openSystemSettings(settingType: String) {
         val intent: Intent = when (settingType) {
             SETTING_1 -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
@@ -60,14 +60,15 @@ class IntentService(private val context: Context) {
             startActivity(intent)
             Log.d(TAG, "onOpenSystemSettings: $settingType")
         } catch (e: Exception) {
-            ToastService(context).toast(context.getString(R.string.system_settings_unsupported))
+            ToastService.toast(app.getString(R.string.system_settings_unsupported))
             Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
         }
     }
 
+    @JvmStatic
     fun openPermissionPage() {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        val uri = Uri.fromParts(PACKAGE, context.packageName, null)
+        val uri = Uri.fromParts(PACKAGE, app.packageName, null)
         intent.setData(uri)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
@@ -75,11 +76,12 @@ class IntentService(private val context: Context) {
             startActivity(intent)
             Log.d(TAG, "openPermissionPage")
         } catch (e: Exception) {
-            ToastService(context).toast(context.getString(R.string.system_settings_unsupported))
+            ToastService.toast(app.getString(R.string.system_settings_unsupported))
             Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
         }
     }
 
+    @JvmStatic
     fun openGoogleMaps(latitude: String, longitude: String) {
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
@@ -96,9 +98,10 @@ class IntentService(private val context: Context) {
         }
     }
 
+    @JvmStatic
     private fun startActivity(intent: Intent) {
         try {
-            context.startActivity(intent)
+            app.startActivity(intent)
             Log.d(TAG, "startActivity")
             return
         } catch (e: Exception) {
@@ -107,18 +110,19 @@ class IntentService(private val context: Context) {
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
-                ToastService(context).toast(context.getString(R.string.google_play_not_installed))
+                ToastService.toast(app.getString(R.string.google_play_not_installed))
                 Log.i(TAG, "Google Play not installed")
             }
 
             GOOGLE_MAPS -> {
-                ToastService(context).toast(context.getString(R.string.google_maps_not_installed))
+                ToastService.toast(app.getString(R.string.google_maps_not_installed))
                 Log.i(TAG, "Google Maps not installed")
-                IntentService(context).openAppOnMarket(GOOGLE_MAPS)
+                openAppOnMarket(GOOGLE_MAPS)
             }
         }
     }
 
+    @JvmStatic
     fun openAppOnMarket(packageName: String, isGooglePlay: Boolean = true) {
         val marketUri: Uri = Uri.parse(
             if (packageName.isBlank()) {
@@ -142,10 +146,11 @@ class IntentService(private val context: Context) {
         }
     }
 
+    @JvmStatic
     fun restartApp() {
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(app, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
-        (context as Activity).finish()
+        app.startActivity(intent)
+        (app.baseContext as Activity).finish()
     }
 }
