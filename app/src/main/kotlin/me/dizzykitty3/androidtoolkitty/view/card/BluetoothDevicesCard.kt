@@ -28,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TBluetooth
@@ -102,8 +103,9 @@ fun BluetoothDevicesCard() {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Text(text = "${device.name} (${type(device.type)})")
-                        CustomIconPopup(device.address)
+                        Text(text = device.name)
+                        CustomIconAndTextPadding()
+                        CustomIconPopup(type(device.type), device.address)
                     }
                 }
 
