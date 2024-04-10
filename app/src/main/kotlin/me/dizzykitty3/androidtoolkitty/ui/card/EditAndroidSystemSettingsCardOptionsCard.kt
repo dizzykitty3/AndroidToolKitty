@@ -7,8 +7,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomHideCardSettingSwitch
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 
 private const val SETTING_1 = "setting_display"

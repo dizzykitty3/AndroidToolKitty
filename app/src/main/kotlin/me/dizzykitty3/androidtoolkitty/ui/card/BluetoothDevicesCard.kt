@@ -27,9 +27,9 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconPopup
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TBluetooth
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent

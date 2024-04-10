@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.theme
+package me.dizzykitty3.androidtoolkitty.foundation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

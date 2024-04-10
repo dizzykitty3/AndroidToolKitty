@@ -10,11 +10,11 @@ import androidx.compose.runtime.remember
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.data.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupDivider
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupTitleText
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSystemSettingsButton
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleText
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSystemSettingsButton
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
 
 private const val SETTING_1 = "setting_display"
 private const val SETTING_2 = "setting_auto_rotate"

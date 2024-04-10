@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.ui_component
+package me.dizzykitty3.androidtoolkitty.foundation.ui.component
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DropdownMenuItem

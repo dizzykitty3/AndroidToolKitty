@@ -2,7 +2,7 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGradientText
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGradientText
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 
 @Composable

@@ -26,9 +26,9 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomDropdownMenu
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomDropdownMenu
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast

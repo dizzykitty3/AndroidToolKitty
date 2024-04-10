@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.ui_component
+package me.dizzykitty3.androidtoolkitty.foundation.ui.component
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.tween

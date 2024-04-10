@@ -16,9 +16,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndTextPadding
-import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
