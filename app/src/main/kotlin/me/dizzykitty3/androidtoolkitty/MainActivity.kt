@@ -9,7 +9,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import me.dizzykitty3.androidtoolkitty.data.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.foundation.ui.theme.ToolKittyTheme
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TClipboard
 import me.dizzykitty3.androidtoolkitty.ui.MainLayout

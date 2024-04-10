@@ -26,7 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomBoldText
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard

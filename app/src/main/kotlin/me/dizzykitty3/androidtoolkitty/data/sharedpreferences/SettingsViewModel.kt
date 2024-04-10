@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.data
+package me.dizzykitty3.androidtoolkitty.data.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
