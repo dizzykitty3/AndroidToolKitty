@@ -8,6 +8,8 @@ import android.bluetooth.BluetoothDevice
 import android.content.Context
 import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Bluetooth
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -45,7 +47,10 @@ private const val GRANTED = PackageManager.PERMISSION_GRANTED
 @SuppressLint("MissingPermission")
 @Composable
 fun BluetoothDevicesCard() {
-    CustomCard(title = R.string.bluetooth_devices) {
+    CustomCard(
+        icon = Icons.Outlined.Bluetooth,
+        title = R.string.bluetooth_devices
+    ) {
         val context = LocalContext.current
         val view = LocalView.current
 
