@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.foundation.ui_component
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,47 +34,45 @@ fun CustomIconPopup(
     var showPopup by remember { mutableStateOf(false) }
 
     Row {
-        Box {
-            Icon(
-                imageVector = Icons.Outlined.Info,
-                contentDescription = "Info",
-                modifier = Modifier
-                    .size(16.dp)
-                    .clickable { showPopup = true },
-                tint = Color.DarkGray
-            )
+        Icon(
+            imageVector = Icons.Outlined.Info,
+            contentDescription = "Info",
+            modifier = Modifier
+                .size(16.dp)
+                .clickable { showPopup = true },
+            tint = Color.DarkGray
+        )
 
-            if (showPopup) {
-                Popup(
-                    onDismissRequest = { showPopup = false },
-                    popupPositionProvider = object : PopupPositionProvider {
-                        override fun calculatePosition(
-                            anchorBounds: IntRect,
-                            windowSize: IntSize,
-                            layoutDirection: LayoutDirection,
-                            popupContentSize: IntSize
-                        ): IntOffset {
-                            val positionAbove = anchorBounds.top - popupContentSize.height
+        if (showPopup) {
+            Popup(
+                onDismissRequest = { showPopup = false },
+                popupPositionProvider = object : PopupPositionProvider {
+                    override fun calculatePosition(
+                        anchorBounds: IntRect,
+                        windowSize: IntSize,
+                        layoutDirection: LayoutDirection,
+                        popupContentSize: IntSize
+                    ): IntOffset {
+                        val positionAbove = anchorBounds.top - popupContentSize.height
 
-                            return if (positionAbove >= 0) {
-                                IntOffset(anchorBounds.left, positionAbove)
-                            } else {
-                                IntOffset(anchorBounds.left, anchorBounds.bottom)
-                            }
+                        return if (positionAbove >= 0) {
+                            IntOffset(anchorBounds.left, positionAbove)
+                        } else {
+                            IntOffset(anchorBounds.left, anchorBounds.bottom)
                         }
                     }
+                }
+            ) {
+                Surface(
+                    shape = RoundedCornerShape(4.dp),
+                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(4.dp)
                 ) {
-                    Surface(
-                        shape = RoundedCornerShape(4.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant,
-                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(4.dp)
-                    ) {
-                        Text(
-                            text = ("$deviceType, $deviceAddress"),
-                            modifier = Modifier.padding(8.dp)
-                        )
-                    }
+                    Text(
+                        text = ("$deviceType, $deviceAddress"),
+                        modifier = Modifier.padding(8.dp)
+                    )
                 }
             }
         }
