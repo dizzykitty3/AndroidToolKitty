@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.view.card
+package me.dizzykitty3.androidtoolkitty.ui.card
 
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -9,10 +9,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.data.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomHideCardSettingSwitch
-import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"

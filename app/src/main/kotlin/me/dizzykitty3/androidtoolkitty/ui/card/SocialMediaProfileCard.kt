@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.view.card
+package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.content.Context
 import android.util.Log
@@ -25,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.data.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
@@ -32,7 +33,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
-import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 private const val TAG = "SocialMediaProfileCard"
 

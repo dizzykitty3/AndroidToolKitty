@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.view
+package me.dizzykitty3.androidtoolkitty.ui
 
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -7,11 +7,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import me.dizzykitty3.androidtoolkitty.view.layout.BluetoothDevicesScreen
-import me.dizzykitty3.androidtoolkitty.view.layout.EditHomePageScreen
-import me.dizzykitty3.androidtoolkitty.view.layout.HomeScreen
-import me.dizzykitty3.androidtoolkitty.view.layout.LuckySpinningWheelScreen
-import me.dizzykitty3.androidtoolkitty.view.layout.SettingsScreen
+import me.dizzykitty3.androidtoolkitty.ui.screen.BluetoothDevicesScreen
+import me.dizzykitty3.androidtoolkitty.ui.screen.EditHomePageScreen
+import me.dizzykitty3.androidtoolkitty.ui.screen.HomeScreen
+import me.dizzykitty3.androidtoolkitty.ui.screen.LuckySpinningWheelScreen
+import me.dizzykitty3.androidtoolkitty.ui.screen.SettingsScreen
 
 private const val HOME_SCREEN = "HomeScreen"
 private const val SETTINGS_SCREEN = "SettingsScreen"
@@ -20,7 +20,7 @@ private const val LUCKY_SPINNING_WHEEL_SCREEN = "LuckySpinningWheelScreen"
 private const val BLUETOOTH_DEVICES_SCREEN = "BluetoothDevicesScreen"
 
 @Composable
-fun NavHostLayout() {
+fun MainLayout() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,

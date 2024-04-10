@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.view.card
+package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth

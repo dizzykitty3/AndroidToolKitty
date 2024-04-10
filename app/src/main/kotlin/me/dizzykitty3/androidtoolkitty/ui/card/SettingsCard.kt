@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.view.card
+package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.app.Activity
 import android.view.View
@@ -26,6 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.data.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomBoldText
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
@@ -35,7 +36,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomIconAndText
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TSnackbar
-import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
 
 private const val EDIT_HOME_PAGE_SCREEN = "EditHomePageScreen"
 

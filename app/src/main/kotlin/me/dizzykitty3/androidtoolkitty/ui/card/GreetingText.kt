@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.view.card
+package me.dizzykitty3.androidtoolkitty.ui.card
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color

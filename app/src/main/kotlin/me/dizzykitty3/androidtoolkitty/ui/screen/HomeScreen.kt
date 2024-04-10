@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.view.layout
+package me.dizzykitty3.androidtoolkitty.ui.screen
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -18,25 +18,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.data.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.foundation.ui_component.CustomTip
-import me.dizzykitty3.androidtoolkitty.view.card.AndroidVersionsCard
-import me.dizzykitty3.androidtoolkitty.view.card.BluetoothDevicesCard
-import me.dizzykitty3.androidtoolkitty.view.card.CheckAppOnAppMarketCard
-import me.dizzykitty3.androidtoolkitty.view.card.ClipboardCard
-import me.dizzykitty3.androidtoolkitty.view.card.GoogleMapsCard
-import me.dizzykitty3.androidtoolkitty.view.card.GreetingText
-import me.dizzykitty3.androidtoolkitty.view.card.LuckyWheelCard
-import me.dizzykitty3.androidtoolkitty.view.card.SocialMediaProfileCard
-import me.dizzykitty3.androidtoolkitty.view.card.SystemSettingsCard
-import me.dizzykitty3.androidtoolkitty.view.card.UnicodeCard
-import me.dizzykitty3.androidtoolkitty.view.card.UrlCard
-import me.dizzykitty3.androidtoolkitty.view.card.VolumeCard
-import me.dizzykitty3.androidtoolkitty.view.card.YearProgressCard
-import me.dizzykitty3.androidtoolkitty.viewmodel.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.ui.card.AndroidVersionsCard
+import me.dizzykitty3.androidtoolkitty.ui.card.BluetoothDevicesCard
+import me.dizzykitty3.androidtoolkitty.ui.card.CheckAppOnAppMarketCard
+import me.dizzykitty3.androidtoolkitty.ui.card.ClipboardCard
+import me.dizzykitty3.androidtoolkitty.ui.card.GoogleMapsCard
+import me.dizzykitty3.androidtoolkitty.ui.card.GreetingText
+import me.dizzykitty3.androidtoolkitty.ui.card.LuckyWheelCard
+import me.dizzykitty3.androidtoolkitty.ui.card.SocialMediaProfileCard
+import me.dizzykitty3.androidtoolkitty.ui.card.SystemSettingsCard
+import me.dizzykitty3.androidtoolkitty.ui.card.UnicodeCard
+import me.dizzykitty3.androidtoolkitty.ui.card.UrlCard
+import me.dizzykitty3.androidtoolkitty.ui.card.VolumeCard
+import me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
 import java.util.Locale
 
 private const val SETTINGS_SCREEN = "SettingsScreen"
