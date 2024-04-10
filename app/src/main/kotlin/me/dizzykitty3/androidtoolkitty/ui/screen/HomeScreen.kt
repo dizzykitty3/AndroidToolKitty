@@ -5,11 +5,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -19,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomScreen
@@ -31,7 +28,6 @@ import me.dizzykitty3.androidtoolkitty.ui.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.ui.card.GoogleMapsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.GreetingText
 import me.dizzykitty3.androidtoolkitty.ui.card.LuckyWheelCard
-import me.dizzykitty3.androidtoolkitty.ui.card.SocialMediaProfileCard
 import me.dizzykitty3.androidtoolkitty.ui.card.SystemSettingsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UnicodeCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UrlCard
@@ -46,7 +42,8 @@ private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"
 private const val CARD_3 = "card_clipboard"
 private const val CARD_4 = "card_url"
-private const val CARD_5 = "card_social_media_profile"
+
+//private const val CARD_5 = "card_social_media_profile"
 private const val CARD_6 = "card_android_system_settings"
 private const val CARD_7 = "card_unicode"
 private const val CARD_8 = "card_google_maps"
@@ -101,7 +98,7 @@ fun HomeScreen(navController: NavHostController) {
             CARD_2 to settingsViewModel.getCardShowedState(CARD_2),
             CARD_3 to settingsViewModel.getCardShowedState(CARD_3),
             CARD_4 to settingsViewModel.getCardShowedState(CARD_4),
-            CARD_5 to settingsViewModel.getCardShowedState(CARD_5),
+//            CARD_5 to settingsViewModel.getCardShowedState(CARD_5),
             CARD_6 to settingsViewModel.getCardShowedState(CARD_6),
             CARD_7 to settingsViewModel.getCardShowedState(CARD_7),
             CARD_8 to settingsViewModel.getCardShowedState(CARD_8),
@@ -118,7 +115,7 @@ fun HomeScreen(navController: NavHostController) {
                     CARD_2 -> VolumeCard()
                     CARD_3 -> ClipboardCard()
                     CARD_4 -> UrlCard()
-                    CARD_5 -> SocialMediaProfileCard()
+//                    CARD_5 -> SocialMediaProfileCard()
                     CARD_6 -> SystemSettingsCard()
                     CARD_7 -> UnicodeCard()
                     CARD_8 -> GoogleMapsCard()
@@ -130,18 +127,18 @@ fun HomeScreen(navController: NavHostController) {
             }
         }
 
-        CustomCard(title = R.string.test) {
-            Button(
-                onClick = { navController.navigate(LUCKY_SPINNING_WHEEL_SCREEN) }
-            ) {
-                Text(text = stringResource(R.string.lucky_spinning_wheel))
-            }
-            Button(
-                onClick = { navController.navigate(BLUETOOTH_DEVICES_SCREEN) }
-            ) {
-                Text(text = stringResource(id = R.string.bluetooth_devices))
-            }
-        }
+//        CustomCard(title = R.string.test) {
+//            Button(
+//                onClick = { navController.navigate(LUCKY_SPINNING_WHEEL_SCREEN) }
+//            ) {
+//                Text(text = stringResource(R.string.lucky_spinning_wheel))
+//            }
+//            Button(
+//                onClick = { navController.navigate(BLUETOOTH_DEVICES_SCREEN) }
+//            ) {
+//                Text(text = stringResource(id = R.string.bluetooth_devices))
+//            }
+//        }
     }
 }
 
