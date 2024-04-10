@@ -91,7 +91,7 @@ fun BluetoothDevicesCard() {
         }
 
         if (showResult) {
-            Text(text = "\n${stringResource(id = R.string.current_device)}\n${bluetoothAdapter?.name}\n")
+            Text(text = "${stringResource(id = R.string.current_device)} ${bluetoothAdapter?.name}\n")
 
             if (size == 0) {
                 Text(text = stringResource(id = R.string.no_paired_devices))
