@@ -42,7 +42,7 @@
     <string name="github">GitHub</string>
     <string name="x">X（推特）</string>
     <string name="weibo">微博</string>
-    <string name="youtube_id">YouTube (UID)</string>
+    <string name="youtube_id">YouTube (ID)</string>
     <string name="platform_not_added_yet">这里没有我所想的社交平台</string>
     <string name="open_developer_options">开发者选项</string>
     <string name="requires_restart_do_it_now">这将需要重启 APP</string>
