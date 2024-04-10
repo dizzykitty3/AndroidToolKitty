@@ -1,6 +1,8 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Notes
@@ -56,7 +58,14 @@ fun UnicodeCard() {
                         CustomItalicText(" 00610062")
                     }
                 )
-            }
+            },
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    if (isUnicodeInput) {
+                        onClickConvertButton(unicode, { characters = it }, true)
+                    }
+                }
+            )
         )
 
         OutlinedTextField(
@@ -68,7 +77,17 @@ fun UnicodeCard() {
                 isUnicodeInput = false
             },
             label = { Text(stringResource(R.string.character)) },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    if (isCharacterInput) {
+                        onClickConvertButton(characters, { unicode = it }, false)
+                    }
+                }
+            )
         )
 
         TextButton(
@@ -103,4 +122,5 @@ private fun onClickConvertButton(
     } catch (e: Exception) {
         TToast.toast(e.message ?: "Unknown error occurred")
     }
+    Log.d(TAG, "onClickConvertButton")
 }
