@@ -41,4 +41,21 @@ object TString {
             throw IllegalArgumentException("Invalid Unicode string format: ", e)
         }
     }
+
+    @JvmStatic
+    @Throws(IllegalArgumentException::class)
+    fun characterToUnicode(characters: String): String {
+        if (characters.isEmpty()) {
+            throw IllegalArgumentException("Input string is empty")
+        }
+
+        val stringBuilder = StringBuilder()
+        for (char in characters) {
+            val unicodeValue = char.code
+            val hexString = unicodeValue.toString(16).padStart(4, '0') // 转换成十六进制并确保长度为4
+            stringBuilder.append(hexString)
+        }
+        return stringBuilder.toString()
+    }
+
 }

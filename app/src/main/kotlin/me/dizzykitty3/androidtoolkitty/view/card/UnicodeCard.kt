@@ -1,8 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.view.card
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Notes
@@ -10,7 +8,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,23 +27,27 @@ private const val TAG = "UnicodeCard"
 
 @Composable
 fun UnicodeCard() {
+    var unicode by remember { mutableStateOf("") }
+    var characters by remember { mutableStateOf("") }
+    var isUnicodeInput by remember { mutableStateOf(false) }
+    var isCharacterInput by remember { mutableStateOf(false) }
+
     CustomCard(
         icon = Icons.AutoMirrored.Outlined.Notes,
         title = R.string.unicode
     ) {
-        var unicode by remember { mutableStateOf("") }
-        val characters = remember { mutableStateOf("") }
-
         OutlinedTextField(
             value = unicode,
-            onValueChange = { unicode = it },
+            onValueChange = {
+                unicode = it
+                characters = "" // 清空字符字段
+                isUnicodeInput = true
+                isCharacterInput = false
+            },
             label = { Text(stringResource(R.string.unicode)) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = { onClickConvertButton(unicode, characters) }
             ),
             supportingText = {
                 Text(
@@ -59,14 +60,25 @@ fun UnicodeCard() {
         )
 
         OutlinedTextField(
-            value = characters.value,
-            onValueChange = {},
+            value = characters,
+            onValueChange = {
+                characters = it
+                unicode = ""
+                isCharacterInput = true
+                isUnicodeInput = false
+            },
             label = { Text(stringResource(R.string.character)) },
             modifier = Modifier.fillMaxWidth()
         )
 
         TextButton(
-            onClick = { onClickConvertButton(unicode, characters) }
+            onClick = {
+                if (isUnicodeInput) {
+                    onClickConvertButton(unicode, { characters = it }, true)
+                } else if (isCharacterInput) {
+                    onClickConvertButton(characters, { unicode = it }, false)
+                }
+            }
         ) {
             Text(text = stringResource(R.string.convert))
         }
@@ -74,17 +86,21 @@ fun UnicodeCard() {
 }
 
 private fun onClickConvertButton(
-    unicode: String,
-    characterField: MutableState<String>
+    input: String,
+    updateResult: (String) -> Unit,
+    isUnicodeToChar: Boolean
 ) {
-    if (unicode.isBlank()) return
+    if (input.isBlank()) return
 
     try {
-        val result = TString.unicodeToCharacter(unicode)
-        characterField.value = result
+        val result = if (isUnicodeToChar) {
+            TString.unicodeToCharacter(input)
+        } else {
+            TString.characterToUnicode(input)
+        }
+        updateResult(result)
         TClipboard.copy(result)
     } catch (e: Exception) {
         TToast.toast(e.message ?: "Unknown error occurred")
     }
-    Log.d(TAG, "onClickConvertButton")
 }
