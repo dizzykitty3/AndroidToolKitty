@@ -1,18 +1,25 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Visibility
+import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomHideCardSettingSwitch
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 
 private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"
@@ -164,6 +171,12 @@ fun EditHomeScreenCard() {
                 mIsShowCard12 = false
             }
         ) {
+            Icon(
+                imageVector = Icons.Outlined.VisibilityOff,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+            CustomIconAndTextPadding()
             Text(text = stringResource(R.string.hide_all_cards))
         }
 
@@ -183,6 +196,12 @@ fun EditHomeScreenCard() {
                 mIsShowCard12 = true
             }
         ) {
+            Icon(
+                imageVector = Icons.Outlined.Visibility,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+            CustomIconAndTextPadding()
             Text(text = stringResource(R.string.show_all_cards))
         }
     }

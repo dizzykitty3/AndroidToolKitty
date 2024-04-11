@@ -10,9 +10,11 @@ import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Bluetooth
+import androidx.compose.material.icons.outlined.BluetoothConnected
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -23,6 +25,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -93,6 +96,12 @@ fun BluetoothDevicesCard() {
                 TToast.toast(context.getString(R.string.bluetooth_disabled))
             }
         ) {
+            Icon(
+                imageVector = Icons.Outlined.BluetoothConnected,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+            CustomIconAndTextPadding()
             Text(text = stringResource(id = R.string.show_paired_devices))
         }
 
