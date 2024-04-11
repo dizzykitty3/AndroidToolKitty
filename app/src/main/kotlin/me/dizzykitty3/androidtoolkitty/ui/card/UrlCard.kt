@@ -7,8 +7,10 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
+import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -63,6 +65,18 @@ fun UrlCard() {
             keyboardActions = KeyboardActions(
                 onDone = { onClickVisitUrlButton(url) }
             ),
+            trailingIcon = {
+                if (url.isNotEmpty()) {
+                    IconButton(
+                        onClick = { url = "" }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Clear,
+                            contentDescription = stringResource(R.string.clear_input),
+                        )
+                    }
+                }
+            },
             supportingText = {
                 Text(
                     text = buildAnnotatedString {
@@ -137,6 +151,18 @@ fun UrlCard() {
             keyboardActions = KeyboardActions(
                 onDone = { onVisitProfileButton(context, username, mPlatformIndex) }
             ),
+            trailingIcon = {
+                if (username.isNotEmpty()) {
+                    IconButton(
+                        onClick = { username = "" }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Clear,
+                            contentDescription = stringResource(R.string.clear_input),
+                        )
+                    }
+                }
+            },
             supportingText = {
                 if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
                     val platform = TUrl.Platform.entries[mPlatformIndex]

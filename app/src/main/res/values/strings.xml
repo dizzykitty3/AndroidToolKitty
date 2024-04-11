@@ -13,6 +13,7 @@
     <string name="unknown">Unknown</string>
     <string name="manually_grant">Manually grant</string>
     <string name="warning">Warning</string>
+    <string name="clear_input">Clear inputs</string>
 
     <!--Home screen: top tip-->
     <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>
