@@ -17,7 +17,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntRect
 import androidx.compose.ui.unit.IntSize
@@ -40,7 +39,7 @@ fun CustomIconPopup(
             modifier = Modifier
                 .size(16.dp)
                 .clickable { showPopup = true },
-            tint = Color.DarkGray
+            tint = MaterialTheme.colorScheme.secondary
         )
 
         if (showPopup) {
