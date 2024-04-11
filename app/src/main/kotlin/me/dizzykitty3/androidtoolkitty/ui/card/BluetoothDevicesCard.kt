@@ -69,7 +69,7 @@ fun BluetoothDevicesCard() {
                 // Check permission
                 if (noPermission(context)) {
                     TSnackbar(view).snackbar(
-                        message = context.getString(R.string.tap_allow_to_continue),
+                        message = context.getString(R.string.grant_permission_then_tap_again),
                         buttonText = context.getString(R.string.manually_grant),
                         buttonColor = primary,
                         buttonClickListener = { TIntent.openPermissionPage() }

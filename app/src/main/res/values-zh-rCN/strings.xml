@@ -105,7 +105,7 @@
     <string name="show_paired_devices">查看已配对的设备</string>
     <string name="current_device">当前设备：</string>
     <string name="paired_devices">已配对的设备：</string>
-    <string name="tap_allow_to_continue">授予权限以继续</string>
+    <string name="grant_permission_then_tap_again">授予权限，然后再次点击按钮</string>
     <string name="bt">经典</string>
     <string name="ble">低功耗</string>
     <string name="dual">双模</string>
