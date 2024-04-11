@@ -7,8 +7,10 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
+import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.Shop
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -29,7 +31,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPaddi
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 
 @Composable
-fun CheckAppOnAppMarketCard() {
+fun AppMarketCard() {
     CustomCard(
         icon = Icons.Outlined.Shop,
         title = R.string.open_app_on_google_play
@@ -46,7 +48,19 @@ fun CheckAppOnAppMarketCard() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = { TIntent.openAppOnMarket(packageName) }
-            )
+            ),
+            trailingIcon = {
+                if (packageName.isNotEmpty()) {
+                    IconButton(
+                        onClick = { packageName = "" }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Clear,
+                            contentDescription = stringResource(R.string.clear_input),
+                        )
+                    }
+                }
+            }
         )
         CustomSpacerPadding()
         Row {

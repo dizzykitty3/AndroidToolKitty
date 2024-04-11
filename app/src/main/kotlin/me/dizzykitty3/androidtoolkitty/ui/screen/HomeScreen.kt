@@ -22,12 +22,12 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomOneHandedMo
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui.card.AndroidVersionsCard
+import me.dizzykitty3.androidtoolkitty.ui.card.AppMarketCard
 import me.dizzykitty3.androidtoolkitty.ui.card.BluetoothDevicesCard
-import me.dizzykitty3.androidtoolkitty.ui.card.CheckAppOnAppMarketCard
 import me.dizzykitty3.androidtoolkitty.ui.card.ClipboardCard
-import me.dizzykitty3.androidtoolkitty.ui.card.GoogleMapsCard
-import me.dizzykitty3.androidtoolkitty.ui.card.GreetingText
+import me.dizzykitty3.androidtoolkitty.ui.card.Greeting
 import me.dizzykitty3.androidtoolkitty.ui.card.LuckyWheelCard
+import me.dizzykitty3.androidtoolkitty.ui.card.MapsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.SystemSettingsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UnicodeCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UrlCard
@@ -62,7 +62,7 @@ fun HomeScreen(navController: NavHostController) {
             Box(
                 modifier = Modifier.weight(1f)
             ) {
-                GreetingText()
+                Greeting()
             }
 
             IconButton(
@@ -115,8 +115,8 @@ fun HomeScreen(navController: NavHostController) {
                     CARD_4 -> UrlCard()
                     CARD_6 -> SystemSettingsCard()
                     CARD_7 -> UnicodeCard()
-                    CARD_8 -> GoogleMapsCard()
-                    CARD_9 -> CheckAppOnAppMarketCard()
+                    CARD_8 -> MapsCard()
+                    CARD_9 -> AppMarketCard()
                     CARD_10 -> AndroidVersionsCard()
                     CARD_11 -> LuckyWheelCard()
                     CARD_12 -> BluetoothDevicesCard()

@@ -6,7 +6,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGradientTex
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 
 @Composable
-fun GreetingText() {
+fun Greeting() {
     CustomGradientText(
         textToDisplay = TString.greeting(),
         colors = listOf(

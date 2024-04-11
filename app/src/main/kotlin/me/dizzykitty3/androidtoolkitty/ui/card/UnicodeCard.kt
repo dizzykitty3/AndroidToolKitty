@@ -6,6 +6,9 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Notes
+import androidx.compose.material.icons.outlined.Clear
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -65,7 +68,19 @@ fun UnicodeCard() {
                         onClickConvertButton(unicode, { characters = it }, true)
                     }
                 }
-            )
+            ),
+            trailingIcon = {
+                if (unicode.isNotEmpty()) {
+                    IconButton(
+                        onClick = { unicode = "" }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Clear,
+                            contentDescription = stringResource(R.string.clear_input),
+                        )
+                    }
+                }
+            },
         )
 
         OutlinedTextField(
@@ -87,7 +102,19 @@ fun UnicodeCard() {
                         onClickConvertButton(characters, { unicode = it }, false)
                     }
                 }
-            )
+            ),
+            trailingIcon = {
+                if (characters.isNotEmpty()) {
+                    IconButton(
+                        onClick = { characters = "" }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Clear,
+                            contentDescription = stringResource(R.string.clear_input),
+                        )
+                    }
+                }
+            },
         )
 
         TextButton(

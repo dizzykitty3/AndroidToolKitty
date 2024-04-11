@@ -8,8 +8,10 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
+import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.Place
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -31,7 +33,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 private const val TAG = "GoogleMapsCard"
 
 @Composable
-fun GoogleMapsCard() {
+fun MapsCard() {
     CustomCard(
         icon = Icons.Outlined.Place,
         title = R.string.google_maps
@@ -54,7 +56,19 @@ fun GoogleMapsCard() {
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = { onClickOpenGoogleMapsButton(latitude, longitude) }
-                )
+                ),
+                trailingIcon = {
+                    if (latitude.isNotEmpty()) {
+                        IconButton(
+                            onClick = { latitude = "" }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Clear,
+                                contentDescription = stringResource(R.string.clear_input),
+                            )
+                        }
+                    }
+                },
             )
 
             OutlinedTextField(
@@ -71,7 +85,19 @@ fun GoogleMapsCard() {
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = { onClickOpenGoogleMapsButton(latitude, longitude) }
-                )
+                ),
+                trailingIcon = {
+                    if (longitude.isNotEmpty()) {
+                        IconButton(
+                            onClick = { longitude = "" }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Clear,
+                                contentDescription = stringResource(R.string.clear_input),
+                            )
+                        }
+                    }
+                },
             )
         }
 
