@@ -54,6 +54,8 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel.getLuckySpinningWheelItems
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel.setLuckySpinningWheelItems
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import kotlin.math.cos
@@ -68,7 +70,18 @@ fun LuckyWheelCard() {
         title = R.string.lucky_spinning_wheel
     ) {
         // 初始化轮盘项目列表
-        var items by remember { mutableStateOf(listOf("条目1", "条目2", "条目3", "条目4", "条目5", "条目6")) }
+        var items by remember {
+            mutableStateOf(
+                getLuckySpinningWheelItems() ?: listOf(
+                    "条目1",
+                    "条目2",
+                    "条目3",
+                    "条目4",
+                    "条目5",
+                    "条目6"
+                )
+            )
+        }
 
         // 记住画笔设置，避免每次绘制时重新创建
         val paint = remember {
@@ -152,7 +165,9 @@ fun LuckyWheelCard() {
 
                 // 绘制项目文本
                 items.forEachIndexed { index, item ->
-                    val textAngleRad = Math.toRadians((360f / items.size * index + currentRotationDegrees + 360f / items.size / 2) % 360.toDouble()).toFloat()
+                    val textAngleRad =
+                        Math.toRadians((360f / items.size * index + currentRotationDegrees + 360f / items.size / 2) % 360.toDouble())
+                            .toFloat()
                     val textRadius = radius * 0.7f
                     drawContext.canvas.nativeCanvas.drawText(
                         item,
@@ -194,7 +209,10 @@ fun LuckyWheelCard() {
             // 可扩展列表，用于显示和修改项目列表
             ExpandableList(
                 items = items,
-                onItemsChange = { updatedItems -> items = updatedItems }
+                onItemsChange = { updatedItems ->
+                    items = updatedItems
+                    setLuckySpinningWheelItems(updatedItems)
+                }
             )
         }
     }
@@ -207,7 +225,8 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
     // 正在编辑的元素索引，-1表示没有元素处于编辑状态
     var editingIndex by remember { mutableIntStateOf(-1) }
     // 编辑中的文本列表，用于暂存编辑时的文本更改
-    val editingText = remember { mutableStateListOf<String>().also { list -> items.forEach { list.add(it) } } }
+    val editingText =
+        remember { mutableStateListOf<String>().also { list -> items.forEach { list.add(it) } } }
     val listState = rememberLazyListState()
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -276,7 +295,8 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                                     imageVector = Icons.Default.Check,
                                     contentDescription = "Done",
                                     modifier = Modifier.clickable {
-                                        val updatedList = items.toMutableList().also { it[index] = editingText[index] }
+                                        val updatedList = items.toMutableList()
+                                            .also { it[index] = editingText[index] }
                                         onItemsChange(updatedList)
                                         editingIndex = -1
                                     }
@@ -294,7 +314,8 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                                     imageVector = Icons.Default.Remove,
                                     contentDescription = "Remove",
                                     modifier = Modifier.clickable {
-                                        val newList = items.toMutableList().apply { removeAt(index) }
+                                        val newList =
+                                            items.toMutableList().apply { removeAt(index) }
                                         onItemsChange(newList)
                                         // 重置或调整编辑索引
                                         if (index == editingIndex) {

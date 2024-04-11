@@ -73,4 +73,5 @@ dependencies {
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
     implementation(libs.datastore.preferences)
+    implementation(libs.gson)
 }

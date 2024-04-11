@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
+import com.google.gson.reflect.TypeToken
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
 object SettingsViewModel : ViewModel() {
@@ -17,6 +20,7 @@ object SettingsViewModel : ViewModel() {
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
     private const val SLIDER_INCREMENT_5_PERCENT = "slider_increment_5_percent"
+    private const val LUCKY_SPINNING_WHEEL_ITEMS = "lucky_spinning_wheel_items"
 
     private fun getSharedPrefs(): SharedPreferences {
         return app.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -126,6 +130,25 @@ object SettingsViewModel : ViewModel() {
         Log.d(TAG, "custom volume option label = $customOptionLabel")
         with(getSharedPrefs().edit()) {
             putString(VOLUME_OPTION_LABEL, customOptionLabel)
+            apply()
+        }
+    }
+
+    fun getLuckySpinningWheelItems(): List<String>? {
+        val itemsJson = getSharedPrefs().getString(LUCKY_SPINNING_WHEEL_ITEMS, null) ?: return null
+        return try {
+            Gson().fromJson(itemsJson, object : TypeToken<List<String>>() {}.type)
+        } catch (e: JsonSyntaxException) {
+            Log.e(TAG, "Error parsing spinning wheel items JSON", e)
+            null
+        }
+    }
+
+    fun setLuckySpinningWheelItems(items: List<String>) {
+        val itemsJson = Gson().toJson(items)
+        Log.d(TAG, "lucky spinning wheel items = $itemsJson")
+        with(getSharedPrefs().edit()) {
+            putString(LUCKY_SPINNING_WHEEL_ITEMS, itemsJson)
             apply()
         }
     }

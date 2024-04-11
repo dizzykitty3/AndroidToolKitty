@@ -12,6 +12,7 @@ coreKtx = "1.12.0"
 room = "2.6.1"
 ksp = "1.9.23-1.0.19"
 datastorePreferences = "1.0.0"
+gson = "2.10.1"
 
 [libraries]
 material = { module = "com.google.android.material:material", version.ref = "material" }
@@ -25,6 +26,7 @@ core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
