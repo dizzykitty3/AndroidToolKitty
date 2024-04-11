@@ -27,7 +27,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomDropdownMenu
@@ -108,7 +108,7 @@ fun UrlCard() {
 
         var username by remember { mutableStateOf("") }
 
-        val platformIndex = SettingsViewModel.getLastTimeSelectedSocialPlatform()
+        val platformIndex = SettingsSharedPref.getLastTimeSelectedSocialPlatform()
         var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
 
         val platformList = TUrl.Platform.entries.map { stringResource(it.nameResId) }

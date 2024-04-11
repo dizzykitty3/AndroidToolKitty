@@ -15,7 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
@@ -30,7 +30,7 @@ fun ClipboardCard() {
     ) {
         val context = LocalContext.current
 
-        val isShowHintText = !SettingsViewModel.getHaveOpenedSettingsScreen()
+        val isShowHintText = !SettingsSharedPref.getHaveOpenedSettingsScreen()
         if (isShowHintText) CustomTip(resId = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
         Button(

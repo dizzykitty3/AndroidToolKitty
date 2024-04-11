@@ -3,11 +3,10 @@ package me.dizzykitty3.androidtoolkitty.data.sharedpreferences
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import androidx.lifecycle.ViewModel
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-object SettingsViewModel : ViewModel() {
-    private const val TAG = "SettingsViewModel"
+object SettingsSharedPref {
+    private const val TAG = "SettingsSharedPref"
     private const val PREF_NAME = "Settings"
     private const val IS_AUTO_CLEAR_CLIPBOARD = "is_auto_clear_clipboard"
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"

@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomScreen
@@ -53,7 +53,7 @@ private const val CARD_12 = "card_bluetooth_devices"
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    val settingsViewModel = remember { SettingsViewModel }
+    val settingsSharedPref = remember { SettingsSharedPref }
 
     CustomScreen {
         Row(
@@ -68,7 +68,7 @@ fun HomeScreen(navController: NavHostController) {
             IconButton(
                 onClick = {
                     navController.navigate(SETTINGS_SCREEN)
-                    settingsViewModel.setHaveOpenedSettingsScreen(true)
+                    settingsSharedPref.setHaveOpenedSettingsScreen(true)
                 },
                 modifier = Modifier.size(40.dp)
             ) {
@@ -82,7 +82,7 @@ fun HomeScreen(navController: NavHostController) {
 
         CustomCardSpacePadding()
 
-        if (settingsViewModel.getIsOneHandedMode()) CustomOneHandedModePadding()
+        if (settingsSharedPref.getIsOneHandedMode()) CustomOneHandedModePadding()
 
         val locale = Locale.getDefault().toString()
         if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) CustomTip(
@@ -93,17 +93,17 @@ fun HomeScreen(navController: NavHostController) {
         )
 
         val cardMapping = mapOf(
-            CARD_1 to settingsViewModel.getCardShowedState(CARD_1),
-            CARD_2 to settingsViewModel.getCardShowedState(CARD_2),
-            CARD_3 to settingsViewModel.getCardShowedState(CARD_3),
-            CARD_4 to settingsViewModel.getCardShowedState(CARD_4),
-            CARD_6 to settingsViewModel.getCardShowedState(CARD_6),
-            CARD_7 to settingsViewModel.getCardShowedState(CARD_7),
-            CARD_8 to settingsViewModel.getCardShowedState(CARD_8),
-            CARD_9 to settingsViewModel.getCardShowedState(CARD_9),
-            CARD_10 to settingsViewModel.getCardShowedState(CARD_10),
-            CARD_11 to settingsViewModel.getCardShowedState(CARD_11),
-            CARD_12 to settingsViewModel.getCardShowedState(CARD_12)
+            CARD_1 to settingsSharedPref.getCardShowedState(CARD_1),
+            CARD_2 to settingsSharedPref.getCardShowedState(CARD_2),
+            CARD_3 to settingsSharedPref.getCardShowedState(CARD_3),
+            CARD_4 to settingsSharedPref.getCardShowedState(CARD_4),
+            CARD_6 to settingsSharedPref.getCardShowedState(CARD_6),
+            CARD_7 to settingsSharedPref.getCardShowedState(CARD_7),
+            CARD_8 to settingsSharedPref.getCardShowedState(CARD_8),
+            CARD_9 to settingsSharedPref.getCardShowedState(CARD_9),
+            CARD_10 to settingsSharedPref.getCardShowedState(CARD_10),
+            CARD_11 to settingsSharedPref.getCardShowedState(CARD_11),
+            CARD_12 to settingsSharedPref.getCardShowedState(CARD_12)
         )
 
         cardMapping.forEach { (cardName, isShow) ->

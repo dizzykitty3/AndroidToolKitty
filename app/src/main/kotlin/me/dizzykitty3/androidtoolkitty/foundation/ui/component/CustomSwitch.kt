@@ -10,7 +10,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 
 @Composable
 fun CustomHideCardSettingSwitch(
@@ -19,13 +19,13 @@ fun CustomHideCardSettingSwitch(
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
-    val settingsViewModel = remember { SettingsViewModel }
+    val settingsSharedPref = remember { SettingsSharedPref }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
             onCheckedChange(!isChecked)
-            settingsViewModel.saveCardShowedState(cardId, !isChecked)
+            settingsSharedPref.saveCardShowedState(cardId, !isChecked)
         }
     ) {
         Text(text = stringResource(id = resId))
