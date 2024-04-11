@@ -7,10 +7,8 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
-import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -30,6 +28,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
@@ -66,15 +65,8 @@ fun UrlCard() {
                 onDone = { onClickVisitUrlButton(url) }
             ),
             trailingIcon = {
-                if (url.isNotEmpty()) {
-                    IconButton(
-                        onClick = { url = "" }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Clear,
-                            contentDescription = stringResource(R.string.clear_input),
-                        )
-                    }
+                ClearInput(text = url) {
+                    url = ""
                 }
             },
             supportingText = {
@@ -152,15 +144,8 @@ fun UrlCard() {
                 onDone = { onVisitProfileButton(context, username, mPlatformIndex) }
             ),
             trailingIcon = {
-                if (username.isNotEmpty()) {
-                    IconButton(
-                        onClick = { username = "" }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Clear,
-                            contentDescription = stringResource(R.string.clear_input),
-                        )
-                    }
+                ClearInput(text = username) {
+                    username = ""
                 }
             },
             supportingText = {

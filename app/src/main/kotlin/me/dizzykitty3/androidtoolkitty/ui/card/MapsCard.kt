@@ -8,10 +8,8 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
-import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material.icons.outlined.Place
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -27,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 
@@ -58,15 +57,8 @@ fun MapsCard() {
                     onDone = { onClickOpenGoogleMapsButton(latitude, longitude) }
                 ),
                 trailingIcon = {
-                    if (latitude.isNotEmpty()) {
-                        IconButton(
-                            onClick = { latitude = "" }
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Clear,
-                                contentDescription = stringResource(R.string.clear_input),
-                            )
-                        }
+                    ClearInput(text = latitude) {
+                        latitude = ""
                     }
                 },
             )
@@ -87,15 +79,8 @@ fun MapsCard() {
                     onDone = { onClickOpenGoogleMapsButton(latitude, longitude) }
                 ),
                 trailingIcon = {
-                    if (longitude.isNotEmpty()) {
-                        IconButton(
-                            onClick = { longitude = "" }
-                        ) {
-                            Icon(
-                                imageVector = Icons.Outlined.Clear,
-                                contentDescription = stringResource(R.string.clear_input),
-                            )
-                        }
+                    ClearInput(text = longitude) {
+                        longitude = ""
                     }
                 },
             )

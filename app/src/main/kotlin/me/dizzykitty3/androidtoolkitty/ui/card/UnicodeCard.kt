@@ -6,9 +6,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Notes
-import androidx.compose.material.icons.outlined.Clear
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -22,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TClipboard
@@ -70,15 +68,8 @@ fun UnicodeCard() {
                 }
             ),
             trailingIcon = {
-                if (unicode.isNotEmpty()) {
-                    IconButton(
-                        onClick = { unicode = "" }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Clear,
-                            contentDescription = stringResource(R.string.clear_input),
-                        )
-                    }
+                ClearInput(text = unicode) {
+                    unicode = ""
                 }
             },
         )
@@ -104,15 +95,8 @@ fun UnicodeCard() {
                 }
             ),
             trailingIcon = {
-                if (characters.isNotEmpty()) {
-                    IconButton(
-                        onClick = { characters = "" }
-                    ) {
-                        Icon(
-                            imageVector = Icons.Outlined.Clear,
-                            contentDescription = stringResource(R.string.clear_input),
-                        )
-                    }
+                ClearInput(text = characters) {
+                    characters = ""
                 }
             },
         )
