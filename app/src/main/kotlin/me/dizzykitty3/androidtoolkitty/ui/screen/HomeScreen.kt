@@ -43,7 +43,6 @@ private const val CARD_2 = "card_volume"
 private const val CARD_3 = "card_clipboard"
 private const val CARD_4 = "card_url"
 
-//private const val CARD_5 = "card_social_media_profile"
 private const val CARD_6 = "card_android_system_settings"
 private const val CARD_7 = "card_unicode"
 private const val CARD_8 = "card_google_maps"
@@ -98,7 +97,6 @@ fun HomeScreen(navController: NavHostController) {
             CARD_2 to settingsViewModel.getCardShowedState(CARD_2),
             CARD_3 to settingsViewModel.getCardShowedState(CARD_3),
             CARD_4 to settingsViewModel.getCardShowedState(CARD_4),
-//            CARD_5 to settingsViewModel.getCardShowedState(CARD_5),
             CARD_6 to settingsViewModel.getCardShowedState(CARD_6),
             CARD_7 to settingsViewModel.getCardShowedState(CARD_7),
             CARD_8 to settingsViewModel.getCardShowedState(CARD_8),
@@ -115,7 +113,6 @@ fun HomeScreen(navController: NavHostController) {
                     CARD_2 -> VolumeCard()
                     CARD_3 -> ClipboardCard()
                     CARD_4 -> UrlCard()
-//                    CARD_5 -> SocialMediaProfileCard()
                     CARD_6 -> SystemSettingsCard()
                     CARD_7 -> UnicodeCard()
                     CARD_8 -> GoogleMapsCard()

@@ -18,7 +18,6 @@ private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"
 private const val CARD_3 = "card_clipboard"
 private const val CARD_4 = "card_url"
-private const val CARD_5 = "card_social_media_profile"
 private const val CARD_6 = "card_android_system_settings"
 private const val CARD_7 = "card_unicode"
 private const val CARD_8 = "card_google_maps"
@@ -38,7 +37,6 @@ fun EditHomeScreenCard() {
         val isShowCard2 = settingsViewModel.getCardShowedState(CARD_2)
         val isShowCard3 = settingsViewModel.getCardShowedState(CARD_3)
         val isShowCard4 = settingsViewModel.getCardShowedState(CARD_4)
-        val isShowCard5 = settingsViewModel.getCardShowedState(CARD_5)
         val isShowCard6 = settingsViewModel.getCardShowedState(CARD_6)
         val isShowCard7 = settingsViewModel.getCardShowedState(CARD_7)
         val isShowCard8 = settingsViewModel.getCardShowedState(CARD_8)
@@ -51,7 +49,6 @@ fun EditHomeScreenCard() {
         var mIsShowCard2 by remember { mutableStateOf(isShowCard2) }
         var mIsShowCard3 by remember { mutableStateOf(isShowCard3) }
         var mIsShowCard4 by remember { mutableStateOf(isShowCard4) }
-        var mIsShowCard5 by remember { mutableStateOf(isShowCard5) }
         var mIsShowCard6 by remember { mutableStateOf(isShowCard6) }
         var mIsShowCard7 by remember { mutableStateOf(isShowCard7) }
         var mIsShowCard8 by remember { mutableStateOf(isShowCard8) }
@@ -91,14 +88,6 @@ fun EditHomeScreenCard() {
         ) { newState ->
             mIsShowCard4 = newState
             settingsViewModel.saveCardShowedState(CARD_4, newState)
-        }
-        CustomHideCardSettingSwitch(
-            resId = R.string.social_media_profile,
-            cardId = CARD_5,
-            isChecked = mIsShowCard5
-        ) { newState ->
-            mIsShowCard5 = newState
-            settingsViewModel.saveCardShowedState(CARD_5, newState)
         }
         CustomHideCardSettingSwitch(
             resId = R.string.android_system_settings,
@@ -166,7 +155,6 @@ fun EditHomeScreenCard() {
                 mIsShowCard2 = false
                 mIsShowCard3 = false
                 mIsShowCard4 = false
-                mIsShowCard5 = false
                 mIsShowCard6 = false
                 mIsShowCard7 = false
                 mIsShowCard8 = false
@@ -186,7 +174,6 @@ fun EditHomeScreenCard() {
                 mIsShowCard2 = true
                 mIsShowCard3 = true
                 mIsShowCard4 = true
-                mIsShowCard5 = true
                 mIsShowCard6 = true
                 mIsShowCard7 = true
                 mIsShowCard8 = true
@@ -207,7 +194,6 @@ private fun onClickChangeAllCardsButton(isShow: Boolean) {
         CARD_2,
         CARD_3,
         CARD_4,
-        CARD_5,
         CARD_6,
         CARD_7,
         CARD_8,

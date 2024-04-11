@@ -46,8 +46,6 @@
     <string name="url_input_hint_2">and suffix</string>
     <string name="url_input_hint_3">(or</string>
     <string name="url_input_hint_4">, etc.)</string>
-
-    <!--Home screen: social media profile-->
     <string name="social_media_profile">Social media profile</string>
     <string name="platform">Platform</string>
     <string name="username">Username</string>
@@ -64,6 +62,7 @@
     <string name="v2ex">V2EX</string>
     <string name="bilibili_user_id">Bilibili (User ID)</string>
     <string name="temp2">Upload platform name feature is under development.</string>
+    <string name="webpage">Webpage</string>
 
     <!--Home screen: android system settings-->
     <string name="android_system_settings">Android system settings</string>

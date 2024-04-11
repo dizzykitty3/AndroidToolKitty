@@ -47,7 +47,7 @@ fun UrlCard() {
         icon = Icons.Outlined.Link,
         title = R.string.url
     ) {
-        CustomGroupTitleText(resId = R.string.url)
+        CustomGroupTitleText(resId = R.string.webpage)
 
         var url by remember { mutableStateOf("") }
 
