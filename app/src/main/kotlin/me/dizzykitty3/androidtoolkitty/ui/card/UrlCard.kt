@@ -34,7 +34,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomDropdownMen
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomItalicText
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
@@ -112,7 +111,6 @@ fun UrlCard() {
         var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
 
         val platformList = TUrl.Platform.entries.map { stringResource(it.nameResId) }
-        if (mPlatformIndex == TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) CustomTip(resId = R.string.temp2)
 
         CustomDropdownMenu(
             items = platformList,
@@ -189,13 +187,8 @@ private fun onVisitProfileButton(context: Context, username: String, platformInd
     val platform = TUrl.Platform.entries.getOrNull(platformIndex) ?: return
 
     if (platform == TUrl.Platform.PLATFORM_NOT_ADDED_YET) {
-        TToast.toastAndLog(
-            "${context.getString(R.string.platform)}: \"$username\" ${
-                context.getString(
-                    R.string.uploaded
-                )
-            }"
-        )
+//        TToast.toast("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
+        TToast.toast("under development")
         return
     }
 
