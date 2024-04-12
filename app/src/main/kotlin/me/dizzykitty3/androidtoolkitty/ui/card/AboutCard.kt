@@ -23,7 +23,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 
-@Suppress("SpellCheckingInspection")
 @Composable
 fun AboutCard() {
     CustomCard(

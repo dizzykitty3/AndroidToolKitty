@@ -39,7 +39,6 @@ object TUrl {
         return "$HTTPS$urlInput$suffix"
     }
 
-    @Suppress("SpellCheckingInspection")
     @JvmStatic
     fun urlSuffix(urlInput: String): String {
         if (urlInput.contains(".")) return ""
@@ -111,7 +110,6 @@ object TUrl {
         return suffixMap[TString.dropSpaces(urlInput)] ?: COM
     }
 
-    @Suppress("SpellCheckingInspection")
     enum class Platform(val prefix: String, val nameResId: Int) {
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
