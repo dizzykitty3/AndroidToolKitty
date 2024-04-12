@@ -35,6 +35,9 @@ fun CustomSystemSettingsButton(
     }
 }
 
+/**
+ * trailingIcon param of a @Composable TextField, to clear the user input
+ */
 @Composable
 fun ClearInput(
     text: String,
