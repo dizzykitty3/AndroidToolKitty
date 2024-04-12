@@ -58,7 +58,6 @@ fun BluetoothDevicesCard() {
         val view = LocalView.current
 
         var showResult by remember { mutableStateOf(false) }
-        var showDialog by remember { mutableStateOf(false) }
 
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }
         var pairedDevices by remember { mutableStateOf<Set<BluetoothDevice>>(emptySet()) }
@@ -123,31 +122,7 @@ fun BluetoothDevicesCard() {
                     }
                 }
 
-                TextButton(
-                    onClick = { showDialog = true }
-                ) {
-                    Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
-                }
-
-                if (showDialog) {
-                    AlertDialog(
-                        onDismissRequest = { showDialog = false },
-                        text = { Text(text = stringResource(id = R.string.bluetooth_devices_types)) },
-                        confirmButton = {
-                            Button(
-                                onClick = { showDialog = false },
-                                colors = ButtonDefaults.buttonColors(
-                                    containerColor = MaterialTheme.colorScheme.primary
-                                )
-                            ) {
-                                Text(
-                                    text = stringResource(android.R.string.ok),
-                                    color = MaterialTheme.colorScheme.onPrimary
-                                )
-                            }
-                        }
-                    )
-                }
+                BluetoothDeviceTypesDialog()
             }
         }
     }
@@ -187,4 +162,35 @@ private fun requestPermission(context: Context) {
 
 private fun request(context: Context, permission: Array<String>) {
     ActivityCompat.requestPermissions(context as Activity, permission, 1)
+}
+
+@Composable
+fun BluetoothDeviceTypesDialog() {
+    var showDialog by remember { mutableStateOf(false) }
+
+    TextButton(
+        onClick = { showDialog = true }
+    ) {
+        Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
+    }
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            text = { Text(text = stringResource(id = R.string.bluetooth_devices_types)) },
+            confirmButton = {
+                Button(
+                    onClick = { showDialog = false },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
+                ) {
+                    Text(
+                        text = stringResource(android.R.string.ok),
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            }
+        )
+    }
 }
