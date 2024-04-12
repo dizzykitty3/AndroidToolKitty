@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
-import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
@@ -139,7 +138,7 @@ fun UrlCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { onVisitProfileButton(context, username, mPlatformIndex) }
+                onDone = { onVisitProfileButton(username, mPlatformIndex) }
             ),
             trailingIcon = {
                 ClearInput(text = username) {
@@ -161,7 +160,7 @@ fun UrlCard() {
         )
 
         TextButton(
-            onClick = { onVisitProfileButton(context, username, mPlatformIndex) }
+            onClick = { onVisitProfileButton(username, mPlatformIndex) }
         ) {
             Text(text = stringResource(R.string.visit))
 
@@ -181,7 +180,7 @@ private fun onClickVisitUrlButton(url: String) {
     Log.d(TAG, "onClickVisitButton")
 }
 
-private fun onVisitProfileButton(context: Context, username: String, platformIndex: Int) {
+private fun onVisitProfileButton(username: String, platformIndex: Int) {
     if (username.isBlank()) return
 
     val platform = TUrl.Platform.entries.getOrNull(platformIndex) ?: return
