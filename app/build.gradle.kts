@@ -27,6 +27,7 @@ android {
         debug {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
+            versionNameSuffix = " DEV"
         }
 
         release {
