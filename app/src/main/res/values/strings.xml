@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">Android ToolKitty</string>
+    <string name="app_name">Android ToolKitty</string>
 
     <!--Common-->
     <string name="label">Label</string>
@@ -43,7 +43,7 @@
 
     <!--Home screen: url-->
     <string name="url">URL</string>
-    <string name="url_input_hint_1">Visit url without inputting prefix</string>
+    <string name="url_input_hint_1">Visit webpage without inputting prefix</string>
     <string name="url_input_hint_2">and suffix</string>
     <string name="url_input_hint_3">(or</string>
     <string name="url_input_hint_4">, etc.)</string>
@@ -120,7 +120,7 @@
     <string name="bt">BT</string>
     <string name="ble">BLE</string>
     <string name="dual">Dual</string>
-    <string name="no_paired_devices">No paired devices.</string>
+    <string name="no_paired_devices">No paired devices</string>
     <string name="what_is_bt_ble_and_dual">What is BT, BLE, and Dual?</string>
     <string name="bluetooth_devices_types">Classic Bluetooth (BT):\nThis is the familiar type used for things like headsets, speakers, and file transfers. It offers good range and speed but consumes more power.\n\nBluetooth Low Energy (BLE):\nThis newer version is designed for lower power consumption and is ideal for devices that need long battery life, like fitness trackers and smart home sensors. It has a shorter range and slower data transfer rate compared to Classic Bluetooth.\n\nDual:\nSome devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
 
