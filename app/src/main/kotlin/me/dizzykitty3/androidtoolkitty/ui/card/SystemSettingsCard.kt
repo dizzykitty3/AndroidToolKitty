@@ -32,6 +32,8 @@ fun SystemSettingsCard() {
         icon = Icons.Outlined.Settings,
         title = R.string.android_system_settings
     ) {
+        // Variables
+
         val settingsSharedPref = remember { SettingsSharedPref }
 
         val settings = listOf(
@@ -62,6 +64,8 @@ fun SystemSettingsCard() {
         val isShowGroupTitle2 = settings.subList(6, settings.size).any { setting ->
             isShowSetting[setting.settingType] == true
         }
+
+        // UI
 
         if (!checkIsAutoTime()) CustomTip(resId = R.string.set_time_automatically_is_off_tip)
 

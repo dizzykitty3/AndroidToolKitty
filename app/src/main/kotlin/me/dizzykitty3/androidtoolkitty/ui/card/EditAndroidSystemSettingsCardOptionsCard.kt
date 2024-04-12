@@ -21,6 +21,7 @@ private const val SETTING_7 = "setting_locale"
 private const val SETTING_8 = "setting_date_and_time"
 private const val SETTING_9 = "setting_developer"
 
+// TODO refactor this bullshit
 @Composable
 fun EditAndroidSystemSettingsCardOptionsCard() {
     CustomCard(

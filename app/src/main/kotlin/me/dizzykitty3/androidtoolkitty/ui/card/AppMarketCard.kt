@@ -54,32 +54,10 @@ fun AppMarketCard() {
                 }
             }
         )
+
         CustomSpacerPadding()
-        Row {
-            val linkUrl = "https://support.google.com/admob/answer/9972781"
+        WhatIsPackageName()
 
-            Text(
-                text = buildAnnotatedString {
-                    append(stringResource(R.string.whats))
-                    append(" ")
-                }
-            )
-
-            Row(
-                modifier = Modifier.clickable(
-                    onClick = { TIntent.openUrl(linkUrl) }
-                )
-            ) {
-                Text(
-                    text = stringResource(R.string.package_name),
-                    textDecoration = TextDecoration.Underline
-                )
-                Icon(
-                    imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = stringResource(R.string.content_description_link_icon_whats_package_name)
-                )
-            }
-        }
         TextButton(
             onClick = { TIntent.openAppOnMarket(packageName) }
         ) {
@@ -99,6 +77,35 @@ fun AppMarketCard() {
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
                 modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+    }
+}
+
+@Composable
+private fun WhatIsPackageName() {
+    Row {
+        val linkUrl = "https://support.google.com/admob/answer/9972781"
+
+        Text(
+            text = buildAnnotatedString {
+                append(stringResource(R.string.whats))
+                append(" ")
+            }
+        )
+
+        Row(
+            modifier = Modifier.clickable(
+                onClick = { TIntent.openUrl(linkUrl) }
+            )
+        ) {
+            Text(
+                text = stringResource(R.string.package_name),
+                textDecoration = TextDecoration.Underline
+            )
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = stringResource(R.string.content_description_link_icon_whats_package_name)
             )
         }
     }

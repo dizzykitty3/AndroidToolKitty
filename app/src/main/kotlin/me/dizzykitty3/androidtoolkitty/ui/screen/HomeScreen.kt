@@ -5,9 +5,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -17,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomScreen
@@ -124,18 +127,18 @@ fun HomeScreen(navController: NavHostController) {
             }
         }
 
-//        CustomCard(title = R.string.test) {
-//            Button(
-//                onClick = { navController.navigate(LUCKY_SPINNING_WHEEL_SCREEN) }
-//            ) {
-//                Text(text = stringResource(R.string.lucky_spinning_wheel))
-//            }
-//            Button(
-//                onClick = { navController.navigate(BLUETOOTH_DEVICES_SCREEN) }
-//            ) {
-//                Text(text = stringResource(id = R.string.bluetooth_devices))
-//            }
-//        }
+        CustomCard(title = R.string.test) {
+            Button(
+                onClick = { navController.navigate(LUCKY_SPINNING_WHEEL_SCREEN) }
+            ) {
+                Text(text = stringResource(R.string.lucky_spinning_wheel))
+            }
+            Button(
+                onClick = { navController.navigate(BLUETOOTH_DEVICES_SCREEN) }
+            ) {
+                Text(text = stringResource(id = R.string.bluetooth_devices))
+            }
+        }
     }
 }
 

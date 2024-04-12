@@ -27,13 +27,13 @@ fun YearProgressCard() {
         icon = Icons.Outlined.HourglassTop,
         title = R.string.year_progress
     ) {
-        val context = LocalContext.current
-
         var isShowPercentage by remember { mutableStateOf(true) }
 
         Column(
             modifier = Modifier.clickable { isShowPercentage = !isShowPercentage }
         ) {
+            val context = LocalContext.current
+
             CustomAnimatedProgressIndicator()
 
             val textToShow =

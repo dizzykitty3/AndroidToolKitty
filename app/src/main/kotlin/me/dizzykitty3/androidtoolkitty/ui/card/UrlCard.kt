@@ -45,128 +45,137 @@ fun UrlCard() {
         icon = Icons.Outlined.Link,
         title = R.string.url
     ) {
-        CustomGroupTitleText(resId = R.string.webpage)
-
-        var url by remember { mutableStateOf("") }
-
-        OutlinedTextField(
-            value = url,
-            onValueChange = { url = it },
-            label = { Text(stringResource(R.string.url)) },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done,
-                keyboardType = KeyboardType.Ascii
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = { onClickVisitUrlButton(url) }
-            ),
-            trailingIcon = {
-                ClearInput(text = url) {
-                    url = ""
-                }
-            },
-            supportingText = {
-                Text(
-                    text = buildAnnotatedString {
-                        append(text = stringResource(R.string.url_input_hint_1))
-                        CustomItalicText(" www. ")
-                        append(text = stringResource(R.string.url_input_hint_2))
-                        CustomItalicText(" .com ")
-                        append(text = stringResource(R.string.url_input_hint_3))
-                        CustomItalicText(" .net ")
-                        append(text = stringResource(R.string.url_input_hint_4))
-                    }
-                )
-            },
-            prefix = {
-                Text(text = "https://")
-            },
-            suffix = {
-                Text(text = TUrl.urlSuffix(url))
-            }
-        )
-
-        TextButton(
-            onClick = { onClickVisitUrlButton(url) }
-        ) {
-            Text(text = stringResource(R.string.visit))
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = null,
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
-        }
-
+        WebpageUrl()
         CustomGroupDivider()
-        CustomGroupTitleText(resId = R.string.social_media_profile)
+        SocialMediaProfileIUrl()
+    }
+}
 
-        var username by remember { mutableStateOf("") }
+@Composable
+private fun WebpageUrl() {
+    CustomGroupTitleText(resId = R.string.webpage)
 
-        val platformIndex = SettingsSharedPref.getLastTimeSelectedSocialPlatform()
-        var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
+    var url by remember { mutableStateOf("") }
 
-        val platformList = TUrl.Platform.entries.map { stringResource(it.nameResId) }
-
-        CustomDropdownMenu(
-            items = platformList,
-            onItemSelected = { mPlatformIndex = it },
-            label = {
-                if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                    Text(stringResource(R.string.platform))
-                } else {
-                    Text("")
-                }
+    OutlinedTextField(
+        value = url,
+        onValueChange = { url = it },
+        label = { Text(stringResource(R.string.url)) },
+        modifier = Modifier.fillMaxWidth(),
+        keyboardOptions = KeyboardOptions.Default.copy(
+            imeAction = ImeAction.Done,
+            keyboardType = KeyboardType.Ascii
+        ),
+        keyboardActions = KeyboardActions(
+            onDone = { onClickVisitUrlButton(url) }
+        ),
+        trailingIcon = {
+            ClearInput(text = url) {
+                url = ""
             }
-        )
-
-        OutlinedTextField(
-            value = username,
-            onValueChange = { username = it },
-            label = {
-                if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                    Text(stringResource(R.string.username))
-                } else {
-                    Text(stringResource(R.string.platform))
+        },
+        supportingText = {
+            Text(
+                text = buildAnnotatedString {
+                    append(text = stringResource(R.string.url_input_hint_1))
+                    CustomItalicText(" www. ")
+                    append(text = stringResource(R.string.url_input_hint_2))
+                    CustomItalicText(" .com ")
+                    append(text = stringResource(R.string.url_input_hint_3))
+                    CustomItalicText(" .net ")
+                    append(text = stringResource(R.string.url_input_hint_4))
                 }
-            },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = { onVisitProfileButton(username, mPlatformIndex) }
-            ),
-            trailingIcon = {
-                ClearInput(text = username) {
-                    username = ""
-                }
-            },
-            supportingText = {
-                if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                    val platform = TUrl.Platform.entries[mPlatformIndex]
-                    Text(
-                        text = "${TUrl.profilePrefix(platform)}$username",
-                        overflow = TextOverflow.Ellipsis,
-                        maxLines = 1
-                    )
-                } else {
-                    Text(stringResource(R.string.submit_the_platform_you_need))
-                }
-            }
-        )
-
-        TextButton(
-            onClick = { onVisitProfileButton(username, mPlatformIndex) }
-        ) {
-            Text(text = stringResource(R.string.visit))
-
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = null,
-                modifier = Modifier.align(Alignment.CenterVertically)
             )
+        },
+        prefix = {
+            Text(text = "https://")
+        },
+        suffix = {
+            Text(text = TUrl.urlSuffix(url))
         }
+    )
+
+    TextButton(
+        onClick = { onClickVisitUrlButton(url) }
+    ) {
+        Text(text = stringResource(R.string.visit))
+        Icon(
+            imageVector = Icons.Outlined.ArrowOutward,
+            contentDescription = null,
+            modifier = Modifier.align(Alignment.CenterVertically)
+        )
+    }
+}
+
+@Composable
+private fun SocialMediaProfileIUrl() {
+    var username by remember { mutableStateOf("") }
+
+    val platformIndex = SettingsSharedPref.getLastTimeSelectedSocialPlatform()
+    var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
+
+    val platformList = TUrl.Platform.entries.map { stringResource(it.nameResId) }
+
+    CustomGroupTitleText(resId = R.string.social_media_profile)
+
+    CustomDropdownMenu(
+        items = platformList,
+        onItemSelected = { mPlatformIndex = it },
+        label = {
+            if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                Text(stringResource(R.string.platform))
+            } else {
+                Text("")
+            }
+        }
+    )
+
+    OutlinedTextField(
+        value = username,
+        onValueChange = { username = it },
+        label = {
+            if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                Text(stringResource(R.string.username))
+            } else {
+                Text(stringResource(R.string.platform))
+            }
+        },
+        modifier = Modifier.fillMaxWidth(),
+        keyboardOptions = KeyboardOptions.Default.copy(
+            imeAction = ImeAction.Done
+        ),
+        keyboardActions = KeyboardActions(
+            onDone = { onVisitProfileButton(username, mPlatformIndex) }
+        ),
+        trailingIcon = {
+            ClearInput(text = username) {
+                username = ""
+            }
+        },
+        supportingText = {
+            if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                val platform = TUrl.Platform.entries[mPlatformIndex]
+                Text(
+                    text = "${TUrl.profilePrefix(platform)}$username",
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+            } else {
+                Text(stringResource(R.string.submit_the_platform_you_need))
+            }
+        }
+    )
+
+    TextButton(
+        onClick = { onVisitProfileButton(username, mPlatformIndex) }
+    ) {
+        Text(text = stringResource(R.string.visit))
+
+        Icon(
+            imageVector = Icons.Outlined.ArrowOutward,
+            contentDescription = null,
+            modifier = Modifier.align(Alignment.CenterVertically)
+        )
     }
 }
 
