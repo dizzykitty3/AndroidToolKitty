@@ -90,9 +90,10 @@ fun ToolKittyTheme(
     @Composable
     fun OsVersion.colorScheme(darkTheme: Boolean, dynamicColor: Boolean): ColorScheme {
         return when {
-            this.android12() && dynamicColor -> if (darkTheme) dynamicDarkColorScheme(app) else dynamicLightColorScheme(
-                app
-            )
+            this.android12() && dynamicColor ->
+                if (darkTheme) dynamicDarkColorScheme(app)
+                else dynamicLightColorScheme(app)
+
             darkTheme -> DarkColorScheme
             else -> LightColorScheme
         }
