@@ -41,7 +41,7 @@
     <string name="username">用户昵称</string>
     <string name="bilibili_search">哔哩哔哩（搜索）</string>
     <string name="github">GitHub</string>
-    <string name="x">X（推特）</string>
+    <string name="x">X</string>
     <string name="weibo">微博</string>
     <string name="youtube_id">YouTube (ID)</string>
     <string name="platform_not_added_yet">这里没有我所想的社交平台</string>
@@ -64,7 +64,6 @@
     <string name="debugging">调试</string>
     <string name="bilibili_user_id">哔哩哔哩 (用户 UID)</string>
     <string name="clear_clipboard_on_launch">在启动时清除剪贴板</string>
-    <string name="temp2">【开发中功能】提交平台名称</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开\"启动时自动清空剪贴板\"功能</string>
     <string name="settings">设置</string>
     <string name="hide_all_cards">隐藏所有卡片</string>

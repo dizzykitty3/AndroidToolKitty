@@ -29,6 +29,9 @@ object TUrl {
     private const val US = ".us"
     private const val WIKI = ".wiki"
 
+    /**
+     * Adding the appropriate suffix and returning the full URL.
+     */
     @JvmStatic
     fun processUrl(urlInput: String): String {
         val suffix = urlSuffix(urlInput)
@@ -36,7 +39,6 @@ object TUrl {
         return "$HTTPS$urlInput$suffix"
     }
 
-    @Suppress("SpellCheckingInspection")
     @JvmStatic
     fun urlSuffix(urlInput: String): String {
         if (urlInput.contains(".")) return ""
@@ -108,7 +110,6 @@ object TUrl {
         return suffixMap[TString.dropSpaces(urlInput)] ?: COM
     }
 
-    @Suppress("SpellCheckingInspection")
     enum class Platform(val prefix: String, val nameResId: Int) {
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
@@ -122,6 +123,9 @@ object TUrl {
         PLATFORM_NOT_ADDED_YET("", R.string.platform_not_added_yet)
     }
 
+    /**
+     * @return the profile prefix associated with the given platform.
+     */
     @JvmStatic
     fun profilePrefix(platform: Platform): String = platform.prefix
 }

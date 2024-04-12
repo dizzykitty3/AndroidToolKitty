@@ -103,21 +103,21 @@ fun VolumeCard() {
                         selectedIndex = index
                         when (index) {
                             0 -> {
-                                TAudio.setVolume(0)
+                                setVolume(0)
                             }
 
                             1 -> {
-                                TAudio.setVolume((0.3 * maxVolume).toInt())
+                                setVolume(0.3 * maxVolume)
                             }
 
                             2 -> {
-                                TAudio.setVolume((0.5 * maxVolume).toInt())
+                                setVolume(0.5 * maxVolume)
                             }
 
                             3 -> {
-                                if (mCustomVolume > 0) {
-                                    TAudio.setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
-                                } else
+                                if (mCustomVolume > 0)
+                                    setVolume(mCustomVolume * 0.01 * maxVolume)
+                                else
                                     showVolumeDialog = true
                             }
                         }
@@ -163,7 +163,7 @@ fun VolumeCard() {
                                     mCustomVolume = newCustomVolume.toInt()
                                     showVolumeOptionLabelDialog = true
                                     selectedIndex = 3
-                                    TAudio.setVolume((mCustomVolume * 0.01 * maxVolume).toInt())
+                                    setVolume(mCustomVolume * 0.01 * maxVolume)
                                 }
                             }
                         ) {
@@ -249,3 +249,6 @@ fun VolumeCard() {
         }
     }
 }
+
+private fun setVolume(volume: Int) = TAudio.setVolume(volume)
+private fun setVolume(volume: Double) = TAudio.setVolume(volume.toInt())

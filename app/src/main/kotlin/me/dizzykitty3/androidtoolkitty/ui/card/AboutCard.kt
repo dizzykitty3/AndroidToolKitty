@@ -23,7 +23,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 
-@Suppress("SpellCheckingInspection")
 @Composable
 fun AboutCard() {
     CustomCard(
@@ -31,45 +30,9 @@ fun AboutCard() {
     ) {
         DeveloperProfileLink("dizzykitty3")
         DeveloperProfileLink("HongjieCN")
-
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            val context = LocalContext.current
-            val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
-
-            Icon(
-                imageVector = Icons.Outlined.Code,
-                contentDescription = null
-            )
-            CustomIconAndTextPadding()
-            Row(
-                modifier = Modifier.clickable {
-                    TToast.toast(context.getString(R.string.all_help_welcomed))
-                    TIntent.openUrl(sourceCodeUrl)
-                }
-            ) {
-                Text(
-                    text = stringResource(R.string.source_code_on_github),
-                    color = MaterialTheme.colorScheme.primary
-                )
-                Icon(
-                    imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = null,
-                    modifier = Modifier.align(Alignment.CenterVertically),
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-        }
+        GitHubRepoLink()
         CustomSpacerPadding()
-        Row {
-            Icon(
-                imageVector = Icons.Outlined.Schedule,
-                contentDescription = null
-            )
-            CustomIconAndTextPadding()
-            Text(text = "${stringResource(R.string.version)} ${stringResource(R.string.version_number)}")
-        }
+        VersionNumber()
     }
 }
 
@@ -102,4 +65,49 @@ private fun DeveloperProfileLink(
         }
     }
     CustomSpacerPadding()
+}
+
+@Composable
+private fun GitHubRepoLink() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        val context = LocalContext.current
+        val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
+
+        Icon(
+            imageVector = Icons.Outlined.Code,
+            contentDescription = null
+        )
+        CustomIconAndTextPadding()
+        Row(
+            modifier = Modifier.clickable {
+                TToast.toast(context.getString(R.string.all_help_welcomed))
+                TIntent.openUrl(sourceCodeUrl)
+            }
+        ) {
+            Text(
+                text = stringResource(R.string.source_code_on_github),
+                color = MaterialTheme.colorScheme.primary
+            )
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
+}
+
+@Composable
+private fun VersionNumber() {
+    Row {
+        Icon(
+            imageVector = Icons.Outlined.Schedule,
+            contentDescription = null
+        )
+        CustomIconAndTextPadding()
+        Text(text = "${stringResource(R.string.version)} ${stringResource(R.string.version_number)}")
+    }
 }

@@ -33,6 +33,7 @@ private const val CARD_10 = "card_android_versions"
 private const val CARD_11 = "card_lucky_wheel"
 private const val CARD_12 = "card_bluetooth_devices"
 
+// TODO refactor this bullshit
 @Composable
 fun EditHomeScreenCard() {
     CustomCard(

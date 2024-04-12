@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.room)
 }
 
-@Suppress("SpellCheckingInspection")
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
     compileSdk = 34

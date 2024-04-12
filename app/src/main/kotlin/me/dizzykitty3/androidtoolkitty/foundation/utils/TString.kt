@@ -45,10 +45,7 @@ object TString {
     @JvmStatic
     @Throws(IllegalArgumentException::class)
     fun characterToUnicode(characters: String): String {
-        if (characters.isEmpty()) {
-            throw IllegalArgumentException("Input string is empty")
-        }
-
+        require(characters.isNotEmpty()) { "Input string is empty" }
         val stringBuilder = StringBuilder()
         for (char in characters) {
             val unicodeValue = char.code
