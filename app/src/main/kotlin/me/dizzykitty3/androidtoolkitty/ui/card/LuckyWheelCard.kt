@@ -54,8 +54,8 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel.getLuckySpinningWheelItems
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel.setLuckySpinningWheelItems
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.getLuckySpinningWheelItems
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setLuckySpinningWheelItems
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import kotlin.math.cos
