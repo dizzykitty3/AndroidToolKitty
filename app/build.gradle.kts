@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.google.devtools.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.dagger.hilt.android)
 }
 
 android {
@@ -79,9 +80,6 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.runtime.livedata)
-    implementation(libs.dagger)
-    ksp(libs.dagger.compiler)
-    implementation(libs.dagger.android)
-    implementation(libs.dagger.android.support)
-    ksp(libs.dagger.android.processor)
+    implementation(libs.hilt.android) // Dependency injection
+    ksp(libs.hilt.android.compiler)
 }
