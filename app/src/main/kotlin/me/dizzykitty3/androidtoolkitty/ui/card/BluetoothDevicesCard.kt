@@ -163,6 +163,9 @@ private fun type(type: Int): String {
     }
 }
 
+/**
+ * @return true if the app does NOT have the required permissions, false otherwise.
+ */
 private fun noPermission(context: Context): Boolean {
     return if (OsVersion.android12())
         check(context, BT_CONNECT)
