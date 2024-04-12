@@ -14,7 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,9 +30,9 @@ fun CustomDropdownMenu(
         onExpandedChange = { expanded = !expanded },
         modifier = Modifier.fillMaxWidth()
     ) {
-        val settingsViewModel = remember { SettingsViewModel }
+        val settingsSharedPref = remember { SettingsSharedPref }
 
-        val mSelectedPosition = settingsViewModel.getLastTimeSelectedSocialPlatform()
+        val mSelectedPosition = settingsSharedPref.getLastTimeSelectedSocialPlatform()
         var selectedPosition by remember { mutableIntStateOf(mSelectedPosition) }
 
         OutlinedTextField(
@@ -60,7 +60,7 @@ fun CustomDropdownMenu(
                     onClick = {
                         selectedPosition = index
                         onItemSelected(index)
-                        settingsViewModel.saveSelectedSocialPlatform(index)
+                        settingsSharedPref.saveSelectedSocialPlatform(index)
                         expanded = false
                     }
                 )

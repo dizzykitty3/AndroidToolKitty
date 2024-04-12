@@ -24,12 +24,13 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 
 @Composable
-fun CheckAppOnAppMarketCard() {
+fun AppMarketCard() {
     CustomCard(
         icon = Icons.Outlined.Shop,
         title = R.string.open_app_on_google_play
@@ -46,7 +47,12 @@ fun CheckAppOnAppMarketCard() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = { TIntent.openAppOnMarket(packageName) }
-            )
+            ),
+            trailingIcon = {
+                ClearInput(text = packageName) {
+                    packageName = ""
+                }
+            }
         )
         CustomSpacerPadding()
         Row {

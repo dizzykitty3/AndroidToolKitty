@@ -6,13 +6,15 @@ playServicesMaps = "18.2.0"
 composeBom = "2024.04.00"
 activityCompose = "1.8.2"
 material3 = "1.2.1"
-materialIconsExtended = "1.6.5"
+compose = "1.6.5"
 navigationCompose = "2.7.7"
 coreKtx = "1.12.0"
 room = "2.6.1"
 ksp = "1.9.23-1.0.19"
 datastorePreferences = "1.0.0"
 gson = "2.10.1"
+lifecycleViewmodelCompose = "2.7.0"
+dagger = "2.51.1"
 
 [libraries]
 material = { module = "com.google.android.material:material", version.ref = "material" }
@@ -20,13 +22,24 @@ play-services-maps = { module = "com.google.android.gms:play-services-maps", ver
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
 material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
+material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "coreKtx" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
+ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleViewmodelCompose" }
+runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+dagger-android = { module = "com.google.dagger:dagger-android", version.ref = "dagger" }
+dagger-android-support = { module = "com.google.dagger:dagger-android-support", version.ref = "dagger" }
+dagger-android-processor = { module = "com.google.dagger:dagger-android-processor", version.ref = "dagger" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

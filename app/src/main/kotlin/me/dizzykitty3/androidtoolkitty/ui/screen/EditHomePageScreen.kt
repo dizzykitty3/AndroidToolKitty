@@ -1,7 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.screen
 
 import androidx.compose.runtime.Composable
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui.card.EditAndroidSystemSettingsCardOptionsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.EditHomeScreenCard
@@ -13,7 +13,7 @@ fun EditHomePageScreen() {
     CustomScreen {
         EditHomeScreenCard()
 
-        if (SettingsViewModel.getCardShowedState(CARD_6)) {
+        if (SettingsSharedPref.getCardShowedState(CARD_6)) {
             EditAndroidSystemSettingsCardOptionsCard()
         }
     }

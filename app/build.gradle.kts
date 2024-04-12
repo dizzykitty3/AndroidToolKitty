@@ -74,4 +74,15 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.datastore.preferences)
     implementation(libs.gson)
+    implementation(libs.ui.tooling.preview) // @Preview
+    debugImplementation(libs.ui.tooling)
+    androidTestImplementation(libs.ui.test.junit4)
+    debugImplementation(libs.ui.test.manifest)
+    implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.runtime.livedata)
+    implementation(libs.dagger)
+    ksp(libs.dagger.compiler)
+    implementation(libs.dagger.android)
+    implementation(libs.dagger.android.support)
+    ksp(libs.dagger.android.processor)
 }

@@ -32,7 +32,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
@@ -48,18 +48,18 @@ fun VolumeCard() {
     ) {
         val context = LocalContext.current
 
-        val settingsViewModel = remember { SettingsViewModel }
+        val settingsSharedPref = remember { SettingsSharedPref }
 
         val currentVolume = TAudio.volume()
         val maxVolume = TAudio.maxVolumeIndex()
 
         val sliderIncrementFivePercent =
-            settingsViewModel.getIsSliderIncrementFivePercent()
+            settingsSharedPref.getIsSliderIncrementFivePercent()
 
-        val customVolume = settingsViewModel.getCustomVolume()
+        val customVolume = settingsSharedPref.getCustomVolume()
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
 
-        val customVolumeOptionLabel = settingsViewModel.getCustomVolumeOptionLabel()
+        val customVolumeOptionLabel = settingsSharedPref.getCustomVolumeOptionLabel()
         var mCustomVolumeOptionLabel by remember { mutableStateOf(customVolumeOptionLabel) }
 
         val options = listOf(
@@ -159,7 +159,7 @@ fun VolumeCard() {
                                     TToast.toast(context.getString(R.string.system_media_volume_levels_limited))
                                     return@Button
                                 } else {
-                                    settingsViewModel.setCustomVolume(newCustomVolume.toInt())
+                                    settingsSharedPref.setCustomVolume(newCustomVolume.toInt())
                                     mCustomVolume = newCustomVolume.toInt()
                                     showVolumeOptionLabelDialog = true
                                     selectedIndex = 3
@@ -202,7 +202,7 @@ fun VolumeCard() {
                             ),
                             keyboardActions = KeyboardActions(
                                 onDone = {
-                                    settingsViewModel.setCustomVolumeOptionLabel(optionLabel)
+                                    settingsSharedPref.setCustomVolumeOptionLabel(optionLabel)
                                     mCustomVolumeOptionLabel = optionLabel
                                     showVolumeOptionLabelDialog = false
                                     showVolumeDialog = false
@@ -213,7 +213,7 @@ fun VolumeCard() {
                     confirmButton = {
                         Button(
                             onClick = {
-                                settingsViewModel.setCustomVolumeOptionLabel(optionLabel)
+                                settingsSharedPref.setCustomVolumeOptionLabel(optionLabel)
                                 mCustomVolumeOptionLabel = optionLabel
                                 showVolumeOptionLabelDialog = false
                                 showVolumeDialog = false

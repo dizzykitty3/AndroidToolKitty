@@ -9,10 +9,11 @@
     <string name="debugging">Debugging</string>
     <string name="show_more">show more</string>
     <string name="show_less">show less</string>
-    <string name="tap_allow_to_continue">Tap \"Allow\" to continue</string>
+    <string name="grant_permission_then_tap_again">Choose \"Allow\" on the popup, then tap the button again</string>
     <string name="unknown">Unknown</string>
     <string name="manually_grant">Manually grant</string>
     <string name="warning">Warning</string>
+    <string name="clear_input">Clear inputs</string>
 
     <!--Home screen: top tip-->
     <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>
@@ -46,8 +47,6 @@
     <string name="url_input_hint_2">and suffix</string>
     <string name="url_input_hint_3">(or</string>
     <string name="url_input_hint_4">, etc.)</string>
-
-    <!--Home screen: social media profile-->
     <string name="social_media_profile">Social media profile</string>
     <string name="platform">Platform</string>
     <string name="username">Username</string>
@@ -64,6 +63,7 @@
     <string name="v2ex">V2EX</string>
     <string name="bilibili_user_id">Bilibili (User ID)</string>
     <string name="temp2">Upload platform name feature is under development.</string>
+    <string name="webpage">Webpage</string>
 
     <!--Home screen: android system settings-->
     <string name="android_system_settings">Android system settings</string>
@@ -88,8 +88,8 @@
 
     <!--Home screen: google maps-->
     <string name="google_maps">Google Maps</string>
-    <string name="latitude">Latitude</string>
-    <string name="longitude">Longitude</string>
+    <string name="latitude">lat</string>
+    <string name="longitude">lng</string>
     <string name="google_maps_not_installed">Google Maps is not installed</string>
     <string name="google_play_not_installed">Google Play is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>
@@ -150,5 +150,5 @@
     <string name="source_code_on_github">View source code on GitHub</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240410</string>
+    <string name="version_number" translatable="false">20240411</string>
 </resources>

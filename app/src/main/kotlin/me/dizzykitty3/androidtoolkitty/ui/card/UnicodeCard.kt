@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TClipboard
@@ -65,7 +66,12 @@ fun UnicodeCard() {
                         onClickConvertButton(unicode, { characters = it }, true)
                     }
                 }
-            )
+            ),
+            trailingIcon = {
+                ClearInput(text = unicode) {
+                    unicode = ""
+                }
+            },
         )
 
         OutlinedTextField(
@@ -87,7 +93,12 @@ fun UnicodeCard() {
                         onClickConvertButton(characters, { unicode = it }, false)
                     }
                 }
-            )
+            ),
+            trailingIcon = {
+                ClearInput(text = characters) {
+                    characters = ""
+                }
+            },
         )
 
         TextButton(

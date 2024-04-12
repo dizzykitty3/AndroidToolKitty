@@ -25,13 +25,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
 
 private const val TAG = "GoogleMapsCard"
 
 @Composable
-fun GoogleMapsCard() {
+fun MapsCard() {
     CustomCard(
         icon = Icons.Outlined.Place,
         title = R.string.google_maps
@@ -54,7 +55,12 @@ fun GoogleMapsCard() {
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = { onClickOpenGoogleMapsButton(latitude, longitude) }
-                )
+                ),
+                trailingIcon = {
+                    ClearInput(text = latitude) {
+                        latitude = ""
+                    }
+                },
             )
 
             OutlinedTextField(
@@ -71,7 +77,12 @@ fun GoogleMapsCard() {
                 ),
                 keyboardActions = KeyboardActions(
                     onDone = { onClickOpenGoogleMapsButton(latitude, longitude) }
-                )
+                ),
+                trailingIcon = {
+                    ClearInput(text = longitude) {
+                        longitude = ""
+                    }
+                },
             )
         }
 

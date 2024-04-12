@@ -27,7 +27,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
@@ -47,7 +48,7 @@ fun UrlCard() {
         icon = Icons.Outlined.Link,
         title = R.string.url
     ) {
-        CustomGroupTitleText(resId = R.string.url)
+        CustomGroupTitleText(resId = R.string.webpage)
 
         var url by remember { mutableStateOf("") }
 
@@ -63,6 +64,11 @@ fun UrlCard() {
             keyboardActions = KeyboardActions(
                 onDone = { onClickVisitUrlButton(url) }
             ),
+            trailingIcon = {
+                ClearInput(text = url) {
+                    url = ""
+                }
+            },
             supportingText = {
                 Text(
                     text = buildAnnotatedString {
@@ -102,7 +108,7 @@ fun UrlCard() {
 
         var username by remember { mutableStateOf("") }
 
-        val platformIndex = SettingsViewModel.getLastTimeSelectedSocialPlatform()
+        val platformIndex = SettingsSharedPref.getLastTimeSelectedSocialPlatform()
         var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
 
         val platformList = TUrl.Platform.entries.map { stringResource(it.nameResId) }
@@ -137,6 +143,11 @@ fun UrlCard() {
             keyboardActions = KeyboardActions(
                 onDone = { onVisitProfileButton(context, username, mPlatformIndex) }
             ),
+            trailingIcon = {
+                ClearInput(text = username) {
+                    username = ""
+                }
+            },
             supportingText = {
                 if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
                     val platform = TUrl.Platform.entries[mPlatformIndex]

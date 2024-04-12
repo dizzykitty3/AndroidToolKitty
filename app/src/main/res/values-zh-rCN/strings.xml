@@ -10,6 +10,7 @@
     <string name="url_input_hint_3">(或</string>
     <string name="url_input_hint_4">等)快速访问网址</string>
     <string name="visit">前往</string>
+    <string name="webpage">网页</string>
     <string name="android_system_settings">Android 系统设置</string>
     <string name="open_display_settings">显示设置</string>
     <string name="open_auto_rotate_settings">屏幕自动旋转设置</string>
@@ -104,7 +105,7 @@
     <string name="show_paired_devices">查看已配对的设备</string>
     <string name="current_device">当前设备：</string>
     <string name="paired_devices">已配对的设备：</string>
-    <string name="tap_allow_to_continue">授予权限以继续</string>
+    <string name="grant_permission_then_tap_again">授予权限，然后再次点击按钮</string>
     <string name="bt">经典</string>
     <string name="ble">低功耗</string>
     <string name="dual">双模</string>
@@ -114,4 +115,5 @@
     <string name="bluetooth_devices_types">经典蓝牙（BT）：这是一种用于耳机、扬声器和文件传输等的熟悉类型。它提供良好的范围和速度，但消耗的电力更多。\n\n低功耗蓝牙（BLE）：这个较新的版本设计用于低功耗，非常适合需要长电池寿命的设备，如健身追踪器和智能家居传感器。与经典蓝牙相比，它的范围更短，数据传输速率更慢。\n\n双模：有些设备可能同时支持经典蓝牙和蓝牙LE。这些被称为双模式设备，可以根据需要提供与不同类型设备连接的灵活性。例如，智能手表可能使用BLE与手机连接以获取通知，但也具有经典蓝牙用于音乐播放。</string>
     <string name="manually_grant">手动授予</string>
     <string name="skip">跳过</string>
+    <string name="clear_input">清空输入</string>
 </resources>

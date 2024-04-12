@@ -26,7 +26,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomBoldText
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
@@ -46,18 +46,18 @@ fun SettingsCard(navController: NavHostController) {
     ) {
         val view = LocalView.current
 
-        val settingsViewModel = remember { SettingsViewModel }
+        val settingsSharedPref = remember { SettingsSharedPref }
 
-        val autoClearClipboard = settingsViewModel.getIsAutoClearClipboard()
+        val autoClearClipboard = settingsSharedPref.getIsAutoClearClipboard()
         var mAutoClearClipboard by remember { mutableStateOf(autoClearClipboard) }
 
-        val oneHandedMode = settingsViewModel.getIsOneHandedMode()
+        val oneHandedMode = settingsSharedPref.getIsOneHandedMode()
         var mOneHandedMode by remember { mutableStateOf(oneHandedMode) }
 
-        val dynamicColor = settingsViewModel.getIsDynamicColor()
+        val dynamicColor = settingsSharedPref.getIsDynamicColor()
         var mDynamicColor by remember { mutableStateOf(dynamicColor) }
 
-        val volumeSlideSteps = settingsViewModel.getIsSliderIncrementFivePercent()
+        val volumeSlideSteps = settingsSharedPref.getIsSliderIncrementFivePercent()
         var mVolumeSlideSteps by remember { mutableStateOf(volumeSlideSteps) }
 
         val primary = MaterialTheme.colorScheme.primary.toArgb()
@@ -68,7 +68,7 @@ fun SettingsCard(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mAutoClearClipboard = !mAutoClearClipboard
-                settingsViewModel.setIsAutoClearClipboard(mAutoClearClipboard)
+                settingsSharedPref.setIsAutoClearClipboard(mAutoClearClipboard)
             }
         ) {
             Text(text = stringResource(R.string.clear_clipboard_on_launch))
@@ -77,7 +77,7 @@ fun SettingsCard(navController: NavHostController) {
                 checked = mAutoClearClipboard,
                 onCheckedChange = {
                     mAutoClearClipboard = it
-                    settingsViewModel.setIsAutoClearClipboard(it)
+                    settingsSharedPref.setIsAutoClearClipboard(it)
                 }
             )
         }
@@ -86,7 +86,7 @@ fun SettingsCard(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mVolumeSlideSteps = !mVolumeSlideSteps
-                settingsViewModel.setIsSliderIncrementFivePercent(mVolumeSlideSteps)
+                settingsSharedPref.setIsSliderIncrementFivePercent(mVolumeSlideSteps)
             }
         ) {
             Text(text = stringResource(R.string.set_slider_increment_5))
@@ -95,7 +95,7 @@ fun SettingsCard(navController: NavHostController) {
                 checked = mVolumeSlideSteps,
                 onCheckedChange = {
                     mVolumeSlideSteps = it
-                    settingsViewModel.setIsSliderIncrementFivePercent(it)
+                    settingsSharedPref.setIsSliderIncrementFivePercent(it)
                 }
             )
         }
@@ -125,7 +125,7 @@ fun SettingsCard(navController: NavHostController) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mOneHandedMode = !mOneHandedMode
-                settingsViewModel.setIsOneHandedMode(mOneHandedMode)
+                settingsSharedPref.setIsOneHandedMode(mOneHandedMode)
             }
         ) {
             Text(text = stringResource(R.string.one_handed_mode))
@@ -134,7 +134,7 @@ fun SettingsCard(navController: NavHostController) {
                 checked = mOneHandedMode,
                 onCheckedChange = {
                     mOneHandedMode = it
-                    settingsViewModel.setIsOneHandedMode(it)
+                    settingsSharedPref.setIsOneHandedMode(it)
                 }
             )
         }
@@ -176,7 +176,7 @@ fun SettingsCard(navController: NavHostController) {
             positiveButtonText = stringResource(R.string.erase_all_data),
             negativeButtonText = null,
             onClickAction = {
-                settingsViewModel.clear()
+                settingsSharedPref.clear()
                 (context as Activity).finish()
             }
         )
@@ -185,7 +185,7 @@ fun SettingsCard(navController: NavHostController) {
 
 private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view: View) {
     val context = view.context
-    SettingsViewModel.setIsDynamicColor(isDynamicColor)
+    SettingsSharedPref.setIsDynamicColor(isDynamicColor)
 
     TSnackbar(view).snackbar(
         message = context.getString(R.string.requires_restart_do_it_now),

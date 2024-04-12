@@ -9,7 +9,7 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleText
@@ -32,7 +32,7 @@ fun SystemSettingsCard() {
         icon = Icons.Outlined.Settings,
         title = R.string.android_system_settings
     ) {
-        val settingsViewModel = remember { SettingsViewModel }
+        val settingsSharedPref = remember { SettingsSharedPref }
 
         val settings = listOf(
             Setting(SETTING_1, R.string.open_display_settings),
@@ -50,7 +50,7 @@ fun SystemSettingsCard() {
             mutableStateMapOf<String, Boolean>().apply {
                 settings.forEach { setting ->
                     this[setting.settingType] =
-                        settingsViewModel.getCardShowedState(setting.settingType)
+                        settingsSharedPref.getCardShowedState(setting.settingType)
                 }
             }
         }
