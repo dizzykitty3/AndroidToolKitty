@@ -8,7 +8,7 @@
     <string name="url_input_hint_1">不必输入前缀</string>
     <string name="url_input_hint_2">和后缀</string>
     <string name="url_input_hint_3">(或</string>
-    <string name="url_input_hint_4">等)快速访问网址</string>
+    <string name="url_input_hint_4">等)快速访问网页</string>
     <string name="visit">前往</string>
     <string name="webpage">网页</string>
     <string name="android_system_settings">Android 系统设置</string>
