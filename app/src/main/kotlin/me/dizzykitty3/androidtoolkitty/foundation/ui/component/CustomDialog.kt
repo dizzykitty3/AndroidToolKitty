@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
@@ -35,7 +36,8 @@ fun CustomAlertDialogButton(
             containerColor = MaterialTheme.colorScheme.error,
             contentColor = MaterialTheme.colorScheme.onError
         ),
-        onClick = { showDialog = true }
+        onClick = { showDialog = true },
+        elevation = ButtonDefaults.buttonElevation(1.dp)
     ) {
         Icon(
             imageVector = Icons.Outlined.DeleteForever,

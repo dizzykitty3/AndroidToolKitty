@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.Bluetooth
 import androidx.compose.material.icons.outlined.Casino
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -147,7 +148,8 @@ fun HomeScreen(navController: NavHostController) {
 
         CustomCard(title = R.string.test) {
             Button(
-                onClick = { navController.navigate(LUCKY_SPINNING_WHEEL_SCREEN) }
+                onClick = { navController.navigate(LUCKY_SPINNING_WHEEL_SCREEN) },
+                elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Casino,
@@ -157,7 +159,8 @@ fun HomeScreen(navController: NavHostController) {
                 Text(text = stringResource(R.string.lucky_spinning_wheel))
             }
             Button(
-                onClick = { navController.navigate(BLUETOOTH_DEVICES_SCREEN) }
+                onClick = { navController.navigate(BLUETOOTH_DEVICES_SCREEN) },
+                elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Bluetooth,

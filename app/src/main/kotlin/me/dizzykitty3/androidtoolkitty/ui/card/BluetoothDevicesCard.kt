@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
@@ -93,7 +94,8 @@ fun BluetoothDevicesCard() {
 
                 // When Bluetooth is OFF
                 TToast.toast(context.getString(R.string.bluetooth_disabled))
-            }
+            },
+            elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
             Icon(
                 imageVector = Icons.Outlined.BluetoothConnected,

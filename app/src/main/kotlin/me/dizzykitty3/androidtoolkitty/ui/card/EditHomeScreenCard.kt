@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +15,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
@@ -170,7 +172,8 @@ fun EditHomeScreenCard() {
                 mIsShowCard10 = false
                 mIsShowCard11 = false
                 mIsShowCard12 = false
-            }
+            },
+            elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
             Icon(
                 imageVector = Icons.Outlined.VisibilityOff,
@@ -195,7 +198,8 @@ fun EditHomeScreenCard() {
                 mIsShowCard10 = true
                 mIsShowCard11 = true
                 mIsShowCard12 = true
-            }
+            },
+            elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
             Icon(
                 imageVector = Icons.Outlined.Visibility,
