@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import com.google.gson.reflect.TypeToken
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
 object SettingsSharedPref {
@@ -136,7 +135,8 @@ object SettingsSharedPref {
     fun getLuckySpinningWheelItems(): List<String>? {
         val itemsJson = getSharedPrefs().getString(LUCKY_SPINNING_WHEEL_ITEMS, null) ?: return null
         return try {
-            Gson().fromJson(itemsJson, object : TypeToken<List<String>>() {}.type)
+            val itemsArray: Array<String> = Gson().fromJson(itemsJson, Array<String>::class.java)
+            itemsArray.toList()
         } catch (e: JsonSyntaxException) {
             Log.e(TAG, "Error parsing spinning wheel items JSON", e)
             null
