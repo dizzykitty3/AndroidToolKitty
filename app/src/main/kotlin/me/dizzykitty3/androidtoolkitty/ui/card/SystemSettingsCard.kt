@@ -2,8 +2,13 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.content.ContentResolver
 import android.provider.Settings
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.BatteryStd
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
@@ -13,8 +18,10 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleText
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
+import me.dizzykitty3.androidtoolkitty.foundation.utils.TBattery
 
 private const val SETTING_1 = "setting_display"
 private const val SETTING_2 = "setting_auto_rotate"
@@ -70,6 +77,17 @@ fun SystemSettingsCard() {
         if (!checkIsAutoTime()) CustomTip(resId = R.string.set_time_automatically_is_off_tip)
 
         if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
+
+        Row {
+            Icon(
+                imageVector = Icons.Outlined.BatteryStd,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary
+            )
+            Text(text = "${TBattery.batteryLevel()}%")
+        }
+
+        CustomSpacerPadding()
 
         settings.subList(0, 6).forEach { setting ->
             if (isShowSetting[setting.settingType] == true) {
