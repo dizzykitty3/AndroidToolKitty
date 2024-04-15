@@ -5,7 +5,6 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-
 object TBattery {
     fun batteryLevel(): Int {
         val batteryIntent = app.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
