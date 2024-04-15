@@ -28,10 +28,10 @@ fun AboutCard() {
     CustomCard(
         title = R.string.about
     ) {
-        DeveloperProfileLink("dizzykitty3")
-        DeveloperProfileLink("HongjieCN")
-        GitHubRepoLink()
-        CustomSpacerPadding()
+//        DeveloperProfileLink("dizzykitty3")
+//        DeveloperProfileLink("HongjieCN")
+//        GitHubRepoLink()
+//        CustomSpacerPadding()
         VersionNumber()
     }
 }
