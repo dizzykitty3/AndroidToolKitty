@@ -77,8 +77,6 @@ fun SystemSettingsCard() {
 
         if (!checkIsAutoTime()) CustomTip(resId = R.string.set_time_automatically_is_off_tip)
 
-        if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
-
         Row {
             Icon(
                 imageVector = Icons.Outlined.BatteryStd,
@@ -87,8 +85,10 @@ fun SystemSettingsCard() {
             )
             Text(text = "${TBattery.batteryLevel()}%")
         }
-
         CustomSpacerPadding()
+        CustomGroupDivider()
+
+        if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
 
         settings.subList(0, 6).forEach { setting ->
             if (isShowSetting[setting.settingType] == true) {

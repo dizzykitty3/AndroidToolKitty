@@ -32,7 +32,8 @@ fun CustomAlertDialogButton(
 
     Button(
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.error
+            containerColor = MaterialTheme.colorScheme.error,
+            contentColor = MaterialTheme.colorScheme.onError
         ),
         onClick = { showDialog = true }
     ) {
