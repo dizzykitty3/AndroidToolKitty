@@ -8,16 +8,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
@@ -26,7 +26,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
@@ -38,6 +37,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
 
 private const val TAG = "UrlCard"
+private const val HTTPS = "https://"
 
 @Composable
 fun UrlCard() {
@@ -70,8 +70,16 @@ private fun WebpageUrl() {
             onDone = { onClickVisitUrlButton(url) }
         ),
         trailingIcon = {
-            ClearInput(text = url) {
-                url = ""
+            if (url.isNotBlank()) {
+                IconButton(onClick = {
+                    onClickVisitUrlButton(url)
+                }) {
+                    Icon(
+                        imageVector = Icons.Outlined.ArrowOutward,
+                        contentDescription = stringResource(id = R.string.visit),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         },
         supportingText = {
@@ -88,23 +96,12 @@ private fun WebpageUrl() {
             )
         },
         prefix = {
-            Text(text = "https://")
+            Text(text = HTTPS)
         },
         suffix = {
             Text(text = TUrl.urlSuffix(url))
         }
     )
-
-    TextButton(
-        onClick = { onClickVisitUrlButton(url) }
-    ) {
-        Text(text = stringResource(R.string.visit))
-        Icon(
-            imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = null,
-            modifier = Modifier.align(Alignment.CenterVertically)
-        )
-    }
 }
 
 @Composable
@@ -148,8 +145,16 @@ private fun SocialMediaProfileIUrl() {
             onDone = { onVisitProfileButton(username, mPlatformIndex) }
         ),
         trailingIcon = {
-            ClearInput(text = username) {
-                username = ""
+            if (username.isNotBlank()) {
+                IconButton(onClick = {
+                    onVisitProfileButton(username, mPlatformIndex)
+                }) {
+                    Icon(
+                        imageVector = Icons.Outlined.ArrowOutward,
+                        contentDescription = stringResource(id = R.string.visit),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         },
         supportingText = {
@@ -165,18 +170,6 @@ private fun SocialMediaProfileIUrl() {
             }
         }
     )
-
-    TextButton(
-        onClick = { onVisitProfileButton(username, mPlatformIndex) }
-    ) {
-        Text(text = stringResource(R.string.visit))
-
-        Icon(
-            imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = null,
-            modifier = Modifier.align(Alignment.CenterVertically)
-        )
-    }
 }
 
 private fun onClickVisitUrlButton(url: String) {
