@@ -137,7 +137,7 @@ fun VolumeCard() {
 
                 AlertDialog(
                     onDismissRequest = {
-                        showVolumeDialog = false
+                        // Ignore
                     },
                     title = {
                         Text(text = "${stringResource(R.string.add_custom_volume)}\n${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
@@ -185,8 +185,7 @@ fun VolumeCard() {
 
                 AlertDialog(
                     onDismissRequest = {
-                        showVolumeOptionLabelDialog = false
-                        showVolumeDialog = false
+                        // Ignore
                     },
                     title = {
                         Text(text = stringResource(R.string.you_can_set_a_label_for_it))

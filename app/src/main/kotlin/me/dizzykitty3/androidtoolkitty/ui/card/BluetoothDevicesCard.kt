@@ -140,7 +140,9 @@ private fun BluetoothDeviceTypesDialog() {
 
     if (showDialog) {
         AlertDialog(
-            onDismissRequest = { showDialog = false },
+            onDismissRequest = {
+                // Ignore
+            },
             text = { Text(text = stringResource(id = R.string.bluetooth_devices_types)) },
             confirmButton = {
                 Button(
