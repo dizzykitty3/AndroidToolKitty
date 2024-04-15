@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.Bluetooth
+import androidx.compose.material.icons.outlined.Casino
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -26,6 +28,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCardSpacePadding
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
@@ -146,11 +149,21 @@ fun HomeScreen(navController: NavHostController) {
             Button(
                 onClick = { navController.navigate(LUCKY_SPINNING_WHEEL_SCREEN) }
             ) {
+                Icon(
+                    imageVector = Icons.Outlined.Casino,
+                    contentDescription = stringResource(id = R.string.lucky_spinning_wheel)
+                )
+                CustomIconAndTextPadding()
                 Text(text = stringResource(R.string.lucky_spinning_wheel))
             }
             Button(
                 onClick = { navController.navigate(BLUETOOTH_DEVICES_SCREEN) }
             ) {
+                Icon(
+                    imageVector = Icons.Outlined.Bluetooth,
+                    contentDescription = stringResource(id = R.string.bluetooth_devices)
+                )
+                CustomIconAndTextPadding()
                 Text(text = stringResource(id = R.string.bluetooth_devices))
             }
         }
