@@ -43,7 +43,7 @@
     <string name="github">GitHub</string>
     <string name="x">X</string>
     <string name="weibo">微博</string>
-    <string name="youtube_id">YouTube (ID)</string>
+    <string name="youtube_id">YouTube (UID)</string>
     <string name="platform_not_added_yet">这里没有我所想的社交平台</string>
     <string name="open_developer_options">开发者选项</string>
     <string name="requires_restart_do_it_now">这将需要重启 APP</string>
@@ -64,7 +64,7 @@
     <string name="debugging">调试</string>
     <string name="bilibili_user_id">哔哩哔哩 (用户 UID)</string>
     <string name="clear_clipboard_on_launch">在启动时清除剪贴板</string>
-    <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开\"启动时自动清空剪贴板\"功能</string>
+    <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开「启动时自动清空剪贴板」功能</string>
     <string name="settings">设置</string>
     <string name="hide_all_cards">隐藏所有卡片</string>
     <string name="show_all_cards">显示所有卡片</string>
@@ -73,7 +73,7 @@
     <string name="volume">音量</string>
     <string name="media_volume">媒体音量</string>
     <string name="erase_all_app_data">清除应用所有数据</string>
-    <string name="set_time_automatically_is_off_tip">“自动设置时间”未启用。某些应用部分功能可能表现异常。</string>
+    <string name="set_time_automatically_is_off_tip">「自动设置时间」未启用。某些应用部分功能可能表现异常。</string>
     <string name="warning">警告</string>
     <string name="erase_all_data">清除所有数据</string>
     <string name="open_on_other_markets">在其他应用商店打开</string>

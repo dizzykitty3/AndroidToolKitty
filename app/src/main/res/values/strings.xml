@@ -9,7 +9,7 @@
     <string name="debugging">Debugging</string>
     <string name="show_more">show more</string>
     <string name="show_less">show less</string>
-    <string name="grant_permission_then_tap_again">Choose \"Allow\" on the popup, then tap the button again</string>
+    <string name="grant_permission_then_tap_again">Choose Allow on the popup, then tap the button again</string>
     <string name="unknown">Unknown</string>
     <string name="manually_grant">Manually grant</string>
     <string name="warning">Warning</string>
@@ -39,7 +39,7 @@
     <string name="clear_clipboard">Clear clipboard</string>
     <string name="clipboard_cleared">Clipboard cleared</string>
     <string name="clipboard_cleared_automatically">Clipboard cleared automatically</string>
-    <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on \"clear clipboard on launch\" in Settings Screen.</string>
+    <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on Clear Clipboard on Launch in Settings Screen.</string>
 
     <!--Home screen: url-->
     <string name="url">URL</string>
@@ -54,7 +54,7 @@
     <string name="github">GitHub</string>
     <string name="x">X</string>
     <string name="weibo">Weibo</string>
-    <string name="youtube_id">YouTube (ID)</string>
+    <string name="youtube_id">YouTube (User ID)</string>
     <string name="platform_not_added_yet">No platform you need here?</string>
     <string name="submit_the_platform_you_need">Submit the platform you need</string>
     <string name="uploaded">uploaded</string>
@@ -75,7 +75,7 @@
     <string name="open_battery_optimization_settings">Battery optimization settings</string>
     <string name="open_developer_options">Developer options</string>
     <string name="open_caption_preferences">Caption preferences</string>
-    <string name="set_time_automatically_is_off_tip">\"Set time automatically\" is now OFF. You may experience some unexpected behavior while using your phone.</string>
+    <string name="set_time_automatically_is_off_tip">Set Time Automatically is now OFF. You may experience some unexpected behavior while using your phone.</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
 
     <!--Home screen: unicode-->
@@ -134,7 +134,7 @@
     <string name="erase_all_data">Erase all data</string>
     <string name="customize_my_home_page">Customize my home page</string>
     <string name="material_you_dynamic_color">Material You dynamic color</string>
-    <string name="customize_system_settings_card">Customize \"Android system settings\" card options</string>
+    <string name="customize_system_settings_card">Customize Android System Settings card options</string>
     <string name="customize">Customize</string>
     <string name="warning_erase_all_data_1">This action will erase all your data, including</string>
     <string name="warning_erase_all_data_2">histories and settings.</string>
