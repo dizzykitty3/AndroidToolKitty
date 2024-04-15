@@ -10,7 +10,7 @@ fun Greeting() {
     CustomGradientText(
         textToDisplay = TString.greeting(),
         colors = listOf(
-            MaterialTheme.colorScheme.primary,
+            MaterialTheme.colorScheme.primaryContainer,
             MaterialTheme.colorScheme.tertiaryContainer
         )
     )
