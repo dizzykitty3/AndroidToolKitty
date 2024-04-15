@@ -6,10 +6,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.Text
+import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
+import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -54,6 +59,7 @@ private const val CARD_10 = "card_android_versions"
 private const val CARD_11 = "card_lucky_wheel"
 private const val CARD_12 = "card_bluetooth_devices"
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
@@ -68,18 +74,28 @@ fun HomeScreen(navController: NavHostController) {
                 Greeting()
             }
 
-            IconButton(
-                onClick = {
-                    navController.navigate(SETTINGS_SCREEN)
-                    settingsSharedPref.setHaveOpenedSettingsScreen(true)
+            TooltipBox(
+                positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+                tooltip = {
+                    PlainTooltip {
+                        Text(text = stringResource(id = R.string.settings))
+                    }
                 },
-                modifier = Modifier.size(40.dp)
+                state = rememberTooltipState(),
             ) {
-                Icon(
-                    imageVector = Icons.Default.Settings,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
+                IconButton(
+                    onClick = {
+                        navController.navigate(SETTINGS_SCREEN)
+                        settingsSharedPref.setHaveOpenedSettingsScreen(true)
+                    },
+                    modifier = Modifier.size(40.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Settings,
+                        contentDescription = stringResource(id = R.string.settings),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         }
 
