@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
@@ -81,7 +82,7 @@ fun SystemSettingsCard() {
         Row {
             Icon(
                 imageVector = Icons.Outlined.BatteryStd,
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.battery_level),
                 tint = MaterialTheme.colorScheme.primary
             )
             Text(text = "${TBattery.batteryLevel()}%")

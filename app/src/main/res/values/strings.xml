@@ -14,6 +14,7 @@
     <string name="manually_grant">Manually grant</string>
     <string name="warning">Warning</string>
     <string name="clear_input">Clear input</string>
+    <string name="info">Info</string>
 
     <!--Home screen: top tip-->
     <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>
@@ -77,6 +78,7 @@
     <string name="open_caption_preferences">Caption preferences</string>
     <string name="set_time_automatically_is_off_tip">Set Time Automatically is now OFF. You may experience some unexpected behavior while using your phone.</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
+    <string name="battery_level">Battery level</string>
 
     <!--Home screen: unicode-->
     <string name="unicode">Unicode</string>
@@ -150,4 +152,5 @@
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="version">Version</string>
     <string name="version_number" translatable="false">20240412</string>
+    <string name="developer_profile_link">Developer profile link</string>
 </resources>

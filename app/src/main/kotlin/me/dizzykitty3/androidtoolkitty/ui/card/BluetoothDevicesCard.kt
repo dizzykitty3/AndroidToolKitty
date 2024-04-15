@@ -97,7 +97,7 @@ fun BluetoothDevicesCard() {
         ) {
             Icon(
                 imageVector = Icons.Outlined.BluetoothConnected,
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.show_paired_devices),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             CustomIconAndTextPadding()

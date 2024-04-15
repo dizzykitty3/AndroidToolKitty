@@ -93,7 +93,7 @@ fun MapsCard() {
 
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.open_google_maps),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }

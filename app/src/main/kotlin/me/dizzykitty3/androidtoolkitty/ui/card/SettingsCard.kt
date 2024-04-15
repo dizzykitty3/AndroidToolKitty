@@ -159,7 +159,7 @@ private fun CustomSettingOptions(navController: NavHostController) {
     ) {
         Icon(
             imageVector = Icons.Outlined.Edit,
-            contentDescription = null,
+            contentDescription = stringResource(id = R.string.customize_my_home_page),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
         CustomIconAndTextPadding()

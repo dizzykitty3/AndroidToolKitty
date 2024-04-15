@@ -174,7 +174,7 @@ fun EditHomeScreenCard() {
         ) {
             Icon(
                 imageVector = Icons.Outlined.VisibilityOff,
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.hide_all_cards),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             CustomIconAndTextPadding()
@@ -199,7 +199,7 @@ fun EditHomeScreenCard() {
         ) {
             Icon(
                 imageVector = Icons.Outlined.Visibility,
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.show_all_cards),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             CustomIconAndTextPadding()

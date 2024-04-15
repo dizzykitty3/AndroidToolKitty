@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun CustomAlertDialogButton(
@@ -37,7 +38,7 @@ fun CustomAlertDialogButton(
     ) {
         Icon(
             imageVector = Icons.Outlined.DeleteForever,
-            contentDescription = null,
+            contentDescription = stringResource(id = R.string.erase_all_data),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
         CustomIconAndTextPadding()

@@ -43,7 +43,7 @@ private fun DeveloperProfileLink(
     Row {
         Icon(
             imageVector = Icons.Outlined.AccountCircle,
-            contentDescription = null
+            contentDescription = stringResource(id = R.string.developer_profile_link)
         )
         CustomIconAndTextPadding()
         Row(
@@ -77,7 +77,7 @@ private fun GitHubRepoLink() {
 
         Icon(
             imageVector = Icons.Outlined.Code,
-            contentDescription = null
+            contentDescription = stringResource(id = R.string.developer_profile_link)
         )
         CustomIconAndTextPadding()
         Row(
@@ -92,7 +92,7 @@ private fun GitHubRepoLink() {
             )
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.developer_profile_link),
                 modifier = Modifier.align(Alignment.CenterVertically),
                 tint = MaterialTheme.colorScheme.primary
             )
@@ -105,7 +105,7 @@ private fun VersionNumber() {
     Row {
         Icon(
             imageVector = Icons.Outlined.Schedule,
-            contentDescription = null
+            contentDescription = stringResource(id = R.string.version)
         )
         CustomIconAndTextPadding()
         Text(text = "${stringResource(R.string.version)} ${stringResource(R.string.version_number)}")

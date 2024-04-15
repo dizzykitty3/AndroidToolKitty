@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun CustomGradientText(
@@ -110,7 +111,7 @@ fun CustomTip(
         ) {
             Icon(
                 Icons.Outlined.Info,
-                contentDescription = "Tip Icon",
+                contentDescription = stringResource(id = R.string.info),
                 modifier = Modifier.size(24.dp)
             )
             CustomIconAndTextPadding()

@@ -238,7 +238,7 @@ fun VolumeCard() {
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Edit,
-                        contentDescription = null,
+                        contentDescription = stringResource(id = R.string.edit),
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                     CustomIconAndTextPadding()
