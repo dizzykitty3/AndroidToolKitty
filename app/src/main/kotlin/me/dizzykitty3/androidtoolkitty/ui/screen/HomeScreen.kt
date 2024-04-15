@@ -50,7 +50,6 @@ private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"
 private const val CARD_3 = "card_clipboard"
 private const val CARD_4 = "card_url"
-
 private const val CARD_6 = "card_android_system_settings"
 private const val CARD_7 = "card_unicode"
 private const val CARD_8 = "card_google_maps"
