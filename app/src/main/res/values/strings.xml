@@ -153,4 +153,7 @@
     <string name="version">Version</string>
     <string name="version_number" translatable="false">20240415</string>
     <string name="developer_profile_link">Developer profile link</string>
+
+    <!--Permission request screen: about-->
+    <string name="permission_request">Permission request</string>
 </resources>

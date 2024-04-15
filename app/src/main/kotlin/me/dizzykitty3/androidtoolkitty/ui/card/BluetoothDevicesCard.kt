@@ -32,14 +32,13 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
+import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TBluetooth
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TSnackbar
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 
 @SuppressLint("InlinedApi")
@@ -47,10 +46,11 @@ private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 private const val BT = Manifest.permission.BLUETOOTH
 private const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
 private const val GRANTED = PackageManager.PERMISSION_GRANTED
+private const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
 
 @SuppressLint("MissingPermission")
 @Composable
-fun BluetoothDevicesCard() {
+fun BluetoothDevicesCard(navController: NavHostController) {
     CustomCard(
         icon = Icons.Outlined.Bluetooth,
         title = R.string.bluetooth_devices
@@ -71,13 +71,14 @@ fun BluetoothDevicesCard() {
             onClick = {
                 // Check permission
                 if (noPermission(context)) {
-                    TSnackbar(view).snackbar(
-                        message = context.getString(R.string.grant_permission_then_tap_again),
-                        buttonText = context.getString(R.string.manually_grant),
-                        buttonColor = primary,
-                        buttonClickListener = { TIntent.openPermissionPage() }
-                    )
-                    requestPermission(context)
+                    navController.navigate(PERMISSION_REQUEST_SCREEN)
+//                    TSnackbar(view).snackbar(
+//                        message = context.getString(R.string.grant_permission_then_tap_again),
+//                        buttonText = context.getString(R.string.manually_grant),
+//                        buttonColor = primary,
+//                        buttonClickListener = { TIntent.openPermissionPage() }
+//                    )
+//                    requestPermission(context)
                     return@Button
                 }
 

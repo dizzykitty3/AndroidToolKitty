@@ -141,7 +141,7 @@ fun HomeScreen(navController: NavHostController) {
                     CARD_9 -> AppMarketCard()
                     CARD_10 -> AndroidVersionsCard()
                     CARD_11 -> LuckyWheelCard()
-                    CARD_12 -> BluetoothDevicesCard()
+                    CARD_12 -> BluetoothDevicesCard(navController)
                 }
             }
         }
@@ -181,8 +181,8 @@ fun LuckySpinningWheelScreen() {
 }
 
 @Composable
-fun BluetoothDevicesScreen() {
+fun BluetoothDevicesScreen(navController: NavHostController) {
     CustomScreen {
-        BluetoothDevicesCard()
+        BluetoothDevicesCard(navController)
     }
 }
