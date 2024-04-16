@@ -9,7 +9,6 @@
     <string name="debugging">Debugging</string>
     <string name="show_more">show more</string>
     <string name="show_less">show less</string>
-    <string name="grant_permission_then_tap_again">Choose Allow on the popup, then tap the button again</string>
     <string name="unknown">Unknown</string>
     <string name="warning">Warning</string>
     <string name="clear_input">Clear input</string>
@@ -57,7 +56,6 @@
     <string name="youtube_id">YouTube (User ID)</string>
     <string name="platform_not_added_yet">No platform you need here?</string>
     <string name="submit_the_platform_you_need">Submit the platform you need</string>
-    <string name="uploaded">uploaded</string>
     <string name="pixiv_artwork_id">pixiv (Artwork ID)</string>
     <string name="pixiv_user_id">pixiv (User ID)</string>
     <string name="v2ex">V2EX</string>
@@ -105,9 +103,6 @@
 
     <!--Home screen: android versions-->
     <string name="android_versions">Android versions</string>
-
-    <!--Home screen: test-->
-    <string name="test">test</string>
 
     <!--Home screen: lucky spinning wheel-->
     <string name="lucky_spinning_wheel">Lucky spinning wheel</string>

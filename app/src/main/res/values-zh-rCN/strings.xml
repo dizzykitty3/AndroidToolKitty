@@ -55,7 +55,6 @@
     <plurals name="days_remaining">
         <item quantity="other">剩余 %1$d 天</item>
     </plurals>
-    <string name="uploaded">已上传</string>
     <string name="all_help_welcomed">欢迎建议意见和PR！</string>
     <string name="pixiv_artwork_id">pixiv (作品 ID)</string>
     <string name="pixiv_user_id">pixiv (用户 ID)</string>
@@ -96,7 +95,6 @@
     <string name="edit">编辑</string>
     <string name="general">基本</string>
     <string name="set_slider_increment_5">将滑块增量设置为 5%</string>
-    <string name="test">测试</string>
     <string name="lucky_spinning_wheel">幸运大转盘</string>
     <string name="info">信息</string>
     <string name="no_translation">抱歉， %1$s 翻译尚未添加。</string>
@@ -107,7 +105,6 @@
     <string name="show_paired_devices">查看已配对的设备</string>
     <string name="current_device">当前设备：</string>
     <string name="paired_devices">已配对的设备：</string>
-    <string name="grant_permission_then_tap_again">授予权限，然后再次点击按钮</string>
     <string name="bt">经典</string>
     <string name="ble">低功耗</string>
     <string name="dual">双模</string>
