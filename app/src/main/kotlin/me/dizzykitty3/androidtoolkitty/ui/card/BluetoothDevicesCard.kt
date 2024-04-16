@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Context
@@ -26,9 +25,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
@@ -56,7 +53,6 @@ fun BluetoothDevicesCard(navController: NavHostController) {
         title = R.string.bluetooth_devices
     ) {
         val context = LocalContext.current
-        val view = LocalView.current
 
         var showResult by remember { mutableStateOf(false) }
 
@@ -65,20 +61,11 @@ fun BluetoothDevicesCard(navController: NavHostController) {
 
         var size by remember { mutableIntStateOf(0) }
 
-        val primary = MaterialTheme.colorScheme.primary.toArgb()
-
         Button(
             onClick = {
                 // Check permission
                 if (noPermission(context)) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
-//                    TSnackbar(view).snackbar(
-//                        message = context.getString(R.string.grant_permission_then_tap_again),
-//                        buttonText = context.getString(R.string.manually_grant),
-//                        buttonColor = primary,
-//                        buttonClickListener = { TIntent.openPermissionPage() }
-//                    )
-//                    requestPermission(context)
                     return@Button
                 }
 
@@ -186,16 +173,4 @@ private fun noPermission(context: Context): Boolean {
 
 private fun check(context: Context, permission: String): Boolean {
     return ActivityCompat.checkSelfPermission(context, permission) != GRANTED
-}
-
-private fun requestPermission(context: Context) {
-    if (OsVersion.android12()) {
-        request(context, arrayOf(BT_CONNECT))
-        return
-    }
-    request(context, arrayOf(BT, BT_ADMIN))
-}
-
-private fun request(context: Context, permission: Array<String>) {
-    ActivityCompat.requestPermissions(context as Activity, permission, 1)
 }

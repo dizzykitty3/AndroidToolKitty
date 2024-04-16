@@ -5,10 +5,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.Bluetooth
-import androidx.compose.material.icons.outlined.Casino
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -27,9 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCardSpacePadding
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
@@ -48,8 +42,6 @@ import me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
 import java.util.Locale
 
 private const val SETTINGS_SCREEN = "SettingsScreen"
-private const val LUCKY_SPINNING_WHEEL_SCREEN = "LuckySpinningWheelScreen"
-private const val BLUETOOTH_DEVICES_SCREEN = "BluetoothDevicesScreen"
 private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"
 private const val CARD_3 = "card_clipboard"
@@ -145,44 +137,5 @@ fun HomeScreen(navController: NavHostController) {
                 }
             }
         }
-
-        CustomCard(title = R.string.test) {
-            Button(
-                onClick = { navController.navigate(LUCKY_SPINNING_WHEEL_SCREEN) },
-                elevation = ButtonDefaults.buttonElevation(1.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Casino,
-                    contentDescription = stringResource(id = R.string.lucky_spinning_wheel)
-                )
-                CustomIconAndTextPadding()
-                Text(text = stringResource(R.string.lucky_spinning_wheel))
-            }
-            Button(
-                onClick = { navController.navigate(BLUETOOTH_DEVICES_SCREEN) },
-                elevation = ButtonDefaults.buttonElevation(1.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Bluetooth,
-                    contentDescription = stringResource(id = R.string.bluetooth_devices)
-                )
-                CustomIconAndTextPadding()
-                Text(text = stringResource(id = R.string.bluetooth_devices))
-            }
-        }
-    }
-}
-
-@Composable
-fun LuckySpinningWheelScreen() {
-    CustomScreen {
-        LuckyWheelCard()
-    }
-}
-
-@Composable
-fun BluetoothDevicesScreen(navController: NavHostController) {
-    CustomScreen {
-        BluetoothDevicesCard(navController)
     }
 }

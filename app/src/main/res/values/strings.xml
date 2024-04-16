@@ -11,7 +11,6 @@
     <string name="show_less">show less</string>
     <string name="grant_permission_then_tap_again">Choose Allow on the popup, then tap the button again</string>
     <string name="unknown">Unknown</string>
-    <string name="manually_grant">Manually grant</string>
     <string name="warning">Warning</string>
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>
@@ -154,6 +153,10 @@
     <string name="version_number" translatable="false">20240415</string>
     <string name="developer_profile_link">Developer profile link</string>
 
-    <!--Permission request screen: about-->
+    <!--Permission request screen-->
     <string name="permission_request">Permission request</string>
+    <string name="bluetooth_connect">To check paired bluetooth devices, please grant the app BLUETOOTH_CONNECT permission.</string>
+    <string name="bluetooth_bluetooth_admin">To check paired bluetooth devices, please grant the app BLUETOOTH, BLUETOOTH_ADMIN permissions.</string>
+    <string name="missed_sys_popup">Missed the system permission popup?</string>
+    <string name="manually_grant">Manually grant</string>
 </resources>
