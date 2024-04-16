@@ -61,6 +61,10 @@
     <string name="v2ex">V2EX</string>
     <string name="bilibili_user_id">Bilibili (User ID)</string>
     <string name="webpage">Webpage</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+    <string name="fanbox">Fanbox</string>
+    <string name="patreon">Patreon</string>
 
     <!--Home screen: android system settings-->
     <string name="android_system_settings">Android system settings</string>

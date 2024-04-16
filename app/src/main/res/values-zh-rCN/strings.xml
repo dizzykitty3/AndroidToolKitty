@@ -11,6 +11,10 @@
     <string name="url_input_hint_4">等)快速访问网页</string>
     <string name="visit">前往</string>
     <string name="webpage">网页</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+    <string name="fanbox">Fanbox</string>
+    <string name="patreon">Patreon</string>
     <string name="android_system_settings">Android 系统设置</string>
     <string name="open_display_settings">显示设置</string>
     <string name="open_auto_rotate_settings">屏幕自动旋转设置</string>

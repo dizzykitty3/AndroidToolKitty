@@ -161,7 +161,10 @@ private fun SocialMediaProfileIUrl() {
             if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
                 val platform = TUrl.Platform.entries[mPlatformIndex]
                 Text(
-                    text = "${TUrl.profilePrefix(platform)}$username",
+                    text = if (platform != TUrl.Platform.FANBOX)
+                        "${TUrl.profilePrefix(platform)}$username"
+                    else
+                        "$username${TUrl.profilePrefix(platform)}",
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
@@ -191,6 +194,11 @@ private fun onVisitProfileButton(username: String, platformIndex: Int) {
     }
 
     val prefix = platform.prefix
-    TIntent.openUrl("$prefix${TString.dropSpaces(username)}")
+    val url =
+        if (platform == TUrl.Platform.FANBOX)
+            "${TString.dropSpaces(username)}$prefix"
+        else
+            "$prefix${TString.dropSpaces(username)}"
+    TIntent.openUrl(url)
     Log.d(TAG, "onVisitProfile")
 }

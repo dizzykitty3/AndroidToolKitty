@@ -113,7 +113,11 @@ object TUrl {
     enum class Platform(val prefix: String, val nameResId: Int) {
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
+        FACEBOOK("facebook.com/", R.string.facebook),
+        FANBOX(".fanbox.cc", R.string.fanbox), // e.g. username.fanbox.cc
         GITHUB("github.com/", R.string.github),
+        INSTAGRAM("instagram.com/", R.string.instagram),
+        PATREON("patreon.com/", R.string.patreon),
         PIXIV_ARTWORK("pixiv.net/artworks/", R.string.pixiv_artwork_id),
         PIXIV_USER("pixiv.net/users/", R.string.pixiv_user_id),
         V2EX("v2ex.com/member/", R.string.v2ex),
