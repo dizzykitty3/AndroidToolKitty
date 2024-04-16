@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
@@ -24,6 +25,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
@@ -155,11 +157,12 @@ private fun CustomSettingOptions(navController: NavHostController) {
     CustomGroupTitleText(R.string.customize)
 
     Button(
-        onClick = { navController.navigate(EDIT_HOME_PAGE_SCREEN) }
+        onClick = { navController.navigate(EDIT_HOME_PAGE_SCREEN) },
+        elevation = ButtonDefaults.buttonElevation(1.dp)
     ) {
         Icon(
             imageVector = Icons.Outlined.Edit,
-            contentDescription = null,
+            contentDescription = stringResource(id = R.string.customize_my_home_page),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
         CustomIconAndTextPadding()

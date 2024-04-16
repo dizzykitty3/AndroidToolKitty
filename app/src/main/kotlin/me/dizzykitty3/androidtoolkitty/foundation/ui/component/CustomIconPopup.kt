@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntRect
 import androidx.compose.ui.unit.IntSize
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupPositionProvider
+import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun CustomIconPopup(
@@ -35,7 +37,7 @@ fun CustomIconPopup(
     Row {
         Icon(
             imageVector = Icons.Outlined.Info,
-            contentDescription = "Info",
+            contentDescription = stringResource(id = R.string.info),
             modifier = Modifier
                 .size(16.dp)
                 .clickable { showPopup = true },

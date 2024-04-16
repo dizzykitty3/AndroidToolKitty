@@ -17,6 +17,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun CustomAlertDialogButton(
@@ -31,13 +33,15 @@ fun CustomAlertDialogButton(
 
     Button(
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.error
+            containerColor = MaterialTheme.colorScheme.error,
+            contentColor = MaterialTheme.colorScheme.onError
         ),
-        onClick = { showDialog = true }
+        onClick = { showDialog = true },
+        elevation = ButtonDefaults.buttonElevation(1.dp)
     ) {
         Icon(
             imageVector = Icons.Outlined.DeleteForever,
-            contentDescription = null,
+            contentDescription = stringResource(id = R.string.erase_all_data),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
         CustomIconAndTextPadding()
@@ -49,7 +53,9 @@ fun CustomAlertDialogButton(
 
     if (showDialog) {
         AlertDialog(
-            onDismissRequest = { showDialog = false },
+            onDismissRequest = {
+                // Ignore
+            },
             title = { Text(text = dialogMessageTitle) },
             text = { dialogMessage() },
             confirmButton = {

@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Context
@@ -26,19 +25,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
+import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TBluetooth
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TSnackbar
 import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
 
 @SuppressLint("InlinedApi")
@@ -46,16 +43,16 @@ private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 private const val BT = Manifest.permission.BLUETOOTH
 private const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
 private const val GRANTED = PackageManager.PERMISSION_GRANTED
+private const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
 
 @SuppressLint("MissingPermission")
 @Composable
-fun BluetoothDevicesCard() {
+fun BluetoothDevicesCard(navController: NavHostController) {
     CustomCard(
         icon = Icons.Outlined.Bluetooth,
         title = R.string.bluetooth_devices
     ) {
         val context = LocalContext.current
-        val view = LocalView.current
 
         var showResult by remember { mutableStateOf(false) }
 
@@ -64,19 +61,11 @@ fun BluetoothDevicesCard() {
 
         var size by remember { mutableIntStateOf(0) }
 
-        val primary = MaterialTheme.colorScheme.primary.toArgb()
-
         Button(
             onClick = {
                 // Check permission
                 if (noPermission(context)) {
-                    TSnackbar(view).snackbar(
-                        message = context.getString(R.string.grant_permission_then_tap_again),
-                        buttonText = context.getString(R.string.manually_grant),
-                        buttonColor = primary,
-                        buttonClickListener = { TIntent.openPermissionPage() }
-                    )
-                    requestPermission(context)
+                    navController.navigate(PERMISSION_REQUEST_SCREEN)
                     return@Button
                 }
 
@@ -93,11 +82,12 @@ fun BluetoothDevicesCard() {
 
                 // When Bluetooth is OFF
                 TToast.toast(context.getString(R.string.bluetooth_disabled))
-            }
+            },
+            elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
             Icon(
                 imageVector = Icons.Outlined.BluetoothConnected,
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.show_paired_devices),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             CustomIconAndTextPadding()
@@ -140,7 +130,9 @@ private fun BluetoothDeviceTypesDialog() {
 
     if (showDialog) {
         AlertDialog(
-            onDismissRequest = { showDialog = false },
+            onDismissRequest = {
+                // Ignore
+            },
             text = { Text(text = stringResource(id = R.string.bluetooth_devices_types)) },
             confirmButton = {
                 Button(
@@ -181,16 +173,4 @@ private fun noPermission(context: Context): Boolean {
 
 private fun check(context: Context, permission: String): Boolean {
     return ActivityCompat.checkSelfPermission(context, permission) != GRANTED
-}
-
-private fun requestPermission(context: Context) {
-    if (OsVersion.android12()) {
-        request(context, arrayOf(BT_CONNECT))
-        return
-    }
-    request(context, arrayOf(BT, BT_ADMIN))
-}
-
-private fun request(context: Context, permission: Array<String>) {
-    ActivityCompat.requestPermissions(context as Activity, permission, 1)
 }

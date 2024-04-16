@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun CustomGradientText(
@@ -100,7 +101,8 @@ fun CustomTip(
         modifier = Modifier.padding(bottom = 8.dp),
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
         Row(
@@ -110,14 +112,13 @@ fun CustomTip(
         ) {
             Icon(
                 Icons.Outlined.Info,
-                contentDescription = "Tip Icon",
+                contentDescription = stringResource(id = R.string.info),
                 modifier = Modifier.size(24.dp)
             )
             CustomIconAndTextPadding()
             Text(
                 text = formattedMessage,
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onTertiaryContainer,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }

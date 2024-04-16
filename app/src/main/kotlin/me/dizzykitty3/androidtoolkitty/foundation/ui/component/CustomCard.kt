@@ -43,7 +43,7 @@ fun CustomCard(
                 Row {
                     Icon(
                         imageVector = icon,
-                        contentDescription = null,
+                        contentDescription = stringResource(id = title),
                         modifier = Modifier.align(
                             alignment = Alignment.CenterVertically
                         )

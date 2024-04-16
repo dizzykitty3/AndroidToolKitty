@@ -5,11 +5,15 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.Text
+import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
+import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -19,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomScreen
@@ -39,13 +42,10 @@ import me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
 import java.util.Locale
 
 private const val SETTINGS_SCREEN = "SettingsScreen"
-private const val LUCKY_SPINNING_WHEEL_SCREEN = "LuckySpinningWheelScreen"
-private const val BLUETOOTH_DEVICES_SCREEN = "BluetoothDevicesScreen"
 private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"
 private const val CARD_3 = "card_clipboard"
 private const val CARD_4 = "card_url"
-
 private const val CARD_6 = "card_android_system_settings"
 private const val CARD_7 = "card_unicode"
 private const val CARD_8 = "card_google_maps"
@@ -54,6 +54,7 @@ private const val CARD_10 = "card_android_versions"
 private const val CARD_11 = "card_lucky_wheel"
 private const val CARD_12 = "card_bluetooth_devices"
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
@@ -68,18 +69,28 @@ fun HomeScreen(navController: NavHostController) {
                 Greeting()
             }
 
-            IconButton(
-                onClick = {
-                    navController.navigate(SETTINGS_SCREEN)
-                    settingsSharedPref.setHaveOpenedSettingsScreen(true)
+            TooltipBox(
+                positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+                tooltip = {
+                    PlainTooltip {
+                        Text(text = stringResource(id = R.string.settings))
+                    }
                 },
-                modifier = Modifier.size(40.dp)
+                state = rememberTooltipState(),
             ) {
-                Icon(
-                    imageVector = Icons.Default.Settings,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
+                IconButton(
+                    onClick = {
+                        navController.navigate(SETTINGS_SCREEN)
+                        settingsSharedPref.setHaveOpenedSettingsScreen(true)
+                    },
+                    modifier = Modifier.size(40.dp)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Settings,
+                        contentDescription = stringResource(id = R.string.settings),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                }
             }
         }
 
@@ -122,36 +133,9 @@ fun HomeScreen(navController: NavHostController) {
                     CARD_9 -> AppMarketCard()
                     CARD_10 -> AndroidVersionsCard()
                     CARD_11 -> LuckyWheelCard()
-                    CARD_12 -> BluetoothDevicesCard()
+                    CARD_12 -> BluetoothDevicesCard(navController)
                 }
             }
         }
-
-        CustomCard(title = R.string.test) {
-            Button(
-                onClick = { navController.navigate(LUCKY_SPINNING_WHEEL_SCREEN) }
-            ) {
-                Text(text = stringResource(R.string.lucky_spinning_wheel))
-            }
-            Button(
-                onClick = { navController.navigate(BLUETOOTH_DEVICES_SCREEN) }
-            ) {
-                Text(text = stringResource(id = R.string.bluetooth_devices))
-            }
-        }
-    }
-}
-
-@Composable
-fun LuckySpinningWheelScreen() {
-    CustomScreen {
-        LuckyWheelCard()
-    }
-}
-
-@Composable
-fun BluetoothDevicesScreen() {
-    CustomScreen {
-        BluetoothDevicesCard()
     }
 }

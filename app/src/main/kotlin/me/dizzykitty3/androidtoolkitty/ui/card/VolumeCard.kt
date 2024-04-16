@@ -10,6 +10,7 @@ import androidx.compose.material.icons.automirrored.outlined.VolumeUp
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -31,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
@@ -137,7 +139,7 @@ fun VolumeCard() {
 
                 AlertDialog(
                     onDismissRequest = {
-                        showVolumeDialog = false
+                        // Ignore
                     },
                     title = {
                         Text(text = "${stringResource(R.string.add_custom_volume)}\n${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
@@ -185,8 +187,7 @@ fun VolumeCard() {
 
                 AlertDialog(
                     onDismissRequest = {
-                        showVolumeOptionLabelDialog = false
-                        showVolumeDialog = false
+                        // Ignore
                     },
                     title = {
                         Text(text = stringResource(R.string.you_can_set_a_label_for_it))
@@ -235,11 +236,12 @@ fun VolumeCard() {
                 horizontalArrangement = Arrangement.End
             ) {
                 Button(
-                    onClick = { showVolumeDialog = true }
+                    onClick = { showVolumeDialog = true },
+                    elevation = ButtonDefaults.buttonElevation(1.dp)
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Edit,
-                        contentDescription = null,
+                        contentDescription = stringResource(id = R.string.edit),
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                     CustomIconAndTextPadding()

@@ -1,8 +1,9 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.google.devtools.ksp)
+    alias(libs.plugins.application)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.room)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -26,6 +27,7 @@ android {
         debug {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
+            versionNameSuffix = " DEV"
         }
 
         release {
@@ -68,7 +70,7 @@ dependencies {
     implementation(libs.material3)
     implementation(libs.material.icons.extended)
     implementation(libs.navigation.compose) // NavHostController
-    implementation(libs.core.ktx) // WindowCompat, ActivityCompat
+    implementation(libs.core) // WindowCompat, ActivityCompat
     implementation(libs.room.runtime)
     ksp(libs.room.compiler)
     implementation(libs.datastore.preferences)
@@ -79,9 +81,7 @@ dependencies {
     debugImplementation(libs.ui.test.manifest)
     implementation(libs.lifecycle.viewmodel.compose)
     implementation(libs.runtime.livedata)
-    implementation(libs.dagger)
-    ksp(libs.dagger.compiler)
-    implementation(libs.dagger.android)
-    implementation(libs.dagger.android.support)
-    ksp(libs.dagger.android.processor)
+    implementation(libs.hilt) // Dependency injection
+    ksp(libs.hilt.compiler)
+    implementation(libs.coroutines) // Asynchronous tasks
 }

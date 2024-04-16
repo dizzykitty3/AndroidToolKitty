@@ -15,5 +15,3 @@
 local.properties
 .idea
 gradle/wrapper/gradle-wrapper.jar
-app/src/androidTest
-app/src/test

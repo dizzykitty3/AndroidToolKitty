@@ -8,7 +8,7 @@
     <string name="url_input_hint_1">不必输入前缀</string>
     <string name="url_input_hint_2">和后缀</string>
     <string name="url_input_hint_3">(或</string>
-    <string name="url_input_hint_4">等)快速访问网址</string>
+    <string name="url_input_hint_4">等)快速访问网页</string>
     <string name="visit">前往</string>
     <string name="webpage">网页</string>
     <string name="android_system_settings">Android 系统设置</string>
@@ -19,6 +19,7 @@
     <string name="open_bluetooth_settings">蓝牙设置</string>
     <string name="open_date_and_time_settings">时间与日期设置</string>
     <string name="open_battery_optimization_settings">电池优化设置</string>
+    <string name="battery_level">电量</string>
     <string name="unicode">Unicode</string>
     <string name="unicode_input_hint">各 Unicode 的最后四位，如</string>
     <string name="character">字符</string>
@@ -43,7 +44,7 @@
     <string name="github">GitHub</string>
     <string name="x">X</string>
     <string name="weibo">微博</string>
-    <string name="youtube_id">YouTube (ID)</string>
+    <string name="youtube_id">YouTube (UID)</string>
     <string name="platform_not_added_yet">这里没有我所想的社交平台</string>
     <string name="open_developer_options">开发者选项</string>
     <string name="requires_restart_do_it_now">这将需要重启 APP</string>
@@ -54,7 +55,6 @@
     <plurals name="days_remaining">
         <item quantity="other">剩余 %1$d 天</item>
     </plurals>
-    <string name="uploaded">已上传</string>
     <string name="all_help_welcomed">欢迎建议意见和PR！</string>
     <string name="pixiv_artwork_id">pixiv (作品 ID)</string>
     <string name="pixiv_user_id">pixiv (用户 ID)</string>
@@ -64,7 +64,7 @@
     <string name="debugging">调试</string>
     <string name="bilibili_user_id">哔哩哔哩 (用户 UID)</string>
     <string name="clear_clipboard_on_launch">在启动时清除剪贴板</string>
-    <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开\"启动时自动清空剪贴板\"功能</string>
+    <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开「启动时自动清空剪贴板」功能</string>
     <string name="settings">设置</string>
     <string name="hide_all_cards">隐藏所有卡片</string>
     <string name="show_all_cards">显示所有卡片</string>
@@ -73,7 +73,7 @@
     <string name="volume">音量</string>
     <string name="media_volume">媒体音量</string>
     <string name="erase_all_app_data">清除应用所有数据</string>
-    <string name="set_time_automatically_is_off_tip">“自动设置时间”未启用。某些应用部分功能可能表现异常。</string>
+    <string name="set_time_automatically_is_off_tip">「自动设置时间」未启用。某些应用部分功能可能表现异常。</string>
     <string name="warning">警告</string>
     <string name="erase_all_data">清除所有数据</string>
     <string name="open_on_other_markets">在其他应用商店打开</string>
@@ -90,12 +90,13 @@
     <string name="warning_erase_all_data_2">历史和设置。</string>
     <string name="warning_erase_all_data_3">确定要继续吗？</string>
     <string name="you_can_set_a_label_for_it">可以给此音量选项设置一个标签</string>
+    <string name="app_name">Android ToolKitty</string>
     <string name="label">标签</string>
     <string name="edit">编辑</string>
     <string name="general">基本</string>
     <string name="set_slider_increment_5">将滑块增量设置为 5%</string>
-    <string name="test">测试</string>
     <string name="lucky_spinning_wheel">幸运大转盘</string>
+    <string name="info">信息</string>
     <string name="no_translation">抱歉， %1$s 翻译尚未添加。</string>
     <string name="show_more">展开</string>
     <string name="show_less">收起</string>
@@ -104,15 +105,19 @@
     <string name="show_paired_devices">查看已配对的设备</string>
     <string name="current_device">当前设备：</string>
     <string name="paired_devices">已配对的设备：</string>
-    <string name="grant_permission_then_tap_again">授予权限，然后再次点击按钮</string>
     <string name="bt">经典</string>
     <string name="ble">低功耗</string>
     <string name="dual">双模</string>
     <string name="unknown">未知</string>
-    <string name="no_paired_devices">当前没有已配对的设备。</string>
+    <string name="no_paired_devices">没有已配对的设备</string>
     <string name="what_is_bt_ble_and_dual">什么是经典、低功耗、双模？</string>
     <string name="bluetooth_devices_types">经典蓝牙（BT）：这是一种用于耳机、扬声器和文件传输等的熟悉类型。它提供良好的范围和速度，但消耗的电力更多。\n\n低功耗蓝牙（BLE）：这个较新的版本设计用于低功耗，非常适合需要长电池寿命的设备，如健身追踪器和智能家居传感器。与经典蓝牙相比，它的范围更短，数据传输速率更慢。\n\n双模：有些设备可能同时支持经典蓝牙和蓝牙LE。这些被称为双模式设备，可以根据需要提供与不同类型设备连接的灵活性。例如，智能手表可能使用BLE与手机连接以获取通知，但也具有经典蓝牙用于音乐播放。</string>
+    <string name="bluetooth_connect">要查看已配对的设备，请授予 BLUETOOTH_CONNECT 权限</string>
+    <string name="bluetooth_bluetooth_admin">要查看已配对的设备，请授予 BLUETOOTH, BLUETOOTH_ADMIN 权限</string>
+    <string name="missed_sys_popup">错过了系统权限弹窗吗？</string>
     <string name="manually_grant">手动授予</string>
     <string name="skip">跳过</string>
     <string name="clear_input">清空输入</string>
+    <string name="developer_profile_link">开发者主页链接</string>
+    <string name="permission_request">授予权限</string>
 </resources>

@@ -29,7 +29,7 @@ fun CustomSystemSettingsButton(
 
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = null,
+            contentDescription = stringResource(id = buttonText),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
     }

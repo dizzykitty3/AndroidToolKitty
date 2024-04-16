@@ -64,7 +64,7 @@ fun AppMarketCard() {
             Text(text = stringResource(R.string.open_on_google_play))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.open_app_on_google_play),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
@@ -75,7 +75,7 @@ fun AppMarketCard() {
             Text(text = stringResource(R.string.open_on_other_markets))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.open_on_other_markets),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }

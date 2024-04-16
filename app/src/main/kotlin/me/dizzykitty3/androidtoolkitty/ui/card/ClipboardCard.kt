@@ -39,7 +39,7 @@ fun ClipboardCard() {
         ) {
             Icon(
                 imageVector = Icons.Outlined.ClearAll,
-                contentDescription = null,
+                contentDescription = stringResource(id = R.string.clear_clipboard),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             CustomIconAndTextPadding()
