@@ -15,7 +15,7 @@ datastorePreferences = "1.0.0"
 gson = "2.10.1"
 lifecycleViewmodelCompose = "2.7.0"
 hilt = "2.51.1"
-coroutines = "1.7.1"
+coroutines = "1.8.0"
 
 [libraries]
 material = { module = "com.google.android.material:material", version.ref = "material" }
