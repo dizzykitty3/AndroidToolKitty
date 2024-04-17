@@ -40,11 +40,13 @@ fun YearProgressCard() {
                 if (isShowPercentage)
                     "${(yearProgressPercentage(yearProgress()))}%"
                 else
-                    context.resources.getQuantityString(
-                        R.plurals.days_remaining,
-                        (totalDaysInYear() - daysPassed()).toInt(),
-                        totalDaysInYear() - daysPassed()
-                    )
+                    "${(yearProgressPercentage(yearProgress()))}% · ${
+                        context.resources.getQuantityString(
+                            R.plurals.days_remaining,
+                            (totalDaysInYear() - daysPassed()).toInt(),
+                            totalDaysInYear() - daysPassed()
+                        )
+                    }"
             Text(
                 text = textToShow,
                 modifier = Modifier.fillMaxWidth()
