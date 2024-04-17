@@ -120,4 +120,7 @@
     <string name="clear_input">清空输入</string>
     <string name="developer_profile_link">开发者主页链接</string>
     <string name="permission_request">授予权限</string>
+    <string name="item">条目</string>
+    <string name="start_spinning">开始旋转</string>
+    <string name="selected">已选中</string>
 </resources>

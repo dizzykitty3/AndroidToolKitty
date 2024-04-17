@@ -51,6 +51,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
@@ -69,17 +70,11 @@ fun LuckyWheelCard() {
         icon = Icons.Outlined.Casino,
         title = R.string.lucky_spinning_wheel
     ) {
+        val baseItem = stringResource(R.string.item)
         // 初始化轮盘项目列表
         var items by remember {
             mutableStateOf(
-                getLuckySpinningWheelItems() ?: listOf(
-                    "条目1",
-                    "条目2",
-                    "条目3",
-                    "条目4",
-                    "条目5",
-                    "条目6"
-                )
+                getLuckySpinningWheelItems() ?: List(3) { index -> "$baseItem${index + 1}" }
             )
         }
 
@@ -111,6 +106,7 @@ fun LuckyWheelCard() {
             animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = "",
         )
 
+        val baseSelected = stringResource(R.string.selected)
         // 当动画结束时，计算并显示选中的项目
         LaunchedEffect(currentRotationDegrees) {
             if (currentRotationDegrees == targetRotationDegrees && hasRotated) {
@@ -121,7 +117,7 @@ fun LuckyWheelCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                TToast.toast("Selected: $selected")
+                TToast.toast("$baseSelected: $selected")
                 rotationDegrees = targetRotationDegrees % 360
             }
         }
@@ -204,7 +200,7 @@ fun LuckyWheelCard() {
                     targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
                 }
             }) {
-                Text(text = "开始旋转")
+                Text(text = stringResource(R.string.start_spinning))
             }
             // 可扩展列表，用于显示和修改项目列表
             ExpandableList(
@@ -271,6 +267,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
 
         // 展开状态下显示的可编辑列表
         AnimatedVisibility(visible = expanded) {
+            val baseItem = stringResource(R.string.item)
             Column {
                 LazyColumn(state = listState, modifier = Modifier.heightIn(max = 200.dp)) {
                     itemsIndexed(items) { index, item ->
@@ -337,7 +334,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
                         .clip(RoundedCornerShape(10.dp))
                         .background(MaterialTheme.colorScheme.surfaceVariant)
                         .clickable {
-                            val newItem = "新条目${items.size + 1}"
+                            val newItem = "$baseItem${items.size + 1}"
                             val updatedItems = items + newItem
                             onItemsChange(updatedItems)
                             editingText.add(newItem)
