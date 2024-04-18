@@ -23,6 +23,18 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_1
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_10
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_11
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_12
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_2
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_3
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_4
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_6
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_7
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_8
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_9
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTINGS_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomScreen
@@ -40,19 +52,6 @@ import me.dizzykitty3.androidtoolkitty.ui.card.UrlCard
 import me.dizzykitty3.androidtoolkitty.ui.card.VolumeCard
 import me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
 import java.util.Locale
-
-private const val SETTINGS_SCREEN = "SettingsScreen"
-private const val CARD_1 = "card_year_progress"
-private const val CARD_2 = "card_volume"
-private const val CARD_3 = "card_clipboard"
-private const val CARD_4 = "card_url"
-private const val CARD_6 = "card_sys_setting"
-private const val CARD_7 = "card_unicode"
-private const val CARD_8 = "card_google_maps"
-private const val CARD_9 = "card_app_market"
-private const val CARD_10 = "card_android_version"
-private const val CARD_11 = "card_lucky_wheel"
-private const val CARD_12 = "card_bluetooth_device"
 
 @Composable
 fun HomeScreen(navController: NavHostController) {

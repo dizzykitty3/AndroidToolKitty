@@ -7,19 +7,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_2
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_3
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_4
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_5
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_6
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
-
-private const val SETTING_1 = "setting_display"
-private const val SETTING_2 = "setting_auto_rotate"
-private const val SETTING_3 = "setting_bluetooth"
-private const val SETTING_4 = "setting_default_apps"
-private const val SETTING_5 = "setting_battery_optimization"
-private const val SETTING_6 = "setting_caption"
-private const val SETTING_7 = "setting_locale"
-private const val SETTING_8 = "setting_date_and_time"
-private const val SETTING_9 = "setting_developer"
 
 // TODO refactor this bullshit
 @Composable

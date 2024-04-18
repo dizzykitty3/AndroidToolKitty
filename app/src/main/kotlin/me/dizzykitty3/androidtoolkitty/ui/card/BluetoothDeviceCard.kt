@@ -1,11 +1,9 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.content.Context
-import android.content.pm.PackageManager
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Bluetooth
@@ -31,19 +29,17 @@ import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.const.BT
+import me.dizzykitty3.androidtoolkitty.foundation.const.BT_ADMIN
+import me.dizzykitty3.androidtoolkitty.foundation.const.BT_CONNECT
+import me.dizzykitty3.androidtoolkitty.foundation.const.GRANTED
+import me.dizzykitty3.androidtoolkitty.foundation.const.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.util.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
-import me.dizzykitty3.androidtoolkitty.ui.PERMISSION_REQUEST_SCREEN
-
-@SuppressLint("InlinedApi")
-private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
-private const val BT = Manifest.permission.BLUETOOTH
-private const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
-private const val GRANTED = PackageManager.PERMISSION_GRANTED
 
 @SuppressLint("MissingPermission")
 @Composable

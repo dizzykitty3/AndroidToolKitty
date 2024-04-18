@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.foundation.const.EDIT_HOME_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomBoldText
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
@@ -38,7 +39,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPaddi
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
-import me.dizzykitty3.androidtoolkitty.ui.EDIT_HOME_SCREEN
 
 @Composable
 fun SettingsCard(navController: NavHostController) {

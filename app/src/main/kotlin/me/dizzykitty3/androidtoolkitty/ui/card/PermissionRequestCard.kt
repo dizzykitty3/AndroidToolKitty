@@ -1,7 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
-import android.Manifest
-import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import androidx.compose.material.icons.Icons
@@ -13,15 +11,13 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.const.BT
+import me.dizzykitty3.androidtoolkitty.foundation.const.BT_ADMIN
+import me.dizzykitty3.androidtoolkitty.foundation.const.BT_CONNECT
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
-import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
-
-@SuppressLint("InlinedApi")
-private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
-private const val BT = Manifest.permission.BLUETOOTH
-private const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
+import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 
 @Composable
 fun PermissionRequestCard() {
