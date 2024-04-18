@@ -1,9 +1,9 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.util.Log
 import me.dizzykitty3.androidtoolkitty.R
 
-object TUrl {
+object UrlUtil {
     private const val TAG = "TUrl"
     private const val HTTPS = "https://"
     private const val BG = ".bg"
@@ -33,7 +33,7 @@ object TUrl {
      * Adding the appropriate suffix and returning the full URL.
      */
     @JvmStatic
-    fun processUrl(urlInput: String): String {
+    fun toFullUrl(urlInput: String): String {
         val suffix = urlSuffix(urlInput)
         Log.d(TAG, if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
         return "$HTTPS$urlInput$suffix"
@@ -107,13 +107,17 @@ object TUrl {
             "namu" to WIKI,
         )
 
-        return suffixMap[TString.dropSpaces(urlInput)] ?: COM
+        return suffixMap[StringUtil.dropSpaces(urlInput)] ?: COM
     }
 
     enum class Platform(val prefix: String, val nameResId: Int) {
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
+        FACEBOOK("facebook.com/", R.string.facebook),
+        FANBOX(".fanbox.cc", R.string.fanbox), // e.g. username.fanbox.cc
         GITHUB("github.com/", R.string.github),
+        INSTAGRAM("instagram.com/", R.string.instagram),
+        PATREON("patreon.com/", R.string.patreon),
         PIXIV_ARTWORK("pixiv.net/artworks/", R.string.pixiv_artwork_id),
         PIXIV_USER("pixiv.net/users/", R.string.pixiv_user_id),
         V2EX("v2ex.com/member/", R.string.v2ex),

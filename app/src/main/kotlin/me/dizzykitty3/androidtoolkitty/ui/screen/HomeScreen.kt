@@ -27,14 +27,14 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCardSpacePa
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
-import me.dizzykitty3.androidtoolkitty.ui.card.AndroidVersionsCard
+import me.dizzykitty3.androidtoolkitty.ui.card.AndroidVersionCard
 import me.dizzykitty3.androidtoolkitty.ui.card.AppMarketCard
-import me.dizzykitty3.androidtoolkitty.ui.card.BluetoothDevicesCard
+import me.dizzykitty3.androidtoolkitty.ui.card.BluetoothDeviceCard
 import me.dizzykitty3.androidtoolkitty.ui.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.ui.card.Greeting
 import me.dizzykitty3.androidtoolkitty.ui.card.LuckyWheelCard
 import me.dizzykitty3.androidtoolkitty.ui.card.MapsCard
-import me.dizzykitty3.androidtoolkitty.ui.card.SystemSettingsCard
+import me.dizzykitty3.androidtoolkitty.ui.card.SysSettingCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UnicodeCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UrlCard
 import me.dizzykitty3.androidtoolkitty.ui.card.VolumeCard
@@ -46,53 +46,20 @@ private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"
 private const val CARD_3 = "card_clipboard"
 private const val CARD_4 = "card_url"
-private const val CARD_6 = "card_android_system_settings"
+private const val CARD_6 = "card_sys_setting"
 private const val CARD_7 = "card_unicode"
 private const val CARD_8 = "card_google_maps"
-private const val CARD_9 = "card_open_app_on_google_play"
-private const val CARD_10 = "card_android_versions"
+private const val CARD_9 = "card_app_market"
+private const val CARD_10 = "card_android_version"
 private const val CARD_11 = "card_lucky_wheel"
-private const val CARD_12 = "card_bluetooth_devices"
+private const val CARD_12 = "card_bluetooth_device"
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
 
     CustomScreen {
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Box(
-                modifier = Modifier.weight(1f)
-            ) {
-                Greeting()
-            }
-
-            TooltipBox(
-                positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
-                tooltip = {
-                    PlainTooltip {
-                        Text(text = stringResource(id = R.string.settings))
-                    }
-                },
-                state = rememberTooltipState(),
-            ) {
-                IconButton(
-                    onClick = {
-                        navController.navigate(SETTINGS_SCREEN)
-                        settingsSharedPref.setHaveOpenedSettingsScreen(true)
-                    },
-                    modifier = Modifier.size(40.dp)
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        contentDescription = stringResource(id = R.string.settings),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
-            }
-        }
+        GreetingAndSetting(navController)
 
         CustomCardSpacePadding()
 
@@ -127,14 +94,54 @@ fun HomeScreen(navController: NavHostController) {
                     CARD_2 -> VolumeCard()
                     CARD_3 -> ClipboardCard()
                     CARD_4 -> UrlCard()
-                    CARD_6 -> SystemSettingsCard()
+                    CARD_6 -> SysSettingCard()
                     CARD_7 -> UnicodeCard()
                     CARD_8 -> MapsCard()
                     CARD_9 -> AppMarketCard()
-                    CARD_10 -> AndroidVersionsCard()
+                    CARD_10 -> AndroidVersionCard()
                     CARD_11 -> LuckyWheelCard()
-                    CARD_12 -> BluetoothDevicesCard(navController)
+                    CARD_12 -> BluetoothDeviceCard(navController)
                 }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun GreetingAndSetting(navController: NavHostController) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        val settingsSharedPref = remember { SettingsSharedPref }
+
+        Box(
+            modifier = Modifier.weight(1f)
+        ) {
+            Greeting()
+        }
+
+        TooltipBox(
+            positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+            tooltip = {
+                PlainTooltip {
+                    Text(text = stringResource(id = R.string.settings))
+                }
+            },
+            state = rememberTooltipState(),
+        ) {
+            IconButton(
+                onClick = {
+                    navController.navigate(SETTINGS_SCREEN)
+                    settingsSharedPref.setHaveOpenedSettingsScreen(true)
+                },
+                modifier = Modifier.size(40.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Settings,
+                    contentDescription = stringResource(id = R.string.settings),
+                    tint = MaterialTheme.colorScheme.primary
+                )
             }
         }
     }

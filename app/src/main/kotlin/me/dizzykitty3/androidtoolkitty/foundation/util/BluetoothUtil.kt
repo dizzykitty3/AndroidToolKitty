@@ -1,11 +1,11 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.content.Context
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-object TBluetooth {
+object BluetoothUtil {
     private lateinit var bluetoothManager: BluetoothManager
 
     private fun bluetoothService() {

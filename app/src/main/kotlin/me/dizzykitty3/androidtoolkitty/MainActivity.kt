@@ -11,7 +11,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.theme.ToolKittyTheme
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TClipboard
+import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.ui.MainLayout
 
 class MainActivity : ComponentActivity() {
@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus and isAutoClearClipboard) // Clipboard operations require window focus
-            TClipboard.clear()
+            ClipboardUtil.clear()
     }
 
     override fun onStop() {

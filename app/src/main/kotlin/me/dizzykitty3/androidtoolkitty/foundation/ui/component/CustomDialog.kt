@@ -44,7 +44,7 @@ fun CustomAlertDialogButton(
             contentDescription = stringResource(id = R.string.erase_all_data),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
-        CustomIconAndTextPadding()
+        CustomSpacerPadding()
         Text(
             text = buttonText,
             color = MaterialTheme.colorScheme.onError

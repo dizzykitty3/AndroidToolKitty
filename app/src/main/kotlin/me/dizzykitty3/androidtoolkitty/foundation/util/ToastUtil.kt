@@ -1,18 +1,16 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.util.Log
 import android.widget.Toast
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-object TToast {
-    private const val TAG = "ToastService"
-
+object ToastUtil {
     @JvmStatic
     fun toast(message: String) = Toast.makeText(app, message, Toast.LENGTH_SHORT).show()
 
     @JvmStatic
-    fun toastAndLog(logEvent: String) {
-        Log.d(TAG, logEvent)
+    fun toastAndLog(tag:String,logEvent: String) {
+        Log.i(tag, logEvent)
         toast(logEvent)
     }
 }

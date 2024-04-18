@@ -58,7 +58,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.getLuckySpinningWheelItems
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setLuckySpinningWheelItems
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
+import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -68,7 +68,7 @@ fun LuckyWheelCard() {
     // 使用CustomCard布局展示幸运轮盘
     CustomCard(
         icon = Icons.Outlined.Casino,
-        title = R.string.lucky_spinning_wheel
+        title = R.string.lucky_wheel
     ) {
         val baseItem = stringResource(R.string.item)
         // 初始化轮盘项目列表
@@ -117,7 +117,7 @@ fun LuckyWheelCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                TToast.toast("$baseSelected: $selected")
+                ToastUtil.toast("$baseSelected: $selected")
                 rotationDegrees = targetRotationDegrees % 360
             }
         }

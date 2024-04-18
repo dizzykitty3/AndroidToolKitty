@@ -27,7 +27,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
+import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 
 @Composable
 fun AppMarketCard() {
@@ -46,7 +46,7 @@ fun AppMarketCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { TIntent.openAppOnMarket(packageName) }
+                onDone = { IntentUtil.openAppOnMarket(packageName) }
             ),
             trailingIcon = {
                 ClearInput(text = packageName) {
@@ -59,7 +59,7 @@ fun AppMarketCard() {
         WhatIsPackageName()
 
         TextButton(
-            onClick = { TIntent.openAppOnMarket(packageName) }
+            onClick = { IntentUtil.openAppOnMarket(packageName) }
         ) {
             Text(text = stringResource(R.string.open_on_google_play))
             Icon(
@@ -70,7 +70,7 @@ fun AppMarketCard() {
         }
 
         TextButton(
-            onClick = { TIntent.openAppOnMarket(packageName, false) }
+            onClick = { IntentUtil.openAppOnMarket(packageName, false) }
         ) {
             Text(text = stringResource(R.string.open_on_other_markets))
             Icon(
@@ -96,7 +96,7 @@ private fun WhatIsPackageName() {
 
         Row(
             modifier = Modifier.clickable(
-                onClick = { TIntent.openUrl(linkUrl) }
+                onClick = { IntentUtil.openUrl(linkUrl) }
             )
         ) {
             Text(

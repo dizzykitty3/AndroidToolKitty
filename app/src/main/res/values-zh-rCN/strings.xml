@@ -11,6 +11,10 @@
     <string name="url_input_hint_4">等)快速访问网页</string>
     <string name="visit">前往</string>
     <string name="webpage">网页</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+    <string name="fanbox">Fanbox</string>
+    <string name="patreon">Patreon</string>
     <string name="android_system_settings">Android 系统设置</string>
     <string name="open_display_settings">显示设置</string>
     <string name="open_auto_rotate_settings">屏幕自动旋转设置</string>
@@ -20,6 +24,7 @@
     <string name="open_date_and_time_settings">时间与日期设置</string>
     <string name="open_battery_optimization_settings">电池优化设置</string>
     <string name="battery_level">电量</string>
+    <string name="wifi">Wi-Fi</string>
     <string name="unicode">Unicode</string>
     <string name="unicode_input_hint">各 Unicode 的最后四位，如</string>
     <string name="character">字符</string>
@@ -95,7 +100,7 @@
     <string name="edit">编辑</string>
     <string name="general">基本</string>
     <string name="set_slider_increment_5">将滑块增量设置为 5%</string>
-    <string name="lucky_spinning_wheel">幸运大转盘</string>
+    <string name="lucky_wheel">幸运大转盘</string>
     <string name="info">信息</string>
     <string name="no_translation">抱歉， %1$s 翻译尚未添加。</string>
     <string name="show_more">展开</string>
@@ -120,6 +125,8 @@
     <string name="clear_input">清空输入</string>
     <string name="developer_profile_link">开发者主页链接</string>
     <string name="permission_request">授予权限</string>
+    <string name="cellular">Cellular</string>
+    <string name="offline">Offline</string>
     <string name="item">条目</string>
     <string name="start_spinning">开始旋转</string>
     <string name="selected">已选中</string>

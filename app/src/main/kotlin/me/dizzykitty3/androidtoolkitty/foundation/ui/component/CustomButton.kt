@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
+import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 
 @Composable
 fun CustomSystemSettingsButton(
@@ -22,7 +22,7 @@ fun CustomSystemSettingsButton(
     buttonText: Int
 ) {
     Button(
-        onClick = { TIntent.openSystemSettings(settingType) },
+        onClick = { IntentUtil.openSystemSettings(settingType) },
         elevation = ButtonDefaults.buttonElevation(1.dp)
     ) {
         Text(text = stringResource(id = buttonText))

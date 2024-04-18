@@ -21,23 +21,23 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomHideCardSettingSwitch
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 
 private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"
 private const val CARD_3 = "card_clipboard"
 private const val CARD_4 = "card_url"
-private const val CARD_6 = "card_android_system_settings"
+private const val CARD_6 = "card_sys_setting"
 private const val CARD_7 = "card_unicode"
 private const val CARD_8 = "card_google_maps"
-private const val CARD_9 = "card_open_app_on_google_play"
-private const val CARD_10 = "card_android_versions"
+private const val CARD_9 = "card_app_market"
+private const val CARD_10 = "card_android_version"
 private const val CARD_11 = "card_lucky_wheel"
-private const val CARD_12 = "card_bluetooth_devices"
+private const val CARD_12 = "card_bluetooth_device"
 
 // TODO refactor this bullshit
 @Composable
-fun EditHomeScreenCard() {
+fun EditHomeCard() {
     CustomCard(
         title = R.string.customize_my_home_page
     ) {
@@ -140,7 +140,7 @@ fun EditHomeScreenCard() {
             settingsSharedPref.saveCardShowedState(CARD_10, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.lucky_spinning_wheel,
+            resId = R.string.lucky_wheel,
             cardId = CARD_11,
             isChecked = mIsShowCard11
         ) { newState ->
@@ -180,7 +180,7 @@ fun EditHomeScreenCard() {
                 contentDescription = stringResource(id = R.string.hide_all_cards),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
-            CustomIconAndTextPadding()
+            CustomSpacerPadding()
             Text(text = stringResource(R.string.hide_all_cards))
         }
 
@@ -206,7 +206,7 @@ fun EditHomeScreenCard() {
                 contentDescription = stringResource(id = R.string.show_all_cards),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
-            CustomIconAndTextPadding()
+            CustomSpacerPadding()
             Text(text = stringResource(R.string.show_all_cards))
         }
     }

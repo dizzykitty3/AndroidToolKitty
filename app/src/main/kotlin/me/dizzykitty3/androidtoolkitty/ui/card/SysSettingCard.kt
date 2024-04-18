@@ -5,7 +5,11 @@ import android.provider.Settings
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BatteryStd
+import androidx.compose.material.icons.outlined.NetworkCell
+import androidx.compose.material.icons.outlined.QuestionMark
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.Wifi
+import androidx.compose.material.icons.outlined.WifiOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,7 +26,8 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleT
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TBattery
+import me.dizzykitty3.androidtoolkitty.foundation.util.BatteryUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.NetworkUtil
 
 private const val SETTING_1 = "setting_display"
 private const val SETTING_2 = "setting_auto_rotate"
@@ -35,7 +40,7 @@ private const val SETTING_8 = "setting_date_and_time"
 private const val SETTING_9 = "setting_developer"
 
 @Composable
-fun SystemSettingsCard() {
+fun SysSettingCard() {
     CustomCard(
         icon = Icons.Outlined.Settings,
         title = R.string.android_system_settings
@@ -73,6 +78,8 @@ fun SystemSettingsCard() {
             isShowSetting[setting.settingType] == true
         }
 
+        val networkState = NetworkUtil.networkState()
+
         // UI
 
         if (!checkIsAutoTime()) CustomTip(resId = R.string.set_time_automatically_is_off_tip)
@@ -83,10 +90,56 @@ fun SystemSettingsCard() {
                 contentDescription = stringResource(id = R.string.battery_level),
                 tint = MaterialTheme.colorScheme.primary
             )
-            Text(text = "${TBattery.batteryLevel()}%")
+            CustomSpacerPadding()
+            Text(text = "${BatteryUtil.batteryLevel()}%")
+
+            CustomSpacerPadding()
+
+            when (networkState) {
+                NetworkUtil.STATE_CODE_WIFI -> {
+                    Icon(
+                        imageVector = Icons.Outlined.Wifi,
+                        contentDescription = stringResource(id = R.string.wifi),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    CustomSpacerPadding()
+                    Text(text = stringResource(id = R.string.wifi))
+                }
+
+                NetworkUtil.STATE_CODE_MOBILE -> {
+                    Icon(
+                        imageVector = Icons.Outlined.NetworkCell,
+                        contentDescription = stringResource(id = R.string.cellular),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    CustomSpacerPadding()
+                    Text(text = stringResource(id = R.string.cellular))
+                }
+
+                NetworkUtil.STATE_CODE_OFFLINE -> {
+                    Icon(
+                        imageVector = Icons.Outlined.WifiOff,
+                        contentDescription = stringResource(id = R.string.offline),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    CustomSpacerPadding()
+                    Text(text = stringResource(id = R.string.offline))
+                }
+
+                else -> {
+                    Icon(
+                        imageVector = Icons.Outlined.QuestionMark,
+                        contentDescription = stringResource(id = R.string.unknown),
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    CustomSpacerPadding()
+                    Text(text = stringResource(id = R.string.unknown))
+                }
+            }
         }
         CustomSpacerPadding()
-        CustomGroupDivider()
+
+        if (isShowGroupTitle1 || isShowGroupTitle2) CustomGroupDivider()
 
         if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
 

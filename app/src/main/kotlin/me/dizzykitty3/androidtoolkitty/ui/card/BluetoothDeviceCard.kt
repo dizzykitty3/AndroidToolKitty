@@ -32,22 +32,22 @@ import androidx.core.app.ActivityCompat
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconPopup
-import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TBluetooth
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.util.BluetoothUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
+import me.dizzykitty3.androidtoolkitty.ui.PERMISSION_REQUEST_SCREEN
 
 @SuppressLint("InlinedApi")
 private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 private const val BT = Manifest.permission.BLUETOOTH
 private const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
 private const val GRANTED = PackageManager.PERMISSION_GRANTED
-private const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
 
 @SuppressLint("MissingPermission")
 @Composable
-fun BluetoothDevicesCard(navController: NavHostController) {
+fun BluetoothDeviceCard(navController: NavHostController) {
     CustomCard(
         icon = Icons.Outlined.Bluetooth,
         title = R.string.bluetooth_devices
@@ -70,7 +70,7 @@ fun BluetoothDevicesCard(navController: NavHostController) {
                 }
 
                 // Get system service
-                bluetoothAdapter = TBluetooth.bluetoothAdapter()
+                bluetoothAdapter = BluetoothUtil.bluetoothAdapter()
 
                 // Show current device name, paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {
@@ -81,7 +81,7 @@ fun BluetoothDevicesCard(navController: NavHostController) {
                 }
 
                 // When Bluetooth is OFF
-                TToast.toast(context.getString(R.string.bluetooth_disabled))
+                ToastUtil.toast(context.getString(R.string.bluetooth_disabled))
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
@@ -90,7 +90,7 @@ fun BluetoothDevicesCard(navController: NavHostController) {
                 contentDescription = stringResource(id = R.string.show_paired_devices),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
-            CustomIconAndTextPadding()
+            CustomSpacerPadding()
             Text(text = stringResource(id = R.string.show_paired_devices))
         }
 
@@ -107,19 +107,19 @@ fun BluetoothDevicesCard(navController: NavHostController) {
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(text = device.name)
-                        CustomIconAndTextPadding()
+                        CustomSpacerPadding()
                         CustomIconPopup(type(device.type), device.address)
                     }
                 }
 
-                BluetoothDeviceTypesDialog()
+                BluetoothDeviceTypeDialog()
             }
         }
     }
 }
 
 @Composable
-private fun BluetoothDeviceTypesDialog() {
+private fun BluetoothDeviceTypeDialog() {
     var showDialog by remember { mutableStateOf(false) }
 
     TextButton(

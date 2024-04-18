@@ -16,10 +16,10 @@ import androidx.compose.ui.platform.LocalContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomAnimatedProgressIndicator
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TDate.daysPassed
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TDate.totalDaysInYear
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TDate.yearProgress
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TDate.yearProgressPercentage
+import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.daysPassed
+import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.totalDaysInYear
+import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.yearProgress
+import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.yearProgressPercentage
 
 @Composable
 fun YearProgressCard() {
@@ -40,11 +40,13 @@ fun YearProgressCard() {
                 if (isShowPercentage)
                     "${(yearProgressPercentage(yearProgress()))}%"
                 else
-                    context.resources.getQuantityString(
-                        R.plurals.days_remaining,
-                        (totalDaysInYear() - daysPassed()).toInt(),
-                        totalDaysInYear() - daysPassed()
-                    )
+                    "${(yearProgressPercentage(yearProgress()))}% · ${
+                        context.resources.getQuantityString(
+                            R.plurals.days_remaining,
+                            (totalDaysInYear() - daysPassed()).toInt(),
+                            totalDaysInYear() - daysPassed()
+                        )
+                    }"
             Text(
                 text = textToShow,
                 modifier = Modifier.fillMaxWidth()

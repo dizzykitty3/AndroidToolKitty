@@ -1,11 +1,11 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-object TBattery {
+object BatteryUtil {
     fun batteryLevel(): Int {
         val batteryIntent = app.registerReceiver(null, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
         val level = batteryIntent?.getIntExtra(BatteryManager.EXTRA_LEVEL, -1) ?: -1

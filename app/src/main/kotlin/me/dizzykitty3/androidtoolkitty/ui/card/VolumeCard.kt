@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
@@ -36,10 +37,10 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TAudio
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
+import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil.setVolume
+import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,8 +53,8 @@ fun VolumeCard() {
 
         val settingsSharedPref = remember { SettingsSharedPref }
 
-        val currentVolume = TAudio.volume()
-        val maxVolume = TAudio.maxVolumeIndex()
+        val currentVolume = AudioUtil.volume()
+        val maxVolume = AudioUtil.maxVolumeIndex()
 
         val sliderIncrementFivePercent =
             settingsSharedPref.getIsSliderIncrementFivePercent()
@@ -87,9 +88,8 @@ fun VolumeCard() {
             )
         }
 
+        var rememberSelectedIndex: Int? = null
         var showVolumeDialog by remember { mutableStateOf(false) }
-
-        var showVolumeOptionLabelDialog by remember { mutableStateOf(false) }
 
         Text(text = stringResource(R.string.media_volume))
 
@@ -102,6 +102,8 @@ fun VolumeCard() {
             options.forEachIndexed { index, label ->
                 SegmentedButton(
                     onClick = {
+                        rememberSelectedIndex = selectedIndex
+
                         selectedIndex = index
                         when (index) {
                             0 -> {
@@ -136,53 +138,6 @@ fun VolumeCard() {
 
             if (showVolumeDialog) {
                 var newCustomVolume by remember { mutableFloatStateOf(0f) }
-
-                AlertDialog(
-                    onDismissRequest = {
-                        // Ignore
-                    },
-                    title = {
-                        Text(text = "${stringResource(R.string.add_custom_volume)}\n${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
-                    },
-                    text = {
-                        Slider(
-                            value = newCustomVolume,
-                            onValueChange = {
-                                newCustomVolume = it
-                            },
-                            valueRange = 0f..100f,
-                            steps = if (sliderIncrementFivePercent) 19 else 0
-                        )
-                    },
-                    confirmButton = {
-                        Button(
-                            onClick = {
-                                if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0 && newCustomVolume.toInt() != 0) {
-                                    TToast.toast(context.getString(R.string.system_media_volume_levels_limited))
-                                    return@Button
-                                } else {
-                                    settingsSharedPref.setCustomVolume(newCustomVolume.toInt())
-                                    mCustomVolume = newCustomVolume.toInt()
-                                    showVolumeOptionLabelDialog = true
-                                    selectedIndex = 3
-                                    setVolume(mCustomVolume * 0.01 * maxVolume)
-                                }
-                            }
-                        ) {
-                            Text(text = stringResource(android.R.string.ok))
-                        }
-                    },
-                    dismissButton = {
-                        TextButton(
-                            onClick = { showVolumeDialog = false }
-                        ) {
-                            Text(text = stringResource(android.R.string.cancel))
-                        }
-                    }
-                )
-            }
-
-            if (showVolumeOptionLabelDialog) {
                 var optionLabel by remember { mutableStateOf("") }
 
                 AlertDialog(
@@ -190,40 +145,75 @@ fun VolumeCard() {
                         // Ignore
                     },
                     title = {
-                        Text(text = stringResource(R.string.you_can_set_a_label_for_it))
+                        Text(text = stringResource(R.string.add_custom_volume))
                     },
                     text = {
-                        OutlinedTextField(
-                            value = optionLabel,
-                            onValueChange = { optionLabel = it },
-                            label = { Text(text = stringResource(R.string.label)) },
-                            modifier = Modifier.fillMaxWidth(),
-                            keyboardOptions = KeyboardOptions.Default.copy(
-                                imeAction = ImeAction.Done
-                            ),
-                            keyboardActions = KeyboardActions(
-                                onDone = {
-                                    settingsSharedPref.setCustomVolumeOptionLabel(optionLabel)
-                                    mCustomVolumeOptionLabel = optionLabel
-                                    showVolumeOptionLabelDialog = false
-                                    showVolumeDialog = false
-                                }
+                        Column {
+                            Slider(
+                                value = newCustomVolume,
+                                onValueChange = { newCustomVolume = it },
+                                valueRange = 0f..100f,
+                                steps = if (sliderIncrementFivePercent) 19 else 0
                             )
-                        )
+                            Text(text = "${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
+                            CustomSpacerPadding()
+                            OutlinedTextField(
+                                value = optionLabel,
+                                onValueChange = { optionLabel = it },
+                                label = { Text(text = stringResource(R.string.label)) },
+                                modifier = Modifier.fillMaxWidth(),
+                                keyboardOptions = KeyboardOptions.Default.copy(
+                                    imeAction = ImeAction.Done
+                                ),
+                                keyboardActions = KeyboardActions(
+                                    onDone = {
+                                        settingsSharedPref.setCustomVolume(newCustomVolume.toInt())
+                                        mCustomVolume = newCustomVolume.toInt()
+                                        if (optionLabel == "") {
+                                            settingsSharedPref.setCustomVolumeOptionLabel(
+                                                optionLabel
+                                            )
+                                            mCustomVolumeOptionLabel = optionLabel
+                                        }
+                                        selectedIndex = 3
+                                        setVolume(mCustomVolume * 0.01 * maxVolume)
+                                        showVolumeDialog = false
+                                    }
+                                ),
+                                supportingText = { Text(text = stringResource(R.string.you_can_set_a_label_for_it)) }
+                            )
+                        }
                     },
                     confirmButton = {
                         Button(
                             onClick = {
-                                settingsSharedPref.setCustomVolumeOptionLabel(optionLabel)
-                                mCustomVolumeOptionLabel = optionLabel
-                                showVolumeOptionLabelDialog = false
+                                if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0 && newCustomVolume.toInt() != 0) {
+                                    ToastUtil.toast(context.getString(R.string.system_media_volume_levels_limited))
+                                    return@Button
+                                } else {
+                                    settingsSharedPref.setCustomVolume(newCustomVolume.toInt())
+                                    mCustomVolume = newCustomVolume.toInt()
+                                    if (optionLabel == "") {
+                                        settingsSharedPref.setCustomVolumeOptionLabel(optionLabel)
+                                        mCustomVolumeOptionLabel = optionLabel
+                                    }
+                                    selectedIndex = 3
+                                    setVolume(mCustomVolume * 0.01 * maxVolume)
+                                    showVolumeDialog = false
+                                }
+                            }
+                        ) {
+                            Text(text = stringResource(id = android.R.string.ok))
+                        }
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = {
+                                selectedIndex = rememberSelectedIndex
                                 showVolumeDialog = false
                             }
                         ) {
-                            if (optionLabel == "")
-                                Text(text = stringResource(id = R.string.skip))
-                            else
-                                Text(text = stringResource(id = android.R.string.ok))
+                            Text(text = stringResource(android.R.string.cancel))
                         }
                     }
                 )
@@ -244,13 +234,10 @@ fun VolumeCard() {
                         contentDescription = stringResource(id = R.string.edit),
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
-                    CustomIconAndTextPadding()
+                    CustomSpacerPadding()
                     Text(text = stringResource(R.string.edit))
                 }
             }
         }
     }
 }
-
-private fun setVolume(volume: Int) = TAudio.setVolume(volume)
-private fun setVolume(volume: Double) = TAudio.setVolume(volume.toInt())

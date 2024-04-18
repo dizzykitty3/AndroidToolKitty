@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Android ToolKitty</string>
 
-    <!--Common-->
+    <!-- Common -->
     <string name="label">Label</string>
     <string name="edit">Edit</string>
     <string name="visit">Visit</string>
@@ -14,17 +14,17 @@
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>
 
-    <!--Home screen: top tip-->
+    <!-- Home screen: top tip -->
     <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>
 
-    <!--Home screen: year progress-->
+    <!-- Home screen: year progress -->
     <string name="year_progress">Year progress</string>
     <plurals name="days_remaining">
         <item quantity="one">%1$d day remaining</item>
         <item quantity="other">%1$d days remaining</item>
     </plurals>
 
-    <!--Home screen: volume-->
+    <!-- Home screen: volume -->
     <string name="volume">Volume</string>
     <string name="media_volume">Media volume</string>
     <string name="mute">mute</string>
@@ -33,14 +33,14 @@
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
     <string name="skip">Skip</string>
 
-    <!--Home screen: clipboard-->
+    <!-- Home screen: clipboard -->
     <string name="clipboard">Clipboard</string>
     <string name="clear_clipboard">Clear clipboard</string>
     <string name="clipboard_cleared">Clipboard cleared</string>
     <string name="clipboard_cleared_automatically">Clipboard cleared automatically</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on Clear Clipboard on Launch in Settings Screen.</string>
 
-    <!--Home screen: url-->
+    <!-- Home screen: url -->
     <string name="url">URL</string>
     <string name="url_input_hint_1">Visit webpage without inputting prefix</string>
     <string name="url_input_hint_2">and suffix</string>
@@ -61,9 +61,13 @@
     <string name="v2ex">V2EX</string>
     <string name="bilibili_user_id">Bilibili (User ID)</string>
     <string name="webpage">Webpage</string>
+    <string name="instagram">Instagram</string>
+    <string name="facebook">Facebook</string>
+    <string name="fanbox">Fanbox</string>
+    <string name="patreon">Patreon</string>
 
-    <!--Home screen: android system settings-->
-    <string name="android_system_settings">Android system settings</string>
+    <!-- Home screen: system settings -->
+    <string name="android_system_settings">System settings</string>
     <string name="open_display_settings">Display settings</string>
     <string name="open_auto_rotate_settings">Auto rotate settings</string>
     <string name="open_language_settings">Language settings</string>
@@ -76,15 +80,18 @@
     <string name="set_time_automatically_is_off_tip">Set Time Automatically is now OFF. You may experience some unexpected behavior while using your phone.</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
     <string name="battery_level">Battery level</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="cellular">Cellular</string>
+    <string name="offline">Offline</string>
 
-    <!--Home screen: unicode-->
+    <!-- Home screen: unicode -->
     <string name="unicode">Unicode</string>
     <string name="unicode_input_hint">Last 4 digits of each, e.g.</string>
     <string name="character">Character</string>
     <string name="copied">copied</string>
     <string name="convert">Convert</string>
 
-    <!--Home screen: google maps-->
+    <!-- Home screen: google maps -->
     <string name="google_maps">Google Maps</string>
     <string name="latitude">lat</string>
     <string name="longitude">lng</string>
@@ -92,7 +99,7 @@
     <string name="google_play_not_installed">Google Play is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>
 
-    <!--Home screen: open app on google play-->
+    <!-- Home screen: open app on google play -->
     <string name="open_app_on_google_play">Open app on Google Play</string>
     <string name="package_name_or_search">Package name or search</string>
     <string name="whats">What\'s</string>
@@ -101,13 +108,16 @@
     <string name="open_on_google_play">Open on Google Play</string>
     <string name="open_on_other_markets">Open on other markets</string>
 
-    <!--Home screen: android versions-->
+    <!-- Home screen: android versions -->
     <string name="android_versions">Android versions</string>
 
-    <!--Home screen: lucky spinning wheel-->
-    <string name="lucky_spinning_wheel">Lucky spinning wheel</string>
+    <!-- Home screen: lucky wheel -->
+    <string name="lucky_wheel">Lucky wheel</string>
+    <string name="item">item</string>
+    <string name="start_spinning">Start Spinning</string>
+    <string name="selected">selected</string>
 
-    <!--Home screen: bluetooth devices-->
+    <!-- Home screen: bluetooth devices -->
     <string name="bluetooth_devices">Bluetooth devices</string>
     <string name="bluetooth_disabled">Bluetooth disabled</string>
     <string name="show_paired_devices">Show paired devices</string>
@@ -120,7 +130,7 @@
     <string name="what_is_bt_ble_and_dual">What is BT, BLE, and Dual?</string>
     <string name="bluetooth_devices_types">Classic Bluetooth (BT):\nThis is the familiar type used for things like headsets, speakers, and file transfers. It offers good range and speed but consumes more power.\n\nBluetooth Low Energy (BLE):\nThis newer version is designed for lower power consumption and is ideal for devices that need long battery life, like fitness trackers and smart home sensors. It has a shorter range and slower data transfer rate compared to Classic Bluetooth.\n\nDual:\nSome devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
 
-    <!--Settings screen: settings-->
+    <!-- Settings screen: settings -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
     <string name="settings">Settings</string>
     <string name="hide_all_cards">Hide all cards</string>
@@ -140,21 +150,20 @@
     <string name="requires_restart_do_it_now">Requires restart, do it now?</string>
     <string name="restart">Restart</string>
 
-    <!--Settings screen: about-->
+    <!-- Settings screen: about -->
     <string name="about">About</string>
     <string name="source_code_on_github">View source code on GitHub</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240416</string>
+    <string name="version_number" translatable="false">20240418</string>
     <string name="developer_profile_link">Developer profile link</string>
 
-    <!--Permission request screen-->
+    <!-- Permission request screen -->
     <string name="permission_request">Permission request</string>
     <string name="bluetooth_connect">To check paired bluetooth devices, please grant the app BLUETOOTH_CONNECT permission.</string>
     <string name="bluetooth_bluetooth_admin">To check paired bluetooth devices, please grant the app BLUETOOTH, BLUETOOTH_ADMIN permissions.</string>
     <string name="missed_sys_popup">Missed the system permission popup?</string>
     <string name="manually_grant">Manually grant</string>
-    <string name="item">item</string>
-    <string name="start_spinning">Start Spinning</string>
-    <string name="selected">selected</string>
+
+    <!-- End of resources-->
 </resources>
