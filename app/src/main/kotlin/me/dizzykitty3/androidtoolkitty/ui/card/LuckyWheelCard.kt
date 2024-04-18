@@ -67,7 +67,7 @@ fun LuckyWheelCard() {
     // 使用CustomCard布局展示幸运轮盘
     CustomCard(
         icon = Icons.Outlined.Casino,
-        title = R.string.lucky_spinning_wheel
+        title = R.string.lucky_wheel
     ) {
         // 初始化轮盘项目列表
         var items by remember {

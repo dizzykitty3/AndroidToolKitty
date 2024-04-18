@@ -21,7 +21,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomItalicText
 
 @Composable
-fun AndroidVersionsCard() {
+fun AndroidVersionCard() {
     CustomCard(
         icon = Icons.Outlined.Android,
         title = R.string.android_versions

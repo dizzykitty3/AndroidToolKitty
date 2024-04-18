@@ -23,7 +23,7 @@ private const val SETTING_9 = "setting_developer"
 
 // TODO refactor this bullshit
 @Composable
-fun EditAndroidSystemSettingsCardOptionsCard() {
+fun EditSysSettingCard() {
     CustomCard(
         title = R.string.customize_system_settings_card
     ) {

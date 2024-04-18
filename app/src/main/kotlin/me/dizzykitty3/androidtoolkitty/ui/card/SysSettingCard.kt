@@ -26,8 +26,8 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleT
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
-import me.dizzykitty3.androidtoolkitty.foundation.util.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.BatteryUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.NetworkUtil
 
 private const val SETTING_1 = "setting_display"
 private const val SETTING_2 = "setting_auto_rotate"
@@ -40,7 +40,7 @@ private const val SETTING_8 = "setting_date_and_time"
 private const val SETTING_9 = "setting_developer"
 
 @Composable
-fun SystemSettingsCard() {
+fun SysSettingCard() {
     CustomCard(
         icon = Icons.Outlined.Settings,
         title = R.string.android_system_settings
@@ -133,7 +133,8 @@ fun SystemSettingsCard() {
             }
         }
         CustomSpacerPadding()
-        CustomGroupDivider()
+
+        if (isShowGroupTitle1 || isShowGroupTitle2) CustomGroupDivider()
 
         if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
 

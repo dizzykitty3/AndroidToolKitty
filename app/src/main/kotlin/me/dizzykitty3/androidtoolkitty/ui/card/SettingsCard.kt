@@ -35,11 +35,10 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
-import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
-
-private const val EDIT_HOME_PAGE_SCREEN = "EditHomePageScreen"
+import me.dizzykitty3.androidtoolkitty.ui.EDIT_HOME_SCREEN
 
 @Composable
 fun SettingsCard(navController: NavHostController) {
@@ -157,7 +156,7 @@ private fun CustomSettingOptions(navController: NavHostController) {
     CustomGroupTitleText(R.string.customize)
 
     Button(
-        onClick = { navController.navigate(EDIT_HOME_PAGE_SCREEN) },
+        onClick = { navController.navigate(EDIT_HOME_SCREEN) },
         elevation = ButtonDefaults.buttonElevation(1.dp)
     ) {
         Icon(

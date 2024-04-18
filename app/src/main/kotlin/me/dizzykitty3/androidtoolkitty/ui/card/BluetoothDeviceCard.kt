@@ -34,20 +34,20 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconPopup
-import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.BluetoothUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
+import me.dizzykitty3.androidtoolkitty.ui.PERMISSION_REQUEST_SCREEN
 
 @SuppressLint("InlinedApi")
 private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 private const val BT = Manifest.permission.BLUETOOTH
 private const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
 private const val GRANTED = PackageManager.PERMISSION_GRANTED
-private const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
 
 @SuppressLint("MissingPermission")
 @Composable
-fun BluetoothDevicesCard(navController: NavHostController) {
+fun BluetoothDeviceCard(navController: NavHostController) {
     CustomCard(
         icon = Icons.Outlined.Bluetooth,
         title = R.string.bluetooth_devices
@@ -112,14 +112,14 @@ fun BluetoothDevicesCard(navController: NavHostController) {
                     }
                 }
 
-                BluetoothDeviceTypesDialog()
+                BluetoothDeviceTypeDialog()
             }
         }
     }
 }
 
 @Composable
-private fun BluetoothDeviceTypesDialog() {
+private fun BluetoothDeviceTypeDialog() {
     var showDialog by remember { mutableStateOf(false) }
 
     TextButton(

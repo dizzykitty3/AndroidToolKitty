@@ -7,15 +7,15 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import me.dizzykitty3.androidtoolkitty.ui.screen.EditHomePageScreen
+import me.dizzykitty3.androidtoolkitty.ui.screen.EditHomeScreen
 import me.dizzykitty3.androidtoolkitty.ui.screen.HomeScreen
 import me.dizzykitty3.androidtoolkitty.ui.screen.PermissionRequestScreen
 import me.dizzykitty3.androidtoolkitty.ui.screen.SettingsScreen
 
-private const val HOME_SCREEN = "HomeScreen"
-private const val SETTINGS_SCREEN = "SettingsScreen"
-private const val EDIT_HOME_PAGE_SCREEN = "EditHomePageScreen"
-private const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
+const val HOME_SCREEN = "HomeScreen"
+const val SETTINGS_SCREEN = "SettingsScreen"
+const val EDIT_HOME_SCREEN = "EditHomeScreen"
+const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
 
 @Composable
 fun MainLayout() {
@@ -28,7 +28,7 @@ fun MainLayout() {
     ) {
         composable(HOME_SCREEN) { HomeScreen(navController) }
         composable(SETTINGS_SCREEN) { SettingsScreen(navController) }
-        composable(EDIT_HOME_PAGE_SCREEN) { EditHomePageScreen() }
+        composable(EDIT_HOME_SCREEN) { EditHomeScreen() }
         composable(PERMISSION_REQUEST_SCREEN) { PermissionRequestScreen() }
     }
 }

@@ -100,7 +100,7 @@
     <string name="edit">编辑</string>
     <string name="general">基本</string>
     <string name="set_slider_increment_5">将滑块增量设置为 5%</string>
-    <string name="lucky_spinning_wheel">幸运大转盘</string>
+    <string name="lucky_wheel">幸运大转盘</string>
     <string name="info">信息</string>
     <string name="no_translation">抱歉， %1$s 翻译尚未添加。</string>
     <string name="show_more">展开</string>
