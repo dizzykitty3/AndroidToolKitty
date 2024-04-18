@@ -34,7 +34,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.TUrl
+import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
 
 private const val TAG = "UrlCard"
 private const val HTTPS = "https://"
@@ -99,7 +99,7 @@ private fun WebpageUrl() {
             Text(text = HTTPS)
         },
         suffix = {
-            Text(text = TUrl.urlSuffix(url))
+            Text(text = UrlUtil.urlSuffix(url))
         }
     )
 }
@@ -111,7 +111,7 @@ private fun SocialMediaProfileIUrl() {
     val platformIndex = SettingsSharedPref.getLastTimeSelectedSocialPlatform()
     var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
 
-    val platformList = TUrl.Platform.entries.map { stringResource(it.nameResId) }
+    val platformList = UrlUtil.Platform.entries.map { stringResource(it.nameResId) }
 
     CustomGroupTitleText(resId = R.string.social_media_profile)
 
@@ -119,7 +119,7 @@ private fun SocialMediaProfileIUrl() {
         items = platformList,
         onItemSelected = { mPlatformIndex = it },
         label = {
-            if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+            if (mPlatformIndex != UrlUtil.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
                 Text(stringResource(R.string.platform))
             } else {
                 Text("")
@@ -131,7 +131,7 @@ private fun SocialMediaProfileIUrl() {
         value = username,
         onValueChange = { username = it },
         label = {
-            if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+            if (mPlatformIndex != UrlUtil.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
                 Text(stringResource(R.string.username))
             } else {
                 Text(stringResource(R.string.platform))
@@ -158,13 +158,13 @@ private fun SocialMediaProfileIUrl() {
             }
         },
         supportingText = {
-            if (mPlatformIndex != TUrl.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                val platform = TUrl.Platform.entries[mPlatformIndex]
+            if (mPlatformIndex != UrlUtil.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
+                val platform = UrlUtil.Platform.entries[mPlatformIndex]
                 Text(
-                    text = if (platform != TUrl.Platform.FANBOX)
-                        "${TUrl.profilePrefix(platform)}$username"
+                    text = if (platform != UrlUtil.Platform.FANBOX)
+                        "${UrlUtil.profilePrefix(platform)}$username"
                     else
-                        "$username${TUrl.profilePrefix(platform)}",
+                        "$username${UrlUtil.profilePrefix(platform)}",
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
@@ -178,16 +178,16 @@ private fun SocialMediaProfileIUrl() {
 private fun onClickVisitUrlButton(url: String) {
     if (url.isBlank()) return
 
-    IntentUtil.openUrl(TUrl.processUrl(StringUtil.dropSpaces(url)))
+    IntentUtil.openUrl(UrlUtil.toFullUrl(StringUtil.dropSpaces(url)))
     Log.d(TAG, "onClickVisitButton")
 }
 
 private fun onVisitProfileButton(username: String, platformIndex: Int) {
     if (username.isBlank()) return
 
-    val platform = TUrl.Platform.entries.getOrNull(platformIndex) ?: return
+    val platform = UrlUtil.Platform.entries.getOrNull(platformIndex) ?: return
 
-    if (platform == TUrl.Platform.PLATFORM_NOT_ADDED_YET) {
+    if (platform == UrlUtil.Platform.PLATFORM_NOT_ADDED_YET) {
 //        TToast.toast("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
         ToastUtil.toast("under development")
         return
@@ -195,7 +195,7 @@ private fun onVisitProfileButton(username: String, platformIndex: Int) {
 
     val prefix = platform.prefix
     val url =
-        if (platform == TUrl.Platform.FANBOX)
+        if (platform == UrlUtil.Platform.FANBOX)
             "${StringUtil.dropSpaces(username)}$prefix"
         else
             "$prefix${StringUtil.dropSpaces(username)}"

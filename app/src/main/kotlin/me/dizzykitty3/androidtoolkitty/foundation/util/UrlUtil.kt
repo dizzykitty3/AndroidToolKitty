@@ -3,7 +3,7 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 import android.util.Log
 import me.dizzykitty3.androidtoolkitty.R
 
-object TUrl {
+object UrlUtil {
     private const val TAG = "TUrl"
     private const val HTTPS = "https://"
     private const val BG = ".bg"
@@ -33,7 +33,7 @@ object TUrl {
      * Adding the appropriate suffix and returning the full URL.
      */
     @JvmStatic
-    fun processUrl(urlInput: String): String {
+    fun toFullUrl(urlInput: String): String {
         val suffix = urlSuffix(urlInput)
         Log.d(TAG, if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
         return "$HTTPS$urlInput$suffix"
