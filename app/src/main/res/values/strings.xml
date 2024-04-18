@@ -66,8 +66,8 @@
     <string name="fanbox">Fanbox</string>
     <string name="patreon">Patreon</string>
 
-    <!--Home screen: android system settings-->
-    <string name="android_system_settings">Android system settings</string>
+    <!--Home screen: system settings-->
+    <string name="android_system_settings">System settings</string>
     <string name="open_display_settings">Display settings</string>
     <string name="open_auto_rotate_settings">Auto rotate settings</string>
     <string name="open_language_settings">Language settings</string>
@@ -80,6 +80,9 @@
     <string name="set_time_automatically_is_off_tip">Set Time Automatically is now OFF. You may experience some unexpected behavior while using your phone.</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
     <string name="battery_level">Battery level</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="cellular">Cellular</string>
+    <string name="offline">Offline</string>
 
     <!--Home screen: unicode-->
     <string name="unicode">Unicode</string>

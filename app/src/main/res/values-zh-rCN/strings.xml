@@ -24,6 +24,7 @@
     <string name="open_date_and_time_settings">时间与日期设置</string>
     <string name="open_battery_optimization_settings">电池优化设置</string>
     <string name="battery_level">电量</string>
+    <string name="wifi">Wi-Fi</string>
     <string name="unicode">Unicode</string>
     <string name="unicode_input_hint">各 Unicode 的最后四位，如</string>
     <string name="character">字符</string>
@@ -124,4 +125,6 @@
     <string name="clear_input">清空输入</string>
     <string name="developer_profile_link">开发者主页链接</string>
     <string name="permission_request">授予权限</string>
+    <string name="cellular">Cellular</string>
+    <string name="offline">Offline</string>
 </resources>
