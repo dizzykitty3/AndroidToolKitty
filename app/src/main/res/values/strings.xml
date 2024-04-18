@@ -161,4 +161,7 @@
     <string name="bluetooth_bluetooth_admin">To check paired bluetooth devices, please grant the app BLUETOOTH, BLUETOOTH_ADMIN permissions.</string>
     <string name="missed_sys_popup">Missed the system permission popup?</string>
     <string name="manually_grant">Manually grant</string>
+    <string name="item">item</string>
+    <string name="start_spinning">Start Spinning</string>
+    <string name="selected">selected</string>
 </resources>
