@@ -34,7 +34,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomBoldText
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleText
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
@@ -164,7 +164,7 @@ private fun CustomSettingOptions(navController: NavHostController) {
             contentDescription = stringResource(id = R.string.customize_my_home_page),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
-        CustomIconAndTextPadding()
+        CustomSpacerPadding()
         Text(text = stringResource(R.string.customize_my_home_page))
     }
 }

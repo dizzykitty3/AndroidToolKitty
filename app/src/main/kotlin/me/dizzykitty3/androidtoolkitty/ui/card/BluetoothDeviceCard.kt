@@ -32,8 +32,8 @@ import androidx.core.app.ActivityCompat
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconPopup
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.util.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
@@ -90,7 +90,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 contentDescription = stringResource(id = R.string.show_paired_devices),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
-            CustomIconAndTextPadding()
+            CustomSpacerPadding()
             Text(text = stringResource(id = R.string.show_paired_devices))
         }
 
@@ -107,7 +107,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(text = device.name)
-                        CustomIconAndTextPadding()
+                        CustomSpacerPadding()
                         CustomIconPopup(type(device.type), device.address)
                     }
                 }

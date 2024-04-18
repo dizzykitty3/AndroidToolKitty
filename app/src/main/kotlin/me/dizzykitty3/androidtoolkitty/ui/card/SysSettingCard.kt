@@ -90,6 +90,7 @@ fun SysSettingCard() {
                 contentDescription = stringResource(id = R.string.battery_level),
                 tint = MaterialTheme.colorScheme.primary
             )
+            CustomSpacerPadding()
             Text(text = "${BatteryUtil.batteryLevel()}%")
 
             CustomSpacerPadding()
@@ -101,6 +102,7 @@ fun SysSettingCard() {
                         contentDescription = stringResource(id = R.string.wifi),
                         tint = MaterialTheme.colorScheme.primary
                     )
+                    CustomSpacerPadding()
                     Text(text = stringResource(id = R.string.wifi))
                 }
 
@@ -110,6 +112,7 @@ fun SysSettingCard() {
                         contentDescription = stringResource(id = R.string.cellular),
                         tint = MaterialTheme.colorScheme.primary
                     )
+                    CustomSpacerPadding()
                     Text(text = stringResource(id = R.string.cellular))
                 }
 
@@ -119,6 +122,7 @@ fun SysSettingCard() {
                         contentDescription = stringResource(id = R.string.offline),
                         tint = MaterialTheme.colorScheme.primary
                     )
+                    CustomSpacerPadding()
                     Text(text = stringResource(id = R.string.offline))
                 }
 
@@ -128,6 +132,7 @@ fun SysSettingCard() {
                         contentDescription = stringResource(id = R.string.unknown),
                         tint = MaterialTheme.colorScheme.primary
                     )
+                    CustomSpacerPadding()
                     Text(text = stringResource(id = R.string.unknown))
                 }
             }

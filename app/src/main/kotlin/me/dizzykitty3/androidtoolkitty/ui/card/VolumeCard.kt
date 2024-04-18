@@ -37,7 +37,6 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil.setVolume
@@ -235,7 +234,7 @@ fun VolumeCard() {
                         contentDescription = stringResource(id = R.string.edit),
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
-                    CustomIconAndTextPadding()
+                    CustomSpacerPadding()
                     Text(text = stringResource(R.string.edit))
                 }
             }

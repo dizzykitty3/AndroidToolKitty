@@ -21,7 +21,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomHideCardSettingSwitch
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 
 private const val CARD_1 = "card_year_progress"
 private const val CARD_2 = "card_volume"
@@ -180,7 +180,7 @@ fun EditHomeCard() {
                 contentDescription = stringResource(id = R.string.hide_all_cards),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
-            CustomIconAndTextPadding()
+            CustomSpacerPadding()
             Text(text = stringResource(R.string.hide_all_cards))
         }
 
@@ -206,7 +206,7 @@ fun EditHomeCard() {
                 contentDescription = stringResource(id = R.string.show_all_cards),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
-            CustomIconAndTextPadding()
+            CustomSpacerPadding()
             Text(text = stringResource(R.string.show_all_cards))
         }
     }
