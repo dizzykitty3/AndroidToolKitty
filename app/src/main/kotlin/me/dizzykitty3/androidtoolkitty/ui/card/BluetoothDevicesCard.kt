@@ -34,9 +34,9 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconPopup
-import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TBluetooth
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
+import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.BluetoothUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 
 @SuppressLint("InlinedApi")
 private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
@@ -70,7 +70,7 @@ fun BluetoothDevicesCard(navController: NavHostController) {
                 }
 
                 // Get system service
-                bluetoothAdapter = TBluetooth.bluetoothAdapter()
+                bluetoothAdapter = BluetoothUtil.bluetoothAdapter()
 
                 // Show current device name, paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {
@@ -81,7 +81,7 @@ fun BluetoothDevicesCard(navController: NavHostController) {
                 }
 
                 // When Bluetooth is OFF
-                TToast.toast(context.getString(R.string.bluetooth_disabled))
+                ToastUtil.toast(context.getString(R.string.bluetooth_disabled))
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {

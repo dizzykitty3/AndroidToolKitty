@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.util.Log
 import me.dizzykitty3.androidtoolkitty.R
@@ -107,7 +107,7 @@ object TUrl {
             "namu" to WIKI,
         )
 
-        return suffixMap[TString.dropSpaces(urlInput)] ?: COM
+        return suffixMap[StringUtil.dropSpaces(urlInput)] ?: COM
     }
 
     enum class Platform(val prefix: String, val nameResId: Int) {

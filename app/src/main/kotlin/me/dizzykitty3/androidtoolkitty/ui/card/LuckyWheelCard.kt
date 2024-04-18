@@ -57,7 +57,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.getLuckySpinningWheelItems
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setLuckySpinningWheelItems
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
+import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -121,7 +121,7 @@ fun LuckyWheelCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                TToast.toast("Selected: $selected")
+                ToastUtil.toast("Selected: $selected")
                 rotationDegrees = targetRotationDegrees % 360
             }
         }

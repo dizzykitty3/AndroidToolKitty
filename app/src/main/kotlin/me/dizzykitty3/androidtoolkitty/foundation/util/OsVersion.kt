@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.os.Build
 

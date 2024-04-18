@@ -15,8 +15,8 @@ import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
-import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
+import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 
 @SuppressLint("InlinedApi")
 private const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
@@ -49,7 +49,7 @@ fun PermissionRequestCard() {
 fun ManuallyGrant() {
     Text(text = stringResource(id = R.string.missed_sys_popup))
     Button(
-        onClick = { TIntent.openPermissionPage() }
+        onClick = { IntentUtil.openPermissionPage() }
     ) {
         Text(text = stringResource(id = R.string.manually_grant))
     }

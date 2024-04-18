@@ -38,8 +38,8 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TAudio
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
+import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,8 +52,8 @@ fun VolumeCard() {
 
         val settingsSharedPref = remember { SettingsSharedPref }
 
-        val currentVolume = TAudio.volume()
-        val maxVolume = TAudio.maxVolumeIndex()
+        val currentVolume = AudioUtil.volume()
+        val maxVolume = AudioUtil.maxVolumeIndex()
 
         val sliderIncrementFivePercent =
             settingsSharedPref.getIsSliderIncrementFivePercent()
@@ -158,7 +158,7 @@ fun VolumeCard() {
                         Button(
                             onClick = {
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0 && newCustomVolume.toInt() != 0) {
-                                    TToast.toast(context.getString(R.string.system_media_volume_levels_limited))
+                                    ToastUtil.toast(context.getString(R.string.system_media_volume_levels_limited))
                                     return@Button
                                 } else {
                                     settingsSharedPref.setCustomVolume(newCustomVolume.toInt())
@@ -252,5 +252,5 @@ fun VolumeCard() {
     }
 }
 
-private fun setVolume(volume: Int) = TAudio.setVolume(volume)
-private fun setVolume(volume: Double) = TAudio.setVolume(volume.toInt())
+private fun setVolume(volume: Int) = AudioUtil.setVolume(volume)
+private fun setVolume(volume: Double) = AudioUtil.setVolume(volume)

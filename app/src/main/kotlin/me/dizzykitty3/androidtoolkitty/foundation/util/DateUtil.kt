@@ -1,9 +1,9 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
-object TDate {
+object DateUtil {
     @JvmStatic
     fun daysPassed(): Long =
         daysFromStartOfYear(LocalDate.now())

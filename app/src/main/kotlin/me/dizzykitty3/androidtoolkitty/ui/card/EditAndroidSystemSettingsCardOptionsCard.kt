@@ -9,7 +9,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomHideCardSettingSwitch
-import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 
 private const val SETTING_1 = "setting_display"
 private const val SETTING_2 = "setting_auto_rotate"

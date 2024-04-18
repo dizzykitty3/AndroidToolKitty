@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -6,7 +6,8 @@ import android.content.Context
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-object TClipboard {
+object ClipboardUtil {
+    private const val TAG = "ClipboardUtil"
     private lateinit var clipboard: ClipboardManager
 
     private fun clipboardService() {
@@ -18,7 +19,7 @@ object TClipboard {
         clipboardService()
         if (clipboard.hasPrimaryClip()) {
             clipboard.clearPrimaryClip()
-            TToast.toastAndLog(app.getString(R.string.clipboard_cleared_automatically))
+            ToastUtil.toastAndLog(TAG,app.getString(R.string.clipboard_cleared_automatically))
         }
     }
 
@@ -27,6 +28,6 @@ object TClipboard {
         clipboardService()
         val clip = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
-        TToast.toast("$text ${app.getString(R.string.copied)}")
+        ToastUtil.toast("$text ${app.getString(R.string.copied)}")
     }
 }

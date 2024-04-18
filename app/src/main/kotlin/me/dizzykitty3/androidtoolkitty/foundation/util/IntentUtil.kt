@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,7 +11,7 @@ import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-object TIntent {
+object IntentUtil {
     private const val TAG = "IntentService"
     private const val HTTPS = "https://"
     private const val GOOGLE_MAPS = "com.google.android.apps.maps"
@@ -59,7 +59,7 @@ object TIntent {
             startActivity(intent)
             Log.d(TAG, "onOpenSystemSettings: $settingType")
         } catch (e: Exception) {
-            TToast.toast(app.getString(R.string.system_settings_unsupported))
+            ToastUtil.toast(app.getString(R.string.system_settings_unsupported))
             Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
         }
     }
@@ -75,7 +75,7 @@ object TIntent {
             startActivity(intent)
             Log.d(TAG, "openPermissionPage")
         } catch (e: Exception) {
-            TToast.toast(app.getString(R.string.system_settings_unsupported))
+            ToastUtil.toast(app.getString(R.string.system_settings_unsupported))
             Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
         }
     }
@@ -109,12 +109,12 @@ object TIntent {
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
-                TToast.toast(app.getString(R.string.google_play_not_installed))
+                ToastUtil.toast(app.getString(R.string.google_play_not_installed))
                 Log.i(TAG, "Google Play not installed")
             }
 
             GOOGLE_MAPS -> {
-                TToast.toast(app.getString(R.string.google_maps_not_installed))
+                ToastUtil.toast(app.getString(R.string.google_maps_not_installed))
                 Log.i(TAG, "Google Maps not installed")
                 openAppOnMarket(GOOGLE_MAPS)
             }
@@ -127,7 +127,7 @@ object TIntent {
             if (packageName.isBlank()) {
                 return
             } else if (packageName.contains(".")) {
-                "market://details?id=${TString.dropSpaces(packageName)}"
+                "market://details?id=${StringUtil.dropSpaces(packageName)}"
             } else {
                 "market://search?q=${packageName.trim()}"
             }

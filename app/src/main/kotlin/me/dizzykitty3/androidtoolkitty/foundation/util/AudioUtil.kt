@@ -1,10 +1,10 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.content.Context
 import android.media.AudioManager
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
 
-object TAudio {
+object AudioUtil {
     private lateinit var audioManager: AudioManager
 
     private fun audioService() {
@@ -27,5 +27,11 @@ object TAudio {
     fun setVolume(volume: Int) {
         audioService()
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI)
+    }
+
+    @JvmStatic
+    fun setVolume(volume: Double) {
+        audioService()
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume.toInt(), AudioManager.FLAG_SHOW_UI)
     }
 }

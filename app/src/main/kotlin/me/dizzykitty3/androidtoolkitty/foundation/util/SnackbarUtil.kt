@@ -1,9 +1,9 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 
-class TSnackbar(private val view: View) {
+class SnackbarUtil(private val view: View) {
     fun snackbar(message: String) =
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
 

@@ -1,8 +1,8 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import java.time.LocalTime
 
-object TString {
+object StringUtil {
     @JvmStatic
     fun greeting(): String {
         val currentTime = LocalTime.now()

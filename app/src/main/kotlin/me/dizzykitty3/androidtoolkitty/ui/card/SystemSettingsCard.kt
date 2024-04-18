@@ -26,8 +26,8 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleT
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
-import me.dizzykitty3.androidtoolkitty.foundation.utils.NetworkUtil
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TBattery
+import me.dizzykitty3.androidtoolkitty.foundation.util.NetworkUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.BatteryUtil
 
 private const val SETTING_1 = "setting_display"
 private const val SETTING_2 = "setting_auto_rotate"
@@ -90,7 +90,7 @@ fun SystemSettingsCard() {
                 contentDescription = stringResource(id = R.string.battery_level),
                 tint = MaterialTheme.colorScheme.primary
             )
-            Text(text = "${TBattery.batteryLevel()}%")
+            Text(text = "${BatteryUtil.batteryLevel()}%")
 
             CustomSpacerPadding()
 

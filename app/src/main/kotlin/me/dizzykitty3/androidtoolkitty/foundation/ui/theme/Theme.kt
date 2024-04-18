@@ -14,7 +14,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
-import me.dizzykitty3.androidtoolkitty.foundation.utils.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 
 private val DarkColorScheme = darkColorScheme(
     primary = md_theme_dark_primary,

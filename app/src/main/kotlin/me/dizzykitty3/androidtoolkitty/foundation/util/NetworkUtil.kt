@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.utils
+package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -17,6 +17,7 @@ object NetworkUtil {
             app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
+    @JvmStatic
     fun networkState(): Int {
         connectivityService()
         val activeNetwork = connectivityManager.activeNetwork ?: return STATE_CODE_OFFLINE

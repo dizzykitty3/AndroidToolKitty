@@ -19,9 +19,9 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
+import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.TUrl
 
 @Composable
 fun AboutCard() {
@@ -48,7 +48,7 @@ private fun DeveloperProfileLink(
         CustomIconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
-                TIntent.openUrl("${TUrl.profilePrefix(TUrl.Platform.GITHUB)}$name")
+                IntentUtil.openUrl("${TUrl.profilePrefix(TUrl.Platform.GITHUB)}$name")
             }
         ) {
             Text(
@@ -82,8 +82,8 @@ private fun GitHubRepoLink() {
         CustomIconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
-                TToast.toast(context.getString(R.string.all_help_welcomed))
-                TIntent.openUrl(sourceCodeUrl)
+                ToastUtil.toast(context.getString(R.string.all_help_welcomed))
+                IntentUtil.openUrl(sourceCodeUrl)
             }
         ) {
             Text(

@@ -19,8 +19,10 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TClipboard
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
+import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
+
+private const val TAG = "ClipboardCard"
 
 @Composable
 fun ClipboardCard() {
@@ -49,6 +51,6 @@ fun ClipboardCard() {
 }
 
 private fun onClearClipboardButton(context: Context) {
-    TClipboard.clear()
-    TToast.toastAndLog(context.getString(R.string.clipboard_cleared))
+    ClipboardUtil.clear()
+    ToastUtil.toastAndLog(TAG,context.getString(R.string.clipboard_cleared))
 }

@@ -31,10 +31,10 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomDropdownMen
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomItalicText
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TString
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TToast
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TUrl
+import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.TUrl
 
 private const val TAG = "UrlCard"
 private const val HTTPS = "https://"
@@ -178,7 +178,7 @@ private fun SocialMediaProfileIUrl() {
 private fun onClickVisitUrlButton(url: String) {
     if (url.isBlank()) return
 
-    TIntent.openUrl(TUrl.processUrl(TString.dropSpaces(url)))
+    IntentUtil.openUrl(TUrl.processUrl(StringUtil.dropSpaces(url)))
     Log.d(TAG, "onClickVisitButton")
 }
 
@@ -189,16 +189,16 @@ private fun onVisitProfileButton(username: String, platformIndex: Int) {
 
     if (platform == TUrl.Platform.PLATFORM_NOT_ADDED_YET) {
 //        TToast.toast("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
-        TToast.toast("under development")
+        ToastUtil.toast("under development")
         return
     }
 
     val prefix = platform.prefix
     val url =
         if (platform == TUrl.Platform.FANBOX)
-            "${TString.dropSpaces(username)}$prefix"
+            "${StringUtil.dropSpaces(username)}$prefix"
         else
-            "$prefix${TString.dropSpaces(username)}"
-    TIntent.openUrl(url)
+            "$prefix${StringUtil.dropSpaces(username)}"
+    IntentUtil.openUrl(url)
     Log.d(TAG, "onVisitProfile")
 }

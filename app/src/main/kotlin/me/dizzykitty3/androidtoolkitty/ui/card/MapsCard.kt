@@ -27,7 +27,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.utils.TIntent
+import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 
 private const val TAG = "GoogleMapsCard"
 
@@ -103,6 +103,6 @@ fun MapsCard() {
 private fun onClickOpenGoogleMapsButton(latitude: String, longitude: String) {
     if (latitude.isBlank() || longitude.isBlank()) return
 
-    TIntent.openGoogleMaps(latitude, longitude)
+    IntentUtil.openGoogleMaps(latitude, longitude)
     Log.d(TAG, "onClickOpenGoogleMapsButton")
 }
