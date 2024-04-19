@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Android ToolKitty</string>
-
     <!-- Common -->
     <string name="label">Label</string>
     <string name="edit">Edit</string>

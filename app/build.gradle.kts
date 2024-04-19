@@ -23,15 +23,21 @@ android {
         }
     }
 
+    defaultConfig{
+        resValue("string", "app_name", "Android ToolKitty")
+    }
+
     buildTypes {
         debug {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
             versionNameSuffix = " DEV"
+            resValue("string", "app_name", "ATK Debug")
         }
 
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
