@@ -91,9 +91,9 @@ fun LuckyWheelCard() {
         // Material Design颜色主题
         val colors = List(3) { index ->
             when (index) {
-                0 -> MaterialTheme.colorScheme.primary
+                0 -> MaterialTheme.colorScheme.primaryContainer
                 1 -> MaterialTheme.colorScheme.inversePrimary
-                else -> MaterialTheme.colorScheme.secondary
+                else -> MaterialTheme.colorScheme.secondaryContainer
             }
         }
 
@@ -129,7 +129,7 @@ fun LuckyWheelCard() {
             val primary = MaterialTheme.colorScheme.primary
 
             // 绘制转盘
-            Canvas(modifier = Modifier.size(300.dp)) {
+            Canvas(modifier = Modifier.size(250.dp)) {
                 val center = Offset(size.width / 2, size.height / 2)
                 val radius = size.minDimension / 2
                 items.indices.forEach { index ->
@@ -354,6 +354,3 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
         }
     }
 }
-
-
-
