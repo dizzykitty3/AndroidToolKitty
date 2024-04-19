@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
@@ -45,7 +46,6 @@ fun SysSettingCard() {
         title = R.string.android_system_settings
     ) {
         // Variables
-
         val settingsSharedPref = remember { SettingsSharedPref }
 
         val settings = listOf(
@@ -77,69 +77,10 @@ fun SysSettingCard() {
             isShowSetting[setting.settingType] == true
         }
 
-        val networkState = NetworkUtil.networkState()
-
         // UI
-
         if (!checkIsAutoTime()) CustomTip(resId = R.string.set_time_automatically_is_off_tip)
-
-        Row {
-            Icon(
-                imageVector = Icons.Outlined.BatteryStd,
-                contentDescription = stringResource(id = R.string.battery_level),
-                tint = MaterialTheme.colorScheme.primary
-            )
-            CustomSpacerPadding()
-            Text(text = "${BatteryUtil.batteryLevel()}%")
-
-            CustomSpacerPadding()
-
-            when (networkState) {
-                NetworkUtil.STATE_CODE_WIFI -> {
-                    Icon(
-                        imageVector = Icons.Outlined.Wifi,
-                        contentDescription = stringResource(id = R.string.wifi),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                    CustomSpacerPadding()
-                    Text(text = stringResource(id = R.string.wifi))
-                }
-
-                NetworkUtil.STATE_CODE_MOBILE -> {
-                    Icon(
-                        imageVector = Icons.Outlined.NetworkCell,
-                        contentDescription = stringResource(id = R.string.cellular),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                    CustomSpacerPadding()
-                    Text(text = stringResource(id = R.string.cellular))
-                }
-
-                NetworkUtil.STATE_CODE_OFFLINE -> {
-                    Icon(
-                        imageVector = Icons.Outlined.WifiOff,
-                        contentDescription = stringResource(id = R.string.offline),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                    CustomSpacerPadding()
-                    Text(text = stringResource(id = R.string.offline))
-                }
-
-                else -> {
-                    Icon(
-                        imageVector = Icons.Outlined.QuestionMark,
-                        contentDescription = stringResource(id = R.string.unknown),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                    CustomSpacerPadding()
-                    Text(text = stringResource(id = R.string.unknown))
-                }
-            }
-        }
-        CustomSpacerPadding()
-
+        BatteryAndNetwork()
         if (isShowGroupTitle1 || isShowGroupTitle2) CustomGroupDivider()
-
         if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
 
         settings.subList(0, 6).forEach { setting ->
@@ -152,7 +93,6 @@ fun SysSettingCard() {
         }
 
         if (isShowGroupTitle1 && isShowGroupTitle2) CustomGroupDivider()
-
         if (isShowGroupTitle2) CustomGroupTitleText(R.string.debugging)
 
         settings.subList(6, settings.size).forEach { setting ->
@@ -173,3 +113,59 @@ private fun checkIsAutoTime(): Boolean {
 }
 
 data class Setting(val settingType: String, val buttonText: Int)
+
+@Composable
+fun BatteryAndNetwork() {
+    val batteryLevel = remember { BatteryUtil.batteryLevel() }
+
+    Row {
+        Icon(
+            imageVector = Icons.Outlined.BatteryStd,
+            contentDescription = stringResource(id = R.string.battery_level),
+            tint = MaterialTheme.colorScheme.primary
+        )
+        CustomSpacerPadding()
+        Text(text = "$batteryLevel%")
+
+        CustomSpacerPadding()
+        NetworkState()
+    }
+    CustomSpacerPadding()
+}
+
+@Composable
+fun NetworkState() {
+    val networkState = remember { NetworkUtil.networkState() }
+
+    when (networkState) {
+        NetworkUtil.STATE_CODE_WIFI -> {
+            NetworkStateIcon(Icons.Outlined.Wifi, R.string.wifi)
+        }
+
+        NetworkUtil.STATE_CODE_MOBILE -> {
+            NetworkStateIcon(Icons.Outlined.NetworkCell, R.string.cellular)
+        }
+
+        NetworkUtil.STATE_CODE_OFFLINE -> {
+            NetworkStateIcon(Icons.Outlined.WifiOff, R.string.offline)
+        }
+
+        else -> {
+            NetworkStateIcon(Icons.Outlined.QuestionMark, R.string.unknown)
+        }
+    }
+}
+
+@Composable
+fun NetworkStateIcon(
+    imageVector: ImageVector,
+    resId: Int
+) {
+    Icon(
+        imageVector = imageVector,
+        contentDescription = stringResource(id = resId),
+        tint = MaterialTheme.colorScheme.primary
+    )
+    CustomSpacerPadding()
+    Text(text = stringResource(id = resId))
+}
