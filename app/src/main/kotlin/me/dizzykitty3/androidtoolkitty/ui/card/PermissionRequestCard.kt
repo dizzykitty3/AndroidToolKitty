@@ -5,7 +5,9 @@ import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -25,29 +27,36 @@ fun PermissionRequestCard() {
         title = (R.string.permission_request),
         icon = Icons.Outlined.Shield
     ) {
-        val context = LocalContext.current
-
-        if (OsVersion.android12()) Text(text = stringResource(id = R.string.bluetooth_connect))
-        else Text(text = stringResource(id = R.string.bluetooth_bluetooth_admin))
-        Button(
-            onClick = { requestPermission(context) }
-        ) {
-            Text(text = stringResource(id = R.string.permission_request))
-        }
-
+        BluetoothPermission()
         CustomGroupDivider()
         ManuallyGrant()
     }
 }
 
+@Composable
+fun BluetoothPermission() {
+    val context = LocalContext.current
+
+    if (OsVersion.android12()) Text(text = stringResource(id = R.string.bluetooth_connect))
+    else Text(text = stringResource(id = R.string.bluetooth_bluetooth_admin))
+
+    Button(
+        onClick = { requestPermission(context) }
+    ) {
+        Text(text = stringResource(id = R.string.permission_request))
+    }
+}
 
 @Composable
 fun ManuallyGrant() {
     Text(text = stringResource(id = R.string.missed_sys_popup))
-    Button(
+    TextButton(
         onClick = { IntentUtil.openPermissionPage() }
     ) {
-        Text(text = stringResource(id = R.string.manually_grant))
+        Text(
+            text = stringResource(id = R.string.manually_grant),
+            color = MaterialTheme.colorScheme.primary
+        )
     }
 }
 

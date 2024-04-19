@@ -13,6 +13,7 @@ import androidx.compose.material.icons.outlined.WifiOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
@@ -128,6 +129,8 @@ fun BatteryAndNetwork() {
         Text(text = "$batteryLevel%")
 
         CustomSpacerPadding()
+        CustomSpacerPadding()
+
         NetworkState()
     }
     CustomSpacerPadding()
