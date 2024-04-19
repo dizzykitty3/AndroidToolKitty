@@ -102,7 +102,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
-                        Text(text = device.name ?: "Unknown device")
+                        Text(text = device.name ?: stringResource(id = R.string.unknown_device))
                         CustomSpacerPadding()
                         CustomIconPopup(type(device.type), device.address)
                     }
