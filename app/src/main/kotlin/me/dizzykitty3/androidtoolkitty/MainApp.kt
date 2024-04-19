@@ -3,10 +3,10 @@ package me.dizzykitty3.androidtoolkitty
 import android.app.Application
 import android.util.Log
 
-class ToolKittyApp : Application() {
+class MainApp : Application() {
     companion object {
         private const val TAG = "ToolKittyApp"
-        lateinit var app: ToolKittyApp private set
+        lateinit var app: MainApp private set
     }
 
     override fun onCreate() {

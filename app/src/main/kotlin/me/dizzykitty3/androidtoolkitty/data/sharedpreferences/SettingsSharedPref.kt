@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 
 object SettingsSharedPref {
     private const val TAG = "SettingsSharedPref"

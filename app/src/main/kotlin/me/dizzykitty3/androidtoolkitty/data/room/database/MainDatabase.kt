@@ -11,20 +11,20 @@ import me.dizzykitty3.androidtoolkitty.data.room.entity.UrlHistory
     entities = [UrlHistory::class],
     version = 1
 )
-abstract class ToolKittyDatabase : RoomDatabase() {
+abstract class MainDatabase : RoomDatabase() {
     abstract fun urlHistoryDao(): UrlHistoryDao
 
     companion object {
         private const val ROOM_DATABASE_NAME = "ToolKittyDatabase"
 
         @Volatile
-        private var INSTANCE: ToolKittyDatabase? = null
+        private var INSTANCE: MainDatabase? = null
 
-        fun getInstance(context: Context): ToolKittyDatabase =
+        fun getInstance(context: Context): MainDatabase =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
-                    ToolKittyDatabase::class.java, ROOM_DATABASE_NAME
+                    MainDatabase::class.java, ROOM_DATABASE_NAME
                 ).build().also { INSTANCE = it }
             }
     }

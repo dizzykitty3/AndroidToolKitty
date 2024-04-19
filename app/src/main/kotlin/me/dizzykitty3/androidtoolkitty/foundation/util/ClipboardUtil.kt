@@ -4,7 +4,7 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 
 object ClipboardUtil {
     private const val TAG = "ClipboardUtil"

@@ -3,7 +3,7 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
-import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 
 object BatteryUtil {
     fun batteryLevel(): Int {

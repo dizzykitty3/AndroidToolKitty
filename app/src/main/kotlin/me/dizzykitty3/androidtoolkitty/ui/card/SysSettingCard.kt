@@ -19,7 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_2

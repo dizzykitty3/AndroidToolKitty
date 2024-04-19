@@ -2,7 +2,7 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.content.Context
 import android.media.AudioManager
-import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 
 object AudioUtil {
     private lateinit var audioManager: AudioManager

@@ -9,7 +9,7 @@ import android.provider.Settings
 import android.util.Log
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.foundation.const.GOOGLE_MAPS
 import me.dizzykitty3.androidtoolkitty.foundation.const.GOOGLE_PLAY
 import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS

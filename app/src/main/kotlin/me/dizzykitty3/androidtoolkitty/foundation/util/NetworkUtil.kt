@@ -3,7 +3,7 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 
 object NetworkUtil {
     private const val STATE_CODE_UNKNOWN = 0
