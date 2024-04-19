@@ -13,14 +13,13 @@ import androidx.compose.material.icons.outlined.WifiOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_2
