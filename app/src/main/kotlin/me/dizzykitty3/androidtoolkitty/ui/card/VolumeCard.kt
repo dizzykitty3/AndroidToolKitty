@@ -56,7 +56,7 @@ fun VolumeCard() {
 
         val maxVolume = AudioUtil.maxVolumeIndex()
 
-        val sliderIncrementFivePercent = settingsSharedPref.getIsSliderIncrementFivePercent()
+        val sliderIncrementFivePercent = settingsSharedPref.sliderIncrement5Percent
 
         val customVolume = settingsSharedPref.getCustomVolume()
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }

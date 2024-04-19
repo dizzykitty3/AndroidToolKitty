@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ToolKittyTheme(
-                dynamicColor = SettingsSharedPref.getIsDynamicColor()
+                dynamicColor = SettingsSharedPref.dynamicColor
             ) {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
                     MainLayout()
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun getSettingsSharedPreferences() {
-        isAutoClearClipboard = SettingsSharedPref.getIsAutoClearClipboard()
+        isAutoClearClipboard = SettingsSharedPref.autoClearClipboard
         Log.d(TAG, "settings sp got")
     }
 

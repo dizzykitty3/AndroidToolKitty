@@ -62,7 +62,7 @@ fun HomeScreen(navController: NavHostController) {
 
         CustomCardSpacePadding()
 
-        if (settingsSharedPref.getIsOneHandedMode()) CustomOneHandedModePadding()
+        if (settingsSharedPref.oneHandedMode) CustomOneHandedModePadding()
 
         val locale = Locale.getDefault().toString()
         if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) CustomTip(
@@ -132,7 +132,7 @@ fun GreetingAndSetting(navController: NavHostController) {
             IconButton(
                 onClick = {
                     navController.navigate(SETTINGS_SCREEN)
-                    settingsSharedPref.setHaveOpenedSettingsScreen(true)
+                    settingsSharedPref.openedSettingsScreen = true
                 },
                 modifier = Modifier.size(40.dp)
             ) {

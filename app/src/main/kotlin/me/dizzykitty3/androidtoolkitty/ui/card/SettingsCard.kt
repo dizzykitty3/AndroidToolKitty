@@ -59,16 +59,16 @@ private fun GeneralSettingOptions() {
 
     val settingsSharedPref = remember { SettingsSharedPref }
 
-    val autoClearClipboard = settingsSharedPref.getIsAutoClearClipboard()
+    val autoClearClipboard = settingsSharedPref.autoClearClipboard
     var mAutoClearClipboard by remember { mutableStateOf(autoClearClipboard) }
 
-    val oneHandedMode = settingsSharedPref.getIsOneHandedMode()
+    val oneHandedMode = settingsSharedPref.oneHandedMode
     var mOneHandedMode by remember { mutableStateOf(oneHandedMode) }
 
-    val dynamicColor = settingsSharedPref.getIsDynamicColor()
+    val dynamicColor = settingsSharedPref.dynamicColor
     var mDynamicColor by remember { mutableStateOf(dynamicColor) }
 
-    val volumeSlideSteps = settingsSharedPref.getIsSliderIncrementFivePercent()
+    val volumeSlideSteps = settingsSharedPref.sliderIncrement5Percent
     var mVolumeSlideSteps by remember { mutableStateOf(volumeSlideSteps) }
 
     val primary = MaterialTheme.colorScheme.primary.toArgb()
@@ -79,7 +79,7 @@ private fun GeneralSettingOptions() {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
             mAutoClearClipboard = !mAutoClearClipboard
-            settingsSharedPref.setIsAutoClearClipboard(mAutoClearClipboard)
+            settingsSharedPref.autoClearClipboard = mAutoClearClipboard
         }
     ) {
         Text(text = stringResource(R.string.clear_clipboard_on_launch))
@@ -88,7 +88,7 @@ private fun GeneralSettingOptions() {
             checked = mAutoClearClipboard,
             onCheckedChange = {
                 mAutoClearClipboard = it
-                settingsSharedPref.setIsAutoClearClipboard(it)
+                settingsSharedPref.autoClearClipboard = it
             }
         )
     }
@@ -97,7 +97,7 @@ private fun GeneralSettingOptions() {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
             mVolumeSlideSteps = !mVolumeSlideSteps
-            settingsSharedPref.setIsSliderIncrementFivePercent(mVolumeSlideSteps)
+            settingsSharedPref.sliderIncrement5Percent = mVolumeSlideSteps
         }
     ) {
         Text(text = stringResource(R.string.set_slider_increment_5))
@@ -106,7 +106,7 @@ private fun GeneralSettingOptions() {
             checked = mVolumeSlideSteps,
             onCheckedChange = {
                 mVolumeSlideSteps = it
-                settingsSharedPref.setIsSliderIncrementFivePercent(it)
+                settingsSharedPref.sliderIncrement5Percent = it
             }
         )
     }
@@ -136,7 +136,7 @@ private fun GeneralSettingOptions() {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
             mOneHandedMode = !mOneHandedMode
-            settingsSharedPref.setIsOneHandedMode(mOneHandedMode)
+            settingsSharedPref.oneHandedMode = mOneHandedMode
         }
     ) {
         Text(text = stringResource(R.string.one_handed_mode))
@@ -145,7 +145,7 @@ private fun GeneralSettingOptions() {
             checked = mOneHandedMode,
             onCheckedChange = {
                 mOneHandedMode = it
-                settingsSharedPref.setIsOneHandedMode(it)
+                settingsSharedPref.oneHandedMode = it
             }
         )
     }
@@ -201,7 +201,7 @@ private fun DebuggingSettingOptions() {
 
 private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view: View) {
     val context = view.context
-    SettingsSharedPref.setIsDynamicColor(isDynamicColor)
+    SettingsSharedPref.dynamicColor = isDynamicColor
 
     SnackbarUtil(view).snackbar(
         message = context.getString(R.string.requires_restart_do_it_now),

@@ -10,31 +10,74 @@ import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 object SettingsSharedPref {
     private const val TAG = "SettingsSharedPref"
     private const val PREF_NAME = "Settings"
+
+    // Boolean
     private const val IS_AUTO_CLEAR_CLIPBOARD = "is_auto_clear_clipboard"
-    private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
-    private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
-    private const val IS_ONE_HANDED_MODE = "is_one_handed_mode"
+    private const val IS_SLIDER_INCREMENT_5_PERCENT = "is_slider_increment_5_percent"
     private const val IS_DYNAMIC_COLOR = "is_dynamic_color"
+    private const val IS_ONE_HANDED_MODE = "is_one_handed_mode"
+    private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
+
+    private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
-    private const val SLIDER_INCREMENT_5_PERCENT = "slider_increment_5_percent"
     private const val LUCKY_SPINNING_WHEEL_ITEMS = "lucky_spinning_wheel_items"
 
     private fun getSharedPrefs(): SharedPreferences {
         return app.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
     }
 
-    fun getIsAutoClearClipboard(): Boolean {
-        return getSharedPrefs().getBoolean(IS_AUTO_CLEAR_CLIPBOARD, false)
-    }
+    // Boolean
 
-    fun setIsAutoClearClipboard(isAutoClear: Boolean) {
-        Log.d(TAG, "is auto clear clipboard = $isAutoClear")
-        with(getSharedPrefs().edit()) {
-            putBoolean(IS_AUTO_CLEAR_CLIPBOARD, isAutoClear)
-            apply()
+    var autoClearClipboard: Boolean
+        get() = getSharedPrefs().getBoolean(IS_AUTO_CLEAR_CLIPBOARD, false)
+        set(value) {
+            Log.d(TAG, "is auto clear clipboard = $value")
+            with(getSharedPrefs().edit()) {
+                putBoolean(IS_AUTO_CLEAR_CLIPBOARD, value)
+                apply()
+            }
         }
-    }
+
+    var sliderIncrement5Percent :Boolean
+        get() = getSharedPrefs().getBoolean(IS_SLIDER_INCREMENT_5_PERCENT, false)
+        set(value) {
+            Log.d(TAG, "is slider increment 5% = $value")
+            with(getSharedPrefs().edit()) {
+                putBoolean(IS_SLIDER_INCREMENT_5_PERCENT, value)
+                apply()
+            }
+        }
+
+    var dynamicColor : Boolean
+        get() = getSharedPrefs().getBoolean(IS_DYNAMIC_COLOR, true)
+        set(value) {
+            Log.d(TAG, "is dynamic color = $value")
+            with(getSharedPrefs().edit()) {
+                putBoolean(IS_DYNAMIC_COLOR, value)
+                apply()
+            }
+        }
+
+    var oneHandedMode : Boolean
+        get() = getSharedPrefs().getBoolean(IS_ONE_HANDED_MODE, false)
+        set(value) {
+            Log.d(TAG, "is one-handed mode = $value")
+            with(getSharedPrefs().edit()) {
+                putBoolean(IS_ONE_HANDED_MODE, value)
+                apply()
+            }
+        }
+
+    var openedSettingsScreen:Boolean
+        get() = getSharedPrefs().getBoolean(HAVE_OPENED_SETTINGS_SCREEN, false)
+        set(value) {
+            Log.d(TAG, "have opened settings menu = $value")
+            with(getSharedPrefs().edit()) {
+                putBoolean(HAVE_OPENED_SETTINGS_SCREEN, value)
+                apply()
+            }
+        }
 
     fun getCardShowedState(cardId: String): Boolean {
         return getSharedPrefs().getBoolean(cardId, true)
@@ -56,54 +99,6 @@ object SettingsSharedPref {
         Log.d(TAG, "last time platform index = $lastTimePlatformIndex")
         with(getSharedPrefs().edit()) {
             putInt(LAST_TIME_SELECTED_PLATFORM_INDEX, lastTimePlatformIndex)
-            apply()
-        }
-    }
-
-    fun getHaveOpenedSettingsScreen(): Boolean {
-        return getSharedPrefs().getBoolean(HAVE_OPENED_SETTINGS_SCREEN, false)
-    }
-
-    fun setHaveOpenedSettingsScreen(haveOpened: Boolean) {
-        Log.d(TAG, "have opened settings menu = $haveOpened")
-        with(getSharedPrefs().edit()) {
-            putBoolean(HAVE_OPENED_SETTINGS_SCREEN, haveOpened)
-            apply()
-        }
-    }
-
-    fun getIsOneHandedMode(): Boolean {
-        return getSharedPrefs().getBoolean(IS_ONE_HANDED_MODE, false)
-    }
-
-    fun setIsOneHandedMode(isOneHandedMode: Boolean) {
-        Log.d(TAG, "is single hand mode = $isOneHandedMode")
-        with(getSharedPrefs().edit()) {
-            putBoolean(IS_ONE_HANDED_MODE, isOneHandedMode)
-            apply()
-        }
-    }
-
-    fun getIsDynamicColor(): Boolean {
-        return getSharedPrefs().getBoolean(IS_DYNAMIC_COLOR, true)
-    }
-
-    fun setIsDynamicColor(isDynamicColor: Boolean) {
-        Log.d(TAG, "is dynamic color = $isDynamicColor")
-        with(getSharedPrefs().edit()) {
-            putBoolean(IS_DYNAMIC_COLOR, isDynamicColor)
-            apply()
-        }
-    }
-
-    fun getIsSliderIncrementFivePercent(): Boolean {
-        return getSharedPrefs().getBoolean(SLIDER_INCREMENT_5_PERCENT, false)
-    }
-
-    fun setIsSliderIncrementFivePercent(incrementFivePercent: Boolean) {
-        Log.d(TAG, "is slider increment 5% = $incrementFivePercent")
-        with(getSharedPrefs().edit()) {
-            putBoolean(SLIDER_INCREMENT_5_PERCENT, incrementFivePercent)
             apply()
         }
     }
