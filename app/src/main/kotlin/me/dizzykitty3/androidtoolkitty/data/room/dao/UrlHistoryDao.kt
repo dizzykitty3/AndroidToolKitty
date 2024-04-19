@@ -8,12 +8,15 @@ import me.dizzykitty3.androidtoolkitty.data.room.entity.UrlHistory
 
 @Dao
 interface UrlHistoryDao {
-    @Query("SELECT * FROM UrlHistory")
+    @Query("SELECT * FROM UrlHistory ORDER BY `key` DESC")
     fun getAll(): List<UrlHistory>
 
     @Insert
-    fun insertAll(vararg urlHistories: UrlHistory)
+    fun insert(urlHistory: UrlHistory)
 
     @Delete
     fun delete(urlHistory: UrlHistory)
+
+    @Delete
+    fun deleteAll(urlHistories: UrlHistory)
 }
