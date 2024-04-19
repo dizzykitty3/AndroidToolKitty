@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconAndTextPadding
@@ -108,6 +109,13 @@ private fun VersionNumber() {
             contentDescription = stringResource(id = R.string.version)
         )
         CustomIconAndTextPadding()
-        Text(text = "${stringResource(R.string.version)} ${stringResource(R.string.version_number)}")
+
+        val debugVariant = BuildConfig.BUILD_TYPE == "debug"
+        val versionInfo =
+            if (debugVariant)
+                "${stringResource(R.string.version)} ${stringResource(R.string.version_number)} debug"
+            else
+                "${stringResource(R.string.version)} ${stringResource(R.string.version_number)}"
+        Text(text = versionInfo)
     }
 }
