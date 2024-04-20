@@ -24,7 +24,7 @@ android {
     }
 
     defaultConfig {
-        resValue("string", "app_name", "Android ToolKitty")
+        resValue("string", "app_name", "ToolKitty")
     }
 
     buildTypes {
@@ -32,7 +32,7 @@ android {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
             versionNameSuffix = " DEV"
-            resValue("string", "app_name", "ATK Debug")
+            resValue("string", "app_name", "ATK dev")
         }
 
         release {
