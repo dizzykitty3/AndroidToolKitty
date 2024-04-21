@@ -24,6 +24,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
@@ -39,7 +40,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.util.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
-import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 
 @SuppressLint("MissingPermission")
 @Composable
@@ -49,6 +50,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
         title = R.string.bluetooth_devices
     ) {
         val context = LocalContext.current
+        val view = LocalView.current
 
         var showResult by remember { mutableStateOf(false) }
 
@@ -77,7 +79,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 }
 
                 // When Bluetooth is OFF
-                ToastUtil.toast(context.getString(R.string.bluetooth_disabled))
+                SnackbarUtil(view).snackbar(context.getString(R.string.bluetooth_disabled))
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
