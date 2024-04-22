@@ -24,7 +24,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 @Composable
 fun PermissionRequestCard() {
     CustomCard(
-        title = (R.string.permission_request),
+        title = (R.string.request_permission),
         icon = Icons.Outlined.Shield
     ) {
         BluetoothPermission()
@@ -43,7 +43,7 @@ fun BluetoothPermission() {
     Button(
         onClick = { requestPermission(context) }
     ) {
-        Text(text = stringResource(id = R.string.permission_request))
+        Text(text = stringResource(id = R.string.request_permission))
     }
 }
 
@@ -54,7 +54,7 @@ fun ManuallyGrant() {
         onClick = { IntentUtil.openPermissionPage() }
     ) {
         Text(
-            text = stringResource(id = R.string.manually_grant),
+            text = stringResource(id = R.string.go_to_settings),
             color = MaterialTheme.colorScheme.primary
         )
     }

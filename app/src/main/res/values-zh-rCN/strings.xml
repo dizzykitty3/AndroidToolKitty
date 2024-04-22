@@ -124,7 +124,7 @@
     <string name="skip">跳过</string>
     <string name="clear_input">清空输入</string>
     <string name="developer_profile_link">开发者主页链接</string>
-    <string name="permission_request">授予权限</string>
+    <string name="request_permission">授予权限</string>
     <string name="cellular">移动数据</string>
     <string name="offline">无网络</string>
     <string name="item">条目</string>
