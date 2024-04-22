@@ -68,8 +68,8 @@ private fun EarlyVersions() {
             Column(
                 modifier = Modifier.weight(0.4f)
             ) {
-                AndroidVersion(text = "Android 11")
-                AndroidVersion(text = "Android 10")
+                AndroidVersion(id = R.string.android_11)
+                AndroidVersion(id = R.string.android_10)
                 AndroidVersion(text = "Android 9")
                 AndroidVersion(text = "Android 8.1")
                 AndroidVersion(text = "Android 8")
