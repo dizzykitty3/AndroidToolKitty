@@ -2,14 +2,15 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import me.dizzykitty3.androidtoolkitty.MainActivity
-import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.const.GOOGLE_MAPS
 import me.dizzykitty3.androidtoolkitty.foundation.const.GOOGLE_PLAY
 import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
@@ -24,6 +25,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 
+
 object IntentUtil {
     private const val TAG = "IntentService"
 
@@ -31,8 +33,6 @@ object IntentUtil {
     fun openUrl(finalUrl: String) {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(if (finalUrl.contains(HTTPS)) finalUrl else "$HTTPS$finalUrl")
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
         startActivity(intent)
         Log.d(TAG, "openUrl")
     }
@@ -53,8 +53,6 @@ object IntentUtil {
             else -> return
         }
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
         try {
             startActivity(intent)
             Log.d(TAG, "onOpenSystemSettings: $settingType")
@@ -69,7 +67,6 @@ object IntentUtil {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         val uri = Uri.fromParts(PACKAGE, app.packageName, null)
         intent.setData(uri)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         try {
             startActivity(intent)
@@ -87,7 +84,6 @@ object IntentUtil {
 
         val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         intent.setPackage(GOOGLE_MAPS)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         try {
             startActivity(intent)
@@ -100,6 +96,7 @@ object IntentUtil {
     @JvmStatic
     private fun startActivity(intent: Intent) {
         try {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             app.startActivity(intent)
             Log.d(TAG, "startActivity")
             return
@@ -135,7 +132,6 @@ object IntentUtil {
 
         val marketIntent = Intent(Intent.ACTION_VIEW, marketUri)
         if (isGooglePlay) marketIntent.setPackage(GOOGLE_PLAY)
-        marketIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
         try {
             startActivity(marketIntent)
@@ -151,5 +147,11 @@ object IntentUtil {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         app.startActivity(intent)
         (context as Activity).finish()
+    }
+
+    @JvmStatic
+    fun openBluetooth() {
+        val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+        startActivity(intent)
     }
 }

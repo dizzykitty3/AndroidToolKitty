@@ -101,6 +101,7 @@
     <string name="set_slider_increment_5">将滑块增量设置为 5%</string>
     <string name="lucky_wheel">幸运大转盘</string>
     <string name="info">信息</string>
+    <string name="go_to_settings">Go to settings</string>
     <string name="no_translation">抱歉， %1$s 翻译尚未添加。</string>
     <string name="show_more">展开</string>
     <string name="show_less">收起</string>
@@ -130,4 +131,5 @@
     <string name="start_spinning">开始旋转</string>
     <string name="selected">已选中</string>
     <string name="unknown_device">未知设备</string>
+    <string name="turn_on_bluetooth">Turn on Bluetooth</string>
 </resources>

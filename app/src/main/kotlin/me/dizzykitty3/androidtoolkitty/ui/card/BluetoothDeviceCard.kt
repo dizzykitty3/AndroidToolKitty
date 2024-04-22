@@ -23,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
@@ -39,6 +40,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.util.BluetoothUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 
@@ -58,6 +60,10 @@ fun BluetoothDeviceCard(navController: NavHostController) {
         var pairedDevices by remember { mutableStateOf<Set<BluetoothDevice>>(emptySet()) }
 
         var size by remember { mutableIntStateOf(0) }
+
+        val bluetoothDisabledMessage = stringResource(id = R.string.bluetooth_disabled)
+        val turnOnMessage = stringResource(id = R.string.turn_on_bluetooth)
+        val materialColor = MaterialTheme.colorScheme.primary.toArgb()
 
         Button(
             onClick = {
@@ -79,7 +85,12 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 }
 
                 // When Bluetooth is OFF
-                SnackbarUtil(view).snackbar(context.getString(R.string.bluetooth_disabled))
+                SnackbarUtil(view).snackbar(
+                    message = bluetoothDisabledMessage,
+                    buttonText = turnOnMessage,
+                    buttonColor = materialColor,
+                    buttonClickListener = { IntentUtil.openBluetooth() }
+                )
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
