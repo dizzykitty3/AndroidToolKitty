@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.ui.theme
+package me.dizzykitty3.androidtoolkitty.foundation.theme
 
 import android.annotation.SuppressLint
 import android.app.Activity

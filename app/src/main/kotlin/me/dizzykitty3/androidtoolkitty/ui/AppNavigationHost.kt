@@ -17,7 +17,7 @@ import me.dizzykitty3.androidtoolkitty.ui.screen.PermissionRequestScreen
 import me.dizzykitty3.androidtoolkitty.ui.screen.SettingsScreen
 
 @Composable
-fun MainLayout() {
+fun AppNavigationHost() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,

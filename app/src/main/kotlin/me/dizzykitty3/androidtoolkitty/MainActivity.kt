@@ -11,9 +11,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.ui.theme.ToolKittyTheme
+import me.dizzykitty3.androidtoolkitty.foundation.theme.ToolKittyTheme
 import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
-import me.dizzykitty3.androidtoolkitty.ui.MainLayout
+import me.dizzykitty3.androidtoolkitty.ui.AppNavigationHost
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
                 dynamicColor = SettingsSharedPref.dynamicColor
             ) {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
-                    MainLayout()
+                    AppNavigationHost()
                 }
             }
         }
