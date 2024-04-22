@@ -66,7 +66,8 @@ fun CustomAlertDialogButton(
                     },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.primary
-                    )
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(1.dp)
                 ) {
                     Text(
                         text = positiveButtonText ?: stringResource(android.R.string.ok),
