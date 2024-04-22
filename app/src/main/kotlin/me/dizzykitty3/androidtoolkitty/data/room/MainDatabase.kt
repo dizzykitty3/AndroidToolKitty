@@ -1,15 +1,16 @@
-package me.dizzykitty3.androidtoolkitty.data.room.database
+package me.dizzykitty3.androidtoolkitty.data.room
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import me.dizzykitty3.androidtoolkitty.data.room.dao.UrlHistoryDao
-import me.dizzykitty3.androidtoolkitty.data.room.entity.UrlHistory
+
+// Reference codelab: https://developer.android.com/codelabs/basic-android-kotlin-compose-persisting-data-room
 
 @Database(
     entities = [UrlHistory::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class MainDatabase : RoomDatabase() {
     abstract fun urlHistoryDao(): UrlHistoryDao

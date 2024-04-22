@@ -88,6 +88,7 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose) // NavHostController
+    implementation(libs.androidx.room.ktx) // To use Coroutine features
     implementation(libs.androidx.room.runtime)
     implementation(libs.google.gson)
     implementation(libs.google.hilt) // Dependency injection
