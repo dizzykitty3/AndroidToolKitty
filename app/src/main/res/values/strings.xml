@@ -12,6 +12,7 @@
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>
     <string name="go_to_settings">Go to settings</string>
+    <string name="success_and_back">Success! Now you can back to the previous screen</string>
 
     <!-- Home screen: top tip -->
     <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>

@@ -1,7 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
-import android.app.Activity
-import android.content.Context
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.Button
@@ -9,17 +7,20 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.const.BT
-import me.dizzykitty3.androidtoolkitty.foundation.const.BT_ADMIN
-import me.dizzykitty3.androidtoolkitty.foundation.const.BT_CONNECT
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.PermissionUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 
 @Composable
 fun PermissionRequestCard() {
@@ -27,23 +28,32 @@ fun PermissionRequestCard() {
         title = (R.string.request_permission),
         icon = Icons.Outlined.Shield
     ) {
-        BluetoothPermission()
-        CustomGroupDivider()
-        ManuallyGrant()
-    }
-}
+        var clickCount by remember { mutableIntStateOf(0) }
 
-@Composable
-fun BluetoothPermission() {
-    val context = LocalContext.current
+        val view = LocalView.current
+        val context = LocalContext.current
+        val successMessage = stringResource(id = R.string.success_and_back)
 
-    if (OsVersion.android12()) Text(text = stringResource(id = R.string.bluetooth_connect))
-    else Text(text = stringResource(id = R.string.bluetooth_bluetooth_admin))
+        if (OsVersion.android12()) Text(text = stringResource(id = R.string.bluetooth_connect))
+        else Text(text = stringResource(id = R.string.bluetooth_bluetooth_admin))
 
-    Button(
-        onClick = { requestPermission(context) }
-    ) {
-        Text(text = stringResource(id = R.string.request_permission))
+        Button(
+            onClick = {
+                if (PermissionUtil.noBluetoothPermission(context)) {
+                    PermissionUtil.requestBluetoothPermission(context)
+                    clickCount++
+                    return@Button
+                }
+                SnackbarUtil(view).snackbar(successMessage)
+            }
+        ) {
+            Text(text = stringResource(id = R.string.request_permission))
+        }
+
+        if (clickCount >= 2) {
+            CustomGroupDivider()
+            ManuallyGrant()
+        }
     }
 }
 
@@ -58,16 +68,4 @@ fun ManuallyGrant() {
             color = MaterialTheme.colorScheme.primary
         )
     }
-}
-
-private fun requestPermission(context: Context) {
-    if (OsVersion.android12()) {
-        request(context, arrayOf(BT_CONNECT))
-        return
-    }
-    request(context, arrayOf(BT, BT_ADMIN))
-}
-
-private fun request(context: Context, permission: Array<String>) {
-    ActivityCompat.requestPermissions(context as Activity, permission, 1)
 }

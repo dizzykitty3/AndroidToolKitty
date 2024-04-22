@@ -3,7 +3,6 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
-import android.content.Context
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Bluetooth
@@ -28,20 +27,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.const.BT
-import me.dizzykitty3.androidtoolkitty.foundation.const.BT_ADMIN
-import me.dizzykitty3.androidtoolkitty.foundation.const.BT_CONNECT
-import me.dizzykitty3.androidtoolkitty.foundation.const.GRANTED
 import me.dizzykitty3.androidtoolkitty.foundation.const.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.util.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 
 @SuppressLint("MissingPermission")
@@ -68,7 +62,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
         Button(
             onClick = {
                 // Check permission
-                if (noPermission(context)) {
+                if (PermissionUtil.noBluetoothPermission(context)) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                     return@Button
                 }
@@ -168,18 +162,4 @@ private fun type(type: Int): String {
         3 -> stringResource(id = R.string.dual)
         else -> stringResource(id = R.string.unknown)
     }
-}
-
-/**
- * @return true if the app does NOT have the required permissions, false otherwise.
- */
-private fun noPermission(context: Context): Boolean {
-    return if (OsVersion.android12())
-        check(context, BT_CONNECT)
-    else
-        check(context, BT) || check(context, BT_ADMIN)
-}
-
-private fun check(context: Context, permission: String): Boolean {
-    return ActivityCompat.checkSelfPermission(context, permission) != GRANTED
 }
