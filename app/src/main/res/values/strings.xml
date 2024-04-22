@@ -109,6 +109,16 @@
 
     <!-- Home screen: android versions -->
     <string name="android_versions">Android versions</string>
+    <string name="android_15">Android 15</string>
+    <string name="android_14">Android 14</string>
+    <string name="android_13">Android 13</string>
+    <string name="android_12_l">Android 12L</string>
+    <string name="android_12">Android 12</string>
+    <string name="api_35">API 35, VanillaIceCream</string>
+    <string name="api_34">API 34, UpsideDownCake</string>
+    <string name="api_33">API 33, Tiramisu</string>
+    <string name="api_32">API 32, Sv2</string>
+    <string name="api_31">API 31, S</string>
 
     <!-- Home screen: lucky wheel -->
     <string name="lucky_wheel">Lucky wheel</string>

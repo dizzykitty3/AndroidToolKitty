@@ -39,21 +39,21 @@ private fun RecentVersions() {
         Column(
             modifier = Modifier.weight(0.4f)
         ) {
-            AndroidVersion(text = "Android 15")
-            AndroidVersion(text = "Android 14")
-            AndroidVersion(text = "Android 13")
-            AndroidVersion(text = "Android 12L")
-            AndroidVersion(text = "Android 12")
+            AndroidVersion(id = R.string.android_15)
+            AndroidVersion(id = R.string.android_14)
+            AndroidVersion(id = R.string.android_13)
+            AndroidVersion(id = R.string.android_12_l)
+            AndroidVersion(id = R.string.android_12)
         }
 
         Column(
             modifier = Modifier.weight(0.6f)
         ) {
-            AndroidApiLevelAndName(text = "API 35, VanillaIceCream")
-            AndroidApiLevelAndName(text = "API 34, UpsideDownCake")
-            AndroidApiLevelAndName(text = "API 33, Tiramisu")
-            AndroidApiLevelAndName(text = "API 32, Sv2")
-            AndroidApiLevelAndName(text = "API 31, S")
+            AndroidApiLevelAndName(id = R.string.api_35)
+            AndroidApiLevelAndName(id = R.string.api_34)
+            AndroidApiLevelAndName(id = R.string.api_33)
+            AndroidApiLevelAndName(id = R.string.api_32)
+            AndroidApiLevelAndName(id = R.string.api_31)
         }
     }
 }
@@ -146,9 +146,27 @@ private fun AndroidApiLevelAndName(text: String) {
 }
 
 @Composable
+private fun AndroidApiLevelAndName(id: Int) {
+    Text(
+        text = buildAnnotatedString { CustomItalicText(text = stringResource(id = id)) },
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis
+    )
+}
+
+@Composable
 private fun AndroidVersion(text: String) {
     Text(
         text = text,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis
+    )
+}
+
+@Composable
+private fun AndroidVersion(id: Int) {
+    Text(
+        text = stringResource(id = id),
         maxLines = 1,
         overflow = TextOverflow.Ellipsis
     )
