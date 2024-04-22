@@ -50,6 +50,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -78,10 +79,12 @@ fun LuckyWheelCard() {
             )
         }
 
+        val textColor = MaterialTheme.colorScheme.onSecondaryContainer.toArgb()
+
         // 记住画笔设置，避免每次绘制时重新创建
         val paint = remember {
             android.graphics.Paint().apply {
-                color = android.graphics.Color.BLACK
+                color = textColor // onSecondaryContainer
                 textAlign = android.graphics.Paint.Align.CENTER
                 textSize = 40f
             }
@@ -91,8 +94,8 @@ fun LuckyWheelCard() {
         // Material Design颜色主题
         val colors = List(2) { index ->
             when (index) {
-                0 -> MaterialTheme.colorScheme.primaryContainer
-                else -> MaterialTheme.colorScheme.secondaryContainer
+                0 -> MaterialTheme.colorScheme.secondaryContainer
+                else -> MaterialTheme.colorScheme.surface
             }
         }
 
