@@ -93,7 +93,6 @@ object IntentUtil {
         }
     }
 
-    @JvmStatic
     private fun startActivity(intent: Intent) {
         try {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
