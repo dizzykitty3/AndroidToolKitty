@@ -37,7 +37,7 @@ fun CustomCard(
             modifier = cardPadding
         ) {
             if (icon == null) {
-                CardTitle(resId = title)
+                CardTitle(id = title)
                 CardContent { content() }
             } else {
                 Row {
@@ -49,7 +49,7 @@ fun CustomCard(
                         )
                     )
                     CustomIconAndTextPadding()
-                    CardTitle(resId = title)
+                    CardTitle(id = title)
                 }
                 CardContent { content() }
             }
@@ -60,11 +60,11 @@ fun CustomCard(
 
 @Composable
 private fun CardTitle(
-    resId: Int
+    id: Int
 ) {
     Text(
         modifier = Modifier.fillMaxWidth(),
-        text = stringResource(id = resId),
+        text = stringResource(id = id),
         style = TextStyle.Default.copy(
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Normal,

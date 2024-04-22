@@ -78,7 +78,7 @@ fun SysSettingCard() {
         }
 
         // UI
-        if (!checkIsAutoTime()) CustomTip(resId = R.string.set_time_automatically_is_off_tip)
+        if (!checkIsAutoTime()) CustomTip(id = R.string.set_time_automatically_is_off_tip)
         BatteryAndNetwork()
         if (isShowGroupTitle1 || isShowGroupTitle2) CustomGroupDivider()
         if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
@@ -161,13 +161,13 @@ fun NetworkState() {
 @Composable
 fun NetworkStateIcon(
     imageVector: ImageVector,
-    resId: Int
+    id: Int
 ) {
     Icon(
         imageVector = imageVector,
-        contentDescription = stringResource(id = resId),
+        contentDescription = stringResource(id = id),
         tint = MaterialTheme.colorScheme.primary
     )
     CustomSpacerPadding()
-    Text(text = stringResource(id = resId))
+    Text(text = stringResource(id = id))
 }

@@ -63,14 +63,14 @@ fun CustomGradientText(
 
 @Composable
 fun AnnotatedString.Builder.CustomBoldText(
-    resId: Int
+    id: Int
 ) {
     val boldTextStyle = SpanStyle(
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold
     )
     withStyle(boldTextStyle) {
-        append(stringResource(id = resId))
+        append(stringResource(id = id))
     }
 }
 
@@ -89,9 +89,9 @@ fun AnnotatedString.Builder.CustomItalicText(
 
 @Composable
 fun CustomTip(
-    resId: Int
+    id: Int
 ) {
-    CustomTip(formattedMessage = stringResource(id = resId))
+    CustomTip(formattedMessage = stringResource(id = id))
 }
 
 @Composable
@@ -128,10 +128,10 @@ fun CustomTip(
 
 @Composable
 fun CustomGroupTitleText(
-    resId: Int
+    id: Int
 ) {
     Text(
-        text = stringResource(id = resId),
+        text = stringResource(id = id),
         style = MaterialTheme.typography.titleMedium
     )
     CustomSpacerPadding()

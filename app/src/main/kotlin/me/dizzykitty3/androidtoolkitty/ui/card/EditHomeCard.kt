@@ -67,7 +67,7 @@ fun EditHomeCard() {
         var mIsShowCard12 by remember { mutableStateOf(isShowCard12) }
 
         CustomHideCardSettingSwitch(
-            resId = R.string.year_progress,
+            id = R.string.year_progress,
             cardId = CARD_1,
             isChecked = mIsShowCard1
         ) { newState ->
@@ -75,7 +75,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_1, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.volume,
+            id = R.string.volume,
             cardId = CARD_2,
             isChecked = mIsShowCard2
         ) { newState ->
@@ -83,7 +83,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_2, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.clipboard,
+            id = R.string.clipboard,
             cardId = CARD_3,
             isChecked = mIsShowCard3
         ) { newState ->
@@ -91,7 +91,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_3, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.url,
+            id = R.string.url,
             cardId = CARD_4,
             isChecked = mIsShowCard4
         ) { newState ->
@@ -99,7 +99,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_4, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.android_system_settings,
+            id = R.string.android_system_settings,
             cardId = CARD_6,
             isChecked = mIsShowCard6
         ) { newState ->
@@ -107,7 +107,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_6, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.unicode,
+            id = R.string.unicode,
             cardId = CARD_7,
             isChecked = mIsShowCard7
         ) { newState ->
@@ -115,7 +115,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_7, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.google_maps,
+            id = R.string.google_maps,
             cardId = CARD_8,
             isChecked = mIsShowCard8
         ) { newState ->
@@ -123,7 +123,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_8, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.open_app_on_google_play,
+            id = R.string.open_app_on_google_play,
             cardId = CARD_9,
             isChecked = mIsShowCard9
         ) { newState ->
@@ -131,7 +131,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_9, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.android_versions,
+            id = R.string.android_versions,
             cardId = CARD_10,
             isChecked = mIsShowCard10
         ) { newState ->
@@ -139,7 +139,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_10, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.lucky_wheel,
+            id = R.string.lucky_wheel,
             cardId = CARD_11,
             isChecked = mIsShowCard11
         ) { newState ->
@@ -147,7 +147,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_11, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.bluetooth_devices,
+            id = R.string.bluetooth_devices,
             cardId = CARD_12,
             isChecked = mIsShowCard12
         ) { newState ->

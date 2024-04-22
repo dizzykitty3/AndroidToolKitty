@@ -54,7 +54,7 @@ fun UrlCard() {
 
 @Composable
 private fun WebpageUrl() {
-    CustomGroupTitleText(resId = R.string.webpage)
+    CustomGroupTitleText(id = R.string.webpage)
 
     var url by remember { mutableStateOf("") }
 
@@ -117,7 +117,7 @@ private fun SocialMediaProfileIUrl() {
 
     val platformList = UrlUtil.Platform.entries.map { stringResource(it.nameResId) }
 
-    CustomGroupTitleText(resId = R.string.social_media_profile)
+    CustomGroupTitleText(id = R.string.social_media_profile)
 
     CustomDropdownMenu(
         items = platformList,
