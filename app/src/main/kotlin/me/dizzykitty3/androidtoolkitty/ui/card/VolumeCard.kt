@@ -129,8 +129,21 @@ fun VolumeCard() {
             }
 
             if (showVolumeDialog) {
-                var newCustomVolume by remember { mutableFloatStateOf(0f) }
-                var optionLabel by remember { mutableStateOf("") }
+                var newCustomVolume by remember {
+                    if (mCustomVolume < 0) {
+                        mutableFloatStateOf(0f)
+                    } else {
+                        mutableFloatStateOf(mCustomVolume.toFloat())
+                    }
+                }
+
+                var optionLabel by remember {
+                    if (mCustomVolume < 0) {
+                        mutableStateOf("")
+                    } else {
+                        mutableStateOf(mCustomVolumeOptionLabel.toString())
+                    }
+                }
 
                 AlertDialog(
                     onDismissRequest = {
@@ -145,7 +158,12 @@ fun VolumeCard() {
                                 value = newCustomVolume,
                                 onValueChange = {
                                     newCustomVolume = it
-                                    optionLabel = "${it.toInt()}%"
+                                    optionLabel =
+                                        if (mCustomVolume < 0) {
+                                            "${it.toInt()}%"
+                                        } else {
+                                            mCustomVolumeOptionLabel.toString()
+                                        }
                                 },
                                 valueRange = 0f..100f,
                                 steps = if (sliderIncrementFivePercent) 19 else 0
