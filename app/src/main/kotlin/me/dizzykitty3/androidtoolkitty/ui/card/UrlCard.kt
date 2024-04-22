@@ -8,16 +8,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Link
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
@@ -27,6 +27,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
@@ -70,16 +71,8 @@ private fun WebpageUrl() {
             onDone = { onClickVisitUrlButton(url) }
         ),
         trailingIcon = {
-            if (url.isNotBlank()) {
-                IconButton(onClick = {
-                    onClickVisitUrlButton(url)
-                }) {
-                    Icon(
-                        imageVector = Icons.Outlined.ArrowOutward,
-                        contentDescription = stringResource(id = R.string.visit),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
+            ClearInput(text = url) {
+                url = ""
             }
         },
         supportingText = {
@@ -102,6 +95,17 @@ private fun WebpageUrl() {
             Text(text = UrlUtil.urlSuffix(url))
         }
     )
+
+    TextButton(
+        onClick = { onClickVisitUrlButton(url) }
+    ) {
+        Text(text = stringResource(R.string.visit))
+        Icon(
+            imageVector = Icons.Outlined.ArrowOutward,
+            contentDescription = null,
+            modifier = Modifier.align(Alignment.CenterVertically)
+        )
+    }
 }
 
 @Composable
@@ -145,16 +149,8 @@ private fun SocialMediaProfileIUrl() {
             onDone = { onVisitProfileButton(username, mPlatformIndex) }
         ),
         trailingIcon = {
-            if (username.isNotBlank()) {
-                IconButton(onClick = {
-                    onVisitProfileButton(username, mPlatformIndex)
-                }) {
-                    Icon(
-                        imageVector = Icons.Outlined.ArrowOutward,
-                        contentDescription = stringResource(id = R.string.visit),
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                }
+            ClearInput(text = username) {
+                username = ""
             }
         },
         supportingText = {
@@ -173,6 +169,18 @@ private fun SocialMediaProfileIUrl() {
             }
         }
     )
+
+    TextButton(
+        onClick = { onVisitProfileButton(username, mPlatformIndex) }
+    ) {
+        Text(text = stringResource(R.string.visit))
+
+        Icon(
+            imageVector = Icons.Outlined.ArrowOutward,
+            contentDescription = null,
+            modifier = Modifier.align(Alignment.CenterVertically)
+        )
+    }
 }
 
 private fun onClickVisitUrlButton(url: String) {
