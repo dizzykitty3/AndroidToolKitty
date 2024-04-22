@@ -99,7 +99,7 @@ fun CustomTip(
     formattedMessage: String
 ) {
     Card(
-        modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_tip)),
+        modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_tip)),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
