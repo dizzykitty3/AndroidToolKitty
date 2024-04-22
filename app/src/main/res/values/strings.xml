@@ -30,7 +30,6 @@
     <string name="add_custom_volume">Add custom volume</string>
     <string name="you_can_set_a_label_for_it">You can set a label for it</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
-    <string name="skip">Skip</string>
 
     <!-- Home screen: clipboard -->
     <string name="clipboard">Clipboard</string>
@@ -164,7 +163,6 @@
     <string name="bluetooth_connect">To check paired bluetooth devices, please grant the app Nearby Devices permission.</string>
     <string name="bluetooth_bluetooth_admin">To check paired bluetooth devices, please grant the app BLUETOOTH, BLUETOOTH_ADMIN permissions.</string>
     <string name="missed_sys_popup">Missed the system permission popup?</string>
-    <string name="manually_grant">Manually grant</string>
 
     <!-- End of resources -->
 </resources>
