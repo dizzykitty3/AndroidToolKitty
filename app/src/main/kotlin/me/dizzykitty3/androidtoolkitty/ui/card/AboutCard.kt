@@ -113,7 +113,7 @@ private fun VersionNumber() {
         val debugVariant = BuildConfig.BUILD_TYPE == "debug"
         val versionInfo =
             if (debugVariant)
-                "${stringResource(R.string.version)} ${stringResource(R.string.version_number)} debug"
+                "${stringResource(R.string.version)} ${stringResource(R.string.version_number)} dev"
             else
                 "${stringResource(R.string.version)} ${stringResource(R.string.version_number)}"
         Text(text = versionInfo)
