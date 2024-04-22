@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -98,16 +99,16 @@ fun CustomTip(
     formattedMessage: String
 ) {
     Card(
-        modifier = Modifier.padding(bottom = 8.dp),
-        shape = RoundedCornerShape(8.dp),
+        modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_tip)),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
         )
     ) {
         Row(
             modifier = Modifier
-                .padding(8.dp)
+                .padding(dimensionResource(id = R.dimen.padding_tip))
                 .fillMaxWidth()
         ) {
             Icon(
