@@ -74,7 +74,7 @@ fun LuckyWheelCard() {
         // 初始化轮盘项目列表
         var items by remember {
             mutableStateOf(
-                getLuckySpinningWheelItems() ?: List(3) { index -> "$baseItem${index + 1}" }
+                getLuckySpinningWheelItems() ?: List(4) { index -> "$baseItem${index + 1}" }
             )
         }
 
