@@ -89,10 +89,9 @@ fun LuckyWheelCard() {
         var hasRotated by remember { mutableStateOf(false) }
 
         // Material Design颜色主题
-        val colors = List(3) { index ->
+        val colors = List(2) { index ->
             when (index) {
                 0 -> MaterialTheme.colorScheme.primaryContainer
-                1 -> MaterialTheme.colorScheme.inversePrimary
                 else -> MaterialTheme.colorScheme.secondaryContainer
             }
         }
