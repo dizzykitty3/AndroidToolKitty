@@ -70,57 +70,57 @@ private fun EarlyVersions() {
             ) {
                 AndroidVersion(id = R.string.android_11)
                 AndroidVersion(id = R.string.android_10)
-                AndroidVersion(text = "Android 9")
-                AndroidVersion(text = "Android 8.1")
-                AndroidVersion(text = "Android 8")
-                AndroidVersion(text = "Android 7.1.1")
-                AndroidVersion(text = "Android 7")
-                AndroidVersion(text = "Android 6")
-                AndroidVersion(text = "Android 5.1")
-                AndroidVersion(text = "Android 5")
-                AndroidVersion(text = "Android 4.4W")
-                AndroidVersion(text = "Android 4.4")
-                AndroidVersion(text = "Android 4.3")
-                AndroidVersion(text = "Android 4.2")
-                AndroidVersion(text = "Android 4.1")
-                AndroidVersion(text = "Android 4.0.3")
-                AndroidVersion(text = "Android 4.0")
-                AndroidVersion(text = "Android 3.2")
-                AndroidVersion(text = "Android 3.1")
-                AndroidVersion(text = "Android 3.0")
-                AndroidVersion(text = "Android 2.3.3")
-                AndroidVersion(text = "Android 2.3")
-                AndroidVersion(text = "Android 2.2")
-                AndroidVersion(text = "Android 2.1")
+                AndroidVersion(id = R.string.android_9)
+                AndroidVersion(id = R.string.android_8_1)
+                AndroidVersion(id = R.string.android_8)
+                AndroidVersion(id = R.string.android_7_1_1)
+                AndroidVersion(id = R.string.android_7)
+                AndroidVersion(id = R.string.android_6)
+                AndroidVersion(id = R.string.android_5_1)
+                AndroidVersion(id = R.string.android_5)
+                AndroidVersion(id = R.string.android_4_4_w)
+                AndroidVersion(id = R.string.android_4_4)
+                AndroidVersion(id = R.string.android_4_3)
+                AndroidVersion(id = R.string.android_4_2)
+                AndroidVersion(id = R.string.android_4_1)
+                AndroidVersion(id = R.string.android_4_0_3)
+                AndroidVersion(id = R.string.android_4_0)
+                AndroidVersion(id = R.string.android_3_2)
+                AndroidVersion(id = R.string.android_3_1)
+                AndroidVersion(id = R.string.android_3_0)
+                AndroidVersion(id = R.string.android_2_3_3)
+                AndroidVersion(id = R.string.android_2_3)
+                AndroidVersion(id = R.string.android_2_2)
+                AndroidVersion(id = R.string.android_2_1)
             }
 
             Column(
                 modifier = Modifier.weight(0.6f)
             ) {
-                AndroidApiLevelAndName(text = "API 30, R")
-                AndroidApiLevelAndName(text = "API 29, Q")
-                AndroidApiLevelAndName(text = "API 28, Pie")
-                AndroidApiLevelAndName(text = "API 27, Oreo")
-                AndroidApiLevelAndName(text = "API 26, Oreo")
-                AndroidApiLevelAndName(text = "API 25, Nougat")
-                AndroidApiLevelAndName(text = "API 24, Nougat")
-                AndroidApiLevelAndName(text = "API 23, Marshmallow")
-                AndroidApiLevelAndName(text = "API 22, Lollipop")
-                AndroidApiLevelAndName(text = "API 21, Lollipop")
-                AndroidApiLevelAndName(text = "API 20, KitKat Wear")
-                AndroidApiLevelAndName(text = "API 19, KitKat")
-                AndroidApiLevelAndName(text = "API 18, Jelly Bean")
-                AndroidApiLevelAndName(text = "API 17, Jelly Bean")
-                AndroidApiLevelAndName(text = "API 16, Jelly Bean")
-                AndroidApiLevelAndName(text = "API 15, IceCreamSandwich")
-                AndroidApiLevelAndName(text = "API 14, IceCreamSandwich")
-                AndroidApiLevelAndName(text = "API 13, Honeycomb")
-                AndroidApiLevelAndName(text = "API 12, Honeycomb")
-                AndroidApiLevelAndName(text = "API 11, Honeycomb")
-                AndroidApiLevelAndName(text = "API 10, Gingerbread")
-                AndroidApiLevelAndName(text = "API 9, Gingerbread")
-                AndroidApiLevelAndName(text = "API 8, Froyo")
-                AndroidApiLevelAndName(text = "API 7, Eclair")
+                AndroidApiLevelAndName(id = R.string.api_30)
+                AndroidApiLevelAndName(id = R.string.api_29)
+                AndroidApiLevelAndName(id = R.string.api_28)
+                AndroidApiLevelAndName(id = R.string.api_27)
+                AndroidApiLevelAndName(id = R.string.api_26)
+                AndroidApiLevelAndName(id = R.string.api_25)
+                AndroidApiLevelAndName(id = R.string.api_24)
+                AndroidApiLevelAndName(id = R.string.api_23)
+                AndroidApiLevelAndName(id = R.string.api_22)
+                AndroidApiLevelAndName(id = R.string.api_21)
+                AndroidApiLevelAndName(id = R.string.api_20)
+                AndroidApiLevelAndName(id = R.string.api_19)
+                AndroidApiLevelAndName(id = R.string.api_18)
+                AndroidApiLevelAndName(id = R.string.api_17)
+                AndroidApiLevelAndName(id = R.string.api_16)
+                AndroidApiLevelAndName(id = R.string.api_15)
+                AndroidApiLevelAndName(id = R.string.api_14)
+                AndroidApiLevelAndName(id = R.string.api_13)
+                AndroidApiLevelAndName(id = R.string.api_12)
+                AndroidApiLevelAndName(id = R.string.api_11)
+                AndroidApiLevelAndName(id = R.string.api_10)
+                AndroidApiLevelAndName(id = R.string.api_9)
+                AndroidApiLevelAndName(id = R.string.api_8)
+                AndroidApiLevelAndName(id = R.string.api_7)
             }
         }
     }
@@ -137,27 +137,9 @@ private fun EarlyVersions() {
 }
 
 @Composable
-private fun AndroidApiLevelAndName(text: String) {
-    Text(
-        text = buildAnnotatedString { CustomItalicText(text = text) },
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis
-    )
-}
-
-@Composable
 private fun AndroidApiLevelAndName(id: Int) {
     Text(
         text = buildAnnotatedString { CustomItalicText(text = stringResource(id = id)) },
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis
-    )
-}
-
-@Composable
-private fun AndroidVersion(text: String) {
-    Text(
-        text = text,
         maxLines = 1,
         overflow = TextOverflow.Ellipsis
     )
