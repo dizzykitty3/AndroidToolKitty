@@ -5,6 +5,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.BatteryStd
+import androidx.compose.material.icons.outlined.NetworkCell
+import androidx.compose.material.icons.outlined.QuestionMark
+import androidx.compose.material.icons.outlined.Wifi
+import androidx.compose.material.icons.outlined.WifiOff
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -18,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -38,7 +44,10 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTINGS_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCardSpacePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomOneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomScreen
+import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
+import me.dizzykitty3.androidtoolkitty.foundation.util.BatteryUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.ui.card.AndroidVersionCard
 import me.dizzykitty3.androidtoolkitty.ui.card.AppMarketCard
 import me.dizzykitty3.androidtoolkitty.ui.card.BluetoothDeviceCard
@@ -71,6 +80,8 @@ fun HomeScreen(navController: NavHostController) {
                 locale
             )
         )
+
+        BatteryAndNetwork()
 
         val cardMapping = mapOf(
             CARD_1 to settingsSharedPref.getCardShowedState(CARD_1),
@@ -144,4 +155,62 @@ fun GreetingAndSetting(navController: NavHostController) {
             }
         }
     }
+}
+
+@Composable
+fun BatteryAndNetwork() {
+    val batteryLevel = remember { BatteryUtil.batteryLevel() }
+
+    Row {
+        Icon(
+            imageVector = Icons.Outlined.BatteryStd,
+            contentDescription = stringResource(id = R.string.battery_level),
+            tint = MaterialTheme.colorScheme.primary
+        )
+        CustomSpacerPadding()
+        Text(text = "$batteryLevel%")
+
+        CustomSpacerPadding()
+        CustomSpacerPadding()
+
+        NetworkState()
+    }
+    CustomSpacerPadding()
+}
+
+@Composable
+fun NetworkState() {
+    val networkState = remember { NetworkUtil.networkState() }
+
+    when (networkState) {
+        NetworkUtil.STATE_CODE_WIFI -> {
+            NetworkStateIcon(Icons.Outlined.Wifi, R.string.wifi)
+        }
+
+        NetworkUtil.STATE_CODE_MOBILE -> {
+            NetworkStateIcon(Icons.Outlined.NetworkCell, R.string.cellular)
+        }
+
+        NetworkUtil.STATE_CODE_OFFLINE -> {
+            NetworkStateIcon(Icons.Outlined.WifiOff, R.string.offline)
+        }
+
+        else -> {
+            NetworkStateIcon(Icons.Outlined.QuestionMark, R.string.unknown)
+        }
+    }
+}
+
+@Composable
+fun NetworkStateIcon(
+    imageVector: ImageVector,
+    id: Int
+) {
+    Icon(
+        imageVector = imageVector,
+        contentDescription = stringResource(id = id),
+        tint = MaterialTheme.colorScheme.primary
+    )
+    CustomSpacerPadding()
+    Text(text = stringResource(id = id))
 }

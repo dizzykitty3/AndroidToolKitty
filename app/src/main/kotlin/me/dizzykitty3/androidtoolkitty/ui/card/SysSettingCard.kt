@@ -2,22 +2,11 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.content.ContentResolver
 import android.provider.Settings
-import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.BatteryStd
-import androidx.compose.material.icons.outlined.NetworkCell
-import androidx.compose.material.icons.outlined.QuestionMark
 import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.Wifi
-import androidx.compose.material.icons.outlined.WifiOff
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
@@ -33,11 +22,8 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleText
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
-import me.dizzykitty3.androidtoolkitty.foundation.util.BatteryUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.NetworkUtil
 
 @Composable
 fun SysSettingCard() {
@@ -79,8 +65,7 @@ fun SysSettingCard() {
 
         // UI
         if (!checkIsAutoTime()) CustomTip(id = R.string.set_time_automatically_is_off_tip)
-        BatteryAndNetwork()
-        if (isShowGroupTitle1 || isShowGroupTitle2) CustomGroupDivider()
+
         if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
 
         settings.subList(0, 6).forEach { setting ->
@@ -113,61 +98,3 @@ private fun checkIsAutoTime(): Boolean {
 }
 
 data class Setting(val settingType: String, val buttonText: Int)
-
-@Composable
-fun BatteryAndNetwork() {
-    val batteryLevel = remember { BatteryUtil.batteryLevel() }
-
-    Row {
-        Icon(
-            imageVector = Icons.Outlined.BatteryStd,
-            contentDescription = stringResource(id = R.string.battery_level),
-            tint = MaterialTheme.colorScheme.primary
-        )
-        CustomSpacerPadding()
-        Text(text = "$batteryLevel%")
-
-        CustomSpacerPadding()
-        CustomSpacerPadding()
-
-        NetworkState()
-    }
-    CustomSpacerPadding()
-}
-
-@Composable
-fun NetworkState() {
-    val networkState = remember { NetworkUtil.networkState() }
-
-    when (networkState) {
-        NetworkUtil.STATE_CODE_WIFI -> {
-            NetworkStateIcon(Icons.Outlined.Wifi, R.string.wifi)
-        }
-
-        NetworkUtil.STATE_CODE_MOBILE -> {
-            NetworkStateIcon(Icons.Outlined.NetworkCell, R.string.cellular)
-        }
-
-        NetworkUtil.STATE_CODE_OFFLINE -> {
-            NetworkStateIcon(Icons.Outlined.WifiOff, R.string.offline)
-        }
-
-        else -> {
-            NetworkStateIcon(Icons.Outlined.QuestionMark, R.string.unknown)
-        }
-    }
-}
-
-@Composable
-fun NetworkStateIcon(
-    imageVector: ImageVector,
-    id: Int
-) {
-    Icon(
-        imageVector = imageVector,
-        contentDescription = stringResource(id = id),
-        tint = MaterialTheme.colorScheme.primary
-    )
-    CustomSpacerPadding()
-    Text(text = stringResource(id = id))
-}
