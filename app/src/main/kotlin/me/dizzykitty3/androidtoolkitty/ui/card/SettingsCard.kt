@@ -204,8 +204,8 @@ private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view:
     SettingsSharedPref.dynamicColor = isDynamicColor
 
     SnackbarUtil(view).snackbar(
-        message = context.getString(R.string.requires_restart_do_it_now),
-        buttonText = context.getString(R.string.restart),
+        message = R.string.requires_restart_do_it_now,
+        buttonText = R.string.restart,
         buttonColor = color,
         buttonClickListener = { IntentUtil.restartApp(context) }
     )

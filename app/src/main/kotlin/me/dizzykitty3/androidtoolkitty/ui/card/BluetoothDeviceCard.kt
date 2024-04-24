@@ -55,8 +55,6 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
         var size by remember { mutableIntStateOf(0) }
 
-        val bluetoothDisabledMessage = stringResource(id = R.string.bluetooth_disabled)
-        val turnOnMessage = stringResource(id = R.string.turn_on_bluetooth)
         val materialColor = MaterialTheme.colorScheme.primary.toArgb()
 
         Button(
@@ -80,8 +78,8 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
                 // When Bluetooth is OFF
                 SnackbarUtil(view).snackbar(
-                    message = bluetoothDisabledMessage,
-                    buttonText = turnOnMessage,
+                    message = R.string.bluetooth_disabled,
+                    buttonText = R.string.turn_on_bluetooth,
                     buttonColor = materialColor,
                     buttonClickListener = { IntentUtil.openBluetooth() }
                 )

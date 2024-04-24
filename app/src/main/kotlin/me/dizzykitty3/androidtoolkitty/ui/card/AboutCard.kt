@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
@@ -73,7 +72,6 @@ private fun GitHubRepoLink() {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val context = LocalContext.current
         val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
 
         Icon(
@@ -83,7 +81,7 @@ private fun GitHubRepoLink() {
         CustomIconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
-                ToastUtil.toast(context.getString(R.string.all_help_welcomed))
+                ToastUtil.toast(R.string.all_help_welcomed)
                 IntentUtil.openUrl(sourceCodeUrl)
             }
         ) {

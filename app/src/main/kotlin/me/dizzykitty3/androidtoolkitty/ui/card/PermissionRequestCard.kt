@@ -32,7 +32,6 @@ fun PermissionRequestCard() {
 
         val view = LocalView.current
         val context = LocalContext.current
-        val successMessage = stringResource(id = R.string.success_and_back)
 
         if (OsVersion.android12()) Text(text = stringResource(id = R.string.bluetooth_connect))
         else Text(text = stringResource(id = R.string.bluetooth_bluetooth_admin))
@@ -44,7 +43,7 @@ fun PermissionRequestCard() {
                     clickCount++
                     return@Button
                 }
-                SnackbarUtil(view).snackbar(successMessage)
+                SnackbarUtil(view).snackbar(R.string.success_and_back)
             }
         ) {
             Text(text = stringResource(id = R.string.request_permission))

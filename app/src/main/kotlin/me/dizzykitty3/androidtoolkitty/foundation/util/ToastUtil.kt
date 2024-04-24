@@ -9,8 +9,17 @@ object ToastUtil {
     fun toast(message: String) = Toast.makeText(app, message, Toast.LENGTH_SHORT).show()
 
     @JvmStatic
-    fun toastAndLog(tag:String,logEvent: String) {
+    fun toast(message: Int) = toast(app.applicationContext.getString(message))
+
+    @JvmStatic
+    fun toastAndLog(tag: String, logEvent: String) {
         Log.i(tag, logEvent)
         toast(logEvent)
+    }
+
+    @JvmStatic
+    fun toastAndLog(tag: String, logEvent: Int) {
+        Log.i(tag, app.applicationContext.getString(logEvent))
+        toast(app.applicationContext.getString(logEvent))
     }
 }
