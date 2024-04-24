@@ -168,8 +168,8 @@
     <string name="api_8">API 8, Froyo</string>
     <string name="api_7">API 7, Eclair</string>
 
-    <!-- Home screen: lucky wheel -->
-    <string name="lucky_wheel">Lucky wheel</string>
+    <!-- Home screen: wheel of fortune -->
+    <string name="wheel_of_fortune">Wheel of Fortune</string>
     <string name="item">item</string>
     <string name="start_spinning">Start</string>
     <string name="selected">selected</string>

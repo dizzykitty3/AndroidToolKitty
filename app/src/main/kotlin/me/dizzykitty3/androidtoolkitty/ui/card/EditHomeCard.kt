@@ -139,7 +139,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_10, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.lucky_wheel,
+            id = R.string.wheel_of_fortune,
             cardId = CARD_11,
             isChecked = mIsShowCard11
         ) { newState ->

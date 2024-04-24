@@ -44,12 +44,12 @@ import me.dizzykitty3.androidtoolkitty.ui.card.AppMarketCard
 import me.dizzykitty3.androidtoolkitty.ui.card.BluetoothDeviceCard
 import me.dizzykitty3.androidtoolkitty.ui.card.ClipboardCard
 import me.dizzykitty3.androidtoolkitty.ui.card.Greeting
-import me.dizzykitty3.androidtoolkitty.ui.card.LuckyWheelCard
 import me.dizzykitty3.androidtoolkitty.ui.card.MapsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.SysSettingCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UnicodeCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UrlCard
 import me.dizzykitty3.androidtoolkitty.ui.card.VolumeCard
+import me.dizzykitty3.androidtoolkitty.ui.card.WheelOfFortuneCard
 import me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
 import java.util.Locale
 
@@ -98,7 +98,7 @@ fun HomeScreen(navController: NavHostController) {
                     CARD_8 -> MapsCard()
                     CARD_9 -> AppMarketCard()
                     CARD_10 -> AndroidVersionCard()
-                    CARD_11 -> LuckyWheelCard()
+                    CARD_11 -> WheelOfFortuneCard()
                     CARD_12 -> BluetoothDeviceCard(navController)
                 }
             }

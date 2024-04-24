@@ -123,7 +123,7 @@
     <string name="api_9">API 9, Gingerbread</string>
     <string name="api_8">API 8, Froyo</string>
     <string name="api_7">API 7, Eclair</string>
-    <string name="lucky_wheel">幸运大转盘</string>
+    <string name="wheel_of_fortune">幸运大转盘</string>
     <string name="info">信息</string>
     <string name="go_to_settings">Go to settings</string>
     <string name="no_translation">抱歉， %1$s 翻译尚未添加。</string>

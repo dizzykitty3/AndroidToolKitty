@@ -18,7 +18,7 @@ const val CARD_7 = "card_unicode"
 const val CARD_8 = "card_google_maps"
 const val CARD_9 = "card_app_market"
 const val CARD_10 = "card_android_version"
-const val CARD_11 = "card_lucky_wheel"
+const val CARD_11 = "card_wheel_of_fortune"
 const val CARD_12 = "card_bluetooth_device"
 
 const val SETTING_1 = "setting_display"

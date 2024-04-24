@@ -65,11 +65,11 @@ import kotlin.math.sin
 import kotlin.random.Random
 
 @Composable
-fun LuckyWheelCard() {
+fun WheelOfFortuneCard() {
     // 使用CustomCard布局展示幸运轮盘
     CustomCard(
         icon = Icons.Outlined.Casino,
-        title = R.string.lucky_wheel
+        title = R.string.wheel_of_fortune
     ) {
         val baseItem = stringResource(R.string.item)
         // 初始化轮盘项目列表
