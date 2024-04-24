@@ -5,6 +5,9 @@ import com.google.android.material.snackbar.Snackbar
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 
 class SnackbarUtil(private val view: View) {
+    fun snackbar(message: String) =
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
+
     fun snackbar(message: Int) =
         Snackbar.make(view, app.applicationContext.getString(message), Snackbar.LENGTH_SHORT).show()
 

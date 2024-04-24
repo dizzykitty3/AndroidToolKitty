@@ -53,6 +53,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -61,7 +62,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setLuckySpinningWheelItems
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -112,6 +113,8 @@ fun WheelOfFortuneCard() {
             animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = "",
         )
 
+        val view = LocalView.current
+
         // 当动画结束时，计算并显示选中的项目
         LaunchedEffect(currentRotationDegrees) {
             if (currentRotationDegrees == targetRotationDegrees && hasRotated) {
@@ -123,7 +126,7 @@ fun WheelOfFortuneCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                ToastUtil.toast(selected)
+                SnackbarUtil(view).snackbar(selected)
                 rotationDegrees = targetRotationDegrees % 360
             }
         }
