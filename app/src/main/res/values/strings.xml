@@ -171,7 +171,7 @@
     <!-- Home screen: wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
     <string name="item">item</string>
-    <string name="start_spinning">Start</string>
+    <string name="start_spinning">Spin</string>
     <string name="selected">selected</string>
 
     <!-- Home screen: bluetooth devices -->
