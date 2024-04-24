@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.theme.ToolKittyTheme
 import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import me.dizzykitty3.androidtoolkitty.ui.AppNavigationHost
 
 @AndroidEntryPoint
@@ -52,8 +53,13 @@ class MainActivity : ComponentActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        if (hasFocus and isAutoClearClipboard) // Clipboard operations require window focus
-            ClipboardUtil.clear()
+        if (hasFocus and isAutoClearClipboard) {// Clipboard operations require window focus
+            val cleared = ClipboardUtil.check()
+            if (cleared) {
+                ToastUtil.toast(R.string.clipboard_cleared_automatically)
+                Log.i(TAG, "Clipboard cleared automatically")
+            }
+        }
     }
 
     override fun onStop() {

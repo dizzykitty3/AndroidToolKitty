@@ -3,11 +3,10 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.R
 
 object ClipboardUtil {
-    private const val TAG = "ClipboardUtil"
     private lateinit var clipboard: ClipboardManager
 
     private fun clipboardService() {
@@ -19,8 +18,17 @@ object ClipboardUtil {
         clipboardService()
         if (clipboard.hasPrimaryClip()) {
             clipboard.clearPrimaryClip()
-            ToastUtil.toastAndLog(TAG,app.getString(R.string.clipboard_cleared_automatically))
         }
+    }
+
+    @JvmStatic
+    fun check(): Boolean {
+        clipboardService()
+        if (clipboard.hasPrimaryClip()) {
+            clipboard.clearPrimaryClip()
+            return true
+        }
+        return false
     }
 
     @JvmStatic
