@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.ui.component
+package me.dizzykitty3.androidtoolkitty.foundation.composable
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row

@@ -10,6 +10,11 @@ import androidx.compose.runtime.remember
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupDivider
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupTitleText
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSystemSettingsButton
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTip
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_2
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_3
@@ -19,11 +24,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_6
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupDivider
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomGroupTitleText
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSystemSettingsButton
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
 
 @Composable
 fun SysSettingCard() {

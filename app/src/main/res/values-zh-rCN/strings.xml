@@ -151,7 +151,6 @@
     <string name="offline">无网络</string>
     <string name="item">条目</string>
     <string name="start_spinning">开始旋转</string>
-    <string name="selected">已选中</string>
     <string name="unknown_device">未知设备</string>
     <string name="turn_on_bluetooth">Turn on Bluetooth</string>
     <string name="success_and_back">Success! Now you can back to the previous screen</string>

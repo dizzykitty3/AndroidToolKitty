@@ -7,6 +7,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_2
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_3
@@ -16,8 +18,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_6
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 
 // TODO refactor this bullshit

@@ -32,6 +32,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomBottomPadding
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCardSpacePadding
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomOneHandedModePadding
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTip
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTopPadding
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_1
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_10
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_11
@@ -44,12 +50,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_9
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTINGS_SCREEN
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomBottomPadding
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCardSpacePadding
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomOneHandedModePadding
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTip
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomTopPadding
 import me.dizzykitty3.androidtoolkitty.foundation.util.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.ui.card.AndroidVersionCard

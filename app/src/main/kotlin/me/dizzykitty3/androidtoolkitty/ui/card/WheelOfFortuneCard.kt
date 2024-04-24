@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
+import android.graphics.Paint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -58,7 +59,8 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.getLuckySpinningWheelItems
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setLuckySpinningWheelItems
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import kotlin.math.cos
 import kotlin.math.sin
@@ -83,9 +85,9 @@ fun WheelOfFortuneCard() {
 
         // 记住画笔设置，避免每次绘制时重新创建
         val paint = remember {
-            android.graphics.Paint().apply {
+            Paint().apply {
                 color = textColor // onSecondaryContainer
-                textAlign = android.graphics.Paint.Align.CENTER
+                textAlign = Paint.Align.CENTER
                 textSize = 40f
             }
         }
@@ -110,7 +112,6 @@ fun WheelOfFortuneCard() {
             animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = "",
         )
 
-        val baseSelected = stringResource(R.string.selected)
         // 当动画结束时，计算并显示选中的项目
         LaunchedEffect(currentRotationDegrees) {
             if (currentRotationDegrees == targetRotationDegrees && hasRotated) {
@@ -122,7 +123,7 @@ fun WheelOfFortuneCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                ToastUtil.toast("$baseSelected: $selected")
+                ToastUtil.toast(selected)
                 rotationDegrees = targetRotationDegrees % 360
             }
         }
@@ -132,6 +133,9 @@ fun WheelOfFortuneCard() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             val primary = MaterialTheme.colorScheme.primary
+
+            CustomSpacerPadding()
+            CustomSpacerPadding()
 
             // 绘制转盘
             Canvas(modifier = Modifier.size(250.dp)) {
@@ -196,6 +200,8 @@ fun WheelOfFortuneCard() {
                 )
             }
 
+            CustomSpacerPadding()
+
             // 旋转按钮
             Button(onClick = {
                 if (items.isNotEmpty() && !isSpinning) {
@@ -228,11 +234,11 @@ fun WheelOfFortuneCard() {
 
 @Composable
 fun ExpandableList(
-items: List<String>,
-onItemsChange: (List<String>) -> Unit,
-expanded: Boolean,
-setExpanded: (Boolean) -> Unit,
-isSpinning: Boolean
+    items: List<String>,
+    onItemsChange: (List<String>) -> Unit,
+    expanded: Boolean,
+    setExpanded: (Boolean) -> Unit,
+    isSpinning: Boolean
 ) {
     // 正在编辑的元素索引，-1表示没有元素处于编辑状态
     var editingIndex by remember { mutableIntStateOf(-1) }

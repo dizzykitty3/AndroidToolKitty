@@ -14,8 +14,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomAnimatedProgressIndicator
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomAnimatedProgressIndicator
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.daysPassed
 import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.totalDaysInYear
 import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.yearProgress
