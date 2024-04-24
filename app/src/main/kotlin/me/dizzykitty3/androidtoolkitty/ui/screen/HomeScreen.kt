@@ -41,10 +41,10 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTopPadding
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_1
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_10
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_11
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_12
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_2
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_3
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_4
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_5
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_6
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_8
@@ -209,13 +209,13 @@ fun HomeCards(navController: NavHostController) {
         CARD_2 to settingsSharedPref.getCardShowedState(CARD_2),
         CARD_3 to settingsSharedPref.getCardShowedState(CARD_3),
         CARD_4 to settingsSharedPref.getCardShowedState(CARD_4),
+        CARD_5 to settingsSharedPref.getCardShowedState(CARD_5),
         CARD_6 to settingsSharedPref.getCardShowedState(CARD_6),
         CARD_7 to settingsSharedPref.getCardShowedState(CARD_7),
         CARD_8 to settingsSharedPref.getCardShowedState(CARD_8),
         CARD_9 to settingsSharedPref.getCardShowedState(CARD_9),
         CARD_10 to settingsSharedPref.getCardShowedState(CARD_10),
-        CARD_11 to settingsSharedPref.getCardShowedState(CARD_11),
-        CARD_12 to settingsSharedPref.getCardShowedState(CARD_12)
+        CARD_11 to settingsSharedPref.getCardShowedState(CARD_11)
     )
 
     cardMapping.forEach { (cardName, isShow) ->
@@ -225,13 +225,13 @@ fun HomeCards(navController: NavHostController) {
                 CARD_2 -> VolumeCard()
                 CARD_3 -> ClipboardCard()
                 CARD_4 -> UrlCard()
-                CARD_6 -> SysSettingCard()
-                CARD_7 -> UnicodeCard()
-                CARD_8 -> MapsCard()
+                CARD_5 -> SysSettingCard()
+                CARD_6 -> WheelOfFortuneCard()
+                CARD_7 -> BluetoothDeviceCard(navController)
+                CARD_8 -> UnicodeCard()
                 CARD_9 -> AppMarketCard()
-                CARD_10 -> AndroidVersionCard()
-                CARD_11 -> WheelOfFortuneCard()
-                CARD_12 -> BluetoothDeviceCard(navController)
+                CARD_10 -> MapsCard()
+                CARD_11 -> AndroidVersionCard()
             }
         }
     }

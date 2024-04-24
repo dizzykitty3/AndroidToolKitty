@@ -25,10 +25,10 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_1
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_10
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_11
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_12
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_2
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_3
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_4
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_5
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_6
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_8
@@ -46,25 +46,25 @@ fun EditHomeCard() {
         val isShowCard2 = settingsSharedPref.getCardShowedState(CARD_2)
         val isShowCard3 = settingsSharedPref.getCardShowedState(CARD_3)
         val isShowCard4 = settingsSharedPref.getCardShowedState(CARD_4)
+        val isShowCard5 = settingsSharedPref.getCardShowedState(CARD_5)
         val isShowCard6 = settingsSharedPref.getCardShowedState(CARD_6)
         val isShowCard7 = settingsSharedPref.getCardShowedState(CARD_7)
         val isShowCard8 = settingsSharedPref.getCardShowedState(CARD_8)
         val isShowCard9 = settingsSharedPref.getCardShowedState(CARD_9)
         val isShowCard10 = settingsSharedPref.getCardShowedState(CARD_10)
         val isShowCard11 = settingsSharedPref.getCardShowedState(CARD_11)
-        val isShowCard12 = settingsSharedPref.getCardShowedState(CARD_12)
 
         var mIsShowCard1 by remember { mutableStateOf(isShowCard1) }
         var mIsShowCard2 by remember { mutableStateOf(isShowCard2) }
         var mIsShowCard3 by remember { mutableStateOf(isShowCard3) }
         var mIsShowCard4 by remember { mutableStateOf(isShowCard4) }
+        var mIsShowCard5 by remember { mutableStateOf(isShowCard5) }
         var mIsShowCard6 by remember { mutableStateOf(isShowCard6) }
         var mIsShowCard7 by remember { mutableStateOf(isShowCard7) }
         var mIsShowCard8 by remember { mutableStateOf(isShowCard8) }
         var mIsShowCard9 by remember { mutableStateOf(isShowCard9) }
         var mIsShowCard10 by remember { mutableStateOf(isShowCard10) }
         var mIsShowCard11 by remember { mutableStateOf(isShowCard11) }
-        var mIsShowCard12 by remember { mutableStateOf(isShowCard12) }
 
         CustomHideCardSettingSwitch(
             id = R.string.year_progress,
@@ -100,6 +100,14 @@ fun EditHomeCard() {
         }
         CustomHideCardSettingSwitch(
             id = R.string.android_system_settings,
+            cardId = CARD_5,
+            isChecked = mIsShowCard5
+        ) { newState ->
+            mIsShowCard5 = newState
+            settingsSharedPref.saveCardShowedState(CARD_5, newState)
+        }
+        CustomHideCardSettingSwitch(
+            id = R.string.wheel_of_fortune,
             cardId = CARD_6,
             isChecked = mIsShowCard6
         ) { newState ->
@@ -107,7 +115,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_6, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.unicode,
+            id = R.string.bluetooth_devices,
             cardId = CARD_7,
             isChecked = mIsShowCard7
         ) { newState ->
@@ -115,7 +123,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_7, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.google_maps,
+            id = R.string.unicode,
             cardId = CARD_8,
             isChecked = mIsShowCard8
         ) { newState ->
@@ -131,7 +139,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_9, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.android_versions,
+            id = R.string.google_maps,
             cardId = CARD_10,
             isChecked = mIsShowCard10
         ) { newState ->
@@ -139,20 +147,12 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_10, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.wheel_of_fortune,
+            id = R.string.android_versions,
             cardId = CARD_11,
             isChecked = mIsShowCard11
         ) { newState ->
             mIsShowCard11 = newState
             settingsSharedPref.saveCardShowedState(CARD_11, newState)
-        }
-        CustomHideCardSettingSwitch(
-            id = R.string.bluetooth_devices,
-            cardId = CARD_12,
-            isChecked = mIsShowCard12
-        ) { newState ->
-            mIsShowCard12 = newState
-            settingsSharedPref.saveCardShowedState(CARD_12, newState)
         }
 
         CustomGroupDivider()
@@ -164,13 +164,13 @@ fun EditHomeCard() {
                 mIsShowCard2 = false
                 mIsShowCard3 = false
                 mIsShowCard4 = false
+                mIsShowCard5 = false
                 mIsShowCard6 = false
                 mIsShowCard7 = false
                 mIsShowCard8 = false
                 mIsShowCard9 = false
                 mIsShowCard10 = false
                 mIsShowCard11 = false
-                mIsShowCard12 = false
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
@@ -190,13 +190,13 @@ fun EditHomeCard() {
                 mIsShowCard2 = true
                 mIsShowCard3 = true
                 mIsShowCard4 = true
+                mIsShowCard5 = true
                 mIsShowCard6 = true
                 mIsShowCard7 = true
                 mIsShowCard8 = true
                 mIsShowCard9 = true
                 mIsShowCard10 = true
                 mIsShowCard11 = true
-                mIsShowCard12 = true
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
@@ -217,13 +217,13 @@ private fun onClickChangeAllCardsButton(isShow: Boolean) {
         CARD_2,
         CARD_3,
         CARD_4,
+        CARD_5,
         CARD_6,
         CARD_7,
         CARD_8,
         CARD_9,
         CARD_10,
-        CARD_11,
-        CARD_12
+        CARD_11
     )
     val settingsViewModel = SettingsSharedPref
 
