@@ -17,6 +17,7 @@ object SettingsSharedPref {
     private const val IS_DYNAMIC_COLOR = "is_dynamic_color"
     private const val IS_ONE_HANDED_MODE = "is_one_handed_mode"
     private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
+    private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -75,6 +76,16 @@ object SettingsSharedPref {
             Log.d(TAG, "have opened settings menu = $value")
             with(getSharedPrefs().edit()) {
                 putBoolean(HAVE_OPENED_SETTINGS_SCREEN, value)
+                apply()
+            }
+        }
+
+    var haveCustomLabel: Boolean
+        get() = getSharedPrefs().getBoolean(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
+        set(value) {
+            Log.d(TAG, "using custom volume option label = $value")
+            with(getSharedPrefs().edit()) {
+                putBoolean(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
                 apply()
             }
         }

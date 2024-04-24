@@ -61,6 +61,9 @@ fun VolumeCard() {
         val customVolumeOptionLabel = settingsSharedPref.getCustomVolumeOptionLabel()
         var mCustomVolumeOptionLabel by remember { mutableStateOf(customVolumeOptionLabel) }
 
+        val haveCustomLabel = settingsSharedPref.haveCustomLabel
+        var mHaveCustomLabel by remember { mutableStateOf(haveCustomLabel) }
+
         val options = listOf(
             stringResource(R.string.mute),
             "40%",
@@ -155,12 +158,8 @@ fun VolumeCard() {
                                 value = newCustomVolume,
                                 onValueChange = {
                                     newCustomVolume = it
-                                    optionLabel =
-                                        if (mCustomVolume < 0) {
-                                            "${it.toInt()}%"
-                                        } else {
-                                            mCustomVolumeOptionLabel.toString()
-                                        }
+                                    if (mCustomVolume < 0 || (!mHaveCustomLabel))
+                                        optionLabel = "${it.toInt()}%"
                                 },
                                 valueRange = 0f..100f,
                                 steps = if (sliderIncrementFivePercent) 19 else 0
@@ -169,7 +168,10 @@ fun VolumeCard() {
                             CustomSpacerPadding()
                             OutlinedTextField(
                                 value = optionLabel,
-                                onValueChange = { optionLabel = it },
+                                onValueChange = {
+                                    optionLabel = it
+                                    mHaveCustomLabel = true
+                                },
                                 label = { Text(text = stringResource(R.string.label)) },
                                 modifier = Modifier.fillMaxWidth(),
                                 keyboardOptions = KeyboardOptions.Default.copy(
@@ -179,6 +181,9 @@ fun VolumeCard() {
                                     onDone = {
                                         settingsSharedPref.setCustomVolume(newCustomVolume.toInt())
                                         mCustomVolume = newCustomVolume.toInt()
+                                        if (mHaveCustomLabel) {
+                                            settingsSharedPref.haveCustomLabel = true
+                                        }
                                         settingsSharedPref.setCustomVolumeOptionLabel(optionLabel)
                                         mCustomVolumeOptionLabel = optionLabel
                                         selectedIndex = 3
@@ -190,6 +195,7 @@ fun VolumeCard() {
                                 trailingIcon = {
                                     ClearInput(text = optionLabel) {
                                         optionLabel = ""
+                                        mHaveCustomLabel = true
                                     }
                                 }
                             )
@@ -204,6 +210,9 @@ fun VolumeCard() {
                                 } else {
                                     settingsSharedPref.setCustomVolume(newCustomVolume.toInt())
                                     mCustomVolume = newCustomVolume.toInt()
+                                    if (mHaveCustomLabel) {
+                                        settingsSharedPref.haveCustomLabel = true
+                                    }
                                     settingsSharedPref.setCustomVolumeOptionLabel(optionLabel)
                                     mCustomVolumeOptionLabel = optionLabel
                                     selectedIndex = 3
@@ -218,6 +227,7 @@ fun VolumeCard() {
                     dismissButton = {
                         TextButton(
                             onClick = {
+                                if (!haveCustomLabel) mHaveCustomLabel = false
                                 showVolumeDialog = false
                                 selectedIndex = when (AudioUtil.volume()) {
                                     0 -> 0
