@@ -18,6 +18,6 @@ class MainApp : Application() {
         super.onCreate()
         Log.d(TAG, "onCreate")
         app = this
-        container = AppDataContainer(this)
+        container = AppDataContainer()
     }
 }

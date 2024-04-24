@@ -14,7 +14,7 @@ object NetworkUtil {
 
     private fun connectivityService() {
         connectivityManager =
-            app.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            app.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     }
 
     @JvmStatic

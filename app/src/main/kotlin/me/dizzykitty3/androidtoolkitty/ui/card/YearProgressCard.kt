@@ -39,7 +39,7 @@ fun YearProgressCard() {
                     "${(yearProgressPercentage(yearProgress()))}%"
                 else
                     "${(yearProgressPercentage(yearProgress()))}% · ${
-                        app.resources.getQuantityString(
+                        app.applicationContext.resources.getQuantityString(
                             R.plurals.days_remaining,
                             (totalDaysInYear() - daysPassed()).toInt(),
                             totalDaysInYear() - daysPassed()

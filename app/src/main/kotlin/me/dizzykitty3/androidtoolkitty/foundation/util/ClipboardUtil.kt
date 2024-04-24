@@ -10,7 +10,8 @@ object ClipboardUtil {
     private lateinit var clipboard: ClipboardManager
 
     private fun clipboardService() {
-        clipboard = app.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        clipboard =
+            app.applicationContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     }
 
     @JvmStatic
@@ -36,6 +37,6 @@ object ClipboardUtil {
         clipboardService()
         val clip = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
-        ToastUtil.toast("$text ${app.getString(R.string.copied)}")
+        ToastUtil.toast("$text ${app.applicationContext.getString(R.string.copied)}")
     }
 }

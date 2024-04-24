@@ -9,7 +9,8 @@ object BluetoothUtil {
     private lateinit var bluetoothManager: BluetoothManager
 
     private fun bluetoothService() {
-        bluetoothManager = app.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
+        bluetoothManager =
+            app.applicationContext.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
     }
 
     @JvmStatic

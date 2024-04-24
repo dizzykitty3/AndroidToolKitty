@@ -92,7 +92,7 @@ fun SysSettingCard() {
 }
 
 private fun checkIsAutoTime(): Boolean {
-    val contentResolver: ContentResolver = app.contentResolver
+    val contentResolver: ContentResolver = app.applicationContext.contentResolver
     val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
     return isAutoTime == 1
 }

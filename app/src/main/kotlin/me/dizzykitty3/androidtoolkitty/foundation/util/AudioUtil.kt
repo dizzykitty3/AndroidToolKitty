@@ -8,7 +8,8 @@ object AudioUtil {
     private lateinit var audioManager: AudioManager
 
     private fun audioService() {
-        audioManager = app.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        audioManager =
+            app.applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     }
 
     @JvmStatic

@@ -57,7 +57,7 @@ object IntentUtil {
             startActivity(intent)
             Log.d(TAG, "onOpenSystemSettings: $settingType")
         } catch (e: Exception) {
-            ToastUtil.toast(app.getString(R.string.system_settings_unsupported))
+            ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
             Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
         }
     }
@@ -72,7 +72,7 @@ object IntentUtil {
             startActivity(intent)
             Log.d(TAG, "openPermissionPage")
         } catch (e: Exception) {
-            ToastUtil.toast(app.getString(R.string.system_settings_unsupported))
+            ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
             Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
         }
     }
@@ -105,12 +105,12 @@ object IntentUtil {
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
-                ToastUtil.toast(app.getString(R.string.google_play_not_installed))
+                ToastUtil.toast(app.applicationContext.getString(R.string.google_play_not_installed))
                 Log.i(TAG, "Google Play not installed")
             }
 
             GOOGLE_MAPS -> {
-                ToastUtil.toast(app.getString(R.string.google_maps_not_installed))
+                ToastUtil.toast(app.applicationContext.getString(R.string.google_maps_not_installed))
                 Log.i(TAG, "Google Maps not installed")
                 openAppOnMarket(GOOGLE_MAPS)
             }
@@ -142,9 +142,9 @@ object IntentUtil {
 
     @JvmStatic
     fun restartApp(context: Context) {
-        val intent = Intent(app, MainActivity::class.java)
+        val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        app.startActivity(intent)
+        context.startActivity(intent)
         (context as Activity).finish()
     }
 
