@@ -90,6 +90,8 @@ fun WheelOfFortuneCard() {
             }
         }
         var hasRotated by remember { mutableStateOf(false) }
+        var isSpinning by remember { mutableStateOf(false) }
+        var expanded by remember { mutableStateOf(false) }
 
         // Material Design颜色主题
         val colors = List(2) { index ->
@@ -112,6 +114,7 @@ fun WheelOfFortuneCard() {
         // 当动画结束时，计算并显示选中的项目
         LaunchedEffect(currentRotationDegrees) {
             if (currentRotationDegrees == targetRotationDegrees && hasRotated) {
+                isSpinning = false
                 val normalizedRotationDegrees = targetRotationDegrees % 360
                 val itemsCount = items.size
                 val anglePerItem = 360f / itemsCount
@@ -195,7 +198,11 @@ fun WheelOfFortuneCard() {
 
             // 旋转按钮
             Button(onClick = {
-                if (items.isNotEmpty()) {
+                if (items.isNotEmpty() && !isSpinning) {
+                    if (expanded) {
+                        expanded = false
+                    }
+                    isSpinning = true
                     hasRotated = true
                     val randomBaseCircles = 3
                     val fineTunedAngle = Random.nextInt(360)
@@ -210,16 +217,23 @@ fun WheelOfFortuneCard() {
                 onItemsChange = { updatedItems ->
                     items = updatedItems
                     setLuckySpinningWheelItems(updatedItems)
-                }
+                },
+                expanded = expanded,
+                setExpanded = { value -> expanded = value },
+                isSpinning = isSpinning
             )
         }
     }
 }
 
 @Composable
-fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
-    // 标记列表是否展开
-    var expanded by remember { mutableStateOf(false) }
+fun ExpandableList(
+items: List<String>,
+onItemsChange: (List<String>) -> Unit,
+expanded: Boolean,
+setExpanded: (Boolean) -> Unit,
+isSpinning: Boolean
+) {
     // 正在编辑的元素索引，-1表示没有元素处于编辑状态
     var editingIndex by remember { mutableIntStateOf(-1) }
     // 编辑中的文本列表，用于暂存编辑时的文本更改
@@ -248,7 +262,7 @@ fun ExpandableList(items: List<String>, onItemsChange: (List<String>) -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { expanded = !expanded }
+                .clickable(enabled = !isSpinning) { setExpanded(!expanded) }
                 .padding(8.dp)
                 .clip(RoundedCornerShape(10.dp))
                 .background(MaterialTheme.colorScheme.surfaceVariant)
