@@ -99,11 +99,10 @@ fun CustomTip(
     formattedMessage: String
 ) {
     Card(
-        modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.padding_tip)),
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
         Row(
@@ -124,6 +123,7 @@ fun CustomTip(
             )
         }
     }
+    CustomCardSpacePadding()
 }
 
 @Composable

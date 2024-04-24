@@ -79,7 +79,6 @@ fun HomeScreen(navController: NavHostController) {
     ) {
         item { CustomTopPadding() }
         item { GreetingAndSetting(navController) }
-        item { CustomCardSpacePadding() }
         if (settingsSharedPref.oneHandedMode) item { CustomOneHandedModePadding() }
         val locale = Locale.getDefault().toString()
         if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) item { NoTranslationTip(locale) }
@@ -127,13 +126,17 @@ fun GreetingAndSetting(navController: NavHostController) {
             }
         }
     }
+    CustomCardSpacePadding()
+    CustomCardSpacePadding()
 }
 
 @Composable
 fun BatteryAndNetwork() {
     val batteryLevel = remember { BatteryUtil.batteryLevel() }
 
-    Row {
+    Row(
+        modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_card_content))
+    ) {
         Icon(
             imageVector = Icons.Outlined.BatteryStd,
             contentDescription = stringResource(id = R.string.battery_level),
@@ -147,7 +150,7 @@ fun BatteryAndNetwork() {
 
         NetworkState()
     }
-    CustomSpacerPadding()
+    CustomCardSpacePadding()
 }
 
 @Composable
