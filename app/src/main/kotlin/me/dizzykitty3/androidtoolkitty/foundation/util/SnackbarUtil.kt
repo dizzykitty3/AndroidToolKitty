@@ -4,6 +4,7 @@ import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 
+@Suppress("SpellCheckingInspection")
 class SnackbarUtil(private val view: View) {
     fun snackbar(message: String) =
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
