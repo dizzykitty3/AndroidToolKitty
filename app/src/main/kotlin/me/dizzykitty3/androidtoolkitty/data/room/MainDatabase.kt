@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 package me.dizzykitty3.androidtoolkitty.data.room
 
 import androidx.room.Database

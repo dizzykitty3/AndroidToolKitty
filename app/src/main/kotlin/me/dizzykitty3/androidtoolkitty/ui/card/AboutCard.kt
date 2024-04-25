@@ -23,6 +23,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
 
+@Suppress("SpellCheckingInspection")
 @Composable
 fun AboutCard() {
     CustomCard(
@@ -99,6 +100,7 @@ private fun GitHubRepoLink() {
     }
 }
 
+@Suppress("KotlinConstantConditions")
 @Composable
 private fun VersionNumber() {
     Row {
