@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.screen
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -200,11 +199,9 @@ private fun NoTranslationTip(locale: String) {
 
 @Composable
 private fun GreetingContainer() {
-    Column {
-        Greeting()
-        CustomCardSpacePadding()
-        CustomCardSpacePadding()
-    }
+    Greeting()
+    CustomCardSpacePadding()
+    CustomCardSpacePadding()
 }
 
 @Composable
