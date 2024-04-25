@@ -38,26 +38,38 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
 
-private const val TAG = "UrlCard"
+private const val TAG = "WebpageCard"
 
 @Composable
-fun UrlCard() {
+fun WebpageCard() {
     CustomCard(
         icon = Icons.Outlined.Link,
-        title = R.string.url
+        title = R.string.webpage
     ) {
+        var expanded by remember { mutableStateOf(false) }
+
+        if (expanded) CustomGroupTitleText(id = R.string.search)
+
         Search()
-        CustomGroupDivider()
-        WebpageUrl()
-        CustomGroupDivider()
-        SocialMediaProfileIUrl()
+
+        if (expanded) {
+            CustomGroupDivider()
+            WebpageUrl()
+            CustomGroupDivider()
+            SocialMediaProfileIUrl()
+        }
+
+        TextButton(onClick = { expanded = !expanded }) {
+            if (expanded)
+                Text(text = stringResource(id = R.string.show_less))
+            else
+                Text(text = stringResource(id = R.string.show_more))
+        }
     }
 }
 
 @Composable
 private fun Search() {
-    CustomGroupTitleText(id = R.string.search)
-
     var searchQuery by remember { mutableStateOf("") }
 
     OutlinedTextField(
@@ -69,7 +81,7 @@ private fun Search() {
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(
-            onDone = { IntentUtil.openSearch(searchQuery) }
+            onDone = { onClickSearchButton(searchQuery) }
         ),
         trailingIcon = {
             ClearInput(text = searchQuery) {
@@ -79,7 +91,7 @@ private fun Search() {
     )
 
     TextButton(
-        onClick = { IntentUtil.openSearch(searchQuery) }
+        onClick = { onClickSearchButton(searchQuery) }
     ) {
         Text(text = stringResource(R.string.search))
         Icon(
@@ -221,6 +233,13 @@ private fun SocialMediaProfileIUrl() {
     }
 }
 
+private fun onClickSearchButton(query: String) {
+    if (query.isBlank()) return
+
+    IntentUtil.openSearch(query)
+    Log.d(TAG, "onClickSearchButton")
+}
+
 private fun onClickVisitUrlButton(url: String) {
     if (url.isBlank()) return
 
@@ -234,7 +253,7 @@ private fun onVisitProfileButton(username: String, platformIndex: Int) {
     val platform = UrlUtil.Platform.entries.getOrNull(platformIndex) ?: return
 
     if (platform == UrlUtil.Platform.PLATFORM_NOT_ADDED_YET) {
-//        TToast.toast("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
+//        ToastUtil.toast("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
         ToastUtil.toast("under development")
         return
     }

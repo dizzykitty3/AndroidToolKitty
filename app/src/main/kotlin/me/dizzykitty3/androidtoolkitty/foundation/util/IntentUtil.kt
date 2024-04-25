@@ -30,9 +30,16 @@ object IntentUtil {
     private const val TAG = "IntentUtil"
 
     @JvmStatic
-    fun openUrl(finalUrl: String) {
+    fun openUrl(url: String) {
+        if (url.isBlank()) return
+
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(if (finalUrl.contains(HTTPS)) finalUrl else "$HTTPS$finalUrl")
+        intent.data = Uri.parse(
+            if (url.contains(HTTPS))
+                url
+            else
+                "$HTTPS$url"
+        )
         startActivity(intent)
         Log.d(TAG, "openUrl")
     }
@@ -79,6 +86,8 @@ object IntentUtil {
 
     @JvmStatic
     fun openGoogleMaps(latitude: String, longitude: String) {
+        if (latitude.isBlank() || longitude.isBlank()) return
+
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
 
@@ -129,11 +138,11 @@ object IntentUtil {
             }
         )
 
-        val marketIntent = Intent(Intent.ACTION_VIEW, marketUri)
-        if (isGooglePlay) marketIntent.setPackage(GOOGLE_PLAY)
+        val intent = Intent(Intent.ACTION_VIEW, marketUri)
+        if (isGooglePlay) intent.setPackage(GOOGLE_PLAY)
 
         try {
-            startActivity(marketIntent)
+            startActivity(intent)
             Log.d(TAG, "openAppOnMarket")
         } catch (e: Exception) {
             Log.e(TAG, ">>>ERROR<<< openCertainAppOnPlayStore: $e")
@@ -159,8 +168,16 @@ object IntentUtil {
 
     @JvmStatic
     fun openSearch(query: String) {
+        if (query.isBlank()) return
+
         val intent = Intent(Intent.ACTION_WEB_SEARCH)
         intent.putExtra(SearchManager.QUERY, query)
-        startActivity(intent)
+
+        try {
+            startActivity(intent)
+            Log.d(TAG, "openSearch")
+        } catch (e: Exception) {
+            Log.e(TAG, ">>>ERROR<<< openSearch: $e")
+        }
     }
 }

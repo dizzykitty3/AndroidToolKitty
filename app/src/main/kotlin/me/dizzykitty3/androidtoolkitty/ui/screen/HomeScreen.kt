@@ -60,8 +60,8 @@ import me.dizzykitty3.androidtoolkitty.ui.card.Greeting
 import me.dizzykitty3.androidtoolkitty.ui.card.MapsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.SysSettingCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UnicodeCard
-import me.dizzykitty3.androidtoolkitty.ui.card.UrlCard
 import me.dizzykitty3.androidtoolkitty.ui.card.VolumeCard
+import me.dizzykitty3.androidtoolkitty.ui.card.WebpageCard
 import me.dizzykitty3.androidtoolkitty.ui.card.WheelOfFortuneCard
 import me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
 import java.util.Locale
@@ -79,9 +79,16 @@ fun HomeScreen(navController: NavHostController) {
     ) {
         item { CustomTopPadding() }
         item { BatteryNetworkAndSetting(navController) }
+
         if (settingsSharedPref.oneHandedMode) item { CustomOneHandedModePadding() }
-        else item { CustomCardSpacePadding() }
-        item { GreetingContainer() }
+        else {
+            item { CustomCardSpacePadding() }
+            item { CustomCardSpacePadding() }
+        }
+
+        item { Greeting() }
+        item { CustomCardSpacePadding() }
+        item { CustomCardSpacePadding() }
         val locale = Locale.getDefault().toString()
         if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) item { NoTranslationTip(locale) }
         item { HomeCards(navController) }
@@ -198,13 +205,6 @@ private fun NoTranslationTip(locale: String) {
 }
 
 @Composable
-private fun GreetingContainer() {
-    Greeting()
-    CustomCardSpacePadding()
-    CustomCardSpacePadding()
-}
-
-@Composable
 private fun HomeCards(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
 
@@ -228,7 +228,7 @@ private fun HomeCards(navController: NavHostController) {
                 CARD_1 -> YearProgressCard()
                 CARD_2 -> VolumeCard()
                 CARD_3 -> ClipboardCard()
-                CARD_4 -> UrlCard()
+                CARD_4 -> WebpageCard()
                 CARD_5 -> SysSettingCard()
                 CARD_6 -> WheelOfFortuneCard()
                 CARD_7 -> BluetoothDeviceCard(navController)
