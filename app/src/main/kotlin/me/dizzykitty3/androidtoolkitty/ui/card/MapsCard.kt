@@ -29,7 +29,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 
-private const val TAG = "GoogleMapsCard"
+private const val TAG = "MapsCard"
 
 @Composable
 fun MapsCard() {

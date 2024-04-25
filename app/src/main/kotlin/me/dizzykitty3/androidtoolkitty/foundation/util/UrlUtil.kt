@@ -27,7 +27,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.US
 import me.dizzykitty3.androidtoolkitty.foundation.const.WIKI
 
 object UrlUtil {
-    private const val TAG = "TUrl"
+    private const val TAG = "UrlUtil"
 
     /**
      * Adding the appropriate suffix and returning the full URL.

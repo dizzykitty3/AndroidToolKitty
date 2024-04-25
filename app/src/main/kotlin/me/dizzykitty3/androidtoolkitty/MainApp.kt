@@ -9,7 +9,7 @@ import me.dizzykitty3.androidtoolkitty.data.room.AppDataContainer
 @HiltAndroidApp
 class MainApp : Application() {
     companion object {
-        private const val TAG = "ToolKittyApp"
+        private const val TAG = "MainApp"
         lateinit var app: MainApp private set
         lateinit var container: AppContainer
     }

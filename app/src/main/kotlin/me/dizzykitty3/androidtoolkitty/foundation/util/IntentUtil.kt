@@ -26,7 +26,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 
 object IntentUtil {
-    private const val TAG = "IntentService"
+    private const val TAG = "IntentUtil"
 
     @JvmStatic
     fun openUrl(finalUrl: String) {
