@@ -139,6 +139,9 @@ object IntentUtil {
         }
     }
 
+    /**
+     * Remember to use Activity Context to restart app.
+     */
     @JvmStatic
     fun restartApp(context: Context) {
         val intent = Intent(context, MainActivity::class.java)

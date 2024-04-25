@@ -8,6 +8,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.BT_ADMIN
 import me.dizzykitty3.androidtoolkitty.foundation.const.BT_CONNECT
 import me.dizzykitty3.androidtoolkitty.foundation.const.GRANTED
 
+/**
+ * Remember to use Activity Context to check/request permission.
+ */
 object PermissionUtil {
     /**
      * @return true if the app does NOT have the required permissions, false otherwise.
