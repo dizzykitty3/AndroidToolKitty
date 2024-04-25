@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.screen
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -78,11 +79,12 @@ fun HomeScreen(navController: NavHostController) {
         )
     ) {
         item { CustomTopPadding() }
-        item { GreetingAndSetting(navController) }
+        item { BatteryNetworkAndSetting(navController) }
         if (settingsSharedPref.oneHandedMode) item { CustomOneHandedModePadding() }
+        else item { CustomCardSpacePadding() }
+        item { GreetingContainer() }
         val locale = Locale.getDefault().toString()
         if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) item { NoTranslationTip(locale) }
-        item { BatteryAndNetwork() }
         item { HomeCards(navController) }
         item { CustomBottomPadding() }
     }
@@ -90,7 +92,7 @@ fun HomeScreen(navController: NavHostController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GreetingAndSetting(navController: NavHostController) {
+fun BatteryNetworkAndSetting(navController: NavHostController) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -99,7 +101,7 @@ fun GreetingAndSetting(navController: NavHostController) {
         Box(
             modifier = Modifier.weight(1f)
         ) {
-            Greeting()
+            BatteryAndNetwork()
         }
 
         TooltipBox(
@@ -126,17 +128,13 @@ fun GreetingAndSetting(navController: NavHostController) {
             }
         }
     }
-    CustomCardSpacePadding()
-    CustomCardSpacePadding()
 }
 
 @Composable
 fun BatteryAndNetwork() {
     val batteryLevel = remember { BatteryUtil.batteryLevel() }
 
-    Row(
-        modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_card_content))
-    ) {
+    Row {
         Icon(
             imageVector = Icons.Outlined.BatteryStd,
             contentDescription = stringResource(id = R.string.battery_level),
@@ -198,6 +196,15 @@ fun NoTranslationTip(locale: String) {
             locale
         )
     )
+}
+
+@Composable
+fun GreetingContainer() {
+    Column {
+        Greeting()
+        CustomCardSpacePadding()
+        CustomCardSpacePadding()
+    }
 }
 
 @Composable
