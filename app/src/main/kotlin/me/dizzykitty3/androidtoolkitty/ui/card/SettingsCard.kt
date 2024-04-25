@@ -111,7 +111,6 @@ private fun GeneralSettingOptions() {
         )
     }
 
-
     if (OsVersion.android12()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
