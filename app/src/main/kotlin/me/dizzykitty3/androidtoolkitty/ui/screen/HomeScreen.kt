@@ -92,7 +92,7 @@ fun HomeScreen(navController: NavHostController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BatteryNetworkAndSetting(navController: NavHostController) {
+private fun BatteryNetworkAndSetting(navController: NavHostController) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -131,7 +131,7 @@ fun BatteryNetworkAndSetting(navController: NavHostController) {
 }
 
 @Composable
-fun BatteryAndNetwork() {
+private fun BatteryAndNetwork() {
     val batteryLevel = remember { BatteryUtil.batteryLevel() }
 
     Row {
@@ -152,7 +152,7 @@ fun BatteryAndNetwork() {
 }
 
 @Composable
-fun NetworkState() {
+private fun NetworkState() {
     val networkState = remember { NetworkUtil.networkState() }
 
     when (networkState) {
@@ -175,7 +175,7 @@ fun NetworkState() {
 }
 
 @Composable
-fun NetworkStateIcon(
+private fun NetworkStateIcon(
     imageVector: ImageVector,
     id: Int
 ) {
@@ -189,7 +189,7 @@ fun NetworkStateIcon(
 }
 
 @Composable
-fun NoTranslationTip(locale: String) {
+private fun NoTranslationTip(locale: String) {
     CustomTip(
         formattedMessage = stringResource(
             R.string.no_translation,
@@ -199,7 +199,7 @@ fun NoTranslationTip(locale: String) {
 }
 
 @Composable
-fun GreetingContainer() {
+private fun GreetingContainer() {
     Column {
         Greeting()
         CustomCardSpacePadding()
@@ -208,7 +208,7 @@ fun GreetingContainer() {
 }
 
 @Composable
-fun HomeCards(navController: NavHostController) {
+private fun HomeCards(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
 
     val cardMapping = mapOf(
