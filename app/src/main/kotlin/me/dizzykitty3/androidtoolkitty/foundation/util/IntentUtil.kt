@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.SearchManager
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
@@ -153,6 +154,13 @@ object IntentUtil {
     @JvmStatic
     fun openBluetooth() {
         val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+        startActivity(intent)
+    }
+
+    @JvmStatic
+    fun openSearch(query: String) {
+        val intent = Intent(Intent.ACTION_WEB_SEARCH)
+        intent.putExtra(SearchManager.QUERY, query)
         startActivity(intent)
     }
 }

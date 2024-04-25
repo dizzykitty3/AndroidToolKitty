@@ -188,4 +188,5 @@
     <string name="android_2_1">Android 2.1</string>
     <string name="android_8_1">Android 8.1</string>
     <string name="android_8">Android 8</string>
+    <string name="search">搜索</string>
 </resources>

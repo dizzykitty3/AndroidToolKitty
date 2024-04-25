@@ -46,9 +46,47 @@ fun UrlCard() {
         icon = Icons.Outlined.Link,
         title = R.string.url
     ) {
+        Search()
+        CustomGroupDivider()
         WebpageUrl()
         CustomGroupDivider()
         SocialMediaProfileIUrl()
+    }
+}
+
+@Composable
+private fun Search() {
+    CustomGroupTitleText(id = R.string.search)
+
+    var searchQuery by remember { mutableStateOf("") }
+
+    OutlinedTextField(
+        value = searchQuery,
+        onValueChange = { searchQuery = it },
+        label = { Text(text = stringResource(id = R.string.search)) },
+        modifier = Modifier.fillMaxWidth(),
+        keyboardOptions = KeyboardOptions.Default.copy(
+            imeAction = ImeAction.Done
+        ),
+        keyboardActions = KeyboardActions(
+            onDone = { IntentUtil.openSearch(searchQuery) }
+        ),
+        trailingIcon = {
+            ClearInput(text = searchQuery) {
+                searchQuery = ""
+            }
+        },
+    )
+
+    TextButton(
+        onClick = { IntentUtil.openSearch(searchQuery) }
+    ) {
+        Text(text = stringResource(R.string.search))
+        Icon(
+            imageVector = Icons.Outlined.ArrowOutward,
+            contentDescription = null,
+            modifier = Modifier.align(Alignment.CenterVertically)
+        )
     }
 }
 
