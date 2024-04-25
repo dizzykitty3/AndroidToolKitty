@@ -218,7 +218,7 @@ fun WheelOfFortuneCard() {
                     targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
                 }
             }) {
-                Text(text = stringResource(R.string.start_spinning))
+                Text(text = stringResource(R.string.spin))
             }
             // 可扩展列表，用于显示和修改项目列表
             ExpandableList(
