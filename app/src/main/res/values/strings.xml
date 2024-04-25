@@ -39,7 +39,7 @@
     <string name="clipboard_cleared_automatically">Clipboard cleared automatically</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on Clear Clipboard on Launch in Settings Screen.</string>
 
-    <!-- Home screen: url -->
+    <!-- Home screen: webpage -->
     <string name="url">URL</string>
     <string name="url_input_hint_1">Visit webpage without inputting prefix</string>
     <string name="url_input_hint_2">and suffix</string>
@@ -67,7 +67,7 @@
     <string name="search">Search</string>
 
     <!-- Home screen: system settings -->
-    <string name="android_system_settings">System settings</string>
+    <string name="system_settings">System settings</string>
     <string name="open_display_settings">Display settings</string>
     <string name="open_auto_rotate_settings">Auto rotate settings</string>
     <string name="open_language_settings">Language settings</string>

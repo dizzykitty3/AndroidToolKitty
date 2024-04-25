@@ -15,7 +15,7 @@
     <string name="facebook">Facebook</string>
     <string name="fanbox">Fanbox</string>
     <string name="patreon">Patreon</string>
-    <string name="android_system_settings">Android 系统设置</string>
+    <string name="system_settings">Android 系统设置</string>
     <string name="open_display_settings">显示设置</string>
     <string name="open_auto_rotate_settings">屏幕自动旋转设置</string>
     <string name="open_language_settings">语言设置</string>

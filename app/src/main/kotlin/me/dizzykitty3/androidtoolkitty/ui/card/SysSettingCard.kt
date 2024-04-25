@@ -29,7 +29,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 fun SysSettingCard() {
     CustomCard(
         icon = Icons.Outlined.Settings,
-        title = R.string.android_system_settings
+        title = R.string.system_settings
     ) {
         // Variables
         val settingsSharedPref = remember { SettingsSharedPref }

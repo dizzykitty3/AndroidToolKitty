@@ -99,7 +99,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_4, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.android_system_settings,
+            id = R.string.system_settings,
             cardId = CARD_5,
             isChecked = mIsShowCard5
         ) { newState ->
