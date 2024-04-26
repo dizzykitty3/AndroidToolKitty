@@ -3,7 +3,11 @@ package me.dizzykitty3.androidtoolkitty.ui.screen
 import android.app.Activity
 import android.os.Build
 import android.view.View
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material.icons.Icons
@@ -18,7 +22,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -68,9 +71,14 @@ fun SettingsScreen(navController: NavHostController) {
             GeneralOptions()
             CustomGroupDivider()
             CustomizeOptions(navController = navController)
-            if (debuggingOptions || (!debuggingOptions && tapCount >= 5)) {
-                CustomGroupDivider()
-                DebuggingOptions(navController)
+            AnimatedVisibility(
+                visible = (debuggingOptions || (!debuggingOptions && tapCount >= 5)),
+                enter = fadeIn(animationSpec = tween(durationMillis = 2000))
+            ) {
+                Column {
+                    CustomGroupDivider()
+                    DebuggingOptions(navController)
+                }
             }
         }
 
@@ -82,6 +90,12 @@ fun SettingsScreen(navController: NavHostController) {
                 modifier = Modifier.clickable {
                     if (!debuggingOptions) {
                         tapCount++
+                        if (tapCount == 3) {
+                            SnackbarUtil(view).snackbar("2 more times")
+                        }
+                        if (tapCount == 4) {
+                            SnackbarUtil(view).snackbar("1 more time")
+                        }
                         if (tapCount == 5) {
                             SnackbarUtil(view).snackbar(R.string.now_a_developer)
                             SettingsSharedPref.debuggingOptions = true
@@ -284,13 +298,13 @@ private fun DebuggingOptions(navController: NavHostController) {
 
     CustomSpacerPadding()
 
-    TextButton(
+    Button(
         onClick = { navController.navigate(PERMISSION_REQUEST_SCREEN) }
     ) {
         Text(text = "go to permission request screen")
     }
 
-    TextButton(
+    Button(
         onClick = { ToastUtil.toast("under development") }
     ) {
         Text(text = "check sharedpreferences values")
