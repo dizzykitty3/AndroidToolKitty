@@ -18,6 +18,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -45,6 +46,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomIconAndTextPa
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomScreen
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.const.EDIT_HOME_SCREEN
+import me.dizzykitty3.androidtoolkitty.foundation.const.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
@@ -68,7 +70,7 @@ fun SettingsScreen(navController: NavHostController) {
             CustomizeOptions(navController = navController)
             if (debuggingOptions || (!debuggingOptions && tapCount >= 5)) {
                 CustomGroupDivider()
-                DebuggingOptions()
+                DebuggingOptions(navController)
             }
         }
 
@@ -225,7 +227,7 @@ private fun CustomizeOptions(navController: NavHostController) {
 }
 
 @Composable
-private fun DebuggingOptions() {
+private fun DebuggingOptions(navController: NavHostController) {
     val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
 
@@ -235,6 +237,12 @@ private fun DebuggingOptions() {
     Text(text = "lang code = ${Locale.getDefault()}")
 
     CustomSpacerPadding()
+
+    TextButton(
+        onClick = { navController.navigate(PERMISSION_REQUEST_SCREEN) }
+    ) {
+        Text(text = "go to permission request screen")
+    }
 
     CustomAlertDialogButton(
         buttonText = stringResource(R.string.erase_all_app_data),
