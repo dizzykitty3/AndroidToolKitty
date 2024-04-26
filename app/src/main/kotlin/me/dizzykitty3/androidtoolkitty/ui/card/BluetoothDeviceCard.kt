@@ -81,7 +81,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                     message = R.string.bluetooth_disabled,
                     buttonText = R.string.turn_on_bluetooth,
                     buttonColor = materialColor,
-                    buttonClickListener = { IntentUtil.openBluetooth() }
+                    buttonClickListener = { IntentUtil.openBluetooth(context) }
                 )
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)

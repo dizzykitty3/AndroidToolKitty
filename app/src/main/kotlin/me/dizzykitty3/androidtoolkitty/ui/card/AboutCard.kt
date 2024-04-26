@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
@@ -42,6 +43,8 @@ private fun DeveloperProfileLink(
     name: String
 ) {
     Row {
+        val context = LocalContext.current
+
         Icon(
             imageVector = Icons.Outlined.AccountCircle,
             contentDescription = stringResource(id = R.string.developer_profile_link)
@@ -49,7 +52,10 @@ private fun DeveloperProfileLink(
         CustomIconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
-                IntentUtil.openUrl("${UrlUtil.profilePrefix(UrlUtil.Platform.GITHUB)}$name")
+                IntentUtil.openUrl(
+                    "${UrlUtil.profilePrefix(UrlUtil.Platform.GITHUB)}$name",
+                    context
+                )
             }
         ) {
             Text(
@@ -73,6 +79,7 @@ private fun GitHubRepoLink() {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
+        val context = LocalContext.current
         val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
 
         Icon(
@@ -83,7 +90,7 @@ private fun GitHubRepoLink() {
         Row(
             modifier = Modifier.clickable {
                 ToastUtil.toast(R.string.all_help_welcomed)
-                IntentUtil.openUrl(sourceCodeUrl)
+                IntentUtil.openUrl(sourceCodeUrl, context)
             }
         ) {
             Text(

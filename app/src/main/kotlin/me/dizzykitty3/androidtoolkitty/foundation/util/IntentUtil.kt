@@ -30,7 +30,7 @@ object IntentUtil {
     private const val TAG = "IntentUtil"
 
     @JvmStatic
-    fun openUrl(url: String) {
+    fun openUrl(url: String, context: Context) {
         if (url.isBlank()) return
 
         val intent = Intent(Intent.ACTION_VIEW)
@@ -40,13 +40,13 @@ object IntentUtil {
             else
                 "$HTTPS$url"
         )
-        startActivity(intent)
+        startActivity(intent, context)
         Log.d(TAG, "openUrl")
     }
 
     @SuppressLint("InlinedApi")
     @JvmStatic
-    fun openSystemSettings(settingType: String) {
+    fun openSystemSettings(settingType: String, context: Context) {
         val intent: Intent = when (settingType) {
             SETTING_1 -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
             SETTING_2 -> if (OsVersion.android12()) Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
@@ -61,7 +61,7 @@ object IntentUtil {
         }
 
         try {
-            startActivity(intent)
+            startActivity(intent, context)
             Log.d(TAG, "onOpenSystemSettings: $settingType")
         } catch (e: Exception) {
             ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
@@ -70,13 +70,13 @@ object IntentUtil {
     }
 
     @JvmStatic
-    fun openPermissionPage() {
+    fun openPermissionPage(context: Context) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         val uri = Uri.fromParts(PACKAGE, app.packageName, null)
         intent.setData(uri)
 
         try {
-            startActivity(intent)
+            startActivity(intent, context)
             Log.d(TAG, "openPermissionPage")
         } catch (e: Exception) {
             ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
@@ -85,7 +85,7 @@ object IntentUtil {
     }
 
     @JvmStatic
-    fun openGoogleMaps(latitude: String, longitude: String) {
+    fun openGoogleMaps(latitude: String, longitude: String, context: Context) {
         if (latitude.isBlank() || longitude.isBlank()) return
 
         val coordinates = "$latitude,$longitude"
@@ -95,17 +95,17 @@ object IntentUtil {
         intent.setPackage(GOOGLE_MAPS)
 
         try {
-            startActivity(intent)
+            startActivity(intent, context)
             Log.d(TAG, "openGoogleMaps")
         } catch (e: Exception) {
             Log.e(TAG, ">>>ERROR<<< openGoogleMaps: $e")
         }
     }
 
-    private fun startActivity(intent: Intent) {
+    private fun startActivity(intent: Intent, context: Context) {
         try {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            app.startActivity(intent)
+            context.startActivity(intent)
             Log.d(TAG, "startActivity")
             return
         } catch (e: Exception) {
@@ -121,13 +121,13 @@ object IntentUtil {
             GOOGLE_MAPS -> {
                 ToastUtil.toast(app.applicationContext.getString(R.string.google_maps_not_installed))
                 Log.i(TAG, "Google Maps not installed")
-                openAppOnMarket(GOOGLE_MAPS)
+                openAppOnMarket(GOOGLE_MAPS, context)
             }
         }
     }
 
     @JvmStatic
-    fun openAppOnMarket(packageName: String, isGooglePlay: Boolean = true) {
+    fun openAppOnMarket(packageName: String, context: Context, isGooglePlay: Boolean = true) {
         val marketUri: Uri = Uri.parse(
             if (packageName.isBlank()) {
                 return
@@ -142,7 +142,7 @@ object IntentUtil {
         if (isGooglePlay) intent.setPackage(GOOGLE_PLAY)
 
         try {
-            startActivity(intent)
+            startActivity(intent, context)
             Log.d(TAG, "openAppOnMarket")
         } catch (e: Exception) {
             Log.e(TAG, ">>>ERROR<<< openCertainAppOnPlayStore: $e")
@@ -161,20 +161,20 @@ object IntentUtil {
     }
 
     @JvmStatic
-    fun openBluetooth() {
+    fun openBluetooth(context: Context) {
         val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-        startActivity(intent)
+        startActivity(intent, context)
     }
 
     @JvmStatic
-    fun openSearch(query: String) {
+    fun openSearch(query: String, context: Context) {
         if (query.isBlank()) return
 
         val intent = Intent(Intent.ACTION_WEB_SEARCH)
         intent.putExtra(SearchManager.QUERY, query)
 
         try {
-            startActivity(intent)
+            startActivity(intent, context)
             Log.d(TAG, "openSearch")
         } catch (e: Exception) {
             Log.e(TAG, ">>>ERROR<<< openSearch: $e")

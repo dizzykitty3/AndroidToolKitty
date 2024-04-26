@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
+import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
@@ -19,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
@@ -70,6 +72,8 @@ fun WebpageCard() {
 
 @Composable
 private fun Search() {
+    val context = LocalContext.current
+
     var searchQuery by remember { mutableStateOf("") }
 
     OutlinedTextField(
@@ -81,7 +85,7 @@ private fun Search() {
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onClickSearchButton(searchQuery) }
+            onDone = { onClickSearchButton(searchQuery, context) }
         ),
         trailingIcon = {
             ClearInput(text = searchQuery) {
@@ -91,7 +95,7 @@ private fun Search() {
     )
 
     TextButton(
-        onClick = { onClickSearchButton(searchQuery) }
+        onClick = { onClickSearchButton(searchQuery, context) }
     ) {
         Text(text = stringResource(R.string.search))
         Icon(
@@ -106,6 +110,7 @@ private fun Search() {
 private fun WebpageUrl() {
     CustomGroupTitleText(id = R.string.webpage)
 
+    val context = LocalContext.current
     var url by remember { mutableStateOf("") }
 
     OutlinedTextField(
@@ -118,7 +123,7 @@ private fun WebpageUrl() {
             keyboardType = KeyboardType.Ascii
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onClickVisitUrlButton(url) }
+            onDone = { onClickVisitUrlButton(url, context) }
         ),
         trailingIcon = {
             ClearInput(text = url) {
@@ -147,7 +152,7 @@ private fun WebpageUrl() {
     )
 
     TextButton(
-        onClick = { onClickVisitUrlButton(url) }
+        onClick = { onClickVisitUrlButton(url, context) }
     ) {
         Text(text = stringResource(R.string.visit))
         Icon(
@@ -160,6 +165,8 @@ private fun WebpageUrl() {
 
 @Composable
 private fun SocialMediaProfileIUrl() {
+    val context = LocalContext.current
+
     var username by remember { mutableStateOf("") }
 
     val platformIndex = SettingsSharedPref.getLastTimeSelectedSocialPlatform()
@@ -196,7 +203,7 @@ private fun SocialMediaProfileIUrl() {
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onVisitProfileButton(username, mPlatformIndex) }
+            onDone = { onVisitProfileButton(username, mPlatformIndex, context) }
         ),
         trailingIcon = {
             ClearInput(text = username) {
@@ -221,7 +228,7 @@ private fun SocialMediaProfileIUrl() {
     )
 
     TextButton(
-        onClick = { onVisitProfileButton(username, mPlatformIndex) }
+        onClick = { onVisitProfileButton(username, mPlatformIndex, context) }
     ) {
         Text(text = stringResource(R.string.visit))
 
@@ -233,21 +240,21 @@ private fun SocialMediaProfileIUrl() {
     }
 }
 
-private fun onClickSearchButton(query: String) {
+private fun onClickSearchButton(query: String, context: Context) {
     if (query.isBlank()) return
 
-    IntentUtil.openSearch(query)
+    IntentUtil.openSearch(query, context)
     Log.d(TAG, "onClickSearchButton")
 }
 
-private fun onClickVisitUrlButton(url: String) {
+private fun onClickVisitUrlButton(url: String, context: Context) {
     if (url.isBlank()) return
 
-    IntentUtil.openUrl(UrlUtil.toFullUrl(StringUtil.dropSpaces(url)))
+    IntentUtil.openUrl(UrlUtil.toFullUrl(StringUtil.dropSpaces(url)), context)
     Log.d(TAG, "onClickVisitButton")
 }
 
-private fun onVisitProfileButton(username: String, platformIndex: Int) {
+private fun onVisitProfileButton(username: String, platformIndex: Int, context: Context) {
     if (username.isBlank()) return
 
     val platform = UrlUtil.Platform.entries.getOrNull(platformIndex) ?: return
@@ -264,6 +271,6 @@ private fun onVisitProfileButton(username: String, platformIndex: Int) {
             "${StringUtil.dropSpaces(username)}$prefix"
         else
             "$prefix${StringUtil.dropSpaces(username)}"
-    IntentUtil.openUrl(url)
+    IntentUtil.openUrl(url, context)
     Log.d(TAG, "onVisitProfile")
 }

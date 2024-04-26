@@ -58,9 +58,11 @@ fun PermissionRequestCard() {
 
 @Composable
 fun ManuallyGrant() {
+    val context = LocalContext.current
+
     Text(text = stringResource(id = R.string.missed_sys_popup))
     TextButton(
-        onClick = { IntentUtil.openPermissionPage() }
+        onClick = { IntentUtil.openPermissionPage(context) }
     ) {
         Text(
             text = stringResource(id = R.string.go_to_settings),
