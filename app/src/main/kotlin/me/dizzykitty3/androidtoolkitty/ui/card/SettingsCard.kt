@@ -45,16 +45,16 @@ fun SettingsCard(navController: NavHostController) {
     CustomCard(
         title = R.string.settings
     ) {
-        GeneralSettingOptions()
+        GeneralOptions()
         CustomGroupDivider()
-        CustomSettingOptions(navController = navController)
+        CustomizeOptions(navController = navController)
         CustomGroupDivider()
-        DebuggingSettingOptions()
+        DebuggingOptions()
     }
 }
 
 @Composable
-private fun GeneralSettingOptions() {
+private fun GeneralOptions() {
     val view = LocalView.current
 
     val settingsSharedPref = remember { SettingsSharedPref }
@@ -151,7 +151,7 @@ private fun GeneralSettingOptions() {
 }
 
 @Composable
-private fun CustomSettingOptions(navController: NavHostController) {
+private fun CustomizeOptions(navController: NavHostController) {
     CustomGroupTitleText(R.string.customize)
 
     Button(
@@ -169,7 +169,7 @@ private fun CustomSettingOptions(navController: NavHostController) {
 }
 
 @Composable
-private fun DebuggingSettingOptions() {
+private fun DebuggingOptions() {
     val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
 
