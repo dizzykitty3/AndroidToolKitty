@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.os.Build
 
-@Suppress("unused")
 object OsVersion {
     private val osVersion = Build.VERSION.SDK_INT
 

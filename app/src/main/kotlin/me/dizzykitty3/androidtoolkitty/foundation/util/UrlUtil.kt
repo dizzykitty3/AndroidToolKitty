@@ -43,7 +43,7 @@ object UrlUtil {
     fun urlSuffix(urlInput: String): String {
         if (urlInput.contains(".")) return ""
 
-        @Suppress("SpellCheckingInspection") val suffixMap = mapOf(
+        val suffixMap = mapOf(
             "remove" to BG,
             "feishu" to CN,
             "52pojie" to CN,
@@ -110,7 +110,6 @@ object UrlUtil {
         return suffixMap[StringUtil.dropSpaces(urlInput)] ?: COM
     }
 
-    @Suppress("SpellCheckingInspection")
     enum class Platform(val prefix: String, val nameResId: Int) {
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),

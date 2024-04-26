@@ -285,7 +285,6 @@ private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view:
     )
 }
 
-@Suppress("SpellCheckingInspection")
 @Composable
 private fun Contributor() {
     CustomGroupTitleText(id = R.string.contributors)

@@ -7,12 +7,10 @@ plugins {
 }
 
 android {
-    @Suppress("SpellCheckingInspection")
     namespace = "me.dizzykitty3.androidtoolkitty"
     compileSdk = 34
 
     defaultConfig {
-        @Suppress("SpellCheckingInspection")
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 29
         targetSdk = 34
