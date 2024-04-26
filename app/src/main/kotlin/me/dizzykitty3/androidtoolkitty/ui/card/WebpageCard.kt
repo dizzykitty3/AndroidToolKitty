@@ -48,21 +48,27 @@ fun WebpageCard() {
         icon = Icons.Outlined.Link,
         title = R.string.webpage
     ) {
-        var expanded by remember { mutableStateOf(false) }
+        val settingsSharedPref = remember { SettingsSharedPref }
 
-        if (expanded) CustomGroupTitleText(id = R.string.search)
+        val showMore = settingsSharedPref.webpageCardShowMore
+        var mShowMore by remember { mutableStateOf(showMore) }
+
+        if (mShowMore) CustomGroupTitleText(id = R.string.search)
 
         Search()
 
-        if (expanded) {
+        if (mShowMore) {
             CustomGroupDivider()
             WebpageUrl()
             CustomGroupDivider()
             SocialMediaProfileIUrl()
         }
 
-        TextButton(onClick = { expanded = !expanded }) {
-            if (expanded)
+        TextButton(onClick = {
+            mShowMore = !mShowMore
+            settingsSharedPref.webpageCardShowMore = mShowMore
+        }) {
+            if (mShowMore)
                 Text(text = stringResource(id = R.string.show_less))
             else
                 Text(text = stringResource(id = R.string.show_more))

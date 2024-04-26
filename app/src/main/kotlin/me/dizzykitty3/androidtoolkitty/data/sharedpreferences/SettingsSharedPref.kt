@@ -18,6 +18,7 @@ object SettingsSharedPref {
     private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val DEBUGGING_OPTIONS = "debugging_options"
+    private const val WEBPAGE_CARD_SHOW_MORE = "webpage_card_show_more"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -93,6 +94,16 @@ object SettingsSharedPref {
             Log.d(TAG, "view debugging options = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(DEBUGGING_OPTIONS, value)
+                apply()
+            }
+        }
+
+    var webpageCardShowMore: Boolean
+        get() = sharedPrefs.getBoolean(WEBPAGE_CARD_SHOW_MORE, false)
+        set(value) {
+            Log.d(TAG, "webpage card show more = $value")
+            with(sharedPrefs.edit()) {
+                putBoolean(WEBPAGE_CARD_SHOW_MORE, value)
                 apply()
             }
         }
