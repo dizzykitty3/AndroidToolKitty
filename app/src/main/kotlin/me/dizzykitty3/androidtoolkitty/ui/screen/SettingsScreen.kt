@@ -244,6 +244,12 @@ private fun DebuggingOptions(navController: NavHostController) {
         Text(text = "go to permission request screen")
     }
 
+    TextButton(
+        onClick = { ToastUtil.toast("under development") }
+    ) {
+        Text(text = "check sharedpreferences values")
+    }
+
     CustomAlertDialogButton(
         buttonText = stringResource(R.string.erase_all_app_data),
         dialogMessageTitle = stringResource(R.string.warning),
