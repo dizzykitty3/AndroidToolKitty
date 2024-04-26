@@ -30,6 +30,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.outlined.Casino
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -206,18 +207,21 @@ fun WheelOfFortuneCard() {
             CustomSpacerPadding()
 
             // 旋转按钮
-            Button(onClick = {
-                if (items.isNotEmpty() && !isSpinning) {
-                    if (expanded) {
-                        expanded = false
+            Button(
+                onClick = {
+                    if (items.isNotEmpty() && !isSpinning) {
+                        if (expanded) {
+                            expanded = false
+                        }
+                        isSpinning = true
+                        hasRotated = true
+                        val randomBaseCircles = 3
+                        val fineTunedAngle = Random.nextInt(360)
+                        targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
                     }
-                    isSpinning = true
-                    hasRotated = true
-                    val randomBaseCircles = 3
-                    val fineTunedAngle = Random.nextInt(360)
-                    targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
-                }
-            }) {
+                },
+                elevation = ButtonDefaults.buttonElevation(1.dp)
+            ) {
                 Text(text = stringResource(R.string.spin))
             }
             // 可扩展列表，用于显示和修改项目列表
