@@ -19,6 +19,7 @@ object SettingsSharedPref {
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val DEBUGGING_OPTIONS = "debugging_options"
     private const val WEBPAGE_CARD_SHOW_MORE = "webpage_card_show_more"
+    private const val SORA_SHION = "sora_shion"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -104,6 +105,16 @@ object SettingsSharedPref {
             Log.d(TAG, "webpage card show more = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(WEBPAGE_CARD_SHOW_MORE, value)
+                apply()
+            }
+        }
+
+    var soraShion: Boolean
+        get() = sharedPrefs.getBoolean(SORA_SHION, false)
+        set(value) {
+            Log.d(TAG, "sora shion theme = $value")
+            with(sharedPrefs.edit()) {
+                putBoolean(SORA_SHION, value)
                 apply()
             }
         }

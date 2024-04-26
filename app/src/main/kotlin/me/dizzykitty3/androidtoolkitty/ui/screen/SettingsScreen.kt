@@ -129,6 +129,9 @@ private fun GeneralOptions() {
     val volumeSlideSteps = settingsSharedPref.sliderIncrement5Percent
     var mVolumeSlideSteps by remember { mutableStateOf(volumeSlideSteps) }
 
+    val soraShion = settingsSharedPref.soraShion
+    var mSoraShion by remember { mutableStateOf(soraShion) }
+
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
     CustomGroupTitleText(R.string.general)
@@ -174,6 +177,7 @@ private fun GeneralOptions() {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mDynamicColor = !mDynamicColor
+                mSoraShion = false
                 onClickDynamicColorButton(mDynamicColor, primary, view)
             }
         ) {
@@ -183,7 +187,28 @@ private fun GeneralOptions() {
                 checked = mDynamicColor,
                 onCheckedChange = {
                     mDynamicColor = it
+                    mSoraShion = false
                     onClickDynamicColorButton(it, primary, view)
+                }
+            )
+        }
+    }
+
+    if (!mDynamicColor || !OsVersion.android12()) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.clickable {
+                mSoraShion = !mSoraShion
+                onClickSoraShionButton(mSoraShion, primary, view)
+            }
+        ) {
+            Text(text = "theme 2 (sora = shion)")
+            Spacer(modifier = Modifier.weight(1f))
+            Switch(
+                checked = mSoraShion,
+                onCheckedChange = {
+                    mSoraShion = it
+                    onClickSoraShionButton(it, primary, view)
                 }
             )
         }
@@ -276,6 +301,19 @@ private fun DebuggingOptions(navController: NavHostController) {
 private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view: View) {
     val context = view.context
     SettingsSharedPref.dynamicColor = isDynamicColor
+    SettingsSharedPref.soraShion = false
+
+    SnackbarUtil(view).snackbar(
+        message = R.string.requires_restart_do_it_now,
+        buttonText = R.string.restart,
+        buttonColor = color,
+        buttonClickListener = { IntentUtil.restartApp(context) }
+    )
+}
+
+private fun onClickSoraShionButton(isSoraShion: Boolean, color: Int, view: View) {
+    val context = view.context
+    SettingsSharedPref.soraShion = isSoraShion
 
     SnackbarUtil(view).snackbar(
         message = R.string.requires_restart_do_it_now,

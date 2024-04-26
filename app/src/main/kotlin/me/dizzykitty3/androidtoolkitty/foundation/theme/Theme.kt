@@ -82,7 +82,7 @@ private val LightColorScheme = lightColorScheme(
 
 @SuppressLint("NewApi")
 @Composable
-fun ToolKittyTheme(
+fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit

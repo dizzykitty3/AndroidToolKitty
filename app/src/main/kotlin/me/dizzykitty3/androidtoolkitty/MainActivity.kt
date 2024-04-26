@@ -11,9 +11,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.theme.ToolKittyTheme
+import me.dizzykitty3.androidtoolkitty.foundation.theme.AppTheme
+import me.dizzykitty3.androidtoolkitty.foundation.theme.SoraShionTheme
 import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.AppNavigationHost
 
 @AndroidEntryPoint
@@ -23,17 +24,30 @@ class MainActivity : ComponentActivity() {
     }
 
     private var isAutoClearClipboard = false
+    private var isSoraShion = false
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        isSoraShion = SettingsSharedPref.soraShion
         setContent {
-            ToolKittyTheme(
-                dynamicColor = SettingsSharedPref.dynamicColor
-            ) {
-                Scaffold(modifier = Modifier.fillMaxSize()) {
-                    AppNavigationHost()
+            if (!isSoraShion) {
+                AppTheme(
+                    dynamicColor = SettingsSharedPref.dynamicColor
+                ) {
+                    Scaffold(modifier = Modifier.fillMaxSize()) {
+                        AppNavigationHost()
+                    }
+                }
+            } else {
+                SoraShionTheme(
+                    dynamicColor = SettingsSharedPref.dynamicColor
+                ) {
+                    Scaffold(modifier = Modifier.fillMaxSize()) {
+                        AppNavigationHost()
+                    }
                 }
             }
         }
@@ -56,7 +70,7 @@ class MainActivity : ComponentActivity() {
         if (hasFocus and isAutoClearClipboard) {// Clipboard operations require window focus
             val cleared = ClipboardUtil.check()
             if (cleared) {
-                ToastUtil.toast(R.string.clipboard_cleared_automatically)
+                SnackbarUtil(window.decorView).snackbar(R.string.clipboard_cleared_automatically)
                 Log.i(TAG, "Clipboard cleared automatically")
             }
         }

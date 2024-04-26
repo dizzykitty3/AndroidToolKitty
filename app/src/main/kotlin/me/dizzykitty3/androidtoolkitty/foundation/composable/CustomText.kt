@@ -102,8 +102,8 @@ fun CustomTip(
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
         Row(

@@ -2,7 +2,8 @@ package me.dizzykitty3.androidtoolkitty.foundation.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Material 3 baseline color scheme
+// Material 3 baseline color scheme (purple)
+
 val md_theme_light_primary = Color(0xFF6750A4)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFEADDFF)
