@@ -77,18 +77,22 @@ fun HomeScreen(navController: NavHostController) {
             end = cardPadding
         )
     ) {
+        // Status
         item { CustomTopPadding() }
         item { BatteryNetworkAndSetting(navController) }
+        item { CustomCardSpacePadding() }
+        item { CustomCardSpacePadding() }
 
-        if (settingsSharedPref.oneHandedMode) item { CustomOneHandedModePadding() }
+        // Greeting
+        item { Greeting() }
+        if (settingsSharedPref.oneHandedMode)
+            item { CustomOneHandedModePadding() }
         else {
             item { CustomCardSpacePadding() }
             item { CustomCardSpacePadding() }
         }
 
-        item { Greeting() }
-        item { CustomCardSpacePadding() }
-        item { CustomCardSpacePadding() }
+        // Contents
         val locale = Locale.getDefault().toString()
         if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) item { NoTranslationTip(locale) }
         item { HomeCards(navController) }
