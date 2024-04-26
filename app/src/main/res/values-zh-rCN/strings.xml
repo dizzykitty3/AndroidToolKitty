@@ -150,7 +150,7 @@
     <string name="cellular">移动数据</string>
     <string name="offline">无网络</string>
     <string name="item">条目</string>
-    <string name="spin">开始旋转</string>
+    <string name="spin">开始</string>
     <string name="unknown_device">未知设备</string>
     <string name="turn_on_bluetooth">打开蓝牙</string>
     <string name="success_and_back">已获得权限！返回上一界面吧</string>
