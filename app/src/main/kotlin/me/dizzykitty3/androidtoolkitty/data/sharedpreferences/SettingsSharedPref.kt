@@ -20,6 +20,7 @@ object SettingsSharedPref {
     private const val DEBUGGING_OPTIONS = "debugging_options"
     private const val WEBPAGE_CARD_SHOW_MORE = "webpage_card_show_more"
     private const val SORA_SHION = "sora_shion"
+    private const val COLLAPSE_KEYBOARD = "collapse_keyboard"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -115,6 +116,16 @@ object SettingsSharedPref {
             Log.d(TAG, "sora shion theme = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SORA_SHION, value)
+                apply()
+            }
+        }
+
+    var collapseKeyboard: Boolean
+        get() = sharedPrefs.getBoolean(COLLAPSE_KEYBOARD, true)
+        set(value) {
+            Log.d(TAG, "collapse keyboard = $value")
+            with(sharedPrefs.edit()) {
+                putBoolean(COLLAPSE_KEYBOARD, value)
                 apply()
             }
         }

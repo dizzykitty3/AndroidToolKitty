@@ -132,6 +132,9 @@ private fun GeneralOptions() {
     val soraShion = settingsSharedPref.soraShion
     var mSoraShion by remember { mutableStateOf(soraShion) }
 
+    val collapseKeyboard = settingsSharedPref.collapseKeyboard
+    var mCollapseKeyboard by remember { mutableStateOf(collapseKeyboard) }
+
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
     CustomGroupTitleText(R.string.general)
@@ -228,6 +231,24 @@ private fun GeneralOptions() {
             onCheckedChange = {
                 mOneHandedMode = it
                 settingsSharedPref.oneHandedMode = it
+            }
+        )
+    }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.clickable {
+            mCollapseKeyboard = !mCollapseKeyboard
+            settingsSharedPref.collapseKeyboard = mCollapseKeyboard
+        }
+    ) {
+        Text(text = "collapse keyboard when back to toolkitty app")
+        Spacer(modifier = Modifier.weight(1f))
+        Switch(
+            checked = mCollapseKeyboard,
+            onCheckedChange = {
+                mCollapseKeyboard = it
+                settingsSharedPref.collapseKeyboard = it
             }
         )
     }

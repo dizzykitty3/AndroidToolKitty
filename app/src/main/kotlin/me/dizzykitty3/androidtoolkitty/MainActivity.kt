@@ -25,6 +25,7 @@ class MainActivity : ComponentActivity() {
 
     private var isAutoClearClipboard = false
     private var isSoraShion = false
+    private var isCollapseKeyboard = true
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +63,7 @@ class MainActivity : ComponentActivity() {
 
     private fun getSettingsSharedPreferences() {
         isAutoClearClipboard = SettingsSharedPref.autoClearClipboard
+        isCollapseKeyboard = SettingsSharedPref.collapseKeyboard
         Log.d(TAG, "settings sp got")
     }
 
@@ -78,7 +80,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onStop() {
         super.onStop()
-        currentFocus?.clearFocus() // To collapse keyboard
-        Log.d(TAG, "focus cleared")
+        if (isCollapseKeyboard) {
+            currentFocus?.clearFocus() // To collapse keyboard
+            Log.d(TAG, "focus cleared")
+        }
     }
 }
