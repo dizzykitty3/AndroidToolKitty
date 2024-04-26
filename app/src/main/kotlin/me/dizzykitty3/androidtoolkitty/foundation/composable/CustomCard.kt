@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.foundation.composable
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,7 +26,7 @@ import me.dizzykitty3.androidtoolkitty.R
 @Composable
 fun CustomCard(
     icon: ImageVector? = null,
-    title: Int,
+    @StringRes title: Int,
     content: @Composable () -> Unit
 ) {
     ElevatedCard(
@@ -60,7 +61,7 @@ fun CustomCard(
 
 @Composable
 private fun CardTitle(
-    id: Int
+    @StringRes id: Int
 ) {
     Text(
         modifier = Modifier.fillMaxWidth(),

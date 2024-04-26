@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -137,7 +138,7 @@ private fun EarlyVersions() {
 }
 
 @Composable
-private fun AndroidApiLevelAndName(id: Int) {
+private fun AndroidApiLevelAndName(@StringRes id: Int) {
     Text(
         text = buildAnnotatedString { CustomItalicText(text = stringResource(id = id)) },
         maxLines = 1,
@@ -146,7 +147,7 @@ private fun AndroidApiLevelAndName(id: Int) {
 }
 
 @Composable
-private fun AndroidVersion(id: Int) {
+private fun AndroidVersion(@StringRes id: Int) {
     Text(
         text = stringResource(id = id),
         maxLines = 1,

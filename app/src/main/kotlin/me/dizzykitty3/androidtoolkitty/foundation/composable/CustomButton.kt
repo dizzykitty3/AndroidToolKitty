@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.foundation.composable
 
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Clear
@@ -20,7 +21,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 @Composable
 fun CustomSystemSettingsButton(
     settingType: String,
-    buttonText: Int
+    @StringRes buttonText: Int
 ) {
     val context = LocalContext.current
 

@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.foundation.composable
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -63,7 +64,7 @@ fun CustomGradientText(
 
 @Composable
 fun AnnotatedString.Builder.CustomBoldText(
-    id: Int
+    @StringRes id: Int
 ) {
     val boldTextStyle = SpanStyle(
         fontStyle = FontStyle.Normal,
@@ -89,7 +90,7 @@ fun AnnotatedString.Builder.CustomItalicText(
 
 @Composable
 fun CustomTip(
-    id: Int
+    @StringRes id: Int
 ) {
     CustomTip(formattedMessage = stringResource(id = id))
 }
@@ -128,7 +129,7 @@ fun CustomTip(
 
 @Composable
 fun CustomGroupTitleText(
-    id: Int
+    @StringRes id: Int
 ) {
     Text(
         text = stringResource(id = id),

@@ -271,7 +271,7 @@ private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view:
 
 @Suppress("SpellCheckingInspection")
 @Composable
-fun Contributor() {
+private fun Contributor() {
     CustomGroupTitleText(id = R.string.contributors)
     DeveloperProfileLink("dizzykitty3")
     CustomSpacerPadding()
@@ -314,7 +314,7 @@ private fun DeveloperProfileLink(
 }
 
 @Composable
-fun SourceAndLicenses() {
+private fun SourceAndLicenses() {
     CustomGroupTitleText(id = R.string.source_and_licenses)
     GitHubRepoLink()
 }

@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.foundation.composable
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,7 +15,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 
 @Composable
 fun CustomHideCardSettingSwitch(
-    id: Int,
+    @StringRes id: Int,
     cardId: String,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit

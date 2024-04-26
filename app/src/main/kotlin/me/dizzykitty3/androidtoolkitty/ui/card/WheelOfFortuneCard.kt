@@ -236,7 +236,7 @@ fun WheelOfFortuneCard() {
 }
 
 @Composable
-fun ExpandableList(
+private fun ExpandableList(
     items: List<String>,
     onItemsChange: (List<String>) -> Unit,
     expanded: Boolean,

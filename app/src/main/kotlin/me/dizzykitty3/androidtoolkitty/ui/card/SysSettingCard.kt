@@ -97,4 +97,4 @@ private fun checkIsAutoTime(): Boolean {
     return isAutoTime == 1
 }
 
-data class Setting(val settingType: String, val buttonText: Int)
+private data class Setting(val settingType: String, val buttonText: Int)
