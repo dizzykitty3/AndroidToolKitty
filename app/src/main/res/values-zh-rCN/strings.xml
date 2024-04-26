@@ -189,4 +189,7 @@
     <string name="android_8_1">Android 8.1</string>
     <string name="android_8">Android 8</string>
     <string name="search">搜索</string>
+    <string name="contributors">贡献者</string>
+    <string name="source_and_licenses">源码和许可证</string>
+    <string name="now_a_developer">已开启调试选项</string>
 </resources>

@@ -216,6 +216,9 @@
     <string name="version">Version</string>
     <string name="version_number" translatable="false">20240426</string>
     <string name="developer_profile_link">Developer profile link</string>
+    <string name="contributors">Contributors</string>
+    <string name="source_and_licenses">Source code &amp; Licenses</string>
+    <string name="now_a_developer">You are now a developer</string>
 
     <!-- Permission request screen -->
     <string name="request_permission">Request permission</string>

@@ -17,6 +17,7 @@ object SettingsSharedPref {
     private const val IS_ONE_HANDED_MODE = "is_one_handed_mode"
     private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
+    private const val DEBUGGING_OPTIONS = "debugging_options"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -82,6 +83,16 @@ object SettingsSharedPref {
             Log.d(TAG, "using custom volume option label = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
+                apply()
+            }
+        }
+
+    var debuggingOptions: Boolean
+        get() = sharedPrefs.getBoolean(DEBUGGING_OPTIONS, false)
+        set(value) {
+            Log.d(TAG, "view debugging options = $value")
+            with(sharedPrefs.edit()) {
+                putBoolean(DEBUGGING_OPTIONS, value)
                 apply()
             }
         }

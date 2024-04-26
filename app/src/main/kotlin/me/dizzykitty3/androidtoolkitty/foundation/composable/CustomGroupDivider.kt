@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 @Composable
 fun CustomGroupDivider() {
     CustomSpacerPadding()
+    CustomSpacerPadding()
     HorizontalDivider()
     CustomSpacerPadding()
     CustomSpacerPadding()
