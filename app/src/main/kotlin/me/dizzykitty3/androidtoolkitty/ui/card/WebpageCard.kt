@@ -267,7 +267,7 @@ private fun onVisitProfileButton(username: String, platformIndex: Int, context: 
 
     if (platform == UrlUtil.Platform.PLATFORM_NOT_ADDED_YET) {
 //        ToastUtil.toast("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
-        ToastUtil.toast("under development")
+        ToastUtil.toast(R.string.under_development)
         return
     }
 

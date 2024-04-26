@@ -90,15 +90,13 @@ fun SettingsScreen(navController: NavHostController) {
                 modifier = Modifier.clickable {
                     if (!debuggingOptions) {
                         tapCount++
-                        if (tapCount == 3) {
-                            SnackbarUtil(view).snackbar("2 more times")
-                        }
-                        if (tapCount == 4) {
-                            SnackbarUtil(view).snackbar("1 more time")
-                        }
-                        if (tapCount == 5) {
-                            SnackbarUtil(view).snackbar(R.string.now_a_developer)
-                            SettingsSharedPref.debuggingOptions = true
+                        when (tapCount) {
+                            3 -> SnackbarUtil(view).snackbar(R.string.two_more_times)
+                            4 -> SnackbarUtil(view).snackbar(R.string.one_more_time)
+                            5 -> {
+                                SnackbarUtil(view).snackbar(R.string.now_a_developer)
+                                SettingsSharedPref.debuggingOptions = true
+                            }
                         }
                     }
                 }
@@ -219,7 +217,7 @@ private fun GeneralOptions() {
                 onClickSoraShionButton(mSoraShion, primary, view)
             }
         ) {
-            Text(text = "theme 2 (sora - shion)")
+            Text(text = stringResource(id = R.string.theme_2))
             Spacer(modifier = Modifier.weight(1f))
             Switch(
                 checked = mSoraShion,
@@ -256,7 +254,7 @@ private fun GeneralOptions() {
             settingsSharedPref.collapseKeyboard = mCollapseKeyboard
         }
     ) {
-        Text(text = "collapse keyboard when back to toolkitty app")
+        Text(text = stringResource(id = R.string.collapse_keyboard_when_back_to_app))
         Spacer(modifier = Modifier.weight(1f))
         Switch(
             checked = mCollapseKeyboard,
@@ -301,13 +299,13 @@ private fun DebuggingOptions(navController: NavHostController) {
     Button(
         onClick = { navController.navigate(PERMISSION_REQUEST_SCREEN) }
     ) {
-        Text(text = "go to permission request screen")
+        Text(text = stringResource(id = R.string.go_to_permission_request_screen))
     }
 
     Button(
-        onClick = { ToastUtil.toast("under development") }
+        onClick = { ToastUtil.toast(R.string.under_development) }
     ) {
-        Text(text = "check sharedpreferences values")
+        Text(text = stringResource(id = R.string.check_sp_values))
     }
 
     CustomAlertDialogButton(

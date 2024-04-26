@@ -13,8 +13,13 @@
     <string name="info">Info</string>
     <string name="go_to_settings">Go to settings</string>
     <string name="success_and_back">Success! Now you can back to the previous screen</string>
+    <string name="under_development">under development</string>
 
     <!-- Home screen: top tip -->
+    <string name="battery_level">Battery level</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="cellular">Cellular</string>
+    <string name="offline">Offline</string>
     <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>
 
     <!-- Home screen: year progress -->
@@ -79,10 +84,6 @@
     <string name="open_caption_preferences">Caption preferences</string>
     <string name="set_time_automatically_is_off_tip">Set Time Automatically is now OFF. You may experience some unexpected behavior while using your phone.</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
-    <string name="battery_level">Battery level</string>
-    <string name="wifi">Wi-Fi</string>
-    <string name="cellular">Cellular</string>
-    <string name="offline">Offline</string>
 
     <!-- Home screen: unicode -->
     <string name="unicode">Unicode</string>
@@ -208,6 +209,10 @@
     <string name="set_slider_increment_5">Set slider increment to 5%</string>
     <string name="requires_restart_do_it_now">Requires restart, do it now?</string>
     <string name="restart">Restart</string>
+    <string name="theme_2">Theme 2 (Sora - Shion)</string>
+    <string name="collapse_keyboard_when_back_to_app">Collapse keyboard when back to ToolKitty app</string>
+    <string name="go_to_permission_request_screen">Go to permission request screen</string>
+    <string name="check_sp_values">Check sharedpreferences values</string>
 
     <!-- Settings screen: about -->
     <string name="about">About</string>
@@ -219,6 +224,8 @@
     <string name="contributors">Contributors</string>
     <string name="source_and_licenses">Source code &amp; Licenses</string>
     <string name="now_a_developer">You are now a developer</string>
+    <string name="two_more_times">2 more times</string>
+    <string name="one_more_time">1 more time</string>
 
     <!-- Permission request screen -->
     <string name="request_permission">Request permission</string>
