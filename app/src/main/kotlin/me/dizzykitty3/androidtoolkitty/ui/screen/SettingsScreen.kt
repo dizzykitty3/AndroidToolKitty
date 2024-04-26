@@ -234,6 +234,8 @@ private fun DebuggingOptions() {
     Text(text = "sdk version = ${Build.VERSION.SDK_INT}")
     Text(text = "lang code = ${Locale.getDefault()}")
 
+    CustomSpacerPadding()
+
     CustomAlertDialogButton(
         buttonText = stringResource(R.string.erase_all_app_data),
         dialogMessageTitle = stringResource(R.string.warning),
