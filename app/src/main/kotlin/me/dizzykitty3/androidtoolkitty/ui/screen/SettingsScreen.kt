@@ -205,7 +205,7 @@ private fun GeneralOptions() {
                 onClickSoraShionButton(mSoraShion, primary, view)
             }
         ) {
-            Text(text = "theme 2 (sora = shion)")
+            Text(text = "theme 2 (sora - shion)")
             Spacer(modifier = Modifier.weight(1f))
             Switch(
                 checked = mSoraShion,
