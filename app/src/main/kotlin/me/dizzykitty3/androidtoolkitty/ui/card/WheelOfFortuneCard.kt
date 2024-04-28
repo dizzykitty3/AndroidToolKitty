@@ -54,7 +54,6 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -114,8 +113,6 @@ fun WheelOfFortuneCard() {
             animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = "",
         )
 
-        val view = LocalView.current
-
         // 当动画结束时，计算并显示选中的项目
         LaunchedEffect(currentRotationDegrees) {
             if (currentRotationDegrees == targetRotationDegrees && hasRotated) {
@@ -127,7 +124,7 @@ fun WheelOfFortuneCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                SnackbarUtil(view).snackbar(selected)
+                SnackbarUtil.snackbar(selected)
                 rotationDegrees = targetRotationDegrees % 360
             }
         }

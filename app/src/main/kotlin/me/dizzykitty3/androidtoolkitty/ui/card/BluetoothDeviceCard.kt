@@ -77,7 +77,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 }
 
                 // When Bluetooth is OFF
-                SnackbarUtil(view).snackbar(
+                SnackbarUtil.snackbar(
                     message = R.string.bluetooth_disabled,
                     buttonText = R.string.turn_on_bluetooth,
                     buttonColor = materialColor,

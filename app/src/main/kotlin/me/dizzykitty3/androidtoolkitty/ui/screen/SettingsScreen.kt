@@ -91,10 +91,10 @@ fun SettingsScreen(navController: NavHostController) {
                     if (!debuggingOptions) {
                         tapCount++
                         when (tapCount) {
-                            3 -> SnackbarUtil(view).snackbar(R.string.two_more_times)
-                            4 -> SnackbarUtil(view).snackbar(R.string.one_more_time)
+                            3 -> SnackbarUtil.snackbar(R.string.two_more_times)
+                            4 -> SnackbarUtil.snackbar(R.string.one_more_time)
                             5 -> {
-                                SnackbarUtil(view).snackbar(R.string.now_a_developer)
+                                SnackbarUtil.snackbar(R.string.now_a_developer)
                                 SettingsSharedPref.debuggingOptions = true
                             }
                         }
@@ -336,7 +336,7 @@ private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view:
     SettingsSharedPref.dynamicColor = isDynamicColor
     SettingsSharedPref.soraShion = false
 
-    SnackbarUtil(view).snackbar(
+    SnackbarUtil.snackbar(
         message = R.string.requires_restart_do_it_now,
         buttonText = R.string.restart,
         buttonColor = color,
@@ -348,7 +348,7 @@ private fun onClickSoraShionButton(isSoraShion: Boolean, color: Int, view: View)
     val context = view.context
     SettingsSharedPref.soraShion = isSoraShion
 
-    SnackbarUtil(view).snackbar(
+    SnackbarUtil.snackbar(
         message = R.string.requires_restart_do_it_now,
         buttonText = R.string.restart,
         buttonColor = color,

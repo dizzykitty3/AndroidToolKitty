@@ -4,8 +4,9 @@ import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.view
 
-class SnackbarUtil(private val view: View) {
+object SnackbarUtil {
     fun snackbar(message: String) =
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
 

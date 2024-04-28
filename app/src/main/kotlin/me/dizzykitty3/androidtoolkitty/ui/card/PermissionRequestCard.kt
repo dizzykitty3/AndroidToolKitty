@@ -43,7 +43,7 @@ fun PermissionRequestCard() {
                     clickCount++
                     return@Button
                 }
-                SnackbarUtil(view).snackbar(R.string.success_and_back)
+                SnackbarUtil.snackbar(R.string.success_and_back)
             }
         ) {
             Text(text = stringResource(id = R.string.request_permission))

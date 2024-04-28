@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty
 
 import android.app.Application
 import android.util.Log
+import android.view.View
 import dagger.hilt.android.HiltAndroidApp
 import me.dizzykitty3.androidtoolkitty.data.room.AppContainer
 import me.dizzykitty3.androidtoolkitty.data.room.AppDataContainer
@@ -12,6 +13,7 @@ class MainApp : Application() {
         private const val TAG = "MainApp"
         lateinit var app: MainApp private set
         lateinit var container: AppContainer
+        lateinit var view: View
     }
 
     override fun onCreate() {
