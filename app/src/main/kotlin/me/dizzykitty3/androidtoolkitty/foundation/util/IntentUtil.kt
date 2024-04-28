@@ -68,6 +68,7 @@ object IntentUtil {
     }
 
     @SuppressLint("InlinedApi")
+    @JvmStatic
     fun openSystemSettings(settingType: String, context: Context) {
         val intent: Intent = when (settingType) {
             SETTING_1 -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
