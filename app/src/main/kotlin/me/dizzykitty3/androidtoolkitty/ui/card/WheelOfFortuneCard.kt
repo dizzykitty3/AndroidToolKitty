@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -48,6 +49,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -139,7 +141,7 @@ fun WheelOfFortuneCard() {
             CustomSpacerPadding()
 
             // 绘制转盘
-            Canvas(modifier = Modifier.size(250.dp)) {
+            Canvas(modifier = Modifier.size(250.dp).aspectRatio(1f)) {
                 val center = Offset(size.width / 2, size.height / 2)
                 val radius = size.minDimension / 2
                 items.indices.forEach { index ->
@@ -151,7 +153,7 @@ fun WheelOfFortuneCard() {
                         startAngle = startAngle,
                         sweepAngle = sweepAngle,
                         useCenter = true,
-                        size = size,
+                        size = Size(radius * 2, radius * 2),
                         topLeft = Offset(center.x - radius, center.y - radius)
                     )
 
