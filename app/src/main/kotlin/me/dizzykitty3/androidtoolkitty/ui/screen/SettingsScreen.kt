@@ -303,7 +303,7 @@ private fun DebuggingOptions(navController: NavHostController) {
     }
 
     Button(
-        onClick = { ToastUtil.toast(R.string.under_development) }
+        onClick = { SnackbarUtil.snackbar(R.string.under_development) }
     ) {
         Text(text = stringResource(id = R.string.check_sp_values))
     }

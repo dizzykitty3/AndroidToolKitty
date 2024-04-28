@@ -36,8 +36,8 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupTitleTex
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
 
 private const val TAG = "WebpageCard"
@@ -266,8 +266,8 @@ private fun onVisitProfileButton(username: String, platformIndex: Int, context: 
     val platform = UrlUtil.Platform.entries.getOrNull(platformIndex) ?: return
 
     if (platform == UrlUtil.Platform.PLATFORM_NOT_ADDED_YET) {
-//        ToastUtil.toast("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
-        ToastUtil.toast(R.string.under_development)
+//        SnackbarUtil.snackbar("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
+        SnackbarUtil.snackbar(R.string.under_development)
         return
     }
 

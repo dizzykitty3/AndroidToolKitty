@@ -40,7 +40,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil.setVolume
-import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -205,7 +205,7 @@ fun VolumeCard() {
                         Button(
                             onClick = {
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
-                                    if (newCustomVolume.toInt() != 0) ToastUtil.toast(R.string.system_media_volume_levels_limited)
+                                    if (newCustomVolume.toInt() != 0) SnackbarUtil.snackbar(R.string.system_media_volume_levels_limited)
                                     return@Button
                                 } else {
                                     settingsSharedPref.customVolume = newCustomVolume.toInt()

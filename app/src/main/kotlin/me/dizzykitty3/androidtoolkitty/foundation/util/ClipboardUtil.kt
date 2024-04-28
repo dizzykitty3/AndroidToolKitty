@@ -27,6 +27,6 @@ object ClipboardUtil {
     fun copy(text: String) {
         val clip = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
-        ToastUtil.toast("$text ${app.applicationContext.getString(R.string.copied)}")
+        SnackbarUtil.snackbar("$text ${app.applicationContext.getString(R.string.copied)}")
     }
 }

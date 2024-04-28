@@ -23,8 +23,8 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 
 private const val TAG = "UnicodeCard"
 
@@ -131,7 +131,7 @@ private fun onClickConvertButton(
         updateResult(result)
         ClipboardUtil.copy(result)
     } catch (e: Exception) {
-        ToastUtil.toast(e.message ?: "Unknown error occurred")
+        SnackbarUtil.snackbar(e.message ?: "Unknown error occurred")
     }
     Log.d(TAG, "onClickConvertButton")
 }
