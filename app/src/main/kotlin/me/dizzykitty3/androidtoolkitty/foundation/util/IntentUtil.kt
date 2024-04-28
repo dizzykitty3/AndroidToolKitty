@@ -29,79 +29,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 object IntentUtil {
     private const val TAG = "IntentUtil"
 
-    @JvmStatic
-    fun openUrl(url: String, context: Context) {
-        if (url.isBlank()) return
-
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(
-            if (url.contains(HTTPS))
-                url
-            else
-                "$HTTPS$url"
-        )
-        startActivity(intent, context)
-        Log.d(TAG, "openUrl")
-    }
-
-    @SuppressLint("InlinedApi")
-    @JvmStatic
-    fun openSystemSettings(settingType: String, context: Context) {
-        val intent: Intent = when (settingType) {
-            SETTING_1 -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
-            SETTING_2 -> if (OsVersion.android12()) Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
-            SETTING_3 -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
-            SETTING_4 -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
-            SETTING_5 -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
-            SETTING_6 -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
-            SETTING_7 -> Intent(Settings.ACTION_LOCALE_SETTINGS)
-            SETTING_8 -> Intent(Settings.ACTION_DATE_SETTINGS)
-            SETTING_9 -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
-            else -> return
-        }
-
-        try {
-            startActivity(intent, context)
-            Log.d(TAG, "onOpenSystemSettings: $settingType")
-        } catch (e: Exception) {
-            ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
-            Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
-        }
-    }
-
-    @JvmStatic
-    fun openPermissionPage(context: Context) {
-        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        val uri = Uri.fromParts(PACKAGE, app.packageName, null)
-        intent.setData(uri)
-
-        try {
-            startActivity(intent, context)
-            Log.d(TAG, "openPermissionPage")
-        } catch (e: Exception) {
-            ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
-            Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
-        }
-    }
-
-    @JvmStatic
-    fun openGoogleMaps(latitude: String, longitude: String, context: Context) {
-        if (latitude.isBlank() || longitude.isBlank()) return
-
-        val coordinates = "$latitude,$longitude"
-        val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
-
-        val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
-        intent.setPackage(GOOGLE_MAPS)
-
-        try {
-            startActivity(intent, context)
-            Log.d(TAG, "openGoogleMaps")
-        } catch (e: Exception) {
-            Log.e(TAG, ">>>ERROR<<< openGoogleMaps: $e")
-        }
-    }
-
     private fun startActivity(intent: Intent, context: Context) {
         try {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -126,7 +53,75 @@ object IntentUtil {
         }
     }
 
-    @JvmStatic
+    fun openUrl(url: String, context: Context) {
+        if (url.isBlank()) return
+
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(
+            if (url.contains(HTTPS))
+                url
+            else
+                "$HTTPS$url"
+        )
+        startActivity(intent, context)
+        Log.d(TAG, "openUrl")
+    }
+
+    @SuppressLint("InlinedApi")
+    fun openSystemSettings(settingType: String, context: Context) {
+        val intent: Intent = when (settingType) {
+            SETTING_1 -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
+            SETTING_2 -> if (OsVersion.android12()) Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
+            SETTING_3 -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
+            SETTING_4 -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+            SETTING_5 -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+            SETTING_6 -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
+            SETTING_7 -> Intent(Settings.ACTION_LOCALE_SETTINGS)
+            SETTING_8 -> Intent(Settings.ACTION_DATE_SETTINGS)
+            SETTING_9 -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
+            else -> return
+        }
+
+        try {
+            startActivity(intent, context)
+            Log.d(TAG, "onOpenSystemSettings: $settingType")
+        } catch (e: Exception) {
+            ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
+            Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
+        }
+    }
+
+    fun openPermissionPage(context: Context) {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts(PACKAGE, app.packageName, null)
+        intent.setData(uri)
+
+        try {
+            startActivity(intent, context)
+            Log.d(TAG, "openPermissionPage")
+        } catch (e: Exception) {
+            ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
+            Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
+        }
+    }
+
+    fun openGoogleMaps(latitude: String, longitude: String, context: Context) {
+        if (latitude.isBlank() || longitude.isBlank()) return
+
+        val coordinates = "$latitude,$longitude"
+        val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
+
+        val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
+        intent.setPackage(GOOGLE_MAPS)
+
+        try {
+            startActivity(intent, context)
+            Log.d(TAG, "openGoogleMaps")
+        } catch (e: Exception) {
+            Log.e(TAG, ">>>ERROR<<< openGoogleMaps: $e")
+        }
+    }
+
     fun openAppOnMarket(packageName: String, context: Context, isGooglePlay: Boolean = true) {
         val marketUri: Uri = Uri.parse(
             if (packageName.isBlank()) {
@@ -152,7 +147,6 @@ object IntentUtil {
     /**
      * Remember to use Activity Context to restart app.
      */
-    @JvmStatic
     fun restartApp(context: Context) {
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -160,13 +154,11 @@ object IntentUtil {
         (context as Activity).finish()
     }
 
-    @JvmStatic
     fun openBluetooth(context: Context) {
         val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
         startActivity(intent, context)
     }
 
-    @JvmStatic
     fun openSearch(query: String, context: Context) {
         if (query.isBlank()) return
 

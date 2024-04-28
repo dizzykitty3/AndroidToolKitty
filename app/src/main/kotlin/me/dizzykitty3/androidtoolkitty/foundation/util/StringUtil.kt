@@ -3,7 +3,6 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 import java.time.LocalTime
 
 object StringUtil {
-    @JvmStatic
     fun greeting(): String {
         val currentTime = LocalTime.now()
         return when (currentTime.hour) {
@@ -16,12 +15,10 @@ object StringUtil {
     /**
      * Drop spaces, including full-width ones.
      */
-    @JvmStatic
     fun dropSpaces(inputString: String): String {
         return inputString.trim().replace("\\s".toRegex(), "").lowercase()
     }
 
-    @JvmStatic
     @Throws(IllegalArgumentException::class)
     fun unicodeToCharacter(unicode: String): String {
         val length = unicode.length
@@ -42,7 +39,6 @@ object StringUtil {
         }
     }
 
-    @JvmStatic
     @Throws(IllegalArgumentException::class)
     fun characterToUnicode(characters: String): String {
         require(characters.isNotEmpty()) { "Input string is empty" }

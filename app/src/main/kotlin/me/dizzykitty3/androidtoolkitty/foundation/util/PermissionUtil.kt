@@ -15,7 +15,6 @@ object PermissionUtil {
     /**
      * @return true if the app does NOT have the required permissions, false otherwise.
      */
-    @JvmStatic
     fun noBluetoothPermission(context: Context): Boolean {
         return if (OsVersion.android12())
             check(context, BT_CONNECT)
@@ -27,7 +26,6 @@ object PermissionUtil {
         return ActivityCompat.checkSelfPermission(context, permission) != GRANTED
     }
 
-    @JvmStatic
     fun requestBluetoothPermission(context: Context) {
         if (OsVersion.android12()) {
             request(context, arrayOf(BT_CONNECT))

@@ -5,34 +5,23 @@ import android.media.AudioManager
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 
 object AudioUtil {
-    private lateinit var audioManager: AudioManager
+    private var audioManager: AudioManager =
+        app.applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-    private fun audioService() {
-        audioManager =
-            app.applicationContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-    }
-
-    @JvmStatic
     fun volume(): Int {
-        audioService()
         return audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
     }
 
-    @JvmStatic
     fun maxVolumeIndex(): Int {
-        audioService()
         return audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
     }
 
-    @JvmStatic
-    fun setVolume(volume: Int) {
-        audioService()
+    fun setVolume(volume: Int) =
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI)
-    }
 
-    @JvmStatic
-    fun setVolume(volume: Double) {
-        audioService()
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume.toInt(), AudioManager.FLAG_SHOW_UI)
-    }
+    fun setVolume(volume: Double) = audioManager.setStreamVolume(
+        AudioManager.STREAM_MUSIC,
+        volume.toInt(),
+        AudioManager.FLAG_SHOW_UI
+    )
 }

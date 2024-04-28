@@ -7,24 +7,16 @@ import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.R
 
 object ClipboardUtil {
-    private lateinit var clipboard: ClipboardManager
+    private var clipboard: ClipboardManager =
+        app.applicationContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
-    private fun clipboardService() {
-        clipboard =
-            app.applicationContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    }
-
-    @JvmStatic
     fun clear() {
-        clipboardService()
         if (clipboard.hasPrimaryClip()) {
             clipboard.clearPrimaryClip()
         }
     }
 
-    @JvmStatic
     fun check(): Boolean {
-        clipboardService()
         if (clipboard.hasPrimaryClip()) {
             clipboard.clearPrimaryClip()
             return true
@@ -32,9 +24,7 @@ object ClipboardUtil {
         return false
     }
 
-    @JvmStatic
     fun copy(text: String) {
-        clipboardService()
         val clip = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
         ToastUtil.toast("$text ${app.applicationContext.getString(R.string.copied)}")

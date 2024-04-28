@@ -32,14 +32,12 @@ object UrlUtil {
     /**
      * Adding the appropriate suffix and returning the full URL.
      */
-    @JvmStatic
     fun toFullUrl(urlInput: String): String {
         val suffix = urlSuffix(urlInput)
         Log.d(TAG, if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
         return "$HTTPS$urlInput$suffix"
     }
 
-    @JvmStatic
     fun urlSuffix(urlInput: String): String {
         if (urlInput.contains(".")) return ""
 
@@ -130,6 +128,5 @@ object UrlUtil {
     /**
      * @return the profile prefix associated with the given platform.
      */
-    @JvmStatic
     fun profilePrefix(platform: Platform): String = platform.prefix
 }
