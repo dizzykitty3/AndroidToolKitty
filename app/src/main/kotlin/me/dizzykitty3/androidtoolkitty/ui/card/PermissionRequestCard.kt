@@ -12,7 +12,6 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
@@ -30,7 +29,6 @@ fun PermissionRequestCard() {
     ) {
         var clickCount by remember { mutableIntStateOf(0) }
 
-        val view = LocalView.current
         val context = LocalContext.current
 
         if (OsVersion.android12()) Text(text = stringResource(id = R.string.bluetooth_connect))

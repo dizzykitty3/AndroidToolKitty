@@ -1,8 +1,8 @@
 package me.dizzykitty3.androidtoolkitty.ui.screen
 
 import android.app.Activity
+import android.content.Context
 import android.os.Build
-import android.view.View
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -32,7 +32,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
@@ -127,8 +126,7 @@ fun SettingsScreen(navController: NavHostController) {
 
 @Composable
 private fun GeneralOptions() {
-    val view = LocalView.current
-
+    val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
 
     val autoClearClipboard = settingsSharedPref.autoClearClipboard
@@ -195,7 +193,7 @@ private fun GeneralOptions() {
             modifier = Modifier.clickable {
                 mDynamicColor = !mDynamicColor
                 mSoraShion = false
-                onClickDynamicColorButton(mDynamicColor, primary, view)
+                onClickDynamicColorButton(mDynamicColor, primary, context)
             }
         ) {
             Text(text = stringResource(R.string.material_you_dynamic_color))
@@ -205,7 +203,7 @@ private fun GeneralOptions() {
                 onCheckedChange = {
                     mDynamicColor = it
                     mSoraShion = false
-                    onClickDynamicColorButton(it, primary, view)
+                    onClickDynamicColorButton(it, primary, context)
                 }
             )
         }
@@ -216,7 +214,7 @@ private fun GeneralOptions() {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mSoraShion = !mSoraShion
-                onClickSoraShionButton(mSoraShion, primary, view)
+                onClickSoraShionButton(mSoraShion, primary, context)
             }
         ) {
             Text(text = stringResource(id = R.string.theme_2))
@@ -225,7 +223,7 @@ private fun GeneralOptions() {
                 checked = mSoraShion,
                 onCheckedChange = {
                     mSoraShion = it
-                    onClickSoraShionButton(it, primary, view)
+                    onClickSoraShionButton(it, primary, context)
                 }
             )
         }
@@ -333,8 +331,7 @@ private fun DebuggingOptions(navController: NavHostController) {
     )
 }
 
-private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view: View) {
-    val context = view.context
+private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, context: Context) {
     SettingsSharedPref.dynamicColor = isDynamicColor
     SettingsSharedPref.soraShion = false
 
@@ -346,8 +343,7 @@ private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, view:
     )
 }
 
-private fun onClickSoraShionButton(isSoraShion: Boolean, color: Int, view: View) {
-    val context = view.context
+private fun onClickSoraShionButton(isSoraShion: Boolean, color: Int, context: Context) {
     SettingsSharedPref.soraShion = isSoraShion
 
     SnackbarUtil.snackbar(
