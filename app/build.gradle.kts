@@ -1,9 +1,9 @@
 plugins {
-    alias(libs.plugins.application)
-    alias(libs.plugins.kotlin)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.androidx.room)
+    alias(libs.plugins.google.hilt)
+    alias(libs.plugins.google.ksp)
+    alias(libs.plugins.jetbrains.kotlin)
 }
 
 android {
@@ -23,15 +23,21 @@ android {
         }
     }
 
+    defaultConfig {
+        resValue("string", "app_name", "ToolKitty")
+    }
+
     buildTypes {
         debug {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
             versionNameSuffix = " DEV"
+            resValue("string", "app_name", "ATK dev")
         }
 
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -44,12 +50,13 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     kotlinOptions {
         jvmTarget = "17"
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.11"
+        kotlinCompilerExtensionVersion = "1.5.12"
     }
     packaging {
         resources {
@@ -62,26 +69,31 @@ android {
 }
 
 dependencies {
-    implementation(libs.material) // Theme.Material3.DynamicColors.DayNight
-    implementation(libs.play.services.maps)
-    implementation(platform(libs.compose.bom))
-    androidTestImplementation(platform(libs.compose.bom))
-    implementation(libs.activity.compose) // ComponentActivity, setContent, enableEdgeToEdge
-    implementation(libs.material3)
-    implementation(libs.material.icons.extended)
-    implementation(libs.navigation.compose) // NavHostController
-    implementation(libs.core) // WindowCompat, ActivityCompat
-    implementation(libs.room.runtime)
-    ksp(libs.room.compiler)
-    implementation(libs.datastore.preferences)
-    implementation(libs.gson)
-    implementation(libs.ui.tooling.preview) // @Preview
-    debugImplementation(libs.ui.tooling)
-    androidTestImplementation(libs.ui.test.junit4)
-    debugImplementation(libs.ui.test.manifest)
-    implementation(libs.lifecycle.viewmodel.compose)
-    implementation(libs.runtime.livedata)
-    implementation(libs.hilt) // Dependency injection
-    ksp(libs.hilt.compiler)
-    implementation(libs.coroutines) // Asynchronous tasks
+
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+
+    implementation(libs.android.gms.play.services.maps)
+    implementation(libs.android.material) // Theme.Material3.DynamicColors.DayNight
+    implementation(libs.androidx.activity.compose) // ComponentActivity, setContent, enableEdgeToEdge
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.compose.material.icons.extended)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.runtime.livedata)
+    implementation(libs.androidx.compose.ui.tooling.preview) // @Preview
+    implementation(libs.androidx.core.ktx) // WindowCompat, ActivityCompat
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+    implementation(libs.androidx.navigation.compose) // NavHostController
+    implementation(libs.androidx.room.ktx) // To use Coroutine features
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.google.gson)
+    implementation(libs.google.hilt) // Dependency injection
+    implementation(libs.kotlinx.coroutines) // Asynchronous tasks
+
+    ksp(libs.androidx.room.compiler)
+    ksp(libs.google.hilt.compiler)
 }

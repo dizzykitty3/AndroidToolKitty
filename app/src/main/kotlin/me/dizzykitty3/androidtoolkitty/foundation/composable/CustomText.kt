@@ -1,5 +1,6 @@
-package me.dizzykitty3.androidtoolkitty.foundation.ui.component
+package me.dizzykitty3.androidtoolkitty.foundation.composable
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
@@ -62,14 +64,14 @@ fun CustomGradientText(
 
 @Composable
 fun AnnotatedString.Builder.CustomBoldText(
-    resId: Int
+    @StringRes id: Int
 ) {
     val boldTextStyle = SpanStyle(
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold
     )
     withStyle(boldTextStyle) {
-        append(stringResource(id = resId))
+        append(stringResource(id = id))
     }
 }
 
@@ -88,9 +90,9 @@ fun AnnotatedString.Builder.CustomItalicText(
 
 @Composable
 fun CustomTip(
-    resId: Int
+    @StringRes id: Int
 ) {
-    CustomTip(formattedMessage = stringResource(id = resId))
+    CustomTip(formattedMessage = stringResource(id = id))
 }
 
 @Composable
@@ -98,8 +100,7 @@ fun CustomTip(
     formattedMessage: String
 ) {
     Card(
-        modifier = Modifier.padding(bottom = 8.dp),
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
@@ -107,7 +108,7 @@ fun CustomTip(
     ) {
         Row(
             modifier = Modifier
-                .padding(8.dp)
+                .padding(dimensionResource(id = R.dimen.padding_tip))
                 .fillMaxWidth()
         ) {
             Icon(
@@ -123,14 +124,15 @@ fun CustomTip(
             )
         }
     }
+    CustomCardSpacePadding()
 }
 
 @Composable
 fun CustomGroupTitleText(
-    resId: Int
+    @StringRes id: Int
 ) {
     Text(
-        text = stringResource(id = resId),
+        text = stringResource(id = id),
         style = MaterialTheme.typography.titleMedium
     )
     CustomSpacerPadding()

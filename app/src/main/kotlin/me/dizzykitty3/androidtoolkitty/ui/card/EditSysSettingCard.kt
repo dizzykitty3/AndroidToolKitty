@@ -7,19 +7,21 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomHideCardSettingSwitch
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomHideCardSettingSwitch
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_10
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_11
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_12
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_2
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_3
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_4
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_5
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_6
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
-
-private const val SETTING_1 = "setting_display"
-private const val SETTING_2 = "setting_auto_rotate"
-private const val SETTING_3 = "setting_bluetooth"
-private const val SETTING_4 = "setting_default_apps"
-private const val SETTING_5 = "setting_battery_optimization"
-private const val SETTING_6 = "setting_caption"
-private const val SETTING_7 = "setting_locale"
-private const val SETTING_8 = "setting_date_and_time"
-private const val SETTING_9 = "setting_developer"
 
 // TODO refactor this bullshit
 @Composable
@@ -38,6 +40,9 @@ fun EditSysSettingCard() {
         val isShowSetting7 = settingsSharedPref.getCardShowedState(SETTING_7)
         val isShowSetting8 = settingsSharedPref.getCardShowedState(SETTING_8)
         val isShowSetting9 = settingsSharedPref.getCardShowedState(SETTING_9)
+        val isShowSetting10 = settingsSharedPref.getCardShowedState(SETTING_10)
+        val isShowSetting11 = settingsSharedPref.getCardShowedState(SETTING_11)
+        val isShowSetting12 = settingsSharedPref.getCardShowedState(SETTING_12)
         var mIsShowSetting1 by remember { mutableStateOf(isShowSetting1) }
         var mIsShowSetting2 by remember { mutableStateOf(isShowSetting2) }
         var mIsShowSetting3 by remember { mutableStateOf(isShowSetting3) }
@@ -47,8 +52,11 @@ fun EditSysSettingCard() {
         var mIsShowSetting7 by remember { mutableStateOf(isShowSetting7) }
         var mIsShowSetting8 by remember { mutableStateOf(isShowSetting8) }
         var mIsShowSetting9 by remember { mutableStateOf(isShowSetting9) }
+        var mIsShowSetting10 by remember { mutableStateOf(isShowSetting10) }
+        var mIsShowSetting11 by remember { mutableStateOf(isShowSetting11) }
+        var mIsShowSetting12 by remember { mutableStateOf(isShowSetting12) }
         CustomHideCardSettingSwitch(
-            resId = R.string.open_display_settings,
+            id = R.string.open_display_settings,
             cardId = SETTING_1,
             isChecked = mIsShowSetting1
         ) { newState ->
@@ -57,7 +65,7 @@ fun EditSysSettingCard() {
         }
         if (OsVersion.android12()) {
             CustomHideCardSettingSwitch(
-                resId = R.string.open_auto_rotate_settings,
+                id = R.string.open_auto_rotate_settings,
                 cardId = SETTING_2,
                 isChecked = mIsShowSetting2
             ) { newState ->
@@ -66,7 +74,7 @@ fun EditSysSettingCard() {
             }
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.open_bluetooth_settings,
+            id = R.string.open_bluetooth_settings,
             cardId = SETTING_3,
             isChecked = mIsShowSetting3
         ) { newState ->
@@ -74,7 +82,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_3, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.open_default_apps_settings,
+            id = R.string.open_default_apps_settings,
             cardId = SETTING_4,
             isChecked = mIsShowSetting4
         ) { newState ->
@@ -82,7 +90,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_4, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.open_battery_optimization_settings,
+            id = R.string.open_battery_optimization_settings,
             cardId = SETTING_5,
             isChecked = mIsShowSetting5
         ) { newState ->
@@ -90,7 +98,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_5, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.open_caption_preferences,
+            id = R.string.open_caption_preferences,
             cardId = SETTING_6,
             isChecked = mIsShowSetting6
         ) { newState ->
@@ -98,7 +106,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_6, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.open_language_settings,
+            id = R.string.open_language_settings,
             cardId = SETTING_7,
             isChecked = mIsShowSetting7
         ) { newState ->
@@ -106,7 +114,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_7, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.open_date_and_time_settings,
+            id = R.string.open_date_and_time_settings,
             cardId = SETTING_8,
             isChecked = mIsShowSetting8
         ) { newState ->
@@ -114,12 +122,36 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_8, newState)
         }
         CustomHideCardSettingSwitch(
-            resId = R.string.open_developer_options,
+            id = R.string.open_developer_options,
             cardId = SETTING_9,
             isChecked = mIsShowSetting9
         ) { newState ->
             mIsShowSetting9 = newState
             settingsSharedPref.saveCardShowedState(SETTING_9, newState)
+        }
+        CustomHideCardSettingSwitch(
+            id = R.string.usage_access_permission,
+            cardId = SETTING_10,
+            isChecked = mIsShowSetting10
+        ) { newState ->
+            mIsShowSetting10 = newState
+            settingsSharedPref.saveCardShowedState(SETTING_10, newState)
+        }
+        CustomHideCardSettingSwitch(
+            id = R.string.overlay_permission,
+            cardId = SETTING_11,
+            isChecked = mIsShowSetting11
+        ) { newState ->
+            mIsShowSetting11 = newState
+            settingsSharedPref.saveCardShowedState(SETTING_11, newState)
+        }
+        CustomHideCardSettingSwitch(
+            id = R.string.write_permission,
+            cardId = SETTING_12,
+            isChecked = mIsShowSetting12
+        ) { newState ->
+            mIsShowSetting12 = newState
+            settingsSharedPref.saveCardShowedState(SETTING_12, newState)
         }
     }
 }

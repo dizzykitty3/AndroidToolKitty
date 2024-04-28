@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.ui.component
+package me.dizzykitty3.androidtoolkitty.foundation.composable
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -68,7 +68,8 @@ fun CustomIconPopup(
                     shape = RoundedCornerShape(4.dp),
                     color = MaterialTheme.colorScheme.surfaceVariant,
                     contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(4.dp)
+                    modifier = Modifier.padding(4.dp),
+                    shadowElevation = 1.dp
                 ) {
                     Text(
                         text = ("$deviceType, $deviceAddress"),

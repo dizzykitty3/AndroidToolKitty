@@ -12,10 +12,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomAnimatedProgressIndicator
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomAnimatedProgressIndicator
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.daysPassed
 import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.totalDaysInYear
 import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.yearProgress
@@ -32,8 +32,6 @@ fun YearProgressCard() {
         Column(
             modifier = Modifier.clickable { isShowPercentage = !isShowPercentage }
         ) {
-            val context = LocalContext.current
-
             CustomAnimatedProgressIndicator()
 
             val textToShow =
@@ -41,7 +39,7 @@ fun YearProgressCard() {
                     "${(yearProgressPercentage(yearProgress()))}%"
                 else
                     "${(yearProgressPercentage(yearProgress()))}% · ${
-                        context.resources.getQuantityString(
+                        app.applicationContext.resources.getQuantityString(
                             R.plurals.days_remaining,
                             (totalDaysInYear() - daysPassed()).toInt(),
                             totalDaysInYear() - daysPassed()

@@ -2,44 +2,42 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.util.Log
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.foundation.const.BG
+import me.dizzykitty3.androidtoolkitty.foundation.const.CN
+import me.dizzykitty3.androidtoolkitty.foundation.const.COM
+import me.dizzykitty3.androidtoolkitty.foundation.const.COM_CN
+import me.dizzykitty3.androidtoolkitty.foundation.const.CO_AR
+import me.dizzykitty3.androidtoolkitty.foundation.const.CO_JP
+import me.dizzykitty3.androidtoolkitty.foundation.const.CO_UK
+import me.dizzykitty3.androidtoolkitty.foundation.const.EE
+import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
+import me.dizzykitty3.androidtoolkitty.foundation.const.IR
+import me.dizzykitty3.androidtoolkitty.foundation.const.JP
+import me.dizzykitty3.androidtoolkitty.foundation.const.LA
+import me.dizzykitty3.androidtoolkitty.foundation.const.ME
+import me.dizzykitty3.androidtoolkitty.foundation.const.MX
+import me.dizzykitty3.androidtoolkitty.foundation.const.NET
+import me.dizzykitty3.androidtoolkitty.foundation.const.NZ
+import me.dizzykitty3.androidtoolkitty.foundation.const.ORG
+import me.dizzykitty3.androidtoolkitty.foundation.const.RU
+import me.dizzykitty3.androidtoolkitty.foundation.const.SO
+import me.dizzykitty3.androidtoolkitty.foundation.const.TO
+import me.dizzykitty3.androidtoolkitty.foundation.const.TV
+import me.dizzykitty3.androidtoolkitty.foundation.const.US
+import me.dizzykitty3.androidtoolkitty.foundation.const.WIKI
 
 object UrlUtil {
-    private const val TAG = "TUrl"
-    private const val HTTPS = "https://"
-    private const val BG = ".bg"
-    private const val CN = ".cn"
-    private const val CO_AR = ".co.ar"
-    private const val CO_JP = ".co.jp"
-    private const val CO_UK = ".co.uk"
-    private const val COM = ".com"
-    private const val COM_CN = ".com.cn"
-    private const val EE = ".ee"
-    private const val IR = ".ir"
-    private const val JP = ".jp"
-    private const val LA = ".la"
-    private const val NET = ".net"
-    private const val ME = ".me"
-    private const val MX = ".mx"
-    private const val NZ = ".nz"
-    private const val ORG = ".org"
-    private const val RU = ".ru"
-    private const val SO = ".so"
-    private const val TO = ".to"
-    private const val TV = ".tv"
-    private const val US = ".us"
-    private const val WIKI = ".wiki"
+    private const val TAG = "UrlUtil"
 
     /**
      * Adding the appropriate suffix and returning the full URL.
      */
-    @JvmStatic
     fun toFullUrl(urlInput: String): String {
         val suffix = urlSuffix(urlInput)
         Log.d(TAG, if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
         return "$HTTPS$urlInput$suffix"
     }
 
-    @JvmStatic
     fun urlSuffix(urlInput: String): String {
         if (urlInput.contains(".")) return ""
 
@@ -130,6 +128,5 @@ object UrlUtil {
     /**
      * @return the profile prefix associated with the given platform.
      */
-    @JvmStatic
     fun profilePrefix(platform: Platform): String = platform.prefix
 }

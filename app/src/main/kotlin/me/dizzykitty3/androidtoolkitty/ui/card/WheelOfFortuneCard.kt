@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
+import android.graphics.Paint
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -29,6 +31,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.outlined.Casino
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -46,10 +49,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -57,32 +62,35 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.getLuckySpinningWheelItems
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setLuckySpinningWheelItems
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
 
 @Composable
-fun LuckyWheelCard() {
+fun WheelOfFortuneCard() {
     // 使用CustomCard布局展示幸运轮盘
     CustomCard(
         icon = Icons.Outlined.Casino,
-        title = R.string.lucky_wheel
+        title = R.string.wheel_of_fortune
     ) {
         val baseItem = stringResource(R.string.item)
         // 初始化轮盘项目列表
         var items by remember {
             mutableStateOf(
-                getLuckySpinningWheelItems() ?: List(3) { index -> "$baseItem${index + 1}" }
+                getLuckySpinningWheelItems() ?: List(4) { index -> "$baseItem${index + 1}" }
             )
         }
 
+        val textColor = MaterialTheme.colorScheme.onSecondaryContainer.toArgb()
+
         // 记住画笔设置，避免每次绘制时重新创建
         val paint = remember {
-            android.graphics.Paint().apply {
-                color = android.graphics.Color.BLACK
-                textAlign = android.graphics.Paint.Align.CENTER
+            Paint().apply {
+                color = textColor // onSecondaryContainer
+                textAlign = Paint.Align.CENTER
                 textSize = 40f
             }
         }
@@ -91,11 +99,10 @@ fun LuckyWheelCard() {
         var expanded by remember { mutableStateOf(false) }
 
         // Material Design颜色主题
-        val colors = List(3) { index ->
+        val colors = List(2) { index ->
             when (index) {
-                0 -> MaterialTheme.colorScheme.primary
-                1 -> MaterialTheme.colorScheme.inversePrimary
-                else -> MaterialTheme.colorScheme.secondary
+                0 -> MaterialTheme.colorScheme.secondaryContainer
+                else -> MaterialTheme.colorScheme.surface
             }
         }
 
@@ -108,7 +115,6 @@ fun LuckyWheelCard() {
             animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = "",
         )
 
-        val baseSelected = stringResource(R.string.selected)
         // 当动画结束时，计算并显示选中的项目
         LaunchedEffect(currentRotationDegrees) {
             if (currentRotationDegrees == targetRotationDegrees && hasRotated) {
@@ -120,7 +126,7 @@ fun LuckyWheelCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                ToastUtil.toast("$baseSelected: $selected")
+                SnackbarUtil.snackbar(selected)
                 rotationDegrees = targetRotationDegrees % 360
             }
         }
@@ -131,8 +137,11 @@ fun LuckyWheelCard() {
         ) {
             val primary = MaterialTheme.colorScheme.primary
 
+            CustomSpacerPadding()
+            CustomSpacerPadding()
+
             // 绘制转盘
-            Canvas(modifier = Modifier.size(300.dp)) {
+            Canvas(modifier = Modifier.size(250.dp).aspectRatio(1f)) {
                 val center = Offset(size.width / 2, size.height / 2)
                 val radius = size.minDimension / 2
                 items.indices.forEach { index ->
@@ -144,7 +153,7 @@ fun LuckyWheelCard() {
                         startAngle = startAngle,
                         sweepAngle = sweepAngle,
                         useCenter = true,
-                        size = size,
+                        size = Size(radius * 2, radius * 2),
                         topLeft = Offset(center.x - radius, center.y - radius)
                     )
 
@@ -194,20 +203,25 @@ fun LuckyWheelCard() {
                 )
             }
 
+            CustomSpacerPadding()
+
             // 旋转按钮
-            Button(onClick = {
-                if (items.isNotEmpty() && !isSpinning) {
-                    if (expanded) {
-                        expanded = false
+            Button(
+                onClick = {
+                    if (items.isNotEmpty() && !isSpinning) {
+                        if (expanded) {
+                            expanded = false
+                        }
+                        isSpinning = true
+                        hasRotated = true
+                        val randomBaseCircles = 3
+                        val fineTunedAngle = Random.nextInt(360)
+                        targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
                     }
-                    isSpinning = true
-                    hasRotated = true
-                    val randomBaseCircles = 3
-                    val fineTunedAngle = Random.nextInt(360)
-                    targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
-                }
-            }) {
-                Text(text = stringResource(R.string.start_spinning))
+                },
+                elevation = ButtonDefaults.buttonElevation(1.dp)
+            ) {
+                Text(text = stringResource(R.string.spin))
             }
             // 可扩展列表，用于显示和修改项目列表
             ExpandableList(
@@ -225,12 +239,12 @@ fun LuckyWheelCard() {
 }
 
 @Composable
-fun ExpandableList(
-items: List<String>,
-onItemsChange: (List<String>) -> Unit,
-expanded: Boolean,
-setExpanded: (Boolean) -> Unit,
-isSpinning: Boolean
+private fun ExpandableList(
+    items: List<String>,
+    onItemsChange: (List<String>) -> Unit,
+    expanded: Boolean,
+    setExpanded: (Boolean) -> Unit,
+    isSpinning: Boolean
 ) {
     // 正在编辑的元素索引，-1表示没有元素处于编辑状态
     var editingIndex by remember { mutableIntStateOf(-1) }
@@ -368,6 +382,3 @@ isSpinning: Boolean
         }
     }
 }
-
-
-

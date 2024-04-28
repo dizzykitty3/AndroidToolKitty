@@ -1,16 +1,20 @@
 package me.dizzykitty3.androidtoolkitty.foundation.util
 
-import android.util.Log
 import android.widget.Toast
-import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
+import androidx.annotation.StringRes
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 
 object ToastUtil {
-    @JvmStatic
-    fun toast(message: String) = Toast.makeText(app, message, Toast.LENGTH_SHORT).show()
+    /**
+     * NOT RECOMMENDED. Use Snackbar instead.
+     * @see SnackbarUtil.snackbar
+     */
+    fun toast(message: String) =
+        Toast.makeText(app.applicationContext, message, Toast.LENGTH_SHORT).show()
 
-    @JvmStatic
-    fun toastAndLog(tag:String,logEvent: String) {
-        Log.i(tag, logEvent)
-        toast(logEvent)
-    }
+    /**
+     * NOT RECOMMENDED. Use Snackbar instead.
+     * @see SnackbarUtil.snackbar
+     */
+    fun toast(@StringRes message: Int) = toast(app.applicationContext.getString(message))
 }

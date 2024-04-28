@@ -19,9 +19,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.foundation.composable.ClearInput
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil

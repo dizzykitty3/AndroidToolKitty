@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Android ToolKitty</string>
-
     <!-- Common -->
     <string name="label">Label</string>
     <string name="edit">Edit</string>
@@ -13,8 +11,16 @@
     <string name="warning">Warning</string>
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>
+    <string name="go_to_settings">Go to settings</string>
+    <string name="success_and_back">Success! Now you can back to the previous screen</string>
+    <string name="under_development">under development</string>
+    <string name="permission">Permission</string>
 
     <!-- Home screen: top tip -->
+    <string name="battery_level">Battery level</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="cellular">Cellular</string>
+    <string name="offline">Offline</string>
     <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>
 
     <!-- Home screen: year progress -->
@@ -31,7 +37,6 @@
     <string name="add_custom_volume">Add custom volume</string>
     <string name="you_can_set_a_label_for_it">You can set a label for it</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
-    <string name="skip">Skip</string>
 
     <!-- Home screen: clipboard -->
     <string name="clipboard">Clipboard</string>
@@ -40,7 +45,7 @@
     <string name="clipboard_cleared_automatically">Clipboard cleared automatically</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on Clear Clipboard on Launch in Settings Screen.</string>
 
-    <!-- Home screen: url -->
+    <!-- Home screen: webpage -->
     <string name="url">URL</string>
     <string name="url_input_hint_1">Visit webpage without inputting prefix</string>
     <string name="url_input_hint_2">and suffix</string>
@@ -65,9 +70,10 @@
     <string name="facebook">Facebook</string>
     <string name="fanbox">Fanbox</string>
     <string name="patreon">Patreon</string>
+    <string name="search">Search</string>
 
     <!-- Home screen: system settings -->
-    <string name="android_system_settings">System settings</string>
+    <string name="system_settings">System settings</string>
     <string name="open_display_settings">Display settings</string>
     <string name="open_auto_rotate_settings">Auto rotate settings</string>
     <string name="open_language_settings">Language settings</string>
@@ -79,10 +85,9 @@
     <string name="open_caption_preferences">Caption preferences</string>
     <string name="set_time_automatically_is_off_tip">Set Time Automatically is now OFF. You may experience some unexpected behavior while using your phone.</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
-    <string name="battery_level">Battery level</string>
-    <string name="wifi">Wi-Fi</string>
-    <string name="cellular">Cellular</string>
-    <string name="offline">Offline</string>
+    <string name="usage_access_permission">Usage access permission</string>
+    <string name="overlay_permission">Overlay permission</string>
+    <string name="write_permission">Write permission</string>
 
     <!-- Home screen: unicode -->
     <string name="unicode">Unicode</string>
@@ -110,12 +115,69 @@
 
     <!-- Home screen: android versions -->
     <string name="android_versions">Android versions</string>
+    <string name="android_15">Android 15</string>
+    <string name="android_14">Android 14</string>
+    <string name="android_13">Android 13</string>
+    <string name="android_12_l">Android 12L</string>
+    <string name="android_12">Android 12</string>
+    <string name="android_11">Android 11</string>
+    <string name="android_10">Android 10</string>
+    <string name="android_9">Android 9</string>
+    <string name="android_8_1">Android 8.1</string>
+    <string name="android_8">Android 8</string>
+    <string name="android_7_1_1">Android 7.1.1</string>
+    <string name="android_7">Android 7</string>
+    <string name="android_6">Android 6</string>
+    <string name="android_5_1">Android 5.1</string>
+    <string name="android_5">Android 5</string>
+    <string name="android_4_4_w">Android 4.4W</string>
+    <string name="android_4_4">Android 4.4</string>
+    <string name="android_4_3">Android 4.3</string>
+    <string name="android_4_2">Android 4.2</string>
+    <string name="android_4_1">Android 4.1</string>
+    <string name="android_4_0_3">Android 4.0.3</string>
+    <string name="android_4_0">Android 4.0</string>
+    <string name="android_3_2">Android 3.2</string>
+    <string name="android_3_1">Android 3.1</string>
+    <string name="android_3_0">Android 3.0</string>
+    <string name="android_2_3_3">Android 2.3.3</string>
+    <string name="android_2_3">Android 2.3</string>
+    <string name="android_2_2">Android 2.2</string>
+    <string name="android_2_1" >Android 2.1</string>
+    <string name="api_35">API 35, VanillaIceCream</string>
+    <string name="api_34">API 34, UpsideDownCake</string>
+    <string name="api_33">API 33, Tiramisu</string>
+    <string name="api_32">API 32, Sv2</string>
+    <string name="api_31">API 31, S</string>
+    <string name="api_30">API 30, R</string>
+    <string name="api_29">API 29, Q</string>
+    <string name="api_28">API 28, Pie</string>
+    <string name="api_27">API 27, Oreo</string>
+    <string name="api_26">API 26, Oreo</string>
+    <string name="api_25">API 25, Nougat</string>
+    <string name="api_24">API 24, Nougat</string>
+    <string name="api_23">API 23, Marshmallow</string>
+    <string name="api_22">API 22, Lollipop</string>
+    <string name="api_21">API 21, Lollipop</string>
+    <string name="api_20">API 20, KitKat Wear</string>
+    <string name="api_19">API 19, KitKat</string>
+    <string name="api_18">API 18, Jelly Bean</string>
+    <string name="api_17">API 17, Jelly Bean</string>
+    <string name="api_16">API 16, Jelly Bean</string>
+    <string name="api_15">API 15, IceCreamSandwich</string>
+    <string name="api_14">API 14, IceCreamSandwich</string>
+    <string name="api_13">API 13, Honeycomb</string>
+    <string name="api_12">API 12, Honeycomb</string>
+    <string name="api_11">API 11, Honeycomb</string>
+    <string name="api_10">API 10, Gingerbread</string>
+    <string name="api_9">API 9, Gingerbread</string>
+    <string name="api_8">API 8, Froyo</string>
+    <string name="api_7">API 7, Eclair</string>
 
-    <!-- Home screen: lucky wheel -->
-    <string name="lucky_wheel">Lucky wheel</string>
+    <!-- Home screen: wheel of fortune -->
+    <string name="wheel_of_fortune">Wheel of Fortune</string>
     <string name="item">item</string>
-    <string name="start_spinning">Start Spinning</string>
-    <string name="selected">selected</string>
+    <string name="spin">Spin</string>
 
     <!-- Home screen: bluetooth devices -->
     <string name="bluetooth_devices">Bluetooth devices</string>
@@ -129,6 +191,8 @@
     <string name="no_paired_devices">No paired devices</string>
     <string name="what_is_bt_ble_and_dual">What is BT, BLE, and Dual?</string>
     <string name="bluetooth_devices_types">Classic Bluetooth (BT):\nThis is the familiar type used for things like headsets, speakers, and file transfers. It offers good range and speed but consumes more power.\n\nBluetooth Low Energy (BLE):\nThis newer version is designed for lower power consumption and is ideal for devices that need long battery life, like fitness trackers and smart home sensors. It has a shorter range and slower data transfer rate compared to Classic Bluetooth.\n\nDual:\nSome devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
+    <string name="unknown_device">Unknown device</string>
+    <string name="turn_on_bluetooth">Turn on Bluetooth</string>
 
     <!-- Settings screen: settings -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
@@ -149,21 +213,29 @@
     <string name="set_slider_increment_5">Set slider increment to 5%</string>
     <string name="requires_restart_do_it_now">Requires restart, do it now?</string>
     <string name="restart">Restart</string>
+    <string name="theme_2">Theme 2 (Sora - Shion)</string>
+    <string name="collapse_keyboard_when_back_to_app">Collapse keyboard when back to ToolKitty app</string>
+    <string name="go_to_permission_request_screen">Go to permission request screen</string>
+    <string name="check_sp_values">Check sharedpreferences values</string>
 
     <!-- Settings screen: about -->
     <string name="about">About</string>
     <string name="source_code_on_github">View source code on GitHub</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240418</string>
+    <string name="version_number" translatable="false">20240426</string>
     <string name="developer_profile_link">Developer profile link</string>
+    <string name="contributors">Contributors</string>
+    <string name="source_and_licenses">Source code &amp; Licenses</string>
+    <string name="now_a_developer">You are now a developer</string>
+    <string name="two_more_times">2 more times</string>
+    <string name="one_more_time">1 more time</string>
 
     <!-- Permission request screen -->
-    <string name="permission_request">Permission request</string>
-    <string name="bluetooth_connect">To check paired bluetooth devices, please grant the app BLUETOOTH_CONNECT permission.</string>
+    <string name="request_permission">Request permission</string>
+    <string name="bluetooth_connect">To check paired bluetooth devices, please grant the app Nearby Devices permission.</string>
     <string name="bluetooth_bluetooth_admin">To check paired bluetooth devices, please grant the app BLUETOOTH, BLUETOOTH_ADMIN permissions.</string>
     <string name="missed_sys_popup">Missed the system permission popup?</string>
-    <string name="manually_grant">Manually grant</string>
 
-    <!-- End of resources-->
+    <!-- End of resources -->
 </resources>

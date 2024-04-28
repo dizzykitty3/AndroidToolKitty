@@ -8,7 +8,6 @@ object OsVersion {
     /**
      * 1. Photo picker
      */
-    @JvmStatic
     fun android13(): Boolean = osVersion >= 33
 
     /**
@@ -16,12 +15,10 @@ object OsVersion {
      * 2. Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS)
      * 3. Manifest.permission.BLUETOOTH_CONNECT
      */
-    @JvmStatic
     fun android12(): Boolean = osVersion >= 31
 
     /**
      * 1. Adaptive icons
      */
-    @JvmStatic
     fun android8(): Boolean = osVersion >= 26
 }

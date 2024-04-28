@@ -19,14 +19,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.ClearInput
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.foundation.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.composable.ClearInput
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 
 @Composable
@@ -35,6 +36,8 @@ fun AppMarketCard() {
         icon = Icons.Outlined.Shop,
         title = R.string.open_app_on_google_play
     ) {
+        val context = LocalContext.current
+
         var packageName by remember { mutableStateOf("") }
 
         OutlinedTextField(
@@ -46,7 +49,7 @@ fun AppMarketCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { IntentUtil.openAppOnMarket(packageName) }
+                onDone = { IntentUtil.openAppOnMarket(packageName, context) }
             ),
             trailingIcon = {
                 ClearInput(text = packageName) {
@@ -59,7 +62,7 @@ fun AppMarketCard() {
         WhatIsPackageName()
 
         TextButton(
-            onClick = { IntentUtil.openAppOnMarket(packageName) }
+            onClick = { IntentUtil.openAppOnMarket(packageName, context) }
         ) {
             Text(text = stringResource(R.string.open_on_google_play))
             Icon(
@@ -70,7 +73,7 @@ fun AppMarketCard() {
         }
 
         TextButton(
-            onClick = { IntentUtil.openAppOnMarket(packageName, false) }
+            onClick = { IntentUtil.openAppOnMarket(packageName, context, false) }
         ) {
             Text(text = stringResource(R.string.open_on_other_markets))
             Icon(
@@ -85,6 +88,7 @@ fun AppMarketCard() {
 @Composable
 private fun WhatIsPackageName() {
     Row {
+        val context = LocalContext.current
         val linkUrl = "https://support.google.com/admob/answer/9972781"
 
         Text(
@@ -96,7 +100,7 @@ private fun WhatIsPackageName() {
 
         Row(
             modifier = Modifier.clickable(
-                onClick = { IntentUtil.openUrl(linkUrl) }
+                onClick = { IntentUtil.openUrl(linkUrl, context) }
             )
         ) {
             Text(

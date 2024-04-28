@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.ui.component
+package me.dizzykitty3.androidtoolkitty.foundation.composable
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DeleteForever
@@ -46,8 +46,7 @@ fun CustomAlertDialogButton(
         )
         CustomSpacerPadding()
         Text(
-            text = buttonText,
-            color = MaterialTheme.colorScheme.onError
+            text = buttonText
         )
     }
 
@@ -65,12 +64,13 @@ fun CustomAlertDialogButton(
                         onClickAction()
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
-                    )
+                        containerColor = MaterialTheme.colorScheme.error
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(1.dp)
                 ) {
                     Text(
                         text = positiveButtonText ?: stringResource(android.R.string.ok),
-                        color = MaterialTheme.colorScheme.onPrimary
+                        color = MaterialTheme.colorScheme.onError
                     )
                 }
             },

@@ -2,105 +2,40 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.SearchManager
+import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import me.dizzykitty3.androidtoolkitty.MainActivity
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.ToolKittyApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.foundation.const.GOOGLE_MAPS
+import me.dizzykitty3.androidtoolkitty.foundation.const.GOOGLE_PLAY
+import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
+import me.dizzykitty3.androidtoolkitty.foundation.const.PACKAGE
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_10
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_11
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_12
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_2
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_3
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_4
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_5
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_6
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 
 object IntentUtil {
-    private const val TAG = "IntentService"
-    private const val HTTPS = "https://"
-    private const val GOOGLE_MAPS = "com.google.android.apps.maps"
-    private const val GOOGLE_PLAY = "com.android.vending"
-    private const val SETTING_1 = "setting_display"
-    private const val SETTING_2 = "setting_auto_rotate"
-    private const val SETTING_3 = "setting_bluetooth"
-    private const val SETTING_4 = "setting_default_apps"
-    private const val SETTING_5 = "setting_battery_optimization"
-    private const val SETTING_6 = "setting_caption"
-    private const val SETTING_7 = "setting_locale"
-    private const val SETTING_8 = "setting_date_and_time"
-    private const val SETTING_9 = "setting_developer"
-    private const val PACKAGE = "package"
+    private const val TAG = "IntentUtil"
 
-    @JvmStatic
-    fun openUrl(finalUrl: String) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(if (finalUrl.contains(HTTPS)) finalUrl else "$HTTPS$finalUrl")
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-        startActivity(intent)
-        Log.d(TAG, "openUrl")
-    }
-
-    @SuppressLint("InlinedApi")
-    @JvmStatic
-    fun openSystemSettings(settingType: String) {
-        val intent: Intent = when (settingType) {
-            SETTING_1 -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
-            SETTING_2 -> if (OsVersion.android12()) Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
-            SETTING_3 -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
-            SETTING_4 -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
-            SETTING_5 -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
-            SETTING_6 -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
-            SETTING_7 -> Intent(Settings.ACTION_LOCALE_SETTINGS)
-            SETTING_8 -> Intent(Settings.ACTION_DATE_SETTINGS)
-            SETTING_9 -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
-            else -> return
-        }
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
+    private fun startActivity(intent: Intent, context: Context) {
         try {
-            startActivity(intent)
-            Log.d(TAG, "onOpenSystemSettings: $settingType")
-        } catch (e: Exception) {
-            ToastUtil.toast(app.getString(R.string.system_settings_unsupported))
-            Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
-        }
-    }
-
-    @JvmStatic
-    fun openPermissionPage() {
-        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        val uri = Uri.fromParts(PACKAGE, app.packageName, null)
-        intent.setData(uri)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-        try {
-            startActivity(intent)
-            Log.d(TAG, "openPermissionPage")
-        } catch (e: Exception) {
-            ToastUtil.toast(app.getString(R.string.system_settings_unsupported))
-            Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
-        }
-    }
-
-    @JvmStatic
-    fun openGoogleMaps(latitude: String, longitude: String) {
-        val coordinates = "$latitude,$longitude"
-        val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
-
-        val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
-        intent.setPackage(GOOGLE_MAPS)
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-        try {
-            startActivity(intent)
-            Log.d(TAG, "openGoogleMaps")
-        } catch (e: Exception) {
-            Log.e(TAG, ">>>ERROR<<< openGoogleMaps: $e")
-        }
-    }
-
-    @JvmStatic
-    private fun startActivity(intent: Intent) {
-        try {
-            app.startActivity(intent)
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
             Log.d(TAG, "startActivity")
             return
         } catch (e: Exception) {
@@ -109,20 +44,91 @@ object IntentUtil {
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
-                ToastUtil.toast(app.getString(R.string.google_play_not_installed))
+                ToastUtil.toast(app.applicationContext.getString(R.string.google_play_not_installed))
                 Log.i(TAG, "Google Play not installed")
             }
 
             GOOGLE_MAPS -> {
-                ToastUtil.toast(app.getString(R.string.google_maps_not_installed))
+                ToastUtil.toast(app.applicationContext.getString(R.string.google_maps_not_installed))
                 Log.i(TAG, "Google Maps not installed")
-                openAppOnMarket(GOOGLE_MAPS)
+                openAppOnMarket(GOOGLE_MAPS, context)
             }
         }
     }
 
+    fun openUrl(url: String, context: Context) {
+        if (url.isBlank()) return
+
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(
+            if (url.contains(HTTPS))
+                url
+            else
+                "$HTTPS$url"
+        )
+        startActivity(intent, context)
+        Log.d(TAG, "openUrl")
+    }
+
     @JvmStatic
-    fun openAppOnMarket(packageName: String, isGooglePlay: Boolean = true) {
+    fun openSystemSettings(settingType: String, context: Context) {
+        val intent: Intent = when (settingType) {
+            SETTING_1 -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
+            SETTING_2 -> @SuppressLint("InlinedApi") if (OsVersion.android12()) Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
+            SETTING_3 -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
+            SETTING_4 -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+            SETTING_5 -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+            SETTING_6 -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
+            SETTING_7 -> Intent(Settings.ACTION_LOCALE_SETTINGS)
+            SETTING_8 -> Intent(Settings.ACTION_DATE_SETTINGS)
+            SETTING_9 -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
+            SETTING_10 -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+            SETTING_11 -> Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+            SETTING_12 -> Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+            else -> return
+        }
+
+        try {
+            startActivity(intent, context)
+            Log.d(TAG, "onOpenSystemSettings: $settingType")
+        } catch (e: Exception) {
+            ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
+            Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
+        }
+    }
+
+    fun openPermissionPage(context: Context) {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri = Uri.fromParts(PACKAGE, app.packageName, null)
+        intent.setData(uri)
+
+        try {
+            startActivity(intent, context)
+            Log.d(TAG, "openPermissionPage")
+        } catch (e: Exception) {
+            ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
+            Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
+        }
+    }
+
+    fun openGoogleMaps(latitude: String, longitude: String, context: Context) {
+        if (latitude.isBlank() || longitude.isBlank()) return
+
+        val coordinates = "$latitude,$longitude"
+        val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
+
+        val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
+        intent.setPackage(GOOGLE_MAPS)
+
+        try {
+            startActivity(intent, context)
+            Log.d(TAG, "openGoogleMaps")
+        } catch (e: Exception) {
+            Log.e(TAG, ">>>ERROR<<< openGoogleMaps: $e")
+        }
+    }
+
+    fun openAppOnMarket(packageName: String, context: Context, isGooglePlay: Boolean = true) {
         val marketUri: Uri = Uri.parse(
             if (packageName.isBlank()) {
                 return
@@ -133,23 +139,43 @@ object IntentUtil {
             }
         )
 
-        val marketIntent = Intent(Intent.ACTION_VIEW, marketUri)
-        if (isGooglePlay) marketIntent.setPackage(GOOGLE_PLAY)
-        marketIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        val intent = Intent(Intent.ACTION_VIEW, marketUri)
+        if (isGooglePlay) intent.setPackage(GOOGLE_PLAY)
 
         try {
-            startActivity(marketIntent)
+            startActivity(intent, context)
             Log.d(TAG, "openAppOnMarket")
         } catch (e: Exception) {
             Log.e(TAG, ">>>ERROR<<< openCertainAppOnPlayStore: $e")
         }
     }
 
-    @JvmStatic
+    /**
+     * Remember to use Activity Context to restart app.
+     */
     fun restartApp(context: Context) {
-        val intent = Intent(app, MainActivity::class.java)
+        val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        app.startActivity(intent)
+        context.startActivity(intent)
         (context as Activity).finish()
+    }
+
+    fun openBluetooth(context: Context) {
+        val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+        startActivity(intent, context)
+    }
+
+    fun openSearch(query: String, context: Context) {
+        if (query.isBlank()) return
+
+        val intent = Intent(Intent.ACTION_WEB_SEARCH)
+        intent.putExtra(SearchManager.QUERY, query)
+
+        try {
+            startActivity(intent, context)
+            Log.d(TAG, "openSearch")
+        } catch (e: Exception) {
+            Log.e(TAG, ">>>ERROR<<< openSearch: $e")
+        }
     }
 }
