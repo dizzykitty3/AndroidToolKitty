@@ -17,6 +17,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.GOOGLE_PLAY
 import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
 import me.dizzykitty3.androidtoolkitty.foundation.const.PACKAGE
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_10
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_11
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_12
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_2
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_3
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_4
@@ -79,6 +82,9 @@ object IntentUtil {
             SETTING_7 -> Intent(Settings.ACTION_LOCALE_SETTINGS)
             SETTING_8 -> Intent(Settings.ACTION_DATE_SETTINGS)
             SETTING_9 -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
+            SETTING_10 -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+            SETTING_11 -> Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+            SETTING_12 -> Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
             else -> return
         }
 

@@ -16,6 +16,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupTitleTex
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTip
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_10
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_11
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_12
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_2
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_3
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_4
@@ -43,7 +46,10 @@ fun SysSettingCard() {
             Setting(SETTING_6, R.string.open_caption_preferences),
             Setting(SETTING_7, R.string.open_language_settings),
             Setting(SETTING_8, R.string.open_date_and_time_settings),
-            Setting(SETTING_9, R.string.open_developer_options)
+            Setting(SETTING_9, R.string.open_developer_options),
+            Setting(SETTING_10, R.string.usage_access_permission),
+            Setting(SETTING_11, R.string.overlay_permission),
+            Setting(SETTING_12, R.string.write_permission)
         )
 
         val isShowSetting = remember {
@@ -59,7 +65,11 @@ fun SysSettingCard() {
             isShowSetting[setting.settingType] == true
         }
 
-        val isShowGroupTitle2 = settings.subList(6, settings.size).any { setting ->
+        val isShowGroupTitle2 = settings.subList(6, 9).any { setting ->
+            isShowSetting[setting.settingType] == true
+        }
+
+        val isShowGroupTitle3 = settings.subList(9, 12).any { setting ->
             isShowSetting[setting.settingType] == true
         }
 
@@ -80,7 +90,19 @@ fun SysSettingCard() {
         if (isShowGroupTitle1 && isShowGroupTitle2) CustomGroupDivider()
         if (isShowGroupTitle2) CustomGroupTitleText(R.string.debugging)
 
-        settings.subList(6, settings.size).forEach { setting ->
+        settings.subList(6, 9).forEach { setting ->
+            if (isShowSetting[setting.settingType] == true) {
+                CustomSystemSettingsButton(
+                    settingType = setting.settingType,
+                    buttonText = setting.buttonText
+                )
+            }
+        }
+
+        if ((isShowGroupTitle1 || isShowGroupTitle2) && isShowGroupTitle3) CustomGroupDivider()
+        if (isShowGroupTitle3) CustomGroupTitleText(R.string.permission)
+
+        settings.subList(9, 12).forEach { setting ->
             if (isShowSetting[setting.settingType] == true) {
                 CustomSystemSettingsButton(
                     settingType = setting.settingType,

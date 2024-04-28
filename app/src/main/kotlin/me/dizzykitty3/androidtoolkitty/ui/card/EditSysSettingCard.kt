@@ -10,6 +10,9 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_10
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_11
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_12
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_2
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_3
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_4
@@ -37,6 +40,9 @@ fun EditSysSettingCard() {
         val isShowSetting7 = settingsSharedPref.getCardShowedState(SETTING_7)
         val isShowSetting8 = settingsSharedPref.getCardShowedState(SETTING_8)
         val isShowSetting9 = settingsSharedPref.getCardShowedState(SETTING_9)
+        val isShowSetting10 = settingsSharedPref.getCardShowedState(SETTING_10)
+        val isShowSetting11 = settingsSharedPref.getCardShowedState(SETTING_11)
+        val isShowSetting12 = settingsSharedPref.getCardShowedState(SETTING_12)
         var mIsShowSetting1 by remember { mutableStateOf(isShowSetting1) }
         var mIsShowSetting2 by remember { mutableStateOf(isShowSetting2) }
         var mIsShowSetting3 by remember { mutableStateOf(isShowSetting3) }
@@ -46,6 +52,9 @@ fun EditSysSettingCard() {
         var mIsShowSetting7 by remember { mutableStateOf(isShowSetting7) }
         var mIsShowSetting8 by remember { mutableStateOf(isShowSetting8) }
         var mIsShowSetting9 by remember { mutableStateOf(isShowSetting9) }
+        var mIsShowSetting10 by remember { mutableStateOf(isShowSetting10) }
+        var mIsShowSetting11 by remember { mutableStateOf(isShowSetting11) }
+        var mIsShowSetting12 by remember { mutableStateOf(isShowSetting12) }
         CustomHideCardSettingSwitch(
             id = R.string.open_display_settings,
             cardId = SETTING_1,
@@ -119,6 +128,30 @@ fun EditSysSettingCard() {
         ) { newState ->
             mIsShowSetting9 = newState
             settingsSharedPref.saveCardShowedState(SETTING_9, newState)
+        }
+        CustomHideCardSettingSwitch(
+            id = R.string.usage_access_permission,
+            cardId = SETTING_10,
+            isChecked = mIsShowSetting10
+        ) { newState ->
+            mIsShowSetting10 = newState
+            settingsSharedPref.saveCardShowedState(SETTING_10, newState)
+        }
+        CustomHideCardSettingSwitch(
+            id = R.string.overlay_permission,
+            cardId = SETTING_11,
+            isChecked = mIsShowSetting11
+        ) { newState ->
+            mIsShowSetting11 = newState
+            settingsSharedPref.saveCardShowedState(SETTING_11, newState)
+        }
+        CustomHideCardSettingSwitch(
+            id = R.string.write_permission,
+            cardId = SETTING_12,
+            isChecked = mIsShowSetting12
+        ) { newState ->
+            mIsShowSetting12 = newState
+            settingsSharedPref.saveCardShowedState(SETTING_12, newState)
         }
     }
 }

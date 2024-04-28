@@ -30,6 +30,9 @@ const val SETTING_6 = "setting_caption"
 const val SETTING_7 = "setting_locale"
 const val SETTING_8 = "setting_date_and_time"
 const val SETTING_9 = "setting_developer"
+const val SETTING_10 = "setting_usage_access"
+const val SETTING_11 = "setting_overlay"
+const val SETTING_12 = "setting_write"
 
 @SuppressLint("InlinedApi")
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
