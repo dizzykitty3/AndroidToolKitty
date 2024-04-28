@@ -55,10 +55,10 @@ fun VolumeCard() {
 
         val sliderIncrementFivePercent = settingsSharedPref.sliderIncrement5Percent
 
-        val customVolume = settingsSharedPref.getCustomVolume()
+        val customVolume = settingsSharedPref.customVolume
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
 
-        val customVolumeOptionLabel = settingsSharedPref.getCustomVolumeOptionLabel()
+        val customVolumeOptionLabel = settingsSharedPref.customVolumeOptionLabel
         var mCustomVolumeOptionLabel by remember { mutableStateOf(customVolumeOptionLabel) }
 
         val haveCustomLabel = settingsSharedPref.haveCustomLabel
@@ -179,12 +179,12 @@ fun VolumeCard() {
                                 ),
                                 keyboardActions = KeyboardActions(
                                     onDone = {
-                                        settingsSharedPref.setCustomVolume(newCustomVolume.toInt())
+                                        settingsSharedPref.customVolume = newCustomVolume.toInt()
                                         mCustomVolume = newCustomVolume.toInt()
                                         if (mHaveCustomLabel) {
                                             settingsSharedPref.haveCustomLabel = true
                                         }
-                                        settingsSharedPref.setCustomVolumeOptionLabel(optionLabel)
+                                        settingsSharedPref.customVolumeOptionLabel = optionLabel
                                         mCustomVolumeOptionLabel = optionLabel
                                         selectedIndex = 3
                                         setVolume(mCustomVolume * 0.01 * maxVolume)
@@ -208,12 +208,12 @@ fun VolumeCard() {
                                     if (newCustomVolume.toInt() != 0) ToastUtil.toast(R.string.system_media_volume_levels_limited)
                                     return@Button
                                 } else {
-                                    settingsSharedPref.setCustomVolume(newCustomVolume.toInt())
+                                    settingsSharedPref.customVolume = newCustomVolume.toInt()
                                     mCustomVolume = newCustomVolume.toInt()
                                     if (mHaveCustomLabel) {
                                         settingsSharedPref.haveCustomLabel = true
                                     }
-                                    settingsSharedPref.setCustomVolumeOptionLabel(optionLabel)
+                                    settingsSharedPref.customVolumeOptionLabel = optionLabel
                                     mCustomVolumeOptionLabel = optionLabel
                                     selectedIndex = 3
                                     setVolume(mCustomVolume * 0.01 * maxVolume)

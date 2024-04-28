@@ -142,41 +142,35 @@ object SettingsSharedPref {
         }
     }
 
-    fun getLastTimeSelectedSocialPlatform(): Int {
-        return sharedPrefs.getInt(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
-    }
-
-    fun saveSelectedSocialPlatform(lastTimePlatformIndex: Int) {
-        Log.d(TAG, "last time platform index = $lastTimePlatformIndex")
-        with(sharedPrefs.edit()) {
-            putInt(LAST_TIME_SELECTED_PLATFORM_INDEX, lastTimePlatformIndex)
-            apply()
+    var lastTimeSelectedSocialPlatform: Int
+        get() = sharedPrefs.getInt(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
+        set(value) {
+            Log.d(TAG, "last time platform index = $value")
+            with(sharedPrefs.edit()) {
+                putInt(LAST_TIME_SELECTED_PLATFORM_INDEX, value)
+                apply()
+            }
         }
-    }
 
-    fun getCustomVolume(): Int {
-        return sharedPrefs.getInt(CUSTOM_VOLUME, Int.MIN_VALUE)
-    }
-
-    fun setCustomVolume(customVolume: Int) {
-        Log.d(TAG, "custom volume = $customVolume")
-        with(sharedPrefs.edit()) {
-            putInt(CUSTOM_VOLUME, customVolume)
-            apply()
+    var customVolume: Int
+        get() = sharedPrefs.getInt(CUSTOM_VOLUME, Int.MIN_VALUE)
+        set(value) {
+            Log.d(TAG, "custom volume = $value")
+            with(sharedPrefs.edit()) {
+                putInt(CUSTOM_VOLUME, value)
+                apply()
+            }
         }
-    }
 
-    fun getCustomVolumeOptionLabel(): String? {
-        return sharedPrefs.getString(VOLUME_OPTION_LABEL, "")
-    }
-
-    fun setCustomVolumeOptionLabel(customOptionLabel: String) {
-        Log.d(TAG, "custom volume option label = $customOptionLabel")
-        with(sharedPrefs.edit()) {
-            putString(VOLUME_OPTION_LABEL, customOptionLabel)
-            apply()
+    var customVolumeOptionLabel: String?
+        get() = sharedPrefs.getString(VOLUME_OPTION_LABEL, "")
+        set(value) {
+            Log.d(TAG, "custom volume option label = $value")
+            with(sharedPrefs.edit()) {
+                putString(VOLUME_OPTION_LABEL, value)
+                apply()
+            }
         }
-    }
 
     fun getLuckySpinningWheelItems(): List<String>? {
         val itemsJson = sharedPrefs.getString(LUCKY_SPINNING_WHEEL_ITEMS, null) ?: return null

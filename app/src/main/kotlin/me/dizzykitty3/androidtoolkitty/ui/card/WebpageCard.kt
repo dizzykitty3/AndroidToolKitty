@@ -175,7 +175,7 @@ private fun SocialMediaProfileIUrl() {
 
     var username by remember { mutableStateOf("") }
 
-    val platformIndex = SettingsSharedPref.getLastTimeSelectedSocialPlatform()
+    val platformIndex = SettingsSharedPref.lastTimeSelectedSocialPlatform
     var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
 
     val platformList = UrlUtil.Platform.entries.map { stringResource(it.nameResId) }
