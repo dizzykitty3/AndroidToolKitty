@@ -57,11 +57,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
 import java.util.Locale
 
-@Suppress("KotlinConstantConditions")
 @Composable
 fun SettingsScreen(navController: NavHostController) {
     CustomScreen {
-        val view = LocalView.current
         val debuggingOptions = SettingsSharedPref.debuggingOptions
         var tapCount by remember { mutableIntStateOf(0) }
 
@@ -71,6 +69,7 @@ fun SettingsScreen(navController: NavHostController) {
             GeneralOptions()
             CustomGroupDivider()
             CustomizeOptions(navController = navController)
+            @Suppress("KotlinConstantConditions")
             AnimatedVisibility(
                 visible = (debuggingOptions || (!debuggingOptions && tapCount >= 5)),
                 enter = fadeIn(animationSpec = tween(durationMillis = 2000))
@@ -107,7 +106,10 @@ fun SettingsScreen(navController: NavHostController) {
                 )
                 CustomIconAndTextPadding()
 
+                @Suppress("KotlinConstantConditions")
                 val debugVariant = BuildConfig.BUILD_TYPE == "debug"
+
+                @Suppress("KotlinConstantConditions")
                 val versionInfo =
                     if (debugVariant)
                         "${stringResource(R.string.version)} ${stringResource(R.string.version_number)} dev"

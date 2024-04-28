@@ -24,7 +24,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -38,7 +37,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 
-@SuppressLint("MissingPermission")
 @Composable
 fun BluetoothDeviceCard(navController: NavHostController) {
     CustomCard(
@@ -46,7 +44,6 @@ fun BluetoothDeviceCard(navController: NavHostController) {
         title = R.string.bluetooth_devices
     ) {
         val context = LocalContext.current
-        val view = LocalView.current
 
         var showResult by remember { mutableStateOf(false) }
 
@@ -70,6 +67,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
                 // Show current device name, paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {
+                    @SuppressLint("MissingPermission")
                     pairedDevices = bluetoothAdapter!!.bondedDevices
                     size = pairedDevices.size
                     showResult = true
@@ -95,6 +93,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
             Text(text = stringResource(id = R.string.show_paired_devices))
         }
 
+        @SuppressLint("MissingPermission")
         if (showResult) {
             Text(text = "${stringResource(id = R.string.current_device)} ${bluetoothAdapter?.name}\n")
 
