@@ -25,9 +25,9 @@
     <string name="open_battery_optimization_settings">电池优化设置</string>
     <string name="battery_level">电量</string>
     <string name="wifi">Wi-Fi</string>
-    <string name="usage_access_permission">查看使用情况权限</string>
-    <string name="overlay_permission">显示在其他应用上层权限</string>
-    <string name="write_permission">修改系统设置权限</string>
+    <string name="open_usage_access_permission">查看使用情况权限</string>
+    <string name="open_overlay_permission">显示在其他应用上层权限</string>
+    <string name="open_write_permission">修改系统设置权限</string>
     <string name="unicode">Unicode</string>
     <string name="unicode_input_hint">各 Unicode 的最后四位，如</string>
     <string name="character">字符</string>

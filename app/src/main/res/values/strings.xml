@@ -74,20 +74,20 @@
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>
-    <string name="open_display_settings">Display settings</string>
-    <string name="open_auto_rotate_settings">Auto rotate settings</string>
-    <string name="open_language_settings">Language settings</string>
-    <string name="open_default_apps_settings">Default apps settings</string>
-    <string name="open_bluetooth_settings">Bluetooth settings</string>
-    <string name="open_date_and_time_settings">Date &amp; time settings</string>
-    <string name="open_battery_optimization_settings">Battery optimization settings</string>
+    <string name="open_display_settings">Display</string>
+    <string name="open_auto_rotate_settings">Auto-rotate screen</string>
+    <string name="open_language_settings">Languages</string>
+    <string name="open_default_apps_settings">Default apps</string>
+    <string name="open_bluetooth_settings">Bluetooth</string>
+    <string name="open_date_and_time_settings">Date &amp; time</string>
+    <string name="open_battery_optimization_settings">Battery optimization</string>
     <string name="open_developer_options">Developer options</string>
     <string name="open_caption_preferences">Caption preferences</string>
     <string name="set_time_automatically_is_off_tip">Set Time Automatically is now OFF. You may experience some unexpected behavior while using your phone.</string>
     <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
-    <string name="usage_access_permission">Usage access permission</string>
-    <string name="overlay_permission">Overlay permission</string>
-    <string name="write_permission">Write permission</string>
+    <string name="open_usage_access_permission">Usage access</string>
+    <string name="open_overlay_permission">Display over other apps</string>
+    <string name="open_write_permission">Modify system settings</string>
 
     <!-- Home screen: unicode -->
     <string name="unicode">Unicode</string>

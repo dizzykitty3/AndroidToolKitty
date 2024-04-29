@@ -47,9 +47,9 @@ fun SysSettingCard() {
             Setting(SETTING_7, R.string.open_language_settings),
             Setting(SETTING_8, R.string.open_date_and_time_settings),
             Setting(SETTING_9, R.string.open_developer_options),
-            Setting(SETTING_10, R.string.usage_access_permission),
-            Setting(SETTING_11, R.string.overlay_permission),
-            Setting(SETTING_12, R.string.write_permission)
+            Setting(SETTING_10, R.string.open_usage_access_permission),
+            Setting(SETTING_11, R.string.open_overlay_permission),
+            Setting(SETTING_12, R.string.open_write_permission)
         )
 
         val isShowSetting = remember {

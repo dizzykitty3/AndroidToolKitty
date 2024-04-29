@@ -130,7 +130,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_9, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.usage_access_permission,
+            id = R.string.open_usage_access_permission,
             cardId = SETTING_10,
             isChecked = mIsShowSetting10
         ) { newState ->
@@ -138,7 +138,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_10, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.overlay_permission,
+            id = R.string.open_overlay_permission,
             cardId = SETTING_11,
             isChecked = mIsShowSetting11
         ) { newState ->
@@ -146,7 +146,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_11, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.write_permission,
+            id = R.string.open_write_permission,
             cardId = SETTING_12,
             isChecked = mIsShowSetting12
         ) { newState ->
