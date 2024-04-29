@@ -320,8 +320,8 @@ private fun DebuggingOptions(navController: NavHostController) {
 
     CustomGroupTitleText(R.string.debugging)
 
-    Text(text = "sdk version = ${Build.VERSION.SDK_INT}")
-    Text(text = "lang code = ${Locale.getDefault()}")
+    Text(text = "Android ${Build.VERSION.RELEASE}, API ${Build.VERSION.SDK_INT}")
+    Text(text = "Language =  ${Locale.getDefault()}")
 
     CustomSpacerPadding()
 
