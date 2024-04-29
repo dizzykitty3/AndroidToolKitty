@@ -4,22 +4,84 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.screen.SettingsScreen
+ */
 const val SETTINGS_SCREEN = "SettingsScreen"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.screen.HomeScreen
+ */
 const val HOME_SCREEN = "HomeScreen"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.screen.EditHomeScreen
+ */
 const val EDIT_HOME_SCREEN = "EditHomeScreen"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.screen.PermissionRequestScreen
+ */
 const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
 
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
+ */
 const val CARD_1 = "card_year_progress"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.VolumeCard
+ */
 const val CARD_2 = "card_volume"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.ClipboardCard
+ */
 const val CARD_3 = "card_clipboard"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.WebpageCard
+ */
 const val CARD_4 = "card_webpage"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.SysSettingCard
+ */
 const val CARD_5 = "card_sys_setting"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.WheelOfFortuneCard
+ */
 const val CARD_6 = "card_wheel_of_fortune"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.BluetoothDeviceCard
+ */
 const val CARD_7 = "card_bluetooth_device"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.UnicodeCard
+ */
 const val CARD_8 = "card_unicode"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.AppMarketCard
+ */
 const val CARD_9 = "card_app_market"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.MapsCard
+ */
 const val CARD_10 = "card_google_maps"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.AndroidVersionCard
+ */
 const val CARD_11 = "card_android_version"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.FontWeightCard
+ */
 const val CARD_12 = "card_font_weight"
 
 const val SETTING_1 = "setting_display"
