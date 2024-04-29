@@ -48,7 +48,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
         var showResult by remember { mutableStateOf(false) }
 
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }
-        var pairedDevices by remember { mutableStateOf<Set<BluetoothDevice>>(emptySet()) }
+        var pairedDevices by remember { mutableStateOf<List<BluetoothDevice>>(emptyList()) }
 
         var size by remember { mutableIntStateOf(0) }
 
@@ -68,7 +68,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 // Show current device name, paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {
                     @SuppressLint("MissingPermission")
-                    pairedDevices = bluetoothAdapter!!.bondedDevices
+                    pairedDevices = bluetoothAdapter!!.bondedDevices.sortedBy { it.name }
                     size = pairedDevices.size
                     showResult = true
                     return@Button
