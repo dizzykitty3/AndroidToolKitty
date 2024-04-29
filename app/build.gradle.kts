@@ -56,6 +56,7 @@ android {
         jvmTarget = "17"
     }
     composeOptions {
+        // https://developer.android.com/jetpack/androidx/releases/compose-compiler
         kotlinCompilerExtensionVersion = "1.5.12"
     }
     packaging {
