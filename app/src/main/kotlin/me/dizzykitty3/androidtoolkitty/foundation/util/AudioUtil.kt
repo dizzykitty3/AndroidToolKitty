@@ -19,9 +19,5 @@ object AudioUtil {
     fun setVolume(volume: Int) =
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI)
 
-    fun setVolume(volume: Double) = audioManager.setStreamVolume(
-        AudioManager.STREAM_MUSIC,
-        volume.toInt(),
-        AudioManager.FLAG_SHOW_UI
-    )
+    fun setVolume(volume: Double) = setVolume(volume.toInt())
 }
