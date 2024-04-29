@@ -24,7 +24,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 
 /**
- * @see me.dizzykitty3.androidtoolkitty.ui.screen.SettingsScreen
+ * @see SysSettingCard
  */
 // TODO refactor this bullshit
 @Composable

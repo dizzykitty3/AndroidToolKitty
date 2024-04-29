@@ -28,6 +28,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 
+/**
+ * @see EditSysSettingCard
+ */
 @Composable
 fun SysSettingCard() {
     CustomCard(

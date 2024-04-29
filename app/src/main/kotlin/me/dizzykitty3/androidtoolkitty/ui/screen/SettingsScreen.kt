@@ -56,9 +56,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
 import java.util.Locale
 
-/**
- * @see me.dizzykitty3.androidtoolkitty.ui.card.EditSysSettingCard
- */
 @Composable
 fun SettingsScreen(navController: NavHostController) {
     CustomScreen {
