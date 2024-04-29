@@ -105,7 +105,7 @@
     <string name="open_google_maps">Open Google Maps</string>
 
     <!-- Home screen: open app on google play -->
-    <string name="open_app_on_google_play">Open app on Google Play</string>
+    <string name="check_app_on_market">Check app on Market</string>
     <string name="package_name_or_search">Package name or search</string>
     <string name="whats">What\'s</string>
     <string name="package_name">package name</string>

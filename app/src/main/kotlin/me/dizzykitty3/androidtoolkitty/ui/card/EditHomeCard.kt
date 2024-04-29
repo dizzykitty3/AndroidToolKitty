@@ -137,7 +137,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_8, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_app_on_google_play,
+            id = R.string.check_app_on_market,
             cardId = CARD_9,
             isChecked = mIsShowCard9
         ) { newState ->

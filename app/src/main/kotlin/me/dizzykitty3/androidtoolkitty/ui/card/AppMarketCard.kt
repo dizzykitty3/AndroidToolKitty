@@ -34,7 +34,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 fun AppMarketCard() {
     CustomCard(
         icon = Icons.Outlined.Shop,
-        title = R.string.open_app_on_google_play
+        title = R.string.check_app_on_market
     ) {
         val context = LocalContext.current
 
@@ -67,7 +67,7 @@ fun AppMarketCard() {
             Text(text = stringResource(R.string.open_on_google_play))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(id = R.string.open_app_on_google_play),
+                contentDescription = stringResource(id = R.string.check_app_on_market),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
