@@ -9,7 +9,6 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowOutward
@@ -158,15 +157,20 @@ private fun GeneralOptions() {
             settingsSharedPref.autoClearClipboard = mAutoClearClipboard
         }
     ) {
-        Text(text = stringResource(R.string.clear_clipboard_on_launch))
-        Spacer(modifier = Modifier.weight(1f))
-        Switch(
-            checked = mAutoClearClipboard,
-            onCheckedChange = {
-                mAutoClearClipboard = it
-                settingsSharedPref.autoClearClipboard = it
-            }
-        )
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(R.string.clear_clipboard_on_launch))
+        }
+        Column {
+            Switch(
+                checked = mAutoClearClipboard,
+                onCheckedChange = {
+                    mAutoClearClipboard = it
+                    settingsSharedPref.autoClearClipboard = it
+                }
+            )
+        }
     }
 
     Row(
@@ -176,15 +180,20 @@ private fun GeneralOptions() {
             settingsSharedPref.sliderIncrement5Percent = mVolumeSlideSteps
         }
     ) {
-        Text(text = stringResource(R.string.set_slider_increment_5))
-        Spacer(modifier = Modifier.weight(1f))
-        Switch(
-            checked = mVolumeSlideSteps,
-            onCheckedChange = {
-                mVolumeSlideSteps = it
-                settingsSharedPref.sliderIncrement5Percent = it
-            }
-        )
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(R.string.set_slider_increment_5))
+        }
+        Column {
+            Switch(
+                checked = mVolumeSlideSteps,
+                onCheckedChange = {
+                    mVolumeSlideSteps = it
+                    settingsSharedPref.sliderIncrement5Percent = it
+                }
+            )
+        }
     }
 
     if (OsVersion.android12()) {
@@ -196,16 +205,21 @@ private fun GeneralOptions() {
                 onClickDynamicColorButton(mDynamicColor, primary, context)
             }
         ) {
-            Text(text = stringResource(R.string.material_you_dynamic_color))
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mDynamicColor,
-                onCheckedChange = {
-                    mDynamicColor = it
-                    mSoraShion = false
-                    onClickDynamicColorButton(it, primary, context)
-                }
-            )
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(text = stringResource(R.string.material_you_dynamic_color))
+            }
+            Column {
+                Switch(
+                    checked = mDynamicColor,
+                    onCheckedChange = {
+                        mDynamicColor = it
+                        mSoraShion = false
+                        onClickDynamicColorButton(it, primary, context)
+                    }
+                )
+            }
         }
     }
 
@@ -217,15 +231,20 @@ private fun GeneralOptions() {
                 onClickSoraShionButton(mSoraShion, primary, context)
             }
         ) {
-            Text(text = stringResource(id = R.string.theme_2))
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mSoraShion,
-                onCheckedChange = {
-                    mSoraShion = it
-                    onClickSoraShionButton(it, primary, context)
-                }
-            )
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(text = stringResource(id = R.string.theme_2))
+            }
+            Column {
+                Switch(
+                    checked = mSoraShion,
+                    onCheckedChange = {
+                        mSoraShion = it
+                        onClickSoraShionButton(it, primary, context)
+                    }
+                )
+            }
         }
     }
 
@@ -236,15 +255,20 @@ private fun GeneralOptions() {
             settingsSharedPref.oneHandedMode = mOneHandedMode
         }
     ) {
-        Text(text = stringResource(R.string.one_handed_mode))
-        Spacer(modifier = Modifier.weight(1f))
-        Switch(
-            checked = mOneHandedMode,
-            onCheckedChange = {
-                mOneHandedMode = it
-                settingsSharedPref.oneHandedMode = it
-            }
-        )
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(R.string.one_handed_mode))
+        }
+        Column {
+            Switch(
+                checked = mOneHandedMode,
+                onCheckedChange = {
+                    mOneHandedMode = it
+                    settingsSharedPref.oneHandedMode = it
+                }
+            )
+        }
     }
 
     Row(
@@ -254,15 +278,20 @@ private fun GeneralOptions() {
             settingsSharedPref.collapseKeyboard = mCollapseKeyboard
         }
     ) {
-        Text(text = stringResource(id = R.string.collapse_keyboard_when_back_to_app))
-        Spacer(modifier = Modifier.weight(1f))
-        Switch(
-            checked = mCollapseKeyboard,
-            onCheckedChange = {
-                mCollapseKeyboard = it
-                settingsSharedPref.collapseKeyboard = it
-            }
-        )
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(id = R.string.collapse_keyboard_when_back_to_app))
+        }
+        Column {
+            Switch(
+                checked = mCollapseKeyboard,
+                onCheckedChange = {
+                    mCollapseKeyboard = it
+                    settingsSharedPref.collapseKeyboard = it
+                }
+            )
+        }
     }
 }
 
