@@ -20,6 +20,7 @@ const val CARD_8 = "card_unicode"
 const val CARD_9 = "card_app_market"
 const val CARD_10 = "card_google_maps"
 const val CARD_11 = "card_android_version"
+const val CARD_12 = "card_font_weight"
 
 const val SETTING_1 = "setting_display"
 const val SETTING_2 = "setting_auto_rotate"

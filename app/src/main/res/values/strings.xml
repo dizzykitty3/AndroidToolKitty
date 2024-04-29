@@ -175,6 +175,18 @@
     <string name="api_7">API 7, Eclair</string>
 
     <!-- Home screen: wheel of fortune -->
+    <string name="font_weight">Font weight</string>
+    <string name="w1">100 Thin</string>
+    <string name="w2">200 ExtraLight</string>
+    <string name="w3">300 Light</string>
+    <string name="w4">400 Normal</string>
+    <string name="w5">500 Medium</string>
+    <string name="w6">600 SemiBold</string>
+    <string name="w7">700 Bold</string>
+    <string name="w8">800 ExtraBold</string>
+    <string name="w9">900 Black</string>
+
+    <!-- Home screen: wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
     <string name="item">item</string>
     <string name="spin">Spin</string>

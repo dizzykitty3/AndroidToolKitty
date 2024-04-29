@@ -23,6 +23,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.screen.SettingsScreen
+ */
 // TODO refactor this bullshit
 @Composable
 fun EditSysSettingCard() {

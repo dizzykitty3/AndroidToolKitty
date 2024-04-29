@@ -203,4 +203,14 @@
     <string name="two_more_times">还需要 2 次</string>
     <string name="under_development">开发中</string>
     <string name="permission">权限</string>
+    <string name="font_weight">字重</string>
+    <string name="w1">100 淡体 Thin</string>
+    <string name="w2">200 特细 ExtraLight</string>
+    <string name="w3">300 细体 Light</string>
+    <string name="w4">400 标准 Normal</string>
+    <string name="w5">500 适中 Medium</string>
+    <string name="w6">600 次粗 SemiBold</string>
+    <string name="w7">700 粗体 Bold</string>
+    <string name="w8">800 特粗 ExtraBold</string>
+    <string name="w9">900 浓体 Black</string>
 </resources>
