@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FontDownload
 import androidx.compose.material3.Text
@@ -9,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupDivider
 
 @Composable
 fun FontWeightCard() {
@@ -25,6 +27,29 @@ fun FontWeightCard() {
         Bold(id = R.string.w7)
         ExtraBold(id = R.string.w8)
         Black(id = R.string.w9)
+        CustomGroupDivider()
+        Row {
+            Thin(id = R.string.a)
+            ExtraLight(id = R.string.a)
+            Light(id = R.string.a)
+            Normal(id = R.string.a)
+            Medium(id = R.string.a)
+            SemiBold(id = R.string.a)
+            Bold(id = R.string.a)
+            ExtraBold(id = R.string.a)
+            Black(id = R.string.a)
+        }
+        Row {
+            Thin(id = R.string.chinese_que)
+            ExtraLight(id = R.string.chinese_que)
+            Light(id = R.string.chinese_que)
+            Normal(id = R.string.chinese_que)
+            Medium(id = R.string.chinese_que)
+            SemiBold(id = R.string.chinese_que)
+            Bold(id = R.string.chinese_que)
+            ExtraBold(id = R.string.chinese_que)
+            Black(id = R.string.chinese_que)
+        }
     }
 }
 

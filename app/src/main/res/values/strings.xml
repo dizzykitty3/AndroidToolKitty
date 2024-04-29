@@ -185,6 +185,8 @@
     <string name="w7">700 Bold</string>
     <string name="w8">800 ExtraBold</string>
     <string name="w9">900 Black</string>
+    <string name="a">A</string>
+    <string name="chinese_que">雀</string>
 
     <!-- Home screen: wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
