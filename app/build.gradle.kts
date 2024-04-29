@@ -76,6 +76,7 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.squareup.leakcanary.android) // To detect memory leak
 
     implementation(libs.android.gms.play.services.maps)
     implementation(libs.android.material) // Theme.Material3.DynamicColors.DayNight
