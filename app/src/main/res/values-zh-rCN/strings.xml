@@ -217,4 +217,6 @@
     <string name="chinese_que">雀</string>
     <string name="tap_to_confirm">确认更改</string>
     <string name="japanese_ki">気</string>
+    <string name="clipboard_card_hidden">已为您隐藏首页的剪贴板卡片</string>
+    <string name="undo">撤销</string>
 </resources>

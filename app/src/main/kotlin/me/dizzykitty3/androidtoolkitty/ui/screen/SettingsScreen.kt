@@ -48,6 +48,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupTitleTex
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomScreen
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_3
 import me.dizzykitty3.androidtoolkitty.foundation.const.EDIT_HOME_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.const.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
@@ -132,24 +133,12 @@ private fun GeneralOptions() {
     val view = LocalView.current
     val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
-
-    val autoClearClipboard = settingsSharedPref.autoClearClipboard
-    var mAutoClearClipboard by remember { mutableStateOf(autoClearClipboard) }
-
-    val oneHandedMode = settingsSharedPref.oneHandedMode
-    var mOneHandedMode by remember { mutableStateOf(oneHandedMode) }
-
-    val dynamicColor = settingsSharedPref.dynamicColor
-    var mDynamicColor by remember { mutableStateOf(dynamicColor) }
-
-    val volumeSlideSteps = settingsSharedPref.sliderIncrement5Percent
-    var mVolumeSlideSteps by remember { mutableStateOf(volumeSlideSteps) }
-
-    val soraShion = settingsSharedPref.soraShion
-    var mSoraShion by remember { mutableStateOf(soraShion) }
-
-    val collapseKeyboard = settingsSharedPref.collapseKeyboard
-    var mCollapseKeyboard by remember { mutableStateOf(collapseKeyboard) }
+    var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
+    var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
+    var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
+    var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
+    var soraShion by remember { mutableStateOf(settingsSharedPref.soraShion) }
+    var collapseKeyboard by remember { mutableStateOf(settingsSharedPref.collapseKeyboard) }
 
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
@@ -158,8 +147,20 @@ private fun GeneralOptions() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
-            mAutoClearClipboard = !mAutoClearClipboard
-            settingsSharedPref.autoClearClipboard = mAutoClearClipboard
+            autoClearClipboard = !autoClearClipboard
+            if (autoClearClipboard) {
+                settingsSharedPref.saveCardShowedState(CARD_3, false)
+                SnackbarUtil.snackbar(
+                    view,
+                    message = R.string.clipboard_card_hidden,
+                    buttonText = R.string.undo,
+                    buttonColor = primary,
+                    buttonClickListener = {
+                        settingsSharedPref.saveCardShowedState(CARD_3, true)
+                    }
+                )
+            }
+            settingsSharedPref.autoClearClipboard = autoClearClipboard
         }
     ) {
         Column(
@@ -168,10 +169,24 @@ private fun GeneralOptions() {
             Text(text = stringResource(R.string.clear_clipboard_on_launch))
         }
         Column {
+            val primaryColor = MaterialTheme.colorScheme.primary.toArgb()
+
             Switch(
-                checked = mAutoClearClipboard,
+                checked = autoClearClipboard,
                 onCheckedChange = {
-                    mAutoClearClipboard = it
+                    autoClearClipboard = it
+                    if (autoClearClipboard) {
+                        settingsSharedPref.saveCardShowedState(CARD_3, false)
+                        SnackbarUtil.snackbar(
+                            view,
+                            message = R.string.clipboard_card_hidden,
+                            buttonText = R.string.undo,
+                            buttonColor = primaryColor,
+                            buttonClickListener = {
+                                settingsSharedPref.saveCardShowedState(CARD_3, true)
+                            }
+                        )
+                    }
                     settingsSharedPref.autoClearClipboard = it
                 }
             )
@@ -181,8 +196,8 @@ private fun GeneralOptions() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
-            mVolumeSlideSteps = !mVolumeSlideSteps
-            settingsSharedPref.sliderIncrement5Percent = mVolumeSlideSteps
+            volumeSlideSteps = !volumeSlideSteps
+            settingsSharedPref.sliderIncrement5Percent = volumeSlideSteps
         }
     ) {
         Column(
@@ -192,9 +207,9 @@ private fun GeneralOptions() {
         }
         Column {
             Switch(
-                checked = mVolumeSlideSteps,
+                checked = volumeSlideSteps,
                 onCheckedChange = {
-                    mVolumeSlideSteps = it
+                    volumeSlideSteps = it
                     settingsSharedPref.sliderIncrement5Percent = it
                 }
             )
@@ -205,9 +220,9 @@ private fun GeneralOptions() {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                mDynamicColor = !mDynamicColor
-                mSoraShion = false
-                onClickDynamicColorButton(view, mDynamicColor, primary, context)
+                dynamicColor = !dynamicColor
+                soraShion = false
+                onClickDynamicColorButton(view, dynamicColor, primary, context)
             }
         ) {
             Column(
@@ -217,10 +232,10 @@ private fun GeneralOptions() {
             }
             Column {
                 Switch(
-                    checked = mDynamicColor,
+                    checked = dynamicColor,
                     onCheckedChange = {
-                        mDynamicColor = it
-                        mSoraShion = false
+                        dynamicColor = it
+                        soraShion = false
                         onClickDynamicColorButton(view, it, primary, context)
                     }
                 )
@@ -228,12 +243,12 @@ private fun GeneralOptions() {
         }
     }
 
-    if (!mDynamicColor || !OsVersion.android12()) {
+    if (!dynamicColor || !OsVersion.android12()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                mSoraShion = !mSoraShion
-                onClickSoraShionButton(view, mSoraShion, primary, context)
+                soraShion = !soraShion
+                onClickSoraShionButton(view, soraShion, primary, context)
             }
         ) {
             Column(
@@ -243,9 +258,9 @@ private fun GeneralOptions() {
             }
             Column {
                 Switch(
-                    checked = mSoraShion,
+                    checked = soraShion,
                     onCheckedChange = {
-                        mSoraShion = it
+                        soraShion = it
                         onClickSoraShionButton(view, it, primary, context)
                     }
                 )
@@ -256,8 +271,8 @@ private fun GeneralOptions() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
-            mOneHandedMode = !mOneHandedMode
-            settingsSharedPref.oneHandedMode = mOneHandedMode
+            oneHandedMode = !oneHandedMode
+            settingsSharedPref.oneHandedMode = oneHandedMode
         }
     ) {
         Column(
@@ -267,9 +282,9 @@ private fun GeneralOptions() {
         }
         Column {
             Switch(
-                checked = mOneHandedMode,
+                checked = oneHandedMode,
                 onCheckedChange = {
-                    mOneHandedMode = it
+                    oneHandedMode = it
                     settingsSharedPref.oneHandedMode = it
                 }
             )
@@ -279,8 +294,8 @@ private fun GeneralOptions() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
-            mCollapseKeyboard = !mCollapseKeyboard
-            settingsSharedPref.collapseKeyboard = mCollapseKeyboard
+            collapseKeyboard = !collapseKeyboard
+            settingsSharedPref.collapseKeyboard = collapseKeyboard
         }
     ) {
         Column(
@@ -290,9 +305,9 @@ private fun GeneralOptions() {
         }
         Column {
             Switch(
-                checked = mCollapseKeyboard,
+                checked = collapseKeyboard,
                 onCheckedChange = {
-                    mCollapseKeyboard = it
+                    collapseKeyboard = it
                     settingsSharedPref.collapseKeyboard = it
                 }
             )
