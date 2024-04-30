@@ -7,7 +7,7 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
@@ -117,7 +117,7 @@ fun SysSettingCard() {
 }
 
 private fun checkIsAutoTime(): Boolean {
-    val contentResolver: ContentResolver = app.applicationContext.contentResolver
+    val contentResolver: ContentResolver = appContext.contentResolver
     val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
     return isAutoTime == 1
 }

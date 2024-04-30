@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.view
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.foundation.theme.SoraShionTheme
@@ -54,8 +53,6 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        view = window.decorView
-
         Log.d(TAG, "onCreate called")
     }
 
@@ -76,7 +73,7 @@ class MainActivity : ComponentActivity() {
         if (hasFocus and isAutoClearClipboard) {// Clipboard operations require window focus
             val cleared = ClipboardUtil.check()
             if (cleared) {
-                SnackbarUtil.snackbar(R.string.clipboard_cleared_automatically)
+                SnackbarUtil.snackbar(window.decorView, R.string.clipboard_cleared_automatically)
                 Log.i(TAG, "Clipboard cleared automatically")
             }
         }

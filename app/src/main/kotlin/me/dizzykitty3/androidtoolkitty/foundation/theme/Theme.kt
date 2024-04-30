@@ -13,7 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 
 private val DarkColorScheme = darkColorScheme(
@@ -91,8 +91,8 @@ fun AppTheme(
     fun OsVersion.colorScheme(darkTheme: Boolean, dynamicColor: Boolean): ColorScheme {
         return when {
             this.android12() && dynamicColor ->
-                if (darkTheme) dynamicDarkColorScheme(app)
-                else dynamicLightColorScheme(app)
+                if (darkTheme) dynamicDarkColorScheme(appContext)
+                else dynamicLightColorScheme(appContext)
 
             darkTheme -> DarkColorScheme
             else -> LightColorScheme

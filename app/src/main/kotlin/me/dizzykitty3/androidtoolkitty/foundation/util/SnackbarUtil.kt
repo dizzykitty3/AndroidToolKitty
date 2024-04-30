@@ -3,24 +3,24 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.view
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 
 object SnackbarUtil {
-    fun snackbar(message: String) =
+    fun snackbar(view: View, message: String) =
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
 
-    fun snackbar(@StringRes message: Int) =
-        Snackbar.make(view, app.applicationContext.getString(message), Snackbar.LENGTH_SHORT).show()
+    fun snackbar(view: View, @StringRes message: Int) =
+        Snackbar.make(view, appContext.getString(message), Snackbar.LENGTH_SHORT).show()
 
     fun snackbar(
+        view: View,
         @StringRes message: Int,
         @StringRes buttonText: Int,
         buttonColor: Int,
         buttonClickListener: View.OnClickListener
     ) =
-        Snackbar.make(view, app.applicationContext.getString(message), Snackbar.LENGTH_LONG)
-            .setAction(app.applicationContext.getString(buttonText), buttonClickListener)
+        Snackbar.make(view, appContext.getString(message), Snackbar.LENGTH_LONG)
+            .setAction(appContext.getString(buttonText), buttonClickListener)
             .setActionTextColor(buttonColor)
             .show()
 }

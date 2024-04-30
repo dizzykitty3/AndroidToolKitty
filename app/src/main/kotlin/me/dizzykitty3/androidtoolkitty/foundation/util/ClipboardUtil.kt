@@ -3,12 +3,13 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import android.view.View
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.R
 
 object ClipboardUtil {
     private var clipboard: ClipboardManager =
-        app.applicationContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
     fun clear() {
         if (clipboard.hasPrimaryClip()) {
@@ -24,9 +25,9 @@ object ClipboardUtil {
         return false
     }
 
-    fun copy(text: String) {
+    fun copy(view: View, text: String) {
         val clip = ClipData.newPlainText("label", text)
         clipboard.setPrimaryClip(clip)
-        SnackbarUtil.snackbar("$text ${app.applicationContext.getString(R.string.copied)}")
+        SnackbarUtil.snackbar(view, "$text ${appContext.getString(R.string.copied)}")
     }
 }

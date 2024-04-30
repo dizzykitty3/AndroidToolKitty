@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.util.Log
+import android.view.View
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ClearAll
 import androidx.compose.material.icons.outlined.ContentPasteSearch
@@ -11,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
@@ -29,11 +31,13 @@ fun ClipboardCard() {
         icon = Icons.Outlined.ContentPasteSearch,
         title = R.string.clipboard
     ) {
+        val view = LocalView.current
+
         val isShowHintText = !SettingsSharedPref.openedSettingsScreen
         if (isShowHintText) CustomTip(id = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
         Button(
-            onClick = { onClearClipboardButton() },
+            onClick = { onClearClipboardButton(view) },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
             Icon(
@@ -47,8 +51,8 @@ fun ClipboardCard() {
     }
 }
 
-private fun onClearClipboardButton() {
+private fun onClearClipboardButton(view: View) {
     ClipboardUtil.clear()
-    SnackbarUtil.snackbar(R.string.clipboard_cleared)
+    SnackbarUtil.snackbar(view, R.string.clipboard_cleared)
     Log.i(TAG, "Clipboard cleared")
 }

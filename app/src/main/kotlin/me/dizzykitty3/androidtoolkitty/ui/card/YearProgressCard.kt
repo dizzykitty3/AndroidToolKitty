@@ -12,7 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomAnimatedProgressIndicator
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
@@ -39,7 +39,7 @@ fun YearProgressCard() {
                     "${(yearProgressPercentage(yearProgress()))}%"
                 else
                     "${(yearProgressPercentage(yearProgress()))}% · ${
-                        app.applicationContext.resources.getQuantityString(
+                        appContext.resources.getQuantityString(
                             R.plurals.days_remaining,
                             (totalDaysInYear() - daysPassed()).toInt(),
                             totalDaysInYear() - daysPassed()

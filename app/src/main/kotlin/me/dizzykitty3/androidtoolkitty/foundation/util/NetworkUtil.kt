@@ -3,7 +3,7 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 
 object NetworkUtil {
     private const val STATE_CODE_UNKNOWN = 0
@@ -11,7 +11,7 @@ object NetworkUtil {
     const val STATE_CODE_MOBILE = 2
     const val STATE_CODE_OFFLINE = 3
     private var connectivityManager: ConnectivityManager =
-        app.applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     fun networkState(): Int {
         val activeNetwork = connectivityManager.activeNetwork ?: return STATE_CODE_OFFLINE

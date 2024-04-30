@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -49,6 +50,8 @@ fun VolumeCard() {
         icon = Icons.AutoMirrored.Outlined.VolumeUp,
         title = R.string.volume
     ) {
+        val view = LocalView.current
+
         val settingsSharedPref = remember { SettingsSharedPref }
 
         val maxVolume = AudioUtil.maxVolumeIndex()
@@ -205,7 +208,10 @@ fun VolumeCard() {
                         Button(
                             onClick = {
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
-                                    if (newCustomVolume.toInt() != 0) SnackbarUtil.snackbar(R.string.system_media_volume_levels_limited)
+                                    if (newCustomVolume.toInt() != 0) SnackbarUtil.snackbar(
+                                        view,
+                                        R.string.system_media_volume_levels_limited
+                                    )
                                     return@Button
                                 } else {
                                     settingsSharedPref.customVolume = newCustomVolume.toInt()

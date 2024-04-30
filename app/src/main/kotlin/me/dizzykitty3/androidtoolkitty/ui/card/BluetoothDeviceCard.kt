@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -43,6 +44,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
         icon = Icons.Outlined.Bluetooth,
         title = R.string.bluetooth_devices
     ) {
+        val view = LocalView.current
         val context = LocalContext.current
 
         var showResult by remember { mutableStateOf(false) }
@@ -76,6 +78,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
                 // When Bluetooth is OFF
                 SnackbarUtil.snackbar(
+                    view,
                     message = R.string.bluetooth_disabled,
                     buttonText = R.string.turn_on_bluetooth,
                     buttonColor = materialColor,

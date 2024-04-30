@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.ui.screen
 import android.app.Activity
 import android.content.Context
 import android.os.Build
+import android.view.View
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -31,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
@@ -58,6 +60,8 @@ import java.util.Locale
 @Composable
 fun SettingsScreen(navController: NavHostController) {
     CustomScreen {
+        val view = LocalView.current
+
         val debuggingOptions = SettingsSharedPref.debuggingOptions
         var tapCount by remember { mutableIntStateOf(0) }
 
@@ -88,10 +92,10 @@ fun SettingsScreen(navController: NavHostController) {
                     if (!debuggingOptions) {
                         tapCount++
                         when (tapCount) {
-                            3 -> SnackbarUtil.snackbar(R.string.two_more_times)
-                            4 -> SnackbarUtil.snackbar(R.string.one_more_time)
+                            3 -> SnackbarUtil.snackbar(view, R.string.two_more_times)
+                            4 -> SnackbarUtil.snackbar(view, R.string.one_more_time)
                             5 -> {
-                                SnackbarUtil.snackbar(R.string.now_a_developer)
+                                SnackbarUtil.snackbar(view, R.string.now_a_developer)
                                 SettingsSharedPref.debuggingOptions = true
                             }
                         }
@@ -125,6 +129,7 @@ fun SettingsScreen(navController: NavHostController) {
 
 @Composable
 private fun GeneralOptions() {
+    val view = LocalView.current
     val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
 
@@ -202,7 +207,7 @@ private fun GeneralOptions() {
             modifier = Modifier.clickable {
                 mDynamicColor = !mDynamicColor
                 mSoraShion = false
-                onClickDynamicColorButton(mDynamicColor, primary, context)
+                onClickDynamicColorButton(view, mDynamicColor, primary, context)
             }
         ) {
             Column(
@@ -216,7 +221,7 @@ private fun GeneralOptions() {
                     onCheckedChange = {
                         mDynamicColor = it
                         mSoraShion = false
-                        onClickDynamicColorButton(it, primary, context)
+                        onClickDynamicColorButton(view, it, primary, context)
                     }
                 )
             }
@@ -228,7 +233,7 @@ private fun GeneralOptions() {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 mSoraShion = !mSoraShion
-                onClickSoraShionButton(mSoraShion, primary, context)
+                onClickSoraShionButton(view, mSoraShion, primary, context)
             }
         ) {
             Column(
@@ -241,7 +246,7 @@ private fun GeneralOptions() {
                     checked = mSoraShion,
                     onCheckedChange = {
                         mSoraShion = it
-                        onClickSoraShionButton(it, primary, context)
+                        onClickSoraShionButton(view, it, primary, context)
                     }
                 )
             }
@@ -315,6 +320,7 @@ private fun CustomizeOptions(navController: NavHostController) {
 
 @Composable
 private fun DebuggingOptions(navController: NavHostController) {
+    val view = LocalView.current
     val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
 
@@ -332,7 +338,7 @@ private fun DebuggingOptions(navController: NavHostController) {
     }
 
     Button(
-        onClick = { SnackbarUtil.snackbar(R.string.under_development) }
+        onClick = { SnackbarUtil.snackbar(view, R.string.under_development) }
     ) {
         Text(text = stringResource(id = R.string.check_sp_values))
     }
@@ -360,11 +366,17 @@ private fun DebuggingOptions(navController: NavHostController) {
     )
 }
 
-private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, context: Context) {
+private fun onClickDynamicColorButton(
+    view: View,
+    isDynamicColor: Boolean,
+    color: Int,
+    context: Context
+) {
     SettingsSharedPref.dynamicColor = isDynamicColor
     SettingsSharedPref.soraShion = false
 
     SnackbarUtil.snackbar(
+        view,
         message = R.string.requires_restart_do_it_now,
         buttonText = R.string.restart,
         buttonColor = color,
@@ -372,10 +384,11 @@ private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, conte
     )
 }
 
-private fun onClickSoraShionButton(isSoraShion: Boolean, color: Int, context: Context) {
+private fun onClickSoraShionButton(view: View, isSoraShion: Boolean, color: Int, context: Context) {
     SettingsSharedPref.soraShion = isSoraShion
 
     SnackbarUtil.snackbar(
+        view,
         message = R.string.requires_restart_do_it_now,
         buttonText = R.string.restart,
         buttonColor = color,
