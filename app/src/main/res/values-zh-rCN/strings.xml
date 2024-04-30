@@ -215,4 +215,5 @@
     <string name="w9">900 浓体 Black</string>
     <string name="a">A</string>
     <string name="chinese_que">雀</string>
+    <string name="tap_to_confirm">确认更改</string>
 </resources>

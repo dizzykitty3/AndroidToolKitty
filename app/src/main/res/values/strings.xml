@@ -89,12 +89,41 @@
     <string name="open_overlay_permission">Display over other apps</string>
     <string name="open_write_permission">Modify system settings</string>
 
+    <!-- Home screen: wheel of fortune -->
+    <string name="wheel_of_fortune">Wheel of Fortune</string>
+    <string name="item">item</string>
+    <string name="spin">Spin</string>
+
+    <!-- Home screen: bluetooth devices -->
+    <string name="bluetooth_devices">Bluetooth devices</string>
+    <string name="bluetooth_disabled">Bluetooth disabled</string>
+    <string name="show_paired_devices">Show paired devices</string>
+    <string name="current_device">Current device:</string>
+    <string name="paired_devices">Paired devices:</string>
+    <string name="bt">BT</string>
+    <string name="ble">BLE</string>
+    <string name="dual">Dual</string>
+    <string name="no_paired_devices">No paired devices</string>
+    <string name="what_is_bt_ble_and_dual">What is BT, BLE, and Dual?</string>
+    <string name="bluetooth_devices_types">Classic Bluetooth (BT):\nThis is the familiar type used for things like headsets, speakers, and file transfers. It offers good range and speed but consumes more power.\n\nBluetooth Low Energy (BLE):\nThis newer version is designed for lower power consumption and is ideal for devices that need long battery life, like fitness trackers and smart home sensors. It has a shorter range and slower data transfer rate compared to Classic Bluetooth.\n\nDual:\nSome devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
+    <string name="unknown_device">Unknown device</string>
+    <string name="turn_on_bluetooth">Turn on Bluetooth</string>
+
     <!-- Home screen: unicode -->
     <string name="unicode">Unicode</string>
     <string name="unicode_input_hint">Last 4 digits of each, e.g.</string>
     <string name="character">Character</string>
     <string name="copied">copied</string>
     <string name="convert">Convert</string>
+
+    <!-- Home screen: check app on market -->
+    <string name="check_app_on_market">Check app on Market</string>
+    <string name="package_name_or_search">Package name or search</string>
+    <string name="whats">What\'s</string>
+    <string name="package_name">package name</string>
+    <string name="content_description_link_icon_whats_package_name">link icon: what\'s package name</string>
+    <string name="open_on_google_play">Open on Google Play</string>
+    <string name="open_on_other_markets">Open on other markets</string>
 
     <!-- Home screen: google maps -->
     <string name="google_maps">Google Maps</string>
@@ -103,15 +132,6 @@
     <string name="google_maps_not_installed">Google Maps is not installed</string>
     <string name="google_play_not_installed">Google Play is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>
-
-    <!-- Home screen: open app on google play -->
-    <string name="check_app_on_market">Check app on Market</string>
-    <string name="package_name_or_search">Package name or search</string>
-    <string name="whats">What\'s</string>
-    <string name="package_name">package name</string>
-    <string name="content_description_link_icon_whats_package_name">link icon: what\'s package name</string>
-    <string name="open_on_google_play">Open on Google Play</string>
-    <string name="open_on_other_markets">Open on other markets</string>
 
     <!-- Home screen: android versions -->
     <string name="android_versions">Android versions</string>
@@ -174,7 +194,7 @@
     <string name="api_8">API 8, Froyo</string>
     <string name="api_7">API 7, Eclair</string>
 
-    <!-- Home screen: wheel of fortune -->
+    <!-- Home screen: font weight -->
     <string name="font_weight">Font weight</string>
     <string name="w1">100 Thin</string>
     <string name="w2">200 ExtraLight</string>
@@ -187,26 +207,6 @@
     <string name="w9">900 Black</string>
     <string name="a">A</string>
     <string name="chinese_que">雀</string>
-
-    <!-- Home screen: wheel of fortune -->
-    <string name="wheel_of_fortune">Wheel of Fortune</string>
-    <string name="item">item</string>
-    <string name="spin">Spin</string>
-
-    <!-- Home screen: bluetooth devices -->
-    <string name="bluetooth_devices">Bluetooth devices</string>
-    <string name="bluetooth_disabled">Bluetooth disabled</string>
-    <string name="show_paired_devices">Show paired devices</string>
-    <string name="current_device">Current device:</string>
-    <string name="paired_devices">Paired devices:</string>
-    <string name="bt">BT</string>
-    <string name="ble">BLE</string>
-    <string name="dual">Dual</string>
-    <string name="no_paired_devices">No paired devices</string>
-    <string name="what_is_bt_ble_and_dual">What is BT, BLE, and Dual?</string>
-    <string name="bluetooth_devices_types">Classic Bluetooth (BT):\nThis is the familiar type used for things like headsets, speakers, and file transfers. It offers good range and speed but consumes more power.\n\nBluetooth Low Energy (BLE):\nThis newer version is designed for lower power consumption and is ideal for devices that need long battery life, like fitness trackers and smart home sensors. It has a shorter range and slower data transfer rate compared to Classic Bluetooth.\n\nDual:\nSome devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
-    <string name="unknown_device">Unknown device</string>
-    <string name="turn_on_bluetooth">Turn on Bluetooth</string>
 
     <!-- Settings screen: settings -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
@@ -231,6 +231,7 @@
     <string name="collapse_keyboard_when_back_to_app">Collapse keyboard when back to ToolKitty app</string>
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
     <string name="check_sp_values">Check sharedpreferences values</string>
+    <string name="tap_to_confirm">Tap to confirm</string>
 
     <!-- Settings screen: about -->
     <string name="about">About</string>

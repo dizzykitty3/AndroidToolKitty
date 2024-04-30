@@ -6,6 +6,7 @@ import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -14,6 +15,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
@@ -34,6 +37,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_6
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_9
+import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 
 /**
  * @see me.dizzykitty3.androidtoolkitty.ui.screen.HomeScreen
@@ -44,6 +48,7 @@ fun EditHomeCard() {
     CustomCard(
         title = R.string.customize_my_home_page
     ) {
+        val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
 
         val isShowCard1 = settingsSharedPref.getCardShowedState(CARD_1)
@@ -171,21 +176,31 @@ fun EditHomeCard() {
 
         CustomGroupDivider()
 
+        val primary = MaterialTheme.colorScheme.primary.toArgb()
+
         Button(
             onClick = {
-                onClickChangeAllCardsButton(false)
-                mIsShowCard1 = false
-                mIsShowCard2 = false
-                mIsShowCard3 = false
-                mIsShowCard4 = false
-                mIsShowCard5 = false
-                mIsShowCard6 = false
-                mIsShowCard7 = false
-                mIsShowCard8 = false
-                mIsShowCard9 = false
-                mIsShowCard10 = false
-                mIsShowCard11 = false
-                mIsShowCard12 = false
+                SnackbarUtil.snackbar(
+                    view,
+                    message = R.string.tap_to_confirm,
+                    buttonText = android.R.string.ok,
+                    buttonColor = primary,
+                    buttonClickListener = {
+                        onClickChangeAllCardsButton(false)
+                        mIsShowCard1 = false
+                        mIsShowCard2 = false
+                        mIsShowCard3 = false
+                        mIsShowCard4 = false
+                        mIsShowCard5 = false
+                        mIsShowCard6 = false
+                        mIsShowCard7 = false
+                        mIsShowCard8 = false
+                        mIsShowCard9 = false
+                        mIsShowCard10 = false
+                        mIsShowCard11 = false
+                        mIsShowCard12 = false
+                    }
+                )
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
@@ -200,19 +215,27 @@ fun EditHomeCard() {
 
         Button(
             onClick = {
-                onClickChangeAllCardsButton(true)
-                mIsShowCard1 = true
-                mIsShowCard2 = true
-                mIsShowCard3 = true
-                mIsShowCard4 = true
-                mIsShowCard5 = true
-                mIsShowCard6 = true
-                mIsShowCard7 = true
-                mIsShowCard8 = true
-                mIsShowCard9 = true
-                mIsShowCard10 = true
-                mIsShowCard11 = true
-                mIsShowCard12 = true
+                SnackbarUtil.snackbar(
+                    view,
+                    message = R.string.tap_to_confirm,
+                    buttonText = android.R.string.ok,
+                    buttonColor = primary,
+                    buttonClickListener = {
+                        onClickChangeAllCardsButton(true)
+                        mIsShowCard1 = true
+                        mIsShowCard2 = true
+                        mIsShowCard3 = true
+                        mIsShowCard4 = true
+                        mIsShowCard5 = true
+                        mIsShowCard6 = true
+                        mIsShowCard7 = true
+                        mIsShowCard8 = true
+                        mIsShowCard9 = true
+                        mIsShowCard10 = true
+                        mIsShowCard11 = true
+                        mIsShowCard12 = true
+                    }
+                )
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
