@@ -16,7 +16,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupDivider
 fun FontWeightCard() {
     CustomCard(
         icon = Icons.Outlined.FontDownload,
-        title = R.string.font_weight
+        title = R.string.font_weight_test
     ) {
         Thin(id = R.string.w1)
         ExtraLight(id = R.string.w2)
@@ -28,28 +28,24 @@ fun FontWeightCard() {
         ExtraBold(id = R.string.w8)
         Black(id = R.string.w9)
         CustomGroupDivider()
-        Row {
-            Thin(id = R.string.a)
-            ExtraLight(id = R.string.a)
-            Light(id = R.string.a)
-            Normal(id = R.string.a)
-            Medium(id = R.string.a)
-            SemiBold(id = R.string.a)
-            Bold(id = R.string.a)
-            ExtraBold(id = R.string.a)
-            Black(id = R.string.a)
-        }
-        Row {
-            Thin(id = R.string.chinese_que)
-            ExtraLight(id = R.string.chinese_que)
-            Light(id = R.string.chinese_que)
-            Normal(id = R.string.chinese_que)
-            Medium(id = R.string.chinese_que)
-            SemiBold(id = R.string.chinese_que)
-            Bold(id = R.string.chinese_que)
-            ExtraBold(id = R.string.chinese_que)
-            Black(id = R.string.chinese_que)
-        }
+        RowFontWeightTest(id = R.string.a)
+        RowFontWeightTest(id = R.string.chinese_que)
+        RowFontWeightTest(id = R.string.japanese_ki)
+    }
+}
+
+@Composable
+private fun RowFontWeightTest(@StringRes id: Int) {
+    Row {
+        Thin(id = id)
+        ExtraLight(id = id)
+        Light(id = id)
+        Normal(id = id)
+        Medium(id = id)
+        SemiBold(id = id)
+        Bold(id = id)
+        ExtraBold(id = id)
+        Black(id = id)
     }
 }
 

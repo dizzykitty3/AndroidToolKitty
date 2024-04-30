@@ -195,7 +195,7 @@
     <string name="api_7">API 7, Eclair</string>
 
     <!-- Home screen: font weight -->
-    <string name="font_weight">Font weight</string>
+    <string name="font_weight_test">Font weight test</string>
     <string name="w1">100 Thin</string>
     <string name="w2">200 ExtraLight</string>
     <string name="w3">300 Light</string>
@@ -207,6 +207,7 @@
     <string name="w9">900 Black</string>
     <string name="a">A</string>
     <string name="chinese_que">雀</string>
+    <string name="japanese_ki">気</string>
 
     <!-- Settings screen: settings -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>

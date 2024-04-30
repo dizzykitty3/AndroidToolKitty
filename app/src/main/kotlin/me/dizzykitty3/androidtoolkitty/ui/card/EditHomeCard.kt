@@ -166,7 +166,7 @@ fun EditHomeCard() {
             settingsSharedPref.saveCardShowedState(CARD_11, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.font_weight,
+            id = R.string.font_weight_test,
             cardId = CARD_12,
             isChecked = mIsShowCard12
         ) { newState ->

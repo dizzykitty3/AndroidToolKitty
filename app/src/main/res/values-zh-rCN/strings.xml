@@ -203,7 +203,7 @@
     <string name="two_more_times">还需要 2 次</string>
     <string name="under_development">开发中</string>
     <string name="permission">权限</string>
-    <string name="font_weight">字重</string>
+    <string name="font_weight_test">字重测试</string>
     <string name="w1">100 淡体 Thin</string>
     <string name="w2">200 特细 ExtraLight</string>
     <string name="w3">300 细体 Light</string>
@@ -216,4 +216,5 @@
     <string name="a">A</string>
     <string name="chinese_que">雀</string>
     <string name="tap_to_confirm">确认更改</string>
+    <string name="japanese_ki">気</string>
 </resources>
