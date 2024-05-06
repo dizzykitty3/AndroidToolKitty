@@ -55,7 +55,7 @@
     <string name="social_media_profile">Social media profile</string>
     <string name="platform">Platform</string>
     <string name="username">Username</string>
-    <string name="bilibili_search">Bilibili (Search)</string>
+    <string name="bilibili_search">bilibili (Search)</string>
     <string name="github">GitHub</string>
     <string name="x">X</string>
     <string name="weibo">Weibo</string>
@@ -65,7 +65,7 @@
     <string name="pixiv_artwork_id">pixiv (Artwork ID)</string>
     <string name="pixiv_user_id">pixiv (User ID)</string>
     <string name="v2ex">V2EX</string>
-    <string name="bilibili_user_id">Bilibili (User ID)</string>
+    <string name="bilibili_user_id">bilibili (User ID)</string>
     <string name="webpage">Webpage</string>
     <string name="instagram">Instagram</string>
     <string name="facebook">Facebook</string>
@@ -73,8 +73,8 @@
     <string name="patreon">Patreon</string>
     <string name="search">Search</string>
     <string name="fantia">Fantia</string>
-    <string name="pixiv_user_custom_url">pixiv (User custom url)</string>
-    <string name="steam_user_custom_url">Steam (User custom url)</string>
+    <string name="pixiv_user_custom_url">pixiv (User custom URL)</string>
+    <string name="steam_user_custom_url">Steam (User custom URL)</string>
     <string name="plurk">Plurk</string>
     <string name="twitch">Twitch</string>
 
