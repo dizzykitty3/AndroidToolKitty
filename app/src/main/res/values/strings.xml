@@ -72,6 +72,11 @@
     <string name="fanbox">Fanbox</string>
     <string name="patreon">Patreon</string>
     <string name="search">Search</string>
+    <string name="fantia">Fantia</string>
+    <string name="pixiv_user_custom_url">pixiv (User custom url)</string>
+    <string name="steam_user_custom_url">Steam (User custom url)</string>
+    <string name="plurk">Plurk</string>
+    <string name="twitch">Twitch</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>

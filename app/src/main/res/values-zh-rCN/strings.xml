@@ -15,6 +15,7 @@
     <string name="facebook">Facebook</string>
     <string name="fanbox">Fanbox</string>
     <string name="patreon">Patreon</string>
+    <string name="fantia">Fantia</string>
     <string name="system_settings">Android 系统设置</string>
     <string name="open_display_settings">显示设置</string>
     <string name="open_auto_rotate_settings">屏幕自动旋转设置</string>
@@ -219,4 +220,8 @@
     <string name="japanese_ki">気</string>
     <string name="clipboard_card_hidden">已为您隐藏首页的剪贴板卡片</string>
     <string name="undo">撤销</string>
+    <string name="pixiv_user_custom_url">Pixiv (User custom url)</string>
+    <string name="steam_user_custom_url">Steam (User custom url)</string>
+    <string name="plurk">Plurk</string>
+    <string name="twitch">Twitch</string>
 </resources>
