@@ -240,6 +240,8 @@
     <string name="check_sp_values">Check sharedpreferences values</string>
     <string name="tap_to_confirm">Tap to confirm</string>
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
+    <string name="show_all_options">Show all options</string>
+    <string name="hide_all_options">Hide all options</string>
 
     <!-- Settings screen: about -->
     <string name="about">About</string>

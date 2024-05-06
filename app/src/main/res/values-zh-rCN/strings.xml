@@ -58,6 +58,8 @@
     <string name="open_developer_options">开发者选项</string>
     <string name="requires_restart_do_it_now">这将需要重启 APP</string>
     <string name="restart">立即重启</string>
+    <string name="show_all_options">Show all options</string>
+    <string name="hide_all_options">Hide all options</string>
     <string name="about">关于</string>
     <string name="source_code_on_github">在 GitHub 上查看源码</string>
     <string name="submit_the_platform_you_need">提交你所想平台的名称给开发者</string>
