@@ -7,6 +7,7 @@ import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 object ToastUtil {
     /**
      * NOT RECOMMENDED. Use Snackbar instead.
+     * @see (https://developer.android.com/guide/topics/ui/notifiers/toasts#alternatives_to_using_toasts)
      * @see SnackbarUtil.snackbar
      */
     fun toast(message: String) =
@@ -14,6 +15,7 @@ object ToastUtil {
 
     /**
      * NOT RECOMMENDED. Use Snackbar instead.
+     * @see (https://developer.android.com/guide/topics/ui/notifiers/toasts#alternatives_to_using_toasts)
      * @see SnackbarUtil.snackbar
      */
     fun toast(@StringRes message: Int) = toast(appContext.getString(message))
