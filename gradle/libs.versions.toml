@@ -1,52 +1,36 @@
 [versions]
-# Android Gradle Plugin
-# https://developer.android.com/build/releases/gradle-plugin
-agp = "8.4.0"
+# Android Gradle plugin
+agp = "8.4.0" # https://developer.android.com/build/releases/gradle-plugin
 
 # AndroidX
-# https://developer.android.com/jetpack/androidx/releases/activity
-activity = "1.9.0"
-# https://developer.android.com/jetpack/androidx/releases/compose
-# https://developer.android.com/develop/ui/compose/bom/bom-mapping
-compose = "1.6.7"
-composeBom = "2024.05.00"
-composeM3 = "1.2.1"
-# https://developer.android.com/jetpack/androidx/releases/core
-core = "1.13.1"
-# https://developer.android.com/jetpack/androidx/releases/datastore
-dataStore = "1.1.1"
-# https://developer.android.com/jetpack/androidx/releases/lifecycle
-lifecycle = "2.7.0"
-# https://developer.android.com/jetpack/androidx/releases/navigation
-navigation = "2.7.7"
-# https://developer.android.com/jetpack/androidx/releases/room
-room = "2.6.1"
-
-# Google Play Services
-# https://developers.google.com/android/guides/setup#list-dependencies
-gmsMaps = "18.2.0"
+activity = "1.9.0" # https://developer.android.com/jetpack/androidx/releases/activity
+compose = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
+composeBom = "2024.05.00" # https://developer.android.com/develop/ui/compose/bom/bom-mapping
+composeM3 = "1.2.1" # https://developer.android.com/jetpack/androidx/releases/compose-material3
+core = "1.13.1" # https://developer.android.com/jetpack/androidx/releases/core
+dataStore = "1.1.1" # https://developer.android.com/jetpack/androidx/releases/datastore
+lifecycle = "2.7.0" # https://developer.android.com/jetpack/androidx/releases/lifecycle
+navigation = "2.7.7" # https://developer.android.com/jetpack/androidx/releases/navigation
+room = "2.6.1" # https://developer.android.com/jetpack/androidx/releases/room
 
 # Google
-# https://github.com/google/dagger/releases
-dagger = "2.51.1"
-# https://github.com/google/gson/releases
-gson = "2.10.1"
-# https://github.com/google/ksp/releases
-ksp = "1.9.23-1.0.20"
+dagger = "2.51.1" # https://github.com/google/dagger/releases
+gson = "2.10.1" # https://github.com/google/gson/releases
+ksp = "1.9.23-1.0.20" # https://github.com/google/ksp/releases
+
+# Google Play Services
+gmsMaps = "18.2.0" # https://developers.google.com/android/guides/setup#list-dependencies
 
 # Kotlin
-# https://github.com/JetBrains/kotlin/releases
-kotlin = "1.9.23"
-# https://github.com/Kotlin/kotlinx.coroutines/releases
-coroutines = "1.8.0"
+kotlin = "1.9.23" # https://github.com/JetBrains/kotlin/releases
+coroutines = "1.8.0" # https://github.com/Kotlin/kotlinx.coroutines/releases
+serialization = "1.6.3" # https://github.com/Kotlin/kotlinx.serialization/releases
 
 # Material
-# https://github.com/material-components/material-components-android/releases
-material = "1.12.0"
+material = "1.12.0" # https://github.com/material-components/material-components-android/releases
 
 # Square
-# https://github.com/square/leakcanary/releases
-leakCanary = "2.14"
+leakCanary = "2.14" # https://github.com/square/leakcanary/releases
 
 [libraries]
 android-gms-play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "gmsMaps" }
@@ -71,11 +55,13 @@ google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gs
 google-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger" }
 google-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
-squareup-leakcanary-android = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakCanary" }
+kotlinx-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serialization" }
+squareup-leakcanary = { group = "com.squareup.leakcanary", name = "leakcanary-android", version.ref = "leakCanary" }
 
 [plugins]
-android-application = { id = "com.android.application", version.ref = "agp" }
-androidx-room = { id = "androidx.room", version.ref = "room" }
-google-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
-google-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-jetbrains-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+application = { id = "com.android.application", version.ref = "agp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+room = { id = "androidx.room", version.ref = "room" }

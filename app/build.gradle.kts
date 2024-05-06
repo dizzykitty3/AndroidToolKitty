@@ -1,9 +1,10 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.androidx.room)
-    alias(libs.plugins.google.hilt)
-    alias(libs.plugins.google.ksp)
-    alias(libs.plugins.jetbrains.kotlin)
+    alias(libs.plugins.application)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.room)
 }
 
 android {
@@ -70,13 +71,12 @@ android {
 }
 
 dependencies {
-
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
 
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.squareup.leakcanary.android) // To detect memory leak
+    debugImplementation(libs.squareup.leakcanary) // To detect memory leak
 
     implementation(libs.android.gms.play.services.maps)
     implementation(libs.android.material) // Theme.Material3.DynamicColors.DayNight
@@ -92,9 +92,10 @@ dependencies {
     implementation(libs.androidx.navigation.compose) // NavHostController
     implementation(libs.androidx.room.ktx) // To use Coroutine features
     implementation(libs.androidx.room.runtime)
-    implementation(libs.google.gson)
+    implementation(libs.google.gson) // TODO migrate to kotlinx serialization
     implementation(libs.google.hilt) // Dependency injection
     implementation(libs.kotlinx.coroutines) // Asynchronous tasks
+    implementation(libs.kotlinx.serialization) // json
 
     ksp(libs.androidx.room.compiler)
     ksp(libs.google.hilt.compiler)
