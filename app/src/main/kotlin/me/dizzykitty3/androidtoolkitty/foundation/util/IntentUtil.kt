@@ -44,12 +44,12 @@ object IntentUtil {
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
-                ToastUtil.toast(appContext.getString(R.string.google_play_not_installed))
+                ToastUtil.toast(R.string.google_play_not_installed)
                 Log.i(TAG, "Google Play not installed")
             }
 
             GOOGLE_MAPS -> {
-                ToastUtil.toast(appContext.getString(R.string.google_maps_not_installed))
+                ToastUtil.toast(R.string.google_maps_not_installed)
                 Log.i(TAG, "Google Maps not installed")
                 openAppOnMarket(GOOGLE_MAPS, context)
             }
@@ -92,7 +92,7 @@ object IntentUtil {
             startActivity(intent, context)
             Log.d(TAG, "onOpenSystemSettings: $settingType")
         } catch (e: Exception) {
-            ToastUtil.toast(appContext.getString(R.string.system_settings_unsupported))
+            ToastUtil.toast(R.string.system_settings_unsupported)
             Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
         }
     }
@@ -106,7 +106,7 @@ object IntentUtil {
             startActivity(intent, context)
             Log.d(TAG, "openPermissionPage")
         } catch (e: Exception) {
-            ToastUtil.toast(appContext.getString(R.string.system_settings_unsupported))
+            ToastUtil.toast(R.string.system_settings_unsupported)
             Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
         }
     }
