@@ -1,20 +1,20 @@
 [versions]
 # Android Gradle Plugin
 # https://developer.android.com/build/releases/gradle-plugin
-agp = "8.3.2"
+agp = "8.4.0"
 
 # AndroidX
 # https://developer.android.com/jetpack/androidx/releases/activity
 activity = "1.9.0"
 # https://developer.android.com/jetpack/androidx/releases/compose
 # https://developer.android.com/develop/ui/compose/bom/bom-mapping
-compose = "1.6.6"
-composeBom = "2024.04.01"
+compose = "1.6.7"
+composeBom = "2024.05.00"
 composeM3 = "1.2.1"
 # https://developer.android.com/jetpack/androidx/releases/core
-core = "1.13.0"
+core = "1.13.1"
 # https://developer.android.com/jetpack/androidx/releases/datastore
-dataStore = "1.1.0"
+dataStore = "1.1.1"
 # https://developer.android.com/jetpack/androidx/releases/lifecycle
 lifecycle = "2.7.0"
 # https://developer.android.com/jetpack/androidx/releases/navigation
@@ -42,7 +42,7 @@ coroutines = "1.8.0"
 
 # Material
 # https://github.com/material-components/material-components-android/releases
-material = "1.11.0"
+material = "1.12.0"
 
 # Square
 # https://github.com/square/leakcanary/releases
