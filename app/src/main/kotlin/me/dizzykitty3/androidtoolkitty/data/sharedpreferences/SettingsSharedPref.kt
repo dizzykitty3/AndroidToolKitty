@@ -3,9 +3,13 @@ package me.dizzykitty3.androidtoolkitty.data.sharedpreferences
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.JsonSyntaxException
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
+
+@Serializable
+data class WheelOfFortuneItems(val items: List<String>)
 
 object SettingsSharedPref {
     private const val TAG = "SettingsSharedPref"
@@ -25,7 +29,7 @@ object SettingsSharedPref {
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
-    private const val LUCKY_SPINNING_WHEEL_ITEMS = "lucky_spinning_wheel_items"
+    private const val WHEEL_OF_FORTUNE_ITEMS = "lucky_spinning_wheel_items"
 
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -173,21 +177,21 @@ object SettingsSharedPref {
         }
 
     fun getLuckySpinningWheelItems(): List<String>? {
-        val itemsJson = sharedPrefs.getString(LUCKY_SPINNING_WHEEL_ITEMS, null) ?: return null
+        val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null
         return try {
-            val itemsArray: Array<String> = Gson().fromJson(itemsJson, Array<String>::class.java)
-            itemsArray.toList()
-        } catch (e: JsonSyntaxException) {
-            Log.e(TAG, "Error parsing spinning wheel items JSON", e)
+            val items: WheelOfFortuneItems = Json.decodeFromString(itemsJson)
+            items.items
+        } catch (e: Exception) {
+            Log.e(TAG, "Error parsing wheel of fortune items JSON", e)
             null
         }
     }
 
     fun setLuckySpinningWheelItems(items: List<String>) {
-        val itemsJson = Gson().toJson(items)
+        val itemsJson = Json.encodeToString(WheelOfFortuneItems(items))
         Log.d(TAG, "lucky spinning wheel items = $itemsJson")
         with(sharedPrefs.edit()) {
-            putString(LUCKY_SPINNING_WHEEL_ITEMS, itemsJson)
+            putString(WHEEL_OF_FORTUNE_ITEMS, itemsJson)
             apply()
         }
     }

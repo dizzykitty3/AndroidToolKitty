@@ -15,7 +15,6 @@ room = "2.6.1" # https://developer.android.com/jetpack/androidx/releases/room
 
 # Google
 dagger = "2.51.1" # https://github.com/google/dagger/releases
-gson = "2.10.1" # https://github.com/google/gson/releases
 ksp = "1.9.23-1.0.20" # https://github.com/google/ksp/releases
 
 # Google Play services
@@ -51,7 +50,6 @@ androidx-navigation-compose = { group = "androidx.navigation", name = "navigatio
 androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
-google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 google-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "dagger" }
 google-hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "dagger" }
 kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }

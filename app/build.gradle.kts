@@ -92,7 +92,6 @@ dependencies {
     implementation(libs.androidx.navigation.compose) // NavHostController
     implementation(libs.androidx.room.ktx) // To use Coroutine features
     implementation(libs.androidx.room.runtime)
-    implementation(libs.google.gson) // TODO migrate to kotlinx serialization
     implementation(libs.google.hilt) // Dependency injection
     implementation(libs.kotlinx.coroutines) // Asynchronous tasks
     implementation(libs.kotlinx.serialization) // json
