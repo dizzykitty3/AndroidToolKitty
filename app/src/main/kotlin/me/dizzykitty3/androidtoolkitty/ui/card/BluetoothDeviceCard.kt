@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -43,12 +44,13 @@ fun BluetoothDeviceCard(navController: NavHostController) {
         icon = Icons.Outlined.Bluetooth,
         title = R.string.bluetooth_devices
     ) {
+        val view = LocalView.current
         val context = LocalContext.current
 
         var showResult by remember { mutableStateOf(false) }
 
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }
-        var pairedDevices by remember { mutableStateOf<Set<BluetoothDevice>>(emptySet()) }
+        var pairedDevices by remember { mutableStateOf<List<BluetoothDevice>>(emptyList()) }
 
         var size by remember { mutableIntStateOf(0) }
 
@@ -68,7 +70,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 // Show current device name, paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {
                     @SuppressLint("MissingPermission")
-                    pairedDevices = bluetoothAdapter!!.bondedDevices
+                    pairedDevices = bluetoothAdapter!!.bondedDevices.sortedBy { it.name }
                     size = pairedDevices.size
                     showResult = true
                     return@Button
@@ -76,6 +78,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
                 // When Bluetooth is OFF
                 SnackbarUtil.snackbar(
+                    view,
                     message = R.string.bluetooth_disabled,
                     buttonText = R.string.turn_on_bluetooth,
                     buttonColor = materialColor,

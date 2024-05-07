@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.content.Context
 import android.util.Log
+import android.view.View
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -21,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
@@ -36,8 +38,8 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupTitleTex
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
 
 private const val TAG = "WebpageCard"
@@ -171,6 +173,7 @@ private fun WebpageUrl() {
 
 @Composable
 private fun SocialMediaProfileIUrl() {
+    val view = LocalView.current
     val context = LocalContext.current
 
     var username by remember { mutableStateOf("") }
@@ -209,7 +212,7 @@ private fun SocialMediaProfileIUrl() {
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onVisitProfileButton(username, mPlatformIndex, context) }
+            onDone = { onVisitProfileButton(view, username, mPlatformIndex, context) }
         ),
         trailingIcon = {
             ClearInput(text = username) {
@@ -234,7 +237,7 @@ private fun SocialMediaProfileIUrl() {
     )
 
     TextButton(
-        onClick = { onVisitProfileButton(username, mPlatformIndex, context) }
+        onClick = { onVisitProfileButton(view, username, mPlatformIndex, context) }
     ) {
         Text(text = stringResource(R.string.visit))
 
@@ -260,14 +263,19 @@ private fun onClickVisitUrlButton(url: String, context: Context) {
     Log.d(TAG, "onClickVisitButton")
 }
 
-private fun onVisitProfileButton(username: String, platformIndex: Int, context: Context) {
+private fun onVisitProfileButton(
+    view: View,
+    username: String,
+    platformIndex: Int,
+    context: Context
+) {
     if (username.isBlank()) return
 
     val platform = UrlUtil.Platform.entries.getOrNull(platformIndex) ?: return
 
     if (platform == UrlUtil.Platform.PLATFORM_NOT_ADDED_YET) {
-//        ToastUtil.toast("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
-        ToastUtil.toast(R.string.under_development)
+//        SnackbarUtil.snackbar("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
+        SnackbarUtil.snackbar(view, R.string.under_development)
         return
     }
 

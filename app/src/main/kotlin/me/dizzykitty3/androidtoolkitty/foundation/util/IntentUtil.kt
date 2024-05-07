@@ -10,7 +10,7 @@ import android.net.Uri
 import android.provider.Settings
 import android.util.Log
 import me.dizzykitty3.androidtoolkitty.MainActivity
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.const.GOOGLE_MAPS
 import me.dizzykitty3.androidtoolkitty.foundation.const.GOOGLE_PLAY
@@ -44,12 +44,12 @@ object IntentUtil {
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
-                ToastUtil.toast(app.applicationContext.getString(R.string.google_play_not_installed))
+                ToastUtil.toast(R.string.google_play_not_installed)
                 Log.i(TAG, "Google Play not installed")
             }
 
             GOOGLE_MAPS -> {
-                ToastUtil.toast(app.applicationContext.getString(R.string.google_maps_not_installed))
+                ToastUtil.toast(R.string.google_maps_not_installed)
                 Log.i(TAG, "Google Maps not installed")
                 openAppOnMarket(GOOGLE_MAPS, context)
             }
@@ -92,21 +92,21 @@ object IntentUtil {
             startActivity(intent, context)
             Log.d(TAG, "onOpenSystemSettings: $settingType")
         } catch (e: Exception) {
-            ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
+            ToastUtil.toast(R.string.system_settings_unsupported)
             Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
         }
     }
 
     fun openPermissionPage(context: Context) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        val uri = Uri.fromParts(PACKAGE, app.packageName, null)
+        val uri = Uri.fromParts(PACKAGE, appContext.packageName, null)
         intent.setData(uri)
 
         try {
             startActivity(intent, context)
             Log.d(TAG, "openPermissionPage")
         } catch (e: Exception) {
-            ToastUtil.toast(app.applicationContext.getString(R.string.system_settings_unsupported))
+            ToastUtil.toast(R.string.system_settings_unsupported)
             Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
         }
     }

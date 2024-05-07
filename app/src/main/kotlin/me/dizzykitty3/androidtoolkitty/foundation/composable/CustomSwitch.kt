@@ -2,8 +2,8 @@ package me.dizzykitty3.androidtoolkitty.foundation.composable
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -29,11 +29,16 @@ fun CustomHideCardSettingSwitch(
             settingsSharedPref.saveCardShowedState(cardId, !isChecked)
         }
     ) {
-        Text(text = stringResource(id = id))
-        Spacer(modifier = Modifier.weight(1f))
-        Switch(
-            checked = isChecked,
-            onCheckedChange = onCheckedChange
-        )
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(id = id))
+        }
+        Column {
+            Switch(
+                checked = isChecked,
+                onCheckedChange = onCheckedChange
+            )
+        }
     }
 }

@@ -7,7 +7,7 @@ import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
@@ -27,7 +27,11 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_6
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
+import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 
+/**
+ * @see EditSysSettingCard
+ */
 @Composable
 fun SysSettingCard() {
     CustomCard(
@@ -47,9 +51,9 @@ fun SysSettingCard() {
             Setting(SETTING_7, R.string.open_language_settings),
             Setting(SETTING_8, R.string.open_date_and_time_settings),
             Setting(SETTING_9, R.string.open_developer_options),
-            Setting(SETTING_10, R.string.usage_access_permission),
-            Setting(SETTING_11, R.string.overlay_permission),
-            Setting(SETTING_12, R.string.write_permission)
+            Setting(SETTING_10, R.string.open_usage_access_permission),
+            Setting(SETTING_11, R.string.open_overlay_permission),
+            Setting(SETTING_12, R.string.open_write_permission)
         )
 
         val isShowSetting = remember {
@@ -78,7 +82,21 @@ fun SysSettingCard() {
 
         if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
 
-        settings.subList(0, 6).forEach { setting ->
+        if (isShowSetting[SETTING_1] == true) {
+            CustomSystemSettingsButton(
+                settingType = SETTING_1,
+                buttonText = R.string.open_display_settings
+            )
+        }
+
+        if (isShowSetting[SETTING_2] == true || OsVersion.android12()) {
+            CustomSystemSettingsButton(
+                settingType = SETTING_2,
+                buttonText = R.string.open_auto_rotate_settings
+            )
+        }
+
+        settings.subList(2, 6).forEach { setting ->
             if (isShowSetting[setting.settingType] == true) {
                 CustomSystemSettingsButton(
                     settingType = setting.settingType,
@@ -114,7 +132,7 @@ fun SysSettingCard() {
 }
 
 private fun checkIsAutoTime(): Boolean {
-    val contentResolver: ContentResolver = app.applicationContext.contentResolver
+    val contentResolver: ContentResolver = appContext.contentResolver
     val isAutoTime = Settings.Global.getInt(contentResolver, Settings.Global.AUTO_TIME, 0)
     return isAutoTime == 1
 }

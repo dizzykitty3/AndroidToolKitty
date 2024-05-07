@@ -3,7 +3,7 @@ package me.dizzykitty3.androidtoolkitty.data.room
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 
 // Reference codelab: https://developer.android.com/codelabs/basic-android-kotlin-compose-persisting-data-room
 
@@ -24,7 +24,7 @@ abstract class MainDatabase : RoomDatabase() {
         fun getInstance(): MainDatabase =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: Room.databaseBuilder(
-                    app.applicationContext,
+                    appContext,
                     MainDatabase::class.java, ROOM_DATABASE_NAME
                 ).build().also { INSTANCE = it }
             }

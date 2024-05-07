@@ -3,13 +3,13 @@ package me.dizzykitty3.androidtoolkitty.ui.screen
 import android.app.Activity
 import android.content.Context
 import android.os.Build
+import android.view.View
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowOutward
@@ -32,6 +32,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
@@ -47,6 +48,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupTitleTex
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomScreen
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_3
 import me.dizzykitty3.androidtoolkitty.foundation.const.EDIT_HOME_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.const.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
@@ -59,6 +61,8 @@ import java.util.Locale
 @Composable
 fun SettingsScreen(navController: NavHostController) {
     CustomScreen {
+        val view = LocalView.current
+
         val debuggingOptions = SettingsSharedPref.debuggingOptions
         var tapCount by remember { mutableIntStateOf(0) }
 
@@ -89,10 +93,10 @@ fun SettingsScreen(navController: NavHostController) {
                     if (!debuggingOptions) {
                         tapCount++
                         when (tapCount) {
-                            3 -> SnackbarUtil.snackbar(R.string.two_more_times)
-                            4 -> SnackbarUtil.snackbar(R.string.one_more_time)
+                            3 -> SnackbarUtil.snackbar(view, R.string.two_more_times)
+                            4 -> SnackbarUtil.snackbar(view, R.string.one_more_time)
                             5 -> {
-                                SnackbarUtil.snackbar(R.string.now_a_developer)
+                                SnackbarUtil.snackbar(view, R.string.now_a_developer)
                                 SettingsSharedPref.debuggingOptions = true
                             }
                         }
@@ -126,26 +130,16 @@ fun SettingsScreen(navController: NavHostController) {
 
 @Composable
 private fun GeneralOptions() {
+    val view = LocalView.current
     val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
-
-    val autoClearClipboard = settingsSharedPref.autoClearClipboard
-    var mAutoClearClipboard by remember { mutableStateOf(autoClearClipboard) }
-
-    val oneHandedMode = settingsSharedPref.oneHandedMode
-    var mOneHandedMode by remember { mutableStateOf(oneHandedMode) }
-
-    val dynamicColor = settingsSharedPref.dynamicColor
-    var mDynamicColor by remember { mutableStateOf(dynamicColor) }
-
-    val volumeSlideSteps = settingsSharedPref.sliderIncrement5Percent
-    var mVolumeSlideSteps by remember { mutableStateOf(volumeSlideSteps) }
-
-    val soraShion = settingsSharedPref.soraShion
-    var mSoraShion by remember { mutableStateOf(soraShion) }
-
-    val collapseKeyboard = settingsSharedPref.collapseKeyboard
-    var mCollapseKeyboard by remember { mutableStateOf(collapseKeyboard) }
+    var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
+    val showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
+    var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
+    var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
+    var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
+    var soraShion by remember { mutableStateOf(settingsSharedPref.soraShion) }
+    var collapseKeyboard by remember { mutableStateOf(settingsSharedPref.collapseKeyboard) }
 
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
@@ -154,76 +148,146 @@ private fun GeneralOptions() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
-            mAutoClearClipboard = !mAutoClearClipboard
-            settingsSharedPref.autoClearClipboard = mAutoClearClipboard
+            autoClearClipboard = !autoClearClipboard
+            // Automatically hide Clipboard Card when turning on Clear on Launch feature.
+            if (autoClearClipboard && showClipboardCard) {
+                settingsSharedPref.saveCardShowedState(CARD_3, false)
+                SnackbarUtil.snackbar(
+                    view,
+                    message = R.string.clipboard_card_hidden,
+                    buttonText = R.string.undo,
+                    buttonColor = primary,
+                    buttonClickListener = {
+                        settingsSharedPref.saveCardShowedState(CARD_3, true)
+                    }
+                )
+            }
+            settingsSharedPref.autoClearClipboard = autoClearClipboard
         }
     ) {
-        Text(text = stringResource(R.string.clear_clipboard_on_launch))
-        Spacer(modifier = Modifier.weight(1f))
-        Switch(
-            checked = mAutoClearClipboard,
-            onCheckedChange = {
-                mAutoClearClipboard = it
-                settingsSharedPref.autoClearClipboard = it
-            }
-        )
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(R.string.clear_clipboard_on_launch))
+        }
+        Column {
+            val primaryColor = MaterialTheme.colorScheme.primary.toArgb()
+
+            Switch(
+                checked = autoClearClipboard,
+                onCheckedChange = {
+                    autoClearClipboard = it
+                    if (autoClearClipboard) {
+                        settingsSharedPref.saveCardShowedState(CARD_3, false)
+                        SnackbarUtil.snackbar(
+                            view,
+                            message = R.string.clipboard_card_hidden,
+                            buttonText = R.string.undo,
+                            buttonColor = primaryColor,
+                            buttonClickListener = {
+                                settingsSharedPref.saveCardShowedState(CARD_3, true)
+                            }
+                        )
+                    }
+                    settingsSharedPref.autoClearClipboard = it
+                }
+            )
+        }
     }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
-            mVolumeSlideSteps = !mVolumeSlideSteps
-            settingsSharedPref.sliderIncrement5Percent = mVolumeSlideSteps
+            volumeSlideSteps = !volumeSlideSteps
+            settingsSharedPref.sliderIncrement5Percent = volumeSlideSteps
         }
     ) {
-        Text(text = stringResource(R.string.set_slider_increment_5))
-        Spacer(modifier = Modifier.weight(1f))
-        Switch(
-            checked = mVolumeSlideSteps,
-            onCheckedChange = {
-                mVolumeSlideSteps = it
-                settingsSharedPref.sliderIncrement5Percent = it
-            }
-        )
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(R.string.set_slider_increment_5))
+        }
+        Column {
+            Switch(
+                checked = volumeSlideSteps,
+                onCheckedChange = {
+                    volumeSlideSteps = it
+                    settingsSharedPref.sliderIncrement5Percent = it
+                }
+            )
+        }
     }
 
     if (OsVersion.android12()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                mDynamicColor = !mDynamicColor
-                mSoraShion = false
-                onClickDynamicColorButton(mDynamicColor, primary, context)
+                dynamicColor = !dynamicColor
+                soraShion = false
+                onClickDynamicColorButton(view, dynamicColor, primary, context)
             }
         ) {
-            Text(text = stringResource(R.string.material_you_dynamic_color))
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = mDynamicColor,
-                onCheckedChange = {
-                    mDynamicColor = it
-                    mSoraShion = false
-                    onClickDynamicColorButton(it, primary, context)
-                }
-            )
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(text = stringResource(R.string.material_you_dynamic_color))
+            }
+            Column {
+                Switch(
+                    checked = dynamicColor,
+                    onCheckedChange = {
+                        dynamicColor = it
+                        soraShion = false
+                        onClickDynamicColorButton(view, it, primary, context)
+                    }
+                )
+            }
         }
     }
 
-    if (!mDynamicColor || !OsVersion.android12()) {
+    if (!dynamicColor || !OsVersion.android12()) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
-                mSoraShion = !mSoraShion
-                onClickSoraShionButton(mSoraShion, primary, context)
+                soraShion = !soraShion
+                onClickSoraShionButton(view, soraShion, primary, context)
             }
         ) {
-            Text(text = stringResource(id = R.string.theme_2))
-            Spacer(modifier = Modifier.weight(1f))
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(text = stringResource(id = R.string.theme_2))
+            }
+            Column {
+                Switch(
+                    checked = soraShion,
+                    onCheckedChange = {
+                        soraShion = it
+                        onClickSoraShionButton(view, it, primary, context)
+                    }
+                )
+            }
+        }
+    }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.clickable {
+            oneHandedMode = !oneHandedMode
+            settingsSharedPref.oneHandedMode = oneHandedMode
+        }
+    ) {
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(R.string.one_handed_mode))
+        }
+        Column {
             Switch(
-                checked = mSoraShion,
+                checked = oneHandedMode,
                 onCheckedChange = {
-                    mSoraShion = it
-                    onClickSoraShionButton(it, primary, context)
+                    oneHandedMode = it
+                    settingsSharedPref.oneHandedMode = it
                 }
             )
         }
@@ -232,37 +296,24 @@ private fun GeneralOptions() {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
-            mOneHandedMode = !mOneHandedMode
-            settingsSharedPref.oneHandedMode = mOneHandedMode
+            collapseKeyboard = !collapseKeyboard
+            settingsSharedPref.collapseKeyboard = collapseKeyboard
         }
     ) {
-        Text(text = stringResource(R.string.one_handed_mode))
-        Spacer(modifier = Modifier.weight(1f))
-        Switch(
-            checked = mOneHandedMode,
-            onCheckedChange = {
-                mOneHandedMode = it
-                settingsSharedPref.oneHandedMode = it
-            }
-        )
-    }
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable {
-            mCollapseKeyboard = !mCollapseKeyboard
-            settingsSharedPref.collapseKeyboard = mCollapseKeyboard
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(id = R.string.collapse_keyboard_when_back_to_app))
         }
-    ) {
-        Text(text = stringResource(id = R.string.collapse_keyboard_when_back_to_app))
-        Spacer(modifier = Modifier.weight(1f))
-        Switch(
-            checked = mCollapseKeyboard,
-            onCheckedChange = {
-                mCollapseKeyboard = it
-                settingsSharedPref.collapseKeyboard = it
-            }
-        )
+        Column {
+            Switch(
+                checked = collapseKeyboard,
+                onCheckedChange = {
+                    collapseKeyboard = it
+                    settingsSharedPref.collapseKeyboard = it
+                }
+            )
+        }
     }
 }
 
@@ -286,13 +337,14 @@ private fun CustomizeOptions(navController: NavHostController) {
 
 @Composable
 private fun DebuggingOptions(navController: NavHostController) {
+    val view = LocalView.current
     val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
 
     CustomGroupTitleText(R.string.debugging)
 
-    Text(text = "sdk version = ${Build.VERSION.SDK_INT}")
-    Text(text = "lang code = ${Locale.getDefault()}")
+    Text(text = "Android ${Build.VERSION.RELEASE}, API ${Build.VERSION.SDK_INT}")
+    Text(text = "Language =  ${Locale.getDefault()}")
 
     CustomSpacerPadding()
 
@@ -303,7 +355,7 @@ private fun DebuggingOptions(navController: NavHostController) {
     }
 
     Button(
-        onClick = { ToastUtil.toast(R.string.under_development) }
+        onClick = { SnackbarUtil.snackbar(view, R.string.under_development) }
     ) {
         Text(text = stringResource(id = R.string.check_sp_values))
     }
@@ -331,11 +383,17 @@ private fun DebuggingOptions(navController: NavHostController) {
     )
 }
 
-private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, context: Context) {
+private fun onClickDynamicColorButton(
+    view: View,
+    isDynamicColor: Boolean,
+    color: Int,
+    context: Context
+) {
     SettingsSharedPref.dynamicColor = isDynamicColor
     SettingsSharedPref.soraShion = false
 
     SnackbarUtil.snackbar(
+        view,
         message = R.string.requires_restart_do_it_now,
         buttonText = R.string.restart,
         buttonColor = color,
@@ -343,10 +401,11 @@ private fun onClickDynamicColorButton(isDynamicColor: Boolean, color: Int, conte
     )
 }
 
-private fun onClickSoraShionButton(isSoraShion: Boolean, color: Int, context: Context) {
+private fun onClickSoraShionButton(view: View, isSoraShion: Boolean, color: Int, context: Context) {
     SettingsSharedPref.soraShion = isSoraShion
 
     SnackbarUtil.snackbar(
+        view,
         message = R.string.requires_restart_do_it_now,
         buttonText = R.string.restart,
         buttonColor = color,

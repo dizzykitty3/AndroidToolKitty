@@ -2,19 +2,21 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.widget.Toast
 import androidx.annotation.StringRes
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 
 object ToastUtil {
     /**
      * NOT RECOMMENDED. Use Snackbar instead.
+     * @see (https://developer.android.com/guide/topics/ui/notifiers/toasts#alternatives_to_using_toasts)
      * @see SnackbarUtil.snackbar
      */
     fun toast(message: String) =
-        Toast.makeText(app.applicationContext, message, Toast.LENGTH_SHORT).show()
+        Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show()
 
     /**
      * NOT RECOMMENDED. Use Snackbar instead.
+     * @see (https://developer.android.com/guide/topics/ui/notifiers/toasts#alternatives_to_using_toasts)
      * @see SnackbarUtil.snackbar
      */
-    fun toast(@StringRes message: Int) = toast(app.applicationContext.getString(message))
+    fun toast(@StringRes message: Int) = toast(appContext.getString(message))
 }

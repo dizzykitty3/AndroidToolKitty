@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.app
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 
 object SettingsSharedPref {
     private const val TAG = "SettingsSharedPref"
@@ -28,7 +28,7 @@ object SettingsSharedPref {
     private const val LUCKY_SPINNING_WHEEL_ITEMS = "lucky_spinning_wheel_items"
 
     private val sharedPrefs: SharedPreferences
-        get() = app.applicationContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
     var autoClearClipboard: Boolean
         get() = sharedPrefs.getBoolean(IS_AUTO_CLEAR_CLIPBOARD, false)

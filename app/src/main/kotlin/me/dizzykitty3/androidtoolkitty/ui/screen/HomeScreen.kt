@@ -41,6 +41,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTopPadding
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_1
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_10
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_11
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_12
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_2
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_3
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_4
@@ -56,6 +57,7 @@ import me.dizzykitty3.androidtoolkitty.ui.card.AndroidVersionCard
 import me.dizzykitty3.androidtoolkitty.ui.card.AppMarketCard
 import me.dizzykitty3.androidtoolkitty.ui.card.BluetoothDeviceCard
 import me.dizzykitty3.androidtoolkitty.ui.card.ClipboardCard
+import me.dizzykitty3.androidtoolkitty.ui.card.FontWeightCard
 import me.dizzykitty3.androidtoolkitty.ui.card.Greeting
 import me.dizzykitty3.androidtoolkitty.ui.card.MapsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.SysSettingCard
@@ -66,6 +68,9 @@ import me.dizzykitty3.androidtoolkitty.ui.card.WheelOfFortuneCard
 import me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
 import java.util.Locale
 
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.EditHomeCard
+ */
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
@@ -223,7 +228,8 @@ private fun HomeCards(navController: NavHostController) {
         CARD_8 to settingsSharedPref.getCardShowedState(CARD_8),
         CARD_9 to settingsSharedPref.getCardShowedState(CARD_9),
         CARD_10 to settingsSharedPref.getCardShowedState(CARD_10),
-        CARD_11 to settingsSharedPref.getCardShowedState(CARD_11)
+        CARD_11 to settingsSharedPref.getCardShowedState(CARD_11),
+        CARD_12 to settingsSharedPref.getCardShowedState(CARD_12)
     )
 
     cardMapping.forEach { (cardName, isShow) ->
@@ -240,6 +246,7 @@ private fun HomeCards(navController: NavHostController) {
                 CARD_9 -> AppMarketCard()
                 CARD_10 -> MapsCard()
                 CARD_11 -> AndroidVersionCard()
+                CARD_12 -> FontWeightCard()
             }
         }
     }

@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.util.Log
+import android.view.View
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -15,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
@@ -23,8 +25,8 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 
 private const val TAG = "UnicodeCard"
 
@@ -39,6 +41,8 @@ fun UnicodeCard() {
         icon = Icons.AutoMirrored.Outlined.Notes,
         title = R.string.unicode
     ) {
+        val view = LocalView.current
+
         OutlinedTextField(
             value = unicode,
             onValueChange = {
@@ -63,7 +67,7 @@ fun UnicodeCard() {
             keyboardActions = KeyboardActions(
                 onDone = {
                     if (isUnicodeInput) {
-                        onClickConvertButton(unicode, { characters = it }, true)
+                        onClickConvertButton(view, unicode, { characters = it }, true)
                     }
                 }
             ),
@@ -90,7 +94,7 @@ fun UnicodeCard() {
             keyboardActions = KeyboardActions(
                 onDone = {
                     if (isCharacterInput) {
-                        onClickConvertButton(characters, { unicode = it }, false)
+                        onClickConvertButton(view, characters, { unicode = it }, false)
                     }
                 }
             ),
@@ -104,9 +108,9 @@ fun UnicodeCard() {
         TextButton(
             onClick = {
                 if (isUnicodeInput) {
-                    onClickConvertButton(unicode, { characters = it }, true)
+                    onClickConvertButton(view, unicode, { characters = it }, true)
                 } else if (isCharacterInput) {
-                    onClickConvertButton(characters, { unicode = it }, false)
+                    onClickConvertButton(view, characters, { unicode = it }, false)
                 }
             }
         ) {
@@ -116,6 +120,7 @@ fun UnicodeCard() {
 }
 
 private fun onClickConvertButton(
+    view: View,
     input: String,
     updateResult: (String) -> Unit,
     isUnicodeToChar: Boolean
@@ -129,9 +134,9 @@ private fun onClickConvertButton(
             StringUtil.characterToUnicode(input)
         }
         updateResult(result)
-        ClipboardUtil.copy(result)
+        ClipboardUtil.copy(view, result)
     } catch (e: Exception) {
-        ToastUtil.toast(e.message ?: "Unknown error occurred")
+        SnackbarUtil.snackbar(view, e.message ?: "Unknown error occurred")
     }
     Log.d(TAG, "onClickConvertButton")
 }
