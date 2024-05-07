@@ -139,8 +139,8 @@
     <string name="google_play_not_installed">Google Play is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>
 
-    <!-- Home screen: android versions -->
-    <string name="android_versions">Android versions</string>
+    <!-- Home screen: android version history -->
+    <string name="android_versions">Android version history</string>
     <string name="android_15">Android 15</string>
     <string name="android_14">Android 14</string>
     <string name="android_13">Android 13</string>
