@@ -360,6 +360,12 @@ private fun DebuggingOptions(navController: NavHostController) {
         Text(text = stringResource(id = R.string.check_sp_values))
     }
 
+    Button(
+        onClick = { IntentUtil.restartApp(context) }
+    ) {
+        Text(text = stringResource(id = R.string.restart))
+    }
+
     CustomAlertDialogButton(
         buttonText = stringResource(R.string.erase_all_app_data),
         dialogMessageTitle = stringResource(R.string.warning),
