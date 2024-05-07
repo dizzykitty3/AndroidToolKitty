@@ -134,7 +134,7 @@ private fun GeneralOptions() {
     val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
-    val showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
+    var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
     var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
@@ -151,6 +151,7 @@ private fun GeneralOptions() {
             autoClearClipboard = !autoClearClipboard
             // Automatically hide Clipboard Card when turning on Clear on Launch feature.
             if (autoClearClipboard && showClipboardCard) {
+                showClipboardCard = false
                 settingsSharedPref.saveCardShowedState(CARD_3, false)
                 SnackbarUtil.snackbar(
                     view,
