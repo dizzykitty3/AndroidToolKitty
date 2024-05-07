@@ -27,6 +27,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_6
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
+import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 
 /**
  * @see EditSysSettingCard
@@ -81,7 +82,21 @@ fun SysSettingCard() {
 
         if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
 
-        settings.subList(0, 6).forEach { setting ->
+        if (isShowSetting[SETTING_1] == true) {
+            CustomSystemSettingsButton(
+                settingType = SETTING_1,
+                buttonText = R.string.open_display_settings
+            )
+        }
+
+        if (isShowSetting[SETTING_2] == true || OsVersion.android12()) {
+            CustomSystemSettingsButton(
+                settingType = SETTING_2,
+                buttonText = R.string.open_auto_rotate_settings
+            )
+        }
+
+        settings.subList(2, 6).forEach { setting ->
             if (isShowSetting[setting.settingType] == true) {
                 CustomSystemSettingsButton(
                     settingType = setting.settingType,
