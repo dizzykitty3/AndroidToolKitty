@@ -17,10 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomItalicText
 
+@Preview
 @Composable
 fun AndroidVersionCard() {
     CustomCard(

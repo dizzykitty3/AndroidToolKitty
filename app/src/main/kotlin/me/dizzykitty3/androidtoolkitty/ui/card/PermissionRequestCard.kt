@@ -14,6 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupDivider
@@ -22,6 +23,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 
+@Preview
 @Composable
 fun PermissionRequestCard() {
     CustomCard(
