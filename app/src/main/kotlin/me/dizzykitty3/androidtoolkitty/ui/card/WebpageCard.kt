@@ -155,7 +155,7 @@ private fun WebpageUrl() {
             Text(text = HTTPS)
         },
         suffix = {
-            Text(text = UrlUtil.urlSuffix(url))
+            Text(text = UrlUtil.suffixOf(url))
         }
     )
 
@@ -224,9 +224,9 @@ private fun SocialMediaProfileIUrl() {
                 val platform = UrlUtil.Platform.entries[mPlatformIndex]
                 Text(
                     text = if (platform != UrlUtil.Platform.FANBOX)
-                        "${UrlUtil.profilePrefix(platform)}$username"
+                        "${UrlUtil.prefixOf(platform)}$username"
                     else
-                        "$username${UrlUtil.profilePrefix(platform)}",
+                        "$username${UrlUtil.prefixOf(platform)}",
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )

@@ -43,9 +43,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             } else {
-                SoraShionTheme(
-                    dynamicColor = SettingsSharedPref.dynamicColor
-                ) {
+                SoraShionTheme {
                     Scaffold(modifier = Modifier.fillMaxSize()) {
                         AppNavigationHost()
                     }

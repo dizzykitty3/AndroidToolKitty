@@ -445,7 +445,7 @@ private fun DeveloperProfileLink(
         Row(
             modifier = Modifier.clickable {
                 IntentUtil.openUrl(
-                    "${UrlUtil.profilePrefix(UrlUtil.Platform.GITHUB)}$name",
+                    "${UrlUtil.prefixOf(UrlUtil.Platform.GITHUB)}$name",
                     context
                 )
             }
