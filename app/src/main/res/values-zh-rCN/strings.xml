@@ -226,4 +226,5 @@
     <string name="steam_user_custom_url">Steam (用户自定义 URL)</string>
     <string name="plurk">Plurk</string>
     <string name="twitch">Twitch</string>
+    <string name="already_developer">已经启用了调试选项</string>
 </resources>

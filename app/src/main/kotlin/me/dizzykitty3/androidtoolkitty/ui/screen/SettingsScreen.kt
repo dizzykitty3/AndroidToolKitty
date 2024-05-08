@@ -100,6 +100,8 @@ fun SettingsScreen(navController: NavHostController) {
                                 SettingsSharedPref.debuggingOptions = true
                             }
                         }
+                    } else {
+                        SnackbarUtil.snackbar(view, R.string.already_developer)
                     }
                 }
             ) {
