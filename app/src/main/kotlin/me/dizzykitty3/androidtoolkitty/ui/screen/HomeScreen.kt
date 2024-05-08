@@ -38,6 +38,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomOneHandedMode
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTip
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTopPadding
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_0
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_1
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_10
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_11
@@ -61,6 +62,7 @@ import me.dizzykitty3.androidtoolkitty.ui.card.FontWeightCard
 import me.dizzykitty3.androidtoolkitty.ui.card.Greeting
 import me.dizzykitty3.androidtoolkitty.ui.card.MapsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.SysSettingCard
+import me.dizzykitty3.androidtoolkitty.ui.card.TestCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UnicodeCard
 import me.dizzykitty3.androidtoolkitty.ui.card.VolumeCard
 import me.dizzykitty3.androidtoolkitty.ui.card.WebpageCard
@@ -218,6 +220,7 @@ private fun HomeCards(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
 
     val cardMapping = mapOf(
+        CARD_0 to true,
         CARD_1 to settingsSharedPref.getCardShowedState(CARD_1),
         CARD_2 to settingsSharedPref.getCardShowedState(CARD_2),
         CARD_3 to settingsSharedPref.getCardShowedState(CARD_3),
@@ -235,6 +238,7 @@ private fun HomeCards(navController: NavHostController) {
     cardMapping.forEach { (cardName, isShow) ->
         if (isShow) {
             when (cardName) {
+                CARD_0 -> TestCard()
                 CARD_1 -> YearProgressCard()
                 CARD_2 -> VolumeCard()
                 CARD_3 -> ClipboardCard()

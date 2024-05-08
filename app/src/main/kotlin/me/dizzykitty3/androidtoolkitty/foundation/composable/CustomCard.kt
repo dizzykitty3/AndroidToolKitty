@@ -29,6 +29,19 @@ fun CustomCard(
     @StringRes title: Int,
     content: @Composable () -> Unit
 ) {
+    CustomCard(
+        icon = icon,
+        title = stringResource(id = title),
+        content = content
+    )
+}
+
+@Composable
+fun CustomCard(
+    icon: ImageVector? = null,
+    title: String,
+    content: @Composable () -> Unit
+) {
     ElevatedCard(
         modifier = Modifier.fillMaxWidth()
     ) {
@@ -38,19 +51,19 @@ fun CustomCard(
             modifier = cardPadding
         ) {
             if (icon == null) {
-                CardTitle(id = title)
+                CardTitle(title = title)
                 CardContent { content() }
             } else {
                 Row {
                     Icon(
                         imageVector = icon,
-                        contentDescription = stringResource(id = title),
+                        contentDescription = title,
                         modifier = Modifier.align(
                             alignment = Alignment.CenterVertically
                         )
                     )
                     CustomIconAndTextPadding()
-                    CardTitle(id = title)
+                    CardTitle(title = title)
                 }
                 CardContent { content() }
             }
@@ -61,11 +74,11 @@ fun CustomCard(
 
 @Composable
 private fun CardTitle(
-    @StringRes id: Int
+    title: String
 ) {
     Text(
         modifier = Modifier.fillMaxWidth(),
-        text = stringResource(id = id),
+        text = title,
         style = TextStyle.Default.copy(
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Normal,

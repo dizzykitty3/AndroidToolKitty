@@ -24,6 +24,8 @@ const val EDIT_HOME_SCREEN = "EditHomeScreen"
  */
 const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
 
+const val CARD_0 = "card_test"
+
 /**
  * @see me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
  */
