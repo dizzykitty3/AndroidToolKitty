@@ -1,10 +1,16 @@
 package me.dizzykitty3.androidtoolkitty.ui.screen
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.BatteryStd
@@ -26,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -73,6 +80,18 @@ import java.util.Locale
  */
 @Composable
 fun HomeScreen(navController: NavHostController) {
+    val configuration = LocalConfiguration.current
+    val screenWidth = configuration.screenWidthDp
+
+    if (screenWidth < 600) {  // 假设宽度小于600dp为手机布局
+        MobileLayout(navController)
+    } else {
+        TabletLayout(navController)
+    }
+}
+
+@Composable
+fun MobileLayout(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
     val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
 
@@ -102,6 +121,28 @@ fun HomeScreen(navController: NavHostController) {
         if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) item { NoTranslationTip(locale) }
         item { HomeCards(navController) }
         item { CustomBottomPadding() }
+    }
+}
+
+@Composable
+fun TabletLayout(navController: NavHostController) {
+    val cardPadding = dimensionResource(id = R.dimen.padding_card_content_large)
+
+    Column(modifier = Modifier.padding(cardPadding)) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            // 使用 Box 控制 Greeting 的布局
+            Box(modifier = Modifier.weight(1f)) {
+                Greeting()
+            }
+
+            // 使用 Box 控制 BatteryNetworkAndSetting 的布局
+            Box(modifier = Modifier.weight(1f)) {
+                BatteryNetworkAndSetting(navController)
+            }
+        }
+
+        // 使用两列布局显示卡片
+        TwoColumnHomeCards(navController)
     }
 }
 
@@ -247,6 +288,52 @@ private fun HomeCards(navController: NavHostController) {
                 CARD_10 -> MapsCard()
                 CARD_11 -> AndroidVersionCard()
                 CARD_12 -> FontWeightCard()
+            }
+        }
+    }
+}
+
+@Composable
+private fun TwoColumnHomeCards(navController: NavHostController) {
+    val settingsSharedPref = remember { SettingsSharedPref }
+    val cardPadding = dimensionResource(id = R.dimen.padding_card_content_large)
+
+    val cardMapping = mapOf(
+        CARD_1 to settingsSharedPref.getCardShowedState(CARD_1),
+        CARD_2 to settingsSharedPref.getCardShowedState(CARD_2),
+        CARD_3 to settingsSharedPref.getCardShowedState(CARD_3),
+        CARD_4 to settingsSharedPref.getCardShowedState(CARD_4),
+        CARD_5 to settingsSharedPref.getCardShowedState(CARD_5),
+        CARD_6 to settingsSharedPref.getCardShowedState(CARD_6),
+        CARD_7 to settingsSharedPref.getCardShowedState(CARD_7),
+        CARD_8 to settingsSharedPref.getCardShowedState(CARD_8),
+        CARD_9 to settingsSharedPref.getCardShowedState(CARD_9),
+        CARD_10 to settingsSharedPref.getCardShowedState(CARD_10),
+        CARD_11 to settingsSharedPref.getCardShowedState(CARD_11),
+        CARD_12 to settingsSharedPref.getCardShowedState(CARD_12)
+    )
+
+    LazyVerticalStaggeredGrid(
+        columns = StaggeredGridCells.Fixed(2),
+        verticalItemSpacing = cardPadding,
+        horizontalArrangement = Arrangement.spacedBy(cardPadding),
+    ) {
+        items(cardMapping.entries.toList()) { entry ->
+            if (entry.value) {
+                when (entry.key) {
+                    CARD_1 -> YearProgressCard()
+                    CARD_2 -> VolumeCard()
+                    CARD_3 -> ClipboardCard()
+                    CARD_4 -> WebpageCard()
+                    CARD_5 -> SysSettingCard()
+                    CARD_6 -> WheelOfFortuneCard()
+                    CARD_7 -> BluetoothDeviceCard(navController)
+                    CARD_8 -> UnicodeCard()
+                    CARD_9 -> AppMarketCard()
+                    CARD_10 -> MapsCard()
+                    CARD_11 -> AndroidVersionCard()
+                    CARD_12 -> FontWeightCard()
+                }
             }
         }
     }
