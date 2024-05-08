@@ -89,7 +89,7 @@ fun SysSettingCard() {
             )
         }
 
-        if (isShowSetting[SETTING_2] == true || OsVersion.android12()) {
+        if (isShowSetting[SETTING_2] == true && OsVersion.android12()) {
             CustomSystemSettingsButton(
                 settingType = SETTING_2,
                 buttonText = R.string.open_auto_rotate_settings
