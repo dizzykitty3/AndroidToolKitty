@@ -366,7 +366,7 @@ private fun DebuggingOptions(navController: NavHostController) {
     Button(
         onClick = { IntentUtil.restartApp(context) }
     ) {
-        Text(text = stringResource(id = R.string.restart))
+        Text(text = stringResource(id = R.string.restart_app))
     }
 
     CustomAlertDialogButton(
