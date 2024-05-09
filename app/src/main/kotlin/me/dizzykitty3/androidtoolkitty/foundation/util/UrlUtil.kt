@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.util.Log
+import androidx.annotation.StringRes
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.const.BG
 import me.dizzykitty3.androidtoolkitty.foundation.const.CN
@@ -108,9 +109,10 @@ object UrlUtil {
         return suffixMap[StringUtil.dropSpaces(urlInput)] ?: COM
     }
 
-    enum class Platform(val prefix: String, val nameResId: Int) {
+    enum class Platform(val prefix: String, @StringRes val nameResId: Int) {
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
+        BOOTH(".booth.pm", R.string.booth), // e.g. username.booth.pm
         FACEBOOK("facebook.com/", R.string.facebook),
         FANBOX(".fanbox.cc", R.string.fanbox), // e.g. username.fanbox.cc
         FANTIA("fantia.jp/", R.string.fantia),

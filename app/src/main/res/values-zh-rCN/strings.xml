@@ -228,4 +228,5 @@
     <string name="twitch">Twitch</string>
     <string name="already_developer">已经启用了调试选项</string>
     <string name="restart_app">重启 ToolKitty</string>
+    <string name="booth">BOOTH</string>
 </resources>

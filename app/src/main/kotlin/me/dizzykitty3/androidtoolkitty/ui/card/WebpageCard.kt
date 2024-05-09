@@ -223,10 +223,10 @@ private fun SocialMediaProfileIUrl() {
             if (mPlatformIndex != UrlUtil.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
                 val platform = UrlUtil.Platform.entries[mPlatformIndex]
                 Text(
-                    text = if (platform != UrlUtil.Platform.FANBOX)
-                        "${UrlUtil.prefixOf(platform)}$username"
+                    text = if (platform == UrlUtil.Platform.FANBOX || platform == UrlUtil.Platform.BOOTH)
+                        "$username${UrlUtil.prefixOf(platform)}"
                     else
-                        "$username${UrlUtil.prefixOf(platform)}",
+                        "${UrlUtil.prefixOf(platform)}$username",
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
@@ -281,7 +281,7 @@ private fun onVisitProfileButton(
 
     val prefix = platform.prefix
     val url =
-        if (platform == UrlUtil.Platform.FANBOX)
+        if (platform == UrlUtil.Platform.FANBOX || platform == UrlUtil.Platform.BOOTH)
             "${StringUtil.dropSpaces(username)}$prefix"
         else
             "$prefix${StringUtil.dropSpaces(username)}"
