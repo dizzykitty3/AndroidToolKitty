@@ -66,7 +66,7 @@
     <plurals name="days_remaining">
         <item quantity="other">剩余 %1$d 天</item>
     </plurals>
-    <string name="all_help_welcomed">欢迎建议意见和PR！</string>
+    <string name="all_help_welcomed">欢迎建议意见和 PR！</string>
     <string name="pixiv_artwork_id">pixiv (作品 ID)</string>
     <string name="pixiv_user_id">pixiv (用户 ID)</string>
     <string name="v2ex">V2EX</string>
