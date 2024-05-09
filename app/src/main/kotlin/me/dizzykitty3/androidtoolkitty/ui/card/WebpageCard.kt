@@ -2,7 +2,8 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.content.Context
 import android.util.Log
-import android.view.View
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -27,6 +28,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
@@ -173,7 +175,6 @@ private fun WebpageUrl() {
 
 @Composable
 private fun SocialMediaProfileIUrl() {
-    val view = LocalView.current
     val context = LocalContext.current
 
     var username by remember { mutableStateOf("") }
@@ -188,31 +189,19 @@ private fun SocialMediaProfileIUrl() {
     CustomDropdownMenu(
         items = platformList,
         onItemSelected = { mPlatformIndex = it },
-        label = {
-            if (mPlatformIndex != UrlUtil.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                Text(stringResource(R.string.platform))
-            } else {
-                Text("")
-            }
-        }
+        label = { Text(stringResource(R.string.platform)) }
     )
 
     OutlinedTextField(
         value = username,
         onValueChange = { username = it },
-        label = {
-            if (mPlatformIndex != UrlUtil.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                Text(stringResource(R.string.username))
-            } else {
-                Text(stringResource(R.string.platform))
-            }
-        },
+        label = { Text(stringResource(R.string.username)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onVisitProfileButton(view, username, mPlatformIndex, context) }
+            onDone = { onVisitProfileButton(username, mPlatformIndex, context) }
         ),
         trailingIcon = {
             ClearInput(text = username) {
@@ -220,33 +209,50 @@ private fun SocialMediaProfileIUrl() {
             }
         },
         supportingText = {
-            if (mPlatformIndex != UrlUtil.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                val platform = UrlUtil.Platform.entries[mPlatformIndex]
-                Text(
-                    text = if (platform == UrlUtil.Platform.FANBOX || platform == UrlUtil.Platform.BOOTH)
-                        "$username${UrlUtil.prefixOf(platform)}"
-                    else
-                        "${UrlUtil.prefixOf(platform)}$username",
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
-                )
-            } else {
-                Text(stringResource(R.string.submit_the_platform_you_need))
-            }
+            val platform = UrlUtil.Platform.entries[mPlatformIndex]
+            Text(
+                text = if (platform == UrlUtil.Platform.FANBOX || platform == UrlUtil.Platform.BOOTH)
+                    "$username${UrlUtil.prefixOf(platform)}"
+                else
+                    "${UrlUtil.prefixOf(platform)}$username",
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
+            )
         }
     )
 
-    TextButton(
-        onClick = { onVisitProfileButton(view, username, mPlatformIndex, context) }
+    Row(
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = stringResource(R.string.visit))
+        TextButton(
+            onClick = { onVisitProfileButton(username, mPlatformIndex, context) }
+        ) {
+            Text(text = stringResource(R.string.visit))
 
-        Icon(
-            imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = null,
-            modifier = Modifier.align(Alignment.CenterVertically)
-        )
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+
+        NoPlatformYouNeedHere()
     }
+}
+
+@Composable
+private fun NoPlatformYouNeedHere() {
+    val view = LocalView.current
+
+    Text(
+        text = buildAnnotatedString {
+            CustomItalicText(stringResource(id = R.string.platform_not_added_yet))
+        },
+        textDecoration = TextDecoration.Underline,
+        modifier = Modifier.clickable {
+//                SnackbarUtil.snackbar(view, R.string.uploaded)
+            SnackbarUtil.snackbar(view, R.string.under_development)
+        })
 }
 
 private fun onClickSearchButton(query: String, context: Context) {
@@ -264,7 +270,6 @@ private fun onClickVisitUrlButton(url: String, context: Context) {
 }
 
 private fun onVisitProfileButton(
-    view: View,
     username: String,
     platformIndex: Int,
     context: Context
@@ -272,12 +277,6 @@ private fun onVisitProfileButton(
     if (username.isBlank()) return
 
     val platform = UrlUtil.Platform.entries.getOrNull(platformIndex) ?: return
-
-    if (platform == UrlUtil.Platform.PLATFORM_NOT_ADDED_YET) {
-//        SnackbarUtil.snackbar("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
-        SnackbarUtil.snackbar(view, R.string.under_development)
-        return
-    }
 
     val prefix = platform.prefix
     val url =
