@@ -30,6 +30,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomBottomPadding
@@ -219,8 +220,8 @@ private fun NoTranslationTip(locale: String) {
 private fun HomeCards(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
 
-    val cardMapping = mapOf(
-        CARD_0 to true,
+    @Suppress("KotlinConstantConditions") val cardMapping = mapOf(
+        CARD_0 to (BuildConfig.BUILD_TYPE == "debug"),
         CARD_1 to settingsSharedPref.getCardShowedState(CARD_1),
         CARD_2 to settingsSharedPref.getCardShowedState(CARD_2),
         CARD_3 to settingsSharedPref.getCardShowedState(CARD_3),
@@ -238,7 +239,7 @@ private fun HomeCards(navController: NavHostController) {
     cardMapping.forEach { (cardName, isShow) ->
         if (isShow) {
             when (cardName) {
-                CARD_0 -> TestCard()
+                CARD_0 -> TestCard(navController)
                 CARD_1 -> YearProgressCard()
                 CARD_2 -> VolumeCard()
                 CARD_3 -> ClipboardCard()

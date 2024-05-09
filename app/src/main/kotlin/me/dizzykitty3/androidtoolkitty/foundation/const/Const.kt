@@ -24,6 +24,14 @@ const val EDIT_HOME_SCREEN = "EditHomeScreen"
  */
 const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
 
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.screen.QrCodeGeneratorScreen
+ */
+const val QR_CODE_GENERATOR_SCREEN = "QrCodeGeneratorScreen"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.TestCard
+ */
 const val CARD_0 = "card_test"
 
 /**
