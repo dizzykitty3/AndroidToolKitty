@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.composable.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
@@ -136,7 +137,8 @@ private fun onClickConvertButton(
             StringUtil.characterToUnicode(input)
         }
         updateResult(result)
-        ClipboardUtil.copy(view, result)
+        ClipboardUtil.copy(result)
+        SnackbarUtil.snackbar(view, "$result ${appContext.getString(R.string.copied)}")
     } catch (e: Exception) {
         SnackbarUtil.snackbar(view, e.message ?: "Unknown error occurred")
     }
