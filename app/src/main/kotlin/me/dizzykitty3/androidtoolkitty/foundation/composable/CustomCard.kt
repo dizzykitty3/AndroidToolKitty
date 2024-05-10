@@ -9,12 +9,9 @@ import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -97,14 +94,14 @@ private fun CardContent(
         CustomSpacerPadding()
         CustomSpacerPadding()
         Column {
-            val lifecycleOwner = LocalLifecycleOwner.current
-            val focusManager = LocalFocusManager.current
-
-            DisposableEffect(key1 = lifecycleOwner) {
-                onDispose {
-                    focusManager.clearFocus()
-                }
-            }
+//            val lifecycleOwner = LocalLifecycleOwner.current
+//            val focusManager = LocalFocusManager.current
+//
+//            DisposableEffect(key1 = lifecycleOwner) {
+//                onDispose {
+//                    focusManager.clearFocus()
+//                }
+//            }
             content()
         }
     }
