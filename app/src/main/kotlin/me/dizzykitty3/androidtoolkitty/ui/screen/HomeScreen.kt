@@ -257,38 +257,11 @@ private fun NoTranslationTip(locale: String) {
 @Composable
 private fun HomeCards(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
-
-    val cardMapping = mapOf(
-        CARD_1 to settingsSharedPref.getCardShowedState(CARD_1),
-        CARD_2 to settingsSharedPref.getCardShowedState(CARD_2),
-        CARD_3 to settingsSharedPref.getCardShowedState(CARD_3),
-        CARD_4 to settingsSharedPref.getCardShowedState(CARD_4),
-        CARD_5 to settingsSharedPref.getCardShowedState(CARD_5),
-        CARD_6 to settingsSharedPref.getCardShowedState(CARD_6),
-        CARD_7 to settingsSharedPref.getCardShowedState(CARD_7),
-        CARD_8 to settingsSharedPref.getCardShowedState(CARD_8),
-        CARD_9 to settingsSharedPref.getCardShowedState(CARD_9),
-        CARD_10 to settingsSharedPref.getCardShowedState(CARD_10),
-        CARD_11 to settingsSharedPref.getCardShowedState(CARD_11),
-        CARD_12 to settingsSharedPref.getCardShowedState(CARD_12)
-    )
+    val cardMapping = getCardMapping(settingsSharedPref)
 
     cardMapping.forEach { (cardName, isShow) ->
         if (isShow) {
-            when (cardName) {
-                CARD_1 -> YearProgressCard()
-                CARD_2 -> VolumeCard()
-                CARD_3 -> ClipboardCard()
-                CARD_4 -> WebpageCard()
-                CARD_5 -> SysSettingCard()
-                CARD_6 -> WheelOfFortuneCard()
-                CARD_7 -> BluetoothDeviceCard(navController)
-                CARD_8 -> UnicodeCard()
-                CARD_9 -> AppMarketCard()
-                CARD_10 -> MapsCard()
-                CARD_11 -> AndroidVersionCard()
-                CARD_12 -> FontWeightCard()
-            }
+            CardContent(cardName, navController)
         }
     }
 }
@@ -297,44 +270,44 @@ private fun HomeCards(navController: NavHostController) {
 private fun TwoColumnHomeCards(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
     val cardPadding = dimensionResource(id = R.dimen.padding_card_content_large)
-
-    val cardMapping = mapOf(
-        CARD_1 to settingsSharedPref.getCardShowedState(CARD_1),
-        CARD_2 to settingsSharedPref.getCardShowedState(CARD_2),
-        CARD_3 to settingsSharedPref.getCardShowedState(CARD_3),
-        CARD_4 to settingsSharedPref.getCardShowedState(CARD_4),
-        CARD_5 to settingsSharedPref.getCardShowedState(CARD_5),
-        CARD_6 to settingsSharedPref.getCardShowedState(CARD_6),
-        CARD_7 to settingsSharedPref.getCardShowedState(CARD_7),
-        CARD_8 to settingsSharedPref.getCardShowedState(CARD_8),
-        CARD_9 to settingsSharedPref.getCardShowedState(CARD_9),
-        CARD_10 to settingsSharedPref.getCardShowedState(CARD_10),
-        CARD_11 to settingsSharedPref.getCardShowedState(CARD_11),
-        CARD_12 to settingsSharedPref.getCardShowedState(CARD_12)
-    )
+    val cardMapping = getCardMapping(settingsSharedPref)
 
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
         verticalItemSpacing = cardPadding,
         horizontalArrangement = Arrangement.spacedBy(cardPadding),
     ) {
-        items(cardMapping.entries.toList()) { entry ->
-            if (entry.value) {
-                when (entry.key) {
-                    CARD_1 -> YearProgressCard()
-                    CARD_2 -> VolumeCard()
-                    CARD_3 -> ClipboardCard()
-                    CARD_4 -> WebpageCard()
-                    CARD_5 -> SysSettingCard()
-                    CARD_6 -> WheelOfFortuneCard()
-                    CARD_7 -> BluetoothDeviceCard(navController)
-                    CARD_8 -> UnicodeCard()
-                    CARD_9 -> AppMarketCard()
-                    CARD_10 -> MapsCard()
-                    CARD_11 -> AndroidVersionCard()
-                    CARD_12 -> FontWeightCard()
-                }
+        items(cardMapping.toList()) { (cardName, isShow) ->
+            if (isShow) {
+                CardContent(cardName, navController)
             }
         }
+    }
+}
+
+@Composable
+private fun getCardMapping(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> {
+    return listOf(
+        CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
+        CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
+        CARD_11, CARD_12
+    ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
+}
+
+@Composable
+private fun CardContent(cardName: String, navController: NavHostController) {
+    when (cardName) {
+        CARD_1 -> YearProgressCard()
+        CARD_2 -> VolumeCard()
+        CARD_3 -> ClipboardCard()
+        CARD_4 -> WebpageCard()
+        CARD_5 -> SysSettingCard()
+        CARD_6 -> WheelOfFortuneCard()
+        CARD_7 -> BluetoothDeviceCard(navController)
+        CARD_8 -> UnicodeCard()
+        CARD_9 -> AppMarketCard()
+        CARD_10 -> MapsCard()
+        CARD_11 -> AndroidVersionCard()
+        CARD_12 -> FontWeightCard()
     }
 }
