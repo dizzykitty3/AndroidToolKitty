@@ -30,7 +30,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomScreen
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
 import androidx.compose.ui.Alignment.Companion as Alignment1
 
-@Preview
+@Preview(showSystemUi = true)
 @Composable
 fun QrCodeGeneratorScreen() {
     CustomScreen {

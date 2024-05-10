@@ -5,9 +5,18 @@ import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.const.QR_CODE_GENERATOR_SCREEN
+
+@Preview
+@Composable
+private fun Preview() {
+    val navController = rememberNavController()
+    TestCard(navController)
+}
 
 @Composable
 fun TestCard(navController: NavHostController) {
@@ -47,5 +56,11 @@ fun TestCard(navController: NavHostController) {
         ) {
             Text(text = "to-do list")
         }
+        Text(text = "To-do list")
+        Text(text = "SP -> DataStore")
+        Text(text = "Date countdown feature")
+        Text(text = "Share to clipboard feature")
+        Text(text = "Add license info")
+        Text(text = "Add @Preview")
     }
 }
