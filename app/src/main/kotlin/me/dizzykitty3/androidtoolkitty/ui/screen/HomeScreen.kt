@@ -1,7 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.screen
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -292,19 +292,20 @@ private fun TwoColumnHomeCards(navController: NavHostController) {
 @Suppress("KotlinConstantConditions")
 @Composable
 private fun getCardMapping(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> {
-     val debugBuild =  BuildConfig.BUILD_TYPE == "debug"
-    return if (debugBuild) {listOf(
-        CARD_0,
-        CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
-        CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
-        CARD_11, CARD_12
-    ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
-     } else {
-         listOf(
-             CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
-             CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
-             CARD_11, CARD_12
-         ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
+    val debugBuild = BuildConfig.BUILD_TYPE == "debug"
+    return if (debugBuild) {
+        listOf(
+            CARD_0,
+            CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
+            CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
+            CARD_11, CARD_12
+        ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
+    } else {
+        listOf(
+            CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
+            CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
+            CARD_11, CARD_12
+        ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
     }
 }
 
