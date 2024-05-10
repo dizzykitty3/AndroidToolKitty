@@ -99,7 +99,6 @@
     <string name="open_developer_options">Developer options</string>
     <string name="open_caption_preferences">Caption preferences</string>
     <string name="set_time_automatically_is_off_tip">Set Time Automatically is now OFF. You may experience some unexpected behavior while using your phone.</string>
-    <string name="system_settings_unsupported">The custom ROM has removed this feature</string>
     <string name="open_usage_access_permission">Usage access</string>
     <string name="open_overlay_permission">Display over other apps</string>
     <string name="open_write_permission">Modify system settings</string>
