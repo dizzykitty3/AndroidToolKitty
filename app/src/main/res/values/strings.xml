@@ -80,6 +80,12 @@
     <string name="twitch">Twitch</string>
     <string name="booth">BOOTH</string>
     <string name="platform_example_url">Example URL (optional)</string>
+    <string name="artstation">ArtStation</string>
+    <string name="tiktok">TikTok</string>
+    <string name="telegram">Telegram</string>
+    <string name="snapchat">Snacpchat</string>
+    <string name="threads">Threads</string>
+    <string name="paypal">PayPal</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>
