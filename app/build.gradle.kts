@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.application)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kapt)
     alias(libs.plugins.kotlin)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
@@ -96,6 +97,9 @@ dependencies {
     implementation(libs.kotlinx.coroutines) // Asynchronous tasks
     implementation(libs.kotlinx.serialization) // json
 
+    // Dagger’s KSP support is currently in alpha.
+    // https://kotlinlang.org/docs/ksp-overview.html#supported-libraries
+    kapt(libs.google.hilt.compiler)
+
     ksp(libs.androidx.room.compiler)
-    ksp(libs.google.hilt.compiler)
 }
