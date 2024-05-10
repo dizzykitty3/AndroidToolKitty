@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.content.ContentResolver
 import android.provider.Settings
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
@@ -137,4 +138,4 @@ private fun checkIsAutoTime(): Boolean {
     return isAutoTime == 1
 }
 
-private data class Setting(val settingType: String, val buttonText: Int)
+private data class Setting(val settingType: String, @StringRes val buttonText: Int)

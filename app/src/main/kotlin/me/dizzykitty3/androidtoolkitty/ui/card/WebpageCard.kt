@@ -215,7 +215,7 @@ private fun SocialMediaProfileIUrl() {
         supportingText = {
             val platform = UrlUtil.Platform.entries[mPlatformIndex]
             Text(
-                text = if (platform == UrlUtil.Platform.FANBOX || platform == UrlUtil.Platform.BOOTH)
+                text = if (needAlterUrlStyle(platform))
                     "$username${UrlUtil.prefixOf(platform)}"
                 else
                     "${UrlUtil.prefixOf(platform)}$username",
@@ -342,10 +342,13 @@ private fun onVisitProfileButton(
 
     val prefix = platform.prefix
     val url =
-        if (platform == UrlUtil.Platform.FANBOX || platform == UrlUtil.Platform.BOOTH)
+        if (needAlterUrlStyle(platform))
             "${StringUtil.dropSpaces(username)}$prefix"
         else
             "$prefix${StringUtil.dropSpaces(username)}"
     IntentUtil.openUrl(url, context)
     Log.d(TAG, "onVisitProfile")
 }
+
+private fun needAlterUrlStyle(platform: UrlUtil.Platform): Boolean =
+    platform == UrlUtil.Platform.FANBOX || platform == UrlUtil.Platform.BOOTH

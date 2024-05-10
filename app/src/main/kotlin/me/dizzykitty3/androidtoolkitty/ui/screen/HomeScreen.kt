@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.screen
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -195,7 +196,7 @@ private fun NetworkState() {
 @Composable
 private fun NetworkStateIcon(
     imageVector: ImageVector,
-    id: Int
+    @StringRes id: Int
 ) {
     Icon(
         imageVector = imageVector,
