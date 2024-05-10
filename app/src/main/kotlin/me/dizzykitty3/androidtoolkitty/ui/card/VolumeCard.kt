@@ -175,7 +175,7 @@ fun VolumeCard() {
                                     optionLabel = it
                                     mHaveCustomLabel = true
                                 },
-                                label = { Text(text = stringResource(R.string.label)) },
+                                label = { Text(text = stringResource(R.string.label_optional)) },
                                 modifier = Modifier.fillMaxWidth(),
                                 keyboardOptions = KeyboardOptions.Default.copy(
                                     imeAction = ImeAction.Done
@@ -194,7 +194,6 @@ fun VolumeCard() {
                                         showVolumeDialog = false
                                     }
                                 ),
-                                supportingText = { Text(text = stringResource(R.string.you_can_set_a_label_for_it)) },
                                 trailingIcon = {
                                     ClearInput(text = optionLabel) {
                                         optionLabel = ""

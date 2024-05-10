@@ -100,12 +100,12 @@ const val SETTING_3 = "setting_bluetooth"
 const val SETTING_4 = "setting_default_apps"
 const val SETTING_5 = "setting_battery_optimization"
 const val SETTING_6 = "setting_caption"
-const val SETTING_7 = "setting_locale"
-const val SETTING_8 = "setting_date_and_time"
-const val SETTING_9 = "setting_developer"
-const val SETTING_10 = "setting_usage_access"
-const val SETTING_11 = "setting_overlay"
-const val SETTING_12 = "setting_write"
+const val SETTING_7 = "setting_usage_access"
+const val SETTING_8 = "setting_overlay"
+const val SETTING_9 = "setting_write"
+const val SETTING_10 = "setting_locale"
+const val SETTING_11 = "setting_date_and_time"
+const val SETTING_12 = "setting_developer"
 
 @SuppressLint("InlinedApi")
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT

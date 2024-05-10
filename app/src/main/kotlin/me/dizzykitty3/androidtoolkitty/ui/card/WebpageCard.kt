@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 import android.content.Context
 import android.util.Log
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
@@ -10,7 +11,11 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -23,7 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
@@ -38,9 +42,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTip
 import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
 
@@ -242,17 +246,75 @@ private fun SocialMediaProfileIUrl() {
 
 @Composable
 private fun NoPlatformYouNeedHere() {
-    val view = LocalView.current
+    var showDialog by remember { mutableStateOf(false) }
 
     Text(
         text = buildAnnotatedString {
             CustomItalicText(stringResource(id = R.string.platform_not_added_yet))
         },
         textDecoration = TextDecoration.Underline,
-        modifier = Modifier.clickable {
-//                SnackbarUtil.snackbar(view, R.string.uploaded)
-            SnackbarUtil.snackbar(view, R.string.under_development)
-        })
+        modifier = Modifier.clickable { showDialog = true })
+
+    var platformNameInput by remember { mutableStateOf("") }
+    var platformExampleUrlInput by remember { mutableStateOf("") }
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text(text = stringResource(id = R.string.submit_the_platform_you_need)) },
+            text = {
+                Column {
+                    CustomTip(id = R.string.under_development)
+                    OutlinedTextField(
+                        value = platformNameInput,
+                        onValueChange = { platformNameInput = it },
+                        label = { Text(text = stringResource(R.string.platform)) },
+                        modifier = Modifier.fillMaxWidth(),
+                        trailingIcon = {
+                            ClearInput(text = platformNameInput) {
+                                platformNameInput = ""
+                            }
+                        },
+                    )
+
+                    OutlinedTextField(
+                        value = platformExampleUrlInput,
+                        onValueChange = { platformExampleUrlInput = it },
+                        label = { Text(text = stringResource(id = R.string.platform_example_url)) },
+                        modifier = Modifier.fillMaxWidth(),
+                        trailingIcon = {
+                            ClearInput(text = platformExampleUrlInput) {
+                                platformExampleUrlInput = ""
+                            }
+                        }
+                    )
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = { showDialog = false },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
+                ) {
+                    Text(
+                        text = stringResource(android.R.string.ok),
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { showDialog = false }
+                ) {
+                    Text(
+                        text = stringResource(id = android.R.string.cancel),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
+        )
+    }
 }
 
 private fun onClickSearchButton(query: String, context: Context) {

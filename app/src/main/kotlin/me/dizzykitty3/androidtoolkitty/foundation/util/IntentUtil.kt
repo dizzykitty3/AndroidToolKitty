@@ -79,12 +79,12 @@ object IntentUtil {
             SETTING_4 -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
             SETTING_5 -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
             SETTING_6 -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
-            SETTING_7 -> Intent(Settings.ACTION_LOCALE_SETTINGS)
-            SETTING_8 -> Intent(Settings.ACTION_DATE_SETTINGS)
-            SETTING_9 -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
-            SETTING_10 -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-            SETTING_11 -> Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-            SETTING_12 -> Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+            SETTING_7 -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+            SETTING_8 -> Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+            SETTING_9 -> Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+            SETTING_10 -> Intent(Settings.ACTION_LOCALE_SETTINGS)
+            SETTING_11 -> Intent(Settings.ACTION_DATE_SETTINGS)
+            SETTING_12 -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
             else -> return
         }
 

@@ -1,6 +1,7 @@
 <resources>
     <!-- Common -->
-    <string name="label">Label</string>
+    <string name="version_number" translatable="false">20240510</string>
+    <string name="label_optional">Label (optional)</string>
     <string name="edit">Edit</string>
     <string name="visit">Visit</string>
     <string name="common">Common</string>
@@ -16,6 +17,7 @@
     <string name="under_development">under development</string>
     <string name="permission">Permission</string>
     <string name="undo">Undo</string>
+    <string name="confirm">Confirm</string>
 
     <!-- Home screen: top tip -->
     <string name="battery_level">Battery level</string>
@@ -36,7 +38,6 @@
     <string name="media_volume">Media volume</string>
     <string name="mute">mute</string>
     <string name="add_custom_volume">Add custom volume</string>
-    <string name="you_can_set_a_label_for_it">You can set a label for it</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
 
     <!-- Home screen: clipboard -->
@@ -78,6 +79,7 @@
     <string name="plurk">Plurk</string>
     <string name="twitch">Twitch</string>
     <string name="booth">BOOTH</string>
+    <string name="platform_example_url">Example URL (optional)</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>
@@ -250,7 +252,6 @@
     <string name="source_code_on_github">View source code on GitHub</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240509</string>
     <string name="developer_profile_link">Developer profile link</string>
     <string name="contributors">Contributors</string>
     <string name="source_and_licenses">Source code &amp; Licenses</string>

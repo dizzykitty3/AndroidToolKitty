@@ -23,7 +23,6 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupDivider
-import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
@@ -77,7 +76,6 @@ fun EditSysSettingCard() {
         var mIsShowSetting11 by remember { mutableStateOf(isShowSetting11) }
         var mIsShowSetting12 by remember { mutableStateOf(isShowSetting12) }
 
-        CustomGroupTitleText(id = R.string.common)
         CustomHideCardSettingSwitch(
             id = R.string.open_display_settings,
             cardId = SETTING_1,
@@ -130,9 +128,9 @@ fun EditSysSettingCard() {
         }
 
         CustomGroupDivider()
-        CustomGroupTitleText(id = R.string.debugging)
+
         CustomHideCardSettingSwitch(
-            id = R.string.open_language_settings,
+            id = R.string.open_usage_access_permission,
             cardId = SETTING_7,
             isChecked = mIsShowSetting7
         ) { newState ->
@@ -140,7 +138,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_7, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_date_and_time_settings,
+            id = R.string.open_overlay_permission,
             cardId = SETTING_8,
             isChecked = mIsShowSetting8
         ) { newState ->
@@ -148,7 +146,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_8, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_developer_options,
+            id = R.string.open_write_permission,
             cardId = SETTING_9,
             isChecked = mIsShowSetting9
         ) { newState ->
@@ -157,9 +155,9 @@ fun EditSysSettingCard() {
         }
 
         CustomGroupDivider()
-        CustomGroupTitleText(id = R.string.permission)
+
         CustomHideCardSettingSwitch(
-            id = R.string.open_usage_access_permission,
+            id = R.string.open_language_settings,
             cardId = SETTING_10,
             isChecked = mIsShowSetting10
         ) { newState ->
@@ -167,7 +165,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_10, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_overlay_permission,
+            id = R.string.open_date_and_time_settings,
             cardId = SETTING_11,
             isChecked = mIsShowSetting11
         ) { newState ->
@@ -175,7 +173,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_11, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_write_permission,
+            id = R.string.open_developer_options,
             cardId = SETTING_12,
             isChecked = mIsShowSetting12
         ) { newState ->
@@ -184,6 +182,7 @@ fun EditSysSettingCard() {
         }
 
         CustomGroupDivider()
+
         val view = LocalView.current
         val primary = MaterialTheme.colorScheme.primary.toArgb()
 
@@ -192,7 +191,7 @@ fun EditSysSettingCard() {
                 SnackbarUtil.snackbar(
                     view,
                     message = R.string.tap_to_confirm,
-                    buttonText = android.R.string.ok,
+                    buttonText = R.string.confirm,
                     buttonColor = primary,
                     buttonClickListener = {
                         onClickChangeAllCardsButton(false)
@@ -227,7 +226,7 @@ fun EditSysSettingCard() {
                 SnackbarUtil.snackbar(
                     view,
                     message = R.string.tap_to_confirm,
-                    buttonText = android.R.string.ok,
+                    buttonText = R.string.confirm,
                     buttonColor = primary,
                     buttonClickListener = {
                         onClickChangeAllCardsButton(true)
