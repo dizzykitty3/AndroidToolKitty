@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.screen
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -37,6 +38,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomBottomPadding
@@ -45,6 +47,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomOneHandedMode
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTip
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTopPadding
+import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_0
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_1
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_10
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_11
@@ -68,6 +71,7 @@ import me.dizzykitty3.androidtoolkitty.ui.card.FontWeightCard
 import me.dizzykitty3.androidtoolkitty.ui.card.Greeting
 import me.dizzykitty3.androidtoolkitty.ui.card.MapsCard
 import me.dizzykitty3.androidtoolkitty.ui.card.SysSettingCard
+import me.dizzykitty3.androidtoolkitty.ui.card.TestCard
 import me.dizzykitty3.androidtoolkitty.ui.card.UnicodeCard
 import me.dizzykitty3.androidtoolkitty.ui.card.VolumeCard
 import me.dizzykitty3.androidtoolkitty.ui.card.WebpageCard
@@ -172,7 +176,7 @@ private fun BatteryNetworkAndSetting(navController: NavHostController) {
             IconButton(
                 onClick = {
                     navController.navigate(SETTINGS_SCREEN)
-                    settingsSharedPref.openedSettingsScreen = true
+                    settingsSharedPref.haveOpenedSettingsScreen = true
                 },
                 modifier = Modifier.size(40.dp)
             ) {
@@ -233,7 +237,7 @@ private fun NetworkState() {
 @Composable
 private fun NetworkStateIcon(
     imageVector: ImageVector,
-    id: Int
+    @StringRes id: Int
 ) {
     Icon(
         imageVector = imageVector,
@@ -285,18 +289,30 @@ private fun TwoColumnHomeCards(navController: NavHostController) {
     }
 }
 
+@Suppress("KotlinConstantConditions")
 @Composable
 private fun getCardMapping(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> {
-    return listOf(
-        CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
-        CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
-        CARD_11, CARD_12
-    ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
+    val debugBuild = BuildConfig.BUILD_TYPE == "debug"
+    return if (debugBuild) {
+        listOf(
+            CARD_0,
+            CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
+            CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
+            CARD_11, CARD_12
+        ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
+    } else {
+        listOf(
+            CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
+            CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
+            CARD_11, CARD_12
+        ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
+    }
 }
 
 @Composable
 private fun CardContent(cardName: String, navController: NavHostController) {
     when (cardName) {
+        CARD_0 -> TestCard(navController)
         CARD_1 -> YearProgressCard()
         CARD_2 -> VolumeCard()
         CARD_3 -> ClipboardCard()

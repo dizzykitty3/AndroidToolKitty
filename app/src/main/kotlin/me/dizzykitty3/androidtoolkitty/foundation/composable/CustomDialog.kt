@@ -52,9 +52,7 @@ fun CustomAlertDialogButton(
 
     if (showDialog) {
         AlertDialog(
-            onDismissRequest = {
-                // Ignore
-            },
+            onDismissRequest = { showDialog = false },
             title = { Text(text = dialogMessageTitle) },
             text = { dialogMessage() },
             confirmButton = {

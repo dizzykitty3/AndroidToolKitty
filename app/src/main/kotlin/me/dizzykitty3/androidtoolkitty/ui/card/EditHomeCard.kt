@@ -183,7 +183,7 @@ fun EditHomeCard() {
                 SnackbarUtil.snackbar(
                     view,
                     message = R.string.tap_to_confirm,
-                    buttonText = android.R.string.ok,
+                    buttonText = R.string.confirm,
                     buttonColor = primary,
                     buttonClickListener = {
                         onClickChangeAllCardsButton(false)
@@ -218,7 +218,7 @@ fun EditHomeCard() {
                 SnackbarUtil.snackbar(
                     view,
                     message = R.string.tap_to_confirm,
-                    buttonText = android.R.string.ok,
+                    buttonText = R.string.confirm,
                     buttonColor = primary,
                     buttonClickListener = {
                         onClickChangeAllCardsButton(true)

@@ -1,6 +1,7 @@
 <resources>
     <!-- Common -->
-    <string name="label">Label</string>
+    <string name="version_number" translatable="false">20240510</string>
+    <string name="label_optional">Label (optional)</string>
     <string name="edit">Edit</string>
     <string name="visit">Visit</string>
     <string name="common">Common</string>
@@ -13,9 +14,10 @@
     <string name="info">Info</string>
     <string name="go_to_settings">Go to settings</string>
     <string name="success_and_back">Success! Now you can back to the previous screen</string>
-    <string name="under_development">under development</string>
+    <string name="under_development">-- UNDER DEVELOPMENT --</string>
     <string name="permission">Permission</string>
     <string name="undo">Undo</string>
+    <string name="confirm">Confirm</string>
 
     <!-- Home screen: top tip -->
     <string name="battery_level">Battery level</string>
@@ -36,7 +38,6 @@
     <string name="media_volume">Media volume</string>
     <string name="mute">mute</string>
     <string name="add_custom_volume">Add custom volume</string>
-    <string name="you_can_set_a_label_for_it">You can set a label for it</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
 
     <!-- Home screen: clipboard -->
@@ -77,6 +78,14 @@
     <string name="steam_user_custom_url">Steam (User custom URL)</string>
     <string name="plurk">Plurk</string>
     <string name="twitch">Twitch</string>
+    <string name="booth">BOOTH</string>
+    <string name="platform_example_url">Example URL (optional)</string>
+    <string name="artstation">ArtStation</string>
+    <string name="tiktok">TikTok</string>
+    <string name="telegram">Telegram</string>
+    <string name="snapchat">Snacpchat</string>
+    <string name="threads">Threads</string>
+    <string name="paypal">PayPal</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>
@@ -139,8 +148,8 @@
     <string name="google_play_not_installed">Google Play is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>
 
-    <!-- Home screen: android versions -->
-    <string name="android_versions">Android versions</string>
+    <!-- Home screen: android version history -->
+    <string name="android_versions">Android version history</string>
     <string name="android_15">Android 15</string>
     <string name="android_14">Android 14</string>
     <string name="android_13">Android 13</string>
@@ -242,19 +251,20 @@
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
     <string name="show_all_options">Show all options</string>
     <string name="hide_all_options">Hide all options</string>
+    <string name="restart_app">Restart app</string>
 
     <!-- Settings screen: about -->
     <string name="about">About</string>
     <string name="source_code_on_github">View source code on GitHub</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="version">Version</string>
-    <string name="version_number" translatable="false">20240507</string>
     <string name="developer_profile_link">Developer profile link</string>
     <string name="contributors">Contributors</string>
     <string name="source_and_licenses">Source code &amp; Licenses</string>
     <string name="now_a_developer">You are now a developer</string>
     <string name="two_more_times">2 more times</string>
     <string name="one_more_time">1 more time</string>
+    <string name="already_developer">You have already enabled debugging options</string>
 
     <!-- Permission request screen -->
     <string name="request_permission">Request permission</string>

@@ -33,7 +33,7 @@ fun ClipboardCard() {
     ) {
         val view = LocalView.current
 
-        val isShowHintText = !SettingsSharedPref.openedSettingsScreen
+        val isShowHintText = !SettingsSharedPref.haveOpenedSettingsScreen
         if (isShowHintText) CustomTip(id = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
         Button(

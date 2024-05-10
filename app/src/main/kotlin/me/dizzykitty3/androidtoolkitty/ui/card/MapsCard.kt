@@ -26,6 +26,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.composable.ClearInput
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomCard
@@ -33,6 +34,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 
 private const val TAG = "MapsCard"
 
+@Preview
 @Composable
 fun MapsCard() {
     CustomCard(

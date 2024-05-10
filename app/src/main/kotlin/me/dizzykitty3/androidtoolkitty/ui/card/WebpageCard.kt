@@ -2,14 +2,20 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.content.Context
 import android.util.Log
-import android.view.View
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -22,11 +28,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
@@ -36,9 +42,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTip
 import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
 
@@ -155,7 +161,7 @@ private fun WebpageUrl() {
             Text(text = HTTPS)
         },
         suffix = {
-            Text(text = UrlUtil.urlSuffix(url))
+            Text(text = UrlUtil.suffixOf(url))
         }
     )
 
@@ -173,7 +179,6 @@ private fun WebpageUrl() {
 
 @Composable
 private fun SocialMediaProfileIUrl() {
-    val view = LocalView.current
     val context = LocalContext.current
 
     var username by remember { mutableStateOf("") }
@@ -188,31 +193,19 @@ private fun SocialMediaProfileIUrl() {
     CustomDropdownMenu(
         items = platformList,
         onItemSelected = { mPlatformIndex = it },
-        label = {
-            if (mPlatformIndex != UrlUtil.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                Text(stringResource(R.string.platform))
-            } else {
-                Text("")
-            }
-        }
+        label = { Text(stringResource(R.string.platform)) }
     )
 
     OutlinedTextField(
         value = username,
         onValueChange = { username = it },
-        label = {
-            if (mPlatformIndex != UrlUtil.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                Text(stringResource(R.string.username))
-            } else {
-                Text(stringResource(R.string.platform))
-            }
-        },
+        label = { Text(stringResource(R.string.username)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onVisitProfileButton(view, username, mPlatformIndex, context) }
+            onDone = { onVisitProfileButton(username, mPlatformIndex, context) }
         ),
         trailingIcon = {
             ClearInput(text = username) {
@@ -220,31 +213,106 @@ private fun SocialMediaProfileIUrl() {
             }
         },
         supportingText = {
-            if (mPlatformIndex != UrlUtil.Platform.PLATFORM_NOT_ADDED_YET.ordinal) {
-                val platform = UrlUtil.Platform.entries[mPlatformIndex]
-                Text(
-                    text = if (platform != UrlUtil.Platform.FANBOX)
-                        "${UrlUtil.profilePrefix(platform)}$username"
-                    else
-                        "$username${UrlUtil.profilePrefix(platform)}",
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
-                )
-            } else {
-                Text(stringResource(R.string.submit_the_platform_you_need))
-            }
+            val platform = UrlUtil.Platform.entries[mPlatformIndex]
+            Text(
+                text = if (needAlterUrlStyle(platform))
+                    "$username${UrlUtil.prefixOf(platform)}"
+                else
+                    "${UrlUtil.prefixOf(platform)}$username",
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
+            )
         }
     )
 
-    TextButton(
-        onClick = { onVisitProfileButton(view, username, mPlatformIndex, context) }
+    Row(
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = stringResource(R.string.visit))
+        TextButton(
+            onClick = { onVisitProfileButton(username, mPlatformIndex, context) }
+        ) {
+            Text(text = stringResource(R.string.visit))
 
-        Icon(
-            imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = null,
-            modifier = Modifier.align(Alignment.CenterVertically)
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+
+        NoPlatformYouNeedHere()
+    }
+}
+
+@Composable
+private fun NoPlatformYouNeedHere() {
+    var showDialog by remember { mutableStateOf(false) }
+
+    Text(
+        text = buildAnnotatedString {
+            CustomItalicText(stringResource(id = R.string.platform_not_added_yet))
+        },
+        textDecoration = TextDecoration.Underline,
+        modifier = Modifier.clickable { showDialog = true })
+
+    var platformNameInput by remember { mutableStateOf("") }
+    var platformExampleUrlInput by remember { mutableStateOf("") }
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text(text = stringResource(id = R.string.submit_the_platform_you_need)) },
+            text = {
+                Column {
+                    CustomTip(id = R.string.under_development)
+                    OutlinedTextField(
+                        value = platformNameInput,
+                        onValueChange = { platformNameInput = it },
+                        label = { Text(text = stringResource(R.string.platform)) },
+                        modifier = Modifier.fillMaxWidth(),
+                        trailingIcon = {
+                            ClearInput(text = platformNameInput) {
+                                platformNameInput = ""
+                            }
+                        },
+                    )
+
+                    OutlinedTextField(
+                        value = platformExampleUrlInput,
+                        onValueChange = { platformExampleUrlInput = it },
+                        label = { Text(text = stringResource(id = R.string.platform_example_url)) },
+                        modifier = Modifier.fillMaxWidth(),
+                        trailingIcon = {
+                            ClearInput(text = platformExampleUrlInput) {
+                                platformExampleUrlInput = ""
+                            }
+                        }
+                    )
+                }
+            },
+            confirmButton = {
+                Button(
+                    onClick = { showDialog = false },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
+                ) {
+                    Text(
+                        text = stringResource(android.R.string.ok),
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { showDialog = false }
+                ) {
+                    Text(
+                        text = stringResource(id = android.R.string.cancel),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+            }
         )
     }
 }
@@ -264,7 +332,6 @@ private fun onClickVisitUrlButton(url: String, context: Context) {
 }
 
 private fun onVisitProfileButton(
-    view: View,
     username: String,
     platformIndex: Int,
     context: Context
@@ -273,18 +340,15 @@ private fun onVisitProfileButton(
 
     val platform = UrlUtil.Platform.entries.getOrNull(platformIndex) ?: return
 
-    if (platform == UrlUtil.Platform.PLATFORM_NOT_ADDED_YET) {
-//        SnackbarUtil.snackbar("${context.getString(R.string.platform)}: \"$username\" ${context.getString(R.string.uploaded)}")
-        SnackbarUtil.snackbar(view, R.string.under_development)
-        return
-    }
-
     val prefix = platform.prefix
     val url =
-        if (platform == UrlUtil.Platform.FANBOX)
+        if (needAlterUrlStyle(platform))
             "${StringUtil.dropSpaces(username)}$prefix"
         else
             "$prefix${StringUtil.dropSpaces(username)}"
     IntentUtil.openUrl(url, context)
     Log.d(TAG, "onVisitProfile")
 }
+
+private fun needAlterUrlStyle(platform: UrlUtil.Platform): Boolean =
+    platform == UrlUtil.Platform.FANBOX || platform == UrlUtil.Platform.BOOTH

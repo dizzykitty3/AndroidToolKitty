@@ -25,6 +25,16 @@ const val EDIT_HOME_SCREEN = "EditHomeScreen"
 const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
 
 /**
+ * @see me.dizzykitty3.androidtoolkitty.ui.screen.QrCodeGeneratorScreen
+ */
+const val QR_CODE_GENERATOR_SCREEN = "QrCodeGeneratorScreen"
+
+/**
+ * @see me.dizzykitty3.androidtoolkitty.ui.card.TestCard
+ */
+const val CARD_0 = "card_test"
+
+/**
  * @see me.dizzykitty3.androidtoolkitty.ui.card.YearProgressCard
  */
 const val CARD_1 = "card_year_progress"
@@ -90,12 +100,12 @@ const val SETTING_3 = "setting_bluetooth"
 const val SETTING_4 = "setting_default_apps"
 const val SETTING_5 = "setting_battery_optimization"
 const val SETTING_6 = "setting_caption"
-const val SETTING_7 = "setting_locale"
-const val SETTING_8 = "setting_date_and_time"
-const val SETTING_9 = "setting_developer"
-const val SETTING_10 = "setting_usage_access"
-const val SETTING_11 = "setting_overlay"
-const val SETTING_12 = "setting_write"
+const val SETTING_7 = "setting_usage_access"
+const val SETTING_8 = "setting_overlay"
+const val SETTING_9 = "setting_write"
+const val SETTING_10 = "setting_locale"
+const val SETTING_11 = "setting_date_and_time"
+const val SETTING_12 = "setting_developer"
 
 @SuppressLint("InlinedApi")
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT

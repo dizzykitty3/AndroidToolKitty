@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty.ui.card
 
 import android.content.ContentResolver
 import android.provider.Settings
+import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.runtime.Composable
@@ -48,12 +49,12 @@ fun SysSettingCard() {
             Setting(SETTING_4, R.string.open_default_apps_settings),
             Setting(SETTING_5, R.string.open_battery_optimization_settings),
             Setting(SETTING_6, R.string.open_caption_preferences),
-            Setting(SETTING_7, R.string.open_language_settings),
-            Setting(SETTING_8, R.string.open_date_and_time_settings),
-            Setting(SETTING_9, R.string.open_developer_options),
-            Setting(SETTING_10, R.string.open_usage_access_permission),
-            Setting(SETTING_11, R.string.open_overlay_permission),
-            Setting(SETTING_12, R.string.open_write_permission)
+            Setting(SETTING_7, R.string.open_usage_access_permission),
+            Setting(SETTING_8, R.string.open_overlay_permission),
+            Setting(SETTING_9, R.string.open_write_permission),
+            Setting(SETTING_10, R.string.open_language_settings),
+            Setting(SETTING_11, R.string.open_date_and_time_settings),
+            Setting(SETTING_12, R.string.open_developer_options)
         )
 
         val isShowSetting = remember {
@@ -89,7 +90,7 @@ fun SysSettingCard() {
             )
         }
 
-        if (isShowSetting[SETTING_2] == true || OsVersion.android12()) {
+        if (isShowSetting[SETTING_2] == true && OsVersion.android12()) {
             CustomSystemSettingsButton(
                 settingType = SETTING_2,
                 buttonText = R.string.open_auto_rotate_settings
@@ -106,7 +107,7 @@ fun SysSettingCard() {
         }
 
         if (isShowGroupTitle1 && isShowGroupTitle2) CustomGroupDivider()
-        if (isShowGroupTitle2) CustomGroupTitleText(R.string.debugging)
+        if (isShowGroupTitle2) CustomGroupTitleText(R.string.permission)
 
         settings.subList(6, 9).forEach { setting ->
             if (isShowSetting[setting.settingType] == true) {
@@ -118,7 +119,7 @@ fun SysSettingCard() {
         }
 
         if ((isShowGroupTitle1 || isShowGroupTitle2) && isShowGroupTitle3) CustomGroupDivider()
-        if (isShowGroupTitle3) CustomGroupTitleText(R.string.permission)
+        if (isShowGroupTitle3) CustomGroupTitleText(R.string.debugging)
 
         settings.subList(9, 12).forEach { setting ->
             if (isShowSetting[setting.settingType] == true) {
@@ -137,4 +138,4 @@ private fun checkIsAutoTime(): Boolean {
     return isAutoTime == 1
 }
 
-private data class Setting(val settingType: String, val buttonText: Int)
+private data class Setting(val settingType: String, @StringRes val buttonText: Int)

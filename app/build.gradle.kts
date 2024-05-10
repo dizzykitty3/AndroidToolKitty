@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.application)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kapt)
     alias(libs.plugins.kotlin)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
@@ -13,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
-        minSdk = 29
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -92,11 +93,13 @@ dependencies {
     implementation(libs.androidx.navigation.compose) // NavHostController
     implementation(libs.androidx.room.ktx) // To use Coroutine features
     implementation(libs.androidx.room.runtime)
-    implementation(libs.google.gson) // TODO migrate to kotlinx serialization
     implementation(libs.google.hilt) // Dependency injection
     implementation(libs.kotlinx.coroutines) // Asynchronous tasks
     implementation(libs.kotlinx.serialization) // json
 
+    // Dagger’s KSP support is currently in alpha.
+    // https://kotlinlang.org/docs/ksp-overview.html#supported-libraries
+    kapt(libs.google.hilt.compiler)
+
     ksp(libs.androidx.room.compiler)
-    ksp(libs.google.hilt.compiler)
 }

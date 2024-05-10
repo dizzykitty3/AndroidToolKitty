@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.util.Log
+import androidx.annotation.StringRes
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.const.BG
 import me.dizzykitty3.androidtoolkitty.foundation.const.CN
@@ -33,12 +34,12 @@ object UrlUtil {
      * Adding the appropriate suffix and returning the full URL.
      */
     fun toFullUrl(urlInput: String): String {
-        val suffix = urlSuffix(urlInput)
+        val suffix = suffixOf(urlInput)
         Log.d(TAG, if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
         return "$HTTPS$urlInput$suffix"
     }
 
-    fun urlSuffix(urlInput: String): String {
+    fun suffixOf(urlInput: String): String {
         if (urlInput.contains(".")) return ""
 
         val suffixMap = mapOf(
@@ -108,30 +109,36 @@ object UrlUtil {
         return suffixMap[StringUtil.dropSpaces(urlInput)] ?: COM
     }
 
-    enum class Platform(val prefix: String, val nameResId: Int) {
+    enum class Platform(val prefix: String, @StringRes val nameResId: Int) {
+        ARTSTATION("artstation.com/", R.string.artstation),
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
+        BOOTH(".booth.pm", R.string.booth), // e.g. username.booth.pm
         FACEBOOK("facebook.com/", R.string.facebook),
         FANBOX(".fanbox.cc", R.string.fanbox), // e.g. username.fanbox.cc
         FANTIA("fantia.jp/", R.string.fantia),
         GITHUB("github.com/", R.string.github),
         INSTAGRAM("instagram.com/", R.string.instagram),
         PATREON("patreon.com/", R.string.patreon),
+        PAYPAL("paypal.me/", R.string.paypal),
         PIXIV_ARTWORK("pixiv.net/artworks/", R.string.pixiv_artwork_id),
         PIXIV_USER("pixiv.net/users/", R.string.pixiv_user_id),
         PIXIV_USER_CUSTOM_URL("pixiv.me/", R.string.pixiv_user_custom_url),
         PLURK("plurk.com/", R.string.plurk),
+        SNAPCHAT("snapchat.com/add/", R.string.snapchat),
         STEAM_USER_CUSTOM_URL("steamcommunity.com/id/", R.string.steam_user_custom_url),
+        TELEGRAM("t.me/", R.string.telegram),
+        THREADS("threads.net/@", R.string.threads),
+        TIKTOK("tiktok.com/@", R.string.tiktok),
         TWITCH("twitch.tv/", R.string.twitch),
         V2EX("v2ex.com/member/", R.string.v2ex),
         WEIBO("weibo.com/n/", R.string.weibo),
         X("x.com/", R.string.x),
-        YOUTUBE("youtube.com/@", R.string.youtube_id),
-        PLATFORM_NOT_ADDED_YET("", R.string.platform_not_added_yet)
+        YOUTUBE("youtube.com/@", R.string.youtube_id)
     }
 
     /**
      * @return the profile prefix associated with the given platform.
      */
-    fun profilePrefix(platform: Platform): String = platform.prefix
+    fun prefixOf(platform: Platform): String = platform.prefix
 }

@@ -64,7 +64,7 @@ fun VolumeCard() {
         val customVolumeOptionLabel = settingsSharedPref.customVolumeOptionLabel
         var mCustomVolumeOptionLabel by remember { mutableStateOf(customVolumeOptionLabel) }
 
-        val haveCustomLabel = settingsSharedPref.haveCustomLabel
+        val haveCustomLabel = settingsSharedPref.usingCustomVolumeOptionLabel
         var mHaveCustomLabel by remember { mutableStateOf(haveCustomLabel) }
 
         val options = listOf(
@@ -175,7 +175,7 @@ fun VolumeCard() {
                                     optionLabel = it
                                     mHaveCustomLabel = true
                                 },
-                                label = { Text(text = stringResource(R.string.label)) },
+                                label = { Text(text = stringResource(R.string.label_optional)) },
                                 modifier = Modifier.fillMaxWidth(),
                                 keyboardOptions = KeyboardOptions.Default.copy(
                                     imeAction = ImeAction.Done
@@ -185,7 +185,7 @@ fun VolumeCard() {
                                         settingsSharedPref.customVolume = newCustomVolume.toInt()
                                         mCustomVolume = newCustomVolume.toInt()
                                         if (mHaveCustomLabel) {
-                                            settingsSharedPref.haveCustomLabel = true
+                                            settingsSharedPref.usingCustomVolumeOptionLabel = true
                                         }
                                         settingsSharedPref.customVolumeOptionLabel = optionLabel
                                         mCustomVolumeOptionLabel = optionLabel
@@ -194,7 +194,6 @@ fun VolumeCard() {
                                         showVolumeDialog = false
                                     }
                                 ),
-                                supportingText = { Text(text = stringResource(R.string.you_can_set_a_label_for_it)) },
                                 trailingIcon = {
                                     ClearInput(text = optionLabel) {
                                         optionLabel = ""
@@ -217,7 +216,7 @@ fun VolumeCard() {
                                     settingsSharedPref.customVolume = newCustomVolume.toInt()
                                     mCustomVolume = newCustomVolume.toInt()
                                     if (mHaveCustomLabel) {
-                                        settingsSharedPref.haveCustomLabel = true
+                                        settingsSharedPref.usingCustomVolumeOptionLabel = true
                                     }
                                     settingsSharedPref.customVolumeOptionLabel = optionLabel
                                     mCustomVolumeOptionLabel = optionLabel

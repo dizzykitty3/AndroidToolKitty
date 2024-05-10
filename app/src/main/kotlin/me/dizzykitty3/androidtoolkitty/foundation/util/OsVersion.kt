@@ -18,6 +18,11 @@ object OsVersion {
     fun android12(): Boolean = osVersion >= 31
 
     /**
+     * 1. ClipboardManager.clearPrimaryClip()
+     */
+    fun android9(): Boolean = osVersion >= 28
+
+    /**
      * 1. Adaptive icons
      */
     fun android8(): Boolean = osVersion >= 26

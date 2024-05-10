@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomAnimatedProgressIndicator
@@ -21,6 +22,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.totalDaysInYear
 import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.yearProgress
 import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.yearProgressPercentage
 
+@Preview
 @Composable
 fun YearProgressCard() {
     CustomCard(
