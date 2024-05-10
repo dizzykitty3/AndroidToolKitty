@@ -64,7 +64,7 @@ fun VolumeCard() {
         val customVolumeOptionLabel = settingsSharedPref.customVolumeOptionLabel
         var mCustomVolumeOptionLabel by remember { mutableStateOf(customVolumeOptionLabel) }
 
-        val haveCustomLabel = settingsSharedPref.haveCustomLabel
+        val haveCustomLabel = settingsSharedPref.usingCustomVolumeOptionLabel
         var mHaveCustomLabel by remember { mutableStateOf(haveCustomLabel) }
 
         val options = listOf(
@@ -185,7 +185,7 @@ fun VolumeCard() {
                                         settingsSharedPref.customVolume = newCustomVolume.toInt()
                                         mCustomVolume = newCustomVolume.toInt()
                                         if (mHaveCustomLabel) {
-                                            settingsSharedPref.haveCustomLabel = true
+                                            settingsSharedPref.usingCustomVolumeOptionLabel = true
                                         }
                                         settingsSharedPref.customVolumeOptionLabel = optionLabel
                                         mCustomVolumeOptionLabel = optionLabel
@@ -216,7 +216,7 @@ fun VolumeCard() {
                                     settingsSharedPref.customVolume = newCustomVolume.toInt()
                                     mCustomVolume = newCustomVolume.toInt()
                                     if (mHaveCustomLabel) {
-                                        settingsSharedPref.haveCustomLabel = true
+                                        settingsSharedPref.usingCustomVolumeOptionLabel = true
                                     }
                                     settingsSharedPref.customVolumeOptionLabel = optionLabel
                                     mCustomVolumeOptionLabel = optionLabel

@@ -14,7 +14,7 @@
     <string name="info">Info</string>
     <string name="go_to_settings">Go to settings</string>
     <string name="success_and_back">Success! Now you can back to the previous screen</string>
-    <string name="under_development">under development</string>
+    <string name="under_development">-- UNDER DEVELOPMENT --</string>
     <string name="permission">Permission</string>
     <string name="undo">Undo</string>
     <string name="confirm">Confirm</string>

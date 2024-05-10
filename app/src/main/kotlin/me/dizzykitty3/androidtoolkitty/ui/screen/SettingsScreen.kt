@@ -16,6 +16,7 @@ import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Schedule
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -48,6 +49,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomGroupTitleTex
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomScreen
 import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.foundation.composable.CustomTip
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_3
 import me.dizzykitty3.androidtoolkitty.foundation.const.EDIT_HOME_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.const.PERMISSION_REQUEST_SCREEN
@@ -340,9 +342,9 @@ private fun CustomizeOptions(navController: NavHostController) {
 
 @Composable
 private fun DebuggingOptions(navController: NavHostController) {
-    val view = LocalView.current
     val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
+    var showSpDialog by remember { mutableStateOf(false) }
 
     CustomGroupTitleText(R.string.debugging)
 
@@ -358,9 +360,38 @@ private fun DebuggingOptions(navController: NavHostController) {
     }
 
     Button(
-        onClick = { SnackbarUtil.snackbar(view, R.string.under_development) }
+        onClick = { showSpDialog = true }
     ) {
         Text(text = stringResource(id = R.string.check_sp_values))
+    }
+
+    val sharedPref = remember { SettingsSharedPref }
+
+    if (showSpDialog) {
+        AlertDialog(
+            onDismissRequest = { showSpDialog = false },
+            title = { Text(text = stringResource(id = R.string.check_sp_values)) },
+            text = {
+                Column {
+                    CustomTip(id = R.string.under_development)
+                    Text(text = "AUTO_CLEAR_CLIPBOARD = ${sharedPref.autoClearClipboard}")
+                    Text(text = "SLIDER_INCREMENT_5_PERCENT = ${sharedPref.sliderIncrement5Percent}")
+                    Text(text = "DYNAMIC_COLOR = ${sharedPref.dynamicColor}")
+                    Text(text = "ONE_HANDED_MODE = ${sharedPref.oneHandedMode}")
+                    Text(text = "HAVE_OPENED_SETTINGS_SCREEN = ${sharedPref.haveOpenedSettingsScreen}")
+                    Text(text = "USING_CUSTOM_VOLUME_OPTION_LABEL = ${sharedPref.usingCustomVolumeOptionLabel}")
+                    Text(text = "DEBUGGING_OPTIONS = ${sharedPref.debuggingOptions}")
+                    Text(text = "WEBPAGE_CARD_SHOW_MORE = ${sharedPref.webpageCardShowMore}")
+                    Text(text = "SORA_SHION = ${sharedPref.soraShion}")
+                    Text(text = "COLLAPSE_KEYBOARD = ${sharedPref.collapseKeyboard}")
+                }
+            },
+            confirmButton = {
+                Button(onClick = { showSpDialog = false }) {
+                    Text(text = stringResource(id = android.R.string.ok))
+                }
+            }
+        )
     }
 
     Button(

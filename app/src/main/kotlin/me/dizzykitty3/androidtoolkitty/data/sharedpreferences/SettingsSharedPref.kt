@@ -15,10 +15,10 @@ object SettingsSharedPref {
     private const val TAG = "SettingsSharedPref"
     private const val PREF_NAME = "Settings"
 
-    private const val IS_AUTO_CLEAR_CLIPBOARD = "is_auto_clear_clipboard"
-    private const val IS_SLIDER_INCREMENT_5_PERCENT = "is_slider_increment_5_percent"
-    private const val IS_DYNAMIC_COLOR = "is_dynamic_color"
-    private const val IS_ONE_HANDED_MODE = "is_one_handed_mode"
+    private const val AUTO_CLEAR_CLIPBOARD = "auto_clear_clipboard"
+    private const val SLIDER_INCREMENT_5_PERCENT = "slider_increment_5_percent"
+    private const val DYNAMIC_COLOR = "dynamic_color"
+    private const val ONE_HANDED_MODE = "one_handed_mode"
     private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val DEBUGGING_OPTIONS = "debugging_options"
@@ -35,46 +35,46 @@ object SettingsSharedPref {
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
     var autoClearClipboard: Boolean
-        get() = sharedPrefs.getBoolean(IS_AUTO_CLEAR_CLIPBOARD, false)
+        get() = sharedPrefs.getBoolean(AUTO_CLEAR_CLIPBOARD, false)
         set(value) {
-            Log.d(TAG, "is auto clear clipboard = $value")
+            Log.d(TAG, "auto clear clipboard = $value")
             with(sharedPrefs.edit()) {
-                putBoolean(IS_AUTO_CLEAR_CLIPBOARD, value)
+                putBoolean(AUTO_CLEAR_CLIPBOARD, value)
                 apply()
             }
         }
 
     var sliderIncrement5Percent: Boolean
-        get() = sharedPrefs.getBoolean(IS_SLIDER_INCREMENT_5_PERCENT, false)
+        get() = sharedPrefs.getBoolean(SLIDER_INCREMENT_5_PERCENT, false)
         set(value) {
-            Log.d(TAG, "is slider increment 5% = $value")
+            Log.d(TAG, "slider increment 5% = $value")
             with(sharedPrefs.edit()) {
-                putBoolean(IS_SLIDER_INCREMENT_5_PERCENT, value)
+                putBoolean(SLIDER_INCREMENT_5_PERCENT, value)
                 apply()
             }
         }
 
     var dynamicColor: Boolean
-        get() = sharedPrefs.getBoolean(IS_DYNAMIC_COLOR, true)
+        get() = sharedPrefs.getBoolean(DYNAMIC_COLOR, true)
         set(value) {
-            Log.d(TAG, "is dynamic color = $value")
+            Log.d(TAG, "dynamic color = $value")
             with(sharedPrefs.edit()) {
-                putBoolean(IS_DYNAMIC_COLOR, value)
+                putBoolean(DYNAMIC_COLOR, value)
                 apply()
             }
         }
 
     var oneHandedMode: Boolean
-        get() = sharedPrefs.getBoolean(IS_ONE_HANDED_MODE, false)
+        get() = sharedPrefs.getBoolean(ONE_HANDED_MODE, false)
         set(value) {
-            Log.d(TAG, "is one-handed mode = $value")
+            Log.d(TAG, "one-handed mode = $value")
             with(sharedPrefs.edit()) {
-                putBoolean(IS_ONE_HANDED_MODE, value)
+                putBoolean(ONE_HANDED_MODE, value)
                 apply()
             }
         }
 
-    var openedSettingsScreen: Boolean
+    var haveOpenedSettingsScreen: Boolean
         get() = sharedPrefs.getBoolean(HAVE_OPENED_SETTINGS_SCREEN, false)
         set(value) {
             Log.d(TAG, "have opened settings menu = $value")
@@ -84,7 +84,7 @@ object SettingsSharedPref {
             }
         }
 
-    var haveCustomLabel: Boolean
+    var usingCustomVolumeOptionLabel: Boolean
         get() = sharedPrefs.getBoolean(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
         set(value) {
             Log.d(TAG, "using custom volume option label = $value")
@@ -97,7 +97,7 @@ object SettingsSharedPref {
     var debuggingOptions: Boolean
         get() = sharedPrefs.getBoolean(DEBUGGING_OPTIONS, false)
         set(value) {
-            Log.d(TAG, "view debugging options = $value")
+            Log.d(TAG, "debugging options = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(DEBUGGING_OPTIONS, value)
                 apply()
@@ -117,7 +117,7 @@ object SettingsSharedPref {
     var soraShion: Boolean
         get() = sharedPrefs.getBoolean(SORA_SHION, false)
         set(value) {
-            Log.d(TAG, "sora shion theme = $value")
+            Log.d(TAG, "sora shion = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SORA_SHION, value)
                 apply()

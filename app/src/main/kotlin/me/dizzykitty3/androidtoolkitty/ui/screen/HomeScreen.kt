@@ -135,7 +135,7 @@ private fun BatteryNetworkAndSetting(navController: NavHostController) {
             IconButton(
                 onClick = {
                     navController.navigate(SETTINGS_SCREEN)
-                    settingsSharedPref.openedSettingsScreen = true
+                    settingsSharedPref.haveOpenedSettingsScreen = true
                 },
                 modifier = Modifier.size(40.dp)
             ) {
