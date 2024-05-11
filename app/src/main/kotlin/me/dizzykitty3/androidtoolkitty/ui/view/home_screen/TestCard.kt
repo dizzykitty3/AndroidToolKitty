@@ -59,8 +59,10 @@ fun TestCard(navController: NavHostController) {
         Text(text = "To-do list")
         Text(text = "SP -> DataStore")
         Text(text = "Date countdown feature")
-        Text(text = "Share to clipboard feature")
         Text(text = "Add license info")
         Text(text = "Add @Preview")
+        Text(text = "Tile, shortcut")
+        Text(text = "app op with shizuku")
+        Text(text = "scaffold ui")
     }
 }
