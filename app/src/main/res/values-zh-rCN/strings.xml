@@ -198,7 +198,6 @@
     <string name="contributors">贡献者</string>
     <string name="source_and_licenses">源码和许可证</string>
     <string name="now_a_developer">已开启调试选项</string>
-    <string name="theme_2">主题：空-紫苑</string>
     <string name="collapse_keyboard_when_back_to_app">回到 App 时收起键盘</string>
     <string name="go_to_permission_request_screen">前往权限申请画面</string>
     <string name="check_sp_values">查看 SP 值</string>

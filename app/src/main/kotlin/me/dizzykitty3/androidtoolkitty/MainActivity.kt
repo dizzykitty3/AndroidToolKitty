@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.theme.AppTheme
-import me.dizzykitty3.androidtoolkitty.foundation.theme.SoraShionTheme
 import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.AppNavigationHost
@@ -24,7 +23,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private var isAutoClearClipboard = false
-    private var isSoraShion = false
     private var isCollapseKeyboard = true
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -32,21 +30,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        isSoraShion = SettingsSharedPref.soraShion
         setContent {
-            if (!isSoraShion) {
-                AppTheme(
-                    dynamicColor = SettingsSharedPref.dynamicColor
-                ) {
-                    Scaffold(modifier = Modifier.fillMaxSize()) {
-                        AppNavigationHost()
-                    }
-                }
-            } else {
-                SoraShionTheme {
-                    Scaffold(modifier = Modifier.fillMaxSize()) {
-                        AppNavigationHost()
-                    }
+            AppTheme(
+                dynamicColor = SettingsSharedPref.dynamicColor
+            ) {
+                Scaffold(modifier = Modifier.fillMaxSize()) {
+                    AppNavigationHost()
                 }
             }
         }

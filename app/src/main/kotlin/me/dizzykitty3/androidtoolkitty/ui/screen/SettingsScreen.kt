@@ -142,7 +142,6 @@ private fun GeneralOptions() {
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
     var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
-    var soraShion by remember { mutableStateOf(settingsSharedPref.soraShion) }
     var collapseKeyboard by remember { mutableStateOf(settingsSharedPref.collapseKeyboard) }
 
     val primary = MaterialTheme.colorScheme.primary.toArgb()
@@ -228,7 +227,6 @@ private fun GeneralOptions() {
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.clickable {
                 dynamicColor = !dynamicColor
-                soraShion = false
                 onClickDynamicColorButton(view, dynamicColor, primary, context)
             }
         ) {
@@ -242,33 +240,7 @@ private fun GeneralOptions() {
                     checked = dynamicColor,
                     onCheckedChange = {
                         dynamicColor = it
-                        soraShion = false
                         onClickDynamicColorButton(view, it, primary, context)
-                    }
-                )
-            }
-        }
-    }
-
-    if (!dynamicColor || !OsVersion.android12()) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                soraShion = !soraShion
-                onClickSoraShionButton(view, soraShion, primary, context)
-            }
-        ) {
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(text = stringResource(id = R.string.theme_2))
-            }
-            Column {
-                Switch(
-                    checked = soraShion,
-                    onCheckedChange = {
-                        soraShion = it
-                        onClickSoraShionButton(view, it, primary, context)
                     }
                 )
             }
@@ -382,7 +354,6 @@ private fun DebuggingOptions(navController: NavHostController) {
                     Text(text = "USING_CUSTOM_VOLUME_OPTION_LABEL = ${sharedPref.usingCustomVolumeOptionLabel}")
                     Text(text = "DEBUGGING_OPTIONS = ${sharedPref.debuggingOptions}")
                     Text(text = "WEBPAGE_CARD_SHOW_MORE = ${sharedPref.webpageCardShowMore}")
-                    Text(text = "SORA_SHION = ${sharedPref.soraShion}")
                     Text(text = "COLLAPSE_KEYBOARD = ${sharedPref.collapseKeyboard}")
                 }
             },
@@ -430,20 +401,6 @@ private fun onClickDynamicColorButton(
     context: Context
 ) {
     SettingsSharedPref.dynamicColor = isDynamicColor
-    SettingsSharedPref.soraShion = false
-
-    SnackbarUtil.snackbar(
-        view,
-        message = R.string.requires_restart_do_it_now,
-        buttonText = R.string.restart,
-        buttonColor = color,
-        buttonClickListener = { IntentUtil.restartApp(context) }
-    )
-}
-
-private fun onClickSoraShionButton(view: View, isSoraShion: Boolean, color: Int, context: Context) {
-    SettingsSharedPref.soraShion = isSoraShion
-
     SnackbarUtil.snackbar(
         view,
         message = R.string.requires_restart_do_it_now,
