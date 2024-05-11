@@ -78,7 +78,7 @@ fun HomeScreen(navController: NavHostController) {
 }
 
 @Composable
-fun MobileLayout(navController: NavHostController) {
+private fun MobileLayout(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
     val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
 
@@ -112,7 +112,7 @@ fun MobileLayout(navController: NavHostController) {
 }
 
 @Composable
-fun TabletLayout(navController: NavHostController) {
+private fun TabletLayout(navController: NavHostController) {
     val cardPadding = dimensionResource(id = R.dimen.padding_card_content_large)
 
     Column(modifier = Modifier.padding(cardPadding)) {
