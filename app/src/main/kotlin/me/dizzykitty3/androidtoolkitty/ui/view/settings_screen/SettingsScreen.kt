@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.settings_screen
 
-import android.app.Activity
 import android.content.Context
 import android.os.Build
 import android.view.View
@@ -390,7 +389,7 @@ private fun DebuggingOptions(navController: NavHostController) {
         negativeButtonText = null,
         onClickAction = {
             settingsSharedPref.clear()
-            (context as Activity).finish()
+            IntentUtil.finishApp(context)
         }
     )
 }

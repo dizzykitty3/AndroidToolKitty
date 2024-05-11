@@ -135,6 +135,13 @@ object IntentUtil {
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
+        finishApp(context)
+    }
+
+    /**
+     * Remember to use Activity Context to finish app.
+     */
+    fun finishApp(context: Context) {
         (context as Activity).finish()
     }
 
