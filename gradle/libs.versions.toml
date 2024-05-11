@@ -1,4 +1,10 @@
 [versions]
+# -- SDK Versions --
+compileSdk = "34" # Android 14 Upside Down Cake
+targetSdk = "34" # Android 14 Upside Down Cake
+minSdk = "26" # Android 8 Oreo
+
+# -- Dependency versions --
 # Android Gradle plugin
 agp = "8.4.0" # https://developer.android.com/build/releases/gradle-plugin
 
@@ -6,6 +12,7 @@ agp = "8.4.0" # https://developer.android.com/build/releases/gradle-plugin
 activity = "1.9.0" # https://developer.android.com/jetpack/androidx/releases/activity
 compose = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
 composeBom = "2024.05.00" # https://developer.android.com/develop/ui/compose/bom/bom-mapping
+composeCompiler = "1.5.13" # https://developer.android.com/jetpack/androidx/releases/compose-kotlin
 composeM3 = "1.2.1" # https://developer.android.com/jetpack/androidx/releases/compose-material3
 core = "1.13.1" # https://developer.android.com/jetpack/androidx/releases/core
 dataStore = "1.1.1" # https://developer.android.com/jetpack/androidx/releases/datastore
@@ -50,17 +57,17 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-google-hilt = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
+google-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 google-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
-kotlinx-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
-squareup-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
+square-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 
 [plugins]
-application = { id = "com.android.application", version.ref = "agp" }
+android-application = { id = "com.android.application", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 room = { id = "androidx.room", version.ref = "room" }

@@ -1,8 +1,8 @@
 plugins {
-    alias(libs.plugins.application)
+    alias(libs.plugins.android.application)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
-    alias(libs.plugins.kotlin)
+    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room)
@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
-        minSdk = 26
-        targetSdk = 34
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
 
@@ -58,8 +58,7 @@ android {
         jvmTarget = "17"
     }
     composeOptions {
-        // https://developer.android.com/jetpack/androidx/releases/compose-compiler
-        kotlinCompilerExtensionVersion = "1.5.13"
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
     packaging {
         resources {
@@ -77,7 +76,7 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.squareup.leakcanary) // To detect memory leak
+    debugImplementation(libs.square.leakcanary) // To detect memory leak
 
     implementation(libs.android.gms.play.services.maps)
     implementation(libs.android.material) // Theme.Material3.DynamicColors.DayNight
@@ -93,8 +92,8 @@ dependencies {
     implementation(libs.androidx.navigation.compose) // NavHostController
     implementation(libs.androidx.room.ktx) // To use Coroutine features
     implementation(libs.androidx.room.runtime)
-    implementation(libs.google.hilt) // Dependency injection
-    implementation(libs.kotlinx.coroutines) // Asynchronous tasks
+    implementation(libs.google.hilt.android) // Dependency injection
+    implementation(libs.kotlinx.coroutines.android) // Asynchronous tasks
     implementation(libs.kotlinx.serialization) // json
 
     // Dagger’s KSP support is currently in alpha.
