@@ -28,7 +28,7 @@ object SettingsSharedPref {
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
-    private const val WHEEL_OF_FORTUNE_ITEMS = "lucky_spinning_wheel_items"
+    private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
 
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -165,7 +165,7 @@ object SettingsSharedPref {
             }
         }
 
-    fun getLuckySpinningWheelItems(): List<String>? {
+    fun getWheelOfFortuneItems(): List<String>? {
         val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null
         return try {
             val items: WheelOfFortuneItems = Json.decodeFromString(itemsJson)
@@ -176,9 +176,9 @@ object SettingsSharedPref {
         }
     }
 
-    fun setLuckySpinningWheelItems(items: List<String>) {
+    fun setWheelOfFortuneItems(items: List<String>) {
         val itemsJson = Json.encodeToString(WheelOfFortuneItems(items))
-        Log.d(TAG, "lucky spinning wheel items = $itemsJson")
+        Log.d(TAG, "wheel of fortune items = $itemsJson")
         with(sharedPrefs.edit()) {
             putString(WHEEL_OF_FORTUNE_ITEMS, itemsJson)
             apply()

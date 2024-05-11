@@ -11,10 +11,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
-import me.dizzykitty3.androidtoolkitty.ui.AppNavigationHost
+import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
+import me.dizzykitty3.androidtoolkitty.ui.view.AppNavigationHost
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
