@@ -39,6 +39,7 @@ object IntentUtil {
             Log.d(TAG, "startActivity")
             return
         } catch (e: Exception) {
+            ToastUtil.toast(e.message ?: "Unknown error")
             Log.e(TAG, ">>>ERROR<<< startActivity: $e")
         }
 
@@ -87,28 +88,16 @@ object IntentUtil {
             SETTING_12 -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
             else -> return
         }
-
-        try {
-            startActivity(intent, context)
-            Log.d(TAG, "onOpenSystemSettings: $settingType")
-        } catch (e: Exception) {
-            ToastUtil.toast(R.string.system_settings_unsupported)
-            Log.e(TAG, ">>>ERROR<<< openSystemSettings: $e")
-        }
+        startActivity(intent, context)
+        Log.d(TAG, "onOpenSystemSettings: $settingType")
     }
 
     fun openPermissionPage(context: Context) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         val uri = Uri.fromParts(PACKAGE, appContext.packageName, null)
         intent.setData(uri)
-
-        try {
-            startActivity(intent, context)
-            Log.d(TAG, "openPermissionPage")
-        } catch (e: Exception) {
-            ToastUtil.toast(R.string.system_settings_unsupported)
-            Log.e(TAG, ">>>ERROR<<< openPermissionPage: $e")
-        }
+        startActivity(intent, context)
+        Log.d(TAG, "openPermissionPage")
     }
 
     fun openGoogleMaps(latitude: String, longitude: String, context: Context) {
@@ -116,16 +105,10 @@ object IntentUtil {
 
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
-
         val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         intent.setPackage(GOOGLE_MAPS)
-
-        try {
-            startActivity(intent, context)
-            Log.d(TAG, "openGoogleMaps")
-        } catch (e: Exception) {
-            Log.e(TAG, ">>>ERROR<<< openGoogleMaps: $e")
-        }
+        startActivity(intent, context)
+        Log.d(TAG, "openGoogleMaps")
     }
 
     fun openAppOnMarket(packageName: String, context: Context, isGooglePlay: Boolean = true) {
@@ -141,13 +124,8 @@ object IntentUtil {
 
         val intent = Intent(Intent.ACTION_VIEW, marketUri)
         if (isGooglePlay) intent.setPackage(GOOGLE_PLAY)
-
-        try {
-            startActivity(intent, context)
-            Log.d(TAG, "openAppOnMarket")
-        } catch (e: Exception) {
-            Log.e(TAG, ">>>ERROR<<< openCertainAppOnPlayStore: $e")
-        }
+        startActivity(intent, context)
+        Log.d(TAG, "openAppOnMarket")
     }
 
     /**
@@ -170,12 +148,7 @@ object IntentUtil {
 
         val intent = Intent(Intent.ACTION_WEB_SEARCH)
         intent.putExtra(SearchManager.QUERY, query)
-
-        try {
-            startActivity(intent, context)
-            Log.d(TAG, "openSearch")
-        } catch (e: Exception) {
-            Log.e(TAG, ">>>ERROR<<< openSearch: $e")
-        }
+        startActivity(intent, context)
+        Log.d(TAG, "openSearch")
     }
 }
