@@ -21,7 +21,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -57,6 +56,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
 import java.util.Locale
 
@@ -150,53 +150,22 @@ private fun AppearanceOptions() {
     CustomGroupTitleText(id = R.string.appearance)
 
     if (OsVersion.android12()) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                dynamicColor = !dynamicColor
-                onClickDynamicColorButton(view, dynamicColor, primary, context)
-            }
+        CustomSwitchRow(
+            text = R.string.material_you_dynamic_color,
+            checked = dynamicColor
         ) {
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(text = stringResource(R.string.material_you_dynamic_color))
-            }
-            Column {
-                Switch(
-                    checked = dynamicColor,
-                    onCheckedChange = {
-                        dynamicColor = it
-                        onClickDynamicColorButton(view, it, primary, context)
-                    }
-                )
-            }
+            dynamicColor = it
+            onClickDynamicColorButton(view, it, primary, context)
         }
     }
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable {
-            oneHandedMode = !oneHandedMode
-            settingsSharedPref.oneHandedMode = oneHandedMode
-        }
+    CustomSwitchRow(
+        text = R.string.one_handed_mode,
+        checked = oneHandedMode
     ) {
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
-            Text(text = stringResource(R.string.one_handed_mode))
-        }
-        Column {
-            Switch(
-                checked = oneHandedMode,
-                onCheckedChange = {
-                    oneHandedMode = it
-                    settingsSharedPref.oneHandedMode = it
-                }
-            )
-        }
+        oneHandedMode = it
+        settingsSharedPref.oneHandedMode = it
     }
-
 }
 
 @Composable
@@ -204,110 +173,49 @@ private fun GeneralOptions() {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
-    val showClipboardCard = settingsSharedPref.getCardShowedState(CARD_3)
-    var mShowClipboardCard by remember { mutableStateOf(showClipboardCard) }
+    var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
     var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
     var collapseKeyboard by remember { mutableStateOf(settingsSharedPref.collapseKeyboard) }
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
     CustomGroupTitleText(R.string.general)
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable {
-            autoClearClipboard = !autoClearClipboard
-            // Automatically hide Clipboard Card when turning on Clear on Launch feature.
-            if (autoClearClipboard && mShowClipboardCard) {
-                mShowClipboardCard = false
-                settingsSharedPref.saveCardShowedState(CARD_3, false)
-                SnackbarUtil.snackbar(
-                    view,
-                    message = R.string.clipboard_card_hidden,
-                    buttonText = R.string.undo,
-                    buttonColor = primary,
-                    buttonClickListener = {
-                        settingsSharedPref.saveCardShowedState(CARD_3, true)
-                    }
-                )
-            }
-            settingsSharedPref.autoClearClipboard = autoClearClipboard
-        }
+    CustomSwitchRow(
+        text = R.string.clear_clipboard_on_launch,
+        checked = autoClearClipboard
     ) {
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
-            Text(text = stringResource(R.string.clear_clipboard_on_launch))
-        }
-        Column {
-            val primaryColor = MaterialTheme.colorScheme.primary.toArgb()
-
-            Switch(
-                checked = autoClearClipboard,
-                onCheckedChange = {
-                    autoClearClipboard = it
-                    if (autoClearClipboard) {
-                        settingsSharedPref.saveCardShowedState(CARD_3, false)
-                        SnackbarUtil.snackbar(
-                            view,
-                            message = R.string.clipboard_card_hidden,
-                            buttonText = R.string.undo,
-                            buttonColor = primaryColor,
-                            buttonClickListener = {
-                                settingsSharedPref.saveCardShowedState(CARD_3, true)
-                            }
-                        )
-                    }
-                    settingsSharedPref.autoClearClipboard = it
+        autoClearClipboard = it
+        // Automatically hide Clipboard Card when turning on Clear on Launch feature.
+        if (autoClearClipboard && showClipboardCard) {
+            showClipboardCard = false
+            settingsSharedPref.saveCardShowedState(CARD_3, false)
+            SnackbarUtil.snackbar(
+                view,
+                message = R.string.clipboard_card_hidden,
+                buttonText = R.string.undo,
+                buttonColor = primary,
+                buttonClickListener = {
+                    settingsSharedPref.saveCardShowedState(CARD_3, true)
                 }
             )
         }
+        settingsSharedPref.autoClearClipboard = autoClearClipboard
     }
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable {
-            volumeSlideSteps = !volumeSlideSteps
-            settingsSharedPref.sliderIncrement5Percent = volumeSlideSteps
-        }
+    CustomSwitchRow(
+        text = R.string.set_slider_increment_5,
+        checked = volumeSlideSteps
     ) {
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
-            Text(text = stringResource(R.string.set_slider_increment_5))
-        }
-        Column {
-            Switch(
-                checked = volumeSlideSteps,
-                onCheckedChange = {
-                    volumeSlideSteps = it
-                    settingsSharedPref.sliderIncrement5Percent = it
-                }
-            )
-        }
+        volumeSlideSteps = it
+        settingsSharedPref.sliderIncrement5Percent = it
     }
 
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable {
-            collapseKeyboard = !collapseKeyboard
-            settingsSharedPref.collapseKeyboard = collapseKeyboard
-        }
+    CustomSwitchRow(
+        text = R.string.collapse_keyboard_when_back_to_app,
+        checked = collapseKeyboard
     ) {
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
-            Text(text = stringResource(id = R.string.collapse_keyboard_when_back_to_app))
-        }
-        Column {
-            Switch(
-                checked = collapseKeyboard,
-                onCheckedChange = {
-                    collapseKeyboard = it
-                    settingsSharedPref.collapseKeyboard = it
-                }
-            )
-        }
+        collapseKeyboard = it
+        settingsSharedPref.collapseKeyboard = it
     }
 }
 

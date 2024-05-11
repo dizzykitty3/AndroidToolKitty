@@ -42,3 +42,31 @@ fun CustomHideCardSettingSwitch(
         }
     }
 }
+
+@Composable
+fun CustomSwitchRow(
+    @StringRes text: Int,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.clickable {
+            onCheckedChange(!checked)
+        }
+    ) {
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(text))
+        }
+        Column {
+            Switch(
+                checked = checked,
+                onCheckedChange = {
+                    onCheckedChange(it)
+                }
+            )
+        }
+    }
+}
