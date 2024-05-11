@@ -353,4 +353,6 @@ private fun onVisitProfileButton(
 }
 
 private fun needAlterUrlStyle(platform: UrlUtil.Platform): Boolean =
-    platform == UrlUtil.Platform.FANBOX || platform == UrlUtil.Platform.BOOTH
+    platform == UrlUtil.Platform.FANBOX
+            || platform == UrlUtil.Platform.BOOTH
+            || platform == UrlUtil.Platform.TUMBLR

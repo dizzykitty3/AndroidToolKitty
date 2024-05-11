@@ -83,9 +83,12 @@
     <string name="artstation">ArtStation</string>
     <string name="tiktok">TikTok</string>
     <string name="telegram">Telegram</string>
-    <string name="snapchat">Snacpchat</string>
+    <string name="snapchat">Snapchat</string>
     <string name="threads">Threads</string>
     <string name="paypal">PayPal</string>
+    <string name="tumblr">Tumblr</string>
+    <string name="skeb">Skeb</string>
+    <string name="potofu">POTOFU</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>

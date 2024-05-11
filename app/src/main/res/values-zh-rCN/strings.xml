@@ -236,4 +236,7 @@
     <string name="paypal">PayPal</string>
     <string name="appearance">外观</string>
     <string name="sp_values">SP 值</string>
+    <string name="tumblr">Tumblr</string>
+    <string name="skeb">Skeb</string>
+    <string name="potofu">POTOFU</string>
 </resources>
