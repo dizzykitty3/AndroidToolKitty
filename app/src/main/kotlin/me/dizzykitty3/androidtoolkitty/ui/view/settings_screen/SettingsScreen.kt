@@ -70,8 +70,12 @@ fun SettingsScreen(navController: NavHostController) {
         CustomCard(
             title = R.string.settings
         ) {
+            AppearanceOptions()
+            CustomGroupDivider()
+
             GeneralOptions()
             CustomGroupDivider()
+
             CustomizeOptions(navController = navController)
             @Suppress("KotlinConstantConditions")
             AnimatedVisibility(
@@ -124,26 +128,85 @@ fun SettingsScreen(navController: NavHostController) {
                 Text(text = versionInfo)
             }
             CustomGroupDivider()
+
             Contributor()
             CustomGroupDivider()
+
             SourceAndLicenses()
         }
     }
 }
 
 @Composable
-private fun GeneralOptions() {
+private fun AppearanceOptions() {
     val view = LocalView.current
     val context = LocalContext.current
+    val settingsSharedPref = remember { SettingsSharedPref }
+    var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
+    var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
+    val primary = MaterialTheme.colorScheme.primary.toArgb()
+
+    CustomGroupTitleText(id = R.string.appearance)
+
+    if (OsVersion.android12()) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.clickable {
+                dynamicColor = !dynamicColor
+                onClickDynamicColorButton(view, dynamicColor, primary, context)
+            }
+        ) {
+            Column(
+                modifier = Modifier.weight(1f)
+            ) {
+                Text(text = stringResource(R.string.material_you_dynamic_color))
+            }
+            Column {
+                Switch(
+                    checked = dynamicColor,
+                    onCheckedChange = {
+                        dynamicColor = it
+                        onClickDynamicColorButton(view, it, primary, context)
+                    }
+                )
+            }
+        }
+    }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.clickable {
+            oneHandedMode = !oneHandedMode
+            settingsSharedPref.oneHandedMode = oneHandedMode
+        }
+    ) {
+        Column(
+            modifier = Modifier.weight(1f)
+        ) {
+            Text(text = stringResource(R.string.one_handed_mode))
+        }
+        Column {
+            Switch(
+                checked = oneHandedMode,
+                onCheckedChange = {
+                    oneHandedMode = it
+                    settingsSharedPref.oneHandedMode = it
+                }
+            )
+        }
+    }
+
+}
+
+@Composable
+private fun GeneralOptions() {
+    val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
     val showClipboardCard = settingsSharedPref.getCardShowedState(CARD_3)
     var mShowClipboardCard by remember { mutableStateOf(showClipboardCard) }
-    var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
-    var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
     var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
     var collapseKeyboard by remember { mutableStateOf(settingsSharedPref.collapseKeyboard) }
-
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
     CustomGroupTitleText(R.string.general)
@@ -222,53 +285,6 @@ private fun GeneralOptions() {
         }
     }
 
-    if (OsVersion.android12()) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.clickable {
-                dynamicColor = !dynamicColor
-                onClickDynamicColorButton(view, dynamicColor, primary, context)
-            }
-        ) {
-            Column(
-                modifier = Modifier.weight(1f)
-            ) {
-                Text(text = stringResource(R.string.material_you_dynamic_color))
-            }
-            Column {
-                Switch(
-                    checked = dynamicColor,
-                    onCheckedChange = {
-                        dynamicColor = it
-                        onClickDynamicColorButton(view, it, primary, context)
-                    }
-                )
-            }
-        }
-    }
-
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable {
-            oneHandedMode = !oneHandedMode
-            settingsSharedPref.oneHandedMode = oneHandedMode
-        }
-    ) {
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
-            Text(text = stringResource(R.string.one_handed_mode))
-        }
-        Column {
-            Switch(
-                checked = oneHandedMode,
-                onCheckedChange = {
-                    oneHandedMode = it
-                    settingsSharedPref.oneHandedMode = it
-                }
-            )
-        }
-    }
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
