@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.Upload
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -260,6 +261,7 @@ private fun NoPlatformYouNeedHere() {
 
     if (showDialog) {
         AlertDialog(
+            icon = { Icon(imageVector = Icons.Outlined.Upload, contentDescription = null) },
             onDismissRequest = { showDialog = false },
             title = { Text(text = stringResource(id = R.string.submit_the_platform_you_need)) },
             text = {

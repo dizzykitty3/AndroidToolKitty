@@ -13,6 +13,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Code
+import androidx.compose.material.icons.outlined.DataObject
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.AlertDialog
@@ -357,8 +358,9 @@ private fun DebuggingOptions(navController: NavHostController) {
 
     if (showSpDialog) {
         AlertDialog(
+            icon = { Icon(imageVector = Icons.Outlined.DataObject, contentDescription = null) },
             onDismissRequest = { showSpDialog = false },
-            title = { Text(text = stringResource(id = R.string.check_sp_values)) },
+            title = { Text(text = stringResource(id = R.string.sp_values)) },
             text = {
                 Column {
                     CustomTip(id = R.string.under_development)

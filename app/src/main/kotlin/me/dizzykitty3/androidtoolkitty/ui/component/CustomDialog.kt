@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty.ui.component
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DeleteForever
+import androidx.compose.material.icons.outlined.Warning
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -52,6 +53,7 @@ fun CustomAlertDialogButton(
 
     if (showDialog) {
         AlertDialog(
+            icon = { Icon(imageVector = Icons.Outlined.Warning, contentDescription = null) },
             onDismissRequest = { showDialog = false },
             title = { Text(text = dialogMessageTitle) },
             text = { dialogMessage() },

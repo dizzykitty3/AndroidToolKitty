@@ -149,6 +149,12 @@ fun VolumeCard() {
                 }
 
                 AlertDialog(
+                    icon = {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Outlined.VolumeUp,
+                            contentDescription = null
+                        )
+                    },
                     onDismissRequest = {
                         // Ignore
                     },
