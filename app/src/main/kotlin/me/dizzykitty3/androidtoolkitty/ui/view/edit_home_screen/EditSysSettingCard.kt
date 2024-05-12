@@ -181,30 +181,47 @@ fun EditSysSettingCard() {
 
         val view = LocalView.current
         val primary = MaterialTheme.colorScheme.primary.toArgb()
+        val showSnackbarToConfirm = settingsSharedPref.showSnackbarToConfirm
 
         Button(
             onClick = {
-                SnackbarUtil.snackbar(
-                    view,
-                    message = R.string.tap_to_confirm,
-                    buttonText = R.string.confirm,
-                    buttonColor = primary,
-                    buttonClickListener = {
-                        onClickChangeAllCardsButton(false)
-                        mIsShowSetting1 = false
-                        mIsShowSetting2 = false
-                        mIsShowSetting3 = false
-                        mIsShowSetting4 = false
-                        mIsShowSetting5 = false
-                        mIsShowSetting6 = false
-                        mIsShowSetting7 = false
-                        mIsShowSetting8 = false
-                        mIsShowSetting9 = false
-                        mIsShowSetting10 = false
-                        mIsShowSetting11 = false
-                        mIsShowSetting12 = false
-                    }
-                )
+                if (showSnackbarToConfirm) {
+                    SnackbarUtil.snackbar(
+                        view,
+                        message = R.string.tap_to_confirm,
+                        buttonText = R.string.confirm,
+                        buttonColor = primary,
+                        buttonClickListener = {
+                            onClickChangeAllCardsButton(false)
+                            mIsShowSetting1 = false
+                            mIsShowSetting2 = false
+                            mIsShowSetting3 = false
+                            mIsShowSetting4 = false
+                            mIsShowSetting5 = false
+                            mIsShowSetting6 = false
+                            mIsShowSetting7 = false
+                            mIsShowSetting8 = false
+                            mIsShowSetting9 = false
+                            mIsShowSetting10 = false
+                            mIsShowSetting11 = false
+                            mIsShowSetting12 = false
+                        }
+                    )
+                } else {
+                    onClickChangeAllCardsButton(false)
+                    mIsShowSetting1 = false
+                    mIsShowSetting2 = false
+                    mIsShowSetting3 = false
+                    mIsShowSetting4 = false
+                    mIsShowSetting5 = false
+                    mIsShowSetting6 = false
+                    mIsShowSetting7 = false
+                    mIsShowSetting8 = false
+                    mIsShowSetting9 = false
+                    mIsShowSetting10 = false
+                    mIsShowSetting11 = false
+                    mIsShowSetting12 = false
+                }
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
@@ -219,27 +236,43 @@ fun EditSysSettingCard() {
 
         Button(
             onClick = {
-                SnackbarUtil.snackbar(
-                    view,
-                    message = R.string.tap_to_confirm,
-                    buttonText = R.string.confirm,
-                    buttonColor = primary,
-                    buttonClickListener = {
-                        onClickChangeAllCardsButton(true)
-                        mIsShowSetting1 = true
-                        mIsShowSetting2 = true
-                        mIsShowSetting3 = true
-                        mIsShowSetting4 = true
-                        mIsShowSetting5 = true
-                        mIsShowSetting6 = true
-                        mIsShowSetting7 = true
-                        mIsShowSetting8 = true
-                        mIsShowSetting9 = true
-                        mIsShowSetting10 = true
-                        mIsShowSetting11 = true
-                        mIsShowSetting12 = true
-                    }
-                )
+                if (showSnackbarToConfirm) {
+                    SnackbarUtil.snackbar(
+                        view,
+                        message = R.string.tap_to_confirm,
+                        buttonText = R.string.confirm,
+                        buttonColor = primary,
+                        buttonClickListener = {
+                            onClickChangeAllCardsButton(true)
+                            mIsShowSetting1 = true
+                            mIsShowSetting2 = true
+                            mIsShowSetting3 = true
+                            mIsShowSetting4 = true
+                            mIsShowSetting5 = true
+                            mIsShowSetting6 = true
+                            mIsShowSetting7 = true
+                            mIsShowSetting8 = true
+                            mIsShowSetting9 = true
+                            mIsShowSetting10 = true
+                            mIsShowSetting11 = true
+                            mIsShowSetting12 = true
+                        }
+                    )
+                } else {
+                    onClickChangeAllCardsButton(true)
+                    mIsShowSetting1 = true
+                    mIsShowSetting2 = true
+                    mIsShowSetting3 = true
+                    mIsShowSetting4 = true
+                    mIsShowSetting5 = true
+                    mIsShowSetting6 = true
+                    mIsShowSetting7 = true
+                    mIsShowSetting8 = true
+                    mIsShowSetting9 = true
+                    mIsShowSetting10 = true
+                    mIsShowSetting11 = true
+                    mIsShowSetting12 = true
+                }
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {

@@ -88,7 +88,7 @@
     <string name="set_time_automatically_is_off_tip">「自动设置时间」未启用。某些应用部分功能可能表现异常。</string>
     <string name="warning">警告</string>
     <string name="erase_all_data">清除所有数据</string>
-    <string name="open_on_other_markets">在其他应用商店打开</string>
+    <string name="open_on_other_markets">前往其他应用商店</string>
     <string name="android_versions">Android 版本历史</string>
     <string name="customize_my_home_page">自定义显示的卡片</string>
     <string name="add_custom_volume">添加一个自定义音量</string>
@@ -231,7 +231,7 @@
     <string name="artstation">ArtStation</string>
     <string name="tiktok">TikTok</string>
     <string name="telegram">Telegram</string>
-    <string name="snapchat">Snacpchat</string>
+    <string name="snapchat">Snapchat</string>
     <string name="threads">Threads</string>
     <string name="paypal">PayPal</string>
     <string name="appearance">外观</string>
@@ -239,4 +239,6 @@
     <string name="tumblr">Tumblr</string>
     <string name="skeb">Skeb</string>
     <string name="potofu">POTOFU</string>
+    <string name="show_divider">显示分界线</string>
+    <string name="show_snackbar_to_confirm">在确认动作前显示 snackbar</string>
 </resources>

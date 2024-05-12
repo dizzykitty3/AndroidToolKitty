@@ -176,30 +176,47 @@ fun EditHomeScreen() {
             CustomGroupDivider()
 
             val primary = MaterialTheme.colorScheme.primary.toArgb()
+            val showSnackbarToConfirm = settingsSharedPref.showSnackbarToConfirm
 
             Button(
                 onClick = {
-                    SnackbarUtil.snackbar(
-                        view,
-                        message = R.string.tap_to_confirm,
-                        buttonText = R.string.confirm,
-                        buttonColor = primary,
-                        buttonClickListener = {
-                            onClickChangeAllCardsButton(false)
-                            mIsShowCard1 = false
-                            mIsShowCard2 = false
-                            mIsShowCard3 = false
-                            mIsShowCard4 = false
-                            mIsShowCard5 = false
-                            mIsShowCard6 = false
-                            mIsShowCard7 = false
-                            mIsShowCard8 = false
-                            mIsShowCard9 = false
-                            mIsShowCard10 = false
-                            mIsShowCard11 = false
-                            mIsShowCard12 = false
-                        }
-                    )
+                    if (showSnackbarToConfirm) {
+                        SnackbarUtil.snackbar(
+                            view,
+                            message = R.string.tap_to_confirm,
+                            buttonText = R.string.confirm,
+                            buttonColor = primary,
+                            buttonClickListener = {
+                                onClickChangeAllCardsButton(false)
+                                mIsShowCard1 = false
+                                mIsShowCard2 = false
+                                mIsShowCard3 = false
+                                mIsShowCard4 = false
+                                mIsShowCard5 = false
+                                mIsShowCard6 = false
+                                mIsShowCard7 = false
+                                mIsShowCard8 = false
+                                mIsShowCard9 = false
+                                mIsShowCard10 = false
+                                mIsShowCard11 = false
+                                mIsShowCard12 = false
+                            }
+                        )
+                    } else {
+                        onClickChangeAllCardsButton(false)
+                        mIsShowCard1 = false
+                        mIsShowCard2 = false
+                        mIsShowCard3 = false
+                        mIsShowCard4 = false
+                        mIsShowCard5 = false
+                        mIsShowCard6 = false
+                        mIsShowCard7 = false
+                        mIsShowCard8 = false
+                        mIsShowCard9 = false
+                        mIsShowCard10 = false
+                        mIsShowCard11 = false
+                        mIsShowCard12 = false
+                    }
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {
@@ -214,27 +231,43 @@ fun EditHomeScreen() {
 
             Button(
                 onClick = {
-                    SnackbarUtil.snackbar(
-                        view,
-                        message = R.string.tap_to_confirm,
-                        buttonText = R.string.confirm,
-                        buttonColor = primary,
-                        buttonClickListener = {
-                            onClickChangeAllCardsButton(true)
-                            mIsShowCard1 = true
-                            mIsShowCard2 = true
-                            mIsShowCard3 = true
-                            mIsShowCard4 = true
-                            mIsShowCard5 = true
-                            mIsShowCard6 = true
-                            mIsShowCard7 = true
-                            mIsShowCard8 = true
-                            mIsShowCard9 = true
-                            mIsShowCard10 = true
-                            mIsShowCard11 = true
-                            mIsShowCard12 = true
-                        }
-                    )
+                    if (showSnackbarToConfirm) {
+                        SnackbarUtil.snackbar(
+                            view,
+                            message = R.string.tap_to_confirm,
+                            buttonText = R.string.confirm,
+                            buttonColor = primary,
+                            buttonClickListener = {
+                                onClickChangeAllCardsButton(true)
+                                mIsShowCard1 = true
+                                mIsShowCard2 = true
+                                mIsShowCard3 = true
+                                mIsShowCard4 = true
+                                mIsShowCard5 = true
+                                mIsShowCard6 = true
+                                mIsShowCard7 = true
+                                mIsShowCard8 = true
+                                mIsShowCard9 = true
+                                mIsShowCard10 = true
+                                mIsShowCard11 = true
+                                mIsShowCard12 = true
+                            }
+                        )
+                    } else {
+                        onClickChangeAllCardsButton(true)
+                        mIsShowCard1 = true
+                        mIsShowCard2 = true
+                        mIsShowCard3 = true
+                        mIsShowCard4 = true
+                        mIsShowCard5 = true
+                        mIsShowCard6 = true
+                        mIsShowCard7 = true
+                        mIsShowCard8 = true
+                        mIsShowCard9 = true
+                        mIsShowCard10 = true
+                        mIsShowCard11 = true
+                        mIsShowCard12 = true
+                    }
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {

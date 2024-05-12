@@ -31,6 +31,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 
 @Composable
 fun CustomGradientText(
@@ -131,9 +132,19 @@ fun CustomTip(
 fun CustomGroupTitleText(
     @StringRes id: Int
 ) {
-    Text(
-        text = stringResource(id = id),
-        style = MaterialTheme.typography.titleMedium
-    )
+    val showDivider = SettingsSharedPref.showDivider
+
+    if (showDivider) {
+        Text(
+            text = stringResource(id = id),
+            style = MaterialTheme.typography.titleMedium
+        )
+    } else {
+        Text(
+            text = stringResource(id = id),
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.primary
+        )
+    }
     CustomSpacerPadding()
 }

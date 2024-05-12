@@ -1,6 +1,6 @@
 <resources>
     <!-- Common -->
-    <string name="version_number" translatable="false">20240511</string>
+    <string name="version_number" translatable="false">20240512</string>
     <string name="label_optional">Label (optional)</string>
     <string name="edit">Edit</string>
     <string name="visit">Visit</string>
@@ -255,6 +255,8 @@
     <string name="restart_app">Restart app</string>
     <string name="appearance">Appearance</string>
     <string name="sp_values">SharedPreferences values</string>
+    <string name="show_divider">Show divider</string>
+    <string name="show_snackbar_to_confirm">Show snackbar before confirmation</string>
 
     <!-- Settings screen: about -->
     <string name="about">About</string>

@@ -145,26 +145,26 @@ private fun AppearanceOptions() {
     val settingsSharedPref = remember { SettingsSharedPref }
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
+    var showDivider by remember { mutableStateOf(settingsSharedPref.showDivider) }
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
     CustomGroupTitleText(id = R.string.appearance)
 
     if (OsVersion.android12()) {
-        CustomSwitchRow(
-            text = R.string.material_you_dynamic_color,
-            checked = dynamicColor
-        ) {
+        CustomSwitchRow(text = R.string.material_you_dynamic_color, checked = dynamicColor) {
             dynamicColor = it
             onClickDynamicColorButton(view, it, primary, context)
         }
     }
 
-    CustomSwitchRow(
-        text = R.string.one_handed_mode,
-        checked = oneHandedMode
-    ) {
+    CustomSwitchRow(text = R.string.one_handed_mode, checked = oneHandedMode) {
         oneHandedMode = it
         settingsSharedPref.oneHandedMode = it
+    }
+
+    CustomSwitchRow(text = R.string.show_divider, checked = showDivider) {
+        showDivider = it
+        settingsSharedPref.showDivider = it
     }
 }
 
@@ -176,6 +176,7 @@ private fun GeneralOptions() {
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
     var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
     var collapseKeyboard by remember { mutableStateOf(settingsSharedPref.collapseKeyboard) }
+    var showSnackbarToConfirm by remember { mutableStateOf(settingsSharedPref.showSnackbarToConfirm) }
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
     CustomGroupTitleText(R.string.general)
@@ -202,10 +203,7 @@ private fun GeneralOptions() {
         settingsSharedPref.autoClearClipboard = autoClearClipboard
     }
 
-    CustomSwitchRow(
-        text = R.string.set_slider_increment_5,
-        checked = volumeSlideSteps
-    ) {
+    CustomSwitchRow(text = R.string.set_slider_increment_5, checked = volumeSlideSteps) {
         volumeSlideSteps = it
         settingsSharedPref.sliderIncrement5Percent = it
     }
@@ -216,6 +214,11 @@ private fun GeneralOptions() {
     ) {
         collapseKeyboard = it
         settingsSharedPref.collapseKeyboard = it
+    }
+
+    CustomSwitchRow(text = R.string.show_snackbar_to_confirm, checked = showSnackbarToConfirm) {
+        showSnackbarToConfirm = it
+        settingsSharedPref.showSnackbarToConfirm = it
     }
 }
 
@@ -326,14 +329,20 @@ private fun onClickDynamicColorButton(
     color: Int,
     context: Context
 ) {
+    val showSnackbarToConfirm = SettingsSharedPref.showSnackbarToConfirm
+
     SettingsSharedPref.dynamicColor = isDynamicColor
-    SnackbarUtil.snackbar(
-        view,
-        message = R.string.requires_restart_do_it_now,
-        buttonText = R.string.restart,
-        buttonColor = color,
-        buttonClickListener = { IntentUtil.restartApp(context) }
-    )
+    if (showSnackbarToConfirm) {
+        SnackbarUtil.snackbar(
+            view,
+            message = R.string.requires_restart_do_it_now,
+            buttonText = R.string.restart,
+            buttonColor = color,
+            buttonClickListener = { IntentUtil.restartApp(context) }
+        )
+    } else {
+        IntentUtil.restartApp(context)
+    }
 }
 
 @Composable

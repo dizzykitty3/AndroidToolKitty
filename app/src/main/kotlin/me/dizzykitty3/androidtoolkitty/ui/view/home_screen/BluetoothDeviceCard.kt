@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.const.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.util.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
@@ -65,6 +66,8 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
         val materialColor = MaterialTheme.colorScheme.primary.toArgb()
 
+        val showSnackbarToConfirm = SettingsSharedPref.showSnackbarToConfirm
+
         Button(
             onClick = {
                 // Check permission
@@ -86,13 +89,17 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 }
 
                 // When Bluetooth is OFF
-                SnackbarUtil.snackbar(
-                    view,
-                    message = R.string.bluetooth_disabled,
-                    buttonText = R.string.turn_on_bluetooth,
-                    buttonColor = materialColor,
-                    buttonClickListener = { IntentUtil.openBluetooth(context) }
-                )
+                if (showSnackbarToConfirm) {
+                    SnackbarUtil.snackbar(
+                        view,
+                        message = R.string.bluetooth_disabled,
+                        buttonText = R.string.turn_on_bluetooth,
+                        buttonColor = materialColor,
+                        buttonClickListener = { IntentUtil.openBluetooth(context) }
+                    )
+                } else {
+                    IntentUtil.openBluetooth(context)
+                }
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {

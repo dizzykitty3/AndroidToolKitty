@@ -262,7 +262,9 @@ private fun NoPlatformYouNeedHere() {
     if (showDialog) {
         AlertDialog(
             icon = { Icon(imageVector = Icons.Outlined.Upload, contentDescription = null) },
-            onDismissRequest = { showDialog = false },
+            onDismissRequest = {
+                // Ignore
+            },
             title = { Text(text = stringResource(id = R.string.submit_the_platform_you_need)) },
             text = {
                 Column {
