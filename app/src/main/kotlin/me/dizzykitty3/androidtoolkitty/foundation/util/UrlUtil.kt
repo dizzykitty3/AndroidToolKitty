@@ -113,6 +113,10 @@ object UrlUtil {
         ARTSTATION("artstation.com/", R.string.artstation),
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
+        BLUESKY(
+            "bsky.app/profile/",
+            R.string.bluesky
+        ), // e.g. bsky.app/profile/username.bsky.social
         BOOTH(".booth.pm", R.string.booth), // e.g. username.booth.pm
         FACEBOOK("facebook.com/", R.string.facebook),
         FANBOX(".fanbox.cc", R.string.fanbox), // e.g. username.fanbox.cc

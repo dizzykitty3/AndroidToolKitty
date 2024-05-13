@@ -18,9 +18,9 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,7 +35,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
@@ -48,35 +47,30 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomBoldText
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupTitleText
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomIconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
+import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui.component.IconAndTextPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.WarningAlertDialogButton
 import java.util.Locale
 
 @Composable
 fun SettingsScreen(navController: NavHostController) {
     CustomScreen {
         val view = LocalView.current
-
         val debuggingOptions = SettingsSharedPref.debuggingOptions
         var tapCount by remember { mutableIntStateOf(0) }
 
-        CustomCard(
-            title = R.string.settings
-        ) {
+        CustomCard(title = R.string.settings) {
             AppearanceOptions()
-            CustomGroupDivider()
-
+            GroupDivider()
             GeneralOptions()
-            CustomGroupDivider()
-
+            GroupDivider()
             CustomizeOptions(navController = navController)
             @Suppress("KotlinConstantConditions")
             AnimatedVisibility(
@@ -84,15 +78,13 @@ fun SettingsScreen(navController: NavHostController) {
                 enter = fadeIn(animationSpec = tween(durationMillis = 2000))
             ) {
                 Column {
-                    CustomGroupDivider()
+                    GroupDivider()
                     DebuggingOptions(navController)
                 }
             }
         }
 
-        CustomCard(
-            title = R.string.about
-        ) {
+        CustomCard(title = R.string.about) {
             CustomGroupTitleText(id = R.string.version)
             Row(
                 modifier = Modifier.clickable {
@@ -115,24 +107,12 @@ fun SettingsScreen(navController: NavHostController) {
                     imageVector = Icons.Outlined.Schedule,
                     contentDescription = stringResource(id = R.string.version)
                 )
-                CustomIconAndTextPadding()
-
-                @Suppress("KotlinConstantConditions")
-                val debugVariant = BuildConfig.BUILD_TYPE == "debug"
-
-                @Suppress("KotlinConstantConditions")
-                val versionInfo =
-                    if (debugVariant)
-                        "${stringResource(R.string.version)} ${stringResource(R.string.version_number)} dev"
-                    else
-                        "${stringResource(R.string.version)} ${stringResource(R.string.version_number)}"
-                Text(text = versionInfo)
+                IconAndTextPadding()
+                Text(text = "${stringResource(R.string.version)} ${BuildConfig.VERSION_NAME}")
             }
-            CustomGroupDivider()
-
+            GroupDivider()
             Contributor()
-            CustomGroupDivider()
-
+            GroupDivider()
             SourceAndLicenses()
         }
     }
@@ -176,7 +156,7 @@ private fun GeneralOptions() {
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
     var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
     var collapseKeyboard by remember { mutableStateOf(settingsSharedPref.collapseKeyboard) }
-    var showSnackbarToConfirm by remember { mutableStateOf(settingsSharedPref.showSnackbarToConfirm) }
+    var showSnackbarToConfirm by remember { mutableStateOf(settingsSharedPref.showSnackbar) }
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
     CustomGroupTitleText(R.string.general)
@@ -218,7 +198,7 @@ private fun GeneralOptions() {
 
     CustomSwitchRow(text = R.string.show_snackbar_to_confirm, checked = showSnackbarToConfirm) {
         showSnackbarToConfirm = it
-        settingsSharedPref.showSnackbarToConfirm = it
+        settingsSharedPref.showSnackbar = it
     }
 }
 
@@ -226,16 +206,15 @@ private fun GeneralOptions() {
 private fun CustomizeOptions(navController: NavHostController) {
     CustomGroupTitleText(R.string.customize)
 
-    Button(
-        onClick = { navController.navigate(EDIT_HOME_SCREEN) },
-        elevation = ButtonDefaults.buttonElevation(1.dp)
+    OutlinedButton(
+        onClick = { navController.navigate(EDIT_HOME_SCREEN) }
     ) {
         Icon(
             imageVector = Icons.Outlined.Edit,
             contentDescription = stringResource(id = R.string.customize_my_home_page),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
-        CustomSpacerPadding()
+        SpacerPadding()
         Text(text = stringResource(R.string.customize_my_home_page))
     }
 }
@@ -251,17 +230,13 @@ private fun DebuggingOptions(navController: NavHostController) {
     Text(text = "Android ${Build.VERSION.RELEASE}, API ${Build.VERSION.SDK_INT}")
     Text(text = "Language =  ${Locale.getDefault()}")
 
-    CustomSpacerPadding()
+    SpacerPadding()
 
-    Button(
-        onClick = { navController.navigate(PERMISSION_REQUEST_SCREEN) }
-    ) {
+    OutlinedButton(onClick = { navController.navigate(PERMISSION_REQUEST_SCREEN) }) {
         Text(text = stringResource(id = R.string.go_to_permission_request_screen))
     }
 
-    Button(
-        onClick = { showSpDialog = true }
-    ) {
+    OutlinedButton(onClick = { showSpDialog = true }) {
         Text(text = stringResource(id = R.string.check_sp_values))
     }
 
@@ -294,13 +269,11 @@ private fun DebuggingOptions(navController: NavHostController) {
         )
     }
 
-    Button(
-        onClick = { IntentUtil.restartApp(context) }
-    ) {
+    OutlinedButton(onClick = { IntentUtil.restartApp(context) }) {
         Text(text = stringResource(id = R.string.restart_app))
     }
 
-    CustomAlertDialogButton(
+    WarningAlertDialogButton(
         buttonText = stringResource(R.string.erase_all_app_data),
         dialogMessageTitle = stringResource(R.string.warning),
         dialogMessage = {
@@ -329,7 +302,7 @@ private fun onClickDynamicColorButton(
     color: Int,
     context: Context
 ) {
-    val showSnackbarToConfirm = SettingsSharedPref.showSnackbarToConfirm
+    val showSnackbarToConfirm = SettingsSharedPref.showSnackbar
 
     SettingsSharedPref.dynamicColor = isDynamicColor
     if (showSnackbarToConfirm) {
@@ -349,14 +322,12 @@ private fun onClickDynamicColorButton(
 private fun Contributor() {
     CustomGroupTitleText(id = R.string.contributors)
     DeveloperProfileLink("dizzykitty3")
-    CustomSpacerPadding()
+    SpacerPadding()
     DeveloperProfileLink("HongjieCN")
 }
 
 @Composable
-private fun DeveloperProfileLink(
-    name: String
-) {
+private fun DeveloperProfileLink(name: String) {
     Row {
         val context = LocalContext.current
 
@@ -364,7 +335,7 @@ private fun DeveloperProfileLink(
             imageVector = Icons.Outlined.AccountCircle,
             contentDescription = stringResource(id = R.string.developer_profile_link)
         )
-        CustomIconAndTextPadding()
+        IconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
                 IntentUtil.openUrl(
@@ -406,7 +377,7 @@ private fun GitHubRepoLink() {
             imageVector = Icons.Outlined.Code,
             contentDescription = stringResource(id = R.string.developer_profile_link)
         )
-        CustomIconAndTextPadding()
+        IconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
                 ToastUtil.toast(R.string.all_help_welcomed)

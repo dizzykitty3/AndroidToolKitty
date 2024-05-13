@@ -21,7 +21,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupDivider
+import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 
 @Preview
 @Composable
@@ -31,7 +31,6 @@ fun PermissionRequestCard() {
         icon = Icons.Outlined.Shield
     ) {
         var clickCount by remember { mutableIntStateOf(0) }
-
         val view = LocalView.current
         val context = LocalContext.current
 
@@ -52,7 +51,7 @@ fun PermissionRequestCard() {
         }
 
         if (clickCount >= 2) {
-            CustomGroupDivider()
+            GroupDivider()
             ManuallyGrant()
         }
     }

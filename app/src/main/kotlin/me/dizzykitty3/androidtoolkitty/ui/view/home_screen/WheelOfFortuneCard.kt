@@ -30,10 +30,9 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Remove
 import androidx.compose.material.icons.outlined.Casino
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -65,7 +64,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -138,8 +137,8 @@ fun WheelOfFortuneCard() {
         ) {
             val primary = MaterialTheme.colorScheme.primary
 
-            CustomSpacerPadding()
-            CustomSpacerPadding()
+            SpacerPadding()
+            SpacerPadding()
 
             // 绘制转盘
             Canvas(modifier = Modifier
@@ -206,10 +205,10 @@ fun WheelOfFortuneCard() {
                 )
             }
 
-            CustomSpacerPadding()
+            SpacerPadding()
 
             // 旋转按钮
-            Button(
+            OutlinedButton(
                 onClick = {
                     if (items.isNotEmpty() && !isSpinning) {
                         if (expanded) {
@@ -221,8 +220,7 @@ fun WheelOfFortuneCard() {
                         val fineTunedAngle = Random.nextInt(360)
                         targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
                     }
-                },
-                elevation = ButtonDefaults.buttonElevation(1.dp)
+                }
             ) {
                 Text(text = stringResource(R.string.spin))
             }

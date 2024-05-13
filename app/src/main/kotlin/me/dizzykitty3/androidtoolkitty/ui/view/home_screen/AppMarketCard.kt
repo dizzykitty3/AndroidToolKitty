@@ -29,7 +29,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 
 @Preview
 @Composable
@@ -39,7 +39,6 @@ fun AppMarketCard() {
         title = R.string.check_app_on_market
     ) {
         val context = LocalContext.current
-
         var packageName by remember { mutableStateOf("") }
 
         OutlinedTextField(
@@ -60,7 +59,7 @@ fun AppMarketCard() {
             }
         )
 
-        CustomSpacerPadding()
+        SpacerPadding()
         WhatIsPackageName()
 
         TextButton(

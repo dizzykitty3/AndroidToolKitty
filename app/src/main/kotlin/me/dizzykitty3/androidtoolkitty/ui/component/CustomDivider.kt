@@ -5,16 +5,14 @@ import androidx.compose.runtime.Composable
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 
 @Composable
-fun CustomGroupDivider() {
+fun GroupDivider() {
     val showDivider = SettingsSharedPref.showDivider
 
+    SpacerPadding()
     if (showDivider) {
-        CustomSpacerPadding()
-        CustomSpacerPadding()
+        SpacerPadding()
         HorizontalDivider()
-        CustomSpacerPadding()
-        CustomSpacerPadding()
-    } else {
-        CustomSpacerPadding()
+        SpacerPadding()
     }
+    SpacerPadding()
 }

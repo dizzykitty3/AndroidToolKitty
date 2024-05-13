@@ -25,10 +25,10 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupTitleText
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSystemSettingsButton
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
+import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui.component.SystemSettingButton
 
 @Composable
 fun SysSettingCard() {
@@ -81,14 +81,14 @@ fun SysSettingCard() {
         if (isShowGroupTitle1) CustomGroupTitleText(R.string.common)
 
         if (isShowSetting[SETTING_1] == true) {
-            CustomSystemSettingsButton(
+            SystemSettingButton(
                 settingType = SETTING_1,
                 buttonText = R.string.open_display_settings
             )
         }
 
         if (isShowSetting[SETTING_2] == true && OsVersion.android12()) {
-            CustomSystemSettingsButton(
+            SystemSettingButton(
                 settingType = SETTING_2,
                 buttonText = R.string.open_auto_rotate_settings
             )
@@ -96,31 +96,31 @@ fun SysSettingCard() {
 
         settings.subList(2, 6).forEach { setting ->
             if (isShowSetting[setting.settingType] == true) {
-                CustomSystemSettingsButton(
+                SystemSettingButton(
                     settingType = setting.settingType,
                     buttonText = setting.buttonText
                 )
             }
         }
 
-        if (isShowGroupTitle1 && isShowGroupTitle2) CustomGroupDivider()
+        if (isShowGroupTitle1 && isShowGroupTitle2) GroupDivider()
         if (isShowGroupTitle2) CustomGroupTitleText(R.string.permission)
 
         settings.subList(6, 9).forEach { setting ->
             if (isShowSetting[setting.settingType] == true) {
-                CustomSystemSettingsButton(
+                SystemSettingButton(
                     settingType = setting.settingType,
                     buttonText = setting.buttonText
                 )
             }
         }
 
-        if ((isShowGroupTitle1 || isShowGroupTitle2) && isShowGroupTitle3) CustomGroupDivider()
+        if ((isShowGroupTitle1 || isShowGroupTitle2) && isShowGroupTitle3) GroupDivider()
         if (isShowGroupTitle3) CustomGroupTitleText(R.string.debugging)
 
         settings.subList(9, 12).forEach { setting ->
             if (isShowSetting[setting.settingType] == true) {
-                CustomSystemSettingsButton(
+                SystemSettingButton(
                     settingType = setting.settingType,
                     buttonText = setting.buttonText
                 )

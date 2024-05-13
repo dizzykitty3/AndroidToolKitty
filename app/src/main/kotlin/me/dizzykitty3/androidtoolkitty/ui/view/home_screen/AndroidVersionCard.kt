@@ -36,12 +36,8 @@ fun AndroidVersionCard() {
 
 @Composable
 private fun RecentVersions() {
-    Row(
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Column(
-            modifier = Modifier.weight(0.4f)
-        ) {
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Column(modifier = Modifier.weight(0.4f)) {
             AndroidVersion(id = R.string.android_15)
             AndroidVersion(id = R.string.android_14)
             AndroidVersion(id = R.string.android_13)
@@ -49,9 +45,7 @@ private fun RecentVersions() {
             AndroidVersion(id = R.string.android_12)
         }
 
-        Column(
-            modifier = Modifier.weight(0.6f)
-        ) {
+        Column(modifier = Modifier.weight(0.6f)) {
             AndroidApiLevelAndName(id = R.string.api_35)
             AndroidApiLevelAndName(id = R.string.api_34)
             AndroidApiLevelAndName(id = R.string.api_33)
@@ -65,12 +59,8 @@ private fun RecentVersions() {
 private fun EarlyVersions() {
     var expanded by remember { mutableStateOf(false) }
     if (expanded) {
-        Row(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Column(
-                modifier = Modifier.weight(0.4f)
-            ) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.weight(0.4f)) {
                 AndroidVersion(id = R.string.android_11)
                 AndroidVersion(id = R.string.android_10)
                 AndroidVersion(id = R.string.android_9)
@@ -97,9 +87,7 @@ private fun EarlyVersions() {
                 AndroidVersion(id = R.string.android_2_1)
             }
 
-            Column(
-                modifier = Modifier.weight(0.6f)
-            ) {
+            Column(modifier = Modifier.weight(0.6f)) {
                 AndroidApiLevelAndName(id = R.string.api_30)
                 AndroidApiLevelAndName(id = R.string.api_29)
                 AndroidApiLevelAndName(id = R.string.api_28)
@@ -128,9 +116,7 @@ private fun EarlyVersions() {
         }
     }
 
-    TextButton(
-        onClick = { expanded = !expanded }
-    ) {
+    TextButton(onClick = { expanded = !expanded }) {
         if (!expanded) {
             Text(text = stringResource(R.string.show_more))
         } else {

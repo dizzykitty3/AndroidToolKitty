@@ -42,7 +42,6 @@ fun MapsCard() {
         title = R.string.google_maps
     ) {
         val context = LocalContext.current
-
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }
 

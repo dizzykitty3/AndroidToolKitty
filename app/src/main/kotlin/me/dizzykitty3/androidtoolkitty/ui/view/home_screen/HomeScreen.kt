@@ -57,12 +57,12 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_9
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTINGS_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.util.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.NetworkUtil
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomBottomPadding
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomCardSpacePadding
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomOneHandedModePadding
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.BottomPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomTopPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.OneHandedModePadding
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.TopPadding
 import java.util.Locale
 
 @Composable
@@ -89,25 +89,25 @@ private fun MobileLayout(navController: NavHostController) {
         )
     ) {
         // Status
-        item { CustomTopPadding() }
+        item { TopPadding() }
         item { BatteryNetworkAndSetting(navController) }
-        item { CustomCardSpacePadding() }
-        item { CustomCardSpacePadding() }
+        item { CardSpacePadding() }
+        item { CardSpacePadding() }
 
         // Greeting
         item { Greeting() }
         if (settingsSharedPref.oneHandedMode)
-            item { CustomOneHandedModePadding() }
+            item { OneHandedModePadding() }
         else {
-            item { CustomCardSpacePadding() }
-            item { CustomCardSpacePadding() }
+            item { CardSpacePadding() }
+            item { CardSpacePadding() }
         }
 
         // Contents
         val locale = Locale.getDefault().toString()
         if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) item { NoTranslationTip(locale) }
         item { HomeCards(navController) }
-        item { CustomBottomPadding() }
+        item { BottomPadding() }
     }
 }
 
@@ -133,14 +133,10 @@ private fun TabletLayout(navController: NavHostController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun BatteryNetworkAndSetting(navController: NavHostController) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         val settingsSharedPref = remember { SettingsSharedPref }
 
-        Box(
-            modifier = Modifier.weight(1f)
-        ) {
+        Box(modifier = Modifier.weight(1f)) {
             BatteryAndNetwork()
         }
 
@@ -180,15 +176,15 @@ private fun BatteryAndNetwork() {
             contentDescription = stringResource(id = R.string.battery_level),
             tint = MaterialTheme.colorScheme.primary
         )
-        CustomSpacerPadding()
+        SpacerPadding()
         Text(text = "$batteryLevel%")
 
-        CustomSpacerPadding()
-        CustomSpacerPadding()
+        SpacerPadding()
+        SpacerPadding()
 
         NetworkState()
     }
-    CustomCardSpacePadding()
+    CardSpacePadding()
 }
 
 @Composable
@@ -224,7 +220,7 @@ private fun NetworkStateIcon(
         contentDescription = stringResource(id = id),
         tint = MaterialTheme.colorScheme.primary
     )
-    CustomSpacerPadding()
+    SpacerPadding()
     Text(text = stringResource(id = id))
 }
 

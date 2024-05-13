@@ -29,7 +29,7 @@ gmsMaps = "18.2.0" # https://developers.google.com/android/guides/setup#list-dep
 
 # Kotlin
 kotlin = "1.9.23" # https://github.com/JetBrains/kotlin/releases
-coroutines = "1.8.0" # https://github.com/Kotlin/kotlinx.coroutines/releases
+coroutines = "1.8.1" # https://github.com/Kotlin/kotlinx.coroutines/releases
 serialization = "1.6.3" # https://github.com/Kotlin/kotlinx.serialization/releases
 
 # Material
@@ -65,7 +65,7 @@ square-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", ver
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

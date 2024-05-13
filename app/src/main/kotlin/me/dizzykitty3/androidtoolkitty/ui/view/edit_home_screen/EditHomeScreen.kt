@@ -35,10 +35,10 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_9
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 
 @Composable
 fun EditHomeScreen() {
@@ -173,18 +173,18 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_12, newState)
             }
 
-            CustomGroupDivider()
+            GroupDivider()
 
             val primary = MaterialTheme.colorScheme.primary.toArgb()
-            val showSnackbarToConfirm = settingsSharedPref.showSnackbarToConfirm
+            val showSnackbarToConfirm = settingsSharedPref.showSnackbar
 
             Button(
                 onClick = {
                     if (showSnackbarToConfirm) {
                         SnackbarUtil.snackbar(
                             view,
-                            message = R.string.tap_to_confirm,
-                            buttonText = R.string.confirm,
+                            message = R.string.tap_to_apply,
+                            buttonText = R.string.apply,
                             buttonColor = primary,
                             buttonClickListener = {
                                 onClickChangeAllCardsButton(false)
@@ -225,7 +225,7 @@ fun EditHomeScreen() {
                     contentDescription = stringResource(id = R.string.hide_all_cards),
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
-                CustomSpacerPadding()
+                SpacerPadding()
                 Text(text = stringResource(R.string.hide_all_cards))
             }
 
@@ -234,8 +234,8 @@ fun EditHomeScreen() {
                     if (showSnackbarToConfirm) {
                         SnackbarUtil.snackbar(
                             view,
-                            message = R.string.tap_to_confirm,
-                            buttonText = R.string.confirm,
+                            message = R.string.tap_to_apply,
+                            buttonText = R.string.apply,
                             buttonColor = primary,
                             buttonClickListener = {
                                 onClickChangeAllCardsButton(true)
@@ -276,7 +276,7 @@ fun EditHomeScreen() {
                     contentDescription = stringResource(id = R.string.show_all_cards),
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
-                CustomSpacerPadding()
+                SpacerPadding()
                 Text(text = stringResource(R.string.show_all_cards))
             }
         }

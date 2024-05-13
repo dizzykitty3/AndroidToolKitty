@@ -7,17 +7,17 @@ object StringUtil {
         val currentTime = LocalTime.now()
         return when (currentTime.hour) {
             in 6..11 -> "Good morning"
-            in 12..17 -> "Good afternoon"
-            else -> "Good evening"
+            in 12..18 -> "Good afternoon"
+            in 19..22 -> "Good evening"
+            else -> "Good night"
         }
     }
 
     /**
      * Drop spaces, including full-width ones.
      */
-    fun dropSpaces(inputString: String): String {
-        return inputString.trim().replace("\\s".toRegex(), "").lowercase()
-    }
+    fun dropSpaces(inputString: String): String =
+        inputString.trim().replace("\\s".toRegex(), "").lowercase()
 
     @Throws(IllegalArgumentException::class)
     fun unicodeToCharacter(unicode: String): String {

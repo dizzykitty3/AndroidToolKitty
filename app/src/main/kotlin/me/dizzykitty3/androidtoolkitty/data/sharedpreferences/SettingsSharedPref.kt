@@ -25,7 +25,7 @@ object SettingsSharedPref {
     private const val WEBPAGE_CARD_SHOW_MORE = "webpage_card_show_more"
     private const val COLLAPSE_KEYBOARD = "collapse_keyboard"
     private const val SHOW_DIVIDER = "show_divider"
-    private const val SHOW_SNACKBAR_TO_CONFIRM = "show_snackbar_to_confirm"
+    private const val SHOW_SNACKBAR_BEFORE_APPLY_CHANGES = "show_snackbar_to_confirm"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -135,12 +135,12 @@ object SettingsSharedPref {
             }
         }
 
-    var showSnackbarToConfirm: Boolean
-        get() = sharedPrefs.getBoolean(SHOW_SNACKBAR_TO_CONFIRM, true)
+    var showSnackbar: Boolean
+        get() = sharedPrefs.getBoolean(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, true)
         set(value) {
-            Log.d(TAG, "show snackbar to confirm = $value")
+            Log.d(TAG, "show snackbar before apply changes = $value")
             with(sharedPrefs.edit()) {
-                putBoolean(SHOW_SNACKBAR_TO_CONFIRM, value)
+                putBoolean(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, value)
                 apply()
             }
         }

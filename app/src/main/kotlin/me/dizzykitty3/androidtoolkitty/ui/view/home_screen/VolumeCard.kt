@@ -11,7 +11,6 @@ import androidx.compose.material.icons.automirrored.outlined.VolumeUp
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -33,7 +32,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil
@@ -41,7 +39,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil.setVolume
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,21 +49,16 @@ fun VolumeCard() {
         title = R.string.volume
     ) {
         val view = LocalView.current
-
         val settingsSharedPref = remember { SettingsSharedPref }
-
         val maxVolume = AudioUtil.maxVolumeIndex()
-
         val sliderIncrementFivePercent = settingsSharedPref.sliderIncrement5Percent
-
         val customVolume = settingsSharedPref.customVolume
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
-
         val customVolumeOptionLabel = settingsSharedPref.customVolumeOptionLabel
         var mCustomVolumeOptionLabel by remember { mutableStateOf(customVolumeOptionLabel) }
-
         val haveCustomLabel = settingsSharedPref.usingCustomVolumeOptionLabel
         var mHaveCustomLabel by remember { mutableStateOf(haveCustomLabel) }
+        var showVolumeDialog by remember { mutableStateOf(false) }
 
         val options = listOf(
             stringResource(R.string.mute),
@@ -86,11 +79,9 @@ fun VolumeCard() {
             )
         }
 
-        var showVolumeDialog by remember { mutableStateOf(false) }
-
         Text(text = stringResource(R.string.media_volume))
 
-        CustomSpacerPadding()
+        SpacerPadding()
 
         SingleChoiceSegmentedButtonRow(
             modifier = Modifier.fillMaxWidth(),
@@ -174,7 +165,7 @@ fun VolumeCard() {
                                 steps = if (sliderIncrementFivePercent) 19 else 0
                             )
                             Text(text = "${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
-                            CustomSpacerPadding()
+                            SpacerPadding()
                             OutlinedTextField(
                                 value = optionLabel,
                                 onValueChange = {
@@ -261,16 +252,15 @@ fun VolumeCard() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                Button(
-                    onClick = { showVolumeDialog = true },
-                    elevation = ButtonDefaults.buttonElevation(1.dp)
+                TextButton(
+                    onClick = { showVolumeDialog = true }
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Edit,
                         contentDescription = stringResource(id = R.string.edit),
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
-                    CustomSpacerPadding()
+                    SpacerPadding()
                     Text(text = stringResource(R.string.edit))
                 }
             }

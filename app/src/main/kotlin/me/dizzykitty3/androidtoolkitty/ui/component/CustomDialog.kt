@@ -8,6 +8,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -22,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
-fun CustomAlertDialogButton(
+fun WarningAlertDialogButton(
     buttonText: String,
     dialogMessageTitle: String,
     dialogMessage: @Composable () -> Unit,
@@ -32,22 +33,17 @@ fun CustomAlertDialogButton(
 ) {
     var showDialog by remember { mutableStateOf(false) }
 
-    Button(
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.error,
-            contentColor = MaterialTheme.colorScheme.onError
-        ),
-        onClick = { showDialog = true },
-        elevation = ButtonDefaults.buttonElevation(1.dp)
-    ) {
+    OutlinedButton(onClick = { showDialog = true }) {
         Icon(
             imageVector = Icons.Outlined.DeleteForever,
             contentDescription = stringResource(id = R.string.erase_all_data),
-            modifier = Modifier.align(Alignment.CenterVertically)
+            modifier = Modifier.align(Alignment.CenterVertically),
+            tint = MaterialTheme.colorScheme.error
         )
-        CustomSpacerPadding()
+        SpacerPadding()
         Text(
-            text = buttonText
+            text = buttonText,
+            color = MaterialTheme.colorScheme.error
         )
     }
 
@@ -75,9 +71,7 @@ fun CustomAlertDialogButton(
                 }
             },
             dismissButton = {
-                TextButton(
-                    onClick = { showDialog = false }
-                ) {
+                TextButton(onClick = { showDialog = false }) {
                     Text(text = negativeButtonText ?: stringResource(android.R.string.cancel))
                 }
             }

@@ -9,36 +9,36 @@ import androidx.compose.ui.res.dimensionResource
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
-private fun CustomPadding(@DimenRes dimen: Int) {
+private fun Res(@DimenRes dimen: Int) {
     Spacer(modifier = Modifier.padding(dimensionResource(id = dimen)))
 }
 
 @Composable
-fun CustomCardSpacePadding() {
-    CustomPadding(dimen = R.dimen.padding_card_space)
+fun CardSpacePadding() {
+    Res(dimen = R.dimen.padding_card_space)
 }
 
 @Composable
-fun CustomSpacerPadding() {
-    CustomPadding(dimen = R.dimen.padding_spacer)
+fun SpacerPadding() {
+    Res(dimen = R.dimen.padding_spacer)
 }
 
 @Composable
-fun CustomIconAndTextPadding() {
-    CustomPadding(dimen = R.dimen.padding_icons_and_text)
+fun IconAndTextPadding() {
+    Res(dimen = R.dimen.padding_icons_and_text)
 }
 
 @Composable
-fun CustomOneHandedModePadding() {
-    CustomPadding(dimen = R.dimen.padding_one_handed_mode)
+fun OneHandedModePadding() {
+    Res(dimen = R.dimen.padding_one_handed_mode)
 }
 
 @Composable
-fun CustomTopPadding() {
-    CustomPadding(dimen = R.dimen.padding_top)
+fun TopPadding() {
+    Res(dimen = R.dimen.padding_top)
 }
 
 @Composable
-fun CustomBottomPadding() {
-    CustomPadding(dimen = R.dimen.padding_bottom)
+fun BottomPadding() {
+    Res(dimen = R.dimen.padding_bottom)
 }

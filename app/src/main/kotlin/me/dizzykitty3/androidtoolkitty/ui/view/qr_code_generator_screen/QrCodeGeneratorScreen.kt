@@ -25,9 +25,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import androidx.compose.ui.Alignment.Companion as Alignment1
 
 @Preview(showSystemUi = true)
@@ -50,7 +50,7 @@ fun QrCodeGeneratorScreen() {
                 }
             )
 
-            CustomSpacerPadding()
+            SpacerPadding()
 
             Row(
                 verticalAlignment = Alignment1.CenterVertically,
@@ -60,7 +60,6 @@ fun QrCodeGeneratorScreen() {
                     text = "Generate QR Code instantly",
                     modifier = Modifier.weight(1f)
                 )
-
                 Switch(
                     checked = instantOption,
                     onCheckedChange = { instantOption = it }
@@ -74,9 +73,7 @@ fun QrCodeGeneratorScreen() {
                     Text(text = "Generate")
                 }
             }
-
-            CustomGroupDivider()
-
+            GroupDivider()
             QRPic()
         }
     }

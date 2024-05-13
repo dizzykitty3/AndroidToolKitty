@@ -36,9 +36,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomHideCardSettingSwitch
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 
 @Composable
 fun EditSysSettingCard() {
@@ -123,7 +123,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_6, newState)
         }
 
-        CustomGroupDivider()
+        GroupDivider()
 
         CustomHideCardSettingSwitch(
             id = R.string.open_usage_access_permission,
@@ -150,7 +150,7 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_9, newState)
         }
 
-        CustomGroupDivider()
+        GroupDivider()
 
         CustomHideCardSettingSwitch(
             id = R.string.open_language_settings,
@@ -177,19 +177,19 @@ fun EditSysSettingCard() {
             settingsSharedPref.saveCardShowedState(SETTING_12, newState)
         }
 
-        CustomGroupDivider()
+        GroupDivider()
 
         val view = LocalView.current
         val primary = MaterialTheme.colorScheme.primary.toArgb()
-        val showSnackbarToConfirm = settingsSharedPref.showSnackbarToConfirm
+        val showSnackbarToConfirm = settingsSharedPref.showSnackbar
 
         Button(
             onClick = {
                 if (showSnackbarToConfirm) {
                     SnackbarUtil.snackbar(
                         view,
-                        message = R.string.tap_to_confirm,
-                        buttonText = R.string.confirm,
+                        message = R.string.tap_to_apply,
+                        buttonText = R.string.apply,
                         buttonColor = primary,
                         buttonClickListener = {
                             onClickChangeAllCardsButton(false)
@@ -230,7 +230,7 @@ fun EditSysSettingCard() {
                 contentDescription = stringResource(id = R.string.hide_all_options),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
-            CustomSpacerPadding()
+            SpacerPadding()
             Text(text = stringResource(R.string.hide_all_options))
         }
 
@@ -239,8 +239,8 @@ fun EditSysSettingCard() {
                 if (showSnackbarToConfirm) {
                     SnackbarUtil.snackbar(
                         view,
-                        message = R.string.tap_to_confirm,
-                        buttonText = R.string.confirm,
+                        message = R.string.tap_to_apply,
+                        buttonText = R.string.apply,
                         buttonColor = primary,
                         buttonClickListener = {
                             onClickChangeAllCardsButton(true)
@@ -281,7 +281,7 @@ fun EditSysSettingCard() {
                 contentDescription = stringResource(id = R.string.show_all_options),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
-            CustomSpacerPadding()
+            SpacerPadding()
             Text(text = stringResource(R.string.show_all_options))
         }
     }

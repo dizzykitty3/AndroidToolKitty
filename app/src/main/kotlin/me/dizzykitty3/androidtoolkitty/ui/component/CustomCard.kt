@@ -39,14 +39,10 @@ fun CustomCard(
     title: String,
     content: @Composable () -> Unit
 ) {
-    ElevatedCard(
-        modifier = Modifier.fillMaxWidth()
-    ) {
+    ElevatedCard(modifier = Modifier.fillMaxWidth()) {
         val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
 
-        Column(
-            modifier = cardPadding
-        ) {
+        Column(modifier = cardPadding) {
             if (icon == null) {
                 CardTitle(title = title)
                 CardContent { content() }
@@ -59,20 +55,18 @@ fun CustomCard(
                             alignment = Alignment.CenterVertically
                         )
                     )
-                    CustomIconAndTextPadding()
+                    IconAndTextPadding()
                     CardTitle(title = title)
                 }
                 CardContent { content() }
             }
         }
     }
-    CustomCardSpacePadding()
+    CardSpacePadding()
 }
 
 @Composable
-private fun CardTitle(
-    title: String
-) {
+private fun CardTitle(title: String) {
     Text(
         modifier = Modifier.fillMaxWidth(),
         text = title,
@@ -87,14 +81,10 @@ private fun CardTitle(
 }
 
 @Composable
-private fun CardContent(
-    content: @Composable () -> Unit
-) {
+private fun CardContent(content: @Composable () -> Unit) {
     Column {
-        CustomSpacerPadding()
-        CustomSpacerPadding()
-        Column {
-            content()
-        }
+        SpacerPadding()
+        SpacerPadding()
+        Column { content() }
     }
 }

@@ -12,6 +12,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -27,7 +28,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.R
@@ -39,7 +39,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomIconPopup
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomSpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 
 @Preview
 @Composable
@@ -56,24 +56,19 @@ fun BluetoothDeviceCard(navController: NavHostController) {
     ) {
         val view = LocalView.current
         val context = LocalContext.current
-
         var showResult by remember { mutableStateOf(false) }
-
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }
         var pairedDevices by remember { mutableStateOf<List<BluetoothDevice>>(emptyList()) }
-
         var size by remember { mutableIntStateOf(0) }
-
         val materialColor = MaterialTheme.colorScheme.primary.toArgb()
+        val showSnackbarToConfirm = SettingsSharedPref.showSnackbar
 
-        val showSnackbarToConfirm = SettingsSharedPref.showSnackbarToConfirm
-
-        Button(
+        OutlinedButton(
             onClick = {
                 // Check permission
                 if (PermissionUtil.noBluetoothPermission(context)) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
-                    return@Button
+                    return@OutlinedButton
                 }
 
                 // Get system service
@@ -85,7 +80,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                     pairedDevices = bluetoothAdapter!!.bondedDevices.sortedBy { it.name }
                     size = pairedDevices.size
                     showResult = true
-                    return@Button
+                    return@OutlinedButton
                 }
 
                 // When Bluetooth is OFF
@@ -100,15 +95,14 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 } else {
                     IntentUtil.openBluetooth(context)
                 }
-            },
-            elevation = ButtonDefaults.buttonElevation(1.dp)
+            }
         ) {
             Icon(
                 imageVector = Icons.Outlined.BluetoothConnected,
                 contentDescription = stringResource(id = R.string.show_paired_devices),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
-            CustomSpacerPadding()
+            SpacerPadding()
             Text(text = stringResource(id = R.string.show_paired_devices))
         }
 
@@ -122,11 +116,9 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 Text(text = stringResource(id = R.string.paired_devices))
 
                 pairedDevices.forEach { device ->
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(text = device.name ?: stringResource(id = R.string.unknown_device))
-                        CustomSpacerPadding()
+                        SpacerPadding()
                         CustomIconPopup(type(device.type), device.address)
                     }
                 }
@@ -141,9 +133,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 private fun BluetoothDeviceTypeDialog() {
     var showDialog by remember { mutableStateOf(false) }
 
-    TextButton(
-        onClick = { showDialog = true }
-    ) {
+    TextButton(onClick = { showDialog = true }) {
         Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
     }
 
@@ -169,11 +159,10 @@ private fun BluetoothDeviceTypeDialog() {
 }
 
 @Composable
-private fun type(type: Int): String {
-    return when (type) {
+private fun type(type: Int): String =
+    when (type) {
         1 -> stringResource(id = R.string.bt)
         2 -> stringResource(id = R.string.ble)
         3 -> stringResource(id = R.string.dual)
         else -> stringResource(id = R.string.unknown)
     }
-}

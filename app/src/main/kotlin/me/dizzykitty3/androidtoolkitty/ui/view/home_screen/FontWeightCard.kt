@@ -11,7 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupDivider
+import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 
 @Preview
 @Composable
@@ -29,7 +29,7 @@ fun FontWeightCard() {
         Bold(id = R.string.w7)
         ExtraBold(id = R.string.w8)
         Black(id = R.string.w9)
-        CustomGroupDivider()
+        GroupDivider()
         RowFontWeightTest(id = R.string.a)
         RowFontWeightTest(id = R.string.chinese_que)
         RowFontWeightTest(id = R.string.japanese_ki)

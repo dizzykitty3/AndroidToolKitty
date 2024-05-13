@@ -44,10 +44,10 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomDropdownMenu
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
+import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 
 private const val TAG = "WebpageCard"
 
@@ -58,7 +58,6 @@ fun WebpageCard() {
         title = R.string.webpage
     ) {
         val settingsSharedPref = remember { SettingsSharedPref }
-
         val showMore = settingsSharedPref.webpageCardShowMore
         var mShowMore by remember { mutableStateOf(showMore) }
 
@@ -67,9 +66,9 @@ fun WebpageCard() {
         Search()
 
         if (mShowMore) {
-            CustomGroupDivider()
+            GroupDivider()
             WebpageUrl()
-            CustomGroupDivider()
+            GroupDivider()
             SocialMediaProfileIUrl()
         }
 
@@ -88,7 +87,6 @@ fun WebpageCard() {
 @Composable
 private fun Search() {
     val context = LocalContext.current
-
     var searchQuery by remember { mutableStateOf("") }
 
     OutlinedTextField(
@@ -158,17 +156,11 @@ private fun WebpageUrl() {
                 }
             )
         },
-        prefix = {
-            Text(text = HTTPS)
-        },
-        suffix = {
-            Text(text = UrlUtil.suffixOf(url))
-        }
+        prefix = { Text(text = HTTPS) },
+        suffix = { Text(text = UrlUtil.suffixOf(url)) }
     )
 
-    TextButton(
-        onClick = { onClickVisitUrlButton(url, context) }
-    ) {
+    TextButton(onClick = { onClickVisitUrlButton(url, context) }) {
         Text(text = stringResource(R.string.visit))
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
@@ -181,12 +173,9 @@ private fun WebpageUrl() {
 @Composable
 private fun SocialMediaProfileIUrl() {
     val context = LocalContext.current
-
     var username by remember { mutableStateOf("") }
-
     val platformIndex = SettingsSharedPref.lastTimeSelectedSocialPlatform
     var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
-
     val platformList = UrlUtil.Platform.entries.map { stringResource(it.nameResId) }
 
     CustomGroupTitleText(id = R.string.social_media_profile)
@@ -216,22 +205,15 @@ private fun SocialMediaProfileIUrl() {
         supportingText = {
             val platform = UrlUtil.Platform.entries[mPlatformIndex]
             Text(
-                text = if (needAlterUrlStyle(platform))
-                    "$username${UrlUtil.prefixOf(platform)}"
-                else
-                    "${UrlUtil.prefixOf(platform)}$username",
+                text = toFullUrl(platform, username),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
             )
         }
     )
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        TextButton(
-            onClick = { onVisitProfileButton(username, mPlatformIndex, context) }
-        ) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        TextButton(onClick = { onVisitProfileButton(username, mPlatformIndex, context) }) {
             Text(text = stringResource(R.string.visit))
 
             Icon(
@@ -240,7 +222,6 @@ private fun SocialMediaProfileIUrl() {
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
-
         NoPlatformYouNeedHere()
     }
 }
@@ -280,7 +261,6 @@ private fun NoPlatformYouNeedHere() {
                             }
                         },
                     )
-
                     OutlinedTextField(
                         value = platformExampleUrlInput,
                         onValueChange = { platformExampleUrlInput = it },
@@ -343,18 +323,19 @@ private fun onVisitProfileButton(
     if (username.isBlank()) return
 
     val platform = UrlUtil.Platform.entries.getOrNull(platformIndex) ?: return
-
-    val prefix = platform.prefix
-    val url =
-        if (needAlterUrlStyle(platform))
-            "${StringUtil.dropSpaces(username)}$prefix"
-        else
-            "$prefix${StringUtil.dropSpaces(username)}"
+    val url = toFullUrl(platform, username)
     IntentUtil.openUrl(url, context)
     Log.d(TAG, "onVisitProfile")
 }
 
-private fun needAlterUrlStyle(platform: UrlUtil.Platform): Boolean =
-    platform == UrlUtil.Platform.FANBOX
-            || platform == UrlUtil.Platform.BOOTH
-            || platform == UrlUtil.Platform.TUMBLR
+private fun toFullUrl(platform: UrlUtil.Platform, username: String): String {
+    return when (platform) {
+        UrlUtil.Platform.BLUESKY -> "${platform.prefix}${StringUtil.dropSpaces(username)}.bsky.social"
+
+        UrlUtil.Platform.FANBOX,
+        UrlUtil.Platform.BOOTH,
+        UrlUtil.Platform.TUMBLR -> "${StringUtil.dropSpaces(username)}${platform.prefix}"
+
+        else -> "${platform.prefix}${StringUtil.dropSpaces(username)}"
+    }
+}

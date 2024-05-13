@@ -8,16 +8,17 @@ object AudioUtil {
     private var audioManager: AudioManager =
         appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-    fun volume(): Int {
-        return audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
-    }
+    fun volume(): Int =
+        audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 
-    fun maxVolumeIndex(): Int {
-        return audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
-    }
+
+    fun maxVolumeIndex(): Int =
+        audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+
 
     fun setVolume(volume: Int) =
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI)
 
-    fun setVolume(volume: Double) = setVolume(volume.toInt())
+    fun setVolume(volume: Double) =
+        setVolume(volume.toInt())
 }

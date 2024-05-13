@@ -2,7 +2,7 @@ package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Terminal
-import androidx.compose.material3.Button
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,37 +21,37 @@ private fun TestCardPreview() {
 @Composable
 fun TestCard(navController: NavHostController) {
     CustomCard(title = "Test", icon = Icons.Outlined.Terminal) {
-        Button(
+        OutlinedButton(
             onClick = { navController.navigate(QR_CODE_GENERATOR_SCREEN) }
         ) {
             Text(text = "QR Code generator")
         }
-        Button(
+        OutlinedButton(
             onClick = { /*TODO*/ }
         ) {
             Text(text = "QR Code scanner")
         }
-        Button(
+        OutlinedButton(
             onClick = { /*TODO*/ }
         ) {
             Text(text = "arrange home card")
         }
-        Button(
+        OutlinedButton(
             onClick = { /*TODO*/ }
         ) {
             Text(text = "extract apk(s)")
         }
-        Button(
+        OutlinedButton(
             onClick = { /*TODO*/ }
         ) {
             Text(text = "install by apk(s)")
         }
-        Button(
+        OutlinedButton(
             onClick = { /*TODO*/ }
         ) {
             Text(text = "jump to activity")
         }
-        Button(
+        OutlinedButton(
             onClick = { /*TODO*/ }
         ) {
             Text(text = "to-do list")

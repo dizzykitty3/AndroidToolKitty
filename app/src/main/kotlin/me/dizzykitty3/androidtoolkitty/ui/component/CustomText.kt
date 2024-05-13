@@ -31,7 +31,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 
 @Composable
 fun CustomGradientText(
@@ -64,42 +63,30 @@ fun CustomGradientText(
 }
 
 @Composable
-fun AnnotatedString.Builder.CustomBoldText(
-    @StringRes id: Int
-) {
+fun AnnotatedString.Builder.CustomBoldText(@StringRes id: Int) {
     val boldTextStyle = SpanStyle(
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold
     )
-    withStyle(boldTextStyle) {
-        append(stringResource(id = id))
-    }
+    withStyle(boldTextStyle) { append(stringResource(id = id)) }
 }
 
 @Composable
-fun AnnotatedString.Builder.CustomItalicText(
-    text: String
-) {
+fun AnnotatedString.Builder.CustomItalicText(text: String) {
     val italicTextStyle = SpanStyle(
         fontStyle = FontStyle.Italic,
         fontWeight = FontWeight.Light
     )
-    withStyle(italicTextStyle) {
-        append(text)
-    }
+    withStyle(italicTextStyle) { append(text) }
 }
 
 @Composable
-fun CustomTip(
-    @StringRes id: Int
-) {
+fun CustomTip(@StringRes id: Int) {
     CustomTip(formattedMessage = stringResource(id = id))
 }
 
 @Composable
-fun CustomTip(
-    formattedMessage: String
-) {
+fun CustomTip(formattedMessage: String) {
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
@@ -117,7 +104,7 @@ fun CustomTip(
                 contentDescription = stringResource(id = R.string.info),
                 modifier = Modifier.size(24.dp)
             )
-            CustomIconAndTextPadding()
+            IconAndTextPadding()
             Text(
                 text = formattedMessage,
                 style = MaterialTheme.typography.bodyMedium,
@@ -125,26 +112,14 @@ fun CustomTip(
             )
         }
     }
-    CustomCardSpacePadding()
+    CardSpacePadding()
 }
 
 @Composable
-fun CustomGroupTitleText(
-    @StringRes id: Int
-) {
-    val showDivider = SettingsSharedPref.showDivider
-
-    if (showDivider) {
+fun CustomGroupTitleText(@StringRes id: Int) {
         Text(
             text = stringResource(id = id),
             style = MaterialTheme.typography.titleMedium
         )
-    } else {
-        Text(
-            text = stringResource(id = id),
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.primary
-        )
-    }
-    CustomSpacerPadding()
+    SpacerPadding()
 }

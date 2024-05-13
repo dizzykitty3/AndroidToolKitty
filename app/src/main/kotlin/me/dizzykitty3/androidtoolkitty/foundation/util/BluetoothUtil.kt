@@ -9,7 +9,6 @@ object BluetoothUtil {
     private var bluetoothManager: BluetoothManager =
         appContext.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
 
-    fun bluetoothAdapter(): BluetoothAdapter {
-        return bluetoothManager.adapter
-    }
+    fun bluetoothAdapter(): BluetoothAdapter =
+        bluetoothManager.adapter
 }

@@ -1,6 +1,5 @@
 <resources>
     <!-- Common -->
-    <string name="version_number" translatable="false">20240512</string>
     <string name="label_optional">Label (optional)</string>
     <string name="edit">Edit</string>
     <string name="visit">Visit</string>
@@ -17,7 +16,7 @@
     <string name="under_development">-- UNDER DEVELOPMENT --</string>
     <string name="permission">Permission</string>
     <string name="undo">Undo</string>
-    <string name="confirm">Confirm</string>
+    <string name="apply">Apply</string>
 
     <!-- Home screen: top tip -->
     <string name="battery_level">Battery level</string>
@@ -89,6 +88,7 @@
     <string name="tumblr">Tumblr</string>
     <string name="skeb">Skeb</string>
     <string name="potofu">POTOFU</string>
+    <string name="bluesky">Bluesky</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>
@@ -134,7 +134,7 @@
     <string name="convert">Convert</string>
 
     <!-- Home screen: check app on market -->
-    <string name="check_app_on_market">Check app on Market</string>
+    <string name="check_app_on_market">Check app on market</string>
     <string name="package_name_or_search">Package name or search</string>
     <string name="whats">What\'s</string>
     <string name="package_name">package name</string>
@@ -245,10 +245,10 @@
     <string name="set_slider_increment_5">Set slider increment to 5%</string>
     <string name="requires_restart_do_it_now">Requires restart, do it now?</string>
     <string name="restart">Restart</string>
-    <string name="collapse_keyboard_when_back_to_app">Collapse keyboard when back to ToolKitty app</string>
+    <string name="collapse_keyboard_when_back_to_app">Collapse keyboard when back to ToolKitty</string>
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
     <string name="check_sp_values">Check sharedPreferences values</string>
-    <string name="tap_to_confirm">Tap to confirm</string>
+    <string name="tap_to_apply">Tap to apply</string>
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
     <string name="show_all_options">Show all options</string>
     <string name="hide_all_options">Hide all options</string>
@@ -256,7 +256,7 @@
     <string name="appearance">Appearance</string>
     <string name="sp_values">SharedPreferences values</string>
     <string name="show_divider">Show divider</string>
-    <string name="show_snackbar_to_confirm">Show snackbar before confirmation</string>
+    <string name="show_snackbar_to_confirm">Ask me before apply changes</string>
 
     <!-- Settings screen: about -->
     <string name="about">About</string>

@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.hilt.android)
     alias(libs.plugins.kapt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
@@ -16,8 +16,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 674
+        versionName = "1.0.674"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {

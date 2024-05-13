@@ -29,9 +29,7 @@ fun CustomHideCardSettingSwitch(
             settingsSharedPref.saveCardShowedState(cardId, !isChecked)
         }
     ) {
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
+        Column(modifier = Modifier.weight(1f)) {
             Text(text = stringResource(id = id))
         }
         Column {
@@ -55,17 +53,13 @@ fun CustomSwitchRow(
             onCheckedChange(!checked)
         }
     ) {
-        Column(
-            modifier = Modifier.weight(1f)
-        ) {
+        Column(modifier = Modifier.weight(1f)) {
             Text(text = stringResource(text))
         }
         Column {
             Switch(
                 checked = checked,
-                onCheckedChange = {
-                    onCheckedChange(it)
-                }
+                onCheckedChange = { onCheckedChange(it) }
             )
         }
     }
