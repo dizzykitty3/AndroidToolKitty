@@ -16,8 +16,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 678
-        versionName = "1.0.678"
+        versionCode = 679
+        versionName = "1.0.679"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -30,7 +30,7 @@ android {
         debug {
             isMinifyEnabled = false
             applicationIdSuffix = ".debug"
-            versionNameSuffix = " DEV"
+            versionNameSuffix = "-dev"
             resValue("string", "app_name", "ATK dev")
         }
 
