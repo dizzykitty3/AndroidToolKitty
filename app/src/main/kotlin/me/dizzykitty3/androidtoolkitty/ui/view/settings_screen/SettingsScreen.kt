@@ -126,6 +126,8 @@ private fun AppearanceOptions() {
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
     var showDivider by remember { mutableStateOf(settingsSharedPref.showDivider) }
+    var showEditVolumeOption by remember { mutableStateOf(settingsSharedPref.showEditVolumeOption) }
+    val customVolume = settingsSharedPref.customVolume
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
     CustomGroupTitleText(id = R.string.appearance)
@@ -145,6 +147,14 @@ private fun AppearanceOptions() {
     CustomSwitchRow(text = R.string.show_divider, checked = showDivider) {
         showDivider = it
         settingsSharedPref.showDivider = it
+    }
+
+    if (customVolume > 0) CustomSwitchRow(
+        text = R.string.show_edit_volume_option,
+        checked = showEditVolumeOption
+    ) {
+        showEditVolumeOption = it
+        settingsSharedPref.showEditVolumeOption = it
     }
 }
 

@@ -26,6 +26,7 @@ object SettingsSharedPref {
     private const val COLLAPSE_KEYBOARD = "collapse_keyboard"
     private const val SHOW_DIVIDER = "show_divider"
     private const val SHOW_SNACKBAR_BEFORE_APPLY_CHANGES = "show_snackbar_to_confirm"
+    private const val SHOW_EDIT_VOLUME_OPTION = "show_edit_volume_option"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -141,6 +142,16 @@ object SettingsSharedPref {
             Log.d(TAG, "show snackbar before apply changes = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, value)
+                apply()
+            }
+        }
+
+    var showEditVolumeOption: Boolean
+        get() = sharedPrefs.getBoolean(SHOW_EDIT_VOLUME_OPTION, true)
+        set(value) {
+            Log.d(TAG, "show edit volume option = $value")
+            with(sharedPrefs.edit()) {
+                putBoolean(SHOW_EDIT_VOLUME_OPTION, value)
                 apply()
             }
         }

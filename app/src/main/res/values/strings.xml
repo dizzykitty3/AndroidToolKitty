@@ -257,6 +257,7 @@
     <string name="sp_values">SharedPreferences values</string>
     <string name="show_divider">Show divider</string>
     <string name="show_snackbar_to_confirm">Ask me before apply changes</string>
+    <string name="show_edit_volume_option">Show Edit in Volume card</string>
 
     <!-- Settings screen: about -->
     <string name="about">About</string>

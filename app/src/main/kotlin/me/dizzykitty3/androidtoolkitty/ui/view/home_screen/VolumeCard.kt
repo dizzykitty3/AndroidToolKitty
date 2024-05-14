@@ -59,6 +59,7 @@ fun VolumeCard() {
         val haveCustomLabel = settingsSharedPref.usingCustomVolumeOptionLabel
         var mHaveCustomLabel by remember { mutableStateOf(haveCustomLabel) }
         var showVolumeDialog by remember { mutableStateOf(false) }
+        val showEditVolumeOption = settingsSharedPref.showEditVolumeOption
 
         val options = listOf(
             stringResource(R.string.mute),
@@ -247,7 +248,7 @@ fun VolumeCard() {
             }
         }
 
-        if (mCustomVolume > 0) {
+        if (mCustomVolume > 0 && showEditVolumeOption) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
