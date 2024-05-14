@@ -11,10 +11,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.ui.view.AppNavigationHost
+import java.time.LocalTime
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -24,6 +26,7 @@ class MainActivity : ComponentActivity() {
 
     private var isAutoClearClipboard = false
     private var isCollapseKeyboard = true
+    private var isAutoSetMediaVolume = false
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +54,7 @@ class MainActivity : ComponentActivity() {
     private fun getSettingsSharedPreferences() {
         isAutoClearClipboard = SettingsSharedPref.autoClearClipboard
         isCollapseKeyboard = SettingsSharedPref.collapseKeyboard
+        isAutoSetMediaVolume = SettingsSharedPref.autoSetMediaVolume
         Log.d(TAG, "settings sp got")
     }
 
@@ -61,6 +65,14 @@ class MainActivity : ComponentActivity() {
             if (cleared) {
                 SnackbarUtil.snackbar(window.decorView, R.string.clipboard_cleared_automatically)
                 Log.i(TAG, "Clipboard cleared automatically")
+            }
+        }
+        if (isAutoSetMediaVolume) {
+            when (LocalTime.now().hour) {
+                in 6..7 -> AudioUtil.setVolumePercentage(60)
+                in 8..17 -> AudioUtil.setVolume(0)
+                in 18..22 -> AudioUtil.setVolumePercentage(60)
+                else -> AudioUtil.setVolumePercentage(25)
             }
         }
     }

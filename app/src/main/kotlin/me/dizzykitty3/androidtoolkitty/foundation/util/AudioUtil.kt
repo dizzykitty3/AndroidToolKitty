@@ -21,4 +21,10 @@ object AudioUtil {
 
     fun setVolume(volume: Double) =
         setVolume(volume.toInt())
+
+    fun setVolumePercentage(volume: Int) {
+        if (volume in 0..100) {
+            setVolume(maxVolumeIndex() * 0.01 * volume)
+        }
+    }
 }

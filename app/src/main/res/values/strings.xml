@@ -17,6 +17,8 @@
     <string name="permission">Permission</string>
     <string name="undo">Undo</string>
     <string name="apply">Apply</string>
+    <string name="turn_on">Turn on</string>
+    <string name="turn_off">Turn off</string>
 
     <!-- Home screen: top tip -->
     <string name="battery_level">Battery level</string>

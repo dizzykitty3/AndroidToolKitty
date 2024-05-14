@@ -27,6 +27,7 @@ object SettingsSharedPref {
     private const val SHOW_DIVIDER = "show_divider"
     private const val SHOW_SNACKBAR_BEFORE_APPLY_CHANGES = "show_snackbar_to_confirm"
     private const val SHOW_EDIT_VOLUME_OPTION = "show_edit_volume_option"
+    private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -152,6 +153,16 @@ object SettingsSharedPref {
             Log.d(TAG, "show edit volume option = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SHOW_EDIT_VOLUME_OPTION, value)
+                apply()
+            }
+        }
+
+    var autoSetMediaVolume: Boolean
+        get() = sharedPrefs.getBoolean(AUTO_SET_MEDIA_VOLUME, false)
+        set(value) {
+            Log.d(TAG, "auto set media volume = $value")
+            with(sharedPrefs.edit()) {
+                putBoolean(AUTO_SET_MEDIA_VOLUME, value)
                 apply()
             }
         }
