@@ -63,6 +63,21 @@ fun Gradient(
 }
 
 @Composable
+fun GradientSmall(textToDisplay: String, colors: List<Color>) {
+    Row {
+        val text = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    brush = Brush.horizontalGradient(colors = colors),
+                    fontWeight = FontWeight.Bold
+                )
+            ) { append(textToDisplay) }
+        }
+        Text(text = text)
+    }
+}
+
+@Composable
 fun AnnotatedString.Builder.Bold(@StringRes id: Int) {
     val boldTextStyle = SpanStyle(
         fontStyle = FontStyle.Normal,

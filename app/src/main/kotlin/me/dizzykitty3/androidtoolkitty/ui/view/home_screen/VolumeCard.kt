@@ -13,6 +13,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
@@ -39,6 +40,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil.setVolume
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui.component.GradientSmall
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -65,7 +67,7 @@ fun VolumeCard() {
             stringResource(R.string.mute),
             "40%",
             "60%",
-            if (mCustomVolume < 0) "+" else mCustomVolumeOptionLabel
+            if (mCustomVolume < 0) "+ Add" else mCustomVolumeOptionLabel
         )
 
         var selectedIndex by remember {
@@ -119,7 +121,14 @@ fun VolumeCard() {
                         count = options.size
                     )
                 ) {
-                    Text(text = label.toString())
+                    if (label != "+ Add") Text(text = label.toString())
+                    else GradientSmall(
+                        textToDisplay = label.toString(),
+                        colors = listOf(
+                            MaterialTheme.colorScheme.primary,
+                            MaterialTheme.colorScheme.tertiary
+                        )
+                    )
                 }
             }
 
