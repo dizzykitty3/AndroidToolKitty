@@ -16,17 +16,14 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 675
-        versionName = "1.0.675"
+        versionCode = 676
+        versionName = "1.0.676"
 
+        resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
-    }
-
-    defaultConfig {
-        resValue("string", "app_name", "ToolKitty")
     }
 
     buildTypes {
@@ -46,6 +43,15 @@ android {
             )
         }
     }
+
+    applicationVariants.all {
+        this.outputs
+            .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
+            .forEach { output ->
+                output.outputFileName = "android-toolkitty-${this.versionName}.apk"
+            }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
