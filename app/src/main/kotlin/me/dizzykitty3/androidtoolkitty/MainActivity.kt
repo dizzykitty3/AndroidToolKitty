@@ -16,7 +16,6 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.ui.view.AppNavigationHost
-import java.time.LocalTime
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -48,6 +47,7 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         getSettingsSharedPreferences()
+        if (isAutoSetMediaVolume) AudioUtil.autoSetMediaVolume()
         Log.d(TAG, "onResume called")
     }
 
@@ -65,14 +65,6 @@ class MainActivity : ComponentActivity() {
             if (cleared) {
                 SnackbarUtil.snackbar(window.decorView, R.string.clipboard_cleared_automatically)
                 Log.i(TAG, "Clipboard cleared automatically")
-            }
-        }
-        if (isAutoSetMediaVolume) {
-            when (LocalTime.now().hour) {
-                in 6..7 -> AudioUtil.setVolumePercentage(60)
-                in 8..17 -> AudioUtil.setVolume(0)
-                in 18..22 -> AudioUtil.setVolumePercentage(60)
-                else -> AudioUtil.setVolumePercentage(25)
             }
         }
     }
