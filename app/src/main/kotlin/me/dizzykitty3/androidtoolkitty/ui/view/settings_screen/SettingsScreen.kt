@@ -381,7 +381,7 @@ private fun GitHubRepoLink() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         val context = LocalContext.current
-        val sourceCodeUrl = "https://github.com/dizzykitty3/android_toolkitty"
+        val sourceCodeUrl = "https://github.com/dizzykitty3/android-toolkitty"
 
         Icon(
             imageVector = Icons.Outlined.Code,
