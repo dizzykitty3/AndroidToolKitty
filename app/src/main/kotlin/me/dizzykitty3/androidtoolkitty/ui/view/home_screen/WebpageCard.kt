@@ -44,10 +44,10 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomDropdownMenu
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupTitleText
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomItalicText
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
+import me.dizzykitty3.androidtoolkitty.ui.component.Italic
 
 private const val TAG = "WebpageCard"
 
@@ -61,7 +61,7 @@ fun WebpageCard() {
         val showMore = settingsSharedPref.webpageCardShowMore
         var mShowMore by remember { mutableStateOf(showMore) }
 
-        if (mShowMore) CustomGroupTitleText(id = R.string.search)
+        if (mShowMore) GroupTitle(id = R.string.search)
 
         Search()
 
@@ -121,7 +121,7 @@ private fun Search() {
 
 @Composable
 private fun WebpageUrl() {
-    CustomGroupTitleText(id = R.string.webpage)
+    GroupTitle(id = R.string.webpage)
 
     val context = LocalContext.current
     var url by remember { mutableStateOf("") }
@@ -147,11 +147,11 @@ private fun WebpageUrl() {
             Text(
                 text = buildAnnotatedString {
                     append(text = stringResource(R.string.url_input_hint_1))
-                    CustomItalicText(" www. ")
+                    Italic(" www. ")
                     append(text = stringResource(R.string.url_input_hint_2))
-                    CustomItalicText(" .com ")
+                    Italic(" .com ")
                     append(text = stringResource(R.string.url_input_hint_3))
-                    CustomItalicText(" .net ")
+                    Italic(" .net ")
                     append(text = stringResource(R.string.url_input_hint_4))
                 }
             )
@@ -178,7 +178,7 @@ private fun SocialMediaProfileIUrl() {
     var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
     val platformList = UrlUtil.Platform.entries.map { stringResource(it.nameResId) }
 
-    CustomGroupTitleText(id = R.string.social_media_profile)
+    GroupTitle(id = R.string.social_media_profile)
 
     CustomDropdownMenu(
         items = platformList,
@@ -232,7 +232,7 @@ private fun NoPlatformYouNeedHere() {
 
     Text(
         text = buildAnnotatedString {
-            CustomItalicText(stringResource(id = R.string.platform_not_added_yet))
+            Italic(stringResource(id = R.string.platform_not_added_yet))
         },
         textDecoration = TextDecoration.Underline,
         modifier = Modifier.clickable { showDialog = true })

@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.sp
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
-fun CustomGradientText(
+fun Gradient(
     textToDisplay: String,
     colors: List<Color>
 ) {
@@ -63,7 +63,7 @@ fun CustomGradientText(
 }
 
 @Composable
-fun AnnotatedString.Builder.CustomBoldText(@StringRes id: Int) {
+fun AnnotatedString.Builder.Bold(@StringRes id: Int) {
     val boldTextStyle = SpanStyle(
         fontStyle = FontStyle.Normal,
         fontWeight = FontWeight.Bold
@@ -72,12 +72,20 @@ fun AnnotatedString.Builder.CustomBoldText(@StringRes id: Int) {
 }
 
 @Composable
-fun AnnotatedString.Builder.CustomItalicText(text: String) {
+fun AnnotatedString.Builder.Italic(text: String) {
     val italicTextStyle = SpanStyle(
         fontStyle = FontStyle.Italic,
         fontWeight = FontWeight.Light
     )
     withStyle(italicTextStyle) { append(text) }
+}
+
+@Composable
+fun AnnotatedString.Builder.PrimaryColor(@StringRes id: Int) {
+    val materialPrimaryColorStyle = SpanStyle(
+        color = MaterialTheme.colorScheme.primary
+    )
+    withStyle(materialPrimaryColorStyle) { append(stringResource(id = id)) }
 }
 
 @Composable
@@ -116,10 +124,10 @@ fun CustomTip(formattedMessage: String) {
 }
 
 @Composable
-fun CustomGroupTitleText(@StringRes id: Int) {
-        Text(
-            text = stringResource(id = id),
-            style = MaterialTheme.typography.titleMedium
-        )
+fun GroupTitle(@StringRes id: Int) {
+    Text(
+        text = stringResource(id = id),
+        style = MaterialTheme.typography.titleMedium
+    )
     SpacerPadding()
 }

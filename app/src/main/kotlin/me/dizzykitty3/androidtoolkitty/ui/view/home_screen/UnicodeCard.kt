@@ -28,7 +28,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.ui.component.Italic
 
 private const val TAG = "UnicodeCard"
 
@@ -63,7 +63,7 @@ fun UnicodeCard() {
                 Text(
                     text = buildAnnotatedString {
                         append(stringResource(R.string.unicode_input_hint))
-                        CustomItalicText(" 00610062")
+                        Italic(" 00610062")
                     }
                 )
             },

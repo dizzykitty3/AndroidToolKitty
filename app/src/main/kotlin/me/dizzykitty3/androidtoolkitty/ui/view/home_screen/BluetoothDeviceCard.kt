@@ -3,7 +3,10 @@ package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Bluetooth
 import androidx.compose.material.icons.outlined.BluetoothConnected
@@ -27,6 +30,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -39,6 +43,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomIconPopup
+import me.dizzykitty3.androidtoolkitty.ui.component.PrimaryColor
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 
 @Preview
@@ -140,7 +145,16 @@ private fun BluetoothDeviceTypeDialog() {
     if (showDialog) {
         AlertDialog(
             onDismissRequest = { showDialog = false },
-            text = { Text(text = stringResource(id = R.string.bluetooth_devices_types)) },
+            text = {
+                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                    Text(text = buildAnnotatedString { PrimaryColor(id = R.string.bluetooth_devices_types_1) })
+                    Text(text = stringResource(id = R.string.bluetooth_devices_types_2))
+                    Text(text = buildAnnotatedString { PrimaryColor(id = R.string.bluetooth_devices_types_3) })
+                    Text(text = stringResource(id = R.string.bluetooth_devices_types_4))
+                    Text(text = buildAnnotatedString { PrimaryColor(id = R.string.bluetooth_devices_types_5) })
+                    Text(text = stringResource(id = R.string.bluetooth_devices_types_6))
+                }
+            },
             confirmButton = {
                 Button(
                     onClick = { showDialog = false },

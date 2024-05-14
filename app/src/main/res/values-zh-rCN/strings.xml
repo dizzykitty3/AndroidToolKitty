@@ -30,6 +30,11 @@
     <string name="open_usage_access_permission">查看使用情况权限</string>
     <string name="open_overlay_permission">显示在其他应用上层权限</string>
     <string name="open_write_permission">修改系统设置权限</string>
+    <string name="bluetooth_devices_types_1">经典蓝牙（BT）</string>
+    <string name="bluetooth_devices_types_2">这是一种用于耳机、扬声器和文件传输等的熟悉类型。它提供良好的范围和速度，但消耗的电力更多。\n</string>
+    <string name="bluetooth_devices_types_3">低功耗蓝牙（BLE）</string>
+    <string name="bluetooth_devices_types_4">这个较新的版本设计用于低功耗，非常适合需要长电池寿命的设备，如健身追踪器和智能家居传感器。与经典蓝牙相比，它的范围更短，数据传输速率更慢。\n</string>
+    <string name="bluetooth_devices_types_5">双模</string>
     <string name="unicode">Unicode</string>
     <string name="unicode_input_hint">各 Unicode 的最后四位，如</string>
     <string name="character">字符</string>
@@ -146,7 +151,6 @@
     <string name="unknown">未知</string>
     <string name="no_paired_devices">没有已配对的设备</string>
     <string name="what_is_bt_ble_and_dual">什么是经典、低功耗、双模？</string>
-    <string name="bluetooth_devices_types">经典蓝牙（BT）：\n这是一种用于耳机、扬声器和文件传输等的熟悉类型。它提供良好的范围和速度，但消耗的电力更多。\n\n低功耗蓝牙（BLE）：\n这个较新的版本设计用于低功耗，非常适合需要长电池寿命的设备，如健身追踪器和智能家居传感器。与经典蓝牙相比，它的范围更短，数据传输速率更慢。\n\n双模：\n有些设备可能同时支持经典蓝牙和蓝牙LE。这些被称为双模式设备，可以根据需要提供与不同类型设备连接的灵活性。例如，智能手表可能使用BLE与手机连接以获取通知，但也具有经典蓝牙用于音乐播放。</string>
     <string name="bluetooth_connect">要查看已配对的设备，请授予「附近设备」权限</string>
     <string name="bluetooth_bluetooth_admin">要查看已配对的设备，请授予 BLUETOOTH, BLUETOOTH_ADMIN 权限</string>
     <string name="missed_sys_popup">错过了系统权限弹窗吗？</string>
@@ -243,4 +247,5 @@
     <string name="show_divider">显示分界线</string>
     <string name="show_snackbar_to_confirm">在确认更改前询问我</string>
     <string name="bluesky">Bluesky</string>
+    <string name="bluetooth_devices_types_6">有些设备可能同时支持经典蓝牙和蓝牙LE。这些被称为双模式设备，可以根据需要提供与不同类型设备连接的灵活性。例如，智能手表可能使用BLE与手机连接以获取通知，但也具有经典蓝牙用于音乐播放。</string>
 </resources>

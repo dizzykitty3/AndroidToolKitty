@@ -47,13 +47,13 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomBoldText
+import me.dizzykitty3.androidtoolkitty.ui.component.Bold
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomGroupTitleText
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.component.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.WarningAlertDialogButton
@@ -85,7 +85,7 @@ fun SettingsScreen(navController: NavHostController) {
         }
 
         CustomCard(title = R.string.about) {
-            CustomGroupTitleText(id = R.string.version)
+            GroupTitle(id = R.string.version)
             Row(
                 modifier = Modifier.clickable {
                     if (!debuggingOptions) {
@@ -130,7 +130,7 @@ private fun AppearanceOptions() {
     val customVolume = settingsSharedPref.customVolume
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
-    CustomGroupTitleText(id = R.string.appearance)
+    GroupTitle(id = R.string.appearance)
 
     if (OsVersion.android12()) {
         CustomSwitchRow(text = R.string.material_you_dynamic_color, checked = dynamicColor) {
@@ -169,7 +169,7 @@ private fun GeneralOptions() {
     var showSnackbarToConfirm by remember { mutableStateOf(settingsSharedPref.showSnackbar) }
     val primary = MaterialTheme.colorScheme.primary.toArgb()
 
-    CustomGroupTitleText(R.string.general)
+    GroupTitle(R.string.general)
 
     CustomSwitchRow(
         text = R.string.clear_clipboard_on_launch,
@@ -214,7 +214,7 @@ private fun GeneralOptions() {
 
 @Composable
 private fun CustomizeOptions(navController: NavHostController) {
-    CustomGroupTitleText(R.string.customize)
+    GroupTitle(R.string.customize)
 
     OutlinedButton(
         onClick = { navController.navigate(EDIT_HOME_SCREEN) }
@@ -235,7 +235,7 @@ private fun DebuggingOptions(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
     var showSpDialog by remember { mutableStateOf(false) }
 
-    CustomGroupTitleText(R.string.debugging)
+    GroupTitle(R.string.debugging)
 
     Text(text = "Android ${Build.VERSION.RELEASE}, API ${Build.VERSION.SDK_INT}")
     Text(text = "Language =  ${Locale.getDefault()}")
@@ -291,7 +291,7 @@ private fun DebuggingOptions(navController: NavHostController) {
                 text = buildAnnotatedString {
                     append(stringResource(R.string.warning_erase_all_data_1))
                     append(" ")
-                    CustomBoldText(R.string.warning_erase_all_data_2)
+                    Bold(R.string.warning_erase_all_data_2)
                     append("\n\n")
                     append(stringResource(R.string.warning_erase_all_data_3))
                 }
@@ -330,7 +330,7 @@ private fun onClickDynamicColorButton(
 
 @Composable
 private fun Contributor() {
-    CustomGroupTitleText(id = R.string.contributors)
+    GroupTitle(id = R.string.contributors)
     DeveloperProfileLink("dizzykitty3")
     SpacerPadding()
     DeveloperProfileLink("HongjieCN")
@@ -371,7 +371,7 @@ private fun DeveloperProfileLink(name: String) {
 
 @Composable
 private fun SourceAndLicenses() {
-    CustomGroupTitleText(id = R.string.source_and_licenses)
+    GroupTitle(id = R.string.source_and_licenses)
     GitHubRepoLink()
 }
 

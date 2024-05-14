@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomItalicText
+import me.dizzykitty3.androidtoolkitty.ui.component.Italic
 
 @Preview
 @Composable
@@ -128,7 +128,7 @@ private fun EarlyVersions() {
 @Composable
 private fun AndroidApiLevelAndName(@StringRes id: Int) {
     Text(
-        text = buildAnnotatedString { CustomItalicText(text = stringResource(id = id)) },
+        text = buildAnnotatedString { Italic(text = stringResource(id = id)) },
         maxLines = 1,
         overflow = TextOverflow.Ellipsis
     )
