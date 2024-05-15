@@ -252,4 +252,7 @@
     <string name="turn_on">启用</string>
     <string name="turn_off">禁用</string>
     <string name="query">查询</string>
+    <string name="lit_link">Lit.Link</string>
+    <string name="wavebox">Wavebox</string>
+    <string name="carrd">Carrd</string>
 </resources>

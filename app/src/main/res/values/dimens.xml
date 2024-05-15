@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="padding_card_content">20dp</dimen>
-    <dimen name="padding_card_content_large">30dp</dimen>
-    <dimen name="padding_card_space">8dp</dimen>
+    <dimen name="padding_screen">20dp</dimen>
+    <dimen name="padding_screen_large">30dp</dimen>
+    <dimen name="padding_card_space">12dp</dimen>
+    <dimen name="padding_card_space_large">30dp</dimen>
     <dimen name="padding_spacer">4dp</dimen>
     <dimen name="padding_icons_and_text">6dp</dimen>
     <dimen name="padding_one_handed_mode">130dp</dimen>

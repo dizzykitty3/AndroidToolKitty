@@ -9,12 +9,12 @@ import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun CustomScreen(content: @Composable () -> Unit) {
-    val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
+    val screenPadding = dimensionResource(id = R.dimen.padding_screen)
 
     LazyColumn(
         modifier = Modifier.padding(
-            start = cardPadding,
-            end = cardPadding
+            start = screenPadding,
+            end = screenPadding
         )
     ) {
         item { TopPadding() }

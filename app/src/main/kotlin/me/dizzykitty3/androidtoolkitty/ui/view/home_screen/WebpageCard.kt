@@ -334,7 +334,8 @@ private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): 
 
         URLUtil.Platform.FANBOX,
         URLUtil.Platform.BOOTH,
-        URLUtil.Platform.TUMBLR -> "${StringUtil.dropSpaces(username)}${platform.prefix}"
+        URLUtil.Platform.TUMBLR,
+        URLUtil.Platform.CARRD -> "${StringUtil.dropSpaces(username)}${platform.prefix}"
 
         else -> "${platform.prefix}${StringUtil.dropSpaces(username)}"
     }

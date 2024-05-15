@@ -17,3 +17,5 @@ local.properties
 gradle/wrapper/gradle-wrapper.jar
 *.jks
 /app/release
+/app/schemas
+.kotlin

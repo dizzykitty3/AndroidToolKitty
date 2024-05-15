@@ -80,12 +80,12 @@ fun HomeScreen(navController: NavHostController) {
 @Composable
 private fun MobileLayout(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
-    val cardPadding = dimensionResource(id = R.dimen.padding_card_content)
+    val screenPadding = dimensionResource(id = R.dimen.padding_screen)
 
     LazyColumn(
         modifier = Modifier.padding(
-            start = cardPadding,
-            end = cardPadding
+            start = screenPadding,
+            end = screenPadding
         )
     ) {
         // Status
@@ -104,8 +104,7 @@ private fun MobileLayout(navController: NavHostController) {
         }
 
         // Contents
-        val locale = Locale.getDefault().toString()
-        if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) item { NoTranslationTip(locale) }
+        item { NoTranslationTip() }
         item { HomeCards(navController) }
         item { BottomPadding() }
     }
@@ -113,9 +112,15 @@ private fun MobileLayout(navController: NavHostController) {
 
 @Composable
 private fun TabletLayout(navController: NavHostController) {
-    val cardPadding = dimensionResource(id = R.dimen.padding_card_content_large)
+    val largeScreenPadding = dimensionResource(id = R.dimen.padding_screen_large)
 
-    Column(modifier = Modifier.padding(cardPadding)) {
+    Column(
+        modifier = Modifier.padding(
+            top = largeScreenPadding,
+            start = largeScreenPadding,
+            end = largeScreenPadding
+        )
+    ) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Box(modifier = Modifier.weight(1f)) {
                 Greeting()
@@ -125,7 +130,8 @@ private fun TabletLayout(navController: NavHostController) {
                 BatteryNetworkAndSetting(navController)
             }
         }
-
+        SpacerPadding()
+        NoTranslationTip()
         TwoColumnHomeCards(navController)
     }
 }
@@ -225,8 +231,9 @@ private fun NetworkStateIcon(
 }
 
 @Composable
-private fun NoTranslationTip(locale: String) {
-    CustomTip(
+private fun NoTranslationTip() {
+    val locale = Locale.getDefault().toString()
+    if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG")))) CustomTip(
         formattedMessage = stringResource(
             R.string.no_translation,
             locale
@@ -237,28 +244,27 @@ private fun NoTranslationTip(locale: String) {
 @Composable
 private fun HomeCards(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
-    val cardMapping = getCardMapping(settingsSharedPref)
+    val cardMap = getCardMap(settingsSharedPref)
 
-    cardMapping.forEach { (cardName, isShow) ->
+    cardMap.forEach { (cardName, isShow) ->
         if (isShow) {
             CardContent(cardName, navController)
         }
     }
 }
 
-// TODO padding and edgetoedge
 @Composable
 private fun TwoColumnHomeCards(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
-    val cardPadding = dimensionResource(id = R.dimen.padding_card_content_large)
-    val cardMapping = getCardMapping(settingsSharedPref)
+    val largeCardPadding = dimensionResource(id = R.dimen.padding_card_space_large)
+    val cardMap = getCardMap(settingsSharedPref)
 
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
-        verticalItemSpacing = cardPadding,
-        horizontalArrangement = Arrangement.spacedBy(cardPadding),
+        verticalItemSpacing = largeCardPadding,
+        horizontalArrangement = Arrangement.spacedBy(largeCardPadding),
     ) {
-        items(cardMapping.toList()) { (cardName, isShow) ->
+        items(cardMap.toList()) { (cardName, isShow) ->
             if (isShow) {
                 CardContent(cardName, navController)
             }
@@ -268,7 +274,7 @@ private fun TwoColumnHomeCards(navController: NavHostController) {
 
 @Suppress("KotlinConstantConditions")
 @Composable
-private fun getCardMapping(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> {
+private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> {
     val debugBuild = BuildConfig.BUILD_TYPE == "debug"
     return if (debugBuild) {
         listOf(

@@ -7,6 +7,7 @@ import androidx.compose.material.icons.outlined.FontDownload
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
@@ -33,6 +34,11 @@ fun FontWeightCard() {
         RowFontWeightTest(id = R.string.a)
         RowFontWeightTest(id = R.string.chinese_que)
         RowFontWeightTest(id = R.string.japanese_ki)
+        GroupDivider()
+        Text(text = "FontFamily.SansSerif / 雀 / 気", fontFamily = FontFamily.SansSerif)
+        Text(text = "FontFamily.Serif / 雀 / 気", fontFamily = FontFamily.Serif)
+        Text(text = "FontFamily.Cursive / 雀 / 気", fontFamily = FontFamily.Cursive)
+        Text(text = "FontFamily.Monospace / 雀 / 気", fontFamily = FontFamily.Monospace)
     }
 }
 

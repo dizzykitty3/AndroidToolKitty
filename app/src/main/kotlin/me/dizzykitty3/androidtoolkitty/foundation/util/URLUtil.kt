@@ -109,17 +109,22 @@ object URLUtil {
         return suffixMap[StringUtil.dropSpaces(urlInput)] ?: COM
     }
 
+    /**
+     * @see me.dizzykitty3.androidtoolkitty.ui.view.home_screen.toSocialMediaFullURL
+     */
     enum class Platform(val prefix: String, @StringRes val nameRes: Int) {
         ARTSTATION("artstation.com/", R.string.artstation),
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
         BLUESKY("bsky.app/profile/", R.string.bluesky),
         BOOTH(".booth.pm", R.string.booth),
+        CARRD(".carrd.co", R.string.carrd),
         FACEBOOK("facebook.com/", R.string.facebook),
         FANBOX(".fanbox.cc", R.string.fanbox),
         FANTIA("fantia.jp/", R.string.fantia),
         GITHUB("github.com/", R.string.github),
         INSTAGRAM("instagram.com/", R.string.instagram),
+        LIT_LINK("lit.link/", R.string.lit_link),
         PATREON("patreon.com/", R.string.patreon),
         PAYPAL("paypal.me/", R.string.paypal),
         PIXIV_ARTWORK("pixiv.net/artworks/", R.string.pixiv_artwork_id),
@@ -136,6 +141,7 @@ object URLUtil {
         TUMBLR(".tumblr.com", R.string.tumblr),
         TWITCH("twitch.tv/", R.string.twitch),
         V2EX("v2ex.com/member/", R.string.v2ex),
+        WAVEBOX("wavebox.me/wave/", R.string.wavebox),
         WEIBO("weibo.com/n/", R.string.weibo),
         X("x.com/", R.string.x),
         YOUTUBE("youtube.com/@", R.string.youtube_id)
