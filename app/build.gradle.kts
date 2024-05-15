@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt.android)
-    alias(libs.plugins.kapt)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
@@ -22,8 +21,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 687
-        versionName = "1.0.687"
+        versionCode = 688
+        versionName = "1.0.688"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -56,6 +55,12 @@ android {
             .forEach { output ->
                 output.outputFileName = "android-toolkitty-${this.versionName}.apk"
             }
+    }
+
+    composeCompiler {
+        enableStrongSkippingMode = true
+        reportsDestination = layout.buildDirectory.dir("compose_compiler")
+//        stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
     }
 
     compileOptions {
@@ -101,9 +106,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android) // Asynchronous tasks
     implementation(libs.kotlinx.serialization) // json
 
-    // Dagger’s KSP support is currently in alpha.
-    // https://kotlinlang.org/docs/ksp-overview.html#supported-libraries
-    kapt(libs.google.hilt.compiler)
-
+    ksp(libs.google.hilt.compiler)
     ksp(libs.androidx.room.compiler)
 }
