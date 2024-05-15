@@ -69,7 +69,7 @@
     <string name="show_edit_volume_option">在音量卡片显示编辑按钮</string>
     <string name="about">关于</string>
     <string name="source_code_on_github">在 GitHub 上查看源码</string>
-    <string name="submit_the_platform_you_need">提交你所想平台的名称给开发者</string>
+    <string name="submit_the_platform_you_need">提交你所想的平台</string>
     <plurals name="days_remaining">
         <item quantity="other">剩余 %1$d 天</item>
     </plurals>
@@ -251,4 +251,5 @@
     <string name="bluetooth_devices_types_6">有些设备可能同时支持经典蓝牙和蓝牙LE。这些被称为双模式设备，可以根据需要提供与不同类型设备连接的灵活性。例如，智能手表可能使用BLE与手机连接以获取通知，但也具有经典蓝牙用于音乐播放。</string>
     <string name="turn_on">启用</string>
     <string name="turn_off">禁用</string>
+    <string name="query">查询</string>
 </resources>

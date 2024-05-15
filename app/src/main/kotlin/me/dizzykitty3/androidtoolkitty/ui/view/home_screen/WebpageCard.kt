@@ -92,7 +92,7 @@ private fun Search() {
     OutlinedTextField(
         value = searchQuery,
         onValueChange = { searchQuery = it },
-        label = { Text(text = stringResource(id = R.string.search)) },
+        label = { Text(text = stringResource(id = R.string.query)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done
@@ -110,7 +110,7 @@ private fun Search() {
     TextButton(
         onClick = { onClickSearchButton(searchQuery, context) }
     ) {
-        Text(text = stringResource(R.string.search))
+        Text(text = stringResource(R.string.visit))
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
             contentDescription = null,

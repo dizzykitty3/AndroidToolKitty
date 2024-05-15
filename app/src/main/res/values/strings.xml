@@ -50,8 +50,8 @@
 
     <!-- Home screen: webpage -->
     <string name="url">URL</string>
-    <string name="url_input_hint_1">Visit webpage without inputting prefix</string>
-    <string name="url_input_hint_2">and suffix</string>
+    <string name="url_input_hint_1">Visit webpage without inputting </string>
+    <string name="url_input_hint_2">and </string>
     <string name="url_input_hint_3">(or</string>
     <string name="url_input_hint_4">, etc.)</string>
     <string name="social_media_profile">Social media profile</string>
@@ -91,6 +91,7 @@
     <string name="skeb">Skeb</string>
     <string name="potofu">POTOFU</string>
     <string name="bluesky">Bluesky</string>
+    <string name="query">Query</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>
