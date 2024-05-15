@@ -16,3 +16,4 @@ local.properties
 .idea
 gradle/wrapper/gradle-wrapper.jar
 *.jks
+/app/release
