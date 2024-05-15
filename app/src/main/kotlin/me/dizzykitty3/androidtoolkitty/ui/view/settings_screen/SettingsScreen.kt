@@ -334,6 +334,9 @@ private fun Contributor() {
     DeveloperProfileLink("dizzykitty3")
     SpacerPadding()
     DeveloperProfileLink("HongjieCN")
+    SpacerPadding()
+    GroupTitle(id = R.string.special_thanks_to)
+    ThanksTo("tengusw/share_to_clipboard")
 }
 
 @Composable
@@ -359,6 +362,36 @@ private fun DeveloperProfileLink(name: String) {
                 color = MaterialTheme.colorScheme.primary
             )
 
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
+}
+
+@Composable
+private fun ThanksTo(link: String) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        val context = LocalContext.current
+        val sourceCodeUrl = "https://github.com/$link"
+
+        DeveloperProfileLink(name = link.substringBefore('/'))
+        IconAndTextPadding()
+
+        Row(
+            modifier = Modifier.clickable {
+                IntentUtil.openUrl(sourceCodeUrl, context)
+            }
+        ) {
+            Text(
+                text = link.substringAfter('/'),
+                color = MaterialTheme.colorScheme.primary
+            )
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,

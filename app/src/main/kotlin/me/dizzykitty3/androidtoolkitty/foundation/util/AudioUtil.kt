@@ -9,8 +9,7 @@ import java.time.LocalTime
 private const val TAG = "AudioUtil"
 
 object AudioUtil {
-    private var audioManager: AudioManager =
-        appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+    private var audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
     fun volume(): Int =
         audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)

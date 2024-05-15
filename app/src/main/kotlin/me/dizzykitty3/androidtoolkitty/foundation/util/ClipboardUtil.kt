@@ -7,7 +7,7 @@ import android.content.Context
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 
 object ClipboardUtil {
-    private var clipboard: ClipboardManager =
+    private var clipboard =
         appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
     @SuppressLint("NewApi")

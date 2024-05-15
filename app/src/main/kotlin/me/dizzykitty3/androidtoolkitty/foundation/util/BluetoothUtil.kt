@@ -6,7 +6,7 @@ import android.content.Context
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 
 object BluetoothUtil {
-    private var bluetoothManager: BluetoothManager =
+    private var bluetoothManager =
         appContext.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
 
     fun bluetoothAdapter(): BluetoothAdapter =
