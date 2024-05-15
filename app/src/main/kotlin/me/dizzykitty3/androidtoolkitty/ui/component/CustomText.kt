@@ -69,7 +69,7 @@ fun GradientSmall(textToDisplay: String, colors: List<Color>) {
             withStyle(
                 style = SpanStyle(
                     brush = Brush.horizontalGradient(colors = colors),
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Black
                 )
             ) { append(textToDisplay) }
         }

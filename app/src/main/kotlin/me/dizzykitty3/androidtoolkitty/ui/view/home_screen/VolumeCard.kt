@@ -43,6 +43,8 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.GradientSmall
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 
+private const val ADD = "+ Add"
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VolumeCard() {
@@ -62,12 +64,14 @@ fun VolumeCard() {
         var mHaveCustomLabel by remember { mutableStateOf(haveCustomLabel) }
         var showVolumeDialog by remember { mutableStateOf(false) }
         val showEditVolumeOption = settingsSharedPref.showEditVolumeOption
+        val haveTappedAddButton = settingsSharedPref.haveTappedAddButton
+        var mHaveTappedAddButton by remember { mutableStateOf(haveTappedAddButton) }
 
         val options = listOf(
             stringResource(R.string.mute),
             "40%",
             "60%",
-            if (mCustomVolume < 0) "+ Add" else mCustomVolumeOptionLabel
+            if (mCustomVolume < 0) ADD else mCustomVolumeOptionLabel
         )
 
         var selectedIndex by remember {
@@ -108,6 +112,7 @@ fun VolumeCard() {
                             }
 
                             3 -> {
+                                mHaveTappedAddButton = true
                                 if (mCustomVolume > 0)
                                     setVolume(mCustomVolume * 0.01 * maxVolume)
                                 else
@@ -121,14 +126,19 @@ fun VolumeCard() {
                         count = options.size
                     )
                 ) {
-                    if (label != "+ Add") Text(text = label.toString())
-                    else GradientSmall(
-                        textToDisplay = label.toString(),
-                        colors = listOf(
-                            MaterialTheme.colorScheme.primary,
-                            MaterialTheme.colorScheme.tertiary
+                    if (label != ADD) {
+                        Text(text = label.toString())
+                    } else if (mHaveTappedAddButton) {
+                        Text(text = label.toString())
+                    } else {
+                        GradientSmall(
+                            textToDisplay = label.toString(),
+                            colors = listOf(
+                                MaterialTheme.colorScheme.primary,
+                                MaterialTheme.colorScheme.tertiary
+                            )
                         )
-                    )
+                    }
                 }
             }
 
