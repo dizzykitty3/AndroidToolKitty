@@ -40,7 +40,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.URLUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomDropdownMenu
@@ -55,7 +55,7 @@ private const val TAG = "WebpageCard"
 fun WebpageCard() {
     CustomCard(
         icon = Icons.Outlined.Link,
-        title = R.string.webpage
+        titleRes = R.string.webpage
     ) {
         val settingsSharedPref = remember { SettingsSharedPref }
         val showMore = settingsSharedPref.webpageCardShowMore
@@ -67,9 +67,9 @@ fun WebpageCard() {
 
         if (mShowMore) {
             GroupDivider()
-            WebpageUrl()
+            WebpageURL()
             GroupDivider()
-            SocialMediaProfileIUrl()
+            SocialMediaProfileIURL()
         }
 
         TextButton(onClick = {
@@ -120,7 +120,7 @@ private fun Search() {
 }
 
 @Composable
-private fun WebpageUrl() {
+private fun WebpageURL() {
     GroupTitle(id = R.string.webpage)
 
     val context = LocalContext.current
@@ -136,7 +136,7 @@ private fun WebpageUrl() {
             keyboardType = KeyboardType.Ascii
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onClickVisitUrlButton(url, context) }
+            onDone = { onClickVisitURLButton(url, context) }
         ),
         trailingIcon = {
             ClearInput(text = url) {
@@ -157,10 +157,10 @@ private fun WebpageUrl() {
             )
         },
         prefix = { Text(text = HTTPS) },
-        suffix = { Text(text = UrlUtil.suffixOf(url)) }
+        suffix = { Text(text = URLUtil.suffixOf(url)) }
     )
 
-    TextButton(onClick = { onClickVisitUrlButton(url, context) }) {
+    TextButton(onClick = { onClickVisitURLButton(url, context) }) {
         Text(text = stringResource(R.string.visit))
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
@@ -171,12 +171,12 @@ private fun WebpageUrl() {
 }
 
 @Composable
-private fun SocialMediaProfileIUrl() {
+private fun SocialMediaProfileIURL() {
     val context = LocalContext.current
     var username by remember { mutableStateOf("") }
     val platformIndex = SettingsSharedPref.lastTimeSelectedSocialPlatform
     var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
-    val platformList = UrlUtil.Platform.entries.map { stringResource(it.nameResId) }
+    val platformList = URLUtil.Platform.entries.map { stringResource(it.nameRes) }
 
     GroupTitle(id = R.string.social_media_profile)
 
@@ -203,9 +203,9 @@ private fun SocialMediaProfileIUrl() {
             }
         },
         supportingText = {
-            val platform = UrlUtil.Platform.entries[mPlatformIndex]
+            val platform = URLUtil.Platform.entries[mPlatformIndex]
             Text(
-                text = toFullUrl(platform, username),
+                text = toSocialMediaFullURL(platform, username),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
             )
@@ -238,7 +238,7 @@ private fun NoPlatformYouNeedHere() {
         modifier = Modifier.clickable { showDialog = true })
 
     var platformNameInput by remember { mutableStateOf("") }
-    var platformExampleUrlInput by remember { mutableStateOf("") }
+    var platformExampleURLInput by remember { mutableStateOf("") }
 
     if (showDialog) {
         AlertDialog(
@@ -262,13 +262,13 @@ private fun NoPlatformYouNeedHere() {
                         },
                     )
                     OutlinedTextField(
-                        value = platformExampleUrlInput,
-                        onValueChange = { platformExampleUrlInput = it },
+                        value = platformExampleURLInput,
+                        onValueChange = { platformExampleURLInput = it },
                         label = { Text(text = stringResource(id = R.string.platform_example_url)) },
                         modifier = Modifier.fillMaxWidth(),
                         trailingIcon = {
-                            ClearInput(text = platformExampleUrlInput) {
-                                platformExampleUrlInput = ""
+                            ClearInput(text = platformExampleURLInput) {
+                                platformExampleURLInput = ""
                             }
                         }
                     )
@@ -308,10 +308,10 @@ private fun onClickSearchButton(query: String, context: Context) {
     Log.d(TAG, "onClickSearchButton")
 }
 
-private fun onClickVisitUrlButton(url: String, context: Context) {
+private fun onClickVisitURLButton(url: String, context: Context) {
     if (url.isBlank()) return
 
-    IntentUtil.openUrl(UrlUtil.toFullUrl(StringUtil.dropSpaces(url)), context)
+    IntentUtil.openURL(URLUtil.toFullURL(StringUtil.dropSpaces(url)), context)
     Log.d(TAG, "onClickVisitButton")
 }
 
@@ -322,19 +322,19 @@ private fun onVisitProfileButton(
 ) {
     if (username.isBlank()) return
 
-    val platform = UrlUtil.Platform.entries.getOrNull(platformIndex) ?: return
-    val url = toFullUrl(platform, username)
-    IntentUtil.openUrl(url, context)
+    val platform = URLUtil.Platform.entries.getOrNull(platformIndex) ?: return
+    val url = toSocialMediaFullURL(platform, username)
+    IntentUtil.openURL(url, context)
     Log.d(TAG, "onVisitProfile")
 }
 
-private fun toFullUrl(platform: UrlUtil.Platform, username: String): String {
+private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String {
     return when (platform) {
-        UrlUtil.Platform.BLUESKY -> "${platform.prefix}${StringUtil.dropSpaces(username)}.bsky.social"
+        URLUtil.Platform.BLUESKY -> "${platform.prefix}${StringUtil.dropSpaces(username)}.bsky.social"
 
-        UrlUtil.Platform.FANBOX,
-        UrlUtil.Platform.BOOTH,
-        UrlUtil.Platform.TUMBLR -> "${StringUtil.dropSpaces(username)}${platform.prefix}"
+        URLUtil.Platform.FANBOX,
+        URLUtil.Platform.BOOTH,
+        URLUtil.Platform.TUMBLR -> "${StringUtil.dropSpaces(username)}${platform.prefix}"
 
         else -> "${platform.prefix}${StringUtil.dropSpaces(username)}"
     }

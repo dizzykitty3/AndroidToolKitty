@@ -27,7 +27,7 @@ private const val TAG = "ClipboardCard"
 fun ClipboardCard() {
     CustomCard(
         icon = Icons.Outlined.ContentPasteSearch,
-        title = R.string.clipboard
+        titleRes = R.string.clipboard
     ) {
         val view = LocalView.current
         val isShowHintText = !SettingsSharedPref.haveOpenedSettingsScreen

@@ -14,7 +14,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
-import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -103,7 +103,7 @@ fun AppTheme(
     // https://m3.material.io/styles/color/system/how-the-system-works#0207ef40-7f0d-4da8-9280-f062aa6b3e04
 
     @Composable
-    fun OsVersion.colorScheme(darkTheme: Boolean, dynamicColor: Boolean): ColorScheme {
+    fun OSVersion.colorScheme(darkTheme: Boolean, dynamicColor: Boolean): ColorScheme {
         return when {
             this.android12() && dynamicColor ->
                 if (darkTheme) dynamicDarkColorScheme(appContext)
@@ -114,7 +114,7 @@ fun AppTheme(
         }
     }
 
-    val colorScheme = OsVersion.colorScheme(darkTheme, dynamicColor)
+    val colorScheme = OSVersion.colorScheme(darkTheme, dynamicColor)
 
     val view = LocalView.current
     if (!view.isInEditMode) {

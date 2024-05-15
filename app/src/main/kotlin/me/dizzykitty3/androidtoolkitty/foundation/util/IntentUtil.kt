@@ -57,7 +57,7 @@ object IntentUtil {
         }
     }
 
-    fun openUrl(url: String, context: Context) {
+    fun openURL(url: String, context: Context) {
         if (url.isBlank()) return
 
         val intent = Intent(Intent.ACTION_VIEW)
@@ -68,14 +68,14 @@ object IntentUtil {
                 "$HTTPS$url"
         )
         startActivity(intent, context)
-        Log.d(TAG, "openUrl")
+        Log.d(TAG, "openURL")
     }
 
     @JvmStatic
     fun openSystemSettings(settingType: String, context: Context) {
         val intent: Intent = when (settingType) {
             SETTING_1 -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
-            SETTING_2 -> @SuppressLint("InlinedApi") if (OsVersion.android12()) Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
+            SETTING_2 -> @SuppressLint("InlinedApi") if (OSVersion.android12()) Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
             SETTING_3 -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
             SETTING_4 -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
             SETTING_5 -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)

@@ -39,7 +39,7 @@ private const val TAG = "MapsCard"
 fun MapsCard() {
     CustomCard(
         icon = Icons.Outlined.Place,
-        title = R.string.google_maps
+        titleRes = R.string.google_maps
     ) {
         val context = LocalContext.current
         var latitude by remember { mutableStateOf("") }

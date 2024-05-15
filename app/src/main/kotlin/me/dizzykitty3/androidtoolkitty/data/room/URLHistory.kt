@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "url_history")
-data class UrlHistory(
+data class URLHistory(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "url_input") val urlInput: String
 )

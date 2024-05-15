@@ -27,7 +27,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 fun YearProgressCard() {
     CustomCard(
         icon = Icons.Outlined.HourglassTop,
-        title = R.string.year_progress
+        titleRes = R.string.year_progress
     ) {
         var isShowPercentage by remember { mutableStateOf(true) }
 

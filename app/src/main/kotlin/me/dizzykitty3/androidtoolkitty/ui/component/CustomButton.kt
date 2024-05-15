@@ -19,18 +19,18 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 @Composable
 fun SystemSettingButton(
     settingType: String,
-    @StringRes buttonText: Int
+    @StringRes textRes: Int
 ) {
     val context = LocalContext.current
 
     OutlinedButton(
         onClick = { IntentUtil.openSystemSettings(settingType, context) }
     ) {
-        Text(text = stringResource(id = buttonText))
+        Text(text = stringResource(id = textRes))
 
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = stringResource(id = buttonText),
+            contentDescription = stringResource(id = textRes),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
     }

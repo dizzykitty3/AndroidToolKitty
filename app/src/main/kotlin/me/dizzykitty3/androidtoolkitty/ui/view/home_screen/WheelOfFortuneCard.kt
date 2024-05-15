@@ -73,7 +73,7 @@ import kotlin.random.Random
 fun WheelOfFortuneCard() {
     CustomCard(
         icon = Icons.Outlined.Casino,
-        title = R.string.wheel_of_fortune
+        titleRes = R.string.wheel_of_fortune
     ) {
         val baseItem = stringResource(R.string.item)
         // 初始化轮盘项目列表

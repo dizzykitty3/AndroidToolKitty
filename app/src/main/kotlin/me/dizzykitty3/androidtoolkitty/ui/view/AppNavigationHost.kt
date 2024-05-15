@@ -15,7 +15,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTINGS_SCREEN
 import me.dizzykitty3.androidtoolkitty.ui.view.edit_home_screen.EditHomeScreen
 import me.dizzykitty3.androidtoolkitty.ui.view.home_screen.HomeScreen
 import me.dizzykitty3.androidtoolkitty.ui.view.permission_request_screen.PermissionRequestScreen
-import me.dizzykitty3.androidtoolkitty.ui.view.qr_code_generator_screen.QrCodeGeneratorScreen
+import me.dizzykitty3.androidtoolkitty.ui.view.qr_code_generator_screen.QRCodeGeneratorScreen
 import me.dizzykitty3.androidtoolkitty.ui.view.settings_screen.SettingsScreen
 
 @Composable
@@ -31,6 +31,6 @@ fun AppNavigationHost() {
         composable(SETTINGS_SCREEN) { SettingsScreen(navController) }
         composable(EDIT_HOME_SCREEN) { EditHomeScreen() }
         composable(PERMISSION_REQUEST_SCREEN) { PermissionRequestScreen() }
-        composable(QR_CODE_GENERATOR_SCREEN) { QrCodeGeneratorScreen() }
+        composable(QR_CODE_GENERATOR_SCREEN) { QRCodeGeneratorScreen() }
     }
 }

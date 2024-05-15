@@ -48,7 +48,7 @@ fun EditHomeScreen() {
         var mIsShowCard5 by remember { mutableStateOf(isShowCard5) }
 
         CustomCard(
-            title = R.string.customize_my_home_page
+            titleRes = R.string.customize_my_home_page
         ) {
             val view = LocalView.current
 
@@ -77,96 +77,96 @@ fun EditHomeScreen() {
             var mIsShowCard12 by remember { mutableStateOf(isShowCard12) }
 
             CustomHideCardSettingSwitch(
-                id = R.string.year_progress,
-                cardId = CARD_1,
+                textRes = R.string.year_progress,
+                card = CARD_1,
                 isChecked = mIsShowCard1
             ) { newState ->
                 mIsShowCard1 = newState
                 settingsSharedPref.saveCardShowedState(CARD_1, newState)
             }
             CustomHideCardSettingSwitch(
-                id = R.string.volume,
-                cardId = CARD_2,
+                textRes = R.string.volume,
+                card = CARD_2,
                 isChecked = mIsShowCard2
             ) { newState ->
                 mIsShowCard2 = newState
                 settingsSharedPref.saveCardShowedState(CARD_2, newState)
             }
             CustomHideCardSettingSwitch(
-                id = R.string.clipboard,
-                cardId = CARD_3,
+                textRes = R.string.clipboard,
+                card = CARD_3,
                 isChecked = mIsShowCard3
             ) { newState ->
                 mIsShowCard3 = newState
                 settingsSharedPref.saveCardShowedState(CARD_3, newState)
             }
             CustomHideCardSettingSwitch(
-                id = R.string.url,
-                cardId = CARD_4,
+                textRes = R.string.url,
+                card = CARD_4,
                 isChecked = mIsShowCard4
             ) { newState ->
                 mIsShowCard4 = newState
                 settingsSharedPref.saveCardShowedState(CARD_4, newState)
             }
             CustomHideCardSettingSwitch(
-                id = R.string.system_settings,
-                cardId = CARD_5,
+                textRes = R.string.system_settings,
+                card = CARD_5,
                 isChecked = mIsShowCard5
             ) { newState ->
                 mIsShowCard5 = newState
                 settingsSharedPref.saveCardShowedState(CARD_5, newState)
             }
             CustomHideCardSettingSwitch(
-                id = R.string.wheel_of_fortune,
-                cardId = CARD_6,
+                textRes = R.string.wheel_of_fortune,
+                card = CARD_6,
                 isChecked = mIsShowCard6
             ) { newState ->
                 mIsShowCard6 = newState
                 settingsSharedPref.saveCardShowedState(CARD_6, newState)
             }
             CustomHideCardSettingSwitch(
-                id = R.string.bluetooth_devices,
-                cardId = CARD_7,
+                textRes = R.string.bluetooth_devices,
+                card = CARD_7,
                 isChecked = mIsShowCard7
             ) { newState ->
                 mIsShowCard7 = newState
                 settingsSharedPref.saveCardShowedState(CARD_7, newState)
             }
             CustomHideCardSettingSwitch(
-                id = R.string.unicode,
-                cardId = CARD_8,
+                textRes = R.string.unicode,
+                card = CARD_8,
                 isChecked = mIsShowCard8
             ) { newState ->
                 mIsShowCard8 = newState
                 settingsSharedPref.saveCardShowedState(CARD_8, newState)
             }
             CustomHideCardSettingSwitch(
-                id = R.string.check_app_on_market,
-                cardId = CARD_9,
+                textRes = R.string.check_app_on_market,
+                card = CARD_9,
                 isChecked = mIsShowCard9
             ) { newState ->
                 mIsShowCard9 = newState
                 settingsSharedPref.saveCardShowedState(CARD_9, newState)
             }
             CustomHideCardSettingSwitch(
-                id = R.string.google_maps,
-                cardId = CARD_10,
+                textRes = R.string.google_maps,
+                card = CARD_10,
                 isChecked = mIsShowCard10
             ) { newState ->
                 mIsShowCard10 = newState
                 settingsSharedPref.saveCardShowedState(CARD_10, newState)
             }
             CustomHideCardSettingSwitch(
-                id = R.string.android_versions,
-                cardId = CARD_11,
+                textRes = R.string.android_versions,
+                card = CARD_11,
                 isChecked = mIsShowCard11
             ) { newState ->
                 mIsShowCard11 = newState
                 settingsSharedPref.saveCardShowedState(CARD_11, newState)
             }
             CustomHideCardSettingSwitch(
-                id = R.string.font_weight_test,
-                cardId = CARD_12,
+                textRes = R.string.font_weight_test,
+                card = CARD_12,
                 isChecked = mIsShowCard12
             ) { newState ->
                 mIsShowCard12 = newState
@@ -183,8 +183,8 @@ fun EditHomeScreen() {
                     if (showSnackbarToConfirm) {
                         SnackbarUtil.snackbar(
                             view,
-                            message = R.string.tap_to_apply,
-                            buttonText = R.string.apply,
+                            messageRes = R.string.tap_to_apply,
+                            buttonTextRes = R.string.apply,
                             buttonColor = primary,
                             buttonClickListener = {
                                 onClickChangeAllCardsButton(false)
@@ -234,8 +234,8 @@ fun EditHomeScreen() {
                     if (showSnackbarToConfirm) {
                         SnackbarUtil.snackbar(
                             view,
-                            message = R.string.tap_to_apply,
-                            buttonText = R.string.apply,
+                            messageRes = R.string.tap_to_apply,
+                            buttonTextRes = R.string.apply,
                             buttonColor = primary,
                             buttonClickListener = {
                                 onClickChangeAllCardsButton(true)

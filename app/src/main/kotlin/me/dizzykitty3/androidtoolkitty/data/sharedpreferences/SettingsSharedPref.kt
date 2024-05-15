@@ -178,14 +178,14 @@ object SettingsSharedPref {
             }
         }
 
-    fun getCardShowedState(cardId: String): Boolean {
-        return sharedPrefs.getBoolean(cardId, true)
+    fun getCardShowedState(card: String): Boolean {
+        return sharedPrefs.getBoolean(card, true)
     }
 
-    fun saveCardShowedState(cardId: String, isShowed: Boolean) {
-        Log.d(TAG, "$cardId is showed = $isShowed")
+    fun saveCardShowedState(card: String, isShowed: Boolean) {
+        Log.d(TAG, "$card is showed = $isShowed")
         with(sharedPrefs.edit()) {
-            putBoolean(cardId, isShowed)
+            putBoolean(card, isShowed)
             apply()
         }
     }

@@ -43,10 +43,10 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_3
 import me.dizzykitty3.androidtoolkitty.foundation.const.EDIT_HOME_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.const.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.UrlUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.URLUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.Bold
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
@@ -66,7 +66,7 @@ fun SettingsScreen(navController: NavHostController) {
         val debuggingOptions = SettingsSharedPref.debuggingOptions
         var tapCount by remember { mutableIntStateOf(0) }
 
-        CustomCard(title = R.string.settings) {
+        CustomCard(titleRes = R.string.settings) {
             AppearanceOptions()
             GroupDivider()
             GeneralOptions()
@@ -84,7 +84,7 @@ fun SettingsScreen(navController: NavHostController) {
             }
         }
 
-        CustomCard(title = R.string.about) {
+        CustomCard(titleRes = R.string.about) {
             GroupTitle(id = R.string.version)
             Row(
                 modifier = Modifier.clickable {
@@ -132,25 +132,25 @@ private fun AppearanceOptions() {
 
     GroupTitle(id = R.string.appearance)
 
-    if (OsVersion.android12()) {
-        CustomSwitchRow(text = R.string.material_you_dynamic_color, checked = dynamicColor) {
+    if (OSVersion.android12()) {
+        CustomSwitchRow(textRes = R.string.material_you_dynamic_color, checked = dynamicColor) {
             dynamicColor = it
             onClickDynamicColorButton(view, it, primary, context)
         }
     }
 
-    CustomSwitchRow(text = R.string.one_handed_mode, checked = oneHandedMode) {
+    CustomSwitchRow(textRes = R.string.one_handed_mode, checked = oneHandedMode) {
         oneHandedMode = it
         settingsSharedPref.oneHandedMode = it
     }
 
-    CustomSwitchRow(text = R.string.show_divider, checked = showDivider) {
+    CustomSwitchRow(textRes = R.string.show_divider, checked = showDivider) {
         showDivider = it
         settingsSharedPref.showDivider = it
     }
 
     if (customVolume > 0) CustomSwitchRow(
-        text = R.string.show_edit_volume_option,
+        textRes = R.string.show_edit_volume_option,
         checked = showEditVolumeOption
     ) {
         showEditVolumeOption = it
@@ -172,7 +172,7 @@ private fun GeneralOptions() {
     GroupTitle(R.string.general)
 
     CustomSwitchRow(
-        text = R.string.clear_clipboard_on_launch,
+        textRes = R.string.clear_clipboard_on_launch,
         checked = autoClearClipboard
     ) {
         autoClearClipboard = it
@@ -182,8 +182,8 @@ private fun GeneralOptions() {
             settingsSharedPref.saveCardShowedState(CARD_3, false)
             SnackbarUtil.snackbar(
                 view,
-                message = R.string.clipboard_card_hidden,
-                buttonText = R.string.undo,
+                messageRes = R.string.clipboard_card_hidden,
+                buttonTextRes = R.string.undo,
                 buttonColor = primary,
                 buttonClickListener = {
                     settingsSharedPref.saveCardShowedState(CARD_3, true)
@@ -193,20 +193,20 @@ private fun GeneralOptions() {
         settingsSharedPref.autoClearClipboard = autoClearClipboard
     }
 
-    CustomSwitchRow(text = R.string.set_slider_increment_5, checked = volumeSlideSteps) {
+    CustomSwitchRow(textRes = R.string.set_slider_increment_5, checked = volumeSlideSteps) {
         volumeSlideSteps = it
         settingsSharedPref.sliderIncrement5Percent = it
     }
 
     CustomSwitchRow(
-        text = R.string.collapse_keyboard_when_back_to_app,
+        textRes = R.string.collapse_keyboard_when_back_to_app,
         checked = collapseKeyboard
     ) {
         collapseKeyboard = it
         settingsSharedPref.collapseKeyboard = it
     }
 
-    CustomSwitchRow(text = R.string.show_snackbar_to_confirm, checked = showSnackbarToConfirm) {
+    CustomSwitchRow(textRes = R.string.show_snackbar_to_confirm, checked = showSnackbarToConfirm) {
         showSnackbarToConfirm = it
         settingsSharedPref.showSnackbar = it
     }
@@ -318,8 +318,8 @@ private fun onClickDynamicColorButton(
     if (showSnackbarToConfirm) {
         SnackbarUtil.snackbar(
             view,
-            message = R.string.requires_restart_do_it_now,
-            buttonText = R.string.restart,
+            messageRes = R.string.requires_restart_do_it_now,
+            buttonTextRes = R.string.restart,
             buttonColor = color,
             buttonClickListener = { IntentUtil.restartApp(context) }
         )
@@ -351,8 +351,8 @@ private fun DeveloperProfileLink(name: String) {
         IconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
-                IntentUtil.openUrl(
-                    "${UrlUtil.prefixOf(UrlUtil.Platform.GITHUB)}$name",
+                IntentUtil.openURL(
+                    "${URLUtil.prefixOf(URLUtil.Platform.GITHUB)}$name",
                     context
                 )
             }
@@ -378,14 +378,14 @@ private fun ThanksTo(link: String) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         val context = LocalContext.current
-        val sourceCodeUrl = "https://github.com/$link"
+        val sourceCodeURL = "https://github.com/$link"
 
         DeveloperProfileLink(name = link.substringBefore('/'))
         IconAndTextPadding()
 
         Row(
             modifier = Modifier.clickable {
-                IntentUtil.openUrl(sourceCodeUrl, context)
+                IntentUtil.openURL(sourceCodeURL, context)
             }
         ) {
             Text(
@@ -414,7 +414,7 @@ private fun GitHubRepoLink() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         val context = LocalContext.current
-        val sourceCodeUrl = "https://github.com/dizzykitty3/android-toolkitty"
+        val sourceCodeURL = "https://github.com/dizzykitty3/android-toolkitty"
 
         Icon(
             imageVector = Icons.Outlined.Code,
@@ -424,7 +424,7 @@ private fun GitHubRepoLink() {
         Row(
             modifier = Modifier.clickable {
                 ToastUtil.toast(R.string.all_help_welcomed)
-                IntentUtil.openUrl(sourceCodeUrl, context)
+                IntentUtil.openURL(sourceCodeURL, context)
             }
         ) {
             Text(

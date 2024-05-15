@@ -8,12 +8,12 @@ import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 // Reference codelab: https://developer.android.com/codelabs/basic-android-kotlin-compose-persisting-data-room
 
 @Database(
-    entities = [UrlHistory::class],
+    entities = [URLHistory::class],
     version = 1,
     exportSchema = false
 )
 abstract class MainDatabase : RoomDatabase() {
-    abstract fun urlHistoryDao(): UrlHistoryDao
+    abstract fun urlHistoryDao(): URLHistoryDao
 
     companion object {
         private const val ROOM_DATABASE_NAME = "ToolKittyDatabase"

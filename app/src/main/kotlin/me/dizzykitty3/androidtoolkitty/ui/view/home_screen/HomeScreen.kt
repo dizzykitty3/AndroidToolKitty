@@ -213,15 +213,15 @@ private fun NetworkState() {
 @Composable
 private fun NetworkStateIcon(
     imageVector: ImageVector,
-    @StringRes id: Int
+    @StringRes textRes: Int
 ) {
     Icon(
         imageVector = imageVector,
-        contentDescription = stringResource(id = id),
+        contentDescription = stringResource(id = textRes),
         tint = MaterialTheme.colorScheme.primary
     )
     SpacerPadding()
-    Text(text = stringResource(id = id))
+    Text(text = stringResource(id = textRes))
 }
 
 @Composable

@@ -36,7 +36,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 fun AppMarketCard() {
     CustomCard(
         icon = Icons.Outlined.Shop,
-        title = R.string.check_app_on_market
+        titleRes = R.string.check_app_on_market
     ) {
         val context = LocalContext.current
         var packageName by remember { mutableStateOf("") }
@@ -90,7 +90,7 @@ fun AppMarketCard() {
 private fun WhatIsPackageName() {
     Row {
         val context = LocalContext.current
-        val linkUrl = "https://support.google.com/admob/answer/9972781"
+        val linkURL = "https://support.google.com/admob/answer/9972781"
 
         Text(
             text = buildAnnotatedString {
@@ -101,7 +101,7 @@ private fun WhatIsPackageName() {
 
         Row(
             modifier = Modifier.clickable(
-                onClick = { IntentUtil.openUrl(linkUrl, context) }
+                onClick = { IntentUtil.openURL(linkURL, context) }
             )
         ) {
             Text(

@@ -32,7 +32,7 @@ import androidx.compose.ui.Alignment.Companion as Alignment1
 
 @Preview(showSystemUi = true)
 @Composable
-fun QrCodeGeneratorScreen() {
+fun QRCodeGeneratorScreen() {
     CustomScreen {
         CustomCard(title = "QR Code generator") {
             var input by remember { mutableStateOf("") }

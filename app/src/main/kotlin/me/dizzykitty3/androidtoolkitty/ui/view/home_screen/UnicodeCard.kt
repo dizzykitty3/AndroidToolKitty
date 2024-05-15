@@ -42,7 +42,7 @@ fun UnicodeCard() {
 
     CustomCard(
         icon = Icons.AutoMirrored.Outlined.Notes,
-        title = R.string.unicode
+        titleRes = R.string.unicode
     ) {
         val view = LocalView.current
 

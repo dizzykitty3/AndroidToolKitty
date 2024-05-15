@@ -57,7 +57,7 @@ private fun BluetoothDeviceCardPreview() {
 fun BluetoothDeviceCard(navController: NavHostController) {
     CustomCard(
         icon = Icons.Outlined.Bluetooth,
-        title = R.string.bluetooth_devices
+        titleRes = R.string.bluetooth_devices
     ) {
         val view = LocalView.current
         val context = LocalContext.current
@@ -92,8 +92,8 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 if (showSnackbarToConfirm) {
                     SnackbarUtil.snackbar(
                         view,
-                        message = R.string.bluetooth_disabled,
-                        buttonText = R.string.turn_on_bluetooth,
+                        messageRes = R.string.bluetooth_disabled,
+                        buttonTextRes = R.string.turn_on_bluetooth,
                         buttonColor = materialColor,
                         buttonClickListener = { IntentUtil.openBluetooth(context) }
                     )

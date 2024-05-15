@@ -16,7 +16,7 @@ object PermissionUtil {
      * @return true if the app does NOT have the required permissions, false otherwise.
      */
     fun noBluetoothPermission(context: Context): Boolean {
-        return if (OsVersion.android12())
+        return if (OSVersion.android12())
             check(context, BT_CONNECT)
         else
             check(context, BT) || check(context, BT_ADMIN)
@@ -27,7 +27,7 @@ object PermissionUtil {
     }
 
     fun requestBluetoothPermission(context: Context) {
-        if (OsVersion.android12()) {
+        if (OSVersion.android12()) {
             request(context, arrayOf(BT_CONNECT))
             return
         }

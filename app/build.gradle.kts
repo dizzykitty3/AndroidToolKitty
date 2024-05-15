@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk = libs.versions.compileSDK.get().toInt()
 
     buildFeatures {
         buildConfig = true
@@ -19,10 +19,10 @@ android {
 
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
-        minSdk = libs.versions.minSdk.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
-        versionCode = 689
-        versionName = "1.0.689"
+        minSdk = libs.versions.minSDK.get().toInt()
+        targetSdk = libs.versions.targetSDK.get().toInt()
+        versionCode = 690
+        versionName = "1.0.690"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

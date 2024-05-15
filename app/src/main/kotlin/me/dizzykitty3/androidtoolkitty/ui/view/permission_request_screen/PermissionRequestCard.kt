@@ -17,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
@@ -27,14 +27,14 @@ import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 @Composable
 fun PermissionRequestCard() {
     CustomCard(
-        title = (R.string.request_permission),
+        titleRes = (R.string.request_permission),
         icon = Icons.Outlined.Shield
     ) {
         var clickCount by remember { mutableIntStateOf(0) }
         val view = LocalView.current
         val context = LocalContext.current
 
-        if (OsVersion.android12()) Text(text = stringResource(id = R.string.bluetooth_connect))
+        if (OSVersion.android12()) Text(text = stringResource(id = R.string.bluetooth_connect))
         else Text(text = stringResource(id = R.string.bluetooth_bluetooth_admin))
 
         Button(

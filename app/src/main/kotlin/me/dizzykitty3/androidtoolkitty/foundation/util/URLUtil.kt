@@ -27,13 +27,13 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.TV
 import me.dizzykitty3.androidtoolkitty.foundation.const.US
 import me.dizzykitty3.androidtoolkitty.foundation.const.WIKI
 
-object UrlUtil {
-    private const val TAG = "UrlUtil"
+object URLUtil {
+    private const val TAG = "URLUtil"
 
     /**
      * Adding the appropriate suffix and returning the full URL.
      */
-    fun toFullUrl(urlInput: String): String {
+    fun toFullURL(urlInput: String): String {
         val suffix = suffixOf(urlInput)
         Log.d(TAG, if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
         return "$HTTPS$urlInput$suffix"
@@ -109,17 +109,14 @@ object UrlUtil {
         return suffixMap[StringUtil.dropSpaces(urlInput)] ?: COM
     }
 
-    enum class Platform(val prefix: String, @StringRes val nameResId: Int) {
+    enum class Platform(val prefix: String, @StringRes val nameRes: Int) {
         ARTSTATION("artstation.com/", R.string.artstation),
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
-        BLUESKY(
-            "bsky.app/profile/",
-            R.string.bluesky
-        ), // e.g. bsky.app/profile/username.bsky.social
-        BOOTH(".booth.pm", R.string.booth), // e.g. username.booth.pm
+        BLUESKY("bsky.app/profile/", R.string.bluesky),
+        BOOTH(".booth.pm", R.string.booth),
         FACEBOOK("facebook.com/", R.string.facebook),
-        FANBOX(".fanbox.cc", R.string.fanbox), // e.g. username.fanbox.cc
+        FANBOX(".fanbox.cc", R.string.fanbox),
         FANTIA("fantia.jp/", R.string.fantia),
         GITHUB("github.com/", R.string.github),
         INSTAGRAM("instagram.com/", R.string.instagram),
@@ -136,7 +133,7 @@ object UrlUtil {
         TELEGRAM("t.me/", R.string.telegram),
         THREADS("threads.net/@", R.string.threads),
         TIKTOK("tiktok.com/@", R.string.tiktok),
-        TUMBLR(".tumblr.com", R.string.tumblr), // e.g. username.tumblr.com
+        TUMBLR(".tumblr.com", R.string.tumblr),
         TWITCH("twitch.tv/", R.string.twitch),
         V2EX("v2ex.com/member/", R.string.v2ex),
         WEIBO("weibo.com/n/", R.string.weibo),

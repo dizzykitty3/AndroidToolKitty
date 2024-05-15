@@ -1,8 +1,8 @@
 [versions]
 # -- SDK Versions --
-compileSdk = "34" # Android 14 Upside Down Cake
-targetSdk = "34" # Android 14 Upside Down Cake
-minSdk = "26" # Android 8 Oreo
+compileSDK = "34" # Android 14 Upside Down Cake
+targetSDK = "34" # Android 14 Upside Down Cake
+minSDK = "26" # Android 8 Oreo
 
 # -- Dependency versions --
 # Android Gradle plugin
@@ -11,7 +11,7 @@ agp = "8.4.0" # https://developer.android.com/build/releases/gradle-plugin
 # AndroidX
 activity = "1.9.0" # https://developer.android.com/jetpack/androidx/releases/activity
 compose = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
-composeBom = "2024.05.00" # https://developer.android.com/develop/ui/compose/bom/bom-mapping
+composeBOM = "2024.05.00" # https://developer.android.com/develop/ui/compose/bom/bom-mapping
 composeM3 = "1.2.1" # https://developer.android.com/jetpack/androidx/releases/compose-material3
 core = "1.13.1" # https://developer.android.com/jetpack/androidx/releases/core
 dataStore = "1.1.1" # https://developer.android.com/jetpack/androidx/releases/datastore
@@ -41,7 +41,7 @@ leakCanary = "2.14" # https://github.com/square/leakcanary/releases
 android-gms-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "gmsMaps" }
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
-androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBOM" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeM3" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }

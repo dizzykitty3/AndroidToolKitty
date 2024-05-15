@@ -33,7 +33,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_6
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
-import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomHideCardSettingSwitch
@@ -43,7 +43,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 @Composable
 fun EditSysSettingCard() {
     CustomCard(
-        title = R.string.customize_system_settings_card
+        titleRes = R.string.customize_system_settings_card
     ) {
         val settingsSharedPref = remember { SettingsSharedPref }
 
@@ -73,17 +73,17 @@ fun EditSysSettingCard() {
         var mIsShowSetting12 by remember { mutableStateOf(isShowSetting12) }
 
         CustomHideCardSettingSwitch(
-            id = R.string.open_display_settings,
-            cardId = SETTING_1,
+            textRes = R.string.open_display_settings,
+            card = SETTING_1,
             isChecked = mIsShowSetting1
         ) { newState ->
             mIsShowSetting1 = newState
             settingsSharedPref.saveCardShowedState(SETTING_1, newState)
         }
-        if (OsVersion.android12()) {
+        if (OSVersion.android12()) {
             CustomHideCardSettingSwitch(
-                id = R.string.open_auto_rotate_settings,
-                cardId = SETTING_2,
+                textRes = R.string.open_auto_rotate_settings,
+                card = SETTING_2,
                 isChecked = mIsShowSetting2
             ) { newState ->
                 mIsShowSetting2 = newState
@@ -91,32 +91,32 @@ fun EditSysSettingCard() {
             }
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_bluetooth_settings,
-            cardId = SETTING_3,
+            textRes = R.string.open_bluetooth_settings,
+            card = SETTING_3,
             isChecked = mIsShowSetting3
         ) { newState ->
             mIsShowSetting3 = newState
             settingsSharedPref.saveCardShowedState(SETTING_3, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_default_apps_settings,
-            cardId = SETTING_4,
+            textRes = R.string.open_default_apps_settings,
+            card = SETTING_4,
             isChecked = mIsShowSetting4
         ) { newState ->
             mIsShowSetting4 = newState
             settingsSharedPref.saveCardShowedState(SETTING_4, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_battery_optimization_settings,
-            cardId = SETTING_5,
+            textRes = R.string.open_battery_optimization_settings,
+            card = SETTING_5,
             isChecked = mIsShowSetting5
         ) { newState ->
             mIsShowSetting5 = newState
             settingsSharedPref.saveCardShowedState(SETTING_5, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_caption_preferences,
-            cardId = SETTING_6,
+            textRes = R.string.open_caption_preferences,
+            card = SETTING_6,
             isChecked = mIsShowSetting6
         ) { newState ->
             mIsShowSetting6 = newState
@@ -126,24 +126,24 @@ fun EditSysSettingCard() {
         GroupDivider()
 
         CustomHideCardSettingSwitch(
-            id = R.string.open_usage_access_permission,
-            cardId = SETTING_7,
+            textRes = R.string.open_usage_access_permission,
+            card = SETTING_7,
             isChecked = mIsShowSetting7
         ) { newState ->
             mIsShowSetting7 = newState
             settingsSharedPref.saveCardShowedState(SETTING_7, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_overlay_permission,
-            cardId = SETTING_8,
+            textRes = R.string.open_overlay_permission,
+            card = SETTING_8,
             isChecked = mIsShowSetting8
         ) { newState ->
             mIsShowSetting8 = newState
             settingsSharedPref.saveCardShowedState(SETTING_8, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_write_permission,
-            cardId = SETTING_9,
+            textRes = R.string.open_write_permission,
+            card = SETTING_9,
             isChecked = mIsShowSetting9
         ) { newState ->
             mIsShowSetting9 = newState
@@ -153,24 +153,24 @@ fun EditSysSettingCard() {
         GroupDivider()
 
         CustomHideCardSettingSwitch(
-            id = R.string.open_language_settings,
-            cardId = SETTING_10,
+            textRes = R.string.open_language_settings,
+            card = SETTING_10,
             isChecked = mIsShowSetting10
         ) { newState ->
             mIsShowSetting10 = newState
             settingsSharedPref.saveCardShowedState(SETTING_10, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_date_and_time_settings,
-            cardId = SETTING_11,
+            textRes = R.string.open_date_and_time_settings,
+            card = SETTING_11,
             isChecked = mIsShowSetting11
         ) { newState ->
             mIsShowSetting11 = newState
             settingsSharedPref.saveCardShowedState(SETTING_11, newState)
         }
         CustomHideCardSettingSwitch(
-            id = R.string.open_developer_options,
-            cardId = SETTING_12,
+            textRes = R.string.open_developer_options,
+            card = SETTING_12,
             isChecked = mIsShowSetting12
         ) { newState ->
             mIsShowSetting12 = newState
@@ -188,8 +188,8 @@ fun EditSysSettingCard() {
                 if (showSnackbarToConfirm) {
                     SnackbarUtil.snackbar(
                         view,
-                        message = R.string.tap_to_apply,
-                        buttonText = R.string.apply,
+                        messageRes = R.string.tap_to_apply,
+                        buttonTextRes = R.string.apply,
                         buttonColor = primary,
                         buttonClickListener = {
                             onClickChangeAllCardsButton(false)
@@ -239,8 +239,8 @@ fun EditSysSettingCard() {
                 if (showSnackbarToConfirm) {
                     SnackbarUtil.snackbar(
                         view,
-                        message = R.string.tap_to_apply,
-                        buttonText = R.string.apply,
+                        messageRes = R.string.tap_to_apply,
+                        buttonTextRes = R.string.apply,
                         buttonColor = primary,
                         buttonClickListener = {
                             onClickChangeAllCardsButton(true)

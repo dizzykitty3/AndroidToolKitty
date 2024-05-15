@@ -18,7 +18,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 fun FontWeightCard() {
     CustomCard(
         icon = Icons.Outlined.FontDownload,
-        title = R.string.font_weight_test
+        titleRes = R.string.font_weight_test
     ) {
         Thin(id = R.string.w1)
         ExtraLight(id = R.string.w2)

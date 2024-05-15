@@ -8,16 +8,16 @@ import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface UrlHistoryDao {
+interface URLHistoryDao {
     @Query("SELECT * FROM url_history ORDER BY id DESC")
-    fun getAll(): Flow<List<UrlHistory>>
+    fun getAll(): Flow<List<URLHistory>>
 
     @Query("SELECT * from url_history WHERE id = :id")
-    fun get(id: Int): Flow<UrlHistory>
+    fun get(id: Int): Flow<URLHistory>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(urlHistory: UrlHistory)
+    suspend fun insert(urlHistory: URLHistory)
 
     @Delete
-    suspend fun delete(urlHistory: UrlHistory)
+    suspend fun delete(urlHistory: URLHistory)
 }

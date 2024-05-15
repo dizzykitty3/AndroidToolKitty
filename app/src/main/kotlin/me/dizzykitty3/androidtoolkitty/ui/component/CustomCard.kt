@@ -23,12 +23,12 @@ import me.dizzykitty3.androidtoolkitty.R
 @Composable
 fun CustomCard(
     icon: ImageVector? = null,
-    @StringRes title: Int,
+    @StringRes titleRes: Int,
     content: @Composable () -> Unit
 ) {
     CustomCard(
         icon = icon,
-        title = stringResource(id = title),
+        title = stringResource(id = titleRes),
         content = content
     )
 }

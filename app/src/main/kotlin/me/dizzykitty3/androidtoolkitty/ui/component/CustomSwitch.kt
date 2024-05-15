@@ -15,8 +15,8 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 
 @Composable
 fun CustomHideCardSettingSwitch(
-    @StringRes id: Int,
-    cardId: String,
+    @StringRes textRes: Int,
+    card: String,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
@@ -26,11 +26,11 @@ fun CustomHideCardSettingSwitch(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.clickable {
             onCheckedChange(!isChecked)
-            settingsSharedPref.saveCardShowedState(cardId, !isChecked)
+            settingsSharedPref.saveCardShowedState(card, !isChecked)
         }
     ) {
         Column(modifier = Modifier.weight(1f)) {
-            Text(text = stringResource(id = id))
+            Text(text = stringResource(id = textRes))
         }
         Column {
             Switch(
@@ -43,7 +43,7 @@ fun CustomHideCardSettingSwitch(
 
 @Composable
 fun CustomSwitchRow(
-    @StringRes text: Int,
+    @StringRes textRes: Int,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
@@ -54,7 +54,7 @@ fun CustomSwitchRow(
         }
     ) {
         Column(modifier = Modifier.weight(1f)) {
-            Text(text = stringResource(text))
+            Text(text = stringResource(textRes))
         }
         Column {
             Switch(

@@ -50,7 +50,7 @@ private const val ADD = "+ Add"
 fun VolumeCard() {
     CustomCard(
         icon = Icons.AutoMirrored.Outlined.VolumeUp,
-        title = R.string.volume
+        titleRes = R.string.volume
     ) {
         val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }

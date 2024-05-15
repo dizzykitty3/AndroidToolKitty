@@ -23,7 +23,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_6
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
-import me.dizzykitty3.androidtoolkitty.foundation.util.OsVersion
+import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
@@ -34,7 +34,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.SystemSettingButton
 fun SysSettingCard() {
     CustomCard(
         icon = Icons.Outlined.Settings,
-        title = R.string.system_settings
+        titleRes = R.string.system_settings
     ) {
         // Variables
         val settingsSharedPref = remember { SettingsSharedPref }
@@ -83,14 +83,14 @@ fun SysSettingCard() {
         if (isShowSetting[SETTING_1] == true) {
             SystemSettingButton(
                 settingType = SETTING_1,
-                buttonText = R.string.open_display_settings
+                textRes = R.string.open_display_settings
             )
         }
 
-        if (isShowSetting[SETTING_2] == true && OsVersion.android12()) {
+        if (isShowSetting[SETTING_2] == true && OSVersion.android12()) {
             SystemSettingButton(
                 settingType = SETTING_2,
-                buttonText = R.string.open_auto_rotate_settings
+                textRes = R.string.open_auto_rotate_settings
             )
         }
 
@@ -98,7 +98,7 @@ fun SysSettingCard() {
             if (isShowSetting[setting.settingType] == true) {
                 SystemSettingButton(
                     settingType = setting.settingType,
-                    buttonText = setting.buttonText
+                    textRes = setting.textRes
                 )
             }
         }
@@ -110,7 +110,7 @@ fun SysSettingCard() {
             if (isShowSetting[setting.settingType] == true) {
                 SystemSettingButton(
                     settingType = setting.settingType,
-                    buttonText = setting.buttonText
+                    textRes = setting.textRes
                 )
             }
         }
@@ -122,7 +122,7 @@ fun SysSettingCard() {
             if (isShowSetting[setting.settingType] == true) {
                 SystemSettingButton(
                     settingType = setting.settingType,
-                    buttonText = setting.buttonText
+                    textRes = setting.textRes
                 )
             }
         }
@@ -135,4 +135,4 @@ private fun checkIsAutoTime(): Boolean {
     return isAutoTime == 1
 }
 
-private data class Setting(val settingType: String, @StringRes val buttonText: Int)
+private data class Setting(val settingType: String, @StringRes val textRes: Int)
