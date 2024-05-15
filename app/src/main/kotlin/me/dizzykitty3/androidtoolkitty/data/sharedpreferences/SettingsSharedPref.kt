@@ -157,12 +157,12 @@ object SettingsSharedPref {
             }
         }
 
-    var autoSetMediaVolume: Boolean
-        get() = sharedPrefs.getBoolean(AUTO_SET_MEDIA_VOLUME, false)
+    var autoSetMediaVolume: Int
+        get() = sharedPrefs.getInt(AUTO_SET_MEDIA_VOLUME, -1)
         set(value) {
             Log.d(TAG, "auto set media volume = $value")
             with(sharedPrefs.edit()) {
-                putBoolean(AUTO_SET_MEDIA_VOLUME, value)
+                putInt(AUTO_SET_MEDIA_VOLUME, value)
                 apply()
             }
         }

@@ -65,25 +65,35 @@ fun Greeting() {
                         }
                         Column(modifier = Modifier.weight(0.5f)) {
                             Text(text = "mute")
-                            Text(text = "60%")
+                            Text(text = "40%/60%")
                             Text(text = "25%")
-                            Text(text = "60%")
+                            Text(text = "40%/60%")
                         }
                     }
                 }
             },
             confirmButton = {
-                Button(onClick = {
-                    showDialog = false
-                    SettingsSharedPref.autoSetMediaVolume = true
-                }) {
-                    Text(text = stringResource(id = R.string.turn_on))
+                Row {
+                    Button(onClick = {
+                        showDialog = false
+                        SettingsSharedPref.autoSetMediaVolume = 40
+                    }) {
+                        Text(text = "40%")
+                    }
+                }
+                Row {
+                    Button(onClick = {
+                        showDialog = false
+                        SettingsSharedPref.autoSetMediaVolume = 60
+                    }) {
+                        Text(text = "60%")
+                    }
                 }
             },
             dismissButton = {
                 TextButton(onClick = {
                     showDialog = false
-                    SettingsSharedPref.autoSetMediaVolume = false
+                    SettingsSharedPref.autoSetMediaVolume = -1
                 }) {
                     Text(text = stringResource(id = R.string.turn_off))
                 }

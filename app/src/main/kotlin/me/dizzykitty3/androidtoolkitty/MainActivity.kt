@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
 
     private var isAutoClearClipboard = false
     private var isCollapseKeyboard = true
-    private var isAutoSetMediaVolume = false
+    private var isAutoSetMediaVolume = -1
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         getSettingsSharedPreferences()
-        if (isAutoSetMediaVolume) AudioUtil.autoSetMediaVolume()
+        if (isAutoSetMediaVolume != -1) AudioUtil.autoSetMediaVolume(isAutoSetMediaVolume)
         Log.d(TAG, "onResume called")
     }
 

@@ -24,19 +24,20 @@ object AudioUtil {
     fun setVolume(volume: Double) =
         setVolume(volume.toInt())
 
-    private fun setVolumePercentage(volume: Int) {
-        val indexedVolume = (maxVolumeIndex() * 0.01 * volume).toInt()
+    private fun setVolumeByPercentage(percentage: Int) {
+        val indexedVolume = (maxVolumeIndex() * 0.01 * percentage).toInt()
         Log.d(TAG, "current = ${volume()}, target = $indexedVolume")
-        if (volume in 0..100 && (volume() != indexedVolume)) {
+        if (percentage in 0..100 && (volume() != indexedVolume)) {
             setVolume(indexedVolume)
         }
     }
 
-    fun autoSetMediaVolume() =
-        when (LocalTime.now().hour) {
-            in 6..7 -> setVolumePercentage(60)
-            in 8..17 -> setVolumePercentage(0)
-            in 18..22 -> setVolumePercentage(60)
-            else -> setVolumePercentage(25)
+    fun autoSetMediaVolume(percentage: Int) {
+        if (percentage in 0..100) when (LocalTime.now().hour) {
+            in 6..7 -> setVolumeByPercentage(percentage)
+            in 8..17 -> setVolumeByPercentage(0)
+            in 18..22 -> setVolumeByPercentage(percentage)
+            else -> setVolumeByPercentage(25)
         }
+    }
 }
