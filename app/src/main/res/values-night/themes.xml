@@ -1,6 +1,4 @@
 <resources>
 
-    <style name="Theme.AndroidToolKitty" parent="Theme.Material3.DynamicColors.DayNight">
-        <!-- nothing -->
-    </style>
+    <style name="Theme.AndroidToolKitty" parent="Theme.Material3.DynamicColors.DayNight" />
 </resources>

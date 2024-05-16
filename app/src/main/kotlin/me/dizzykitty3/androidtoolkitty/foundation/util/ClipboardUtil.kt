@@ -12,7 +12,6 @@ object ClipboardUtil {
 
     @SuppressLint("NewApi")
     fun clear() {
-        if (!clipboard.hasPrimaryClip()) return
         if (OSVersion.android9()) {
             clipboard.clearPrimaryClip()
             return

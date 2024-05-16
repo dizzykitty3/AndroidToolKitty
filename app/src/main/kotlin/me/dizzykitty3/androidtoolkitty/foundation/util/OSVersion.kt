@@ -14,6 +14,7 @@ object OSVersion {
     /**
      * Android U, Upside Down Cake
      * 1. Activity.overrideActivityTransition()
+     * 2. TileService.startActivityAndCollapse(Intent) -> TileService.startActivityAndCollapse(PendingIntent)
      */
     fun android14(): Boolean = osVersion >= 34
 

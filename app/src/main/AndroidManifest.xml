@@ -37,7 +37,7 @@
         <activity
             android:name=".ShareToClipboardActivity"
             android:exported="true"
-            android:label="Copy"
+            android:label="@string/copy"
             android:theme="@style/Theme.Transparent">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
@@ -45,6 +45,25 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ClearClipboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Transparent" />
+
+        <service
+            android:name=".ClearClipboardTileService"
+            android:enabled="true"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:label="@string/clear_clipboard"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.ACTIVE_TILE"
+                android:value="true" />
+        </service>
     </application>
 
 </manifest>

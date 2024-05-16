@@ -256,4 +256,5 @@
     <string name="lit_link">Lit.Link</string>
     <string name="wavebox">Wavebox</string>
     <string name="carrd">Carrd</string>
+    <string name="copy">复制</string>
 </resources>
