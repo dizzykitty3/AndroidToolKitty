@@ -54,6 +54,8 @@ class MainActivity : ComponentActivity() {
         super.onStart()
         log("onStart")
 
+        isContinuationResumed = false
+
         CoroutineScope(Dispatchers.Main).launch {
             isAutoClearClipboard = withContext(Dispatchers.IO) {
                 SettingsSharedPref.autoClearClipboard
