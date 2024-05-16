@@ -341,6 +341,8 @@ private fun Contributor() {
     SpacerPadding()
     GroupTitle(id = R.string.special_thanks_to)
     ThanksTo("tengusw/share_to_clipboard")
+    SpacerPadding()
+    ThanksTo("hashemi-hossein/memory-guardian")
 }
 
 @Composable
@@ -384,16 +386,11 @@ private fun ThanksTo(link: String) {
         val context = LocalContext.current
         val sourceCodeURL = "https://github.com/$link"
 
-        DeveloperProfileLink(name = link.substringBefore('/'))
-        IconAndTextPadding()
-
-        Row(
-            modifier = Modifier.clickable {
-                IntentUtil.openURL(sourceCodeURL, context)
-            }
-        ) {
+        Row(modifier = Modifier.clickable {
+            IntentUtil.openURL(sourceCodeURL, context)
+        }) {
             Text(
-                text = link.substringAfter('/'),
+                text = link,
                 color = MaterialTheme.colorScheme.primary
             )
             Icon(
