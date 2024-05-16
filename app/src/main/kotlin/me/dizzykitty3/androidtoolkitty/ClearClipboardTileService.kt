@@ -17,11 +17,13 @@ class ClearClipboardTileService : TileService() {
     }
 
     override fun onBind(intent: Intent?): IBinder? {
+        log("onBind")
         return super.onBind(intent)
     }
 
     override fun onStartListening() {
         super.onStartListening()
+        log("onStartListening")
         val cleanTitle = qsTile
         cleanTitle.label = getString(R.string.clear_clipboard)
         cleanTitle.state = Tile.STATE_INACTIVE
@@ -32,6 +34,7 @@ class ClearClipboardTileService : TileService() {
     @SuppressLint("NewApi", "StartActivityAndCollapseDeprecated")
     override fun onClick() {
         super.onClick()
+        log("onClick")
         try {
             val intent = Intent(this@ClearClipboardTileService, ClearClipboardActivity::class.java)
             intent.flags =
@@ -51,7 +54,16 @@ class ClearClipboardTileService : TileService() {
             }
         } catch (e: Exception) {
             Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
-            Log.e(TAG, e.message ?: "unknown error")
+            log(e.printStackTrace().toString(), "e")
+        }
+    }
+
+    private fun log(message: String) = Log.d(TAG, message)
+
+    private fun log(message: String, level: String) {
+        when (level) {
+            "e" -> Log.e(TAG, message)
+            else -> return
         }
     }
 }

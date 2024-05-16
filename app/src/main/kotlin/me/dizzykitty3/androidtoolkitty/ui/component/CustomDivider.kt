@@ -9,8 +9,8 @@ fun GroupDivider() {
     val showDivider = SettingsSharedPref.showDivider
 
     SpacerPadding()
+    SpacerPadding()
     if (showDivider) {
-        SpacerPadding()
         HorizontalDivider()
         SpacerPadding()
     }

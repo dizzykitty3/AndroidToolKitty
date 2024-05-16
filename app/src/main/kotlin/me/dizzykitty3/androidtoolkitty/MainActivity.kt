@@ -109,9 +109,7 @@ class MainActivity : ComponentActivity() {
         log("settings sp got")
     }
 
-    private fun log(message: String) {
-        Log.d(TAG, message)
-    }
+    private fun log(message: String) = Log.d(TAG, message)
 
     private fun log(message: String, level: String) {
         when (level) {
