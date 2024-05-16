@@ -234,13 +234,17 @@ private fun DebuggingOptions(navController: NavHostController) {
     val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var showSpDialog by remember { mutableStateOf(false) }
+    var uiTesting by remember { mutableStateOf(settingsSharedPref.uiTesting) }
 
     GroupTitle(R.string.debugging)
 
     Text(text = "Android ${Build.VERSION.RELEASE}, API ${Build.VERSION.SDK_INT}")
     Text(text = "Language =  ${Locale.getDefault()}")
 
-    SpacerPadding()
+    CustomSwitchRow(textRes = R.string.ui_testing, checked = uiTesting) {
+        uiTesting = it
+        settingsSharedPref.uiTesting = it
+    }
 
     OutlinedButton(onClick = { navController.navigate(PERMISSION_REQUEST_SCREEN) }) {
         Text(text = stringResource(id = R.string.go_to_permission_request_screen))

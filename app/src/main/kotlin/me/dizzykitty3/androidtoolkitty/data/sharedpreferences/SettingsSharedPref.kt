@@ -29,6 +29,7 @@ object SettingsSharedPref {
     private const val SHOW_EDIT_VOLUME_OPTION = "show_edit_volume_option"
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
+    private const val UI_TESTING = "ui_testing"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -174,6 +175,16 @@ object SettingsSharedPref {
             Log.d(TAG, "have tapped add button = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(HAVE_TAPPED_ADD_BUTTON, value)
+                apply()
+            }
+        }
+
+    var uiTesting: Boolean
+        get() = sharedPrefs.getBoolean(UI_TESTING, false)
+        set(value) {
+            Log.d(TAG, "UI testing = $value")
+            with(sharedPrefs.edit()) {
+                putBoolean(UI_TESTING, value)
                 apply()
             }
         }

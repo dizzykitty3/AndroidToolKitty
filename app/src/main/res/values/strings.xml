@@ -269,6 +269,7 @@
     <string name="show_divider">Show divider</string>
     <string name="show_snackbar_to_confirm">Ask me before apply changes</string>
     <string name="show_edit_volume_option">Show Edit in Volume card</string>
+    <string name="ui_testing">UI testing</string>
 
     <!-- Settings screen: about -->
     <string name="about">About</string>

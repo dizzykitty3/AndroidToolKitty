@@ -31,7 +31,8 @@ fun ClipboardCard() {
     ) {
         val view = LocalView.current
         val isShowHintText = !SettingsSharedPref.haveOpenedSettingsScreen
-        if (isShowHintText) CustomTip(id = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
+        val uiTesting = SettingsSharedPref.uiTesting
+        if (isShowHintText || uiTesting) CustomTip(id = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
         OutlinedButton(
             onClick = { onClearClipboardButton(view) }

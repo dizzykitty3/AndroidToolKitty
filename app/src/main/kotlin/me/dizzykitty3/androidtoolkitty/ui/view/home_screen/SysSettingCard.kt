@@ -75,8 +75,10 @@ fun SysSettingCard() {
             isShowSetting[setting.settingType] == true
         }
 
+        val uiTesting = settingsSharedPref.uiTesting
+
         // UI
-        if (!checkIsAutoTime()) CustomTip(id = R.string.set_time_automatically_is_off_tip)
+        if (!checkIsAutoTime() || uiTesting) CustomTip(id = R.string.set_time_automatically_is_off_tip)
 
         if (isShowGroupTitle1) GroupTitle(R.string.common)
 
