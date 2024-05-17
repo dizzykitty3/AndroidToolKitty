@@ -114,7 +114,7 @@ class MainActivity : ComponentActivity() {
     private fun log(message: String, level: String) {
         when (level) {
             "i" -> Log.i(TAG, message)
-            else -> return
+            else -> log(message)
         }
     }
 }

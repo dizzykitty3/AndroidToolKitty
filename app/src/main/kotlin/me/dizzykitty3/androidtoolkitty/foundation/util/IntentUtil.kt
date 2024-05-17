@@ -6,6 +6,7 @@ import android.app.SearchManager
 import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.ACTION_POWER_USAGE_SUMMARY
 import android.net.Uri
 import android.provider.Settings
 import android.util.Log
@@ -28,6 +29,9 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_6
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_ENABLE_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_POWER_USAGE_SUMMARY
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_WIFI
 
 object IntentUtil {
     private const val TAG = "IntentUtil"
@@ -36,22 +40,22 @@ object IntentUtil {
         try {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
-            Log.d(TAG, "startActivity")
+            log("startActivity")
             return
         } catch (e: Exception) {
             ToastUtil.toast(e.message ?: "Unknown error")
-            Log.e(TAG, ">>>ERROR<<< startActivity: $e")
+            log(">>>ERROR<<< startActivity: $e", "e")
         }
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
                 ToastUtil.toast(R.string.google_play_not_installed)
-                Log.i(TAG, "Google Play not installed")
+                log("Google Play not installed", "i")
             }
 
             GOOGLE_MAPS -> {
                 ToastUtil.toast(R.string.google_maps_not_installed)
-                Log.i(TAG, "Google Maps not installed")
+                log("Google Maps not installed", "i")
                 openAppOnMarket(GOOGLE_MAPS, context)
             }
         }
@@ -61,14 +65,46 @@ object IntentUtil {
         if (url.isBlank()) return
 
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(
-            if (url.contains(HTTPS))
-                url
-            else
-                "$HTTPS$url"
-        )
+        intent.data = Uri.parse(if (url.contains(HTTPS)) url else "$HTTPS$url")
         startActivity(intent, context)
-        Log.d(TAG, "openURL")
+        log("openURL")
+    }
+
+    fun openAppOnMarket(packageName: String, context: Context, isGooglePlay: Boolean = true) {
+        val marketUri: Uri = Uri.parse(
+            if (packageName.isBlank()) {
+                return
+            } else if (packageName.contains(".")) {
+                "market://details?id=${StringUtil.dropSpaces(packageName)}"
+            } else {
+                "market://search?q=${packageName.trim()}"
+            }
+        )
+
+        val intent = Intent(Intent.ACTION_VIEW, marketUri)
+        if (isGooglePlay) intent.setPackage(GOOGLE_PLAY)
+        startActivity(intent, context)
+        log("openAppOnMarket")
+    }
+
+    fun openGoogleMaps(latitude: String, longitude: String, context: Context) {
+        if (latitude.isBlank() || longitude.isBlank()) return
+
+        val coordinates = "$latitude,$longitude"
+        val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
+        val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
+        intent.setPackage(GOOGLE_MAPS)
+        startActivity(intent, context)
+        log("openGoogleMaps")
+    }
+
+    fun openSearch(query: String, context: Context) {
+        if (query.isBlank()) return
+
+        val intent = Intent(Intent.ACTION_WEB_SEARCH)
+        intent.putExtra(SearchManager.QUERY, query)
+        startActivity(intent, context)
+        log("openSearch")
     }
 
     @JvmStatic
@@ -86,10 +122,13 @@ object IntentUtil {
             SETTING_10 -> Intent(Settings.ACTION_LOCALE_SETTINGS)
             SETTING_11 -> Intent(Settings.ACTION_DATE_SETTINGS)
             SETTING_12 -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
+            SETTING_ENABLE_BLUETOOTH -> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            SETTING_WIFI -> Intent(Settings.ACTION_WIFI_SETTINGS)
+            SETTING_POWER_USAGE_SUMMARY -> Intent(ACTION_POWER_USAGE_SUMMARY)
             else -> return
         }
         startActivity(intent, context)
-        Log.d(TAG, "onOpenSystemSettings: $settingType")
+        log("onOpenSystemSettings: $settingType")
     }
 
     fun openPermissionPage(context: Context) {
@@ -97,35 +136,7 @@ object IntentUtil {
         val uri = Uri.fromParts(PACKAGE, appContext.packageName, null)
         intent.setData(uri)
         startActivity(intent, context)
-        Log.d(TAG, "openPermissionPage")
-    }
-
-    fun openGoogleMaps(latitude: String, longitude: String, context: Context) {
-        if (latitude.isBlank() || longitude.isBlank()) return
-
-        val coordinates = "$latitude,$longitude"
-        val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
-        val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
-        intent.setPackage(GOOGLE_MAPS)
-        startActivity(intent, context)
-        Log.d(TAG, "openGoogleMaps")
-    }
-
-    fun openAppOnMarket(packageName: String, context: Context, isGooglePlay: Boolean = true) {
-        val marketUri: Uri = Uri.parse(
-            if (packageName.isBlank()) {
-                return
-            } else if (packageName.contains(".")) {
-                "market://details?id=${StringUtil.dropSpaces(packageName)}"
-            } else {
-                "market://search?q=${packageName.trim()}"
-            }
-        )
-
-        val intent = Intent(Intent.ACTION_VIEW, marketUri)
-        if (isGooglePlay) intent.setPackage(GOOGLE_PLAY)
-        startActivity(intent, context)
-        Log.d(TAG, "openAppOnMarket")
+        log("openPermissionPage")
     }
 
     /**
@@ -135,6 +146,7 @@ object IntentUtil {
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
+        log("restartApp")
         finishApp(context)
     }
 
@@ -142,20 +154,17 @@ object IntentUtil {
      * Remember to use Activity Context to finish app.
      */
     fun finishApp(context: Context) {
+        log("finishApp")
         (context as Activity).finish()
     }
 
-    fun openBluetooth(context: Context) {
-        val intent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-        startActivity(intent, context)
-    }
+    private fun log(message: String) = Log.d(TAG, message)
 
-    fun openSearch(query: String, context: Context) {
-        if (query.isBlank()) return
-
-        val intent = Intent(Intent.ACTION_WEB_SEARCH)
-        intent.putExtra(SearchManager.QUERY, query)
-        startActivity(intent, context)
-        Log.d(TAG, "openSearch")
+    private fun log(message: String, level: String) {
+        when (level) {
+            "i" -> Log.i(TAG, message)
+            "e" -> Log.e(TAG, message)
+            else -> log(message)
+        }
     }
 }

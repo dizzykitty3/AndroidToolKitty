@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -55,7 +57,10 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_7
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_8
 import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_9
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTINGS_SCREEN
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_POWER_USAGE_SUMMARY
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_WIFI
 import me.dizzykitty3.androidtoolkitty.foundation.util.BatteryUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.BottomPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.CardSpacePadding
@@ -175,15 +180,22 @@ private fun BatteryNetworkAndSetting(navController: NavHostController) {
 @Composable
 private fun BatteryAndNetwork() {
     val batteryLevel = remember { BatteryUtil.batteryLevel() }
+    val context = LocalContext.current
 
     Row {
-        Icon(
-            imageVector = Icons.Outlined.BatteryStd,
-            contentDescription = stringResource(id = R.string.battery_level),
-            tint = MaterialTheme.colorScheme.primary
-        )
-        SpacerPadding()
-        Text(text = "$batteryLevel%")
+        Row(
+            modifier = Modifier.clickable {
+                IntentUtil.openSystemSettings(SETTING_POWER_USAGE_SUMMARY, context)
+            }
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.BatteryStd,
+                contentDescription = stringResource(id = R.string.battery_level),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            SpacerPadding()
+            Text(text = "$batteryLevel%")
+        }
 
         SpacerPadding()
         SpacerPadding()
@@ -219,15 +231,21 @@ private fun NetworkState() {
 @Composable
 private fun NetworkStateIcon(
     imageVector: ImageVector,
-    @StringRes textRes: Int
+    @StringRes textRes: Int,
 ) {
-    Icon(
-        imageVector = imageVector,
-        contentDescription = stringResource(id = textRes),
-        tint = MaterialTheme.colorScheme.primary
-    )
-    SpacerPadding()
-    Text(text = stringResource(id = textRes))
+    val context = LocalContext.current
+
+    Row(
+        modifier = Modifier.clickable { IntentUtil.openSystemSettings(SETTING_WIFI, context) }
+    ) {
+        Icon(
+            imageVector = imageVector,
+            contentDescription = stringResource(id = textRes),
+            tint = MaterialTheme.colorScheme.primary
+        )
+        SpacerPadding()
+        Text(text = stringResource(id = textRes))
+    }
 }
 
 @Composable

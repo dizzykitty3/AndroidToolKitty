@@ -36,6 +36,9 @@ const val SETTING_9 = "setting_write"
 const val SETTING_10 = "setting_locale"
 const val SETTING_11 = "setting_date_and_time"
 const val SETTING_12 = "setting_developer"
+const val SETTING_ENABLE_BLUETOOTH = "setting_enable_bluetooth"
+const val SETTING_WIFI = "setting_wifi"
+const val SETTING_POWER_USAGE_SUMMARY = "setting_power_usage_summary"
 
 @SuppressLint("InlinedApi")
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT

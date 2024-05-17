@@ -37,6 +37,7 @@ import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.const.PERMISSION_REQUEST_SCREEN
+import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_ENABLE_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.foundation.util.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.PermissionUtil
@@ -95,10 +96,12 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                         messageRes = R.string.bluetooth_disabled,
                         buttonTextRes = R.string.turn_on_bluetooth,
                         buttonColor = materialColor,
-                        buttonClickListener = { IntentUtil.openBluetooth(context) }
+                        buttonClickListener = {
+                            IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, context)
+                        }
                     )
                 } else {
-                    IntentUtil.openBluetooth(context)
+                    IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, context)
                 }
             }
         ) {

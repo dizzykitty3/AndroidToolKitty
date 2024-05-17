@@ -63,7 +63,7 @@ class ClearClipboardTileService : TileService() {
     private fun log(message: String, level: String) {
         when (level) {
             "e" -> Log.e(TAG, message)
-            else -> return
+            else -> log(message)
         }
     }
 }
