@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
-import android.util.Log
 import android.view.View
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ClearAll
@@ -20,8 +19,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
-
-private const val TAG = "ClipboardCard"
+import timber.log.Timber
 
 @Composable
 fun ClipboardCard() {
@@ -49,7 +47,10 @@ fun ClipboardCard() {
 }
 
 private fun onClearClipboardButton(view: View) {
-    ClipboardUtil.clear()
-    SnackbarUtil.snackbar(view, R.string.clipboard_cleared)
-    Log.i(TAG, "Clipboard cleared")
+    val cleared = ClipboardUtil.check()
+    if (cleared)
+        SnackbarUtil.snackbar(view, R.string.clipboard_cleared)
+    else
+        SnackbarUtil.snackbar(view, R.string.clipboard_is_empty)
+    Timber.i("Clipboard cleared")
 }

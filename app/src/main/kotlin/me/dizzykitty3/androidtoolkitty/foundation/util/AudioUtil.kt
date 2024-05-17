@@ -2,11 +2,9 @@ package me.dizzykitty3.androidtoolkitty.foundation.util
 
 import android.content.Context
 import android.media.AudioManager
-import android.util.Log
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
+import timber.log.Timber
 import java.time.LocalTime
-
-private const val TAG = "AudioUtil"
 
 object AudioUtil {
     private var audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -25,7 +23,7 @@ object AudioUtil {
 
     private fun setVolumeByPercentage(percentage: Int) {
         val indexedVolume = (maxVolumeIndex() * 0.01 * percentage).toInt()
-        Log.d(TAG, "current = ${volume()}, target = $indexedVolume")
+        Timber.d("current = ${volume()}, target = $indexedVolume")
         if (percentage in 0..100 && (volume() != indexedVolume)) {
             setVolume(indexedVolume)
         }

@@ -2,17 +2,16 @@ package me.dizzykitty3.androidtoolkitty.data.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
+import timber.log.Timber
 
 @Serializable
 data class WheelOfFortuneItems(val items: List<String>)
 
 object SettingsSharedPref {
-    private const val TAG = "SettingsSharedPref"
     private const val PREF_NAME = "Settings"
 
     private const val AUTO_CLEAR_CLIPBOARD = "auto_clear_clipboard"
@@ -42,7 +41,7 @@ object SettingsSharedPref {
     var autoClearClipboard: Boolean
         get() = sharedPrefs.getBoolean(AUTO_CLEAR_CLIPBOARD, false)
         set(value) {
-            Log.d(TAG, "auto clear clipboard = $value")
+            log("auto clear clipboard = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(AUTO_CLEAR_CLIPBOARD, value)
                 apply()
@@ -52,7 +51,7 @@ object SettingsSharedPref {
     var sliderIncrement5Percent: Boolean
         get() = sharedPrefs.getBoolean(SLIDER_INCREMENT_5_PERCENT, false)
         set(value) {
-            Log.d(TAG, "slider increment 5% = $value")
+            log("slider increment 5% = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SLIDER_INCREMENT_5_PERCENT, value)
                 apply()
@@ -62,7 +61,7 @@ object SettingsSharedPref {
     var dynamicColor: Boolean
         get() = sharedPrefs.getBoolean(DYNAMIC_COLOR, true)
         set(value) {
-            Log.d(TAG, "dynamic color = $value")
+            log("dynamic color = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(DYNAMIC_COLOR, value)
                 apply()
@@ -72,7 +71,7 @@ object SettingsSharedPref {
     var oneHandedMode: Boolean
         get() = sharedPrefs.getBoolean(ONE_HANDED_MODE, false)
         set(value) {
-            Log.d(TAG, "one-handed mode = $value")
+            log("one-handed mode = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(ONE_HANDED_MODE, value)
                 apply()
@@ -82,7 +81,7 @@ object SettingsSharedPref {
     var haveOpenedSettingsScreen: Boolean
         get() = sharedPrefs.getBoolean(HAVE_OPENED_SETTINGS_SCREEN, false)
         set(value) {
-            Log.d(TAG, "have opened settings menu = $value")
+            log("have opened settings menu = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(HAVE_OPENED_SETTINGS_SCREEN, value)
                 apply()
@@ -92,7 +91,7 @@ object SettingsSharedPref {
     var usingCustomVolumeOptionLabel: Boolean
         get() = sharedPrefs.getBoolean(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
         set(value) {
-            Log.d(TAG, "using custom volume option label = $value")
+            log("using custom volume option label = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
                 apply()
@@ -102,7 +101,7 @@ object SettingsSharedPref {
     var debuggingOptions: Boolean
         get() = sharedPrefs.getBoolean(DEBUGGING_OPTIONS, false)
         set(value) {
-            Log.d(TAG, "debugging options = $value")
+            log("debugging options = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(DEBUGGING_OPTIONS, value)
                 apply()
@@ -112,7 +111,7 @@ object SettingsSharedPref {
     var webpageCardShowMore: Boolean
         get() = sharedPrefs.getBoolean(WEBPAGE_CARD_SHOW_MORE, false)
         set(value) {
-            Log.d(TAG, "webpage card show more = $value")
+            log("webpage card show more = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(WEBPAGE_CARD_SHOW_MORE, value)
                 apply()
@@ -122,7 +121,7 @@ object SettingsSharedPref {
     var collapseKeyboard: Boolean
         get() = sharedPrefs.getBoolean(COLLAPSE_KEYBOARD, true)
         set(value) {
-            Log.d(TAG, "collapse keyboard = $value")
+            log("collapse keyboard = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(COLLAPSE_KEYBOARD, value)
                 apply()
@@ -132,7 +131,7 @@ object SettingsSharedPref {
     var showDivider: Boolean
         get() = sharedPrefs.getBoolean(SHOW_DIVIDER, true)
         set(value) {
-            Log.d(TAG, "show divider = $value")
+            log("show divider = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SHOW_DIVIDER, value)
                 apply()
@@ -142,7 +141,7 @@ object SettingsSharedPref {
     var showSnackbar: Boolean
         get() = sharedPrefs.getBoolean(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, true)
         set(value) {
-            Log.d(TAG, "show snackbar before apply changes = $value")
+            log("show snackbar before apply changes = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, value)
                 apply()
@@ -152,7 +151,7 @@ object SettingsSharedPref {
     var showEditVolumeOption: Boolean
         get() = sharedPrefs.getBoolean(SHOW_EDIT_VOLUME_OPTION, true)
         set(value) {
-            Log.d(TAG, "show edit volume option = $value")
+            log("show edit volume option = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SHOW_EDIT_VOLUME_OPTION, value)
                 apply()
@@ -162,7 +161,7 @@ object SettingsSharedPref {
     var autoSetMediaVolume: Int
         get() = sharedPrefs.getInt(AUTO_SET_MEDIA_VOLUME, -1)
         set(value) {
-            Log.d(TAG, "auto set media volume = $value")
+            log("auto set media volume = $value")
             with(sharedPrefs.edit()) {
                 putInt(AUTO_SET_MEDIA_VOLUME, value)
                 apply()
@@ -172,7 +171,7 @@ object SettingsSharedPref {
     var haveTappedAddButton: Boolean
         get() = sharedPrefs.getBoolean(HAVE_TAPPED_ADD_BUTTON, false)
         set(value) {
-            Log.d(TAG, "have tapped add button = $value")
+            log("have tapped add button = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(HAVE_TAPPED_ADD_BUTTON, value)
                 apply()
@@ -182,7 +181,7 @@ object SettingsSharedPref {
     var uiTesting: Boolean
         get() = sharedPrefs.getBoolean(UI_TESTING, false)
         set(value) {
-            Log.d(TAG, "UI testing = $value")
+            log("UI testing = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(UI_TESTING, value)
                 apply()
@@ -194,7 +193,7 @@ object SettingsSharedPref {
     }
 
     fun saveCardShowedState(card: String, isShowed: Boolean) {
-        Log.d(TAG, "$card is showed = $isShowed")
+        log("$card is showed = $isShowed")
         with(sharedPrefs.edit()) {
             putBoolean(card, isShowed)
             apply()
@@ -204,7 +203,7 @@ object SettingsSharedPref {
     var lastTimeSelectedSocialPlatform: Int
         get() = sharedPrefs.getInt(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
         set(value) {
-            Log.d(TAG, "last time platform index = $value")
+            log("last time platform index = $value")
             with(sharedPrefs.edit()) {
                 putInt(LAST_TIME_SELECTED_PLATFORM_INDEX, value)
                 apply()
@@ -214,7 +213,7 @@ object SettingsSharedPref {
     var customVolume: Int
         get() = sharedPrefs.getInt(CUSTOM_VOLUME, Int.MIN_VALUE)
         set(value) {
-            Log.d(TAG, "custom volume = $value")
+            log("custom volume = $value")
             with(sharedPrefs.edit()) {
                 putInt(CUSTOM_VOLUME, value)
                 apply()
@@ -224,7 +223,7 @@ object SettingsSharedPref {
     var customVolumeOptionLabel: String?
         get() = sharedPrefs.getString(VOLUME_OPTION_LABEL, "")
         set(value) {
-            Log.d(TAG, "custom volume option label = $value")
+            log("custom volume option label = $value")
             with(sharedPrefs.edit()) {
                 putString(VOLUME_OPTION_LABEL, value)
                 apply()
@@ -237,14 +236,14 @@ object SettingsSharedPref {
             val items: WheelOfFortuneItems = Json.decodeFromString(itemsJson)
             items.items
         } catch (e: Exception) {
-            Log.e(TAG, "Error parsing wheel of fortune items JSON", e)
+            log("Error parsing wheel of fortune items JSON. $e", "e")
             null
         }
     }
 
     fun setWheelOfFortuneItems(items: List<String>) {
         val itemsJson = Json.encodeToString(WheelOfFortuneItems(items))
-        Log.d(TAG, "wheel of fortune items = $itemsJson")
+        log("wheel of fortune items = $itemsJson")
         with(sharedPrefs.edit()) {
             putString(WHEEL_OF_FORTUNE_ITEMS, itemsJson)
             apply()
@@ -252,10 +251,21 @@ object SettingsSharedPref {
     }
 
     fun clear() {
-        Log.d(TAG, "erase all app data")
+        log("erase all app data")
         with(sharedPrefs.edit()) {
             clear()
             apply()
+        }
+    }
+
+    private fun log(message: String, level: String? = null) {
+        when (level) {
+            "wtf" -> Timber.wtf(message)
+            "e" -> Timber.e(message)
+            "w" -> Timber.w(message)
+            "i" -> Timber.i(message)
+            "v" -> Timber.v(message)
+            else -> Timber.d(message)
         }
     }
 }

@@ -48,6 +48,7 @@
     <string name="clipboard_cleared">Clipboard cleared</string>
     <string name="clipboard_cleared_automatically">Clipboard cleared automatically</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on Clear Clipboard on Launch in Settings Screen.</string>
+    <string name="clipboard_is_empty">Clipboard is empty</string>
 
     <!-- Home screen: webpage -->
     <string name="url">URL</string>

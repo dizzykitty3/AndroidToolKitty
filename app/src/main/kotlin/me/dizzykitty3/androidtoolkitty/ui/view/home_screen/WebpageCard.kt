@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -48,8 +47,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.component.Italic
-
-private const val TAG = "WebpageCard"
+import timber.log.Timber
 
 @Composable
 fun WebpageCard() {
@@ -305,14 +303,14 @@ private fun onClickSearchButton(query: String, context: Context) {
     if (query.isBlank()) return
 
     IntentUtil.openSearch(query, context)
-    Log.d(TAG, "onClickSearchButton")
+    log("onClickSearchButton")
 }
 
 private fun onClickVisitURLButton(url: String, context: Context) {
     if (url.isBlank()) return
 
     IntentUtil.openURL(URLUtil.toFullURL(StringUtil.dropSpaces(url)), context)
-    Log.d(TAG, "onClickVisitButton")
+    log("onClickVisitButton")
 }
 
 private fun onVisitProfileButton(
@@ -325,7 +323,7 @@ private fun onVisitProfileButton(
     val platform = URLUtil.Platform.entries.getOrNull(platformIndex) ?: return
     val url = toSocialMediaFullURL(platform, username)
     IntentUtil.openURL(url, context)
-    Log.d(TAG, "onVisitProfile")
+    log("onVisitProfile")
 }
 
 private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String {
@@ -338,5 +336,16 @@ private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): 
         URLUtil.Platform.CARRD -> "${StringUtil.dropSpaces(username)}${platform.prefix}"
 
         else -> "${platform.prefix}${StringUtil.dropSpaces(username)}"
+    }
+}
+
+private fun log(message: String, level: String? = null) {
+    when (level) {
+        "wtf" -> Timber.wtf(message)
+        "e" -> Timber.e(message)
+        "w" -> Timber.w(message)
+        "i" -> Timber.i(message)
+        "v" -> Timber.v(message)
+        else -> Timber.d(message)
     }
 }

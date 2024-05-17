@@ -291,10 +291,9 @@ private fun TwoColumnHomeCards(navController: NavHostController) {
     }
 }
 
-@Suppress("KotlinConstantConditions")
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> {
-    val debugBuild = BuildConfig.BUILD_TYPE == "debug"
+    val debugBuild = BuildConfig.DEBUG
     return if (debugBuild) {
         listOf(
             CARD_0,

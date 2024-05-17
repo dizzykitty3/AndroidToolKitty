@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
-import android.util.Log
 import android.view.View
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
@@ -29,8 +28,7 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.Italic
-
-private const val TAG = "UnicodeCard"
+import timber.log.Timber
 
 @Preview
 @Composable
@@ -142,5 +140,5 @@ private fun onClickConvertButton(
     } catch (e: Exception) {
         SnackbarUtil.snackbar(view, e.message ?: "Unknown error occurred")
     }
-    Log.d(TAG, "onClickConvertButton")
+    Timber.d("onClickConvertButton")
 }

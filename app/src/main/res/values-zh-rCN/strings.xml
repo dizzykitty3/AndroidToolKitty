@@ -4,6 +4,7 @@
     <string name="clipboard">剪贴板</string>
     <string name="clipboard_cleared">已清空剪贴板</string>
     <string name="clear_clipboard">清空剪贴板</string>
+    <string name="clipboard_is_empty">剪贴板为空</string>
     <string name="url">URL</string>
     <string name="url_input_hint_1">不必输入</string>
     <string name="url_input_hint_2">和</string>

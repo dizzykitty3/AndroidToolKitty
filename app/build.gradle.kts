@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.compose.compiler) // https://developer.android.com/develop/ui/compose/compiler
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
@@ -21,8 +21,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = libs.versions.minSDK.get().toInt()
         targetSdk = libs.versions.targetSDK.get().toInt()
-        versionCode = 699
-        versionName = "1.0.699"
+        versionCode = 700
+        versionName = "1.0.700"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -34,7 +34,7 @@ android {
     buildTypes {
         debug {
             isMinifyEnabled = false
-            applicationIdSuffix = ".debug"
+            applicationIdSuffix = ".dev"
             versionNameSuffix = ".dev"
             resValue("string", "app_name", "AToolKitty.Dev")
         }
@@ -50,11 +50,11 @@ android {
     }
 
     applicationVariants.all {
-        this.outputs
-            .map { it as com.android.build.gradle.internal.api.BaseVariantOutputImpl }
-            .forEach { output ->
-                output.outputFileName = "android-toolkitty-${this.versionName}.apk"
-            }
+        val outputFileName = "android-toolkitty-${this.versionName}.apk"
+        outputs.all {
+            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl)
+                .outputFileName = outputFileName
+        }
     }
 
     composeCompiler {
@@ -68,7 +68,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
     packaging {
         resources {
@@ -107,6 +107,7 @@ dependencies {
     implementation(libs.google.hilt.android) // Dependency injection
     implementation(libs.kotlinx.coroutines.android) // Asynchronous tasks
     implementation(libs.kotlinx.serialization) // json
+    implementation(libs.timber) // logging
 
     ksp(libs.google.hilt.compiler)
     ksp(libs.androidx.room.compiler)

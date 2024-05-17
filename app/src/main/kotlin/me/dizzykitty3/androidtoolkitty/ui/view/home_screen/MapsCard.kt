@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
 import android.content.Context
-import android.util.Log
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,8 +30,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-
-private const val TAG = "MapsCard"
+import timber.log.Timber
 
 @Preview
 @Composable
@@ -109,5 +107,5 @@ private fun onClickOpenGoogleMapsButton(latitude: String, longitude: String, con
     if (latitude.isBlank() || longitude.isBlank()) return
 
     IntentUtil.openGoogleMaps(latitude, longitude, context)
-    Log.d(TAG, "onClickOpenGoogleMapsButton")
+    Timber.d("onClickOpenGoogleMapsButton")
 }

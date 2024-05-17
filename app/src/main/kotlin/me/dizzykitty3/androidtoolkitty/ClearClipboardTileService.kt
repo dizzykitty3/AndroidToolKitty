@@ -7,15 +7,11 @@ import android.graphics.drawable.Icon
 import android.os.IBinder
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
-import android.util.Log
 import android.widget.Toast
 import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
+import timber.log.Timber
 
 class ClearClipboardTileService : TileService() {
-    companion object {
-        private const val TAG = "ClearClipboardTileService"
-    }
-
     override fun onBind(intent: Intent?): IBinder? {
         log("onBind")
         return super.onBind(intent)
@@ -58,12 +54,14 @@ class ClearClipboardTileService : TileService() {
         }
     }
 
-    private fun log(message: String) = Log.d(TAG, message)
-
-    private fun log(message: String, level: String) {
+    private fun log(message: String, level: String? = null) {
         when (level) {
-            "e" -> Log.e(TAG, message)
-            else -> log(message)
+            "wtf" -> Timber.wtf(message)
+            "e" -> Timber.e(message)
+            "w" -> Timber.w(message)
+            "i" -> Timber.i(message)
+            "v" -> Timber.v(message)
+            else -> Timber.d(message)
         }
     }
 }

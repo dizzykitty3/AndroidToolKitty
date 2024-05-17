@@ -1,41 +1,31 @@
 [versions]
-# -- SDK Versions --
+# SDK
 compileSDK = "34" # Android 14 Upside Down Cake
 targetSDK = "34" # Android 14 Upside Down Cake
 minSDK = "26" # Android 8 Oreo
 
-# -- Dependency versions --
-# Android Gradle plugin
-agp = "8.4.0" # https://developer.android.com/build/releases/gradle-plugin
-
-# AndroidX
+# Google, JetBrains
 activity = "1.9.0" # https://developer.android.com/jetpack/androidx/releases/activity
+agp = "8.4.0" # https://developer.android.com/build/releases/gradle-plugin
 compose = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
 composeBOM = "2024.05.00" # https://developer.android.com/develop/ui/compose/bom/bom-mapping
 composeM3 = "1.2.1" # https://developer.android.com/jetpack/androidx/releases/compose-material3
 core = "1.13.1" # https://developer.android.com/jetpack/androidx/releases/core
+coroutines = "1.8.1" # https://github.com/Kotlin/kotlinx.coroutines/releases
+dagger = "2.51.1" # https://github.com/google/dagger/releases
 dataStore = "1.1.1" # https://developer.android.com/jetpack/androidx/releases/datastore
+gmsMaps = "18.2.0" # https://developers.google.com/android/guides/setup#list-dependencies
+kotlin = "2.0.0-RC3" # https://github.com/JetBrains/kotlin/releases
+ksp = "2.0.0-RC3-1.0.20" # https://github.com/google/ksp/releases
 lifecycle = "2.8.0" # https://developer.android.com/jetpack/androidx/releases/lifecycle
+material = "1.12.0" # https://github.com/material-components/material-components-android/releases
 navigation = "2.7.7" # https://developer.android.com/jetpack/androidx/releases/navigation
 room = "2.6.1" # https://developer.android.com/jetpack/androidx/releases/room
-
-# Google
-dagger = "2.51.1" # https://github.com/google/dagger/releases
-ksp = "2.0.0-RC3-1.0.20" # https://github.com/google/ksp/releases
-
-# Google Play services
-gmsMaps = "18.2.0" # https://developers.google.com/android/guides/setup#list-dependencies
-
-# Kotlin
-kotlin = "2.0.0-RC3" # https://github.com/JetBrains/kotlin/releases
-coroutines = "1.8.1" # https://github.com/Kotlin/kotlinx.coroutines/releases
 serialization = "1.6.3" # https://github.com/Kotlin/kotlinx.serialization/releases
 
-# Material
-material = "1.12.0" # https://github.com/material-components/material-components-android/releases
-
-# Square
+# 3rd-party
 leakCanary = "2.14" # https://github.com/square/leakcanary/releases
+timber = "5.0.1" # https://github.com/JakeWharton/timber/releases
 
 [libraries]
 android-gms-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "gmsMaps" }
@@ -61,10 +51,11 @@ google-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", ver
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 square-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" } # https://developer.android.com/develop/ui/compose/compiler
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

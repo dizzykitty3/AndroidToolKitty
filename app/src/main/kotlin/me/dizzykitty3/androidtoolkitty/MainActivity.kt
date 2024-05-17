@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -21,20 +20,15 @@ import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.ui.view.AppNavigationHost
+import timber.log.Timber
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    companion object {
-        private const val TAG = "MainActivity"
-    }
-
     private var continuation: Continuation<Unit>? = null
     private var isContinuationResumed = false
     private var isAutoClearClipboard = false
-    private var isCollapseKeyboard = true
-    private var isAutoSetMediaVolume = -1
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,10 +67,10 @@ class MainActivity : ComponentActivity() {
                     log("Clipboard cleared automatically", "i")
                 }
             }
-            if (isAutoSetMediaVolume != -1) AudioUtil.autoSetMediaVolume(isAutoSetMediaVolume)
+            if (SettingsSharedPref.autoSetMediaVolume != -1) AudioUtil.autoSetMediaVolume(
+                SettingsSharedPref.autoSetMediaVolume
+            )
         }
-
-        getSettingsSharedPreferences()
     }
 
     override fun onResume() {
@@ -97,24 +91,20 @@ class MainActivity : ComponentActivity() {
     override fun onStop() {
         super.onStop()
         log("onStop")
-        if (isCollapseKeyboard) {
+        if (SettingsSharedPref.collapseKeyboard) {
             currentFocus?.clearFocus() // To collapse keyboard
             log("focus cleared")
         }
     }
 
-    private fun getSettingsSharedPreferences() {
-        isCollapseKeyboard = SettingsSharedPref.collapseKeyboard
-        isAutoSetMediaVolume = SettingsSharedPref.autoSetMediaVolume
-        log("settings sp got")
-    }
-
-    private fun log(message: String) = Log.d(TAG, message)
-
-    private fun log(message: String, level: String) {
+    private fun log(message: String, level: String? = null) {
         when (level) {
-            "i" -> Log.i(TAG, message)
-            else -> log(message)
+            "wtf" -> Timber.wtf(message)
+            "e" -> Timber.e(message)
+            "w" -> Timber.w(message)
+            "i" -> Timber.i(message)
+            "v" -> Timber.v(message)
+            else -> Timber.d(message)
         }
     }
 }

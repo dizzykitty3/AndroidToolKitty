@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.foundation.util
 
-import android.util.Log
 import androidx.annotation.StringRes
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.foundation.const.BG
@@ -26,16 +25,18 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.TO
 import me.dizzykitty3.androidtoolkitty.foundation.const.TV
 import me.dizzykitty3.androidtoolkitty.foundation.const.US
 import me.dizzykitty3.androidtoolkitty.foundation.const.WIKI
+import timber.log.Timber
 
 object URLUtil {
-    private const val TAG = "URLUtil"
-
     /**
      * Adding the appropriate suffix and returning the full URL.
      */
     fun toFullURL(urlInput: String): String {
         val suffix = suffixOf(urlInput)
-        Log.d(TAG, if (suffix == COM) "suffix = com, input url: $urlInput" else "suffix = $suffix")
+        Timber.d(
+            if (suffix == COM) "suffix = com, input url: $urlInput"
+            else "suffix = $suffix"
+        )
         return "$HTTPS$urlInput$suffix"
     }
 
