@@ -17,6 +17,7 @@ import kotlinx.coroutines.withContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.ui.view.AppNavigationHost
@@ -67,7 +68,7 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Clipboard cleared automatically")
                 }
             }
-            if (SettingsSharedPref.autoSetMediaVolume != -1) AudioUtil.autoSetMediaVolume(
+            if (SettingsSharedPref.autoSetMediaVolume != -1 && DateUtil.isNotWeekend()) AudioUtil.autoSetMediaVolume(
                 SettingsSharedPref.autoSetMediaVolume
             )
         }

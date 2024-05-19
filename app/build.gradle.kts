@@ -21,8 +21,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = libs.versions.minSDK.get().toInt()
         targetSdk = libs.versions.targetSDK.get().toInt()
-        versionCode = 701
-        versionName = "1.0.701"
+        versionCode = 702
+        versionName = "1.0.702"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
