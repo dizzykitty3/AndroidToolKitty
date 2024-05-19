@@ -158,7 +158,7 @@
     <string name="missed_sys_popup">错过了系统权限弹窗吗？</string>
     <string name="clear_input">清空输入</string>
     <string name="developer_profile_link">开发者主页链接</string>
-    <string name="special_thanks_to">参考了以下开源项目</string>
+    <string name="inspired_by">参考了以下开源项目</string>
     <string name="request_permission">授予权限</string>
     <string name="cellular">移动数据</string>
     <string name="offline">无网络</string>

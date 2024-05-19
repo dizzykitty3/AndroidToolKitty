@@ -339,7 +339,7 @@ private fun Contributor() {
     SpacerPadding()
     DeveloperProfileLink("HongjieCN")
     SpacerPadding()
-    GroupTitle(id = R.string.special_thanks_to)
+    GroupTitle(id = R.string.inspired_by)
     ThanksTo("tengusw/share_to_clipboard")
     SpacerPadding()
     ThanksTo("hashemi-hossein/memory-guardian")
