@@ -9,7 +9,6 @@ import android.content.Intent
 import android.content.Intent.ACTION_POWER_USAGE_SUMMARY
 import android.net.Uri
 import android.provider.Settings
-import android.util.Log
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.R
@@ -32,30 +31,29 @@ import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_ENABLE_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_POWER_USAGE_SUMMARY
 import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_WIFI
+import timber.log.Timber
 
 object IntentUtil {
-    private const val TAG = "IntentUtil"
-
     private fun startActivity(intent: Intent, context: Context) {
         try {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
-            log("startActivity")
+            Timber.d("startActivity")
             return
         } catch (e: Exception) {
             ToastUtil.toast(e.message ?: "Unknown error")
-            log(">>>ERROR<<< startActivity: $e", "e")
+            Timber.e(">>>ERROR<<< startActivity", e)
         }
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
                 ToastUtil.toast(R.string.google_play_not_installed)
-                log("Google Play not installed", "i")
+                Timber.i("Google Play not installed")
             }
 
             GOOGLE_MAPS -> {
                 ToastUtil.toast(R.string.google_maps_not_installed)
-                log("Google Maps not installed", "i")
+                Timber.i("Google Maps not installed")
                 openAppOnMarket(GOOGLE_MAPS, context)
             }
         }
@@ -67,7 +65,7 @@ object IntentUtil {
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(if (url.contains(HTTPS)) url else "$HTTPS$url")
         startActivity(intent, context)
-        log("openURL")
+        Timber.d("openURL")
     }
 
     fun openAppOnMarket(packageName: String, context: Context, isGooglePlay: Boolean = true) {
@@ -84,7 +82,7 @@ object IntentUtil {
         val intent = Intent(Intent.ACTION_VIEW, marketUri)
         if (isGooglePlay) intent.setPackage(GOOGLE_PLAY)
         startActivity(intent, context)
-        log("openAppOnMarket")
+        Timber.d("openAppOnMarket")
     }
 
     fun openGoogleMaps(latitude: String, longitude: String, context: Context) {
@@ -95,7 +93,7 @@ object IntentUtil {
         val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         intent.setPackage(GOOGLE_MAPS)
         startActivity(intent, context)
-        log("openGoogleMaps")
+        Timber.d("openGoogleMaps")
     }
 
     fun openSearch(query: String, context: Context) {
@@ -104,7 +102,7 @@ object IntentUtil {
         val intent = Intent(Intent.ACTION_WEB_SEARCH)
         intent.putExtra(SearchManager.QUERY, query)
         startActivity(intent, context)
-        log("openSearch")
+        Timber.d("openSearch")
     }
 
     @JvmStatic
@@ -128,7 +126,7 @@ object IntentUtil {
             else -> return
         }
         startActivity(intent, context)
-        log("onOpenSystemSettings: $settingType")
+        Timber.d("onOpenSystemSettings: $settingType")
     }
 
     fun openPermissionPage(context: Context) {
@@ -136,7 +134,7 @@ object IntentUtil {
         val uri = Uri.fromParts(PACKAGE, appContext.packageName, null)
         intent.setData(uri)
         startActivity(intent, context)
-        log("openPermissionPage")
+        Timber.d("openPermissionPage")
     }
 
     /**
@@ -146,7 +144,7 @@ object IntentUtil {
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
-        log("restartApp")
+        Timber.d("restartApp")
         finishApp(context)
     }
 
@@ -154,17 +152,7 @@ object IntentUtil {
      * Remember to use Activity Context to finish app.
      */
     fun finishApp(context: Context) {
-        log("finishApp")
+        Timber.d("finishApp")
         (context as Activity).finish()
-    }
-
-    private fun log(message: String) = Log.d(TAG, message)
-
-    private fun log(message: String, level: String) {
-        when (level) {
-            "i" -> Log.i(TAG, message)
-            "e" -> Log.e(TAG, message)
-            else -> log(message)
-        }
     }
 }

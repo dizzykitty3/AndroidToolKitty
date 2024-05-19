@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.widget.Toast
 import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
+import timber.log.Timber
 
 class ShareToClipboardActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Timber.d("onCreate")
         val intent = intent
         val sharedText = intent.getStringExtra(Intent.EXTRA_TEXT)
         if (sharedText != null) {

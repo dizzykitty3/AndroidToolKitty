@@ -41,7 +41,7 @@ object SettingsSharedPref {
     var autoClearClipboard: Boolean
         get() = sharedPrefs.getBoolean(AUTO_CLEAR_CLIPBOARD, false)
         set(value) {
-            log("auto clear clipboard = $value")
+            Timber.d("auto clear clipboard = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(AUTO_CLEAR_CLIPBOARD, value)
                 apply()
@@ -51,7 +51,7 @@ object SettingsSharedPref {
     var sliderIncrement5Percent: Boolean
         get() = sharedPrefs.getBoolean(SLIDER_INCREMENT_5_PERCENT, false)
         set(value) {
-            log("slider increment 5% = $value")
+            Timber.d("slider increment 5% = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SLIDER_INCREMENT_5_PERCENT, value)
                 apply()
@@ -61,7 +61,7 @@ object SettingsSharedPref {
     var dynamicColor: Boolean
         get() = sharedPrefs.getBoolean(DYNAMIC_COLOR, true)
         set(value) {
-            log("dynamic color = $value")
+            Timber.d("dynamic color = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(DYNAMIC_COLOR, value)
                 apply()
@@ -71,7 +71,7 @@ object SettingsSharedPref {
     var oneHandedMode: Boolean
         get() = sharedPrefs.getBoolean(ONE_HANDED_MODE, false)
         set(value) {
-            log("one-handed mode = $value")
+            Timber.d("one-handed mode = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(ONE_HANDED_MODE, value)
                 apply()
@@ -81,7 +81,7 @@ object SettingsSharedPref {
     var haveOpenedSettingsScreen: Boolean
         get() = sharedPrefs.getBoolean(HAVE_OPENED_SETTINGS_SCREEN, false)
         set(value) {
-            log("have opened settings menu = $value")
+            Timber.d("have opened settings menu = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(HAVE_OPENED_SETTINGS_SCREEN, value)
                 apply()
@@ -91,7 +91,7 @@ object SettingsSharedPref {
     var usingCustomVolumeOptionLabel: Boolean
         get() = sharedPrefs.getBoolean(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
         set(value) {
-            log("using custom volume option label = $value")
+            Timber.d("using custom volume option label = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
                 apply()
@@ -101,7 +101,7 @@ object SettingsSharedPref {
     var debuggingOptions: Boolean
         get() = sharedPrefs.getBoolean(DEBUGGING_OPTIONS, false)
         set(value) {
-            log("debugging options = $value")
+            Timber.d("debugging options = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(DEBUGGING_OPTIONS, value)
                 apply()
@@ -111,7 +111,7 @@ object SettingsSharedPref {
     var webpageCardShowMore: Boolean
         get() = sharedPrefs.getBoolean(WEBPAGE_CARD_SHOW_MORE, false)
         set(value) {
-            log("webpage card show more = $value")
+            Timber.d("webpage card show more = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(WEBPAGE_CARD_SHOW_MORE, value)
                 apply()
@@ -121,7 +121,7 @@ object SettingsSharedPref {
     var collapseKeyboard: Boolean
         get() = sharedPrefs.getBoolean(COLLAPSE_KEYBOARD, true)
         set(value) {
-            log("collapse keyboard = $value")
+            Timber.d("collapse keyboard = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(COLLAPSE_KEYBOARD, value)
                 apply()
@@ -131,7 +131,7 @@ object SettingsSharedPref {
     var showDivider: Boolean
         get() = sharedPrefs.getBoolean(SHOW_DIVIDER, true)
         set(value) {
-            log("show divider = $value")
+            Timber.d("show divider = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SHOW_DIVIDER, value)
                 apply()
@@ -141,7 +141,7 @@ object SettingsSharedPref {
     var showSnackbar: Boolean
         get() = sharedPrefs.getBoolean(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, true)
         set(value) {
-            log("show snackbar before apply changes = $value")
+            Timber.d("show snackbar before apply changes = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, value)
                 apply()
@@ -151,7 +151,7 @@ object SettingsSharedPref {
     var showEditVolumeOption: Boolean
         get() = sharedPrefs.getBoolean(SHOW_EDIT_VOLUME_OPTION, true)
         set(value) {
-            log("show edit volume option = $value")
+            Timber.d("show edit volume option = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(SHOW_EDIT_VOLUME_OPTION, value)
                 apply()
@@ -161,7 +161,7 @@ object SettingsSharedPref {
     var autoSetMediaVolume: Int
         get() = sharedPrefs.getInt(AUTO_SET_MEDIA_VOLUME, -1)
         set(value) {
-            log("auto set media volume = $value")
+            Timber.d("auto set media volume = $value")
             with(sharedPrefs.edit()) {
                 putInt(AUTO_SET_MEDIA_VOLUME, value)
                 apply()
@@ -171,7 +171,7 @@ object SettingsSharedPref {
     var haveTappedAddButton: Boolean
         get() = sharedPrefs.getBoolean(HAVE_TAPPED_ADD_BUTTON, false)
         set(value) {
-            log("have tapped add button = $value")
+            Timber.d("have tapped add button = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(HAVE_TAPPED_ADD_BUTTON, value)
                 apply()
@@ -181,7 +181,7 @@ object SettingsSharedPref {
     var uiTesting: Boolean
         get() = sharedPrefs.getBoolean(UI_TESTING, false)
         set(value) {
-            log("UI testing = $value")
+            Timber.d("UI testing = $value")
             with(sharedPrefs.edit()) {
                 putBoolean(UI_TESTING, value)
                 apply()
@@ -193,7 +193,7 @@ object SettingsSharedPref {
     }
 
     fun saveCardShowedState(card: String, isShowed: Boolean) {
-        log("$card is showed = $isShowed")
+        Timber.d("$card is showed = $isShowed")
         with(sharedPrefs.edit()) {
             putBoolean(card, isShowed)
             apply()
@@ -203,7 +203,7 @@ object SettingsSharedPref {
     var lastTimeSelectedSocialPlatform: Int
         get() = sharedPrefs.getInt(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
         set(value) {
-            log("last time platform index = $value")
+            Timber.d("last time platform index = $value")
             with(sharedPrefs.edit()) {
                 putInt(LAST_TIME_SELECTED_PLATFORM_INDEX, value)
                 apply()
@@ -213,7 +213,7 @@ object SettingsSharedPref {
     var customVolume: Int
         get() = sharedPrefs.getInt(CUSTOM_VOLUME, Int.MIN_VALUE)
         set(value) {
-            log("custom volume = $value")
+            Timber.d("custom volume = $value")
             with(sharedPrefs.edit()) {
                 putInt(CUSTOM_VOLUME, value)
                 apply()
@@ -223,7 +223,7 @@ object SettingsSharedPref {
     var customVolumeOptionLabel: String?
         get() = sharedPrefs.getString(VOLUME_OPTION_LABEL, "")
         set(value) {
-            log("custom volume option label = $value")
+            Timber.d("custom volume option label = $value")
             with(sharedPrefs.edit()) {
                 putString(VOLUME_OPTION_LABEL, value)
                 apply()
@@ -236,14 +236,14 @@ object SettingsSharedPref {
             val items: WheelOfFortuneItems = Json.decodeFromString(itemsJson)
             items.items
         } catch (e: Exception) {
-            log("Error parsing wheel of fortune items JSON. $e", "e")
+            Timber.d("Error parsing wheel of fortune items JSON. $e", "e")
             null
         }
     }
 
     fun setWheelOfFortuneItems(items: List<String>) {
         val itemsJson = Json.encodeToString(WheelOfFortuneItems(items))
-        log("wheel of fortune items = $itemsJson")
+        Timber.d("wheel of fortune items = $itemsJson")
         with(sharedPrefs.edit()) {
             putString(WHEEL_OF_FORTUNE_ITEMS, itemsJson)
             apply()
@@ -251,21 +251,10 @@ object SettingsSharedPref {
     }
 
     fun clear() {
-        log("erase all app data")
+        Timber.d("erase all app data")
         with(sharedPrefs.edit()) {
             clear()
             apply()
-        }
-    }
-
-    private fun log(message: String, level: String? = null) {
-        when (level) {
-            "wtf" -> Timber.wtf(message)
-            "e" -> Timber.e(message)
-            "w" -> Timber.w(message)
-            "i" -> Timber.i(message)
-            "v" -> Timber.v(message)
-            else -> Timber.d(message)
         }
     }
 }

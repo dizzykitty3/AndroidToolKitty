@@ -303,14 +303,14 @@ private fun onClickSearchButton(query: String, context: Context) {
     if (query.isBlank()) return
 
     IntentUtil.openSearch(query, context)
-    log("onClickSearchButton")
+    Timber.d("onClickSearchButton")
 }
 
 private fun onClickVisitURLButton(url: String, context: Context) {
     if (url.isBlank()) return
 
     IntentUtil.openURL(URLUtil.toFullURL(StringUtil.dropSpaces(url)), context)
-    log("onClickVisitButton")
+    Timber.d("onClickVisitButton")
 }
 
 private fun onVisitProfileButton(
@@ -323,7 +323,7 @@ private fun onVisitProfileButton(
     val platform = URLUtil.Platform.entries.getOrNull(platformIndex) ?: return
     val url = toSocialMediaFullURL(platform, username)
     IntentUtil.openURL(url, context)
-    log("onVisitProfile")
+    Timber.d("onVisitProfile")
 }
 
 private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String {
@@ -336,16 +336,5 @@ private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): 
         URLUtil.Platform.CARRD -> "${StringUtil.dropSpaces(username)}${platform.prefix}"
 
         else -> "${platform.prefix}${StringUtil.dropSpaces(username)}"
-    }
-}
-
-private fun log(message: String, level: String? = null) {
-    when (level) {
-        "wtf" -> Timber.wtf(message)
-        "e" -> Timber.e(message)
-        "w" -> Timber.w(message)
-        "i" -> Timber.i(message)
-        "v" -> Timber.v(message)
-        else -> Timber.d(message)
     }
 }

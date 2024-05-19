@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        log("onCreate")
+        Timber.d("onCreate")
         enableEdgeToEdge()
         setContent {
             AppTheme(dynamicColor = SettingsSharedPref.dynamicColor) {
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onStart() {
         super.onStart()
-        log("onStart")
+        Timber.d("onStart")
 
         isContinuationResumed = false
 
@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                         window.decorView,
                         R.string.clipboard_cleared_automatically
                     )
-                    log("Clipboard cleared automatically", "i")
+                    Timber.i("Clipboard cleared automatically")
                 }
             }
             if (SettingsSharedPref.autoSetMediaVolume != -1) AudioUtil.autoSetMediaVolume(
@@ -75,36 +75,25 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        log("onResume")
+        Timber.d("onResume")
     }
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        log("onWindowFocusChanged")
+        Timber.d("onWindowFocusChanged")
         if (hasFocus and !isContinuationResumed) { // Clipboard operations require window focus
             continuation?.resume(Unit)
             isContinuationResumed = true
-            log("continuation resumed", "i")
+            Timber.i("continuation resumed")
         }
     }
 
     override fun onStop() {
         super.onStop()
-        log("onStop")
+        Timber.d("onStop")
         if (SettingsSharedPref.collapseKeyboard) {
             currentFocus?.clearFocus() // To collapse keyboard
-            log("focus cleared")
-        }
-    }
-
-    private fun log(message: String, level: String? = null) {
-        when (level) {
-            "wtf" -> Timber.wtf(message)
-            "e" -> Timber.e(message)
-            "w" -> Timber.w(message)
-            "i" -> Timber.i(message)
-            "v" -> Timber.v(message)
-            else -> Timber.d(message)
+            Timber.d("focus cleared")
         }
     }
 }

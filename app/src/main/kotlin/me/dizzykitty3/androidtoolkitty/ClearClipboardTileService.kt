@@ -13,13 +13,13 @@ import timber.log.Timber
 
 class ClearClipboardTileService : TileService() {
     override fun onBind(intent: Intent?): IBinder? {
-        log("onBind")
+        Timber.d("onBind")
         return super.onBind(intent)
     }
 
     override fun onStartListening() {
         super.onStartListening()
-        log("onStartListening")
+        Timber.d("onStartListening")
         val cleanTitle = qsTile
         cleanTitle.label = getString(R.string.clear_clipboard)
         cleanTitle.state = Tile.STATE_INACTIVE
@@ -30,7 +30,7 @@ class ClearClipboardTileService : TileService() {
     @SuppressLint("NewApi", "StartActivityAndCollapseDeprecated")
     override fun onClick() {
         super.onClick()
-        log("onClick")
+        Timber.d("onClick")
         try {
             val intent = Intent(this@ClearClipboardTileService, ClearClipboardActivity::class.java)
             intent.flags =
@@ -50,18 +50,7 @@ class ClearClipboardTileService : TileService() {
             }
         } catch (e: Exception) {
             Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
-            log(e.printStackTrace().toString(), "e")
-        }
-    }
-
-    private fun log(message: String, level: String? = null) {
-        when (level) {
-            "wtf" -> Timber.wtf(message)
-            "e" -> Timber.e(message)
-            "w" -> Timber.w(message)
-            "i" -> Timber.i(message)
-            "v" -> Timber.v(message)
-            else -> Timber.d(message)
+            Timber.e("startActivity", e)
         }
     }
 }
