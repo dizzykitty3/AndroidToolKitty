@@ -37,7 +37,11 @@ object URLUtil {
             if (suffix == COM) "suffix = com, input url: $urlInput"
             else "suffix = $suffix"
         )
-        return "$HTTPS$urlInput$suffix"
+        return if (urlInput.contains(HTTPS)) {
+            "$urlInput$suffix"
+        } else {
+            "$HTTPS$urlInput$suffix"
+        }
     }
 
     fun suffixOf(urlInput: String): String {

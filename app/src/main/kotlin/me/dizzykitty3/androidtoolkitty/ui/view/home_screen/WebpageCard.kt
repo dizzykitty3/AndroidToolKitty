@@ -154,7 +154,11 @@ private fun WebpageURL() {
                 }
             )
         },
-        prefix = { Text(text = HTTPS) },
+        prefix = {
+            if (!url.contains(HTTPS)) {
+                Text(text = HTTPS)
+            }
+        },
         suffix = { Text(text = URLUtil.suffixOf(url)) }
     )
 
@@ -328,7 +332,12 @@ private fun onVisitProfileButton(
 
 private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String {
     return when (platform) {
-        URLUtil.Platform.BLUESKY -> "${platform.prefix}${StringUtil.dropSpaces(username)}.bsky.social"
+        URLUtil.Platform.BLUESKY ->
+            if (username.isNotBlank()) {
+                "${platform.prefix}${StringUtil.dropSpaces(username)}.bsky.social"
+            } else {
+                platform.prefix
+            }
 
         URLUtil.Platform.FANBOX,
         URLUtil.Platform.BOOTH,
