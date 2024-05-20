@@ -236,7 +236,7 @@ object SettingsSharedPref {
             val items: WheelOfFortuneItems = Json.decodeFromString(itemsJson)
             items.items
         } catch (e: Exception) {
-            Timber.d("Error parsing wheel of fortune items JSON. $e", "e")
+            Timber.e("Error parsing wheel of fortune items JSON.", e)
             null
         }
     }
