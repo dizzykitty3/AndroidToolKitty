@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.compose.compiler) // https://developer.android.com/develop/ui/compose/compiler
+    alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
-    compileSdk = libs.versions.compileSDK.get().toInt()
+    compileSdk = 34
 
     buildFeatures {
         buildConfig = true
@@ -19,10 +19,10 @@ android {
 
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
-        minSdk = libs.versions.minSDK.get().toInt()
-        targetSdk = libs.versions.targetSDK.get().toInt()
-        versionCode = 706
-        versionName = "1.0.706"
+        minSdk = 26
+        targetSdk = 34
+        versionCode = 707
+        versionName = "1.0.707"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -88,26 +88,26 @@ dependencies {
 
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
-    debugImplementation(libs.square.leakcanary) // To detect memory leak
+    debugImplementation(libs.square.leakcanary)
 
     implementation(libs.android.gms.play.services.maps)
-    implementation(libs.android.material) // Theme.Material3.DynamicColors.DayNight
-    implementation(libs.androidx.activity.compose) // ComponentActivity, setContent, enableEdgeToEdge
+    implementation(libs.android.material)
+    implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.runtime.livedata)
-    implementation(libs.androidx.compose.ui.tooling.preview) // @Preview
-    implementation(libs.androidx.core.ktx) // WindowCompat, ActivityCompat
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
-    implementation(libs.androidx.navigation.compose) // NavHostController
-    implementation(libs.androidx.room.ktx) // To use Coroutine features
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.runtime)
-    implementation(libs.google.hilt.android) // Dependency injection
-    implementation(libs.kotlinx.coroutines.android) // Asynchronous tasks
-    implementation(libs.kotlinx.serialization) // json
-    implementation(libs.timber) // logging
+    implementation(libs.google.hilt.android)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.serialization)
+    implementation(libs.timber)
 
     ksp(libs.google.hilt.compiler)
     ksp(libs.androidx.room.compiler)
