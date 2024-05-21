@@ -5,8 +5,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Link
@@ -233,11 +235,10 @@ private fun NoPlatformYouNeedHere() {
     var showDialog by remember { mutableStateOf(false) }
 
     Text(
-        text = buildAnnotatedString {
-            Italic(stringResource(id = R.string.platform_not_added_yet))
-        },
+        text = buildAnnotatedString { Italic(stringResource(id = R.string.platform_not_added_yet)) },
         textDecoration = TextDecoration.Underline,
-        modifier = Modifier.clickable { showDialog = true })
+        modifier = Modifier.clickable { showDialog = true }
+    )
 
     var platformNameInput by remember { mutableStateOf("") }
     var platformExampleURLInput by remember { mutableStateOf("") }
@@ -250,7 +251,9 @@ private fun NoPlatformYouNeedHere() {
             },
             title = { Text(text = stringResource(id = R.string.submit_the_platform_you_need)) },
             text = {
-                Column {
+                Column(
+                    modifier = Modifier.verticalScroll(rememberScrollState())
+                ) {
                     CustomTip(id = R.string.under_development)
                     OutlinedTextField(
                         value = platformNameInput,
