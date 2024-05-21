@@ -107,15 +107,28 @@ private fun Search() {
         },
     )
 
-    TextButton(
-        onClick = { onClickSearchButton(searchQuery, context) }
-    ) {
-        Text(text = stringResource(R.string.visit))
-        Icon(
-            imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = null,
-            modifier = Modifier.align(Alignment.CenterVertically)
-        )
+    Row {
+        TextButton(
+            onClick = { onClickSearchButton(searchQuery, context) }
+        ) {
+            Text(text = stringResource(R.string.visit))
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+
+        TextButton(
+            onClick = { onCheckOnYouTube(searchQuery, context) }
+        ) {
+            Text(text = stringResource(R.string.search_on_youtube))
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
     }
 }
 
@@ -311,6 +324,13 @@ private fun onClickSearchButton(query: String, context: Context) {
 
     IntentUtil.openSearch(query, context)
     Timber.d("onClickSearchButton")
+}
+
+private fun onCheckOnYouTube(query: String, context: Context) {
+    if (query.isBlank()) return
+
+    IntentUtil.checkOnYouTube(query, context)
+    Timber.d("onCheckOnYouTube")
 }
 
 private fun onClickVisitURLButton(url: String, context: Context) {

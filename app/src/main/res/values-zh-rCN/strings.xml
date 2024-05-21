@@ -17,6 +17,7 @@
     <string name="fanbox">Fanbox</string>
     <string name="patreon">Patreon</string>
     <string name="fantia">Fantia</string>
+    <string name="search_on_youtube">在 YouTube 上搜索</string>
     <string name="system_settings">Android 系统设置</string>
     <string name="open_display_settings">显示设置</string>
     <string name="open_auto_rotate_settings">屏幕自动旋转设置</string>
@@ -52,7 +53,7 @@
     <string name="whats">什么是</string>
     <string name="package_name">包名</string>
     <string name="content_description_link_icon_whats_package_name">网页链接图标：什么是包名</string>
-    <string name="open_on_google_play">前往 Google Play</string>
+    <string name="open_on_google_play">Google Play</string>
     <string name="social_media_profile">社交媒体主页</string>
     <string name="platform">社交平台</string>
     <string name="username">用户昵称</string>
@@ -96,7 +97,7 @@
     <string name="set_time_automatically_is_off_tip">「自动设置时间」未启用。某些应用部分功能可能表现异常。</string>
     <string name="warning">警告</string>
     <string name="erase_all_data">清除所有数据</string>
-    <string name="open_on_other_markets">前往其他应用商店</string>
+    <string name="open_on_other_markets">其他应用商店</string>
     <string name="android_versions">Android 版本历史</string>
     <string name="customize_my_home_page">自定义显示的卡片</string>
     <string name="add_custom_volume">添加一个自定义音量</string>

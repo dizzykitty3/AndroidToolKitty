@@ -68,6 +68,14 @@ object IntentUtil {
         Timber.d("openURL")
     }
 
+    fun checkOnYouTube(query: String, context: Context) {
+        if (query.isBlank()) return
+
+        val intent =
+            Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/results?search_query=$query"))
+        startActivity(intent, context)
+    }
+
     fun checkOnMarket(packageName: String, context: Context, isGooglePlay: Boolean = true) {
         val marketUri: Uri = Uri.parse(
             if (packageName.isBlank()) {

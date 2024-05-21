@@ -97,6 +97,7 @@
     <string name="lit_link">Lit.Link</string>
     <string name="wavebox">Wavebox</string>
     <string name="carrd">Carrd</string>
+    <string name="search_on_youtube">Search on YouTube</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>
@@ -152,8 +153,8 @@
     <string name="whats">What\'s</string>
     <string name="package_name">package name</string>
     <string name="content_description_link_icon_whats_package_name">link icon: what\'s package name</string>
-    <string name="open_on_google_play">Open on Google Play</string>
-    <string name="open_on_other_markets">Open on other markets</string>
+    <string name="open_on_google_play">Google Play</string>
+    <string name="open_on_other_markets">Other markets</string>
 
     <!-- Home screen: google maps -->
     <string name="google_maps">Google Maps</string>

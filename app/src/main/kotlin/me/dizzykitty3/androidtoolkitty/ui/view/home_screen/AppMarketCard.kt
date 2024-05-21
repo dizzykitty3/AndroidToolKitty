@@ -62,26 +62,28 @@ fun AppMarketCard() {
         SpacerPadding()
         WhatIsPackageName()
 
-        TextButton(
-            onClick = { IntentUtil.checkOnMarket(packageName, context) }
-        ) {
-            Text(text = stringResource(R.string.open_on_google_play))
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(id = R.string.check_app_on_market),
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
-        }
+        Row {
+            TextButton(
+                onClick = { IntentUtil.checkOnMarket(packageName, context) }
+            ) {
+                Text(text = stringResource(R.string.open_on_google_play))
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = stringResource(id = R.string.check_app_on_market),
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+            }
 
-        TextButton(
-            onClick = { IntentUtil.checkOnMarket(packageName, context, false) }
-        ) {
-            Text(text = stringResource(R.string.open_on_other_markets))
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(id = R.string.open_on_other_markets),
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
+            TextButton(
+                onClick = { IntentUtil.checkOnMarket(packageName, context, false) }
+            ) {
+                Text(text = stringResource(R.string.open_on_other_markets))
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = stringResource(id = R.string.open_on_other_markets),
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+            }
         }
     }
 }
