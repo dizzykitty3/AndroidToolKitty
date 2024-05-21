@@ -54,7 +54,7 @@ object IntentUtil {
             GOOGLE_MAPS -> {
                 ToastUtil.toast(R.string.google_maps_not_installed)
                 Timber.i("Google Maps not installed")
-                openAppOnMarket(GOOGLE_MAPS, context)
+                checkOnMarket(GOOGLE_MAPS, context)
             }
         }
     }
@@ -68,7 +68,7 @@ object IntentUtil {
         Timber.d("openURL")
     }
 
-    fun openAppOnMarket(packageName: String, context: Context, isGooglePlay: Boolean = true) {
+    fun checkOnMarket(packageName: String, context: Context, isGooglePlay: Boolean = true) {
         val marketUri: Uri = Uri.parse(
             if (packageName.isBlank()) {
                 return
@@ -85,7 +85,7 @@ object IntentUtil {
         Timber.d("openAppOnMarket")
     }
 
-    fun openGoogleMaps(latitude: String, longitude: String, context: Context) {
+    fun checkOnGoogleMaps(latitude: String, longitude: String, context: Context) {
         if (latitude.isBlank() || longitude.isBlank()) return
 
         val coordinates = "$latitude,$longitude"
@@ -129,7 +129,7 @@ object IntentUtil {
         Timber.d("onOpenSystemSettings: $settingType")
     }
 
-    fun openPermissionPage(context: Context) {
+    fun openAppDetailSettings(context: Context) {
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         val uri = Uri.fromParts(PACKAGE, appContext.packageName, null)
         intent.setData(uri)

@@ -281,7 +281,7 @@ fun EditHomeScreen() {
             }
         }
 
-        if (mIsShowCard5) EditSysSettingCard()
+        if (mIsShowCard5) EditSysSettingsCard()
     }
 }
 

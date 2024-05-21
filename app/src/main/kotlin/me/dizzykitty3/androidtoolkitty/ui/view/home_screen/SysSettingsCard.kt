@@ -31,7 +31,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.component.SystemSettingButton
 
 @Composable
-fun SysSettingCard() {
+fun SysSettingsCard() {
     CustomCard(
         icon = Icons.Outlined.Settings,
         titleRes = R.string.system_settings

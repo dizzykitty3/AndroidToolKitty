@@ -50,7 +50,7 @@ fun AppMarketCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { IntentUtil.openAppOnMarket(packageName, context) }
+                onDone = { IntentUtil.checkOnMarket(packageName, context) }
             ),
             trailingIcon = {
                 ClearInput(text = packageName) {
@@ -63,7 +63,7 @@ fun AppMarketCard() {
         WhatIsPackageName()
 
         TextButton(
-            onClick = { IntentUtil.openAppOnMarket(packageName, context) }
+            onClick = { IntentUtil.checkOnMarket(packageName, context) }
         ) {
             Text(text = stringResource(R.string.open_on_google_play))
             Icon(
@@ -74,7 +74,7 @@ fun AppMarketCard() {
         }
 
         TextButton(
-            onClick = { IntentUtil.openAppOnMarket(packageName, context, false) }
+            onClick = { IntentUtil.checkOnMarket(packageName, context, false) }
         ) {
             Text(text = stringResource(R.string.open_on_other_markets))
             Icon(

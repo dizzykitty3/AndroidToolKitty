@@ -63,7 +63,7 @@ fun ManuallyGrant() {
 
     Text(text = stringResource(id = R.string.missed_sys_popup))
     TextButton(
-        onClick = { IntentUtil.openPermissionPage(context) }
+        onClick = { IntentUtil.openAppDetailSettings(context) }
     ) {
         Text(
             text = stringResource(id = R.string.go_to_settings),

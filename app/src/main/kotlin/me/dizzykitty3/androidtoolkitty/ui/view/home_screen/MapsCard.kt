@@ -106,6 +106,6 @@ fun MapsCard() {
 private fun onClickOpenGoogleMapsButton(latitude: String, longitude: String, context: Context) {
     if (latitude.isBlank() || longitude.isBlank()) return
 
-    IntentUtil.openGoogleMaps(latitude, longitude, context)
+    IntentUtil.checkOnGoogleMaps(latitude, longitude, context)
     Timber.d("onClickOpenGoogleMapsButton")
 }

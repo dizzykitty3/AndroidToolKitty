@@ -41,7 +41,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 
 @Composable
-fun EditSysSettingCard() {
+fun EditSysSettingsCard() {
     CustomCard(
         titleRes = R.string.customize_system_settings_card
     ) {

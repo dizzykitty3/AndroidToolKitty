@@ -318,7 +318,7 @@ private fun CardContent(cardName: String, navController: NavHostController) {
         CARD_2 -> VolumeCard()
         CARD_3 -> ClipboardCard()
         CARD_4 -> WebpageCard()
-        CARD_5 -> SysSettingCard()
+        CARD_5 -> SysSettingsCard()
         CARD_6 -> WheelOfFortuneCard()
         CARD_7 -> BluetoothDeviceCard(navController)
         CARD_8 -> UnicodeCard()
