@@ -129,6 +129,7 @@ object URLUtil {
         FANTIA("fantia.jp/", R.string.fantia),
         GITHUB("github.com/", R.string.github),
         INSTAGRAM("instagram.com/", R.string.instagram),
+        LINKTREE("linktr.ee/", R.string.linktree),
         LIT_LINK("lit.link/", R.string.lit_link),
         PATREON("patreon.com/", R.string.patreon),
         PAYPAL("paypal.me/", R.string.paypal),
