@@ -21,8 +21,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 26
         targetSdk = 34
-        versionCode = 712
-        versionName = "1.0.712"
+        versionCode = 713
+        versionName = "1.0.713"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -36,7 +36,7 @@ android {
             isMinifyEnabled = false
             applicationIdSuffix = ".dev"
             versionNameSuffix = ".dev"
-            resValue("string", "app_name", "AToolKitty.Dev")
+            resValue("string", "app_name", "ToolKitty Dev")
         }
 
         release {

@@ -61,16 +61,15 @@ object IntentUtil {
 
     fun openURL(url: String, context: Context) {
         if (url.isBlank()) return
-
+        Timber.d("openURL")
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(if (url.contains(HTTPS)) url else "$HTTPS$url")
         startActivity(intent, context)
-        Timber.d("openURL")
     }
 
     fun checkOnYouTube(query: String, context: Context) {
         if (query.isBlank()) return
-
+        Timber.d("checkOnYouTube")
         val intent =
             Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/results?search_query=$query"))
         startActivity(intent, context)
@@ -86,31 +85,28 @@ object IntentUtil {
                 "market://search?q=${packageName.trim()}"
             }
         )
-
+        Timber.d("openAppOnMarket")
         val intent = Intent(Intent.ACTION_VIEW, marketUri)
         if (isGooglePlay) intent.setPackage(GOOGLE_PLAY)
         startActivity(intent, context)
-        Timber.d("openAppOnMarket")
     }
 
     fun checkOnGoogleMaps(latitude: String, longitude: String, context: Context) {
         if (latitude.isBlank() || longitude.isBlank()) return
-
+        Timber.d("openGoogleMaps")
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
         val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         intent.setPackage(GOOGLE_MAPS)
         startActivity(intent, context)
-        Timber.d("openGoogleMaps")
     }
 
     fun openSearch(query: String, context: Context) {
         if (query.isBlank()) return
-
+        Timber.d("openSearch")
         val intent = Intent(Intent.ACTION_WEB_SEARCH)
         intent.putExtra(SearchManager.QUERY, query)
         startActivity(intent, context)
-        Timber.d("openSearch")
     }
 
     @JvmStatic
@@ -133,26 +129,26 @@ object IntentUtil {
             SETTING_POWER_USAGE_SUMMARY -> Intent(ACTION_POWER_USAGE_SUMMARY)
             else -> return
         }
-        startActivity(intent, context)
         Timber.d("onOpenSystemSettings: $settingType")
+        startActivity(intent, context)
     }
 
     fun openAppDetailSettings(context: Context) {
+        Timber.d("openPermissionPage")
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         val uri = Uri.fromParts(PACKAGE, appContext.packageName, null)
         intent.setData(uri)
         startActivity(intent, context)
-        Timber.d("openPermissionPage")
     }
 
     /**
      * Remember to use Activity Context to restart app.
      */
     fun restartApp(context: Context) {
+        Timber.d("restartApp")
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
-        Timber.d("restartApp")
         finishApp(context)
     }
 

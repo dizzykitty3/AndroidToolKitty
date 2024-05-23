@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
@@ -43,6 +44,7 @@ fun UnicodeCard() {
         titleRes = R.string.unicode
     ) {
         val view = LocalView.current
+        val focus = LocalFocusManager.current
 
         OutlinedTextField(
             value = unicode,
@@ -69,6 +71,7 @@ fun UnicodeCard() {
                 onDone = {
                     if (isUnicodeInput) {
                         onClickConvertButton(view, unicode, { characters = it }, true)
+                        focus.clearFocus()
                     }
                 }
             ),
@@ -96,6 +99,7 @@ fun UnicodeCard() {
                 onDone = {
                     if (isCharacterInput) {
                         onClickConvertButton(view, characters, { unicode = it }, false)
+                        focus.clearFocus()
                     }
                 }
             ),
@@ -110,8 +114,10 @@ fun UnicodeCard() {
             onClick = {
                 if (isUnicodeInput) {
                     onClickConvertButton(view, unicode, { characters = it }, true)
+                    focus.clearFocus()
                 } else if (isCharacterInput) {
                     onClickConvertButton(view, characters, { unicode = it }, false)
+                    focus.clearFocus()
                 }
             }
         ) {

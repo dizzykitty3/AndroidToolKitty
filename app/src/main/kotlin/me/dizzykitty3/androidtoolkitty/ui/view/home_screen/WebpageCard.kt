@@ -264,9 +264,7 @@ private fun NoPlatformYouNeedHere() {
             },
             title = { Text(text = stringResource(id = R.string.submit_the_platform_you_need)) },
             text = {
-                Column(
-                    modifier = Modifier.verticalScroll(rememberScrollState())
-                ) {
+                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                     CustomTip(id = R.string.under_development)
                     OutlinedTextField(
                         value = platformNameInput,
@@ -321,23 +319,20 @@ private fun NoPlatformYouNeedHere() {
 
 private fun onClickSearchButton(query: String, context: Context) {
     if (query.isBlank()) return
-
-    IntentUtil.openSearch(query, context)
     Timber.d("onClickSearchButton")
+    IntentUtil.openSearch(query, context)
 }
 
 private fun onCheckOnYouTube(query: String, context: Context) {
     if (query.isBlank()) return
-
-    IntentUtil.checkOnYouTube(query, context)
     Timber.d("onCheckOnYouTube")
+    IntentUtil.checkOnYouTube(query, context)
 }
 
 private fun onClickVisitURLButton(url: String, context: Context) {
     if (url.isBlank()) return
-
-    IntentUtil.openURL(URLUtil.toFullURL(StringUtil.dropSpaces(url)), context)
     Timber.d("onClickVisitButton")
+    IntentUtil.openURL(URLUtil.toFullURL(StringUtil.dropSpaces(url)), context)
 }
 
 private fun onVisitProfileButton(
@@ -346,11 +341,10 @@ private fun onVisitProfileButton(
     context: Context
 ) {
     if (username.isBlank()) return
-
+    Timber.d("onVisitProfile")
     val platform = URLUtil.Platform.entries.getOrNull(platformIndex) ?: return
     val url = toSocialMediaFullURL(platform, username)
     IntentUtil.openURL(url, context)
-    Timber.d("onVisitProfile")
 }
 
 private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String {
