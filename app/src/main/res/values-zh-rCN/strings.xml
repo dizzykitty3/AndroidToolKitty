@@ -169,4 +169,11 @@
     <string name="turn_off">禁用</string>
     <string name="query">查询</string>
     <string name="copy">复制</string>
+    <string name="user_sync">用户同步</string>
+    <string name="upload_settings">上传设置</string>
+    <string name="download_settings">下载设置</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="password">密码</string>
+    <string name="email">电子邮箱</string>
 </resources>
