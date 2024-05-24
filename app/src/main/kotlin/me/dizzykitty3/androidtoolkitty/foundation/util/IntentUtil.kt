@@ -37,23 +37,23 @@ object IntentUtil {
     private fun startActivity(intent: Intent, context: Context) {
         try {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
             Timber.d("startActivity")
+            context.startActivity(intent)
             return
         } catch (e: Exception) {
-            ToastUtil.toast(e.message ?: "Unknown error")
             Timber.e(">>>ERROR<<< startActivity", e)
+            ToastUtil.toast(e.message ?: "Unknown error")
         }
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
-                ToastUtil.toast(R.string.google_play_not_installed)
                 Timber.i("Google Play not installed")
+                ToastUtil.toast(R.string.google_play_not_installed)
             }
 
             GOOGLE_MAPS -> {
-                ToastUtil.toast(R.string.google_maps_not_installed)
                 Timber.i("Google Maps not installed")
+                ToastUtil.toast(R.string.google_maps_not_installed)
                 checkOnMarket(GOOGLE_MAPS, context)
             }
         }

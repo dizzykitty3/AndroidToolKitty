@@ -48,9 +48,9 @@ fun ClipboardCard() {
 
 private fun onClearClipboardButton(view: View) {
     val cleared = ClipboardUtil.check()
+    Timber.i("Clipboard cleared")
     if (cleared)
         SnackbarUtil.snackbar(view, R.string.clipboard_cleared)
     else
         SnackbarUtil.snackbar(view, R.string.clipboard_is_empty)
-    Timber.i("Clipboard cleared")
 }

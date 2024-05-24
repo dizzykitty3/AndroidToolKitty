@@ -23,10 +23,10 @@
 
     <!-- Home screen: top tip -->
     <string name="battery_level">Battery level</string>
-    <string name="wifi">Wi-Fi</string>
+    <string name="wifi" translatable="false">Wi-Fi</string>
     <string name="cellular">Cellular</string>
     <string name="offline">Offline</string>
-    <string name="no_translation">Sorry, %1$s translation haven\'t added yet.</string>
+    <string name="no_translation" translatable="false">Sorry, %1$s translation haven\'t added yet.</string>
 
     <!-- Home screen: year progress -->
     <string name="year_progress">Year progress</string>
@@ -51,7 +51,7 @@
     <string name="clipboard_is_empty">Clipboard is empty</string>
 
     <!-- Home screen: webpage -->
-    <string name="url">URL</string>
+    <string name="url" translatable="false">URL</string>
     <string name="url_input_hint_1">Visit webpage without inputting </string>
     <string name="url_input_hint_2">and </string>
     <string name="url_input_hint_3">(or</string>
@@ -60,45 +60,45 @@
     <string name="platform">Platform</string>
     <string name="username">Username</string>
     <string name="bilibili_search">bilibili (Search)</string>
-    <string name="github">GitHub</string>
-    <string name="x">X</string>
+    <string name="github" translatable="false">GitHub</string>
+    <string name="x" translatable="false">X</string>
     <string name="weibo">Weibo</string>
     <string name="youtube_id">YouTube (User ID)</string>
     <string name="platform_not_added_yet">No platform you need here?</string>
     <string name="submit_the_platform_you_need">Submit the platform you need</string>
     <string name="pixiv_artwork_id">pixiv (Artwork ID)</string>
     <string name="pixiv_user_id">pixiv (User ID)</string>
-    <string name="v2ex">V2EX</string>
+    <string name="v2ex" translatable="false">V2EX</string>
     <string name="bilibili_user_id">bilibili (User ID)</string>
     <string name="webpage">Webpage</string>
-    <string name="instagram">Instagram</string>
-    <string name="facebook">Facebook</string>
-    <string name="fanbox">Fanbox</string>
-    <string name="patreon">Patreon</string>
+    <string name="instagram" translatable="false">Instagram</string>
+    <string name="facebook" translatable="false">Facebook</string>
+    <string name="fanbox" translatable="false">Fanbox</string>
+    <string name="patreon" translatable="false">Patreon</string>
     <string name="search">Search</string>
-    <string name="fantia">Fantia</string>
+    <string name="fantia" translatable="false">Fantia</string>
     <string name="pixiv_user_custom_url">pixiv (User custom URL)</string>
     <string name="steam_user_custom_url">Steam (User custom URL)</string>
-    <string name="plurk">Plurk</string>
-    <string name="twitch">Twitch</string>
-    <string name="booth">BOOTH</string>
+    <string name="plurk" translatable="false">Plurk</string>
+    <string name="twitch" translatable="false">Twitch</string>
+    <string name="booth" translatable="false">BOOTH</string>
     <string name="platform_example_url">Example URL (optional)</string>
-    <string name="artstation">ArtStation</string>
-    <string name="tiktok">TikTok</string>
-    <string name="telegram">Telegram</string>
-    <string name="snapchat">Snapchat</string>
-    <string name="threads">Threads</string>
-    <string name="paypal">PayPal</string>
-    <string name="tumblr">Tumblr</string>
-    <string name="skeb">Skeb</string>
-    <string name="potofu">POTOFU</string>
-    <string name="bluesky">Bluesky</string>
+    <string name="artstation" translatable="false">ArtStation</string>
+    <string name="tiktok" translatable="false">TikTok</string>
+    <string name="telegram" translatable="false">Telegram</string>
+    <string name="snapchat" translatable="false">Snapchat</string>
+    <string name="threads" translatable="false">Threads</string>
+    <string name="paypal" translatable="false">PayPal</string>
+    <string name="tumblr" translatable="false">Tumblr</string>
+    <string name="skeb" translatable="false">Skeb</string>
+    <string name="potofu" translatable="false">POTOFU</string>
+    <string name="bluesky" translatable="false">Bluesky</string>
     <string name="query">Query</string>
-    <string name="lit_link">Lit.Link</string>
-    <string name="wavebox">Wavebox</string>
-    <string name="carrd">Carrd</string>
+    <string name="lit_link" translatable="false">Lit.Link</string>
+    <string name="wavebox" translatable="false">Wavebox</string>
+    <string name="carrd" translatable="false">Carrd</string>
     <string name="search_on_youtube">Search on YouTube</string>
-    <string name="linktree">Linktree</string>
+    <string name="linktree" translatable="false">Linktree</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>
@@ -154,7 +154,7 @@
     <string name="whats">What\'s</string>
     <string name="package_name">package name</string>
     <string name="content_description_link_icon_whats_package_name">link icon: what\'s package name</string>
-    <string name="open_on_google_play">Google Play</string>
+    <string name="open_on_google_play" translatable="false">Google Play</string>
     <string name="open_on_other_markets">Other markets</string>
 
     <!-- Home screen: google maps -->
@@ -167,64 +167,64 @@
 
     <!-- Home screen: android version history -->
     <string name="android_versions">Android version history</string>
-    <string name="android_15">Android 15</string>
-    <string name="android_14">Android 14</string>
-    <string name="android_13">Android 13</string>
-    <string name="android_12_l">Android 12L</string>
-    <string name="android_12">Android 12</string>
-    <string name="android_11">Android 11</string>
-    <string name="android_10">Android 10</string>
-    <string name="android_9">Android 9</string>
-    <string name="android_8_1">Android 8.1</string>
-    <string name="android_8">Android 8</string>
-    <string name="android_7_1_1">Android 7.1.1</string>
-    <string name="android_7">Android 7</string>
-    <string name="android_6">Android 6</string>
-    <string name="android_5_1">Android 5.1</string>
-    <string name="android_5">Android 5</string>
-    <string name="android_4_4_w">Android 4.4W</string>
-    <string name="android_4_4">Android 4.4</string>
-    <string name="android_4_3">Android 4.3</string>
-    <string name="android_4_2">Android 4.2</string>
-    <string name="android_4_1">Android 4.1</string>
-    <string name="android_4_0_3">Android 4.0.3</string>
-    <string name="android_4_0">Android 4.0</string>
-    <string name="android_3_2">Android 3.2</string>
-    <string name="android_3_1">Android 3.1</string>
-    <string name="android_3_0">Android 3.0</string>
-    <string name="android_2_3_3">Android 2.3.3</string>
-    <string name="android_2_3">Android 2.3</string>
-    <string name="android_2_2">Android 2.2</string>
-    <string name="android_2_1" >Android 2.1</string>
-    <string name="api_35">API 35, VanillaIceCream</string>
-    <string name="api_34">API 34, UpsideDownCake</string>
-    <string name="api_33">API 33, Tiramisu</string>
-    <string name="api_32">API 32, Sv2</string>
-    <string name="api_31">API 31, S</string>
-    <string name="api_30">API 30, R</string>
-    <string name="api_29">API 29, Q</string>
-    <string name="api_28">API 28, Pie</string>
-    <string name="api_27">API 27, Oreo</string>
-    <string name="api_26">API 26, Oreo</string>
-    <string name="api_25">API 25, Nougat</string>
-    <string name="api_24">API 24, Nougat</string>
-    <string name="api_23">API 23, Marshmallow</string>
-    <string name="api_22">API 22, Lollipop</string>
-    <string name="api_21">API 21, Lollipop</string>
-    <string name="api_20">API 20, KitKat Wear</string>
-    <string name="api_19">API 19, KitKat</string>
-    <string name="api_18">API 18, Jelly Bean</string>
-    <string name="api_17">API 17, Jelly Bean</string>
-    <string name="api_16">API 16, Jelly Bean</string>
-    <string name="api_15">API 15, IceCreamSandwich</string>
-    <string name="api_14">API 14, IceCreamSandwich</string>
-    <string name="api_13">API 13, Honeycomb</string>
-    <string name="api_12">API 12, Honeycomb</string>
-    <string name="api_11">API 11, Honeycomb</string>
-    <string name="api_10">API 10, Gingerbread</string>
-    <string name="api_9">API 9, Gingerbread</string>
-    <string name="api_8">API 8, Froyo</string>
-    <string name="api_7">API 7, Eclair</string>
+    <string name="android_15" translatable="false">Android 15</string>
+    <string name="android_14" translatable="false">Android 14</string>
+    <string name="android_13" translatable="false">Android 13</string>
+    <string name="android_12_l" translatable="false">Android 12L</string>
+    <string name="android_12" translatable="false">Android 12</string>
+    <string name="android_11" translatable="false">Android 11</string>
+    <string name="android_10" translatable="false">Android 10</string>
+    <string name="android_9" translatable="false">Android 9</string>
+    <string name="android_8_1" translatable="false">Android 8.1</string>
+    <string name="android_8" translatable="false">Android 8</string>
+    <string name="android_7_1_1" translatable="false">Android 7.1.1</string>
+    <string name="android_7" translatable="false">Android 7</string>
+    <string name="android_6" translatable="false">Android 6</string>
+    <string name="android_5_1" translatable="false">Android 5.1</string>
+    <string name="android_5" translatable="false">Android 5</string>
+    <string name="android_4_4_w" translatable="false">Android 4.4W</string>
+    <string name="android_4_4" translatable="false">Android 4.4</string>
+    <string name="android_4_3" translatable="false">Android 4.3</string>
+    <string name="android_4_2" translatable="false">Android 4.2</string>
+    <string name="android_4_1" translatable="false">Android 4.1</string>
+    <string name="android_4_0_3" translatable="false">Android 4.0.3</string>
+    <string name="android_4_0" translatable="false">Android 4.0</string>
+    <string name="android_3_2" translatable="false">Android 3.2</string>
+    <string name="android_3_1" translatable="false">Android 3.1</string>
+    <string name="android_3_0" translatable="false">Android 3.0</string>
+    <string name="android_2_3_3" translatable="false">Android 2.3.3</string>
+    <string name="android_2_3" translatable="false">Android 2.3</string>
+    <string name="android_2_2" translatable="false">Android 2.2</string>
+    <string name="android_2_1" translatable="false">Android 2.1</string>
+    <string name="api_35" translatable="false">API 35, VanillaIceCream</string>
+    <string name="api_34" translatable="false">API 34, UpsideDownCake</string>
+    <string name="api_33" translatable="false">API 33, Tiramisu</string>
+    <string name="api_32" translatable="false">API 32, Sv2</string>
+    <string name="api_31" translatable="false">API 31, S</string>
+    <string name="api_30" translatable="false">API 30, R</string>
+    <string name="api_29" translatable="false">API 29, Q</string>
+    <string name="api_28" translatable="false">API 28, Pie</string>
+    <string name="api_27" translatable="false">API 27, Oreo</string>
+    <string name="api_26" translatable="false">API 26, Oreo</string>
+    <string name="api_25" translatable="false">API 25, Nougat</string>
+    <string name="api_24" translatable="false">API 24, Nougat</string>
+    <string name="api_23" translatable="false">API 23, Marshmallow</string>
+    <string name="api_22" translatable="false">API 22, Lollipop</string>
+    <string name="api_21" translatable="false">API 21, Lollipop</string>
+    <string name="api_20" translatable="false">API 20, KitKat Wear</string>
+    <string name="api_19" translatable="false">API 19, KitKat</string>
+    <string name="api_18" translatable="false">API 18, Jelly Bean</string>
+    <string name="api_17" translatable="false">API 17, Jelly Bean</string>
+    <string name="api_16" translatable="false">API 16, Jelly Bean</string>
+    <string name="api_15" translatable="false">API 15, IceCreamSandwich</string>
+    <string name="api_14" translatable="false">API 14, IceCreamSandwich</string>
+    <string name="api_13" translatable="false">API 13, Honeycomb</string>
+    <string name="api_12" translatable="false">API 12, Honeycomb</string>
+    <string name="api_11" translatable="false">API 11, Honeycomb</string>
+    <string name="api_10" translatable="false">API 10, Gingerbread</string>
+    <string name="api_9" translatable="false">API 9, Gingerbread</string>
+    <string name="api_8" translatable="false">API 8, Froyo</string>
+    <string name="api_7" translatable="false">API 7, Eclair</string>
 
     <!-- Home screen: font weight -->
     <string name="font_weight_test">Font weight test</string>
@@ -237,9 +237,9 @@
     <string name="w7">700 Bold</string>
     <string name="w8">800 ExtraBold</string>
     <string name="w9">900 Black</string>
-    <string name="a">A</string>
-    <string name="chinese_que">雀</string>
-    <string name="japanese_ki">気</string>
+    <string name="a" translatable="false">A</string>
+    <string name="chinese_que" translatable="false">雀</string>
+    <string name="japanese_ki" translatable="false">気</string>
 
     <!-- Settings screen: settings -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>

@@ -1,18 +1,23 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FontDownload
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
+import java.util.Locale
 
 @Preview
 @Composable
@@ -21,6 +26,9 @@ fun FontWeightCard() {
         icon = Icons.Outlined.FontDownload,
         titleRes = R.string.font_weight_test
     ) {
+        val locale = Locale.getDefault().toString()
+        val showCJK = locale.contains(Regex("Hans|Hant|zh|ja|ko"))
+
         Thin(id = R.string.w1)
         ExtraLight(id = R.string.w2)
         Light(id = R.string.w3)
@@ -32,13 +40,65 @@ fun FontWeightCard() {
         Black(id = R.string.w9)
         GroupDivider()
         RowFontWeightTest(id = R.string.a)
-        RowFontWeightTest(id = R.string.chinese_que)
-        RowFontWeightTest(id = R.string.japanese_ki)
+        if (showCJK) {
+            RowFontWeightTest(id = R.string.chinese_que)
+            RowFontWeightTest(id = R.string.japanese_ki)
+        }
         GroupDivider()
-        Text(text = "FontFamily.SansSerif / 雀 / 気", fontFamily = FontFamily.SansSerif)
-        Text(text = "FontFamily.Serif / 雀 / 気", fontFamily = FontFamily.Serif)
-        Text(text = "FontFamily.Cursive / 雀 / 気", fontFamily = FontFamily.Cursive)
-        Text(text = "FontFamily.Monospace / 雀 / 気", fontFamily = FontFamily.Monospace)
+        Column(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = "SansSerif SansSerif SansSerif SansSerif SansSerif SansSerif",
+                fontFamily = FontFamily.SansSerif,
+                overflow = TextOverflow.Clip,
+                maxLines = 1
+            )
+            Text(
+                text = "Serif Serif Serif Serif Serif Serif Serif Serif Serif",
+                fontFamily = FontFamily.Serif,
+                overflow = TextOverflow.Clip,
+                maxLines = 1
+            )
+            Text(
+                text = "Cursive Cursive Cursive Cursive Cursive Cursive Cursive ",
+                fontFamily = FontFamily.Cursive,
+                overflow = TextOverflow.Clip,
+                maxLines = 1
+            )
+            Text(
+                text = "Monospace Monospace Monospace Monospace Monospace Monospace ",
+                fontFamily = FontFamily.Monospace,
+                overflow = TextOverflow.Clip,
+                maxLines = 1
+            )
+        }
+        if (showCJK) {
+            Column(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。",
+                    fontFamily = FontFamily.SansSerif,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+                Text(
+                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。",
+                    fontFamily = FontFamily.Serif,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+                Text(
+                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 ",
+                    fontFamily = FontFamily.Cursive,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+                Text(
+                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 ",
+                    fontFamily = FontFamily.Monospace,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+            }
+        }
     }
 }
 

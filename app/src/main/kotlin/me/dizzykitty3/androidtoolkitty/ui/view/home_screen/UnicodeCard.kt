@@ -133,7 +133,7 @@ private fun onClickConvertButton(
     isUnicodeToChar: Boolean
 ) {
     if (input.isBlank()) return
-
+    Timber.d("onClickConvertButton")
     try {
         val result = if (isUnicodeToChar) {
             StringUtil.unicodeToCharacter(input)
@@ -146,5 +146,4 @@ private fun onClickConvertButton(
     } catch (e: Exception) {
         SnackbarUtil.snackbar(view, e.message ?: "Unknown error occurred")
     }
-    Timber.d("onClickConvertButton")
 }
