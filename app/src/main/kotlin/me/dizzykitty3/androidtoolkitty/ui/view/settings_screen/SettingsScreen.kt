@@ -487,7 +487,7 @@ private fun UserSyncSection() {
             if (token.isNullOrEmpty()) {
                 dialogState = DialogState.Login
             } else {
-                ToastUtil.toast("Successfully uploaded settings!")
+                // Handle upload settings
             }
         }) {
             Text(text = stringResource(id = R.string.upload_settings))
@@ -496,7 +496,7 @@ private fun UserSyncSection() {
             if (token.isNullOrEmpty()) {
                 dialogState = DialogState.Login
             } else {
-                ToastUtil.toast("Successfully downloaded settings!")
+                // Handle download settings
             }
         }) {
             Text(text = stringResource(id = R.string.download_settings))
@@ -514,17 +514,21 @@ private fun UserSyncSection() {
                         handleLogin(
                             username,
                             password,
-                            onDismiss = { dialogState = null; isLoading = false }) { newToken ->
-                            token = newToken
-                            dialogState = null
-                            isLoading = false
-                        }
+                            onDismiss = { dialogState = null; isLoading = false },
+                            onTokenReceived = { newToken ->
+                                token = newToken
+                                dialogState = null
+                                isLoading = false
+                            },
+                            onFailure = {
+                                isLoading = false
+                            }
+                        )
                     }
                 },
                 isLoading = isLoading
             )
         }
-
         DialogState.Register -> {
             UserRegisterDialog(
                 onDismiss = { dialogState = null },
@@ -536,17 +540,21 @@ private fun UserSyncSection() {
                             username,
                             email,
                             password,
-                            onDismiss = { dialogState = null; isLoading = false }) { newToken ->
-                            token = newToken
-                            dialogState = null
-                            isLoading = false
-                        }
+                            onDismiss = { dialogState = null; isLoading = false },
+                            onTokenReceived = { newToken ->
+                                token = newToken
+                                dialogState = null
+                                isLoading = false
+                            },
+                            onFailure = {
+                                isLoading = false
+                            }
+                        )
                     }
                 },
                 isLoading = isLoading
             )
         }
-
         null -> {}
     }
 }
@@ -676,13 +684,15 @@ suspend fun handleLogin(
     username: String,
     password: String,
     onDismiss: () -> Unit,
-    onTokenReceived: (String) -> Unit
+    onTokenReceived: (String) -> Unit,
+    onFailure: () -> Unit
 ) {
     handleRequest(
         url = "https://api.yanqishui.work/toolkitten/account/login",
         body = mapOf("username" to username, "password" to password),
         onDismiss = onDismiss,
-        onTokenReceived = onTokenReceived
+        onTokenReceived = onTokenReceived,
+        onFailure = onFailure
     )
 }
 
@@ -691,13 +701,15 @@ suspend fun handleRegister(
     email: String,
     password: String,
     onDismiss: () -> Unit,
-    onTokenReceived: (String) -> Unit
+    onTokenReceived: (String) -> Unit,
+    onFailure: () -> Unit
 ) {
     handleRequest(
         url = "https://api.yanqishui.work/toolkitten/account/register",
         body = mapOf("username" to username, "email" to email, "password" to password),
         onDismiss = onDismiss,
-        onTokenReceived = onTokenReceived
+        onTokenReceived = onTokenReceived,
+        onFailure = onFailure
     )
 }
 
@@ -705,7 +717,8 @@ suspend fun handleRequest(
     url: String,
     body: Map<String, String>,
     onDismiss: () -> Unit,
-    onTokenReceived: (String) -> Unit
+    onTokenReceived: (String) -> Unit,
+    onFailure: () -> Unit
 ) {
     try {
         val response: HttpResponse = HttpUtil.post(url, body)
@@ -721,9 +734,11 @@ suspend fun handleRequest(
             val jsonObject = Json.parseToJsonElement(errorResponse).jsonObject
             val message = jsonObject["message"]?.jsonPrimitive?.content ?: "Unknown error"
             ToastUtil.toast(message)
+            onFailure()
         }
     } catch (e: Exception) {
         Timber.e(e)
         ToastUtil.toast("Operation failed: ${e.message}")
+        onFailure()
     }
 }
