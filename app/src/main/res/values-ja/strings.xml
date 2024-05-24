@@ -29,7 +29,6 @@
     </plurals>
     <string name="volume">音量</string>
     <string name="media_volume">メディア音量</string>
-    <string name="mute">ミュート</string>
     <string name="add_custom_volume">カスタム音量を追加</string>
     <string name="system_media_volume_levels_limited">システムの音量ステップは制限されています。操作に失敗しました。</string>
     <string name="clipboard">クリップボード</string>

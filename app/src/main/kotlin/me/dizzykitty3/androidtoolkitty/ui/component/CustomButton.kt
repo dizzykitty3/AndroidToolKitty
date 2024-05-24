@@ -6,8 +6,8 @@ import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +23,7 @@ fun SystemSettingButton(
 ) {
     val context = LocalContext.current
 
-    OutlinedButton(
+    TextButton(
         onClick = { IntentUtil.openSystemSettings(settingType, context) }
     ) {
         Text(text = stringResource(id = textRes))
