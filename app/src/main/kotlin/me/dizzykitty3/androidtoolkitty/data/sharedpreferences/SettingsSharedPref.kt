@@ -35,6 +35,8 @@ object SettingsSharedPref {
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
     private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
 
+    private const val TOKEN = "token"
+
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
@@ -246,6 +248,18 @@ object SettingsSharedPref {
         Timber.d("wheel of fortune items = $itemsJson")
         with(sharedPrefs.edit()) {
             putString(WHEEL_OF_FORTUNE_ITEMS, itemsJson)
+            apply()
+        }
+    }
+
+    fun getToken(): String? {
+        val token = sharedPrefs.getString(TOKEN, null)
+        return token
+    }
+
+    fun setToken(token: String) {
+        with(sharedPrefs.edit()) {
+            putString(TOKEN, token)
             apply()
         }
     }

@@ -171,4 +171,11 @@
     <string name="bluetooth_bluetooth_admin">ペアリングされた Bluetooth デバイスを確認するには、アプリに BLUETOOTH、BLUETOOTH_ADMIN の権限を付与してください。</string>
     <string name="missed_sys_popup">システム権限ポップアップを見逃しましたか？</string>
     <string name="query">クエリ</string>
+    <string name="user_sync">ユーザー同期</string>
+    <string name="upload_settings">アップロード設定</string>
+    <string name="download_settings">ダウンロード設定</string>
+    <string name="login">ログイン</string>
+    <string name="register">登録</string>
+    <string name="password">パスワード</string>
+    <string name="email">メールアドレス</string>
 </resources>
