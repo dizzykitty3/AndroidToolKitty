@@ -55,6 +55,7 @@ import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import me.dizzykitty3.androidtoolkitty.BuildConfig
@@ -529,6 +530,7 @@ private fun UserSyncSection() {
                 isLoading = isLoading
             )
         }
+
         DialogState.Register -> {
             UserRegisterDialog(
                 onDismiss = { dialogState = null },
@@ -555,6 +557,7 @@ private fun UserSyncSection() {
                 isLoading = isLoading
             )
         }
+
         null -> {}
     }
 }
@@ -729,6 +732,15 @@ suspend fun handleRequest(
             SettingsSharedPref.setToken(responseBody)
             ToastUtil.toast("Operation successful")
             onDismiss()
+        } else if (response.status == HttpStatusCode.BadRequest) {
+            val errorResponse = response.bodyAsText()
+            val jsonObject = Json.parseToJsonElement(errorResponse).jsonObject
+            val detailsArray = jsonObject["details"]?.jsonArray
+            val detailsList = detailsArray?.map { it.jsonPrimitive.content } ?: emptyList()
+            val detailsString = detailsList.joinToString(separator = ", ")
+            val message = if (detailsString.isNotEmpty()) detailsString else "Unknown error"
+            ToastUtil.toast(message)
+            onFailure()
         } else {
             val errorResponse = response.bodyAsText()
             val jsonObject = Json.parseToJsonElement(errorResponse).jsonObject
