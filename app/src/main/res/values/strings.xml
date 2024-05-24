@@ -274,6 +274,15 @@
     <string name="show_edit_volume_option">Show Edit in Volume card</string>
     <string name="ui_testing">UI testing</string>
 
+    <!-- Settings screen: sync -->
+    <string name="user_sync">User Sync</string>
+    <string name="upload_settings">Upload settings</string>
+    <string name="download_settings">Download settings</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="password">password</string>
+    <string name="email">email</string>
+
     <!-- Settings screen: about -->
     <string name="about">About</string>
     <string name="source_code_on_github">View source code on GitHub</string>
@@ -293,13 +302,6 @@
     <string name="bluetooth_connect">To check paired bluetooth devices, please grant the app Nearby Devices permission.</string>
     <string name="bluetooth_bluetooth_admin">To check paired bluetooth devices, please grant the app BLUETOOTH, BLUETOOTH_ADMIN permissions.</string>
     <string name="missed_sys_popup">Missed the system permission popup?</string>
-    <string name="user_sync">User Sync</string>
-    <string name="upload_settings">Upload settings</string>
-    <string name="download_settings">Download settings</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
-    <string name="password">password</string>
-    <string name="email">email</string>
 
     <!-- End of resources -->
 </resources>

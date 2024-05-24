@@ -4,6 +4,7 @@ import android.content.ContentResolver
 import android.provider.Settings
 import androidx.annotation.StringRes
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
@@ -86,40 +87,42 @@ fun SysSettingsCard() {
 
         if (isShowGroupTitle1) GroupTitle(R.string.common)
 
-        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-            if (isShowSetting[SETTING_1] == true) {
-                SystemSettingButton(
-                    settingType = SETTING_1,
-                    textRes = R.string.open_display_settings
-                )
-            }
-
-            if (isShowSetting[SETTING_2] == true && OSVersion.android12()) {
-                SystemSettingButton(
-                    settingType = SETTING_2,
-                    textRes = R.string.open_auto_rotate_settings
-                )
-            }
-        }
-
-        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-            settings.subList(2, 4).forEach { setting ->
-                if (isShowSetting[setting.settingType] == true) {
+        Column(modifier = Modifier.horizontalScroll(rememberScrollState())) {
+            Row {
+                if (isShowSetting[SETTING_1] == true) {
                     SystemSettingButton(
-                        settingType = setting.settingType,
-                        textRes = setting.textRes
+                        settingType = SETTING_1,
+                        textRes = R.string.open_display_settings
+                    )
+                }
+
+                if ((isShowSetting[SETTING_2] == true) && OSVersion.android12()) {
+                    SystemSettingButton(
+                        settingType = SETTING_2,
+                        textRes = R.string.open_auto_rotate_settings
                     )
                 }
             }
-        }
 
-        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-            settings.subList(4, 6).forEach { setting ->
-                if (isShowSetting[setting.settingType] == true) {
-                    SystemSettingButton(
-                        settingType = setting.settingType,
-                        textRes = setting.textRes
-                    )
+            Row {
+                settings.subList(2, 4).forEach { setting ->
+                    if (isShowSetting[setting.settingType] == true) {
+                        SystemSettingButton(
+                            settingType = setting.settingType,
+                            textRes = setting.textRes
+                        )
+                    }
+                }
+            }
+
+            Row {
+                settings.subList(4, 6).forEach { setting ->
+                    if (isShowSetting[setting.settingType] == true) {
+                        SystemSettingButton(
+                            settingType = setting.settingType,
+                            textRes = setting.textRes
+                        )
+                    }
                 }
             }
         }
@@ -127,45 +130,50 @@ fun SysSettingsCard() {
         if (isShowGroupTitle1 && isShowGroupTitle2) GroupDivider()
         if (isShowGroupTitle2) GroupTitle(R.string.permission)
 
-        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-            settings.subList(6, 8).forEach { setting ->
-                if (isShowSetting[setting.settingType] == true) {
+        Column(modifier = Modifier.horizontalScroll(rememberScrollState())) {
+            Row {
+                settings.subList(6, 8).forEach { setting ->
+                    if (isShowSetting[setting.settingType] == true) {
+                        SystemSettingButton(
+                            settingType = setting.settingType,
+                            textRes = setting.textRes
+                        )
+                    }
+                }
+            }
+
+            Row {
+                if (isShowSetting[SETTING_9] == true) {
                     SystemSettingButton(
-                        settingType = setting.settingType,
-                        textRes = setting.textRes
+                        settingType = SETTING_9,
+                        textRes = R.string.open_write_permission
                     )
                 }
             }
         }
 
-        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-            if (isShowSetting[SETTING_9] == true) {
-                SystemSettingButton(
-                    settingType = SETTING_9,
-                    textRes = R.string.open_write_permission
-                )
-            }
-        }
         if ((isShowGroupTitle1 || isShowGroupTitle2) && isShowGroupTitle3) GroupDivider()
         if (isShowGroupTitle3) GroupTitle(R.string.debugging)
 
-        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-            settings.subList(9, 11).forEach { setting ->
-                if (isShowSetting[setting.settingType] == true) {
-                    SystemSettingButton(
-                        settingType = setting.settingType,
-                        textRes = setting.textRes
-                    )
+        Column(modifier = Modifier.horizontalScroll(rememberScrollState())) {
+            Row {
+                settings.subList(9, 11).forEach { setting ->
+                    if (isShowSetting[setting.settingType] == true) {
+                        SystemSettingButton(
+                            settingType = setting.settingType,
+                            textRes = setting.textRes
+                        )
+                    }
                 }
             }
-        }
 
-        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-            if (isShowSetting[SETTING_11] == true) {
-                SystemSettingButton(
-                    settingType = SETTING_11,
-                    textRes = R.string.open_developer_options
-                )
+            Row {
+                if (isShowSetting[SETTING_11] == true) {
+                    SystemSettingButton(
+                        settingType = SETTING_11,
+                        textRes = R.string.open_developer_options
+                    )
+                }
             }
         }
     }

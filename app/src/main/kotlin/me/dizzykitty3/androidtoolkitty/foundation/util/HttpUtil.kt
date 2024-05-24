@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.foundation.util
 
-
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
