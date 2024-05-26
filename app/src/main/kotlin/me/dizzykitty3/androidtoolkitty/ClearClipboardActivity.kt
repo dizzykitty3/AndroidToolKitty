@@ -11,10 +11,13 @@ class ClearClipboardActivity : Activity() {
         super.onCreate(savedInstanceState)
         Timber.d("onCreate")
         val cleared = ClipboardUtil.check()
-        if (cleared)
+        if (cleared) {
+            Timber.i("clipboard cleared")
             Toast.makeText(this, getString(R.string.clipboard_cleared), Toast.LENGTH_SHORT).show()
-        else
+        } else {
+            Timber.i("clipboard is empty")
             Toast.makeText(this, getString(R.string.clipboard_is_empty), Toast.LENGTH_SHORT).show()
+        }
         finish()
     }
 }

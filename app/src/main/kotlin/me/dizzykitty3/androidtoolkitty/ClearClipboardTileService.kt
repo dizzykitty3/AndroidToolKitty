@@ -35,8 +35,8 @@ class ClearClipboardTileService : TileService() {
             val intent = Intent(this@ClearClipboardTileService, ClearClipboardActivity::class.java)
             intent.flags =
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-
             if (OSVersion.android14()) {
+                Timber.i("Android 14")
                 val pendingIntent = PendingIntent.getActivity(
                     this@ClearClipboardTileService,
                     0,
@@ -45,12 +45,13 @@ class ClearClipboardTileService : TileService() {
                 )
                 startActivityAndCollapse(pendingIntent)
             } else {
+                Timber.i("< Android 14")
                 @Suppress("DEPRECATION")
                 startActivityAndCollapse(intent)
             }
         } catch (e: Exception) {
+            Timber.e(e)
             Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
-            Timber.e("startActivity", e)
         }
     }
 }

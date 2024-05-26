@@ -15,6 +15,7 @@ class ShareToClipboardActivity : Activity() {
         val intent = intent
         val sharedText = intent.getStringExtra(Intent.EXTRA_TEXT)
         if (sharedText != null) {
+            Timber.i("onCreate sharedText non null")
             ClipboardUtil.copy(sharedText)
             if (!OSVersion.android13()) Toast.makeText(this, "copied", Toast.LENGTH_SHORT).show()
         }

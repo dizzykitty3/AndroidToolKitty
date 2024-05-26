@@ -21,8 +21,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 26
         targetSdk = 34
-        versionCode = 718
-        versionName = "1.0.718"
+        versionCode = 722
+        versionName = "1.0.722"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -107,12 +107,12 @@ dependencies {
     implementation(libs.google.hilt.android)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization)
-    implementation(libs.timber)
-    implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.cio)
-//    implementation(libs.ktor.client.logging)
     implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.logging)
     implementation(libs.ktor.serialization.kotlinx.json)
+    implementation(libs.timber)
 
     ksp(libs.google.hilt.compiler)
     ksp(libs.androidx.room.compiler)

@@ -4,6 +4,8 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.accept
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -27,6 +29,9 @@ object HttpUtil {
                 isLenient = true
                 ignoreUnknownKeys = true
             })
+        }
+        install(Logging) {
+            level = LogLevel.ALL
         }
         defaultRequest {
             accept(ContentType.Application.Json)

@@ -41,7 +41,7 @@ object IntentUtil {
             context.startActivity(intent)
             return
         } catch (e: Exception) {
-            Timber.e(">>>ERROR<<< startActivity", e)
+            Timber.e(e)
             ToastUtil.toast(e.message ?: "Unknown error")
         }
 

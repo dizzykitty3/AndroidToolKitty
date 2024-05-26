@@ -48,9 +48,7 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         Timber.d("onStart")
-
         isContinuationResumed = false
-
         CoroutineScope(Dispatchers.Main).launch {
             isAutoClearClipboard = withContext(Dispatchers.IO) {
                 SettingsSharedPref.autoClearClipboard
@@ -68,9 +66,10 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Clipboard cleared automatically")
                 }
             }
-            if (SettingsSharedPref.autoSetMediaVolume != -1 && DateUtil.isNotWeekend()) AudioUtil.autoSetMediaVolume(
-                SettingsSharedPref.autoSetMediaVolume
-            )
+            if (SettingsSharedPref.autoSetMediaVolume != -1 && DateUtil.isNotWeekend()) {
+                Timber.i("Set media volume automatically")
+                AudioUtil.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
+            }
         }
     }
 
@@ -83,9 +82,9 @@ class MainActivity : ComponentActivity() {
         super.onWindowFocusChanged(hasFocus)
         Timber.d("onWindowFocusChanged")
         if (hasFocus and !isContinuationResumed) { // Clipboard operations require window focus
+            Timber.i("continuation resumed")
             continuation?.resume(Unit)
             isContinuationResumed = true
-            Timber.i("continuation resumed")
         }
     }
 
@@ -93,8 +92,8 @@ class MainActivity : ComponentActivity() {
         super.onStop()
         Timber.d("onStop")
         if (SettingsSharedPref.collapseKeyboard) {
-            currentFocus?.clearFocus() // To collapse keyboard
             Timber.d("focus cleared")
+            currentFocus?.clearFocus() // To collapse keyboard
         }
     }
 }

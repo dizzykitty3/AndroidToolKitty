@@ -131,6 +131,7 @@ object URLUtil {
         INSTAGRAM("instagram.com/", R.string.instagram),
         LINKTREE("linktr.ee/", R.string.linktree),
         LIT_LINK("lit.link/", R.string.lit_link),
+        MISSKEY("misskey.io/@", R.string.misskeyio),
         PATREON("patreon.com/", R.string.patreon),
         PAYPAL("paypal.me/", R.string.paypal),
         PIXIV_ARTWORK("pixiv.net/artworks/", R.string.pixiv_artwork_id),

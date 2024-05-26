@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Common -->
     <string name="label_optional">Label (optional)</string>
     <string name="edit">Edit</string>
@@ -20,6 +20,7 @@
     <string name="turn_on">Turn on</string>
     <string name="turn_off">Turn off</string>
     <string name="copy">Copy</string>
+    <string name="off" tools:ignore="PrivateResource">OFF</string>
 
     <!-- Home screen: top tip -->
     <string name="battery_level">Battery level</string>
@@ -98,6 +99,7 @@
     <string name="carrd" translatable="false">Carrd</string>
     <string name="search_on_youtube">Search on YouTube</string>
     <string name="linktree" translatable="false">Linktree</string>
+    <string name="misskeyio" translatable="false">Misskey.io</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>

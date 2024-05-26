@@ -11,6 +11,7 @@ dataStore = "1.1.1" # https://developer.android.com/jetpack/androidx/releases/da
 gmsMaps = "18.2.0" # https://developers.google.com/android/guides/setup#list-dependencies
 kotlin = "2.0.0" # https://github.com/JetBrains/kotlin/releases
 ksp = "2.0.0-1.0.21" # https://github.com/google/ksp/releases
+ktor = "2.3.11" # https://github.com/ktorio/ktor/releases
 leakCanary = "2.14" # https://github.com/square/leakcanary/releases
 lifecycle = "2.8.0" # https://developer.android.com/jetpack/androidx/releases/lifecycle
 material = "1.12.0" # https://github.com/material-components/material-components-android/releases
@@ -18,7 +19,6 @@ navigation = "2.7.7" # https://developer.android.com/jetpack/androidx/releases/n
 room = "2.6.1" # https://developer.android.com/jetpack/androidx/releases/room
 serialization = "1.6.3" # https://github.com/Kotlin/kotlinx.serialization/releases
 timber = "5.0.1" # https://github.com/JakeWharton/timber/releases
-ktor = "2.3.11" # https://github.com/ktorio/ktor
 
 [libraries]
 android-gms-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "gmsMaps" }
@@ -43,13 +43,13 @@ google-hilt-android = { module = "com.google.dagger:hilt-android", version.ref =
 google-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 square-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
-ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
-ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
-ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
-ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
-ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -168,9 +168,9 @@ fun SysSettingsCard() {
             }
 
             Row {
-                if (isShowSetting[SETTING_11] == true) {
+                if (isShowSetting[SETTING_12] == true) {
                     SystemSettingButton(
-                        settingType = SETTING_11,
+                        settingType = SETTING_12,
                         textRes = R.string.open_developer_options
                     )
                 }
