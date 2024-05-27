@@ -100,6 +100,9 @@
     <string name="search_on_youtube">Search on YouTube</string>
     <string name="linktree" translatable="false">Linktree</string>
     <string name="misskeyio" translatable="false">Misskey.io</string>
+    <string name="reddit_subreddit" translatable="false">Reddit (subreddit)</string>
+    <string name="linkedin_company" translatable="false">LinkedIn (company)</string>
+    <string name="linkedin_user" translatable="false">LinkedIn (user)</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>
