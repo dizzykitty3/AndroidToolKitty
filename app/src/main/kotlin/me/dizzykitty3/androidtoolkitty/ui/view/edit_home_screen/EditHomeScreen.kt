@@ -21,24 +21,24 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_1
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_10
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_11
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_12
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_2
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_3
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_4
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_5
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_6
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_7
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_8
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_9
-import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.utils.CARD_1
+import me.dizzykitty3.androidtoolkitty.utils.CARD_10
+import me.dizzykitty3.androidtoolkitty.utils.CARD_11
+import me.dizzykitty3.androidtoolkitty.utils.CARD_12
+import me.dizzykitty3.androidtoolkitty.utils.CARD_2
+import me.dizzykitty3.androidtoolkitty.utils.CARD_3
+import me.dizzykitty3.androidtoolkitty.utils.CARD_4
+import me.dizzykitty3.androidtoolkitty.utils.CARD_5
+import me.dizzykitty3.androidtoolkitty.utils.CARD_6
+import me.dizzykitty3.androidtoolkitty.utils.CARD_7
+import me.dizzykitty3.androidtoolkitty.utils.CARD_8
+import me.dizzykitty3.androidtoolkitty.utils.CARD_9
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Composable
 fun EditHomeScreen() {

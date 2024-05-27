@@ -16,12 +16,12 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
-import me.dizzykitty3.androidtoolkitty.foundation.util.PermissionUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.OSVersion
+import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Preview
 @Composable

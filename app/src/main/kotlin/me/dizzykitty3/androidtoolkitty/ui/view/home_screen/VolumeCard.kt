@@ -35,13 +35,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil.setVolume
-import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.GradientSmall
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
+import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 private const val ADD = "+ Add"
 

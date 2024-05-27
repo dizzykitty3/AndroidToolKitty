@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.util
+package me.dizzykitty3.androidtoolkitty.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -9,28 +9,9 @@ import android.content.Intent
 import android.content.Intent.ACTION_POWER_USAGE_SUMMARY
 import android.net.Uri
 import android.provider.Settings
-import me.dizzykitty3.androidtoolkitty.MainActivity
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.const.GOOGLE_MAPS
-import me.dizzykitty3.androidtoolkitty.foundation.const.GOOGLE_PLAY
-import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
-import me.dizzykitty3.androidtoolkitty.foundation.const.PACKAGE
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_1
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_10
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_11
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_12
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_2
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_3
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_4
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_5
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_6
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_7
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_8
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_9
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_ENABLE_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_POWER_USAGE_SUMMARY
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTING_WIFI
+import me.dizzykitty3.androidtoolkitty.app_components.MainActivity
+import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import timber.log.Timber
 
 object IntentUtil {

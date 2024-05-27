@@ -38,10 +38,6 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
-import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.StringUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.URLUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomDropdownMenu
@@ -49,6 +45,10 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.component.Italic
+import me.dizzykitty3.androidtoolkitty.utils.HTTPS
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.StringUtil
+import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 import timber.log.Timber
 
 @Composable

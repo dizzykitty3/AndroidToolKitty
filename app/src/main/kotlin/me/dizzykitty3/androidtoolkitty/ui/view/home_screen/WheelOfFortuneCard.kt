@@ -62,9 +62,9 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.getWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
-import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random

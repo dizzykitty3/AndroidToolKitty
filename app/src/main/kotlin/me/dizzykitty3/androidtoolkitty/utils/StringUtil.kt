@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.util
+package me.dizzykitty3.androidtoolkitty.utils
 
 import java.time.LocalTime
 

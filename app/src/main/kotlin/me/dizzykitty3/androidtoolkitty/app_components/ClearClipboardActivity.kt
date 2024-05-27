@@ -1,9 +1,10 @@
-package me.dizzykitty3.androidtoolkitty
+package me.dizzykitty3.androidtoolkitty.app_components
 
 import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
-import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import timber.log.Timber
 
 class ClearClipboardActivity : Activity() {

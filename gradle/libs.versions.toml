@@ -1,24 +1,24 @@
 [versions]
-activity = "1.9.0" # https://developer.android.com/jetpack/androidx/releases/activity
+activity = "1.9.0"
 agp = "8.4.1"
-compose = "1.6.7" # https://developer.android.com/jetpack/androidx/releases/compose
-composeBOM = "2024.05.00" # https://developer.android.com/develop/ui/compose/bom/bom-mapping
-composeM3 = "1.2.1" # https://developer.android.com/jetpack/androidx/releases/compose-material3
-core = "1.13.1" # https://developer.android.com/jetpack/androidx/releases/core
-coroutines = "1.8.1" # https://github.com/Kotlin/kotlinx.coroutines/releases
-dagger = "2.51.1" # https://github.com/google/dagger/releases
-dataStore = "1.1.1" # https://developer.android.com/jetpack/androidx/releases/datastore
-gmsMaps = "18.2.0" # https://developers.google.com/android/guides/setup#list-dependencies
-kotlin = "2.0.0" # https://github.com/JetBrains/kotlin/releases
-ksp = "2.0.0-1.0.21" # https://github.com/google/ksp/releases
-ktor = "2.3.11" # https://github.com/ktorio/ktor/releases
-leakCanary = "2.14" # https://github.com/square/leakcanary/releases
-lifecycle = "2.8.0" # https://developer.android.com/jetpack/androidx/releases/lifecycle
-material = "1.12.0" # https://github.com/material-components/material-components-android/releases
-navigation = "2.7.7" # https://developer.android.com/jetpack/androidx/releases/navigation
-room = "2.6.1" # https://developer.android.com/jetpack/androidx/releases/room
-serialization = "1.6.3" # https://github.com/Kotlin/kotlinx.serialization/releases
-timber = "5.0.1" # https://github.com/JakeWharton/timber/releases
+compose = "1.6.7"
+composeBOM = "2024.05.00"
+composeM3 = "1.2.1"
+core = "1.13.1"
+coroutines = "1.8.1"
+dagger = "2.51.1"
+dataStore = "1.1.1"
+gmsMaps = "18.2.0"
+kotlin = "2.0.0"
+ksp = "2.0.0-1.0.21"
+ktor = "2.3.11"
+leakCanary = "2.14"
+lifecycle = "2.8.0"
+material = "1.12.0"
+navigation = "2.7.7"
+room = "2.6.1"
+serialization = "1.6.3"
+timber = "5.0.1"
 
 [libraries]
 android-gms-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "gmsMaps" }

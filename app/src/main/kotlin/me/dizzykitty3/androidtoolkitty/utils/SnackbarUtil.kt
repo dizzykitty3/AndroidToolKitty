@@ -1,9 +1,9 @@
-package me.dizzykitty3.androidtoolkitty.foundation.util
+package me.dizzykitty3.androidtoolkitty.utils
 
 import android.view.View
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 
 object SnackbarUtil {
     fun snackbar(view: View, message: String) =

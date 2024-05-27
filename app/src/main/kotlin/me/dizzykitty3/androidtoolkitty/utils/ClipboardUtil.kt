@@ -1,10 +1,10 @@
-package me.dizzykitty3.androidtoolkitty.foundation.util
+package me.dizzykitty3.androidtoolkitty.utils
 
 import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 
 object ClipboardUtil {
     private var clipboard =

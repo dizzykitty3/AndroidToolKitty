@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 
 @Composable
 fun SystemSettingButton(

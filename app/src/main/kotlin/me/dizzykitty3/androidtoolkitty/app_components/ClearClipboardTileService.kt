@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty
+package me.dizzykitty3.androidtoolkitty.app_components
 
 import android.annotation.SuppressLint
 import android.app.PendingIntent
@@ -8,7 +8,8 @@ import android.os.IBinder
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.widget.Toast
-import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
+import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import timber.log.Timber
 
 class ClearClipboardTileService : TileService() {

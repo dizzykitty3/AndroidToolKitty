@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.util
+package me.dizzykitty3.androidtoolkitty.utils
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO

@@ -1,30 +1,7 @@
-package me.dizzykitty3.androidtoolkitty.foundation.util
+package me.dizzykitty3.androidtoolkitty.utils
 
 import androidx.annotation.StringRes
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.const.BG
-import me.dizzykitty3.androidtoolkitty.foundation.const.CN
-import me.dizzykitty3.androidtoolkitty.foundation.const.COM
-import me.dizzykitty3.androidtoolkitty.foundation.const.COM_CN
-import me.dizzykitty3.androidtoolkitty.foundation.const.CO_AR
-import me.dizzykitty3.androidtoolkitty.foundation.const.CO_JP
-import me.dizzykitty3.androidtoolkitty.foundation.const.CO_UK
-import me.dizzykitty3.androidtoolkitty.foundation.const.EE
-import me.dizzykitty3.androidtoolkitty.foundation.const.HTTPS
-import me.dizzykitty3.androidtoolkitty.foundation.const.IR
-import me.dizzykitty3.androidtoolkitty.foundation.const.JP
-import me.dizzykitty3.androidtoolkitty.foundation.const.LA
-import me.dizzykitty3.androidtoolkitty.foundation.const.ME
-import me.dizzykitty3.androidtoolkitty.foundation.const.MX
-import me.dizzykitty3.androidtoolkitty.foundation.const.NET
-import me.dizzykitty3.androidtoolkitty.foundation.const.NZ
-import me.dizzykitty3.androidtoolkitty.foundation.const.ORG
-import me.dizzykitty3.androidtoolkitty.foundation.const.RU
-import me.dizzykitty3.androidtoolkitty.foundation.const.SO
-import me.dizzykitty3.androidtoolkitty.foundation.const.TO
-import me.dizzykitty3.androidtoolkitty.foundation.const.TV
-import me.dizzykitty3.androidtoolkitty.foundation.const.US
-import me.dizzykitty3.androidtoolkitty.foundation.const.WIKI
 import timber.log.Timber
 
 object URLUtil {

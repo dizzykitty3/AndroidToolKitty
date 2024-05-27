@@ -61,15 +61,6 @@ import kotlinx.serialization.json.jsonPrimitive
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.const.CARD_3
-import me.dizzykitty3.androidtoolkitty.foundation.const.EDIT_HOME_SCREEN
-import me.dizzykitty3.androidtoolkitty.foundation.const.PERMISSION_REQUEST_SCREEN
-import me.dizzykitty3.androidtoolkitty.foundation.util.HttpUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.IntentUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
-import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.ToastUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.URLUtil
 import me.dizzykitty3.androidtoolkitty.ui.component.Bold
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
@@ -80,6 +71,15 @@ import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.component.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.WarningAlertDialogButton
+import me.dizzykitty3.androidtoolkitty.utils.CARD_3
+import me.dizzykitty3.androidtoolkitty.utils.EDIT_HOME_SCREEN
+import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.OSVersion
+import me.dizzykitty3.androidtoolkitty.utils.PERMISSION_REQUEST_SCREEN
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
+import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 import timber.log.Timber
 import java.util.Locale
 
@@ -441,7 +441,7 @@ private fun GitHubRepoLink() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         val context = LocalContext.current
-        val sourceCodeURL = "https://github.com/dizzykitty3/android-toolkitty"
+        val sourceCodeURL = "https://github.com/dizzykitty3/AndroidToolKitty"
 
         Icon(
             imageVector = Icons.Outlined.Code,

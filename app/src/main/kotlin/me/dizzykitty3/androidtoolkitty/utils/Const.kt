@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.foundation.const
+package me.dizzykitty3.androidtoolkitty.utils
 
 import android.Manifest
 import android.annotation.SuppressLint

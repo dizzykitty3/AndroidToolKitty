@@ -15,8 +15,8 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
-import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
+import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,

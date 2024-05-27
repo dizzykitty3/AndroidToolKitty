@@ -1,11 +1,11 @@
-package me.dizzykitty3.androidtoolkitty
+package me.dizzykitty3.androidtoolkitty.app_components
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.OSVersion
+import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import timber.log.Timber
 
 class ShareToClipboardActivity : Activity() {

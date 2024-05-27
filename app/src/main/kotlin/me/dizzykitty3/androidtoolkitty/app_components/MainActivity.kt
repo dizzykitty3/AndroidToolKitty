@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty
+package me.dizzykitty3.androidtoolkitty.app_components
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -14,13 +14,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
+import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.foundation.util.AudioUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.ClipboardUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil
-import me.dizzykitty3.androidtoolkitty.foundation.util.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.ui.view.AppNavigationHost
+import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
+import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.utils.DateUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import timber.log.Timber
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume

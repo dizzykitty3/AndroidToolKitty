@@ -1,12 +1,8 @@
-package me.dizzykitty3.androidtoolkitty.foundation.util
+package me.dizzykitty3.androidtoolkitty.utils
 
 import android.app.Activity
 import android.content.Context
 import androidx.core.app.ActivityCompat
-import me.dizzykitty3.androidtoolkitty.foundation.const.BT
-import me.dizzykitty3.androidtoolkitty.foundation.const.BT_ADMIN
-import me.dizzykitty3.androidtoolkitty.foundation.const.BT_CONNECT
-import me.dizzykitty3.androidtoolkitty.foundation.const.GRANTED
 
 /**
  * Remember to use Activity Context to check/request permission.

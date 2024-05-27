@@ -1,8 +1,9 @@
-package me.dizzykitty3.androidtoolkitty
+package me.dizzykitty3.androidtoolkitty.app_components
 
 import android.app.Application
 import android.content.Context
 import dagger.hilt.android.HiltAndroidApp
+import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.data.room.AppContainer
 import me.dizzykitty3.androidtoolkitty.data.room.AppDataContainer
 import timber.log.Timber

@@ -1,9 +1,9 @@
-package me.dizzykitty3.androidtoolkitty.foundation.util
+package me.dizzykitty3.androidtoolkitty.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 
 object NetworkUtil {
     private const val STATE_CODE_UNKNOWN = 0

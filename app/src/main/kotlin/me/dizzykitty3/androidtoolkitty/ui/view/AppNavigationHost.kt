@@ -7,16 +7,16 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import me.dizzykitty3.androidtoolkitty.foundation.const.EDIT_HOME_SCREEN
-import me.dizzykitty3.androidtoolkitty.foundation.const.HOME_SCREEN
-import me.dizzykitty3.androidtoolkitty.foundation.const.PERMISSION_REQUEST_SCREEN
-import me.dizzykitty3.androidtoolkitty.foundation.const.QR_CODE_GENERATOR_SCREEN
-import me.dizzykitty3.androidtoolkitty.foundation.const.SETTINGS_SCREEN
 import me.dizzykitty3.androidtoolkitty.ui.view.edit_home_screen.EditHomeScreen
 import me.dizzykitty3.androidtoolkitty.ui.view.home_screen.HomeScreen
 import me.dizzykitty3.androidtoolkitty.ui.view.permission_request_screen.PermissionRequestScreen
 import me.dizzykitty3.androidtoolkitty.ui.view.qr_code_generator_screen.QRCodeGeneratorScreen
 import me.dizzykitty3.androidtoolkitty.ui.view.settings_screen.SettingsScreen
+import me.dizzykitty3.androidtoolkitty.utils.EDIT_HOME_SCREEN
+import me.dizzykitty3.androidtoolkitty.utils.HOME_SCREEN
+import me.dizzykitty3.androidtoolkitty.utils.PERMISSION_REQUEST_SCREEN
+import me.dizzykitty3.androidtoolkitty.utils.QR_CODE_GENERATOR_SCREEN
+import me.dizzykitty3.androidtoolkitty.utils.SETTINGS_SCREEN
 
 @Composable
 fun AppNavigationHost() {

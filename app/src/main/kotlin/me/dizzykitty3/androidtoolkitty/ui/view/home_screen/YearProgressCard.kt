@@ -13,14 +13,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.daysPassed
-import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.totalDaysInYear
-import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.yearProgress
-import me.dizzykitty3.androidtoolkitty.foundation.util.DateUtil.yearProgressPercentage
+import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomAnimatedProgressIndicator
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
+import me.dizzykitty3.androidtoolkitty.utils.DateUtil.daysPassed
+import me.dizzykitty3.androidtoolkitty.utils.DateUtil.totalDaysInYear
+import me.dizzykitty3.androidtoolkitty.utils.DateUtil.yearProgress
+import me.dizzykitty3.androidtoolkitty.utils.DateUtil.yearProgressPercentage
 
 @Preview
 @Composable

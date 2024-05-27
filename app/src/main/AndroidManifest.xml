@@ -13,7 +13,7 @@
         android:maxSdkVersion="30" />
 
     <application
-        android:name=".MainApp"
+        android:name=".app_components.MainApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="true"
@@ -27,7 +27,7 @@
         tools:targetApi="34">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".app_components.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,7 +37,7 @@
         </activity>
 
         <activity
-            android:name=".ShareToClipboardActivity"
+            android:name=".app_components.ShareToClipboardActivity"
             android:exported="true"
             android:label="@string/copy"
             android:theme="@style/Theme.Transparent">
@@ -49,13 +49,13 @@
         </activity>
 
         <activity
-            android:name=".ClearClipboardActivity"
+            android:name=".app_components.ClearClipboardActivity"
             android:exported="true"
             android:launchMode="singleInstance"
             android:theme="@style/Theme.Transparent" />
 
         <service
-            android:name=".ClearClipboardTileService"
+            android:name=".app_components.ClearClipboardTileService"
             android:enabled="true"
             android:exported="true"
             android:icon="@drawable/ic_launcher_foreground"

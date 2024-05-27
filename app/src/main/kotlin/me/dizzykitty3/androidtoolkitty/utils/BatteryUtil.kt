@@ -1,9 +1,9 @@
-package me.dizzykitty3.androidtoolkitty.foundation.util
+package me.dizzykitty3.androidtoolkitty.utils
 
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
-import me.dizzykitty3.androidtoolkitty.MainApp.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 
 object BatteryUtil {
     fun batteryLevel(): Int {
