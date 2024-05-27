@@ -7,8 +7,14 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowOutward
@@ -18,15 +24,20 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -35,7 +46,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.navigation.NavHostController
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpStatusCode
+import kotlinx.coroutines.launch
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
@@ -51,12 +73,14 @@ import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.WarningAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.utils.CARD_3
 import me.dizzykitty3.androidtoolkitty.utils.EDIT_HOME_SCREEN
+import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
+import timber.log.Timber
 import java.util.Locale
 
 @Composable
@@ -72,6 +96,8 @@ fun SettingsScreen(navController: NavHostController) {
             GeneralOptions()
             GroupDivider()
             CustomizeOptions(navController = navController)
+            GroupDivider()
+            UserSyncSection()
             @Suppress("KotlinConstantConditions")
             AnimatedVisibility(
                 visible = (debuggingOptions || (!debuggingOptions && tapCount >= 5)),
@@ -439,5 +465,292 @@ private fun GitHubRepoLink() {
                 tint = MaterialTheme.colorScheme.primary
             )
         }
+    }
+}
+
+@Composable
+private fun UserSyncSection() {
+    GroupTitle(R.string.user_sync)
+
+    var dialogState by remember { mutableStateOf<DialogState?>(null) }
+    var token by remember { mutableStateOf(SettingsSharedPref.getToken()) }
+    var isLoading by remember { mutableStateOf(false) }
+    val coroutineScope = rememberCoroutineScope()
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround,
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 16.dp)
+    ) {
+        OutlinedButton(onClick = {
+            if (token.isNullOrEmpty()) {
+                dialogState = DialogState.Login
+            } else {
+                // Handle upload settings
+            }
+        }) {
+            Text(text = stringResource(id = R.string.upload_settings))
+        }
+        OutlinedButton(onClick = {
+            if (token.isNullOrEmpty()) {
+                dialogState = DialogState.Login
+            } else {
+                // Handle download settings
+            }
+        }) {
+            Text(text = stringResource(id = R.string.download_settings))
+        }
+    }
+
+    when (dialogState) {
+        DialogState.Login -> {
+            UserLoginDialog(
+                onDismiss = { dialogState = null },
+                onRegisterClick = { dialogState = DialogState.Register },
+                onLoginClick = { username, password ->
+                    isLoading = true
+                    coroutineScope.launch {
+                        handleLogin(
+                            username,
+                            password,
+                            onDismiss = { dialogState = null; isLoading = false },
+                            onTokenReceived = { newToken ->
+                                token = newToken
+                                dialogState = null
+                                isLoading = false
+                            },
+                            onFailure = {
+                                isLoading = false
+                            }
+                        )
+                    }
+                },
+                isLoading = isLoading
+            )
+        }
+
+        DialogState.Register -> {
+            UserRegisterDialog(
+                onDismiss = { dialogState = null },
+                onLoginClick = { dialogState = DialogState.Login },
+                onRegisterClick = { username, email, password ->
+                    isLoading = true
+                    coroutineScope.launch {
+                        handleRegister(
+                            username,
+                            email,
+                            password,
+                            onDismiss = { dialogState = null; isLoading = false },
+                            onTokenReceived = { newToken ->
+                                token = newToken
+                                dialogState = null
+                                isLoading = false
+                            },
+                            onFailure = {
+                                isLoading = false
+                            }
+                        )
+                    }
+                },
+                isLoading = isLoading
+            )
+        }
+
+        null -> {}
+    }
+}
+
+enum class DialogState {
+    Login, Register
+}
+
+@Composable
+private fun UserLoginDialog(
+    onDismiss: () -> Unit,
+    onRegisterClick: () -> Unit,
+    onLoginClick: (String, String) -> Unit,
+    isLoading: Boolean
+) {
+    var username by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+    CommonDialog(onDismiss) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            if (isLoading) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+            } else {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Spacer(modifier = Modifier.weight(1f))
+                    Text(
+                        text = stringResource(id = R.string.register),
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.clickable(onClick = onRegisterClick)
+                    )
+                }
+                TextField(
+                    value = username,
+                    onValueChange = { username = it },
+                    label = { Text(text = stringResource(id = R.string.username)) })
+                TextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text(text = stringResource(id = R.string.password)) },
+                    visualTransformation = PasswordVisualTransformation()
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = { onLoginClick(username, password) },
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                ) {
+                    Text(text = stringResource(id = R.string.login))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun UserRegisterDialog(
+    onDismiss: () -> Unit,
+    onLoginClick: () -> Unit,
+    onRegisterClick: (String, String, String) -> Unit,
+    isLoading: Boolean
+) {
+    var username by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
+
+    CommonDialog(onDismiss) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            if (isLoading) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+            } else {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Spacer(modifier = Modifier.weight(1f))
+                    Text(
+                        text = stringResource(id = R.string.login),
+                        color = MaterialTheme.colorScheme.primary,
+                        modifier = Modifier.clickable(onClick = onLoginClick)
+                    )
+                }
+                TextField(
+                    value = username,
+                    onValueChange = { username = it },
+                    label = { Text(text = stringResource(id = R.string.username)) })
+                TextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    label = { Text(text = stringResource(id = R.string.email)) })
+                TextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text(text = stringResource(id = R.string.password)) },
+                    visualTransformation = PasswordVisualTransformation()
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = { onRegisterClick(username, email, password) },
+                    modifier = Modifier.align(Alignment.CenterHorizontally)
+                ) {
+                    Text(text = stringResource(id = R.string.register))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun CommonDialog(onDismiss: () -> Unit, content: @Composable () -> Unit) {
+    Dialog(onDismissRequest = onDismiss) {
+        Surface(
+            shape = RoundedCornerShape(16.dp),
+            color = MaterialTheme.colorScheme.surface,
+            contentColor = contentColorFor(backgroundColor = MaterialTheme.colorScheme.surface),
+            modifier = Modifier.padding(16.dp)
+        ) {
+            content()
+        }
+    }
+}
+
+suspend fun handleLogin(
+    username: String,
+    password: String,
+    onDismiss: () -> Unit,
+    onTokenReceived: (String) -> Unit,
+    onFailure: () -> Unit
+) {
+    handleRequest(
+        url = "https://api.yanqishui.work/toolkitten/account/login",
+        body = mapOf("username" to username, "password" to password),
+        onDismiss = onDismiss,
+        onTokenReceived = onTokenReceived,
+        onFailure = onFailure
+    )
+}
+
+suspend fun handleRegister(
+    username: String,
+    email: String,
+    password: String,
+    onDismiss: () -> Unit,
+    onTokenReceived: (String) -> Unit,
+    onFailure: () -> Unit
+) {
+    handleRequest(
+        url = "https://api.yanqishui.work/toolkitten/account/register",
+        body = mapOf("username" to username, "email" to email, "password" to password),
+        onDismiss = onDismiss,
+        onTokenReceived = onTokenReceived,
+        onFailure = onFailure
+    )
+}
+
+suspend fun handleRequest(
+    url: String,
+    body: Map<String, String>,
+    onDismiss: () -> Unit,
+    onTokenReceived: (String) -> Unit,
+    onFailure: () -> Unit
+) {
+    try {
+        val response: HttpResponse = HttpUtil.post(url, body)
+
+        if (response.status == HttpStatusCode.OK) {
+            val responseBody = response.bodyAsText()
+            onTokenReceived(responseBody)
+            SettingsSharedPref.setToken(responseBody)
+            ToastUtil.toast("Operation successful")
+            onDismiss()
+        } else if (response.status == HttpStatusCode.BadRequest) {
+            val errorResponse = response.bodyAsText()
+            val jsonObject = Json.parseToJsonElement(errorResponse).jsonObject
+            val detailsArray = jsonObject["details"]?.jsonArray
+            val detailsList = detailsArray?.map { it.jsonPrimitive.content } ?: emptyList()
+            val detailsString = detailsList.joinToString(separator = ", ")
+            val message = if (detailsString.isNotEmpty()) detailsString else "Unknown error"
+            ToastUtil.toast(message)
+            onFailure()
+        } else {
+            val errorResponse = response.bodyAsText()
+            val jsonObject = Json.parseToJsonElement(errorResponse).jsonObject
+            val message = jsonObject["message"]?.jsonPrimitive?.content ?: "Unknown error"
+            ToastUtil.toast(message)
+            onFailure()
+        }
+    } catch (e: Exception) {
+        Timber.e(e)
+        ToastUtil.toast("Operation failed: ${e.message}")
+        onFailure()
     }
 }
