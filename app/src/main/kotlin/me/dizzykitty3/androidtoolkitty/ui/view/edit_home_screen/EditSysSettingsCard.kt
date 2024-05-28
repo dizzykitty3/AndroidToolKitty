@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.edit_home_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
@@ -45,6 +46,7 @@ fun EditSysSettingsCard() {
     CustomCard(
         titleRes = R.string.customize_system_settings_card
     ) {
+        val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
 
         val isShowSetting1 = settingsSharedPref.getCardShowedState(SETTING_1)
@@ -77,6 +79,7 @@ fun EditSysSettingsCard() {
             card = SETTING_1,
             isChecked = mIsShowSetting1
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting1 = newState
             settingsSharedPref.saveCardShowedState(SETTING_1, newState)
         }
@@ -86,6 +89,7 @@ fun EditSysSettingsCard() {
                 card = SETTING_2,
                 isChecked = mIsShowSetting2
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowSetting2 = newState
                 settingsSharedPref.saveCardShowedState(SETTING_2, newState)
             }
@@ -95,6 +99,7 @@ fun EditSysSettingsCard() {
             card = SETTING_3,
             isChecked = mIsShowSetting3
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting3 = newState
             settingsSharedPref.saveCardShowedState(SETTING_3, newState)
         }
@@ -103,6 +108,7 @@ fun EditSysSettingsCard() {
             card = SETTING_4,
             isChecked = mIsShowSetting4
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting4 = newState
             settingsSharedPref.saveCardShowedState(SETTING_4, newState)
         }
@@ -111,6 +117,7 @@ fun EditSysSettingsCard() {
             card = SETTING_5,
             isChecked = mIsShowSetting5
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting5 = newState
             settingsSharedPref.saveCardShowedState(SETTING_5, newState)
         }
@@ -119,6 +126,7 @@ fun EditSysSettingsCard() {
             card = SETTING_6,
             isChecked = mIsShowSetting6
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting6 = newState
             settingsSharedPref.saveCardShowedState(SETTING_6, newState)
         }
@@ -130,6 +138,7 @@ fun EditSysSettingsCard() {
             card = SETTING_7,
             isChecked = mIsShowSetting7
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting7 = newState
             settingsSharedPref.saveCardShowedState(SETTING_7, newState)
         }
@@ -138,6 +147,7 @@ fun EditSysSettingsCard() {
             card = SETTING_8,
             isChecked = mIsShowSetting8
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting8 = newState
             settingsSharedPref.saveCardShowedState(SETTING_8, newState)
         }
@@ -146,6 +156,7 @@ fun EditSysSettingsCard() {
             card = SETTING_9,
             isChecked = mIsShowSetting9
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting9 = newState
             settingsSharedPref.saveCardShowedState(SETTING_9, newState)
         }
@@ -157,6 +168,7 @@ fun EditSysSettingsCard() {
             card = SETTING_10,
             isChecked = mIsShowSetting10
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting10 = newState
             settingsSharedPref.saveCardShowedState(SETTING_10, newState)
         }
@@ -165,6 +177,7 @@ fun EditSysSettingsCard() {
             card = SETTING_11,
             isChecked = mIsShowSetting11
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting11 = newState
             settingsSharedPref.saveCardShowedState(SETTING_11, newState)
         }
@@ -173,18 +186,19 @@ fun EditSysSettingsCard() {
             card = SETTING_12,
             isChecked = mIsShowSetting12
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting12 = newState
             settingsSharedPref.saveCardShowedState(SETTING_12, newState)
         }
 
         GroupDivider()
 
-        val view = LocalView.current
         val primary = MaterialTheme.colorScheme.primary.toArgb()
         val showSnackbarToConfirm = settingsSharedPref.showSnackbar
 
         Button(
             onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 if (showSnackbarToConfirm) {
                     SnackbarUtil.snackbar(
                         view,
@@ -192,6 +206,7 @@ fun EditSysSettingsCard() {
                         buttonTextRes = R.string.apply,
                         buttonColor = primary,
                         buttonClickListener = {
+                            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                             onClickChangeAllCardsButton(false)
                             mIsShowSetting1 = false
                             mIsShowSetting2 = false
@@ -236,6 +251,7 @@ fun EditSysSettingsCard() {
 
         Button(
             onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 if (showSnackbarToConfirm) {
                     SnackbarUtil.snackbar(
                         view,
@@ -243,6 +259,7 @@ fun EditSysSettingsCard() {
                         buttonTextRes = R.string.apply,
                         buttonColor = primary,
                         buttonClickListener = {
+                            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                             onClickChangeAllCardsButton(true)
                             mIsShowSetting1 = true
                             mIsShowSetting2 = true

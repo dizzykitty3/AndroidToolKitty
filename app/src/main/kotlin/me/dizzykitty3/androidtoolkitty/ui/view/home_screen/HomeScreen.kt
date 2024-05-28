@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -35,7 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -145,6 +146,7 @@ private fun TabletLayout(navController: NavHostController) {
 @Composable
 private fun BatteryNetworkAndSetting(navController: NavHostController) {
     Row(verticalAlignment = Alignment.CenterVertically) {
+        val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
 
         Box(modifier = Modifier.weight(1f)) {
@@ -162,6 +164,7 @@ private fun BatteryNetworkAndSetting(navController: NavHostController) {
         ) {
             IconButton(
                 onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     navController.navigate(SETTINGS_SCREEN)
                     settingsSharedPref.haveOpenedSettingsScreen = true
                 },
@@ -180,12 +183,13 @@ private fun BatteryNetworkAndSetting(navController: NavHostController) {
 @Composable
 private fun BatteryAndNetwork() {
     val batteryLevel = remember { BatteryUtil.batteryLevel() }
-    val context = LocalContext.current
+    val view = LocalView.current
 
     Row {
         Row(
             modifier = Modifier.clickable {
-                IntentUtil.openSystemSettings(SETTING_POWER_USAGE_SUMMARY, context)
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                IntentUtil.openSystemSettings(SETTING_POWER_USAGE_SUMMARY, view.context)
             }
         ) {
             Icon(
@@ -233,10 +237,13 @@ private fun NetworkStateIcon(
     imageVector: ImageVector,
     @StringRes textRes: Int,
 ) {
-    val context = LocalContext.current
+    val view = LocalView.current
 
     Row(
-        modifier = Modifier.clickable { IntentUtil.openSystemSettings(SETTING_WIFI, context) }
+        modifier = Modifier.clickable {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            IntentUtil.openSystemSettings(SETTING_WIFI, view.context)
+        }
     ) {
         Icon(
             imageVector = imageVector,

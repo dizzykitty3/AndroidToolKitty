@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.component
 
+import android.view.HapticFeedbackConstants
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
@@ -11,7 +12,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
@@ -21,10 +22,13 @@ fun SystemSettingButton(
     settingType: String,
     @StringRes textRes: Int
 ) {
-    val context = LocalContext.current
+    val view = LocalView.current
 
     TextButton(
-        onClick = { IntentUtil.openSystemSettings(settingType, context) }
+        onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            IntentUtil.openSystemSettings(settingType, view.context)
+        }
     ) {
         Text(text = stringResource(id = textRes))
 

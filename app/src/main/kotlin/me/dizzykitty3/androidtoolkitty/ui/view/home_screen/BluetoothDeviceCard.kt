@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.rememberScrollState
@@ -27,7 +28,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
@@ -61,7 +61,6 @@ fun BluetoothDeviceCard(navController: NavHostController) {
         titleRes = R.string.bluetooth_devices
     ) {
         val view = LocalView.current
-        val context = LocalContext.current
         var showResult by remember { mutableStateOf(false) }
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }
         var pairedDevices by remember { mutableStateOf<List<BluetoothDevice>>(emptyList()) }
@@ -71,8 +70,10 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
         OutlinedButton(
             onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+
                 // Check permission
-                if (PermissionUtil.noBluetoothPermission(context)) {
+                if (PermissionUtil.noBluetoothPermission(view.context)) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                     return@OutlinedButton
                 }
@@ -97,11 +98,12 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                         buttonTextRes = R.string.turn_on_bluetooth,
                         buttonColor = materialColor,
                         buttonClickListener = {
-                            IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, context)
+                            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                            IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, view.context)
                         }
                     )
                 } else {
-                    IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, context)
+                    IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, view.context)
                 }
             }
         ) {
@@ -139,9 +141,13 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
 @Composable
 private fun BluetoothDeviceTypeDialog() {
+    val view = LocalView.current
     var showDialog by remember { mutableStateOf(false) }
 
-    TextButton(onClick = { showDialog = true }) {
+    TextButton(onClick = {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        showDialog = true
+    }) {
         Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
     }
 
@@ -160,7 +166,10 @@ private fun BluetoothDeviceTypeDialog() {
             },
             confirmButton = {
                 Button(
-                    onClick = { showDialog = false },
+                    onClick = {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        showDialog = false
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.primary
                     )

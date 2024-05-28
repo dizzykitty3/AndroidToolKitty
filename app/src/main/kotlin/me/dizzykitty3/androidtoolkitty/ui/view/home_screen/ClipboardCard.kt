@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
+import android.view.HapticFeedbackConstants
 import android.view.View
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ClearAll
@@ -33,7 +34,10 @@ fun ClipboardCard() {
         if (isShowHintText || uiTesting) CustomTip(id = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
         OutlinedButton(
-            onClick = { onClearClipboardButton(view) }
+            onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                onClearClipboardButton(view)
+            }
         ) {
             Icon(
                 imageVector = Icons.Outlined.ClearAll,

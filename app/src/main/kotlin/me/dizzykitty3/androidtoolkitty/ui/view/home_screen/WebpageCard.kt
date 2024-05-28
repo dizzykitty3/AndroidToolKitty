@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
 import android.content.Context
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -29,7 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
@@ -57,6 +58,7 @@ fun WebpageCard() {
         icon = Icons.Outlined.Link,
         titleRes = R.string.webpage
     ) {
+        val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
         val showMore = settingsSharedPref.webpageCardShowMore
         var mShowMore by remember { mutableStateOf(showMore) }
@@ -73,6 +75,7 @@ fun WebpageCard() {
         }
 
         TextButton(onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mShowMore = !mShowMore
             settingsSharedPref.webpageCardShowMore = mShowMore
         }) {
@@ -86,7 +89,7 @@ fun WebpageCard() {
 
 @Composable
 private fun Search() {
-    val context = LocalContext.current
+    val view = LocalView.current
     var searchQuery by remember { mutableStateOf("") }
 
     OutlinedTextField(
@@ -98,10 +101,11 @@ private fun Search() {
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onClickSearchButton(searchQuery, context) }
+            onDone = { onClickSearchButton(searchQuery, view.context) }
         ),
         trailingIcon = {
             ClearInput(text = searchQuery) {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 searchQuery = ""
             }
         },
@@ -109,7 +113,10 @@ private fun Search() {
 
     Row {
         TextButton(
-            onClick = { onClickSearchButton(searchQuery, context) }
+            onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                onClickSearchButton(searchQuery, view.context)
+            }
         ) {
             Text(text = stringResource(R.string.visit))
             Icon(
@@ -120,7 +127,10 @@ private fun Search() {
         }
 
         TextButton(
-            onClick = { onCheckOnYouTube(searchQuery, context) }
+            onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                onCheckOnYouTube(searchQuery, view.context)
+            }
         ) {
             Text(text = stringResource(R.string.search_on_youtube))
             Icon(
@@ -136,7 +146,7 @@ private fun Search() {
 private fun WebpageURL() {
     GroupTitle(id = R.string.webpage)
 
-    val context = LocalContext.current
+    val view = LocalView.current
     var url by remember { mutableStateOf("") }
 
     OutlinedTextField(
@@ -149,10 +159,11 @@ private fun WebpageURL() {
             keyboardType = KeyboardType.Ascii
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onClickVisitURLButton(url, context) }
+            onDone = { onClickVisitURLButton(url, view.context) }
         ),
         trailingIcon = {
             ClearInput(text = url) {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 url = ""
             }
         },
@@ -177,7 +188,10 @@ private fun WebpageURL() {
         suffix = { Text(text = URLUtil.suffixOf(url)) }
     )
 
-    TextButton(onClick = { onClickVisitURLButton(url, context) }) {
+    TextButton(onClick = {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        onClickVisitURLButton(url, view.context)
+    }) {
         Text(text = stringResource(R.string.visit))
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
@@ -189,7 +203,7 @@ private fun WebpageURL() {
 
 @Composable
 private fun SocialMediaProfileIURL() {
-    val context = LocalContext.current
+    val view = LocalView.current
     var username by remember { mutableStateOf("") }
     val platformIndex = SettingsSharedPref.lastTimeSelectedSocialPlatform
     var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
@@ -212,10 +226,11 @@ private fun SocialMediaProfileIURL() {
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onVisitProfileButton(username, mPlatformIndex, context) }
+            onDone = { onVisitProfileButton(username, mPlatformIndex, view.context) }
         ),
         trailingIcon = {
             ClearInput(text = username) {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 username = ""
             }
         },
@@ -230,7 +245,10 @@ private fun SocialMediaProfileIURL() {
     )
 
     Row(verticalAlignment = Alignment.CenterVertically) {
-        TextButton(onClick = { onVisitProfileButton(username, mPlatformIndex, context) }) {
+        TextButton(onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            onVisitProfileButton(username, mPlatformIndex, view.context)
+        }) {
             Text(text = stringResource(R.string.visit))
 
             Icon(
@@ -245,12 +263,16 @@ private fun SocialMediaProfileIURL() {
 
 @Composable
 private fun NoPlatformYouNeedHere() {
+    val view = LocalView.current
     var showDialog by remember { mutableStateOf(false) }
 
     Text(
         text = buildAnnotatedString { Italic(stringResource(id = R.string.platform_not_added_yet)) },
         textDecoration = TextDecoration.Underline,
-        modifier = Modifier.clickable { showDialog = true }
+        modifier = Modifier.clickable {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            showDialog = true
+        }
     )
 
     var platformNameInput by remember { mutableStateOf("") }
@@ -273,6 +295,7 @@ private fun NoPlatformYouNeedHere() {
                         modifier = Modifier.fillMaxWidth(),
                         trailingIcon = {
                             ClearInput(text = platformNameInput) {
+                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                 platformNameInput = ""
                             }
                         },
@@ -284,6 +307,7 @@ private fun NoPlatformYouNeedHere() {
                         modifier = Modifier.fillMaxWidth(),
                         trailingIcon = {
                             ClearInput(text = platformExampleURLInput) {
+                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                 platformExampleURLInput = ""
                             }
                         }
@@ -292,7 +316,10 @@ private fun NoPlatformYouNeedHere() {
             },
             confirmButton = {
                 Button(
-                    onClick = { showDialog = false },
+                    onClick = {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        showDialog = false
+                    },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.primary
                     )
@@ -305,7 +332,10 @@ private fun NoPlatformYouNeedHere() {
             },
             dismissButton = {
                 TextButton(
-                    onClick = { showDialog = false }
+                    onClick = {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        showDialog = false
+                    }
                 ) {
                     Text(
                         text = stringResource(id = android.R.string.cancel),

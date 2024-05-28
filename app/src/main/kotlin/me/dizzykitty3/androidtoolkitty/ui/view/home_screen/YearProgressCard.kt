@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
@@ -29,10 +31,14 @@ fun YearProgressCard() {
         icon = Icons.Outlined.HourglassTop,
         titleRes = R.string.year_progress
     ) {
+        val view = LocalView.current
         var isShowPercentage by remember { mutableStateOf(true) }
 
         Column(
-            modifier = Modifier.clickable { isShowPercentage = !isShowPercentage }
+            modifier = Modifier.clickable {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                isShowPercentage = !isShowPercentage
+            }
         ) {
             CustomAnimatedProgressIndicator()
 

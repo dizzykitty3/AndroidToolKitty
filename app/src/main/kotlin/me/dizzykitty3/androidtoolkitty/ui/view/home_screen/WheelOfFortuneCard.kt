@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
 import android.graphics.Paint
+import android.view.HapticFeedbackConstants
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -75,17 +76,13 @@ fun WheelOfFortuneCard() {
         icon = Icons.Outlined.Casino,
         titleRes = R.string.wheel_of_fortune
     ) {
-        val baseItem = stringResource(R.string.item)
-        // 初始化轮盘项目列表
+        val item = stringResource(R.string.item)
         var items by remember {
             mutableStateOf(
-                getWheelOfFortuneItems() ?: List(4) { index -> "$baseItem${index + 1}" }
+                getWheelOfFortuneItems() ?: List(4) { index -> "$item ${index + 1}" }
             )
         }
-
         val textColor = MaterialTheme.colorScheme.onSecondaryContainer.toArgb()
-
-        // 记住画笔设置，避免每次绘制时重新创建
         val paint = remember {
             Paint().apply {
                 color = textColor // onSecondaryContainer
@@ -96,26 +93,20 @@ fun WheelOfFortuneCard() {
         var hasRotated by remember { mutableStateOf(false) }
         var isSpinning by remember { mutableStateOf(false) }
         var expanded by remember { mutableStateOf(false) }
-
         val colors = List(2) { index ->
             when (index) {
                 0 -> MaterialTheme.colorScheme.secondaryContainer
                 else -> MaterialTheme.colorScheme.surface
             }
         }
-
-        // 记忆旋转度数，用于控制动画
         var rotationDegrees by remember { mutableFloatStateOf(0f) }
         var targetRotationDegrees by remember { mutableFloatStateOf(0f) }
-        // 动画状态管理
         val currentRotationDegrees by animateFloatAsState(
             targetValue = targetRotationDegrees,
             animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = "",
         )
-
         val view = LocalView.current
 
-        // 当动画结束时，计算并显示选中的项目
         LaunchedEffect(currentRotationDegrees) {
             if (currentRotationDegrees == targetRotationDegrees && hasRotated) {
                 isSpinning = false
@@ -130,20 +121,20 @@ fun WheelOfFortuneCard() {
                 rotationDegrees = targetRotationDegrees % 360
             }
         }
+
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             val primary = MaterialTheme.colorScheme.primary
-
             SpacerPadding()
             SpacerPadding()
 
-            // 绘制转盘
             Canvas(modifier = Modifier
                 .size(250.dp)
-                .aspectRatio(1f)) {
+                .aspectRatio(1f)
+            ) {
                 val center = Offset(size.width / 2, size.height / 2)
                 val radius = size.minDimension / 2
                 items.indices.forEach { index ->
@@ -158,8 +149,6 @@ fun WheelOfFortuneCard() {
                         size = Size(radius * 2, radius * 2),
                         topLeft = Offset(center.x - radius, center.y - radius)
                     )
-
-                    // 绘制分隔线
                     val endAngleRad = Math.toRadians((startAngle + sweepAngle).toDouble()).toFloat()
                     val lineEnd = Offset(
                         center.x + radius * cos(endAngleRad),
@@ -172,8 +161,6 @@ fun WheelOfFortuneCard() {
                         strokeWidth = 2f
                     )
                 }
-
-                // 绘制项目文本
                 items.forEachIndexed { index, item ->
                     val textAngleRad =
                         Math.toRadians((360f / items.size * index + currentRotationDegrees + 360f / items.size / 2) % 360.toDouble())
@@ -186,8 +173,6 @@ fun WheelOfFortuneCard() {
                         paint
                     )
                 }
-
-                // 绘制指示箭头
                 val arrowPath = Path().apply {
                     moveTo(center.x, center.y - radius - 15)
                     lineTo(center.x - 10, center.y - radius - 30)
@@ -195,8 +180,6 @@ fun WheelOfFortuneCard() {
                     close()
                 }
                 drawPath(arrowPath, primary)
-
-                // 绘制圆盘外边缘
                 drawCircle(
                     color = Color.Black,
                     radius = radius,
@@ -207,9 +190,9 @@ fun WheelOfFortuneCard() {
 
             SpacerPadding()
 
-            // 旋转按钮
             OutlinedButton(
                 onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     if (items.isNotEmpty() && !isSpinning) {
                         if (expanded) {
                             expanded = false
@@ -224,7 +207,7 @@ fun WheelOfFortuneCard() {
             ) {
                 Text(text = stringResource(R.string.spin))
             }
-            // 可扩展列表，用于显示和修改项目列表
+
             ExpandableList(
                 items = items,
                 onItemsChange = { updatedItems ->
@@ -247,21 +230,18 @@ private fun ExpandableList(
     setExpanded: (Boolean) -> Unit,
     isSpinning: Boolean
 ) {
-    // 正在编辑的元素索引，-1表示没有元素处于编辑状态
+    val view = LocalView.current
     var editingIndex by remember { mutableIntStateOf(-1) }
-    // 编辑中的文本列表，用于暂存编辑时的文本更改
     val editingText =
         remember { mutableStateListOf<String>().also { list -> items.forEach { list.add(it) } } }
     val listState = rememberLazyListState()
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    // 当items更新时，同时更新编辑中的文本列表
     LaunchedEffect(items) {
         editingText.clear()
         editingText.addAll(items)
     }
 
-    // 当editingIndex或items的大小改变时，触发滚动到最新条目的逻辑
     LaunchedEffect(editingIndex, items.size) {
         if (editingIndex >= 0) {
             listState.animateScrollToItem(index = editingIndex)
@@ -270,12 +250,14 @@ private fun ExpandableList(
     }
 
     Column(modifier = Modifier.padding(16.dp)) {
-        // 折叠/展开的头部，点击切换展开状态
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable(enabled = !isSpinning) { setExpanded(!expanded) }
+                .clickable(enabled = !isSpinning) {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    setExpanded(!expanded)
+                }
                 .padding(8.dp)
                 .clip(RoundedCornerShape(10.dp))
                 .background(MaterialTheme.colorScheme.surfaceVariant)
@@ -294,9 +276,8 @@ private fun ExpandableList(
             )
         }
 
-        // 展开状态下显示的可编辑列表
         AnimatedVisibility(visible = expanded) {
-            val baseItem = stringResource(R.string.item)
+            val item = stringResource(R.string.item)
             Column {
                 LazyColumn(state = listState, modifier = Modifier.heightIn(max = 200.dp)) {
                     itemsIndexed(items) { index, item ->
@@ -309,7 +290,6 @@ private fun ExpandableList(
                                 .background(MaterialTheme.colorScheme.surfaceVariant)
                                 .padding(8.dp)
                         ) {
-                            // 编辑状态显示输入框，否则显示文本
                             if (editingIndex == index) {
                                 TextField(
                                     value = editingText[index],
@@ -321,6 +301,7 @@ private fun ExpandableList(
                                     imageVector = Icons.Default.Check,
                                     contentDescription = "Done",
                                     modifier = Modifier.clickable {
+                                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                         val updatedList = items.toMutableList()
                                             .also { it[index] = editingText[index] }
                                         onItemsChange(updatedList)
@@ -332,18 +313,16 @@ private fun ExpandableList(
                                     text = item,
                                     modifier = Modifier
                                         .weight(1f)
-                                        .clickable {
-                                            editingIndex = index
-                                        }
+                                        .clickable { editingIndex = index }
                                 )
                                 Icon(
                                     imageVector = Icons.Default.Remove,
                                     contentDescription = "Remove",
                                     modifier = Modifier.clickable {
+                                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                         val newList =
                                             items.toMutableList().apply { removeAt(index) }
                                         onItemsChange(newList)
-                                        // 重置或调整编辑索引
                                         if (index == editingIndex) {
                                             editingIndex = -1
                                         } else if (index < editingIndex) {
@@ -355,19 +334,21 @@ private fun ExpandableList(
                         }
                     }
                 }
+
                 Spacer(modifier = Modifier.height(8.dp))
-                // 添加新元素的按钮
+
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(10.dp))
                         .background(MaterialTheme.colorScheme.surfaceVariant)
                         .clickable {
-                            val newItem = "$baseItem${items.size + 1}"
+                            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                            val newItem = "$item ${items.size + 1}"
                             val updatedItems = items + newItem
                             onItemsChange(updatedItems)
                             editingText.add(newItem)
-                            editingIndex = items.size // 设置新添加的条目为编辑状态
+                            editingIndex = items.size
                         }
                         .padding(8.dp),
                     verticalAlignment = Alignment.CenterVertically,

@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
 import android.content.Context
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -20,7 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -39,7 +40,7 @@ fun MapsCard() {
         icon = Icons.Outlined.Place,
         titleRes = R.string.google_maps
     ) {
-        val context = LocalContext.current
+        val view = LocalView.current
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }
 
@@ -57,10 +58,11 @@ fun MapsCard() {
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = { onClickOpenGoogleMapsButton(latitude, longitude, context) }
+                    onDone = { onClickOpenGoogleMapsButton(latitude, longitude, view.context) }
                 ),
                 trailingIcon = {
                     ClearInput(text = latitude) {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                         latitude = ""
                     }
                 },
@@ -79,10 +81,11 @@ fun MapsCard() {
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = { onClickOpenGoogleMapsButton(latitude, longitude, context) }
+                    onDone = { onClickOpenGoogleMapsButton(latitude, longitude, view.context) }
                 ),
                 trailingIcon = {
                     ClearInput(text = longitude) {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                         longitude = ""
                     }
                 },
@@ -90,7 +93,10 @@ fun MapsCard() {
         }
 
         TextButton(
-            onClick = { onClickOpenGoogleMapsButton(latitude, longitude, context) }
+            onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                onClickOpenGoogleMapsButton(latitude, longitude, view.context)
+            }
         ) {
             Text(text = stringResource(R.string.open_google_maps))
 

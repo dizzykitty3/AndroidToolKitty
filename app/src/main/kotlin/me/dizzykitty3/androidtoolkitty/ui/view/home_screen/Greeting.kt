@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
@@ -30,10 +32,14 @@ import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 @Preview
 @Composable
 fun Greeting() {
+    val view = LocalView.current
     var showDialog by remember { mutableStateOf(false) }
 
     Box(
-        modifier = Modifier.clickable { showDialog = true }
+        modifier = Modifier.clickable {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            showDialog = true
+        }
     ) {
         Gradient(
             textToDisplay = StringUtil.greeting(),
@@ -75,6 +81,7 @@ fun Greeting() {
             confirmButton = {
                 Row {
                     Button(onClick = {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                         showDialog = false
                         SettingsSharedPref.autoSetMediaVolume = 40
                     }) {
@@ -83,6 +90,7 @@ fun Greeting() {
                 }
                 Row {
                     Button(onClick = {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                         showDialog = false
                         SettingsSharedPref.autoSetMediaVolume = 60
                     }) {
@@ -92,6 +100,7 @@ fun Greeting() {
             },
             dismissButton = {
                 TextButton(onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     showDialog = false
                     SettingsSharedPref.autoSetMediaVolume = -1
                 }) {
