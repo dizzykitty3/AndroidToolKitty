@@ -19,6 +19,18 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import me.dizzykitty3.androidtoolkitty.CARD_1
+import me.dizzykitty3.androidtoolkitty.CARD_10
+import me.dizzykitty3.androidtoolkitty.CARD_11
+import me.dizzykitty3.androidtoolkitty.CARD_12
+import me.dizzykitty3.androidtoolkitty.CARD_2
+import me.dizzykitty3.androidtoolkitty.CARD_3
+import me.dizzykitty3.androidtoolkitty.CARD_4
+import me.dizzykitty3.androidtoolkitty.CARD_5
+import me.dizzykitty3.androidtoolkitty.CARD_6
+import me.dizzykitty3.androidtoolkitty.CARD_7
+import me.dizzykitty3.androidtoolkitty.CARD_8
+import me.dizzykitty3.androidtoolkitty.CARD_9
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
@@ -26,18 +38,6 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.CARD_1
-import me.dizzykitty3.androidtoolkitty.utils.CARD_10
-import me.dizzykitty3.androidtoolkitty.utils.CARD_11
-import me.dizzykitty3.androidtoolkitty.utils.CARD_12
-import me.dizzykitty3.androidtoolkitty.utils.CARD_2
-import me.dizzykitty3.androidtoolkitty.utils.CARD_3
-import me.dizzykitty3.androidtoolkitty.utils.CARD_4
-import me.dizzykitty3.androidtoolkitty.utils.CARD_5
-import me.dizzykitty3.androidtoolkitty.utils.CARD_6
-import me.dizzykitty3.androidtoolkitty.utils.CARD_7
-import me.dizzykitty3.androidtoolkitty.utils.CARD_8
-import me.dizzykitty3.androidtoolkitty.utils.CARD_9
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Composable

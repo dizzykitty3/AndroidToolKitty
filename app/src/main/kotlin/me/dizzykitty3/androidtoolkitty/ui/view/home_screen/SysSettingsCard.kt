@@ -14,6 +14,18 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.SETTING_1
+import me.dizzykitty3.androidtoolkitty.SETTING_10
+import me.dizzykitty3.androidtoolkitty.SETTING_11
+import me.dizzykitty3.androidtoolkitty.SETTING_12
+import me.dizzykitty3.androidtoolkitty.SETTING_2
+import me.dizzykitty3.androidtoolkitty.SETTING_3
+import me.dizzykitty3.androidtoolkitty.SETTING_4
+import me.dizzykitty3.androidtoolkitty.SETTING_5
+import me.dizzykitty3.androidtoolkitty.SETTING_6
+import me.dizzykitty3.androidtoolkitty.SETTING_7
+import me.dizzykitty3.androidtoolkitty.SETTING_8
+import me.dizzykitty3.androidtoolkitty.SETTING_9
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
@@ -22,18 +34,6 @@ import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.component.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_1
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_10
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_11
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_12
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_2
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_3
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_4
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_5
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_6
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_7
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_8
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_9
 
 @Composable
 fun SysSettingsCard() {

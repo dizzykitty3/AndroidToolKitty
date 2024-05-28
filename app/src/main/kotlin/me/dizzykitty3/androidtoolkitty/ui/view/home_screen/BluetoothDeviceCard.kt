@@ -34,7 +34,9 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import me.dizzykitty3.androidtoolkitty.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.SETTING_ENABLE_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomIconPopup
@@ -42,9 +44,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.PrimaryColor
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
-import me.dizzykitty3.androidtoolkitty.utils.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_ENABLE_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Preview
