@@ -68,7 +68,7 @@ fun QRCodeGeneratorScreen() {
 
             if (!instantOption) {
                 TextButton(
-                    onClick = { /*TODO*/ }
+                    onClick = { }
                 ) {
                     Text(text = "Generate")
                 }

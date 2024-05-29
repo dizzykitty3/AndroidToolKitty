@@ -14,7 +14,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.QR_CODE_GENERATOR_SCREEN
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
-import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 
 @Preview
 @Composable
@@ -32,49 +31,6 @@ fun TestCard(navController: NavHostController) {
             ) {
                 Text(text = "QR Code generator")
             }
-            OutlinedButton(
-                onClick = { /*TODO*/ }
-            ) {
-                Text(text = "QR Code scanner")
-            }
-            OutlinedButton(
-                onClick = { /*TODO*/ }
-            ) {
-                Text(text = "arrange home card")
-            }
-            OutlinedButton(
-                onClick = { /*TODO*/ }
-            ) {
-                Text(text = "extract apk(s)")
-            }
-            OutlinedButton(
-                onClick = { /*TODO*/ }
-            ) {
-                Text(text = "install by apk(s)")
-            }
-            OutlinedButton(
-                onClick = { /*TODO*/ }
-            ) {
-                Text(text = "jump to activity")
-            }
-            OutlinedButton(
-                onClick = { /*TODO*/ }
-            ) {
-                Text(text = "to-do list")
-            }
-        }
-
-        SpacerPadding()
-
-        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-            Text(text = "To-do list: ")
-            Text(text = "Date countdown feature, ")
-            Text(text = "Add license info, ")
-            Text(text = "Add @Preview, ")
-            Text(text = "Tile, shortcut, ")
-            Text(text = "app ops with shizuku, ")
-            Text(text = "scaffold ui, ")
-            Text(text = "hilt, room, datastore, coroutines, ")
         }
     }
 }
