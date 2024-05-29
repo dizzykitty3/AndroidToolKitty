@@ -286,8 +286,9 @@ private fun NetworkStateIcon(
 @Composable
 private fun NoTranslationTip() {
     val locale = Locale.getDefault().toString()
+    val languageNotSupport = !locale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
     val uiTesting = SettingsSharedPref.uiTesting
-    if (!(locale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))) || uiTesting) CustomTip(
+    if (languageNotSupport || uiTesting) CustomTip(
         formattedMessage = stringResource(
             R.string.no_translation,
             locale

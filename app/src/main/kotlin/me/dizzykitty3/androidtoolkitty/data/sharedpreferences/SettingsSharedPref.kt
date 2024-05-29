@@ -170,6 +170,8 @@ object SettingsSharedPref {
             }
         }
 
+    fun enabledAutoSetMediaVolume(): Boolean = autoSetMediaVolume != -1
+
     var haveTappedAddButton: Boolean
         get() = sharedPrefs.getBoolean(HAVE_TAPPED_ADD_BUTTON, false)
         set(value) {

@@ -30,7 +30,7 @@ import kotlin.coroutines.resume
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private var continuation: Continuation<Unit>? = null
-    private var isContinuationResumed = false
+    private var continuationNotResumed = true
     private var isAutoClearClipboard = false
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -50,7 +50,7 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         Timber.d("onStart")
-        isContinuationResumed = false
+        continuationNotResumed = true
         CoroutineScope(Dispatchers.Main).launch {
             isAutoClearClipboard = withContext(Dispatchers.IO) {
                 SettingsSharedPref.autoClearClipboard
@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Clipboard cleared automatically")
                 }
             }
-            if (SettingsSharedPref.autoSetMediaVolume != -1 && DateUtil.isNotWeekend()) {
+            if (SettingsSharedPref.enabledAutoSetMediaVolume() && DateUtil.isNotWeekend()) {
                 if (BluetoothUtil.isHeadsetConnected()) {
                     Timber.i("Set media volume automatically: cancelled: BT headset connected")
                 } else {
@@ -87,10 +87,10 @@ class MainActivity : ComponentActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         Timber.d("onWindowFocusChanged")
-        if (hasFocus and !isContinuationResumed) { // Clipboard operations require window focus
+        if (hasFocus and continuationNotResumed) { // Clipboard operations require window focus
             Timber.i("continuation resumed")
             continuation?.resume(Unit)
-            isContinuationResumed = true
+            continuationNotResumed = false
         }
     }
 
