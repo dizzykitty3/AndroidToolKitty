@@ -61,6 +61,18 @@ object SettingsSharedPref {
         }
     }
 
+    fun removePreference(key: String) {
+        with(sharedPrefs.edit()) {
+            if (sharedPrefs.contains(key)) {
+                remove(key)
+                apply()
+                Timber.d("Preference key '$key' removed successfully.")
+            } else {
+                Timber.d("Preference key '$key' does not exist and cannot be removed.")
+            }
+        }
+    }
+
     var autoClearClipboard: Boolean
         get() = getPreference(AUTO_CLEAR_CLIPBOARD, false)
         set(value) = setPreference(AUTO_CLEAR_CLIPBOARD, value)

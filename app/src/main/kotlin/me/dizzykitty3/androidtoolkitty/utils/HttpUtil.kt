@@ -10,6 +10,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.accept
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
+import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.put
@@ -42,10 +43,17 @@ object HttpUtil {
         }
     }
 
-    suspend fun get(url: String, params: Map<String, String> = emptyMap()): HttpResponse =
+    suspend fun get(
+        url: String,
+        params: Map<String, String> = emptyMap(),
+        headers: Map<String, String> = emptyMap()
+    ): HttpResponse =
         try {
             withContext(Dispatchers.IO) {
                 client.get(url) {
+                    headers.forEach { (key, value) ->
+                        header(key, value)
+                    }
                     params.forEach { (key, value) ->
                         parameter(key, value)
                     }
@@ -56,9 +64,16 @@ object HttpUtil {
             throw e
         }
 
-    suspend fun post(url: String, body: Any): HttpResponse = try {
+    suspend fun post(
+        url: String,
+        body: Any,
+        headers: Map<String, String> = emptyMap()
+    ): HttpResponse = try {
         withContext(Dispatchers.IO) {
             client.post(url) {
+                headers.forEach { (key, value) ->
+                    header(key, value)
+                }
                 contentType(ContentType.Application.Json)
                 setBody(body)
             }
@@ -68,9 +83,16 @@ object HttpUtil {
         throw e
     }
 
-    suspend fun put(url: String, body: Any): HttpResponse = try {
+    suspend fun put(
+        url: String,
+        body: Any,
+        headers: Map<String, String> = emptyMap()
+    ): HttpResponse = try {
         withContext(Dispatchers.IO) {
             client.put(url) {
+                headers.forEach { (key, value) ->
+                    header(key, value)
+                }
                 contentType(ContentType.Application.Json)
                 setBody(body)
             }
@@ -80,9 +102,16 @@ object HttpUtil {
         throw e
     }
 
-    suspend fun delete(url: String, params: Map<String, String> = emptyMap()): HttpResponse = try {
+    suspend fun delete(
+        url: String,
+        params: Map<String, String> = emptyMap(),
+        headers: Map<String, String> = emptyMap()
+    ): HttpResponse = try {
         withContext(Dispatchers.IO) {
             client.delete(url) {
+                headers.forEach { (key, value) ->
+                    header(key, value)
+                }
                 params.forEach { (key, value) ->
                     parameter(key, value)
                 }
