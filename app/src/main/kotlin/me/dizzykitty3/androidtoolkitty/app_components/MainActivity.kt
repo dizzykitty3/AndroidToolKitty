@@ -19,6 +19,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.ui.view.AppNavigationHost
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
+import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
@@ -68,8 +69,12 @@ class MainActivity : ComponentActivity() {
                 }
             }
             if (SettingsSharedPref.autoSetMediaVolume != -1 && DateUtil.isNotWeekend()) {
-                Timber.i("Set media volume automatically")
-                AudioUtil.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
+                if (BluetoothUtil.isHeadsetConnected()) {
+                    Timber.i("Set media volume automatically: cancelled: BT headset connected")
+                } else {
+                    Timber.i("Set media volume automatically")
+                    AudioUtil.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
+                }
             }
         }
     }

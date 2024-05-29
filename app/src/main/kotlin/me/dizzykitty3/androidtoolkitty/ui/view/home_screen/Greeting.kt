@@ -23,15 +23,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import me.dizzykitty3.androidtoolkitty.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui.component.Gradient
+import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
-@Preview
 @Composable
-fun Greeting() {
+@Preview
+private fun GreetingPreview() {
+    Greeting(navController = rememberNavController())
+}
+
+@Composable
+fun Greeting(navController: NavHostController) {
     val view = LocalView.current
     var showDialog by remember { mutableStateOf(false) }
 
@@ -83,6 +92,12 @@ fun Greeting() {
                     Button(onClick = {
                         view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                         showDialog = false
+
+                        if (PermissionUtil.noBluetoothPermission(view.context)) {
+                            navController.navigate(PERMISSION_REQUEST_SCREEN)
+                            return@Button
+                        }
+
                         SettingsSharedPref.autoSetMediaVolume = 40
                     }) {
                         Text(text = "40%")
@@ -92,6 +107,12 @@ fun Greeting() {
                     Button(onClick = {
                         view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                         showDialog = false
+
+                        if (PermissionUtil.noBluetoothPermission(view.context)) {
+                            navController.navigate(PERMISSION_REQUEST_SCREEN)
+                            return@Button
+                        }
+
                         SettingsSharedPref.autoSetMediaVolume = 60
                     }) {
                         Text(text = "60%")

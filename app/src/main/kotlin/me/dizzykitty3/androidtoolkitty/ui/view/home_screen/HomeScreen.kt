@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 import android.view.HapticFeedbackConstants
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,9 +15,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.BatteryStd
+import androidx.compose.material.icons.outlined.MediaBluetoothOn
 import androidx.compose.material.icons.outlined.NetworkCell
 import androidx.compose.material.icons.outlined.QuestionMark
 import androidx.compose.material.icons.outlined.Wifi
@@ -67,8 +70,10 @@ import me.dizzykitty3.androidtoolkitty.ui.component.OneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.TopPadding
 import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
+import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
+import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
 import java.util.Locale
 
 @Composable
@@ -96,12 +101,12 @@ private fun MobileLayout(navController: NavHostController) {
     ) {
         // Status
         item { TopPadding() }
-        item { BatteryNetworkAndSetting(navController) }
+        item { TopBar(navController) }
         item { CardSpacePadding() }
         item { CardSpacePadding() }
 
         // Greeting
-        item { Greeting() }
+        item { Greeting(navController) }
         if (settingsSharedPref.oneHandedMode)
             item { OneHandedModePadding() }
         else {
@@ -129,11 +134,11 @@ private fun TabletLayout(navController: NavHostController) {
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Box(modifier = Modifier.weight(1f)) {
-                Greeting()
+                Greeting(navController)
             }
 
             Box(modifier = Modifier.weight(1f)) {
-                BatteryNetworkAndSetting(navController)
+                TopBar(navController)
             }
         }
         SpacerPadding()
@@ -142,50 +147,52 @@ private fun TabletLayout(navController: NavHostController) {
     }
 }
 
+@Composable
+private fun TopBar(navController: NavHostController) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Box(modifier = Modifier.weight(1f)) { Status() }
+        SettingsButton(navController)
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun BatteryNetworkAndSetting(navController: NavHostController) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        val view = LocalView.current
-        val settingsSharedPref = remember { SettingsSharedPref }
+private fun SettingsButton(navController: NavHostController) {
+    val view = LocalView.current
+    val settingsSharedPref = remember { SettingsSharedPref }
 
-        Box(modifier = Modifier.weight(1f)) {
-            BatteryAndNetwork()
-        }
-
-        TooltipBox(
-            positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
-            tooltip = {
-                PlainTooltip {
-                    Text(text = stringResource(id = R.string.settings))
-                }
-            },
-            state = rememberTooltipState(),
-        ) {
-            IconButton(
-                onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-                    navController.navigate(SETTINGS_SCREEN)
-                    settingsSharedPref.haveOpenedSettingsScreen = true
-                },
-                modifier = Modifier.size(40.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Settings,
-                    contentDescription = stringResource(id = R.string.settings),
-                    tint = MaterialTheme.colorScheme.primary
-                )
+    TooltipBox(
+        positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
+        tooltip = {
+            PlainTooltip {
+                Text(text = stringResource(id = R.string.settings))
             }
+        },
+        state = rememberTooltipState(),
+    ) {
+        IconButton(
+            onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                navController.navigate(SETTINGS_SCREEN)
+                settingsSharedPref.haveOpenedSettingsScreen = true
+            },
+            modifier = Modifier.size(40.dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.Settings,
+                contentDescription = stringResource(id = R.string.settings),
+                tint = MaterialTheme.colorScheme.primary
+            )
         }
     }
 }
 
 @Composable
-private fun BatteryAndNetwork() {
+private fun Status() {
     val batteryLevel = remember { BatteryUtil.batteryLevel() }
     val view = LocalView.current
 
-    Row {
+    Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
         Row(
             modifier = Modifier.clickable {
                 view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
@@ -205,6 +212,22 @@ private fun BatteryAndNetwork() {
         SpacerPadding()
 
         NetworkState()
+
+        SpacerPadding()
+        SpacerPadding()
+
+        Row {
+            if (PermissionUtil.noBluetoothPermission(view.context)) return
+            if (BluetoothUtil.isHeadsetConnected()) {
+                Icon(
+                    imageVector = Icons.Outlined.MediaBluetoothOn,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                SpacerPadding()
+                Text(text = "Connected")
+            }
+        }
     }
     CardSpacePadding()
 }
