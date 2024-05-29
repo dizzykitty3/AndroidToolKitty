@@ -14,18 +14,18 @@ import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SETTING_1
-import me.dizzykitty3.androidtoolkitty.SETTING_10
-import me.dizzykitty3.androidtoolkitty.SETTING_11
-import me.dizzykitty3.androidtoolkitty.SETTING_12
-import me.dizzykitty3.androidtoolkitty.SETTING_2
-import me.dizzykitty3.androidtoolkitty.SETTING_3
-import me.dizzykitty3.androidtoolkitty.SETTING_4
-import me.dizzykitty3.androidtoolkitty.SETTING_5
-import me.dizzykitty3.androidtoolkitty.SETTING_6
-import me.dizzykitty3.androidtoolkitty.SETTING_7
-import me.dizzykitty3.androidtoolkitty.SETTING_8
-import me.dizzykitty3.androidtoolkitty.SETTING_9
+import me.dizzykitty3.androidtoolkitty.SETTING_AUTO_ROTATE
+import me.dizzykitty3.androidtoolkitty.SETTING_BATTERY_OPTIMIZATION
+import me.dizzykitty3.androidtoolkitty.SETTING_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.SETTING_CAPTIONING
+import me.dizzykitty3.androidtoolkitty.SETTING_DATE
+import me.dizzykitty3.androidtoolkitty.SETTING_DEFAULT_APPS
+import me.dizzykitty3.androidtoolkitty.SETTING_DEVELOPER
+import me.dizzykitty3.androidtoolkitty.SETTING_DISPLAY
+import me.dizzykitty3.androidtoolkitty.SETTING_LOCALE
+import me.dizzykitty3.androidtoolkitty.SETTING_OVERLAY
+import me.dizzykitty3.androidtoolkitty.SETTING_USAGE_ACCESS
+import me.dizzykitty3.androidtoolkitty.SETTING_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
@@ -45,18 +45,18 @@ fun SysSettingsCard() {
         val settingsSharedPref = remember { SettingsSharedPref }
 
         val settings = listOf(
-            Setting(SETTING_1, R.string.open_display_settings),
-            Setting(SETTING_2, R.string.open_auto_rotate_settings),
-            Setting(SETTING_3, R.string.open_bluetooth_settings),
-            Setting(SETTING_4, R.string.open_default_apps_settings),
-            Setting(SETTING_5, R.string.open_battery_optimization_settings),
-            Setting(SETTING_6, R.string.open_caption_preferences),
-            Setting(SETTING_7, R.string.open_usage_access_permission),
-            Setting(SETTING_8, R.string.open_overlay_permission),
-            Setting(SETTING_9, R.string.open_write_permission),
-            Setting(SETTING_10, R.string.open_language_settings),
-            Setting(SETTING_11, R.string.open_date_and_time_settings),
-            Setting(SETTING_12, R.string.open_developer_options)
+            Setting(SETTING_DISPLAY, R.string.open_display_settings),
+            Setting(SETTING_AUTO_ROTATE, R.string.open_auto_rotate_settings),
+            Setting(SETTING_BLUETOOTH, R.string.open_bluetooth_settings),
+            Setting(SETTING_DEFAULT_APPS, R.string.open_default_apps_settings),
+            Setting(SETTING_BATTERY_OPTIMIZATION, R.string.open_battery_optimization_settings),
+            Setting(SETTING_CAPTIONING, R.string.open_caption_preferences),
+            Setting(SETTING_USAGE_ACCESS, R.string.open_usage_access_permission),
+            Setting(SETTING_OVERLAY, R.string.open_overlay_permission),
+            Setting(SETTING_WRITE_SETTINGS, R.string.open_write_permission),
+            Setting(SETTING_LOCALE, R.string.open_language_settings),
+            Setting(SETTING_DATE, R.string.open_date_and_time_settings),
+            Setting(SETTING_DEVELOPER, R.string.open_developer_options)
         )
 
         val isShowSetting = remember {
@@ -89,16 +89,16 @@ fun SysSettingsCard() {
 
         Column(modifier = Modifier.horizontalScroll(rememberScrollState())) {
             Row {
-                if (isShowSetting[SETTING_1] == true) {
+                if (isShowSetting[SETTING_DISPLAY] == true) {
                     SystemSettingButton(
-                        settingType = SETTING_1,
+                        settingType = SETTING_DISPLAY,
                         textRes = R.string.open_display_settings
                     )
                 }
 
-                if ((isShowSetting[SETTING_2] == true) && OSVersion.android12()) {
+                if ((isShowSetting[SETTING_AUTO_ROTATE] == true) && OSVersion.android12()) {
                     SystemSettingButton(
-                        settingType = SETTING_2,
+                        settingType = SETTING_AUTO_ROTATE,
                         textRes = R.string.open_auto_rotate_settings
                     )
                 }
@@ -143,9 +143,9 @@ fun SysSettingsCard() {
             }
 
             Row {
-                if (isShowSetting[SETTING_9] == true) {
+                if (isShowSetting[SETTING_WRITE_SETTINGS] == true) {
                     SystemSettingButton(
-                        settingType = SETTING_9,
+                        settingType = SETTING_WRITE_SETTINGS,
                         textRes = R.string.open_write_permission
                     )
                 }
@@ -168,9 +168,9 @@ fun SysSettingsCard() {
             }
 
             Row {
-                if (isShowSetting[SETTING_12] == true) {
+                if (isShowSetting[SETTING_DEVELOPER] == true) {
                     SystemSettingButton(
-                        settingType = SETTING_12,
+                        settingType = SETTING_DEVELOPER,
                         textRes = R.string.open_developer_options
                     )
                 }

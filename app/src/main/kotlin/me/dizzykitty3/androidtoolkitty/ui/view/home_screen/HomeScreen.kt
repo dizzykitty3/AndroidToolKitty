@@ -60,6 +60,7 @@ import me.dizzykitty3.androidtoolkitty.CARD_8
 import me.dizzykitty3.androidtoolkitty.CARD_9
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SETTINGS_SCREEN
+import me.dizzykitty3.androidtoolkitty.SETTING_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.SETTING_POWER_USAGE_SUMMARY
 import me.dizzykitty3.androidtoolkitty.SETTING_WIFI
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
@@ -164,6 +165,7 @@ private fun SettingsButton(navController: NavHostController) {
     TooltipBox(
         positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
         tooltip = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             PlainTooltip {
                 Text(text = stringResource(id = R.string.settings))
             }
@@ -216,7 +218,10 @@ private fun Status() {
         SpacerPadding()
         SpacerPadding()
 
-        Row {
+        Row(modifier = Modifier.clickable {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            IntentUtil.openSystemSettings(SETTING_BLUETOOTH, view.context)
+        }) {
             if (PermissionUtil.noBluetoothPermission(view.context)) return
             if (BluetoothUtil.isHeadsetConnected()) {
                 Icon(
