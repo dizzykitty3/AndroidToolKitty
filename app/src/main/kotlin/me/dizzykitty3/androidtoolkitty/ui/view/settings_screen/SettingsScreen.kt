@@ -54,10 +54,6 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.launch
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
@@ -80,7 +76,6 @@ import me.dizzykitty3.androidtoolkitty.utils.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
-import timber.log.Timber
 import java.util.Locale
 
 @Composable
@@ -330,7 +325,7 @@ private fun DebuggingOptions(navController: NavHostController) {
         positiveButtonText = stringResource(R.string.erase_all_data),
         negativeButtonText = null,
         onClickAction = {
-            settingsSharedPref.clear()
+            settingsSharedPref.clearSettings()
             IntentUtil.finishApp(context)
         }
     )
@@ -485,7 +480,7 @@ private fun UserSyncSection() {
             .padding(vertical = 16.dp)
     ) {
         OutlinedButton(onClick = {
-            if (token.isNullOrEmpty()) {
+            if (token.isEmpty()) {
                 dialogState = DialogState.Login
             } else {
                 // Handle upload settings
@@ -494,7 +489,7 @@ private fun UserSyncSection() {
             Text(text = stringResource(id = R.string.upload_settings))
         }
         OutlinedButton(onClick = {
-            if (token.isNullOrEmpty()) {
+            if (token.isEmpty()) {
                 dialogState = DialogState.Login
             } else {
                 // Handle download settings
@@ -723,34 +718,15 @@ suspend fun handleRequest(
     onTokenReceived: (String) -> Unit,
     onFailure: () -> Unit
 ) {
-    try {
-        val response: HttpResponse = HttpUtil.post(url, body)
+    val response: HttpResponse = HttpUtil.post(url, body)
 
-        if (response.status == HttpStatusCode.OK) {
-            val responseBody = response.bodyAsText()
-            onTokenReceived(responseBody)
-            SettingsSharedPref.setToken(responseBody)
-            ToastUtil.toast("Operation successful")
-            onDismiss()
-        } else if (response.status == HttpStatusCode.BadRequest) {
-            val errorResponse = response.bodyAsText()
-            val jsonObject = Json.parseToJsonElement(errorResponse).jsonObject
-            val detailsArray = jsonObject["details"]?.jsonArray
-            val detailsList = detailsArray?.map { it.jsonPrimitive.content } ?: emptyList()
-            val detailsString = detailsList.joinToString(separator = ", ")
-            val message = if (detailsString.isNotEmpty()) detailsString else "Unknown error"
-            ToastUtil.toast(message)
-            onFailure()
-        } else {
-            val errorResponse = response.bodyAsText()
-            val jsonObject = Json.parseToJsonElement(errorResponse).jsonObject
-            val message = jsonObject["message"]?.jsonPrimitive?.content ?: "Unknown error"
-            ToastUtil.toast(message)
-            onFailure()
-        }
-    } catch (e: Exception) {
-        Timber.e(e)
-        ToastUtil.toast("Operation failed: ${e.message}")
+    if (response.status == HttpStatusCode.OK) {
+        val responseBody = response.bodyAsText()
+        onTokenReceived(responseBody)
+        SettingsSharedPref.setToken(responseBody)
+        ToastUtil.toast("Operation successful")
+        onDismiss()
+    } else {
         onFailure()
     }
 }
