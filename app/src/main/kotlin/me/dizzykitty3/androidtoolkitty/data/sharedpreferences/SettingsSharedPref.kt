@@ -73,6 +73,50 @@ object SettingsSharedPref {
         }
     }
 
+    fun exportSettingsToJson(): String {
+        val keys = sharedPrefs.all.keys.filter { it != TOKEN }  // Exclude the token
+        val settingsMap: Map<String, Any?> = keys.associateWith {
+            sharedPrefs.all[it] ?: throw IllegalStateException("Unexpected null value at $it")
+        }
+
+        val serializableMap = mutableMapOf<String, String>()
+        settingsMap.forEach { (key, value) ->
+            when (value) {
+                is String -> serializableMap[key] = value
+                is Int -> serializableMap[key] = value.toString()
+                is Boolean -> serializableMap[key] = value.toString()
+                else -> throw IllegalArgumentException("Unsupported type for $key")
+            }
+        }
+
+        return Json.encodeToString(serializableMap)
+    }
+
+    fun importSettingsFromJson(jsonString: String) {
+        // 假设所有值在 JSON 中都是作为字符串存储的
+        val settingsMap: Map<String, String> = Json.decodeFromString(jsonString)
+        settingsMap.forEach { (key, value) ->
+            // 假设你可以从键值推断出数据类型或在值中存储了类型信息
+            when {
+                value.toBooleanCustom() != null -> setPreference(key, value.toBoolean())
+                value.toIntOrNull() != null -> setPreference(key, value.toInt())
+                else -> setPreference(key, value)
+            }
+        }
+    }
+
+    fun clearSettings() {
+        val token = getToken()
+        sharedPrefs.edit().clear().apply()
+        setToken(token)  // Restore token
+    }
+
+    fun String.toBooleanCustom(): Boolean? = when {
+        this.equals("true", ignoreCase = true) -> true
+        this.equals("false", ignoreCase = true) -> false
+        else -> null
+    }
+
     var autoClearClipboard: Boolean
         get() = getPreference(AUTO_CLEAR_CLIPBOARD, false)
         set(value) = setPreference(AUTO_CLEAR_CLIPBOARD, value)
@@ -152,7 +196,6 @@ object SettingsSharedPref {
                 val items: WheelOfFortuneItems = Json.decodeFromString(it)
                 items.items
             } catch (e: Exception) {
-                Timber.e(e)
                 null
             }
         }
@@ -180,29 +223,5 @@ object SettingsSharedPref {
 
     fun setToken(token: String) = setPreference(TOKEN, token)
 
-    fun exportSettingsToJson(): String {
-        val keys = sharedPrefs.all.keys.filter { it != TOKEN }  // Exclude the token
-        val settingsMap = keys.associateWith {
-            sharedPrefs.all[it] ?: throw IllegalStateException("Unexpected null value at $it")
-        }
-        return Json.encodeToString(settingsMap)
-    }
 
-    fun importSettingsFromJson(jsonString: String) {
-        val settingsMap: Map<String, Any> = Json.decodeFromString(jsonString)
-        settingsMap.forEach { (key, value) ->
-            when (value) {
-                is Boolean -> setPreference(key, value)
-                is Int -> setPreference(key, value)
-                is String -> setPreference(key, value)
-                else -> Timber.w("Unsupported type during import for key $key")
-            }
-        }
-    }
-
-    fun clearSettings() {
-        val token = getToken()
-        sharedPrefs.edit().clear().apply()
-        setToken(token)  // Restore token
-    }
 }

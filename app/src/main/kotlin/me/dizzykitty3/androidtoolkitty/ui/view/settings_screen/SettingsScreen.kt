@@ -483,7 +483,15 @@ private fun UserSyncSection() {
             if (token.isEmpty()) {
                 dialogState = DialogState.Login
             } else {
-                // Handle upload settings
+                coroutineScope.launch {
+                    isLoading = true
+                    handleUploadSettings(
+                        token = token,
+                        settings = SettingsSharedPref.exportSettingsToJson(),
+                        onFailure = {
+                            isLoading = false
+                        })
+                }
             }
         }) {
             Text(text = stringResource(id = R.string.upload_settings))
@@ -492,7 +500,17 @@ private fun UserSyncSection() {
             if (token.isEmpty()) {
                 dialogState = DialogState.Login
             } else {
-                // Handle download settings
+                coroutineScope.launch {
+                    isLoading = true
+                    handleDownloadSettings(
+                        token = token,
+                        onSettingsReceived = {
+                            SettingsSharedPref.importSettingsFromJson(it)
+                        },
+                        onFailure = {
+                            isLoading = false
+                        })
+                }
             }
         }) {
             Text(text = stringResource(id = R.string.download_settings))
@@ -513,6 +531,7 @@ private fun UserSyncSection() {
                             onDismiss = { dialogState = null; isLoading = false },
                             onTokenReceived = { newToken ->
                                 token = newToken
+                                SettingsSharedPref.setToken(newToken)
                                 dialogState = null
                                 isLoading = false
                             },
@@ -540,6 +559,7 @@ private fun UserSyncSection() {
                             onDismiss = { dialogState = null; isLoading = false },
                             onTokenReceived = { newToken ->
                                 token = newToken
+                                SettingsSharedPref.setToken(newToken)
                                 dialogState = null
                                 isLoading = false
                             },
@@ -678,6 +698,34 @@ private fun CommonDialog(onDismiss: () -> Unit, content: @Composable () -> Unit)
     }
 }
 
+suspend fun handleUploadSettings(
+    token: String,
+    settings: String,
+    onFailure: () -> Unit
+) {
+    handleRequest(
+        url = "https://api.yanqishui.work/toolkitten/data/user-settings",
+        headers = mapOf("Authorization" to token),
+        body = mapOf("settings" to settings),
+        onFailure = onFailure,
+        requestType = HttpRequestType.PUT
+    )
+}
+
+suspend fun handleDownloadSettings(
+    token: String,
+    onSettingsReceived: (String) -> Unit,
+    onFailure: () -> Unit
+) {
+    handleRequest(
+        url = "https://api.yanqishui.work/toolkitten/data/user-settings",
+        headers = mapOf("Authorization" to token),
+        onFailure = onFailure,
+        onDataReceived = onSettingsReceived,
+        requestType = HttpRequestType.GET
+    )
+}
+
 suspend fun handleLogin(
     username: String,
     password: String,
@@ -689,8 +737,9 @@ suspend fun handleLogin(
         url = "https://api.yanqishui.work/toolkitten/account/login",
         body = mapOf("username" to username, "password" to password),
         onDismiss = onDismiss,
-        onTokenReceived = onTokenReceived,
-        onFailure = onFailure
+        onDataReceived = onTokenReceived,
+        onFailure = onFailure,
+        requestType = HttpRequestType.POST
     )
 }
 
@@ -706,23 +755,35 @@ suspend fun handleRegister(
         url = "https://api.yanqishui.work/toolkitten/account/register",
         body = mapOf("username" to username, "email" to email, "password" to password),
         onDismiss = onDismiss,
-        onTokenReceived = onTokenReceived,
-        onFailure = onFailure
+        onDataReceived = onTokenReceived,
+        onFailure = onFailure,
+        requestType = HttpRequestType.POST
     )
 }
 
+enum class HttpRequestType {
+    GET, POST, PUT, DELETE
+}
+
 suspend fun handleRequest(
+    requestType: HttpRequestType,
     url: String,
-    body: Map<String, String>,
-    onDismiss: () -> Unit,
-    onTokenReceived: (String) -> Unit,
+    body: Map<String, String> = emptyMap(),
+    headers: Map<String, String> = emptyMap(),
+    onDismiss: () -> Unit = {},
+    onDataReceived: (String) -> Unit = {},
     onFailure: () -> Unit
 ) {
-    val response: HttpResponse = HttpUtil.post(url, body)
+    val response: HttpResponse = when (requestType) {
+        HttpRequestType.GET -> HttpUtil.get(url, body, headers)
+        HttpRequestType.POST -> HttpUtil.post(url, body, headers)
+        HttpRequestType.PUT -> HttpUtil.put(url, body, headers)
+        HttpRequestType.DELETE -> HttpUtil.delete(url, body, headers)
+    }
 
     if (response.status == HttpStatusCode.OK) {
         val responseBody = response.bodyAsText()
-        onTokenReceived(responseBody)
+        onDataReceived(responseBody)
         SettingsSharedPref.setToken(responseBody)
         ToastUtil.toast("Operation successful")
         onDismiss()
