@@ -471,16 +471,27 @@ private fun UserSyncSection() {
     var token by remember { mutableStateOf(SettingsSharedPref.getToken()) }
     var isLoading by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
+    var username by remember { mutableStateOf(SettingsSharedPref.username) }
 
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceAround,
+    Column(
+        verticalArrangement = Arrangement.SpaceAround,
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp)
+            .padding(16.dp)
     ) {
         OutlinedButton(onClick = {
-            if (token.isEmpty()) {
+            if (token.isBlank()) {
+                dialogState = DialogState.Login
+            } else {
+                dialogState = DialogState.UserProfile
+            }
+        }) {
+            Text(text = stringResource(id = R.string.user_profile)) // 用户头像按钮
+        }
+
+        OutlinedButton(onClick = {
+            if (token.isBlank()) {
                 dialogState = DialogState.Login
             } else {
                 coroutineScope.launch {
@@ -497,7 +508,7 @@ private fun UserSyncSection() {
             Text(text = stringResource(id = R.string.upload_settings))
         }
         OutlinedButton(onClick = {
-            if (token.isEmpty()) {
+            if (token.isBlank()) {
                 dialogState = DialogState.Login
             } else {
                 coroutineScope.launch {
@@ -522,11 +533,11 @@ private fun UserSyncSection() {
             UserLoginDialog(
                 onDismiss = { dialogState = null },
                 onRegisterClick = { dialogState = DialogState.Register },
-                onLoginClick = { username, password ->
+                onLoginClick = { usernameForLogin, password ->
                     isLoading = true
                     coroutineScope.launch {
                         handleLogin(
-                            username,
+                            usernameForLogin,
                             password,
                             onDismiss = { dialogState = null; isLoading = false },
                             onTokenReceived = { newToken ->
@@ -573,12 +584,24 @@ private fun UserSyncSection() {
             )
         }
 
+        DialogState.UserProfile -> {
+            UserProfileDialog(
+                username = username,
+                token = token,
+                onLogout = {
+                    SettingsSharedPref.removePreference("token")
+                    token = ""
+                },
+                onDismiss = { dialogState = null }
+            )
+        }
+
         null -> {}
     }
 }
 
 enum class DialogState {
-    Login, Register
+    Login, Register, UserProfile
 }
 
 @Composable
@@ -682,6 +705,38 @@ private fun UserRegisterDialog(
             }
         }
     }
+}
+
+@Composable
+fun UserProfileDialog(
+    username: String?,
+    token: String,
+    onLogout: () -> Unit,
+    onDismiss: () -> Unit
+) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = "User Profile") },
+        text = {
+            Column {
+                Text(text = "Username: $username")
+                Text(text = "Token: $token")
+            }
+        },
+        confirmButton = {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Button(onClick = { onLogout() }) {
+                    Text("Logout")
+                }
+                Button(onClick = { onDismiss() }) {
+                    Text("Close")
+                }
+            }
+        }
+    )
 }
 
 @Composable

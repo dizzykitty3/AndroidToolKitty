@@ -29,6 +29,7 @@ object SettingsSharedPref {
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
     private const val UI_TESTING = "ui_testing"
+    private const val USERNAME = "username"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -188,6 +189,10 @@ object SettingsSharedPref {
     var customVolumeOptionLabel: String?
         get() = getPreference(VOLUME_OPTION_LABEL, "")
         set(value) = setPreference(VOLUME_OPTION_LABEL, value)
+
+    var username: String?
+        get() = getPreference(USERNAME, "")
+        set(value) = setPreference(USERNAME, value)
 
     fun getWheelOfFortuneItems(): List<String>? {
         val itemsJson = getPreference(WHEEL_OF_FORTUNE_ITEMS, "")
