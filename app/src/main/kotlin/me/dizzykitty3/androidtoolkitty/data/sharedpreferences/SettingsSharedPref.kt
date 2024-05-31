@@ -112,7 +112,7 @@ object SettingsSharedPref {
         setToken(token)  // Restore token
     }
 
-    fun String.toBooleanCustom(): Boolean? = when {
+    private fun String.toBooleanCustom(): Boolean? = when {
         this.equals("true", ignoreCase = true) -> true
         this.equals("false", ignoreCase = true) -> false
         else -> null

@@ -839,7 +839,6 @@ suspend fun handleRequest(
     if (response.status == HttpStatusCode.OK) {
         val responseBody = response.bodyAsText()
         onDataReceived(responseBody)
-        SettingsSharedPref.setToken(responseBody)
         ToastUtil.toast("Operation successful")
         onDismiss()
     } else {
