@@ -128,7 +128,8 @@ private fun AppearanceOptions() {
     var showDivider by remember { mutableStateOf(settingsSharedPref.showDivider) }
     var showEditVolumeOption by remember { mutableStateOf(settingsSharedPref.showEditVolumeOption) }
     val customVolume = settingsSharedPref.customVolume
-    val primary = MaterialTheme.colorScheme.primary.toArgb()
+    val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
+    val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
     GroupTitle(id = R.string.appearance)
 
@@ -136,7 +137,7 @@ private fun AppearanceOptions() {
         CustomSwitchRow(textRes = R.string.material_you_dynamic_color, checked = dynamicColor) {
             view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             dynamicColor = it
-            onClickDynamicColorButton(view, it, primary, view.context)
+            onClickDynamicColorButton(view, it, inverseOnSurface, inversePrimary, view.context)
         }
     }
 
@@ -171,7 +172,8 @@ private fun GeneralOptions() {
     var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
     var collapseKeyboard by remember { mutableStateOf(settingsSharedPref.collapseKeyboard) }
     var showSnackbarToConfirm by remember { mutableStateOf(settingsSharedPref.showSnackbar) }
-    val primary = MaterialTheme.colorScheme.primary.toArgb()
+    val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
+    val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
     GroupTitle(R.string.general)
 
@@ -189,7 +191,8 @@ private fun GeneralOptions() {
                 view,
                 messageRes = R.string.clipboard_card_hidden,
                 buttonTextRes = R.string.undo,
-                buttonColor = primary,
+                textColor = inverseOnSurface,
+                buttonColor = inversePrimary,
                 buttonClickListener = {
                     view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     settingsSharedPref.saveCardShowedState(CARD_3, true)
@@ -341,7 +344,8 @@ private fun DebuggingOptions(navController: NavHostController) {
 private fun onClickDynamicColorButton(
     view: View,
     isDynamicColor: Boolean,
-    color: Int,
+    inverseOnSurface: Int,
+    inversePrimary: Int,
     context: Context
 ) {
     val showSnackbarToConfirm = SettingsSharedPref.showSnackbar
@@ -352,7 +356,8 @@ private fun onClickDynamicColorButton(
             view,
             messageRes = R.string.requires_restart_do_it_now,
             buttonTextRes = R.string.restart,
-            buttonColor = color,
+            textColor = inverseOnSurface,
+            buttonColor = inversePrimary,
             buttonClickListener = {
                 view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 IntentUtil.restartApp(context)

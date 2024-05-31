@@ -65,7 +65,8 @@ fun BluetoothDeviceCard(navController: NavHostController) {
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }
         var pairedDevices by remember { mutableStateOf<List<BluetoothDevice>>(emptyList()) }
         var size by remember { mutableIntStateOf(0) }
-        val materialColor = MaterialTheme.colorScheme.primary.toArgb()
+        val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
+        val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
         val showSnackbarToConfirm = SettingsSharedPref.showSnackbar
 
         OutlinedButton(
@@ -96,7 +97,8 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                         view,
                         messageRes = R.string.bluetooth_disabled,
                         buttonTextRes = R.string.turn_on_bluetooth,
-                        buttonColor = materialColor,
+                        textColor = inverseOnSurface,
+                        buttonColor = inversePrimary,
                         buttonClickListener = {
                             view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                             IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, view.context)

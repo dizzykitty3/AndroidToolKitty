@@ -193,7 +193,8 @@ fun EditSysSettingsCard() {
 
         GroupDivider()
 
-        val primary = MaterialTheme.colorScheme.primary.toArgb()
+        val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
+        val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
         val showSnackbarToConfirm = settingsSharedPref.showSnackbar
 
         Button(
@@ -204,7 +205,8 @@ fun EditSysSettingsCard() {
                         view,
                         messageRes = R.string.tap_to_apply,
                         buttonTextRes = R.string.apply,
-                        buttonColor = primary,
+                        textColor = inverseOnSurface,
+                        buttonColor = inversePrimary,
                         buttonClickListener = {
                             view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                             onClickChangeAllCardsButton(false)
@@ -257,7 +259,8 @@ fun EditSysSettingsCard() {
                         view,
                         messageRes = R.string.tap_to_apply,
                         buttonTextRes = R.string.apply,
-                        buttonColor = primary,
+                        textColor = inverseOnSurface,
+                        buttonColor = inversePrimary,
                         buttonClickListener = {
                             view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                             onClickChangeAllCardsButton(true)
