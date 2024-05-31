@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.settings_screen
 
-import android.content.ClipData
 import android.content.Context
 import android.os.Build
 import android.view.View
@@ -474,7 +473,6 @@ private fun UserSyncSection() {
     var token by remember { mutableStateOf(SettingsSharedPref.getToken()) }
     var isLoading by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
-    var username by remember { mutableStateOf(SettingsSharedPref.username) }
 
     Column(
         verticalArrangement = Arrangement.SpaceAround,
@@ -727,7 +725,6 @@ fun UserProfileDialog(
                     text = "Token: $token",
                     modifier = Modifier.clickable {
                         ClipboardUtil.copy(token)
-                        ClipData.newPlainText("Token", token)
                         ToastUtil.toast("Token copied to clipboard")
                     }
                 )
