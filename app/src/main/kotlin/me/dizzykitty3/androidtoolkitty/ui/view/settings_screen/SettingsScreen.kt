@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.settings_screen
 
+import android.content.ClipData
 import android.content.Context
 import android.os.Build
 import android.view.View
@@ -68,6 +69,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.WarningAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.utils.CARD_3
+import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.EDIT_HOME_SCREEN
 import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
@@ -76,6 +78,7 @@ import me.dizzykitty3.androidtoolkitty.utils.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
+import org.json.JSONObject
 import java.util.Locale
 
 @Composable
@@ -586,11 +589,13 @@ private fun UserSyncSection() {
 
         DialogState.UserProfile -> {
             UserProfileDialog(
-                username = username,
                 token = token,
                 onLogout = {
                     SettingsSharedPref.removePreference("token")
                     token = ""
+                    dialogState = null
+                    isLoading = false
+                    ToastUtil.toast("Successfully logout!")
                 },
                 onDismiss = { dialogState = null }
             )
@@ -709,7 +714,6 @@ private fun UserRegisterDialog(
 
 @Composable
 fun UserProfileDialog(
-    username: String?,
     token: String,
     onLogout: () -> Unit,
     onDismiss: () -> Unit
@@ -719,8 +723,14 @@ fun UserProfileDialog(
         title = { Text(text = "User Profile") },
         text = {
             Column {
-                Text(text = "Username: $username")
-                Text(text = "Token: $token")
+                Text(
+                    text = "Token: $token",
+                    modifier = Modifier.clickable {
+                        ClipboardUtil.copy(token)
+                        ClipData.newPlainText("Token", token)
+                        ToastUtil.toast("Token copied to clipboard")
+                    }
+                )
             }
         },
         confirmButton = {
@@ -842,6 +852,10 @@ suspend fun handleRequest(
         ToastUtil.toast("Operation successful")
         onDismiss()
     } else {
+        val errorBody = response.bodyAsText()
+        val jsonObj = JSONObject(errorBody)
+        val errorMessage = jsonObj.getString("message")
+        ToastUtil.toast(errorMessage)
         onFailure()
     }
 }
