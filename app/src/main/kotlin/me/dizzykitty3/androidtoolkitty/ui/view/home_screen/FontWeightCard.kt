@@ -1,9 +1,11 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FontDownload
 import androidx.compose.material3.Text
@@ -17,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
-import java.util.Locale
+import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Preview
 @Composable
@@ -26,8 +28,7 @@ fun FontWeightCard() {
         icon = Icons.Outlined.FontDownload,
         titleRes = R.string.font_weight_test
     ) {
-        val locale = Locale.getDefault().toString()
-        val showCJK = locale.contains(Regex("Hans|Hant|zh|ja|ko"))
+        val showCJK = StringUtil.sysLangCJK()
 
         Thin(id = R.string.w1)
         ExtraLight(id = R.string.w2)
@@ -72,30 +73,26 @@ fun FontWeightCard() {
             )
         }
         if (showCJK) {
-            Column(modifier = Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(rememberScrollState())
+            ) {
                 Text(
                     text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。",
-                    fontFamily = FontFamily.SansSerif,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
+                    fontFamily = FontFamily.SansSerif
                 )
                 Text(
                     text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。",
-                    fontFamily = FontFamily.Serif,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
+                    fontFamily = FontFamily.Serif
                 )
                 Text(
                     text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 ",
-                    fontFamily = FontFamily.Cursive,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
+                    fontFamily = FontFamily.Cursive
                 )
                 Text(
                     text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 ",
-                    fontFamily = FontFamily.Monospace,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
+                    fontFamily = FontFamily.Monospace
                 )
             }
         }

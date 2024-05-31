@@ -75,6 +75,7 @@ import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
+import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 import java.util.Locale
 
 @Composable
@@ -285,13 +286,12 @@ private fun NetworkStateIcon(
 
 @Composable
 private fun NoTranslationTip() {
-    val locale = Locale.getDefault().toString()
-    val languageNotSupport = !locale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
+    val languageNotSupport = StringUtil.sysLangNotSupported()
     val uiTesting = SettingsSharedPref.uiTesting
     if (languageNotSupport || uiTesting) CustomTip(
         formattedMessage = stringResource(
             R.string.no_translation,
-            locale
+            Locale.getDefault().toString()
         )
     )
 }
