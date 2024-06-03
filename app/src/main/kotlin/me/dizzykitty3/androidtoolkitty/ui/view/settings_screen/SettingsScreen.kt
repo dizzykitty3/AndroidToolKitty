@@ -473,6 +473,7 @@ private fun UserSyncSection() {
     var token by remember { mutableStateOf(SettingsSharedPref.getToken()) }
     var isLoading by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
+    val view = LocalView.current
 
     Column(
         verticalArrangement = Arrangement.SpaceAround,
@@ -641,38 +642,35 @@ private fun UserLoginDialog(
 
     CommonDialog(onDismiss) {
         Column(modifier = Modifier.padding(16.dp)) {
-            if (isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
-            } else {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Spacer(modifier = Modifier.weight(1f))
-                    Text(
-                        text = stringResource(id = R.string.register),
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.clickable(onClick = onRegisterClick)
-                    )
-                }
-                TextField(
-                    value = username,
-                    onValueChange = { username = it },
-                    label = { Text(text = stringResource(id = R.string.username)) })
-                TextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    label = { Text(text = stringResource(id = R.string.password)) },
-                    visualTransformation = PasswordVisualTransformation()
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = stringResource(id = R.string.register),
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.clickable(onClick = onRegisterClick)
                 )
-                Spacer(modifier = Modifier.height(16.dp))
-                Button(
-                    onClick = { onLoginClick(username, password) },
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                ) {
-                    Text(text = stringResource(id = R.string.login))
-                }
+            }
+            TextField(
+                value = username,
+                onValueChange = { username = it },
+                label = { Text(text = stringResource(id = R.string.username)) })
+            TextField(
+                value = password,
+                onValueChange = { password = it },
+                label = { Text(text = stringResource(id = R.string.password)) },
+                visualTransformation = PasswordVisualTransformation()
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                enabled = !isLoading,
+                onClick = { onLoginClick(username, password) },
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            ) {
+                Text(text = stringResource(id = R.string.login))
             }
         }
     }
@@ -691,42 +689,39 @@ private fun UserRegisterDialog(
 
     CommonDialog(onDismiss) {
         Column(modifier = Modifier.padding(16.dp)) {
-            if (isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
-            } else {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Spacer(modifier = Modifier.weight(1f))
-                    Text(
-                        text = stringResource(id = R.string.login),
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.clickable(onClick = onLoginClick)
-                    )
-                }
-                TextField(
-                    value = username,
-                    onValueChange = { username = it },
-                    label = { Text(text = stringResource(id = R.string.username)) })
-                TextField(
-                    value = email,
-                    onValueChange = { email = it },
-                    label = { Text(text = stringResource(id = R.string.email)) })
-                TextField(
-                    value = password,
-                    onValueChange = { password = it },
-                    label = { Text(text = stringResource(id = R.string.password)) },
-                    visualTransformation = PasswordVisualTransformation()
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = stringResource(id = R.string.login),
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.clickable(onClick = onLoginClick)
                 )
-                Spacer(modifier = Modifier.height(16.dp))
-                Button(
-                    onClick = { onRegisterClick(username, email, password) },
-                    modifier = Modifier.align(Alignment.CenterHorizontally)
-                ) {
-                    Text(text = stringResource(id = R.string.register))
-                }
+            }
+            TextField(
+                value = username,
+                onValueChange = { username = it },
+                label = { Text(text = stringResource(id = R.string.username)) })
+            TextField(
+                value = email,
+                onValueChange = { email = it },
+                label = { Text(text = stringResource(id = R.string.email)) })
+            TextField(
+                value = password,
+                onValueChange = { password = it },
+                label = { Text(text = stringResource(id = R.string.password)) },
+                visualTransformation = PasswordVisualTransformation()
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                enabled = !isLoading,
+                onClick = { onRegisterClick(username, email, password) },
+                modifier = Modifier.align(Alignment.CenterHorizontally)
+            ) {
+                Text(text = stringResource(id = R.string.register))
             }
         }
     }
