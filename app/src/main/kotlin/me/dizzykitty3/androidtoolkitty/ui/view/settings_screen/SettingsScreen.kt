@@ -481,51 +481,73 @@ private fun UserSyncSection() {
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        OutlinedButton(onClick = {
-            if (token.isBlank()) {
-                dialogState = DialogState.Login
-            } else {
-                dialogState = DialogState.UserProfile
-            }
-        }) {
+        OutlinedButton(
+            onClick = {
+                if (token.isBlank()) {
+                    dialogState = DialogState.Login
+                } else {
+                    dialogState = DialogState.UserProfile
+                }
+            },
+            enabled = !isLoading
+        ) {
             Text(text = stringResource(id = R.string.user_profile)) // 用户头像按钮
         }
 
-        OutlinedButton(onClick = {
-            if (token.isBlank()) {
-                dialogState = DialogState.Login
-            } else {
-                coroutineScope.launch {
-                    isLoading = true
-                    handleUploadSettings(
-                        token = token,
-                        settings = SettingsSharedPref.exportSettingsToJson(),
-                        onFailure = {
-                            isLoading = false
-                        })
+        OutlinedButton(
+            onClick = {
+                if (token.isBlank()) {
+                    dialogState = DialogState.Login
+                } else {
+                    coroutineScope.launch {
+                        isLoading = true
+                        handleUploadSettings(
+                            token = token,
+                            settings = SettingsSharedPref.exportSettingsToJson(),
+                            onFailure = {
+                                isLoading = false
+                            },
+                            onSuccess = {
+                                isLoading = false
+                            }
+                        )
+                    }
                 }
-            }
-        }) {
+            },
+            enabled = !isLoading
+        ) {
             Text(text = stringResource(id = R.string.upload_settings))
         }
-        OutlinedButton(onClick = {
-            if (token.isBlank()) {
-                dialogState = DialogState.Login
-            } else {
-                coroutineScope.launch {
-                    isLoading = true
-                    handleDownloadSettings(
-                        token = token,
-                        onSettingsReceived = {
-                            SettingsSharedPref.importSettingsFromJson(it)
-                        },
-                        onFailure = {
-                            isLoading = false
-                        })
+
+        OutlinedButton(
+            onClick = {
+                if (token.isBlank()) {
+                    dialogState = DialogState.Login
+                } else {
+                    coroutineScope.launch {
+                        isLoading = true
+                        handleDownloadSettings(
+                            token = token,
+                            onSettingsReceived = {
+                                SettingsSharedPref.importSettingsFromJson(it)
+                            },
+                            onFailure = {
+                                isLoading = false
+                            },
+                            onSuccess = {
+                                isLoading = false
+                            }
+                        )
+                    }
                 }
-            }
-        }) {
+            },
+            enabled = !isLoading
+        ) {
             Text(text = stringResource(id = R.string.download_settings))
+        }
+
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.padding(top = 16.dp))
         }
     }
 
@@ -763,13 +785,15 @@ private fun CommonDialog(onDismiss: () -> Unit, content: @Composable () -> Unit)
 suspend fun handleUploadSettings(
     token: String,
     settings: String,
-    onFailure: () -> Unit
+    onFailure: () -> Unit,
+    onSuccess: () -> Unit
 ) {
     handleRequest(
         url = "https://api.yanqishui.work/toolkitten/data/user-settings",
         headers = mapOf("Authorization" to token),
         body = mapOf("settings" to settings),
         onFailure = onFailure,
+        onSuccess = onSuccess,
         requestType = HttpRequestType.PUT
     )
 }
@@ -777,12 +801,14 @@ suspend fun handleUploadSettings(
 suspend fun handleDownloadSettings(
     token: String,
     onSettingsReceived: (String) -> Unit,
-    onFailure: () -> Unit
+    onFailure: () -> Unit,
+    onSuccess: () -> Unit
 ) {
     handleRequest(
         url = "https://api.yanqishui.work/toolkitten/data/user-settings",
         headers = mapOf("Authorization" to token),
         onFailure = onFailure,
+        onSuccess = onSuccess,
         onDataReceived = onSettingsReceived,
         requestType = HttpRequestType.GET
     )
@@ -834,7 +860,8 @@ suspend fun handleRequest(
     headers: Map<String, String> = emptyMap(),
     onDismiss: () -> Unit = {},
     onDataReceived: (String) -> Unit = {},
-    onFailure: () -> Unit
+    onFailure: () -> Unit,
+    onSuccess: () -> Unit = {}
 ) {
     val response: HttpResponse = when (requestType) {
         HttpRequestType.GET -> HttpUtil.get(url, body, headers)
@@ -848,6 +875,7 @@ suspend fun handleRequest(
         onDataReceived(responseBody)
         ToastUtil.toast("Operation successful")
         onDismiss()
+        onSuccess()
     } else {
         val errorBody = response.bodyAsText()
         val jsonObj = JSONObject(errorBody)
