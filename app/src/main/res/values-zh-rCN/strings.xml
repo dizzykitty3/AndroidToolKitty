@@ -178,4 +178,5 @@
     <string name="email">电子邮箱</string>
     <string name="off">OFF</string>
     <string name="user_profile">用户中心</string>
+    <string name="success">成功</string>
 </resources>

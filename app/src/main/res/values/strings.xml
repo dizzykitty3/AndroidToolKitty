@@ -305,6 +305,7 @@
     <string name="bluetooth_bluetooth_admin">To check paired bluetooth devices, please grant the app BLUETOOTH, BLUETOOTH_ADMIN permissions.</string>
     <string name="missed_sys_popup">Missed the system permission popup?</string>
     <string name="user_profile">User Profile</string>
+    <string name="success">success</string>
 
     <!-- End of resources -->
 </resources>
