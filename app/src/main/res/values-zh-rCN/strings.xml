@@ -179,4 +179,11 @@
     <string name="off">OFF</string>
     <string name="user_profile">用户中心</string>
     <string name="success">成功</string>
+    <string name="error_account_locked">账户暂时被锁定，请稍后再试。</string>
+    <string name="error_invalid_credentials">用户名或密码无效。</string>
+    <string name="error_username_taken">用户名已被占用。</string>
+    <string name="error_settings_not_found">您还没有上传设置。</string>
+    <string name="error_unknown">发生未知错误。</string>
+    <string name="error_login_expired">登录状态已过期，请登出后重新登录。</string>
+
 </resources>

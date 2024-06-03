@@ -306,6 +306,12 @@
     <string name="missed_sys_popup">Missed the system permission popup?</string>
     <string name="user_profile">User Profile</string>
     <string name="success">success</string>
+    <string name="error_account_locked">Account is temporarily locked. Please try again later.</string>
+    <string name="error_invalid_credentials">Invalid username or password.</string>
+    <string name="error_username_taken">Username already taken.</string>
+    <string name="error_settings_not_found">You haven\'t uploaded settings yet.</string>
+    <string name="error_unknown">Unknown error occurred.</string>
+    <string name="error_login_expired">Login status expired, please logout and login.</string>
 
     <!-- End of resources -->
 </resources>

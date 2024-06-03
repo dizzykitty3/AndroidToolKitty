@@ -19,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -54,6 +55,16 @@ fun UserSyncSection() {
     val coroutineScope = rememberCoroutineScope()
     val view = LocalView.current
     val success = stringResource(id = R.string.success)
+    var errorCode by remember { mutableStateOf<Int?>(null) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(errorCode) {
+        errorCode?.let { code ->
+            val resId = getErrorStringResourceId(code)
+            errorMessage = view.context.getString(resId)
+            errorCode = null
+        }
+    }
 
     Column(
         verticalArrangement = Arrangement.SpaceAround,
@@ -72,7 +83,7 @@ fun UserSyncSection() {
             },
             enabled = !isLoading
         ) {
-            Text(text = stringResource(id = R.string.user_profile)) // 用户头像按钮
+            Text(text = stringResource(id = R.string.user_profile))
         }
 
         OutlinedButton(
@@ -86,8 +97,9 @@ fun UserSyncSection() {
                             token = token,
                             settings = SettingsSharedPref.exportSettingsToJson(),
                             onFailure = {
-                                SnackbarUtil.snackbar(view, it)
+                                errorCode = it
                                 isLoading = false
+                                SnackbarUtil.snackbar(view, errorMessage)
                             },
                             onSuccess = {
                                 SnackbarUtil.snackbar(view, success)
@@ -116,8 +128,9 @@ fun UserSyncSection() {
                                 SettingsSharedPref.importSettingsFromJson(it)
                             },
                             onFailure = {
-                                SnackbarUtil.snackbar(view, it)
+                                errorCode = it
                                 isLoading = false
+                                SnackbarUtil.snackbar(view, errorMessage)
                             },
                             onSuccess = {
                                 isLoading = false
@@ -158,8 +171,9 @@ fun UserSyncSection() {
                                 SnackbarUtil.snackbar(view, success)
                             },
                             onFailure = {
-                                SnackbarUtil.snackbar(view, it)
+                                errorCode = it
                                 isLoading = false
+                                SnackbarUtil.snackbar(view, errorMessage)
                             }
                         )
                     }
@@ -190,8 +204,9 @@ fun UserSyncSection() {
                                 SnackbarUtil.snackbar(view, success)
                             },
                             onFailure = {
-                                SnackbarUtil.snackbar(view, it)
+                                errorCode = it
                                 isLoading = false
+                                SnackbarUtil.snackbar(view, errorMessage)
                             }
                         )
                     }
@@ -215,6 +230,17 @@ fun UserSyncSection() {
         }
 
         null -> {}
+    }
+}
+
+fun getErrorStringResourceId(code: Int): Int {
+    return when (code) {
+        401 -> R.string.error_login_expired
+        1001 -> R.string.error_account_locked
+        1002 -> R.string.error_invalid_credentials
+        1003 -> R.string.error_username_taken
+        2001 -> R.string.error_settings_not_found
+        else -> R.string.error_unknown
     }
 }
 
@@ -372,7 +398,7 @@ private fun CommonDialog(onDismiss: () -> Unit, content: @Composable () -> Unit)
 suspend fun handleUploadSettings(
     token: String,
     settings: String,
-    onFailure: (String) -> Unit,
+    onFailure: (Int) -> Unit,
     onSuccess: () -> Unit
 ) {
     handleRequest(
@@ -388,7 +414,7 @@ suspend fun handleUploadSettings(
 suspend fun handleDownloadSettings(
     token: String,
     onSettingsReceived: (String) -> Unit,
-    onFailure: (String) -> Unit,
+    onFailure: (Int) -> Unit,
     onSuccess: () -> Unit
 ) {
     handleRequest(
@@ -407,7 +433,7 @@ suspend fun handleLogin(
     onDismiss: () -> Unit,
     onTokenReceived: (String) -> Unit,
     onSuccess: () -> Unit,
-    onFailure: (String) -> Unit
+    onFailure: (Int) -> Unit
 ) {
     handleRequest(
         url = "https://api.yanqishui.work/toolkitten/account/login",
@@ -427,7 +453,7 @@ suspend fun handleRegister(
     onDismiss: () -> Unit,
     onTokenReceived: (String) -> Unit,
     onSuccess: () -> Unit,
-    onFailure: (String) -> Unit
+    onFailure: (Int) -> Unit
 
 ) {
     handleRequest(
@@ -452,7 +478,7 @@ suspend fun handleRequest(
     headers: Map<String, String> = emptyMap(),
     onDismiss: () -> Unit = {},
     onDataReceived: (String) -> Unit = {},
-    onFailure: (String) -> Unit,
+    onFailure: (Int) -> Unit,
     onSuccess: () -> Unit
 ) {
     val response: HttpResponse = when (requestType) {
@@ -467,10 +493,13 @@ suspend fun handleRequest(
         onDataReceived(responseBody)
         onSuccess()
         onDismiss()
+    } else if (response.status == HttpStatusCode.Unauthorized) {
+        onDismiss()
+        onFailure(response.status.value)
     } else {
         val errorBody = response.bodyAsText()
         val jsonObj = JSONObject(errorBody)
-        val errorMessage = jsonObj.getString("message")
-        onFailure(errorMessage)
+        val errorCode = jsonObj.getInt("code")
+        onFailure(errorCode)
     }
 }

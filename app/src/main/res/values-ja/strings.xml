@@ -180,4 +180,10 @@
     <string name="off">OFF</string>
     <string name="user_profile">ユーザーセンター</string>
     <string name="success">成功</string>
+    <string name="error_account_locked">アカウントが一時的にロックされています。しばらくしてからもう一度お試しください。</string>
+    <string name="error_invalid_credentials">ユーザー名またはパスワードが無効です。</string>
+    <string name="error_username_taken">ユーザー名はすでに使用されています。</string>
+    <string name="error_settings_not_found">設定がまだアップロードされていません。</string>
+    <string name="error_unknown">不明なエラーが発生しました。</string>
+    <string name="error_login_expired">ログイン状態が期限切れです。ログアウトして再度ログインしてください。</string>
 </resources>
