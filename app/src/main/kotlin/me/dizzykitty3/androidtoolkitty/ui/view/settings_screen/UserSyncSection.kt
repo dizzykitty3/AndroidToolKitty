@@ -53,7 +53,7 @@ fun UserSyncSection() {
     var isLoading by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
     val view = LocalView.current
-    val httpOk = stringResource(id = R.string.success)
+    val success = stringResource(id = R.string.success)
 
     Column(
         verticalArrangement = Arrangement.SpaceAround,
@@ -90,7 +90,7 @@ fun UserSyncSection() {
                                 isLoading = false
                             },
                             onSuccess = {
-                                SnackbarUtil.snackbar(view, httpOk)
+                                SnackbarUtil.snackbar(view, success)
                                 isLoading = false
                             }
                         )
@@ -112,7 +112,7 @@ fun UserSyncSection() {
                         handleDownloadSettings(
                             token = token,
                             onSettingsReceived = {
-                                SnackbarUtil.snackbar(view, httpOk)
+                                SnackbarUtil.snackbar(view, success)
                                 SettingsSharedPref.importSettingsFromJson(it)
                             },
                             onFailure = {
@@ -155,7 +155,7 @@ fun UserSyncSection() {
                                 isLoading = false
                             },
                             onSuccess = {
-                                SnackbarUtil.snackbar(view, httpOk)
+                                SnackbarUtil.snackbar(view, success)
                             },
                             onFailure = {
                                 SnackbarUtil.snackbar(view, it)
@@ -187,7 +187,7 @@ fun UserSyncSection() {
                                 isLoading = false
                             },
                             onSuccess = {
-                                SnackbarUtil.snackbar(view, httpOk)
+                                SnackbarUtil.snackbar(view, success)
                             },
                             onFailure = {
                                 SnackbarUtil.snackbar(view, it)
@@ -208,7 +208,7 @@ fun UserSyncSection() {
                     token = ""
                     dialogState = null
                     isLoading = false
-                    ToastUtil.toast("Successfully logout!")
+                    SnackbarUtil.snackbar(view, success)
                 },
                 onDismiss = { dialogState = null }
             )
