@@ -186,4 +186,10 @@
     <string name="error_settings_not_found">設定がまだアップロードされていません。</string>
     <string name="error_unknown">不明なエラーが発生しました。</string>
     <string name="error_login_expired">ログイン状態が期限切れです。ログアウトして再度ログインしてください。</string>
+    <string name="download_settings_successful">ダウンロード成功</string>
+    <string name="download_settings_take_effect">設定のダウンロードが成功しました。メイン画面に戻ると変更が有効になります。</string>
+    <string name="ok">オーケー</string>
+    <string name="error_invalid_username">ユーザー名は文字、数字、アンダースコアのみ使用できます</string>
+    <string name="error_invalid_email">有効なメールアドレスを入力してください</string>
+    <string name="error_invalid_password">パスワードは6文字以上である必要があります</string>
 </resources>

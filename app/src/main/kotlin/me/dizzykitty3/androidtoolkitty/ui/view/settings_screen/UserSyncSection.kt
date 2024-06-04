@@ -19,7 +19,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,16 +54,6 @@ fun UserSyncSection() {
     val coroutineScope = rememberCoroutineScope()
     val view = LocalView.current
     val success = stringResource(id = R.string.success)
-    var errorCode by remember { mutableStateOf<Int?>(null) }
-    var errorMessage by remember { mutableStateOf<String?>(null) }
-
-    LaunchedEffect(errorCode) {
-        errorCode?.let { code ->
-            val resId = getErrorStringResourceId(code)
-            errorMessage = view.context.getString(resId)
-            errorCode = null
-        }
-    }
 
     Column(
         verticalArrangement = Arrangement.SpaceAround,
@@ -97,9 +86,9 @@ fun UserSyncSection() {
                             token = token,
                             settings = SettingsSharedPref.exportSettingsToJson(),
                             onFailure = {
-                                errorCode = it
+                                val message = view.context.getString(getErrorStringResourceId(it))
                                 isLoading = false
-                                SnackbarUtil.snackbar(view, errorMessage)
+                                SnackbarUtil.snackbar(view, message)
                             },
                             onSuccess = {
                                 SnackbarUtil.snackbar(view, success)
@@ -128,12 +117,13 @@ fun UserSyncSection() {
                                 SettingsSharedPref.importSettingsFromJson(it)
                             },
                             onFailure = {
-                                errorCode = it
+                                val message = view.context.getString(getErrorStringResourceId(it))
                                 isLoading = false
-                                SnackbarUtil.snackbar(view, errorMessage)
+                                SnackbarUtil.snackbar(view, message)
                             },
                             onSuccess = {
                                 isLoading = false
+                                dialogState = DialogState.SettingsDownloaded
                             }
                         )
                     }
@@ -171,9 +161,9 @@ fun UserSyncSection() {
                                 SnackbarUtil.snackbar(view, success)
                             },
                             onFailure = {
-                                errorCode = it
+                                val message = view.context.getString(getErrorStringResourceId(it))
                                 isLoading = false
-                                SnackbarUtil.snackbar(view, errorMessage)
+                                ToastUtil.toast(message)
                             }
                         )
                     }
@@ -204,9 +194,9 @@ fun UserSyncSection() {
                                 SnackbarUtil.snackbar(view, success)
                             },
                             onFailure = {
-                                errorCode = it
+                                val message = view.context.getString(getErrorStringResourceId(it))
                                 isLoading = false
-                                SnackbarUtil.snackbar(view, errorMessage)
+                                ToastUtil.toast(message)
                             }
                         )
                     }
@@ -229,6 +219,13 @@ fun UserSyncSection() {
             )
         }
 
+        DialogState.SettingsDownloaded -> {
+            SettingsDownloadedDialog(onDismiss = {
+                dialogState = null
+                //TODO 回到主页逻辑
+            })
+        }
+
         null -> {}
     }
 }
@@ -245,7 +242,7 @@ fun getErrorStringResourceId(code: Int): Int {
 }
 
 enum class DialogState {
-    Login, Register, UserProfile
+    Login, Register, UserProfile, SettingsDownloaded
 }
 
 @Composable
@@ -257,6 +254,11 @@ private fun UserLoginDialog(
 ) {
     var username by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var usernameError by remember { mutableStateOf<String?>(null) }
+    var passwordError by remember { mutableStateOf<String?>(null) }
+    val usernameRegex = Regex("^[a-zA-Z0-9_]*$")
+    val passwordRegex = Regex("^[^\\s]{6,}$")
+    val view = LocalView.current
 
     CommonDialog(onDismiss) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -274,18 +276,49 @@ private fun UserLoginDialog(
             }
             TextField(
                 value = username,
-                onValueChange = { username = it },
-                label = { Text(text = stringResource(id = R.string.username)) })
+                onValueChange = {
+                    val trimmedInput = it.filter { char -> char.isLetterOrDigit() || char == '_' }
+                    username = trimmedInput
+                },
+                label = { Text(text = stringResource(id = R.string.username)) },
+                isError = usernameError != null
+            )
+            if (usernameError != null) {
+                Text(
+                    text = usernameError ?: "",
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.align(Alignment.Start)
+                )
+            }
             TextField(
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = {
+                    val trimmedInput = it.replace("\\s".toRegex(), "")
+                    password = trimmedInput
+                },
                 label = { Text(text = stringResource(id = R.string.password)) },
-                visualTransformation = PasswordVisualTransformation()
+                visualTransformation = PasswordVisualTransformation(),
+                isError = passwordError != null
             )
+            if (passwordError != null) {
+                Text(
+                    text = passwordError ?: "",
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.align(Alignment.Start)
+                )
+            }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 enabled = !isLoading,
-                onClick = { onLoginClick(username, password) },
+                onClick = {
+                    usernameError =
+                        if (!username.matches(usernameRegex)) view.context.getString(R.string.error_invalid_username) else null
+                    passwordError =
+                        if (!password.matches(passwordRegex)) view.context.getString(R.string.error_invalid_password) else null
+                    if (usernameError == null && passwordError == null) {
+                        onLoginClick(username, password)
+                    }
+                },
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
                 Text(text = stringResource(id = R.string.login))
@@ -304,6 +337,13 @@ private fun UserRegisterDialog(
     var username by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var usernameError by remember { mutableStateOf<String?>(null) }
+    var emailError by remember { mutableStateOf<String?>(null) }
+    var passwordError by remember { mutableStateOf<String?>(null) }
+    val usernameRegex = Regex("^[a-zA-Z0-9_]*$")
+    val emailRegex = Regex("^[A-Za-z0-9+_.-]+@(.+)\$")
+    val passwordRegex = Regex("^[^\\s]{6,}$")
+    val view = LocalView.current
 
     CommonDialog(onDismiss) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -321,22 +361,67 @@ private fun UserRegisterDialog(
             }
             TextField(
                 value = username,
-                onValueChange = { username = it },
-                label = { Text(text = stringResource(id = R.string.username)) })
+                onValueChange = {
+                    val trimmedInput = it.filter { char -> char.isLetterOrDigit() || char == '_' }
+                    username = trimmedInput
+                },
+                label = { Text(text = stringResource(id = R.string.username)) },
+                isError = usernameError != null
+            )
+            if (usernameError != null) {
+                Text(
+                    text = usernameError ?: "",
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.align(Alignment.Start)
+                )
+            }
             TextField(
                 value = email,
-                onValueChange = { email = it },
-                label = { Text(text = stringResource(id = R.string.email)) })
+                onValueChange = {
+                    val trimmedInput = it.replace("\\s".toRegex(), "")
+                    email = trimmedInput
+                },
+                label = { Text(text = stringResource(id = R.string.email)) },
+                isError = emailError != null
+            )
+            if (emailError != null) {
+                Text(
+                    text = emailError ?: "",
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.align(Alignment.Start)
+                )
+            }
             TextField(
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = {
+                    val trimmedInput = it.replace("\\s".toRegex(), "")
+                    password = trimmedInput
+                },
                 label = { Text(text = stringResource(id = R.string.password)) },
-                visualTransformation = PasswordVisualTransformation()
+                visualTransformation = PasswordVisualTransformation(),
+                isError = passwordError != null
             )
+            if (passwordError != null) {
+                Text(
+                    text = passwordError ?: "",
+                    color = MaterialTheme.colorScheme.error,
+                    modifier = Modifier.align(Alignment.Start)
+                )
+            }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 enabled = !isLoading,
-                onClick = { onRegisterClick(username, email, password) },
+                onClick = {
+                    usernameError =
+                        if (!username.matches(usernameRegex)) view.context.getString(R.string.error_invalid_username) else null
+                    emailError =
+                        if (!email.matches(emailRegex)) view.context.getString(R.string.error_invalid_email) else null
+                    passwordError =
+                        if (!password.matches(passwordRegex)) view.context.getString(R.string.error_invalid_password) else null
+                    if (usernameError == null && emailError == null && passwordError == null) {
+                        onRegisterClick(username, email, password)
+                    }
+                },
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
                 Text(text = stringResource(id = R.string.register))
@@ -376,6 +461,20 @@ fun UserProfileDialog(
                 Button(onClick = { onDismiss() }) {
                     Text("Close")
                 }
+            }
+        }
+    )
+}
+
+@Composable
+fun SettingsDownloadedDialog(onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = { onDismiss() },
+        title = { Text(text = stringResource(id = R.string.download_settings_successful)) },
+        text = { Text(text = stringResource(id = R.string.download_settings_take_effect)) },
+        confirmButton = {
+            Button(onClick = onDismiss) {
+                Text(stringResource(id = R.string.ok))
             }
         }
     )
@@ -503,3 +602,4 @@ suspend fun handleRequest(
         onFailure(errorCode)
     }
 }
+

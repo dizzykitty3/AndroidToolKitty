@@ -185,5 +185,11 @@
     <string name="error_settings_not_found">您还没有上传设置。</string>
     <string name="error_unknown">发生未知错误。</string>
     <string name="error_login_expired">登录状态已过期，请登出后重新登录。</string>
+    <string name="download_settings_successful">下载成功</string>
+    <string name="download_settings_take_effect">设置下载成功。返回主界面后更改将生效。</string>
+    <string name="ok">好的</string>
+    <string name="error_invalid_username">用户名只能包含字母、数字和下划线</string>
+    <string name="error_invalid_email">请输入有效的邮箱地址</string>
+    <string name="error_invalid_password">密码必须至少包含6个字符</string>
 
 </resources>

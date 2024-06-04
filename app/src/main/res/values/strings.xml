@@ -312,6 +312,13 @@
     <string name="error_settings_not_found">You haven\'t uploaded settings yet.</string>
     <string name="error_unknown">Unknown error occurred.</string>
     <string name="error_login_expired">Login status expired, please logout and login.</string>
+    <string name="download_settings_successful">Download Successful</string>
+    <string name="download_settings_take_effect">Settings downloaded successfully. The changes will take effect after returning to the main screen.</string>
+    <string name="ok">ok</string>
+    <string name="error_invalid_username">Username can only contain letters, numbers, and underscores</string>
+    <string name="error_invalid_email">Please enter a valid email address</string>
+    <string name="error_invalid_password">Password must be at least 6 characters long</string>
+
 
     <!-- End of resources -->
 </resources>
