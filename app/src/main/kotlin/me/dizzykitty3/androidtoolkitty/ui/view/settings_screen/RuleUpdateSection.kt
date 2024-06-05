@@ -1,13 +1,9 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.settings_screen
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,11 +11,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
@@ -39,60 +33,53 @@ fun RuleUpdateSection() {
     val errorMessage = stringResource(id = R.string.error_rule_update)
     val success = stringResource(id = R.string.success)
 
-    Column(modifier = Modifier.padding(16.dp)) {
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Button(
-                onClick = {
-                    coroutineScope.launch {
-                        isLoading = true
-                        onUpdateSocialMedia(
-                            onSuccess = {
-                                SettingsSharedPref.socialMedia = it
-                                isLoading = false
-                                SnackbarUtil.snackbar(view, success)
-                            },
-                            onFailure = {
-                                isLoading = false
-                                SnackbarUtil.snackbar(view, errorMessage)
-                            }
-                        )
+    OutlinedButton(
+        onClick = {
+            coroutineScope.launch {
+                isLoading = true
+                onUpdateSocialMedia(
+                    onSuccess = {
+                        SettingsSharedPref.socialMedia = it
+                        isLoading = false
+                        SnackbarUtil.snackbar(view, success)
+                    },
+                    onFailure = {
+                        isLoading = false
+                        SnackbarUtil.snackbar(view, errorMessage)
                     }
-                },
-                modifier = Modifier.padding(end = 8.dp)
-            ) {
-                Text(stringResource(id = R.string.social_media_profile))
-            }
-
-            Button(
-                onClick = {
-                    coroutineScope.launch {
-                        isLoading = true
-                        onUpdateDomainSuffix(
-                            onSuccess = {
-                                SettingsSharedPref.domainSuffix = it
-                                isLoading = false
-                                SnackbarUtil.snackbar(view, success)
-                            },
-                            onFailure = {
-                                isLoading = false
-                                SnackbarUtil.snackbar(view, errorMessage)
-                            }
-                        )
-                    }
-                }
-            ) {
-                Text(stringResource(R.string.url))
+                )
             }
         }
-        if (isLoading) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
+    ) {
+        Text(stringResource(id = R.string.social_media_profile))
+    }
+
+    OutlinedButton(
+        onClick = {
+            coroutineScope.launch {
+                isLoading = true
+                onUpdateDomainSuffix(
+                    onSuccess = {
+                        SettingsSharedPref.domainSuffix = it
+                        isLoading = false
+                        SnackbarUtil.snackbar(view, success)
+                    },
+                    onFailure = {
+                        isLoading = false
+                        SnackbarUtil.snackbar(view, errorMessage)
+                    }
+                )
             }
+        }
+    ) {
+        Text(stringResource(R.string.url))
+    }
+
+    if (isLoading) {
+        Box(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            CircularProgressIndicator()
         }
     }
 }
@@ -120,7 +107,7 @@ suspend fun handleRequest(
         } else {
             onFailure()
         }
-    } catch (e: Exception) {
+    } catch (_: Exception) {
         onFailure()
     }
 }

@@ -57,6 +57,7 @@ object SettingsSharedPref {
 
     private inline fun <reified T> setPreference(key: String, value: T) {
         with(sharedPrefs.edit()) {
+            Timber.d("set preference: $key = $value")
             when (value) {
                 is Boolean -> putBoolean(key, value)
                 is Int -> putInt(key, value)
@@ -80,7 +81,6 @@ object SettingsSharedPref {
     }
 
     fun exportSettingsToJson(): String {
-
         val keys =
             sharedPrefs.all.keys.filter { !nonSettingsPref.contains(it) }  // Exclude the token
         val settingsMap: Map<String, Any?> = keys.associateWith {
@@ -101,10 +101,8 @@ object SettingsSharedPref {
     }
 
     fun importSettingsFromJson(jsonString: String) {
-        // 假设所有值在 JSON 中都是作为字符串存储的
         val settingsMap: Map<String, String> = Json.decodeFromString(jsonString)
         settingsMap.forEach { (key, value) ->
-            // 假设你可以从键值推断出数据类型或在值中存储了类型信息
             when {
                 value.toBooleanCustom() != null -> setPreference(key, value.toBoolean())
                 value.toIntOrNull() != null -> setPreference(key, value.toInt())
@@ -212,6 +210,7 @@ object SettingsSharedPref {
                 val items: WheelOfFortuneItems = Json.decodeFromString(it)
                 items.items
             } catch (e: Exception) {
+                Timber.e(e)
                 null
             }
         }
@@ -238,6 +237,4 @@ object SettingsSharedPref {
     fun getToken(): String = getPreference(TOKEN, "")
 
     fun setToken(token: String) = setPreference(TOKEN, token)
-
-
 }

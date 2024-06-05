@@ -14,9 +14,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -55,88 +55,80 @@ fun UserSyncSection() {
     val view = LocalView.current
     val success = stringResource(id = R.string.success)
 
-    Column(
-        verticalArrangement = Arrangement.SpaceAround,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
+    OutlinedButton(
+        onClick = {
+            if (token.isBlank()) {
+                dialogState = DialogState.Login
+            } else {
+                dialogState = DialogState.UserProfile
+            }
+        },
+        enabled = !isLoading
     ) {
-        OutlinedButton(
-            onClick = {
-                if (token.isBlank()) {
-                    dialogState = DialogState.Login
-                } else {
-                    dialogState = DialogState.UserProfile
-                }
-            },
-            enabled = !isLoading
-        ) {
-            Text(text = stringResource(id = R.string.user_profile))
-        }
+        Text(text = stringResource(id = R.string.user_profile))
+    }
 
-        OutlinedButton(
-            onClick = {
-                if (token.isBlank()) {
-                    dialogState = DialogState.Login
-                } else {
-                    coroutineScope.launch {
-                        isLoading = true
-                        handleUploadSettings(
-                            token = token,
-                            settings = SettingsSharedPref.exportSettingsToJson(),
-                            onFailure = {
-                                val message = view.context.getString(getErrorStringResourceId(it))
-                                isLoading = false
-                                SnackbarUtil.snackbar(view, message)
-                            },
-                            onSuccess = {
-                                SnackbarUtil.snackbar(view, success)
-                                isLoading = false
-                            }
-                        )
-                    }
+    OutlinedButton(
+        onClick = {
+            if (token.isBlank()) {
+                dialogState = DialogState.Login
+            } else {
+                coroutineScope.launch {
+                    isLoading = true
+                    handleUploadSettings(
+                        token = token,
+                        settings = SettingsSharedPref.exportSettingsToJson(),
+                        onFailure = {
+                            val message = view.context.getString(getErrorStringResourceId(it))
+                            isLoading = false
+                            SnackbarUtil.snackbar(view, message)
+                        },
+                        onSuccess = {
+                            SnackbarUtil.snackbar(view, success)
+                            isLoading = false
+                        }
+                    )
                 }
-            },
-            enabled = !isLoading
-        ) {
-            Text(text = stringResource(id = R.string.upload_settings))
-        }
+            }
+        },
+        enabled = !isLoading
+    ) {
+        Text(text = stringResource(id = R.string.upload_settings))
+    }
 
-        OutlinedButton(
-            onClick = {
-                if (token.isBlank()) {
-                    dialogState = DialogState.Login
-                } else {
-                    coroutineScope.launch {
-                        isLoading = true
-                        handleDownloadSettings(
-                            token = token,
-                            onSettingsReceived = {
-                                SnackbarUtil.snackbar(view, success)
-                                SettingsSharedPref.importSettingsFromJson(it)
-                            },
-                            onFailure = {
-                                val message = view.context.getString(getErrorStringResourceId(it))
-                                isLoading = false
-                                SnackbarUtil.snackbar(view, message)
-                            },
-                            onSuccess = {
-                                isLoading = false
-                                dialogState = DialogState.SettingsDownloaded
-                            }
-                        )
-                    }
+    OutlinedButton(
+        onClick = {
+            if (token.isBlank()) {
+                dialogState = DialogState.Login
+            } else {
+                coroutineScope.launch {
+                    isLoading = true
+                    handleDownloadSettings(
+                        token = token,
+                        onSettingsReceived = {
+                            SnackbarUtil.snackbar(view, success)
+                            SettingsSharedPref.importSettingsFromJson(it)
+                        },
+                        onFailure = {
+                            val message = view.context.getString(getErrorStringResourceId(it))
+                            isLoading = false
+                            SnackbarUtil.snackbar(view, message)
+                        },
+                        onSuccess = {
+                            isLoading = false
+                            dialogState = DialogState.SettingsDownloaded
+                        }
+                    )
                 }
-            },
-            enabled = !isLoading
-        ) {
-            Text(text = stringResource(id = R.string.download_settings))
-        }
+            }
+        },
+        enabled = !isLoading
+    ) {
+        Text(text = stringResource(id = R.string.download_settings))
+    }
 
-        if (isLoading) {
-            CircularProgressIndicator(modifier = Modifier.padding(top = 16.dp))
-        }
+    if (isLoading) {
+        CircularProgressIndicator(modifier = Modifier.padding(top = 16.dp))
     }
 
     when (dialogState) {
@@ -274,7 +266,7 @@ private fun UserLoginDialog(
                     modifier = Modifier.clickable(onClick = onRegisterClick)
                 )
             }
-            TextField(
+            OutlinedTextField(
                 value = username,
                 onValueChange = {
                     val trimmedInput = it.filter { char -> char.isLetterOrDigit() || char == '_' }
@@ -290,7 +282,7 @@ private fun UserLoginDialog(
                     modifier = Modifier.align(Alignment.Start)
                 )
             }
-            TextField(
+            OutlinedTextField(
                 value = password,
                 onValueChange = {
                     val trimmedInput = it.replace("\\s".toRegex(), "")
@@ -359,7 +351,7 @@ private fun UserRegisterDialog(
                     modifier = Modifier.clickable(onClick = onLoginClick)
                 )
             }
-            TextField(
+            OutlinedTextField(
                 value = username,
                 onValueChange = {
                     val trimmedInput = it.filter { char -> char.isLetterOrDigit() || char == '_' }
@@ -375,7 +367,7 @@ private fun UserRegisterDialog(
                     modifier = Modifier.align(Alignment.Start)
                 )
             }
-            TextField(
+            OutlinedTextField(
                 value = email,
                 onValueChange = {
                     val trimmedInput = it.replace("\\s".toRegex(), "")
@@ -391,7 +383,7 @@ private fun UserRegisterDialog(
                     modifier = Modifier.align(Alignment.Start)
                 )
             }
-            TextField(
+            OutlinedTextField(
                 value = password,
                 onValueChange = {
                     val trimmedInput = it.replace("\\s".toRegex(), "")
@@ -474,7 +466,7 @@ fun SettingsDownloadedDialog(onDismiss: () -> Unit) {
         text = { Text(text = stringResource(id = R.string.download_settings_take_effect)) },
         confirmButton = {
             Button(onClick = onDismiss) {
-                Text(stringResource(id = R.string.ok))
+                Text(stringResource(id = android.R.string.ok))
             }
         }
     )
@@ -602,8 +594,7 @@ suspend fun handleRequest(
             val errorCode = jsonObj.getInt("code")
             onFailure(errorCode)
         }
-    } catch (e: Exception) {
+    } catch (_: Exception) {
         onFailure(9999)
     }
 }
-

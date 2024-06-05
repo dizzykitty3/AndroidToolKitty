@@ -4,7 +4,6 @@ import androidx.annotation.StringRes
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import timber.log.Timber
 
 object URLUtil {
@@ -26,9 +25,13 @@ object URLUtil {
 
     fun suffixOf(urlInput: String): String {
         if (urlInput.contains(".")) return ""
-        val domainInfoList = SettingsSharedPref.domainSuffix?.let { parseDomainJson(it) }
-        val suffixMapFromJson = domainInfoList?.associate { it.domain to it.suffix } ?: emptyMap()
-        val hardcodedSuffixMap = mapOf(
+
+        // todo
+//        val domainInfoList = SettingsSharedPref.domainSuffix?.let { parseDomainJson(it) }
+//        val suffixMapFromJson = domainInfoList?.associate { it.domain to it.suffix } ?: emptyMap()
+//        val hardcodedSuffixMap = mapOf(
+
+        val suffixMap = mapOf(
             "remove" to BG,
             "feishu" to CN,
             "52pojie" to CN,
@@ -92,9 +95,12 @@ object URLUtil {
             "namu" to WIKI,
         )
 
-        val finalSuffixMap = hardcodedSuffixMap + suffixMapFromJson
-        val cleanInput = StringUtil.dropSpaces(urlInput)
-        return finalSuffixMap[cleanInput] ?: ".com"
+        // todo
+//        val finalSuffixMap = hardcodedSuffixMap + suffixMapFromJson
+//        val cleanInput = StringUtil.dropSpaces(urlInput)
+//        return finalSuffixMap[cleanInput] ?: ".com"
+
+        return suffixMap[StringUtil.dropSpaces(urlInput)] ?: COM
     }
 
     /**
@@ -143,12 +149,12 @@ object URLUtil {
     fun prefixOf(platform: Platform): String = platform.prefix
 
     private fun parseDomainJson(input: String): List<DomainInfo> {
-        val json = Json { ignoreUnknownKeys = true }  // 创建一个 Json 实例，配置为忽略未知键
+        val json = Json { ignoreUnknownKeys = true }
         return json.decodeFromString(input)
     }
 
     private fun parsePlatformJson(input: String): List<PlatformInfo> {
-        val json = Json { ignoreUnknownKeys = true }  // 创建一个 Json 实例，配置为忽略未知键
+        val json = Json { ignoreUnknownKeys = true }
         return json.decodeFromString(input)
     }
 
