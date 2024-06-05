@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.component
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -31,6 +32,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 
 @Composable
 fun Gradient(
@@ -110,6 +112,8 @@ fun CustomTip(@StringRes id: Int) {
 
 @Composable
 fun CustomTip(formattedMessage: String) {
+    val uiTesting = SettingsSharedPref.uiTesting
+
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
@@ -117,6 +121,15 @@ fun CustomTip(formattedMessage: String) {
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
+        if (uiTesting) {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = stringResource(id = R.string.ui_testing))
+            }
+        }
+
         Row(
             modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.padding_tip))
