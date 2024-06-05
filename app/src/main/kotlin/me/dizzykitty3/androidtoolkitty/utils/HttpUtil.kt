@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty.utils
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
+import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
@@ -40,6 +41,9 @@ object HttpUtil {
                 }
             }
             level = LogLevel.ALL
+        }
+        install(HttpTimeout) {
+            requestTimeoutMillis = 5000
         }
         defaultRequest {
             accept(ContentType.Application.Json)

@@ -74,6 +74,8 @@ fun SettingsScreen(navController: NavHostController) {
             CustomizeOptions(navController = navController)
             GroupDivider()
             UserSyncSection()
+            GroupDivider()
+            RuleUpdateSection()
             @Suppress("KotlinConstantConditions")
             AnimatedVisibility(
                 visible = (debuggingOptions || (!debuggingOptions && tapCount >= 5)),

@@ -318,6 +318,8 @@
     <string name="error_invalid_username">Username can only contain letters, numbers, and underscores</string>
     <string name="error_invalid_email">Please enter a valid email address</string>
     <string name="error_invalid_password">Password must be at least 6 characters long</string>
+    <string name="rule_update">Rule Update</string>
+    <string name="error_rule_update">Update rule failed, please try again later.</string>
 
 
     <!-- End of resources -->

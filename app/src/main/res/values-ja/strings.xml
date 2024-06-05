@@ -192,4 +192,6 @@
     <string name="error_invalid_username">ユーザー名は文字、数字、アンダースコアのみ使用できます</string>
     <string name="error_invalid_email">有効なメールアドレスを入力してください</string>
     <string name="error_invalid_password">パスワードは6文字以上である必要があります</string>
+    <string name="rule_update">ルール更新</string>
+    <string name="error_rule_update">ルールの更新に失敗しました。後ほど再試行してください。</string>
 </resources>

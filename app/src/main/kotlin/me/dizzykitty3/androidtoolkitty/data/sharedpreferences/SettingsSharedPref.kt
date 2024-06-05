@@ -35,7 +35,13 @@ object SettingsSharedPref {
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
     private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
 
+    private const val DOMAIN_SUFFIX = "domain_suffix"
+    private const val SOCIAL_MEDIA = "social_media"
+
     private const val TOKEN = "token"
+
+    private val nonSettingsPref = hashSetOf(TOKEN, DOMAIN_SUFFIX, SOCIAL_MEDIA)
+
 
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -74,7 +80,9 @@ object SettingsSharedPref {
     }
 
     fun exportSettingsToJson(): String {
-        val keys = sharedPrefs.all.keys.filter { it != TOKEN }  // Exclude the token
+
+        val keys =
+            sharedPrefs.all.keys.filter { !nonSettingsPref.contains(it) }  // Exclude the token
         val settingsMap: Map<String, Any?> = keys.associateWith {
             sharedPrefs.all[it] ?: throw IllegalStateException("Unexpected null value at $it")
         }
@@ -188,6 +196,14 @@ object SettingsSharedPref {
     var customVolumeOptionLabel: String?
         get() = getPreference(VOLUME_OPTION_LABEL, "")
         set(value) = setPreference(VOLUME_OPTION_LABEL, value)
+
+    var domainSuffix: String?
+        get() = getPreference(DOMAIN_SUFFIX, "")
+        set(value) = setPreference(DOMAIN_SUFFIX, value)
+
+    var socialMedia: String?
+        get() = getPreference(SOCIAL_MEDIA, "")
+        set(value) = setPreference(SOCIAL_MEDIA, value)
 
     fun getWheelOfFortuneItems(): List<String>? {
         val itemsJson = getPreference(WHEEL_OF_FORTUNE_ITEMS, "")
