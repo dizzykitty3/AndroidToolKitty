@@ -79,19 +79,19 @@ fun FontWeightCard() {
                     .horizontalScroll(rememberScrollState())
             ) {
                 Text(
-                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。",
+                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 (SansSerif)",
                     fontFamily = FontFamily.SansSerif
                 )
                 Text(
-                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。",
+                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 (Serif)",
                     fontFamily = FontFamily.Serif
                 )
                 Text(
-                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 ",
+                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 (Cursive)",
                     fontFamily = FontFamily.Cursive
                 )
                 Text(
-                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 ",
+                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 (Monospace)",
                     fontFamily = FontFamily.Monospace
                 )
             }
