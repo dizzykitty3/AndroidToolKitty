@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 import android.content.Context
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -111,7 +112,7 @@ private fun Search() {
         },
     )
 
-    Row {
+    Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
         TextButton(
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)

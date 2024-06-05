@@ -2,8 +2,10 @@ package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -64,7 +66,7 @@ fun AppMarketCard() {
         SpacerPadding()
         WhatIsPackageName()
 
-        Row {
+        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
             TextButton(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
