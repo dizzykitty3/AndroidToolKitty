@@ -8,8 +8,10 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowOutward
@@ -112,7 +114,7 @@ fun SettingsScreen(navController: NavHostController) {
                 Text(text = "${stringResource(R.string.version)} ${BuildConfig.VERSION_NAME}")
             }
             GroupDivider()
-            Contributor()
+            ContributorAndThanksTo()
             GroupDivider()
             SourceAndLicenses()
         }
@@ -329,7 +331,7 @@ private fun onClickDynamicColorButton(
 }
 
 @Composable
-private fun Contributor() {
+private fun ContributorAndThanksTo() {
     GroupTitle(id = R.string.contributors)
     DeveloperProfileLink("dizzykitty3")
     SpacerPadding()
@@ -383,10 +385,14 @@ private fun ThanksTo(link: String) {
         val view = LocalView.current
         val sourceCodeURL = "https://github.com/$link"
 
-        Row(modifier = Modifier.clickable {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-            IntentUtil.openURL(sourceCodeURL, view.context)
-        }) {
+        Row(
+            modifier = Modifier
+                .horizontalScroll(rememberScrollState())
+                .clickable {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    IntentUtil.openURL(sourceCodeURL, view.context)
+                }
+        ) {
             Text(
                 text = link,
                 color = MaterialTheme.colorScheme.primary
