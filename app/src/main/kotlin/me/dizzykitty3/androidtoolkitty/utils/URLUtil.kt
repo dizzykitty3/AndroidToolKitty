@@ -136,6 +136,7 @@ object URLUtil {
         MISSKEY("misskey.io/@", R.string.misskeyio),
         PATREON("patreon.com/", R.string.patreon),
         PAYPAL("paypal.me/", R.string.paypal),
+        PINTEREST("pinterest.com/", R.string.pinterest),
         PIXIV_ARTWORK("pixiv.net/artworks/", R.string.pixiv_artwork_id),
         PIXIV_USER("pixiv.net/users/", R.string.pixiv_user_id),
         PIXIV_USER_CUSTOM_URL("pixiv.me/", R.string.pixiv_user_custom_url),

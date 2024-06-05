@@ -103,6 +103,7 @@
     <string name="reddit_subreddit" translatable="false">Reddit (subreddit)</string>
     <string name="linkedin_company" translatable="false">LinkedIn (company)</string>
     <string name="linkedin_user" translatable="false">LinkedIn (user)</string>
+    <string name="pinterest" translatable="false">Pinterest</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>
