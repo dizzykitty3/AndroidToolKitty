@@ -88,9 +88,15 @@ class MainActivity : ComponentActivity() {
         super.onWindowFocusChanged(hasFocus)
         Timber.d("onWindowFocusChanged")
         if (hasFocus and continuationNotResumed) { // Clipboard operations require window focus
-            Timber.i("continuation resumed")
-            continuation?.resume(Unit)
-            continuationNotResumed = false
+            try {
+                Timber.d("continuation resume start")
+                continuation?.resume(Unit)
+            } catch (e: IllegalStateException) {
+                Timber.e(e)
+            } finally {
+                Timber.i("continuation resumed")
+                continuationNotResumed = false
+            }
         }
     }
 
