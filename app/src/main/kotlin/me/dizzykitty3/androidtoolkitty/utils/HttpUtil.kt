@@ -5,6 +5,7 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.request.accept
 import io.ktor.client.request.delete
@@ -21,6 +22,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
+import timber.log.Timber
 
 object HttpUtil {
     private val client = HttpClient(CIO) {
@@ -32,6 +34,11 @@ object HttpUtil {
             })
         }
         install(Logging) {
+            logger = object : Logger {
+                override fun log(message: String) {
+                    Timber.d(message)
+                }
+            }
             level = LogLevel.ALL
         }
         defaultRequest {
