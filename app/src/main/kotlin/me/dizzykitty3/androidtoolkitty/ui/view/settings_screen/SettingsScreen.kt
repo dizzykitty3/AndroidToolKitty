@@ -14,11 +14,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Code
-import androidx.compose.material.icons.outlined.DataObject
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Schedule
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -46,7 +43,6 @@ import me.dizzykitty3.androidtoolkitty.ui.component.Bold
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSwitchRow
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.component.IconAndTextPadding
@@ -250,7 +246,6 @@ private fun CustomizeOptions(navController: NavHostController) {
 private fun DebuggingOptions(navController: NavHostController) {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
-    var showSpDialog by remember { mutableStateOf(false) }
     var uiTesting by remember { mutableStateOf(settingsSharedPref.uiTesting) }
 
     GroupTitle(R.string.debugging)
@@ -269,45 +264,6 @@ private fun DebuggingOptions(navController: NavHostController) {
         navController.navigate(PERMISSION_REQUEST_SCREEN)
     }) {
         Text(text = stringResource(id = R.string.go_to_permission_request_screen))
-    }
-
-    OutlinedButton(onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-        showSpDialog = true
-    }) {
-        Text(text = stringResource(id = R.string.check_sp_values))
-    }
-
-    val sharedPref = remember { SettingsSharedPref }
-
-    if (showSpDialog) {
-        AlertDialog(
-            icon = { Icon(imageVector = Icons.Outlined.DataObject, contentDescription = null) },
-            onDismissRequest = { showSpDialog = false },
-            title = { Text(text = stringResource(id = R.string.sp_values)) },
-            text = {
-                Column {
-                    CustomTip(id = R.string.under_development)
-                    Text(text = "AUTO_CLEAR_CLIPBOARD = ${sharedPref.autoClearClipboard}")
-                    Text(text = "SLIDER_INCREMENT_5_PERCENT = ${sharedPref.sliderIncrement5Percent}")
-                    Text(text = "DYNAMIC_COLOR = ${sharedPref.dynamicColor}")
-                    Text(text = "ONE_HANDED_MODE = ${sharedPref.oneHandedMode}")
-                    Text(text = "HAVE_OPENED_SETTINGS_SCREEN = ${sharedPref.haveOpenedSettingsScreen}")
-                    Text(text = "USING_CUSTOM_VOLUME_OPTION_LABEL = ${sharedPref.usingCustomVolumeOptionLabel}")
-                    Text(text = "DEBUGGING_OPTIONS = ${sharedPref.debuggingOptions}")
-                    Text(text = "WEBPAGE_CARD_SHOW_MORE = ${sharedPref.webpageCardShowMore}")
-                    Text(text = "COLLAPSE_KEYBOARD = ${sharedPref.collapseKeyboard}")
-                }
-            },
-            confirmButton = {
-                Button(onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-                    showSpDialog = false
-                }) {
-                    Text(text = stringResource(id = android.R.string.ok))
-                }
-            }
-        )
     }
 
     OutlinedButton(onClick = {
