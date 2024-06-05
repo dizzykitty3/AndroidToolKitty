@@ -580,26 +580,30 @@ suspend fun handleRequest(
     onFailure: (Int) -> Unit,
     onSuccess: () -> Unit
 ) {
-    val response: HttpResponse = when (requestType) {
-        HttpRequestType.GET -> HttpUtil.get(url, body, headers)
-        HttpRequestType.POST -> HttpUtil.post(url, body, headers)
-        HttpRequestType.PUT -> HttpUtil.put(url, body, headers)
-        HttpRequestType.DELETE -> HttpUtil.delete(url, body, headers)
-    }
+    try {
+        val response: HttpResponse = when (requestType) {
+            HttpRequestType.GET -> HttpUtil.get(url, body, headers)
+            HttpRequestType.POST -> HttpUtil.post(url, body, headers)
+            HttpRequestType.PUT -> HttpUtil.put(url, body, headers)
+            HttpRequestType.DELETE -> HttpUtil.delete(url, body, headers)
+        }
 
-    if (response.status == HttpStatusCode.OK) {
-        val responseBody = response.bodyAsText()
-        onDataReceived(responseBody)
-        onSuccess()
-        onDismiss()
-    } else if (response.status == HttpStatusCode.Unauthorized) {
-        onDismiss()
-        onFailure(response.status.value)
-    } else {
-        val errorBody = response.bodyAsText()
-        val jsonObj = JSONObject(errorBody)
-        val errorCode = jsonObj.getInt("code")
-        onFailure(errorCode)
+        if (response.status == HttpStatusCode.OK) {
+            val responseBody = response.bodyAsText()
+            onDataReceived(responseBody)
+            onSuccess()
+            onDismiss()
+        } else if (response.status == HttpStatusCode.Unauthorized) {
+            onDismiss()
+            onFailure(response.status.value)
+        } else {
+            val errorBody = response.bodyAsText()
+            val jsonObj = JSONObject(errorBody)
+            val errorCode = jsonObj.getInt("code")
+            onFailure(errorCode)
+        }
+    } catch (e: Exception) {
+        onFailure(9999)
     }
 }
 
