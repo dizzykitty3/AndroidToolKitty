@@ -3,6 +3,10 @@ package me.dizzykitty3.androidtoolkitty.utils
 import android.app.Activity
 import android.content.Context
 import androidx.core.app.ActivityCompat
+import me.dizzykitty3.androidtoolkitty.BT
+import me.dizzykitty3.androidtoolkitty.BT_ADMIN
+import me.dizzykitty3.androidtoolkitty.BT_CONNECT
+import me.dizzykitty3.androidtoolkitty.GRANTED
 
 /**
  * Remember to use Activity Context to check/request permission.

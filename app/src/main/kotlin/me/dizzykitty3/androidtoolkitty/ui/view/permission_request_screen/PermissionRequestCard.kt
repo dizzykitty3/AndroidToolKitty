@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.permission_request_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.Button
@@ -11,7 +12,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,15 +32,15 @@ fun PermissionRequestCard() {
     ) {
         var clickCount by remember { mutableIntStateOf(0) }
         val view = LocalView.current
-        val context = LocalContext.current
 
         if (OSVersion.android12()) Text(text = stringResource(id = R.string.bluetooth_connect))
         else Text(text = stringResource(id = R.string.bluetooth_bluetooth_admin))
 
         Button(
             onClick = {
-                if (PermissionUtil.noBluetoothPermission(context)) {
-                    PermissionUtil.requestBluetoothPermission(context)
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                if (PermissionUtil.noBluetoothPermission(view.context)) {
+                    PermissionUtil.requestBluetoothPermission(view.context)
                     clickCount++
                     return@Button
                 }
@@ -59,11 +59,14 @@ fun PermissionRequestCard() {
 
 @Composable
 fun ManuallyGrant() {
-    val context = LocalContext.current
+    val view = LocalView.current
 
     Text(text = stringResource(id = R.string.missed_sys_popup))
     TextButton(
-        onClick = { IntentUtil.openAppDetailSettings(context) }
+        onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            IntentUtil.openAppDetailSettings(view.context)
+        }
     ) {
         Text(
             text = stringResource(id = R.string.go_to_settings),

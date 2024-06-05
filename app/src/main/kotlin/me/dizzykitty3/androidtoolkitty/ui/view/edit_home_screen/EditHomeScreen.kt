@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.edit_home_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
@@ -19,6 +20,18 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import me.dizzykitty3.androidtoolkitty.CARD_1
+import me.dizzykitty3.androidtoolkitty.CARD_10
+import me.dizzykitty3.androidtoolkitty.CARD_11
+import me.dizzykitty3.androidtoolkitty.CARD_12
+import me.dizzykitty3.androidtoolkitty.CARD_2
+import me.dizzykitty3.androidtoolkitty.CARD_3
+import me.dizzykitty3.androidtoolkitty.CARD_4
+import me.dizzykitty3.androidtoolkitty.CARD_5
+import me.dizzykitty3.androidtoolkitty.CARD_6
+import me.dizzykitty3.androidtoolkitty.CARD_7
+import me.dizzykitty3.androidtoolkitty.CARD_8
+import me.dizzykitty3.androidtoolkitty.CARD_9
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
@@ -26,18 +39,6 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.CARD_1
-import me.dizzykitty3.androidtoolkitty.utils.CARD_10
-import me.dizzykitty3.androidtoolkitty.utils.CARD_11
-import me.dizzykitty3.androidtoolkitty.utils.CARD_12
-import me.dizzykitty3.androidtoolkitty.utils.CARD_2
-import me.dizzykitty3.androidtoolkitty.utils.CARD_3
-import me.dizzykitty3.androidtoolkitty.utils.CARD_4
-import me.dizzykitty3.androidtoolkitty.utils.CARD_5
-import me.dizzykitty3.androidtoolkitty.utils.CARD_6
-import me.dizzykitty3.androidtoolkitty.utils.CARD_7
-import me.dizzykitty3.androidtoolkitty.utils.CARD_8
-import me.dizzykitty3.androidtoolkitty.utils.CARD_9
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Composable
@@ -81,6 +82,7 @@ fun EditHomeScreen() {
                 card = CARD_1,
                 isChecked = mIsShowCard1
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard1 = newState
                 settingsSharedPref.saveCardShowedState(CARD_1, newState)
             }
@@ -89,6 +91,7 @@ fun EditHomeScreen() {
                 card = CARD_2,
                 isChecked = mIsShowCard2
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard2 = newState
                 settingsSharedPref.saveCardShowedState(CARD_2, newState)
             }
@@ -97,6 +100,7 @@ fun EditHomeScreen() {
                 card = CARD_3,
                 isChecked = mIsShowCard3
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard3 = newState
                 settingsSharedPref.saveCardShowedState(CARD_3, newState)
             }
@@ -105,6 +109,7 @@ fun EditHomeScreen() {
                 card = CARD_4,
                 isChecked = mIsShowCard4
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard4 = newState
                 settingsSharedPref.saveCardShowedState(CARD_4, newState)
             }
@@ -113,6 +118,7 @@ fun EditHomeScreen() {
                 card = CARD_5,
                 isChecked = mIsShowCard5
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard5 = newState
                 settingsSharedPref.saveCardShowedState(CARD_5, newState)
             }
@@ -121,6 +127,7 @@ fun EditHomeScreen() {
                 card = CARD_6,
                 isChecked = mIsShowCard6
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard6 = newState
                 settingsSharedPref.saveCardShowedState(CARD_6, newState)
             }
@@ -129,6 +136,7 @@ fun EditHomeScreen() {
                 card = CARD_7,
                 isChecked = mIsShowCard7
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard7 = newState
                 settingsSharedPref.saveCardShowedState(CARD_7, newState)
             }
@@ -137,6 +145,7 @@ fun EditHomeScreen() {
                 card = CARD_8,
                 isChecked = mIsShowCard8
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard8 = newState
                 settingsSharedPref.saveCardShowedState(CARD_8, newState)
             }
@@ -145,6 +154,7 @@ fun EditHomeScreen() {
                 card = CARD_9,
                 isChecked = mIsShowCard9
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard9 = newState
                 settingsSharedPref.saveCardShowedState(CARD_9, newState)
             }
@@ -153,6 +163,7 @@ fun EditHomeScreen() {
                 card = CARD_10,
                 isChecked = mIsShowCard10
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard10 = newState
                 settingsSharedPref.saveCardShowedState(CARD_10, newState)
             }
@@ -161,6 +172,7 @@ fun EditHomeScreen() {
                 card = CARD_11,
                 isChecked = mIsShowCard11
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard11 = newState
                 settingsSharedPref.saveCardShowedState(CARD_11, newState)
             }
@@ -169,24 +181,29 @@ fun EditHomeScreen() {
                 card = CARD_12,
                 isChecked = mIsShowCard12
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowCard12 = newState
                 settingsSharedPref.saveCardShowedState(CARD_12, newState)
             }
 
             GroupDivider()
 
-            val primary = MaterialTheme.colorScheme.primary.toArgb()
+            val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
+            val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
             val showSnackbarToConfirm = settingsSharedPref.showSnackbar
 
             Button(
                 onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     if (showSnackbarToConfirm) {
                         SnackbarUtil.snackbar(
                             view,
                             messageRes = R.string.tap_to_apply,
                             buttonTextRes = R.string.apply,
-                            buttonColor = primary,
+                            textColor = inverseOnSurface,
+                            buttonColor = inversePrimary,
                             buttonClickListener = {
+                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                 onClickChangeAllCardsButton(false)
                                 mIsShowCard1 = false
                                 mIsShowCard2 = false
@@ -231,13 +248,16 @@ fun EditHomeScreen() {
 
             Button(
                 onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     if (showSnackbarToConfirm) {
                         SnackbarUtil.snackbar(
                             view,
                             messageRes = R.string.tap_to_apply,
                             buttonTextRes = R.string.apply,
-                            buttonColor = primary,
+                            textColor = inverseOnSurface,
+                            buttonColor = inversePrimary,
                             buttonClickListener = {
+                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                 onClickChangeAllCardsButton(true)
                                 mIsShowCard1 = true
                                 mIsShowCard2 = true

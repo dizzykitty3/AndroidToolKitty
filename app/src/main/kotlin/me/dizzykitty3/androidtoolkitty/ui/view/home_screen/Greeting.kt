@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,21 +20,35 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import me.dizzykitty3.androidtoolkitty.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui.component.Gradient
+import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
-@Preview
 @Composable
-fun Greeting() {
+@Preview
+private fun GreetingPreview() {
+    Greeting(navController = rememberNavController())
+}
+
+@Composable
+fun Greeting(navController: NavHostController) {
+    val view = LocalView.current
     var showDialog by remember { mutableStateOf(false) }
 
     Box(
-        modifier = Modifier.clickable { showDialog = true }
+        modifier = Modifier.clickable {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            showDialog = true
+        }
     ) {
         Gradient(
             textToDisplay = StringUtil.greeting(),
@@ -75,7 +90,14 @@ fun Greeting() {
             confirmButton = {
                 Row {
                     Button(onClick = {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                         showDialog = false
+
+                        if (PermissionUtil.noBluetoothPermission(view.context)) {
+                            navController.navigate(PERMISSION_REQUEST_SCREEN)
+                            return@Button
+                        }
+
                         SettingsSharedPref.autoSetMediaVolume = 40
                     }) {
                         Text(text = "40%")
@@ -83,7 +105,14 @@ fun Greeting() {
                 }
                 Row {
                     Button(onClick = {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                         showDialog = false
+
+                        if (PermissionUtil.noBluetoothPermission(view.context)) {
+                            navController.navigate(PERMISSION_REQUEST_SCREEN)
+                            return@Button
+                        }
+
                         SettingsSharedPref.autoSetMediaVolume = 60
                     }) {
                         Text(text = "60%")
@@ -92,6 +121,7 @@ fun Greeting() {
             },
             dismissButton = {
                 TextButton(onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     showDialog = false
                     SettingsSharedPref.autoSetMediaVolume = -1
                 }) {

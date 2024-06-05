@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
 import java.time.LocalTime
+import java.util.Locale
 
 object StringUtil {
     fun greeting(): String {
@@ -50,4 +51,16 @@ object StringUtil {
         }
         return stringBuilder.toString()
     }
+
+    private fun sysLocale(): String =
+        Locale.getDefault().toString()
+
+    fun sysLangSupported(): Boolean =
+        sysLocale().contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
+
+    fun sysLangNotSupported(): Boolean =
+        !sysLangSupported()
+
+    fun sysLangCJK(): Boolean =
+        sysLocale().contains(Regex("Hans|Hant|zh|ja|ko"))
 }

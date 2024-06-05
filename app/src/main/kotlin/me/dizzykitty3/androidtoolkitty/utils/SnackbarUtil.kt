@@ -16,10 +16,12 @@ object SnackbarUtil {
         view: View,
         @StringRes messageRes: Int,
         @StringRes buttonTextRes: Int,
+        textColor: Int,
         buttonColor: Int,
         buttonClickListener: View.OnClickListener
     ) =
         Snackbar.make(view, appContext.getString(messageRes), Snackbar.LENGTH_LONG)
+            .setTextColor(textColor)
             .setAction(appContext.getString(buttonTextRes), buttonClickListener)
             .setActionTextColor(buttonColor)
             .show()

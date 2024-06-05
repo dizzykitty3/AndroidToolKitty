@@ -100,6 +100,11 @@
     <string name="search_on_youtube">Search on YouTube</string>
     <string name="linktree" translatable="false">Linktree</string>
     <string name="misskeyio" translatable="false">Misskey.io</string>
+    <string name="reddit_subreddit" translatable="false">Reddit (subreddit)</string>
+    <string name="linkedin_company" translatable="false">LinkedIn (company)</string>
+    <string name="linkedin_user" translatable="false">LinkedIn (user)</string>
+    <string name="pinterest" translatable="false">Pinterest</string>
+    <string name="marshmallow_qa" translatable="false">マシュマロ</string>
 
     <!-- Home screen: system settings -->
     <string name="system_settings">System settings</string>
@@ -141,6 +146,7 @@
     <string name="bluetooth_devices_types_4">This newer version is designed for lower power consumption and is ideal for devices that need long battery life, like fitness trackers and smart home sensors. It has a shorter range and slower data transfer rate compared to Classic Bluetooth.\n</string>
     <string name="bluetooth_devices_types_5">Dual</string>
     <string name="bluetooth_devices_types_6">Some devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
+    <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
 
     <!-- Home screen: unicode -->
     <string name="unicode">Unicode</string>
@@ -263,14 +269,12 @@
     <string name="restart">Restart</string>
     <string name="collapse_keyboard_when_back_to_app">Collapse keyboard when back to ToolKitty</string>
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
-    <string name="check_sp_values">Check sharedPreferences values</string>
     <string name="tap_to_apply">Tap to apply</string>
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
     <string name="show_all_options">Show all options</string>
     <string name="hide_all_options">Hide all options</string>
     <string name="restart_app">Restart app</string>
     <string name="appearance">Appearance</string>
-    <string name="sp_values">SharedPreferences values</string>
     <string name="show_divider">Show divider</string>
     <string name="show_snackbar_to_confirm">Ask me before apply changes</string>
     <string name="show_edit_volume_option">Show Edit in Volume card</string>

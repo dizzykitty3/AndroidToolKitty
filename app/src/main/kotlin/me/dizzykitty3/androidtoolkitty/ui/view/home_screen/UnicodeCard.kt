@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
+import android.view.HapticFeedbackConstants
 import android.view.View
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
@@ -77,6 +78,7 @@ fun UnicodeCard() {
             ),
             trailingIcon = {
                 ClearInput(text = unicode) {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     unicode = ""
                 }
             },
@@ -105,6 +107,7 @@ fun UnicodeCard() {
             ),
             trailingIcon = {
                 ClearInput(text = characters) {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     characters = ""
                 }
             },
@@ -112,6 +115,7 @@ fun UnicodeCard() {
 
         TextButton(
             onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 if (isUnicodeInput) {
                     onClickConvertButton(view, unicode, { characters = it }, true)
                     focus.clearFocus()

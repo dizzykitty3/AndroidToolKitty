@@ -141,14 +141,12 @@
     <string name="restart">再起動</string>
     <string name="collapse_keyboard_when_back_to_app">ToolKitty に戻ったときにキーボードを閉じる</string>
     <string name="go_to_permission_request_screen">権限リクエスト画面に移動</string>
-    <string name="check_sp_values">SharedPreferences の値を確認</string>
     <string name="tap_to_apply">タップして適用</string>
     <string name="clipboard_card_hidden">ホーム画面のクリップボードカードが非表示になりました。</string>
     <string name="show_all_options">すべてのオプションを表示</string>
     <string name="hide_all_options">すべてのオプションを非表示</string>
     <string name="restart_app">アプリを再起動</string>
     <string name="appearance">外観</string>
-    <string name="sp_values">SharedPreferences の値</string>
     <string name="show_divider">区切り線を表示</string>
     <string name="show_snackbar_to_confirm">変更を適用する前に確認を求める</string>
     <string name="show_edit_volume_option">音量カードで編集を表示</string>
@@ -178,6 +176,7 @@
     <string name="password">パスワード</string>
     <string name="email">メールアドレス</string>
     <string name="off">OFF</string>
+    <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
     <string name="user_profile">ユーザーセンター</string>
     <string name="success">成功</string>
     <string name="error_account_locked">アカウントが一時的にロックされています。しばらくしてからもう一度お試しください。</string>

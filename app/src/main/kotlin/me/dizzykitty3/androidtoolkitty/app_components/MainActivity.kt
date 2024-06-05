@@ -19,6 +19,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.ui.view.AppNavigationHost
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
+import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
@@ -29,7 +30,7 @@ import kotlin.coroutines.resume
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private var continuation: Continuation<Unit>? = null
-    private var isContinuationResumed = false
+    private var continuationNotResumed = true
     private var isAutoClearClipboard = false
 
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -49,7 +50,7 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         Timber.d("onStart")
-        isContinuationResumed = false
+        continuationNotResumed = true
         CoroutineScope(Dispatchers.Main).launch {
             isAutoClearClipboard = withContext(Dispatchers.IO) {
                 SettingsSharedPref.autoClearClipboard
@@ -67,9 +68,13 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Clipboard cleared automatically")
                 }
             }
-            if (SettingsSharedPref.autoSetMediaVolume != -1 && DateUtil.isNotWeekend()) {
-                Timber.i("Set media volume automatically")
-                AudioUtil.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
+            if (SettingsSharedPref.enabledAutoSetMediaVolume() && DateUtil.isNotWeekend()) {
+                if (BluetoothUtil.isHeadsetConnected()) {
+                    Timber.i("Set media volume automatically: cancelled: BT headset connected")
+                } else {
+                    Timber.i("Set media volume automatically")
+                    AudioUtil.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
+                }
             }
         }
     }
@@ -82,10 +87,16 @@ class MainActivity : ComponentActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         Timber.d("onWindowFocusChanged")
-        if (hasFocus and !isContinuationResumed) { // Clipboard operations require window focus
-            Timber.i("continuation resumed")
-            continuation?.resume(Unit)
-            isContinuationResumed = true
+        if (hasFocus and continuationNotResumed) { // Clipboard operations require window focus
+            try {
+                Timber.d("continuation resume start")
+                continuation?.resume(Unit)
+            } catch (e: IllegalStateException) {
+                Timber.e(e)
+            } finally {
+                Timber.i("continuation resumed")
+                continuationNotResumed = false
+            }
         }
     }
 

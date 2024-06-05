@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.edit_home_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
@@ -20,24 +21,24 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.SETTING_AUTO_ROTATE
+import me.dizzykitty3.androidtoolkitty.SETTING_BATTERY_OPTIMIZATION
+import me.dizzykitty3.androidtoolkitty.SETTING_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.SETTING_CAPTIONING
+import me.dizzykitty3.androidtoolkitty.SETTING_DATE
+import me.dizzykitty3.androidtoolkitty.SETTING_DEFAULT_APPS
+import me.dizzykitty3.androidtoolkitty.SETTING_DEVELOPER
+import me.dizzykitty3.androidtoolkitty.SETTING_DISPLAY
+import me.dizzykitty3.androidtoolkitty.SETTING_LOCALE
+import me.dizzykitty3.androidtoolkitty.SETTING_OVERLAY
+import me.dizzykitty3.androidtoolkitty.SETTING_USAGE_ACCESS
+import me.dizzykitty3.androidtoolkitty.SETTING_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_1
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_10
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_11
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_12
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_2
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_3
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_4
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_5
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_6
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_7
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_8
-import me.dizzykitty3.androidtoolkitty.utils.SETTING_9
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Composable
@@ -45,20 +46,21 @@ fun EditSysSettingsCard() {
     CustomCard(
         titleRes = R.string.customize_system_settings_card
     ) {
+        val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
 
-        val isShowSetting1 = settingsSharedPref.getCardShowedState(SETTING_1)
-        val isShowSetting2 = settingsSharedPref.getCardShowedState(SETTING_2)
-        val isShowSetting3 = settingsSharedPref.getCardShowedState(SETTING_3)
-        val isShowSetting4 = settingsSharedPref.getCardShowedState(SETTING_4)
-        val isShowSetting5 = settingsSharedPref.getCardShowedState(SETTING_5)
-        val isShowSetting6 = settingsSharedPref.getCardShowedState(SETTING_6)
-        val isShowSetting7 = settingsSharedPref.getCardShowedState(SETTING_7)
-        val isShowSetting8 = settingsSharedPref.getCardShowedState(SETTING_8)
-        val isShowSetting9 = settingsSharedPref.getCardShowedState(SETTING_9)
-        val isShowSetting10 = settingsSharedPref.getCardShowedState(SETTING_10)
-        val isShowSetting11 = settingsSharedPref.getCardShowedState(SETTING_11)
-        val isShowSetting12 = settingsSharedPref.getCardShowedState(SETTING_12)
+        val isShowSetting1 = settingsSharedPref.getCardShowedState(SETTING_DISPLAY)
+        val isShowSetting2 = settingsSharedPref.getCardShowedState(SETTING_AUTO_ROTATE)
+        val isShowSetting3 = settingsSharedPref.getCardShowedState(SETTING_BLUETOOTH)
+        val isShowSetting4 = settingsSharedPref.getCardShowedState(SETTING_DEFAULT_APPS)
+        val isShowSetting5 = settingsSharedPref.getCardShowedState(SETTING_BATTERY_OPTIMIZATION)
+        val isShowSetting6 = settingsSharedPref.getCardShowedState(SETTING_CAPTIONING)
+        val isShowSetting7 = settingsSharedPref.getCardShowedState(SETTING_USAGE_ACCESS)
+        val isShowSetting8 = settingsSharedPref.getCardShowedState(SETTING_OVERLAY)
+        val isShowSetting9 = settingsSharedPref.getCardShowedState(SETTING_WRITE_SETTINGS)
+        val isShowSetting10 = settingsSharedPref.getCardShowedState(SETTING_LOCALE)
+        val isShowSetting11 = settingsSharedPref.getCardShowedState(SETTING_DATE)
+        val isShowSetting12 = settingsSharedPref.getCardShowedState(SETTING_DEVELOPER)
         var mIsShowSetting1 by remember { mutableStateOf(isShowSetting1) }
         var mIsShowSetting2 by remember { mutableStateOf(isShowSetting2) }
         var mIsShowSetting3 by remember { mutableStateOf(isShowSetting3) }
@@ -74,124 +76,139 @@ fun EditSysSettingsCard() {
 
         CustomHideCardSettingSwitch(
             textRes = R.string.open_display_settings,
-            card = SETTING_1,
+            card = SETTING_DISPLAY,
             isChecked = mIsShowSetting1
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting1 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_1, newState)
+            settingsSharedPref.saveCardShowedState(SETTING_DISPLAY, newState)
         }
         if (OSVersion.android12()) {
             CustomHideCardSettingSwitch(
                 textRes = R.string.open_auto_rotate_settings,
-                card = SETTING_2,
+                card = SETTING_AUTO_ROTATE,
                 isChecked = mIsShowSetting2
             ) { newState ->
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 mIsShowSetting2 = newState
-                settingsSharedPref.saveCardShowedState(SETTING_2, newState)
+                settingsSharedPref.saveCardShowedState(SETTING_AUTO_ROTATE, newState)
             }
         }
         CustomHideCardSettingSwitch(
             textRes = R.string.open_bluetooth_settings,
-            card = SETTING_3,
+            card = SETTING_BLUETOOTH,
             isChecked = mIsShowSetting3
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting3 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_3, newState)
+            settingsSharedPref.saveCardShowedState(SETTING_BLUETOOTH, newState)
         }
         CustomHideCardSettingSwitch(
             textRes = R.string.open_default_apps_settings,
-            card = SETTING_4,
+            card = SETTING_DEFAULT_APPS,
             isChecked = mIsShowSetting4
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting4 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_4, newState)
+            settingsSharedPref.saveCardShowedState(SETTING_DEFAULT_APPS, newState)
         }
         CustomHideCardSettingSwitch(
             textRes = R.string.open_battery_optimization_settings,
-            card = SETTING_5,
+            card = SETTING_BATTERY_OPTIMIZATION,
             isChecked = mIsShowSetting5
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting5 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_5, newState)
+            settingsSharedPref.saveCardShowedState(SETTING_BATTERY_OPTIMIZATION, newState)
         }
         CustomHideCardSettingSwitch(
             textRes = R.string.open_caption_preferences,
-            card = SETTING_6,
+            card = SETTING_CAPTIONING,
             isChecked = mIsShowSetting6
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting6 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_6, newState)
+            settingsSharedPref.saveCardShowedState(SETTING_CAPTIONING, newState)
         }
 
         GroupDivider()
 
         CustomHideCardSettingSwitch(
             textRes = R.string.open_usage_access_permission,
-            card = SETTING_7,
+            card = SETTING_USAGE_ACCESS,
             isChecked = mIsShowSetting7
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting7 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_7, newState)
+            settingsSharedPref.saveCardShowedState(SETTING_USAGE_ACCESS, newState)
         }
         CustomHideCardSettingSwitch(
             textRes = R.string.open_overlay_permission,
-            card = SETTING_8,
+            card = SETTING_OVERLAY,
             isChecked = mIsShowSetting8
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting8 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_8, newState)
+            settingsSharedPref.saveCardShowedState(SETTING_OVERLAY, newState)
         }
         CustomHideCardSettingSwitch(
             textRes = R.string.open_write_permission,
-            card = SETTING_9,
+            card = SETTING_WRITE_SETTINGS,
             isChecked = mIsShowSetting9
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting9 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_9, newState)
+            settingsSharedPref.saveCardShowedState(SETTING_WRITE_SETTINGS, newState)
         }
 
         GroupDivider()
 
         CustomHideCardSettingSwitch(
             textRes = R.string.open_language_settings,
-            card = SETTING_10,
+            card = SETTING_LOCALE,
             isChecked = mIsShowSetting10
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting10 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_10, newState)
+            settingsSharedPref.saveCardShowedState(SETTING_LOCALE, newState)
         }
         CustomHideCardSettingSwitch(
             textRes = R.string.open_date_and_time_settings,
-            card = SETTING_11,
+            card = SETTING_DATE,
             isChecked = mIsShowSetting11
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting11 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_11, newState)
+            settingsSharedPref.saveCardShowedState(SETTING_DATE, newState)
         }
         CustomHideCardSettingSwitch(
             textRes = R.string.open_developer_options,
-            card = SETTING_12,
+            card = SETTING_DEVELOPER,
             isChecked = mIsShowSetting12
         ) { newState ->
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             mIsShowSetting12 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_12, newState)
+            settingsSharedPref.saveCardShowedState(SETTING_DEVELOPER, newState)
         }
 
         GroupDivider()
 
-        val view = LocalView.current
-        val primary = MaterialTheme.colorScheme.primary.toArgb()
+        val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
+        val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
         val showSnackbarToConfirm = settingsSharedPref.showSnackbar
 
         Button(
             onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 if (showSnackbarToConfirm) {
                     SnackbarUtil.snackbar(
                         view,
                         messageRes = R.string.tap_to_apply,
                         buttonTextRes = R.string.apply,
-                        buttonColor = primary,
+                        textColor = inverseOnSurface,
+                        buttonColor = inversePrimary,
                         buttonClickListener = {
+                            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                             onClickChangeAllCardsButton(false)
                             mIsShowSetting1 = false
                             mIsShowSetting2 = false
@@ -236,13 +253,16 @@ fun EditSysSettingsCard() {
 
         Button(
             onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 if (showSnackbarToConfirm) {
                     SnackbarUtil.snackbar(
                         view,
                         messageRes = R.string.tap_to_apply,
                         buttonTextRes = R.string.apply,
-                        buttonColor = primary,
+                        textColor = inverseOnSurface,
+                        buttonColor = inversePrimary,
                         buttonClickListener = {
+                            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                             onClickChangeAllCardsButton(true)
                             mIsShowSetting1 = true
                             mIsShowSetting2 = true
@@ -289,18 +309,18 @@ fun EditSysSettingsCard() {
 
 private fun onClickChangeAllCardsButton(isShow: Boolean) {
     val settingList = listOf(
-        SETTING_1,
-        SETTING_2,
-        SETTING_3,
-        SETTING_4,
-        SETTING_5,
-        SETTING_6,
-        SETTING_7,
-        SETTING_8,
-        SETTING_9,
-        SETTING_10,
-        SETTING_11,
-        SETTING_12
+        SETTING_DISPLAY,
+        SETTING_AUTO_ROTATE,
+        SETTING_BLUETOOTH,
+        SETTING_DEFAULT_APPS,
+        SETTING_BATTERY_OPTIMIZATION,
+        SETTING_CAPTIONING,
+        SETTING_USAGE_ACCESS,
+        SETTING_OVERLAY,
+        SETTING_WRITE_SETTINGS,
+        SETTING_LOCALE,
+        SETTING_DATE,
+        SETTING_DEVELOPER
     )
     val settingsViewModel = SettingsSharedPref
 

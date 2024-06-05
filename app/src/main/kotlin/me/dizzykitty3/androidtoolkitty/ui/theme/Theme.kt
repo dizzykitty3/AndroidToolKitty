@@ -265,9 +265,6 @@ fun AppTheme(
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
-    // TODO Add Medium contrast and High contrast support
-    // https://m3.material.io/styles/color/system/how-the-system-works#0207ef40-7f0d-4da8-9280-f062aa6b3e04
-
     @Composable
     fun OSVersion.colorScheme(darkTheme: Boolean, dynamicColor: Boolean): ColorScheme {
         return when {

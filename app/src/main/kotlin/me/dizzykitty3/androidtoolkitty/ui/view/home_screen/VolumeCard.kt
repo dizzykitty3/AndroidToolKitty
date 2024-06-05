@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -100,18 +101,22 @@ fun VolumeCard() {
                         selectedIndex = index
                         when (index) {
                             0 -> {
+                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                 setVolume(0)
                             }
 
                             1 -> {
+                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                 setVolume(0.4 * maxVolume)
                             }
 
                             2 -> {
+                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                 setVolume(0.6 * maxVolume)
                             }
 
                             3 -> {
+                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                 mHaveTappedAddButton = true
                                 if (mCustomVolume > 0)
                                     setVolume(mCustomVolume * 0.01 * maxVolume)
@@ -213,6 +218,7 @@ fun VolumeCard() {
                                 ),
                                 trailingIcon = {
                                     ClearInput(text = optionLabel) {
+                                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                         optionLabel = ""
                                         mHaveCustomLabel = true
                                     }
@@ -223,6 +229,7 @@ fun VolumeCard() {
                     confirmButton = {
                         Button(
                             onClick = {
+                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
                                     if (newCustomVolume.toInt() != 0) SnackbarUtil.snackbar(
                                         view,
@@ -249,6 +256,7 @@ fun VolumeCard() {
                     dismissButton = {
                         TextButton(
                             onClick = {
+                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                                 if (!haveCustomLabel) mHaveCustomLabel = false
                                 showVolumeDialog = false
                                 selectedIndex = when (AudioUtil.volume()) {
@@ -273,7 +281,10 @@ fun VolumeCard() {
                 horizontalArrangement = Arrangement.End
             ) {
                 TextButton(
-                    onClick = { showVolumeDialog = true }
+                    onClick = {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        showVolumeDialog = true
+                    }
                 ) {
                     Icon(
                         imageVector = Icons.Outlined.Edit,

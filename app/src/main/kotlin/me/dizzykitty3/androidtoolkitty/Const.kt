@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.utils
+package me.dizzykitty3.androidtoolkitty
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -24,18 +24,18 @@ const val CARD_10 = "card_google_maps"
 const val CARD_11 = "card_android_version"
 const val CARD_12 = "card_font_weight"
 
-const val SETTING_1 = "setting_display"
-const val SETTING_2 = "setting_auto_rotate"
-const val SETTING_3 = "setting_bluetooth"
-const val SETTING_4 = "setting_default_apps"
-const val SETTING_5 = "setting_battery_optimization"
-const val SETTING_6 = "setting_caption"
-const val SETTING_7 = "setting_usage_access"
-const val SETTING_8 = "setting_overlay"
-const val SETTING_9 = "setting_write"
-const val SETTING_10 = "setting_locale"
-const val SETTING_11 = "setting_date_and_time"
-const val SETTING_12 = "setting_developer"
+const val SETTING_DISPLAY = "setting_display"
+const val SETTING_AUTO_ROTATE = "setting_auto_rotate"
+const val SETTING_BLUETOOTH = "setting_bluetooth"
+const val SETTING_DEFAULT_APPS = "setting_default_apps"
+const val SETTING_BATTERY_OPTIMIZATION = "setting_battery_optimization"
+const val SETTING_CAPTIONING = "setting_captioning"
+const val SETTING_USAGE_ACCESS = "setting_usage_access"
+const val SETTING_OVERLAY = "setting_overlay"
+const val SETTING_WRITE_SETTINGS = "setting_write_settings"
+const val SETTING_LOCALE = "setting_locale"
+const val SETTING_DATE = "setting_date"
+const val SETTING_DEVELOPER = "setting_developer"
 const val SETTING_ENABLE_BLUETOOTH = "setting_enable_bluetooth"
 const val SETTING_WIFI = "setting_wifi"
 const val SETTING_POWER_USAGE_SUMMARY = "setting_power_usage_summary"

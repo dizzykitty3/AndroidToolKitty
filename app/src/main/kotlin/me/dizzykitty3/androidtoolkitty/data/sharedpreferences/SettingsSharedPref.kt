@@ -14,6 +14,7 @@ data class WheelOfFortuneItems(val items: List<String>)
 object SettingsSharedPref {
     private const val PREF_NAME = "Settings"
 
+    // Booleans
     private const val AUTO_CLEAR_CLIPBOARD = "auto_clear_clipboard"
     private const val SLIDER_INCREMENT_5_PERCENT = "slider_increment_5_percent"
     private const val DYNAMIC_COLOR = "dynamic_color"
@@ -174,6 +175,8 @@ object SettingsSharedPref {
     var autoSetMediaVolume: Int
         get() = getPreference(AUTO_SET_MEDIA_VOLUME, -1)
         set(value) = setPreference(AUTO_SET_MEDIA_VOLUME, value)
+
+    fun enabledAutoSetMediaVolume(): Boolean = autoSetMediaVolume != -1
 
     var haveTappedAddButton: Boolean
         get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)

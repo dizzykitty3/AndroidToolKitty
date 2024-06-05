@@ -1,8 +1,11 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -19,7 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
@@ -38,7 +41,7 @@ fun AppMarketCard() {
         icon = Icons.Outlined.Shop,
         titleRes = R.string.check_app_on_market
     ) {
-        val context = LocalContext.current
+        val view = LocalView.current
         var packageName by remember { mutableStateOf("") }
 
         OutlinedTextField(
@@ -50,10 +53,11 @@ fun AppMarketCard() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { IntentUtil.checkOnMarket(packageName, context) }
+                onDone = { IntentUtil.checkOnMarket(packageName, view.context) }
             ),
             trailingIcon = {
                 ClearInput(text = packageName) {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     packageName = ""
                 }
             }
@@ -62,9 +66,12 @@ fun AppMarketCard() {
         SpacerPadding()
         WhatIsPackageName()
 
-        Row {
+        Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
             TextButton(
-                onClick = { IntentUtil.checkOnMarket(packageName, context) }
+                onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    IntentUtil.checkOnMarket(packageName, view.context)
+                }
             ) {
                 Text(text = stringResource(R.string.open_on_google_play))
                 Icon(
@@ -75,7 +82,10 @@ fun AppMarketCard() {
             }
 
             TextButton(
-                onClick = { IntentUtil.checkOnMarket(packageName, context, false) }
+                onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    IntentUtil.checkOnMarket(packageName, view.context, false)
+                }
             ) {
                 Text(text = stringResource(R.string.open_on_other_markets))
                 Icon(
@@ -91,7 +101,7 @@ fun AppMarketCard() {
 @Composable
 private fun WhatIsPackageName() {
     Row {
-        val context = LocalContext.current
+        val view = LocalView.current
         val linkURL = "https://support.google.com/admob/answer/9972781"
 
         Text(
@@ -103,7 +113,10 @@ private fun WhatIsPackageName() {
 
         Row(
             modifier = Modifier.clickable(
-                onClick = { IntentUtil.openURL(linkURL, context) }
+                onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    IntentUtil.openURL(linkURL, view.context)
+                }
             )
         ) {
             Text(

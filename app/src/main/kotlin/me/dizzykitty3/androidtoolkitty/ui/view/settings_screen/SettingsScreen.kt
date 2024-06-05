@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty.ui.view.settings_screen
 
 import android.content.Context
 import android.os.Build
+import android.view.HapticFeedbackConstants
 import android.view.View
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -13,11 +14,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Code
-import androidx.compose.material.icons.outlined.DataObject
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Schedule
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -31,29 +29,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.BuildConfig
+import me.dizzykitty3.androidtoolkitty.CARD_3
+import me.dizzykitty3.androidtoolkitty.EDIT_HOME_SCREEN
+import me.dizzykitty3.androidtoolkitty.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.Bold
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui.component.CustomSwitchRow
-import me.dizzykitty3.androidtoolkitty.ui.component.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.component.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.component.WarningAlertDialogButton
-import me.dizzykitty3.androidtoolkitty.utils.CARD_3
-import me.dizzykitty3.androidtoolkitty.utils.EDIT_HOME_SCREEN
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
-import me.dizzykitty3.androidtoolkitty.utils.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
@@ -92,6 +88,7 @@ fun SettingsScreen(navController: NavHostController) {
             GroupTitle(id = R.string.version)
             Row(
                 modifier = Modifier.clickable {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     if (!debuggingOptions) {
                         tapCount++
                         when (tapCount) {
@@ -125,30 +122,33 @@ fun SettingsScreen(navController: NavHostController) {
 @Composable
 private fun AppearanceOptions() {
     val view = LocalView.current
-    val context = LocalContext.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
     var showDivider by remember { mutableStateOf(settingsSharedPref.showDivider) }
     var showEditVolumeOption by remember { mutableStateOf(settingsSharedPref.showEditVolumeOption) }
     val customVolume = settingsSharedPref.customVolume
-    val primary = MaterialTheme.colorScheme.primary.toArgb()
+    val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
+    val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
     GroupTitle(id = R.string.appearance)
 
     if (OSVersion.android12()) {
         CustomSwitchRow(textRes = R.string.material_you_dynamic_color, checked = dynamicColor) {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             dynamicColor = it
-            onClickDynamicColorButton(view, it, primary, context)
+            onClickDynamicColorButton(view, it, inverseOnSurface, inversePrimary, view.context)
         }
     }
 
     CustomSwitchRow(textRes = R.string.one_handed_mode, checked = oneHandedMode) {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
         oneHandedMode = it
         settingsSharedPref.oneHandedMode = it
     }
 
     CustomSwitchRow(textRes = R.string.show_divider, checked = showDivider) {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
         showDivider = it
         settingsSharedPref.showDivider = it
     }
@@ -157,6 +157,7 @@ private fun AppearanceOptions() {
         textRes = R.string.show_edit_volume_option,
         checked = showEditVolumeOption
     ) {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
         showEditVolumeOption = it
         settingsSharedPref.showEditVolumeOption = it
     }
@@ -171,7 +172,8 @@ private fun GeneralOptions() {
     var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
     var collapseKeyboard by remember { mutableStateOf(settingsSharedPref.collapseKeyboard) }
     var showSnackbarToConfirm by remember { mutableStateOf(settingsSharedPref.showSnackbar) }
-    val primary = MaterialTheme.colorScheme.primary.toArgb()
+    val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
+    val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
     GroupTitle(R.string.general)
 
@@ -179,6 +181,7 @@ private fun GeneralOptions() {
         textRes = R.string.clear_clipboard_on_launch,
         checked = autoClearClipboard
     ) {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
         autoClearClipboard = it
         // Automatically hide Clipboard Card when turning on Clear on Launch feature.
         if (autoClearClipboard && showClipboardCard) {
@@ -188,8 +191,10 @@ private fun GeneralOptions() {
                 view,
                 messageRes = R.string.clipboard_card_hidden,
                 buttonTextRes = R.string.undo,
-                buttonColor = primary,
+                textColor = inverseOnSurface,
+                buttonColor = inversePrimary,
                 buttonClickListener = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     settingsSharedPref.saveCardShowedState(CARD_3, true)
                 }
             )
@@ -198,6 +203,7 @@ private fun GeneralOptions() {
     }
 
     CustomSwitchRow(textRes = R.string.set_slider_increment_5, checked = volumeSlideSteps) {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
         volumeSlideSteps = it
         settingsSharedPref.sliderIncrement5Percent = it
     }
@@ -206,11 +212,13 @@ private fun GeneralOptions() {
         textRes = R.string.collapse_keyboard_when_back_to_app,
         checked = collapseKeyboard
     ) {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
         collapseKeyboard = it
         settingsSharedPref.collapseKeyboard = it
     }
 
     CustomSwitchRow(textRes = R.string.show_snackbar_to_confirm, checked = showSnackbarToConfirm) {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
         showSnackbarToConfirm = it
         settingsSharedPref.showSnackbar = it
     }
@@ -218,10 +226,15 @@ private fun GeneralOptions() {
 
 @Composable
 private fun CustomizeOptions(navController: NavHostController) {
+    val view = LocalView.current
+
     GroupTitle(R.string.customize)
 
     OutlinedButton(
-        onClick = { navController.navigate(EDIT_HOME_SCREEN) }
+        onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            navController.navigate(EDIT_HOME_SCREEN)
+        }
     ) {
         Icon(
             imageVector = Icons.Outlined.Edit,
@@ -235,9 +248,8 @@ private fun CustomizeOptions(navController: NavHostController) {
 
 @Composable
 private fun DebuggingOptions(navController: NavHostController) {
-    val context = LocalContext.current
+    val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
-    var showSpDialog by remember { mutableStateOf(false) }
     var uiTesting by remember { mutableStateOf(settingsSharedPref.uiTesting) }
 
     GroupTitle(R.string.debugging)
@@ -246,48 +258,22 @@ private fun DebuggingOptions(navController: NavHostController) {
     Text(text = "Language =  ${Locale.getDefault()}")
 
     CustomSwitchRow(textRes = R.string.ui_testing, checked = uiTesting) {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
         uiTesting = it
         settingsSharedPref.uiTesting = it
     }
 
-    OutlinedButton(onClick = { navController.navigate(PERMISSION_REQUEST_SCREEN) }) {
+    OutlinedButton(onClick = {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        navController.navigate(PERMISSION_REQUEST_SCREEN)
+    }) {
         Text(text = stringResource(id = R.string.go_to_permission_request_screen))
     }
 
-    OutlinedButton(onClick = { showSpDialog = true }) {
-        Text(text = stringResource(id = R.string.check_sp_values))
-    }
-
-    val sharedPref = remember { SettingsSharedPref }
-
-    if (showSpDialog) {
-        AlertDialog(
-            icon = { Icon(imageVector = Icons.Outlined.DataObject, contentDescription = null) },
-            onDismissRequest = { showSpDialog = false },
-            title = { Text(text = stringResource(id = R.string.sp_values)) },
-            text = {
-                Column {
-                    CustomTip(id = R.string.under_development)
-                    Text(text = "AUTO_CLEAR_CLIPBOARD = ${sharedPref.autoClearClipboard}")
-                    Text(text = "SLIDER_INCREMENT_5_PERCENT = ${sharedPref.sliderIncrement5Percent}")
-                    Text(text = "DYNAMIC_COLOR = ${sharedPref.dynamicColor}")
-                    Text(text = "ONE_HANDED_MODE = ${sharedPref.oneHandedMode}")
-                    Text(text = "HAVE_OPENED_SETTINGS_SCREEN = ${sharedPref.haveOpenedSettingsScreen}")
-                    Text(text = "USING_CUSTOM_VOLUME_OPTION_LABEL = ${sharedPref.usingCustomVolumeOptionLabel}")
-                    Text(text = "DEBUGGING_OPTIONS = ${sharedPref.debuggingOptions}")
-                    Text(text = "WEBPAGE_CARD_SHOW_MORE = ${sharedPref.webpageCardShowMore}")
-                    Text(text = "COLLAPSE_KEYBOARD = ${sharedPref.collapseKeyboard}")
-                }
-            },
-            confirmButton = {
-                Button(onClick = { showSpDialog = false }) {
-                    Text(text = stringResource(id = android.R.string.ok))
-                }
-            }
-        )
-    }
-
-    OutlinedButton(onClick = { IntentUtil.restartApp(context) }) {
+    OutlinedButton(onClick = {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        IntentUtil.restartApp(view.context)
+    }) {
         Text(text = stringResource(id = R.string.restart_app))
     }
 
@@ -308,6 +294,7 @@ private fun DebuggingOptions(navController: NavHostController) {
         positiveButtonText = stringResource(R.string.erase_all_data),
         negativeButtonText = null,
         onClickAction = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             settingsSharedPref.clearSettings()
             IntentUtil.finishApp(context)
         }
@@ -317,7 +304,8 @@ private fun DebuggingOptions(navController: NavHostController) {
 private fun onClickDynamicColorButton(
     view: View,
     isDynamicColor: Boolean,
-    color: Int,
+    inverseOnSurface: Int,
+    inversePrimary: Int,
     context: Context
 ) {
     val showSnackbarToConfirm = SettingsSharedPref.showSnackbar
@@ -328,8 +316,12 @@ private fun onClickDynamicColorButton(
             view,
             messageRes = R.string.requires_restart_do_it_now,
             buttonTextRes = R.string.restart,
-            buttonColor = color,
-            buttonClickListener = { IntentUtil.restartApp(context) }
+            textColor = inverseOnSurface,
+            buttonColor = inversePrimary,
+            buttonClickListener = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                IntentUtil.restartApp(context)
+            }
         )
     } else {
         IntentUtil.restartApp(context)
@@ -352,7 +344,7 @@ private fun Contributor() {
 @Composable
 private fun DeveloperProfileLink(name: String) {
     Row {
-        val context = LocalContext.current
+        val view = LocalView.current
 
         Icon(
             imageVector = Icons.Outlined.AccountCircle,
@@ -361,9 +353,10 @@ private fun DeveloperProfileLink(name: String) {
         IconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 IntentUtil.openURL(
                     "${URLUtil.prefixOf(URLUtil.Platform.GITHUB)}$name",
-                    context
+                    view.context
                 )
             }
         ) {
@@ -387,11 +380,12 @@ private fun ThanksTo(link: String) {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val context = LocalContext.current
+        val view = LocalView.current
         val sourceCodeURL = "https://github.com/$link"
 
         Row(modifier = Modifier.clickable {
-            IntentUtil.openURL(sourceCodeURL, context)
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            IntentUtil.openURL(sourceCodeURL, view.context)
         }) {
             Text(
                 text = link,
@@ -418,7 +412,7 @@ private fun GitHubRepoLink() {
     Row(
         verticalAlignment = Alignment.CenterVertically
     ) {
-        val context = LocalContext.current
+        val view = LocalView.current
         val sourceCodeURL = "https://github.com/dizzykitty3/AndroidToolKitty"
 
         Icon(
@@ -428,8 +422,9 @@ private fun GitHubRepoLink() {
         IconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                 ToastUtil.toast(R.string.all_help_welcomed)
-                IntentUtil.openURL(sourceCodeURL, context)
+                IntentUtil.openURL(sourceCodeURL, view.context)
             }
         ) {
             Text(

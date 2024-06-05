@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.home_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,6 +15,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.style.TextOverflow
@@ -57,6 +59,7 @@ private fun RecentVersions() {
 
 @Composable
 private fun EarlyVersions() {
+    val view = LocalView.current
     var expanded by remember { mutableStateOf(false) }
     if (expanded) {
         Row(modifier = Modifier.fillMaxWidth()) {
@@ -116,7 +119,10 @@ private fun EarlyVersions() {
         }
     }
 
-    TextButton(onClick = { expanded = !expanded }) {
+    TextButton(onClick = {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        expanded = !expanded
+    }) {
         if (!expanded) {
             Text(text = stringResource(R.string.show_more))
         } else {

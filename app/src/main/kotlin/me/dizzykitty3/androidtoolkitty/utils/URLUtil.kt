@@ -1,9 +1,32 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
 import androidx.annotation.StringRes
+import me.dizzykitty3.androidtoolkitty.BG
+import me.dizzykitty3.androidtoolkitty.CN
+import me.dizzykitty3.androidtoolkitty.COM
+import me.dizzykitty3.androidtoolkitty.COM_CN
+import me.dizzykitty3.androidtoolkitty.CO_AR
+import me.dizzykitty3.androidtoolkitty.CO_JP
+import me.dizzykitty3.androidtoolkitty.CO_UK
+import me.dizzykitty3.androidtoolkitty.EE
+import me.dizzykitty3.androidtoolkitty.HTTPS
+import me.dizzykitty3.androidtoolkitty.IR
+import me.dizzykitty3.androidtoolkitty.JP
+import me.dizzykitty3.androidtoolkitty.LA
+import me.dizzykitty3.androidtoolkitty.ME
+import me.dizzykitty3.androidtoolkitty.MX
+import me.dizzykitty3.androidtoolkitty.NET
+import me.dizzykitty3.androidtoolkitty.NZ
+import me.dizzykitty3.androidtoolkitty.ORG
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.RU
+import me.dizzykitty3.androidtoolkitty.SO
+import me.dizzykitty3.androidtoolkitty.TO
+import me.dizzykitty3.androidtoolkitty.TV
+import me.dizzykitty3.androidtoolkitty.US
+import me.dizzykitty3.androidtoolkitty.WIKI
 import timber.log.Timber
 
 object URLUtil {
@@ -118,16 +141,21 @@ object URLUtil {
         FANTIA("fantia.jp/", R.string.fantia),
         GITHUB("github.com/", R.string.github),
         INSTAGRAM("instagram.com/", R.string.instagram),
+        LINKEDIN_COMPANY("linkedin.com/company/", R.string.linkedin_company),
+        LINKEDIN_USER("linkedin.com/in/", R.string.linkedin_user),
         LINKTREE("linktr.ee/", R.string.linktree),
         LIT_LINK("lit.link/", R.string.lit_link),
+        MARSHMALLOW_QA("marshmallow-qa.com/", R.string.marshmallow_qa),
         MISSKEY("misskey.io/@", R.string.misskeyio),
         PATREON("patreon.com/", R.string.patreon),
         PAYPAL("paypal.me/", R.string.paypal),
+        PINTEREST("pinterest.com/", R.string.pinterest),
         PIXIV_ARTWORK("pixiv.net/artworks/", R.string.pixiv_artwork_id),
         PIXIV_USER("pixiv.net/users/", R.string.pixiv_user_id),
         PIXIV_USER_CUSTOM_URL("pixiv.me/", R.string.pixiv_user_custom_url),
         PLURK("plurk.com/", R.string.plurk),
         POTOFU("potofu.me/", R.string.potofu),
+        REDDIT_SUBREDDIT("reddit.com/r/", R.string.reddit_subreddit),
         SKEB("skeb.jp/@", R.string.skeb),
         SNAPCHAT("snapchat.com/add/", R.string.snapchat),
         STEAM_USER_CUSTOM_URL("steamcommunity.com/id/", R.string.steam_user_custom_url),

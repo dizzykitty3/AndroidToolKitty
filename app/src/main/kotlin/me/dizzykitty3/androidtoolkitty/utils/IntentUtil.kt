@@ -9,7 +9,26 @@ import android.content.Intent
 import android.content.Intent.ACTION_POWER_USAGE_SUMMARY
 import android.net.Uri
 import android.provider.Settings
+import me.dizzykitty3.androidtoolkitty.GOOGLE_MAPS
+import me.dizzykitty3.androidtoolkitty.GOOGLE_PLAY
+import me.dizzykitty3.androidtoolkitty.HTTPS
+import me.dizzykitty3.androidtoolkitty.PACKAGE
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.SETTING_AUTO_ROTATE
+import me.dizzykitty3.androidtoolkitty.SETTING_BATTERY_OPTIMIZATION
+import me.dizzykitty3.androidtoolkitty.SETTING_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.SETTING_CAPTIONING
+import me.dizzykitty3.androidtoolkitty.SETTING_DATE
+import me.dizzykitty3.androidtoolkitty.SETTING_DEFAULT_APPS
+import me.dizzykitty3.androidtoolkitty.SETTING_DEVELOPER
+import me.dizzykitty3.androidtoolkitty.SETTING_DISPLAY
+import me.dizzykitty3.androidtoolkitty.SETTING_ENABLE_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.SETTING_LOCALE
+import me.dizzykitty3.androidtoolkitty.SETTING_OVERLAY
+import me.dizzykitty3.androidtoolkitty.SETTING_POWER_USAGE_SUMMARY
+import me.dizzykitty3.androidtoolkitty.SETTING_USAGE_ACCESS
+import me.dizzykitty3.androidtoolkitty.SETTING_WIFI
+import me.dizzykitty3.androidtoolkitty.SETTING_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.app_components.MainActivity
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import timber.log.Timber
@@ -93,18 +112,21 @@ object IntentUtil {
     @JvmStatic
     fun openSystemSettings(settingType: String, context: Context) {
         val intent: Intent = when (settingType) {
-            SETTING_1 -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
-            SETTING_2 -> @SuppressLint("InlinedApi") if (OSVersion.android12()) Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
-            SETTING_3 -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
-            SETTING_4 -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
-            SETTING_5 -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
-            SETTING_6 -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
-            SETTING_7 -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-            SETTING_8 -> Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-            SETTING_9 -> Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
-            SETTING_10 -> Intent(Settings.ACTION_LOCALE_SETTINGS)
-            SETTING_11 -> Intent(Settings.ACTION_DATE_SETTINGS)
-            SETTING_12 -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
+            SETTING_DISPLAY -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
+            SETTING_AUTO_ROTATE -> @SuppressLint("InlinedApi") if (OSVersion.android12()) Intent(
+                Settings.ACTION_AUTO_ROTATE_SETTINGS
+            ) else return
+
+            SETTING_BLUETOOTH -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
+            SETTING_DEFAULT_APPS -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+            SETTING_BATTERY_OPTIMIZATION -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+            SETTING_CAPTIONING -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
+            SETTING_USAGE_ACCESS -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+            SETTING_OVERLAY -> Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+            SETTING_WRITE_SETTINGS -> Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+            SETTING_LOCALE -> Intent(Settings.ACTION_LOCALE_SETTINGS)
+            SETTING_DATE -> Intent(Settings.ACTION_DATE_SETTINGS)
+            SETTING_DEVELOPER -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
             SETTING_ENABLE_BLUETOOTH -> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             SETTING_WIFI -> Intent(Settings.ACTION_WIFI_SETTINGS)
             SETTING_POWER_USAGE_SUMMARY -> Intent(ACTION_POWER_USAGE_SUMMARY)
