@@ -81,6 +81,10 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
                 // Get system service
                 bluetoothAdapter = BluetoothUtil.bluetoothAdapter()
+                if (bluetoothAdapter == null) {
+                    SnackbarUtil.snackbar(view, R.string.no_bluetooth_adapter_available)
+                    return@OutlinedButton
+                }
 
                 // Show current device name, paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {

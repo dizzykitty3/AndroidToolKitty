@@ -146,6 +146,7 @@
     <string name="bluetooth_devices_types_4">This newer version is designed for lower power consumption and is ideal for devices that need long battery life, like fitness trackers and smart home sensors. It has a shorter range and slower data transfer rate compared to Classic Bluetooth.\n</string>
     <string name="bluetooth_devices_types_5">Dual</string>
     <string name="bluetooth_devices_types_6">Some devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
+    <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
 
     <!-- Home screen: unicode -->
     <string name="unicode">Unicode</string>

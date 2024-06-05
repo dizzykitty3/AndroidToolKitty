@@ -15,6 +15,7 @@ object OSVersion {
      * [beta-2](https://android-developers.googleblog.com/2024/05/the-second-beta-of-android-15.html)
      */
     fun android15(): Boolean = osVersion >= 35
+    fun api35(): Boolean = android15()
 
     /**
      * Upside Down Cake
@@ -23,6 +24,7 @@ object OSVersion {
      * 2. TileService.startActivityAndCollapse(Intent) -> TileService.startActivityAndCollapse(PendingIntent)
      */
     fun android14(): Boolean = osVersion >= 34
+    fun api34(): Boolean = android14()
 
     /**
      * Tiramisu
@@ -31,11 +33,13 @@ object OSVersion {
      * 2. Displays a standard visual confirmation when content is added to the clipboard
      */
     fun android13(): Boolean = osVersion >= 33
+    fun api33(): Boolean = android13()
 
     /**
      * Sv2
      */
     fun android12L(): Boolean = osVersion >= 32
+    fun api32(): Boolean = android12L()
 
     /**
      * S
@@ -43,13 +47,16 @@ object OSVersion {
      * 1. Material You dynamic color
      * 2. Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS)
      * 3. Manifest.permission.BLUETOOTH_CONNECT
+     * 4. BluetoothAdapter.getDefaultAdapter() -> BluetoothManager.getAdapter()
      */
     fun android12(): Boolean = osVersion >= 31
+    fun api31(): Boolean = android12()
 
     /**
      * R
      */
     fun android11(): Boolean = osVersion >= 30
+    fun api30(): Boolean = android11()
 
     /**
      * Q
@@ -59,6 +66,7 @@ object OSVersion {
      * your app cannot access clipboard data.
      */
     fun android10(): Boolean = osVersion >= 29
+    fun api29(): Boolean = android10()
 
     /**
      * Pie
@@ -66,6 +74,7 @@ object OSVersion {
      * 1. ClipboardManager.clearPrimaryClip()
      */
     fun android9(): Boolean = osVersion >= 28
+    fun api28(): Boolean = android9()
 
     /**
      * Oreo
@@ -73,4 +82,5 @@ object OSVersion {
      * 1. Adaptive icons
      */
     fun android8(): Boolean = osVersion >= 26
+    fun api26(): Boolean = android8()
 }
