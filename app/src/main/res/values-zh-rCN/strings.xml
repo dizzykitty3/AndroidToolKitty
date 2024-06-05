@@ -176,4 +176,19 @@
     <string name="email">电子邮箱</string>
     <string name="off">OFF</string>
     <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
+    <string name="user_profile">用户中心</string>
+    <string name="success">成功</string>
+    <string name="error_account_locked">账户暂时被锁定，请稍后再试。</string>
+    <string name="error_invalid_credentials">用户名或密码无效。</string>
+    <string name="error_username_taken">用户名已被占用。</string>
+    <string name="error_settings_not_found">您还没有上传设置。</string>
+    <string name="error_unknown">发生未知错误。</string>
+    <string name="error_login_expired">登录状态已过期，请登出后重新登录。</string>
+    <string name="download_settings_successful">下载成功</string>
+    <string name="download_settings_take_effect">设置下载成功。返回主界面后更改将生效。</string>
+    <string name="error_invalid_username">用户名只能包含字母、数字和下划线</string>
+    <string name="error_invalid_email">请输入有效的邮箱地址</string>
+    <string name="error_invalid_password">密码必须至少包含6个字符</string>
+    <string name="rule_update">规则更新</string>
+    <string name="error_rule_update">更新规则失败，请稍后再试。</string>
 </resources>

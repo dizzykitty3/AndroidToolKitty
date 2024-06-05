@@ -35,163 +35,191 @@ object SettingsSharedPref {
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
     private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
-
+    private const val DOMAIN_SUFFIX = "domain_suffix"
+    private const val SOCIAL_MEDIA = "social_media"
     private const val TOKEN = "token"
+    private val nonSettingsPref = hashSetOf(TOKEN, DOMAIN_SUFFIX, SOCIAL_MEDIA)
 
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-    var autoClearClipboard: Boolean
-        get() = sharedPrefs.getBoolean(AUTO_CLEAR_CLIPBOARD, false)
-        set(value) {
-            Timber.d("auto clear clipboard = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(AUTO_CLEAR_CLIPBOARD, value)
+    private inline fun <reified T> getPreference(key: String, defaultValue: T): T {
+        return when (T::class) {
+            Boolean::class -> sharedPrefs.getBoolean(key, defaultValue as Boolean) as T
+            Int::class -> sharedPrefs.getInt(key, defaultValue as Int) as T
+            String::class -> sharedPrefs.getString(key, defaultValue as String) as T
+            else -> throw IllegalArgumentException("Unsupported type")
+        }
+    }
+
+    private inline fun <reified T> setPreference(key: String, value: T) {
+        with(sharedPrefs.edit()) {
+            Timber.d("set preference: $key = $value")
+            when (value) {
+                is Boolean -> putBoolean(key, value)
+                is Int -> putInt(key, value)
+                is String -> putString(key, value)
+                else -> throw IllegalArgumentException("Unsupported type")
+            }
+            apply()
+        }
+    }
+
+    fun removePreference(key: String) {
+        with(sharedPrefs.edit()) {
+            if (sharedPrefs.contains(key)) {
+                remove(key)
                 apply()
+                Timber.d("Preference key '$key' removed successfully.")
+            } else {
+                Timber.d("Preference key '$key' does not exist and cannot be removed.")
             }
         }
+    }
+
+    fun exportSettingsToJson(): String {
+        val keys =
+            sharedPrefs.all.keys.filter { !nonSettingsPref.contains(it) }  // Exclude the token
+        val settingsMap: Map<String, Any?> = keys.associateWith {
+            sharedPrefs.all[it] ?: throw IllegalStateException("Unexpected null value at $it")
+        }
+
+        val serializableMap = mutableMapOf<String, String>()
+        settingsMap.forEach { (key, value) ->
+            when (value) {
+                is String -> serializableMap[key] = value
+                is Int -> serializableMap[key] = value.toString()
+                is Boolean -> serializableMap[key] = value.toString()
+                else -> throw IllegalArgumentException("Unsupported type for $key")
+            }
+        }
+
+        return Json.encodeToString(serializableMap)
+    }
+
+    fun importSettingsFromJson(jsonString: String) {
+        val settingsMap: Map<String, String> = Json.decodeFromString(jsonString)
+        settingsMap.forEach { (key, value) ->
+            when {
+                value.toBooleanCustom() != null -> setPreference(key, value.toBoolean())
+                value.toIntOrNull() != null -> setPreference(key, value.toInt())
+                else -> setPreference(key, value)
+            }
+        }
+    }
+
+    fun clearSettings() {
+        val token = getToken()
+        sharedPrefs.edit().clear().apply()
+        setToken(token)  // Restore token
+    }
+
+    private fun String.toBooleanCustom(): Boolean? = when {
+        this.equals("true", ignoreCase = true) -> true
+        this.equals("false", ignoreCase = true) -> false
+        else -> null
+    }
+
+    var autoClearClipboard: Boolean
+        get() = getPreference(AUTO_CLEAR_CLIPBOARD, false)
+        set(value) = setPreference(AUTO_CLEAR_CLIPBOARD, value)
 
     var sliderIncrement5Percent: Boolean
-        get() = sharedPrefs.getBoolean(SLIDER_INCREMENT_5_PERCENT, false)
-        set(value) {
-            Timber.d("slider increment 5% = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(SLIDER_INCREMENT_5_PERCENT, value)
-                apply()
-            }
-        }
+        get() = getPreference(SLIDER_INCREMENT_5_PERCENT, false)
+        set(value) = setPreference(SLIDER_INCREMENT_5_PERCENT, value)
 
     var dynamicColor: Boolean
-        get() = sharedPrefs.getBoolean(DYNAMIC_COLOR, true)
-        set(value) {
-            Timber.d("dynamic color = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(DYNAMIC_COLOR, value)
-                apply()
-            }
-        }
+        get() = getPreference(DYNAMIC_COLOR, true)
+        set(value) = setPreference(DYNAMIC_COLOR, value)
 
     var oneHandedMode: Boolean
-        get() = sharedPrefs.getBoolean(ONE_HANDED_MODE, false)
-        set(value) {
-            Timber.d("one-handed mode = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(ONE_HANDED_MODE, value)
-                apply()
-            }
-        }
+        get() = getPreference(ONE_HANDED_MODE, false)
+        set(value) = setPreference(ONE_HANDED_MODE, value)
 
     var haveOpenedSettingsScreen: Boolean
-        get() = sharedPrefs.getBoolean(HAVE_OPENED_SETTINGS_SCREEN, false)
-        set(value) {
-            Timber.d("have opened settings menu = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(HAVE_OPENED_SETTINGS_SCREEN, value)
-                apply()
-            }
-        }
+        get() = getPreference(HAVE_OPENED_SETTINGS_SCREEN, false)
+        set(value) = setPreference(HAVE_OPENED_SETTINGS_SCREEN, value)
 
     var usingCustomVolumeOptionLabel: Boolean
-        get() = sharedPrefs.getBoolean(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
-        set(value) {
-            Timber.d("using custom volume option label = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
-                apply()
-            }
-        }
+        get() = getPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
+        set(value) = setPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
 
     var debuggingOptions: Boolean
-        get() = sharedPrefs.getBoolean(DEBUGGING_OPTIONS, false)
-        set(value) {
-            Timber.d("debugging options = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(DEBUGGING_OPTIONS, value)
-                apply()
-            }
-        }
+        get() = getPreference(DEBUGGING_OPTIONS, false)
+        set(value) = setPreference(DEBUGGING_OPTIONS, value)
 
     var webpageCardShowMore: Boolean
-        get() = sharedPrefs.getBoolean(WEBPAGE_CARD_SHOW_MORE, false)
-        set(value) {
-            Timber.d("webpage card show more = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(WEBPAGE_CARD_SHOW_MORE, value)
-                apply()
-            }
-        }
+        get() = getPreference(WEBPAGE_CARD_SHOW_MORE, false)
+        set(value) = setPreference(WEBPAGE_CARD_SHOW_MORE, value)
 
     var collapseKeyboard: Boolean
-        get() = sharedPrefs.getBoolean(COLLAPSE_KEYBOARD, true)
-        set(value) {
-            Timber.d("collapse keyboard = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(COLLAPSE_KEYBOARD, value)
-                apply()
-            }
-        }
+        get() = getPreference(COLLAPSE_KEYBOARD, true)
+        set(value) = setPreference(COLLAPSE_KEYBOARD, value)
 
     var showDivider: Boolean
-        get() = sharedPrefs.getBoolean(SHOW_DIVIDER, true)
-        set(value) {
-            Timber.d("show divider = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(SHOW_DIVIDER, value)
-                apply()
-            }
-        }
+        get() = getPreference(SHOW_DIVIDER, true)
+        set(value) = setPreference(SHOW_DIVIDER, value)
 
     var showSnackbar: Boolean
-        get() = sharedPrefs.getBoolean(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, true)
-        set(value) {
-            Timber.d("show snackbar before apply changes = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, value)
-                apply()
-            }
-        }
+        get() = getPreference(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, true)
+        set(value) = setPreference(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, value)
 
     var showEditVolumeOption: Boolean
-        get() = sharedPrefs.getBoolean(SHOW_EDIT_VOLUME_OPTION, true)
-        set(value) {
-            Timber.d("show edit volume option = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(SHOW_EDIT_VOLUME_OPTION, value)
-                apply()
-            }
-        }
+        get() = getPreference(SHOW_EDIT_VOLUME_OPTION, true)
+        set(value) = setPreference(SHOW_EDIT_VOLUME_OPTION, value)
 
     var autoSetMediaVolume: Int
-        get() = sharedPrefs.getInt(AUTO_SET_MEDIA_VOLUME, -1)
-        set(value) {
-            Timber.d("auto set media volume = $value")
-            with(sharedPrefs.edit()) {
-                putInt(AUTO_SET_MEDIA_VOLUME, value)
-                apply()
-            }
-        }
+        get() = getPreference(AUTO_SET_MEDIA_VOLUME, -1)
+        set(value) = setPreference(AUTO_SET_MEDIA_VOLUME, value)
 
     fun enabledAutoSetMediaVolume(): Boolean = autoSetMediaVolume != -1
 
     var haveTappedAddButton: Boolean
-        get() = sharedPrefs.getBoolean(HAVE_TAPPED_ADD_BUTTON, false)
-        set(value) {
-            Timber.d("have tapped add button = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(HAVE_TAPPED_ADD_BUTTON, value)
-                apply()
-            }
-        }
+        get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
+        set(value) = setPreference(HAVE_TAPPED_ADD_BUTTON, value)
 
     var uiTesting: Boolean
-        get() = sharedPrefs.getBoolean(UI_TESTING, false)
-        set(value) {
-            Timber.d("UI testing = $value")
-            with(sharedPrefs.edit()) {
-                putBoolean(UI_TESTING, value)
-                apply()
+        get() = getPreference(UI_TESTING, false)
+        set(value) = setPreference(UI_TESTING, value)
+
+    var lastTimeSelectedSocialPlatform: Int
+        get() = getPreference(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
+        set(value) = setPreference(LAST_TIME_SELECTED_PLATFORM_INDEX, value)
+
+    var customVolume: Int
+        get() = getPreference(CUSTOM_VOLUME, Int.MIN_VALUE)
+        set(value) = setPreference(CUSTOM_VOLUME, value)
+
+    var customVolumeOptionLabel: String?
+        get() = getPreference(VOLUME_OPTION_LABEL, "")
+        set(value) = setPreference(VOLUME_OPTION_LABEL, value)
+
+    var domainSuffix: String?
+        get() = getPreference(DOMAIN_SUFFIX, "")
+        set(value) = setPreference(DOMAIN_SUFFIX, value)
+
+    var socialMedia: String?
+        get() = getPreference(SOCIAL_MEDIA, "")
+        set(value) = setPreference(SOCIAL_MEDIA, value)
+
+    fun getWheelOfFortuneItems(): List<String>? {
+        val itemsJson = getPreference(WHEEL_OF_FORTUNE_ITEMS, "")
+        return itemsJson.let {
+            try {
+                val items: WheelOfFortuneItems = Json.decodeFromString(it)
+                items.items
+            } catch (e: Exception) {
+                Timber.e(e)
+                null
             }
         }
+    }
+
+    fun setWheelOfFortuneItems(items: List<String>) {
+        val itemsJson = Json.encodeToString(WheelOfFortuneItems(items))
+        Timber.d("wheel of fortune items = $itemsJson")
+        setPreference(WHEEL_OF_FORTUNE_ITEMS, itemsJson)
+    }
 
     fun getCardShowedState(card: String): Boolean {
         return sharedPrefs.getBoolean(card, true)
@@ -205,73 +233,7 @@ object SettingsSharedPref {
         }
     }
 
-    var lastTimeSelectedSocialPlatform: Int
-        get() = sharedPrefs.getInt(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
-        set(value) {
-            Timber.d("last time platform index = $value")
-            with(sharedPrefs.edit()) {
-                putInt(LAST_TIME_SELECTED_PLATFORM_INDEX, value)
-                apply()
-            }
-        }
+    fun getToken(): String = getPreference(TOKEN, "")
 
-    var customVolume: Int
-        get() = sharedPrefs.getInt(CUSTOM_VOLUME, Int.MIN_VALUE)
-        set(value) {
-            Timber.d("custom volume = $value")
-            with(sharedPrefs.edit()) {
-                putInt(CUSTOM_VOLUME, value)
-                apply()
-            }
-        }
-
-    var customVolumeOptionLabel: String?
-        get() = sharedPrefs.getString(VOLUME_OPTION_LABEL, "")
-        set(value) {
-            Timber.d("custom volume option label = $value")
-            with(sharedPrefs.edit()) {
-                putString(VOLUME_OPTION_LABEL, value)
-                apply()
-            }
-        }
-
-    fun getWheelOfFortuneItems(): List<String>? {
-        val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null
-        return try {
-            val items: WheelOfFortuneItems = Json.decodeFromString(itemsJson)
-            items.items
-        } catch (e: Exception) {
-            Timber.e(e)
-            null
-        }
-    }
-
-    fun setWheelOfFortuneItems(items: List<String>) {
-        val itemsJson = Json.encodeToString(WheelOfFortuneItems(items))
-        Timber.d("wheel of fortune items = $itemsJson")
-        with(sharedPrefs.edit()) {
-            putString(WHEEL_OF_FORTUNE_ITEMS, itemsJson)
-            apply()
-        }
-    }
-
-    fun getToken(): String? {
-        val token = sharedPrefs.getString(TOKEN, null)
-        return token
-    }
-
-    fun setToken(token: String) {
-        with(sharedPrefs.edit()) {
-            putString(TOKEN, token)
-            apply()
-        }
-    }
-
-    fun clear() {
-        Timber.d("erase all app data")
-        with(sharedPrefs.edit()) {
-            clear()
-            apply()
-        }
-    }
+    fun setToken(token: String) = setPreference(TOKEN, token)
 }

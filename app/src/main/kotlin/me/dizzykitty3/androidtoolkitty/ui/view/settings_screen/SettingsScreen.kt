@@ -68,6 +68,10 @@ fun SettingsScreen(navController: NavHostController) {
             GeneralOptions()
             GroupDivider()
             CustomizeOptions(navController = navController)
+            GroupDivider()
+            UserSyncSection()
+            GroupDivider()
+            RuleUpdateSection()
             @Suppress("KotlinConstantConditions")
             AnimatedVisibility(
                 visible = (debuggingOptions || (!debuggingOptions && tapCount >= 5)),
@@ -291,7 +295,7 @@ private fun DebuggingOptions(navController: NavHostController) {
         negativeButtonText = null,
         onClickAction = {
             view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-            settingsSharedPref.clear()
+            settingsSharedPref.clearSettings()
             IntentUtil.finishApp(view.context)
         }
     )
