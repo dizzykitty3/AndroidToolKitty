@@ -1,7 +1,10 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
 import androidx.annotation.StringRes
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import timber.log.Timber
 
 object URLUtil {
@@ -23,8 +26,9 @@ object URLUtil {
 
     fun suffixOf(urlInput: String): String {
         if (urlInput.contains(".")) return ""
-
-        val suffixMap = mapOf(
+        val domainInfoList = SettingsSharedPref.domainSuffix?.let { parseJson(it) }
+        val suffixMapFromJson = domainInfoList?.associate { it.domain to it.suffix } ?: emptyMap()
+        val hardcodedSuffixMap = mapOf(
             "remove" to BG,
             "feishu" to CN,
             "52pojie" to CN,
@@ -88,7 +92,9 @@ object URLUtil {
             "namu" to WIKI,
         )
 
-        return suffixMap[StringUtil.dropSpaces(urlInput)] ?: COM
+        val finalSuffixMap = hardcodedSuffixMap + suffixMapFromJson
+        val cleanInput = StringUtil.dropSpaces(urlInput)
+        return finalSuffixMap[cleanInput] ?: ".com"
     }
 
     /**
@@ -135,4 +141,15 @@ object URLUtil {
      * @return the profile prefix associated with the given platform.
      */
     fun prefixOf(platform: Platform): String = platform.prefix
+
+    fun parseJson(input: String): List<DomainInfo> {
+        val json = Json { ignoreUnknownKeys = true }  // 创建一个 Json 实例，配置为忽略未知键
+        return json.decodeFromString(input)
+    }
+
+    @Serializable
+    data class DomainInfo(
+        val domain: String,
+        val suffix: String
+    )
 }
