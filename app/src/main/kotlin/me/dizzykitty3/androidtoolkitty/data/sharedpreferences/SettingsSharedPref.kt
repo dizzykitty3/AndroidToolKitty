@@ -35,14 +35,10 @@ object SettingsSharedPref {
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
     private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
-
     private const val DOMAIN_SUFFIX = "domain_suffix"
     private const val SOCIAL_MEDIA = "social_media"
-
     private const val TOKEN = "token"
-
     private val nonSettingsPref = hashSetOf(TOKEN, DOMAIN_SUFFIX, SOCIAL_MEDIA)
-
 
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

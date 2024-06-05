@@ -1,6 +1,8 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
 import androidx.annotation.StringRes
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.BG
 import me.dizzykitty3.androidtoolkitty.CN
 import me.dizzykitty3.androidtoolkitty.COM
@@ -18,8 +20,6 @@ import me.dizzykitty3.androidtoolkitty.MX
 import me.dizzykitty3.androidtoolkitty.NET
 import me.dizzykitty3.androidtoolkitty.NZ
 import me.dizzykitty3.androidtoolkitty.ORG
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.RU
 import me.dizzykitty3.androidtoolkitty.SO

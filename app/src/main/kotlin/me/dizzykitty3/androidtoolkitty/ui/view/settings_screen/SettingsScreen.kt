@@ -296,7 +296,7 @@ private fun DebuggingOptions(navController: NavHostController) {
         onClickAction = {
             view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             settingsSharedPref.clearSettings()
-            IntentUtil.finishApp(context)
+            IntentUtil.finishApp(view.context)
         }
     )
 }
