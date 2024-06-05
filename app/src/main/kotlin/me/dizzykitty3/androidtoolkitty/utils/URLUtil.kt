@@ -133,6 +133,7 @@ object URLUtil {
         LINKEDIN_USER("linkedin.com/in/", R.string.linkedin_user),
         LINKTREE("linktr.ee/", R.string.linktree),
         LIT_LINK("lit.link/", R.string.lit_link),
+        MARSHMALLOW_QA("marshmallow-qa.com/", R.string.marshmallow_qa),
         MISSKEY("misskey.io/@", R.string.misskeyio),
         PATREON("patreon.com/", R.string.patreon),
         PAYPAL("paypal.me/", R.string.paypal),
