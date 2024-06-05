@@ -26,7 +26,7 @@ object URLUtil {
 
     fun suffixOf(urlInput: String): String {
         if (urlInput.contains(".")) return ""
-        val domainInfoList = SettingsSharedPref.domainSuffix?.let { parseJson(it) }
+        val domainInfoList = SettingsSharedPref.domainSuffix?.let { parseDomainJson(it) }
         val suffixMapFromJson = domainInfoList?.associate { it.domain to it.suffix } ?: emptyMap()
         val hardcodedSuffixMap = mapOf(
             "remove" to BG,
@@ -142,14 +142,28 @@ object URLUtil {
      */
     fun prefixOf(platform: Platform): String = platform.prefix
 
-    fun parseJson(input: String): List<DomainInfo> {
+    private fun parseDomainJson(input: String): List<DomainInfo> {
         val json = Json { ignoreUnknownKeys = true }  // 创建一个 Json 实例，配置为忽略未知键
         return json.decodeFromString(input)
     }
+
+    private fun parsePlatformJson(input: String): List<PlatformInfo> {
+        val json = Json { ignoreUnknownKeys = true }  // 创建一个 Json 实例，配置为忽略未知键
+        return json.decodeFromString(input)
+    }
+
 
     @Serializable
     data class DomainInfo(
         val domain: String,
         val suffix: String
+    )
+
+    @Serializable
+    data class PlatformInfo(
+        val platform: String,
+        val prefix: String,
+        val description: String,
+        val type: Int
     )
 }
