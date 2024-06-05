@@ -57,10 +57,10 @@ fun UserSyncSection() {
 
     OutlinedButton(
         onClick = {
-            if (token.isBlank()) {
-                dialogState = DialogState.Login
+            dialogState = if (token.isBlank()) {
+                DialogState.Login
             } else {
-                dialogState = DialogState.UserProfile
+                DialogState.UserProfile
             }
         },
         enabled = !isLoading
@@ -580,19 +580,25 @@ suspend fun handleRequest(
             HttpRequestType.DELETE -> HttpUtil.delete(url, body, headers)
         }
 
-        if (response.status == HttpStatusCode.OK) {
-            val responseBody = response.bodyAsText()
-            onDataReceived(responseBody)
-            onSuccess()
-            onDismiss()
-        } else if (response.status == HttpStatusCode.Unauthorized) {
-            onDismiss()
-            onFailure(response.status.value)
-        } else {
-            val errorBody = response.bodyAsText()
-            val jsonObj = JSONObject(errorBody)
-            val errorCode = jsonObj.getInt("code")
-            onFailure(errorCode)
+        when (response.status) {
+            HttpStatusCode.OK -> {
+                val responseBody = response.bodyAsText()
+                onDataReceived(responseBody)
+                onSuccess()
+                onDismiss()
+            }
+
+            HttpStatusCode.Unauthorized -> {
+                onDismiss()
+                onFailure(response.status.value)
+            }
+
+            else -> {
+                val errorBody = response.bodyAsText()
+                val jsonObj = JSONObject(errorBody)
+                val errorCode = jsonObj.getInt("code")
+                onFailure(errorCode)
+            }
         }
     } catch (_: Exception) {
         onFailure(9999)
