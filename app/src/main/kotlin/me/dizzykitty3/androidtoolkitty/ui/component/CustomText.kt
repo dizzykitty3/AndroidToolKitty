@@ -121,7 +121,7 @@ fun CustomTip(formattedMessage: String) {
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
-        if (uiTesting) {
+        if (uiTesting && formattedMessage != stringResource(id = R.string.under_development)) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
