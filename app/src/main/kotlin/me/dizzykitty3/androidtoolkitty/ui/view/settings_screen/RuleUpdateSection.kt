@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.settings_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -32,6 +33,7 @@ fun RuleUpdateSection() {
 
     OutlinedButton(
         onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             coroutineScope.launch {
                 isLoading = true
                 onUpdateSocialMedia(
@@ -53,6 +55,7 @@ fun RuleUpdateSection() {
 
     OutlinedButton(
         onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             coroutineScope.launch {
                 isLoading = true
                 onUpdateDomainSuffix(

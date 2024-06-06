@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.settings_screen
 
+import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +18,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -59,6 +61,7 @@ fun UserSyncSection() {
 
     OutlinedButton(
         onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             dialogState = if (token.isBlank()) {
                 DialogState.Login
             } else {
@@ -72,6 +75,7 @@ fun UserSyncSection() {
 
     OutlinedButton(
         onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             if (token.isBlank()) {
                 dialogState = DialogState.Login
             } else {
@@ -100,6 +104,7 @@ fun UserSyncSection() {
 
     OutlinedButton(
         onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             if (token.isBlank()) {
                 dialogState = DialogState.Login
             } else {
@@ -137,8 +142,12 @@ fun UserSyncSection() {
         DialogState.Login -> {
             UserLoginDialog(
                 onDismiss = { dialogState = null },
-                onRegisterClick = { dialogState = DialogState.Register },
+                onRegisterClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    dialogState = DialogState.Register
+                },
                 onLoginClick = { usernameForLogin, password ->
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     isLoading = true
                     coroutineScope.launch {
                         handleLogin(
@@ -169,8 +178,12 @@ fun UserSyncSection() {
         DialogState.Register -> {
             UserRegisterDialog(
                 onDismiss = { dialogState = null },
-                onLoginClick = { dialogState = DialogState.Login },
+                onLoginClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    dialogState = DialogState.Login
+                },
                 onRegisterClick = { username, email, password ->
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     isLoading = true
                     coroutineScope.launch {
                         handleRegister(
@@ -203,6 +216,7 @@ fun UserSyncSection() {
             UserProfileDialog(
                 token = token,
                 onLogout = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     SettingsSharedPref.removePreference("token")
                     token = ""
                     dialogState = null
@@ -273,8 +287,7 @@ private fun UserLoginDialog(
             if (usernameError != null) {
                 Text(
                     text = usernameError ?: "",
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.align(Alignment.Start)
+                    color = MaterialTheme.colorScheme.error
                 )
             }
             OutlinedTextField(
@@ -287,14 +300,14 @@ private fun UserLoginDialog(
             if (passwordError != null) {
                 Text(
                     text = passwordError ?: "",
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.align(Alignment.Start)
+                    color = MaterialTheme.colorScheme.error
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 enabled = !isLoading,
                 onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     usernameError =
                         if (!username.matches(usernameRegex)) view.context.getString(R.string.error_invalid_username) else null
                     passwordError =
@@ -355,8 +368,7 @@ private fun UserRegisterDialog(
             if (usernameError != null) {
                 Text(
                     text = usernameError ?: "",
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.align(Alignment.Start)
+                    color = MaterialTheme.colorScheme.error
                 )
             }
             OutlinedTextField(
@@ -368,8 +380,7 @@ private fun UserRegisterDialog(
             if (emailError != null) {
                 Text(
                     text = emailError ?: "",
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.align(Alignment.Start)
+                    color = MaterialTheme.colorScheme.error
                 )
             }
             OutlinedTextField(
@@ -382,14 +393,14 @@ private fun UserRegisterDialog(
             if (passwordError != null) {
                 Text(
                     text = passwordError ?: "",
-                    color = MaterialTheme.colorScheme.error,
-                    modifier = Modifier.align(Alignment.Start)
+                    color = MaterialTheme.colorScheme.error
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
             Button(
                 enabled = !isLoading,
                 onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
                     usernameError =
                         if (!username.matches(usernameRegex)) view.context.getString(R.string.error_invalid_username) else null
                     emailError =
@@ -414,33 +425,37 @@ private fun UserProfileDialog(
     onLogout: () -> Unit,
     onDismiss: () -> Unit
 ) {
+    val view = LocalView.current
+
     AlertDialog(
         onDismissRequest = { onDismiss() },
-        title = { Text(text = "User Profile") },
+        title = { Text(text = stringResource(id = R.string.user_profile)) },
         text = {
-            Column {
-                Text(
-                    text = "Token: $token",
-                    modifier = Modifier.clickable {
-                        ClipboardUtil.copy(token)
-                        if (!OSVersion.android13()) {
-                            ToastUtil.toast(R.string.copied)
-                        }
+            Text(
+                text = "Token: $token (tap to copy)",
+                modifier = Modifier.clickable {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    ClipboardUtil.copy(token)
+                    if (!OSVersion.android13()) {
+                        ToastUtil.toast(R.string.copied)
                     }
-                )
-            }
+                }
+            )
         },
         confirmButton = {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                Button(onClick = { onLogout() }) {
-                    Text("Logout")
-                }
-                Button(onClick = { onDismiss() }) {
-                    Text("Close")
-                }
+            Button(onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                onDismiss()
+            }) {
+                Text(stringResource(id = android.R.string.ok))
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                onLogout()
+            }) {
+                Text("Logout")
             }
         }
     )
