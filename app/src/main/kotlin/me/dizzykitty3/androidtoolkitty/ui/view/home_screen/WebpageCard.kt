@@ -384,7 +384,7 @@ private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): 
             if (username.isNotBlank()) {
                 "${platform.prefix}${StringUtil.dropSpaces(username)}.bsky.social"
             } else {
-                platform.prefix
+                platform.prefix // for display
             }
 
         URLUtil.Platform.FANBOX,

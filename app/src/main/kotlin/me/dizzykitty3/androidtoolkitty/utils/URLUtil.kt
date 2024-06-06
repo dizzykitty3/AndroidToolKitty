@@ -115,7 +115,7 @@ object URLUtil {
             "twitch" to TV,
             "jable" to TV,
             "zoom" to US,
-            "namu" to WIKI,
+            "namu" to WIKI
         )
 
         // todo
