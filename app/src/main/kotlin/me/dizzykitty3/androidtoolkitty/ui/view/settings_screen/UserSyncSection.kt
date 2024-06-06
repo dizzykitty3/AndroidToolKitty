@@ -217,7 +217,7 @@ fun UserSyncSection() {
     }
 }
 
-fun getErrorStringResourceId(code: Int): Int {
+private fun getErrorStringResourceId(code: Int): Int {
     return when (code) {
         401 -> R.string.error_login_expired
         1001 -> R.string.error_account_locked
@@ -409,7 +409,7 @@ private fun UserRegisterDialog(
 }
 
 @Composable
-fun UserProfileDialog(
+private fun UserProfileDialog(
     token: String,
     onLogout: () -> Unit,
     onDismiss: () -> Unit
@@ -460,7 +460,7 @@ private fun CommonDialog(onDismiss: () -> Unit, content: @Composable () -> Unit)
     }
 }
 
-suspend fun handleUploadSettings(
+private suspend fun handleUploadSettings(
     token: String,
     settings: String,
     onFailure: (Int) -> Unit,
@@ -476,7 +476,7 @@ suspend fun handleUploadSettings(
     )
 }
 
-suspend fun handleDownloadSettings(
+private suspend fun handleDownloadSettings(
     token: String,
     onSettingsReceived: (String) -> Unit,
     onFailure: (Int) -> Unit,
@@ -492,7 +492,7 @@ suspend fun handleDownloadSettings(
     )
 }
 
-suspend fun handleLogin(
+private suspend fun handleLogin(
     username: String,
     password: String,
     onDismiss: () -> Unit,
@@ -511,7 +511,7 @@ suspend fun handleLogin(
     )
 }
 
-suspend fun handleRegister(
+private suspend fun handleRegister(
     username: String,
     email: String,
     password: String,
@@ -536,7 +536,7 @@ enum class HttpRequestType {
     GET, POST, PUT, DELETE
 }
 
-suspend fun handleRequest(
+private suspend fun handleRequest(
     requestType: HttpRequestType,
     url: String,
     body: Map<String, String> = emptyMap(),

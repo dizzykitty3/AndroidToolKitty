@@ -75,17 +75,17 @@ fun RuleUpdateSection() {
     if (isLoading) CircularProgressIndicator()
 }
 
-suspend fun onUpdateSocialMedia(onSuccess: (String) -> Unit, onFailure: () -> Unit) {
+private suspend fun onUpdateSocialMedia(onSuccess: (String) -> Unit, onFailure: () -> Unit) {
     val url = "https://api.yanqishui.work/toolkitten/open/social-media"
     handleRequest(url = url, onSuccess = onSuccess, onFailure = onFailure)
 }
 
-suspend fun onUpdateDomainSuffix(onSuccess: (String) -> Unit, onFailure: () -> Unit) {
+private suspend fun onUpdateDomainSuffix(onSuccess: (String) -> Unit, onFailure: () -> Unit) {
     val url = "https://api.yanqishui.work/toolkitten/open/domain-suffix"
     handleRequest(url = url, onSuccess = onSuccess, onFailure = onFailure)
 }
 
-suspend fun handleRequest(
+private suspend fun handleRequest(
     url: String,
     onSuccess: (String) -> Unit,
     onFailure: () -> Unit
