@@ -42,6 +42,7 @@ import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 import org.json.JSONObject
 
@@ -278,10 +279,7 @@ private fun UserLoginDialog(
             }
             OutlinedTextField(
                 value = password,
-                onValueChange = {
-                    val trimmedInput = it.replace("\\s".toRegex(), "")
-                    password = trimmedInput
-                },
+                onValueChange = { password = StringUtil.dropSpaces(it) },
                 label = { Text(text = stringResource(id = R.string.password)) },
                 visualTransformation = PasswordVisualTransformation(),
                 isError = passwordError != null
@@ -363,10 +361,7 @@ private fun UserRegisterDialog(
             }
             OutlinedTextField(
                 value = email,
-                onValueChange = {
-                    val trimmedInput = it.replace("\\s".toRegex(), "")
-                    email = trimmedInput
-                },
+                onValueChange = { email = StringUtil.dropSpaces(it) },
                 label = { Text(text = stringResource(id = R.string.email)) },
                 isError = emailError != null
             )
@@ -379,10 +374,7 @@ private fun UserRegisterDialog(
             }
             OutlinedTextField(
                 value = password,
-                onValueChange = {
-                    val trimmedInput = it.replace("\\s".toRegex(), "")
-                    password = trimmedInput
-                },
+                onValueChange = { password = StringUtil.dropSpaces(it) },
                 label = { Text(text = stringResource(id = R.string.password)) },
                 visualTransformation = PasswordVisualTransformation(),
                 isError = passwordError != null

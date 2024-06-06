@@ -363,7 +363,7 @@ private fun onCheckOnYouTube(query: String, context: Context) {
 private fun onClickVisitURLButton(url: String, context: Context) {
     if (url.isBlank()) return
     Timber.d("onClickVisitButton")
-    IntentUtil.openURL(URLUtil.toFullURL(StringUtil.dropSpaces(url)), context)
+    IntentUtil.openURL(URLUtil.toFullURL(StringUtil.dropSpacesAndLowercase(url)), context)
 }
 
 private fun onVisitProfileButton(
@@ -382,7 +382,7 @@ private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): 
     return when (platform) {
         URLUtil.Platform.BLUESKY ->
             if (username.isNotBlank()) {
-                "${platform.prefix}${StringUtil.dropSpaces(username)}.bsky.social"
+                "${platform.prefix}${StringUtil.dropSpacesAndLowercase(username)}.bsky.social"
             } else {
                 platform.prefix // for display
             }
@@ -390,8 +390,8 @@ private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): 
         URLUtil.Platform.FANBOX,
         URLUtil.Platform.BOOTH,
         URLUtil.Platform.TUMBLR,
-        URLUtil.Platform.CARRD -> "${StringUtil.dropSpaces(username)}${platform.prefix}"
+        URLUtil.Platform.CARRD -> "${StringUtil.dropSpacesAndLowercase(username)}${platform.prefix}"
 
-        else -> "${platform.prefix}${StringUtil.dropSpaces(username)}"
+        else -> "${platform.prefix}${StringUtil.dropSpacesAndLowercase(username)}"
     }
 }

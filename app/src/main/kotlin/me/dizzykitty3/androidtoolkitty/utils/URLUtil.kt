@@ -123,7 +123,7 @@ object URLUtil {
 //        val cleanInput = StringUtil.dropSpaces(urlInput)
 //        return finalSuffixMap[cleanInput] ?: ".com"
 
-        return suffixMap[StringUtil.dropSpaces(urlInput)] ?: COM
+        return suffixMap[StringUtil.dropSpacesAndLowercase(urlInput)] ?: COM
     }
 
     /**

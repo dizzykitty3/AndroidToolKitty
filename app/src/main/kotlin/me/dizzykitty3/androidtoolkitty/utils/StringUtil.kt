@@ -17,8 +17,12 @@ object StringUtil {
     /**
      * Drop spaces, including full-width ones.
      */
-    fun dropSpaces(inputString: String): String =
-        inputString.trim().replace("\\s".toRegex(), "").lowercase()
+    fun dropSpaces(s: String): String = s.replace("\\s".toRegex(), "")
+
+    /**
+     * Drop spaces, including full-width ones. Then lowercase.
+     */
+    fun dropSpacesAndLowercase(s: String): String = dropSpaces(s).lowercase()
 
     @Throws(IllegalArgumentException::class)
     fun unicodeToCharacter(unicode: String): String {
