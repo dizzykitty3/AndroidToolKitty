@@ -75,15 +75,14 @@ fun WebpageCard() {
             SocialMediaProfileIURL()
         }
 
-        TextButton(onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-            mShowMore = !mShowMore
-            settingsSharedPref.webpageCardShowMore = mShowMore
-        }) {
-            if (mShowMore)
-                Text(text = stringResource(id = R.string.show_less))
-            else
+        if (!mShowMore) {
+            TextButton(onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                mShowMore = !mShowMore
+                settingsSharedPref.webpageCardShowMore = mShowMore
+            }) {
                 Text(text = stringResource(id = R.string.show_more))
+            }
         }
     }
 }

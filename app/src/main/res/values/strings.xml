@@ -6,7 +6,6 @@
     <string name="common">Common</string>
     <string name="debugging">Debugging</string>
     <string name="show_more">show more</string>
-    <string name="show_less">show less</string>
     <string name="unknown">Unknown</string>
     <string name="warning">Warning</string>
     <string name="clear_input">Clear input</string>
@@ -17,7 +16,6 @@
     <string name="permission">Permission</string>
     <string name="undo">Undo</string>
     <string name="apply">Apply</string>
-    <string name="turn_on">Turn on</string>
     <string name="turn_off">Turn off</string>
     <string name="copy">Copy</string>
     <string name="off" tools:ignore="PrivateResource">OFF</string>

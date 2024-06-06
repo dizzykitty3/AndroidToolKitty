@@ -106,7 +106,6 @@
     <string name="info">信息</string>
     <string name="go_to_settings">前往系统设置</string>
     <string name="show_more">展开</string>
-    <string name="show_less">收起</string>
     <string name="bluetooth_devices">蓝牙设备</string>
     <string name="bluetooth_disabled">蓝牙未开启</string>
     <string name="show_paired_devices">查看已配对的设备</string>
@@ -164,7 +163,6 @@
     <string name="show_divider">显示分界线</string>
     <string name="show_snackbar_to_confirm">在确认更改前询问我</string>
     <string name="bluetooth_devices_types_6">有些设备可能同时支持经典蓝牙和蓝牙LE。这些被称为双模式设备，可以根据需要提供与不同类型设备连接的灵活性。例如，智能手表可能使用BLE与手机连接以获取通知，但也具有经典蓝牙用于音乐播放。</string>
-    <string name="turn_on">启用</string>
     <string name="turn_off">禁用</string>
     <string name="query">查询</string>
     <string name="copy">复制</string>

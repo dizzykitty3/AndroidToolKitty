@@ -119,14 +119,12 @@ private fun EarlyVersions() {
         }
     }
 
-    TextButton(onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-        expanded = !expanded
-    }) {
-        if (!expanded) {
+    if (!expanded) {
+        TextButton(onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            expanded = !expanded
+        }) {
             Text(text = stringResource(R.string.show_more))
-        } else {
-            Text(text = stringResource(R.string.show_less))
         }
     }
 }

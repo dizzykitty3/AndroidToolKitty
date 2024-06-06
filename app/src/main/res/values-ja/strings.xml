@@ -5,8 +5,7 @@
     <string name="visit">訪問</string>
     <string name="common">一般</string>
     <string name="debugging">デバッグ</string>
-    <string name="show_more">さらに表示</string>
-    <string name="show_less">表示を減らす</string>
+    <string name="show_more">もっと見る</string>
     <string name="unknown">不明</string>
     <string name="warning">警告</string>
     <string name="clear_input">入力をクリア</string>
@@ -17,7 +16,6 @@
     <string name="permission">許可</string>
     <string name="undo">元に戻す</string>
     <string name="apply">適用</string>
-    <string name="turn_on">オンにする</string>
     <string name="turn_off">オフにする</string>
     <string name="copy">コピー</string>
     <string name="battery_level">バッテリーレベル</string>
