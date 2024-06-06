@@ -39,6 +39,7 @@
     <string name="media_volume">Media volume</string>
     <string name="add_custom_volume">Add custom volume</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
+    <string name="edit_custom_volume">Edit custom volume</string>
 
     <!-- Home screen: clipboard -->
     <string name="clipboard">Clipboard</string>

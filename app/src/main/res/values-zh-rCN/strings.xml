@@ -190,4 +190,5 @@
     <string name="error_invalid_password">密码必须至少包含6个字符</string>
     <string name="rule_update">规则更新</string>
     <string name="error_rule_update">更新规则失败，请稍后再试。</string>
+    <string name="edit_custom_volume">Edit custom volume</string>
 </resources>
