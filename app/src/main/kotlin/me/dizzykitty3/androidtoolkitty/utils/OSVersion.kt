@@ -22,6 +22,7 @@ object OSVersion {
      *
      * 1. Activity.overrideActivityTransition()
      * 2. TileService.startActivityAndCollapse(Intent) -> TileService.startActivityAndCollapse(PendingIntent)
+     * 3. android.permission.DETECT_SCREEN_CAPTURE, Activity.ScreenCaptureCallback
      */
     fun android14(): Boolean = osVersion >= 34
     fun api34(): Boolean = android14()
