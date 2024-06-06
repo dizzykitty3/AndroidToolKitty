@@ -1,7 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.settings_screen
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
@@ -11,7 +9,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import io.ktor.client.statement.HttpResponse
@@ -75,13 +72,7 @@ fun RuleUpdateSection() {
         Text(stringResource(R.string.webpage_suffixes))
     }
 
-    if (isLoading) {
-        Box(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            CircularProgressIndicator()
-        }
-    }
+    if (isLoading) CircularProgressIndicator()
 }
 
 suspend fun onUpdateSocialMedia(onSuccess: (String) -> Unit, onFailure: () -> Unit) {

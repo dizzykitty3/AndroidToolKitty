@@ -40,6 +40,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
+import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 import org.json.JSONObject
@@ -430,7 +431,9 @@ fun UserProfileDialog(
                     text = "Token: $token",
                     modifier = Modifier.clickable {
                         ClipboardUtil.copy(token)
-                        ToastUtil.toast("Token copied to clipboard")
+                        if (!OSVersion.android13()) {
+                            ToastUtil.toast(R.string.copied)
+                        }
                     }
                 )
             }
