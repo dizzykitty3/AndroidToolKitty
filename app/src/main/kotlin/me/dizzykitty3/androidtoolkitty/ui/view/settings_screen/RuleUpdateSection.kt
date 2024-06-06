@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
@@ -75,7 +76,10 @@ fun RuleUpdateSection() {
         Text(stringResource(R.string.webpage_suffixes))
     }
 
-    if (isLoading) CircularProgressIndicator()
+    if (isLoading || SettingsSharedPref.uiTesting) {
+        SpacerPadding()
+        CircularProgressIndicator()
+    }
 }
 
 private suspend fun onUpdateSocialMedia(onSuccess: (String) -> Unit, onFailure: () -> Unit) {

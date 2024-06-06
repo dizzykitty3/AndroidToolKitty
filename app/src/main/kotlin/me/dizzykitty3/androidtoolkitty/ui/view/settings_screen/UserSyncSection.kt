@@ -40,6 +40,7 @@ import kotlinx.coroutines.launch
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.component.GroupTitle
+import me.dizzykitty3.androidtoolkitty.ui.component.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
@@ -57,7 +58,6 @@ fun UserSyncSection() {
     var isLoading by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
     val view = LocalView.current
-    val success = stringResource(id = R.string.success)
 
     OutlinedButton(
         onClick = {
@@ -78,23 +78,22 @@ fun UserSyncSection() {
             view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             if (token.isBlank()) {
                 dialogState = DialogState.Login
-            } else {
-                coroutineScope.launch {
-                    isLoading = true
-                    handleUploadSettings(
-                        token = token,
-                        settings = SettingsSharedPref.exportSettingsToJson(),
-                        onFailure = {
-                            val message = view.context.getString(getErrorStringResourceId(it))
-                            isLoading = false
-                            SnackbarUtil.snackbar(view, message)
-                        },
-                        onSuccess = {
-                            SnackbarUtil.snackbar(view, success)
-                            isLoading = false
-                        }
-                    )
-                }
+                return@OutlinedButton
+            }
+            coroutineScope.launch {
+                isLoading = true
+                handleUploadSettings(
+                    token = token,
+                    settings = SettingsSharedPref.exportSettingsToJson(),
+                    onFailure = {
+                        isLoading = false
+                        SnackbarUtil.snackbar(view, toErrorString(it))
+                    },
+                    onSuccess = {
+                        SnackbarUtil.snackbar(view, R.string.success)
+                        isLoading = false
+                    }
+                )
             }
         },
         enabled = !isLoading
@@ -107,26 +106,25 @@ fun UserSyncSection() {
             view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             if (token.isBlank()) {
                 dialogState = DialogState.Login
-            } else {
-                coroutineScope.launch {
-                    isLoading = true
-                    handleDownloadSettings(
-                        token = token,
-                        onSettingsReceived = {
-                            SnackbarUtil.snackbar(view, success)
-                            SettingsSharedPref.importSettingsFromJson(it)
-                        },
-                        onFailure = {
-                            val message = view.context.getString(getErrorStringResourceId(it))
-                            isLoading = false
-                            SnackbarUtil.snackbar(view, message)
-                        },
-                        onSuccess = {
-                            isLoading = false
-                            SnackbarUtil.snackbar(view, R.string.success)
-                        }
-                    )
-                }
+                return@OutlinedButton
+            }
+            coroutineScope.launch {
+                isLoading = true
+                handleDownloadSettings(
+                    token = token,
+                    onSettingsReceived = {
+                        SnackbarUtil.snackbar(view, R.string.success)
+                        SettingsSharedPref.importSettingsFromJson(it)
+                    },
+                    onFailure = {
+                        isLoading = false
+                        SnackbarUtil.snackbar(view, toErrorString(it))
+                    },
+                    onSuccess = {
+                        isLoading = false
+                        SnackbarUtil.snackbar(view, R.string.success)
+                    }
+                )
             }
         },
         enabled = !isLoading
@@ -134,8 +132,9 @@ fun UserSyncSection() {
         Text(text = stringResource(id = R.string.download_settings))
     }
 
-    if (isLoading) {
-        CircularProgressIndicator(modifier = Modifier.padding(top = 16.dp))
+    if (isLoading || SettingsSharedPref.uiTesting) {
+        SpacerPadding()
+        CircularProgressIndicator()
     }
 
     when (dialogState) {
@@ -160,13 +159,10 @@ fun UserSyncSection() {
                                 dialogState = null
                                 isLoading = false
                             },
-                            onSuccess = {
-                                SnackbarUtil.snackbar(view, success)
-                            },
+                            onSuccess = { SnackbarUtil.snackbar(view, R.string.success) },
                             onFailure = {
-                                val message = view.context.getString(getErrorStringResourceId(it))
                                 isLoading = false
-                                ToastUtil.toast(message)
+                                ToastUtil.toast(toErrorString(it))
                             }
                         )
                     }
@@ -198,12 +194,11 @@ fun UserSyncSection() {
                                 isLoading = false
                             },
                             onSuccess = {
-                                SnackbarUtil.snackbar(view, success)
+                                SnackbarUtil.snackbar(view, R.string.success)
                             },
                             onFailure = {
-                                val message = view.context.getString(getErrorStringResourceId(it))
                                 isLoading = false
-                                ToastUtil.toast(message)
+                                ToastUtil.toast(toErrorString(it))
                             }
                         )
                     }
@@ -221,7 +216,7 @@ fun UserSyncSection() {
                     token = ""
                     dialogState = null
                     isLoading = false
-                    SnackbarUtil.snackbar(view, success)
+                    SnackbarUtil.snackbar(view, R.string.success)
                 },
                 onDismiss = { dialogState = null }
             )
@@ -231,7 +226,7 @@ fun UserSyncSection() {
     }
 }
 
-private fun getErrorStringResourceId(code: Int): Int {
+private fun toErrorString(code: Int): Int {
     return when (code) {
         401 -> R.string.error_login_expired
         1001 -> R.string.error_account_locked
