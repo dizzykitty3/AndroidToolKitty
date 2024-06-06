@@ -151,6 +151,8 @@ object SettingsSharedPref {
         get() = getPreference(WEBPAGE_CARD_SHOW_MORE, false)
         set(value) = setPreference(WEBPAGE_CARD_SHOW_MORE, value)
 
+    fun enabledWebpageCardShowMore(): Boolean = webpageCardShowMore
+
     var collapseKeyboard: Boolean
         get() = getPreference(COLLAPSE_KEYBOARD, true)
         set(value) = setPreference(COLLAPSE_KEYBOARD, value)
@@ -188,6 +190,8 @@ object SettingsSharedPref {
     var customVolume: Int
         get() = getPreference(CUSTOM_VOLUME, Int.MIN_VALUE)
         set(value) = setPreference(CUSTOM_VOLUME, value)
+
+    fun addedCustomVolume(): Boolean = customVolume > 0
 
     var customVolumeOptionLabel: String?
         get() = getPreference(VOLUME_OPTION_LABEL, "")

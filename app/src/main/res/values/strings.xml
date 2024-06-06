@@ -277,6 +277,7 @@
     <string name="show_snackbar_to_confirm">Ask me before apply changes</string>
     <string name="show_edit_volume_option">Show Edit in Volume card</string>
     <string name="ui_testing">UI testing</string>
+    <string name="show_more_in_webpage_card">Show URL and Social media profile in Webpage card</string>
 
     <!-- Settings screen: sync -->
     <string name="user_sync">Preferences sync</string>

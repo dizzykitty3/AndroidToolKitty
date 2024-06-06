@@ -166,6 +166,7 @@
     <string name="turn_off">禁用</string>
     <string name="query">查询</string>
     <string name="copy">复制</string>
+    <string name="show_more_in_webpage_card">Show URL and Social media profile in Webpage card</string>
     <string name="user_sync">用户同步</string>
     <string name="upload_settings">上传设置</string>
     <string name="download_settings">下载设置</string>

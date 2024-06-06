@@ -129,7 +129,9 @@ private fun AppearanceOptions() {
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
     var showDivider by remember { mutableStateOf(settingsSharedPref.showDivider) }
     var showEditVolumeOption by remember { mutableStateOf(settingsSharedPref.showEditVolumeOption) }
-    val customVolume = settingsSharedPref.customVolume
+    val webpageShowMore = settingsSharedPref.enabledWebpageCardShowMore()
+    val showWebpageShowMoreOption = remember { webpageShowMore }
+    var mWebpageShowMore by remember { mutableStateOf(webpageShowMore) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
@@ -155,13 +157,22 @@ private fun AppearanceOptions() {
         settingsSharedPref.showDivider = it
     }
 
-    if (customVolume > 0) CustomSwitchRow(
+    if (settingsSharedPref.addedCustomVolume()) CustomSwitchRow(
         textRes = R.string.show_edit_volume_option,
         checked = showEditVolumeOption
     ) {
         view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
         showEditVolumeOption = it
         settingsSharedPref.showEditVolumeOption = it
+    }
+
+    if (showWebpageShowMoreOption) CustomSwitchRow(
+        textRes = R.string.show_more_in_webpage_card,
+        checked = mWebpageShowMore
+    ) {
+        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        mWebpageShowMore = it
+        settingsSharedPref.webpageCardShowMore = it
     }
 }
 
