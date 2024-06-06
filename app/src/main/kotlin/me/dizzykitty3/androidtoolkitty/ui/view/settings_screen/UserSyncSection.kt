@@ -116,7 +116,7 @@ fun UserSyncSection() {
                         },
                         onSuccess = {
                             isLoading = false
-                            dialogState = DialogState.SettingsDownloaded
+                            SnackbarUtil.snackbar(view, R.string.success)
                         }
                     )
                 }
@@ -211,13 +211,6 @@ fun UserSyncSection() {
             )
         }
 
-        DialogState.SettingsDownloaded -> {
-            SettingsDownloadedDialog(onDismiss = {
-                dialogState = null
-                //TODO 回到主页逻辑
-            })
-        }
-
         null -> {}
     }
 }
@@ -234,7 +227,7 @@ fun getErrorStringResourceId(code: Int): Int {
 }
 
 enum class DialogState {
-    Login, Register, UserProfile, SettingsDownloaded
+    Login, Register, UserProfile
 }
 
 @Composable
@@ -453,20 +446,6 @@ fun UserProfileDialog(
                 Button(onClick = { onDismiss() }) {
                     Text("Close")
                 }
-            }
-        }
-    )
-}
-
-@Composable
-fun SettingsDownloadedDialog(onDismiss: () -> Unit) {
-    AlertDialog(
-        onDismissRequest = { onDismiss() },
-        title = { Text(text = stringResource(id = R.string.download_settings_successful)) },
-        text = { Text(text = stringResource(id = R.string.download_settings_take_effect)) },
-        confirmButton = {
-            Button(onClick = onDismiss) {
-                Text(stringResource(id = android.R.string.ok))
             }
         }
     )

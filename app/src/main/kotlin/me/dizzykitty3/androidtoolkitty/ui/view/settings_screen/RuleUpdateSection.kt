@@ -51,7 +51,7 @@ fun RuleUpdateSection() {
             }
         }
     ) {
-        Text(stringResource(id = R.string.social_media_profile))
+        Text(stringResource(id = R.string.social_media_platforms_list))
     }
 
     OutlinedButton(
@@ -72,7 +72,7 @@ fun RuleUpdateSection() {
             }
         }
     ) {
-        Text(stringResource(R.string.url))
+        Text(stringResource(R.string.webpage_suffixes))
     }
 
     if (isLoading) {

@@ -60,6 +60,7 @@
     <string name="hide_all_options">隐藏所有选项</string>
     <string name="show_edit_volume_option">在音量卡片显示编辑按钮</string>
     <string name="ui_testing">UI 测试</string>
+    <string name="social_media_platforms_list">Social media platforms list</string>
     <string name="about">关于</string>
     <string name="source_code_on_github">在 GitHub 上查看源码</string>
     <string name="submit_the_platform_you_need">提交你所想的平台</string>
@@ -184,8 +185,7 @@
     <string name="error_settings_not_found">您还没有上传设置。</string>
     <string name="error_unknown">发生未知错误。</string>
     <string name="error_login_expired">登录状态已过期，请登出后重新登录。</string>
-    <string name="download_settings_successful">下载成功</string>
-    <string name="download_settings_take_effect">设置下载成功。返回主界面后更改将生效。</string>
+    <string name="webpage_suffixes">Webpage suffixes</string>
     <string name="error_invalid_username">用户名只能包含字母、数字和下划线</string>
     <string name="error_invalid_email">请输入有效的邮箱地址</string>
     <string name="error_invalid_password">密码必须至少包含6个字符</string>

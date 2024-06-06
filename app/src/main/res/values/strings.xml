@@ -281,28 +281,28 @@
     <string name="ui_testing">UI testing</string>
 
     <!-- Settings screen: sync -->
-    <string name="user_sync">User Sync</string>
-    <string name="upload_settings">Upload settings</string>
-    <string name="download_settings">Download settings</string>
+    <string name="user_sync">Preferences sync</string>
+    <string name="upload_settings">Upload preferences</string>
+    <string name="download_settings">Download preferences</string>
     <string name="login">Login</string>
-    <string name="register">Register</string>
-    <string name="password">password</string>
-    <string name="email">email</string>
-    <string name="user_profile">User Profile</string>
+    <string name="register">Sign up</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="user_profile">My account</string>
     <string name="success">success</string>
-    <string name="error_account_locked">Account is temporarily locked. Please try again later.</string>
+    <string name="error_account_locked">Account is temporarily frozen.</string>
     <string name="error_invalid_credentials">Invalid username or password.</string>
     <string name="error_username_taken">Username already taken.</string>
-    <string name="error_settings_not_found">You haven\'t uploaded settings yet.</string>
+    <string name="error_settings_not_found">You haven\'t uploaded preferences yet.</string>
     <string name="error_unknown">Unknown error occurred.</string>
-    <string name="error_login_expired">Login status expired, please logout and login.</string>
-    <string name="download_settings_successful">Download Successful</string>
-    <string name="download_settings_take_effect">Settings downloaded successfully. The changes will take effect after returning to the main screen.</string>
-    <string name="error_invalid_username">Username can only contain letters, numbers, and underscores</string>
-    <string name="error_invalid_email">Please enter a valid email address</string>
-    <string name="error_invalid_password">Password must be at least 6 characters long</string>
-    <string name="rule_update">Rule Update</string>
-    <string name="error_rule_update">Update rule failed, please try again later.</string>
+    <string name="error_login_expired">Login expired. Re-login then try again.</string>
+    <string name="error_invalid_username">Username can only contain letters, numbers, and underscores.</string>
+    <string name="error_invalid_email">Please enter a valid email address.</string>
+    <string name="error_invalid_password">Password must be at least 6 characters.</string>
+    <string name="rule_update">Rules update</string>
+    <string name="error_rule_update">Update rules failed</string>
+    <string name="social_media_platforms_list">Social media platforms list</string>
+    <string name="webpage_suffixes">Webpage suffixes</string>
 
     <!-- Settings screen: about -->
     <string name="about">About</string>
