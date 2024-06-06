@@ -186,7 +186,6 @@ object URLUtil {
         return json.decodeFromString(input)
     }
 
-
     @Serializable
     data class DomainInfo(
         val domain: String,

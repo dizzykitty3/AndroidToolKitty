@@ -9,17 +9,14 @@ import java.time.LocalTime
 object AudioUtil {
     private var audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-    fun volume(): Int =
-        audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+    fun volume(): Int = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 
-    fun maxVolumeIndex(): Int =
-        audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+    fun maxVolumeIndex(): Int = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
     fun setVolume(volume: Int) =
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI)
 
-    fun setVolume(volume: Double) =
-        setVolume(volume.toInt())
+    fun setVolume(volume: Double) = setVolume(volume.toInt())
 
     private fun setVolumeByPercentage(percentage: Int) {
         val indexedVolume = (maxVolumeIndex() * 0.01 * percentage).toInt()

@@ -52,15 +52,12 @@ object StringUtil {
         return stringBuilder.toString()
     }
 
-    private fun sysLocale(): String =
-        Locale.getDefault().toString()
+    private fun sysLocale(): String = Locale.getDefault().toString()
 
-    fun sysLangSupported(): Boolean =
-        sysLocale().contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
+    @Suppress("MemberVisibilityCanBePrivate")
+    fun sysLangSupported(): Boolean = sysLocale().contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
 
-    fun sysLangNotSupported(): Boolean =
-        !sysLangSupported()
+    fun sysLangNotSupported(): Boolean = !sysLangSupported()
 
-    fun sysLangCJK(): Boolean =
-        sysLocale().contains(Regex("Hans|Hant|zh|ja|ko"))
+    fun sysLangCJK(): Boolean = sysLocale().contains(Regex("Hans|Hant|zh|ja|ko"))
 }

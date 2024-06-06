@@ -2,7 +2,7 @@ package me.dizzykitty3.androidtoolkitty.utils
 
 import android.os.Build
 
-@Suppress("unused")
+@Suppress("unused", "MemberVisibilityCanBePrivate")
 object OSVersion {
     private val osVersion = Build.VERSION.SDK_INT
 
@@ -83,4 +83,22 @@ object OSVersion {
      */
     fun android8(): Boolean = osVersion >= 26
     fun api26(): Boolean = android8()
+
+    /**
+     * Nougat
+     */
+    fun android7(): Boolean = osVersion >= 24
+    fun api24(): Boolean = android7()
+
+    /**
+     * Marshmallow
+     */
+    fun android6(): Boolean = osVersion >= 23
+    fun api23(): Boolean = android6()
+
+    /**
+     * Lollipop
+     */
+    fun android5(): Boolean = osVersion >= 21
+    fun api21(): Boolean = android5()
 }

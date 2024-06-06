@@ -17,6 +17,7 @@ object BluetoothUtil {
 
     @SuppressLint("MissingPermission")
     fun isHeadsetConnected(): Boolean =
-        if (bluetoothAdapter() == null) false
-        else bluetoothAdapter()?.getProfileConnectionState(BluetoothProfile.HEADSET) == BluetoothAdapter.STATE_CONNECTED
+        if (bluetoothAdapter() == null) false else bluetoothAdapter()?.getProfileConnectionState(
+            BluetoothProfile.HEADSET
+        ) == BluetoothAdapter.STATE_CONNECTED
 }
