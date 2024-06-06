@@ -17,8 +17,8 @@ class MainApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Timber.d("onCreate")
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+        Timber.d("onCreate")
         appContext = applicationContext
         container = AppDataContainer()
     }
