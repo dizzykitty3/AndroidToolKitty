@@ -51,7 +51,7 @@ fun UserSyncSection() {
     GroupTitle(R.string.user_sync)
 
     var dialogState by remember { mutableStateOf<DialogState?>(null) }
-    var token by remember { mutableStateOf(SettingsSharedPref.getToken()) }
+    var token by remember { mutableStateOf(SettingsSharedPref.token) }
     var isLoading by remember { mutableStateOf(false) }
     val coroutineScope = rememberCoroutineScope()
     val view = LocalView.current
@@ -147,7 +147,7 @@ fun UserSyncSection() {
                             onDismiss = { dialogState = null; isLoading = false },
                             onTokenReceived = { newToken ->
                                 token = newToken
-                                SettingsSharedPref.setToken(newToken)
+                                SettingsSharedPref.token = newToken
                                 dialogState = null
                                 isLoading = false
                             },
@@ -180,7 +180,7 @@ fun UserSyncSection() {
                             onDismiss = { dialogState = null; isLoading = false },
                             onTokenReceived = { newToken ->
                                 token = newToken
-                                SettingsSharedPref.setToken(newToken)
+                                SettingsSharedPref.token = newToken
                                 dialogState = null
                                 isLoading = false
                             },

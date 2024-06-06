@@ -297,7 +297,7 @@ private fun DebuggingOptions(navController: NavHostController) {
         negativeButtonText = null,
         onClickAction = {
             view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-            settingsSharedPref.clearSettings()
+            settingsSharedPref.eraseAllData()
             IntentUtil.finishApp(view.context)
         }
     )

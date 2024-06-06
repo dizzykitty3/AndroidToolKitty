@@ -108,10 +108,9 @@ object SettingsSharedPref {
         }
     }
 
-    fun clearSettings() {
-        val token = getToken()
+    fun eraseAllData() {
+        Timber.d("erase all data")
         sharedPrefs.edit().clear().apply()
-        setToken(token)  // Restore token // TODO why?
     }
 
     private fun String.toBooleanCustom(): Boolean? = when {
@@ -233,7 +232,9 @@ object SettingsSharedPref {
         }
     }
 
-    fun getToken(): String = getPreference(TOKEN, "")
-
-    fun setToken(token: String) = setPreference(TOKEN, token)
+    var token: String
+        get() = getPreference(TOKEN, "")
+        set(value) {
+            setPreference(TOKEN, value)
+        }
 }
