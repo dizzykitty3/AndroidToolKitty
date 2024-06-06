@@ -111,7 +111,7 @@ object SettingsSharedPref {
     fun clearSettings() {
         val token = getToken()
         sharedPrefs.edit().clear().apply()
-        setToken(token)  // Restore token
+        setToken(token)  // Restore token // TODO why?
     }
 
     private fun String.toBooleanCustom(): Boolean? = when {
