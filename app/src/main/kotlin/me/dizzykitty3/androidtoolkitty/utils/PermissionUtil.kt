@@ -22,6 +22,8 @@ object PermissionUtil {
             check(context, BT) || check(context, BT_ADMIN)
     }
 
+    fun haveBluetoothPermission(context: Context) = !noBluetoothPermission(context)
+
     private fun check(context: Context, permission: String): Boolean {
         return ActivityCompat.checkSelfPermission(context, permission) != GRANTED
     }

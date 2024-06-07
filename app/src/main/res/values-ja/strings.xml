@@ -21,6 +21,7 @@
     <string name="battery_level">バッテリーレベル</string>
     <string name="cellular">携帯電話</string>
     <string name="offline">オフライン</string>
+    <string name="connected">connected</string>
     <string name="year_progress">年の進捗</string>
     <plurals name="days_remaining">
         <item quantity="other">%1$d 日残り</item>

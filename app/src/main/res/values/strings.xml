@@ -26,6 +26,7 @@
     <string name="cellular">Cellular</string>
     <string name="offline">Offline</string>
     <string name="no_translation" translatable="false">Sorry, %1$s translation haven\'t added yet.</string>
+    <string name="connected">connected</string>
 
     <!-- Home screen: year progress -->
     <string name="year_progress">Year progress</string>

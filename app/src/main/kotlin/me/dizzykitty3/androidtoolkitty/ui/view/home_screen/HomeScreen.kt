@@ -219,19 +219,20 @@ private fun Status() {
         SpacerPadding()
         SpacerPadding()
 
-        Row(modifier = Modifier.clickable {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-            IntentUtil.openSystemSettings(SETTING_BLUETOOTH, view.context)
-        }) {
-            if (PermissionUtil.noBluetoothPermission(view.context)) return
-            if (BluetoothUtil.isHeadsetConnected()) {
-                Icon(
-                    imageVector = Icons.Outlined.MediaBluetoothOn,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
-                SpacerPadding()
-                Text(text = "Connected")
+        if (PermissionUtil.haveBluetoothPermission(view.context)) {
+            if (BluetoothUtil.isHeadsetConnected() || SettingsSharedPref.uiTesting) {
+                Row(modifier = Modifier.clickable {
+                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    IntentUtil.openSystemSettings(SETTING_BLUETOOTH, view.context)
+                }) {
+                    Icon(
+                        imageVector = Icons.Outlined.MediaBluetoothOn,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    SpacerPadding()
+                    Text(text = stringResource(id = R.string.connected))
+                }
             }
         }
     }
