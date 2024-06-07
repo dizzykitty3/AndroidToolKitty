@@ -53,8 +53,8 @@ object SettingsSharedPref {
     }
 
     private inline fun <reified T> setPreference(key: String, value: T) {
+        Timber.d("set preference: $key = $value")
         with(sharedPrefs.edit()) {
-            Timber.d("set preference: $key = $value")
             when (value) {
                 is Boolean -> putBoolean(key, value)
                 is Int -> putInt(key, value)
@@ -66,15 +66,15 @@ object SettingsSharedPref {
     }
 
     fun removePreference(key: String) {
-        with(sharedPrefs.edit()) {
-            if (sharedPrefs.contains(key)) {
-                remove(key)
-                apply()
-                Timber.d("Preference key '$key' removed successfully.")
-            } else {
-                Timber.d("Preference key '$key' does not exist and cannot be removed.")
-            }
+        if (!sharedPrefs.contains(key)) {
+            Timber.d("Preference key '$key' does not exist and cannot be removed.")
+            return
         }
+        with(sharedPrefs.edit()) {
+            remove(key)
+            apply()
+        }
+        Timber.d("Preference key '$key' removed successfully.")
     }
 
     fun exportSettingsToJson(): String {
@@ -238,7 +238,5 @@ object SettingsSharedPref {
 
     var token: String
         get() = getPreference(TOKEN, "")
-        set(value) {
-            setPreference(TOKEN, value)
-        }
+        set(value) = setPreference(TOKEN, value)
 }
