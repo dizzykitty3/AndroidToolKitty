@@ -69,7 +69,7 @@ fun VolumeCard() {
         var mHaveTappedAddButton by remember { mutableStateOf(haveTappedAddButton) }
 
         val options = listOf(
-            stringResource(id = R.string.off),
+            stringResource(id = R.string.off_all_cap),
             "40%",
             "60%",
             if (mCustomVolume < 0) ADD else mCustomVolumeOptionLabel

@@ -91,7 +91,7 @@
     <string name="open_on_other_markets">其他应用商店</string>
     <string name="android_versions">Android 版本历史</string>
     <string name="customize_my_home_page">自定义显示的卡片</string>
-    <string name="add_custom_volume">添加一个自定义音量</string>
+    <string name="add_custom_volume">添加自定义音量</string>
     <string name="material_you_dynamic_color">Material You 莫奈取色</string>
     <string name="system_media_volume_levels_limited">系统音量阶数较少，请重新调整</string>
     <string name="customize_system_settings_card">自定义「Android 系统设置」卡片的选项</string>
@@ -128,7 +128,6 @@
     <string name="cellular">移动数据</string>
     <string name="offline">无网络</string>
     <string name="item">条目</string>
-    <string name="spin">开始</string>
     <string name="unknown_device">未知设备</string>
     <string name="turn_on_bluetooth">打开蓝牙</string>
     <string name="success_and_back">已获得权限！返回上一界面吧</string>
@@ -167,7 +166,7 @@
     <string name="turn_off">禁用</string>
     <string name="query">查询</string>
     <string name="copy">复制</string>
-    <string name="show_more_in_webpage_card">Show URL and Social media profile in Webpage card</string>
+    <string name="show_full_webpage_card">启用「网页」卡片的全部功能</string>
     <string name="user_sync">用户同步</string>
     <string name="upload_settings">上传设置</string>
     <string name="download_settings">下载设置</string>
@@ -175,8 +174,7 @@
     <string name="register">注册</string>
     <string name="password">密码</string>
     <string name="email">电子邮箱</string>
-    <string name="off">OFF</string>
-    <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
+    <string name="no_bluetooth_adapter_available">获取 Bluetooth Adapter 失败</string>
     <string name="user_profile">用户中心</string>
     <string name="success">成功</string>
     <string name="error_account_locked">账户暂时被锁定，请稍后再试。</string>
@@ -185,11 +183,12 @@
     <string name="error_settings_not_found">您还没有上传设置。</string>
     <string name="error_unknown">发生未知错误。</string>
     <string name="error_login_expired">登录状态已过期，请登出后重新登录。</string>
-    <string name="webpage_suffixes">Webpage suffixes</string>
+    <string name="webpage_suffixes">网址顶级域名</string>
     <string name="error_invalid_username">用户名只能包含字母、数字和下划线</string>
     <string name="error_invalid_email">请输入有效的邮箱地址</string>
     <string name="error_invalid_password">密码必须至少包含6个字符</string>
     <string name="rule_update">规则更新</string>
     <string name="error_rule_update">更新规则失败，请稍后再试。</string>
-    <string name="edit_custom_volume">Edit custom volume</string>
+    <string name="edit_custom_volume">编辑自定义音量</string>
+    <string name="start">开始</string>
 </resources>

@@ -167,7 +167,7 @@ private fun AppearanceOptions() {
     }
 
     if (showWebpageShowMoreOption) CustomSwitchRow(
-        textRes = R.string.show_more_in_webpage_card,
+        textRes = R.string.show_full_webpage_card,
         checked = mWebpageShowMore
     ) {
         view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)

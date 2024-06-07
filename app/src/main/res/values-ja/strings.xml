@@ -101,7 +101,6 @@
     <string name="no_paired_devices">ペアリング済みデバイスはありません</string>
     <string name="what_is_bt_ble_and_dual">BT、BLE、デュアルとは何ですか？</string>
     <string name="item">アイテム</string>
-    <string name="spin">スピン</string>
     <string name="search">検索</string>
     <string name="pixiv_user_custom_url">pixiv（ユーザーカスタムURL）</string>
     <string name="steam_user_custom_url">Steam（ユーザーカスタムURL）</string>
@@ -168,7 +167,7 @@
     <string name="bluetooth_bluetooth_admin">ペアリングされた Bluetooth デバイスを確認するには、アプリに BLUETOOTH、BLUETOOTH_ADMIN の権限を付与してください。</string>
     <string name="missed_sys_popup">システム権限ポップアップを見逃しましたか？</string>
     <string name="query">クエリ</string>
-    <string name="show_more_in_webpage_card">Show URL and Social media profile in Webpage card</string>
+    <string name="show_full_webpage_card">Show URL and Social media profile in Webpage card</string>
     <string name="user_sync">ユーザー同期</string>
     <string name="upload_settings">アップロード設定</string>
     <string name="download_settings">ダウンロード設定</string>
@@ -176,7 +175,6 @@
     <string name="register">登録</string>
     <string name="password">パスワード</string>
     <string name="email">メールアドレス</string>
-    <string name="off">OFF</string>
     <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
     <string name="user_profile">ユーザーセンター</string>
     <string name="success">成功</string>
@@ -193,4 +191,5 @@
     <string name="rule_update">ルール更新</string>
     <string name="error_rule_update">ルールの更新に失敗しました。後ほど再試行してください。</string>
     <string name="edit_custom_volume">Edit custom volume</string>
+    <string name="start">Start</string>
 </resources>

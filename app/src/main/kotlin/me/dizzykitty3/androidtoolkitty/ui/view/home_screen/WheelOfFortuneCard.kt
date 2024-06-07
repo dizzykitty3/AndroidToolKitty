@@ -205,7 +205,7 @@ fun WheelOfFortuneCard() {
                     }
                 }
             ) {
-                Text(text = stringResource(R.string.spin))
+                Text(text = stringResource(R.string.start))
             }
 
             ExpandableList(

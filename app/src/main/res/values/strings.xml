@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Common -->
     <string name="label_optional">Label (optional)</string>
     <string name="edit">Edit</string>
@@ -18,7 +18,8 @@
     <string name="apply">Apply</string>
     <string name="turn_off">Turn off</string>
     <string name="copy">Copy</string>
-    <string name="off" tools:ignore="PrivateResource">OFF</string>
+    <string name="start">Start</string>
+    <string name="off_all_cap" translatable="false">OFF</string>
 
     <!-- Home screen: top tip -->
     <string name="battery_level">Battery level</string>
@@ -125,7 +126,6 @@
     <!-- Home screen: wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
     <string name="item">item</string>
-    <string name="spin">Spin</string>
 
     <!-- Home screen: bluetooth devices -->
     <string name="bluetooth_devices">Bluetooth devices</string>
@@ -279,7 +279,7 @@
     <string name="show_snackbar_to_confirm">Ask me before apply changes</string>
     <string name="show_edit_volume_option">Show Edit in Volume card</string>
     <string name="ui_testing">UI testing</string>
-    <string name="show_more_in_webpage_card">Show URL and Social media profile in Webpage card</string>
+    <string name="show_full_webpage_card">Show full Webpage card</string>
 
     <!-- Settings screen: sync -->
     <string name="user_sync">Preferences sync</string>
