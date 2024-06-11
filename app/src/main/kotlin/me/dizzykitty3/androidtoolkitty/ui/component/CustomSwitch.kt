@@ -63,4 +63,5 @@ fun CustomSwitchRow(
             )
         }
     }
+    SpacerPadding()
 }
