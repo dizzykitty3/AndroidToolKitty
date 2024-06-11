@@ -137,7 +137,6 @@
     <string name="set_slider_increment_5">スライダーの増分を 5% に設定</string>
     <string name="requires_restart_do_it_now">再起動が必要です。今すぐ実行しますか？</string>
     <string name="restart">再起動</string>
-    <string name="collapse_keyboard_when_back_to_app">ToolKitty に戻ったときにキーボードを閉じる</string>
     <string name="go_to_permission_request_screen">権限リクエスト画面に移動</string>
     <string name="tap_to_apply">タップして適用</string>
     <string name="clipboard_card_hidden">ホーム画面のクリップボードカードが非表示になりました。</string>

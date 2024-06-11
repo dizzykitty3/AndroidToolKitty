@@ -79,11 +79,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        Timber.d("onResume")
-    }
-
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         Timber.d("onWindowFocusChanged")
@@ -97,15 +92,6 @@ class MainActivity : ComponentActivity() {
                 Timber.i("continuation resumed")
                 continuationNotResumed = false
             }
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Timber.d("onStop")
-        if (SettingsSharedPref.collapseKeyboard) {
-            Timber.d("focus cleared")
-            currentFocus?.clearFocus() // To collapse keyboard
         }
     }
 }

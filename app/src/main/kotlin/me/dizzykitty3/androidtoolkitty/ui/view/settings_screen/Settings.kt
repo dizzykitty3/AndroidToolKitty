@@ -136,7 +136,6 @@ private fun General() {
     var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
     var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
-    var collapseKeyboard by remember { mutableStateOf(settingsSharedPref.collapseKeyboard) }
     var showSnackbarToConfirm by remember { mutableStateOf(settingsSharedPref.showSnackbar) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
@@ -171,15 +170,6 @@ private fun General() {
             view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
             volumeSlideSteps = it
             settingsSharedPref.sliderIncrement5Percent = it
-        }
-
-        CustomSwitchRow(
-            textRes = R.string.collapse_keyboard_when_back_to_app,
-            checked = collapseKeyboard
-        ) {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-            collapseKeyboard = it
-            settingsSharedPref.collapseKeyboard = it
         }
 
         CustomSwitchRow(

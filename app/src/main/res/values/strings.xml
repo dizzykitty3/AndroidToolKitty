@@ -267,7 +267,6 @@
     <string name="set_slider_increment_5">Set slider increment to 5%</string>
     <string name="requires_restart_do_it_now">Requires restart, do it now?</string>
     <string name="restart">Restart</string>
-    <string name="collapse_keyboard_when_back_to_app">Collapse keyboard when back to ToolKitty</string>
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
     <string name="tap_to_apply">Tap to apply</string>
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
