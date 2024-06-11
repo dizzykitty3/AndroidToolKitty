@@ -74,7 +74,6 @@ import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
-import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 import java.util.Locale
 
@@ -219,20 +218,18 @@ private fun Status() {
         SpacerPadding()
         SpacerPadding()
 
-        if (PermissionUtil.haveBluetoothPermission(view.context)) {
-            if (BluetoothUtil.isHeadsetConnected() || SettingsSharedPref.uiTesting) {
-                Row(modifier = Modifier.clickable {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-                    IntentUtil.openSystemSettings(SETTING_BLUETOOTH, view.context)
-                }) {
-                    Icon(
-                        imageVector = Icons.Outlined.MediaBluetoothOn,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
-                    )
-                    SpacerPadding()
-                    Text(text = stringResource(id = R.string.connected))
-                }
+        if (BluetoothUtil.isHeadsetConnected() || SettingsSharedPref.uiTesting) {
+            Row(modifier = Modifier.clickable {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                IntentUtil.openSystemSettings(SETTING_BLUETOOTH, view.context)
+            }) {
+                Icon(
+                    imageVector = Icons.Outlined.MediaBluetoothOn,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                SpacerPadding()
+                Text(text = stringResource(id = R.string.connected))
             }
         }
     }
