@@ -34,12 +34,11 @@ import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Composable
-fun SettingsCard(navController: NavHostController) {
+fun Settings(navController: NavHostController) {
+    Appearance()
+    General()
+
     CustomCard(titleRes = R.string.settings) {
-        AppearanceOptions()
-        GroupDivider()
-        GeneralOptions()
-        GroupDivider()
         CustomizeOptions(navController = navController)
         GroupDivider()
         UserSyncSection()
@@ -49,7 +48,7 @@ fun SettingsCard(navController: NavHostController) {
 }
 
 @Composable
-private fun AppearanceOptions() {
+private fun Appearance() {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
@@ -62,44 +61,44 @@ private fun AppearanceOptions() {
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
-    GroupTitle(id = R.string.appearance)
-
-    if (OSVersion.android12()) {
-        CustomSwitchRow(textRes = R.string.material_you_dynamic_color, checked = dynamicColor) {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-            dynamicColor = it
-            onClickDynamicColorButton(view, it, inverseOnSurface, inversePrimary, view.context)
+    CustomCard(titleRes = R.string.appearance) {
+        if (OSVersion.android12()) {
+            CustomSwitchRow(textRes = R.string.material_you_dynamic_color, checked = dynamicColor) {
+                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                dynamicColor = it
+                onClickDynamicColorButton(view, it, inverseOnSurface, inversePrimary, view.context)
+            }
         }
-    }
 
-    CustomSwitchRow(textRes = R.string.one_handed_mode, checked = oneHandedMode) {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-        oneHandedMode = it
-        settingsSharedPref.oneHandedMode = it
-    }
+        CustomSwitchRow(textRes = R.string.one_handed_mode, checked = oneHandedMode) {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            oneHandedMode = it
+            settingsSharedPref.oneHandedMode = it
+        }
 
-    CustomSwitchRow(textRes = R.string.show_divider, checked = showDivider) {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-        showDivider = it
-        settingsSharedPref.showDivider = it
-    }
+        CustomSwitchRow(textRes = R.string.show_divider, checked = showDivider) {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            showDivider = it
+            settingsSharedPref.showDivider = it
+        }
 
-    if (settingsSharedPref.addedCustomVolume()) CustomSwitchRow(
-        textRes = R.string.show_edit_volume_option,
-        checked = showEditVolumeOption
-    ) {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-        showEditVolumeOption = it
-        settingsSharedPref.showEditVolumeOption = it
-    }
+        if (settingsSharedPref.addedCustomVolume()) CustomSwitchRow(
+            textRes = R.string.show_edit_volume_option,
+            checked = showEditVolumeOption
+        ) {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            showEditVolumeOption = it
+            settingsSharedPref.showEditVolumeOption = it
+        }
 
-    if (showWebpageShowMoreOption) CustomSwitchRow(
-        textRes = R.string.show_full_webpage_card,
-        checked = mWebpageShowMore
-    ) {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-        mWebpageShowMore = it
-        settingsSharedPref.webpageCardShowMore = it
+        if (showWebpageShowMoreOption) CustomSwitchRow(
+            textRes = R.string.show_full_webpage_card,
+            checked = mWebpageShowMore
+        ) {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            mWebpageShowMore = it
+            settingsSharedPref.webpageCardShowMore = it
+        }
     }
 }
 
@@ -131,7 +130,7 @@ private fun onClickDynamicColorButton(
 }
 
 @Composable
-private fun GeneralOptions() {
+private fun General() {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
@@ -142,52 +141,55 @@ private fun GeneralOptions() {
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
-    GroupTitle(R.string.general)
-
-    CustomSwitchRow(
-        textRes = R.string.clear_clipboard_on_launch,
-        checked = autoClearClipboard
-    ) {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-        autoClearClipboard = it
-        // Automatically hide Clipboard Card when turning on Clear on Launch feature.
-        if (autoClearClipboard && showClipboardCard) {
-            showClipboardCard = false
-            settingsSharedPref.saveCardShowedState(CARD_3, false)
-            SnackbarUtil.snackbar(
-                view,
-                messageRes = R.string.clipboard_card_hidden,
-                buttonTextRes = R.string.undo,
-                textColor = inverseOnSurface,
-                buttonColor = inversePrimary,
-                buttonClickListener = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-                    settingsSharedPref.saveCardShowedState(CARD_3, true)
-                }
-            )
+    CustomCard(titleRes = R.string.general) {
+        CustomSwitchRow(
+            textRes = R.string.clear_clipboard_on_launch,
+            checked = autoClearClipboard
+        ) {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            autoClearClipboard = it
+            // Automatically hide Clipboard Card when turning on Clear on Launch feature.
+            if (autoClearClipboard && showClipboardCard) {
+                showClipboardCard = false
+                settingsSharedPref.saveCardShowedState(CARD_3, false)
+                SnackbarUtil.snackbar(
+                    view,
+                    messageRes = R.string.clipboard_card_hidden,
+                    buttonTextRes = R.string.undo,
+                    textColor = inverseOnSurface,
+                    buttonColor = inversePrimary,
+                    buttonClickListener = {
+                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        settingsSharedPref.saveCardShowedState(CARD_3, true)
+                    }
+                )
+            }
+            settingsSharedPref.autoClearClipboard = autoClearClipboard
         }
-        settingsSharedPref.autoClearClipboard = autoClearClipboard
-    }
 
-    CustomSwitchRow(textRes = R.string.set_slider_increment_5, checked = volumeSlideSteps) {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-        volumeSlideSteps = it
-        settingsSharedPref.sliderIncrement5Percent = it
-    }
+        CustomSwitchRow(textRes = R.string.set_slider_increment_5, checked = volumeSlideSteps) {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            volumeSlideSteps = it
+            settingsSharedPref.sliderIncrement5Percent = it
+        }
 
-    CustomSwitchRow(
-        textRes = R.string.collapse_keyboard_when_back_to_app,
-        checked = collapseKeyboard
-    ) {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-        collapseKeyboard = it
-        settingsSharedPref.collapseKeyboard = it
-    }
+        CustomSwitchRow(
+            textRes = R.string.collapse_keyboard_when_back_to_app,
+            checked = collapseKeyboard
+        ) {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            collapseKeyboard = it
+            settingsSharedPref.collapseKeyboard = it
+        }
 
-    CustomSwitchRow(textRes = R.string.show_snackbar_to_confirm, checked = showSnackbarToConfirm) {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
-        showSnackbarToConfirm = it
-        settingsSharedPref.showSnackbar = it
+        CustomSwitchRow(
+            textRes = R.string.show_snackbar_to_confirm,
+            checked = showSnackbarToConfirm
+        ) {
+            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            showSnackbarToConfirm = it
+            settingsSharedPref.showSnackbar = it
+        }
     }
 }
 

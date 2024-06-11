@@ -16,3 +16,10 @@ fun GroupDivider() {
     }
     SpacerPadding()
 }
+
+@Composable
+fun TitleDivider() {
+    SpacerPadding()
+    SpacerPadding()
+    HorizontalDivider()
+}

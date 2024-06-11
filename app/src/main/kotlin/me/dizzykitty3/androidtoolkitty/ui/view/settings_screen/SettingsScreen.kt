@@ -7,7 +7,7 @@ import me.dizzykitty3.androidtoolkitty.ui.component.CustomScreen
 @Composable
 fun SettingsScreen(navController: NavHostController) {
     CustomScreen {
-        SettingsCard(navController)
-        AboutCard(navController)
+        Settings(navController)
+        About(navController)
     }
 }

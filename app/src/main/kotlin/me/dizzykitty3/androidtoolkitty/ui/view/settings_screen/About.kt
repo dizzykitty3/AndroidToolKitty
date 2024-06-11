@@ -50,7 +50,7 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 import java.util.Locale
 
 @Composable
-fun AboutCard(navController: NavHostController) {
+fun About(navController: NavHostController) {
     val view = LocalView.current
     val debuggingOptions = SettingsSharedPref.debuggingOptions
     var tapCount by remember { mutableIntStateOf(0) }
