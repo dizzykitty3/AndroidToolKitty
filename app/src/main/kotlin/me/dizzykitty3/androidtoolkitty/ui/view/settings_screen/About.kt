@@ -93,7 +93,7 @@ fun About(navController: NavHostController) {
         ) {
             Column {
                 GroupDivider()
-                DebuggingOptions(navController)
+                Debugging(navController)
             }
         })
     }
@@ -217,15 +217,15 @@ private fun GitHubRepoLink() {
 }
 
 @Composable
-private fun DebuggingOptions(navController: NavHostController) {
+private fun Debugging(navController: NavHostController) {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var uiTesting by remember { mutableStateOf(settingsSharedPref.uiTesting) }
 
     GroupTitle(R.string.debugging)
 
-    Text(text = "Android ${Build.VERSION.RELEASE}, API ${Build.VERSION.SDK_INT}")
-    Text(text = "Language =  ${Locale.getDefault()}")
+    Text(text = "OS version = Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
+    Text(text = "Locale =  ${Locale.getDefault()}")
 
     CustomSwitchRow(textRes = R.string.ui_testing, checked = uiTesting) {
         view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
