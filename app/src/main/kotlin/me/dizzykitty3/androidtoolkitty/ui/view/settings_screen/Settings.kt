@@ -64,20 +64,20 @@ private fun Appearance() {
     CustomCard(titleRes = R.string.appearance) {
         if (OSVersion.android12()) {
             CustomSwitchRow(textRes = R.string.material_you_dynamic_color, checked = dynamicColor) {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 dynamicColor = it
                 onClickDynamicColorButton(view, it, inverseOnSurface, inversePrimary, view.context)
             }
         }
 
         CustomSwitchRow(textRes = R.string.one_handed_mode, checked = oneHandedMode) {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             oneHandedMode = it
             settingsSharedPref.oneHandedMode = it
         }
 
         CustomSwitchRow(textRes = R.string.show_divider, checked = showDivider) {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             showDivider = it
             settingsSharedPref.showDivider = it
         }
@@ -86,7 +86,7 @@ private fun Appearance() {
             textRes = R.string.show_edit_volume_option,
             checked = showEditVolumeOption
         ) {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             showEditVolumeOption = it
             settingsSharedPref.showEditVolumeOption = it
         }
@@ -95,7 +95,7 @@ private fun Appearance() {
             textRes = R.string.show_full_webpage_card,
             checked = mWebpageShowMore
         ) {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             mWebpageShowMore = it
             settingsSharedPref.webpageCardShowMore = it
         }
@@ -120,7 +120,7 @@ private fun onClickDynamicColorButton(
             textColor = inverseOnSurface,
             buttonColor = inversePrimary,
             buttonClickListener = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 IntentUtil.restartApp(context)
             }
         )
@@ -145,7 +145,7 @@ private fun General() {
             textRes = R.string.clear_clipboard_on_launch,
             checked = autoClearClipboard
         ) {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             autoClearClipboard = it
             // Automatically hide Clipboard Card when turning on Clear on Launch feature.
             if (autoClearClipboard && showClipboardCard) {
@@ -158,7 +158,7 @@ private fun General() {
                     textColor = inverseOnSurface,
                     buttonColor = inversePrimary,
                     buttonClickListener = {
-                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                         settingsSharedPref.saveCardShowedState(CARD_3, true)
                     }
                 )
@@ -167,7 +167,7 @@ private fun General() {
         }
 
         CustomSwitchRow(textRes = R.string.set_slider_increment_5, checked = volumeSlideSteps) {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             volumeSlideSteps = it
             settingsSharedPref.sliderIncrement5Percent = it
         }
@@ -176,7 +176,7 @@ private fun General() {
             textRes = R.string.show_snackbar_to_confirm,
             checked = showSnackbarToConfirm
         ) {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             showSnackbarToConfirm = it
             settingsSharedPref.showSnackbar = it
         }
@@ -191,7 +191,7 @@ private fun CustomizeOptions(navController: NavHostController) {
 
     OutlinedButton(
         onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             navController.navigate(EDIT_HOME_SCREEN)
         }
     ) {

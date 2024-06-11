@@ -62,7 +62,7 @@ fun MapsCard() {
                 ),
                 trailingIcon = {
                     ClearInput(text = latitude) {
-                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                         latitude = ""
                     }
                 },
@@ -85,7 +85,7 @@ fun MapsCard() {
                 ),
                 trailingIcon = {
                     ClearInput(text = longitude) {
-                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                         longitude = ""
                     }
                 },
@@ -94,7 +94,7 @@ fun MapsCard() {
 
         TextButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 onClickOpenGoogleMapsButton(latitude, longitude, view.context)
             }
         ) {

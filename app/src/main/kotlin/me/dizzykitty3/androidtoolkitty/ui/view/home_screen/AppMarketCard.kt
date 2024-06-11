@@ -57,7 +57,7 @@ fun AppMarketCard() {
             ),
             trailingIcon = {
                 ClearInput(text = packageName) {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     packageName = ""
                 }
             }
@@ -69,7 +69,7 @@ fun AppMarketCard() {
         Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
             TextButton(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     IntentUtil.checkOnMarket(packageName, view.context)
                 }
             ) {
@@ -83,7 +83,7 @@ fun AppMarketCard() {
 
             TextButton(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     IntentUtil.checkOnMarket(packageName, view.context, false)
                 }
             ) {
@@ -114,7 +114,7 @@ private fun WhatIsPackageName() {
         Row(
             modifier = Modifier.clickable(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     IntentUtil.openURL(linkURL, view.context)
                 }
             )

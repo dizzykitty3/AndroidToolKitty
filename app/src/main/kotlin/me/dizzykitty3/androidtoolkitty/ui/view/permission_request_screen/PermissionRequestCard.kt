@@ -38,7 +38,7 @@ fun PermissionRequestCard() {
 
         Button(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 if (PermissionUtil.noBluetoothPermission(view.context)) {
                     PermissionUtil.requestBluetoothPermission(view.context)
                     clickCount++
@@ -64,7 +64,7 @@ fun ManuallyGrant() {
     Text(text = stringResource(id = R.string.missed_sys_popup))
     TextButton(
         onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             IntentUtil.openAppDetailSettings(view.context)
         }
     ) {

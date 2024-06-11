@@ -34,7 +34,7 @@ fun RuleUpdateSection() {
 
     OutlinedButton(
         onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             coroutineScope.launch {
                 isLoading = true
                 onUpdateSocialMedia(
@@ -56,7 +56,7 @@ fun RuleUpdateSection() {
 
     OutlinedButton(
         onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             coroutineScope.launch {
                 isLoading = true
                 onUpdateDomainSuffix(

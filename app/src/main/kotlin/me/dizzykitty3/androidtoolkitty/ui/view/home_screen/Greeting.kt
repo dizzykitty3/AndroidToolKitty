@@ -46,7 +46,7 @@ fun Greeting(navController: NavHostController) {
 
     Box(
         modifier = Modifier.clickable {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             showDialog = true
         }
     ) {
@@ -90,7 +90,7 @@ fun Greeting(navController: NavHostController) {
             confirmButton = {
                 Row {
                     Button(onClick = {
-                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                         showDialog = false
 
                         if (PermissionUtil.noBluetoothPermission(view.context)) {
@@ -105,7 +105,7 @@ fun Greeting(navController: NavHostController) {
                 }
                 Row {
                     Button(onClick = {
-                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                         showDialog = false
 
                         if (PermissionUtil.noBluetoothPermission(view.context)) {
@@ -121,7 +121,7 @@ fun Greeting(navController: NavHostController) {
             },
             dismissButton = {
                 TextButton(onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     showDialog = false
                     SettingsSharedPref.autoSetMediaVolume = -1
                 }) {

@@ -35,7 +35,7 @@ fun ClipboardCard() {
 
         OutlinedButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 onClearClipboardButton(view)
             }
         ) {

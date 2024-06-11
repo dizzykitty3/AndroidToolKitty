@@ -36,7 +36,7 @@ fun YearProgressCard() {
 
         Column(
             modifier = Modifier.clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 isShowPercentage = !isShowPercentage
             }
         ) {

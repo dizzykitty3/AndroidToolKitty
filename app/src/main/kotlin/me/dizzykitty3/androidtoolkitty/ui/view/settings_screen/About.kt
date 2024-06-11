@@ -59,7 +59,7 @@ fun About(navController: NavHostController) {
         GroupTitle(id = R.string.version)
         Row(
             modifier = Modifier.clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 if (!debuggingOptions) {
                     tapCount++
                     when (tapCount) {
@@ -124,7 +124,7 @@ private fun DeveloperProfileLink(name: String) {
         IconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 IntentUtil.openURL(
                     "${URLUtil.prefixOf(URLUtil.Platform.GITHUB)}$name",
                     view.context
@@ -158,7 +158,7 @@ private fun ThanksTo(link: String) {
             modifier = Modifier
                 .horizontalScroll(rememberScrollState())
                 .clickable {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     IntentUtil.openURL(sourceCodeURL, view.context)
                 }
         ) {
@@ -197,7 +197,7 @@ private fun GitHubRepoLink() {
         IconAndTextPadding()
         Row(
             modifier = Modifier.clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 ToastUtil.toast(R.string.all_help_welcomed)
                 IntentUtil.openURL(sourceCodeURL, view.context)
             }
@@ -228,20 +228,20 @@ private fun DebuggingOptions(navController: NavHostController) {
     Text(text = "Language =  ${Locale.getDefault()}")
 
     CustomSwitchRow(textRes = R.string.ui_testing, checked = uiTesting) {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
         uiTesting = it
         settingsSharedPref.uiTesting = it
     }
 
     OutlinedButton(onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
         navController.navigate(PERMISSION_REQUEST_SCREEN)
     }) {
         Text(text = stringResource(id = R.string.go_to_permission_request_screen))
     }
 
     OutlinedButton(onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
         IntentUtil.restartApp(view.context)
     }) {
         Text(text = stringResource(id = R.string.restart_app))
@@ -264,7 +264,7 @@ private fun DebuggingOptions(navController: NavHostController) {
         positiveButtonText = stringResource(R.string.erase_all_data),
         negativeButtonText = null,
         onClickAction = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             settingsSharedPref.eraseAllData()
             IntentUtil.finishApp(view.context)
         }

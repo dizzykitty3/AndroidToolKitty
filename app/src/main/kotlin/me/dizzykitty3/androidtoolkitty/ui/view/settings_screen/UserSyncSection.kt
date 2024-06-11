@@ -61,7 +61,7 @@ fun UserSyncSection() {
 
     OutlinedButton(
         onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             dialogState = if (token.isBlank()) {
                 DialogState.Login
             } else {
@@ -75,7 +75,7 @@ fun UserSyncSection() {
 
     OutlinedButton(
         onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             if (token.isBlank()) {
                 dialogState = DialogState.Login
                 return@OutlinedButton
@@ -103,7 +103,7 @@ fun UserSyncSection() {
 
     OutlinedButton(
         onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             if (token.isBlank()) {
                 dialogState = DialogState.Login
                 return@OutlinedButton
@@ -142,11 +142,11 @@ fun UserSyncSection() {
             UserLoginDialog(
                 onDismiss = { dialogState = null },
                 onRegisterClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     dialogState = DialogState.Register
                 },
                 onLoginClick = { usernameForLogin, password ->
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     isLoading = true
                     coroutineScope.launch {
                         handleLogin(
@@ -175,11 +175,11 @@ fun UserSyncSection() {
             UserRegisterDialog(
                 onDismiss = { dialogState = null },
                 onLoginClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     dialogState = DialogState.Login
                 },
                 onRegisterClick = { username, email, password ->
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     isLoading = true
                     coroutineScope.launch {
                         handleRegister(
@@ -211,7 +211,7 @@ fun UserSyncSection() {
             UserProfileDialog(
                 token = token,
                 onLogout = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     SettingsSharedPref.removePreference("token")
                     token = ""
                     dialogState = null
@@ -302,7 +302,7 @@ private fun UserLoginDialog(
             Button(
                 enabled = !isLoading,
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     usernameError =
                         if (!username.matches(usernameRegex)) view.context.getString(R.string.error_invalid_username) else null
                     passwordError =
@@ -395,7 +395,7 @@ private fun UserRegisterDialog(
             Button(
                 enabled = !isLoading,
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     usernameError =
                         if (!username.matches(usernameRegex)) view.context.getString(R.string.error_invalid_username) else null
                     emailError =
@@ -429,7 +429,7 @@ private fun UserProfileDialog(
             Text(
                 text = "Token: $token (tap to copy)",
                 modifier = Modifier.clickable {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     ClipboardUtil.copy(token)
                     if (!OSVersion.android13()) {
                         ToastUtil.toast(R.string.copied)
@@ -439,7 +439,7 @@ private fun UserProfileDialog(
         },
         confirmButton = {
             Button(onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 onDismiss()
             }) {
                 Text(stringResource(id = android.R.string.ok))
@@ -447,7 +447,7 @@ private fun UserProfileDialog(
         },
         dismissButton = {
             TextButton(onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 onLogout()
             }) {
                 Text("Logout")

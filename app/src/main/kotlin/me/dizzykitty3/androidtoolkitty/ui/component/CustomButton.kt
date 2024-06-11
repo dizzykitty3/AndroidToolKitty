@@ -26,7 +26,7 @@ fun SystemSettingButton(
 
     TextButton(
         onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             IntentUtil.openSystemSettings(settingType, view.context)
         }
     ) {

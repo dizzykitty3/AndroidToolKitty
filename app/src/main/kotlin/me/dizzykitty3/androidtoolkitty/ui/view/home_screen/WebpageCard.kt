@@ -77,7 +77,7 @@ fun WebpageCard() {
 
         if (!mShowMore) {
             TextButton(onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mShowMore = !mShowMore
                 settingsSharedPref.webpageCardShowMore = mShowMore
             }) {
@@ -105,7 +105,7 @@ private fun Search() {
         ),
         trailingIcon = {
             ClearInput(text = searchQuery) {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 searchQuery = ""
             }
         },
@@ -114,7 +114,7 @@ private fun Search() {
     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
         TextButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 onClickSearchButton(searchQuery, view.context)
             }
         ) {
@@ -128,7 +128,7 @@ private fun Search() {
 
         TextButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 onCheckOnYouTube(searchQuery, view.context)
             }
         ) {
@@ -163,7 +163,7 @@ private fun WebpageURL() {
         ),
         trailingIcon = {
             ClearInput(text = url) {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 url = ""
             }
         },
@@ -189,7 +189,7 @@ private fun WebpageURL() {
     )
 
     TextButton(onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
         onClickVisitURLButton(url, view.context)
     }) {
         Text(text = stringResource(R.string.visit))
@@ -230,7 +230,7 @@ private fun SocialMediaProfileIURL() {
         ),
         trailingIcon = {
             ClearInput(text = username) {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 username = ""
             }
         },
@@ -246,7 +246,7 @@ private fun SocialMediaProfileIURL() {
 
     Row(verticalAlignment = Alignment.CenterVertically) {
         TextButton(onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             onVisitProfileButton(username, mPlatformIndex, view.context)
         }) {
             Text(text = stringResource(R.string.visit))
@@ -270,7 +270,7 @@ private fun NoPlatformYouNeedHere() {
         text = buildAnnotatedString { Italic(stringResource(id = R.string.platform_not_added_yet)) },
         textDecoration = TextDecoration.Underline,
         modifier = Modifier.clickable {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             showDialog = true
         }
     )
@@ -295,7 +295,7 @@ private fun NoPlatformYouNeedHere() {
                         modifier = Modifier.fillMaxWidth(),
                         trailingIcon = {
                             ClearInput(text = platformNameInput) {
-                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 platformNameInput = ""
                             }
                         },
@@ -307,7 +307,7 @@ private fun NoPlatformYouNeedHere() {
                         modifier = Modifier.fillMaxWidth(),
                         trailingIcon = {
                             ClearInput(text = platformExampleURLInput) {
-                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 platformExampleURLInput = ""
                             }
                         }
@@ -317,7 +317,7 @@ private fun NoPlatformYouNeedHere() {
             confirmButton = {
                 Button(
                     onClick = {
-                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                         showDialog = false
                     },
                     colors = ButtonDefaults.buttonColors(
@@ -333,7 +333,7 @@ private fun NoPlatformYouNeedHere() {
             dismissButton = {
                 TextButton(
                     onClick = {
-                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                         showDialog = false
                     }
                 ) {

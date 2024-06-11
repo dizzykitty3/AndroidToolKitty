@@ -44,7 +44,7 @@ fun CustomIconPopup(
             modifier = Modifier
                 .size(16.dp)
                 .clickable {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     showPopup = true
                 },
             tint = MaterialTheme.colorScheme.secondary

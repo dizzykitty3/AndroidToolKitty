@@ -78,7 +78,7 @@ fun UnicodeCard() {
             ),
             trailingIcon = {
                 ClearInput(text = unicode) {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     unicode = ""
                 }
             },
@@ -107,7 +107,7 @@ fun UnicodeCard() {
             ),
             trailingIcon = {
                 ClearInput(text = characters) {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     characters = ""
                 }
             },
@@ -115,7 +115,7 @@ fun UnicodeCard() {
 
         TextButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 if (isUnicodeInput) {
                     onClickConvertButton(view, unicode, { characters = it }, true)
                     focus.clearFocus()

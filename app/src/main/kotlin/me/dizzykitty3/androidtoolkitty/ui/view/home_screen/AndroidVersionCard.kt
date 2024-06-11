@@ -121,7 +121,7 @@ private fun EarlyVersions() {
 
     if (!expanded) {
         TextButton(onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             expanded = !expanded
         }) {
             Text(text = stringResource(R.string.show_more))

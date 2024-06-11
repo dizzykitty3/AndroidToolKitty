@@ -82,7 +82,7 @@ fun EditHomeScreen() {
                 card = CARD_1,
                 isChecked = mIsShowCard1
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard1 = newState
                 settingsSharedPref.saveCardShowedState(CARD_1, newState)
             }
@@ -91,7 +91,7 @@ fun EditHomeScreen() {
                 card = CARD_2,
                 isChecked = mIsShowCard2
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard2 = newState
                 settingsSharedPref.saveCardShowedState(CARD_2, newState)
             }
@@ -100,7 +100,7 @@ fun EditHomeScreen() {
                 card = CARD_3,
                 isChecked = mIsShowCard3
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard3 = newState
                 settingsSharedPref.saveCardShowedState(CARD_3, newState)
             }
@@ -109,7 +109,7 @@ fun EditHomeScreen() {
                 card = CARD_4,
                 isChecked = mIsShowCard4
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard4 = newState
                 settingsSharedPref.saveCardShowedState(CARD_4, newState)
             }
@@ -118,7 +118,7 @@ fun EditHomeScreen() {
                 card = CARD_5,
                 isChecked = mIsShowCard5
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard5 = newState
                 settingsSharedPref.saveCardShowedState(CARD_5, newState)
             }
@@ -127,7 +127,7 @@ fun EditHomeScreen() {
                 card = CARD_6,
                 isChecked = mIsShowCard6
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard6 = newState
                 settingsSharedPref.saveCardShowedState(CARD_6, newState)
             }
@@ -136,7 +136,7 @@ fun EditHomeScreen() {
                 card = CARD_7,
                 isChecked = mIsShowCard7
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard7 = newState
                 settingsSharedPref.saveCardShowedState(CARD_7, newState)
             }
@@ -145,7 +145,7 @@ fun EditHomeScreen() {
                 card = CARD_8,
                 isChecked = mIsShowCard8
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard8 = newState
                 settingsSharedPref.saveCardShowedState(CARD_8, newState)
             }
@@ -154,7 +154,7 @@ fun EditHomeScreen() {
                 card = CARD_9,
                 isChecked = mIsShowCard9
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard9 = newState
                 settingsSharedPref.saveCardShowedState(CARD_9, newState)
             }
@@ -163,7 +163,7 @@ fun EditHomeScreen() {
                 card = CARD_10,
                 isChecked = mIsShowCard10
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard10 = newState
                 settingsSharedPref.saveCardShowedState(CARD_10, newState)
             }
@@ -172,7 +172,7 @@ fun EditHomeScreen() {
                 card = CARD_11,
                 isChecked = mIsShowCard11
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard11 = newState
                 settingsSharedPref.saveCardShowedState(CARD_11, newState)
             }
@@ -181,7 +181,7 @@ fun EditHomeScreen() {
                 card = CARD_12,
                 isChecked = mIsShowCard12
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mIsShowCard12 = newState
                 settingsSharedPref.saveCardShowedState(CARD_12, newState)
             }
@@ -194,7 +194,7 @@ fun EditHomeScreen() {
 
             Button(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     if (showSnackbarToConfirm) {
                         SnackbarUtil.snackbar(
                             view,
@@ -203,7 +203,7 @@ fun EditHomeScreen() {
                             textColor = inverseOnSurface,
                             buttonColor = inversePrimary,
                             buttonClickListener = {
-                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 onClickChangeAllCardsButton(false)
                                 mIsShowCard1 = false
                                 mIsShowCard2 = false
@@ -248,7 +248,7 @@ fun EditHomeScreen() {
 
             Button(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     if (showSnackbarToConfirm) {
                         SnackbarUtil.snackbar(
                             view,
@@ -257,7 +257,7 @@ fun EditHomeScreen() {
                             textColor = inverseOnSurface,
                             buttonColor = inversePrimary,
                             buttonClickListener = {
-                                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 onClickChangeAllCardsButton(true)
                                 mIsShowCard1 = true
                                 mIsShowCard2 = true

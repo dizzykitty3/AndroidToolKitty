@@ -165,7 +165,7 @@ private fun SettingsButton(navController: NavHostController) {
     TooltipBox(
         positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
         tooltip = {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             PlainTooltip {
                 Text(text = stringResource(id = R.string.settings))
             }
@@ -174,7 +174,7 @@ private fun SettingsButton(navController: NavHostController) {
     ) {
         IconButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 navController.navigate(SETTINGS_SCREEN)
                 settingsSharedPref.haveOpenedSettingsScreen = true
             },
@@ -197,7 +197,7 @@ private fun Status() {
     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
         Row(
             modifier = Modifier.clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 IntentUtil.openSystemSettings(SETTING_POWER_USAGE_SUMMARY, view.context)
             }
         ) {
@@ -220,7 +220,7 @@ private fun Status() {
 
         if (BluetoothUtil.isHeadsetConnected() || SettingsSharedPref.uiTesting) {
             Row(modifier = Modifier.clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 IntentUtil.openSystemSettings(SETTING_BLUETOOTH, view.context)
             }) {
                 Icon(
@@ -268,7 +268,7 @@ private fun NetworkStateIcon(
 
     Row(
         modifier = Modifier.clickable {
-            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             IntentUtil.openSystemSettings(SETTING_WIFI, view.context)
         }
     ) {

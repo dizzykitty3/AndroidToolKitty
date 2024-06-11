@@ -71,7 +71,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
         OutlinedButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
 
                 // Check permission
                 if (PermissionUtil.noBluetoothPermission(view.context)) {
@@ -104,7 +104,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                         textColor = inverseOnSurface,
                         buttonColor = inversePrimary,
                         buttonClickListener = {
-                            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                             IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, view.context)
                         }
                     )
@@ -151,7 +151,7 @@ private fun BluetoothDeviceTypeDialog() {
     var showDialog by remember { mutableStateOf(false) }
 
     TextButton(onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
         showDialog = true
     }) {
         Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
@@ -173,7 +173,7 @@ private fun BluetoothDeviceTypeDialog() {
             confirmButton = {
                 Button(
                     onClick = {
-                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                         showDialog = false
                     },
                     colors = ButtonDefaults.buttonColors(

@@ -192,7 +192,7 @@ fun WheelOfFortuneCard() {
 
             OutlinedButton(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     if (items.isNotEmpty() && !isSpinning) {
                         if (expanded) {
                             expanded = false
@@ -255,7 +255,7 @@ private fun ExpandableList(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(enabled = !isSpinning) {
-                    view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     setExpanded(!expanded)
                 }
                 .padding(8.dp)
@@ -301,7 +301,7 @@ private fun ExpandableList(
                                     imageVector = Icons.Default.Check,
                                     contentDescription = "Done",
                                     modifier = Modifier.clickable {
-                                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                         val updatedList = items.toMutableList()
                                             .also { it[index] = editingText[index] }
                                         onItemsChange(updatedList)
@@ -319,7 +319,7 @@ private fun ExpandableList(
                                     imageVector = Icons.Default.Remove,
                                     contentDescription = "Remove",
                                     modifier = Modifier.clickable {
-                                        view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                         val newList =
                                             items.toMutableList().apply { removeAt(index) }
                                         onItemsChange(newList)
@@ -343,7 +343,7 @@ private fun ExpandableList(
                         .clip(RoundedCornerShape(10.dp))
                         .background(MaterialTheme.colorScheme.surfaceVariant)
                         .clickable {
-                            view.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                             val newItem = "$item ${items.size + 1}"
                             val updatedItems = items + newItem
                             onItemsChange(updatedItems)
