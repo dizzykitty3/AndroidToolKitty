@@ -16,8 +16,8 @@ import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.Schedule
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -229,14 +229,14 @@ private fun Debugging(navController: NavHostController) {
             settingsSharedPref.uiTesting = it
         }
 
-        OutlinedButton(onClick = {
+        TextButton(onClick = {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             navController.navigate(PERMISSION_REQUEST_SCREEN)
         }) {
             Text(text = stringResource(id = R.string.go_to_permission_request_screen))
         }
 
-        OutlinedButton(onClick = {
+        TextButton(onClick = {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             IntentUtil.restartApp(view.context)
         }) {

@@ -26,27 +26,13 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
-import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Composable
-fun Settings(navController: NavHostController) {
-    Appearance()
-    General()
-    Customize(navController = navController)
-
-    CustomCard(title = "Online features") {
-        UserSyncSection()
-        GroupDivider()
-        RuleUpdateSection()
-    }
-}
-
-@Composable
-private fun Appearance() {
+fun Appearance() {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
@@ -121,7 +107,7 @@ private fun onClickDynamicColorButton(
 }
 
 @Composable
-private fun General() {
+fun General() {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
@@ -175,24 +161,23 @@ private fun General() {
 }
 
 @Composable
-private fun Customize(navController: NavHostController) {
+fun Customize(navController: NavHostController) {
     val view = LocalView.current
 
     CustomCard(titleRes = R.string.customize) {
-
-    OutlinedButton(
-        onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            navController.navigate(EDIT_HOME_SCREEN)
+        OutlinedButton(
+            onClick = {
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                navController.navigate(EDIT_HOME_SCREEN)
+            }
+        ) {
+            Icon(
+                imageVector = Icons.Outlined.Edit,
+                contentDescription = stringResource(id = R.string.customize_my_home_page),
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+            SpacerPadding()
+            Text(text = stringResource(R.string.customize_my_home_page))
         }
-    ) {
-        Icon(
-            imageVector = Icons.Outlined.Edit,
-            contentDescription = stringResource(id = R.string.customize_my_home_page),
-            modifier = Modifier.align(Alignment.CenterVertically)
-        )
-        SpacerPadding()
-        Text(text = stringResource(R.string.customize_my_home_page))
-    }
     }
 }

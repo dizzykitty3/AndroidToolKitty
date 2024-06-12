@@ -8,7 +8,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -33,7 +32,7 @@ fun WarningAlertDialogButton(
 ) {
     var showDialog by remember { mutableStateOf(false) }
 
-    OutlinedButton(onClick = { showDialog = true }) {
+    TextButton(onClick = { showDialog = true }) {
         Icon(
             imageVector = Icons.Outlined.DeleteForever,
             contentDescription = stringResource(id = R.string.erase_all_data),
