@@ -7,7 +7,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
@@ -86,16 +85,14 @@ fun About(navController: NavHostController) {
         ContributorAndThanksTo()
         GroupDivider()
         SourceAndLicenses()
-        @Suppress("KotlinConstantConditions")
-        (AnimatedVisibility(
-            visible = (debuggingOptions || (!debuggingOptions && tapCount >= 5)),
-            enter = fadeIn(animationSpec = tween(durationMillis = 2000))
-        ) {
-            Column {
-                GroupDivider()
-                Debugging(navController)
-            }
-        })
+    }
+
+    @Suppress("KotlinConstantConditions")
+    AnimatedVisibility(
+        visible = (debuggingOptions || (!debuggingOptions && tapCount >= 5)),
+        enter = fadeIn(animationSpec = tween(durationMillis = 2000))
+    ) {
+        Debugging(navController)
     }
 }
 
@@ -222,51 +219,51 @@ private fun Debugging(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
     var uiTesting by remember { mutableStateOf(settingsSharedPref.uiTesting) }
 
-    GroupTitle(R.string.debugging)
+    CustomCard(titleRes = R.string.debugging) {
+        Text(text = "OS version = Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
+        Text(text = "Locale =  ${Locale.getDefault()}")
 
-    Text(text = "OS version = Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
-    Text(text = "Locale =  ${Locale.getDefault()}")
-
-    CustomSwitchRow(textRes = R.string.ui_testing, checked = uiTesting) {
-        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-        uiTesting = it
-        settingsSharedPref.uiTesting = it
-    }
-
-    OutlinedButton(onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-        navController.navigate(PERMISSION_REQUEST_SCREEN)
-    }) {
-        Text(text = stringResource(id = R.string.go_to_permission_request_screen))
-    }
-
-    OutlinedButton(onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-        IntentUtil.restartApp(view.context)
-    }) {
-        Text(text = stringResource(id = R.string.restart_app))
-    }
-
-    WarningAlertDialogButton(
-        buttonText = stringResource(R.string.erase_all_app_data),
-        dialogMessageTitle = stringResource(R.string.warning),
-        dialogMessage = {
-            Text(
-                text = buildAnnotatedString {
-                    append(stringResource(R.string.warning_erase_all_data_1))
-                    append(" ")
-                    Bold(R.string.warning_erase_all_data_2)
-                    append("\n\n")
-                    append(stringResource(R.string.warning_erase_all_data_3))
-                }
-            )
-        },
-        positiveButtonText = stringResource(R.string.erase_all_data),
-        negativeButtonText = null,
-        onClickAction = {
+        CustomSwitchRow(textRes = R.string.ui_testing, checked = uiTesting) {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            settingsSharedPref.eraseAllData()
-            IntentUtil.finishApp(view.context)
+            uiTesting = it
+            settingsSharedPref.uiTesting = it
         }
-    )
+
+        OutlinedButton(onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            navController.navigate(PERMISSION_REQUEST_SCREEN)
+        }) {
+            Text(text = stringResource(id = R.string.go_to_permission_request_screen))
+        }
+
+        OutlinedButton(onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            IntentUtil.restartApp(view.context)
+        }) {
+            Text(text = stringResource(id = R.string.restart_app))
+        }
+
+        WarningAlertDialogButton(
+            buttonText = stringResource(R.string.erase_all_app_data),
+            dialogMessageTitle = stringResource(R.string.warning),
+            dialogMessage = {
+                Text(
+                    text = buildAnnotatedString {
+                        append(stringResource(R.string.warning_erase_all_data_1))
+                        append(" ")
+                        Bold(R.string.warning_erase_all_data_2)
+                        append("\n\n")
+                        append(stringResource(R.string.warning_erase_all_data_3))
+                    }
+                )
+            },
+            positiveButtonText = stringResource(R.string.erase_all_data),
+            negativeButtonText = null,
+            onClickAction = {
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                settingsSharedPref.eraseAllData()
+                IntentUtil.finishApp(view.context)
+            }
+        )
+    }
 }

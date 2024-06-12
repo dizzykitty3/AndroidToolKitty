@@ -27,7 +27,6 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
-import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
@@ -37,10 +36,9 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 fun Settings(navController: NavHostController) {
     Appearance()
     General()
+    Customize(navController = navController)
 
-    CustomCard(titleRes = R.string.settings) {
-        CustomizeOptions(navController = navController)
-        GroupDivider()
+    CustomCard(title = "Online features") {
         UserSyncSection()
         GroupDivider()
         RuleUpdateSection()
@@ -177,10 +175,10 @@ private fun General() {
 }
 
 @Composable
-private fun CustomizeOptions(navController: NavHostController) {
+private fun Customize(navController: NavHostController) {
     val view = LocalView.current
 
-    GroupTitle(R.string.customize)
+    CustomCard(titleRes = R.string.customize) {
 
     OutlinedButton(
         onClick = {
@@ -195,5 +193,6 @@ private fun CustomizeOptions(navController: NavHostController) {
         )
         SpacerPadding()
         Text(text = stringResource(R.string.customize_my_home_page))
+    }
     }
 }
