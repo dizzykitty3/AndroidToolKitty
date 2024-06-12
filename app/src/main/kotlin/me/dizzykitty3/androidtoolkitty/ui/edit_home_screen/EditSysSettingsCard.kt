@@ -130,9 +130,6 @@ fun EditSysSettingsCard() {
             mIsShowSetting6 = newState
             settingsSharedPref.saveCardShowedState(SETTING_CAPTIONING, newState)
         }
-
-        GroupDivider()
-
         CustomHideCardSettingSwitch(
             textRes = R.string.open_usage_access_permission,
             card = SETTING_USAGE_ACCESS,
@@ -160,9 +157,6 @@ fun EditSysSettingsCard() {
             mIsShowSetting9 = newState
             settingsSharedPref.saveCardShowedState(SETTING_WRITE_SETTINGS, newState)
         }
-
-        GroupDivider()
-
         CustomHideCardSettingSwitch(
             textRes = R.string.open_language_settings,
             card = SETTING_LOCALE,
