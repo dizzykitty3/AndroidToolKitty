@@ -41,7 +41,6 @@
     <string name="media_volume">Media volume</string>
     <string name="add_custom_volume">Add custom volume</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
-    <string name="edit_custom_volume">Edit custom volume</string>
 
     <!-- Home screen: clipboard -->
     <string name="clipboard">Clipboard</string>
@@ -274,7 +273,6 @@
     <string name="hide_all_options">Hide all options</string>
     <string name="restart_app">Restart app</string>
     <string name="appearance">Appearance</string>
-    <string name="show_divider">Show divider</string>
     <string name="show_snackbar_to_confirm">Ask me before apply changes</string>
     <string name="show_edit_volume_option">Show Edit in Volume card</string>
     <string name="ui_testing">UI testing</string>

@@ -159,7 +159,6 @@
     <string name="restart_app">重启 ToolKitty</string>
     <string name="platform_example_url">示例 URL（可选）</string>
     <string name="appearance">外观</string>
-    <string name="show_divider">显示分界线</string>
     <string name="show_snackbar_to_confirm">在确认更改前询问我</string>
     <string name="bluetooth_devices_types_6">有些设备可能同时支持经典蓝牙和蓝牙LE。这些被称为双模式设备，可以根据需要提供与不同类型设备连接的灵活性。例如，智能手表可能使用BLE与手机连接以获取通知，但也具有经典蓝牙用于音乐播放。</string>
     <string name="turn_off">禁用</string>
@@ -188,6 +187,5 @@
     <string name="error_invalid_password">密码必须至少包含6个字符</string>
     <string name="rule_update">规则更新</string>
     <string name="error_rule_update">更新规则失败，请稍后再试。</string>
-    <string name="edit_custom_volume">编辑自定义音量</string>
     <string name="start">开始</string>
 </resources>

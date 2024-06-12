@@ -176,7 +176,7 @@ fun VolumeCard() {
                     },
                     title = {
                         if (settingsSharedPref.addedCustomVolume()) {
-                            Text(text = stringResource(id = R.string.edit_custom_volume))
+                            Text(text = stringResource(id = R.string.edit))
                         } else {
                             Text(text = stringResource(R.string.add_custom_volume))
                         }
