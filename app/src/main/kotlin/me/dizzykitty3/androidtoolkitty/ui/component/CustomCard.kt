@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
@@ -43,18 +42,17 @@ fun CustomCard(
         Column(modifier = cardPadding) {
             if (icon == null) {
                 CardTitle(title = title)
-                TitleDivider()
                 CardContent { content() }
             } else {
-                Row(modifier = Modifier.fillMaxWidth()) {
+                Row {
                     Icon(
                         imageVector = icon,
                         contentDescription = title,
                         modifier = Modifier.align(alignment = Alignment.CenterVertically)
                     )
+                    IconAndTextPadding()
                     CardTitle(title = title)
                 }
-                TitleDivider()
                 CardContent { content() }
             }
         }
@@ -65,8 +63,6 @@ fun CustomCard(
 @Composable
 private fun CardTitle(title: String) {
     Text(
-        modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center,
         text = title,
         style = MaterialTheme.typography.headlineSmall
     )

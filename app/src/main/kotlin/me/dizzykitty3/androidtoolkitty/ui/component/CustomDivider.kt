@@ -11,8 +11,3 @@ fun GroupDivider() {
     SpacerPadding()
     SpacerPadding()
 }
-
-@Composable
-fun TitleDivider() {
-    // Nothing
-}
