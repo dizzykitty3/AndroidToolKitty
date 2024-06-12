@@ -88,6 +88,7 @@ private fun EarlyVersions() {
                 AndroidVersion(textRes = R.string.android_2_3)
                 AndroidVersion(textRes = R.string.android_2_2)
                 AndroidVersion(textRes = R.string.android_2_1)
+                Text(text = "...")
             }
 
             Column(modifier = Modifier.weight(0.6f)) {

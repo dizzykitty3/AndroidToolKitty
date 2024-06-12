@@ -48,25 +48,25 @@ fun FontWeightCard() {
         GroupDivider()
         Column(modifier = Modifier.fillMaxWidth()) {
             Text(
-                text = "SansSerif SansSerif SansSerif SansSerif SansSerif SansSerif",
+                text = "SansSerif SansSerif SansSerif SansSerif SansSerif SansSerif SansSerif SansSerif",
                 fontFamily = FontFamily.SansSerif,
                 overflow = TextOverflow.Clip,
                 maxLines = 1
             )
             Text(
-                text = "Serif Serif Serif Serif Serif Serif Serif Serif Serif",
+                text = "Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif",
                 fontFamily = FontFamily.Serif,
                 overflow = TextOverflow.Clip,
                 maxLines = 1
             )
             Text(
-                text = "Cursive Cursive Cursive Cursive Cursive Cursive Cursive ",
+                text = "Cursive Cursive Cursive Cursive Cursive Cursive Cursive Cursive Cursive Cursive",
                 fontFamily = FontFamily.Cursive,
                 overflow = TextOverflow.Clip,
                 maxLines = 1
             )
             Text(
-                text = "Monospace Monospace Monospace Monospace Monospace Monospace ",
+                text = "Monospace Monospace Monospace Monospace Monospace Monospace Monospace Monospace",
                 fontFamily = FontFamily.Monospace,
                 overflow = TextOverflow.Clip,
                 maxLines = 1
@@ -78,22 +78,34 @@ fun FontWeightCard() {
                     .fillMaxWidth()
                     .horizontalScroll(rememberScrollState())
             ) {
-                Text(
-                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 (SansSerif)",
-                    fontFamily = FontFamily.SansSerif
-                )
-                Text(
-                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 (Serif)",
-                    fontFamily = FontFamily.Serif
-                )
-                Text(
-                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 (Cursive)",
-                    fontFamily = FontFamily.Cursive
-                )
-                Text(
-                    text = "闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。 (Monospace)",
-                    fontFamily = FontFamily.Monospace
-                )
+                Row {
+                    Text(
+                        text = stringResource(id = R.string.japanese_sentence),
+                        fontFamily = FontFamily.SansSerif
+                    )
+                    Text(text = " (SansSerif)")
+                }
+                Row {
+                    Text(
+                        text = stringResource(id = R.string.japanese_sentence),
+                        fontFamily = FontFamily.Serif
+                    )
+                    Text(text = " (Serif)")
+                }
+                Row {
+                    Text(
+                        text = stringResource(id = R.string.japanese_sentence),
+                        fontFamily = FontFamily.Cursive
+                    )
+                    Text(text = " (Cursive)")
+                }
+                Row {
+                    Text(
+                        text = stringResource(id = R.string.japanese_sentence),
+                        fontFamily = FontFamily.Monospace
+                    )
+                    Text(text = " (Monospace)")
+                }
             }
         }
     }

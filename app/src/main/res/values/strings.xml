@@ -246,6 +246,7 @@
     <string name="a" translatable="false">A</string>
     <string name="chinese_que" translatable="false">雀</string>
     <string name="japanese_ki" translatable="false">気</string>
+    <string name="japanese_sentence" translatable="false">闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。</string>
 
     <!-- Settings screen: settings -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
