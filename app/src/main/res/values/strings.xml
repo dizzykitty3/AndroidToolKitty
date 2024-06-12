@@ -20,6 +20,7 @@
     <string name="copy">Copy</string>
     <string name="start">Start</string>
     <string name="off_all_cap" translatable="false">OFF</string>
+    <string name="refresh">Refresh</string>
 
     <!-- Home screen: top tip -->
     <string name="battery_level">Battery level</string>

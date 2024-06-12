@@ -119,7 +119,10 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             SpacerPadding()
-            Text(text = stringResource(id = R.string.show_paired_devices))
+            Text(
+                text = if (showResult) stringResource(id = R.string.refresh)
+                else stringResource(id = R.string.show_paired_devices)
+            )
         }
 
         @SuppressLint("MissingPermission")
