@@ -21,7 +21,7 @@
     <string name="battery_level">バッテリーレベル</string>
     <string name="cellular">携帯電話</string>
     <string name="offline">オフライン</string>
-    <string name="connected">connected</string>
+    <string name="connected">Connected</string>
     <string name="year_progress">年の進捗</string>
     <plurals name="days_remaining">
         <item quantity="other">%1$d 日残り</item>
@@ -101,7 +101,6 @@
     <string name="no_paired_devices">ペアリング済みデバイスはありません</string>
     <string name="what_is_bt_ble_and_dual">BT、BLE、デュアルとは何ですか？</string>
     <string name="item">アイテム</string>
-    <string name="spin">スピン</string>
     <string name="search">検索</string>
     <string name="pixiv_user_custom_url">pixiv（ユーザーカスタムURL）</string>
     <string name="steam_user_custom_url">Steam（ユーザーカスタムURL）</string>
@@ -138,7 +137,6 @@
     <string name="set_slider_increment_5">スライダーの増分を 5% に設定</string>
     <string name="requires_restart_do_it_now">再起動が必要です。今すぐ実行しますか？</string>
     <string name="restart">再起動</string>
-    <string name="collapse_keyboard_when_back_to_app">ToolKitty に戻ったときにキーボードを閉じる</string>
     <string name="go_to_permission_request_screen">権限リクエスト画面に移動</string>
     <string name="tap_to_apply">タップして適用</string>
     <string name="clipboard_card_hidden">ホーム画面のクリップボードカードが非表示になりました。</string>
@@ -146,7 +144,6 @@
     <string name="hide_all_options">すべてのオプションを非表示</string>
     <string name="restart_app">アプリを再起動</string>
     <string name="appearance">外観</string>
-    <string name="show_divider">区切り線を表示</string>
     <string name="show_snackbar_to_confirm">変更を適用する前に確認を求める</string>
     <string name="show_edit_volume_option">音量カードで編集を表示</string>
     <string name="ui_testing">UI テスト</string>
@@ -168,7 +165,7 @@
     <string name="bluetooth_bluetooth_admin">ペアリングされた Bluetooth デバイスを確認するには、アプリに BLUETOOTH、BLUETOOTH_ADMIN の権限を付与してください。</string>
     <string name="missed_sys_popup">システム権限ポップアップを見逃しましたか？</string>
     <string name="query">クエリ</string>
-    <string name="show_more_in_webpage_card">Show URL and Social media profile in Webpage card</string>
+    <string name="show_full_webpage_card">Show URL and Social media profile in Webpage card</string>
     <string name="user_sync">ユーザー同期</string>
     <string name="upload_settings">アップロード設定</string>
     <string name="download_settings">ダウンロード設定</string>
@@ -176,7 +173,6 @@
     <string name="register">登録</string>
     <string name="password">パスワード</string>
     <string name="email">メールアドレス</string>
-    <string name="off">OFF</string>
     <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
     <string name="user_profile">ユーザーセンター</string>
     <string name="success">成功</string>
@@ -192,5 +188,6 @@
     <string name="error_invalid_password">パスワードは6文字以上である必要があります</string>
     <string name="rule_update">ルール更新</string>
     <string name="error_rule_update">ルールの更新に失敗しました。後ほど再試行してください。</string>
-    <string name="edit_custom_volume">Edit custom volume</string>
+    <string name="start">Start</string>
+    <string name="refresh">Refresh</string>
 </resources>

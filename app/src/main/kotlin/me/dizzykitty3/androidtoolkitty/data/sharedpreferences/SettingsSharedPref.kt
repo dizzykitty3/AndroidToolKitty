@@ -23,8 +23,6 @@ object SettingsSharedPref {
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val DEBUGGING_OPTIONS = "debugging_options"
     private const val WEBPAGE_CARD_SHOW_MORE = "webpage_card_show_more"
-    private const val COLLAPSE_KEYBOARD = "collapse_keyboard"
-    private const val SHOW_DIVIDER = "show_divider"
     private const val SHOW_SNACKBAR_BEFORE_APPLY_CHANGES = "show_snackbar_to_confirm"
     private const val SHOW_EDIT_VOLUME_OPTION = "show_edit_volume_option"
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
@@ -53,8 +51,8 @@ object SettingsSharedPref {
     }
 
     private inline fun <reified T> setPreference(key: String, value: T) {
+        Timber.d("set preference: $key = $value")
         with(sharedPrefs.edit()) {
-            Timber.d("set preference: $key = $value")
             when (value) {
                 is Boolean -> putBoolean(key, value)
                 is Int -> putInt(key, value)
@@ -66,15 +64,15 @@ object SettingsSharedPref {
     }
 
     fun removePreference(key: String) {
-        with(sharedPrefs.edit()) {
-            if (sharedPrefs.contains(key)) {
-                remove(key)
-                apply()
-                Timber.d("Preference key '$key' removed successfully.")
-            } else {
-                Timber.d("Preference key '$key' does not exist and cannot be removed.")
-            }
+        if (!sharedPrefs.contains(key)) {
+            Timber.d("Preference key '$key' does not exist and cannot be removed.")
+            return
         }
+        with(sharedPrefs.edit()) {
+            remove(key)
+            apply()
+        }
+        Timber.d("Preference key '$key' removed successfully.")
     }
 
     fun exportSettingsToJson(): String {
@@ -153,14 +151,6 @@ object SettingsSharedPref {
 
     fun enabledWebpageCardShowMore(): Boolean = webpageCardShowMore
 
-    var collapseKeyboard: Boolean
-        get() = getPreference(COLLAPSE_KEYBOARD, true)
-        set(value) = setPreference(COLLAPSE_KEYBOARD, value)
-
-    var showDivider: Boolean
-        get() = getPreference(SHOW_DIVIDER, true)
-        set(value) = setPreference(SHOW_DIVIDER, value)
-
     var showSnackbar: Boolean
         get() = getPreference(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, true)
         set(value) = setPreference(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, value)
@@ -238,7 +228,5 @@ object SettingsSharedPref {
 
     var token: String
         get() = getPreference(TOKEN, "")
-        set(value) {
-            setPreference(TOKEN, value)
-        }
+        set(value) = setPreference(TOKEN, value)
 }

@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Common -->
     <string name="label_optional">Label (optional)</string>
     <string name="edit">Edit</string>
@@ -18,7 +18,9 @@
     <string name="apply">Apply</string>
     <string name="turn_off">Turn off</string>
     <string name="copy">Copy</string>
-    <string name="off" tools:ignore="PrivateResource">OFF</string>
+    <string name="start">Start</string>
+    <string name="off_all_cap" translatable="false">OFF</string>
+    <string name="refresh">Refresh</string>
 
     <!-- Home screen: top tip -->
     <string name="battery_level">Battery level</string>
@@ -26,7 +28,7 @@
     <string name="cellular">Cellular</string>
     <string name="offline">Offline</string>
     <string name="no_translation" translatable="false">Sorry, %1$s translation haven\'t added yet.</string>
-    <string name="connected">connected</string>
+    <string name="connected">Connected</string>
 
     <!-- Home screen: year progress -->
     <string name="year_progress">Year progress</string>
@@ -40,7 +42,6 @@
     <string name="media_volume">Media volume</string>
     <string name="add_custom_volume">Add custom volume</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
-    <string name="edit_custom_volume">Edit custom volume</string>
 
     <!-- Home screen: clipboard -->
     <string name="clipboard">Clipboard</string>
@@ -125,7 +126,6 @@
     <!-- Home screen: wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
     <string name="item">item</string>
-    <string name="spin">Spin</string>
 
     <!-- Home screen: bluetooth devices -->
     <string name="bluetooth_devices">Bluetooth devices</string>
@@ -247,6 +247,7 @@
     <string name="a" translatable="false">A</string>
     <string name="chinese_que" translatable="false">雀</string>
     <string name="japanese_ki" translatable="false">気</string>
+    <string name="japanese_sentence" translatable="false">闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。</string>
 
     <!-- Settings screen: settings -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
@@ -267,7 +268,6 @@
     <string name="set_slider_increment_5">Set slider increment to 5%</string>
     <string name="requires_restart_do_it_now">Requires restart, do it now?</string>
     <string name="restart">Restart</string>
-    <string name="collapse_keyboard_when_back_to_app">Collapse keyboard when back to ToolKitty</string>
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
     <string name="tap_to_apply">Tap to apply</string>
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
@@ -275,11 +275,10 @@
     <string name="hide_all_options">Hide all options</string>
     <string name="restart_app">Restart app</string>
     <string name="appearance">Appearance</string>
-    <string name="show_divider">Show divider</string>
     <string name="show_snackbar_to_confirm">Ask me before apply changes</string>
     <string name="show_edit_volume_option">Show Edit in Volume card</string>
     <string name="ui_testing">UI testing</string>
-    <string name="show_more_in_webpage_card">Show URL and Social media profile in Webpage card</string>
+    <string name="show_full_webpage_card">Show full Webpage card</string>
 
     <!-- Settings screen: sync -->
     <string name="user_sync">Preferences sync</string>
@@ -324,7 +323,4 @@
     <string name="bluetooth_connect">To check paired bluetooth devices, please grant the app Nearby Devices permission.</string>
     <string name="bluetooth_bluetooth_admin">To check paired bluetooth devices, please grant the app BLUETOOTH, BLUETOOTH_ADMIN permissions.</string>
     <string name="missed_sys_popup">Missed the system permission popup?</string>
-
-    <!-- End of resources -->
-    <string name="what_the_fuck" translatable="false">.</string>
 </resources>

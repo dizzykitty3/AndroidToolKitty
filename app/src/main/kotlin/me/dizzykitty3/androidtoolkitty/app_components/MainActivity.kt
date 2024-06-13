@@ -16,8 +16,8 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
-import me.dizzykitty3.androidtoolkitty.ui.view.AppNavigationHost
+import me.dizzykitty3.androidtoolkitty.ui.AppNavigationHost
+import me.dizzykitty3.androidtoolkitty.ui_theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
@@ -79,11 +79,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        Timber.d("onResume")
-    }
-
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         Timber.d("onWindowFocusChanged")
@@ -97,15 +92,6 @@ class MainActivity : ComponentActivity() {
                 Timber.i("continuation resumed")
                 continuationNotResumed = false
             }
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Timber.d("onStop")
-        if (SettingsSharedPref.collapseKeyboard) {
-            Timber.d("focus cleared")
-            currentFocus?.clearFocus() // To collapse keyboard
         }
     }
 }
