@@ -74,6 +74,7 @@ class MainActivity : ComponentActivity() {
                 } else {
                     Timber.i("Set media volume automatically")
                     AudioUtil.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
+                    SnackbarUtil.snackbar(window.decorView, R.string.volume_changed)
                 }
             }
         }

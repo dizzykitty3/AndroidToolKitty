@@ -55,7 +55,7 @@ fun VolumeCard() {
     ) {
         val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
-        val maxVolume = AudioUtil.maxVolumeIndex()
+        val maxVolume = AudioUtil.maxVolumeIndex
         val sliderIncrementFivePercent = settingsSharedPref.sliderIncrement5Percent
         val customVolume = settingsSharedPref.customVolume
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
@@ -77,7 +77,7 @@ fun VolumeCard() {
 
         var selectedIndex by remember {
             mutableStateOf(
-                when (AudioUtil.volume()) {
+                when (AudioUtil.volume) {
                     0 -> 0
                     (0.4 * maxVolume).toInt() -> 1
                     (0.6 * maxVolume).toInt() -> 2
@@ -263,7 +263,7 @@ fun VolumeCard() {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 if (!haveCustomLabel) mHaveCustomLabel = false
                                 showVolumeDialog = false
-                                selectedIndex = when (AudioUtil.volume()) {
+                                selectedIndex = when (AudioUtil.volume) {
                                     0 -> 0
                                     (0.4 * maxVolume).toInt() -> 1
                                     (0.6 * maxVolume).toInt() -> 2

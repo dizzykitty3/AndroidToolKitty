@@ -9,9 +9,11 @@ import java.time.LocalTime
 object AudioUtil {
     private var audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
-    fun volume(): Int = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+    val volume: Int
+        get() = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
 
-    fun maxVolumeIndex(): Int = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
+    val maxVolumeIndex: Int
+        get() = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
     fun setVolume(volume: Int) =
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI)
@@ -19,9 +21,9 @@ object AudioUtil {
     fun setVolume(volume: Double) = setVolume(volume.toInt())
 
     private fun setVolumeByPercentage(percentage: Int) {
-        val indexedVolume = (maxVolumeIndex() * 0.01 * percentage).toInt()
-        Timber.d("current = ${volume()}, target = $indexedVolume")
-        if (percentage in 0..100 && (volume() != indexedVolume)) {
+        val indexedVolume = (maxVolumeIndex * 0.01 * percentage).toInt()
+        Timber.d("current = $volume, target = $indexedVolume")
+        if (percentage in 0..100 && (volume != indexedVolume)) {
             setVolume(indexedVolume)
         }
     }
