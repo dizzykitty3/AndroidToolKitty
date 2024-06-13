@@ -21,8 +21,9 @@
     <string name="start">Start</string>
     <string name="off_all_cap" translatable="false">OFF</string>
     <string name="refresh">Refresh</string>
+    <string name="settings">Settings</string>
 
-    <!-- Home screen: top tip -->
+    <!-- Home > Top bar -->
     <string name="battery_level">Battery level</string>
     <string name="wifi" translatable="false">Wi-Fi</string>
     <string name="cellular">Cellular</string>
@@ -30,21 +31,21 @@
     <string name="no_translation" translatable="false">Sorry, %1$s translation haven\'t added yet.</string>
     <string name="connected">Connected</string>
 
-    <!-- Home screen: year progress -->
+    <!-- Home > Year progress -->
     <string name="year_progress">Year progress</string>
     <plurals name="days_remaining">
         <item quantity="one">%1$d day remaining</item>
         <item quantity="other">%1$d days remaining</item>
     </plurals>
 
-    <!-- Home screen: volume -->
+    <!-- Home > Volume -->
     <string name="volume">Volume</string>
     <string name="media_volume">Media volume</string>
     <string name="add_custom_volume">Add custom volume</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
     <string name="volume_changed">Volume changed.</string>
 
-    <!-- Home screen: clipboard -->
+    <!-- Home > Clipboard -->
     <string name="clipboard">Clipboard</string>
     <string name="clear_clipboard">Clear clipboard</string>
     <string name="clipboard_cleared">Clipboard cleared</string>
@@ -52,7 +53,7 @@
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on Clear Clipboard on Launch in Settings Screen.</string>
     <string name="clipboard_is_empty">Clipboard is empty</string>
 
-    <!-- Home screen: webpage -->
+    <!-- Home > Webpage -->
     <string name="url" translatable="false">URL</string>
     <string name="url_input_hint_1">Visit webpage without inputting </string>
     <string name="url_input_hint_2">and </string>
@@ -108,7 +109,7 @@
     <string name="pinterest" translatable="false">Pinterest</string>
     <string name="marshmallow_qa" translatable="false">マシュマロ</string>
 
-    <!-- Home screen: system settings -->
+    <!-- Home > System settings -->
     <string name="system_settings">System settings</string>
     <string name="open_display_settings">Display</string>
     <string name="open_auto_rotate_settings">Auto-rotate screen</string>
@@ -124,11 +125,11 @@
     <string name="open_overlay_permission">Display over other apps</string>
     <string name="open_write_permission">Modify system settings</string>
 
-    <!-- Home screen: wheel of fortune -->
+    <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
     <string name="item">item</string>
 
-    <!-- Home screen: bluetooth devices -->
+    <!-- Home > Bluetooth devices -->
     <string name="bluetooth_devices">Bluetooth devices</string>
     <string name="bluetooth_disabled">Bluetooth disabled</string>
     <string name="show_paired_devices">Show paired devices</string>
@@ -149,14 +150,14 @@
     <string name="bluetooth_devices_types_6">Some devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
     <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
 
-    <!-- Home screen: unicode -->
+    <!-- Home > Unicode -->
     <string name="unicode">Unicode</string>
     <string name="unicode_input_hint">Last 4 digits of each, e.g.</string>
     <string name="character">Character</string>
     <string name="copied">copied</string>
     <string name="convert">Convert</string>
 
-    <!-- Home screen: check app on market -->
+    <!-- Home > Check app on market -->
     <string name="check_app_on_market">Check app on market</string>
     <string name="package_name_or_search">Package name or search</string>
     <string name="whats">What\'s</string>
@@ -165,7 +166,7 @@
     <string name="open_on_google_play" translatable="false">Google Play</string>
     <string name="open_on_other_markets">Other markets</string>
 
-    <!-- Home screen: google maps -->
+    <!-- Home > Google Maps -->
     <string name="google_maps">Google Maps</string>
     <string name="latitude">lat</string>
     <string name="longitude">lng</string>
@@ -173,7 +174,7 @@
     <string name="google_play_not_installed">Google Play is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>
 
-    <!-- Home screen: android version history -->
+    <!-- Home > Android version history -->
     <string name="android_versions">Android version history</string>
     <string name="android_15" translatable="false">Android 15</string>
     <string name="android_14" translatable="false">Android 14</string>
@@ -234,7 +235,7 @@
     <string name="api_8" translatable="false">API 8, Froyo</string>
     <string name="api_7" translatable="false">API 7, Eclair</string>
 
-    <!-- Home screen: font weight -->
+    <!-- Home > Font weight test -->
     <string name="font_weight_test">Font weight test</string>
     <string name="w1">100 Thin</string>
     <string name="w2">200 ExtraLight</string>
@@ -250,38 +251,33 @@
     <string name="japanese_ki" translatable="false">気</string>
     <string name="japanese_sentence" translatable="false">闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。</string>
 
-    <!-- Settings screen: settings -->
-    <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
-    <string name="settings">Settings</string>
-    <string name="hide_all_cards">Hide all cards</string>
-    <string name="show_all_cards">Show all cards</string>
+    <!-- Settings > Appearance -->
     <string name="one_handed_mode">One-handed mode</string>
-    <string name="erase_all_app_data">Erase all app data</string>
-    <string name="erase_all_data">Erase all data</string>
-    <string name="customize_my_home_page">Customize my home page</string>
     <string name="material_you_dynamic_color">Material You dynamic color</string>
-    <string name="customize_system_settings_card">Customize Android System Settings card options</string>
-    <string name="customize">Customize</string>
-    <string name="warning_erase_all_data_1">This action will erase all your data, including</string>
-    <string name="warning_erase_all_data_2">histories and settings.</string>
-    <string name="warning_erase_all_data_3">Are you sure you want to proceed?</string>
-    <string name="general">General</string>
-    <string name="set_slider_increment_5">Set slider increment to 5%</string>
     <string name="requires_restart_do_it_now">Requires restart, do it now?</string>
     <string name="restart">Restart</string>
-    <string name="go_to_permission_request_screen">Go to permission request screen</string>
-    <string name="tap_to_apply">Tap to apply</string>
-    <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
-    <string name="show_all_options">Show all options</string>
-    <string name="hide_all_options">Hide all options</string>
-    <string name="restart_app">Restart app</string>
     <string name="appearance">Appearance</string>
-    <string name="show_snackbar_to_confirm">Ask me before apply changes</string>
     <string name="show_edit_volume_option">Show Edit in Volume card</string>
-    <string name="ui_testing">UI testing</string>
     <string name="show_full_webpage_card">Show full Webpage card</string>
 
-    <!-- Settings screen: sync -->
+    <!-- Settings > General -->
+    <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
+    <string name="general">General</string>
+    <string name="set_slider_increment_5">Set slider increment to 5%</string>
+    <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
+    <string name="show_snackbar_to_confirm">Ask me before apply changes</string>
+
+    <!-- Settings > Customize -->
+    <string name="hide_all_cards">Hide all cards</string>
+    <string name="show_all_cards">Show all cards</string>
+    <string name="customize_my_home_page">Customize my home page</string>
+    <string name="customize_system_settings_card">Customize Android System Settings card options</string>
+    <string name="customize">Customize</string>
+    <string name="tap_to_apply">Tap to apply</string>
+    <string name="show_all_options">Show all options</string>
+    <string name="hide_all_options">Hide all options</string>
+
+    <!-- Settings > Online features -->
     <string name="user_sync">Preferences sync</string>
     <string name="upload_settings">Upload preferences</string>
     <string name="download_settings">Download preferences</string>
@@ -307,7 +303,7 @@
     <string name="online_features">Online features</string>
     <string name="service_provider_privacy_disclaimer">Service provider privacy disclaimer</string>
 
-    <!-- Settings screen: about -->
+    <!-- Settings > About -->
     <string name="about">About</string>
     <string name="source_code_on_github">View source code on GitHub</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
@@ -321,7 +317,17 @@
     <string name="already_developer">You have already enabled debugging options</string>
     <string name="inspired_by">Inspired by</string>
 
-    <!-- Permission request screen -->
+    <!-- Settings > Debugging -->
+    <string name="erase_all_app_data">Erase all app data</string>
+    <string name="erase_all_data">Erase all data</string>
+    <string name="warning_erase_all_data_1">This action will erase all your data, including</string>
+    <string name="warning_erase_all_data_2">histories and settings.</string>
+    <string name="warning_erase_all_data_3">Are you sure you want to proceed?</string>
+    <string name="go_to_permission_request_screen">Go to permission request screen</string>
+    <string name="restart_app">Restart app</string>
+    <string name="ui_testing">UI testing</string>
+
+    <!-- Permission request -->
     <string name="request_permission">Request permission</string>
     <string name="bluetooth_connect">To check paired bluetooth devices, please grant the app Nearby Devices permission.</string>
     <string name="bluetooth_bluetooth_admin">To check paired bluetooth devices, please grant the app BLUETOOTH, BLUETOOTH_ADMIN permissions.</string>
