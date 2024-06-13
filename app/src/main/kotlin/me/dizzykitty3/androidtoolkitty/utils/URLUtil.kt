@@ -138,6 +138,7 @@ object URLUtil {
         CARRD(".carrd.co", R.string.carrd),
         FACEBOOK("facebook.com/", R.string.facebook),
         FANBOX(".fanbox.cc", R.string.fanbox),
+        FANSLY("fansly.com/", R.string.fansly),
         FANTIA("fantia.jp/", R.string.fantia),
         GITHUB("github.com/", R.string.github),
         INSTAGRAM("instagram.com/", R.string.instagram),

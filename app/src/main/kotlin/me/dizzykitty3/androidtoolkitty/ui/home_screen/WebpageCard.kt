@@ -377,14 +377,15 @@ private fun onVisitProfileButton(
     IntentUtil.openURL(url, context)
 }
 
-private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String {
-    return when (platform) {
+private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String =
+    when (platform) {
         URLUtil.Platform.BLUESKY ->
-            if (username.isNotBlank()) {
-                "${platform.prefix}${StringUtil.dropSpacesAndLowercase(username)}.bsky.social"
-            } else {
-                platform.prefix // for display
-            }
+            if (username.isNotBlank()) "${platform.prefix}${
+                StringUtil.dropSpacesAndLowercase(
+                    username
+                )
+            }.bsky.social"
+            else platform.prefix // for display
 
         URLUtil.Platform.FANBOX,
         URLUtil.Platform.BOOTH,
@@ -392,5 +393,4 @@ private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): 
         URLUtil.Platform.CARRD -> "${StringUtil.dropSpacesAndLowercase(username)}${platform.prefix}"
 
         else -> "${platform.prefix}${StringUtil.dropSpacesAndLowercase(username)}"
-    }
 }
