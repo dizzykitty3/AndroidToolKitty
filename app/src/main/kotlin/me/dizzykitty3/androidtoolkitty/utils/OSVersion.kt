@@ -81,6 +81,7 @@ object OSVersion {
      * Oreo
      *
      * 1. Adaptive icons
+     * 2. LocalTime.now()
      */
     fun android8(): Boolean = osVersion >= 26
     fun api26(): Boolean = android8()
@@ -93,6 +94,8 @@ object OSVersion {
 
     /**
      * Marshmallow
+     *
+     * 1. View.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
      */
     fun android6(): Boolean = osVersion >= 23
     fun api23(): Boolean = android6()
