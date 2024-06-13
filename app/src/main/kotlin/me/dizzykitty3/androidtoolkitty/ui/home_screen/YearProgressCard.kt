@@ -43,16 +43,14 @@ fun YearProgressCard() {
             CustomAnimatedProgressIndicator()
 
             val textToShow =
-                if (isShowPercentage)
-                    "${(yearProgressPercentage(yearProgress()))}%"
-                else
-                    "${(yearProgressPercentage(yearProgress()))}% · ${
-                        appContext.resources.getQuantityString(
-                            R.plurals.days_remaining,
-                            (totalDaysInYear() - daysPassed()).toInt(),
-                            totalDaysInYear() - daysPassed()
-                        )
-                    }"
+                if (isShowPercentage) "${(yearProgressPercentage(yearProgress))}%"
+                else "${(yearProgressPercentage(yearProgress))}% · ${
+                    appContext.resources.getQuantityString(
+                        R.plurals.days_remaining,
+                        (totalDaysInYear - daysPassed).toInt(),
+                        totalDaysInYear - daysPassed
+                    )
+                }"
             Text(
                 text = textToShow,
                 modifier = Modifier.fillMaxWidth()

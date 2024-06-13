@@ -15,7 +15,7 @@ import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 @Composable
 fun CustomAnimatedProgressIndicator() {
     val progress = remember { Animatable(0f) }
-    val targetProgress = DateUtil.yearProgress()
+    val targetProgress = DateUtil.yearProgress
     val durationMillis = 2000
 
     LaunchedEffect(true) {

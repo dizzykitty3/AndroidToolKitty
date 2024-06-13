@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Clipboard cleared automatically")
                 }
             }
-            if (SettingsSharedPref.enabledAutoSetMediaVolume() && DateUtil.isNotWeekend()) {
+            if (SettingsSharedPref.enabledAutoSetMediaVolume() && DateUtil.isNotWeekend) {
                 if (BluetoothUtil.isHeadsetConnected()) {
                     Timber.i("Set media volume automatically: cancelled: BT headset connected")
                 } else {
