@@ -44,6 +44,7 @@
     <string name="add_custom_volume">Add custom volume</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
     <string name="volume_changed">Volume changed.</string>
+    <string name="volume_changed_auto">Volume changed automatically.</string>
 
     <!-- Home > Clipboard -->
     <string name="clipboard">Clipboard</string>

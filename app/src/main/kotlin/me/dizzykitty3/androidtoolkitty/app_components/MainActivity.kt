@@ -73,8 +73,11 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Set media volume automatically: cancelled: BT headset connected")
                 } else {
                     Timber.i("Set media volume automatically")
-                    AudioUtil.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
-                    SnackbarUtil.snackbar(window.decorView, R.string.volume_changed)
+                    val result = AudioUtil.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
+                    if (result) SnackbarUtil.snackbar(
+                        window.decorView,
+                        R.string.volume_changed_auto
+                    )
                 }
             }
         }

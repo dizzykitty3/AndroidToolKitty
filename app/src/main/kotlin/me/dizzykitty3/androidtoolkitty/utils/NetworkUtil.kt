@@ -1,7 +1,10 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
+import android.net.ConnectivityManager.TYPE_MOBILE
+import android.net.ConnectivityManager.TYPE_WIFI
 import android.net.NetworkCapabilities
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 
@@ -13,7 +16,18 @@ object NetworkUtil {
     private var connectivityManager: ConnectivityManager =
         appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
+    @Suppress("DEPRECATION")
+    @SuppressLint("NewApi")
     fun networkState(): Int {
+        if (!OSVersion.api23()) {
+            val activeNetwork = connectivityManager.activeNetworkInfo ?: return STATE_CODE_OFFLINE
+            return when (activeNetwork.type) {
+                TYPE_WIFI -> STATE_CODE_WIFI
+                TYPE_MOBILE -> STATE_CODE_MOBILE
+                else -> STATE_CODE_UNKNOWN
+            }
+        }
+
         val activeNetwork = connectivityManager.activeNetwork ?: return STATE_CODE_OFFLINE
         val capabilities =
             connectivityManager.getNetworkCapabilities(activeNetwork) ?: return STATE_CODE_UNKNOWN
