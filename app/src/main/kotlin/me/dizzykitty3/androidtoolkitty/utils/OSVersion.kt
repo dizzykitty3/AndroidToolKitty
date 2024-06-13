@@ -86,6 +86,8 @@ object OSVersion {
 
     /**
      * Nougat
+     *
+     * 1. Create a TileService
      */
     fun android7(): Boolean = osVersion >= 24
     fun api24(): Boolean = android7()
@@ -95,6 +97,7 @@ object OSVersion {
      *
      * 1. View.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
      * 2. ConnectivityManager.getActiveNetwork()
+     * 3. Icon.createWithResource()
      */
     fun android6(): Boolean = osVersion >= 23
     fun api23(): Boolean = android6()
