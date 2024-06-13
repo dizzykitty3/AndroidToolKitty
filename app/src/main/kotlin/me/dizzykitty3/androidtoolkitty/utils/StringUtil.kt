@@ -50,7 +50,7 @@ object StringUtil {
         val stringBuilder = StringBuilder()
         for (char in characters) {
             val unicodeValue = char.code
-            val hexString = unicodeValue.toString(16).padStart(4, '0') // 转换成十六进制并确保长度为4
+            val hexString = unicodeValue.toString(16).padStart(4, '0')
             stringBuilder.append(hexString)
         }
         return stringBuilder.toString()

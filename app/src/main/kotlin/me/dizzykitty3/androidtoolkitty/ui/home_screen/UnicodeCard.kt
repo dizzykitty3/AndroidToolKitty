@@ -51,7 +51,7 @@ fun UnicodeCard() {
             value = unicode,
             onValueChange = {
                 unicode = it
-                characters = "" // 清空字符字段
+                characters = ""
                 isUnicodeInput = true
                 isCharacterInput = false
             },
