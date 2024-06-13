@@ -303,6 +303,8 @@
     <string name="error_rule_update">Update rules failed</string>
     <string name="social_media_platforms_list">Social media platforms list</string>
     <string name="webpage_suffixes">Webpage suffixes</string>
+    <string name="online_features">Online features</string>
+    <string name="service_provider_privacy_disclaimer">Service provider privacy disclaimer</string>
 
     <!-- Settings screen: about -->
     <string name="about">About</string>

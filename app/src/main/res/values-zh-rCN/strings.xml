@@ -188,5 +188,7 @@
     <string name="rule_update">规则更新</string>
     <string name="error_rule_update">更新规则失败，请稍后再试。</string>
     <string name="start">开始</string>
-    <string name="refresh">Refresh</string>
+    <string name="refresh">更新</string>
+    <string name="online_features">Online features</string>
+    <string name="service_provider_privacy_disclaimer">Service provider privacy disclaimer</string>
 </resources>

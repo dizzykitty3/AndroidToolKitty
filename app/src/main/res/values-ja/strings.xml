@@ -190,4 +190,6 @@
     <string name="error_rule_update">ルールの更新に失敗しました。後ほど再試行してください。</string>
     <string name="start">Start</string>
     <string name="refresh">Refresh</string>
+    <string name="online_features">Online features</string>
+    <string name="service_provider_privacy_disclaimer">Service provider privacy disclaimer</string>
 </resources>
