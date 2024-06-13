@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.home_screen
 
 import android.view.HapticFeedbackConstants
+import android.view.View
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,7 +42,6 @@ import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui_components.GradientSmall
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
-import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 private const val ADD = "+ Add"
@@ -102,24 +102,24 @@ fun VolumeCard() {
                         when (index) {
                             0 -> {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                setVolume(0)
+                                setVolume(view, 0)
                             }
 
                             1 -> {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                setVolume(0.4 * maxVolume)
+                                setVolume(view, 0.4 * maxVolume)
                             }
 
                             2 -> {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                setVolume(0.6 * maxVolume)
+                                setVolume(view, 0.6 * maxVolume)
                             }
 
                             3 -> {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 mHaveTappedAddButton = true
                                 if (mCustomVolume > 0)
-                                    setVolume(mCustomVolume * 0.01 * maxVolume)
+                                    setVolume(view, mCustomVolume * 0.01 * maxVolume)
                                 else
                                     showVolumeDialog = true
                             }
@@ -216,7 +216,7 @@ fun VolumeCard() {
                                         settingsSharedPref.customVolumeOptionLabel = optionLabel
                                         mCustomVolumeOptionLabel = optionLabel
                                         selectedIndex = 3
-                                        setVolume(mCustomVolume * 0.01 * maxVolume)
+                                        setVolume(view, mCustomVolume * 0.01 * maxVolume)
                                         showVolumeDialog = false
                                     }
                                 ),
@@ -249,7 +249,7 @@ fun VolumeCard() {
                                     settingsSharedPref.customVolumeOptionLabel = optionLabel
                                     mCustomVolumeOptionLabel = optionLabel
                                     selectedIndex = 3
-                                    setVolume(mCustomVolume * 0.01 * maxVolume)
+                                    setVolume(view, mCustomVolume * 0.01 * maxVolume)
                                     showVolumeDialog = false
                                 }
                             }
@@ -301,4 +301,14 @@ fun VolumeCard() {
             }
         }
     }
+}
+
+private fun setVolume(view: View, volume: Int) {
+    AudioUtil.setVolume(volume)
+    SnackbarUtil.snackbar(view, R.string.volume_changed)
+}
+
+private fun setVolume(view: View, volume: Double) {
+    AudioUtil.setVolume(volume)
+    SnackbarUtil.snackbar(view, R.string.volume_changed)
 }

@@ -192,4 +192,5 @@
     <string name="refresh">Refresh</string>
     <string name="online_features">Online features</string>
     <string name="service_provider_privacy_disclaimer">Service provider privacy disclaimer</string>
+    <string name="volume_changed">Volume changed.</string>
 </resources>
