@@ -68,7 +68,7 @@ class ClearClipboardTileService : TileService() {
             }
         } catch (e: Exception) {
             Timber.e(e)
-            Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
         }
     }
 }

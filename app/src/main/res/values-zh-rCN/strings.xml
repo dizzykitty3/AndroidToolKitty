@@ -193,4 +193,5 @@
     <string name="service_provider_privacy_disclaimer">Service provider privacy disclaimer</string>
     <string name="volume_changed">Volume changed.</string>
     <string name="volume_changed_auto">Volume changed automatically.</string>
+    <string name="error">error</string>
 </resources>
