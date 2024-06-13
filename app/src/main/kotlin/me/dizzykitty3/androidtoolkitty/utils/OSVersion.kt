@@ -62,9 +62,7 @@ object OSVersion {
     /**
      * Q
      *
-     * 1. Unless your app is the default input method editor (IME)
-     * or is the app that currently has focus,
-     * your app cannot access clipboard data.
+     * 1. Unless your app is the default input method editor (IME) or is the app that currently has focus, your app cannot access clipboard data.
      */
     fun android10(): Boolean = osVersion >= 29
     fun api29(): Boolean = android10()
@@ -96,6 +94,7 @@ object OSVersion {
      * Marshmallow
      *
      * 1. View.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+     * 2. ConnectivityManager.getActiveNetwork()
      */
     fun android6(): Boolean = osVersion >= 23
     fun api23(): Boolean = android6()
