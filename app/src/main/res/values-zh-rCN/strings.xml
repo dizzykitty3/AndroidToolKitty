@@ -61,7 +61,7 @@
     <string name="hide_all_options">隐藏所有选项</string>
     <string name="show_edit_volume_option">在音量卡片显示编辑按钮</string>
     <string name="ui_testing">UI 测试</string>
-    <string name="social_media_platforms_list">Social media platforms list</string>
+    <string name="social_media_platforms_list">社交媒体列表</string>
     <string name="about">关于</string>
     <string name="source_code_on_github">在 GitHub 上查看源码</string>
     <string name="submit_the_platform_you_need">提交你所想的平台</string>
@@ -189,9 +189,9 @@
     <string name="error_rule_update">更新规则失败，请稍后再试。</string>
     <string name="start">开始</string>
     <string name="refresh">更新</string>
-    <string name="online_features">Online features</string>
-    <string name="service_provider_privacy_disclaimer">Service provider privacy disclaimer</string>
-    <string name="volume_changed">Volume changed.</string>
-    <string name="volume_changed_auto">Volume changed automatically.</string>
-    <string name="error">error</string>
+    <string name="online_features">在线功能</string>
+    <string name="service_provider_privacy_disclaimer">在线服务隐私声明</string>
+    <string name="volume_changed">音量已调整</string>
+    <string name="volume_changed_auto">音量已自动调整</string>
+    <string name="error">错误</string>
 </resources>
