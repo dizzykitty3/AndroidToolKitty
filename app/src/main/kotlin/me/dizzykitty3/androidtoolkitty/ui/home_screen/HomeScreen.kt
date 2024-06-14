@@ -75,18 +75,12 @@ import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
-import java.util.Locale
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    val configuration = LocalConfiguration.current
-    val screenWidth = configuration.screenWidthDp
-
-    if (screenWidth < 600) {
-        MobileLayout(navController)
-    } else {
-        TabletLayout(navController)
-    }
+    val screenWidth = LocalConfiguration.current.screenWidthDp
+    if (screenWidth < 600) MobileLayout(navController)
+    else TabletLayout(navController)
 }
 
 @Composable
@@ -100,13 +94,10 @@ private fun MobileLayout(navController: NavHostController) {
             end = screenPadding
         )
     ) {
-        // Status
         item { TopPadding() }
         item { TopBar(navController) }
         item { CardSpacePadding() }
         item { CardSpacePadding() }
-
-        // Greeting
         item { Greeting(navController) }
         if (settingsSharedPref.oneHandedMode)
             item { OneHandedModePadding() }
@@ -114,8 +105,6 @@ private fun MobileLayout(navController: NavHostController) {
             item { CardSpacePadding() }
             item { CardSpacePadding() }
         }
-
-        // Contents
         item { NoTranslationTip() }
         item { HomeCards(navController) }
         item { BottomPadding() }
@@ -134,13 +123,8 @@ private fun TabletLayout(navController: NavHostController) {
         )
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            Box(modifier = Modifier.weight(1f)) {
-                Greeting(navController)
-            }
-
-            Box(modifier = Modifier.weight(1f)) {
-                TopBar(navController)
-            }
+            Box(modifier = Modifier.weight(1f)) { Greeting(navController) }
+            Box(modifier = Modifier.weight(1f)) { TopBar(navController) }
         }
         SpacerPadding()
         NoTranslationTip()
@@ -166,9 +150,7 @@ private fun SettingsButton(navController: NavHostController) {
         positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
         tooltip = {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            PlainTooltip {
-                Text(text = stringResource(id = R.string.settings))
-            }
+            PlainTooltip { Text(text = stringResource(id = R.string.settings)) }
         },
         state = rememberTooltipState(),
     ) {
@@ -195,11 +177,10 @@ private fun Status() {
     val view = LocalView.current
 
     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-        Row(
-            modifier = Modifier.clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                IntentUtil.openSystemSettings(SETTING_POWER_USAGE_SUMMARY, view.context)
-            }
+        Row(modifier = Modifier.clickable {
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            IntentUtil.openSystemSettings(SETTING_POWER_USAGE_SUMMARY, view.context)
+        }
         ) {
             Icon(
                 imageVector = Icons.Outlined.BatteryStd,
@@ -209,12 +190,9 @@ private fun Status() {
             SpacerPadding()
             Text(text = "$batteryLevel%")
         }
-
         SpacerPadding()
         SpacerPadding()
-
         NetworkState()
-
         SpacerPadding()
         SpacerPadding()
 
@@ -266,11 +244,10 @@ private fun NetworkStateIcon(
 ) {
     val view = LocalView.current
 
-    Row(
-        modifier = Modifier.clickable {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            IntentUtil.openSystemSettings(SETTING_WIFI, view.context)
-        }
+    Row(modifier = Modifier.clickable {
+        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+        IntentUtil.openSystemSettings(SETTING_WIFI, view.context)
+    }
     ) {
         Icon(
             imageVector = imageVector,
@@ -284,51 +261,38 @@ private fun NetworkStateIcon(
 
 @Composable
 private fun NoTranslationTip() {
-    val languageNotSupport = StringUtil.sysLangNotSupported()
+    val languageNotSupport = StringUtil.sysLangNotSupported
     val uiTesting = SettingsSharedPref.uiTesting
-    if (languageNotSupport || uiTesting) CustomTip(
-        formattedMessage = stringResource(
-            R.string.no_translation,
-            Locale.getDefault().toString()
-        )
-    )
+    if (languageNotSupport || uiTesting)
+        CustomTip(stringResource(R.string.no_translation, StringUtil.sysLocale))
 }
 
 @Composable
 private fun HomeCards(navController: NavHostController) {
-    val settingsSharedPref = remember { SettingsSharedPref }
-    val cardMap = getCardMap(settingsSharedPref)
-
+    val cardMap = getCardMap(SettingsSharedPref)
     cardMap.forEach { (cardName, isShow) ->
-        if (isShow) {
-            CardContent(cardName, navController)
-        }
+        if (isShow) CardContent(cardName, navController)
     }
 }
 
 @Composable
 private fun TwoColumnHomeCards(navController: NavHostController) {
-    val settingsSharedPref = remember { SettingsSharedPref }
     val largeCardPadding = dimensionResource(id = R.dimen.padding_card_space_large)
-    val cardMap = getCardMap(settingsSharedPref)
-
+    val cardMap = getCardMap(SettingsSharedPref)
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
         verticalItemSpacing = largeCardPadding,
         horizontalArrangement = Arrangement.spacedBy(largeCardPadding),
     ) {
         items(cardMap.toList()) { (cardName, isShow) ->
-            if (isShow) {
-                CardContent(cardName, navController)
-            }
+            if (isShow) CardContent(cardName, navController)
         }
     }
 }
 
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> {
-    val debugBuild = BuildConfig.DEBUG
-    return if (debugBuild) {
+    return if (BuildConfig.DEBUG) {
         listOf(
             CARD_0,
             CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,

@@ -18,8 +18,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 @Preview
 @Composable
 private fun TestCardPreview() {
-    val navController = rememberNavController()
-    TestCard(navController)
+    TestCard(rememberNavController())
 }
 
 @Composable

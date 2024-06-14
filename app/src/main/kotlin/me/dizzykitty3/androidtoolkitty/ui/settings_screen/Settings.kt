@@ -38,7 +38,7 @@ fun Appearance() {
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
     var showEditVolumeOption by remember { mutableStateOf(settingsSharedPref.showEditVolumeOption) }
-    val webpageShowMore = settingsSharedPref.enabledWebpageCardShowMore()
+    val webpageShowMore = settingsSharedPref.enabledWebpageCardShowMore
     val showWebpageShowMoreOption = remember { webpageShowMore }
     var mWebpageShowMore by remember { mutableStateOf(webpageShowMore) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
@@ -59,7 +59,7 @@ fun Appearance() {
             settingsSharedPref.oneHandedMode = it
         }
 
-        if (settingsSharedPref.addedCustomVolume()) CustomSwitchRow(
+        if (settingsSharedPref.addedCustomVolume) CustomSwitchRow(
             textRes = R.string.show_edit_volume_option,
             checked = showEditVolumeOption
         ) {
@@ -90,7 +90,7 @@ private fun onClickDynamicColorButton(
 
     SettingsSharedPref.dynamicColor = isDynamicColor
     if (showSnackbarToConfirm) {
-        SnackbarUtil.snackbar(
+        SnackbarUtil.show(
             view,
             messageRes = R.string.requires_restart_do_it_now,
             buttonTextRes = R.string.restart,
@@ -127,7 +127,7 @@ fun General() {
             if (autoClearClipboard && showClipboardCard) {
                 showClipboardCard = false
                 settingsSharedPref.saveCardShowedState(CARD_3, false)
-                SnackbarUtil.snackbar(
+                SnackbarUtil.show(
                     view,
                     messageRes = R.string.clipboard_card_hidden,
                     buttonTextRes = R.string.undo,

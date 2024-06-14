@@ -139,15 +139,12 @@ private fun onClickConvertButton(
     if (input.isBlank()) return
     Timber.d("onClickConvertButton")
     try {
-        val result = if (isUnicodeToChar) {
-            StringUtil.unicodeToCharacter(input)
-        } else {
-            StringUtil.characterToUnicode(input)
-        }
+        val result = if (isUnicodeToChar) StringUtil.unicodeToCharacter(input)
+        else StringUtil.characterToUnicode(input)
         updateResult(result)
         ClipboardUtil.copy(result)
-        SnackbarUtil.snackbar(view, "$result ${appContext.getString(R.string.copied)}")
+        SnackbarUtil.show(view, "$result ${appContext.getString(R.string.copied)}")
     } catch (e: Exception) {
-        SnackbarUtil.snackbar(view, e.message ?: "Unknown error occurred")
+        SnackbarUtil.show(view, e.message ?: "Unknown error occurred")
     }
 }

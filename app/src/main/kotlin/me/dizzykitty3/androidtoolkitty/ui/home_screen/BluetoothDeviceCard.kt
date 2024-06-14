@@ -82,7 +82,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 // Get system service
                 bluetoothAdapter = BluetoothUtil.bluetoothAdapter
                 if (bluetoothAdapter == null) {
-                    SnackbarUtil.snackbar(view, R.string.no_bluetooth_adapter_available)
+                    SnackbarUtil.show(view, R.string.no_bluetooth_adapter_available)
                     return@OutlinedButton
                 }
 
@@ -97,7 +97,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
                 // When Bluetooth is OFF
                 if (showSnackbarToConfirm) {
-                    SnackbarUtil.snackbar(
+                    SnackbarUtil.show(
                         view,
                         messageRes = R.string.bluetooth_disabled,
                         buttonTextRes = R.string.turn_on_bluetooth,
@@ -129,21 +129,18 @@ fun BluetoothDeviceCard(navController: NavHostController) {
         if (showResult) {
             Text(text = "${stringResource(id = R.string.current_device)} ${bluetoothAdapter?.name}\n")
 
-            if (size == 0) {
-                Text(text = stringResource(id = R.string.no_paired_devices))
-            } else {
-                Text(text = stringResource(id = R.string.paired_devices))
+            if (size == 0) Text(text = stringResource(id = R.string.no_paired_devices))
+            else Text(text = stringResource(id = R.string.paired_devices))
 
-                pairedDevices.forEach { device ->
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(text = device.name ?: stringResource(id = R.string.unknown_device))
-                        SpacerPadding()
-                        CustomIconPopup(type(device.type), device.address)
-                    }
+            pairedDevices.forEach { device ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(text = device.name ?: stringResource(id = R.string.unknown_device))
+                    SpacerPadding()
+                    CustomIconPopup(type(device.type), device.address)
                 }
-
-                BluetoothDeviceTypeDialog()
             }
+
+            BluetoothDeviceTypeDialog()
         }
     }
 }

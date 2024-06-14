@@ -117,7 +117,7 @@ fun WheelOfFortuneCard() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                SnackbarUtil.snackbar(view, selected)
+                SnackbarUtil.show(view, selected)
                 rotationDegrees = targetRotationDegrees % 360
             }
         }

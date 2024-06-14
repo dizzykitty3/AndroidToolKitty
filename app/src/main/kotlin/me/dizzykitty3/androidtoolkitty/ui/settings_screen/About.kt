@@ -62,15 +62,15 @@ fun About(navController: NavHostController) {
                 if (!debuggingOptions) {
                     tapCount++
                     when (tapCount) {
-                        3 -> SnackbarUtil.snackbar(view, R.string.two_more_times)
-                        4 -> SnackbarUtil.snackbar(view, R.string.one_more_time)
+                        3 -> SnackbarUtil.show(view, R.string.two_more_times)
+                        4 -> SnackbarUtil.show(view, R.string.one_more_time)
                         5 -> {
-                            SnackbarUtil.snackbar(view, R.string.now_a_developer)
+                            SnackbarUtil.show(view, R.string.now_a_developer)
                             SettingsSharedPref.debuggingOptions = true
                         }
                     }
                 } else {
-                    SnackbarUtil.snackbar(view, R.string.already_developer)
+                    SnackbarUtil.show(view, R.string.already_developer)
                 }
             }
         ) {
@@ -195,7 +195,7 @@ private fun GitHubRepoLink() {
         Row(
             modifier = Modifier.clickable {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                ToastUtil.toast(R.string.all_help_welcomed)
+                ToastUtil.show(R.string.all_help_welcomed)
                 IntentUtil.openURL(sourceCodeURL, view.context)
             }
         ) {

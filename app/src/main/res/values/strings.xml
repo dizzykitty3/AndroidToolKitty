@@ -172,8 +172,8 @@
 
     <!-- Home > Google Maps -->
     <string name="google_maps">Google Maps</string>
-    <string name="latitude">lat</string>
-    <string name="longitude">lng</string>
+    <string name="latitude">latitude</string>
+    <string name="longitude">longitude</string>
     <string name="google_maps_not_installed">Google Maps is not installed</string>
     <string name="google_play_not_installed">Google Play is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>

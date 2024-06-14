@@ -41,11 +41,11 @@ fun RuleUpdateSection() {
                     onSuccess = {
                         SettingsSharedPref.socialMedia = it
                         isLoading = false
-                        SnackbarUtil.snackbar(view, success)
+                        SnackbarUtil.show(view, success)
                     },
                     onFailure = {
                         isLoading = false
-                        SnackbarUtil.snackbar(view, errorMessage)
+                        SnackbarUtil.show(view, errorMessage)
                     }
                 )
             }
@@ -63,11 +63,11 @@ fun RuleUpdateSection() {
                     onSuccess = {
                         SettingsSharedPref.domainSuffix = it
                         isLoading = false
-                        SnackbarUtil.snackbar(view, success)
+                        SnackbarUtil.show(view, success)
                     },
                     onFailure = {
                         isLoading = false
-                        SnackbarUtil.snackbar(view, errorMessage)
+                        SnackbarUtil.show(view, errorMessage)
                     }
                 )
             }

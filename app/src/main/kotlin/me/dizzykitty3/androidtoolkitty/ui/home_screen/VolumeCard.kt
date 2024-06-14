@@ -59,16 +59,12 @@ fun VolumeCard() {
         val settingsSharedPref = remember { SettingsSharedPref }
         val maxVolume = AudioUtil.maxVolumeIndex
         var morePreciseSlider by remember { mutableStateOf(false) }
-        val customVolume = settingsSharedPref.customVolume
-        var mCustomVolume by remember { mutableIntStateOf(customVolume) }
-        val customVolumeOptionLabel = settingsSharedPref.customVolumeOptionLabel
-        var mCustomVolumeOptionLabel by remember { mutableStateOf(customVolumeOptionLabel) }
-        val haveCustomLabel = settingsSharedPref.usingCustomVolumeOptionLabel
-        var mHaveCustomLabel by remember { mutableStateOf(haveCustomLabel) }
+        var mCustomVolume by remember { mutableIntStateOf(settingsSharedPref.customVolume) }
+        var mCustomVolumeOptionLabel by remember { mutableStateOf(settingsSharedPref.customVolumeOptionLabel) }
+        var mHaveCustomLabel by remember { mutableStateOf(settingsSharedPref.usingCustomVolumeOptionLabel) }
         var showVolumeDialog by remember { mutableStateOf(false) }
         val showEditVolumeOption = settingsSharedPref.showEditVolumeOption
-        val haveTappedAddButton = settingsSharedPref.haveTappedAddButton
-        var mHaveTappedAddButton by remember { mutableStateOf(haveTappedAddButton) }
+        var mHaveTappedAddButton by remember { mutableStateOf(settingsSharedPref.haveTappedAddButton) }
 
         val options = listOf(
             stringResource(id = R.string.off_all_cap),
@@ -177,7 +173,7 @@ fun VolumeCard() {
                         // Ignore
                     },
                     title = {
-                        if (settingsSharedPref.addedCustomVolume()) {
+                        if (settingsSharedPref.addedCustomVolume) {
                             Text(text = stringResource(id = R.string.edit))
                         } else {
                             Text(text = stringResource(R.string.add_custom_volume))
@@ -245,7 +241,7 @@ fun VolumeCard() {
                             onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
-                                    if (newCustomVolume.toInt() != 0) SnackbarUtil.snackbar(
+                                    if (newCustomVolume.toInt() != 0) SnackbarUtil.show(
                                         view,
                                         R.string.system_media_volume_levels_limited
                                     )
@@ -271,7 +267,7 @@ fun VolumeCard() {
                         TextButton(
                             onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                if (!haveCustomLabel) mHaveCustomLabel = false
+                                if (!mHaveCustomLabel) mHaveCustomLabel = false
                                 showVolumeDialog = false
                                 selectedIndex = when (AudioUtil.volume) {
                                     0 -> 0
@@ -315,10 +311,10 @@ fun VolumeCard() {
 
 private fun setVolume(view: View, volume: Int) {
     AudioUtil.setVolume(volume)
-    SnackbarUtil.snackbar(view, R.string.volume_changed)
+    SnackbarUtil.show(view, R.string.volume_changed)
 }
 
 private fun setVolume(view: View, volume: Double) {
     AudioUtil.setVolume(volume)
-    SnackbarUtil.snackbar(view, R.string.volume_changed)
+    SnackbarUtil.show(view, R.string.volume_changed)
 }

@@ -11,12 +11,10 @@ plugins {
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
     compileSdk = 34
-
     buildFeatures {
         buildConfig = true
         compose = true
     }
-
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
@@ -30,7 +28,6 @@ android {
             useSupportLibrary = true
         }
     }
-
     buildTypes {
         debug {
             isMinifyEnabled = false
@@ -38,7 +35,6 @@ android {
             versionNameSuffix = ".dev"
             resValue("string", "app_name", "ToolKitty Dev")
         }
-
         release {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -48,7 +44,6 @@ android {
             )
         }
     }
-
     applicationVariants.all {
         val outputFileName = "android-toolkitty-${this.versionName}.apk"
         outputs.all {
@@ -56,13 +51,11 @@ android {
                 .outputFileName = outputFileName
         }
     }
-
     composeCompiler {
         enableStrongSkippingMode = true
         reportsDestination = layout.buildDirectory.dir("compose_compiler")
 //        stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
     }
-
     compileOptions {
         // https://developer.android.com/studio/write/java8-support#library-desugaring
         isCoreLibraryDesugaringEnabled = true // Java 8+ API desugaring support
@@ -88,13 +81,10 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.work.testing)
-
     coreLibraryDesugaring(libs.android.desugar.jdk.libs)
-
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.square.leakcanary)
-
     implementation(libs.android.gms.play.services.maps)
     implementation(libs.android.material)
     implementation(libs.androidx.activity.compose)
@@ -119,7 +109,6 @@ dependencies {
     implementation(libs.ktor.client.logging)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.timber)
-
     ksp(libs.google.hilt.compiler)
     ksp(libs.androidx.room.compiler)
 }

@@ -52,30 +52,83 @@ fun EditHomeScreen() {
             titleRes = R.string.customize_my_home_page
         ) {
             val view = LocalView.current
-
-            val isShowCard1 = settingsSharedPref.getCardShowedState(CARD_1)
-            val isShowCard2 = settingsSharedPref.getCardShowedState(CARD_2)
-            val isShowCard3 = settingsSharedPref.getCardShowedState(CARD_3)
-            val isShowCard4 = settingsSharedPref.getCardShowedState(CARD_4)
-            val isShowCard6 = settingsSharedPref.getCardShowedState(CARD_6)
-            val isShowCard7 = settingsSharedPref.getCardShowedState(CARD_7)
-            val isShowCard8 = settingsSharedPref.getCardShowedState(CARD_8)
-            val isShowCard9 = settingsSharedPref.getCardShowedState(CARD_9)
-            val isShowCard10 = settingsSharedPref.getCardShowedState(CARD_10)
-            val isShowCard11 = settingsSharedPref.getCardShowedState(CARD_11)
-            val isShowCard12 = settingsSharedPref.getCardShowedState(CARD_12)
-
-            var mIsShowCard1 by remember { mutableStateOf(isShowCard1) }
-            var mIsShowCard2 by remember { mutableStateOf(isShowCard2) }
-            var mIsShowCard3 by remember { mutableStateOf(isShowCard3) }
-            var mIsShowCard4 by remember { mutableStateOf(isShowCard4) }
-            var mIsShowCard6 by remember { mutableStateOf(isShowCard6) }
-            var mIsShowCard7 by remember { mutableStateOf(isShowCard7) }
-            var mIsShowCard8 by remember { mutableStateOf(isShowCard8) }
-            var mIsShowCard9 by remember { mutableStateOf(isShowCard9) }
-            var mIsShowCard10 by remember { mutableStateOf(isShowCard10) }
-            var mIsShowCard11 by remember { mutableStateOf(isShowCard11) }
-            var mIsShowCard12 by remember { mutableStateOf(isShowCard12) }
+            var mIsShowCard1 by remember {
+                mutableStateOf(
+                    settingsSharedPref.getCardShowedState(
+                        CARD_1
+                    )
+                )
+            }
+            var mIsShowCard2 by remember {
+                mutableStateOf(
+                    settingsSharedPref.getCardShowedState(
+                        CARD_2
+                    )
+                )
+            }
+            var mIsShowCard3 by remember {
+                mutableStateOf(
+                    settingsSharedPref.getCardShowedState(
+                        CARD_3
+                    )
+                )
+            }
+            var mIsShowCard4 by remember {
+                mutableStateOf(
+                    settingsSharedPref.getCardShowedState(
+                        CARD_4
+                    )
+                )
+            }
+            var mIsShowCard6 by remember {
+                mutableStateOf(
+                    settingsSharedPref.getCardShowedState(
+                        CARD_5
+                    )
+                )
+            }
+            var mIsShowCard7 by remember {
+                mutableStateOf(
+                    settingsSharedPref.getCardShowedState(
+                        CARD_6
+                    )
+                )
+            }
+            var mIsShowCard8 by remember {
+                mutableStateOf(
+                    settingsSharedPref.getCardShowedState(
+                        CARD_7
+                    )
+                )
+            }
+            var mIsShowCard9 by remember {
+                mutableStateOf(
+                    settingsSharedPref.getCardShowedState(
+                        CARD_8
+                    )
+                )
+            }
+            var mIsShowCard10 by remember {
+                mutableStateOf(
+                    settingsSharedPref.getCardShowedState(
+                        CARD_9
+                    )
+                )
+            }
+            var mIsShowCard11 by remember {
+                mutableStateOf(
+                    settingsSharedPref.getCardShowedState(
+                        CARD_10
+                    )
+                )
+            }
+            var mIsShowCard12 by remember {
+                mutableStateOf(
+                    settingsSharedPref.getCardShowedState(
+                        CARD_11
+                    )
+                )
+            }
 
             CustomHideCardSettingSwitch(
                 textRes = R.string.year_progress,
@@ -196,7 +249,7 @@ fun EditHomeScreen() {
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     if (showSnackbarToConfirm) {
-                        SnackbarUtil.snackbar(
+                        SnackbarUtil.show(
                             view,
                             messageRes = R.string.tap_to_apply,
                             buttonTextRes = R.string.apply,
@@ -250,7 +303,7 @@ fun EditHomeScreen() {
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     if (showSnackbarToConfirm) {
-                        SnackbarUtil.snackbar(
+                        SnackbarUtil.show(
                             view,
                             messageRes = R.string.tap_to_apply,
                             buttonTextRes = R.string.apply,

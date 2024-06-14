@@ -61,8 +61,7 @@ fun WebpageCard() {
     ) {
         val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
-        val showMore = settingsSharedPref.webpageCardShowMore
-        var mShowMore by remember { mutableStateOf(showMore) }
+        var mShowMore by remember { mutableStateOf(settingsSharedPref.webpageCardShowMore) }
 
         if (mShowMore) GroupTitle(id = R.string.search)
 

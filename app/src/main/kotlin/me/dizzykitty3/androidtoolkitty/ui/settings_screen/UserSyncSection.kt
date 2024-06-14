@@ -87,10 +87,10 @@ fun UserSyncSection() {
                     settings = SettingsSharedPref.exportSettingsToJson(),
                     onFailure = {
                         isLoading = false
-                        SnackbarUtil.snackbar(view, toErrorString(it))
+                        SnackbarUtil.show(view, toErrorString(it))
                     },
                     onSuccess = {
-                        SnackbarUtil.snackbar(view, R.string.success)
+                        SnackbarUtil.show(view, R.string.success)
                         isLoading = false
                     }
                 )
@@ -113,16 +113,16 @@ fun UserSyncSection() {
                 handleDownloadSettings(
                     token = token,
                     onSettingsReceived = {
-                        SnackbarUtil.snackbar(view, R.string.success)
+                        SnackbarUtil.show(view, R.string.success)
                         SettingsSharedPref.importSettingsFromJson(it)
                     },
                     onFailure = {
                         isLoading = false
-                        SnackbarUtil.snackbar(view, toErrorString(it))
+                        SnackbarUtil.show(view, toErrorString(it))
                     },
                     onSuccess = {
                         isLoading = false
-                        SnackbarUtil.snackbar(view, R.string.success)
+                        SnackbarUtil.show(view, R.string.success)
                     }
                 )
             }
@@ -159,10 +159,10 @@ fun UserSyncSection() {
                                 dialogState = null
                                 isLoading = false
                             },
-                            onSuccess = { SnackbarUtil.snackbar(view, R.string.success) },
+                            onSuccess = { SnackbarUtil.show(view, R.string.success) },
                             onFailure = {
                                 isLoading = false
-                                ToastUtil.toast(toErrorString(it))
+                                ToastUtil.show(toErrorString(it))
                             }
                         )
                     }
@@ -194,11 +194,11 @@ fun UserSyncSection() {
                                 isLoading = false
                             },
                             onSuccess = {
-                                SnackbarUtil.snackbar(view, R.string.success)
+                                SnackbarUtil.show(view, R.string.success)
                             },
                             onFailure = {
                                 isLoading = false
-                                ToastUtil.toast(toErrorString(it))
+                                ToastUtil.show(toErrorString(it))
                             }
                         )
                     }
@@ -216,7 +216,7 @@ fun UserSyncSection() {
                     token = ""
                     dialogState = null
                     isLoading = false
-                    SnackbarUtil.snackbar(view, R.string.success)
+                    SnackbarUtil.show(view, R.string.success)
                 },
                 onDismiss = { dialogState = null }
             )
@@ -432,7 +432,7 @@ private fun UserProfileDialog(
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     ClipboardUtil.copy(token)
                     if (!OSVersion.android13()) {
-                        ToastUtil.toast(R.string.copied)
+                        ToastUtil.show(R.string.copied)
                     }
                 }
             )

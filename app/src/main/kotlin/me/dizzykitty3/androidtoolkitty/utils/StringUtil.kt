@@ -53,12 +53,16 @@ object StringUtil {
         return stringBuilder.toString()
     }
 
-    private fun sysLocale(): String = Locale.getDefault().toString()
+    val sysLocale: String
+        get() = Locale.getDefault().toString()
 
     @Suppress("MemberVisibilityCanBePrivate")
-    fun sysLangSupported(): Boolean = sysLocale().contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
+    val sysLangSupported: Boolean
+        get() = sysLocale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
 
-    fun sysLangNotSupported(): Boolean = !sysLangSupported()
+    val sysLangNotSupported: Boolean
+        get() = !sysLangSupported
 
-    fun sysLangCJK(): Boolean = sysLocale().contains(Regex("Hans|Hant|zh|ja|ko"))
+    val sysLangCJK: Boolean
+        get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
 }

@@ -144,7 +144,8 @@ object SettingsSharedPref {
         get() = getPreference(WEBPAGE_CARD_SHOW_MORE, false)
         set(value) = setPreference(WEBPAGE_CARD_SHOW_MORE, value)
 
-    fun enabledWebpageCardShowMore(): Boolean = webpageCardShowMore
+    val enabledWebpageCardShowMore: Boolean
+        get() = webpageCardShowMore
 
     var showSnackbar: Boolean
         get() = getPreference(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, true)
@@ -158,7 +159,8 @@ object SettingsSharedPref {
         get() = getPreference(AUTO_SET_MEDIA_VOLUME, -1)
         set(value) = setPreference(AUTO_SET_MEDIA_VOLUME, value)
 
-    fun enabledAutoSetMediaVolume(): Boolean = autoSetMediaVolume != -1
+    val enabledAutoSetMediaVolume: Boolean
+        get() = autoSetMediaVolume != -1
 
     var haveTappedAddButton: Boolean
         get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
@@ -176,7 +178,8 @@ object SettingsSharedPref {
         get() = getPreference(CUSTOM_VOLUME, Int.MIN_VALUE)
         set(value) = setPreference(CUSTOM_VOLUME, value)
 
-    fun addedCustomVolume(): Boolean = customVolume > 0
+    val addedCustomVolume: Boolean
+        get() = customVolume > 0
 
     var customVolumeOptionLabel: String?
         get() = getPreference(VOLUME_OPTION_LABEL, "")

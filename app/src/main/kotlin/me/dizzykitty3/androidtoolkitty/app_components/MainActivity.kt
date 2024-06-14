@@ -59,25 +59,21 @@ class MainActivity : ComponentActivity() {
                 continuation = cont
             }
             if (isAutoClearClipboard) {
-                val cleared = ClipboardUtil.check()
-                if (cleared) {
-                    SnackbarUtil.snackbar(
+                if (ClipboardUtil.check()) {
+                    SnackbarUtil.show(
                         window.decorView,
                         R.string.clipboard_cleared_automatically
                     )
                     Timber.i("Clipboard cleared automatically")
                 }
             }
-            if (SettingsSharedPref.enabledAutoSetMediaVolume() && DateUtil.isNotWeekend) {
+            if (SettingsSharedPref.enabledAutoSetMediaVolume && DateUtil.isNotWeekend) {
                 if (BluetoothUtil.isHeadsetConnected()) {
                     Timber.i("Set media volume automatically: cancelled: BT headset connected")
                 } else {
                     Timber.i("Set media volume automatically")
-                    val result = AudioUtil.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
-                    if (result) SnackbarUtil.snackbar(
-                        window.decorView,
-                        R.string.volume_changed_auto
-                    )
+                    if (AudioUtil.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume))
+                        SnackbarUtil.show(window.decorView, R.string.volume_changed_auto)
                 }
             }
         }

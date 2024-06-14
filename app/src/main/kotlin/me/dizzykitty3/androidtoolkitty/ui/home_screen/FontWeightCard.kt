@@ -28,7 +28,7 @@ fun FontWeightCard() {
         icon = Icons.Outlined.FontDownload,
         titleRes = R.string.font_weight_test
     ) {
-        val showCJK = StringUtil.sysLangCJK()
+        val showCJK = StringUtil.sysLangCJK
 
         Thin(id = R.string.w1)
         ExtraLight(id = R.string.w2)

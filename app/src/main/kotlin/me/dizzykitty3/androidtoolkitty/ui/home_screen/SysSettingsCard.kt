@@ -41,7 +41,6 @@ fun SysSettingsCard() {
         icon = Icons.Outlined.Settings,
         titleRes = R.string.system_settings
     ) {
-        // Variables
         val settingsSharedPref = remember { SettingsSharedPref }
 
         val settings = listOf(
@@ -82,7 +81,6 @@ fun SysSettingsCard() {
 
         val uiTesting = settingsSharedPref.uiTesting
 
-        // UI
         if (!checkIsAutoTime() || uiTesting) CustomTip(id = R.string.set_time_automatically_is_off_tip)
 
         if (isShowGroupTitle1) GroupTitle(R.string.common)

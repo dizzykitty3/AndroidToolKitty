@@ -42,18 +42,18 @@ object IntentUtil {
             return
         } catch (e: Exception) {
             Timber.e(e)
-            ToastUtil.toast(e.message ?: "Unknown error")
+            ToastUtil.show(e.message ?: "Unknown error")
         }
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
                 Timber.i("Google Play not installed")
-                ToastUtil.toast(R.string.google_play_not_installed)
+                ToastUtil.show(R.string.google_play_not_installed)
             }
 
             GOOGLE_MAPS -> {
                 Timber.i("Google Maps not installed")
-                ToastUtil.toast(R.string.google_maps_not_installed)
+                ToastUtil.show(R.string.google_maps_not_installed)
                 checkOnMarket(GOOGLE_MAPS, context)
             }
         }

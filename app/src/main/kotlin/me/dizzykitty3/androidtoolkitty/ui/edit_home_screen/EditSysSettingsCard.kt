@@ -48,31 +48,90 @@ fun EditSysSettingsCard() {
     ) {
         val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
-
-        val isShowSetting1 = settingsSharedPref.getCardShowedState(SETTING_DISPLAY)
-        val isShowSetting2 = settingsSharedPref.getCardShowedState(SETTING_AUTO_ROTATE)
-        val isShowSetting3 = settingsSharedPref.getCardShowedState(SETTING_BLUETOOTH)
-        val isShowSetting4 = settingsSharedPref.getCardShowedState(SETTING_DEFAULT_APPS)
-        val isShowSetting5 = settingsSharedPref.getCardShowedState(SETTING_BATTERY_OPTIMIZATION)
-        val isShowSetting6 = settingsSharedPref.getCardShowedState(SETTING_CAPTIONING)
-        val isShowSetting7 = settingsSharedPref.getCardShowedState(SETTING_USAGE_ACCESS)
-        val isShowSetting8 = settingsSharedPref.getCardShowedState(SETTING_OVERLAY)
-        val isShowSetting9 = settingsSharedPref.getCardShowedState(SETTING_WRITE_SETTINGS)
-        val isShowSetting10 = settingsSharedPref.getCardShowedState(SETTING_LOCALE)
-        val isShowSetting11 = settingsSharedPref.getCardShowedState(SETTING_DATE)
-        val isShowSetting12 = settingsSharedPref.getCardShowedState(SETTING_DEVELOPER)
-        var mIsShowSetting1 by remember { mutableStateOf(isShowSetting1) }
-        var mIsShowSetting2 by remember { mutableStateOf(isShowSetting2) }
-        var mIsShowSetting3 by remember { mutableStateOf(isShowSetting3) }
-        var mIsShowSetting4 by remember { mutableStateOf(isShowSetting4) }
-        var mIsShowSetting5 by remember { mutableStateOf(isShowSetting5) }
-        var mIsShowSetting6 by remember { mutableStateOf(isShowSetting6) }
-        var mIsShowSetting7 by remember { mutableStateOf(isShowSetting7) }
-        var mIsShowSetting8 by remember { mutableStateOf(isShowSetting8) }
-        var mIsShowSetting9 by remember { mutableStateOf(isShowSetting9) }
-        var mIsShowSetting10 by remember { mutableStateOf(isShowSetting10) }
-        var mIsShowSetting11 by remember { mutableStateOf(isShowSetting11) }
-        var mIsShowSetting12 by remember { mutableStateOf(isShowSetting12) }
+        var mIsShowSetting1 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_DISPLAY
+                )
+            )
+        }
+        var mIsShowSetting2 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_AUTO_ROTATE
+                )
+            )
+        }
+        var mIsShowSetting3 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_BLUETOOTH
+                )
+            )
+        }
+        var mIsShowSetting4 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_DEFAULT_APPS
+                )
+            )
+        }
+        var mIsShowSetting5 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_BATTERY_OPTIMIZATION
+                )
+            )
+        }
+        var mIsShowSetting6 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_CAPTIONING
+                )
+            )
+        }
+        var mIsShowSetting7 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_USAGE_ACCESS
+                )
+            )
+        }
+        var mIsShowSetting8 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_OVERLAY
+                )
+            )
+        }
+        var mIsShowSetting9 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_WRITE_SETTINGS
+                )
+            )
+        }
+        var mIsShowSetting10 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_LOCALE
+                )
+            )
+        }
+        var mIsShowSetting11 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_DATE
+                )
+            )
+        }
+        var mIsShowSetting12 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    SETTING_DEVELOPER
+                )
+            )
+        }
 
         CustomHideCardSettingSwitch(
             textRes = R.string.open_display_settings,
@@ -195,7 +254,7 @@ fun EditSysSettingsCard() {
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 if (showSnackbarToConfirm) {
-                    SnackbarUtil.snackbar(
+                    SnackbarUtil.show(
                         view,
                         messageRes = R.string.tap_to_apply,
                         buttonTextRes = R.string.apply,
@@ -249,7 +308,7 @@ fun EditSysSettingsCard() {
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 if (showSnackbarToConfirm) {
-                    SnackbarUtil.snackbar(
+                    SnackbarUtil.show(
                         view,
                         messageRes = R.string.tap_to_apply,
                         buttonTextRes = R.string.apply,
