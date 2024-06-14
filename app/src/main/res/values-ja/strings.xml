@@ -134,7 +134,6 @@
     <string name="warning_erase_all_data_2">履歴や設定を含むすべてのデータを消去します。</string>
     <string name="warning_erase_all_data_3">続行してもよろしいですか？</string>
     <string name="general">一般</string>
-    <string name="set_slider_increment_5">スライダーの増分を 5% に設定</string>
     <string name="requires_restart_do_it_now">再起動が必要です。今すぐ実行しますか？</string>
     <string name="restart">再起動</string>
     <string name="go_to_permission_request_screen">権限リクエスト画面に移動</string>
@@ -195,4 +194,5 @@
     <string name="volume_changed">Volume changed.</string>
     <string name="volume_changed_auto">Volume changed automatically.</string>
     <string name="error">error</string>
+    <string name="more_precise_slider">More precise slider</string>
 </resources>

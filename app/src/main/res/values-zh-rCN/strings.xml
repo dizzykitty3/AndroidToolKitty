@@ -102,7 +102,6 @@
     <string name="label_optional">标签（可选）</string>
     <string name="edit">编辑</string>
     <string name="general">基本</string>
-    <string name="set_slider_increment_5">将滑块增量设置为 5%</string>
     <string name="wheel_of_fortune">幸运大转盘</string>
     <string name="info">信息</string>
     <string name="go_to_settings">前往系统设置</string>
@@ -194,4 +193,5 @@
     <string name="volume_changed">音量已调整</string>
     <string name="volume_changed_auto">音量已自动调整</string>
     <string name="error">错误</string>
+    <string name="more_precise_slider">More precise slider</string>
 </resources>

@@ -16,7 +16,6 @@ object SettingsSharedPref {
 
     // Booleans
     private const val AUTO_CLEAR_CLIPBOARD = "auto_clear_clipboard"
-    private const val SLIDER_INCREMENT_5_PERCENT = "slider_increment_5_percent"
     private const val DYNAMIC_COLOR = "dynamic_color"
     private const val ONE_HANDED_MODE = "one_handed_mode"
     private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
@@ -120,10 +119,6 @@ object SettingsSharedPref {
     var autoClearClipboard: Boolean
         get() = getPreference(AUTO_CLEAR_CLIPBOARD, false)
         set(value) = setPreference(AUTO_CLEAR_CLIPBOARD, value)
-
-    var sliderIncrement5Percent: Boolean
-        get() = getPreference(SLIDER_INCREMENT_5_PERCENT, false)
-        set(value) = setPreference(SLIDER_INCREMENT_5_PERCENT, value)
 
     var dynamicColor: Boolean
         get() = getPreference(DYNAMIC_COLOR, true)

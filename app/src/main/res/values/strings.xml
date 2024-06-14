@@ -46,6 +46,7 @@
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
     <string name="volume_changed">Volume changed.</string>
     <string name="volume_changed_auto">Volume changed automatically.</string>
+    <string name="more_precise_slider">More precise slider</string>
 
     <!-- Home > Clipboard -->
     <string name="clipboard">Clipboard</string>
@@ -266,7 +267,6 @@
     <!-- Settings > General -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
     <string name="general">General</string>
-    <string name="set_slider_increment_5">Set slider increment to 5%</string>
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
     <string name="show_snackbar_to_confirm">Ask me before apply changes</string>
 

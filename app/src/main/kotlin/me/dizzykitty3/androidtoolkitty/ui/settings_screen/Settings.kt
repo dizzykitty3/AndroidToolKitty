@@ -112,7 +112,6 @@ fun General() {
     val settingsSharedPref = remember { SettingsSharedPref }
     var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
-    var volumeSlideSteps by remember { mutableStateOf(settingsSharedPref.sliderIncrement5Percent) }
     var showSnackbarToConfirm by remember { mutableStateOf(settingsSharedPref.showSnackbar) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
@@ -141,12 +140,6 @@ fun General() {
                 )
             }
             settingsSharedPref.autoClearClipboard = autoClearClipboard
-        }
-
-        CustomSwitchRow(textRes = R.string.set_slider_increment_5, checked = volumeSlideSteps) {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            volumeSlideSteps = it
-            settingsSharedPref.sliderIncrement5Percent = it
         }
 
         CustomSwitchRow(

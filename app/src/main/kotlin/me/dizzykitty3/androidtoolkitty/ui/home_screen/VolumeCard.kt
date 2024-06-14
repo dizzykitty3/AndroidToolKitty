@@ -39,7 +39,9 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui_components.GradientSmall
+import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
@@ -56,7 +58,7 @@ fun VolumeCard() {
         val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
         val maxVolume = AudioUtil.maxVolumeIndex
-        val sliderIncrementFivePercent = settingsSharedPref.sliderIncrement5Percent
+        var morePreciseSlider by remember { mutableStateOf(false) }
         val customVolume = settingsSharedPref.customVolume
         var mCustomVolume by remember { mutableIntStateOf(customVolume) }
         val customVolumeOptionLabel = settingsSharedPref.customVolumeOptionLabel
@@ -191,7 +193,7 @@ fun VolumeCard() {
                                         optionLabel = "${it.toInt()}%"
                                 },
                                 valueRange = 0f..100f,
-                                steps = if (sliderIncrementFivePercent) 19 else 0
+                                steps = if (morePreciseSlider) 0 else 9
                             )
                             Text(text = "${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
                             SpacerPadding()
@@ -228,6 +230,14 @@ fun VolumeCard() {
                                     }
                                 }
                             )
+                            GroupDivider()
+                            CustomSwitchRow(
+                                textRes = R.string.more_precise_slider,
+                                checked = morePreciseSlider
+                            ) {
+                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                morePreciseSlider = it
+                            }
                         }
                     },
                     confirmButton = {
