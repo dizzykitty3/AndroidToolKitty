@@ -10,7 +10,6 @@ const val EDIT_HOME_SCREEN = "EditHomeScreen"
 const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
 const val QR_CODE_GENERATOR_SCREEN = "QrCodeGeneratorScreen"
 
-const val CARD_0 = "card_test"
 const val CARD_1 = "card_year_progress"
 const val CARD_2 = "card_volume"
 const val CARD_3 = "card_clipboard"

@@ -7,15 +7,22 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.Schedule
+import androidx.compose.material.icons.outlined.Terminal
+import androidx.compose.material.icons.outlined.WbSunny
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -32,17 +39,20 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.PERMISSION_REQUEST_SCREEN
+import me.dizzykitty3.androidtoolkitty.QR_CODE_GENERATOR_SCREEN
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.Bold
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
+import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui_components.WarningAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
@@ -216,10 +226,11 @@ private fun GitHubRepoLink() {
 @Composable
 private fun Debugging(navController: NavHostController) {
     val view = LocalView.current
+    var showDialog by remember { mutableStateOf(false) }
     val settingsSharedPref = remember { SettingsSharedPref }
     var uiTesting by remember { mutableStateOf(settingsSharedPref.uiTesting) }
 
-    CustomCard(titleRes = R.string.debugging) {
+    CustomCard(titleRes = R.string.debugging, icon = Icons.Outlined.Terminal) {
         Text(text = "OS version = Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
         Text(text = "Locale =  ${Locale.getDefault()}")
 
@@ -229,14 +240,27 @@ private fun Debugging(navController: NavHostController) {
             settingsSharedPref.uiTesting = it
         }
 
-        TextButton(onClick = {
+        OutlinedButton(onClick = {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             navController.navigate(PERMISSION_REQUEST_SCREEN)
         }) {
             Text(text = stringResource(id = R.string.go_to_permission_request_screen))
         }
 
-        TextButton(onClick = {
+        OutlinedButton(onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            showDialog = true
+        }) {
+            Text(text = "Auto set volume")
+        }
+
+        OutlinedButton(
+            onClick = { navController.navigate(QR_CODE_GENERATOR_SCREEN) }
+        ) {
+            Text(text = "QR Code generator")
+        }
+
+        OutlinedButton(onClick = {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             IntentUtil.restartApp(view.context)
         }) {
@@ -265,5 +289,77 @@ private fun Debugging(navController: NavHostController) {
                 IntentUtil.finishApp(view.context)
             }
         )
+
+        if (showDialog) {
+            AlertDialog(
+                onDismissRequest = { showDialog = false },
+                icon = {
+                    Icon(imageVector = Icons.Outlined.WbSunny, contentDescription = null)
+                },
+                title = {
+                    Text(text = "Auto set media volume")
+                },
+                text = {
+                    Column(modifier = Modifier.fillMaxWidth()) {
+                        CustomTip(id = R.string.under_development)
+                        Row {
+                            Column(modifier = Modifier.weight(0.5f)) {
+                                Text(text = "8:00 AM - 5:59 PM")
+                                Text(text = "6:00 PM - 10:59 PM")
+                                Text(text = "11:00 PM - 5:59 AM")
+                                Text(text = "6:00 PM - 7:59 AM")
+                            }
+                            Column(modifier = Modifier.weight(0.5f)) {
+                                Text(text = "mute")
+                                Text(text = "40%/60%")
+                                Text(text = "25%")
+                                Text(text = "40%/60%")
+                            }
+                        }
+                    }
+                },
+                confirmButton = {
+                    Row {
+                        Button(onClick = {
+                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                            showDialog = false
+
+                            if (PermissionUtil.noBluetoothPermission(view.context)) {
+                                navController.navigate(PERMISSION_REQUEST_SCREEN)
+                                return@Button
+                            }
+
+                            SettingsSharedPref.autoSetMediaVolume = 40
+                        }) {
+                            Text(text = "40%")
+                        }
+                    }
+                    Row {
+                        Button(onClick = {
+                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                            showDialog = false
+
+                            if (PermissionUtil.noBluetoothPermission(view.context)) {
+                                navController.navigate(PERMISSION_REQUEST_SCREEN)
+                                return@Button
+                            }
+
+                            SettingsSharedPref.autoSetMediaVolume = 60
+                        }) {
+                            Text(text = "60%")
+                        }
+                    }
+                },
+                dismissButton = {
+                    TextButton(onClick = {
+                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                        showDialog = false
+                        SettingsSharedPref.autoSetMediaVolume = -1
+                    }) {
+                        Text(text = stringResource(id = R.string.turn_off))
+                    }
+                }
+            )
+        }
     }
 }

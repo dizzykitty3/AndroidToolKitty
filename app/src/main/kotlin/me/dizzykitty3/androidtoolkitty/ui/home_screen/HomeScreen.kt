@@ -44,8 +44,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import me.dizzykitty3.androidtoolkitty.BuildConfig
-import me.dizzykitty3.androidtoolkitty.CARD_0
 import me.dizzykitty3.androidtoolkitty.CARD_1
 import me.dizzykitty3.androidtoolkitty.CARD_10
 import me.dizzykitty3.androidtoolkitty.CARD_11
@@ -98,7 +96,7 @@ private fun MobileLayout(navController: NavHostController) {
         item { TopBar(navController) }
         item { CardSpacePadding() }
         item { CardSpacePadding() }
-        item { Greeting(navController) }
+        item { Greeting() }
         if (settingsSharedPref.oneHandedMode)
             item { OneHandedModePadding() }
         else {
@@ -123,7 +121,7 @@ private fun TabletLayout(navController: NavHostController) {
         )
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            Box(modifier = Modifier.weight(1f)) { Greeting(navController) }
+            Box(modifier = Modifier.weight(1f)) { Greeting() }
             Box(modifier = Modifier.weight(1f)) { TopBar(navController) }
         }
         SpacerPadding()
@@ -291,27 +289,15 @@ private fun TwoColumnHomeCards(navController: NavHostController) {
 }
 
 @Composable
-private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> {
-    return if (BuildConfig.DEBUG) {
-        listOf(
-            CARD_0,
-            CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
-            CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
-            CARD_11, CARD_12
-        ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
-    } else {
-        listOf(
-            CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
-            CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
-            CARD_11, CARD_12
-        ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
-    }
-}
+private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> = listOf(
+    CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
+    CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
+    CARD_11, CARD_12
+).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
 
 @Composable
 private fun CardContent(cardName: String, navController: NavHostController) {
     when (cardName) {
-        CARD_0 -> TestCard(navController)
         CARD_1 -> YearProgressCard()
         CARD_2 -> VolumeCard()
         CARD_3 -> ClipboardCard()
