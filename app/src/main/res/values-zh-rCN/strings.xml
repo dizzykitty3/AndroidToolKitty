@@ -21,7 +21,6 @@
     <string name="open_bluetooth_settings">蓝牙设置</string>
     <string name="open_date_and_time_settings">时间与日期设置</string>
     <string name="open_battery_optimization_settings">电池优化设置</string>
-    <string name="apply">确认</string>
     <string name="battery_level">电量</string>
     <string name="open_usage_access_permission">查看使用情况权限</string>
     <string name="open_overlay_permission">显示在其他应用上层权限</string>
@@ -55,8 +54,6 @@
     <string name="youtube_id">YouTube (UID)</string>
     <string name="platform_not_added_yet">这里没有我所想的社交平台</string>
     <string name="open_developer_options">开发者选项</string>
-    <string name="requires_restart_do_it_now">这将需要重启 APP</string>
-    <string name="restart">立即重启</string>
     <string name="show_all_options">显示所有选项</string>
     <string name="hide_all_options">隐藏所有选项</string>
     <string name="show_edit_volume_option">在音量卡片显示编辑按钮</string>
@@ -107,7 +104,6 @@
     <string name="go_to_settings">前往系统设置</string>
     <string name="show_more">展开</string>
     <string name="bluetooth_devices">蓝牙设备</string>
-    <string name="bluetooth_disabled">蓝牙未开启</string>
     <string name="show_paired_devices">查看已配对的设备</string>
     <string name="current_device">当前设备：</string>
     <string name="paired_devices">已配对的设备：</string>
@@ -128,7 +124,6 @@
     <string name="offline">无网络</string>
     <string name="item">条目</string>
     <string name="unknown_device">未知设备</string>
-    <string name="turn_on_bluetooth">打开蓝牙</string>
     <string name="success_and_back">已获得权限！返回上一界面吧</string>
     <string name="search">搜索</string>
     <string name="contributors">贡献者</string>
@@ -149,7 +144,6 @@
     <string name="w7">700 粗体 Bold</string>
     <string name="w8">800 特粗 ExtraBold</string>
     <string name="w9">900 浓体 Black</string>
-    <string name="tap_to_apply">确认更改</string>
     <string name="clipboard_card_hidden">已为您隐藏首页的剪贴板卡片</string>
     <string name="undo">撤销</string>
     <string name="pixiv_user_custom_url">Pixiv (用户自定义 URL)</string>
@@ -158,7 +152,6 @@
     <string name="restart_app">重启 ToolKitty</string>
     <string name="platform_example_url">示例 URL（可选）</string>
     <string name="appearance">外观</string>
-    <string name="show_snackbar_to_confirm">在确认更改前询问我</string>
     <string name="bluetooth_devices_types_6">有些设备可能同时支持经典蓝牙和蓝牙LE。这些被称为双模式设备，可以根据需要提供与不同类型设备连接的灵活性。例如，智能手表可能使用BLE与手机连接以获取通知，但也具有经典蓝牙用于音乐播放。</string>
     <string name="turn_off">禁用</string>
     <string name="query">查询</string>

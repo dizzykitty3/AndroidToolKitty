@@ -22,7 +22,6 @@ object SettingsSharedPref {
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val DEBUGGING_OPTIONS = "debugging_options"
     private const val WEBPAGE_CARD_SHOW_MORE = "webpage_card_show_more"
-    private const val SHOW_SNACKBAR_BEFORE_APPLY_CHANGES = "show_snackbar_to_confirm"
     private const val SHOW_EDIT_VOLUME_OPTION = "show_edit_volume_option"
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
@@ -146,10 +145,6 @@ object SettingsSharedPref {
 
     val enabledWebpageCardShowMore: Boolean
         get() = webpageCardShowMore
-
-    var showSnackbar: Boolean
-        get() = getPreference(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, true)
-        set(value) = setPreference(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, value)
 
     var showEditVolumeOption: Boolean
         get() = getPreference(SHOW_EDIT_VOLUME_OPTION, true)

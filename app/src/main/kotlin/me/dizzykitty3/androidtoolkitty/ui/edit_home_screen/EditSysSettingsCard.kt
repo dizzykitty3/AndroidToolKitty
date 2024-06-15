@@ -39,7 +39,6 @@ import me.dizzykitty3.androidtoolkitty.ui_components.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Composable
 fun EditSysSettingsCard() {
@@ -248,36 +247,10 @@ fun EditSysSettingsCard() {
 
         val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
         val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
-        val showSnackbarToConfirm = settingsSharedPref.showSnackbar
 
         Button(
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                if (showSnackbarToConfirm) {
-                    SnackbarUtil.show(
-                        view,
-                        messageRes = R.string.tap_to_apply,
-                        buttonTextRes = R.string.apply,
-                        textColor = inverseOnSurface,
-                        buttonColor = inversePrimary,
-                        buttonClickListener = {
-                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                            onClickChangeAllCardsButton(false)
-                            mIsShowSetting1 = false
-                            mIsShowSetting2 = false
-                            mIsShowSetting3 = false
-                            mIsShowSetting4 = false
-                            mIsShowSetting5 = false
-                            mIsShowSetting6 = false
-                            mIsShowSetting7 = false
-                            mIsShowSetting8 = false
-                            mIsShowSetting9 = false
-                            mIsShowSetting10 = false
-                            mIsShowSetting11 = false
-                            mIsShowSetting12 = false
-                        }
-                    )
-                } else {
                     onClickChangeAllCardsButton(false)
                     mIsShowSetting1 = false
                     mIsShowSetting2 = false
@@ -291,7 +264,6 @@ fun EditSysSettingsCard() {
                     mIsShowSetting10 = false
                     mIsShowSetting11 = false
                     mIsShowSetting12 = false
-                }
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
@@ -307,31 +279,6 @@ fun EditSysSettingsCard() {
         Button(
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                if (showSnackbarToConfirm) {
-                    SnackbarUtil.show(
-                        view,
-                        messageRes = R.string.tap_to_apply,
-                        buttonTextRes = R.string.apply,
-                        textColor = inverseOnSurface,
-                        buttonColor = inversePrimary,
-                        buttonClickListener = {
-                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                            onClickChangeAllCardsButton(true)
-                            mIsShowSetting1 = true
-                            mIsShowSetting2 = true
-                            mIsShowSetting3 = true
-                            mIsShowSetting4 = true
-                            mIsShowSetting5 = true
-                            mIsShowSetting6 = true
-                            mIsShowSetting7 = true
-                            mIsShowSetting8 = true
-                            mIsShowSetting9 = true
-                            mIsShowSetting10 = true
-                            mIsShowSetting11 = true
-                            mIsShowSetting12 = true
-                        }
-                    )
-                } else {
                     onClickChangeAllCardsButton(true)
                     mIsShowSetting1 = true
                     mIsShowSetting2 = true
@@ -345,7 +292,6 @@ fun EditSysSettingsCard() {
                     mIsShowSetting10 = true
                     mIsShowSetting11 = true
                     mIsShowSetting12 = true
-                }
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {

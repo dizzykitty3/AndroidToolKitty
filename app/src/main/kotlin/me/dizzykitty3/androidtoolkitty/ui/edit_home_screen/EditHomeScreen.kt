@@ -39,7 +39,6 @@ import me.dizzykitty3.androidtoolkitty.ui_components.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Composable
 fun EditHomeScreen() {
@@ -243,36 +242,10 @@ fun EditHomeScreen() {
 
             val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
             val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
-            val showSnackbarToConfirm = settingsSharedPref.showSnackbar
 
             Button(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    if (showSnackbarToConfirm) {
-                        SnackbarUtil.show(
-                            view,
-                            messageRes = R.string.tap_to_apply,
-                            buttonTextRes = R.string.apply,
-                            textColor = inverseOnSurface,
-                            buttonColor = inversePrimary,
-                            buttonClickListener = {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                onClickChangeAllCardsButton(false)
-                                mIsShowCard1 = false
-                                mIsShowCard2 = false
-                                mIsShowCard3 = false
-                                mIsShowCard4 = false
-                                mIsShowCard5 = false
-                                mIsShowCard6 = false
-                                mIsShowCard7 = false
-                                mIsShowCard8 = false
-                                mIsShowCard9 = false
-                                mIsShowCard10 = false
-                                mIsShowCard11 = false
-                                mIsShowCard12 = false
-                            }
-                        )
-                    } else {
                         onClickChangeAllCardsButton(false)
                         mIsShowCard1 = false
                         mIsShowCard2 = false
@@ -286,7 +259,6 @@ fun EditHomeScreen() {
                         mIsShowCard10 = false
                         mIsShowCard11 = false
                         mIsShowCard12 = false
-                    }
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {
@@ -302,31 +274,6 @@ fun EditHomeScreen() {
             Button(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    if (showSnackbarToConfirm) {
-                        SnackbarUtil.show(
-                            view,
-                            messageRes = R.string.tap_to_apply,
-                            buttonTextRes = R.string.apply,
-                            textColor = inverseOnSurface,
-                            buttonColor = inversePrimary,
-                            buttonClickListener = {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                onClickChangeAllCardsButton(true)
-                                mIsShowCard1 = true
-                                mIsShowCard2 = true
-                                mIsShowCard3 = true
-                                mIsShowCard4 = true
-                                mIsShowCard5 = true
-                                mIsShowCard6 = true
-                                mIsShowCard7 = true
-                                mIsShowCard8 = true
-                                mIsShowCard9 = true
-                                mIsShowCard10 = true
-                                mIsShowCard11 = true
-                                mIsShowCard12 = true
-                            }
-                        )
-                    } else {
                         onClickChangeAllCardsButton(true)
                         mIsShowCard1 = true
                         mIsShowCard2 = true
@@ -340,7 +287,6 @@ fun EditHomeScreen() {
                         mIsShowCard10 = true
                         mIsShowCard11 = true
                         mIsShowCard12 = true
-                    }
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {

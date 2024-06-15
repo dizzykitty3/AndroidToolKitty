@@ -15,7 +15,6 @@
     <string name="under_development">-- 開発中 --</string>
     <string name="permission">許可</string>
     <string name="undo">元に戻す</string>
-    <string name="apply">適用</string>
     <string name="turn_off">オフにする</string>
     <string name="copy">コピー</string>
     <string name="battery_level">バッテリーレベル</string>
@@ -91,7 +90,6 @@
     <string name="android_versions">Android バージョン履歴</string>
     <string name="wheel_of_fortune">福の輪</string>
     <string name="bluetooth_devices">Bluetoothデバイス</string>
-    <string name="bluetooth_disabled">Bluetoothが無効になっています</string>
     <string name="show_paired_devices">ペアリング済みデバイスを表示</string>
     <string name="current_device">現在のデバイス:</string>
     <string name="paired_devices">ペアリング済みデバイス:</string>
@@ -107,7 +105,6 @@
     <string name="platform_example_url">例URL（任意）</string>
     <string name="search_on_youtube">YouTube で検索</string>
     <string name="unknown_device">不明なデバイス</string>
-    <string name="turn_on_bluetooth">Bluetoothをオンにする</string>
     <string name="font_weight_test">フォントウェイト テスト</string>
     <string name="w1">100 Thin</string>
     <string name="w2">200 ExtraLight</string>
@@ -134,16 +131,12 @@
     <string name="warning_erase_all_data_2">履歴や設定を含むすべてのデータを消去します。</string>
     <string name="warning_erase_all_data_3">続行してもよろしいですか？</string>
     <string name="general">一般</string>
-    <string name="requires_restart_do_it_now">再起動が必要です。今すぐ実行しますか？</string>
-    <string name="restart">再起動</string>
     <string name="go_to_permission_request_screen">権限リクエスト画面に移動</string>
-    <string name="tap_to_apply">タップして適用</string>
     <string name="clipboard_card_hidden">ホーム画面のクリップボードカードが非表示になりました。</string>
     <string name="show_all_options">すべてのオプションを表示</string>
     <string name="hide_all_options">すべてのオプションを非表示</string>
     <string name="restart_app">アプリを再起動</string>
     <string name="appearance">外観</string>
-    <string name="show_snackbar_to_confirm">変更を適用する前に確認を求める</string>
     <string name="show_edit_volume_option">音量カードで編集を表示</string>
     <string name="ui_testing">UI テスト</string>
     <string name="social_media_platforms_list">Social media platforms list</string>

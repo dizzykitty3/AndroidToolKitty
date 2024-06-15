@@ -37,7 +37,6 @@ import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SETTING_ENABLE_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.ui_components.PrimaryColor
@@ -67,7 +66,6 @@ fun BluetoothDeviceCard(navController: NavHostController) {
         var size by remember { mutableIntStateOf(0) }
         val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
         val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
-        val showSnackbarToConfirm = SettingsSharedPref.showSnackbar
 
         OutlinedButton(
             onClick = {
@@ -96,21 +94,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 }
 
                 // When Bluetooth is OFF
-                if (showSnackbarToConfirm) {
-                    SnackbarUtil.show(
-                        view,
-                        messageRes = R.string.bluetooth_disabled,
-                        buttonTextRes = R.string.turn_on_bluetooth,
-                        textColor = inverseOnSurface,
-                        buttonColor = inversePrimary,
-                        buttonClickListener = {
-                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                             IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, view.context)
-                        }
-                    )
-                } else {
-                    IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, view.context)
-                }
             }
         ) {
             Icon(

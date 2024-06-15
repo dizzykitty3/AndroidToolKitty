@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.ui.settings_screen
 
 import android.content.Context
 import android.view.HapticFeedbackConstants
-import android.view.View
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.Icon
@@ -41,15 +40,13 @@ fun Appearance() {
     val webpageShowMore = settingsSharedPref.enabledWebpageCardShowMore
     val showWebpageShowMoreOption = remember { webpageShowMore }
     var mWebpageShowMore by remember { mutableStateOf(webpageShowMore) }
-    val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
-    val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
     CustomCard(titleRes = R.string.appearance) {
         if (OSVersion.android12()) {
             CustomSwitchRow(textRes = R.string.material_you_dynamic_color, checked = dynamicColor) {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 dynamicColor = it
-                onClickDynamicColorButton(view, it, inverseOnSurface, inversePrimary, view.context)
+                onClickDynamicColorButton(it, view.context)
             }
         }
 
@@ -79,31 +76,9 @@ fun Appearance() {
     }
 }
 
-private fun onClickDynamicColorButton(
-    view: View,
-    isDynamicColor: Boolean,
-    inverseOnSurface: Int,
-    inversePrimary: Int,
-    context: Context
-) {
-    val showSnackbarToConfirm = SettingsSharedPref.showSnackbar
-
+private fun onClickDynamicColorButton(isDynamicColor: Boolean, context: Context) {
     SettingsSharedPref.dynamicColor = isDynamicColor
-    if (showSnackbarToConfirm) {
-        SnackbarUtil.show(
-            view,
-            messageRes = R.string.requires_restart_do_it_now,
-            buttonTextRes = R.string.restart,
-            textColor = inverseOnSurface,
-            buttonColor = inversePrimary,
-            buttonClickListener = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                IntentUtil.restartApp(context)
-            }
-        )
-    } else {
-        IntentUtil.restartApp(context)
-    }
+    IntentUtil.restartApp(context)
 }
 
 @Composable
@@ -112,7 +87,6 @@ fun General() {
     val settingsSharedPref = remember { SettingsSharedPref }
     var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
-    var showSnackbarToConfirm by remember { mutableStateOf(settingsSharedPref.showSnackbar) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
@@ -140,15 +114,6 @@ fun General() {
                 )
             }
             settingsSharedPref.autoClearClipboard = autoClearClipboard
-        }
-
-        CustomSwitchRow(
-            textRes = R.string.show_snackbar_to_confirm,
-            checked = showSnackbarToConfirm
-        ) {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            showSnackbarToConfirm = it
-            settingsSharedPref.showSnackbar = it
         }
     }
 }

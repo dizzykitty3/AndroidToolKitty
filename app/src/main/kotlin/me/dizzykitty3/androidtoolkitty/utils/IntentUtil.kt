@@ -117,6 +117,7 @@ object IntentUtil {
                 Settings.ACTION_AUTO_ROTATE_SETTINGS
             ) else return
 
+            // TODO API requirement
             SETTING_BLUETOOTH -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
             SETTING_DEFAULT_APPS -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
             SETTING_BATTERY_OPTIMIZATION -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
