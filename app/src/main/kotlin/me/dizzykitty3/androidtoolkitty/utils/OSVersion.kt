@@ -88,6 +88,7 @@ object OSVersion {
      * Nougat
      *
      * 1. Create a TileService
+     * 2. Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
      */
     fun android7(): Boolean = osVersion >= 24
     fun api24(): Boolean = android7()
@@ -98,6 +99,9 @@ object OSVersion {
      * 1. View.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
      * 2. ConnectivityManager.getActiveNetwork()
      * 3. Icon.createWithResource()
+     * 4. Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+     * 5. Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+     * 6. Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
      */
     fun android6(): Boolean = osVersion >= 23
     fun api23(): Boolean = android6()
