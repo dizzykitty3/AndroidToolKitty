@@ -150,7 +150,6 @@
     <string name="now_a_developer">あなたは今、開発者です</string>
     <string name="two_more_times">あと 2 回</string>
     <string name="one_more_time">あと 1 回</string>
-    <string name="already_developer">デバッグオプションがすでに有効になっています</string>
     <string name="inspired_by">インスピレーション：</string>
     <string name="request_permission">権限をリクエスト</string>
     <string name="bluetooth_connect">ペアリングされた Bluetooth デバイスを確認するには、アプリに近くのデバイスの権限を付与してください。</string>

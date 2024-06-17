@@ -1,8 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui
 
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -23,9 +20,7 @@ fun AppNavigationHost() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = HOME_SCREEN,
-        enterTransition = { fadeIn(animationSpec = tween(durationMillis = 100)) },
-        exitTransition = { fadeOut(animationSpec = tween(durationMillis = 100)) }
+        startDestination = HOME_SCREEN
     ) {
         composable(HOME_SCREEN) { HomeScreen(navController) }
         composable(SETTINGS_SCREEN) { SettingsScreen(navController) }

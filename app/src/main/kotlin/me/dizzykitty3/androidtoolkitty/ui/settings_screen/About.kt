@@ -61,35 +61,41 @@ import java.util.Locale
 @Composable
 fun About(navController: NavHostController) {
     val view = LocalView.current
-    val debuggingOptions = SettingsSharedPref.debuggingOptions
+    var debuggingOptions by remember { mutableStateOf(SettingsSharedPref.debuggingOptions) }
     var tapCount by remember { mutableIntStateOf(0) }
 
     CustomCard(titleRes = R.string.about) {
         GroupTitle(id = R.string.version)
-        Row(
-            modifier = Modifier.clickable {
+        if (!debuggingOptions) {
+            Row(modifier = Modifier.clickable {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                if (!debuggingOptions) {
-                    tapCount++
-                    when (tapCount) {
-                        3 -> SnackbarUtil.show(view, R.string.two_more_times)
-                        4 -> SnackbarUtil.show(view, R.string.one_more_time)
-                        5 -> {
-                            SnackbarUtil.show(view, R.string.now_a_developer)
-                            SettingsSharedPref.debuggingOptions = true
-                        }
+                tapCount++
+                when (tapCount) {
+                    3 -> SnackbarUtil.show(view, R.string.two_more_times)
+                    4 -> SnackbarUtil.show(view, R.string.one_more_time)
+                    5 -> {
+                        debuggingOptions = true
+                        SnackbarUtil.show(view, R.string.now_a_developer)
+                        SettingsSharedPref.debuggingOptions = true
                     }
-                } else {
-                    SnackbarUtil.show(view, R.string.already_developer)
                 }
+            }) {
+                Icon(
+                    imageVector = Icons.Outlined.Schedule,
+                    contentDescription = stringResource(id = R.string.version)
+                )
+                IconAndTextPadding()
+                Text(text = "${stringResource(R.string.version)} ${BuildConfig.VERSION_NAME}")
             }
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Schedule,
-                contentDescription = stringResource(id = R.string.version)
-            )
-            IconAndTextPadding()
-            Text(text = "${stringResource(R.string.version)} ${BuildConfig.VERSION_NAME}")
+        } else {
+            Row {
+                Icon(
+                    imageVector = Icons.Outlined.Schedule,
+                    contentDescription = stringResource(id = R.string.version)
+                )
+                IconAndTextPadding()
+                Text(text = "${stringResource(R.string.version)} ${BuildConfig.VERSION_NAME}")
+            }
         }
         GroupDivider()
         ContributorAndThanksTo()

@@ -310,7 +310,6 @@
     <string name="now_a_developer">You are now a developer</string>
     <string name="two_more_times">2 more times</string>
     <string name="one_more_time">1 more time</string>
-    <string name="already_developer">You have already enabled debugging options</string>
     <string name="inspired_by">Inspired by</string>
 
     <!-- Settings > Debugging -->
