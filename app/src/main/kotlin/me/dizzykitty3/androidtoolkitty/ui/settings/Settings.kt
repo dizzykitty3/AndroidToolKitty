@@ -64,6 +64,7 @@ private fun Appearance() {
     val settingsSharedPref = remember { SettingsSharedPref }
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
+    var systemVolumeUI by remember { mutableStateOf(settingsSharedPref.showSystemVolumeUI) }
 
     Card(title = R.string.appearance) {
         if (OSVersion.android12()) {
@@ -79,6 +80,12 @@ private fun Appearance() {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             oneHandedMode = it
             settingsSharedPref.oneHandedMode = it
+        }
+
+        CustomSwitchRow(text = R.string.show_system_volume_ui, checked = systemVolumeUI) {
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            systemVolumeUI = it
+            settingsSharedPref.showSystemVolumeUI = it
         }
     }
 }

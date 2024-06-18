@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.utils
 import android.content.Context
 import android.media.AudioManager
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import timber.log.Timber
 import java.time.LocalTime
 
@@ -15,8 +16,18 @@ object AudioUtil {
     val maxVolumeIndex: Int
         get() = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
-    fun setVolume(volume: Int) =
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI)
+    fun setVolume(volume: Int) {
+        val showSystemUI = SettingsSharedPref.showSystemVolumeUI
+        if (showSystemUI)
+            audioManager.setStreamVolume(
+                AudioManager.STREAM_MUSIC,
+                volume,
+                AudioManager.FLAG_SHOW_UI
+            )
+        else
+            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0)
+
+    }
 
     fun setVolume(volume: Double) = setVolume(volume.toInt())
 

@@ -27,6 +27,7 @@ object SettingsSharedPref {
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
     private const val UI_TESTING = "ui_testing"
     private const val SHOW_PRIVACY_DISCLAIMER = "show_privacy_disclaimer"
+    private const val SHOW_SYSTEM_VOLUME_UI = "show_system_volume_ui"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -189,6 +190,10 @@ object SettingsSharedPref {
     var showPrivacyDisclaimer: Boolean
         get() = getPreference(SHOW_PRIVACY_DISCLAIMER, true)
         set(value) = setPreference(SHOW_PRIVACY_DISCLAIMER, value)
+
+    var showSystemVolumeUI: Boolean
+        get() = getPreference(SHOW_SYSTEM_VOLUME_UI, true)
+        set(value) = setPreference(SHOW_SYSTEM_VOLUME_UI, value)
 
     fun getWheelOfFortuneItems(): List<String>? {
         val itemsJson = getPreference(WHEEL_OF_FORTUNE_ITEMS, "")
