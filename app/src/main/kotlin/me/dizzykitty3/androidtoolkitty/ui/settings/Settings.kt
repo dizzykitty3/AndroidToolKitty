@@ -26,7 +26,6 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
@@ -39,14 +38,17 @@ fun Settings(navController: NavHostController) {
         Appearance()
         General(navController)
         Card(title = R.string.online_features) {
-            var acceptted by remember { mutableStateOf(false) }
-            CustomTip(R.string.under_development)
-            if (!acceptted) {
-                Text("${stringResource(R.string.service_provider_privacy_disclaimer)}:")
-                Text(stringResource(R.string.under_development))
-                TextButton({ acceptted = true }) { Text("Accept") }
+            var showPrivacyDisclaimer by remember { mutableStateOf(SettingsSharedPref.showPrivacyDisclaimer) }
+            if (showPrivacyDisclaimer) {
+                Text(stringResource(R.string.service_provider_privacy_disclaimer))
+                SpacerPadding()
+                Text("These features are developed and maintained by yanqishui.work")
+                TextButton({
+                    showPrivacyDisclaimer = false
+                    SettingsSharedPref.showPrivacyDisclaimer = false
+                }) { Text("Accept") }
             }
-            if (acceptted) {
+            if (!showPrivacyDisclaimer) {
                 PreferencesSync()
                 GroupDivider()
                 RulesUpdate()
