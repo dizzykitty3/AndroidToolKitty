@@ -53,7 +53,6 @@ private fun Appearance() {
     val settingsSharedPref = remember { SettingsSharedPref }
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
-    var showEditVolumeOption by remember { mutableStateOf(settingsSharedPref.showEditVolumeOption) }
     val webpageShowMore = settingsSharedPref.enabledWebpageCardShowMore
     val showWebpageShowMoreOption = remember { webpageShowMore }
     var mWebpageShowMore by remember { mutableStateOf(webpageShowMore) }
@@ -72,15 +71,6 @@ private fun Appearance() {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             oneHandedMode = it
             settingsSharedPref.oneHandedMode = it
-        }
-
-        if (settingsSharedPref.addedCustomVolume) CustomSwitchRow(
-            textRes = R.string.show_edit_volume_option,
-            checked = showEditVolumeOption
-        ) {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            showEditVolumeOption = it
-            settingsSharedPref.showEditVolumeOption = it
         }
 
         if (showWebpageShowMoreOption) CustomSwitchRow(
