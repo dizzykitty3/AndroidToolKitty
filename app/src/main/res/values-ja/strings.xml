@@ -155,7 +155,7 @@
     <string name="bluetooth_bluetooth_admin">ペアリングされた Bluetooth デバイスを確認するには、アプリに BLUETOOTH、BLUETOOTH_ADMIN の権限を付与してください。</string>
     <string name="missed_sys_popup">システム権限ポップアップを見逃しましたか？</string>
     <string name="query">クエリ</string>
-    <string name="show_full_webpage_card">Show URL and Social media profile in Webpage card</string>
+    <string name="keep_showing_full_webpage_card">Keep showing full Webpage card</string>
     <string name="user_sync">ユーザー同期</string>
     <string name="upload_settings">アップロード設定</string>
     <string name="download_settings">ダウンロード設定</string>

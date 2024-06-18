@@ -256,7 +256,7 @@
     <string name="one_handed_mode">One-handed mode</string>
     <string name="material_you_dynamic_color">Material You dynamic color</string>
     <string name="appearance">Appearance</string>
-    <string name="show_full_webpage_card">Show full Webpage card</string>
+    <string name="keep_showing_full_webpage_card">Keep showing full Webpage card</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>

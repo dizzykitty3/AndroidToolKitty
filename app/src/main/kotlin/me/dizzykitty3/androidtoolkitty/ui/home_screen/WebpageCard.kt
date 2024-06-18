@@ -61,24 +61,25 @@ fun WebpageCard() {
     ) {
         val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
-        var mShowMore by remember { mutableStateOf(settingsSharedPref.webpageCardShowMore) }
+        val keepShowMore by remember { mutableStateOf(settingsSharedPref.keepWebpageCardShowMore) }
+        var mShowMore by remember { mutableStateOf(false) }
 
-        if (mShowMore) GroupTitle(id = R.string.search)
+        if (keepShowMore || mShowMore) GroupTitle(id = R.string.search)
 
         Search()
 
-        if (mShowMore) {
+        if (keepShowMore || mShowMore) {
             GroupDivider()
             WebpageURL()
             GroupDivider()
             SocialMediaProfileIURL()
         }
 
-        if (!mShowMore) {
+        if (!keepShowMore && !mShowMore) {
             TextButton(onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mShowMore = !mShowMore
-                settingsSharedPref.webpageCardShowMore = mShowMore
+                settingsSharedPref.haveTappedWebpageCardShowMore = true
             }) {
                 Text(text = stringResource(id = R.string.show_more))
             }

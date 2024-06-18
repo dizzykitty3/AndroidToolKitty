@@ -53,9 +53,6 @@ private fun Appearance() {
     val settingsSharedPref = remember { SettingsSharedPref }
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
-    val webpageShowMore = settingsSharedPref.enabledWebpageCardShowMore
-    val showWebpageShowMoreOption = remember { webpageShowMore }
-    var mWebpageShowMore by remember { mutableStateOf(webpageShowMore) }
 
     CustomCard(titleRes = R.string.appearance) {
         if (OSVersion.android12()) {
@@ -72,15 +69,6 @@ private fun Appearance() {
             oneHandedMode = it
             settingsSharedPref.oneHandedMode = it
         }
-
-        if (showWebpageShowMoreOption) CustomSwitchRow(
-            textRes = R.string.show_full_webpage_card,
-            checked = mWebpageShowMore
-        ) {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            mWebpageShowMore = it
-            settingsSharedPref.webpageCardShowMore = it
-        }
     }
 }
 
@@ -92,6 +80,8 @@ private fun General(navController: NavHostController) {
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
+    val haveTappedWebpageCardShowMore = settingsSharedPref.haveTappedWebpageCardShowMore
+    var webpageShowMore by remember { mutableStateOf(settingsSharedPref.keepWebpageCardShowMore) }
 
     CustomCard(titleRes = R.string.general) {
         CustomSwitchRow(
@@ -117,6 +107,15 @@ private fun General(navController: NavHostController) {
                 )
             }
             settingsSharedPref.autoClearClipboard = autoClearClipboard
+        }
+
+        if (haveTappedWebpageCardShowMore) CustomSwitchRow(
+            textRes = R.string.keep_showing_full_webpage_card,
+            checked = webpageShowMore
+        ) {
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            webpageShowMore = it
+            settingsSharedPref.keepWebpageCardShowMore = it
         }
 
         OutlinedButton(
