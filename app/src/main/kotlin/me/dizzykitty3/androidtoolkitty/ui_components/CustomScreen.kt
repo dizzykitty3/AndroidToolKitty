@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui_components
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
@@ -12,10 +13,12 @@ fun CustomScreen(content: @Composable () -> Unit) {
     val screenPadding = dimensionResource(id = R.dimen.padding_screen)
 
     LazyColumn(
-        modifier = Modifier.padding(
-            start = screenPadding,
-            end = screenPadding
-        )
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(
+                start = screenPadding,
+                end = screenPadding
+            )
     ) {
         item { TopPadding() }
         item { content() }

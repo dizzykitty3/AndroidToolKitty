@@ -1,8 +1,12 @@
 package me.dizzykitty3.androidtoolkitty.ui
 
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -24,9 +28,18 @@ fun AppNavigationHost() {
     NavHost(
         navController = navController,
         startDestination = HOME_SCREEN,
-        enterTransition = { fadeIn(animationSpec = tween(durationMillis = 100)) },
-        exitTransition = { fadeOut(animationSpec = tween(durationMillis = 100)) }
-    ) {
+        enterTransition = {
+            slideInHorizontally(
+                animationSpec = tween(300, easing = EaseIn), initialOffsetX = { it / 2 },
+            )
+        },
+        popExitTransition = {
+            slideOutHorizontally(
+                animationSpec = tween(300, easing = EaseOut), targetOffsetX = { it },
+            )
+        },
+        popEnterTransition = { fadeIn(animationSpec = tween(300, easing = EaseIn)) },
+        exitTransition = { fadeOut(animationSpec = tween(300, easing = EaseOut)) }) {
         composable(HOME_SCREEN) { Home(navController) }
         composable(SETTINGS_SCREEN) { Settings(navController) }
         composable(EDIT_HOME_SCREEN) { HomeEdit() }
