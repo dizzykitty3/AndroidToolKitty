@@ -307,7 +307,7 @@ private fun Debugging(navController: NavHostController) {
                 },
                 text = {
                     Column(modifier = Modifier.fillMaxWidth()) {
-                        CustomTip(id = R.string.under_development)
+                        CustomTip(message = R.string.under_development)
                         Row {
                             Column(modifier = Modifier.weight(0.5f)) {
                                 Text(text = "8:00 AM - 5:59 PM")

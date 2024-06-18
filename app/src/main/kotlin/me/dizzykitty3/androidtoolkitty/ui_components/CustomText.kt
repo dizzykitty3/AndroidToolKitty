@@ -106,12 +106,12 @@ fun AnnotatedString.Builder.PrimaryColor(@StringRes id: Int) {
 }
 
 @Composable
-fun CustomTip(@StringRes id: Int) {
-    CustomTip(formattedMessage = stringResource(id = id))
+fun CustomTip(@StringRes message: Int) {
+    CustomTip(message = stringResource(id = message))
 }
 
 @Composable
-fun CustomTip(formattedMessage: String) {
+fun CustomTip(message: String) {
     val uiTesting = SettingsSharedPref.uiTesting
 
     Card(
@@ -121,7 +121,7 @@ fun CustomTip(formattedMessage: String) {
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
-        if (uiTesting && formattedMessage != stringResource(id = R.string.under_development)) {
+        if (uiTesting && message != stringResource(id = R.string.under_development)) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -142,7 +142,7 @@ fun CustomTip(formattedMessage: String) {
             )
             IconAndTextPadding()
             Text(
-                text = formattedMessage,
+                text = message,
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )

@@ -81,7 +81,7 @@ fun SysSettings() {
 
         val uiTesting = settingsSharedPref.uiTesting
 
-        if (!checkIsAutoTime() || uiTesting) CustomTip(id = R.string.set_time_automatically_is_off_tip)
+        if (!checkIsAutoTime() || uiTesting) CustomTip(message = R.string.set_time_automatically_is_off_tip)
 
         if (isShowGroupTitle1) GroupTitle(R.string.common)
 

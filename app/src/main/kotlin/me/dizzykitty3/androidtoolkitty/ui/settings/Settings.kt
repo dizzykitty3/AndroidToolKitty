@@ -7,6 +7,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,10 +39,18 @@ fun Settings(navController: NavHostController) {
         Appearance()
         General(navController)
         Card(title = R.string.online_features) {
-            CustomTip(R.string.service_provider_privacy_disclaimer)
-            PreferencesSync()
-            GroupDivider()
-            RulesUpdate()
+            var acceptted by remember { mutableStateOf(false) }
+            CustomTip(R.string.under_development)
+            if (!acceptted) {
+                Text("${stringResource(R.string.service_provider_privacy_disclaimer)}:")
+                Text(stringResource(R.string.under_development))
+                TextButton({ acceptted = true }) { Text("Accept") }
+            }
+            if (acceptted) {
+                PreferencesSync()
+                GroupDivider()
+                RulesUpdate()
+            }
         }
         AboutAndDebugging(navController)
     }

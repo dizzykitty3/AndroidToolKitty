@@ -287,7 +287,7 @@ private fun NoPlatformYouNeedHere() {
             title = { Text(text = stringResource(id = R.string.submit_the_platform_you_need)) },
             text = {
                 Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                    CustomTip(id = R.string.under_development)
+                    CustomTip(message = R.string.under_development)
                     OutlinedTextField(
                         value = platformNameInput,
                         onValueChange = { platformNameInput = it },
