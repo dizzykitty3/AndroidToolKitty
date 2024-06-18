@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.view.HapticFeedbackConstants
 import android.view.View
@@ -15,7 +15,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
@@ -23,10 +23,10 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import timber.log.Timber
 
 @Composable
-fun ClipboardCard() {
-    CustomCard(
+fun Clipboard() {
+    Card(
         icon = Icons.Outlined.ContentPasteSearch,
-        titleRes = R.string.clipboard
+        title = R.string.clipboard
     ) {
         val view = LocalView.current
         val isShowHintText = !SettingsSharedPref.haveOpenedSettingsScreen
@@ -53,8 +53,6 @@ fun ClipboardCard() {
 private fun onClearClipboardButton(view: View) {
     val cleared = ClipboardUtil.check()
     Timber.i("Clipboard cleared")
-    if (cleared)
-        SnackbarUtil.show(view, R.string.clipboard_cleared)
-    else
-        SnackbarUtil.show(view, R.string.clipboard_is_empty)
+    if (cleared) SnackbarUtil.show(view, R.string.clipboard_cleared)
+    else SnackbarUtil.show(view, R.string.clipboard_is_empty)
 }

@@ -18,20 +18,20 @@ import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
-fun CustomCard(
+fun Card(
     icon: ImageVector? = null,
-    @StringRes titleRes: Int,
+    @StringRes title: Int,
     content: @Composable () -> Unit
 ) {
-    CustomCard(
+    Card(
         icon = icon,
-        title = stringResource(id = titleRes),
+        title = stringResource(id = title),
         content = content
     )
 }
 
 @Composable
-fun CustomCard(
+fun Card(
     icon: ImageVector? = null,
     title: String,
     content: @Composable () -> Unit

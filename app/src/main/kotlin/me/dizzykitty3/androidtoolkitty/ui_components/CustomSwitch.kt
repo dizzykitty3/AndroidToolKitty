@@ -15,7 +15,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 
 @Composable
 fun CustomHideCardSettingSwitch(
-    @StringRes textRes: Int,
+    @StringRes text: Int,
     card: String,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
@@ -30,7 +30,7 @@ fun CustomHideCardSettingSwitch(
         }
     ) {
         Column(modifier = Modifier.weight(1f)) {
-            Text(text = stringResource(id = textRes))
+            Text(text = stringResource(id = text))
         }
         Column {
             Switch(
@@ -43,7 +43,7 @@ fun CustomHideCardSettingSwitch(
 
 @Composable
 fun CustomSwitchRow(
-    @StringRes textRes: Int,
+    @StringRes text: Int,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
@@ -54,7 +54,7 @@ fun CustomSwitchRow(
         }
     ) {
         Column(modifier = Modifier.weight(1f)) {
-            Text(text = stringResource(textRes))
+            Text(text = stringResource(text))
         }
         Column {
             Switch(

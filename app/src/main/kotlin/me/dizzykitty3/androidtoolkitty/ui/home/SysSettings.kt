@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.content.ContentResolver
 import android.provider.Settings
@@ -28,7 +28,7 @@ import me.dizzykitty3.androidtoolkitty.SETTING_USAGE_ACCESS
 import me.dizzykitty3.androidtoolkitty.SETTING_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
@@ -36,10 +36,10 @@ import me.dizzykitty3.androidtoolkitty.ui_components.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 
 @Composable
-fun SysSettingsCard() {
-    CustomCard(
+fun SysSettings() {
+    Card(
         icon = Icons.Outlined.Settings,
-        titleRes = R.string.system_settings
+        title = R.string.system_settings
     ) {
         val settingsSharedPref = remember { SettingsSharedPref }
 
@@ -90,14 +90,14 @@ fun SysSettingsCard() {
                 if (isShowSetting[SETTING_DISPLAY] == true) {
                     SystemSettingButton(
                         settingType = SETTING_DISPLAY,
-                        textRes = R.string.open_display_settings
+                        text = R.string.open_display_settings
                     )
                 }
 
                 if ((isShowSetting[SETTING_AUTO_ROTATE] == true) && OSVersion.android12()) {
                     SystemSettingButton(
                         settingType = SETTING_AUTO_ROTATE,
-                        textRes = R.string.open_auto_rotate_settings
+                        text = R.string.open_auto_rotate_settings
                     )
                 }
             }
@@ -107,7 +107,7 @@ fun SysSettingsCard() {
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
                             settingType = setting.settingType,
-                            textRes = setting.textRes
+                            text = setting.text
                         )
                     }
                 }
@@ -118,7 +118,7 @@ fun SysSettingsCard() {
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
                             settingType = setting.settingType,
-                            textRes = setting.textRes
+                            text = setting.text
                         )
                     }
                 }
@@ -134,7 +134,7 @@ fun SysSettingsCard() {
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
                             settingType = setting.settingType,
-                            textRes = setting.textRes
+                            text = setting.text
                         )
                     }
                 }
@@ -144,7 +144,7 @@ fun SysSettingsCard() {
                 if (isShowSetting[SETTING_WRITE_SETTINGS] == true) {
                     SystemSettingButton(
                         settingType = SETTING_WRITE_SETTINGS,
-                        textRes = R.string.open_write_permission
+                        text = R.string.open_write_permission
                     )
                 }
             }
@@ -159,7 +159,7 @@ fun SysSettingsCard() {
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
                             settingType = setting.settingType,
-                            textRes = setting.textRes
+                            text = setting.text
                         )
                     }
                 }
@@ -169,7 +169,7 @@ fun SysSettingsCard() {
                 if (isShowSetting[SETTING_DEVELOPER] == true) {
                     SystemSettingButton(
                         settingType = SETTING_DEVELOPER,
-                        textRes = R.string.open_developer_options
+                        text = R.string.open_developer_options
                     )
                 }
             }
@@ -183,4 +183,4 @@ private fun checkIsAutoTime(): Boolean {
     return isAutoTime == 1
 }
 
-private data class Setting(val settingType: String, @StringRes val textRes: Int)
+private data class Setting(val settingType: String, @StringRes val text: Int)

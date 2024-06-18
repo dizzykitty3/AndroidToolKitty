@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.edit_home_screen
+package me.dizzykitty3.androidtoolkitty.ui.edit
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons
@@ -7,7 +7,6 @@ import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -16,7 +15,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -34,21 +32,21 @@ import me.dizzykitty3.androidtoolkitty.CARD_8
 import me.dizzykitty3.androidtoolkitty.CARD_9
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 
 @Composable
-fun EditHomeScreen() {
+fun HomeEdit() {
     CustomScreen {
         val settingsSharedPref = remember { SettingsSharedPref }
         val isShowCard5 = settingsSharedPref.getCardShowedState(CARD_5)
         var mIsShowCard5 by remember { mutableStateOf(isShowCard5) }
 
-        CustomCard(
-            titleRes = R.string.customize_my_home_page
+        Card(
+            title = R.string.customize_my_home_page
         ) {
             val view = LocalView.current
             var mIsShowCard1 by remember {
@@ -130,7 +128,7 @@ fun EditHomeScreen() {
             }
 
             CustomHideCardSettingSwitch(
-                textRes = R.string.year_progress,
+                text = R.string.year_progress,
                 card = CARD_1,
                 isChecked = mIsShowCard1
             ) { newState ->
@@ -139,7 +137,7 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_1, newState)
             }
             CustomHideCardSettingSwitch(
-                textRes = R.string.volume,
+                text = R.string.volume,
                 card = CARD_2,
                 isChecked = mIsShowCard2
             ) { newState ->
@@ -148,7 +146,7 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_2, newState)
             }
             CustomHideCardSettingSwitch(
-                textRes = R.string.clipboard,
+                text = R.string.clipboard,
                 card = CARD_3,
                 isChecked = mIsShowCard3
             ) { newState ->
@@ -157,7 +155,7 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_3, newState)
             }
             CustomHideCardSettingSwitch(
-                textRes = R.string.url,
+                text = R.string.url,
                 card = CARD_4,
                 isChecked = mIsShowCard4
             ) { newState ->
@@ -166,7 +164,7 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_4, newState)
             }
             CustomHideCardSettingSwitch(
-                textRes = R.string.system_settings,
+                text = R.string.system_settings,
                 card = CARD_5,
                 isChecked = mIsShowCard5
             ) { newState ->
@@ -175,7 +173,7 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_5, newState)
             }
             CustomHideCardSettingSwitch(
-                textRes = R.string.wheel_of_fortune,
+                text = R.string.wheel_of_fortune,
                 card = CARD_6,
                 isChecked = mIsShowCard6
             ) { newState ->
@@ -184,7 +182,7 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_6, newState)
             }
             CustomHideCardSettingSwitch(
-                textRes = R.string.bluetooth_devices,
+                text = R.string.bluetooth_devices,
                 card = CARD_7,
                 isChecked = mIsShowCard7
             ) { newState ->
@@ -193,7 +191,7 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_7, newState)
             }
             CustomHideCardSettingSwitch(
-                textRes = R.string.unicode,
+                text = R.string.unicode,
                 card = CARD_8,
                 isChecked = mIsShowCard8
             ) { newState ->
@@ -202,7 +200,7 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_8, newState)
             }
             CustomHideCardSettingSwitch(
-                textRes = R.string.check_app_on_market,
+                text = R.string.check_app_on_market,
                 card = CARD_9,
                 isChecked = mIsShowCard9
             ) { newState ->
@@ -211,7 +209,7 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_9, newState)
             }
             CustomHideCardSettingSwitch(
-                textRes = R.string.google_maps,
+                text = R.string.google_maps,
                 card = CARD_10,
                 isChecked = mIsShowCard10
             ) { newState ->
@@ -220,7 +218,7 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_10, newState)
             }
             CustomHideCardSettingSwitch(
-                textRes = R.string.android_versions,
+                text = R.string.android_versions,
                 card = CARD_11,
                 isChecked = mIsShowCard11
             ) { newState ->
@@ -229,7 +227,7 @@ fun EditHomeScreen() {
                 settingsSharedPref.saveCardShowedState(CARD_11, newState)
             }
             CustomHideCardSettingSwitch(
-                textRes = R.string.font_weight_test,
+                text = R.string.font_weight_test,
                 card = CARD_12,
                 isChecked = mIsShowCard12
             ) { newState ->
@@ -239,9 +237,6 @@ fun EditHomeScreen() {
             }
 
             GroupDivider()
-
-            val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
-            val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
 
             Button(
                 onClick = {
@@ -300,7 +295,7 @@ fun EditHomeScreen() {
             }
         }
 
-        if (mIsShowCard5) EditSysSettingsCard()
+        if (mIsShowCard5) SysSettingsCardEdit()
     }
 }
 

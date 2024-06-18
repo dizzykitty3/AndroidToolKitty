@@ -12,11 +12,11 @@ import me.dizzykitty3.androidtoolkitty.HOME_SCREEN
 import me.dizzykitty3.androidtoolkitty.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.QR_CODE_GENERATOR_SCREEN
 import me.dizzykitty3.androidtoolkitty.SETTINGS_SCREEN
-import me.dizzykitty3.androidtoolkitty.ui.edit_home_screen.EditHomeScreen
-import me.dizzykitty3.androidtoolkitty.ui.home_screen.HomeScreen
-import me.dizzykitty3.androidtoolkitty.ui.permission_request_screen.PermissionRequestScreen
-import me.dizzykitty3.androidtoolkitty.ui.qr_code_generator_screen.QRCodeGeneratorScreen
-import me.dizzykitty3.androidtoolkitty.ui.settings_screen.SettingsScreen
+import me.dizzykitty3.androidtoolkitty.ui.edit.HomeEdit
+import me.dizzykitty3.androidtoolkitty.ui.home.Home
+import me.dizzykitty3.androidtoolkitty.ui.permission_request.PermissionRequest
+import me.dizzykitty3.androidtoolkitty.ui.qr_code_generator.QRCodeGenerator
+import me.dizzykitty3.androidtoolkitty.ui.settings.Settings
 
 @Composable
 fun AppNavigationHost() {
@@ -27,10 +27,10 @@ fun AppNavigationHost() {
         enterTransition = { fadeIn(animationSpec = tween(durationMillis = 100)) },
         exitTransition = { fadeOut(animationSpec = tween(durationMillis = 100)) }
     ) {
-        composable(HOME_SCREEN) { HomeScreen(navController) }
-        composable(SETTINGS_SCREEN) { SettingsScreen(navController) }
-        composable(EDIT_HOME_SCREEN) { EditHomeScreen() }
-        composable(PERMISSION_REQUEST_SCREEN) { PermissionRequestScreen() }
-        composable(QR_CODE_GENERATOR_SCREEN) { QRCodeGeneratorScreen() }
+        composable(HOME_SCREEN) { Home(navController) }
+        composable(SETTINGS_SCREEN) { Settings(navController) }
+        composable(EDIT_HOME_SCREEN) { HomeEdit() }
+        composable(PERMISSION_REQUEST_SCREEN) { PermissionRequest() }
+        composable(QR_CODE_GENERATOR_SCREEN) { QRCodeGenerator() }
     }
 }

@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.graphics.Paint
 import android.view.HapticFeedbackConstants
@@ -63,7 +63,7 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.getWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import kotlin.math.cos
@@ -71,10 +71,10 @@ import kotlin.math.sin
 import kotlin.random.Random
 
 @Composable
-fun WheelOfFortuneCard() {
-    CustomCard(
+fun WheelOfFortune() {
+    Card(
         icon = Icons.Outlined.Casino,
-        titleRes = R.string.wheel_of_fortune
+        title = R.string.wheel_of_fortune
     ) {
         val item = stringResource(R.string.item)
         var items by remember {

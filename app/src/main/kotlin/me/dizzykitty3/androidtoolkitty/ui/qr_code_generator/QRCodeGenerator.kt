@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.qr_code_generator_screen
+package me.dizzykitty3.androidtoolkitty.ui.qr_code_generator
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -23,8 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
@@ -32,9 +32,9 @@ import androidx.compose.ui.Alignment.Companion as Alignment1
 
 @Preview(showSystemUi = true)
 @Composable
-fun QRCodeGeneratorScreen() {
+fun QRCodeGenerator() {
     CustomScreen {
-        CustomCard(title = "QR Code generator") {
+        Card(title = "QR Code generator") {
             var input by remember { mutableStateOf("") }
             var instantOption by remember { mutableStateOf(false) }
 

@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.settings_screen
+package me.dizzykitty3.androidtoolkitty.ui.settings
 
 import android.os.Build
 import android.view.HapticFeedbackConstants
@@ -43,7 +43,7 @@ import me.dizzykitty3.androidtoolkitty.QR_CODE_GENERATOR_SCREEN
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.Bold
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
@@ -58,13 +58,14 @@ import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 import java.util.Locale
 
+@Suppress("KotlinConstantConditions")
 @Composable
-fun About(navController: NavHostController) {
+fun AboutAndDebugging(navController: NavHostController) {
     val view = LocalView.current
     var debuggingOptions by remember { mutableStateOf(SettingsSharedPref.debuggingOptions) }
     var tapCount by remember { mutableIntStateOf(0) }
 
-    CustomCard(titleRes = R.string.about) {
+    Card(title = R.string.about) {
         GroupTitle(id = R.string.version)
         if (!debuggingOptions) {
             Row(modifier = Modifier.clickable {
@@ -103,7 +104,6 @@ fun About(navController: NavHostController) {
         SourceAndLicenses()
     }
 
-    @Suppress("KotlinConstantConditions")
     AnimatedVisibility(
         visible = (debuggingOptions || (!debuggingOptions && tapCount >= 5)),
         enter = fadeIn(animationSpec = tween(durationMillis = 2000))
@@ -236,11 +236,11 @@ private fun Debugging(navController: NavHostController) {
     val settingsSharedPref = remember { SettingsSharedPref }
     var uiTesting by remember { mutableStateOf(settingsSharedPref.uiTesting) }
 
-    CustomCard(titleRes = R.string.debugging, icon = Icons.Outlined.Terminal) {
+    Card(title = R.string.debugging, icon = Icons.Outlined.Terminal) {
         Text(text = "OS version = Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
         Text(text = "Locale =  ${Locale.getDefault()}")
 
-        CustomSwitchRow(textRes = R.string.ui_testing, checked = uiTesting) {
+        CustomSwitchRow(text = R.string.ui_testing, checked = uiTesting) {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             uiTesting = it
             settingsSharedPref.uiTesting = it

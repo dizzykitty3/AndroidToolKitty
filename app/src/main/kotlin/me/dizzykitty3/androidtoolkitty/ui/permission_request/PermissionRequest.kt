@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.permission_request_screen
+package me.dizzykitty3.androidtoolkitty.ui.permission_request
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons
@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
@@ -26,10 +26,10 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Preview
 @Composable
-fun PermissionRequestScreen() {
+fun PermissionRequest() {
     CustomScreen {
-        CustomCard(
-            titleRes = (R.string.request_permission),
+        Card(
+            title = (R.string.request_permission),
             icon = Icons.Outlined.Shield
         ) {
             var clickCount by remember { mutableIntStateOf(0) }

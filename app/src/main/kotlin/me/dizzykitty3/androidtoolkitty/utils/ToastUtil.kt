@@ -15,5 +15,5 @@ object ToastUtil {
      * [NOT RECOMMENDED. Use Snackbar instead.](https://developer.android.com/guide/topics/ui/notifiers/toasts#alternatives_to_using_toasts)
      * @see SnackbarUtil.show
      */
-    fun show(@StringRes messageRes: Int) = show(appContext.getString(messageRes))
+    fun show(@StringRes message: Int) = show(appContext.getString(message))
 }

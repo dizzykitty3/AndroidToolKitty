@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.view.HapticFeedbackConstants
 import android.view.View
@@ -37,8 +37,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui_components.GradientSmall
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
@@ -50,10 +50,10 @@ private const val ADD = "+ Add"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun VolumeCard() {
-    CustomCard(
+fun Volume() {
+    Card(
         icon = Icons.AutoMirrored.Outlined.VolumeUp,
-        titleRes = R.string.volume
+        title = R.string.volume
     ) {
         val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
@@ -227,7 +227,7 @@ fun VolumeCard() {
                             )
                             GroupDivider()
                             CustomSwitchRow(
-                                textRes = R.string.more_precise_slider,
+                                text = R.string.more_precise_slider,
                                 checked = morePreciseSlider
                             ) {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)

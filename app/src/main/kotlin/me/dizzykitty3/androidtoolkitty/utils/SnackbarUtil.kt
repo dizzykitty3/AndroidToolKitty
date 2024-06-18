@@ -9,20 +9,20 @@ object SnackbarUtil {
     fun show(view: View, message: String) =
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
 
-    fun show(view: View, @StringRes messageRes: Int) =
-        Snackbar.make(view, appContext.getString(messageRes), Snackbar.LENGTH_SHORT).show()
+    fun show(view: View, @StringRes message: Int) =
+        Snackbar.make(view, appContext.getString(message), Snackbar.LENGTH_SHORT).show()
 
     fun show(
         view: View,
-        @StringRes messageRes: Int,
-        @StringRes buttonTextRes: Int,
+        @StringRes message: Int,
+        @StringRes buttonText: Int,
         textColor: Int,
         buttonColor: Int,
         buttonClickListener: View.OnClickListener
     ) =
-        Snackbar.make(view, appContext.getString(messageRes), Snackbar.LENGTH_LONG)
+        Snackbar.make(view, appContext.getString(message), Snackbar.LENGTH_LONG)
             .setTextColor(textColor)
-            .setAction(appContext.getString(buttonTextRes), buttonClickListener)
+            .setAction(appContext.getString(buttonText), buttonClickListener)
             .setActionTextColor(buttonColor)
             .show()
 }

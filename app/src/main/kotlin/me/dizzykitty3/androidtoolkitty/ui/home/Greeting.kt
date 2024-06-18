@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

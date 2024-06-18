@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.horizontalScroll
@@ -17,16 +17,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Preview
 @Composable
-fun FontWeightCard() {
-    CustomCard(
+fun FontWeight() {
+    Card(
         icon = Icons.Outlined.FontDownload,
-        titleRes = R.string.font_weight_test
+        title = R.string.font_weight_test
     ) {
         val showCJK = StringUtil.sysLangCJK
 

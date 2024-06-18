@@ -39,7 +39,8 @@ class ClearClipboardTileService : TileService() {
         cleanTitle.updateTile()
     }
 
-    @SuppressLint("NewApi", "StartActivityAndCollapseDeprecated")
+    @Suppress("DEPRECATION")
+    @SuppressLint("StartActivityAndCollapseDeprecated")
     override fun onClick() {
         if (!OSVersion.api24()) {
             Timber.w("TileService unsupported")
@@ -63,7 +64,6 @@ class ClearClipboardTileService : TileService() {
                 startActivityAndCollapse(pendingIntent)
             } else {
                 Timber.i("< Android 14")
-                @Suppress("DEPRECATION")
                 startActivityAndCollapse(intent)
             }
         } catch (e: Exception) {

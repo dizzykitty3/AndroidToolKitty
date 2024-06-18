@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.settings_screen
+package me.dizzykitty3.androidtoolkitty.ui.settings
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons
@@ -22,7 +22,7 @@ import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.EDIT_HOME_SCREEN
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
@@ -33,17 +33,17 @@ import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Composable
-fun SettingsScreen(navController: NavHostController) {
+fun Settings(navController: NavHostController) {
     CustomScreen {
         Appearance()
         General(navController)
-        CustomCard(titleRes = R.string.online_features) {
+        Card(title = R.string.online_features) {
             CustomTip(R.string.service_provider_privacy_disclaimer)
-            UserSyncSection()
+            PreferencesSync()
             GroupDivider()
-            RuleUpdateSection()
+            RulesUpdate()
         }
-        About(navController)
+        AboutAndDebugging(navController)
     }
 }
 
@@ -54,9 +54,9 @@ private fun Appearance() {
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
 
-    CustomCard(titleRes = R.string.appearance) {
+    Card(title = R.string.appearance) {
         if (OSVersion.android12()) {
-            CustomSwitchRow(textRes = R.string.material_you_dynamic_color, checked = dynamicColor) {
+            CustomSwitchRow(text = R.string.material_you_dynamic_color, checked = dynamicColor) {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 dynamicColor = it
                 SettingsSharedPref.dynamicColor = it
@@ -64,7 +64,7 @@ private fun Appearance() {
             }
         }
 
-        CustomSwitchRow(textRes = R.string.one_handed_mode, checked = oneHandedMode) {
+        CustomSwitchRow(text = R.string.one_handed_mode, checked = oneHandedMode) {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             oneHandedMode = it
             settingsSharedPref.oneHandedMode = it
@@ -83,9 +83,9 @@ private fun General(navController: NavHostController) {
     val haveTappedWebpageCardShowMore = settingsSharedPref.haveTappedWebpageCardShowMore
     var webpageShowMore by remember { mutableStateOf(settingsSharedPref.keepWebpageCardShowMore) }
 
-    CustomCard(titleRes = R.string.general) {
+    Card(title = R.string.general) {
         CustomSwitchRow(
-            textRes = R.string.clear_clipboard_on_launch,
+            text = R.string.clear_clipboard_on_launch,
             checked = autoClearClipboard
         ) {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
@@ -96,8 +96,8 @@ private fun General(navController: NavHostController) {
                 settingsSharedPref.saveCardShowedState(CARD_3, false)
                 SnackbarUtil.show(
                     view,
-                    messageRes = R.string.clipboard_card_hidden,
-                    buttonTextRes = R.string.undo,
+                    message = R.string.clipboard_card_hidden,
+                    buttonText = R.string.undo,
                     textColor = inverseOnSurface,
                     buttonColor = inversePrimary,
                     buttonClickListener = {
@@ -110,7 +110,7 @@ private fun General(navController: NavHostController) {
         }
 
         if (haveTappedWebpageCardShowMore) CustomSwitchRow(
-            textRes = R.string.keep_showing_full_webpage_card,
+            text = R.string.keep_showing_full_webpage_card,
             checked = webpageShowMore
         ) {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)

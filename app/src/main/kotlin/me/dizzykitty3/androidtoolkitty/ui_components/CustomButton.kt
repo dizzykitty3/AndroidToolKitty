@@ -20,7 +20,7 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 @Composable
 fun SystemSettingButton(
     settingType: String,
-    @StringRes textRes: Int
+    @StringRes text: Int
 ) {
     val view = LocalView.current
 
@@ -30,11 +30,11 @@ fun SystemSettingButton(
             IntentUtil.openSystemSettings(settingType, view.context)
         }
     ) {
-        Text(text = stringResource(id = textRes))
+        Text(text = stringResource(id = text))
 
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = stringResource(id = textRes),
+            contentDescription = stringResource(id = text),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
     }

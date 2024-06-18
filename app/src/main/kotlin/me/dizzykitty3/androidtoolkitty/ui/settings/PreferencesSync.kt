@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.settings_screen
+package me.dizzykitty3.androidtoolkitty.ui.settings
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
@@ -50,7 +50,7 @@ import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 import org.json.JSONObject
 
 @Composable
-fun UserSyncSection() {
+fun PreferencesSync() {
     GroupTitle(R.string.user_sync)
 
     var dialogState by remember { mutableStateOf<DialogState?>(null) }

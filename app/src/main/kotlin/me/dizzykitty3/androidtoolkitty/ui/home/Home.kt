@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.view.HapticFeedbackConstants
 import androidx.annotation.StringRes
@@ -75,7 +75,7 @@ import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun Home(navController: NavHostController) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
     if (screenWidth < 600) MobileLayout(navController)
     else TabletLayout(navController)
@@ -238,7 +238,7 @@ private fun NetworkState() {
 @Composable
 private fun NetworkStateIcon(
     imageVector: ImageVector,
-    @StringRes textRes: Int,
+    @StringRes text: Int,
 ) {
     val view = LocalView.current
 
@@ -249,11 +249,11 @@ private fun NetworkStateIcon(
     ) {
         Icon(
             imageVector = imageVector,
-            contentDescription = stringResource(id = textRes),
+            contentDescription = stringResource(id = text),
             tint = MaterialTheme.colorScheme.primary
         )
         SpacerPadding()
-        Text(text = stringResource(id = textRes))
+        Text(text = stringResource(id = text))
     }
 }
 
@@ -298,17 +298,17 @@ private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Bool
 @Composable
 private fun CardContent(cardName: String, navController: NavHostController) {
     when (cardName) {
-        CARD_1 -> YearProgressCard()
-        CARD_2 -> VolumeCard()
-        CARD_3 -> ClipboardCard()
-        CARD_4 -> WebpageCard()
-        CARD_5 -> SysSettingsCard()
-        CARD_6 -> WheelOfFortuneCard()
-        CARD_7 -> BluetoothDeviceCard(navController)
-        CARD_8 -> UnicodeCard()
-        CARD_9 -> AppMarketCard()
-        CARD_10 -> MapsCard()
-        CARD_11 -> AndroidVersionCard()
-        CARD_12 -> FontWeightCard()
+        CARD_1 -> YearProgress()
+        CARD_2 -> Volume()
+        CARD_3 -> Clipboard()
+        CARD_4 -> Webpage()
+        CARD_5 -> SysSettings()
+        CARD_6 -> WheelOfFortune()
+        CARD_7 -> BluetoothDevice(navController)
+        CARD_8 -> Unicode()
+        CARD_9 -> AppMarket()
+        CARD_10 -> Maps()
+        CARD_11 -> AndroidVersions()
+        CARD_12 -> FontWeight()
     }
 }

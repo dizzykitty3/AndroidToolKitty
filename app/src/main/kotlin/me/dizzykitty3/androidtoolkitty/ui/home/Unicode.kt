@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.view.HapticFeedbackConstants
 import android.view.View
@@ -24,8 +24,8 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui_components.Italic
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
@@ -34,15 +34,15 @@ import timber.log.Timber
 
 @Preview
 @Composable
-fun UnicodeCard() {
+fun Unicode() {
     var unicode by remember { mutableStateOf("") }
     var characters by remember { mutableStateOf("") }
     var isUnicodeInput by remember { mutableStateOf(false) }
     var isCharacterInput by remember { mutableStateOf(false) }
 
-    CustomCard(
+    Card(
         icon = Icons.AutoMirrored.Outlined.Notes,
-        titleRes = R.string.unicode
+        title = R.string.unicode
     ) {
         val view = LocalView.current
         val focus = LocalFocusManager.current

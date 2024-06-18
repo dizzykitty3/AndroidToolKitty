@@ -56,7 +56,6 @@ object StringUtil {
     val sysLocale: String
         get() = Locale.getDefault().toString()
 
-    @Suppress("MemberVisibilityCanBePrivate")
     val sysLangSupported: Boolean
         get() = sysLocale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
 

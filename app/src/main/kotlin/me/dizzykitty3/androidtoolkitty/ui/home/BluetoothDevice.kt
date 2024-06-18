@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
@@ -27,7 +27,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
@@ -37,7 +36,7 @@ import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SETTING_ENABLE_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.ui_components.PrimaryColor
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
@@ -50,22 +49,21 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 @Composable
 private fun BluetoothDeviceCardPreview() {
     val navController = rememberNavController()
-    BluetoothDeviceCard(navController)
+    BluetoothDevice(navController)
 }
 
+@SuppressLint("MissingPermission")
 @Composable
-fun BluetoothDeviceCard(navController: NavHostController) {
-    CustomCard(
+fun BluetoothDevice(navController: NavHostController) {
+    Card(
         icon = Icons.Outlined.Bluetooth,
-        titleRes = R.string.bluetooth_devices
+        title = R.string.bluetooth_devices
     ) {
         val view = LocalView.current
         var showResult by remember { mutableStateOf(false) }
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }
         var pairedDevices by remember { mutableStateOf<List<BluetoothDevice>>(emptyList()) }
         var size by remember { mutableIntStateOf(0) }
-        val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
-        val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
         OutlinedButton(
             onClick = {
@@ -86,7 +84,6 @@ fun BluetoothDeviceCard(navController: NavHostController) {
 
                 // Show current device name, paired devices' name and MAC address
                 if (bluetoothAdapter!!.isEnabled) {
-                    @SuppressLint("MissingPermission")
                     pairedDevices = bluetoothAdapter!!.bondedDevices.sortedBy { it.name }
                     size = pairedDevices.size
                     showResult = true
@@ -94,7 +91,7 @@ fun BluetoothDeviceCard(navController: NavHostController) {
                 }
 
                 // When Bluetooth is OFF
-                            IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, view.context)
+                IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, view.context)
             }
         ) {
             Icon(
@@ -109,7 +106,6 @@ fun BluetoothDeviceCard(navController: NavHostController) {
             )
         }
 
-        @SuppressLint("MissingPermission")
         if (showResult) {
             Text(text = "${stringResource(id = R.string.current_device)} ${bluetoothAdapter?.name}\n")
 

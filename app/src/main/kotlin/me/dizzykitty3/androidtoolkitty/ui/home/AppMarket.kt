@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
@@ -29,17 +29,17 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 
 @Preview
 @Composable
-fun AppMarketCard() {
-    CustomCard(
+fun AppMarket() {
+    Card(
         icon = Icons.Outlined.Shop,
-        titleRes = R.string.check_app_on_market
+        title = R.string.check_app_on_market
     ) {
         val view = LocalView.current
         var packageName by remember { mutableStateOf("") }

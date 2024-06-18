@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.content.Context
 import android.view.HapticFeedbackConstants
@@ -28,17 +28,17 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import timber.log.Timber
 
 @Preview
 @Composable
-fun MapsCard() {
-    CustomCard(
+fun Maps() {
+    Card(
         icon = Icons.Outlined.Place,
-        titleRes = R.string.google_maps
+        title = R.string.google_maps
     ) {
         val view = LocalView.current
         var latitude by remember { mutableStateOf("") }

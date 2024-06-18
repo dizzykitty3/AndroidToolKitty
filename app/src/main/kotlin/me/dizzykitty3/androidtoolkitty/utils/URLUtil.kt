@@ -80,9 +80,9 @@ object URLUtil {
     }
 
     /**
-     * @see me.dizzykitty3.androidtoolkitty.ui.home_screen.toSocialMediaFullURL
+     * @see me.dizzykitty3.androidtoolkitty.ui.home.toSocialMediaFullURL
      */
-    enum class Platform(val prefix: String, @StringRes val nameRes: Int) {
+    enum class Platform(val prefix: String, @StringRes val platform: Int) {
         ARTSTATION("artstation.com/", R.string.artstation),
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),

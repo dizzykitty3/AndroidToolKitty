@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.home_screen
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.content.Context
 import android.view.HapticFeedbackConstants
@@ -41,8 +41,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomCard
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
@@ -54,10 +54,10 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 import timber.log.Timber
 
 @Composable
-fun WebpageCard() {
-    CustomCard(
+fun Webpage() {
+    Card(
         icon = Icons.Outlined.Link,
-        titleRes = R.string.webpage
+        title = R.string.webpage
     ) {
         val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
@@ -207,7 +207,7 @@ private fun SocialMediaProfileIURL() {
     var username by remember { mutableStateOf("") }
     val platformIndex = SettingsSharedPref.lastTimeSelectedSocialPlatform
     var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
-    val platformList = URLUtil.Platform.entries.map { stringResource(it.nameRes) }
+    val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
 
     GroupTitle(id = R.string.social_media_profile)
 

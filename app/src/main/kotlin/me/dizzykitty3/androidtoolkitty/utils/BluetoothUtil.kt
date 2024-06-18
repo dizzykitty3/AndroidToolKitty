@@ -11,8 +11,8 @@ object BluetoothUtil {
     private var bluetoothManager =
         appContext.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
 
+    @Suppress("DEPRECATION")
     val bluetoothAdapter: BluetoothAdapter?
-        @Suppress("DEPRECATION")
         get() = if (OSVersion.api31()) bluetoothManager.adapter else BluetoothAdapter.getDefaultAdapter()
 
     @SuppressLint("MissingPermission")

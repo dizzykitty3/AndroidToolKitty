@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.settings_screen
+package me.dizzykitty3.androidtoolkitty.ui.settings
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.material3.CircularProgressIndicator
@@ -24,7 +24,7 @@ import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 
 @Composable
-fun RuleUpdateSection() {
+fun RulesUpdate() {
     GroupTitle(R.string.rule_update)
     val coroutineScope = rememberCoroutineScope()
     var isLoading by remember { mutableStateOf(false) }
