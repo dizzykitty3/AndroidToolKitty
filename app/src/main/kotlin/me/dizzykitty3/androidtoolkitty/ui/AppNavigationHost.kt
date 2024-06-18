@@ -30,7 +30,7 @@ fun AppNavigationHost() {
         startDestination = HOME_SCREEN,
         enterTransition = {
             slideInHorizontally(
-                animationSpec = tween(300, easing = EaseIn), initialOffsetX = { it / 2 },
+                animationSpec = tween(300, easing = EaseIn), initialOffsetX = { it },
             )
         },
         popExitTransition = {
