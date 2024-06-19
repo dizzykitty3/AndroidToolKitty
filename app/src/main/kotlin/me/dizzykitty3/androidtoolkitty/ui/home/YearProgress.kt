@@ -32,17 +32,17 @@ fun YearProgress() {
         title = R.string.year_progress
     ) {
         val view = LocalView.current
-        var isShowPercentage by remember { mutableStateOf(true) }
+        var percentageOnly by remember { mutableStateOf(true) }
 
         Column(
             modifier = Modifier.clickable {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                isShowPercentage = !isShowPercentage
+                percentageOnly = !percentageOnly
             }
         ) {
             CustomAnimatedProgressIndicator()
 
-            val textToShow = if (isShowPercentage) percentage() else percentageAndRemaining()
+            val textToShow = if (percentageOnly) percentage() else percentageAndRemaining()
             Text(
                 text = textToShow,
                 modifier = Modifier.fillMaxWidth()
@@ -53,7 +53,7 @@ fun YearProgress() {
 
 private fun percentage(): String = "${(yearProgressPercentage(yearProgress))}%"
 
-private fun percentageAndRemaining(): String = "${percentage()}% · ${
+private fun percentageAndRemaining(): String = "${percentage()} · ${
     appContext.resources.getQuantityString(
         R.plurals.days_remaining,
         (totalDaysInYear - daysPassed).toInt(),
