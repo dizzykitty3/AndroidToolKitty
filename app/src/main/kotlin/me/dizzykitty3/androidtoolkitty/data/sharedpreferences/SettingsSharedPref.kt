@@ -196,15 +196,13 @@ object SettingsSharedPref {
         set(value) = setPreference(SHOW_SYSTEM_VOLUME_UI, value)
 
     fun getWheelOfFortuneItems(): List<String>? {
-        val itemsJson = getPreference(WHEEL_OF_FORTUNE_ITEMS, "")
-        return itemsJson.let {
-            try {
-                val items: WheelOfFortuneItems = Json.decodeFromString(it)
-                items.items
-            } catch (e: Exception) {
-                Timber.e(e)
-                null
-            }
+        val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null
+        return try {
+            val items: WheelOfFortuneItems = Json.decodeFromString(itemsJson)
+            items.items
+        } catch (e: Exception) {
+            Timber.e(e)
+            null
         }
     }
 
