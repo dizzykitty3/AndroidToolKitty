@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
-    compileSdk = 34
+    compileSdk = 35
     buildFeatures {
         buildConfig = true
         compose = true
@@ -18,7 +18,7 @@ android {
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 817
         versionName = "1.0.817"
 
