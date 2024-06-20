@@ -45,11 +45,11 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.Bold
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui_components.UnderDevelopmentTip
 import me.dizzykitty3.androidtoolkitty.ui_components.WarningAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
@@ -307,7 +307,7 @@ private fun Debugging(navController: NavHostController) {
                 },
                 text = {
                     Column(modifier = Modifier.fillMaxWidth()) {
-                        CustomTip(message = R.string.under_development)
+                        UnderDevelopmentTip()
                         Row {
                             Column(modifier = Modifier.weight(0.5f)) {
                                 Text(text = "8:00 AM - 5:59 PM")

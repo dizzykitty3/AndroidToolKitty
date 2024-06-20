@@ -111,6 +111,9 @@ fun CustomTip(@StringRes message: Int) {
 }
 
 @Composable
+fun UnderDevelopmentTip() = CustomTip(R.string.under_development)
+
+@Composable
 fun CustomTip(message: String) {
     val uiTesting = SettingsSharedPref.uiTesting
 

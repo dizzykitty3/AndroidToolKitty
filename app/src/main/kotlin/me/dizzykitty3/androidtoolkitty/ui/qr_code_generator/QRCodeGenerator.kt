@@ -28,6 +28,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui_components.UnderDevelopmentTip
 import androidx.compose.ui.Alignment.Companion as Alignment1
 
 @Preview(showSystemUi = true)
@@ -37,6 +38,8 @@ fun QRCodeGenerator() {
         Card(title = "QR Code generator") {
             var input by remember { mutableStateOf("") }
             var instantOption by remember { mutableStateOf(false) }
+
+            UnderDevelopmentTip()
 
             OutlinedTextField(
                 modifier = Modifier.fillMaxWidth(),

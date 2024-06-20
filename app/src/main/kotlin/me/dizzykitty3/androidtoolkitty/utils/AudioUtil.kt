@@ -16,9 +16,9 @@ object AudioUtil {
     val maxVolumeIndex: Int
         get() = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
-    fun setVolume(volume: Int) {
+    fun setVolume(volume: Int, isAutoSetVolume: Boolean = false) {
         val showSystemUI = SettingsSharedPref.showSystemVolumeUI
-        if (showSystemUI)
+        if (showSystemUI || isAutoSetVolume)
             audioManager.setStreamVolume(
                 AudioManager.STREAM_MUSIC,
                 volume,
@@ -35,7 +35,7 @@ object AudioUtil {
         val indexedVolume = (maxVolumeIndex * 0.01 * percentage).toInt()
         Timber.d("current = $volume, target = $indexedVolume")
         if (percentage in 0..100 && (volume != indexedVolume)) {
-            setVolume(indexedVolume)
+            setVolume(indexedVolume, true)
             Timber.d("setVolumeAutomatically true")
             return true
         }

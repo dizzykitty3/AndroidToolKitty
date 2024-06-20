@@ -44,10 +44,10 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomDropdownMenu
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.Italic
+import me.dizzykitty3.androidtoolkitty.ui_components.UnderDevelopmentTip
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
@@ -287,7 +287,7 @@ private fun NoPlatformYouNeedHere() {
             title = { Text(text = stringResource(id = R.string.submit_the_platform_you_need)) },
             text = {
                 Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                    CustomTip(message = R.string.under_development)
+                    UnderDevelopmentTip()
                     OutlinedTextField(
                         value = platformNameInput,
                         onValueChange = { platformNameInput = it },
