@@ -306,9 +306,6 @@
     <string name="developer_profile_link">Developer profile link</string>
     <string name="contributors">Contributors</string>
     <string name="licenses">Licenses</string>
-    <string name="now_a_developer">You are now a developer</string>
-    <string name="two_more_times">2 more times</string>
-    <string name="one_more_time">1 more time</string>
     <string name="inspired_by">Inspired by</string>
 
     <!-- Settings > Debugging -->

@@ -126,10 +126,7 @@
     <string name="search">搜索</string>
     <string name="contributors">贡献者</string>
     <string name="licenses">许可证</string>
-    <string name="now_a_developer">已开启调试选项</string>
     <string name="go_to_permission_request_screen">前往权限申请画面</string>
-    <string name="one_more_time">还需要 1 次</string>
-    <string name="two_more_times">还需要 2 次</string>
     <string name="under_development">——开发中——</string>
     <string name="permission">权限</string>
     <string name="font_weight_test">字重测试</string>
