@@ -1,15 +1,16 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
+import androidx.annotation.CheckResult
 import java.time.LocalTime
 import java.util.Locale
 
 object StringUtil {
     fun greeting(): String = when (LocalTime.now().hour) {
-            in 6..11 -> "Good morning"
-            in 12..18 -> "Good afternoon"
-            in 19..22 -> "Good evening"
-            else -> "Good night"
-        }
+        in 6..11 -> "Good morning"
+        in 12..18 -> "Good afternoon"
+        in 19..22 -> "Good evening"
+        else -> "Good night"
+    }
 
     /**
      * Drop spaces, including full-width ones.
@@ -54,14 +55,14 @@ object StringUtil {
     }
 
     val sysLocale: String
-        get() = Locale.getDefault().toString()
+        @CheckResult get() = Locale.getDefault().toString()
 
     val sysLangSupported: Boolean
-        get() = sysLocale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
+        @CheckResult get() = sysLocale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
 
     val sysLangNotSupported: Boolean
-        get() = !sysLangSupported
+        @CheckResult get() = !sysLangSupported
 
     val sysLangCJK: Boolean
-        get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
+        @CheckResult get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
 }

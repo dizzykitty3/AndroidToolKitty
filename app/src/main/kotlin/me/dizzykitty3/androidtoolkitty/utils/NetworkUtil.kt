@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.net.ConnectivityManager.TYPE_MOBILE
 import android.net.ConnectivityManager.TYPE_WIFI
 import android.net.NetworkCapabilities
+import androidx.annotation.CheckResult
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 
 object NetworkUtil {
@@ -18,6 +19,7 @@ object NetworkUtil {
 
     @Suppress("DEPRECATION")
     @SuppressLint("NewApi")
+    @CheckResult
     fun networkState(): Int {
         if (!OSVersion.api23()) {
             val activeNetwork = connectivityManager.activeNetworkInfo ?: return STATE_CODE_OFFLINE

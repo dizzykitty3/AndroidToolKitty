@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import androidx.annotation.CheckResult
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 
 object ClipboardUtil {
@@ -20,6 +21,7 @@ object ClipboardUtil {
     }
 
     @SuppressLint("NewApi")
+    @CheckResult
     fun check(): Boolean {
         if (!clipboard.hasPrimaryClip()) return false
         if (OSVersion.android9()) {
