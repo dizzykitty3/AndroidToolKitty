@@ -59,7 +59,7 @@
     <string name="ui_testing">UI 测试</string>
     <string name="social_media_platforms_list">社交媒体列表</string>
     <string name="about">关于</string>
-    <string name="source_code_on_github">在 GitHub 上查看源码</string>
+    <string name="source_code">源码</string>
     <string name="submit_the_platform_you_need">提交你所想的平台</string>
     <plurals name="days_remaining">
         <item quantity="other">剩余 %1$d 天</item>
@@ -125,7 +125,7 @@
     <string name="success_and_back">已获得权限！返回上一界面吧</string>
     <string name="search">搜索</string>
     <string name="contributors">贡献者</string>
-    <string name="source_and_licenses">源码和许可证</string>
+    <string name="licenses">许可证</string>
     <string name="now_a_developer">已开启调试选项</string>
     <string name="go_to_permission_request_screen">前往权限申请画面</string>
     <string name="one_more_time">还需要 1 次</string>

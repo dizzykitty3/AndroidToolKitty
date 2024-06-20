@@ -17,8 +17,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui_components.Screen
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
@@ -27,7 +27,7 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 @Preview
 @Composable
 fun PermissionRequest() {
-    CustomScreen {
+    Screen {
         Card(
             title = (R.string.request_permission),
             icon = Icons.Outlined.Shield

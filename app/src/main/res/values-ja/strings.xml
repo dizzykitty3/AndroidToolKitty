@@ -139,12 +139,12 @@
     <string name="ui_testing">UI テスト</string>
     <string name="social_media_platforms_list">Social media platforms list</string>
     <string name="about">APP について</string>
-    <string name="source_code_on_github">GitHub でソースコードを表示</string>
+    <string name="source_code">ソースコード</string>
     <string name="all_help_welcomed">すべての助けは大歓迎です！ :D</string>
     <string name="version">バージョン</string>
     <string name="developer_profile_link">開発者プロフィールリンク</string>
     <string name="contributors">貢献者</string>
-    <string name="source_and_licenses">ソースコード＆ライセンス</string>
+    <string name="licenses">ライセンス</string>
     <string name="now_a_developer">あなたは今、開発者です</string>
     <string name="two_more_times">あと 2 回</string>
     <string name="one_more_time">あと 1 回</string>

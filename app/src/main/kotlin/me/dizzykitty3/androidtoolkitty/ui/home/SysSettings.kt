@@ -29,10 +29,10 @@ import me.dizzykitty3.androidtoolkitty.SETTING_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.SystemSettingButton
+import me.dizzykitty3.androidtoolkitty.ui_components.Tip
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 
 @Composable
@@ -81,7 +81,7 @@ fun SysSettings() {
 
         val uiTesting = settingsSharedPref.uiTesting
 
-        if (!checkIsAutoTime() || uiTesting) CustomTip(message = R.string.set_time_automatically_is_off_tip)
+        if (!checkIsAutoTime() || uiTesting) Tip(message = R.string.set_time_automatically_is_off_tip)
 
         if (isShowGroupTitle1) GroupTitle(R.string.common)
 

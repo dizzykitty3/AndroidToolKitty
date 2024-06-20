@@ -1,7 +1,11 @@
 package me.dizzykitty3.androidtoolkitty.ui.settings
 
 import android.view.HapticFeedbackConstants
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -20,41 +24,83 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.CARD_3
+import me.dizzykitty3.androidtoolkitty.DEBUGGING_SCREEN
 import me.dizzykitty3.androidtoolkitty.EDIT_HOME_SCREEN
+import me.dizzykitty3.androidtoolkitty.LICENSES_SCREEN
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui_components.Screen
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 
 @Composable
 fun Settings(navController: NavHostController) {
-    CustomScreen {
+    Screen {
+        val view = LocalView.current
+        val sourceCodeURL = "https://github.com/dizzykitty3/AndroidToolKitty"
+
         Appearance()
         General(navController)
-        Card(title = R.string.online_features) {
-            var showPrivacyDisclaimer by remember { mutableStateOf(SettingsSharedPref.showPrivacyDisclaimer) }
-            if (showPrivacyDisclaimer) {
-                Text(stringResource(R.string.service_provider_privacy_disclaimer))
-                SpacerPadding()
-                Text("These features are developed and maintained by yanqishui.work")
-                TextButton({
-                    showPrivacyDisclaimer = false
-                    SettingsSharedPref.showPrivacyDisclaimer = false
-                }) { Text("Accept") }
-            }
-            if (!showPrivacyDisclaimer) {
-                PreferencesSync()
-                GroupDivider()
-                RulesUpdate()
+        var showOnlineFeatures by remember { mutableStateOf(SettingsSharedPref.showOnlineFeatures) }
+        if (showOnlineFeatures) {
+            Card(title = R.string.online_features) {
+                var showPrivacyDisclaimer by remember { mutableStateOf(SettingsSharedPref.showPrivacyDisclaimer) }
+                if (showPrivacyDisclaimer) {
+                    Text(stringResource(R.string.service_provider_privacy_disclaimer))
+                    SpacerPadding()
+                    Text("These features are developed and maintained by yanqishui.work")
+                    Row(Modifier.horizontalScroll(rememberScrollState())) {
+                        TextButton({
+                            showPrivacyDisclaimer = false
+                            SettingsSharedPref.showPrivacyDisclaimer = false
+                        }) { Text("Accept") }
+                        TextButton({
+                            showOnlineFeatures = false
+                            SettingsSharedPref.showOnlineFeatures = false
+                        }) { Text("Keep using ToolKitty offline") }
+                    }
+                }
+                if (!showPrivacyDisclaimer) {
+                    PreferencesSync()
+                    GroupDivider()
+                    RulesUpdate()
+                }
             }
         }
-        AboutAndDebugging(navController)
+        About()
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.horizontalScroll(rememberScrollState())
+        ) {
+            TextButton({
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                ToastUtil.show(R.string.all_help_welcomed)
+                IntentUtil.openURL(sourceCodeURL, view.context)
+            }) {
+                Text(stringResource(R.string.source_code))
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = stringResource(R.string.source_code),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
+            Text("|")
+            TextButton({
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                navController.navigate(LICENSES_SCREEN)
+            }) { Text(stringResource(R.string.licenses)) }
+            Text("|")
+            TextButton({
+                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                navController.navigate(DEBUGGING_SCREEN)
+            }) { Text(stringResource(R.string.debugging)) }
+        }
     }
 }
 
@@ -148,7 +194,7 @@ private fun General(navController: NavHostController) {
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             SpacerPadding()
-            Text(text = stringResource(R.string.customize_my_home_page))
+            Text(stringResource(R.string.customize_my_home_page))
         }
     }
 }

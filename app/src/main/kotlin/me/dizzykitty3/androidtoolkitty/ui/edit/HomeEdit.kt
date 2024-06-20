@@ -34,13 +34,13 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.CustomHideCardSettingSwitch
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomScreen
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui_components.Screen
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 
 @Composable
 fun HomeEdit() {
-    CustomScreen {
+    Screen {
         val settingsSharedPref = remember { SettingsSharedPref }
         val isShowCard5 = settingsSharedPref.getCardShowedState(CARD_5)
         var mIsShowCard5 by remember { mutableStateOf(isShowCard5) }

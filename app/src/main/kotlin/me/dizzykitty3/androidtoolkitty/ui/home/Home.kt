@@ -64,9 +64,9 @@ import me.dizzykitty3.androidtoolkitty.SETTING_WIFI
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.BottomPadding
 import me.dizzykitty3.androidtoolkitty.ui_components.CardSpacePadding
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui_components.OneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui_components.Tip
 import me.dizzykitty3.androidtoolkitty.ui_components.TopPadding
 import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
@@ -262,7 +262,7 @@ private fun NoTranslationTip() {
     val languageNotSupport = StringUtil.sysLangNotSupported
     val uiTesting = SettingsSharedPref.uiTesting
     if (languageNotSupport || uiTesting)
-        CustomTip(stringResource(R.string.no_translation, StringUtil.sysLocale))
+        Tip(stringResource(R.string.no_translation, StringUtil.sysLocale))
 }
 
 @Composable

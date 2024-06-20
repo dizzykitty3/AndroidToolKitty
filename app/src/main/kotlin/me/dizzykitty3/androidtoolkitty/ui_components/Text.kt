@@ -106,15 +106,15 @@ fun AnnotatedString.Builder.PrimaryColor(@StringRes id: Int) {
 }
 
 @Composable
-fun CustomTip(@StringRes message: Int) {
-    CustomTip(message = stringResource(id = message))
+fun Tip(@StringRes message: Int) {
+    Tip(message = stringResource(id = message))
 }
 
 @Composable
-fun UnderDevelopmentTip() = CustomTip(R.string.under_development)
+fun UnderDevelopmentTip() = Tip(R.string.under_development)
 
 @Composable
-fun CustomTip(message: String) {
+fun Tip(message: String) {
     val uiTesting = SettingsSharedPref.uiTesting
 
     Card(

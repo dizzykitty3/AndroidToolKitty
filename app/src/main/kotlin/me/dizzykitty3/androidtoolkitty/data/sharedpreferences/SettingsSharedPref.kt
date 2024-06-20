@@ -20,13 +20,13 @@ object SettingsSharedPref {
     private const val ONE_HANDED_MODE = "one_handed_mode"
     private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
-    private const val DEBUGGING_OPTIONS = "debugging_options"
     private const val KEEP_WEBPAGE_CARD_SHOW_MORE = "keep_webpage_card_show_more"
     private const val HAVE_TAPPED_WEBPAGE_CARD_SHOW_MORE = "have_tapped_webpage_card_show_more"
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
     private const val UI_TESTING = "ui_testing"
     private const val SHOW_PRIVACY_DISCLAIMER = "show_privacy_disclaimer"
+    private const val SHOW_ONLINE_FEATURES = "show_online_features"
     private const val SHOW_SYSTEM_VOLUME_UI = "show_system_volume_ui"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
@@ -137,10 +137,6 @@ object SettingsSharedPref {
         get() = getPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
         set(value) = setPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
 
-    var debuggingOptions: Boolean
-        get() = getPreference(DEBUGGING_OPTIONS, false)
-        set(value) = setPreference(DEBUGGING_OPTIONS, value)
-
     var keepWebpageCardShowMore: Boolean
         get() = getPreference(KEEP_WEBPAGE_CARD_SHOW_MORE, false)
         set(value) = setPreference(KEEP_WEBPAGE_CARD_SHOW_MORE, value)
@@ -190,6 +186,10 @@ object SettingsSharedPref {
     var showPrivacyDisclaimer: Boolean
         get() = getPreference(SHOW_PRIVACY_DISCLAIMER, true)
         set(value) = setPreference(SHOW_PRIVACY_DISCLAIMER, value)
+
+    var showOnlineFeatures: Boolean
+        get() = getPreference(SHOW_ONLINE_FEATURES, true)
+        set(value) = setPreference(SHOW_ONLINE_FEATURES, value)
 
     var showSystemVolumeUI: Boolean
         get() = getPreference(SHOW_SYSTEM_VOLUME_UI, true)

@@ -16,8 +16,8 @@ import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
-import me.dizzykitty3.androidtoolkitty.ui_components.CustomTip
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui_components.Tip
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import timber.log.Timber
@@ -31,7 +31,7 @@ fun Clipboard() {
         val view = LocalView.current
         val isShowHintText = !SettingsSharedPref.haveOpenedSettingsScreen
         val uiTesting = SettingsSharedPref.uiTesting
-        if (isShowHintText || uiTesting) CustomTip(message = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
+        if (isShowHintText || uiTesting) Tip(message = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
         OutlinedButton(
             onClick = {
