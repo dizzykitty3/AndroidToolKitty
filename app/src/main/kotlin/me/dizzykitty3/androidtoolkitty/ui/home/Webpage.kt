@@ -48,7 +48,9 @@ import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.Italic
 import me.dizzykitty3.androidtoolkitty.ui_components.UnderDevelopmentTip
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnYouTube
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSearch
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 import timber.log.Timber
@@ -101,7 +103,7 @@ private fun Search() {
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onClickSearchButton(searchQuery, view.context) }
+            onDone = { view.context.onClickSearchButton(searchQuery) }
         ),
         trailingIcon = {
             ClearInput(text = searchQuery) {
@@ -115,7 +117,7 @@ private fun Search() {
         TextButton(
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                onClickSearchButton(searchQuery, view.context)
+                view.context.onClickSearchButton(searchQuery)
             }
         ) {
             Text(text = stringResource(R.string.visit))
@@ -129,7 +131,7 @@ private fun Search() {
         TextButton(
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                onCheckOnYouTube(searchQuery, view.context)
+                view.context.onCheckOnYouTube(searchQuery)
             }
         ) {
             Text(text = stringResource(R.string.search_on_youtube))
@@ -159,7 +161,7 @@ private fun WebpageURL() {
             keyboardType = KeyboardType.Ascii
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onClickVisitURLButton(url, view.context) }
+            onDone = { view.context.onClickVisitURLButton(url) }
         ),
         trailingIcon = {
             ClearInput(text = url) {
@@ -190,7 +192,7 @@ private fun WebpageURL() {
 
     TextButton(onClick = {
         view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-        onClickVisitURLButton(url, view.context)
+        view.context.onClickVisitURLButton(url)
     }) {
         Text(text = stringResource(R.string.visit))
         Icon(
@@ -226,7 +228,7 @@ private fun SocialMediaProfileIURL() {
             imeAction = ImeAction.Done
         ),
         keyboardActions = KeyboardActions(
-            onDone = { onVisitProfileButton(username, mPlatformIndex, view.context) }
+            onDone = { view.context.onVisitProfileButton(username, mPlatformIndex) }
         ),
         trailingIcon = {
             ClearInput(text = username) {
@@ -247,7 +249,7 @@ private fun SocialMediaProfileIURL() {
     Row(verticalAlignment = Alignment.CenterVertically) {
         TextButton(onClick = {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            onVisitProfileButton(username, mPlatformIndex, view.context)
+            view.context.onVisitProfileButton(username, mPlatformIndex)
         }) {
             Text(text = stringResource(R.string.visit))
 
@@ -347,34 +349,33 @@ private fun NoPlatformYouNeedHere() {
     }
 }
 
-private fun onClickSearchButton(query: String, context: Context) {
+private fun Context.onClickSearchButton(query: String) {
     if (query.isBlank()) return
     Timber.d("onClickSearchButton")
-    IntentUtil.openSearch(query, context)
+    this.openSearch(query)
 }
 
-private fun onCheckOnYouTube(query: String, context: Context) {
+private fun Context.onCheckOnYouTube(query: String) {
     if (query.isBlank()) return
     Timber.d("onCheckOnYouTube")
-    IntentUtil.checkOnYouTube(query, context)
+    this.checkOnYouTube(query)
 }
 
-private fun onClickVisitURLButton(url: String, context: Context) {
+private fun Context.onClickVisitURLButton(url: String) {
     if (url.isBlank()) return
     Timber.d("onClickVisitButton")
-    IntentUtil.openURL(URLUtil.toFullURL(StringUtil.dropSpacesAndLowercase(url)), context)
+    this.openURL(URLUtil.toFullURL(StringUtil.dropSpacesAndLowercase(url)))
 }
 
-private fun onVisitProfileButton(
+private fun Context.onVisitProfileButton(
     username: String,
     platformIndex: Int,
-    context: Context
 ) {
     if (username.isBlank()) return
     Timber.d("onVisitProfile")
     val platform = URLUtil.Platform.entries.getOrNull(platformIndex) ?: return
     val url = toSocialMediaFullURL(platform, username)
-    IntentUtil.openURL(url, context)
+    this.openURL(url)
 }
 
 private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String =

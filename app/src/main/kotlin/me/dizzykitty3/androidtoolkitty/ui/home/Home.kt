@@ -70,7 +70,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.Tip
 import me.dizzykitty3.androidtoolkitty.ui_components.TopPadding
 import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
@@ -177,7 +177,7 @@ private fun Status() {
     Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
         Row(modifier = Modifier.clickable {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            IntentUtil.openSystemSettings(SETTING_POWER_USAGE_SUMMARY, view.context)
+            view.context.openSystemSettings(SETTING_POWER_USAGE_SUMMARY)
         }
         ) {
             Icon(
@@ -197,7 +197,7 @@ private fun Status() {
         if (BluetoothUtil.isHeadsetConnected() || SettingsSharedPref.uiTesting) {
             Row(modifier = Modifier.clickable {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                IntentUtil.openSystemSettings(SETTING_BLUETOOTH, view.context)
+                view.context.openSystemSettings(SETTING_BLUETOOTH)
             }) {
                 Icon(
                     imageVector = Icons.Outlined.MediaBluetoothOn,
@@ -244,7 +244,7 @@ private fun NetworkStateIcon(
 
     Row(modifier = Modifier.clickable {
         view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-        IntentUtil.openSystemSettings(SETTING_WIFI, view.context)
+        view.context.openSystemSettings(SETTING_WIFI)
     }
     ) {
         Icon(

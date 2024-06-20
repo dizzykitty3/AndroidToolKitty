@@ -19,7 +19,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.Screen
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
@@ -68,7 +68,7 @@ fun ManuallyGrant() {
     TextButton(
         onClick = {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            IntentUtil.openAppDetailSettings(view.context)
+            view.context.openAppDetailSettings()
         }
     ) {
         Text(

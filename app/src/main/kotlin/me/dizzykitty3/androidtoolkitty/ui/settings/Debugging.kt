@@ -34,7 +34,8 @@ import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui_components.Screen
 import me.dizzykitty3.androidtoolkitty.ui_components.UnderDevelopmentTip
 import me.dizzykitty3.androidtoolkitty.ui_components.WarningAlertDialogButton
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.finishApp
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import java.util.Locale
@@ -86,7 +87,7 @@ fun Debugging(navController: NavHostController) {
 
             OutlinedButton(onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                IntentUtil.restartApp(view.context)
+                view.context.restartApp()
             }) {
                 Text(text = stringResource(id = R.string.restart_app))
             }
@@ -110,7 +111,7 @@ fun Debugging(navController: NavHostController) {
                 onClickAction = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     settingsSharedPref.eraseAllData()
-                    IntentUtil.finishApp(view.context)
+                    view.context.finishApp()
                 }
             )
 

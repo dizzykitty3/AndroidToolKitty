@@ -24,7 +24,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 
 @Composable
@@ -70,10 +70,7 @@ private fun DeveloperProfileLink(name: String) {
         Row(
             modifier = Modifier.clickable {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                IntentUtil.openURL(
-                    "${URLUtil.prefixOf(URLUtil.Platform.GITHUB)}$name",
-                    view.context
-                )
+                view.context.openURL("${URLUtil.prefixOf(URLUtil.Platform.GITHUB)}$name")
             }
         ) {
             Text(
@@ -104,7 +101,7 @@ private fun ThanksTo(link: String) {
                 .horizontalScroll(rememberScrollState())
                 .clickable {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    IntentUtil.openURL(sourceCodeURL, view.context)
+                    view.context.openURL(sourceCodeURL)
                 }
         ) {
             Text(

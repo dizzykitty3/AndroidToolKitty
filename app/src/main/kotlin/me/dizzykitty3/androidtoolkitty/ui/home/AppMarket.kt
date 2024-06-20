@@ -32,7 +32,8 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnMarket
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 
 @Preview
 @Composable
@@ -53,7 +54,7 @@ fun AppMarket() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { IntentUtil.checkOnMarket(packageName, view.context) }
+                onDone = { view.context.checkOnMarket(packageName) }
             ),
             trailingIcon = {
                 ClearInput(text = packageName) {
@@ -70,7 +71,7 @@ fun AppMarket() {
             TextButton(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    IntentUtil.checkOnMarket(packageName, view.context)
+                    view.context.checkOnMarket(packageName)
                 }
             ) {
                 Text(text = stringResource(R.string.open_on_google_play))
@@ -84,7 +85,7 @@ fun AppMarket() {
             TextButton(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    IntentUtil.checkOnMarket(packageName, view.context, false)
+                    view.context.checkOnMarket(packageName, false)
                 }
             ) {
                 Text(text = stringResource(R.string.open_on_other_markets))
@@ -115,7 +116,7 @@ private fun WhatIsPackageName() {
             modifier = Modifier.clickable(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    IntentUtil.openURL(linkURL, view.context)
+                    view.context.openURL(linkURL)
                 }
             )
         ) {

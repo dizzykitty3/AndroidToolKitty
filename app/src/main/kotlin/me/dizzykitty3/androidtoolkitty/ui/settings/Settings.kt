@@ -34,7 +34,8 @@ import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.Screen
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
@@ -85,7 +86,7 @@ fun Settings(navController: NavHostController) {
             TextButton({
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 ToastUtil.show(R.string.all_help_welcomed)
-                IntentUtil.openURL(sourceCodeURL, view.context)
+                view.context.openURL(sourceCodeURL)
             }) {
                 Text(stringResource(R.string.source_code))
                 Icon(
@@ -122,7 +123,7 @@ private fun Appearance() {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 dynamicColor = it
                 SettingsSharedPref.dynamicColor = it
-                IntentUtil.restartApp(view.context)
+                view.context.restartApp()
             }
         }
 
