@@ -61,7 +61,7 @@ fun Debugging(navController: NavHostController) {
                 OutlinedButton({
                     settingsSharedPref.showOnlineFeatures = true
                     SnackbarUtil.show(view, R.string.success)
-                }) { Text("Show online features") }
+                }) { Text(stringResource(R.string.show_online_features)) }
             }
 
             OutlinedButton(onClick = {
@@ -75,13 +75,13 @@ fun Debugging(navController: NavHostController) {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 showDialog = true
             }) {
-                Text(text = "Auto set volume")
+                Text(stringResource(R.string.auto_set_volume))
             }
 
             OutlinedButton(
                 onClick = { navController.navigate(QR_CODE_GENERATOR_SCREEN) }
             ) {
-                Text(text = "QR Code generator")
+                Text(stringResource(R.string.qr_code_generator))
             }
 
             OutlinedButton(onClick = {
@@ -120,9 +120,7 @@ fun Debugging(navController: NavHostController) {
                     icon = {
                         Icon(imageVector = Icons.Outlined.WbSunny, contentDescription = null)
                     },
-                    title = {
-                        Text(text = "Auto set media volume")
-                    },
+                    title = { Text(stringResource(R.string.auto_set_volume)) },
                     text = {
                         Column(modifier = Modifier.fillMaxWidth()) {
                             UnderDevelopmentTip()

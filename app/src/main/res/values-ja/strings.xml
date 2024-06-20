@@ -182,5 +182,11 @@
     <string name="volume_changed_auto">Volume changed automatically.</string>
     <string name="error">error</string>
     <string name="more_precise_slider">More precise slider</string>
-    <string name="show_system_volume_ui">Show system volume UI</string>
+    <string name="show_system_volume_ui">Show system volume UI after changing volume</string>
+    <string name="accept">Accept</string>
+    <string name="service_provider_privacy_disclaimer_content">These features are developed and maintained by yanqishui.work</string>
+    <string name="show_online_features">Show online features</string>
+    <string name="auto_set_volume">Set volume automatically</string>
+    <string name="qr_code_generator">QR Code generator</string>
+    <string name="keep_using_offline">Keep using ToolKitty offline</string>
 </resources>

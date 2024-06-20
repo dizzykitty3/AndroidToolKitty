@@ -22,6 +22,7 @@
     <string name="refresh">Refresh</string>
     <string name="settings">Settings</string>
     <string name="error">error</string>
+    <string name="accept">Accept</string>
 
     <!-- Home > Top bar -->
     <string name="battery_level">Battery level</string>
@@ -297,6 +298,8 @@
     <string name="webpage_suffixes">Webpage suffixes</string>
     <string name="online_features">Online features</string>
     <string name="service_provider_privacy_disclaimer">Service provider privacy disclaimer</string>
+    <string name="service_provider_privacy_disclaimer_content">These features are developed and maintained by yanqishui.work</string>
+    <string name="keep_using_offline">Keep using ToolKitty offline</string>
 
     <!-- Settings > About -->
     <string name="about">About</string>
@@ -317,6 +320,9 @@
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
     <string name="restart_app">Restart app</string>
     <string name="ui_testing">UI testing</string>
+    <string name="show_online_features">Show online features</string>
+    <string name="auto_set_volume">Set volume automatically</string>
+    <string name="qr_code_generator">QR Code generator</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>

@@ -54,16 +54,20 @@ fun Settings(navController: NavHostController) {
                 if (showPrivacyDisclaimer) {
                     Text(stringResource(R.string.service_provider_privacy_disclaimer))
                     SpacerPadding()
-                    Text("These features are developed and maintained by yanqishui.work")
-                    Row(Modifier.horizontalScroll(rememberScrollState())) {
+                    Text(stringResource(R.string.service_provider_privacy_disclaimer_content))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.horizontalScroll(rememberScrollState())
+                    ) {
                         TextButton({
                             showPrivacyDisclaimer = false
                             SettingsSharedPref.showPrivacyDisclaimer = false
-                        }) { Text("Accept") }
+                        }) { Text(stringResource(R.string.accept)) }
+                        Text("|")
                         TextButton({
                             showOnlineFeatures = false
                             SettingsSharedPref.showOnlineFeatures = false
-                        }) { Text("Keep using ToolKitty offline") }
+                        }) { Text(stringResource(R.string.keep_using_offline)) }
                     }
                 }
                 if (!showPrivacyDisclaimer) {
