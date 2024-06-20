@@ -42,9 +42,8 @@ fun YearProgress() {
         ) {
             CustomAnimatedProgressIndicator()
 
-            val textToShow = if (percentageOnly) percentage() else percentageAndRemaining()
             Text(
-                text = textToShow,
+                text = if (percentageOnly) percentage() else percentageAndRemaining(),
                 modifier = Modifier.fillMaxWidth()
             )
         }
@@ -53,10 +52,10 @@ fun YearProgress() {
 
 private fun percentage(): String = "${(yearProgressPercentage(yearProgress))}%"
 
-private fun percentageAndRemaining(): String = "${percentage()} · ${
-    appContext.resources.getQuantityString(
-        R.plurals.days_remaining,
-        (totalDaysInYear - daysPassed).toInt(),
-        totalDaysInYear - daysPassed
-    )
-}"
+private fun remainingDays(): String = appContext.resources.getQuantityString(
+    R.plurals.days_remaining,
+    (totalDaysInYear - daysPassed).toInt(),
+    totalDaysInYear - daysPassed
+)
+
+private fun percentageAndRemaining(): String = "${percentage()} · ${remainingDays()}"
