@@ -4,15 +4,12 @@ import java.time.LocalTime
 import java.util.Locale
 
 object StringUtil {
-    fun greeting(): String {
-        val currentTime = LocalTime.now()
-        return when (currentTime.hour) {
+    fun greeting(): String = when (LocalTime.now().hour) {
             in 6..11 -> "Good morning"
             in 12..18 -> "Good afternoon"
             in 19..22 -> "Good evening"
             else -> "Good night"
         }
-    }
 
     /**
      * Drop spaces, including full-width ones.
@@ -50,18 +47,21 @@ object StringUtil {
         val stringBuilder = StringBuilder()
         for (char in characters) {
             val unicodeValue = char.code
-            val hexString = unicodeValue.toString(16).padStart(4, '0') // 转换成十六进制并确保长度为4
+            val hexString = unicodeValue.toString(16).padStart(4, '0')
             stringBuilder.append(hexString)
         }
         return stringBuilder.toString()
     }
 
-    private fun sysLocale(): String = Locale.getDefault().toString()
+    val sysLocale: String
+        get() = Locale.getDefault().toString()
 
-    @Suppress("MemberVisibilityCanBePrivate")
-    fun sysLangSupported(): Boolean = sysLocale().contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
+    val sysLangSupported: Boolean
+        get() = sysLocale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
 
-    fun sysLangNotSupported(): Boolean = !sysLangSupported()
+    val sysLangNotSupported: Boolean
+        get() = !sysLangSupported
 
-    fun sysLangCJK(): Boolean = sysLocale().contains(Regex("Hans|Hant|zh|ja|ko"))
+    val sysLangCJK: Boolean
+        get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
 }

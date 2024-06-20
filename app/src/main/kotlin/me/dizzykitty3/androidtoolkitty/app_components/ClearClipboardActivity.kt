@@ -18,17 +18,16 @@ class ClearClipboardActivity : Activity() {
         Timber.d("onWindowFocusChanged")
         if (hasFocus) {
             Timber.d("hasFocus")
-            val cleared = ClipboardUtil.check()
-            if (cleared) {
+            if (ClipboardUtil.check()) {
                 Timber.i("clipboard cleared")
-                Toast.makeText(this, getString(R.string.clipboard_cleared), Toast.LENGTH_SHORT)
-                    .show()
+                toast(getString(R.string.clipboard_cleared))
             } else {
                 Timber.i("clipboard is empty")
-                Toast.makeText(this, getString(R.string.clipboard_is_empty), Toast.LENGTH_SHORT)
-                    .show()
+                toast(getString(R.string.clipboard_is_empty))
             }
             finish()
         }
     }
+
+    private fun toast(s: String) = Toast.makeText(this, s, Toast.LENGTH_SHORT).show()
 }

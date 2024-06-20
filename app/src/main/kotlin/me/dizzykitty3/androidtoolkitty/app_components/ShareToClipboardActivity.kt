@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import timber.log.Timber
@@ -17,7 +18,11 @@ class ShareToClipboardActivity : Activity() {
         if (sharedText != null) {
             Timber.i("onCreate sharedText non null")
             ClipboardUtil.copy(sharedText)
-            if (!OSVersion.android13()) Toast.makeText(this, "copied", Toast.LENGTH_SHORT).show()
+            if (!OSVersion.android13()) Toast.makeText(
+                this,
+                getString(R.string.copied),
+                Toast.LENGTH_SHORT
+            ).show()
         }
         finish()
     }

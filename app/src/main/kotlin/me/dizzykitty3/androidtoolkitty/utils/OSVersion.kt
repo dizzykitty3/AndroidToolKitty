@@ -62,9 +62,7 @@ object OSVersion {
     /**
      * Q
      *
-     * 1. Unless your app is the default input method editor (IME)
-     * or is the app that currently has focus,
-     * your app cannot access clipboard data.
+     * 1. Unless your app is the default input method editor (IME) or is the app that currently has focus, your app cannot access clipboard data.
      */
     fun android10(): Boolean = osVersion >= 29
     fun api29(): Boolean = android10()
@@ -81,18 +79,29 @@ object OSVersion {
      * Oreo
      *
      * 1. Adaptive icons
+     * 2. LocalTime.now()
      */
     fun android8(): Boolean = osVersion >= 26
     fun api26(): Boolean = android8()
 
     /**
      * Nougat
+     *
+     * 1. Create a TileService
+     * 2. Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
      */
     fun android7(): Boolean = osVersion >= 24
     fun api24(): Boolean = android7()
 
     /**
      * Marshmallow
+     *
+     * 1. View.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+     * 2. ConnectivityManager.getActiveNetwork()
+     * 3. Icon.createWithResource()
+     * 4. Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+     * 5. Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
+     * 6. Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
      */
     fun android6(): Boolean = osVersion >= 23
     fun api23(): Boolean = android6()

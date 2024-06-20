@@ -10,7 +10,6 @@ object ClipboardUtil {
     private var clipboard =
         appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
-    @Suppress("unused")
     @SuppressLint("NewApi")
     fun clear() {
         if (OSVersion.android9()) {

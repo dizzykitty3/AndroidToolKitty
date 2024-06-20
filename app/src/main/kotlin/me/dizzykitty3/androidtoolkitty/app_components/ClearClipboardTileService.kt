@@ -12,13 +12,24 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import timber.log.Timber
 
+@SuppressLint("NewApi")
 class ClearClipboardTileService : TileService() {
     override fun onBind(intent: Intent?): IBinder? {
+        if (!OSVersion.api24()) {
+            Timber.w("TileService unsupported")
+            return null
+        }
+
         Timber.d("onBind")
         return super.onBind(intent)
     }
 
     override fun onStartListening() {
+        if (!OSVersion.api24()) {
+            Timber.w("TileService unsupported")
+            return
+        }
+
         super.onStartListening()
         Timber.d("onStartListening")
         val cleanTitle = qsTile
@@ -28,8 +39,14 @@ class ClearClipboardTileService : TileService() {
         cleanTitle.updateTile()
     }
 
-    @SuppressLint("NewApi", "StartActivityAndCollapseDeprecated")
+    @Suppress("DEPRECATION")
+    @SuppressLint("StartActivityAndCollapseDeprecated")
     override fun onClick() {
+        if (!OSVersion.api24()) {
+            Timber.w("TileService unsupported")
+            return
+        }
+
         super.onClick()
         Timber.d("onClick")
         try {
@@ -47,12 +64,11 @@ class ClearClipboardTileService : TileService() {
                 startActivityAndCollapse(pendingIntent)
             } else {
                 Timber.i("< Android 14")
-                @Suppress("DEPRECATION")
                 startActivityAndCollapse(intent)
             }
         } catch (e: Exception) {
             Timber.e(e)
-            Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error), Toast.LENGTH_SHORT).show()
         }
     }
 }

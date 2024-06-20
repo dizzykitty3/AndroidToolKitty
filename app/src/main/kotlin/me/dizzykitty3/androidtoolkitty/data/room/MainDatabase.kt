@@ -5,8 +5,6 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 
-// Reference codelab: https://developer.android.com/codelabs/basic-android-kotlin-compose-persisting-data-room
-
 @Database(
     entities = [URLHistory::class],
     version = 1,

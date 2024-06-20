@@ -42,18 +42,18 @@ object IntentUtil {
             return
         } catch (e: Exception) {
             Timber.e(e)
-            ToastUtil.toast(e.message ?: "Unknown error")
+            ToastUtil.show(e.message ?: "Unknown error")
         }
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
                 Timber.i("Google Play not installed")
-                ToastUtil.toast(R.string.google_play_not_installed)
+                ToastUtil.show(R.string.google_play_not_installed)
             }
 
             GOOGLE_MAPS -> {
                 Timber.i("Google Maps not installed")
-                ToastUtil.toast(R.string.google_maps_not_installed)
+                ToastUtil.show(R.string.google_maps_not_installed)
                 checkOnMarket(GOOGLE_MAPS, context)
             }
         }
@@ -117,6 +117,7 @@ object IntentUtil {
                 Settings.ACTION_AUTO_ROTATE_SETTINGS
             ) else return
 
+            // TODO API requirement
             SETTING_BLUETOOTH -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
             SETTING_DEFAULT_APPS -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
             SETTING_BATTERY_OPTIMIZATION -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)

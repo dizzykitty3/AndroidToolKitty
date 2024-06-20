@@ -16,18 +16,18 @@ object SettingsSharedPref {
 
     // Booleans
     private const val AUTO_CLEAR_CLIPBOARD = "auto_clear_clipboard"
-    private const val SLIDER_INCREMENT_5_PERCENT = "slider_increment_5_percent"
     private const val DYNAMIC_COLOR = "dynamic_color"
     private const val ONE_HANDED_MODE = "one_handed_mode"
     private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
-    private const val DEBUGGING_OPTIONS = "debugging_options"
-    private const val WEBPAGE_CARD_SHOW_MORE = "webpage_card_show_more"
-    private const val SHOW_SNACKBAR_BEFORE_APPLY_CHANGES = "show_snackbar_to_confirm"
-    private const val SHOW_EDIT_VOLUME_OPTION = "show_edit_volume_option"
+    private const val KEEP_WEBPAGE_CARD_SHOW_MORE = "keep_webpage_card_show_more"
+    private const val HAVE_TAPPED_WEBPAGE_CARD_SHOW_MORE = "have_tapped_webpage_card_show_more"
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
     private const val UI_TESTING = "ui_testing"
+    private const val SHOW_PRIVACY_DISCLAIMER = "show_privacy_disclaimer"
+    private const val SHOW_ONLINE_FEATURES = "show_online_features"
+    private const val SHOW_SYSTEM_VOLUME_UI = "show_system_volume_ui"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -121,10 +121,6 @@ object SettingsSharedPref {
         get() = getPreference(AUTO_CLEAR_CLIPBOARD, false)
         set(value) = setPreference(AUTO_CLEAR_CLIPBOARD, value)
 
-    var sliderIncrement5Percent: Boolean
-        get() = getPreference(SLIDER_INCREMENT_5_PERCENT, false)
-        set(value) = setPreference(SLIDER_INCREMENT_5_PERCENT, value)
-
     var dynamicColor: Boolean
         get() = getPreference(DYNAMIC_COLOR, true)
         set(value) = setPreference(DYNAMIC_COLOR, value)
@@ -141,29 +137,20 @@ object SettingsSharedPref {
         get() = getPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
         set(value) = setPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
 
-    var debuggingOptions: Boolean
-        get() = getPreference(DEBUGGING_OPTIONS, false)
-        set(value) = setPreference(DEBUGGING_OPTIONS, value)
+    var keepWebpageCardShowMore: Boolean
+        get() = getPreference(KEEP_WEBPAGE_CARD_SHOW_MORE, false)
+        set(value) = setPreference(KEEP_WEBPAGE_CARD_SHOW_MORE, value)
 
-    var webpageCardShowMore: Boolean
-        get() = getPreference(WEBPAGE_CARD_SHOW_MORE, false)
-        set(value) = setPreference(WEBPAGE_CARD_SHOW_MORE, value)
-
-    fun enabledWebpageCardShowMore(): Boolean = webpageCardShowMore
-
-    var showSnackbar: Boolean
-        get() = getPreference(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, true)
-        set(value) = setPreference(SHOW_SNACKBAR_BEFORE_APPLY_CHANGES, value)
-
-    var showEditVolumeOption: Boolean
-        get() = getPreference(SHOW_EDIT_VOLUME_OPTION, true)
-        set(value) = setPreference(SHOW_EDIT_VOLUME_OPTION, value)
+    var haveTappedWebpageCardShowMore: Boolean
+        get() = getPreference(HAVE_TAPPED_WEBPAGE_CARD_SHOW_MORE, false)
+        set(value) = setPreference(HAVE_TAPPED_WEBPAGE_CARD_SHOW_MORE, value)
 
     var autoSetMediaVolume: Int
         get() = getPreference(AUTO_SET_MEDIA_VOLUME, -1)
         set(value) = setPreference(AUTO_SET_MEDIA_VOLUME, value)
 
-    fun enabledAutoSetMediaVolume(): Boolean = autoSetMediaVolume != -1
+    val enabledAutoSetMediaVolume: Boolean
+        get() = autoSetMediaVolume != -1
 
     var haveTappedAddButton: Boolean
         get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
@@ -181,7 +168,8 @@ object SettingsSharedPref {
         get() = getPreference(CUSTOM_VOLUME, Int.MIN_VALUE)
         set(value) = setPreference(CUSTOM_VOLUME, value)
 
-    fun addedCustomVolume(): Boolean = customVolume > 0
+    val addedCustomVolume: Boolean
+        get() = customVolume > 0
 
     var customVolumeOptionLabel: String?
         get() = getPreference(VOLUME_OPTION_LABEL, "")
@@ -195,16 +183,26 @@ object SettingsSharedPref {
         get() = getPreference(SOCIAL_MEDIA, "")
         set(value) = setPreference(SOCIAL_MEDIA, value)
 
+    var showPrivacyDisclaimer: Boolean
+        get() = getPreference(SHOW_PRIVACY_DISCLAIMER, true)
+        set(value) = setPreference(SHOW_PRIVACY_DISCLAIMER, value)
+
+    var showOnlineFeatures: Boolean
+        get() = getPreference(SHOW_ONLINE_FEATURES, true)
+        set(value) = setPreference(SHOW_ONLINE_FEATURES, value)
+
+    var showSystemVolumeUI: Boolean
+        get() = getPreference(SHOW_SYSTEM_VOLUME_UI, true)
+        set(value) = setPreference(SHOW_SYSTEM_VOLUME_UI, value)
+
     fun getWheelOfFortuneItems(): List<String>? {
-        val itemsJson = getPreference(WHEEL_OF_FORTUNE_ITEMS, "")
-        return itemsJson.let {
-            try {
-                val items: WheelOfFortuneItems = Json.decodeFromString(it)
-                items.items
-            } catch (e: Exception) {
-                Timber.e(e)
-                null
-            }
+        val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null
+        return try {
+            val items: WheelOfFortuneItems = Json.decodeFromString(itemsJson)
+            items.items
+        } catch (e: Exception) {
+            Timber.e(e)
+            null
         }
     }
 

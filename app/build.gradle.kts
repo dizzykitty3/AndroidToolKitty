@@ -10,19 +10,17 @@ plugins {
 
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
-    compileSdk = 34
-
+    compileSdk = 35
     buildFeatures {
         buildConfig = true
         compose = true
     }
-
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
-        targetSdk = 34
-        versionCode = 817
-        versionName = "1.0.817"
+        targetSdk = compileSdk
+        versionCode = 865
+        versionName = "1.0.${versionCode}"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -30,7 +28,6 @@ android {
             useSupportLibrary = true
         }
     }
-
     buildTypes {
         debug {
             isMinifyEnabled = false
@@ -38,7 +35,6 @@ android {
             versionNameSuffix = ".dev"
             resValue("string", "app_name", "ToolKitty Dev")
         }
-
         release {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -48,22 +44,22 @@ android {
             )
         }
     }
-
     applicationVariants.all {
-        val outputFileName = "android-toolkitty-${this.versionName}.apk"
+        val outputFileName = "android-toolkitty-${versionName}.apk"
         outputs.all {
             (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl)
                 .outputFileName = outputFileName
         }
     }
-
     composeCompiler {
         enableStrongSkippingMode = true
         reportsDestination = layout.buildDirectory.dir("compose_compiler")
+        // https://developer.android.com/develop/ui/compose/compiler#configuration-options
 //        stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
     }
-
     compileOptions {
+        // https://developer.android.com/studio/write/java8-support#library-desugaring
+        isCoreLibraryDesugaringEnabled = true // Java 8+ API desugaring support
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -86,11 +82,10 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.work.testing)
-
+    coreLibraryDesugaring(libs.android.desugar.jdk.libs)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.square.leakcanary)
-
     implementation(libs.android.gms.play.services.maps)
     implementation(libs.android.material)
     implementation(libs.androidx.activity.compose)
@@ -115,7 +110,6 @@ dependencies {
     implementation(libs.ktor.client.logging)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.timber)
-
     ksp(libs.google.hilt.compiler)
     ksp(libs.androidx.room.compiler)
 }
