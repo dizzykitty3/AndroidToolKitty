@@ -18,9 +18,9 @@ android {
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
-        targetSdk = 35
-        versionCode = 817
-        versionName = "1.0.817"
+        targetSdk = compileSdk
+        versionCode = 865
+        versionName = "1.0.${versionCode}"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -45,7 +45,7 @@ android {
         }
     }
     applicationVariants.all {
-        val outputFileName = "android-toolkitty-${this.versionName}.apk"
+        val outputFileName = "android-toolkitty-${versionName}.apk"
         outputs.all {
             (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl)
                 .outputFileName = outputFileName
