@@ -117,7 +117,7 @@ private fun Appearance() {
     var systemVolumeUI by remember { mutableStateOf(settingsSharedPref.showSystemVolumeUI) }
 
     Card(title = R.string.appearance) {
-        if (OSVersion.android12()) {
+        if (OSVersion.a12()) {
             CustomSwitchRow(text = R.string.material_you_dynamic_color, checked = dynamicColor) {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 dynamicColor = it

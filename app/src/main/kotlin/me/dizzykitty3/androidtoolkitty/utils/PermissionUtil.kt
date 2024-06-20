@@ -18,7 +18,7 @@ object PermissionUtil {
      */
     @CheckResult
     fun noBluetoothPermission(context: Context): Boolean {
-        return if (OSVersion.android12()) check(context, BT_CONNECT)
+        return if (OSVersion.a12()) check(context, BT_CONNECT)
         else check(context, BT) || check(context, BT_ADMIN)
     }
 
@@ -26,7 +26,7 @@ object PermissionUtil {
         ActivityCompat.checkSelfPermission(context, permission) != GRANTED
 
     fun requestBluetoothPermission(context: Context) {
-        if (OSVersion.android12()) {
+        if (OSVersion.a12()) {
             request(context, arrayOf(BT_CONNECT))
             return
         }

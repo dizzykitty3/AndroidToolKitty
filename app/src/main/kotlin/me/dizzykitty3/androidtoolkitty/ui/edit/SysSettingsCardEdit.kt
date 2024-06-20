@@ -137,7 +137,7 @@ fun SysSettingsCardEdit() {
             mIsShowSetting1 = newState
             settingsSharedPref.saveCardShowedState(SETTING_DISPLAY, newState)
         }
-        if (OSVersion.android12()) {
+        if (OSVersion.a12()) {
             CustomHideCardSettingSwitch(
                 text = R.string.open_auto_rotate_settings,
                 card = SETTING_AUTO_ROTATE,

@@ -431,7 +431,7 @@ private fun UserProfileDialog(
                 modifier = Modifier.clickable {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     ClipboardUtil.copy(token)
-                    if (!OSVersion.android13()) {
+                    if (!OSVersion.a13()) {
                         ToastUtil.show(R.string.copied)
                     }
                 }

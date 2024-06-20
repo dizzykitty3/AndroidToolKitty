@@ -35,7 +35,7 @@ fun PermissionRequest() {
             var clickCount by remember { mutableIntStateOf(0) }
             val view = LocalView.current
 
-            if (OSVersion.android12()) Text(text = stringResource(id = R.string.bluetooth_connect))
+            if (OSVersion.a12()) Text(text = stringResource(id = R.string.bluetooth_connect))
             else Text(text = stringResource(id = R.string.bluetooth_bluetooth_admin))
 
             Button(

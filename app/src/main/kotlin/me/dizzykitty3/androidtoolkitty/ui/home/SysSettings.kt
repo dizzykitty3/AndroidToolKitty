@@ -94,7 +94,7 @@ fun SysSettings() {
                     )
                 }
 
-                if ((isShowSetting[SETTING_AUTO_ROTATE] == true) && OSVersion.android12()) {
+                if ((isShowSetting[SETTING_AUTO_ROTATE] == true) && OSVersion.a12()) {
                     SystemSettingButton(
                         settingType = SETTING_AUTO_ROTATE,
                         text = R.string.open_auto_rotate_settings

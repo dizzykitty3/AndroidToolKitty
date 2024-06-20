@@ -53,7 +53,7 @@ class ClearClipboardTileService : TileService() {
             val intent = Intent(this@ClearClipboardTileService, ClearClipboardActivity::class.java)
             intent.flags =
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-            if (OSVersion.android14()) {
+            if (OSVersion.a14()) {
                 Timber.i("Android 14")
                 val pendingIntent = PendingIntent.getActivity(
                     this@ClearClipboardTileService,

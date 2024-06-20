@@ -113,7 +113,7 @@ object IntentUtil {
     fun openSystemSettings(settingType: String, context: Context) {
         val intent: Intent = when (settingType) {
             SETTING_DISPLAY -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
-            SETTING_AUTO_ROTATE -> @SuppressLint("InlinedApi") if (OSVersion.android12()) Intent(
+            SETTING_AUTO_ROTATE -> @SuppressLint("InlinedApi") if (OSVersion.a12()) Intent(
                 Settings.ACTION_AUTO_ROTATE_SETTINGS
             ) else return
 
