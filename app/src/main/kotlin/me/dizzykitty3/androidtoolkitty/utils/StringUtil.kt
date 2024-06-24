@@ -65,4 +65,6 @@ object StringUtil {
 
     val sysLangCJK: Boolean
         @CheckResult get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
+
+    fun toASCII(c: String): String = c.map { it.code }.joinToString(", ")
 }

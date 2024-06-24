@@ -30,7 +30,7 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 @Composable
 fun About() {
     Card(title = R.string.about) {
-        GroupTitle(id = R.string.version)
+        GroupTitle(title = R.string.version)
         Row {
             Icon(
                 imageVector = Icons.Outlined.Schedule,
@@ -46,12 +46,12 @@ fun About() {
 
 @Composable
 private fun ContributorAndThanksTo() {
-    GroupTitle(id = R.string.contributors)
+    GroupTitle(title = R.string.contributors)
     DeveloperProfileLink("dizzykitty3")
     SpacerPadding()
     DeveloperProfileLink("HongjieCN")
     SpacerPadding()
-    GroupTitle(id = R.string.inspired_by)
+    GroupTitle(title = R.string.inspired_by)
     ThanksTo("tengusw/share_to_clipboard")
     SpacerPadding()
     ThanksTo("hashemi-hossein/memory-guardian")

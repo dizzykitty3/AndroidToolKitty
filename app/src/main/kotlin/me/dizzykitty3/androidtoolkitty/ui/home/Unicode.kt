@@ -26,6 +26,8 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
+import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.Italic
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
@@ -127,6 +129,41 @@ fun Unicode() {
         ) {
             Text(text = stringResource(R.string.convert))
         }
+
+        GroupDivider()
+        GroupTitle("to ASCII")
+
+        var stringToASCII by remember { mutableStateOf("") }
+        var toASCIIResult by remember { mutableStateOf("") }
+
+        OutlinedTextField(
+            value = stringToASCII,
+            onValueChange = { stringToASCII = it },
+            label = { Text(stringResource(R.string.character)) },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    toASCIIResult = StringUtil.toASCII(stringToASCII)
+                    focus.clearFocus()
+                }
+            ),
+            trailingIcon = {
+                ClearInput(text = stringToASCII) {
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    stringToASCII = ""
+                }
+            },
+        )
+
+        Text("result = $toASCIIResult")
+
+        TextButton({
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            toASCIIResult = StringUtil.toASCII(stringToASCII)
+        }) { Text("Convert to ASCII values") }
     }
 }
 

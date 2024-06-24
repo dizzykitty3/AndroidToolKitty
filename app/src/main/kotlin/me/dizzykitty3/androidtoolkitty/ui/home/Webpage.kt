@@ -66,7 +66,7 @@ fun Webpage() {
         val keepShowMore by remember { mutableStateOf(settingsSharedPref.keepWebpageCardShowMore) }
         var mShowMore by remember { mutableStateOf(false) }
 
-        if (keepShowMore || mShowMore) GroupTitle(id = R.string.search)
+        if (keepShowMore || mShowMore) GroupTitle(title = R.string.search)
 
         Search()
 
@@ -146,7 +146,7 @@ private fun Search() {
 
 @Composable
 private fun WebpageURL() {
-    GroupTitle(id = R.string.webpage)
+    GroupTitle(title = R.string.webpage)
 
     val view = LocalView.current
     var url by remember { mutableStateOf("") }
@@ -211,7 +211,7 @@ private fun SocialMediaProfileIURL() {
     var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
     val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
 
-    GroupTitle(id = R.string.social_media_profile)
+    GroupTitle(title = R.string.social_media_profile)
 
     CustomDropdownMenu(
         items = platformList,
