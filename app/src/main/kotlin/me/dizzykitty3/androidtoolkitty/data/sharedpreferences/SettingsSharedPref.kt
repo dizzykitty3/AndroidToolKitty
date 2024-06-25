@@ -28,10 +28,14 @@ object SettingsSharedPref {
     private const val SHOW_PRIVACY_DISCLAIMER = "show_privacy_disclaimer"
     private const val SHOW_ONLINE_FEATURES = "show_online_features"
     private const val SHOW_SYSTEM_VOLUME_UI = "show_system_volume_ui"
+    private const val ENABLE_LOCATION = "enable_location"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
+    private const val SAVED_LATITUDE = "saved_latitude"
+    private const val SAVED_LONGITUDE = "saved_longitude"
+
     private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
     private const val DOMAIN_SUFFIX = "domain_suffix"
     private const val SOCIAL_MEDIA = "social_media"
@@ -46,6 +50,7 @@ object SettingsSharedPref {
             Boolean::class -> sharedPrefs.getBoolean(key, defaultValue as Boolean) as T
             Int::class -> sharedPrefs.getInt(key, defaultValue as Int) as T
             String::class -> sharedPrefs.getString(key, defaultValue as String) as T
+            Float::class -> sharedPrefs.getFloat(key, defaultValue as Float) as T
             else -> throw IllegalArgumentException("Unsupported type")
         }
     }
@@ -57,6 +62,7 @@ object SettingsSharedPref {
                 is Boolean -> putBoolean(key, value)
                 is Int -> putInt(key, value)
                 is String -> putString(key, value)
+                is Float -> putFloat(key, value)
                 else -> throw IllegalArgumentException("Unsupported type")
             }
             apply()
@@ -195,6 +201,10 @@ object SettingsSharedPref {
         get() = getPreference(SHOW_SYSTEM_VOLUME_UI, true)
         set(value) = setPreference(SHOW_SYSTEM_VOLUME_UI, value)
 
+    var enableLocation: Boolean
+        get() = getPreference(ENABLE_LOCATION, false)
+        set(value) = setPreference(ENABLE_LOCATION, value)
+
     fun getWheelOfFortuneItems(): List<String>? {
         val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null
         return try {
@@ -227,4 +237,12 @@ object SettingsSharedPref {
     var token: String
         get() = getPreference(TOKEN, "")
         set(value) = setPreference(TOKEN, value)
+
+    var savedLatitude: Float
+        get() = getPreference(SAVED_LATITUDE, 0f)
+        set(value) = setPreference(SAVED_LATITUDE, value)
+
+    var savedLongitude: Float
+        get() = getPreference(SAVED_LONGITUDE, 0f)
+        set(value) = setPreference(SAVED_LONGITUDE, value)
 }

@@ -10,6 +10,7 @@ coroutines = "1.8.1"
 dagger = "2.51.1"
 dataStore = "1.1.1"
 desugar = "2.0.4"
+gmsLocation = "21.3.0"
 gmsMaps = "18.2.0"
 kotlin = "2.0.0"
 ksp = "2.0.0-1.0.22"
@@ -27,6 +28,7 @@ work = "2.9.0"
 about-libraries-compose-m3 = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
 about-libraries-core = { module = "com.mikepenz:aboutlibraries-core", version.ref = "aboutLibraries" }
 android-desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar" }
+android-gms-play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "gmsLocation" }
 android-gms-play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "gmsMaps" }
 android-material = { module = "com.google.android.material:material", version.ref = "material" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }

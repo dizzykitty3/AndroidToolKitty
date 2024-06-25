@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.BT
 import me.dizzykitty3.androidtoolkitty.BT_ADMIN
 import me.dizzykitty3.androidtoolkitty.BT_CONNECT
+import me.dizzykitty3.androidtoolkitty.FINE_LOCATION
 import me.dizzykitty3.androidtoolkitty.GRANTED
 
 /**
@@ -22,6 +23,9 @@ object PermissionUtil {
         else check(context, BT) || check(context, BT_ADMIN)
     }
 
+    @CheckResult
+    fun noLocationPermission(context: Context): Boolean = check(context, FINE_LOCATION)
+
     private fun check(context: Context, permission: String): Boolean =
         ActivityCompat.checkSelfPermission(context, permission) != GRANTED
 
@@ -31,6 +35,10 @@ object PermissionUtil {
             return
         }
         request(context, arrayOf(BT, BT_ADMIN))
+    }
+
+    fun requestLocationPermission(context: Context) {
+        request(context, arrayOf(FINE_LOCATION))
     }
 
     private fun request(context: Context, permission: Array<String>) =

@@ -52,6 +52,22 @@ fun PermissionRequest() {
                 Text(text = stringResource(id = R.string.request_permission))
             }
 
+            GroupDivider()
+
+            Text(stringResource(R.string.fine_location))
+
+            Button(
+                onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    if (PermissionUtil.noLocationPermission(view.context)) {
+                        PermissionUtil.requestLocationPermission(view.context)
+                        clickCount++
+                        return@Button
+                    }
+                    SnackbarUtil.show(view, R.string.success_and_back)
+                }
+            ) { Text(stringResource(R.string.request_permission)) }
+
             if (clickCount >= 2) {
                 GroupDivider()
                 ManuallyGrant()

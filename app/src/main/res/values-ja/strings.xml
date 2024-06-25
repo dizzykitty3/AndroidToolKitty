@@ -189,4 +189,5 @@
     <string name="auto_set_volume">Set volume automatically</string>
     <string name="qr_code_generator">QR Code generator</string>
     <string name="keep_using_offline">Keep using ToolKitty offline</string>
+    <string name="fine_location">To check current location, please grant the app Location permission.</string>
 </resources>
