@@ -74,6 +74,7 @@ android {
             excludes += "DebugProbesKt.bin"
         }
     }
+    buildToolsVersion = "35.0.0"
     room {
         schemaDirectory("$projectDir/schemas")
     }
