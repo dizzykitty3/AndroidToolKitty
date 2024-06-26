@@ -45,6 +45,7 @@ object OSVersion {
      * 2. Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS)
      * 3. Manifest.permission.BLUETOOTH_CONNECT
      * 4. BluetoothAdapter.getDefaultAdapter() -> BluetoothManager.getAdapter()
+     * 5. Cannot use ACCESS_FINE_LOCATION without ACCESS_COARSE_LOCATION
      */
     fun a12(): Boolean = osVersion >= 31
     fun api31(): Boolean = a12()
