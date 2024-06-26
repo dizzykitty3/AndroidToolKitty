@@ -112,6 +112,8 @@
     <string name="pinterest" translatable="false">Pinterest</string>
     <string name="marshmallow_qa" translatable="false">マシュマロ</string>
     <string name="fansly" translatable="false">fansly</string>
+    <string name="unsplash" translatable="false">Unsplash</string>
+    <string name="mastodon" translatable="false">Mastodon (@mastodon.social)</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>

@@ -378,13 +378,18 @@ private fun Context.onVisitProfileButton(
     this.openURL(url)
 }
 
+/**
+ * @see me.dizzykitty3.androidtoolkitty.utils.URLUtil.Platform
+ */
 private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String =
     when (platform) {
         URLUtil.Platform.BLUESKY ->
-            if (username.isNotBlank())
-                "${platform.prefix}${StringUtil.dropSpacesAndLowercase(username)}.bsky.social"
+            if (username.contains("."))
+                "${platform.prefix}$username" // user custom
+            else if (username.isNotBlank())
+                "${platform.prefix}${StringUtil.dropSpacesAndLowercase(username)}.bsky.social" // default
             else
-                platform.prefix // for display
+                platform.prefix // for app UI display
 
         URLUtil.Platform.FANBOX,
         URLUtil.Platform.BOOTH,
