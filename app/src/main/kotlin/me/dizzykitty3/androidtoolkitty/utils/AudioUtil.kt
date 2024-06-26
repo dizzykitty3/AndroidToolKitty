@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.media.AudioManager
+import android.view.View
 import com.google.android.gms.location.LocationServices
+import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import timber.log.Timber
@@ -34,24 +36,23 @@ object AudioUtil {
 
     fun setVolume(volume: Double) = setVolume(volume.toInt())
 
-    private fun setVolumeByPercentage(percentage: Int): Boolean {
+    private fun View.setVolumeByPercentage(percentage: Int) {
         val indexedVolume = (maxVolumeIndex * 0.01 * percentage).toInt()
         Timber.d("current = $volume, target = $indexedVolume")
         if (percentage in 0..100 && (volume != indexedVolume)) {
             setVolume(indexedVolume, true)
             Timber.d("setVolumeAutomatically true")
-            return true
+            SnackbarUtil.show(this, R.string.auto_set_volume)
         }
         Timber.d("setVolumeAutomatically false, current == target")
-        return false
     }
 
     @SuppressLint("MissingPermission")
-    fun autoSetMediaVolume(percentage: Int): Boolean {
-        if (percentage !in 0..100) return false
+    fun View.autoSetMediaVolume(percentage: Int) {
+        if (percentage !in 0..100) return
 
         if (SettingsSharedPref.enableLocation) {
-            if (PermissionUtil.noLocationPermission(appContext)) return false
+            if (PermissionUtil.noLocationPermission(appContext)) return
             var distance: Float
             val currentLocation = LocationServices.getFusedLocationProviderClient(appContext)
             currentLocation.lastLocation.addOnSuccessListener { location: Location? ->
@@ -61,26 +62,17 @@ object AudioUtil {
                     Timber.d("latitude = ${location.latitude}")
                     Timber.d("longitude = ${location.longitude}")
                     Timber.d("distance = $distance")
-                    handleDistanceLogic(distance, percentage)
+                    this.setVolumeByPercentage(if (distance >= 200f) 0 else percentage)
                 }
             }
+            return
         }
-        return when (LocalTime.now().hour) {
-            in 6..7 -> setVolumeByPercentage(percentage)
-            in 8..17 -> setVolumeByPercentage(0)
-            in 18..22 -> setVolumeByPercentage(percentage)
-            else -> setVolumeByPercentage(25)
-        }
-    }
 
-    private fun handleDistanceLogic(distance: Float, percentage: Int) {
-        if (distance <= 200f) {
-            setVolumeByPercentage(0)
-        } else {
-            when (LocalTime.now().hour) {
-                in 7..8, in 17..18 -> setVolumeByPercentage(0)
-                else -> setVolumeByPercentage(percentage)
-            }
+        when (LocalTime.now().hour) {
+            6 -> this.setVolumeByPercentage(percentage)
+            in 7..17 -> this.setVolumeByPercentage(0)
+            in 18..22 -> this.setVolumeByPercentage(percentage)
+            else -> this.setVolumeByPercentage(25)
         }
     }
 }

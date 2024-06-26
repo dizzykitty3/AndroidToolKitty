@@ -84,6 +84,7 @@ fun Debugging(navController: NavHostController) {
                 }
                 val fusedLocationClient =
                     LocationServices.getFusedLocationProviderClient(view.context)
+                Timber.d("fusedLocationClient = $fusedLocationClient")
                 fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
                     if (location != null) {
                         saveLocationToStorage(location.latitude, location.longitude)
@@ -93,6 +94,7 @@ fun Debugging(navController: NavHostController) {
                         return@addOnSuccessListener
                     }
                     Timber.w("location == null")
+                    SnackbarUtil.show(view, "get location error")
                 }
             }) { Text("${stringResource(R.string.auto_set_volume)} (check location)") }
 
@@ -121,7 +123,7 @@ fun Debugging(navController: NavHostController) {
                                 }
                             }
                             Text("set volume automatically (check location)")
-                            Text("current location")
+                            Text("current location (places where you want to turn on phone volume)")
                             Text("latitude = ${(settingsSharedPref.savedLatitude)}")
                             Text("longitude = ${settingsSharedPref.savedLongitude}")
                         }

@@ -18,7 +18,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.AppNavigationHost
 import me.dizzykitty3.androidtoolkitty.ui_theme.AppTheme
-import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
+import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.autoSetMediaVolume
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
@@ -72,8 +72,7 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Set media volume automatically: cancelled: BT headset connected")
                 } else {
                     Timber.i("Set media volume automatically")
-                    if (AudioUtil.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume))
-                        SnackbarUtil.show(window.decorView, R.string.volume_changed_auto)
+                    window.decorView.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
                 }
             }
         }
