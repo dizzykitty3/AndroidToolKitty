@@ -155,9 +155,14 @@ fun Tip(message: String) {
 }
 
 @Composable
-fun GroupTitle(@StringRes id: Int) {
+fun GroupTitle(@StringRes title: Int) {
+    GroupTitle(stringResource(title))
+}
+
+@Composable
+fun GroupTitle(title: String) {
     Text(
-        text = stringResource(id = id),
+        text = title,
         style = MaterialTheme.typography.titleMedium
     )
     SpacerPadding()

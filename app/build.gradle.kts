@@ -1,4 +1,5 @@
 plugins {
+    alias(libs.plugins.about.libraries)
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt.android)
@@ -73,6 +74,7 @@ android {
             excludes += "DebugProbesKt.bin"
         }
     }
+    buildToolsVersion = "35.0.0"
     room {
         schemaDirectory("$projectDir/schemas")
     }
@@ -82,10 +84,16 @@ dependencies {
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.work.testing)
+
     coreLibraryDesugaring(libs.android.desugar.jdk.libs)
+
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.square.leakcanary)
+
+    implementation(libs.about.libraries.compose.m3)
+    implementation(libs.about.libraries.core)
+    implementation(libs.android.gms.play.services.location)
     implementation(libs.android.gms.play.services.maps)
     implementation(libs.android.material)
     implementation(libs.androidx.activity.compose)
@@ -110,6 +118,7 @@ dependencies {
     implementation(libs.ktor.client.logging)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.timber)
+
     ksp(libs.google.hilt.compiler)
     ksp(libs.androidx.room.compiler)
 }

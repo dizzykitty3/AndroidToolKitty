@@ -44,7 +44,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 import org.json.JSONObject
@@ -87,10 +87,10 @@ fun PreferencesSync() {
                     settings = SettingsSharedPref.exportSettingsToJson(),
                     onFailure = {
                         isLoading = false
-                        SnackbarUtil.show(view, toErrorString(it))
+                        view.snackbar(toErrorString(it))
                     },
                     onSuccess = {
-                        SnackbarUtil.show(view, R.string.success)
+                        view.snackbar(R.string.success)
                         isLoading = false
                     }
                 )
@@ -113,16 +113,16 @@ fun PreferencesSync() {
                 handleDownloadSettings(
                     token = token,
                     onSettingsReceived = {
-                        SnackbarUtil.show(view, R.string.success)
+                        view.snackbar(R.string.success)
                         SettingsSharedPref.importSettingsFromJson(it)
                     },
                     onFailure = {
                         isLoading = false
-                        SnackbarUtil.show(view, toErrorString(it))
+                        view.snackbar(toErrorString(it))
                     },
                     onSuccess = {
                         isLoading = false
-                        SnackbarUtil.show(view, R.string.success)
+                        view.snackbar(R.string.success)
                     }
                 )
             }
@@ -159,7 +159,7 @@ fun PreferencesSync() {
                                 dialogState = null
                                 isLoading = false
                             },
-                            onSuccess = { SnackbarUtil.show(view, R.string.success) },
+                            onSuccess = { view.snackbar(R.string.success) },
                             onFailure = {
                                 isLoading = false
                                 ToastUtil.show(toErrorString(it))
@@ -194,7 +194,7 @@ fun PreferencesSync() {
                                 isLoading = false
                             },
                             onSuccess = {
-                                SnackbarUtil.show(view, R.string.success)
+                                view.snackbar(R.string.success)
                             },
                             onFailure = {
                                 isLoading = false
@@ -216,7 +216,7 @@ fun PreferencesSync() {
                     token = ""
                     dialogState = null
                     isLoading = false
-                    SnackbarUtil.show(view, R.string.success)
+                    view.snackbar(R.string.success)
                 },
                 onDismiss = { dialogState = null }
             )
@@ -431,7 +431,7 @@ private fun UserProfileDialog(
                 modifier = Modifier.clickable {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     ClipboardUtil.copy(token)
-                    if (!OSVersion.android13()) {
+                    if (!OSVersion.a13()) {
                         ToastUtil.show(R.string.copied)
                     }
                 }

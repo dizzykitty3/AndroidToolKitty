@@ -30,7 +30,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnGoogleMaps
 import timber.log.Timber
 
 @Preview
@@ -58,7 +58,7 @@ fun Maps() {
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = { onClickOpenGoogleMapsButton(latitude, longitude, view.context) }
+                    onDone = { view.context.onClickOpenGoogleMapsButton(latitude, longitude) }
                 ),
                 trailingIcon = {
                     ClearInput(text = latitude) {
@@ -81,7 +81,7 @@ fun Maps() {
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = { onClickOpenGoogleMapsButton(latitude, longitude, view.context) }
+                    onDone = { view.context.onClickOpenGoogleMapsButton(latitude, longitude) }
                 ),
                 trailingIcon = {
                     ClearInput(text = longitude) {
@@ -95,7 +95,7 @@ fun Maps() {
         TextButton(
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                onClickOpenGoogleMapsButton(latitude, longitude, view.context)
+                view.context.onClickOpenGoogleMapsButton(latitude, longitude)
             }
         ) {
             Text(text = stringResource(R.string.open_google_maps))
@@ -109,8 +109,8 @@ fun Maps() {
     }
 }
 
-private fun onClickOpenGoogleMapsButton(latitude: String, longitude: String, context: Context) {
+private fun Context.onClickOpenGoogleMapsButton(latitude: String, longitude: String) {
     if (latitude.isBlank() || longitude.isBlank()) return
     Timber.d("onClickOpenGoogleMapsButton")
-    IntentUtil.checkOnGoogleMaps(latitude, longitude, context)
+    this.checkOnGoogleMaps(latitude, longitude)
 }

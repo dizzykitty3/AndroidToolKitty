@@ -1,15 +1,16 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
+import androidx.annotation.CheckResult
 import java.time.LocalTime
 import java.util.Locale
 
 object StringUtil {
     fun greeting(): String = when (LocalTime.now().hour) {
-            in 6..11 -> "Good morning"
-            in 12..18 -> "Good afternoon"
-            in 19..22 -> "Good evening"
-            else -> "Good night"
-        }
+        in 6..11 -> "Good morning"
+        in 12..18 -> "Good afternoon"
+        in 19..22 -> "Good evening"
+        else -> "Good night"
+    }
 
     /**
      * Drop spaces, including full-width ones.
@@ -54,14 +55,25 @@ object StringUtil {
     }
 
     val sysLocale: String
-        get() = Locale.getDefault().toString()
+        @CheckResult get() = Locale.getDefault().toString()
 
     val sysLangSupported: Boolean
-        get() = sysLocale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
+        @CheckResult get() = sysLocale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
 
     val sysLangNotSupported: Boolean
-        get() = !sysLangSupported
+        @CheckResult get() = !sysLangSupported
 
     val sysLangCJK: Boolean
-        get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
+        @CheckResult get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
+
+    fun toASCII(c: String): String = c.map { it.code }.joinToString(", ")
+
+    /**
+     * the regular expression ^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$
+     * allows for strings that start with letters, numbers, or underscores,
+     * followed by zero or more occurrences of a space followed by more letters, numbers, or underscores.
+     */
+    fun validUsername(s: String): Boolean = s.matches(Regex("^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$"))
+
+    fun invalidUsername(s: String): Boolean = !validUsername(s)
 }

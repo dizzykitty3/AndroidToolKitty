@@ -112,6 +112,8 @@
     <string name="pinterest" translatable="false">Pinterest</string>
     <string name="marshmallow_qa" translatable="false">マシュマロ</string>
     <string name="fansly" translatable="false">fansly</string>
+    <string name="unsplash" translatable="false">Unsplash</string>
+    <string name="mastodon" translatable="false">Mastodon (@mastodon.social)</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>
@@ -329,4 +331,5 @@
     <string name="bluetooth_connect">To check paired bluetooth devices, please grant the app Nearby Devices permission.</string>
     <string name="bluetooth_bluetooth_admin">To check paired bluetooth devices, please grant the app BLUETOOTH, BLUETOOTH_ADMIN permissions.</string>
     <string name="missed_sys_popup">Missed the system permission popup?</string>
+    <string name="fine_location">To check current location, please grant the app Location permission.</string>
 </resources>

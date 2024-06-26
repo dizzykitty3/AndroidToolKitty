@@ -34,9 +34,10 @@ import me.dizzykitty3.androidtoolkitty.ui_components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.Screen
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 
 @Composable
@@ -85,7 +86,7 @@ fun Settings(navController: NavHostController) {
             TextButton({
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 ToastUtil.show(R.string.all_help_welcomed)
-                IntentUtil.openURL(sourceCodeURL, view.context)
+                view.context.openURL(sourceCodeURL)
             }) {
                 Text(stringResource(R.string.source_code))
                 Icon(
@@ -117,12 +118,12 @@ private fun Appearance() {
     var systemVolumeUI by remember { mutableStateOf(settingsSharedPref.showSystemVolumeUI) }
 
     Card(title = R.string.appearance) {
-        if (OSVersion.android12()) {
+        if (OSVersion.a12()) {
             CustomSwitchRow(text = R.string.material_you_dynamic_color, checked = dynamicColor) {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 dynamicColor = it
                 SettingsSharedPref.dynamicColor = it
-                IntentUtil.restartApp(view.context)
+                view.context.restartApp()
             }
         }
 
@@ -162,8 +163,7 @@ private fun General(navController: NavHostController) {
             if (autoClearClipboard && showClipboardCard) {
                 showClipboardCard = false
                 settingsSharedPref.saveCardShowedState(CARD_3, false)
-                SnackbarUtil.show(
-                    view,
+                view.snackbar(
                     message = R.string.clipboard_card_hidden,
                     buttonText = R.string.undo,
                     textColor = inverseOnSurface,

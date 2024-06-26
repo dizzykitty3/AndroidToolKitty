@@ -44,7 +44,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.GradientSmall
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 
 private const val ADD = "+ Add"
 
@@ -240,10 +240,7 @@ fun Volume() {
                             onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
-                                    if (newCustomVolume.toInt() != 0) SnackbarUtil.show(
-                                        view,
-                                        R.string.system_media_volume_levels_limited
-                                    )
+                                    if (newCustomVolume.toInt() != 0) view.snackbar(R.string.system_media_volume_levels_limited)
                                     return@Button
                                 } else {
                                     settingsSharedPref.customVolume = newCustomVolume.toInt()
@@ -310,10 +307,10 @@ fun Volume() {
 
 private fun setVolume(view: View, volume: Int) {
     AudioUtil.setVolume(volume)
-    SnackbarUtil.show(view, R.string.volume_changed)
+    view.snackbar(R.string.volume_changed)
 }
 
 private fun setVolume(view: View, volume: Double) {
     AudioUtil.setVolume(volume)
-    SnackbarUtil.show(view, R.string.volume_changed)
+    view.snackbar(R.string.volume_changed)
 }

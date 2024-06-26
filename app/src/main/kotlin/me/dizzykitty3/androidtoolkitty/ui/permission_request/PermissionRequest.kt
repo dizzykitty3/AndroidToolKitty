@@ -19,10 +19,10 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.Screen
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 
 @Preview
 @Composable
@@ -35,7 +35,7 @@ fun PermissionRequest() {
             var clickCount by remember { mutableIntStateOf(0) }
             val view = LocalView.current
 
-            if (OSVersion.android12()) Text(text = stringResource(id = R.string.bluetooth_connect))
+            if (OSVersion.a12()) Text(text = stringResource(id = R.string.bluetooth_connect))
             else Text(text = stringResource(id = R.string.bluetooth_bluetooth_admin))
 
             Button(
@@ -46,11 +46,27 @@ fun PermissionRequest() {
                         clickCount++
                         return@Button
                     }
-                    SnackbarUtil.show(view, R.string.success_and_back)
+                    view.snackbar(R.string.success_and_back)
                 }
             ) {
                 Text(text = stringResource(id = R.string.request_permission))
             }
+
+            GroupDivider()
+
+            Text(stringResource(R.string.fine_location))
+
+            Button(
+                onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    if (PermissionUtil.noLocationPermission(view.context)) {
+                        PermissionUtil.requestLocationPermission(view.context)
+                        clickCount++
+                        return@Button
+                    }
+                    view.snackbar(R.string.success_and_back)
+                }
+            ) { Text(stringResource(R.string.request_permission)) }
 
             if (clickCount >= 2) {
                 GroupDivider()
@@ -68,7 +84,7 @@ fun ManuallyGrant() {
     TextButton(
         onClick = {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            IntentUtil.openAppDetailSettings(view.context)
+            view.context.openAppDetailSettings()
         }
     ) {
         Text(

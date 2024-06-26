@@ -1,9 +1,15 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.location.Location
 import android.media.AudioManager
+import android.view.View
+import com.google.android.gms.location.LocationServices
+import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 import timber.log.Timber
 import java.time.LocalTime
 
@@ -31,25 +37,43 @@ object AudioUtil {
 
     fun setVolume(volume: Double) = setVolume(volume.toInt())
 
-    private fun setVolumeByPercentage(percentage: Int): Boolean {
+    private fun View.setVolumeByPercentage(percentage: Int) {
         val indexedVolume = (maxVolumeIndex * 0.01 * percentage).toInt()
         Timber.d("current = $volume, target = $indexedVolume")
         if (percentage in 0..100 && (volume != indexedVolume)) {
             setVolume(indexedVolume, true)
             Timber.d("setVolumeAutomatically true")
-            return true
+            this.snackbar(R.string.volume_changed_auto)
         }
-        Timber.d("setVolumeAutomatically false")
-        return false
+        Timber.d("setVolumeAutomatically false, current == target")
     }
 
-    fun autoSetMediaVolume(percentage: Int): Boolean {
-        if (percentage !in 0..100) return false
-        return when (LocalTime.now().hour) {
-            in 6..7 -> setVolumeByPercentage(percentage)
-            in 8..17 -> setVolumeByPercentage(0)
-            in 18..22 -> setVolumeByPercentage(percentage)
-            else -> setVolumeByPercentage(25)
+    @SuppressLint("MissingPermission")
+    fun View.autoSetMediaVolume(percentage: Int) {
+        if (percentage !in 0..100) return
+
+        if (SettingsSharedPref.enableLocation) {
+            if (PermissionUtil.noLocationPermission(appContext)) return
+            var distance: Float
+            val currentLocation = LocationServices.getFusedLocationProviderClient(appContext)
+            currentLocation.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    distance =
+                        LocationUtil.calculateDistanceToSaved(location.latitude, location.longitude)
+                    Timber.d("latitude = ${location.latitude}")
+                    Timber.d("longitude = ${location.longitude}")
+                    Timber.d("distance = $distance")
+                    this.setVolumeByPercentage(if (distance >= 200f) 0 else percentage)
+                }
+            }
+            return
+        }
+
+        when (LocalTime.now().hour) {
+            6 -> this.setVolumeByPercentage(percentage)
+            in 7..17 -> this.setVolumeByPercentage(0)
+            in 18..22 -> this.setVolumeByPercentage(percentage)
+            else -> this.setVolumeByPercentage(25)
         }
     }
 }

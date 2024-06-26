@@ -188,4 +188,5 @@
     <string name="auto_set_volume">自动调整音量</string>
     <string name="qr_code_generator">生成二维码</string>
     <string name="keep_using_offline">保持离线使用</string>
+    <string name="fine_location">To check current location, please grant the app Location permission.</string>
 </resources>

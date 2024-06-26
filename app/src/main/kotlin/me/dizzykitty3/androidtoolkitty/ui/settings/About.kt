@@ -24,13 +24,13 @@ import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 
 @Composable
 fun About() {
     Card(title = R.string.about) {
-        GroupTitle(id = R.string.version)
+        GroupTitle(title = R.string.version)
         Row {
             Icon(
                 imageVector = Icons.Outlined.Schedule,
@@ -46,12 +46,12 @@ fun About() {
 
 @Composable
 private fun ContributorAndThanksTo() {
-    GroupTitle(id = R.string.contributors)
+    GroupTitle(title = R.string.contributors)
     DeveloperProfileLink("dizzykitty3")
     SpacerPadding()
     DeveloperProfileLink("HongjieCN")
     SpacerPadding()
-    GroupTitle(id = R.string.inspired_by)
+    GroupTitle(title = R.string.inspired_by)
     ThanksTo("tengusw/share_to_clipboard")
     SpacerPadding()
     ThanksTo("hashemi-hossein/memory-guardian")
@@ -70,10 +70,7 @@ private fun DeveloperProfileLink(name: String) {
         Row(
             modifier = Modifier.clickable {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                IntentUtil.openURL(
-                    "${URLUtil.prefixOf(URLUtil.Platform.GITHUB)}$name",
-                    view.context
-                )
+                view.context.openURL("${URLUtil.prefixOf(URLUtil.Platform.GITHUB)}$name")
             }
         ) {
             Text(
@@ -104,7 +101,7 @@ private fun ThanksTo(link: String) {
                 .horizontalScroll(rememberScrollState())
                 .clickable {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    IntentUtil.openURL(sourceCodeURL, view.context)
+                    view.context.openURL(sourceCodeURL)
                 }
         ) {
             Text(

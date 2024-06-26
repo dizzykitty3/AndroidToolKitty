@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
+import androidx.annotation.CheckResult
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
@@ -21,5 +22,5 @@ object DateUtil {
         (progress * 100).toString().substring(0, 4)
 
     val isNotWeekend: Boolean
-        get() = LocalDate.now().dayOfWeek != DayOfWeek.SATURDAY && LocalDate.now().dayOfWeek != DayOfWeek.SUNDAY
+        @CheckResult get() = LocalDate.now().dayOfWeek != DayOfWeek.SATURDAY && LocalDate.now().dayOfWeek != DayOfWeek.SUNDAY
 }

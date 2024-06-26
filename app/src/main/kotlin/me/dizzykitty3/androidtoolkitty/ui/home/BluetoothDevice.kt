@@ -41,9 +41,9 @@ import me.dizzykitty3.androidtoolkitty.ui_components.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.ui_components.PrimaryColor
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 
 @Preview
 @Composable
@@ -78,7 +78,7 @@ fun BluetoothDevice(navController: NavHostController) {
                 // Get system service
                 bluetoothAdapter = BluetoothUtil.bluetoothAdapter
                 if (bluetoothAdapter == null) {
-                    SnackbarUtil.show(view, R.string.no_bluetooth_adapter_available)
+                    view.snackbar(R.string.no_bluetooth_adapter_available)
                     return@OutlinedButton
                 }
 
@@ -91,7 +91,7 @@ fun BluetoothDevice(navController: NavHostController) {
                 }
 
                 // When Bluetooth is OFF
-                IntentUtil.openSystemSettings(SETTING_ENABLE_BLUETOOTH, view.context)
+                view.context.openSystemSettings(SETTING_ENABLE_BLUETOOTH)
             }
         ) {
             Icon(

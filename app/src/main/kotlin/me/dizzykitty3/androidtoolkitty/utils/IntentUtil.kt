@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.SearchManager
 import android.bluetooth.BluetoothAdapter
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.ACTION_POWER_USAGE_SUMMARY
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.provider.Settings
 import me.dizzykitty3.androidtoolkitty.GOOGLE_MAPS
@@ -34,15 +36,15 @@ import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appConte
 import timber.log.Timber
 
 object IntentUtil {
-    private fun startActivity(intent: Intent, context: Context) {
+    private fun Context.launch(intent: Intent) {
         try {
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             Timber.d("startActivity")
-            context.startActivity(intent)
+            intent.setFlags(FLAG_ACTIVITY_NEW_TASK)
+            this.startActivity(intent)
             return
-        } catch (e: Exception) {
+        } catch (e: ActivityNotFoundException) {
             Timber.e(e)
-            ToastUtil.show(e.message ?: "Unknown error")
+            ToastUtil.show(e.message ?: "Unsupported")
         }
 
         when (intent.`package`) {
@@ -54,28 +56,28 @@ object IntentUtil {
             GOOGLE_MAPS -> {
                 Timber.i("Google Maps not installed")
                 ToastUtil.show(R.string.google_maps_not_installed)
-                checkOnMarket(GOOGLE_MAPS, context)
+                checkOnMarket(GOOGLE_MAPS)
             }
         }
     }
 
-    fun openURL(url: String, context: Context) {
+    fun Context.openURL(url: String) {
         if (url.isBlank()) return
         Timber.d("openURL")
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(if (url.contains(HTTPS)) url else "$HTTPS$url")
-        startActivity(intent, context)
+        this.launch(intent)
     }
 
-    fun checkOnYouTube(query: String, context: Context) {
+    fun Context.checkOnYouTube(query: String) {
         if (query.isBlank()) return
         Timber.d("checkOnYouTube")
         val intent =
             Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/results?search_query=$query"))
-        startActivity(intent, context)
+        this.launch(intent)
     }
 
-    fun checkOnMarket(packageName: String, context: Context, isGooglePlay: Boolean = true) {
+    fun Context.checkOnMarket(packageName: String, isGooglePlay: Boolean = true) {
         val marketUri: Uri = Uri.parse(
             if (packageName.isBlank()) {
                 return
@@ -88,32 +90,32 @@ object IntentUtil {
         Timber.d("openAppOnMarket")
         val intent = Intent(Intent.ACTION_VIEW, marketUri)
         if (isGooglePlay) intent.setPackage(GOOGLE_PLAY)
-        startActivity(intent, context)
+        this.launch(intent)
     }
 
-    fun checkOnGoogleMaps(latitude: String, longitude: String, context: Context) {
+    fun Context.checkOnGoogleMaps(latitude: String, longitude: String) {
         if (latitude.isBlank() || longitude.isBlank()) return
         Timber.d("openGoogleMaps")
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
         val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         intent.setPackage(GOOGLE_MAPS)
-        startActivity(intent, context)
+        this.launch(intent)
     }
 
-    fun openSearch(query: String, context: Context) {
+    fun Context.openSearch(query: String) {
         if (query.isBlank()) return
         Timber.d("openSearch")
         val intent = Intent(Intent.ACTION_WEB_SEARCH)
         intent.putExtra(SearchManager.QUERY, query)
-        startActivity(intent, context)
+        this.launch(intent)
     }
 
     @JvmStatic
-    fun openSystemSettings(settingType: String, context: Context) {
+    fun Context.openSystemSettings(settingType: String) {
         val intent: Intent = when (settingType) {
             SETTING_DISPLAY -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
-            SETTING_AUTO_ROTATE -> @SuppressLint("InlinedApi") if (OSVersion.android12()) Intent(
+            SETTING_AUTO_ROTATE -> @SuppressLint("InlinedApi") if (OSVersion.a12()) Intent(
                 Settings.ACTION_AUTO_ROTATE_SETTINGS
             ) else return
 
@@ -134,33 +136,33 @@ object IntentUtil {
             else -> return
         }
         Timber.d("onOpenSystemSettings: $settingType")
-        startActivity(intent, context)
+        this.launch(intent)
     }
 
-    fun openAppDetailSettings(context: Context) {
+    fun Context.openAppDetailSettings() {
         Timber.d("openPermissionPage")
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         val uri = Uri.fromParts(PACKAGE, appContext.packageName, null)
         intent.setData(uri)
-        startActivity(intent, context)
+        this.launch(intent)
     }
 
     /**
      * Remember to use Activity Context to restart app.
      */
-    fun restartApp(context: Context) {
+    fun Context.restartApp() {
         Timber.d("restartApp")
-        val intent = Intent(context, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        context.startActivity(intent)
-        finishApp(context)
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or FLAG_ACTIVITY_NEW_TASK)
+        this.launch(intent)
+        this.finishApp()
     }
 
     /**
      * Remember to use Activity Context to finish app.
      */
-    fun finishApp(context: Context) {
+    fun Context.finishApp() {
         Timber.d("finishApp")
-        (context as Activity).finish()
+        (this as Activity).finish()
     }
 }

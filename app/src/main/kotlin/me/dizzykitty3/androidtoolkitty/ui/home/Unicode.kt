@@ -26,9 +26,11 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.ClearInput
+import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.Italic
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 import timber.log.Timber
 
@@ -71,7 +73,7 @@ fun Unicode() {
             keyboardActions = KeyboardActions(
                 onDone = {
                     if (isUnicodeInput) {
-                        onClickConvertButton(view, unicode, { characters = it }, true)
+                        view.onClickConvertButton(unicode, { characters = it }, true)
                         focus.clearFocus()
                     }
                 }
@@ -100,7 +102,7 @@ fun Unicode() {
             keyboardActions = KeyboardActions(
                 onDone = {
                     if (isCharacterInput) {
-                        onClickConvertButton(view, characters, { unicode = it }, false)
+                        view.onClickConvertButton(characters, { unicode = it }, false)
                         focus.clearFocus()
                     }
                 }
@@ -117,21 +119,55 @@ fun Unicode() {
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 if (isUnicodeInput) {
-                    onClickConvertButton(view, unicode, { characters = it }, true)
+                    view.onClickConvertButton(unicode, { characters = it }, true)
                     focus.clearFocus()
                 } else if (isCharacterInput) {
-                    onClickConvertButton(view, characters, { unicode = it }, false)
+                    view.onClickConvertButton(characters, { unicode = it }, false)
                     focus.clearFocus()
                 }
             }
         ) {
             Text(text = stringResource(R.string.convert))
         }
+
+        GroupDivider()
+        GroupTitle("to ASCII")
+
+        var stringToASCII by remember { mutableStateOf("") }
+        var toASCIIResult by remember { mutableStateOf("") }
+
+        OutlinedTextField(
+            value = stringToASCII,
+            onValueChange = { stringToASCII = it },
+            label = { Text(stringResource(R.string.character)) },
+            modifier = Modifier.fillMaxWidth(),
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = {
+                    toASCIIResult = StringUtil.toASCII(stringToASCII)
+                    focus.clearFocus()
+                }
+            ),
+            trailingIcon = {
+                ClearInput(text = stringToASCII) {
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    stringToASCII = ""
+                }
+            },
+        )
+
+        Text("result = $toASCIIResult")
+
+        TextButton({
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            toASCIIResult = StringUtil.toASCII(stringToASCII)
+        }) { Text("Convert to ASCII values") }
     }
 }
 
-private fun onClickConvertButton(
-    view: View,
+private fun View.onClickConvertButton(
     input: String,
     updateResult: (String) -> Unit,
     isUnicodeToChar: Boolean
@@ -143,8 +179,8 @@ private fun onClickConvertButton(
         else StringUtil.characterToUnicode(input)
         updateResult(result)
         ClipboardUtil.copy(result)
-        SnackbarUtil.show(view, "$result ${appContext.getString(R.string.copied)}")
+        this.snackbar("$result ${appContext.getString(R.string.copied)}")
     } catch (e: Exception) {
-        SnackbarUtil.show(view, e.message ?: "Unknown error occurred")
+        this.snackbar(e.message ?: "Unknown error occurred")
     }
 }
