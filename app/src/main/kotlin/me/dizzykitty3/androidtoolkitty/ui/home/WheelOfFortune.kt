@@ -65,7 +65,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -117,7 +117,7 @@ fun WheelOfFortune() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                SnackbarUtil.show(view, selected)
+                view.snackbar(selected)
                 rotationDegrees = targetRotationDegrees % 360
             }
         }
@@ -131,9 +131,10 @@ fun WheelOfFortune() {
             SpacerPadding()
             SpacerPadding()
 
-            Canvas(modifier = Modifier
-                .size(250.dp)
-                .aspectRatio(1f)
+            Canvas(
+                modifier = Modifier
+                    .size(250.dp)
+                    .aspectRatio(1f)
             ) {
                 val center = Offset(size.width / 2, size.height / 2)
                 val radius = size.minDimension / 2

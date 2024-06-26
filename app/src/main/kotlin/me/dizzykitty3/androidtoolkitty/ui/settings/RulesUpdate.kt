@@ -21,7 +21,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 
 @Composable
 fun RulesUpdate() {
@@ -29,8 +29,6 @@ fun RulesUpdate() {
     val coroutineScope = rememberCoroutineScope()
     var isLoading by remember { mutableStateOf(false) }
     val view = LocalView.current
-    val errorMessage = stringResource(id = R.string.error_rule_update)
-    val success = stringResource(id = R.string.success)
 
     OutlinedButton(
         onClick = {
@@ -41,11 +39,11 @@ fun RulesUpdate() {
                     onSuccess = {
                         SettingsSharedPref.socialMedia = it
                         isLoading = false
-                        SnackbarUtil.show(view, success)
+                        view.snackbar(R.string.success)
                     },
                     onFailure = {
                         isLoading = false
-                        SnackbarUtil.show(view, errorMessage)
+                        view.snackbar(R.string.error_rule_update)
                     }
                 )
             }
@@ -63,11 +61,11 @@ fun RulesUpdate() {
                     onSuccess = {
                         SettingsSharedPref.domainSuffix = it
                         isLoading = false
-                        SnackbarUtil.show(view, success)
+                        view.snackbar(R.string.success)
                     },
                     onFailure = {
                         isLoading = false
-                        SnackbarUtil.show(view, errorMessage)
+                        view.snackbar(R.string.error_rule_update)
                     }
                 )
             }

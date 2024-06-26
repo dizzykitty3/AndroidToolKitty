@@ -22,7 +22,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.Screen
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 
 @Preview
 @Composable
@@ -46,7 +46,7 @@ fun PermissionRequest() {
                         clickCount++
                         return@Button
                     }
-                    SnackbarUtil.show(view, R.string.success_and_back)
+                    view.snackbar(R.string.success_and_back)
                 }
             ) {
                 Text(text = stringResource(id = R.string.request_permission))
@@ -64,7 +64,7 @@ fun PermissionRequest() {
                         clickCount++
                         return@Button
                     }
-                    SnackbarUtil.show(view, R.string.success_and_back)
+                    view.snackbar(R.string.success_and_back)
                 }
             ) { Text(stringResource(R.string.request_permission)) }
 

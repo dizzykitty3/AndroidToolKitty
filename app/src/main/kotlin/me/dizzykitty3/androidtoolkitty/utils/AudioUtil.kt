@@ -9,6 +9,7 @@ import com.google.android.gms.location.LocationServices
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 import timber.log.Timber
 import java.time.LocalTime
 
@@ -42,7 +43,7 @@ object AudioUtil {
         if (percentage in 0..100 && (volume != indexedVolume)) {
             setVolume(indexedVolume, true)
             Timber.d("setVolumeAutomatically true")
-            SnackbarUtil.show(this, R.string.auto_set_volume)
+            this.snackbar(R.string.auto_set_volume)
         }
         Timber.d("setVolumeAutomatically false, current == target")
     }

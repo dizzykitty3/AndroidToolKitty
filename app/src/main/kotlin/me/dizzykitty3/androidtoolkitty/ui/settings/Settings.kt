@@ -37,7 +37,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
 
 @Composable
@@ -163,8 +163,7 @@ private fun General(navController: NavHostController) {
             if (autoClearClipboard && showClipboardCard) {
                 showClipboardCard = false
                 settingsSharedPref.saveCardShowedState(CARD_3, false)
-                SnackbarUtil.show(
-                    view,
+                view.snackbar(
                     message = R.string.clipboard_card_hidden,
                     buttonText = R.string.undo,
                     textColor = inverseOnSurface,
