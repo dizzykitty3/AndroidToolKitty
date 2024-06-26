@@ -67,4 +67,13 @@ object StringUtil {
         @CheckResult get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
 
     fun toASCII(c: String): String = c.map { it.code }.joinToString(", ")
+
+    /**
+     * the regular expression ^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$
+     * allows for strings that start with letters, numbers, or underscores,
+     * followed by zero or more occurrences of a space followed by more letters, numbers, or underscores.
+     */
+    fun validUsername(s: String): Boolean = s.matches(Regex("^[a-zA-Z0-9_]+( [a-zA-Z0-9_]+)*$"))
+
+    fun invalidUsername(s: String): Boolean = !validUsername(s)
 }

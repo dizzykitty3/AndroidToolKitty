@@ -238,11 +238,22 @@ private fun SocialMediaProfileIURL() {
         },
         supportingText = {
             val platform = URLUtil.Platform.entries[mPlatformIndex]
-            Text(
-                text = toSocialMediaFullURL(platform, username),
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
-            )
+            Column {
+                Text(
+                    text = toSocialMediaFullURL(platform, username),
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
+                )
+                if (platform == URLUtil.Platform.X
+                    && username.isNotBlank()
+                    && StringUtil.invalidUsername(username)
+                ) {
+                    Text(
+                        "username for $platform should only contains letters, numbers, and underscores",
+                        color = MaterialTheme.colorScheme.error
+                    )
+                }
+            }
         }
     )
 
