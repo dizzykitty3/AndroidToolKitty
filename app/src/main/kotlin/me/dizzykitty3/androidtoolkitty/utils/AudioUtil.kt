@@ -43,7 +43,7 @@ object AudioUtil {
         if (percentage in 0..100 && (volume != indexedVolume)) {
             setVolume(indexedVolume, true)
             Timber.d("setVolumeAutomatically true")
-            this.snackbar(R.string.auto_set_volume)
+            this.snackbar(R.string.volume_changed_auto)
         }
         Timber.d("setVolumeAutomatically false, current == target")
     }
