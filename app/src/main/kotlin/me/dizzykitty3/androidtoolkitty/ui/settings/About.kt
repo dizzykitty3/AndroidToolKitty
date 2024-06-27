@@ -30,14 +30,13 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 @Composable
 fun About() {
     Card(title = R.string.about) {
-        GroupTitle(title = R.string.version)
         Row {
             Icon(
                 imageVector = Icons.Outlined.Code,
                 contentDescription = stringResource(id = R.string.version)
             )
             IconAndTextPadding()
-            Text(BuildConfig.VERSION_NAME)
+            Text("${stringResource(R.string.version)} ${BuildConfig.VERSION_NAME}")
         }
         GroupDivider()
         ContributorAndThanksTo()
