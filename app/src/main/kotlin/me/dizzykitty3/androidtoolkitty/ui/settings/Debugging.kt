@@ -43,7 +43,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.WarningAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.finishApp
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
 import java.util.Locale
 
@@ -74,7 +74,7 @@ fun Debugging(navController: NavHostController) {
             if (!settingsSharedPref.showOnlineFeatures) {
                 OutlinedButton({
                     settingsSharedPref.showOnlineFeatures = true
-                    view.snackbar(R.string.success)
+                    view.showSnackbar(R.string.success)
                 }) { Text(stringResource(R.string.show_online_features)) }
             }
 
@@ -105,7 +105,7 @@ fun Debugging(navController: NavHostController) {
                         mLoadingComplete = true
                     } else {
                         Timber.w("location == null")
-                        view.snackbar("get location error")
+                        view.showSnackbar("get location error")
                         mLoadingComplete = true
                     }
                 }

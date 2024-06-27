@@ -65,7 +65,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -117,7 +117,7 @@ fun WheelOfFortune() {
                     (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
                 val selected = items[selectedIndex]
 
-                view.snackbar(selected)
+                view.showSnackbar(selected)
                 rotationDegrees = targetRotationDegrees % 360
             }
         }

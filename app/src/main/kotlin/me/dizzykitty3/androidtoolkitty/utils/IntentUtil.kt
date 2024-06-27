@@ -33,6 +33,7 @@ import me.dizzykitty3.androidtoolkitty.SETTING_WIFI
 import me.dizzykitty3.androidtoolkitty.SETTING_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.app_components.MainActivity
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 import timber.log.Timber
 
 object IntentUtil {
@@ -44,18 +45,18 @@ object IntentUtil {
             return
         } catch (e: ActivityNotFoundException) {
             Timber.e(e)
-            ToastUtil.show(e.message ?: "Unsupported")
+            this.showToast(e.message ?: "Unsupported")
         }
 
         when (intent.`package`) {
             GOOGLE_PLAY -> {
                 Timber.i("Google Play not installed")
-                ToastUtil.show(R.string.google_play_not_installed)
+                this.showToast(R.string.google_play_not_installed)
             }
 
             GOOGLE_MAPS -> {
                 Timber.i("Google Maps not installed")
-                ToastUtil.show(R.string.google_maps_not_installed)
+                this.showToast(R.string.google_maps_not_installed)
                 checkOnMarket(GOOGLE_MAPS)
             }
         }

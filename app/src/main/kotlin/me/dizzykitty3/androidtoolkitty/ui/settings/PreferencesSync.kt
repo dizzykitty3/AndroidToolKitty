@@ -44,9 +44,9 @@ import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
-import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
+import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 import org.json.JSONObject
 
 @Composable
@@ -87,10 +87,10 @@ fun PreferencesSync() {
                     settings = SettingsSharedPref.exportSettingsToJson(),
                     onFailure = {
                         isLoading = false
-                        view.snackbar(toErrorString(it))
+                        view.showSnackbar(toErrorString(it))
                     },
                     onSuccess = {
-                        view.snackbar(R.string.success)
+                        view.showSnackbar(R.string.success)
                         isLoading = false
                     }
                 )
@@ -113,16 +113,16 @@ fun PreferencesSync() {
                 handleDownloadSettings(
                     token = token,
                     onSettingsReceived = {
-                        view.snackbar(R.string.success)
+                        view.showSnackbar(R.string.success)
                         SettingsSharedPref.importSettingsFromJson(it)
                     },
                     onFailure = {
                         isLoading = false
-                        view.snackbar(toErrorString(it))
+                        view.showSnackbar(toErrorString(it))
                     },
                     onSuccess = {
                         isLoading = false
-                        view.snackbar(R.string.success)
+                        view.showSnackbar(R.string.success)
                     }
                 )
             }
@@ -159,10 +159,10 @@ fun PreferencesSync() {
                                 dialogState = null
                                 isLoading = false
                             },
-                            onSuccess = { view.snackbar(R.string.success) },
+                            onSuccess = { view.showSnackbar(R.string.success) },
                             onFailure = {
                                 isLoading = false
-                                ToastUtil.show(toErrorString(it))
+                                view.context.showToast(toErrorString(it))
                             }
                         )
                     }
@@ -194,11 +194,11 @@ fun PreferencesSync() {
                                 isLoading = false
                             },
                             onSuccess = {
-                                view.snackbar(R.string.success)
+                                view.showSnackbar(R.string.success)
                             },
                             onFailure = {
                                 isLoading = false
-                                ToastUtil.show(toErrorString(it))
+                                view.context.showToast(toErrorString(it))
                             }
                         )
                     }
@@ -216,7 +216,7 @@ fun PreferencesSync() {
                     token = ""
                     dialogState = null
                     isLoading = false
-                    view.snackbar(R.string.success)
+                    view.showSnackbar(R.string.success)
                 },
                 onDismiss = { dialogState = null }
             )
@@ -432,7 +432,7 @@ private fun UserProfileDialog(
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     ClipboardUtil.copy(token)
                     if (!OSVersion.a13()) {
-                        ToastUtil.show(R.string.copied)
+                        view.context.showToast(R.string.copied)
                     }
                 }
             )

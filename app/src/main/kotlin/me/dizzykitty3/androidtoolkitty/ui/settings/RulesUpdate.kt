@@ -21,7 +21,7 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.HttpUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @Composable
 fun RulesUpdate() {
@@ -39,11 +39,11 @@ fun RulesUpdate() {
                     onSuccess = {
                         SettingsSharedPref.socialMedia = it
                         isLoading = false
-                        view.snackbar(R.string.success)
+                        view.showSnackbar(R.string.success)
                     },
                     onFailure = {
                         isLoading = false
-                        view.snackbar(R.string.error_rule_update)
+                        view.showSnackbar(R.string.error_rule_update)
                     }
                 )
             }
@@ -61,11 +61,11 @@ fun RulesUpdate() {
                     onSuccess = {
                         SettingsSharedPref.domainSuffix = it
                         isLoading = false
-                        view.snackbar(R.string.success)
+                        view.showSnackbar(R.string.success)
                     },
                     onFailure = {
                         isLoading = false
-                        view.snackbar(R.string.error_rule_update)
+                        view.showSnackbar(R.string.error_rule_update)
                     }
                 )
             }

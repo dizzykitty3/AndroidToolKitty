@@ -37,8 +37,8 @@ import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
-import me.dizzykitty3.androidtoolkitty.utils.ToastUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
+import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 
 @Composable
 fun Settings(navController: NavHostController) {
@@ -85,7 +85,7 @@ fun Settings(navController: NavHostController) {
         ) {
             TextButton({
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                ToastUtil.show(R.string.all_help_welcomed)
+                view.context.showToast(R.string.all_help_welcomed)
                 view.context.openURL(sourceCodeURL)
             }) {
                 Text(stringResource(R.string.source_code))
@@ -163,7 +163,7 @@ private fun General(navController: NavHostController) {
             if (autoClearClipboard && showClipboardCard) {
                 showClipboardCard = false
                 settingsSharedPref.saveCardShowedState(CARD_3, false)
-                view.snackbar(
+                view.showSnackbar(
                     message = R.string.clipboard_card_hidden,
                     buttonText = R.string.undo,
                     textColor = inverseOnSurface,
