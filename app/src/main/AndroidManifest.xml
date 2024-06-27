@@ -44,7 +44,7 @@
             android:name=".app_components.ShareToClipboardActivity"
             android:exported="true"
             android:label="@string/copy"
-            android:theme="@style/Theme.Transparent">
+            android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
