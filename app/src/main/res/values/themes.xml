@@ -13,6 +13,6 @@
         <item name="android:windowBackground">@null</item>
         <item name="android:windowAnimationStyle">@null</item>
         <item name="android:windowDisablePreview">true</item>
-        <item name="android:windowNoDisplay">true</item>
+        <!--        <item name="android:windowNoDisplay">true</item> // must call finish() before onResume() -->
     </style>
 </resources>
