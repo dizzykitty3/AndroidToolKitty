@@ -169,7 +169,15 @@ fun Volume() {
                         )
                     },
                     onDismissRequest = {
-                        // Ignore
+                        if (!mHaveCustomLabel) mHaveCustomLabel = false
+                        showVolumeDialog = false
+                        selectedIndex = when (AudioUtil.volume) {
+                            0 -> 0
+                            (0.4 * maxVolume).toInt() -> 1
+                            (0.6 * maxVolume).toInt() -> 2
+                            (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
+                            else -> null
+                        }
                     },
                     title = {
                         if (settingsSharedPref.addedCustomVolume) {

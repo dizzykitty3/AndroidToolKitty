@@ -294,9 +294,7 @@ private fun NoPlatformYouNeedHere() {
     if (showDialog) {
         AlertDialog(
             icon = { Icon(imageVector = Icons.Outlined.Upload, contentDescription = null) },
-            onDismissRequest = {
-                // Ignore
-            },
+            onDismissRequest = { showDialog = false },
             title = { Text(text = stringResource(id = R.string.submit_the_platform_you_need)) },
             text = {
                 Column(modifier = Modifier.verticalScroll(rememberScrollState())) {

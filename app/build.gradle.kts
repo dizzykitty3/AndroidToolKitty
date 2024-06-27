@@ -20,7 +20,7 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
         targetSdk = compileSdk
-        versionCode = 865
+        versionCode = 886
         versionName = "1.0.${versionCode}"
 
         resValue("string", "app_name", "ToolKitty")
@@ -66,6 +66,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
+        allWarningsAsErrors = true
     }
     packaging {
         resources {

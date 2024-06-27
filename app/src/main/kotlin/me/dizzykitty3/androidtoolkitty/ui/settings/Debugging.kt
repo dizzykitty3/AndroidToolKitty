@@ -12,12 +12,14 @@ import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -82,27 +84,33 @@ fun Debugging(navController: NavHostController) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                     return@OutlinedButton
                 }
-                val fusedLocationClient =
-                    LocationServices.getFusedLocationProviderClient(view.context)
-                Timber.d("fusedLocationClient = $fusedLocationClient")
-                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                    if (location != null) {
-                        saveLocationToStorage(location.latitude, location.longitude)
-                        Timber.d("save latitude = ${location.latitude}")
-                        Timber.d("save longitude = ${location.longitude}")
-                        showLocationDialog = true
-                        return@addOnSuccessListener
-                    }
-                    Timber.w("location == null")
-                    view.snackbar("get location error")
-                }
+                showLocationDialog = true
             }) { Text("${stringResource(R.string.auto_set_volume)} (check location)") }
 
             if (showLocationDialog) {
+                val fusedLocationClient =
+                    LocationServices.getFusedLocationProviderClient(view.context)
+                Timber.d("fusedLocationClient = $fusedLocationClient")
+                var mLocation: Location? = null
+                var mLoadingComplete by remember { mutableStateOf(false) }
+                var mLatitude by remember { mutableDoubleStateOf(0.0) }
+                var mLongitude by remember { mutableDoubleStateOf(0.0) }
+                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                    if (location != null) {
+                        mLocation = location
+                        mLatitude = location.latitude
+                        mLongitude = location.longitude
+                        Timber.d("latitude = ${location.latitude}")
+                        Timber.d("longitude = ${location.longitude}")
+                        mLoadingComplete = true
+                    } else {
+                        Timber.w("location == null")
+                        view.snackbar("get location error")
+                        mLoadingComplete = true
+                    }
+                }
                 AlertDialog(
-                    onDismissRequest = {
-                        // Ignore
-                    },
+                    onDismissRequest = { showLocationDialog = false },
                     icon = { Icon(Icons.Outlined.WbSunny, null) },
                     title = { Text(stringResource(R.string.auto_set_volume)) },
                     text = {
@@ -124,31 +132,41 @@ fun Debugging(navController: NavHostController) {
                             }
                             Text("set volume automatically (check location)")
                             Text("current location (places where you want to turn on phone volume)")
-                            Text("latitude = ${(settingsSharedPref.savedLatitude)}")
-                            Text("longitude = ${settingsSharedPref.savedLongitude}")
+                            if (mLoadingComplete) {
+                                if (mLocation != null) {
+                                    Text("latitude = $mLatitude")
+                                    Text("longitude = $mLongitude")
+                                } else {
+                                    Text("get location error")
+                                }
+                            } else {
+                                CircularProgressIndicator()
+                            }
                         }
                     },
                     confirmButton = {
                         Row {
-                            Button({
+                            Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 showLocationDialog = false
                                 if (PermissionUtil.noBluetoothPermission(view.context)) {
                                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                                     return@Button
                                 }
+                                saveLocationToStorage(mLatitude, mLongitude)
                                 SettingsSharedPref.autoSetMediaVolume = 40
                                 settingsSharedPref.enableLocation = true
                             }) { Text("40%") }
                         }
                         Row {
-                            Button({
+                            Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 showLocationDialog = false
                                 if (PermissionUtil.noBluetoothPermission(view.context)) {
                                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                                     return@Button
                                 }
+                                saveLocationToStorage(mLatitude, mLongitude)
                                 SettingsSharedPref.autoSetMediaVolume = 60
                                 settingsSharedPref.enableLocation = true
                             }) { Text("60%") }
@@ -289,6 +307,10 @@ fun Debugging(navController: NavHostController) {
 
 private fun saveLocationToStorage(latitude: Double, longitude: Double) {
     Timber.d("saveLocationToStorage")
+    Timber.d("latitude = $latitude (double)")
+    Timber.d("save latitude = ${latitude.toFloat()} (float)")
+    Timber.d("longitude = $longitude (double)")
+    Timber.d("save longitude = ${longitude.toFloat()} (float)")
     SettingsSharedPref.savedLatitude = latitude.toFloat()
     SettingsSharedPref.savedLongitude = longitude.toFloat()
 }
