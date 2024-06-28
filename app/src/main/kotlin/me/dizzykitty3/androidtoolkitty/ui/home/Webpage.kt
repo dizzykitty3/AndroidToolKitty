@@ -207,25 +207,21 @@ private fun WebpageURL() {
 private fun SocialMediaProfileIURL() {
     val view = LocalView.current
     var username by remember { mutableStateOf("") }
-    val platformIndex = SettingsSharedPref.lastTimeSelectedSocialPlatform
-    var mPlatformIndex by remember { mutableIntStateOf(platformIndex) }
+    var platformIndex by remember { mutableIntStateOf(SettingsSharedPref.lastTimeSelectedSocialPlatform) }
+    val platform = URLUtil.Platform.entries[platformIndex]
     val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
-    var isInvalid by remember { mutableStateOf(false) }
 
     GroupTitle(title = R.string.social_media_profile)
 
     CustomDropdownMenu(
         items = platformList,
-        onItemSelected = { mPlatformIndex = it },
+        onItemSelected = { platformIndex = it },
         label = { Text(stringResource(R.string.platform)) }
     )
 
     OutlinedTextField(
         value = username,
-        onValueChange = {
-            username = it
-            isInvalid = isInvalid(URLUtil.Platform.entries.get(platformIndex), username)
-        },
+        onValueChange = { username = it },
         label = { Text(stringResource(R.string.username)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -233,8 +229,8 @@ private fun SocialMediaProfileIURL() {
         ),
         keyboardActions = KeyboardActions(
             onDone = {
-                if (!isInvalid) {
-                    view.context.onVisitProfileButton(username, mPlatformIndex)
+                if (isValid(platform, username)) {
+                    view.context.onVisitProfileButton(username, platformIndex)
                 }
             }
         ),
@@ -245,14 +241,13 @@ private fun SocialMediaProfileIURL() {
             }
         },
         supportingText = {
-            val platform = URLUtil.Platform.entries[mPlatformIndex]
             Column {
                 Text(
                     text = toSocialMediaFullURL(platform, username),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
-                if (isInvalid) {
+                if (isInvalid(platform, username)) {
                     Text(
                         "username for $platform should only contains letters, numbers, and underscores",
                         color = MaterialTheme.colorScheme.error
@@ -265,8 +260,8 @@ private fun SocialMediaProfileIURL() {
     Row(verticalAlignment = Alignment.CenterVertically) {
         TextButton(onClick = {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            if (!isInvalid) {
-                view.context.onVisitProfileButton(username, mPlatformIndex)
+            if (isValid(platform, username)) {
+                view.context.onVisitProfileButton(username, platformIndex)
             }
         }) {
             Text(text = stringResource(R.string.visit))
@@ -419,3 +414,6 @@ private fun isInvalid(platform: URLUtil.Platform, username: String): Boolean =
     platform == URLUtil.Platform.X
             && username.isNotBlank()
             && StringUtil.invalidUsername(username)
+
+private fun isValid(platform: URLUtil.Platform, username: String): Boolean =
+    !isInvalid(platform, username)
