@@ -63,7 +63,7 @@ object AudioUtil {
                     Timber.d("latitude = ${location.latitude}")
                     Timber.d("longitude = ${location.longitude}")
                     Timber.d("distance = $distance")
-                    this.setVolumeByPercentage(if (distance >= 200f) 0 else percentage)
+                    this.setVolumeByPercentage(if (distance >= 200f) 0 else if (LocalTime.now().hour !in 6..22) 20 else percentage)
                 }
             }
             return
@@ -73,7 +73,7 @@ object AudioUtil {
             6 -> this.setVolumeByPercentage(percentage)
             in 7..17 -> this.setVolumeByPercentage(0)
             in 18..22 -> this.setVolumeByPercentage(percentage)
-            else -> this.setVolumeByPercentage(25)
+            else -> this.setVolumeByPercentage(20)
         }
     }
 }
