@@ -413,7 +413,7 @@ private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): 
 private fun isInvalid(platform: URLUtil.Platform, username: String): Boolean =
     platform == URLUtil.Platform.X
             && username.isNotBlank()
-            && StringUtil.invalidUsername(username)
+            && StringUtil.invalidUsername(StringUtil.dropSpaces(username))
 
 private fun isValid(platform: URLUtil.Platform, username: String): Boolean =
     !isInvalid(platform, username)
