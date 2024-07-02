@@ -57,8 +57,9 @@ fun Debugging(navController: NavHostController) {
     Screen {
         Card(title = R.string.debugging, icon = Icons.Outlined.Terminal) {
             Text("debugging info")
-            Text(text = "OS version = Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
-            Text(text = "Locale =  ${Locale.getDefault()}")
+            Text("OS version = Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
+            Text("Manufacturer = ${Build.MANUFACTURER}")
+            Text("Locale =  ${Locale.getDefault()}")
 
             GroupDivider()
             Text("test functions")
