@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import timber.log.Timber
 
@@ -162,7 +163,7 @@ object SettingsSharedPref {
         set(value) = setPreference(HAVE_TAPPED_ADD_BUTTON, value)
 
     var devMode: Boolean
-        get() = getPreference(DEV_MODE, false)
+        get() = getPreference(DEV_MODE, if (BuildConfig.DEBUG) true else false)
         set(value) = setPreference(DEV_MODE, value)
 
     var lastTimeSelectedSocialPlatform: Int

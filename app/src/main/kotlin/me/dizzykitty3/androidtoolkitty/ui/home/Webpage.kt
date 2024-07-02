@@ -249,21 +249,19 @@ private fun SocialMediaProfileIURL() {
         }
     )
 
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        TextButton(onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            if (isValid(platform, username)) {
-                view.context.onVisitProfileButton(username, platformIndex)
-            }
-        }) {
-            Text(text = stringResource(R.string.visit))
-
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = null,
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
+    TextButton({
+        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+        if (isValid(platform, username)) {
+            view.context.onVisitProfileButton(username, platformIndex)
         }
+    }) {
+        Text(stringResource(R.string.visit))
+
+        Icon(
+            imageVector = Icons.Outlined.ArrowOutward,
+            contentDescription = null,
+            modifier = Modifier.align(Alignment.CenterVertically)
+        )
     }
 }
 
