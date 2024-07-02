@@ -79,9 +79,9 @@ fun SysSettings() {
             isShowSetting[setting.settingType] == true
         }
 
-        val uiTesting = settingsSharedPref.uiTesting
+        val devMode = settingsSharedPref.devMode
 
-        if (!checkIsAutoTime() || uiTesting) Tip(message = R.string.set_time_automatically_is_off_tip)
+        if (!checkIsAutoTime() || devMode) Tip(message = R.string.set_time_automatically_is_off_tip)
 
         if (isShowGroupTitle1) GroupTitle(R.string.common)
 

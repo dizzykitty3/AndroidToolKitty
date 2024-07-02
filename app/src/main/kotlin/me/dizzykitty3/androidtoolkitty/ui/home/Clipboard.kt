@@ -19,7 +19,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.Card
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui_components.Tip
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
 
 @Composable
@@ -30,8 +30,8 @@ fun Clipboard() {
     ) {
         val view = LocalView.current
         val isShowHintText = !SettingsSharedPref.haveOpenedSettingsScreen
-        val uiTesting = SettingsSharedPref.uiTesting
-        if (isShowHintText || uiTesting) Tip(message = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
+        val devMode = SettingsSharedPref.devMode
+        if (isShowHintText || devMode) Tip(message = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
         OutlinedButton(
             onClick = {
@@ -51,7 +51,7 @@ fun Clipboard() {
 }
 
 private fun onClearClipboardButton(view: View) {
-    val cleared = ClipboardUtil.check()
+    val cleared = ClipboardUtil.clear()
     Timber.i("Clipboard cleared")
-    view.snackbar(if (cleared) R.string.clipboard_cleared else R.string.clipboard_is_empty)
+    view.showSnackbar(if (cleared) R.string.clipboard_cleared else R.string.clipboard_is_empty)
 }

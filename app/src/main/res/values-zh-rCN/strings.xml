@@ -52,15 +52,13 @@
     <string name="bilibili_search">哔哩哔哩 (搜索)</string>
     <string name="weibo">微博</string>
     <string name="youtube_id">YouTube (UID)</string>
-    <string name="platform_not_added_yet">这里没有我所想的社交平台</string>
     <string name="open_developer_options">开发者选项</string>
     <string name="show_all_options">显示所有选项</string>
     <string name="hide_all_options">隐藏所有选项</string>
-    <string name="ui_testing">UI 测试</string>
+    <string name="dev_mode">dev mode</string>
     <string name="social_media_platforms_list">社交媒体列表</string>
     <string name="about">关于</string>
     <string name="source_code">源码</string>
-    <string name="submit_the_platform_you_need">提交你所想的平台</string>
     <plurals name="days_remaining">
         <item quantity="other">剩余 %1$d 天</item>
     </plurals>
@@ -144,7 +142,6 @@
     <string name="pixiv_user_custom_url">Pixiv (用户自定义 URL)</string>
     <string name="steam_user_custom_url">Steam (用户自定义 URL)</string>
     <string name="restart_app">重启 ToolKitty</string>
-    <string name="platform_example_url">示例 URL（可选）</string>
     <string name="appearance">外观</string>
     <string name="bluetooth_devices_types_6">有些设备可能同时支持经典蓝牙和蓝牙LE。这些被称为双模式设备，可以根据需要提供与不同类型设备连接的灵活性。例如，智能手表可能使用BLE与手机连接以获取通知，但也具有经典蓝牙用于音乐播放。</string>
     <string name="turn_off">禁用</string>
@@ -189,4 +186,5 @@
     <string name="qr_code_generator">生成二维码</string>
     <string name="keep_using_offline">保持离线使用</string>
     <string name="fine_location">To check current location, please grant the app Location permission.</string>
+    <string name="disable_online_features">Disable online features</string>
 </resources>

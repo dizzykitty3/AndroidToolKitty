@@ -43,6 +43,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.CARD_1
 import me.dizzykitty3.androidtoolkitty.CARD_10
@@ -171,22 +172,21 @@ private fun SettingsButton(navController: NavHostController) {
 
 @Composable
 private fun Status() {
-    val batteryLevel = remember { BatteryUtil.batteryLevel() }
+    val batteryLevel = BatteryUtil.batteryLevel()
     val view = LocalView.current
 
-    Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-        Row(modifier = Modifier.clickable {
+    Row(Modifier.horizontalScroll(rememberScrollState())) {
+        Row(Modifier.clickable {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             view.context.openSystemSettings(SETTING_POWER_USAGE_SUMMARY)
-        }
-        ) {
+        }) {
             Icon(
                 imageVector = Icons.Outlined.BatteryStd,
-                contentDescription = stringResource(id = R.string.battery_level),
+                contentDescription = stringResource(R.string.battery_level),
                 tint = MaterialTheme.colorScheme.primary
             )
             SpacerPadding()
-            Text(text = "$batteryLevel%")
+            Text("$batteryLevel%")
         }
         SpacerPadding()
         SpacerPadding()
@@ -194,8 +194,8 @@ private fun Status() {
         SpacerPadding()
         SpacerPadding()
 
-        if (BluetoothUtil.isHeadsetConnected() || SettingsSharedPref.uiTesting) {
-            Row(modifier = Modifier.clickable {
+        if (BluetoothUtil.isHeadsetConnected() || SettingsSharedPref.devMode) {
+            Row(Modifier.clickable {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 view.context.openSystemSettings(SETTING_BLUETOOTH)
             }) {
@@ -205,7 +205,19 @@ private fun Status() {
                     tint = MaterialTheme.colorScheme.primary
                 )
                 SpacerPadding()
-                Text(text = stringResource(id = R.string.connected))
+                if (!SettingsSharedPref.devMode) {
+                    Text(stringResource(R.string.connected))
+                } else {
+                    Column {
+                        Text(
+                            stringResource(R.string.dev_mode),
+                            color = MaterialTheme.colorScheme.primary,
+                            fontSize = 6.sp,
+                            lineHeight = 1.sp
+                        )
+                        Text(stringResource(R.string.connected))
+                    }
+                }
             }
         }
     }
@@ -260,8 +272,8 @@ private fun NetworkStateIcon(
 @Composable
 private fun NoTranslationTip() {
     val languageNotSupport = StringUtil.sysLangNotSupported
-    val uiTesting = SettingsSharedPref.uiTesting
-    if (languageNotSupport || uiTesting)
+    val devMode = SettingsSharedPref.devMode
+    if (languageNotSupport || devMode)
         Tip(stringResource(R.string.no_translation, StringUtil.sysLocale))
 }
 

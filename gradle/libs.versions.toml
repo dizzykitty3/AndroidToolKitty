@@ -1,5 +1,5 @@
 [versions]
-aboutLibraries = "11.2.1"
+aboutLibraries = "11.2.2"
 activity = "1.9.0"
 agp = "8.5.0"
 compose = "1.6.8"
@@ -15,7 +15,7 @@ gmsMaps = "19.0.0"
 kotlin = "2.0.0"
 ksp = "2.0.0-1.0.22"
 ktor = "2.3.12"
-leakCanary = "2.14"
+leakCanary = "3.0-alpha-8"
 lifecycle = "2.8.2"
 material = "1.12.0"
 navigation = "2.7.7"
@@ -58,7 +58,7 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
-square-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
+leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakCanary" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 [plugins]

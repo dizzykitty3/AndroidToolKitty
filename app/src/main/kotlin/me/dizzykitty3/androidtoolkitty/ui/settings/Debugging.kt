@@ -6,18 +6,19 @@ import android.os.Build
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -41,7 +42,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.WarningAlertDialogButton
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.finishApp
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
 import java.util.Locale
 
@@ -49,31 +50,36 @@ import java.util.Locale
 @Composable
 fun Debugging(navController: NavHostController) {
     val view = LocalView.current
-    var showDialog by remember { mutableStateOf(false) }
     val settingsSharedPref = remember { SettingsSharedPref }
-    var uiTesting by remember { mutableStateOf(settingsSharedPref.uiTesting) }
+    var devMode by remember { mutableStateOf(settingsSharedPref.devMode) }
     var showLocationDialog by remember { mutableStateOf(false) }
 
     Screen {
         Card(title = R.string.debugging, icon = Icons.Outlined.Terminal) {
             Text("debugging info")
-            Text(text = "OS version = Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
-            Text(text = "Locale =  ${Locale.getDefault()}")
+            Text("OS version = Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
+            Text("Manufacturer = ${Build.MANUFACTURER}")
+            Text("Locale =  ${Locale.getDefault()}")
 
             GroupDivider()
             Text("test functions")
 
-            CustomSwitchRow(text = R.string.ui_testing, checked = uiTesting) {
+            CustomSwitchRow(text = R.string.dev_mode, checked = devMode) {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                uiTesting = it
-                settingsSharedPref.uiTesting = it
+                devMode = it
+                settingsSharedPref.devMode = it
             }
 
             if (!settingsSharedPref.showOnlineFeatures) {
                 OutlinedButton({
                     settingsSharedPref.showOnlineFeatures = true
-                    view.snackbar(R.string.success)
+                    view.showSnackbar(R.string.success)
                 }) { Text(stringResource(R.string.show_online_features)) }
+            } else {
+                OutlinedButton({
+                    settingsSharedPref.showOnlineFeatures = false
+                    view.showSnackbar(R.string.success)
+                }) { Text(stringResource(R.string.disable_online_features)) }
             }
 
             OutlinedButton(onClick = {
@@ -82,27 +88,33 @@ fun Debugging(navController: NavHostController) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                     return@OutlinedButton
                 }
-                val fusedLocationClient =
-                    LocationServices.getFusedLocationProviderClient(view.context)
-                Timber.d("fusedLocationClient = $fusedLocationClient")
-                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                    if (location != null) {
-                        saveLocationToStorage(location.latitude, location.longitude)
-                        Timber.d("save latitude = ${location.latitude}")
-                        Timber.d("save longitude = ${location.longitude}")
-                        showLocationDialog = true
-                        return@addOnSuccessListener
-                    }
-                    Timber.w("location == null")
-                    view.snackbar("get location error")
-                }
+                showLocationDialog = true
             }) { Text("${stringResource(R.string.auto_set_volume)} (check location)") }
 
             if (showLocationDialog) {
+                val fusedLocationClient =
+                    LocationServices.getFusedLocationProviderClient(view.context)
+                Timber.d("fusedLocationClient = $fusedLocationClient")
+                var mLocation: Location? = null
+                var mLoadingComplete by remember { mutableStateOf(false) }
+                var mLatitude by remember { mutableDoubleStateOf(0.0) }
+                var mLongitude by remember { mutableDoubleStateOf(0.0) }
+                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                    if (location != null) {
+                        mLocation = location
+                        mLatitude = location.latitude
+                        mLongitude = location.longitude
+                        Timber.d("latitude = ${location.latitude}")
+                        Timber.d("longitude = ${location.longitude}")
+                        mLoadingComplete = true
+                    } else {
+                        Timber.w("location == null")
+                        view.showSnackbar("get location error")
+                        mLoadingComplete = true
+                    }
+                }
                 AlertDialog(
-                    onDismissRequest = {
-                        // Ignore
-                    },
+                    onDismissRequest = { showLocationDialog = false },
                     icon = { Icon(Icons.Outlined.WbSunny, null) },
                     title = { Text(stringResource(R.string.auto_set_volume)) },
                     text = {
@@ -124,33 +136,41 @@ fun Debugging(navController: NavHostController) {
                             }
                             Text("set volume automatically (check location)")
                             Text("current location (places where you want to turn on phone volume)")
-                            Text("latitude = ${(settingsSharedPref.savedLatitude)}")
-                            Text("longitude = ${settingsSharedPref.savedLongitude}")
+                            if (mLoadingComplete) {
+                                if (mLocation != null) {
+                                    Text("latitude = $mLatitude")
+                                    Text("longitude = $mLongitude")
+                                } else {
+                                    Text("get location error")
+                                }
+                            } else {
+                                CircularProgressIndicator()
+                            }
                         }
                     },
                     confirmButton = {
                         Row {
-                            Button({
+                            Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 showLocationDialog = false
                                 if (PermissionUtil.noBluetoothPermission(view.context)) {
                                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                                     return@Button
                                 }
+                                saveLocationToStorage(mLatitude, mLongitude)
                                 SettingsSharedPref.autoSetMediaVolume = 40
-                                settingsSharedPref.enableLocation = true
                             }) { Text("40%") }
                         }
                         Row {
-                            Button({
+                            Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 showLocationDialog = false
                                 if (PermissionUtil.noBluetoothPermission(view.context)) {
                                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                                     return@Button
                                 }
+                                saveLocationToStorage(mLatitude, mLongitude)
                                 SettingsSharedPref.autoSetMediaVolume = 60
-                                settingsSharedPref.enableLocation = true
                             }) { Text("60%") }
                         }
                     },
@@ -159,7 +179,6 @@ fun Debugging(navController: NavHostController) {
                             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                             showLocationDialog = false
                             SettingsSharedPref.autoSetMediaVolume = -1
-                            settingsSharedPref.enableLocation = false
                         }) { Text(stringResource(R.string.turn_off)) }
                     })
             }
@@ -169,13 +188,6 @@ fun Debugging(navController: NavHostController) {
                 navController.navigate(PERMISSION_REQUEST_SCREEN)
             }) {
                 Text(text = stringResource(id = R.string.go_to_permission_request_screen))
-            }
-
-            OutlinedButton(onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                showDialog = true
-            }) {
-                Text(stringResource(R.string.auto_set_volume))
             }
 
             OutlinedButton(
@@ -213,82 +225,16 @@ fun Debugging(navController: NavHostController) {
                     view.context.finishApp()
                 }
             )
-
-            if (showDialog) {
-                AlertDialog(
-                    onDismissRequest = { showDialog = false },
-                    icon = {
-                        Icon(imageVector = Icons.Outlined.WbSunny, contentDescription = null)
-                    },
-                    title = { Text(stringResource(R.string.auto_set_volume)) },
-                    text = {
-                        Column(modifier = Modifier.fillMaxWidth()) {
-                            UnderDevelopmentTip()
-                            Row {
-                                Column(modifier = Modifier.weight(0.5f)) {
-                                    Text(text = "8:00 AM - 5:59 PM")
-                                    Text(text = "6:00 PM - 10:59 PM")
-                                    Text(text = "11:00 PM - 5:59 AM")
-                                    Text(text = "6:00 PM - 7:59 AM")
-                                }
-                                Column(modifier = Modifier.weight(0.5f)) {
-                                    Text(text = "mute")
-                                    Text(text = "40%/60%")
-                                    Text(text = "25%")
-                                    Text(text = "40%/60%")
-                                }
-                            }
-                        }
-                    },
-                    confirmButton = {
-                        Row {
-                            Button(onClick = {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                showDialog = false
-
-                                if (PermissionUtil.noBluetoothPermission(view.context)) {
-                                    navController.navigate(PERMISSION_REQUEST_SCREEN)
-                                    return@Button
-                                }
-
-                                SettingsSharedPref.autoSetMediaVolume = 40
-                            }) {
-                                Text(text = "40%")
-                            }
-                        }
-                        Row {
-                            Button(onClick = {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                showDialog = false
-
-                                if (PermissionUtil.noBluetoothPermission(view.context)) {
-                                    navController.navigate(PERMISSION_REQUEST_SCREEN)
-                                    return@Button
-                                }
-
-                                SettingsSharedPref.autoSetMediaVolume = 60
-                            }) {
-                                Text(text = "60%")
-                            }
-                        }
-                    },
-                    dismissButton = {
-                        TextButton(onClick = {
-                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                            showDialog = false
-                            SettingsSharedPref.autoSetMediaVolume = -1
-                        }) {
-                            Text(text = stringResource(id = R.string.turn_off))
-                        }
-                    }
-                )
-            }
         }
     }
 }
 
 private fun saveLocationToStorage(latitude: Double, longitude: Double) {
     Timber.d("saveLocationToStorage")
+    Timber.d("latitude = $latitude (double)")
+    Timber.d("save latitude = ${latitude.toFloat()} (float)")
+    Timber.d("longitude = $longitude (double)")
+    Timber.d("save longitude = ${longitude.toFloat()} (float)")
     SettingsSharedPref.savedLatitude = latitude.toFloat()
     SettingsSharedPref.savedLongitude = longitude.toFloat()
 }

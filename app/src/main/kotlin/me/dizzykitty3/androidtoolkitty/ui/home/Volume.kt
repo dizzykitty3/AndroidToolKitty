@@ -44,7 +44,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.GradientSmall
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 private const val ADD = "+ Add"
 
@@ -169,7 +169,15 @@ fun Volume() {
                         )
                     },
                     onDismissRequest = {
-                        // Ignore
+                        if (!mHaveCustomLabel) mHaveCustomLabel = false
+                        showVolumeDialog = false
+                        selectedIndex = when (AudioUtil.volume) {
+                            0 -> 0
+                            (0.4 * maxVolume).toInt() -> 1
+                            (0.6 * maxVolume).toInt() -> 2
+                            (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
+                            else -> null
+                        }
                     },
                     title = {
                         if (settingsSharedPref.addedCustomVolume) {
@@ -240,7 +248,7 @@ fun Volume() {
                             onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
-                                    if (newCustomVolume.toInt() != 0) view.snackbar(R.string.system_media_volume_levels_limited)
+                                    if (newCustomVolume.toInt() != 0) view.showSnackbar(R.string.system_media_volume_levels_limited)
                                     return@Button
                                 } else {
                                     settingsSharedPref.customVolume = newCustomVolume.toInt()
@@ -305,12 +313,13 @@ fun Volume() {
     }
 }
 
+@Suppress("SameParameterValue")
 private fun setVolume(view: View, volume: Int) {
     AudioUtil.setVolume(volume)
-    view.snackbar(R.string.volume_changed)
+    view.showSnackbar(R.string.volume_changed)
 }
 
 private fun setVolume(view: View, volume: Double) {
     AudioUtil.setVolume(volume)
-    view.snackbar(R.string.volume_changed)
+    view.showSnackbar(R.string.volume_changed)
 }

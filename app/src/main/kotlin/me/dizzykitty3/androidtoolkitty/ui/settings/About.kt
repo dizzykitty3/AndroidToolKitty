@@ -8,7 +8,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowOutward
-import androidx.compose.material.icons.outlined.Schedule
+import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -30,14 +30,13 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 @Composable
 fun About() {
     Card(title = R.string.about) {
-        GroupTitle(title = R.string.version)
         Row {
             Icon(
-                imageVector = Icons.Outlined.Schedule,
+                imageVector = Icons.Outlined.Code,
                 contentDescription = stringResource(id = R.string.version)
             )
             IconAndTextPadding()
-            Text(text = "${stringResource(R.string.version)} ${BuildConfig.VERSION_NAME}")
+            Text("${stringResource(R.string.version)} ${BuildConfig.VERSION_NAME}")
         }
         GroupDivider()
         ContributorAndThanksTo()
@@ -55,6 +54,14 @@ private fun ContributorAndThanksTo() {
     ThanksTo("tengusw/share_to_clipboard")
     SpacerPadding()
     ThanksTo("hashemi-hossein/memory-guardian")
+    if (BuildConfig.DEBUG) {
+        SpacerPadding()
+        ThanksTo("DeweyReed/ClipboardCleaner")
+        SpacerPadding()
+        ThanksTo("mueller-ma/Coffee")
+        SpacerPadding()
+        ThanksTo("Kin69/EasyNotes")
+    }
 }
 
 @Composable

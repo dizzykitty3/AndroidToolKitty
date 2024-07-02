@@ -115,7 +115,7 @@ fun UnderDevelopmentTip() = Tip(R.string.under_development)
 
 @Composable
 fun Tip(message: String) {
-    val uiTesting = SettingsSharedPref.uiTesting
+    val devMode = SettingsSharedPref.devMode
 
     Card(
         shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_tip)),
@@ -124,12 +124,16 @@ fun Tip(message: String) {
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
-        if (uiTesting && message != stringResource(id = R.string.under_development)) {
+        if (devMode && message != stringResource(R.string.under_development)) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = stringResource(id = R.string.ui_testing))
+                Text(
+                    stringResource(R.string.dev_mode),
+                    fontSize = 6.sp,
+                    lineHeight = 1.sp
+                )
             }
         }
 

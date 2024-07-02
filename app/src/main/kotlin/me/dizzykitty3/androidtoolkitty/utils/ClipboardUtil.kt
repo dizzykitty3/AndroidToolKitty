@@ -12,17 +12,8 @@ object ClipboardUtil {
         appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
     @SuppressLint("NewApi")
-    fun clear() {
-        if (OSVersion.a9()) {
-            clipboard.clearPrimaryClip()
-            return
-        }
-        copy("")
-    }
-
-    @SuppressLint("NewApi")
     @CheckResult
-    fun check(): Boolean {
+    fun clear(): Boolean {
         if (!clipboard.hasPrimaryClip()) return false
         if (OSVersion.a9()) {
             clipboard.clearPrimaryClip()

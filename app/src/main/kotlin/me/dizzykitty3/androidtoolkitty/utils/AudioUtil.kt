@@ -9,7 +9,7 @@ import com.google.android.gms.location.LocationServices
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
 import java.time.LocalTime
 
@@ -43,7 +43,7 @@ object AudioUtil {
         if (percentage in 0..100 && (volume != indexedVolume)) {
             setVolume(indexedVolume, true)
             Timber.d("setVolumeAutomatically true")
-            this.snackbar(R.string.volume_changed_auto)
+            this.showSnackbar(R.string.volume_changed_auto)
         }
         Timber.d("setVolumeAutomatically false, current == target")
     }
@@ -51,29 +51,18 @@ object AudioUtil {
     @SuppressLint("MissingPermission")
     fun View.autoSetMediaVolume(percentage: Int) {
         if (percentage !in 0..100) return
-
-        if (SettingsSharedPref.enableLocation) {
-            if (PermissionUtil.noLocationPermission(appContext)) return
-            var distance: Float
-            val currentLocation = LocationServices.getFusedLocationProviderClient(appContext)
-            currentLocation.lastLocation.addOnSuccessListener { location: Location? ->
-                if (location != null) {
-                    distance =
-                        LocationUtil.calculateDistanceToSaved(location.latitude, location.longitude)
-                    Timber.d("latitude = ${location.latitude}")
-                    Timber.d("longitude = ${location.longitude}")
-                    Timber.d("distance = $distance")
-                    this.setVolumeByPercentage(if (distance >= 200f) 0 else percentage)
-                }
+        if (PermissionUtil.noLocationPermission(appContext)) return
+        var distance: Float
+        val currentLocation = LocationServices.getFusedLocationProviderClient(appContext)
+        currentLocation.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                distance = LocationUtil.getDistance(location.latitude, location.longitude)
+                Timber.d("latitude = ${location.latitude}")
+                Timber.d("longitude = ${location.longitude}")
+                Timber.d("distance = $distance")
+                if (SettingsSharedPref.devMode) this.showSnackbar("${this.context.getString(R.string.dev_mode)} message: distance = $distance")
+                this.setVolumeByPercentage(if (distance >= 200f) 0 else if (LocalTime.now().hour !in 6..22) 20 else percentage)
             }
-            return
-        }
-
-        when (LocalTime.now().hour) {
-            6 -> this.setVolumeByPercentage(percentage)
-            in 7..17 -> this.setVolumeByPercentage(0)
-            in 18..22 -> this.setVolumeByPercentage(percentage)
-            else -> this.setVolumeByPercentage(25)
         }
     }
 }

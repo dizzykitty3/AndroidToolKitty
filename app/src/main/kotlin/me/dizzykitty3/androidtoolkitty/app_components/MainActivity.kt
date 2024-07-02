@@ -22,7 +22,7 @@ import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.autoSetMediaVolume
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
@@ -59,8 +59,8 @@ class MainActivity : ComponentActivity() {
                 continuation = cont
             }
             if (isAutoClearClipboard) {
-                if (ClipboardUtil.check()) {
-                    window.decorView.snackbar(R.string.clipboard_cleared_automatically)
+                if (ClipboardUtil.clear()) {
+                    window.decorView.showSnackbar(R.string.clipboard_cleared_automatically)
                     Timber.i("Clipboard cleared automatically")
                 }
             }

@@ -30,7 +30,7 @@ import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.Italic
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.snackbar
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 import timber.log.Timber
 
@@ -179,8 +179,8 @@ private fun View.onClickConvertButton(
         else StringUtil.characterToUnicode(input)
         updateResult(result)
         ClipboardUtil.copy(result)
-        this.snackbar("$result ${appContext.getString(R.string.copied)}")
+        this.showSnackbar("$result ${appContext.getString(R.string.copied)}")
     } catch (e: Exception) {
-        this.snackbar(e.message ?: "Unknown error occurred")
+        this.showSnackbar(e.message ?: "Unknown error occurred")
     }
 }

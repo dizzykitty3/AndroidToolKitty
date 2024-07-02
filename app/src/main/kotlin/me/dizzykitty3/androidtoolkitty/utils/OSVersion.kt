@@ -11,6 +11,7 @@ object OSVersion {
      * [developer-preview-2](https://android-developers.googleblog.com/2024/03/the-second-developer-preview-of-android-15.html)
      * [beta-1](https://android-developers.googleblog.com/2024/04/the-first-beta-of-android-15.html)
      * [beta-2](https://android-developers.googleblog.com/2024/05/the-second-beta-of-android-15.html)
+     * [beta-3](https://android-developers.googleblog.com/2024/06/the-third-beta-of-android-15.html)
      */
     fun a15(): Boolean = osVersion >= 35
     fun api35(): Boolean = a15()
@@ -101,6 +102,9 @@ object OSVersion {
     fun marshmallow(): Boolean = a6()
     fun m(): Boolean = a6()
 
+    /**
+     * 1. Jetpack Compose support
+     */
     fun a5(): Boolean = osVersion >= 21
     fun api21(): Boolean = a5()
     fun lollipop(): Boolean = a5()

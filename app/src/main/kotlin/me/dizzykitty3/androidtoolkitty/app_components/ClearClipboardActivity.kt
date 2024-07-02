@@ -18,7 +18,7 @@ class ClearClipboardActivity : Activity() {
         Timber.d("onWindowFocusChanged")
         if (hasFocus) {
             Timber.d("hasFocus")
-            if (ClipboardUtil.check()) {
+            if (ClipboardUtil.clear()) {
                 Timber.i("clipboard cleared")
                 toast(getString(R.string.clipboard_cleared))
             } else {
