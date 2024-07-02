@@ -313,6 +313,7 @@ fun Volume() {
     }
 }
 
+@Suppress("SameParameterValue")
 private fun setVolume(view: View, volume: Int) {
     AudioUtil.setVolume(volume)
     view.showSnackbar(R.string.volume_changed)

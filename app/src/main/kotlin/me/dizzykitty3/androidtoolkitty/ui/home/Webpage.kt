@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.content.Context
 import android.view.HapticFeedbackConstants
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,14 +9,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Link
-import androidx.compose.material.icons.outlined.Upload
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -36,7 +30,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
@@ -47,7 +40,6 @@ import me.dizzykitty3.androidtoolkitty.ui_components.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui_components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui_components.Italic
-import me.dizzykitty3.androidtoolkitty.ui_components.UnderDevelopmentTip
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnYouTube
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSearch
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
@@ -272,91 +264,6 @@ private fun SocialMediaProfileIURL() {
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
-        NoPlatformYouNeedHere()
-    }
-}
-
-@Composable
-private fun NoPlatformYouNeedHere() {
-    val view = LocalView.current
-    var showDialog by remember { mutableStateOf(false) }
-
-    Text(
-        text = buildAnnotatedString { Italic(stringResource(id = R.string.platform_not_added_yet)) },
-        textDecoration = TextDecoration.Underline,
-        modifier = Modifier.clickable {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            showDialog = true
-        }
-    )
-
-    var platformNameInput by remember { mutableStateOf("") }
-    var platformExampleURLInput by remember { mutableStateOf("") }
-
-    if (showDialog) {
-        AlertDialog(
-            icon = { Icon(imageVector = Icons.Outlined.Upload, contentDescription = null) },
-            onDismissRequest = { showDialog = false },
-            title = { Text(text = stringResource(id = R.string.submit_the_platform_you_need)) },
-            text = {
-                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                    UnderDevelopmentTip()
-                    OutlinedTextField(
-                        value = platformNameInput,
-                        onValueChange = { platformNameInput = it },
-                        label = { Text(text = stringResource(R.string.platform)) },
-                        modifier = Modifier.fillMaxWidth(),
-                        trailingIcon = {
-                            ClearInput(text = platformNameInput) {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                platformNameInput = ""
-                            }
-                        },
-                    )
-                    OutlinedTextField(
-                        value = platformExampleURLInput,
-                        onValueChange = { platformExampleURLInput = it },
-                        label = { Text(text = stringResource(id = R.string.platform_example_url)) },
-                        modifier = Modifier.fillMaxWidth(),
-                        trailingIcon = {
-                            ClearInput(text = platformExampleURLInput) {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                platformExampleURLInput = ""
-                            }
-                        }
-                    )
-                }
-            },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                        showDialog = false
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
-                    )
-                ) {
-                    Text(
-                        text = stringResource(android.R.string.ok),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-            },
-            dismissButton = {
-                TextButton(
-                    onClick = {
-                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                        showDialog = false
-                    }
-                ) {
-                    Text(
-                        text = stringResource(id = android.R.string.cancel),
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
-            }
-        )
     }
 }
 

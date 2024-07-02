@@ -56,7 +56,6 @@
     <string name="open_write_permission">システム設定の変更</string>
     <string name="weibo">Weibo</string>
     <string name="youtube_id">YouTube（ユーザーID）</string>
-    <string name="platform_not_added_yet">ここに必要なプラットフォームがありませんか？</string>
     <string name="bluetooth_devices_types_1">クラシックBluetooth（BT）</string>
     <string name="bluetooth_devices_types_2">これはヘッドセット、スピーカー、ファイル転送などに使用される一般的なタイプです。良好な範囲と速度を提供しますが、より多くの電力を消費します。\n</string>
     <string name="bluetooth_devices_types_3">Bluetooth Low Energy（BLE）</string>
@@ -79,7 +78,6 @@
     <string name="package_name">パッケージ名</string>
     <string name="content_description_link_icon_whats_package_name">リンクアイコン：パッケージ名とは</string>
     <string name="open_developer_options">開発者向けオプション</string>
-    <string name="submit_the_platform_you_need">必要なプラットフォームを提出する</string>
     <string name="pixiv_artwork_id">pixiv（作品ID）</string>
     <string name="pixiv_user_id">pixiv（ユーザーID）</string>
     <string name="open_caption_preferences">字幕設定</string>
@@ -102,7 +100,6 @@
     <string name="search">検索</string>
     <string name="pixiv_user_custom_url">pixiv（ユーザーカスタムURL）</string>
     <string name="steam_user_custom_url">Steam（ユーザーカスタムURL）</string>
-    <string name="platform_example_url">例URL（任意）</string>
     <string name="search_on_youtube">YouTube で検索</string>
     <string name="unknown_device">不明なデバイス</string>
     <string name="font_weight_test">フォントウェイト テスト</string>

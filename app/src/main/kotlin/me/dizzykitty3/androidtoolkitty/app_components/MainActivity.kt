@@ -59,7 +59,7 @@ class MainActivity : ComponentActivity() {
                 continuation = cont
             }
             if (isAutoClearClipboard) {
-                if (ClipboardUtil.check()) {
+                if (ClipboardUtil.clear()) {
                     window.decorView.showSnackbar(R.string.clipboard_cleared_automatically)
                     Timber.i("Clipboard cleared automatically")
                 }
