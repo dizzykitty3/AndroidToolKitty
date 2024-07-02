@@ -6,7 +6,6 @@ import android.os.Build
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material.icons.outlined.WbSunny
@@ -51,7 +50,6 @@ import java.util.Locale
 @Composable
 fun Debugging(navController: NavHostController) {
     val view = LocalView.current
-    var showDialog by remember { mutableStateOf(false) }
     val settingsSharedPref = remember { SettingsSharedPref }
     var uiTesting by remember { mutableStateOf(settingsSharedPref.uiTesting) }
     var showLocationDialog by remember { mutableStateOf(false) }
@@ -155,7 +153,6 @@ fun Debugging(navController: NavHostController) {
                                 }
                                 saveLocationToStorage(mLatitude, mLongitude)
                                 SettingsSharedPref.autoSetMediaVolume = 40
-                                settingsSharedPref.enableLocation = true
                             }) { Text("40%") }
                         }
                         Row {
@@ -168,7 +165,6 @@ fun Debugging(navController: NavHostController) {
                                 }
                                 saveLocationToStorage(mLatitude, mLongitude)
                                 SettingsSharedPref.autoSetMediaVolume = 60
-                                settingsSharedPref.enableLocation = true
                             }) { Text("60%") }
                         }
                     },
@@ -177,7 +173,6 @@ fun Debugging(navController: NavHostController) {
                             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                             showLocationDialog = false
                             SettingsSharedPref.autoSetMediaVolume = -1
-                            settingsSharedPref.enableLocation = false
                         }) { Text(stringResource(R.string.turn_off)) }
                     })
             }
@@ -187,13 +182,6 @@ fun Debugging(navController: NavHostController) {
                 navController.navigate(PERMISSION_REQUEST_SCREEN)
             }) {
                 Text(text = stringResource(id = R.string.go_to_permission_request_screen))
-            }
-
-            OutlinedButton(onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                showDialog = true
-            }) {
-                Text(stringResource(R.string.auto_set_volume))
             }
 
             OutlinedButton(
@@ -231,76 +219,6 @@ fun Debugging(navController: NavHostController) {
                     view.context.finishApp()
                 }
             )
-
-            if (showDialog) {
-                AlertDialog(
-                    onDismissRequest = { showDialog = false },
-                    icon = {
-                        Icon(imageVector = Icons.Outlined.WbSunny, contentDescription = null)
-                    },
-                    title = { Text(stringResource(R.string.auto_set_volume)) },
-                    text = {
-                        Column(modifier = Modifier.fillMaxWidth()) {
-                            UnderDevelopmentTip()
-                            Row {
-                                Column(modifier = Modifier.weight(0.5f)) {
-                                    Text(text = "8:00 AM - 5:59 PM")
-                                    Text(text = "6:00 PM - 10:59 PM")
-                                    Text(text = "11:00 PM - 5:59 AM")
-                                    Text(text = "6:00 PM - 7:59 AM")
-                                }
-                                Column(modifier = Modifier.weight(0.5f)) {
-                                    Text(text = "mute")
-                                    Text(text = "40%/60%")
-                                    Text(text = "25%")
-                                    Text(text = "40%/60%")
-                                }
-                            }
-                        }
-                    },
-                    confirmButton = {
-                        Row {
-                            Button(onClick = {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                showDialog = false
-
-                                if (PermissionUtil.noBluetoothPermission(view.context)) {
-                                    navController.navigate(PERMISSION_REQUEST_SCREEN)
-                                    return@Button
-                                }
-
-                                SettingsSharedPref.autoSetMediaVolume = 40
-                            }) {
-                                Text(text = "40%")
-                            }
-                        }
-                        Row {
-                            Button(onClick = {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                                showDialog = false
-
-                                if (PermissionUtil.noBluetoothPermission(view.context)) {
-                                    navController.navigate(PERMISSION_REQUEST_SCREEN)
-                                    return@Button
-                                }
-
-                                SettingsSharedPref.autoSetMediaVolume = 60
-                            }) {
-                                Text(text = "60%")
-                            }
-                        }
-                    },
-                    dismissButton = {
-                        TextButton(onClick = {
-                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                            showDialog = false
-                            SettingsSharedPref.autoSetMediaVolume = -1
-                        }) {
-                            Text(text = stringResource(id = R.string.turn_off))
-                        }
-                    }
-                )
-            }
         }
     }
 }

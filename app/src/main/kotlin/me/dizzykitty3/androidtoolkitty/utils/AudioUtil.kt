@@ -51,29 +51,18 @@ object AudioUtil {
     @SuppressLint("MissingPermission")
     fun View.autoSetMediaVolume(percentage: Int) {
         if (percentage !in 0..100) return
-
-        if (SettingsSharedPref.enableLocation) {
-            if (PermissionUtil.noLocationPermission(appContext)) return
-            var distance: Float
-            val currentLocation = LocationServices.getFusedLocationProviderClient(appContext)
-            currentLocation.lastLocation.addOnSuccessListener { location: Location? ->
-                if (location != null) {
-                    distance =
-                        LocationUtil.calculateDistanceToSaved(location.latitude, location.longitude)
-                    Timber.d("latitude = ${location.latitude}")
-                    Timber.d("longitude = ${location.longitude}")
-                    Timber.d("distance = $distance")
-                    this.setVolumeByPercentage(if (distance >= 200f) 0 else if (LocalTime.now().hour !in 6..22) 20 else percentage)
-                }
+        if (PermissionUtil.noLocationPermission(appContext)) return
+        var distance: Float
+        val currentLocation = LocationServices.getFusedLocationProviderClient(appContext)
+        currentLocation.lastLocation.addOnSuccessListener { location: Location? ->
+            if (location != null) {
+                distance = LocationUtil.getDistance(location.latitude, location.longitude)
+                Timber.d("latitude = ${location.latitude}")
+                Timber.d("longitude = ${location.longitude}")
+                Timber.d("distance = $distance")
+                if (SettingsSharedPref.uiTesting) this.showSnackbar("distance = $distance")
+                this.setVolumeByPercentage(if (distance >= 200f) 0 else if (LocalTime.now().hour !in 6..22) 20 else percentage)
             }
-            return
-        }
-
-        when (LocalTime.now().hour) {
-            6 -> this.setVolumeByPercentage(percentage)
-            in 7..17 -> this.setVolumeByPercentage(0)
-            in 18..22 -> this.setVolumeByPercentage(percentage)
-            else -> this.setVolumeByPercentage(20)
         }
     }
 }

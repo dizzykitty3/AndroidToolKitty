@@ -201,10 +201,6 @@ object SettingsSharedPref {
         get() = getPreference(SHOW_SYSTEM_VOLUME_UI, true)
         set(value) = setPreference(SHOW_SYSTEM_VOLUME_UI, value)
 
-    var enableLocation: Boolean
-        get() = getPreference(ENABLE_LOCATION, false)
-        set(value) = setPreference(ENABLE_LOCATION, value)
-
     fun getWheelOfFortuneItems(): List<String>? {
         val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null
         return try {
