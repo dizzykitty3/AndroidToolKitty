@@ -136,7 +136,7 @@
     <string name="hide_all_options">すべてのオプションを非表示</string>
     <string name="restart_app">アプリを再起動</string>
     <string name="appearance">外観</string>
-    <string name="ui_testing">UI テスト</string>
+    <string name="dev_mode">dev mode</string>
     <string name="social_media_platforms_list">Social media platforms list</string>
     <string name="about">APP について</string>
     <string name="source_code">ソースコード</string>
@@ -190,4 +190,5 @@
     <string name="qr_code_generator">QR Code generator</string>
     <string name="keep_using_offline">Keep using ToolKitty offline</string>
     <string name="fine_location">To check current location, please grant the app Location permission.</string>
+    <string name="disable_online_features">Disable online features</string>
 </resources>

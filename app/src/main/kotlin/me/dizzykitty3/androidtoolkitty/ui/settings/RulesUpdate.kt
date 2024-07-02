@@ -1,7 +1,9 @@
 package me.dizzykitty3.androidtoolkitty.ui.settings
 
 import android.view.HapticFeedbackConstants
+import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +14,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.sp
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
@@ -74,9 +77,19 @@ fun RulesUpdate() {
         Text(stringResource(R.string.webpage_suffixes))
     }
 
-    if (isLoading || SettingsSharedPref.uiTesting) {
+    if (isLoading || SettingsSharedPref.devMode) {
         SpacerPadding()
-        CircularProgressIndicator()
+        Row {
+            CircularProgressIndicator()
+            if (SettingsSharedPref.devMode) {
+                Text(
+                    stringResource(R.string.dev_mode),
+                    color = MaterialTheme.colorScheme.primary,
+                    fontSize = 6.sp,
+                    lineHeight = 1.sp,
+                )
+            }
+        }
     }
 }
 

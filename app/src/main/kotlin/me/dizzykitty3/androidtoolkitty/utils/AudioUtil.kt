@@ -60,7 +60,7 @@ object AudioUtil {
                 Timber.d("latitude = ${location.latitude}")
                 Timber.d("longitude = ${location.longitude}")
                 Timber.d("distance = $distance")
-                if (SettingsSharedPref.uiTesting) this.showSnackbar("distance = $distance")
+                if (SettingsSharedPref.devMode) this.showSnackbar("${this.context.getString(R.string.dev_mode)} message: distance = $distance")
                 this.setVolumeByPercentage(if (distance >= 200f) 0 else if (LocalTime.now().hour !in 6..22) 20 else percentage)
             }
         }

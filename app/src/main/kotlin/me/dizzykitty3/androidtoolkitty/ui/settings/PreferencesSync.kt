@@ -32,6 +32,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
@@ -132,9 +133,19 @@ fun PreferencesSync() {
         Text(text = stringResource(id = R.string.download_settings))
     }
 
-    if (isLoading || SettingsSharedPref.uiTesting) {
+    if (isLoading || SettingsSharedPref.devMode) {
         SpacerPadding()
-        CircularProgressIndicator()
+        Row {
+            CircularProgressIndicator()
+            if (SettingsSharedPref.devMode) {
+                Text(
+                    stringResource(R.string.dev_mode),
+                    color = MaterialTheme.colorScheme.primary,
+                    fontSize = 6.sp,
+                    lineHeight = 1.sp
+                )
+            }
+        }
     }
 
     when (dialogState) {

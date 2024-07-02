@@ -51,7 +51,7 @@ import java.util.Locale
 fun Debugging(navController: NavHostController) {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
-    var uiTesting by remember { mutableStateOf(settingsSharedPref.uiTesting) }
+    var devMode by remember { mutableStateOf(settingsSharedPref.devMode) }
     var showLocationDialog by remember { mutableStateOf(false) }
 
     Screen {
@@ -63,10 +63,10 @@ fun Debugging(navController: NavHostController) {
             GroupDivider()
             Text("test functions")
 
-            CustomSwitchRow(text = R.string.ui_testing, checked = uiTesting) {
+            CustomSwitchRow(text = R.string.dev_mode, checked = devMode) {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                uiTesting = it
-                settingsSharedPref.uiTesting = it
+                devMode = it
+                settingsSharedPref.devMode = it
             }
 
             if (!settingsSharedPref.showOnlineFeatures) {
@@ -74,6 +74,11 @@ fun Debugging(navController: NavHostController) {
                     settingsSharedPref.showOnlineFeatures = true
                     view.showSnackbar(R.string.success)
                 }) { Text(stringResource(R.string.show_online_features)) }
+            } else {
+                OutlinedButton({
+                    settingsSharedPref.showOnlineFeatures = false
+                    view.showSnackbar(R.string.success)
+                }) { Text(stringResource(R.string.disable_online_features)) }
             }
 
             OutlinedButton(onClick = {

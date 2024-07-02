@@ -30,8 +30,8 @@ fun Clipboard() {
     ) {
         val view = LocalView.current
         val isShowHintText = !SettingsSharedPref.haveOpenedSettingsScreen
-        val uiTesting = SettingsSharedPref.uiTesting
-        if (isShowHintText || uiTesting) Tip(message = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
+        val devMode = SettingsSharedPref.devMode
+        if (isShowHintText || devMode) Tip(message = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
         OutlinedButton(
             onClick = {
