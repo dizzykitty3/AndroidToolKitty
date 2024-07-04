@@ -297,7 +297,7 @@ private fun Context.onVisitProfileButton(
 }
 
 /**
- * @see me.dizzykitty3.androidtoolkitty.utils.URLUtil.Platform
+ * @see me.dizzykitty3.androidtoolkitty.data.utils.URLUtil.Platform
  */
 private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String =
     when (platform) {

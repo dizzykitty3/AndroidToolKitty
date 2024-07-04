@@ -80,7 +80,7 @@ object URLUtil {
     }
 
     /**
-     * @see me.dizzykitty3.androidtoolkitty.ui.home.toSocialMediaFullURL
+     * @see me.dizzykitty3.androidtoolkitty.ui.view.home.toSocialMediaFullURL
      */
     enum class Platform(val prefix: String, @StringRes val platform: Int) {
         ARTSTATION("artstation.com/", R.string.artstation),

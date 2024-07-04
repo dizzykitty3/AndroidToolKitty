@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.view.qr_code_generator
+package me.dizzykitty3.androidtoolkitty.ui.view.others
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box

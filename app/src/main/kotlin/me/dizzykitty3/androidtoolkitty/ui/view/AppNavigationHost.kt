@@ -21,7 +21,7 @@ import me.dizzykitty3.androidtoolkitty.data.SETTINGS_SCREEN
 import me.dizzykitty3.androidtoolkitty.ui.view.home.Home
 import me.dizzykitty3.androidtoolkitty.ui.view.others.HomeEdit
 import me.dizzykitty3.androidtoolkitty.ui.view.others.PermissionRequest
-import me.dizzykitty3.androidtoolkitty.ui.view.qr_code_generator.QRCodeGenerator
+import me.dizzykitty3.androidtoolkitty.ui.view.others.QRCodeGenerator
 import me.dizzykitty3.androidtoolkitty.ui.view.settings.Debugging
 import me.dizzykitty3.androidtoolkitty.ui.view.settings.Licenses
 import me.dizzykitty3.androidtoolkitty.ui.view.settings.Settings
