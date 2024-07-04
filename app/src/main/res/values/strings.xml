@@ -112,6 +112,10 @@
     <string name="fansly" translatable="false">fansly</string>
     <string name="unsplash" translatable="false">Unsplash</string>
     <string name="mastodon" translatable="false">Mastodon (@mastodon.social)</string>
+    <string name="twitcasting">TwitCasting</string>
+    <string name="profcard" translatable="false">プロフカード</string>
+    <string name="note" translatable="false">note</string>
+    <string name="unifans">Unifans</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>

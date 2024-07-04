@@ -42,6 +42,7 @@
     <string name="platform">プラットフォーム</string>
     <string name="username">ユーザー名</string>
     <string name="bilibili_search">bilibili（検索）</string>
+    <string name="twitcasting">ツイキャス</string>
     <string name="system_settings">システム設定</string>
     <string name="open_display_settings">ディスプレイ</string>
     <string name="open_auto_rotate_settings">画面の自動回転</string>
@@ -193,4 +194,5 @@
     <string name="result">result =</string>
     <string name="convert_to_ascii_values">Convert to ASCII values</string>
     <string name="codes_of_characters">Codes of Characters</string>
+    <string name="unifans">Unifans</string>
 </resources>
