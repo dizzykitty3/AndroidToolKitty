@@ -189,4 +189,8 @@
     <string name="disable_online_features">Disable online features</string>
     <string name="distance">distance</string>
     <string name="open_accessibility_settings">Accessibility</string>
+    <string name="ascii">ASCII</string>
+    <string name="result">result =</string>
+    <string name="convert_to_ascii_values">Convert to ASCII values</string>
+    <string name="codes_of_characters">Codes of Characters</string>
 </resources>

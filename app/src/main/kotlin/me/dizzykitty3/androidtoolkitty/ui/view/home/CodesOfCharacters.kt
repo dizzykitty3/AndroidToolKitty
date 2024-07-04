@@ -44,10 +44,12 @@ fun Unicode() {
 
     Card(
         icon = Icons.AutoMirrored.Outlined.Notes,
-        title = R.string.unicode
+        title = R.string.codes_of_characters
     ) {
         val view = LocalView.current
         val focus = LocalFocusManager.current
+
+        GroupTitle(R.string.unicode)
 
         OutlinedTextField(
             value = unicode,
@@ -131,7 +133,7 @@ fun Unicode() {
         }
 
         GroupDivider()
-        GroupTitle("to ASCII")
+        GroupTitle(R.string.ascii)
 
         var stringToASCII by remember { mutableStateOf("") }
         var toASCIIResult by remember { mutableStateOf("") }
@@ -158,12 +160,12 @@ fun Unicode() {
             },
         )
 
-        Text("result = $toASCIIResult")
+        if (toASCIIResult != "") Text("${stringResource(R.string.result)} $toASCIIResult")
 
         TextButton({
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             toASCIIResult = StringUtil.toASCII(stringToASCII)
-        }) { Text("Convert to ASCII values") }
+        }) { Text(stringResource(R.string.convert_to_ascii_values)) }
     }
 }
 

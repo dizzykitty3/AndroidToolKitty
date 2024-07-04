@@ -188,4 +188,8 @@
     <string name="disable_online_features">禁用「在线功能」</string>
     <string name="distance">距离</string>
     <string name="open_accessibility_settings">无障碍</string>
+    <string name="ascii">ASCII</string>
+    <string name="result">结果为</string>
+    <string name="convert_to_ascii_values">转换为 ASCII 值</string>
+    <string name="codes_of_characters">Codes of Characters</string>
 </resources>
