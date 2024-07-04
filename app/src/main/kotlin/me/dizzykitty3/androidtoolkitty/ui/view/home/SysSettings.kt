@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.data.SETTING_ACCESSIBILITY
 import me.dizzykitty3.androidtoolkitty.data.SETTING_AUTO_ROTATE
 import me.dizzykitty3.androidtoolkitty.data.SETTING_BATTERY_OPTIMIZATION
 import me.dizzykitty3.androidtoolkitty.data.SETTING_BLUETOOTH
@@ -51,6 +52,7 @@ fun SysSettings() {
             Setting(SETTING_USAGE_ACCESS, R.string.open_usage_access_permission),
             Setting(SETTING_OVERLAY, R.string.open_overlay_permission),
             Setting(SETTING_WRITE_SETTINGS, R.string.open_write_permission),
+            Setting(SETTING_ACCESSIBILITY, R.string.open_accessibility_settings),
             Setting(SETTING_LOCALE, R.string.open_language_settings),
             Setting(SETTING_DATE, R.string.open_date_and_time_settings),
             Setting(SETTING_DEVELOPER, R.string.open_developer_options)
@@ -128,6 +130,16 @@ fun SysSettings() {
             }
             Row {
                 settings.subList(10, 12).forEach { setting ->
+                    if (isShowSetting[setting.settingType] == true) {
+                        SystemSettingButton(
+                            settingType = setting.settingType,
+                            text = setting.text
+                        )
+                    }
+                }
+            }
+            Row {
+                settings.subList(12, 13).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
                             settingType = setting.settingType,

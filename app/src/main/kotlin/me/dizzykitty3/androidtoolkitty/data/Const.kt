@@ -39,6 +39,7 @@ const val SETTING_DEVELOPER = "setting_developer"
 const val SETTING_ENABLE_BLUETOOTH = "setting_enable_bluetooth"
 const val SETTING_WIFI = "setting_wifi"
 const val SETTING_POWER_USAGE_SUMMARY = "setting_power_usage_summary"
+const val SETTING_ACCESSIBILITY = "setting_accessibility"
 
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 const val BT = Manifest.permission.BLUETOOTH

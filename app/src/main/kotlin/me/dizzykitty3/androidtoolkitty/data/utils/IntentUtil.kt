@@ -18,6 +18,7 @@ import me.dizzykitty3.androidtoolkitty.data.GOOGLE_MAPS
 import me.dizzykitty3.androidtoolkitty.data.GOOGLE_PLAY
 import me.dizzykitty3.androidtoolkitty.data.HTTPS
 import me.dizzykitty3.androidtoolkitty.data.PACKAGE
+import me.dizzykitty3.androidtoolkitty.data.SETTING_ACCESSIBILITY
 import me.dizzykitty3.androidtoolkitty.data.SETTING_AUTO_ROTATE
 import me.dizzykitty3.androidtoolkitty.data.SETTING_BATTERY_OPTIMIZATION
 import me.dizzykitty3.androidtoolkitty.data.SETTING_BLUETOOTH
@@ -134,6 +135,7 @@ object IntentUtil {
             SETTING_ENABLE_BLUETOOTH -> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             SETTING_WIFI -> Intent(Settings.ACTION_WIFI_SETTINGS)
             SETTING_POWER_USAGE_SUMMARY -> Intent(ACTION_POWER_USAGE_SUMMARY)
+            SETTING_ACCESSIBILITY -> Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             else -> return
         }
         Timber.d("onOpenSystemSettings: $settingType")

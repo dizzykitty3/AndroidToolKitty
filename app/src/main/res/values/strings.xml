@@ -127,6 +127,7 @@
     <string name="open_usage_access_permission">Usage access</string>
     <string name="open_overlay_permission">Display over other apps</string>
     <string name="open_write_permission">Modify system settings</string>
+    <string name="open_accessibility_settings">Accessibility</string>
 
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
