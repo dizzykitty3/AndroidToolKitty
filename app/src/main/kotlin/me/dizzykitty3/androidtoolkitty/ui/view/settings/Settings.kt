@@ -151,7 +151,6 @@ private fun General(navController: NavHostController) {
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
-    val haveTappedWebpageCardShowMore = settingsSharedPref.haveTappedWebpageCardShowMore
     var webpageShowMore by remember { mutableStateOf(settingsSharedPref.keepWebpageCardShowMore) }
 
     Card(title = R.string.general) {
@@ -179,7 +178,7 @@ private fun General(navController: NavHostController) {
             settingsSharedPref.autoClearClipboard = autoClearClipboard
         }
 
-        if (haveTappedWebpageCardShowMore) CustomSwitchRow(
+        CustomSwitchRow(
             text = R.string.keep_showing_full_webpage_card,
             checked = webpageShowMore
         ) {

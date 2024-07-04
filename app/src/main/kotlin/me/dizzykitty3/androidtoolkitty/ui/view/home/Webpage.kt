@@ -73,7 +73,6 @@ fun Webpage() {
             TextButton(onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 mShowMore = !mShowMore
-                settingsSharedPref.haveTappedWebpageCardShowMore = true
             }) {
                 Text(text = stringResource(id = R.string.show_more))
             }
