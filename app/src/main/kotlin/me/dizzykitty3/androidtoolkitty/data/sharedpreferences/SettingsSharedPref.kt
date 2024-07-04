@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.BuildConfig
-import me.dizzykitty3.androidtoolkitty.app_components.MainApp.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import timber.log.Timber
 
 @Serializable
