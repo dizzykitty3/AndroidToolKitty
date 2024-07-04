@@ -61,11 +61,13 @@ fun Settings(navController: NavHostController) {
                         modifier = Modifier.horizontalScroll(rememberScrollState())
                     ) {
                         TextButton({
+                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                             showPrivacyDisclaimer = false
                             SettingsSharedPref.showPrivacyDisclaimer = false
                         }) { Text(stringResource(R.string.accept)) }
                         Text("|")
                         TextButton({
+                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                             showOnlineFeatures = false
                             SettingsSharedPref.showOnlineFeatures = false
                         }) { Text(stringResource(R.string.keep_using_offline)) }

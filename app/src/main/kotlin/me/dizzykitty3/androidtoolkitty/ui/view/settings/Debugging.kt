@@ -41,7 +41,7 @@ import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.components.Screen
-import me.dizzykitty3.androidtoolkitty.ui.components.UnderDevelopmentTip
+import me.dizzykitty3.androidtoolkitty.ui.components.WIPTip
 import me.dizzykitty3.androidtoolkitty.ui.components.WarningAlertDialogButton
 import timber.log.Timber
 import java.util.Locale
@@ -62,7 +62,6 @@ fun Debugging(navController: NavHostController) {
             Text("Locale =  ${Locale.getDefault()}")
 
             GroupDivider()
-            Text("test functions")
 
             CustomSwitchRow(text = R.string.dev_mode, checked = devMode) {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
@@ -72,11 +71,13 @@ fun Debugging(navController: NavHostController) {
 
             if (!settingsSharedPref.showOnlineFeatures) {
                 OutlinedButton({
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     settingsSharedPref.showOnlineFeatures = true
                     view.showSnackbar(R.string.success)
                 }) { Text(stringResource(R.string.show_online_features)) }
             } else {
                 OutlinedButton({
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                     settingsSharedPref.showOnlineFeatures = false
                     view.showSnackbar(R.string.success)
                 }) { Text(stringResource(R.string.disable_online_features)) }
@@ -119,7 +120,7 @@ fun Debugging(navController: NavHostController) {
                     title = { Text(stringResource(R.string.auto_set_volume)) },
                     text = {
                         Column {
-                            UnderDevelopmentTip()
+                            WIPTip()
                             Row {
                                 Column(modifier = Modifier.weight(0.5f)) {
                                     Text(text = "8:00 AM - 5:59 PM")
@@ -191,7 +192,10 @@ fun Debugging(navController: NavHostController) {
             }
 
             OutlinedButton(
-                onClick = { navController.navigate(QR_CODE_GENERATOR_SCREEN) }
+                onClick = {
+                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    navController.navigate(QR_CODE_GENERATOR_SCREEN)
+                }
             ) {
                 Text(stringResource(R.string.qr_code_generator))
             }

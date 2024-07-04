@@ -111,7 +111,7 @@ fun Tip(@StringRes message: Int) {
 }
 
 @Composable
-fun UnderDevelopmentTip() = Tip(R.string.under_development)
+fun WIPTip() = Tip(R.string.wip)
 
 @Composable
 fun Tip(message: String) {
@@ -125,7 +125,7 @@ fun Tip(message: String) {
         )
     ) {
         if (devMode
-            && message != stringResource(R.string.under_development)
+            && message != stringResource(R.string.wip)
             && message != stringResource(R.string.auto_generated_by_about_libraries)
         ) {
             Column(

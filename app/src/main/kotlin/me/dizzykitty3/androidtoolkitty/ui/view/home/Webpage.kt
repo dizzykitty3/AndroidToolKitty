@@ -105,7 +105,10 @@ private fun Search() {
         },
     )
 
-    Row(modifier = Modifier.horizontalScroll(rememberScrollState())) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.horizontalScroll(rememberScrollState())
+    ) {
         TextButton(
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
@@ -119,7 +122,7 @@ private fun Search() {
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
-
+        Text("|")
         TextButton(
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)

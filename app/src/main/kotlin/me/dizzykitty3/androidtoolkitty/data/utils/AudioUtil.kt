@@ -57,12 +57,19 @@ object AudioUtil {
         currentLocation.lastLocation.addOnSuccessListener { location: Location? ->
             if (location != null) {
                 distance = LocationUtil.getDistance(location.latitude, location.longitude)
-                Timber.d("latitude = ${location.latitude}")
-                Timber.d("longitude = ${location.longitude}")
-                Timber.d("distance = $distance")
-                if (SettingsSharedPref.devMode) this.showSnackbar("${this.context.getString(R.string.dev_mode)} message: distance = $distance")
-                this.setVolumeByPercentage(if (distance >= 200f) 0 else if (LocalTime.now().hour !in 6..22) 20 else percentage)
+                val notAtHome = isNotAtHome(distance)
+                if (notAtHome) Timber.d("distance > 50 meters")
+                if (SettingsSharedPref.devMode) this.showSnackbar(
+                    "${this.context.getString(R.string.dev_mode_message)} ${
+                        this.context.getString(
+                            R.string.distance
+                        )
+                    } = $distance"
+                )
+                this.setVolumeByPercentage(if (notAtHome) 0 else if (LocalTime.now().hour !in 6..22) 20 else percentage)
             }
         }
     }
+
+    private fun isNotAtHome(distance: Float): Boolean = distance >= 50f
 }

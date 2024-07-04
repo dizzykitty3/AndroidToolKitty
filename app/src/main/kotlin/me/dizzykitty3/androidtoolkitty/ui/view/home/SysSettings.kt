@@ -30,8 +30,6 @@ import me.dizzykitty3.androidtoolkitty.data.SETTING_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.data.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
-import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
-import me.dizzykitty3.androidtoolkitty.ui.components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.components.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.ui.components.Tip
 
@@ -67,23 +65,9 @@ fun SysSettings() {
             }
         }
 
-        val isShowGroupTitle1 = settings.subList(0, 6).any { setting ->
-            isShowSetting[setting.settingType] == true
-        }
-
-        val isShowGroupTitle2 = settings.subList(6, 9).any { setting ->
-            isShowSetting[setting.settingType] == true
-        }
-
-        val isShowGroupTitle3 = settings.subList(9, 12).any { setting ->
-            isShowSetting[setting.settingType] == true
-        }
-
         val devMode = settingsSharedPref.devMode
 
         if (!checkIsAutoTime() || devMode) Tip(message = R.string.set_time_automatically_is_off_tip)
-
-        if (isShowGroupTitle1) GroupTitle(R.string.common)
 
         Column(modifier = Modifier.horizontalScroll(rememberScrollState())) {
             Row {
@@ -112,7 +96,6 @@ fun SysSettings() {
                     }
                 }
             }
-
             Row {
                 settings.subList(4, 6).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {
@@ -123,12 +106,6 @@ fun SysSettings() {
                     }
                 }
             }
-        }
-
-        if (isShowGroupTitle1 && isShowGroupTitle2) GroupDivider()
-        if (isShowGroupTitle2) GroupTitle(R.string.permission)
-
-        Column(modifier = Modifier.horizontalScroll(rememberScrollState())) {
             Row {
                 settings.subList(6, 8).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {
@@ -139,23 +116,8 @@ fun SysSettings() {
                     }
                 }
             }
-
             Row {
-                if (isShowSetting[SETTING_WRITE_SETTINGS] == true) {
-                    SystemSettingButton(
-                        settingType = SETTING_WRITE_SETTINGS,
-                        text = R.string.open_write_permission
-                    )
-                }
-            }
-        }
-
-        if ((isShowGroupTitle1 || isShowGroupTitle2) && isShowGroupTitle3) GroupDivider()
-        if (isShowGroupTitle3) GroupTitle(R.string.debugging)
-
-        Column(modifier = Modifier.horizontalScroll(rememberScrollState())) {
-            Row {
-                settings.subList(9, 11).forEach { setting ->
+                settings.subList(8, 10).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
                             settingType = setting.settingType,
@@ -164,13 +126,14 @@ fun SysSettings() {
                     }
                 }
             }
-
             Row {
-                if (isShowSetting[SETTING_DEVELOPER] == true) {
-                    SystemSettingButton(
-                        settingType = SETTING_DEVELOPER,
-                        text = R.string.open_developer_options
-                    )
+                settings.subList(10, 12).forEach { setting ->
+                    if (isShowSetting[setting.settingType] == true) {
+                        SystemSettingButton(
+                            settingType = setting.settingType,
+                            text = setting.text
+                        )
+                    }
                 }
             }
         }

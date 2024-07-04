@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.data.utils
 
 import android.os.Build
 
-@Suppress("unused", "MemberVisibilityCanBePrivate")
 object OSVersion {
     private val osVersion = Build.VERSION.SDK_INT
 
