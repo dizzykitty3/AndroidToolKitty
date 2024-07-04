@@ -54,6 +54,8 @@ private fun ContributorAndThanksTo() {
     ThanksTo("tengusw/share_to_clipboard")
     SpacerPadding()
     ThanksTo("hashemi-hossein/memory-guardian")
+    SpacerPadding()
+    ThanksTo("AkaneFoundation/Omni")
     if (BuildConfig.DEBUG) {
         SpacerPadding()
         ThanksTo("DeweyReed/ClipboardCleaner")
