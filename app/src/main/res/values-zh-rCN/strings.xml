@@ -192,6 +192,6 @@
     <string name="ascii">ASCII</string>
     <string name="result">结果为</string>
     <string name="convert_to_ascii_values">转换为 ASCII 值</string>
-    <string name="codes_of_characters">Codes of Characters</string>
+    <string name="codes_of_characters">字符编码</string>
     <string name="unifans">引力圈</string>
 </resources>
