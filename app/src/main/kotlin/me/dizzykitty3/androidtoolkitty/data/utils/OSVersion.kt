@@ -64,6 +64,7 @@ object OSVersion {
 
     /**
      * 1. ClipboardManager.clearPrimaryClip()
+     * 2. PackageInfo.getLongVersionCode()
      */
     fun a9(): Boolean = osVersion >= 28
     fun api28(): Boolean = a9()

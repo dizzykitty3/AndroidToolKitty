@@ -1,5 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.view.settings
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -15,11 +17,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.utils.IntentUtil.openURL
+import me.dizzykitty3.androidtoolkitty.data.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.data.utils.URLUtil
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
@@ -30,17 +34,29 @@ import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 @Composable
 fun About() {
     Card(title = R.string.about) {
+        val context = LocalContext.current
+
         Row {
             Icon(
                 imageVector = Icons.Outlined.Code,
                 contentDescription = stringResource(id = R.string.version)
             )
             IconAndTextPadding()
-            Text("${stringResource(R.string.version)} ${BuildConfig.VERSION_NAME}")
+            Text("${stringResource(R.string.version)} 1.0.${context.versionCode()}")
+            if (BuildConfig.DEBUG) Text(".dev")
         }
         GroupDivider()
         ContributorAndThanksTo()
     }
+}
+
+// BuildConfig.VERSION_NAME may not have the updated value at compile time. (I guess)
+@SuppressLint("NewApi")
+private fun Context.versionCode(): String {
+    return if (OSVersion.api28())
+        this.packageManager.getPackageInfo(this.packageName, 0).longVersionCode.toString()
+    else
+        BuildConfig.VERSION_CODE.toString() // TODO check on simulator
 }
 
 @Composable
