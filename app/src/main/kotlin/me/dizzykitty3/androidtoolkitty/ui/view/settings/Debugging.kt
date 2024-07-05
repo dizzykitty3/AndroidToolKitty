@@ -46,6 +46,7 @@ import me.dizzykitty3.androidtoolkitty.ui.components.Bold
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
+import me.dizzykitty3.androidtoolkitty.ui.components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.components.Screen
 import me.dizzykitty3.androidtoolkitty.ui.components.WIPTip
 import me.dizzykitty3.androidtoolkitty.ui.components.WarningAlertDialogButton
@@ -61,7 +62,7 @@ fun Debugging(navController: NavHostController) {
 
     Screen {
         Card(title = R.string.debugging, icon = Icons.Outlined.Terminal) {
-            Text("debugging info")
+            GroupTitle("debugging info")
             Row(Modifier.fillMaxWidth()) {
                 Column(
                     Modifier

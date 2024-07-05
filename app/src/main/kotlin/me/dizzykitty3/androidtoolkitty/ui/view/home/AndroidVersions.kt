@@ -2,9 +2,12 @@ package me.dizzykitty3.androidtoolkitty.ui.view.home
 
 import android.view.HapticFeedbackConstants
 import androidx.annotation.StringRes
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material3.Text
@@ -18,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
@@ -47,7 +49,9 @@ private fun RecentVersions() {
             AndroidVersion(text = R.string.android_12)
         }
 
-        Column(modifier = Modifier.weight(0.6f)) {
+        Column(
+            modifier = Modifier.weight(0.6f)
+        ) {
             AndroidApiLevelAndName(text = R.string.api_35)
             AndroidApiLevelAndName(text = R.string.api_34)
             AndroidApiLevelAndName(text = R.string.api_33)
@@ -132,18 +136,14 @@ private fun EarlyVersions() {
 
 @Composable
 private fun AndroidApiLevelAndName(@StringRes text: Int) {
-    Text(
-        text = buildAnnotatedString { Italic(text = stringResource(id = text)) },
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis
-    )
+    Box(Modifier.horizontalScroll(rememberScrollState())) {
+        Text(text = buildAnnotatedString { Italic(text = stringResource(id = text)) })
+    }
 }
 
 @Composable
 private fun AndroidVersion(@StringRes text: Int) {
-    Text(
-        text = stringResource(id = text),
-        maxLines = 1,
-        overflow = TextOverflow.Ellipsis
-    )
+    Box(Modifier.horizontalScroll(rememberScrollState())) {
+        Text(text = stringResource(id = text))
+    }
 }
