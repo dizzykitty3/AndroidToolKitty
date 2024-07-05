@@ -64,7 +64,7 @@ import me.dizzykitty3.androidtoolkitty.data.SETTING_POWER_USAGE_SUMMARY
 import me.dizzykitty3.androidtoolkitty.data.SETTING_WIFI
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.data.utils.BatteryUtil
-import me.dizzykitty3.androidtoolkitty.data.utils.BluetoothUtil
+import me.dizzykitty3.androidtoolkitty.data.utils.BluetoothUtil.isHeadsetConnected
 import me.dizzykitty3.androidtoolkitty.data.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.data.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.data.utils.StringUtil
@@ -194,7 +194,7 @@ private fun Status() {
         SpacerPadding()
         SpacerPadding()
 
-        if (BluetoothUtil.isHeadsetConnected() || SettingsSharedPref.devMode) {
+        if (view.context.isHeadsetConnected() || SettingsSharedPref.devMode) {
             Row(Modifier.clickable {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                 view.context.openSystemSettings(SETTING_BLUETOOTH)

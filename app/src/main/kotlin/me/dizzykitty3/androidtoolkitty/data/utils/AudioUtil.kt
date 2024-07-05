@@ -52,7 +52,7 @@ object AudioUtil {
     @SuppressLint("MissingPermission")
     fun View.autoSetMediaVolume(percentage: Int) {
         if (percentage !in 0..100) return
-        if (appContext.noLocationPermission()) return
+        if (this.context.noLocationPermission()) return
         var distance: Float
         val currentLocation = LocationServices.getFusedLocationProviderClient(appContext)
         currentLocation.lastLocation.addOnSuccessListener { location: Location? ->

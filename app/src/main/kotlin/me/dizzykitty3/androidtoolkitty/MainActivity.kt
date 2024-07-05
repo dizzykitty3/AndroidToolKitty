@@ -16,7 +16,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.data.utils.AudioUtil.autoSetMediaVolume
-import me.dizzykitty3.androidtoolkitty.data.utils.BluetoothUtil
+import me.dizzykitty3.androidtoolkitty.data.utils.BluetoothUtil.isHeadsetConnected
 import me.dizzykitty3.androidtoolkitty.data.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.data.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.data.utils.SnackbarUtil.showSnackbar
@@ -64,7 +64,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
             if (SettingsSharedPref.enabledAutoSetMediaVolume && DateUtil.isNotWeekend) {
-                if (BluetoothUtil.isHeadsetConnected()) {
+                if (this@MainActivity.isHeadsetConnected()) {
                     Timber.i("Set media volume automatically: cancelled: BT headset connected")
                 } else {
                     Timber.i("Set media volume automatically")

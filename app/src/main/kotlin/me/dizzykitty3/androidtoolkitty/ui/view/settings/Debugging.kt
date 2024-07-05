@@ -32,7 +32,6 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import com.google.android.gms.location.LocationServices
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.QR_CODE_GENERATOR_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
@@ -108,7 +107,7 @@ fun Debugging(navController: NavHostController) {
 
             OutlinedButton(onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                if (appContext.noLocationPermission()) {
+                if (view.context.noLocationPermission()) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                     return@OutlinedButton
                 }
@@ -177,7 +176,7 @@ fun Debugging(navController: NavHostController) {
                             Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 showLocationDialog = false
-                                if (appContext.noBluetoothPermission()) {
+                                if (view.context.noBluetoothPermission()) {
                                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                                     return@Button
                                 }
@@ -189,7 +188,7 @@ fun Debugging(navController: NavHostController) {
                             Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 showLocationDialog = false
-                                if (appContext.noBluetoothPermission()) {
+                                if (view.context.noBluetoothPermission()) {
                                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                                     return@Button
                                 }

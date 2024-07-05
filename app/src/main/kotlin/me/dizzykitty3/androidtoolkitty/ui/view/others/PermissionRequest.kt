@@ -16,7 +16,6 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.data.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil.noBluetoothPermission
@@ -37,6 +36,7 @@ fun PermissionRequest() {
             icon = Icons.Outlined.Shield
         ) {
             var clickCount by remember { mutableIntStateOf(0) }
+            var clickCount2 by remember { mutableIntStateOf(0) }
             val view = LocalView.current
 
             if (OSVersion.a12()) Text(text = stringResource(id = R.string.bluetooth_connect))
@@ -45,8 +45,8 @@ fun PermissionRequest() {
             Button(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    if (appContext.noBluetoothPermission()) {
-                        appContext.requestBluetoothPermission()
+                    if (view.context.noBluetoothPermission()) {
+                        view.context.requestBluetoothPermission()
                         clickCount++
                         return@Button
                     }
@@ -63,16 +63,16 @@ fun PermissionRequest() {
             Button(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    if (appContext.noLocationPermission()) {
-                        appContext.requestLocationPermission()
-                        clickCount++
+                    if (view.context.noLocationPermission()) {
+                        view.context.requestLocationPermission()
+                        clickCount2++
                         return@Button
                     }
                     view.showSnackbar(R.string.success_and_back)
                 }
             ) { Text(stringResource(R.string.request_permission)) }
 
-            if (clickCount >= 2) {
+            if (clickCount >= 2 || clickCount2 >= 2) {
                 GroupDivider()
                 ManuallyGrant()
             }
