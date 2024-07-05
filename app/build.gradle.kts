@@ -2,11 +2,11 @@ plugins {
     alias(libs.plugins.about.libraries)
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
-    alias(libs.plugins.hilt.android)
+//    alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
+//    alias(libs.plugins.ksp)
+//    alias(libs.plugins.room)
 }
 
 android {
@@ -20,7 +20,7 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
         targetSdk = compileSdk
-        versionCode = 889
+        versionCode = 920
         versionName = "1.0.${versionCode}"
 
         resValue("string", "app_name", "ToolKitty")
@@ -76,9 +76,9 @@ android {
         }
     }
     buildToolsVersion = "35.0.0"
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
+//    room {
+//        schemaDirectory("$projectDir/schemas")
+//    }
 }
 
 dependencies {
@@ -104,13 +104,13 @@ dependencies {
     implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.datastore.preferences)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
+//    implementation(libs.androidx.datastore.preferences)
+//    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.work.runtime.ktx)
-    implementation(libs.google.hilt.android)
+//    implementation(libs.androidx.room.ktx)
+//    implementation(libs.androidx.room.runtime)
+//    implementation(libs.androidx.work.runtime.ktx)
+//    implementation(libs.google.hilt.android)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization)
     implementation(libs.ktor.client.cio)
@@ -120,6 +120,6 @@ dependencies {
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.timber)
 
-    ksp(libs.google.hilt.compiler)
-    ksp(libs.androidx.room.compiler)
+//    ksp(libs.google.hilt.compiler)
+//    ksp(libs.androidx.room.compiler)
 }

@@ -13,6 +13,7 @@
     <string name="visit">前往</string>
     <string name="webpage">网页</string>
     <string name="search_on_youtube">在 YouTube 上搜索</string>
+    <string name="twitcasting">TwitCasting</string>
     <string name="system_settings">Android 系统设置</string>
     <string name="open_display_settings">显示设置</string>
     <string name="open_auto_rotate_settings">屏幕自动旋转设置</string>
@@ -98,7 +99,7 @@
     <string name="wheel_of_fortune">幸运大转盘</string>
     <string name="info">信息</string>
     <string name="go_to_settings">前往系统设置</string>
-    <string name="show_more">展开</string>
+    <string name="show_more">更多</string>
     <string name="bluetooth_devices">蓝牙设备</string>
     <string name="show_paired_devices">查看已配对的设备</string>
     <string name="current_device">当前设备：</string>
@@ -125,7 +126,6 @@
     <string name="contributors">贡献者</string>
     <string name="licenses">许可证</string>
     <string name="go_to_permission_request_screen">前往权限申请画面</string>
-    <string name="under_development">——开发中——</string>
     <string name="permission">权限</string>
     <string name="font_weight_test">字重测试</string>
     <string name="w1">100 淡体 Thin</string>
@@ -185,6 +185,13 @@
     <string name="auto_set_volume">自动调整音量</string>
     <string name="qr_code_generator">生成二维码</string>
     <string name="keep_using_offline">保持离线使用</string>
-    <string name="fine_location">To check current location, please grant the app Location permission.</string>
-    <string name="disable_online_features">Disable online features</string>
+    <string name="fine_location">为了请求当前的位置，请授予「位置」权限</string>
+    <string name="disable_online_features">禁用「在线功能」</string>
+    <string name="distance">距离</string>
+    <string name="open_accessibility_settings">无障碍</string>
+    <string name="ascii">ASCII</string>
+    <string name="result">结果为</string>
+    <string name="convert_to_ascii_values">转换为 ASCII 值</string>
+    <string name="codes_of_characters">字符编码</string>
+    <string name="unifans">引力圈</string>
 </resources>

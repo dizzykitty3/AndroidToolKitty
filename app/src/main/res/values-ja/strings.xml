@@ -12,7 +12,6 @@
     <string name="info">情報</string>
     <string name="go_to_settings">設定に移動</string>
     <string name="success_and_back">成功！前の画面に戻れます</string>
-    <string name="under_development">-- 開発中 --</string>
     <string name="permission">許可</string>
     <string name="undo">元に戻す</string>
     <string name="turn_off">オフにする</string>
@@ -43,6 +42,7 @@
     <string name="platform">プラットフォーム</string>
     <string name="username">ユーザー名</string>
     <string name="bilibili_search">bilibili（検索）</string>
+    <string name="twitcasting">ツイキャス</string>
     <string name="system_settings">システム設定</string>
     <string name="open_display_settings">ディスプレイ</string>
     <string name="open_auto_rotate_settings">画面の自動回転</string>
@@ -188,4 +188,11 @@
     <string name="keep_using_offline">Keep using ToolKitty offline</string>
     <string name="fine_location">To check current location, please grant the app Location permission.</string>
     <string name="disable_online_features">Disable online features</string>
+    <string name="distance">distance</string>
+    <string name="open_accessibility_settings">Accessibility</string>
+    <string name="ascii">ASCII</string>
+    <string name="result">result =</string>
+    <string name="convert_to_ascii_values">Convert to ASCII values</string>
+    <string name="codes_of_characters">Codes of Characters</string>
+    <string name="unifans">Unifans</string>
 </resources>
