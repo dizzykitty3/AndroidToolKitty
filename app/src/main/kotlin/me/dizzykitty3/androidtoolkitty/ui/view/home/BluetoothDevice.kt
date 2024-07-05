@@ -34,11 +34,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.SETTING_ENABLE_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.data.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.data.utils.IntentUtil.openSystemSettings
-import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil
+import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil.noBluetoothPermission
 import me.dizzykitty3.androidtoolkitty.data.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomIconPopup
@@ -70,7 +71,7 @@ fun BluetoothDevice(navController: NavHostController) {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
 
                 // Check permission
-                if (PermissionUtil.noBluetoothPermission(view.context)) {
+                if (appContext.noBluetoothPermission()) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                     return@OutlinedButton
                 }

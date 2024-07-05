@@ -4,8 +4,11 @@ import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Build
 import android.view.HapticFeedbackConstants
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material.icons.outlined.WbSunny
@@ -29,13 +32,16 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import com.google.android.gms.location.LocationServices
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.QR_CODE_GENERATOR_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.data.utils.IntentUtil.finishApp
 import me.dizzykitty3.androidtoolkitty.data.utils.IntentUtil.restartApp
-import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil
+import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil.noBluetoothPermission
+import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil.noLocationPermission
 import me.dizzykitty3.androidtoolkitty.data.utils.SnackbarUtil.showSnackbar
+import me.dizzykitty3.androidtoolkitty.data.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.ui.components.Bold
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomSwitchRow
@@ -44,7 +50,6 @@ import me.dizzykitty3.androidtoolkitty.ui.components.Screen
 import me.dizzykitty3.androidtoolkitty.ui.components.WIPTip
 import me.dizzykitty3.androidtoolkitty.ui.components.WarningAlertDialogButton
 import timber.log.Timber
-import java.util.Locale
 
 @SuppressLint("MissingPermission")
 @Composable
@@ -57,9 +62,26 @@ fun Debugging(navController: NavHostController) {
     Screen {
         Card(title = R.string.debugging, icon = Icons.Outlined.Terminal) {
             Text("debugging info")
-            Text("OS version = Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
-            Text("Manufacturer = ${Build.MANUFACTURER}")
-            Text("Locale =  ${Locale.getDefault()}")
+            Row(Modifier.fillMaxWidth()) {
+                Column(
+                    Modifier
+                        .weight(0.4f)
+                        .horizontalScroll(rememberScrollState())
+                ) {
+                    Text("os_version")
+                    Text("manufacturer")
+                    Text("locale")
+                }
+                Column(
+                    Modifier
+                        .weight(0.6f)
+                        .horizontalScroll(rememberScrollState())
+                ) {
+                    Text("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
+                    Text(Build.MANUFACTURER)
+                    Text(StringUtil.sysLocale)
+                }
+            }
 
             GroupDivider()
 
@@ -85,7 +107,7 @@ fun Debugging(navController: NavHostController) {
 
             OutlinedButton(onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                if (PermissionUtil.noLocationPermission(view.context)) {
+                if (appContext.noLocationPermission()) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                     return@OutlinedButton
                 }
@@ -154,7 +176,7 @@ fun Debugging(navController: NavHostController) {
                             Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 showLocationDialog = false
-                                if (PermissionUtil.noBluetoothPermission(view.context)) {
+                                if (appContext.noBluetoothPermission()) {
                                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                                     return@Button
                                 }
@@ -166,7 +188,7 @@ fun Debugging(navController: NavHostController) {
                             Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
                                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
                                 showLocationDialog = false
-                                if (PermissionUtil.noBluetoothPermission(view.context)) {
+                                if (appContext.noBluetoothPermission()) {
                                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                                     return@Button
                                 }

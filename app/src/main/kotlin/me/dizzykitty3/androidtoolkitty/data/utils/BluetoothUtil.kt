@@ -7,6 +7,7 @@ import android.bluetooth.BluetoothProfile
 import android.content.Context
 import androidx.annotation.CheckResult
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil.noBluetoothPermission
 
 object BluetoothUtil {
     private var bluetoothManager =
@@ -19,7 +20,7 @@ object BluetoothUtil {
     @SuppressLint("MissingPermission")
     @CheckResult
     fun isHeadsetConnected(): Boolean {
-        if (PermissionUtil.noBluetoothPermission(appContext)) return false
+        if (appContext.noBluetoothPermission()) return false
         return if (bluetoothAdapter == null) false
         else bluetoothAdapter?.getProfileConnectionState(BluetoothProfile.HEADSET) == BluetoothAdapter.STATE_CONNECTED
     }

@@ -9,6 +9,7 @@ import com.google.android.gms.location.LocationServices
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil.noLocationPermission
 import me.dizzykitty3.androidtoolkitty.data.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
 import java.time.LocalTime
@@ -51,7 +52,7 @@ object AudioUtil {
     @SuppressLint("MissingPermission")
     fun View.autoSetMediaVolume(percentage: Int) {
         if (percentage !in 0..100) return
-        if (PermissionUtil.noLocationPermission(appContext)) return
+        if (appContext.noLocationPermission()) return
         var distance: Float
         val currentLocation = LocationServices.getFusedLocationProviderClient(appContext)
         currentLocation.lastLocation.addOnSuccessListener { location: Location? ->

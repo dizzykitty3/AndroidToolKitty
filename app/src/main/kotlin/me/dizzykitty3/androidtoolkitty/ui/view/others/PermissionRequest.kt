@@ -16,9 +16,13 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.data.utils.OSVersion
-import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil
+import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil.noBluetoothPermission
+import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil.noLocationPermission
+import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil.requestBluetoothPermission
+import me.dizzykitty3.androidtoolkitty.data.utils.PermissionUtil.requestLocationPermission
 import me.dizzykitty3.androidtoolkitty.data.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
@@ -41,8 +45,8 @@ fun PermissionRequest() {
             Button(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    if (PermissionUtil.noBluetoothPermission(view.context)) {
-                        PermissionUtil.requestBluetoothPermission(view.context)
+                    if (appContext.noBluetoothPermission()) {
+                        appContext.requestBluetoothPermission()
                         clickCount++
                         return@Button
                     }
@@ -59,8 +63,8 @@ fun PermissionRequest() {
             Button(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    if (PermissionUtil.noLocationPermission(view.context)) {
-                        PermissionUtil.requestLocationPermission(view.context)
+                    if (appContext.noLocationPermission()) {
+                        appContext.requestLocationPermission()
                         clickCount++
                         return@Button
                     }
