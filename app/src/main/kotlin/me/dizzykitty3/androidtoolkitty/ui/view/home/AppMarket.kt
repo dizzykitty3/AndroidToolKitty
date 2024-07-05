@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
@@ -43,6 +44,7 @@ fun AppMarket() {
         title = R.string.check_app_on_market
     ) {
         val view = LocalView.current
+        val focus = LocalFocusManager.current
         var packageName by remember { mutableStateOf("") }
 
         OutlinedTextField(
@@ -54,7 +56,10 @@ fun AppMarket() {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = { view.context.checkOnMarket(packageName) }
+                onDone = {
+                    focus.clearFocus()
+                    view.context.checkOnMarket(packageName)
+                }
             ),
             trailingIcon = {
                 ClearInput(text = packageName) {
@@ -70,6 +75,7 @@ fun AppMarket() {
             TextButton(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    focus.clearFocus()
                     view.context.checkOnMarket(packageName)
                 }
             ) {
@@ -84,6 +90,7 @@ fun AppMarket() {
             TextButton(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    focus.clearFocus()
                     view.context.checkOnMarket(packageName, false)
                 }
             ) {

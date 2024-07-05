@@ -21,6 +21,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -41,6 +44,9 @@ fun Maps() {
         title = R.string.google_maps
     ) {
         val view = LocalView.current
+        val focus = LocalFocusManager.current
+        val focusRequester1 = remember { FocusRequester() }
+        val focusRequester2 = remember { FocusRequester() }
         var latitude by remember { mutableStateOf("") }
         var longitude by remember { mutableStateOf("") }
 
@@ -52,13 +58,21 @@ fun Maps() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
-                    .padding(end = dimensionResource(id = R.dimen.padding_spacer)),
+                    .padding(end = dimensionResource(id = R.dimen.padding_spacer))
+                    .focusRequester(focusRequester1),
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = { view.context.onClickOpenGoogleMapsButton(latitude, longitude) }
+                    onDone = {
+                        if (longitude == "") {
+                            focusRequester2.requestFocus()
+                        } else {
+                            focus.clearFocus()
+                            view.context.onClickOpenGoogleMapsButton(latitude, longitude)
+                        }
+                    }
                 ),
                 trailingIcon = {
                     ClearInput(text = latitude) {
@@ -75,13 +89,21 @@ fun Maps() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
-                    .padding(start = dimensionResource(id = R.dimen.padding_spacer)),
+                    .padding(start = dimensionResource(id = R.dimen.padding_spacer))
+                    .focusRequester(focusRequester2),
                 keyboardOptions = KeyboardOptions.Default.copy(
                     keyboardType = KeyboardType.Number,
                     imeAction = ImeAction.Done
                 ),
                 keyboardActions = KeyboardActions(
-                    onDone = { view.context.onClickOpenGoogleMapsButton(latitude, longitude) }
+                    onDone = {
+                        if (latitude == "") {
+                            focusRequester1.requestFocus()
+                        } else {
+                            focus.clearFocus()
+                            view.context.onClickOpenGoogleMapsButton(latitude, longitude)
+                        }
+                    }
                 ),
                 trailingIcon = {
                     ClearInput(text = longitude) {
@@ -95,6 +117,7 @@ fun Maps() {
         TextButton(
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                focus.clearFocus()
                 view.context.onClickOpenGoogleMapsButton(latitude, longitude)
             }
         ) {

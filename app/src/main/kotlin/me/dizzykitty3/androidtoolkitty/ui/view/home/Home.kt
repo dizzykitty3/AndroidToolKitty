@@ -323,7 +323,7 @@ private fun CardContent(cardName: String, navController: NavHostController) {
         CARD_5 -> SysSettings()
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice(navController)
-        CARD_8 -> Unicode()
+        CARD_8 -> CodesOfCharacters()
         CARD_9 -> AppMarket()
         CARD_10 -> Maps()
         CARD_11 -> AndroidVersions()

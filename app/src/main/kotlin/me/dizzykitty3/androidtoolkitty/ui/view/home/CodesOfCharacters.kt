@@ -36,7 +36,7 @@ import timber.log.Timber
 
 @Preview
 @Composable
-fun Unicode() {
+fun CodesOfCharacters() {
     var unicode by remember { mutableStateOf("") }
     var characters by remember { mutableStateOf("") }
     var isUnicodeInput by remember { mutableStateOf(false) }
@@ -75,8 +75,8 @@ fun Unicode() {
             keyboardActions = KeyboardActions(
                 onDone = {
                     if (isUnicodeInput) {
-                        view.onClickConvertButton(unicode, { characters = it }, true)
                         focus.clearFocus()
+                        view.onClickConvertButton(unicode, { characters = it }, true)
                     }
                 }
             ),
@@ -104,8 +104,8 @@ fun Unicode() {
             keyboardActions = KeyboardActions(
                 onDone = {
                     if (isCharacterInput) {
-                        view.onClickConvertButton(characters, { unicode = it }, false)
                         focus.clearFocus()
+                        view.onClickConvertButton(characters, { unicode = it }, false)
                     }
                 }
             ),
@@ -120,12 +120,11 @@ fun Unicode() {
         TextButton(
             onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                focus.clearFocus()
                 if (isUnicodeInput) {
                     view.onClickConvertButton(unicode, { characters = it }, true)
-                    focus.clearFocus()
                 } else if (isCharacterInput) {
                     view.onClickConvertButton(characters, { unicode = it }, false)
-                    focus.clearFocus()
                 }
             }
         ) {
@@ -148,8 +147,8 @@ fun Unicode() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    toASCIIResult = StringUtil.toASCII(stringToASCII)
                     focus.clearFocus()
+                    toASCIIResult = StringUtil.toASCII(stringToASCII)
                 }
             ),
             trailingIcon = {
@@ -164,6 +163,7 @@ fun Unicode() {
 
         TextButton({
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            focus.clearFocus()
             toASCIIResult = StringUtil.toASCII(stringToASCII)
         }) { Text(stringResource(R.string.convert_to_ascii_values)) }
     }
