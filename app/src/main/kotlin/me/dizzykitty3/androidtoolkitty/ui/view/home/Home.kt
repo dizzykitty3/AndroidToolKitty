@@ -45,6 +45,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.CARD_1
 import me.dizzykitty3.androidtoolkitty.data.CARD_10
@@ -70,6 +71,7 @@ import me.dizzykitty3.androidtoolkitty.data.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.data.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.ui.components.BottomPadding
 import me.dizzykitty3.androidtoolkitty.ui.components.CardSpacePadding
+import me.dizzykitty3.androidtoolkitty.ui.components.DevBuildTip
 import me.dizzykitty3.androidtoolkitty.ui.components.OneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.components.Tip
@@ -104,6 +106,7 @@ private fun MobileLayout(navController: NavHostController) {
             item { CardSpacePadding() }
             item { CardSpacePadding() }
         }
+        if (BuildConfig.DEBUG) item { DevBuildTip() }
         item { NoTranslationTip() }
         item { HomeCards(navController) }
         item { BottomPadding() }
@@ -126,6 +129,9 @@ private fun TabletLayout(navController: NavHostController) {
             Box(modifier = Modifier.weight(1f)) { TopBar(navController) }
         }
         SpacerPadding()
+        if (BuildConfig.DEBUG) {
+            DevBuildTip()
+        }
         NoTranslationTip()
         TwoColumnHomeCards(navController)
     }

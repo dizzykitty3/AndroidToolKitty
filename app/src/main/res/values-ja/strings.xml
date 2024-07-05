@@ -195,4 +195,5 @@
     <string name="convert_to_ascii_values">Convert to ASCII values</string>
     <string name="codes_of_characters">Codes of Characters</string>
     <string name="unifans">Unifans</string>
+    <string name="debug_build_top_tip">This is a debug build. Expect some bugs and worse performance.</string>
 </resources>

@@ -32,6 +32,7 @@
     <string name="offline">Offline</string>
     <string name="no_translation" translatable="false">Sorry, %1$s translation haven\'t added yet.</string>
     <string name="connected">Connected</string>
+    <string name="debug_build_top_tip">This is a debug build. Expect some bugs and worse performance.</string>
 
     <!-- Home > Year progress -->
     <string name="year_progress">Year progress</string>

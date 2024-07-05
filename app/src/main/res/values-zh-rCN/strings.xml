@@ -83,7 +83,7 @@
     <string name="set_time_automatically_is_off_tip">「自动设置时间」未启用。某些应用部分功能可能表现异常。</string>
     <string name="warning">警告</string>
     <string name="erase_all_data">清除所有数据</string>
-    <string name="open_on_other_markets">其他应用商店</string>
+    <string name="open_on_other_markets">其他商店</string>
     <string name="android_versions">Android 版本历史</string>
     <string name="customize_my_home_page">自定义显示的卡片</string>
     <string name="add_custom_volume">添加自定义音量</string>
@@ -194,4 +194,5 @@
     <string name="convert_to_ascii_values">转换为 ASCII 值</string>
     <string name="codes_of_characters">字符编码</string>
     <string name="unifans">引力圈</string>
+    <string name="debug_build_top_tip">This is a debug build. Expect some bugs and worse performance.</string>
 </resources>
