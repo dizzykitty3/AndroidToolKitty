@@ -39,6 +39,7 @@ import me.dizzykitty3.androidtoolkitty.data.utils.ToastUtil.showToast
 import timber.log.Timber
 
 object IntentUtil {
+    // Didn't use StartActivity as the name because a custom extension function is needed.
     private fun Context.launch(intent: Intent) {
         try {
             Timber.d("startActivity")
