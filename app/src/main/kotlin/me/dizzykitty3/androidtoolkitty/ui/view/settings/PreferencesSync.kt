@@ -44,7 +44,7 @@ import me.dizzykitty3.androidtoolkitty.data.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.data.utils.HttpUtil
 import me.dizzykitty3.androidtoolkitty.data.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.data.utils.SnackbarUtil.showSnackbar
-import me.dizzykitty3.androidtoolkitty.data.utils.StringUtil
+import me.dizzykitty3.androidtoolkitty.data.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.data.utils.ToastUtil.showToast
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
@@ -298,7 +298,7 @@ private fun UserLoginDialog(
             }
             OutlinedTextField(
                 value = password,
-                onValueChange = { password = StringUtil.dropSpaces(it) },
+                onValueChange = { password = it.dropSpaces() },
                 label = { Text(text = stringResource(id = R.string.password)) },
                 visualTransformation = PasswordVisualTransformation(),
                 isError = passwordError != null
@@ -379,7 +379,7 @@ private fun UserRegisterDialog(
             }
             OutlinedTextField(
                 value = email,
-                onValueChange = { email = StringUtil.dropSpaces(it) },
+                onValueChange = { email = it.dropSpaces() },
                 label = { Text(text = stringResource(id = R.string.email)) },
                 isError = emailError != null
             )
@@ -391,7 +391,7 @@ private fun UserRegisterDialog(
             }
             OutlinedTextField(
                 value = password,
-                onValueChange = { password = StringUtil.dropSpaces(it) },
+                onValueChange = { password = it.dropSpaces() },
                 label = { Text(text = stringResource(id = R.string.password)) },
                 visualTransformation = PasswordVisualTransformation(),
                 isError = passwordError != null

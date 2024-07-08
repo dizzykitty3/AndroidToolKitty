@@ -15,12 +15,12 @@ object StringUtil {
     /**
      * Drop spaces, including full-width ones.
      */
-    fun dropSpaces(s: String): String = s.replace("\\s".toRegex(), "")
+    fun String.dropSpaces(): String = this.replace("\\s".toRegex(), "")
 
     /**
      * Drop spaces, including full-width ones. Then lowercase.
      */
-    fun dropSpacesAndLowercase(s: String): String = dropSpaces(s).lowercase()
+    fun String.dropSpacesAndLowercase(): String = this.dropSpaces().lowercase()
 
     @Throws(IllegalArgumentException::class)
     fun unicodeToCharacter(unicode: String): String {
@@ -66,12 +66,12 @@ object StringUtil {
     val sysLangCJK: Boolean
         @CheckResult get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
 
-    fun toASCII(c: String): String = c.map { it.code }.joinToString(", ")
+    fun String.toASCII(): String = this.map { it.code }.joinToString(", ")
 
     /**
      * Allows for letters, numbers, or underscores.
      */
-    fun validUsername(s: String): Boolean = s.matches(Regex("^[a-zA-Z0-9_]*$"))
+    fun String.isValidUsername(): Boolean = this.matches(Regex("^[a-zA-Z0-9_]*$"))
 
-    fun invalidUsername(s: String): Boolean = !validUsername(s)
+    fun String.isInvalidUsername(): Boolean = !this.isValidUsername()
 }

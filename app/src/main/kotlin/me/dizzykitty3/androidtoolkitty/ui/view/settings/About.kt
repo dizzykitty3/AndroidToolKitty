@@ -95,7 +95,7 @@ private fun DeveloperProfileLink(name: String) {
         Row(
             modifier = Modifier.clickable {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                view.context.openURL("${URLUtil.prefixOf(URLUtil.Platform.GITHUB)}$name")
+                view.context.openURL("${URLUtil.Platform.GITHUB.prefix}$name")
             }
         ) {
             Text(

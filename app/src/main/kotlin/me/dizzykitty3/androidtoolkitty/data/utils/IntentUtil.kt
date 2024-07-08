@@ -34,6 +34,7 @@ import me.dizzykitty3.androidtoolkitty.data.SETTING_POWER_USAGE_SUMMARY
 import me.dizzykitty3.androidtoolkitty.data.SETTING_USAGE_ACCESS
 import me.dizzykitty3.androidtoolkitty.data.SETTING_WIFI
 import me.dizzykitty3.androidtoolkitty.data.SETTING_WRITE_SETTINGS
+import me.dizzykitty3.androidtoolkitty.data.utils.StringUtil.dropSpacesAndLowercase
 import me.dizzykitty3.androidtoolkitty.data.utils.ToastUtil.showToast
 import timber.log.Timber
 
@@ -84,7 +85,7 @@ object IntentUtil {
             if (packageName.isBlank()) {
                 return
             } else if (packageName.contains(".")) {
-                "market://details?id=${StringUtil.dropSpacesAndLowercase(packageName)}"
+                "market://details?id=${packageName.dropSpacesAndLowercase()}"
             } else {
                 "market://search?q=${packageName.trim()}"
             }

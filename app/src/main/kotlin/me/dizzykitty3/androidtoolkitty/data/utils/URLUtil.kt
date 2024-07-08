@@ -1,8 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.data.utils
 
 import androidx.annotation.StringRes
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.BG
 import me.dizzykitty3.androidtoolkitty.data.CN
@@ -27,33 +25,25 @@ import me.dizzykitty3.androidtoolkitty.data.TO
 import me.dizzykitty3.androidtoolkitty.data.TV
 import me.dizzykitty3.androidtoolkitty.data.US
 import me.dizzykitty3.androidtoolkitty.data.WIKI
+import me.dizzykitty3.androidtoolkitty.data.utils.StringUtil.dropSpacesAndLowercase
 import timber.log.Timber
 
 object URLUtil {
     /**
      * Adding the appropriate suffix and returning the full URL.
      */
-    fun toFullURL(urlInput: String): String {
-        val suffix = suffixOf(urlInput)
+    fun String.toFullURL(): String {
+        val suffix = this.getSuffix()
         Timber.d(
-            if (suffix == COM) "suffix = com, input url: $urlInput"
+            if (suffix == COM) "suffix = com, input url: $this"
             else "suffix = $suffix"
         )
-        return if (urlInput.contains(HTTPS)) {
-            "$urlInput$suffix"
-        } else {
-            "$HTTPS$urlInput$suffix"
-        }
+        return if (this.contains(HTTPS)) "$this$suffix"
+        else "$HTTPS$this$suffix"
     }
 
-    fun suffixOf(urlInput: String): String {
-        if (urlInput.contains(".")) return ""
-
-        // todo
-//        val domainInfoList = SettingsSharedPref.domainSuffix?.let { parseDomainJson(it) }
-//        val suffixMapFromJson = domainInfoList?.associate { it.domain to it.suffix } ?: emptyMap()
-//        val hardcodedSuffixMap = mapOf(
-
+    fun String.getSuffix(): String {
+        if (this.contains(".")) return ""
         val suffixMap = mapOf(
             "remove" to BG, "feishu" to CN, "52pojie" to CN, "360" to CN, "mercadolibre" to CO_AR,
             "rakuten" to CO_JP, "dmm" to CO_JP, "autohome" to COM_CN, "zol" to COM_CN,
@@ -70,13 +60,7 @@ object URLUtil {
             "notion" to SO, "zoro" to TO, "1337x" to TO, "twitch" to TV, "jable" to TV,
             "zoom" to US, "namu" to WIKI
         )
-
-        // todo
-//        val finalSuffixMap = hardcodedSuffixMap + suffixMapFromJson
-//        val cleanInput = StringUtil.dropSpaces(urlInput)
-//        return finalSuffixMap[cleanInput] ?: ".com"
-
-        return suffixMap[StringUtil.dropSpacesAndLowercase(urlInput)] ?: COM
+        return suffixMap[this.dropSpacesAndLowercase()] ?: COM
     }
 
     /**
@@ -130,33 +114,4 @@ object URLUtil {
         X("x.com/", R.string.x),
         YOUTUBE("youtube.com/@", R.string.youtube_id)
     }
-
-    /**
-     * @return the profile prefix associated with the given platform.
-     */
-    fun prefixOf(platform: Platform): String = platform.prefix
-
-    private fun parseDomainJson(input: String): List<DomainInfo> {
-        val json = Json { ignoreUnknownKeys = true }
-        return json.decodeFromString(input)
-    }
-
-    private fun parsePlatformJson(input: String): List<PlatformInfo> {
-        val json = Json { ignoreUnknownKeys = true }
-        return json.decodeFromString(input)
-    }
-
-    @Serializable
-    data class DomainInfo(
-        val domain: String,
-        val suffix: String
-    )
-
-    @Serializable
-    data class PlatformInfo(
-        val platform: String,
-        val prefix: String,
-        val description: String,
-        val type: Int
-    )
 }

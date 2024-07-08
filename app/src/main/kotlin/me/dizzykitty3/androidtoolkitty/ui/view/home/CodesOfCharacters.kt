@@ -27,6 +27,7 @@ import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.data.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.data.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.data.utils.StringUtil
+import me.dizzykitty3.androidtoolkitty.data.utils.StringUtil.toASCII
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
@@ -148,7 +149,7 @@ fun CodesOfCharacters() {
             keyboardActions = KeyboardActions(
                 onDone = {
                     focus.clearFocus()
-                    toASCIIResult = StringUtil.toASCII(stringToASCII)
+                    toASCIIResult = stringToASCII.toASCII()
                 }
             ),
             trailingIcon = {
@@ -164,7 +165,7 @@ fun CodesOfCharacters() {
         TextButton({
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             focus.clearFocus()
-            toASCIIResult = StringUtil.toASCII(stringToASCII)
+            toASCIIResult = stringToASCII.toASCII()
         }) { Text(stringResource(R.string.convert_to_ascii_values)) }
     }
 }
