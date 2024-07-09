@@ -79,6 +79,7 @@ object URLUtil {
         FANTIA("fantia.jp/", R.string.fantia),
         GITHUB("github.com/", R.string.github),
         INSTAGRAM("instagram.com/", R.string.instagram),
+        KO_FI("ko-fi.com/", R.string.ko_fi),
         LINKEDIN_COMPANY("linkedin.com/company/", R.string.linkedin_company),
         LINKEDIN_USER("linkedin.com/in/", R.string.linkedin_user),
         LINKTREE("linktr.ee/", R.string.linktree),

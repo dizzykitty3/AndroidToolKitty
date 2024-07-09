@@ -117,6 +117,7 @@
     <string name="profcard" translatable="false">プロフカード</string>
     <string name="note" translatable="false">note</string>
     <string name="unifans">Unifans</string>
+    <string name="ko_fi" translatable="false">Ko-fi</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>
