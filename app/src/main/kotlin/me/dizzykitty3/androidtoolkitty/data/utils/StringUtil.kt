@@ -58,20 +58,20 @@ object StringUtil {
         @CheckResult get() = Locale.getDefault().toString()
 
     val sysLangSupported: Boolean
-        @CheckResult get() = sysLocale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
+        @CheckResult get() = sysLocale.contains(("en|Hans|zh_CN|zh_SG|ja").toRegex())
 
     val sysLangNotSupported: Boolean
         @CheckResult get() = !sysLangSupported
 
     val sysLangCJK: Boolean
-        @CheckResult get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
+        @CheckResult get() = sysLocale.contains(("Hans|Hant|zh|ja|ko").toRegex())
 
     fun String.toASCII(): String = this.map { it.code }.joinToString(", ")
 
     /**
      * Allows for letters, numbers, or underscores.
      */
-    fun String.isValidUsername(): Boolean = this.matches(Regex("^[a-zA-Z0-9_]*$"))
+    fun String.isValidUsername(): Boolean = this.matches(("^[a-zA-Z0-9_]*$").toRegex())
 
     fun String.isInvalidUsername(): Boolean = !this.isValidUsername()
 }
