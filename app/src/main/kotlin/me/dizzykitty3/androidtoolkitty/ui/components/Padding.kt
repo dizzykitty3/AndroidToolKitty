@@ -23,6 +23,9 @@ fun SpacerPadding() {
     Res(padding = R.dimen.padding_spacer)
 }
 
+/**
+ * Note: Not for buttons.
+ */
 @Composable
 fun IconAndTextPadding() {
     Res(padding = R.dimen.padding_icons_and_text)

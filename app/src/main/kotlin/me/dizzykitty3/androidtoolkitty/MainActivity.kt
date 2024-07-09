@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty
 
-//import dagger.hilt.android.AndroidEntryPoint
 import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,24 +8,28 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.hilt.navigation.compose.hiltViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.data.utils.AudioUtil.autoSetMediaVolume
-import me.dizzykitty3.androidtoolkitty.data.utils.BluetoothUtil.isHeadsetConnected
-import me.dizzykitty3.androidtoolkitty.data.utils.ClipboardUtil
-import me.dizzykitty3.androidtoolkitty.data.utils.DateUtil
-import me.dizzykitty3.androidtoolkitty.data.utils.SnackbarUtil.showSnackbar
+import me.dizzykitty3.androidtoolkitty.domain.utils.AudioUtil.autoSetMediaVolume
+import me.dizzykitty3.androidtoolkitty.domain.utils.BluetoothUtil.isHeadsetConnected
+import me.dizzykitty3.androidtoolkitty.domain.utils.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.domain.utils.DateUtil
+import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
+import me.dizzykitty3.androidtoolkitty.ui.AppNavHost
+import me.dizzykitty3.androidtoolkitty.ui.screens.settings.model.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
-import me.dizzykitty3.androidtoolkitty.ui.view.AppNavigationHost
 import timber.log.Timber
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private var continuation: Continuation<Unit>? = null
     private var continuationNotResumed = true
@@ -36,11 +39,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("onCreate")
+        installSplashScreen()
         enableEdgeToEdge()
         setContent {
+            val settingsViewModel = hiltViewModel<SettingsViewModel>()
+
             AppTheme(dynamicColor = SettingsSharedPref.dynamicColor) {
-                Scaffold(modifier = Modifier.fillMaxSize()) {
-                    AppNavigationHost()
+                Scaffold(Modifier.fillMaxSize()) {
+                    AppNavHost(settingsViewModel)
                 }
             }
         }

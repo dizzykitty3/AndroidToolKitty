@@ -41,7 +41,7 @@
         </activity>
 
         <activity
-            android:name=".ShareToClipboardActivity"
+            android:name=".appcomponents.ShareToClipboardActivity"
             android:exported="true"
             android:label="@string/copy"
             android:theme="@android:style/Theme.NoDisplay">
@@ -53,13 +53,13 @@
         </activity>
 
         <activity
-            android:name=".ClearClipboardActivity"
+            android:name=".appcomponents.ClearClipboardActivity"
             android:exported="true"
             android:launchMode="singleInstance"
             android:theme="@style/Theme.Transparent" />
 
         <service
-            android:name=".ClearClipboardTileService"
+            android:name=".appcomponents.ClearClipboardTileService"
             android:enabled="true"
             android:exported="true"
             android:icon="@drawable/ic_launcher_foreground"

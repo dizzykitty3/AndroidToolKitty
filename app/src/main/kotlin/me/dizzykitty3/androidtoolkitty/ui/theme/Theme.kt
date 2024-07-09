@@ -5,6 +5,7 @@ import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -16,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
-import me.dizzykitty3.androidtoolkitty.data.utils.OSVersion
+import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
 
 private val lightScheme = lightColorScheme(
     primary = primaryLight,
@@ -289,7 +290,7 @@ fun AppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = Typography(),
         content = content
     )
 }

@@ -25,8 +25,6 @@ object SettingsSharedPref {
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
     private const val DEV_MODE = "dev_mode"
-    private const val SHOW_PRIVACY_DISCLAIMER = "show_privacy_disclaimer"
-    private const val SHOW_ONLINE_FEATURES = "show_online_features"
     private const val SHOW_SYSTEM_VOLUME_UI = "show_system_volume_ui"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
@@ -36,10 +34,6 @@ object SettingsSharedPref {
     private const val SAVED_LONGITUDE = "saved_longitude"
 
     private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
-    private const val DOMAIN_SUFFIX = "domain_suffix"
-    private const val SOCIAL_MEDIA = "social_media"
-    private const val TOKEN = "token"
-    private val nonSettingsPref = hashSetOf(TOKEN, DOMAIN_SUFFIX, SOCIAL_MEDIA)
 
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -68,58 +62,9 @@ object SettingsSharedPref {
         }
     }
 
-    fun removePreference(key: String) {
-        if (!sharedPrefs.contains(key)) {
-            Timber.d("Preference key '$key' does not exist and cannot be removed.")
-            return
-        }
-        with(sharedPrefs.edit()) {
-            remove(key)
-            apply()
-        }
-        Timber.d("Preference key '$key' removed successfully.")
-    }
-
-    fun exportSettingsToJson(): String {
-        val keys =
-            sharedPrefs.all.keys.filter { !nonSettingsPref.contains(it) }  // Exclude the token
-        val settingsMap: Map<String, Any?> = keys.associateWith {
-            sharedPrefs.all[it] ?: throw IllegalStateException("Unexpected null value at $it")
-        }
-
-        val serializableMap = mutableMapOf<String, String>()
-        settingsMap.forEach { (key, value) ->
-            when (value) {
-                is String -> serializableMap[key] = value
-                is Int -> serializableMap[key] = value.toString()
-                is Boolean -> serializableMap[key] = value.toString()
-                else -> throw IllegalArgumentException("Unsupported type for $key")
-            }
-        }
-
-        return Json.encodeToString(serializableMap)
-    }
-
-    fun importSettingsFromJson(jsonString: String) {
-        val settingsMap: Map<String, String> = Json.decodeFromString(jsonString)
-        settingsMap.forEach { (key, value) ->
-            when {
-                value.toBooleanCustom() != null -> setPreference(key, value.toBoolean())
-                value.toIntOrNull() != null -> setPreference(key, value.toInt())
-                else -> setPreference(key, value)
-            }
-        }
-    }
-
     fun eraseAllData() {
         Timber.d("erase all data")
         sharedPrefs.edit().clear().apply()
-    }
-
-    private fun String.toBooleanCustom(): Boolean? = when {
-        this.equals("true", ignoreCase = true) -> true
-        this.equals("false", ignoreCase = true) -> false
-        else -> null
     }
 
     var autoClearClipboard: Boolean
@@ -157,6 +102,7 @@ object SettingsSharedPref {
         get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
         set(value) = setPreference(HAVE_TAPPED_ADD_BUTTON, value)
 
+    @Suppress("RedundantIf")
     var devMode: Boolean
         get() = getPreference(DEV_MODE, if (BuildConfig.DEBUG) true else false)
         set(value) = setPreference(DEV_MODE, value)
@@ -175,22 +121,6 @@ object SettingsSharedPref {
     var customVolumeOptionLabel: String?
         get() = getPreference(VOLUME_OPTION_LABEL, "")
         set(value) = setPreference(VOLUME_OPTION_LABEL, value)
-
-    var domainSuffix: String?
-        get() = getPreference(DOMAIN_SUFFIX, "")
-        set(value) = setPreference(DOMAIN_SUFFIX, value)
-
-    var socialMedia: String?
-        get() = getPreference(SOCIAL_MEDIA, "")
-        set(value) = setPreference(SOCIAL_MEDIA, value)
-
-    var showPrivacyDisclaimer: Boolean
-        get() = getPreference(SHOW_PRIVACY_DISCLAIMER, true)
-        set(value) = setPreference(SHOW_PRIVACY_DISCLAIMER, value)
-
-    var showOnlineFeatures: Boolean
-        get() = getPreference(SHOW_ONLINE_FEATURES, true)
-        set(value) = setPreference(SHOW_ONLINE_FEATURES, value)
 
     var showSystemVolumeUI: Boolean
         get() = getPreference(SHOW_SYSTEM_VOLUME_UI, true)
@@ -224,10 +154,6 @@ object SettingsSharedPref {
             apply()
         }
     }
-
-    var token: String
-        get() = getPreference(TOKEN, "")
-        set(value) = setPreference(TOKEN, value)
 
     var savedLatitude: Float
         get() = getPreference(SAVED_LATITUDE, 0f)
