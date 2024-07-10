@@ -17,7 +17,6 @@ fun Screen(content: @Composable () -> Unit) {
             .fillMaxSize()
             .padding(start = screenPadding, end = screenPadding)
     ) {
-        item { TopPadding() }
         item { content() }
         item { BottomPadding() }
     }

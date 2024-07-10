@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.screens.edit
+package me.dizzykitty3.androidtoolkitty.ui.screens.settings
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons

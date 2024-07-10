@@ -28,6 +28,7 @@ import me.dizzykitty3.androidtoolkitty.data.CARD_3
 import me.dizzykitty3.androidtoolkitty.data.DEBUGGING_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.EDIT_HOME_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.LICENSES_SCREEN
+import me.dizzykitty3.androidtoolkitty.data.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.restartApp
@@ -38,44 +39,14 @@ import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui.components.Screen
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.ui.screens.settings.model.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Screen {
-        val view = LocalView.current
-        val sourceCodeURL = "https://github.com/dizzykitty3/AndroidToolKitty"
-
         Appearance()
         General(navController)
-        About()
-        Row(
-            Modifier.horizontalScroll(rememberScrollState()),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            TextButton({
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                view.context.showToast(R.string.all_help_welcomed)
-                view.context.openURL(sourceCodeURL)
-            }) {
-                Text(stringResource(R.string.source_code))
-                Icon(
-                    imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = stringResource(R.string.source_code),
-                    tint = MaterialTheme.colorScheme.primary
-                )
-            }
-            Text("|")
-            TextButton({
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                navController.navigate(LICENSES_SCREEN)
-            }) { Text(stringResource(R.string.licenses)) }
-            Text("|")
-            TextButton({
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                navController.navigate(DEBUGGING_SCREEN)
-            }) { Text(stringResource(R.string.debugging)) }
-        }
+        Bottom(navController)
     }
 }
 
@@ -85,7 +56,6 @@ private fun Appearance() {
     val settingsSharedPref = remember { SettingsSharedPref }
     var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
-    var systemVolumeUI by remember { mutableStateOf(settingsSharedPref.showSystemVolumeUI) }
 
     Card(title = R.string.appearance) {
         if (OSVersion.a12()) {
@@ -101,12 +71,6 @@ private fun Appearance() {
             view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
             oneHandedMode = it
             settingsSharedPref.oneHandedMode = it
-        }
-
-        CustomSwitchRow(text = R.string.show_system_volume_ui, checked = systemVolumeUI) {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-            systemVolumeUI = it
-            settingsSharedPref.showSystemVolumeUI = it
         }
     }
 }
@@ -169,5 +133,38 @@ private fun General(navController: NavHostController) {
             SpacerPadding()
             Text(stringResource(R.string.customize_my_home_page))
         }
+    }
+}
+
+@Composable
+private fun Bottom(navController: NavHostController) {
+    val view = LocalView.current
+
+    Row(
+        Modifier.horizontalScroll(rememberScrollState()),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TextButton({
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.context.showToast(R.string.all_help_welcomed)
+            view.context.openURL(SOURCE_CODE_URL)
+        }) {
+            Text(stringResource(R.string.source_code))
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = stringResource(R.string.source_code),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+        Text("|")
+        TextButton({
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            navController.navigate(LICENSES_SCREEN)
+        }) { Text(stringResource(R.string.licenses)) }
+        Text("|")
+        TextButton({
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            navController.navigate(DEBUGGING_SCREEN)
+        }) { Text(stringResource(R.string.debugging)) }
     }
 }

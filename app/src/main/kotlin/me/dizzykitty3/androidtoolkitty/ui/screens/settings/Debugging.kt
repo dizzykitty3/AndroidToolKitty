@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.settings
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.location.Location
 import android.os.Build
 import android.view.HapticFeedbackConstants
@@ -26,24 +27,22 @@ import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import com.google.android.gms.location.LocationServices
+import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.QR_CODE_GENERATOR_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.finishApp
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.restartApp
+import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.domain.utils.PermissionUtil.noBluetoothPermission
 import me.dizzykitty3.androidtoolkitty.domain.utils.PermissionUtil.noLocationPermission
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil
-import me.dizzykitty3.androidtoolkitty.ui.components.Bold
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
@@ -51,8 +50,7 @@ import me.dizzykitty3.androidtoolkitty.ui.components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.components.Screen
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.components.WIPTip
-import me.dizzykitty3.androidtoolkitty.ui.components.WarningAlertDialogButton
-import me.dizzykitty3.androidtoolkitty.ui.screens.settings.model.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 import timber.log.Timber
 
 @SuppressLint("MissingPermission")
@@ -70,21 +68,26 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             Row(Modifier.fillMaxWidth()) {
                 Column(
                     Modifier
-                        .weight(0.3f)
+                        .weight(0.4f)
                         .horizontalScroll(rememberScrollState())
                 ) {
                     Text(stringResource(R.string.device))
-                    Text(stringResource(R.string.os))
+                    Text(stringResource(R.string.os_version))
                     Text(stringResource(R.string.locale))
+                    Text(stringResource(R.string.app_version))
                 }
                 Column(
                     Modifier
-                        .weight(0.7f)
+                        .weight(0.6f)
                         .horizontalScroll(rememberScrollState())
                 ) {
                     Text("${Build.MANUFACTURER} ${Build.DEVICE}")
                     Text("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
                     Text(StringUtil.sysLocale)
+                    Row {
+                        Text("1.0.${view.context.versionCode()}")
+                        if (BuildConfig.DEBUG) Text(".dev")
+                    }
                 }
             }
 
@@ -220,46 +223,16 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             }
         }
 
-        Row(
-            Modifier.horizontalScroll(rememberScrollState()),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            TextButton(onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                view.context.restartApp()
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.Refresh,
-                    contentDescription = null
-                )
-                SpacerPadding()
-                Text(text = stringResource(id = R.string.restart))
-            }
-
-            Text("|")
-
-            WarningAlertDialogButton(
-                buttonText = stringResource(R.string.erase_all_app_data),
-                dialogMessageTitle = stringResource(R.string.warning),
-                dialogMessage = {
-                    Text(
-                        text = buildAnnotatedString {
-                            append(stringResource(R.string.warning_erase_all_data_1))
-                            append(" ")
-                            Bold(R.string.warning_erase_all_data_2)
-                            append("\n\n")
-                            append(stringResource(R.string.warning_erase_all_data_3))
-                        }
-                    )
-                },
-                positiveButtonText = stringResource(R.string.erase_all_data),
-                negativeButtonText = null,
-                onClickAction = {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                    settingsSharedPref.eraseAllData()
-                    view.context.finishApp()
-                }
+        TextButton(onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.context.restartApp()
+        }) {
+            Icon(
+                imageVector = Icons.Outlined.Refresh,
+                contentDescription = null
             )
+            SpacerPadding()
+            Text(text = stringResource(id = R.string.restart_app))
         }
     }
 }
@@ -272,4 +245,13 @@ private fun saveLocationToStorage(latitude: Double, longitude: Double) {
     Timber.d("save longitude = ${longitude.toFloat()} (float)")
     SettingsSharedPref.savedLatitude = latitude.toFloat()
     SettingsSharedPref.savedLongitude = longitude.toFloat()
+}
+
+// BuildConfig.VERSION_NAME may not have the updated value at compile time. (I guess)
+@SuppressLint("NewApi")
+private fun Context.versionCode(): String {
+    return if (OSVersion.api28())
+        this.packageManager.getPackageInfo(this.packageName, 0).longVersionCode.toString()
+    else
+        BuildConfig.VERSION_CODE.toString() // TODO check on simulator
 }

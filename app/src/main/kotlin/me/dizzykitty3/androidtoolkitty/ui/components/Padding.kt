@@ -37,11 +37,6 @@ fun OneHandedModePadding() {
 }
 
 @Composable
-fun TopPadding() {
-    Res(padding = R.dimen.padding_top)
-}
-
-@Composable
 fun BottomPadding() {
     Res(padding = R.dimen.padding_bottom)
 }

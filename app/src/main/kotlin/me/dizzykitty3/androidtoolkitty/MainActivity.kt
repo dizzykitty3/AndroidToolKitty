@@ -1,14 +1,13 @@
 package me.dizzykitty3.androidtoolkitty
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -23,8 +22,8 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.ui.AppNavHost
-import me.dizzykitty3.androidtoolkitty.ui.screens.settings.model.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
+import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 import timber.log.Timber
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
@@ -35,18 +34,20 @@ class MainActivity : ComponentActivity() {
     private var continuationNotResumed = true
     private var isAutoClearClipboard = false
 
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("onCreate")
-        installSplashScreen()
+//        installSplashScreen()
         enableEdgeToEdge()
         setContent {
             val settingsViewModel = hiltViewModel<SettingsViewModel>()
 
             AppTheme(dynamicColor = SettingsSharedPref.dynamicColor) {
-                Scaffold(Modifier.fillMaxSize()) {
-                    AppNavHost(settingsViewModel)
+                Scaffold(Modifier.fillMaxSize()) { innerPadding ->
+                    AppNavHost(
+                        Modifier.padding(top = innerPadding.calculateTopPadding()),
+                        settingsViewModel
+                    )
                 }
             }
         }

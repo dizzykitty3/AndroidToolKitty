@@ -75,8 +75,7 @@ import me.dizzykitty3.androidtoolkitty.ui.components.DevBuildTip
 import me.dizzykitty3.androidtoolkitty.ui.components.OneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.components.Tip
-import me.dizzykitty3.androidtoolkitty.ui.components.TopPadding
-import me.dizzykitty3.androidtoolkitty.ui.screens.settings.model.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController) {
@@ -96,7 +95,6 @@ private fun MobileLayout(navController: NavHostController) {
             end = screenPadding
         )
     ) {
-        item { TopPadding() }
         item { TopBar(navController) }
         item { CardSpacePadding() }
         item { CardSpacePadding() }

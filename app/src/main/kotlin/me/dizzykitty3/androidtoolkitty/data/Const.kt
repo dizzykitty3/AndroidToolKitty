@@ -75,3 +75,5 @@ const val TO = ".to"
 const val TV = ".tv"
 const val US = ".us"
 const val WIKI = ".wiki"
+
+const val SOURCE_CODE_URL = "https://github.com/dizzykitty3/AndroidToolKitty"

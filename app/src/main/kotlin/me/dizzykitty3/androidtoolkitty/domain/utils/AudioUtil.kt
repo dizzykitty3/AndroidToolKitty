@@ -23,18 +23,12 @@ object AudioUtil {
     val maxVolumeIndex: Int
         get() = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC)
 
-    fun setVolume(volume: Int, isAutoSetVolume: Boolean = false) {
-        val showSystemUI = SettingsSharedPref.showSystemVolumeUI
-        if (showSystemUI || isAutoSetVolume)
-            audioManager.setStreamVolume(
-                AudioManager.STREAM_MUSIC,
-                volume,
-                AudioManager.FLAG_SHOW_UI
-            )
-        else
-            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0)
-
-    }
+    fun setVolume(volume: Int, isAutoSetVolume: Boolean = false) =
+        audioManager.setStreamVolume(
+            AudioManager.STREAM_MUSIC,
+            volume,
+            if (isAutoSetVolume) AudioManager.FLAG_SHOW_UI else 0
+        )
 
     private fun View.setVolumeByPercentage(percentage: Int) {
         val indexedVolume = (maxVolumeIndex * 0.01 * percentage).toInt()

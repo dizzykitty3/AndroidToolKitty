@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.screens.edit
+package me.dizzykitty3.androidtoolkitty.ui.screens.settings
 
 import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons
@@ -37,7 +37,7 @@ import me.dizzykitty3.androidtoolkitty.ui.components.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.components.Screen
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.ui.screens.settings.model.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun HomeEdit(settingsViewModel: SettingsViewModel) {
@@ -242,19 +242,19 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
             Button(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                        onClickChangeAllCardsButton(false)
-                        mIsShowCard1 = false
-                        mIsShowCard2 = false
-                        mIsShowCard3 = false
-                        mIsShowCard4 = false
-                        mIsShowCard5 = false
-                        mIsShowCard6 = false
-                        mIsShowCard7 = false
-                        mIsShowCard8 = false
-                        mIsShowCard9 = false
-                        mIsShowCard10 = false
-                        mIsShowCard11 = false
-                        mIsShowCard12 = false
+                    onClickChangeAllCardsButton(false)
+                    mIsShowCard1 = false
+                    mIsShowCard2 = false
+                    mIsShowCard3 = false
+                    mIsShowCard4 = false
+                    mIsShowCard5 = false
+                    mIsShowCard6 = false
+                    mIsShowCard7 = false
+                    mIsShowCard8 = false
+                    mIsShowCard9 = false
+                    mIsShowCard10 = false
+                    mIsShowCard11 = false
+                    mIsShowCard12 = false
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {
@@ -270,19 +270,19 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
             Button(
                 onClick = {
                     view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-                        onClickChangeAllCardsButton(true)
-                        mIsShowCard1 = true
-                        mIsShowCard2 = true
-                        mIsShowCard3 = true
-                        mIsShowCard4 = true
-                        mIsShowCard5 = true
-                        mIsShowCard6 = true
-                        mIsShowCard7 = true
-                        mIsShowCard8 = true
-                        mIsShowCard9 = true
-                        mIsShowCard10 = true
-                        mIsShowCard11 = true
-                        mIsShowCard12 = true
+                    onClickChangeAllCardsButton(true)
+                    mIsShowCard1 = true
+                    mIsShowCard2 = true
+                    mIsShowCard3 = true
+                    mIsShowCard4 = true
+                    mIsShowCard5 = true
+                    mIsShowCard6 = true
+                    mIsShowCard7 = true
+                    mIsShowCard8 = true
+                    mIsShowCard9 = true
+                    mIsShowCard10 = true
+                    mIsShowCard11 = true
+                    mIsShowCard12 = true
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {

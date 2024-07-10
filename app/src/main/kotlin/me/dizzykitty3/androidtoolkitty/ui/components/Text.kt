@@ -125,10 +125,7 @@ fun Tip(message: String) {
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
-        if (devMode
-            && message != stringResource(R.string.wip)
-            && message != stringResource(R.string.auto_generated_by_about_libraries)
-        ) {
+        if (devMode && message != stringResource(R.string.wip)) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally

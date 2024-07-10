@@ -1,4 +1,4 @@
-package me.dizzykitty3.androidtoolkitty.ui.screens.settings.model
+package me.dizzykitty3.androidtoolkitty.ui.viewmodel
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf

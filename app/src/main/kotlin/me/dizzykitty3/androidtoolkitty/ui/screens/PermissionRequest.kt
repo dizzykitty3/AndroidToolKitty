@@ -25,7 +25,7 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.components.Screen
-import me.dizzykitty3.androidtoolkitty.ui.screens.settings.model.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun PermissionRequest(settingsViewModel: SettingsViewModel) {

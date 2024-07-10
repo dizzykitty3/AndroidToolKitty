@@ -25,7 +25,6 @@ object SettingsSharedPref {
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
     private const val DEV_MODE = "dev_mode"
-    private const val SHOW_SYSTEM_VOLUME_UI = "show_system_volume_ui"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -102,9 +101,8 @@ object SettingsSharedPref {
         get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
         set(value) = setPreference(HAVE_TAPPED_ADD_BUTTON, value)
 
-    @Suppress("RedundantIf")
     var devMode: Boolean
-        get() = getPreference(DEV_MODE, if (BuildConfig.DEBUG) true else false)
+        get() = getPreference(DEV_MODE, BuildConfig.DEBUG)
         set(value) = setPreference(DEV_MODE, value)
 
     var lastTimeSelectedSocialPlatform: Int
@@ -121,10 +119,6 @@ object SettingsSharedPref {
     var customVolumeOptionLabel: String?
         get() = getPreference(VOLUME_OPTION_LABEL, "")
         set(value) = setPreference(VOLUME_OPTION_LABEL, value)
-
-    var showSystemVolumeUI: Boolean
-        get() = getPreference(SHOW_SYSTEM_VOLUME_UI, true)
-        set(value) = setPreference(SHOW_SYSTEM_VOLUME_UI, value)
 
     fun getWheelOfFortuneItems(): List<String>? {
         val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null

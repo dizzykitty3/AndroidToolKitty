@@ -56,7 +56,6 @@
     <string name="show_all_options">显示所有选项</string>
     <string name="hide_all_options">隐藏所有选项</string>
     <string name="dev_mode">开发者模式</string>
-    <string name="about">关于</string>
     <string name="source_code">源码</string>
     <plurals name="days_remaining">
         <item quantity="other">剩余 %1$d 天</item>
@@ -65,7 +64,6 @@
     <string name="pixiv_artwork_id">pixiv (作品 ID)</string>
     <string name="pixiv_user_id">pixiv (用户 ID)</string>
     <string name="open_caption_preferences">字幕偏好</string>
-    <string name="common">一般</string>
     <string name="debugging">调试</string>
     <string name="bilibili_user_id">哔哩哔哩 (用户 UID)</string>
     <string name="clear_clipboard_on_launch">在启动时清除剪贴板</string>
@@ -73,13 +71,10 @@
     <string name="settings">设置</string>
     <string name="hide_all_cards">隐藏所有卡片</string>
     <string name="show_all_cards">显示所有卡片</string>
-    <string name="version">版本</string>
     <string name="one_handed_mode">单手模式</string>
     <string name="volume">音量</string>
     <string name="media_volume">媒体音量</string>
-    <string name="erase_all_app_data">清除应用所有数据</string>
     <string name="set_time_automatically_is_off_tip">「自动设置时间」未启用。某些应用部分功能可能表现异常。</string>
-    <string name="warning">警告</string>
     <string name="erase_all_data">清除所有数据</string>
     <string name="open_on_other_markets">其他商店</string>
     <string name="android_versions">Android 版本历史</string>
@@ -88,9 +83,6 @@
     <string name="material_you_dynamic_color">Material You 莫奈取色</string>
     <string name="system_media_volume_levels_limited">系统音量阶数较少，请重新调整</string>
     <string name="customize_system_settings_card">自定义「Android 系统设置」卡片的选项</string>
-    <string name="warning_erase_all_data_1">此操作将清除您的所有数据，包括</string>
-    <string name="warning_erase_all_data_2">历史和设置。</string>
-    <string name="warning_erase_all_data_3">确定要继续吗？</string>
     <string name="label_optional">标签（可选）</string>
     <string name="edit">编辑</string>
     <string name="general">基本</string>
@@ -112,8 +104,6 @@
     <string name="bluetooth_bluetooth_admin">要查看已配对的设备，请授予 BLUETOOTH, BLUETOOTH_ADMIN 权限</string>
     <string name="missed_sys_popup">错过了系统权限弹窗吗？</string>
     <string name="clear_input">清空输入</string>
-    <string name="developer_profile_link">开发者主页链接</string>
-    <string name="inspired_by">参考了以下开源项目</string>
     <string name="request_permission">授予权限</string>
     <string name="cellular">移动数据</string>
     <string name="offline">无网络</string>
@@ -121,10 +111,8 @@
     <string name="unknown_device">未知设备</string>
     <string name="success_and_back">已获得权限！返回上一界面吧</string>
     <string name="search">搜索</string>
-    <string name="contributors">贡献者</string>
     <string name="licenses">许可证</string>
     <string name="go_to_permission_request_screen">前往权限申请画面</string>
-    <string name="permission">权限</string>
     <string name="font_weight_test">字重测试</string>
     <string name="w1">100 淡体 Thin</string>
     <string name="w2">200 特细 ExtraLight</string>
@@ -139,7 +127,7 @@
     <string name="undo">撤销</string>
     <string name="pixiv_user_custom_url">Pixiv (用户自定义 URL)</string>
     <string name="steam_user_custom_url">Steam (用户自定义 URL)</string>
-    <string name="restart">重启 ToolKitty</string>
+    <string name="restart_app">重启 ToolKitty</string>
     <string name="appearance">外观</string>
     <string name="bluetooth_devices_types_6">有些设备可能同时支持经典蓝牙和蓝牙LE。这些被称为双模式设备，可以根据需要提供与不同类型设备连接的灵活性。例如，智能手表可能使用BLE与手机连接以获取通知，但也具有经典蓝牙用于音乐播放。</string>
     <string name="turn_off">禁用</string>
@@ -153,13 +141,9 @@
     <string name="volume_changed_auto">音量已自动调整</string>
     <string name="error">错误</string>
     <string name="more_precise_slider">精确调整</string>
-    <string name="show_system_volume_ui">调整音量后显示系统音量条</string>
-    <string name="accept">同意</string>
-    <string name="show_online_features">显示「在线功能」</string>
     <string name="auto_set_volume">自动调整音量</string>
     <string name="qr_code_generator">生成二维码</string>
     <string name="fine_location">为了请求当前的位置，请授予「位置」权限</string>
-    <string name="disable_online_features">禁用「在线功能」</string>
     <string name="distance">距离</string>
     <string name="open_accessibility_settings">无障碍</string>
     <string name="result">结果为</string>

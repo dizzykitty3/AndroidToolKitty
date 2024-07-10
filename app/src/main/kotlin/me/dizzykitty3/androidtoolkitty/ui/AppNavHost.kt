@@ -10,6 +10,7 @@ import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -22,19 +23,20 @@ import me.dizzykitty3.androidtoolkitty.data.QR_CODE_GENERATOR_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.SETTINGS_SCREEN
 import me.dizzykitty3.androidtoolkitty.ui.screens.PermissionRequest
 import me.dizzykitty3.androidtoolkitty.ui.screens.QRCodeGenerator
-import me.dizzykitty3.androidtoolkitty.ui.screens.edit.HomeEdit
 import me.dizzykitty3.androidtoolkitty.ui.screens.home.Home
 import me.dizzykitty3.androidtoolkitty.ui.screens.settings.Debugging
+import me.dizzykitty3.androidtoolkitty.ui.screens.settings.HomeEdit
 import me.dizzykitty3.androidtoolkitty.ui.screens.settings.Licenses
 import me.dizzykitty3.androidtoolkitty.ui.screens.settings.Settings
-import me.dizzykitty3.androidtoolkitty.ui.screens.settings.model.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 
 @Composable
-fun AppNavHost(settingsViewModel: SettingsViewModel) {
+fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
     val navController = rememberNavController()
     val newAnimation = settingsViewModel.settings.value.enableNewAnimation
 
     NavHost(
+        modifier = modifier,
         navController = navController,
         startDestination = HOME_SCREEN,
         enterTransition = {
