@@ -166,7 +166,7 @@ object IntentUtil {
     /**
      * Remember to use Activity Context to finish app.
      */
-    fun Context.finishApp() {
+    private fun Context.finishApp() {
         Timber.d("finishApp")
         (this as Activity).finish()
     }

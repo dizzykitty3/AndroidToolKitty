@@ -31,7 +31,6 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.SETTING_ENABLE_BLUETOOTH
@@ -43,12 +42,6 @@ import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.ui.components.PrimaryColor
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
-
-@Composable
-private fun BluetoothDeviceCardPreview() {
-    val navController = rememberNavController()
-    BluetoothDevice(navController)
-}
 
 @SuppressLint("MissingPermission")
 @Composable

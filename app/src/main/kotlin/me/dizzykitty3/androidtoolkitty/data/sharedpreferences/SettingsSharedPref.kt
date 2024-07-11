@@ -61,11 +61,6 @@ object SettingsSharedPref {
         }
     }
 
-    fun eraseAllData() {
-        Timber.d("erase all data")
-        sharedPrefs.edit().clear().apply()
-    }
-
     var autoClearClipboard: Boolean
         get() = getPreference(AUTO_CLEAR_CLIPBOARD, false)
         set(value) = setPreference(AUTO_CLEAR_CLIPBOARD, value)
