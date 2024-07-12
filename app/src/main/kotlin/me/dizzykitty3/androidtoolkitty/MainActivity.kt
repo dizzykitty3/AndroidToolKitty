@@ -25,13 +25,14 @@ import me.dizzykitty3.androidtoolkitty.ui.AppNavHost
 import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 import timber.log.Timber
+import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private var continuation: Continuation<Unit>? = null
-    private var continuationNotResumed = true
+    private var continuationNotResumed = AtomicBoolean(true)
     private var isAutoClearClipboard = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         Timber.d("onStart")
-        continuationNotResumed = true
+        continuationNotResumed.set(true)
         CoroutineScope(Dispatchers.Main).launch {
             isAutoClearClipboard = withContext(Dispatchers.IO) {
                 SettingsSharedPref.autoClearClipboard
@@ -84,7 +85,7 @@ class MainActivity : ComponentActivity() {
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         Timber.d("onWindowFocusChanged")
-        if (hasFocus and continuationNotResumed) { // Clipboard operations require window focus
+        if (hasFocus and continuationNotResumed.get()) { // Clipboard operations require window focus
             try {
                 Timber.d("continuation resume start")
                 continuation?.resume(Unit)
@@ -92,7 +93,7 @@ class MainActivity : ComponentActivity() {
                 Timber.e(e)
             } finally {
                 Timber.i("continuation resumed")
-                continuationNotResumed = false
+                continuationNotResumed.set(false)
             }
         }
     }
