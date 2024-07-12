@@ -294,9 +294,10 @@
     <string name="new_animation">new transition animation</string>
     <string name="debugging_info" translatable="false">debugging info</string>
     <string name="device" translatable="false">device</string>
-    <string name="os_version" translatable="false">os_version</string>
+    <string name="os_version" translatable="false">os_ver</string>
     <string name="locale" translatable="false">locale</string>
-    <string name="app_version" translatable="false">app_version</string>
+    <string name="app_version" translatable="false">app_ver</string>
+    <string name="open_app_detail_settings" translatable="false">Open app detail settings</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>

@@ -37,6 +37,7 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.domain.utils.ToastUtil.showToast
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomSwitchRow
+import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.components.Screen
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
@@ -118,6 +119,8 @@ private fun General(navController: NavHostController) {
             webpageShowMore = it
             settingsSharedPref.keepWebpageCardShowMore = it
         }
+
+        GroupDivider()
 
         OutlinedButton(
             onClick = {

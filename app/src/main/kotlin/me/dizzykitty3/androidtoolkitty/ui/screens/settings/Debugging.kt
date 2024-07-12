@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Refresh
+import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material3.AlertDialog
@@ -37,6 +38,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.QR_CODE_GENERATOR_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.domain.utils.PermissionUtil.noBluetoothPermission
@@ -46,7 +48,6 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
-import me.dizzykitty3.androidtoolkitty.ui.components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.components.Screen
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.components.WIPTip
@@ -64,11 +65,10 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
 
     Screen {
         Card(title = R.string.debugging, icon = Icons.Outlined.Terminal) {
-            GroupTitle(stringResource(R.string.debugging_info))
             Row(Modifier.fillMaxWidth()) {
                 Column(
                     Modifier
-                        .weight(0.4f)
+                        .weight(0.3f)
                         .horizontalScroll(rememberScrollState())
                 ) {
                     Text(stringResource(R.string.device))
@@ -78,7 +78,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                 }
                 Column(
                     Modifier
-                        .weight(0.6f)
+                        .weight(0.7f)
                         .horizontalScroll(rememberScrollState())
                 ) {
                     Text("${Build.MANUFACTURER} ${Build.DEVICE}")
@@ -104,6 +104,8 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                 newAnimation = it
                 settingsViewModel.update(settingsViewModel.settings.value.copy(enableNewAnimation = it))
             }
+
+            GroupDivider()
 
             OutlinedButton(onClick = {
                 view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
@@ -221,6 +223,18 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             ) {
                 Text(stringResource(R.string.qr_code_generator))
             }
+        }
+
+        TextButton(onClick = {
+            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.context.openAppDetailSettings()
+        }) {
+            Icon(
+                imageVector = Icons.Outlined.SettingsApplications,
+                contentDescription = null
+            )
+            SpacerPadding()
+            Text(text = stringResource(id = R.string.open_app_detail_settings))
         }
 
         TextButton(onClick = {
