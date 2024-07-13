@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.home
 
-import android.view.HapticFeedbackConstants
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -66,6 +65,7 @@ import me.dizzykitty3.androidtoolkitty.data.SETTING_WIFI
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.BluetoothUtil.isHeadsetConnected
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.domain.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil
@@ -153,14 +153,14 @@ private fun SettingsButton(navController: NavHostController) {
     TooltipBox(
         positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
         tooltip = {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             PlainTooltip { Text(text = stringResource(id = R.string.settings)) }
         },
         state = rememberTooltipState(),
     ) {
         IconButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 navController.navigate(SETTINGS_SCREEN)
                 settingsSharedPref.haveOpenedSettingsScreen = true
             },
@@ -182,7 +182,7 @@ private fun Status() {
 
     Row(Modifier.horizontalScroll(rememberScrollState())) {
         Row(Modifier.clickable {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             view.context.openSystemSettings(SETTING_POWER_USAGE_SUMMARY)
         }) {
             Icon(
@@ -201,7 +201,7 @@ private fun Status() {
 
         if (view.context.isHeadsetConnected() || SettingsSharedPref.devMode) {
             Row(Modifier.clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 view.context.openSystemSettings(SETTING_BLUETOOTH)
             }) {
                 Icon(
@@ -260,7 +260,7 @@ private fun NetworkStateIcon(
     val view = LocalView.current
 
     Row(modifier = Modifier.clickable {
-        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+        view.hapticFeedback()
         view.context.openSystemSettings(SETTING_WIFI)
     }
     ) {

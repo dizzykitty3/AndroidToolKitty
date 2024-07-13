@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.os.Build
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,6 +37,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.QR_CODE_GENERATOR_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
@@ -94,13 +94,13 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             GroupDivider()
 
             CustomSwitchRow(text = R.string.dev_mode, checked = devMode) {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 devMode = it
                 settingsSharedPref.devMode = it
             }
 
             CustomSwitchRow(text = R.string.new_animation, checked = newAnimation) {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 newAnimation = it
                 settingsViewModel.update(settingsViewModel.settings.value.copy(enableNewAnimation = it))
             }
@@ -108,7 +108,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             GroupDivider()
 
             OutlinedButton(onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 if (view.context.noLocationPermission()) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
                     return@OutlinedButton
@@ -176,7 +176,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                     confirmButton = {
                         Row {
                             Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                view.hapticFeedback()
                                 showLocationDialog = false
                                 if (view.context.noBluetoothPermission()) {
                                     navController.navigate(PERMISSION_REQUEST_SCREEN)
@@ -188,7 +188,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                         }
                         Row {
                             Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                view.hapticFeedback()
                                 showLocationDialog = false
                                 if (view.context.noBluetoothPermission()) {
                                     navController.navigate(PERMISSION_REQUEST_SCREEN)
@@ -201,7 +201,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                     },
                     dismissButton = {
                         TextButton({
-                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                            view.hapticFeedback()
                             showLocationDialog = false
                             SettingsSharedPref.autoSetMediaVolume = -1
                         }) { Text(stringResource(R.string.turn_off)) }
@@ -209,7 +209,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             }
 
             OutlinedButton(onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 navController.navigate(PERMISSION_REQUEST_SCREEN)
             }) {
                 Text(text = stringResource(id = R.string.go_to_permission_request_screen))
@@ -217,7 +217,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
 
             OutlinedButton(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     navController.navigate(QR_CODE_GENERATOR_SCREEN)
                 }
             ) {
@@ -226,7 +226,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
         }
 
         TextButton(onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             view.context.openAppDetailSettings()
         }) {
             Icon(
@@ -238,7 +238,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
         }
 
         TextButton(onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             view.context.restartApp()
         }) {
             Icon(

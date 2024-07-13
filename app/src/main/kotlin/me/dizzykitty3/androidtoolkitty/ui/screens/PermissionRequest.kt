@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.Button
@@ -15,6 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.domain.utils.PermissionUtil.noBluetoothPermission
@@ -43,7 +43,7 @@ fun PermissionRequest(settingsViewModel: SettingsViewModel) {
 
             Button(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     if (view.context.noBluetoothPermission()) {
                         view.context.requestBluetoothPermission()
                         clickCount++
@@ -61,7 +61,7 @@ fun PermissionRequest(settingsViewModel: SettingsViewModel) {
 
             Button(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     if (view.context.noLocationPermission()) {
                         view.context.requestLocationPermission()
                         clickCount2++
@@ -86,7 +86,7 @@ fun ManuallyGrant() {
     Text(text = stringResource(id = R.string.missed_sys_popup))
     TextButton(
         onClick = {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             view.context.openAppDetailSettings()
         }
     ) {

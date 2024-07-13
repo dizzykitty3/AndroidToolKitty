@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.home
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,6 +19,7 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.DateUtil.daysPassed
 import me.dizzykitty3.androidtoolkitty.domain.utils.DateUtil.totalDaysInYear
 import me.dizzykitty3.androidtoolkitty.domain.utils.DateUtil.yearProgress
 import me.dizzykitty3.androidtoolkitty.domain.utils.DateUtil.yearProgressPercentage
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomAnimatedProgressIndicator
 
@@ -34,7 +34,7 @@ fun YearProgress() {
 
         Column(
             modifier = Modifier.clickable {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 percentageOnly = !percentageOnly
             }
         ) {

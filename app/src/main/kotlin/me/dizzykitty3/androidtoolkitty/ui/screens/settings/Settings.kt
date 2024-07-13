@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.settings
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.rememberScrollState
@@ -30,6 +29,7 @@ import me.dizzykitty3.androidtoolkitty.data.EDIT_HOME_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.LICENSES_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
@@ -61,7 +61,7 @@ private fun Appearance() {
     Card(title = R.string.appearance) {
         if (OSVersion.a12()) {
             CustomSwitchRow(text = R.string.material_you_dynamic_color, checked = dynamicColor) {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 dynamicColor = it
                 SettingsSharedPref.dynamicColor = it
                 view.context.restartApp()
@@ -69,7 +69,7 @@ private fun Appearance() {
         }
 
         CustomSwitchRow(text = R.string.one_handed_mode, checked = oneHandedMode) {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             oneHandedMode = it
             settingsSharedPref.oneHandedMode = it
         }
@@ -91,7 +91,7 @@ private fun General(navController: NavHostController) {
             text = R.string.clear_clipboard_on_launch,
             checked = autoClearClipboard
         ) {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             autoClearClipboard = it
             // Automatically hide Clipboard Card when turning on Clear on Launch feature.
             if (autoClearClipboard && showClipboardCard) {
@@ -103,7 +103,7 @@ private fun General(navController: NavHostController) {
                     textColor = inverseOnSurface,
                     buttonColor = inversePrimary,
                     buttonClickListener = {
-                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                        view.hapticFeedback()
                         settingsSharedPref.saveCardShowedState(CARD_3, true)
                     }
                 )
@@ -115,7 +115,7 @@ private fun General(navController: NavHostController) {
             text = R.string.keep_showing_full_webpage_card,
             checked = webpageShowMore
         ) {
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             webpageShowMore = it
             settingsSharedPref.keepWebpageCardShowMore = it
         }
@@ -124,7 +124,7 @@ private fun General(navController: NavHostController) {
 
         OutlinedButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 navController.navigate(EDIT_HOME_SCREEN)
             }
         ) {
@@ -148,7 +148,7 @@ private fun Bottom(navController: NavHostController) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         TextButton({
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             view.context.showToast(R.string.all_help_welcomed)
             view.context.openURL(SOURCE_CODE_URL)
         }) {
@@ -161,12 +161,12 @@ private fun Bottom(navController: NavHostController) {
         }
         Text("|")
         TextButton({
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             navController.navigate(LICENSES_SCREEN)
         }) { Text(stringResource(R.string.licenses)) }
         Text("|")
         TextButton({
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             navController.navigate(DEBUGGING_SCREEN)
         }) { Text(stringResource(R.string.debugging)) }
     }

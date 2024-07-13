@@ -123,14 +123,22 @@ object IntentUtil {
                 Settings.ACTION_AUTO_ROTATE_SETTINGS
             ) else return
 
-            // TODO API requirement
             SETTING_BLUETOOTH -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
-            SETTING_DEFAULT_APPS -> Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
-            SETTING_BATTERY_OPTIMIZATION -> Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
+            SETTING_DEFAULT_APPS -> @SuppressLint("InlinedApi") if (OSVersion.api24()) Intent(
+                Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS
+            ) else return
+
+            SETTING_BATTERY_OPTIMIZATION -> @SuppressLint("InlinedApi") if (OSVersion.api23()) Intent(
+                Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS
+            ) else return
+
             SETTING_CAPTIONING -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
             SETTING_USAGE_ACCESS -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-            SETTING_OVERLAY -> Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-            SETTING_WRITE_SETTINGS -> Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+            SETTING_OVERLAY -> @SuppressLint("InlinedApi") if (OSVersion.api23()) Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION) else return
+            SETTING_WRITE_SETTINGS -> @SuppressLint("InlinedApi") if (OSVersion.api23()) Intent(
+                Settings.ACTION_MANAGE_WRITE_SETTINGS
+            ) else return
+
             SETTING_LOCALE -> Intent(Settings.ACTION_LOCALE_SETTINGS)
             SETTING_DATE -> Intent(Settings.ACTION_DATE_SETTINGS)
             SETTING_DEVELOPER -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)

@@ -3,7 +3,6 @@ package me.dizzykitty3.androidtoolkitty.ui.screens.home
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.rememberScrollState
@@ -35,6 +34,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.SETTING_ENABLE_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.domain.utils.BluetoothUtil
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.domain.utils.PermissionUtil.noBluetoothPermission
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
@@ -58,8 +58,7 @@ fun BluetoothDevice(navController: NavHostController) {
 
         OutlinedButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
-
+                view.hapticFeedback()
                 // Check permission
                 if (view.context.noBluetoothPermission()) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
@@ -122,7 +121,7 @@ private fun BluetoothDeviceTypeDialog() {
     var showDialog by remember { mutableStateOf(false) }
 
     TextButton(onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+        view.hapticFeedback()
         showDialog = true
     }) {
         Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
@@ -144,7 +143,7 @@ private fun BluetoothDeviceTypeDialog() {
             confirmButton = {
                 Button(
                     onClick = {
-                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                        view.hapticFeedback()
                         showDialog = false
                     },
                     colors = ButtonDefaults.buttonColors(

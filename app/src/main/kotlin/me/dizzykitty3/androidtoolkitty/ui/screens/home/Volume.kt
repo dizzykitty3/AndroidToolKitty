@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.home
 
-import android.view.HapticFeedbackConstants
 import android.view.View
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -38,6 +37,7 @@ import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.AudioUtil
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.ClearInput
@@ -98,22 +98,22 @@ fun Volume() {
                         selectedIndex = index
                         when (index) {
                             0 -> {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                view.hapticFeedback()
                                 view.setVolume(0)
                             }
 
                             1 -> {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                view.hapticFeedback()
                                 view.setVolume(0.4 * maxVolume)
                             }
 
                             2 -> {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                view.hapticFeedback()
                                 view.setVolume(0.6 * maxVolume)
                             }
 
                             3 -> {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                view.hapticFeedback()
                                 mHaveTappedAddButton = true
                                 if (mCustomVolume > 0)
                                     view.setVolume(mCustomVolume * 0.01 * maxVolume)
@@ -227,7 +227,7 @@ fun Volume() {
                                 ),
                                 trailingIcon = {
                                     ClearInput(text = optionLabel) {
-                                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                        view.hapticFeedback()
                                         optionLabel = ""
                                         mHaveCustomLabel = true
                                     }
@@ -238,7 +238,7 @@ fun Volume() {
                                 text = R.string.more_precise_slider,
                                 checked = morePreciseSlider
                             ) {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                view.hapticFeedback()
                                 morePreciseSlider = it
                             }
                         }
@@ -246,7 +246,7 @@ fun Volume() {
                     confirmButton = {
                         Button(
                             onClick = {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                view.hapticFeedback()
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
                                     if (newCustomVolume.toInt() != 0) view.showSnackbar(R.string.system_media_volume_levels_limited)
                                     return@Button
@@ -270,7 +270,7 @@ fun Volume() {
                     dismissButton = {
                         TextButton(
                             onClick = {
-                                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                view.hapticFeedback()
                                 if (!mHaveCustomLabel) mHaveCustomLabel = false
                                 showVolumeDialog = false
                                 selectedIndex = when (AudioUtil.volume) {
@@ -296,7 +296,7 @@ fun Volume() {
             ) {
                 TextButton(
                     onClick = {
-                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                        view.hapticFeedback()
                         showVolumeDialog = true
                     }
                 ) {

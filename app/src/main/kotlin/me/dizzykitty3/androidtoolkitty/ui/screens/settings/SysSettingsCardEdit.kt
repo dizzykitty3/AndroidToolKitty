@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.settings
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
@@ -32,6 +31,7 @@ import me.dizzykitty3.androidtoolkitty.data.SETTING_OVERLAY
 import me.dizzykitty3.androidtoolkitty.data.SETTING_USAGE_ACCESS
 import me.dizzykitty3.androidtoolkitty.data.SETTING_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomHideCardSettingSwitch
@@ -133,7 +133,7 @@ fun SysSettingsCardEdit() {
             card = SETTING_DISPLAY,
             isChecked = mIsShowSetting1
         ) { newState ->
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             mIsShowSetting1 = newState
             settingsSharedPref.saveCardShowedState(SETTING_DISPLAY, newState)
         }
@@ -143,7 +143,7 @@ fun SysSettingsCardEdit() {
                 card = SETTING_AUTO_ROTATE,
                 isChecked = mIsShowSetting2
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowSetting2 = newState
                 settingsSharedPref.saveCardShowedState(SETTING_AUTO_ROTATE, newState)
             }
@@ -153,7 +153,7 @@ fun SysSettingsCardEdit() {
             card = SETTING_BLUETOOTH,
             isChecked = mIsShowSetting3
         ) { newState ->
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             mIsShowSetting3 = newState
             settingsSharedPref.saveCardShowedState(SETTING_BLUETOOTH, newState)
         }
@@ -162,7 +162,7 @@ fun SysSettingsCardEdit() {
             card = SETTING_DEFAULT_APPS,
             isChecked = mIsShowSetting4
         ) { newState ->
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             mIsShowSetting4 = newState
             settingsSharedPref.saveCardShowedState(SETTING_DEFAULT_APPS, newState)
         }
@@ -171,7 +171,7 @@ fun SysSettingsCardEdit() {
             card = SETTING_BATTERY_OPTIMIZATION,
             isChecked = mIsShowSetting5
         ) { newState ->
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             mIsShowSetting5 = newState
             settingsSharedPref.saveCardShowedState(SETTING_BATTERY_OPTIMIZATION, newState)
         }
@@ -180,7 +180,7 @@ fun SysSettingsCardEdit() {
             card = SETTING_CAPTIONING,
             isChecked = mIsShowSetting6
         ) { newState ->
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             mIsShowSetting6 = newState
             settingsSharedPref.saveCardShowedState(SETTING_CAPTIONING, newState)
         }
@@ -189,7 +189,7 @@ fun SysSettingsCardEdit() {
             card = SETTING_USAGE_ACCESS,
             isChecked = mIsShowSetting7
         ) { newState ->
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             mIsShowSetting7 = newState
             settingsSharedPref.saveCardShowedState(SETTING_USAGE_ACCESS, newState)
         }
@@ -198,7 +198,7 @@ fun SysSettingsCardEdit() {
             card = SETTING_OVERLAY,
             isChecked = mIsShowSetting8
         ) { newState ->
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             mIsShowSetting8 = newState
             settingsSharedPref.saveCardShowedState(SETTING_OVERLAY, newState)
         }
@@ -207,7 +207,7 @@ fun SysSettingsCardEdit() {
             card = SETTING_WRITE_SETTINGS,
             isChecked = mIsShowSetting9
         ) { newState ->
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             mIsShowSetting9 = newState
             settingsSharedPref.saveCardShowedState(SETTING_WRITE_SETTINGS, newState)
         }
@@ -216,7 +216,7 @@ fun SysSettingsCardEdit() {
             card = SETTING_LOCALE,
             isChecked = mIsShowSetting10
         ) { newState ->
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             mIsShowSetting10 = newState
             settingsSharedPref.saveCardShowedState(SETTING_LOCALE, newState)
         }
@@ -225,7 +225,7 @@ fun SysSettingsCardEdit() {
             card = SETTING_DATE,
             isChecked = mIsShowSetting11
         ) { newState ->
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             mIsShowSetting11 = newState
             settingsSharedPref.saveCardShowedState(SETTING_DATE, newState)
         }
@@ -234,7 +234,7 @@ fun SysSettingsCardEdit() {
             card = SETTING_DEVELOPER,
             isChecked = mIsShowSetting12
         ) { newState ->
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             mIsShowSetting12 = newState
             settingsSharedPref.saveCardShowedState(SETTING_DEVELOPER, newState)
         }
@@ -243,7 +243,7 @@ fun SysSettingsCardEdit() {
 
         Button(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 onClickChangeAllCardsButton(false)
                 mIsShowSetting1 = false
                 mIsShowSetting2 = false
@@ -271,7 +271,7 @@ fun SysSettingsCardEdit() {
 
         Button(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 onClickChangeAllCardsButton(true)
                 mIsShowSetting1 = true
                 mIsShowSetting2 = true

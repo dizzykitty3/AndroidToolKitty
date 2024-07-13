@@ -10,7 +10,7 @@
     <string name="info">Info</string>
     <string name="go_to_settings">Go to settings</string>
     <string name="success_and_back">Success! Now you can back to the previous screen</string>
-    <string name="wip" translatable="false">-- WORK IN PROGRESS --</string>
+    <string name="wip">-- WORK IN PROGRESS --</string>
     <string name="undo">Undo</string>
     <string name="turn_off">Turn off</string>
     <string name="copy">Copy</string>
@@ -283,7 +283,6 @@
     <string name="licenses">Licenses</string>
 
     <!-- Settings > Debugging -->
-    <string name="erase_all_data">Erase all data</string>
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
     <string name="restart_app">Restart app</string>
     <string name="dev_mode">dev mode</string>
@@ -292,12 +291,11 @@
     <string name="dev_mode_message" translatable="false">dev mode message:</string>
     <string name="distance">distance</string>
     <string name="new_animation">new transition animation</string>
-    <string name="debugging_info" translatable="false">debugging info</string>
     <string name="device" translatable="false">device</string>
     <string name="os_version" translatable="false">os_ver</string>
     <string name="locale" translatable="false">locale</string>
     <string name="app_version" translatable="false">app_ver</string>
-    <string name="open_app_detail_settings" translatable="false">Open app detail settings</string>
+    <string name="open_app_detail_settings">Open app detail settings</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>

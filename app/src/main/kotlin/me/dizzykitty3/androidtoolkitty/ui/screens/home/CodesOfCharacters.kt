@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.home
 
-import android.view.HapticFeedbackConstants
 import android.view.View
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
@@ -24,6 +23,7 @@ import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.domain.utils.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil.toASCII
@@ -81,7 +81,7 @@ fun CodesOfCharacters() {
             ),
             trailingIcon = {
                 ClearInput(text = unicode) {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     unicode = ""
                 }
             },
@@ -110,7 +110,7 @@ fun CodesOfCharacters() {
             ),
             trailingIcon = {
                 ClearInput(text = characters) {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     characters = ""
                 }
             },
@@ -118,7 +118,7 @@ fun CodesOfCharacters() {
 
         TextButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 focus.clearFocus()
                 if (isUnicodeInput) {
                     view.onClickConvertButton(unicode, { characters = it }, true)
@@ -152,7 +152,7 @@ fun CodesOfCharacters() {
             ),
             trailingIcon = {
                 ClearInput(text = stringToASCII) {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     stringToASCII = ""
                 }
             },
@@ -161,7 +161,7 @@ fun CodesOfCharacters() {
         if (toASCIIResult != "") Text("${stringResource(R.string.result)} $toASCIIResult")
 
         TextButton({
-            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+            view.hapticFeedback()
             focus.clearFocus()
             toASCIIResult = stringToASCII.toASCII()
         }) { Text(stringResource(R.string.convert_to_ascii_values)) }

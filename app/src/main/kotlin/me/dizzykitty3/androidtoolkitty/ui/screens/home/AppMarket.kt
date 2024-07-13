@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.home
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Row
@@ -29,6 +28,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextDecoration
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.checkOnMarket
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
@@ -61,7 +61,7 @@ fun AppMarket() {
             ),
             trailingIcon = {
                 ClearInput(text = packageName) {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     packageName = ""
                 }
             }
@@ -72,7 +72,7 @@ fun AppMarket() {
         ) {
             TextButton(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     focus.clearFocus()
                     view.context.checkOnMarket(packageName)
                 }
@@ -87,7 +87,7 @@ fun AppMarket() {
             Text("|")
             TextButton(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     focus.clearFocus()
                     view.context.checkOnMarket(packageName, false)
                 }
@@ -122,7 +122,7 @@ private fun WhatIsPackageName() {
         Row(
             modifier = Modifier.clickable(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     view.context.openURL(linkURL)
                 }
             )

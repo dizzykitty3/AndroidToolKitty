@@ -75,7 +75,6 @@
     <string name="volume">音量</string>
     <string name="media_volume">媒体音量</string>
     <string name="set_time_automatically_is_off_tip">「自动设置时间」未启用。某些应用部分功能可能表现异常。</string>
-    <string name="erase_all_data">清除所有数据</string>
     <string name="open_on_other_markets">其他商店</string>
     <string name="android_versions">Android 版本历史</string>
     <string name="customize_my_home_page">自定义显示的卡片</string>
@@ -104,6 +103,7 @@
     <string name="bluetooth_bluetooth_admin">要查看已配对的设备，请授予 BLUETOOTH, BLUETOOTH_ADMIN 权限</string>
     <string name="missed_sys_popup">错过了系统权限弹窗吗？</string>
     <string name="clear_input">清空输入</string>
+    <string name="open_app_detail_settings">Open app detail settings</string>
     <string name="request_permission">授予权限</string>
     <string name="cellular">移动数据</string>
     <string name="offline">无网络</string>
@@ -124,6 +124,7 @@
     <string name="w8">800 特粗 ExtraBold</string>
     <string name="w9">900 浓体 Black</string>
     <string name="clipboard_card_hidden">已为您隐藏首页的剪贴板卡片</string>
+    <string name="wip">-- WORK IN PROGRESS --</string>
     <string name="undo">撤销</string>
     <string name="pixiv_user_custom_url">Pixiv (用户自定义 URL)</string>
     <string name="steam_user_custom_url">Steam (用户自定义 URL)</string>

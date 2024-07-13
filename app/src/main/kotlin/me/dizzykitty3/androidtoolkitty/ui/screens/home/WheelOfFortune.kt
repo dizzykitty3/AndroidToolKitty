@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.home
 
 import android.graphics.Paint
-import android.view.HapticFeedbackConstants
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateFloatAsState
@@ -63,6 +62,7 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.getWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
@@ -193,7 +193,7 @@ fun WheelOfFortune() {
 
             OutlinedButton(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     if (items.isNotEmpty() && !isSpinning) {
                         if (expanded) {
                             expanded = false
@@ -256,7 +256,7 @@ private fun ExpandableList(
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(enabled = !isSpinning) {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     setExpanded(!expanded)
                 }
                 .padding(8.dp)
@@ -302,7 +302,7 @@ private fun ExpandableList(
                                     imageVector = Icons.Default.Check,
                                     contentDescription = "Done",
                                     modifier = Modifier.clickable {
-                                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                        view.hapticFeedback()
                                         val updatedList = items.toMutableList()
                                             .also { it[index] = editingText[index] }
                                         onItemsChange(updatedList)
@@ -320,7 +320,7 @@ private fun ExpandableList(
                                     imageVector = Icons.Default.Remove,
                                     contentDescription = "Remove",
                                     modifier = Modifier.clickable {
-                                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                                        view.hapticFeedback()
                                         val newList =
                                             items.toMutableList().apply { removeAt(index) }
                                         onItemsChange(newList)
@@ -344,7 +344,7 @@ private fun ExpandableList(
                         .clip(RoundedCornerShape(10.dp))
                         .background(MaterialTheme.colorScheme.surfaceVariant)
                         .clickable {
-                            view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                            view.hapticFeedback()
                             val newItem = "$item ${items.size + 1}"
                             val updatedItems = items + newItem
                             onItemsChange(updatedItems)

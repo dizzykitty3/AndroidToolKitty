@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.home
 
 import android.content.Context
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -30,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.checkOnGoogleMaps
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.ClearInput
@@ -74,7 +74,7 @@ fun Maps() {
                 ),
                 trailingIcon = {
                     ClearInput(text = latitude) {
-                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                        view.hapticFeedback()
                         latitude = ""
                     }
                 },
@@ -105,7 +105,7 @@ fun Maps() {
                 ),
                 trailingIcon = {
                     ClearInput(text = longitude) {
-                        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                        view.hapticFeedback()
                         longitude = ""
                     }
                 },
@@ -114,7 +114,7 @@ fun Maps() {
 
         TextButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 focus.clearFocus()
                 view.context.onClickOpenGoogleMapsButton(latitude, longitude)
             }

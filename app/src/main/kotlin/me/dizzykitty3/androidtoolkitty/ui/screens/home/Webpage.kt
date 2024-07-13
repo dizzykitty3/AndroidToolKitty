@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.home
 
 import android.content.Context
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -35,6 +34,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.HTTPS
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.checkOnYouTube
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openSearch
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openURL
@@ -76,7 +76,7 @@ fun Webpage() {
 
         if (!keepShowMore && !mShowMore) {
             TextButton(onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mShowMore = !mShowMore
             }) {
                 Text(text = stringResource(id = R.string.show_more))
@@ -107,7 +107,7 @@ private fun Search() {
         ),
         trailingIcon = {
             ClearInput(text = searchQuery) {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 searchQuery = ""
             }
         },
@@ -119,7 +119,7 @@ private fun Search() {
     ) {
         TextButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 focus.clearFocus()
                 view.context.onClickSearchButton(searchQuery)
             }
@@ -134,7 +134,7 @@ private fun Search() {
         Text("|")
         TextButton(
             onClick = {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 focus.clearFocus()
                 view.context.onCheckOnYouTube(searchQuery)
             }
@@ -174,7 +174,7 @@ private fun WebpageURL() {
         ),
         trailingIcon = {
             ClearInput(text = url) {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 url = ""
             }
         },
@@ -200,7 +200,7 @@ private fun WebpageURL() {
     )
 
     TextButton(onClick = {
-        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+        view.hapticFeedback()
         focus.clearFocus()
         view.context.onClickVisitURLButton(url)
     }) {
@@ -248,7 +248,7 @@ private fun SocialMediaProfileIURL() {
         ),
         trailingIcon = {
             ClearInput(text = username) {
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 username = ""
             }
         },
@@ -270,7 +270,7 @@ private fun SocialMediaProfileIURL() {
     )
 
     TextButton({
-        view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+        view.hapticFeedback()
         focus.clearFocus()
         if (isValid(platform, username)) {
             view.context.onVisitProfileButton(username, platformIndex)

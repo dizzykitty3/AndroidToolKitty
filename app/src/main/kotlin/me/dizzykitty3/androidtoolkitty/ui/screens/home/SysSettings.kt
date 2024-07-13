@@ -29,7 +29,6 @@ import me.dizzykitty3.androidtoolkitty.data.SETTING_OVERLAY
 import me.dizzykitty3.androidtoolkitty.data.SETTING_USAGE_ACCESS
 import me.dizzykitty3.androidtoolkitty.data.SETTING_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.ui.components.Tip
@@ -42,16 +41,20 @@ fun SysSettings() {
     ) {
         val settingsSharedPref = remember { SettingsSharedPref }
 
+        // TODO API requirement
         val settings = listOf(
             Setting(SETTING_DISPLAY, R.string.open_display_settings),
-            Setting(SETTING_AUTO_ROTATE, R.string.open_auto_rotate_settings),
+            Setting(SETTING_AUTO_ROTATE, R.string.open_auto_rotate_settings), // android 12
             Setting(SETTING_BLUETOOTH, R.string.open_bluetooth_settings),
-            Setting(SETTING_DEFAULT_APPS, R.string.open_default_apps_settings),
-            Setting(SETTING_BATTERY_OPTIMIZATION, R.string.open_battery_optimization_settings),
+            Setting(SETTING_DEFAULT_APPS, R.string.open_default_apps_settings), // api 24
+            Setting(
+                SETTING_BATTERY_OPTIMIZATION,
+                R.string.open_battery_optimization_settings
+            ), // api 23
             Setting(SETTING_CAPTIONING, R.string.open_caption_preferences),
             Setting(SETTING_USAGE_ACCESS, R.string.open_usage_access_permission),
-            Setting(SETTING_OVERLAY, R.string.open_overlay_permission),
-            Setting(SETTING_WRITE_SETTINGS, R.string.open_write_permission),
+            Setting(SETTING_OVERLAY, R.string.open_overlay_permission), // api 23
+            Setting(SETTING_WRITE_SETTINGS, R.string.open_write_permission), // api 23
             Setting(SETTING_ACCESSIBILITY, R.string.open_accessibility_settings),
             Setting(SETTING_LOCALE, R.string.open_language_settings),
             Setting(SETTING_DATE, R.string.open_date_and_time_settings),
@@ -73,21 +76,15 @@ fun SysSettings() {
 
         Column(modifier = Modifier.horizontalScroll(rememberScrollState())) {
             Row {
-                if (isShowSetting[SETTING_DISPLAY] == true) {
-                    SystemSettingButton(
-                        settingType = SETTING_DISPLAY,
-                        text = R.string.open_display_settings
-                    )
-                }
-
-                if ((isShowSetting[SETTING_AUTO_ROTATE] == true) && OSVersion.a12()) {
-                    SystemSettingButton(
-                        settingType = SETTING_AUTO_ROTATE,
-                        text = R.string.open_auto_rotate_settings
-                    )
+                settings.subList(0, 2).forEach { setting ->
+                    if (isShowSetting[setting.settingType] == true) {
+                        SystemSettingButton(
+                            settingType = setting.settingType,
+                            text = setting.text
+                        )
+                    }
                 }
             }
-
             Row {
                 settings.subList(2, 4).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {

@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.settings
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
@@ -32,6 +31,7 @@ import me.dizzykitty3.androidtoolkitty.data.CARD_7
 import me.dizzykitty3.androidtoolkitty.data.CARD_8
 import me.dizzykitty3.androidtoolkitty.data.CARD_9
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
@@ -133,7 +133,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_1,
                 isChecked = mIsShowCard1
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard1 = newState
                 settingsSharedPref.saveCardShowedState(CARD_1, newState)
             }
@@ -142,7 +142,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_2,
                 isChecked = mIsShowCard2
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard2 = newState
                 settingsSharedPref.saveCardShowedState(CARD_2, newState)
             }
@@ -151,7 +151,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_3,
                 isChecked = mIsShowCard3
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard3 = newState
                 settingsSharedPref.saveCardShowedState(CARD_3, newState)
             }
@@ -160,7 +160,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_4,
                 isChecked = mIsShowCard4
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard4 = newState
                 settingsSharedPref.saveCardShowedState(CARD_4, newState)
             }
@@ -169,7 +169,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_5,
                 isChecked = mIsShowCard5
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard5 = newState
                 settingsSharedPref.saveCardShowedState(CARD_5, newState)
             }
@@ -178,7 +178,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_6,
                 isChecked = mIsShowCard6
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard6 = newState
                 settingsSharedPref.saveCardShowedState(CARD_6, newState)
             }
@@ -187,7 +187,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_7,
                 isChecked = mIsShowCard7
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard7 = newState
                 settingsSharedPref.saveCardShowedState(CARD_7, newState)
             }
@@ -196,7 +196,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_8,
                 isChecked = mIsShowCard8
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard8 = newState
                 settingsSharedPref.saveCardShowedState(CARD_8, newState)
             }
@@ -205,7 +205,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_9,
                 isChecked = mIsShowCard9
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard9 = newState
                 settingsSharedPref.saveCardShowedState(CARD_9, newState)
             }
@@ -214,7 +214,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_10,
                 isChecked = mIsShowCard10
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard10 = newState
                 settingsSharedPref.saveCardShowedState(CARD_10, newState)
             }
@@ -223,7 +223,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_11,
                 isChecked = mIsShowCard11
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard11 = newState
                 settingsSharedPref.saveCardShowedState(CARD_11, newState)
             }
@@ -232,7 +232,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 card = CARD_12,
                 isChecked = mIsShowCard12
             ) { newState ->
-                view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                view.hapticFeedback()
                 mIsShowCard12 = newState
                 settingsSharedPref.saveCardShowedState(CARD_12, newState)
             }
@@ -241,7 +241,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
 
             Button(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     onClickChangeAllCardsButton(false)
                     mIsShowCard1 = false
                     mIsShowCard2 = false
@@ -269,7 +269,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
 
             Button(
                 onClick = {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     onClickChangeAllCardsButton(true)
                     mIsShowCard1 = true
                     mIsShowCard2 = true
