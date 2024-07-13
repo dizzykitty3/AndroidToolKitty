@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import me.dizzykitty3.androidtoolkitty.data.utils.DateUtil
+import me.dizzykitty3.androidtoolkitty.domain.utils.DateUtil
 
 @Composable
 fun CustomAnimatedProgressIndicator() {

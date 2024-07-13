@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.components
 
-import android.view.HapticFeedbackConstants
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -28,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import androidx.compose.ui.window.PopupPositionProvider
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 
 @Composable
 fun CustomIconPopup(
@@ -44,7 +44,7 @@ fun CustomIconPopup(
             modifier = Modifier
                 .size(16.dp)
                 .clickable {
-                    view.performHapticFeedback(HapticFeedbackConstants.CONTEXT_CLICK)
+                    view.hapticFeedback()
                     showPopup = true
                 },
             tint = MaterialTheme.colorScheme.secondary

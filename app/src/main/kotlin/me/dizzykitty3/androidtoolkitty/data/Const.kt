@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.data
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 
 const val SETTINGS_SCREEN = "SettingsScreen"
@@ -41,6 +42,7 @@ const val SETTING_WIFI = "setting_wifi"
 const val SETTING_POWER_USAGE_SUMMARY = "setting_power_usage_summary"
 const val SETTING_ACCESSIBILITY = "setting_accessibility"
 
+@SuppressLint("InlinedApi")
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 const val BT = Manifest.permission.BLUETOOTH
 const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
@@ -75,3 +77,5 @@ const val TO = ".to"
 const val TV = ".tv"
 const val US = ".us"
 const val WIKI = ".wiki"
+
+const val SOURCE_CODE_URL = "https://github.com/dizzykitty3/AndroidToolKitty"

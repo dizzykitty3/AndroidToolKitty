@@ -2,10 +2,10 @@ plugins {
     alias(libs.plugins.about.libraries)
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
-//    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
-//    alias(libs.plugins.ksp)
+    alias(libs.plugins.ksp)
 //    alias(libs.plugins.room)
 }
 
@@ -20,7 +20,7 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
         targetSdk = compileSdk
-        versionCode = 920
+        versionCode = 935
         versionName = "1.0.${versionCode}"
 
         resValue("string", "app_name", "ToolKitty")
@@ -82,9 +82,9 @@ android {
 }
 
 dependencies {
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    androidTestImplementation(libs.androidx.work.testing)
+//    androidTestImplementation(platform(libs.androidx.compose.bom))
+//    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
+//    androidTestImplementation(libs.androidx.work.testing)
 
     coreLibraryDesugaring(libs.android.desugar.jdk.libs)
 
@@ -101,25 +101,22 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.runtime.livedata)
-    implementation(libs.androidx.compose.ui.tooling.preview)
+//    implementation(libs.androidx.compose.runtime.livedata)
+//    implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
-//    implementation(libs.androidx.datastore.preferences)
+//    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.hilt.navigation.compose)
 //    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
 //    implementation(libs.androidx.room.ktx)
 //    implementation(libs.androidx.room.runtime)
 //    implementation(libs.androidx.work.runtime.ktx)
-//    implementation(libs.google.hilt.android)
+    implementation(libs.google.hilt.android)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization)
-    implementation(libs.ktor.client.cio)
-    implementation(libs.ktor.client.content.negotiation)
-    implementation(libs.ktor.client.core)
-    implementation(libs.ktor.client.logging)
-    implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.timber)
 
-//    ksp(libs.google.hilt.compiler)
+    ksp(libs.google.hilt.compiler)
 //    ksp(libs.androidx.room.compiler)
 }

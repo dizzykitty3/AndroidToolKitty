@@ -3,17 +3,14 @@
     <string name="label_optional">Label (optional)</string>
     <string name="edit">Edit</string>
     <string name="visit">Visit</string>
-    <string name="common">Common</string>
     <string name="debugging">Debugging</string>
     <string name="show_more">show more</string>
     <string name="unknown">Unknown</string>
-    <string name="warning">Warning</string>
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>
     <string name="go_to_settings">Go to settings</string>
     <string name="success_and_back">Success! Now you can back to the previous screen</string>
-    <string name="wip" translatable="false">-- WORK IN PROGRESS --</string>
-    <string name="permission">Permission</string>
+    <string name="wip">-- WORK IN PROGRESS --</string>
     <string name="undo">Undo</string>
     <string name="turn_off">Turn off</string>
     <string name="copy">Copy</string>
@@ -22,7 +19,6 @@
     <string name="refresh">Refresh</string>
     <string name="settings">Settings</string>
     <string name="error">error</string>
-    <string name="accept">Accept</string>
     <string name="result">result =</string>
 
     <!-- Home > Top bar -->
@@ -32,6 +28,7 @@
     <string name="offline">Offline</string>
     <string name="no_translation" translatable="false">Sorry, %1$s translation haven\'t added yet.</string>
     <string name="connected">Connected</string>
+    <string name="debug_build_top_tip">This is a debug build. Expect some bugs and worse performance.</string>
 
     <!-- Home > Year progress -->
     <string name="year_progress">Year progress</string>
@@ -116,6 +113,8 @@
     <string name="profcard" translatable="false">プロフカード</string>
     <string name="note" translatable="false">note</string>
     <string name="unifans">Unifans</string>
+    <string name="ko_fi" translatable="false">Ko-fi</string>
+    <string name="invalid_username_input_tip">username for %1$s should only contains letters, numbers, and underscores</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>
@@ -158,13 +157,13 @@
     <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
 
     <!-- Home > Codes of Characters -->
-    <string name="unicode">Unicode</string>
+    <string name="unicode" translatable="false">Unicode</string>
     <string name="unicode_input_hint">Last 4 digits of each, e.g.</string>
     <string name="character">Character</string>
     <string name="copied">copied</string>
     <string name="convert">Convert</string>
     <string name="codes_of_characters">Codes of Characters</string>
-    <string name="ascii">ASCII</string>
+    <string name="ascii" translatable="false">ASCII</string>
     <string name="convert_to_ascii_values">Convert to ASCII values</string>
 
     <!-- Home > Check app on market -->
@@ -266,14 +265,11 @@
     <string name="material_you_dynamic_color">Material You dynamic color</string>
     <string name="appearance">Appearance</string>
     <string name="keep_showing_full_webpage_card">Keep showing full Webpage card</string>
-    <string name="show_system_volume_ui">Show system volume UI after changing volume</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
     <string name="general">General</string>
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
-
-    <!-- Settings > Customize -->
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
     <string name="customize_my_home_page">Customize my home page</string>
@@ -281,60 +277,25 @@
     <string name="show_all_options">Show all options</string>
     <string name="hide_all_options">Hide all options</string>
 
-    <!-- Settings > Online features -->
-    <string name="user_sync">Preferences sync</string>
-    <string name="upload_settings">Upload preferences</string>
-    <string name="download_settings">Download preferences</string>
-    <string name="login">Login</string>
-    <string name="register">Sign up</string>
-    <string name="password">Password</string>
-    <string name="email">Email</string>
-    <string name="user_profile">My account</string>
-    <string name="success">success</string>
-    <string name="error_account_locked">Account is temporarily frozen.</string>
-    <string name="error_invalid_credentials">Invalid username or password.</string>
-    <string name="error_username_taken">Username already taken.</string>
-    <string name="error_settings_not_found">You haven\'t uploaded preferences yet.</string>
-    <string name="error_unknown">Unknown error occurred.</string>
-    <string name="error_login_expired">Login expired. Re-login then try again.</string>
-    <string name="error_invalid_username">Username can only contain letters, numbers, and underscores.</string>
-    <string name="error_invalid_email">Please enter a valid email address.</string>
-    <string name="error_invalid_password">Password must be at least 6 characters.</string>
-    <string name="rule_update">Rules update</string>
-    <string name="error_rule_update">Update rules failed</string>
-    <string name="social_media_platforms_list">Social media platforms list</string>
-    <string name="webpage_suffixes">Webpage suffixes</string>
-    <string name="online_features">Online features</string>
-    <string name="service_provider_privacy_disclaimer">Service provider privacy disclaimer</string>
-    <string name="service_provider_privacy_disclaimer_content">These features are developed and maintained by yanqishui.work</string>
-    <string name="keep_using_offline">Keep using ToolKitty offline</string>
-
     <!-- Settings > About -->
-    <string name="about">About</string>
     <string name="source_code">Source code</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
-    <string name="version">Version</string>
-    <string name="developer_profile_link">Developer profile link</string>
-    <string name="contributors">Contributors</string>
     <string name="licenses">Licenses</string>
-    <string name="inspired_by">Inspired by</string>
-    <string name="auto_generated_by_about_libraries" translatable="false">Auto-generated by AboutLibraries</string>
 
     <!-- Settings > Debugging -->
-    <string name="erase_all_app_data">Erase all app data</string>
-    <string name="erase_all_data">Erase all data</string>
-    <string name="warning_erase_all_data_1">This action will erase all your data, including</string>
-    <string name="warning_erase_all_data_2">histories and settings.</string>
-    <string name="warning_erase_all_data_3">Are you sure you want to proceed?</string>
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
     <string name="restart_app">Restart app</string>
     <string name="dev_mode">dev mode</string>
-    <string name="show_online_features">Show online features</string>
-    <string name="disable_online_features">Disable online features</string>
     <string name="auto_set_volume">Set volume automatically</string>
     <string name="qr_code_generator">QR Code generator</string>
     <string name="dev_mode_message" translatable="false">dev mode message:</string>
     <string name="distance">distance</string>
+    <string name="new_animation">new transition animation</string>
+    <string name="device" translatable="false">device</string>
+    <string name="os_version" translatable="false">os_ver</string>
+    <string name="locale" translatable="false">locale</string>
+    <string name="app_version" translatable="false">app_ver</string>
+    <string name="open_app_detail_settings">Open app detail settings</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>

@@ -23,6 +23,9 @@ fun SpacerPadding() {
     Res(padding = R.dimen.padding_spacer)
 }
 
+/**
+ * Note: Not for buttons.
+ */
 @Composable
 fun IconAndTextPadding() {
     Res(padding = R.dimen.padding_icons_and_text)
@@ -31,11 +34,6 @@ fun IconAndTextPadding() {
 @Composable
 fun OneHandedModePadding() {
     Res(padding = R.dimen.padding_one_handed_mode)
-}
-
-@Composable
-fun TopPadding() {
-    Res(padding = R.dimen.padding_top)
 }
 
 @Composable

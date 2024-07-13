@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.BugReport
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -80,15 +81,6 @@ fun GradientSmall(textToDisplay: String, colors: List<Color>) {
 }
 
 @Composable
-fun AnnotatedString.Builder.Bold(@StringRes id: Int) {
-    val boldTextStyle = SpanStyle(
-        fontStyle = FontStyle.Normal,
-        fontWeight = FontWeight.Bold
-    )
-    withStyle(boldTextStyle) { append(stringResource(id = id)) }
-}
-
-@Composable
 fun AnnotatedString.Builder.Italic(text: String) {
     val italicTextStyle = SpanStyle(
         fontStyle = FontStyle.Italic,
@@ -124,10 +116,7 @@ fun Tip(message: String) {
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
-        if (devMode
-            && message != stringResource(R.string.wip)
-            && message != stringResource(R.string.auto_generated_by_about_libraries)
-        ) {
+        if (devMode && message != stringResource(R.string.wip)) {
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -159,6 +148,36 @@ fun Tip(message: String) {
         }
     }
     CardSpacePadding()
+}
+
+@Composable
+fun DevBuildTip() {
+    Card(
+        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_tip)),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+        )
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(dimensionResource(id = R.dimen.padding_tip))
+                .fillMaxWidth()
+        ) {
+            Icon(
+                Icons.Outlined.BugReport,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
+            )
+            IconAndTextPadding()
+            Text(
+                text = stringResource(R.string.debug_build_top_tip),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+    }
+    SpacerPadding()
 }
 
 @Composable
