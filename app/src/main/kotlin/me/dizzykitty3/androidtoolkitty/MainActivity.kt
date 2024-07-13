@@ -19,7 +19,6 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.AudioUtil.autoSetMediaVolume
 import me.dizzykitty3.androidtoolkitty.domain.utils.BluetoothUtil.isHeadsetConnected
 import me.dizzykitty3.androidtoolkitty.domain.utils.ClipboardUtil
-import me.dizzykitty3.androidtoolkitty.domain.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.ui.AppNavHost
 import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
@@ -71,7 +70,7 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Clipboard cleared automatically")
                 }
             }
-            if (SettingsSharedPref.enabledAutoSetMediaVolume && DateUtil.isNotWeekend) {
+            if (SettingsSharedPref.enabledAutoSetMediaVolume) {
                 if (this@MainActivity.isHeadsetConnected()) {
                     Timber.i("Set media volume automatically: cancelled: BT headset connected")
                 } else {
