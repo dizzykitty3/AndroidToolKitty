@@ -20,7 +20,7 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
         targetSdk = compileSdk
-        versionCode = 938
+        versionCode = 939
         versionName = "1.0.${versionCode}"
 
         resValue("string", "app_name", "ToolKitty")
