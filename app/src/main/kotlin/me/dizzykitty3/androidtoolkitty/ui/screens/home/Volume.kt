@@ -12,6 +12,7 @@ import androidx.compose.material.icons.automirrored.outlined.VolumeUp
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -34,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.AudioUtil
@@ -262,7 +264,8 @@ fun Volume() {
                                     view.setVolume(mCustomVolume * 0.01 * maxVolume)
                                     showVolumeDialog = false
                                 }
-                            }
+                            },
+                            elevation = ButtonDefaults.buttonElevation(1.dp)
                         ) {
                             Text(text = stringResource(id = android.R.string.ok))
                         }

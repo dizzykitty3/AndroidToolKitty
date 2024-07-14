@@ -290,7 +290,7 @@
     <string name="qr_code_generator">QR Code generator</string>
     <string name="dev_mode_message" translatable="false">dev mode message:</string>
     <string name="distance">distance</string>
-    <string name="new_animation">new transition animation</string>
+    <string name="fade_animation">Fade animation</string>
     <string name="device" translatable="false">device</string>
     <string name="os_version" translatable="false">os_ver</string>
     <string name="locale" translatable="false">locale</string>

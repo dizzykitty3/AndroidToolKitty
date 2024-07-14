@@ -13,5 +13,5 @@ data class Settings(
     var encryptBackup: Boolean = false,
     var cornerRadius: Int = 32,
     //
-    var enableNewAnimation: Boolean = false
+    var fadeAnimation: Boolean = false
 )

@@ -16,6 +16,7 @@ import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
@@ -30,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.google.android.gms.location.LocationServices
 import me.dizzykitty3.androidtoolkitty.BuildConfig
@@ -61,7 +63,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
     val settingsSharedPref = remember { SettingsSharedPref }
     var devMode by remember { mutableStateOf(settingsSharedPref.devMode) }
     var showLocationDialog by remember { mutableStateOf(false) }
-    var newAnimation by remember { mutableStateOf(settingsViewModel.settings.value.enableNewAnimation) }
+    var fadeAnimation by remember { mutableStateOf(settingsViewModel.settings.value.fadeAnimation) }
 
     Screen {
         Card(title = R.string.debugging, icon = Icons.Outlined.Terminal) {
@@ -99,10 +101,10 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                 settingsSharedPref.devMode = it
             }
 
-            CustomSwitchRow(text = R.string.new_animation, checked = newAnimation) {
+            CustomSwitchRow(text = R.string.fade_animation, checked = fadeAnimation) {
                 view.hapticFeedback()
-                newAnimation = it
-                settingsViewModel.update(settingsViewModel.settings.value.copy(enableNewAnimation = it))
+                fadeAnimation = it
+                settingsViewModel.update(settingsViewModel.settings.value.copy(fadeAnimation = it))
             }
 
             GroupDivider()
@@ -175,28 +177,32 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                     },
                     confirmButton = {
                         Row {
-                            Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
-                                view.hapticFeedback()
-                                showLocationDialog = false
-                                if (view.context.noBluetoothPermission()) {
-                                    navController.navigate(PERMISSION_REQUEST_SCREEN)
-                                    return@Button
-                                }
-                                saveLocationToStorage(mLatitude, mLongitude)
-                                SettingsSharedPref.autoSetMediaVolume = 40
-                            }) { Text("40%") }
+                            Button(
+                                enabled = (mLoadingComplete && (mLocation != null)), onClick = {
+                                    view.hapticFeedback()
+                                    showLocationDialog = false
+                                    if (view.context.noBluetoothPermission()) {
+                                        navController.navigate(PERMISSION_REQUEST_SCREEN)
+                                        return@Button
+                                    }
+                                    saveLocationToStorage(mLatitude, mLongitude)
+                                    SettingsSharedPref.autoSetMediaVolume = 40
+                                }, elevation = ButtonDefaults.buttonElevation(1.dp)
+                            ) { Text("40%") }
                         }
                         Row {
-                            Button(enabled = (mLoadingComplete && (mLocation != null)), onClick = {
-                                view.hapticFeedback()
-                                showLocationDialog = false
-                                if (view.context.noBluetoothPermission()) {
-                                    navController.navigate(PERMISSION_REQUEST_SCREEN)
-                                    return@Button
-                                }
-                                saveLocationToStorage(mLatitude, mLongitude)
-                                SettingsSharedPref.autoSetMediaVolume = 60
-                            }) { Text("60%") }
+                            Button(
+                                enabled = (mLoadingComplete && (mLocation != null)), onClick = {
+                                    view.hapticFeedback()
+                                    showLocationDialog = false
+                                    if (view.context.noBluetoothPermission()) {
+                                        navController.navigate(PERMISSION_REQUEST_SCREEN)
+                                        return@Button
+                                    }
+                                    saveLocationToStorage(mLatitude, mLongitude)
+                                    SettingsSharedPref.autoSetMediaVolume = 60
+                                }, elevation = ButtonDefaults.buttonElevation(1.dp)
+                            ) { Text("60%") }
                         }
                     },
                     dismissButton = {

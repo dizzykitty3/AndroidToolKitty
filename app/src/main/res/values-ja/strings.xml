@@ -153,6 +153,6 @@
     <string name="codes_of_characters">Codes of Characters</string>
     <string name="unifans">Unifans</string>
     <string name="debug_build_top_tip">This is a debug build. Expect some bugs and worse performance.</string>
-    <string name="new_animation">new transition animation</string>
+    <string name="fade_animation">Fade animation</string>
     <string name="invalid_username_input_tip">username for %1$s should only contains letters, numbers, and underscores</string>
 </resources>

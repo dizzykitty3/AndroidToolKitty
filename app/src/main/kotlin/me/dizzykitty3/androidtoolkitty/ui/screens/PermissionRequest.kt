@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.ui.screens
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -13,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openAppDetailSettings
@@ -50,7 +52,8 @@ fun PermissionRequest(settingsViewModel: SettingsViewModel) {
                         return@Button
                     }
                     view.showSnackbar(R.string.success_and_back)
-                }
+                },
+                elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {
                 Text(text = stringResource(id = R.string.request_permission))
             }
@@ -68,7 +71,8 @@ fun PermissionRequest(settingsViewModel: SettingsViewModel) {
                         return@Button
                     }
                     view.showSnackbar(R.string.success_and_back)
-                }
+                },
+                elevation = ButtonDefaults.buttonElevation(1.dp)
             ) { Text(stringResource(R.string.request_permission)) }
 
             if (clickCount >= 2 || clickCount2 >= 2) {

@@ -1,7 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui
 
-import androidx.compose.animation.core.EaseIn
-import androidx.compose.animation.core.EaseOut
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -33,51 +31,49 @@ import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 @Composable
 fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
     val navController = rememberNavController()
-    val newAnimation = settingsViewModel.settings.value.enableNewAnimation
+    val fadeAnimation = settingsViewModel.settings.value.fadeAnimation
 
     NavHost(
         modifier = modifier,
         navController = navController,
         startDestination = HOME_SCREEN,
         enterTransition = {
-            if (newAnimation)
+            if (fadeAnimation)
                 fadeIn(animationSpec = tween(DEFAULT_FADE_DURATION)) +
                         scaleIn(
                             initialScale = DEFAULT_INITIAL_SCALE,
                             animationSpec = tween(DEFAULT_SCALE_DURATION)
                         )
             else slideInHorizontally(
-                animationSpec = tween(300, easing = EaseIn), initialOffsetX = { it },
+                initialOffsetX = { fullWidth -> fullWidth },
+                animationSpec = tween(DEFAULT_SLIDE_DURATION)
             )
         },
         popExitTransition = {
-            if (newAnimation)
+            if (fadeAnimation)
                 fadeOut(animationSpec = tween(DEFAULT_FADE_DURATION)) +
                         scaleOut(
                             targetScale = DEFAULT_INITIAL_SCALE,
                             animationSpec = tween(DEFAULT_SCALE_DURATION)
                         )
             else slideOutHorizontally(
-                animationSpec = tween(300, easing = EaseOut), targetOffsetX = { it },
+                targetOffsetX = { fullWidth -> fullWidth },
+                animationSpec = tween(DEFAULT_SLIDE_DURATION)
             )
         },
         popEnterTransition = {
-            if (newAnimation)
-                fadeIn(animationSpec = tween(DEFAULT_FADE_DURATION)) +
-                        scaleIn(
-                            initialScale = DEFAULT_INITIAL_SCALE,
-                            animationSpec = tween(DEFAULT_SCALE_DURATION)
-                        )
-            else fadeIn(animationSpec = tween(300, easing = EaseIn))
+            fadeIn(animationSpec = tween(DEFAULT_FADE_DURATION)) +
+                    scaleIn(
+                        initialScale = DEFAULT_INITIAL_SCALE,
+                        animationSpec = tween(DEFAULT_SCALE_DURATION)
+                    )
         },
         exitTransition = {
-            if (newAnimation)
-                fadeOut(animationSpec = tween(DEFAULT_FADE_DURATION)) +
-                        scaleOut(
-                            targetScale = DEFAULT_INITIAL_SCALE,
-                            animationSpec = tween(DEFAULT_SCALE_DURATION)
-                        )
-            else fadeOut(animationSpec = tween(300, easing = EaseOut))
+            fadeOut(animationSpec = tween(DEFAULT_FADE_DURATION)) +
+                    scaleOut(
+                        targetScale = DEFAULT_INITIAL_SCALE,
+                        animationSpec = tween(DEFAULT_SCALE_DURATION)
+                    )
         }) {
         composable(HOME_SCREEN) { Home(settingsViewModel, navController) }
         composable(SETTINGS_SCREEN) { Settings(settingsViewModel, navController) }
@@ -91,4 +87,5 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
 
 private const val DEFAULT_FADE_DURATION = 300
 private const val DEFAULT_SCALE_DURATION = 400
+private const val DEFAULT_SLIDE_DURATION = 400
 private const val DEFAULT_INITIAL_SCALE = 0.9f
