@@ -1,11 +1,14 @@
 package me.dizzykitty3.androidtoolkitty.ui.components
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BugReport
@@ -98,9 +101,7 @@ fun AnnotatedString.Builder.PrimaryColor(@StringRes id: Int) {
 }
 
 @Composable
-fun Tip(@StringRes message: Int) {
-    Tip(message = stringResource(id = message))
-}
+fun Tip(@StringRes message: Int) = Tip(stringResource(message))
 
 @Composable
 fun WIPTip() = Tip(R.string.wip)
@@ -110,7 +111,7 @@ fun Tip(message: String) {
     val devMode = SettingsSharedPref.devMode
 
     Card(
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_tip)),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.tertiaryContainer,
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
@@ -118,7 +119,7 @@ fun Tip(message: String) {
     ) {
         if (devMode && message != stringResource(R.string.wip)) {
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -131,12 +132,12 @@ fun Tip(message: String) {
 
         Row(
             modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_tip))
+                .padding(dimensionResource(R.dimen.padding_tip))
                 .fillMaxWidth()
         ) {
             Icon(
                 Icons.Outlined.Info,
-                contentDescription = stringResource(id = R.string.info),
+                contentDescription = stringResource(R.string.info),
                 modifier = Modifier.size(24.dp)
             )
             IconAndTextPadding()
@@ -153,7 +154,7 @@ fun Tip(message: String) {
 @Composable
 fun DevBuildTip() {
     Card(
-        shape = RoundedCornerShape(dimensionResource(id = R.dimen.padding_tip)),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.secondaryContainer,
             contentColor = MaterialTheme.colorScheme.onSecondaryContainer
@@ -161,7 +162,7 @@ fun DevBuildTip() {
     ) {
         Row(
             modifier = Modifier
-                .padding(dimensionResource(id = R.dimen.padding_tip))
+                .padding(dimensionResource(R.dimen.padding_tip))
                 .fillMaxWidth()
         ) {
             Icon(
@@ -181,9 +182,7 @@ fun DevBuildTip() {
 }
 
 @Composable
-fun GroupTitle(@StringRes title: Int) {
-    GroupTitle(stringResource(title))
-}
+fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))
 
 @Composable
 fun GroupTitle(title: String) {
@@ -193,3 +192,11 @@ fun GroupTitle(title: String) {
     )
     SpacerPadding()
 }
+
+@Composable
+fun ScrollableText(text: String) =
+    Box(Modifier.horizontalScroll(rememberScrollState())) { Text(text) }
+
+
+@Composable
+fun ScrollableText(@StringRes text: Int) = ScrollableText(stringResource(text))

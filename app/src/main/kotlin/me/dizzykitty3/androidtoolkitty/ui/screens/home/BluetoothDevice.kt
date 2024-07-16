@@ -47,10 +47,7 @@ import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 @SuppressLint("MissingPermission")
 @Composable
 fun BluetoothDevice(navController: NavHostController) {
-    Card(
-        icon = Icons.Outlined.Bluetooth,
-        title = R.string.bluetooth_devices
-    ) {
+    Card(R.string.bluetooth_devices, Icons.Outlined.Bluetooth) {
         val view = LocalView.current
         var showResult by remember { mutableStateOf(false) }
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }

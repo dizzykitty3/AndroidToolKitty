@@ -33,6 +33,7 @@ object AudioUtil {
     private fun View.setVolumeByPercentage(percentage: Int) {
         val indexedVolume = (maxVolumeIndex * 0.01 * percentage).toInt()
         Timber.d("current = $volume, target = $indexedVolume")
+
         if (percentage in 0..100 && (volume != indexedVolume)) {
             setVolume(indexedVolume, true)
             Timber.d("setVolumeAutomatically true")
@@ -45,18 +46,18 @@ object AudioUtil {
     fun View.autoSetMediaVolume(percentage: Int) {
         if (percentage !in 0..100) return
         if (this.context.noLocationPermission()) return
+
         var distance: Float
         val currentLocation = LocationServices.getFusedLocationProviderClient(appContext)
+
         currentLocation.lastLocation.addOnSuccessListener { location: Location? ->
             if (location != null) {
                 distance = LocationUtil.getDistance(location.latitude, location.longitude)
-                val notAtHome = isNotAtHome(distance)
+                val notAtHome = distance.isNotAtHome()
                 if (notAtHome) Timber.d("distance > 50 meters")
                 if (SettingsSharedPref.devMode) this.showSnackbar(
                     "${this.context.getString(R.string.dev_mode_message)} ${
-                        this.context.getString(
-                            R.string.distance
-                        )
+                        this.context.getString(R.string.distance)
                     } = $distance"
                 )
                 this.setVolumeByPercentage(if (notAtHome) 0 else if (LocalTime.now().hour !in 6..22) 20 else percentage)
@@ -64,5 +65,5 @@ object AudioUtil {
         }
     }
 
-    private fun isNotAtHome(distance: Float): Boolean = distance >= 50f
+    private fun Float.isNotAtHome(): Boolean = this >= 50f
 }

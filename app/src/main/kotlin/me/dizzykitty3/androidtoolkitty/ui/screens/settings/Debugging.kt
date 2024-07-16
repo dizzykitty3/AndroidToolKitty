@@ -4,12 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import android.os.Build
-import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.SettingsApplications
@@ -52,6 +49,7 @@ import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.components.Screen
+import me.dizzykitty3.androidtoolkitty.ui.components.ScrollableText
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.components.WIPTip
 import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
@@ -70,17 +68,17 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
         Card(title = R.string.debugging, icon = Icons.Outlined.Terminal) {
             Row(Modifier.fillMaxWidth()) {
                 Column(Modifier.weight(0.4f)) {
-                    HorizontalScrollableText(stringResource(R.string.manufacturer))
-                    HorizontalScrollableText(stringResource(R.string.device))
-                    HorizontalScrollableText(stringResource(R.string.os_version))
-                    HorizontalScrollableText(stringResource(R.string.locale))
-                    HorizontalScrollableText(stringResource(R.string.app_version))
+                    ScrollableText(stringResource(R.string.manufacturer))
+                    ScrollableText(stringResource(R.string.device))
+                    ScrollableText(stringResource(R.string.os_version))
+                    ScrollableText(stringResource(R.string.locale))
+                    ScrollableText(stringResource(R.string.app_version))
                 }
                 Column(Modifier.weight(0.6f)) {
-                    HorizontalScrollableText(Build.MANUFACTURER)
-                    HorizontalScrollableText("${Build.MODEL} (${Build.DEVICE})")
-                    HorizontalScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
-                    HorizontalScrollableText(StringUtil.sysLocale)
+                    ScrollableText(Build.MANUFACTURER)
+                    ScrollableText("${Build.MODEL} (${Build.DEVICE})")
+                    ScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
+                    ScrollableText(StringUtil.sysLocale)
                     Row {
                         Text("1.0.${view.context.versionCode()}")
                         if (BuildConfig.DEBUG) Text(".dev")
@@ -102,7 +100,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                 settingsViewModel.update(settingsViewModel.settings.value.copy(fadeAnimation = it))
             }
 
-            OutlinedButton(onClick = {
+            OutlinedButton({
                 view.hapticFeedback()
                 if (view.context.noLocationPermission()) {
                     navController.navigate(PERMISSION_REQUEST_SCREEN)
@@ -207,7 +205,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                     })
             }
 
-            OutlinedButton(onClick = {
+            OutlinedButton({
                 view.hapticFeedback()
                 navController.navigate(PERMISSION_REQUEST_SCREEN)
             }) {
@@ -215,7 +213,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             }
 
             OutlinedButton(
-                onClick = {
+                {
                     view.hapticFeedback()
                     navController.navigate(QR_CODE_GENERATOR_SCREEN)
                 }
@@ -224,7 +222,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             }
         }
 
-        TextButton(onClick = {
+        TextButton({
             view.hapticFeedback()
             view.context.openAppDetailSettings()
         }) {
@@ -233,10 +231,10 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                 contentDescription = null
             )
             SpacerPadding()
-            Text(text = stringResource(id = R.string.open_app_detail_settings))
+            Text(stringResource(R.string.open_app_detail_settings))
         }
 
-        TextButton(onClick = {
+        TextButton({
             view.hapticFeedback()
             view.context.restartApp()
         }) {
@@ -245,15 +243,8 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                 contentDescription = null
             )
             SpacerPadding()
-            Text(text = stringResource(id = R.string.restart_app))
+            Text(stringResource(R.string.restart_app))
         }
-    }
-}
-
-@Composable
-private fun HorizontalScrollableText(text: String) {
-    Box(Modifier.horizontalScroll(rememberScrollState())) {
-        Text(text)
     }
 }
 

@@ -39,7 +39,6 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.checkOnYouTube
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openSearch
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil.dropSpaces
-import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil.dropSpacesAndLowercase
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil.isInvalidUsername
 import me.dizzykitty3.androidtoolkitty.domain.utils.URLUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.URLUtil.getSuffix
@@ -301,7 +300,7 @@ private fun Context.onCheckOnYouTube(query: String) {
 private fun Context.onClickVisitURLButton(url: String) {
     if (url.isBlank()) return
     Timber.d("onClickVisitButton")
-    this.openURL(url.dropSpacesAndLowercase().toFullURL())
+    this.openURL(url.dropSpaces().lowercase().toFullURL())
 }
 
 private fun Context.onVisitProfileButton(
@@ -324,16 +323,16 @@ private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): 
             if (username.contains("."))
                 "${platform.prefix}$username" // user custom
             else if (username.isNotBlank())
-                "${platform.prefix}${username.dropSpacesAndLowercase()}.bsky.social" // default
+                "${platform.prefix}${username.dropSpaces().lowercase()}.bsky.social" // default
             else
                 platform.prefix // for app UI display
 
         URLUtil.Platform.FANBOX,
         URLUtil.Platform.BOOTH,
         URLUtil.Platform.TUMBLR,
-        URLUtil.Platform.CARRD -> "${username.dropSpacesAndLowercase()}${platform.prefix}"
+        URLUtil.Platform.CARRD -> "${username.dropSpaces().lowercase()}${platform.prefix}"
 
-        else -> "${platform.prefix}${username.dropSpacesAndLowercase()}"
+        else -> "${platform.prefix}${username.dropSpaces().lowercase()}"
     }
 
 private fun isInvalid(platform: URLUtil.Platform, username: String): Boolean =

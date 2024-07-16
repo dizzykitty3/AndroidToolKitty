@@ -24,17 +24,15 @@ fun SystemSettingButton(
 ) {
     val view = LocalView.current
 
-    TextButton(
-        onClick = {
-            view.hapticFeedback()
-            view.context.openSystemSettings(settingType)
-        }
-    ) {
-        Text(text = stringResource(id = text))
+    TextButton({
+        view.hapticFeedback()
+        view.context.openSystemSettings(settingType)
+    }) {
+        Text(stringResource(text))
 
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = stringResource(id = text),
+            contentDescription = stringResource(text),
             modifier = Modifier.align(Alignment.CenterVertically)
         )
     }
@@ -49,7 +47,7 @@ fun ClearInput(
     onClick: () -> Unit
 ) {
     if (text.isNotEmpty()) {
-        IconButton(onClick = onClick) {
+        IconButton(onClick) {
             Icon(
                 imageVector = Icons.Outlined.Clear,
                 contentDescription = stringResource(R.string.clear_input),

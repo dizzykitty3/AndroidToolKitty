@@ -10,7 +10,7 @@ import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun Screen(content: @Composable () -> Unit) {
-    val screenPadding = dimensionResource(id = R.dimen.padding_screen)
+    val screenPadding = dimensionResource(R.dimen.padding_screen)
 
     LazyColumn(
         modifier = Modifier

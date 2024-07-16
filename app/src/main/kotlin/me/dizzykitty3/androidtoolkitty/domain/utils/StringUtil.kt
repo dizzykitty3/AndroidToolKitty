@@ -17,11 +17,6 @@ object StringUtil {
      */
     fun String.dropSpaces(): String = this.replace("\\s".toRegex(), "")
 
-    /**
-     * Drop spaces, including full-width ones. Then lowercase.
-     */
-    fun String.dropSpacesAndLowercase(): String = this.dropSpaces().lowercase()
-
     @Throws(IllegalArgumentException::class)
     fun unicodeToCharacter(unicode: String): String {
         val length = unicode.length

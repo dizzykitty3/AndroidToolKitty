@@ -1,7 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.domain.utils
 
-import androidx.annotation.CheckResult
-import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -20,7 +18,4 @@ object DateUtil {
 
     fun yearProgressPercentage(progress: Float): String =
         (progress * 100).toString().substring(0, 4)
-
-    val isNotWeekend: Boolean
-        @CheckResult get() = LocalDate.now().dayOfWeek != DayOfWeek.SATURDAY && LocalDate.now().dayOfWeek != DayOfWeek.SUNDAY
 }

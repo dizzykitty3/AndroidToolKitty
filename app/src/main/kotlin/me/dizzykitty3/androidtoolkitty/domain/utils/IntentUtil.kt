@@ -34,7 +34,7 @@ import me.dizzykitty3.androidtoolkitty.data.SETTING_POWER_USAGE_SUMMARY
 import me.dizzykitty3.androidtoolkitty.data.SETTING_USAGE_ACCESS
 import me.dizzykitty3.androidtoolkitty.data.SETTING_WIFI
 import me.dizzykitty3.androidtoolkitty.data.SETTING_WRITE_SETTINGS
-import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil.dropSpacesAndLowercase
+import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.domain.utils.ToastUtil.showToast
 import timber.log.Timber
 
@@ -48,7 +48,7 @@ object IntentUtil {
             return
         } catch (e: ActivityNotFoundException) {
             Timber.e(e)
-            this.showToast(e.message ?: "Unsupported")
+            e.message?.let { this.showToast(it) }
         }
 
         when (intent.`package`) {
@@ -76,8 +76,10 @@ object IntentUtil {
     fun Context.checkOnYouTube(query: String) {
         if (query.isBlank()) return
         Timber.d("checkOnYouTube")
-        val intent =
-            Intent(Intent.ACTION_VIEW, Uri.parse("https://youtube.com/results?search_query=$query"))
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("https://youtube.com/results?search_query=$query")
+        )
         this.launch(intent)
     }
 
@@ -86,7 +88,7 @@ object IntentUtil {
             if (packageName.isBlank()) {
                 return
             } else if (packageName.contains(".")) {
-                "market://details?id=${packageName.dropSpacesAndLowercase()}"
+                "market://details?id=${packageName.dropSpaces().lowercase()}"
             } else {
                 "market://search?q=${packageName.trim()}"
             }

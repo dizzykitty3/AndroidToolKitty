@@ -25,7 +25,7 @@ fun CustomAnimatedProgressIndicator() {
         )
     }
 
-    Column(modifier = Modifier.fillMaxWidth()) {
+    Column(Modifier.fillMaxWidth()) {
         SpacerPadding()
         LinearProgressIndicator(
             progress = { progress.value },
