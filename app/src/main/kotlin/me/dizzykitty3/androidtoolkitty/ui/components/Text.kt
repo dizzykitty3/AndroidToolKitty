@@ -147,7 +147,7 @@ fun Tip(message: String) {
             )
         }
     }
-    CardSpacePadding()
+    SpacerPadding()
 }
 
 @Composable

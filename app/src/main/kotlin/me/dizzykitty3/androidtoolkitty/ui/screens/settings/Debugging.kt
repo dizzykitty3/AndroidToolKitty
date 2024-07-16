@@ -102,8 +102,6 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                 settingsViewModel.update(settingsViewModel.settings.value.copy(fadeAnimation = it))
             }
 
-            GroupDivider()
-
             OutlinedButton(onClick = {
                 view.hapticFeedback()
                 if (view.context.noLocationPermission()) {

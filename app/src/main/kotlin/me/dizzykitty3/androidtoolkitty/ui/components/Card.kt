@@ -25,7 +25,7 @@ fun Card(
 ) {
     Card(
         icon = icon,
-        title = stringResource(id = title),
+        title = stringResource(title),
         content = content
     )
 }
@@ -36,25 +36,24 @@ fun Card(
     title: String,
     content: @Composable () -> Unit
 ) {
-    ElevatedCard(modifier = Modifier.fillMaxWidth()) {
-        val cardPadding = Modifier.padding(dimensionResource(id = R.dimen.padding_card_content))
-
-        Column(modifier = cardPadding) {
+    ElevatedCard(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(dimensionResource(R.dimen.padding_card_content))) {
             if (icon == null) {
-                CardTitle(title = title)
-                CardContent { content() }
+                CardTitle(title)
             } else {
                 Row {
                     Icon(
                         imageVector = icon,
                         contentDescription = title,
-                        modifier = Modifier.align(alignment = Alignment.CenterVertically)
+                        modifier = Modifier.align(Alignment.CenterVertically)
                     )
                     IconAndTextPadding()
-                    CardTitle(title = title)
+                    CardTitle(title)
                 }
-                CardContent { content() }
             }
+            SpacerPadding()
+            SpacerPadding()
+            content()
         }
     }
     CardSpacePadding()
@@ -66,13 +65,4 @@ private fun CardTitle(title: String) {
         text = title,
         style = MaterialTheme.typography.headlineSmall
     )
-}
-
-@Composable
-private fun CardContent(content: @Composable () -> Unit) {
-    Column {
-        SpacerPadding()
-        SpacerPadding()
-        Column { content() }
-    }
 }

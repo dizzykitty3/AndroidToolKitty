@@ -72,7 +72,6 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.ui.components.BottomPadding
 import me.dizzykitty3.androidtoolkitty.ui.components.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.ui.components.DevBuildTip
-import me.dizzykitty3.androidtoolkitty.ui.components.OneHandedModePadding
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.components.Tip
 import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
@@ -86,8 +85,9 @@ fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController)
 
 @Composable
 private fun MobileLayout(navController: NavHostController) {
-    val settingsSharedPref = remember { SettingsSharedPref }
     val screenPadding = dimensionResource(id = R.dimen.padding_screen)
+    val debug = BuildConfig.DEBUG
+    val noTranslation = StringUtil.sysLangNotSupported || SettingsSharedPref.devMode
 
     LazyColumn(
         modifier = Modifier.padding(
@@ -99,14 +99,11 @@ private fun MobileLayout(navController: NavHostController) {
         item { CardSpacePadding() }
         item { CardSpacePadding() }
         item { Greeting() }
-        if (settingsSharedPref.oneHandedMode)
-            item { OneHandedModePadding() }
-        else {
-            item { CardSpacePadding() }
-            item { CardSpacePadding() }
-        }
-        if (BuildConfig.DEBUG) item { DevBuildTip() }
-        item { NoTranslationTip() }
+        item { CardSpacePadding() }
+        item { CardSpacePadding() }
+        if (debug) item { DevBuildTip() }
+        if (noTranslation) item { NoTranslationTip() }
+        if (debug || noTranslation) item { CardSpacePadding() }
         item { HomeCards(navController) }
         item { BottomPadding() }
     }
@@ -118,7 +115,6 @@ private fun TabletLayout(navController: NavHostController) {
 
     Column(
         modifier = Modifier.padding(
-            top = largeScreenPadding,
             start = largeScreenPadding,
             end = largeScreenPadding
         )
@@ -276,10 +272,7 @@ private fun NetworkStateIcon(
 
 @Composable
 private fun NoTranslationTip() {
-    val languageNotSupport = StringUtil.sysLangNotSupported
-    val devMode = SettingsSharedPref.devMode
-    if (languageNotSupport || devMode)
-        Tip(stringResource(R.string.no_translation, StringUtil.sysLocale))
+    Tip(stringResource(R.string.no_translation, StringUtil.sysLocale))
 }
 
 @Composable

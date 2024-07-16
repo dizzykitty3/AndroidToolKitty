@@ -56,7 +56,7 @@
     <string name="show_all_options">显示所有选项</string>
     <string name="hide_all_options">隐藏所有选项</string>
     <string name="dev_mode">开发者模式</string>
-    <string name="source_code">源码</string>
+    <string name="source_code">前往 GitHub 查看源码</string>
     <plurals name="days_remaining">
         <item quantity="other">剩余 %1$d 天</item>
     </plurals>
@@ -71,7 +71,6 @@
     <string name="settings">设置</string>
     <string name="hide_all_cards">隐藏所有卡片</string>
     <string name="show_all_cards">显示所有卡片</string>
-    <string name="one_handed_mode">单手模式</string>
     <string name="volume">音量</string>
     <string name="media_volume">媒体音量</string>
     <string name="set_time_automatically_is_off_tip">「自动设置时间」未启用。某些应用部分功能可能表现异常。</string>
@@ -153,5 +152,5 @@
     <string name="unifans">引力圈</string>
     <string name="debug_build_top_tip">此为调试版本。包含错误且性能较差。</string>
     <string name="fade_animation">淡入淡出动画</string>
-    <string name="invalid_username_input_tip">%1$s 的用户名仅包含字母、数字和下划线</string>
+    <string name="invalid_username_input_tip">%1$s 的用户名应仅包含字母、数字和下划线</string>
 </resources>

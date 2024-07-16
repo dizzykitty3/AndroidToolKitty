@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.settings
 
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
@@ -55,7 +56,6 @@ fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostControl
 private fun Appearance() {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
-    var oneHandedMode by remember { mutableStateOf(settingsSharedPref.oneHandedMode) }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
 
     Card(title = R.string.appearance) {
@@ -66,12 +66,6 @@ private fun Appearance() {
                 SettingsSharedPref.dynamicColor = it
                 view.context.restartApp()
             }
-        }
-
-        CustomSwitchRow(text = R.string.one_handed_mode, checked = oneHandedMode) {
-            view.hapticFeedback()
-            oneHandedMode = it
-            settingsSharedPref.oneHandedMode = it
         }
     }
 }
@@ -143,10 +137,21 @@ private fun General(navController: NavHostController) {
 private fun Bottom(navController: NavHostController) {
     val view = LocalView.current
 
-    Row(
-        Modifier.horizontalScroll(rememberScrollState()),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
+    Column {
+        Row(
+            Modifier.horizontalScroll(rememberScrollState()),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            TextButton({
+                view.hapticFeedback()
+                navController.navigate(LICENSES_SCREEN)
+            }) { Text(stringResource(R.string.licenses)) }
+            Text("|")
+            TextButton({
+                view.hapticFeedback()
+                navController.navigate(DEBUGGING_SCREEN)
+            }) { Text(stringResource(R.string.debugging)) }
+        }
         TextButton({
             view.hapticFeedback()
             view.context.showToast(R.string.all_help_welcomed)
@@ -159,15 +164,5 @@ private fun Bottom(navController: NavHostController) {
                 tint = MaterialTheme.colorScheme.primary
             )
         }
-        Text("|")
-        TextButton({
-            view.hapticFeedback()
-            navController.navigate(LICENSES_SCREEN)
-        }) { Text(stringResource(R.string.licenses)) }
-        Text("|")
-        TextButton({
-            view.hapticFeedback()
-            navController.navigate(DEBUGGING_SCREEN)
-        }) { Text(stringResource(R.string.debugging)) }
     }
 }

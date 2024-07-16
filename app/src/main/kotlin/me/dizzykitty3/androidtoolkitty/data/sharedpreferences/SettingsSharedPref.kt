@@ -18,7 +18,6 @@ object SettingsSharedPref {
     // Booleans
     private const val AUTO_CLEAR_CLIPBOARD = "auto_clear_clipboard"
     private const val DYNAMIC_COLOR = "dynamic_color"
-    private const val ONE_HANDED_MODE = "one_handed_mode"
     private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val KEEP_WEBPAGE_CARD_SHOW_MORE = "keep_webpage_card_show_more"
@@ -68,10 +67,6 @@ object SettingsSharedPref {
     var dynamicColor: Boolean
         get() = getPreference(DYNAMIC_COLOR, true)
         set(value) = setPreference(DYNAMIC_COLOR, value)
-
-    var oneHandedMode: Boolean
-        get() = getPreference(ONE_HANDED_MODE, false)
-        set(value) = setPreference(ONE_HANDED_MODE, value)
 
     var haveOpenedSettingsScreen: Boolean
         get() = getPreference(HAVE_OPENED_SETTINGS_SCREEN, false)
