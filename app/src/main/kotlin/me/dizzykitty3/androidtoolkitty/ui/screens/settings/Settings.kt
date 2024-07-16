@@ -58,7 +58,7 @@ private fun Appearance() {
     val settingsSharedPref = remember { SettingsSharedPref }
     var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
 
-    Card(title = R.string.appearance) {
+    Card(R.string.appearance) {
         if (OSVersion.a12()) {
             CustomSwitchRow(text = R.string.material_you_dynamic_color, checked = dynamicColor) {
                 view.hapticFeedback()
@@ -80,7 +80,7 @@ private fun General(navController: NavHostController) {
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
     var webpageShowMore by remember { mutableStateOf(settingsSharedPref.keepWebpageCardShowMore) }
 
-    Card(title = R.string.general) {
+    Card(R.string.general) {
         CustomSwitchRow(
             text = R.string.clear_clipboard_on_launch,
             checked = autoClearClipboard
@@ -116,15 +116,14 @@ private fun General(navController: NavHostController) {
 
         GroupDivider()
 
-        OutlinedButton(
-            onClick = {
-                view.hapticFeedback()
-                navController.navigate(EDIT_HOME_SCREEN)
-            }
+        OutlinedButton({
+            view.hapticFeedback()
+            navController.navigate(EDIT_HOME_SCREEN)
+        }
         ) {
             Icon(
                 imageVector = Icons.Outlined.Edit,
-                contentDescription = stringResource(id = R.string.customize_my_home_page),
+                contentDescription = stringResource(R.string.customize_my_home_page),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             SpacerPadding()
@@ -138,6 +137,18 @@ private fun Bottom(navController: NavHostController) {
     val view = LocalView.current
 
     Column {
+        TextButton({
+            view.hapticFeedback()
+            view.context.showToast(R.string.all_help_welcomed)
+            view.context.openURL(SOURCE_CODE_URL)
+        }) {
+            Text(stringResource(R.string.view_source_code))
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = stringResource(R.string.view_source_code),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
         Row(
             Modifier.horizontalScroll(rememberScrollState()),
             verticalAlignment = Alignment.CenterVertically
@@ -151,18 +162,6 @@ private fun Bottom(navController: NavHostController) {
                 view.hapticFeedback()
                 navController.navigate(DEBUGGING_SCREEN)
             }) { Text(stringResource(R.string.debugging)) }
-        }
-        TextButton({
-            view.hapticFeedback()
-            view.context.showToast(R.string.all_help_welcomed)
-            view.context.openURL(SOURCE_CODE_URL)
-        }) {
-            Text(stringResource(R.string.source_code))
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(R.string.source_code),
-                tint = MaterialTheme.colorScheme.primary
-            )
         }
     }
 }

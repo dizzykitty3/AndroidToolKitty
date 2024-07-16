@@ -19,21 +19,21 @@ import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun Card(
-    icon: ImageVector? = null,
     @StringRes title: Int,
+    icon: ImageVector? = null,
     content: @Composable () -> Unit
 ) {
     Card(
-        icon = icon,
         title = stringResource(title),
+        icon = icon,
         content = content
     )
 }
 
 @Composable
 fun Card(
-    icon: ImageVector? = null,
     title: String,
+    icon: ImageVector? = null,
     content: @Composable () -> Unit
 ) {
     ElevatedCard(Modifier.fillMaxWidth()) {

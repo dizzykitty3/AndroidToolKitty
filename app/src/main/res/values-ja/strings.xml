@@ -125,7 +125,7 @@
     <string name="restart_app">アプリを再起動</string>
     <string name="appearance">外観</string>
     <string name="dev_mode">dev mode</string>
-    <string name="source_code">ソースコード</string>
+    <string name="view_source_code">ソースコード</string>
     <string name="all_help_welcomed">すべての助けは大歓迎です！ :D</string>
     <string name="licenses">ライセンス</string>
     <string name="open_app_detail_settings">Open app detail settings</string>

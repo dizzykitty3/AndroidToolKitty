@@ -277,7 +277,7 @@
     <string name="hide_all_options">Hide all options</string>
 
     <!-- Settings > About -->
-    <string name="source_code">View source code on GitHub</string>
+    <string name="view_source_code">View source code on GitHub</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="licenses">Licenses</string>
 
