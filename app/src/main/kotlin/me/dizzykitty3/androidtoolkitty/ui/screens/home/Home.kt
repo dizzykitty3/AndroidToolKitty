@@ -69,7 +69,6 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.domain.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil
-import me.dizzykitty3.androidtoolkitty.ui.components.BottomPadding
 import me.dizzykitty3.androidtoolkitty.ui.components.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.ui.components.DevBuildTip
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
@@ -105,7 +104,6 @@ private fun MobileLayout(navController: NavHostController) {
         if (noTranslation) item { NoTranslationTip() }
         if (debug || noTranslation) item { CardSpacePadding() }
         item { HomeCards(navController) }
-        item { BottomPadding() }
     }
 }
 
@@ -127,7 +125,7 @@ private fun TabletLayout(navController: NavHostController) {
         if (BuildConfig.DEBUG) {
             DevBuildTip()
         }
-        NoTranslationTip()
+        if (StringUtil.sysLangNotSupported || SettingsSharedPref.devMode) NoTranslationTip()
         TwoColumnHomeCards(navController)
     }
 }

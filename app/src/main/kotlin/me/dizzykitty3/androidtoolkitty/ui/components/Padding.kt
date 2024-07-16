@@ -22,6 +22,3 @@ fun SpacerPadding() = Res(padding = R.dimen.padding_spacer)
  */
 @Composable
 fun IconAndTextPadding() = Res(padding = R.dimen.padding_icons_and_text)
-
-@Composable
-fun BottomPadding() = Res(padding = R.dimen.padding_bottom)

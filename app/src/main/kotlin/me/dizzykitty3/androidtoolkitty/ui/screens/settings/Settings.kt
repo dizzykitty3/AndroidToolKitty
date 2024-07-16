@@ -1,9 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.settings
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Edit
@@ -149,19 +146,13 @@ private fun Bottom(navController: NavHostController) {
                 tint = MaterialTheme.colorScheme.primary
             )
         }
-        Row(
-            Modifier.horizontalScroll(rememberScrollState()),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            TextButton({
-                view.hapticFeedback()
-                navController.navigate(LICENSES_SCREEN)
-            }) { Text(stringResource(R.string.licenses)) }
-            Text("|")
-            TextButton({
-                view.hapticFeedback()
-                navController.navigate(DEBUGGING_SCREEN)
-            }) { Text(stringResource(R.string.debugging)) }
-        }
+        TextButton({
+            view.hapticFeedback()
+            navController.navigate(LICENSES_SCREEN)
+        }) { Text(stringResource(R.string.licenses)) }
+        TextButton({
+            view.hapticFeedback()
+            navController.navigate(DEBUGGING_SCREEN)
+        }) { Text(stringResource(R.string.debugging)) }
     }
 }

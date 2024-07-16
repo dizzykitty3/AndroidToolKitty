@@ -33,7 +33,7 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.checkOnMarket
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.ClearInput
-import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 
 @Composable
 fun AppMarket() {
@@ -99,10 +99,9 @@ fun AppMarket() {
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
             }
-            Text("|")
-            SpacerPadding()
-            WhatIsPackageName()
         }
+        GroupDivider()
+        WhatIsPackageName()
     }
 }
 

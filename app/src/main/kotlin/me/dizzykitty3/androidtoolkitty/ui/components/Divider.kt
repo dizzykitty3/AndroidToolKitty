@@ -6,8 +6,6 @@ import androidx.compose.runtime.Composable
 @Composable
 fun GroupDivider() {
     SpacerPadding()
-    SpacerPadding()
     HorizontalDivider()
-    SpacerPadding()
     SpacerPadding()
 }
