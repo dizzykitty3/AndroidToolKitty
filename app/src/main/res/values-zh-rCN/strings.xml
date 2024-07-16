@@ -103,7 +103,7 @@
     <string name="bluetooth_bluetooth_admin">要查看已配对的设备，请授予 BLUETOOTH, BLUETOOTH_ADMIN 权限</string>
     <string name="missed_sys_popup">错过了系统权限弹窗吗？</string>
     <string name="clear_input">清空输入</string>
-    <string name="open_app_detail_settings">Open app detail settings</string>
+    <string name="open_app_detail_settings">打开应用详情设置</string>
     <string name="request_permission">授予权限</string>
     <string name="cellular">移动数据</string>
     <string name="offline">无网络</string>
@@ -152,6 +152,6 @@
     <string name="codes_of_characters">字符编码</string>
     <string name="unifans">引力圈</string>
     <string name="debug_build_top_tip">此为调试版本。包含错误且性能较差。</string>
-    <string name="fade_animation">Fade animation</string>
+    <string name="fade_animation">淡入淡出动画</string>
     <string name="invalid_username_input_tip">%1$s 的用户名仅包含字母、数字和下划线</string>
 </resources>

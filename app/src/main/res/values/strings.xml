@@ -296,6 +296,7 @@
     <string name="locale" translatable="false">locale</string>
     <string name="app_version" translatable="false">app_ver</string>
     <string name="open_app_detail_settings">Open app detail settings</string>
+    <string name="manufacturer" translatable="false">manufacturer</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>

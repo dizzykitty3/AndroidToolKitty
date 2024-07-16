@@ -5,6 +5,7 @@ import android.content.Context
 import android.location.Location
 import android.os.Build
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -68,24 +69,18 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
     Screen {
         Card(title = R.string.debugging, icon = Icons.Outlined.Terminal) {
             Row(Modifier.fillMaxWidth()) {
-                Column(
-                    Modifier
-                        .weight(0.3f)
-                        .horizontalScroll(rememberScrollState())
-                ) {
-                    Text(stringResource(R.string.device))
-                    Text(stringResource(R.string.os_version))
-                    Text(stringResource(R.string.locale))
-                    Text(stringResource(R.string.app_version))
+                Column(Modifier.weight(0.4f)) {
+                    HorizontalScrollableText(stringResource(R.string.manufacturer))
+                    HorizontalScrollableText(stringResource(R.string.device))
+                    HorizontalScrollableText(stringResource(R.string.os_version))
+                    HorizontalScrollableText(stringResource(R.string.locale))
+                    HorizontalScrollableText(stringResource(R.string.app_version))
                 }
-                Column(
-                    Modifier
-                        .weight(0.7f)
-                        .horizontalScroll(rememberScrollState())
-                ) {
-                    Text("${Build.MANUFACTURER} ${Build.DEVICE}")
-                    Text("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
-                    Text(StringUtil.sysLocale)
+                Column(Modifier.weight(0.6f)) {
+                    HorizontalScrollableText(Build.MANUFACTURER)
+                    HorizontalScrollableText("${Build.MODEL} (${Build.DEVICE})")
+                    HorizontalScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
+                    HorizontalScrollableText(StringUtil.sysLocale)
                     Row {
                         Text("1.0.${view.context.versionCode()}")
                         if (BuildConfig.DEBUG) Text(".dev")
@@ -254,6 +249,13 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             SpacerPadding()
             Text(text = stringResource(id = R.string.restart_app))
         }
+    }
+}
+
+@Composable
+private fun HorizontalScrollableText(text: String) {
+    Box(Modifier.horizontalScroll(rememberScrollState())) {
+        Text(text)
     }
 }
 
