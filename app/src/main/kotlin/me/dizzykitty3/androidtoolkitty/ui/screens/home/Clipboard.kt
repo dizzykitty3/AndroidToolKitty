@@ -20,32 +20,32 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.ui.components.Tip
+import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 import timber.log.Timber
 
 @Composable
-fun Clipboard() {
-    Card(
-        icon = Icons.Outlined.ContentPasteSearch,
-        title = R.string.clipboard
-    ) {
+fun Clipboard(settingsViewModel: SettingsViewModel) {
+    Card(R.string.clipboard, Icons.Outlined.ContentPasteSearch) {
         val view = LocalView.current
         val isShowHintText = !SettingsSharedPref.haveOpenedSettingsScreen
-        val devMode = SettingsSharedPref.devMode
-        if (isShowHintText || devMode) Tip(message = R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
+        val devMode = settingsViewModel.settings.value.devMode
+        if (isShowHintText || devMode)
+            Tip(
+                settingsViewModel,
+                R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen
+            )
 
-        OutlinedButton(
-            onClick = {
-                view.hapticFeedback()
-                onClearClipboardButton(view)
-            }
-        ) {
+        OutlinedButton({
+            view.hapticFeedback()
+            onClearClipboardButton(view)
+        }) {
             Icon(
                 imageVector = Icons.Outlined.ClearAll,
                 contentDescription = stringResource(id = R.string.clear_clipboard),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             SpacerPadding()
-            Text(text = stringResource(R.string.clear_clipboard))
+            Text(stringResource(R.string.clear_clipboard))
         }
     }
 }

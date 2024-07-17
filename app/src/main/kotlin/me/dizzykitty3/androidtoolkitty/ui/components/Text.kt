@@ -36,7 +36,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 
 @Composable
 fun Gradient(
@@ -51,9 +51,7 @@ fun Gradient(
                         colors = colors
                     )
                 )
-            ) {
-                append(textToDisplay)
-            }
+            ) { append(textToDisplay) }
         }
         Text(
             text = text,
@@ -79,7 +77,7 @@ fun GradientSmall(textToDisplay: String, colors: List<Color>) {
                 )
             ) { append(textToDisplay) }
         }
-        Text(text = text)
+        Text(text)
     }
 }
 
@@ -94,21 +92,58 @@ fun AnnotatedString.Builder.Italic(text: String) {
 
 @Composable
 fun AnnotatedString.Builder.PrimaryColor(@StringRes id: Int) {
-    val materialPrimaryColorStyle = SpanStyle(
-        color = MaterialTheme.colorScheme.primary
-    )
-    withStyle(materialPrimaryColorStyle) { append(stringResource(id = id)) }
+    val materialPrimaryColorStyle = SpanStyle(color = MaterialTheme.colorScheme.primary)
+    withStyle(materialPrimaryColorStyle) { append(stringResource(id)) }
 }
 
 @Composable
-fun Tip(@StringRes message: Int) = Tip(stringResource(message))
+fun Tip(settingsViewModel: SettingsViewModel, @StringRes message: Int) =
+    Tip(settingsViewModel, stringResource(message))
 
 @Composable
-fun WIPTip() = Tip(R.string.wip)
+fun WIPTip() {
+    Card(
+        shape = RoundedCornerShape(dimensionResource(R.dimen.padding_tip)),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+        )
+    ) {
+        Column(
+            Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                stringResource(R.string.dev_mode),
+                fontSize = 6.sp,
+                lineHeight = 1.sp
+            )
+        }
+
+        Row(
+            Modifier
+                .padding(dimensionResource(R.dimen.padding_tip))
+                .fillMaxWidth()
+        ) {
+            Icon(
+                Icons.Outlined.Info,
+                contentDescription = stringResource(R.string.info),
+                modifier = Modifier.size(24.dp)
+            )
+            IconAndTextPadding()
+            Text(
+                text = stringResource(R.string.wip),
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+    }
+    SpacerPadding()
+}
 
 @Composable
-fun Tip(message: String) {
-    val devMode = SettingsSharedPref.devMode
+fun Tip(settingsViewModel: SettingsViewModel, message: String) {
+    val devMode = settingsViewModel.settings.value.devMode
 
     Card(
         shape = RoundedCornerShape(dimensionResource(R.dimen.padding_tip)),
@@ -117,7 +152,7 @@ fun Tip(message: String) {
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
-        if (devMode && message != stringResource(R.string.wip)) {
+        if (devMode) {
             Column(
                 Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -131,7 +166,7 @@ fun Tip(message: String) {
         }
 
         Row(
-            modifier = Modifier
+            Modifier
                 .padding(dimensionResource(R.dimen.padding_tip))
                 .fillMaxWidth()
         ) {
@@ -161,7 +196,7 @@ fun DevBuildTip() {
         )
     ) {
         Row(
-            modifier = Modifier
+            Modifier
                 .padding(dimensionResource(R.dimen.padding_tip))
                 .fillMaxWidth()
         ) {
@@ -186,10 +221,7 @@ fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))
 
 @Composable
 fun GroupTitle(title: String) {
-    Text(
-        text = title,
-        style = MaterialTheme.typography.titleMedium
-    )
+    Text(title, style = MaterialTheme.typography.titleMedium)
     SpacerPadding()
 }
 

@@ -78,62 +78,54 @@ import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 @Composable
 fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val screenWidth = LocalConfiguration.current.screenWidthDp
-    if (screenWidth < 600) MobileLayout(navController)
-    else TabletLayout(navController)
+    if (screenWidth < 600) MobileLayout(settingsViewModel, navController)
+    else TabletLayout(settingsViewModel, navController)
 }
 
 @Composable
-private fun MobileLayout(navController: NavHostController) {
-    val screenPadding = dimensionResource(id = R.dimen.padding_screen)
+private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+    val screenPadding = dimensionResource(R.dimen.padding_screen)
     val debug = BuildConfig.DEBUG
-    val noTranslation = StringUtil.sysLangNotSupported || SettingsSharedPref.devMode
+    val noTranslation = StringUtil.sysLangNotSupported || settingsViewModel.settings.value.devMode
 
-    LazyColumn(
-        modifier = Modifier.padding(
-            start = screenPadding,
-            end = screenPadding
-        )
-    ) {
-        item { TopBar(navController) }
+    LazyColumn(Modifier.padding(start = screenPadding, end = screenPadding)) {
+        item { TopBar(settingsViewModel, navController) }
         item { CardSpacePadding() }
         item { CardSpacePadding() }
         item { Greeting() }
         item { CardSpacePadding() }
         item { CardSpacePadding() }
         if (debug) item { DevBuildTip() }
-        if (noTranslation) item { NoTranslationTip() }
+        if (noTranslation) item { NoTranslationTip(settingsViewModel) }
         if (debug || noTranslation) item { CardSpacePadding() }
-        item { HomeCards(navController) }
+        item { HomeCards(settingsViewModel, navController) }
     }
 }
 
 @Composable
-private fun TabletLayout(navController: NavHostController) {
-    val largeScreenPadding = dimensionResource(id = R.dimen.padding_screen_large)
+private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+    val largeScreenPadding = dimensionResource(R.dimen.padding_screen_large)
+    val debug = BuildConfig.DEBUG
+    val noTranslation = StringUtil.sysLangNotSupported || settingsViewModel.settings.value.devMode
 
-    Column(
-        modifier = Modifier.padding(
-            start = largeScreenPadding,
-            end = largeScreenPadding
-        )
-    ) {
-        Row(modifier = Modifier.fillMaxWidth()) {
-            Box(modifier = Modifier.weight(1f)) { Greeting() }
-            Box(modifier = Modifier.weight(1f)) { TopBar(navController) }
+    Column(Modifier.padding(start = largeScreenPadding, end = largeScreenPadding)) {
+        Row(Modifier.fillMaxWidth()) {
+            Box(Modifier.weight(1f)) { Greeting() }
+            Box(Modifier.weight(1f)) { TopBar(settingsViewModel, navController) }
         }
         SpacerPadding()
-        if (BuildConfig.DEBUG) {
+        if (debug) {
             DevBuildTip()
         }
-        if (StringUtil.sysLangNotSupported || SettingsSharedPref.devMode) NoTranslationTip()
-        TwoColumnHomeCards(navController)
+        if (noTranslation) NoTranslationTip(settingsViewModel)
+        TwoColumnHomeCards(settingsViewModel, navController)
     }
 }
 
 @Composable
-private fun TopBar(navController: NavHostController) {
+private fun TopBar(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Box(modifier = Modifier.weight(1f)) { Status() }
+        Box(Modifier.weight(1f)) { Status(settingsViewModel) }
         SettingsButton(navController)
     }
 }
@@ -148,12 +140,12 @@ private fun SettingsButton(navController: NavHostController) {
         positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
         tooltip = {
             view.hapticFeedback()
-            PlainTooltip { Text(text = stringResource(id = R.string.settings)) }
+            PlainTooltip { Text(text = stringResource(R.string.settings)) }
         },
         state = rememberTooltipState(),
     ) {
         IconButton(
-            onClick = {
+            {
                 view.hapticFeedback()
                 navController.navigate(SETTINGS_SCREEN)
                 settingsSharedPref.haveOpenedSettingsScreen = true
@@ -162,7 +154,7 @@ private fun SettingsButton(navController: NavHostController) {
         ) {
             Icon(
                 imageVector = Icons.Default.Settings,
-                contentDescription = stringResource(id = R.string.settings),
+                contentDescription = stringResource(R.string.settings),
                 tint = MaterialTheme.colorScheme.primary
             )
         }
@@ -170,7 +162,7 @@ private fun SettingsButton(navController: NavHostController) {
 }
 
 @Composable
-private fun Status() {
+private fun Status(settingsViewModel: SettingsViewModel) {
     val batteryLevel = BatteryUtil.batteryLevel()
     val view = LocalView.current
 
@@ -193,7 +185,9 @@ private fun Status() {
         SpacerPadding()
         SpacerPadding()
 
-        if (view.context.isHeadsetConnected() || SettingsSharedPref.devMode) {
+        val devMode = settingsViewModel.settings.value.devMode
+
+        if (view.context.isHeadsetConnected() || devMode) {
             Row(Modifier.clickable {
                 view.hapticFeedback()
                 view.context.openSystemSettings(SETTING_BLUETOOTH)
@@ -204,7 +198,7 @@ private fun Status() {
                     tint = MaterialTheme.colorScheme.primary
                 )
                 SpacerPadding()
-                if (!SettingsSharedPref.devMode) {
+                if (!devMode) {
                     Text(stringResource(R.string.connected))
                 } else {
                     Column {
@@ -253,37 +247,39 @@ private fun NetworkStateIcon(
 ) {
     val view = LocalView.current
 
-    Row(modifier = Modifier.clickable {
+    Row(Modifier.clickable {
         view.hapticFeedback()
         view.context.openSystemSettings(SETTING_WIFI)
     }
     ) {
         Icon(
             imageVector = imageVector,
-            contentDescription = stringResource(id = text),
+            contentDescription = stringResource(text),
             tint = MaterialTheme.colorScheme.primary
         )
         SpacerPadding()
-        Text(text = stringResource(id = text))
+        Text(stringResource(text))
     }
 }
 
 @Composable
-private fun NoTranslationTip() {
-    Tip(stringResource(R.string.no_translation, StringUtil.sysLocale))
+private fun NoTranslationTip(settingsViewModel: SettingsViewModel) {
+    Tip(settingsViewModel, stringResource(R.string.no_translation, StringUtil.sysLocale))
 }
 
 @Composable
-private fun HomeCards(navController: NavHostController) {
-    val cardMap = getCardMap(SettingsSharedPref)
-    cardMap.forEach { (cardName, isShow) ->
-        if (isShow) CardContent(cardName, navController)
+private fun HomeCards(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+    getCardMap(SettingsSharedPref).forEach { (cardName, isShow) ->
+        if (isShow) CardContent(settingsViewModel, cardName, navController)
     }
 }
 
 @Composable
-private fun TwoColumnHomeCards(navController: NavHostController) {
-    val largeCardPadding = dimensionResource(id = R.dimen.padding_card_space_large)
+private fun TwoColumnHomeCards(
+    settingsViewModel: SettingsViewModel,
+    navController: NavHostController
+) {
+    val largeCardPadding = dimensionResource(R.dimen.padding_card_space_large)
     val cardMap = getCardMap(SettingsSharedPref)
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
@@ -291,7 +287,7 @@ private fun TwoColumnHomeCards(navController: NavHostController) {
         horizontalArrangement = Arrangement.spacedBy(largeCardPadding),
     ) {
         items(cardMap.toList()) { (cardName, isShow) ->
-            if (isShow) CardContent(cardName, navController)
+            if (isShow) CardContent(settingsViewModel, cardName, navController)
         }
     }
 }
@@ -304,13 +300,17 @@ private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Bool
 ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
 
 @Composable
-private fun CardContent(cardName: String, navController: NavHostController) {
+private fun CardContent(
+    settingsViewModel: SettingsViewModel,
+    cardName: String,
+    navController: NavHostController
+) {
     when (cardName) {
         CARD_1 -> YearProgress()
         CARD_2 -> Volume()
-        CARD_3 -> Clipboard()
+        CARD_3 -> Clipboard(settingsViewModel)
         CARD_4 -> Webpage()
-        CARD_5 -> SysSettings()
+        CARD_5 -> SysSettings(settingsViewModel)
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice(navController)
         CARD_8 -> CodesOfCharacters()

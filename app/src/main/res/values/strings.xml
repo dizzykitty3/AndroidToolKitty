@@ -264,6 +264,7 @@
     <string name="material_you_dynamic_color">Material You dynamic color</string>
     <string name="appearance">Appearance</string>
     <string name="keep_showing_full_webpage_card">Keep showing full Webpage card</string>
+    <string name="needs_restart">Needs restart, do it now?</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
@@ -289,7 +290,7 @@
     <string name="qr_code_generator">QR Code generator</string>
     <string name="dev_mode_message" translatable="false">dev mode message:</string>
     <string name="distance">distance</string>
-    <string name="fade_animation">Fade animation</string>
+    <string name="switch_to_fade_animation">Switch to fade animation</string>
     <string name="device" translatable="false">device</string>
     <string name="os_version" translatable="false">os_ver</string>
     <string name="locale" translatable="false">locale</string>

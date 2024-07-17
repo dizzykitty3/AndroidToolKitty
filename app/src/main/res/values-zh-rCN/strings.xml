@@ -151,6 +151,7 @@
     <string name="codes_of_characters">字符编码</string>
     <string name="unifans">引力圈</string>
     <string name="debug_build_top_tip">此为调试版本。包含错误且性能较差。</string>
-    <string name="fade_animation">淡入淡出动画</string>
+    <string name="switch_to_fade_animation">选用淡入淡出动画</string>
     <string name="invalid_username_input_tip">%1$s 的用户名应仅包含字母、数字和下划线</string>
+    <string name="needs_restart">Needs restart, do it now?</string>
 </resources>

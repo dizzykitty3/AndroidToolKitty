@@ -43,6 +43,7 @@ class MainActivity : ComponentActivity() {
     private var continuation: Continuation<Unit>? = null
     private var continuationNotResumed = AtomicBoolean(true)
     private var isAutoClearClipboard = false
+    private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,8 +51,8 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         enableEdgeToEdge()
         setContent {
-            val settingsViewModel = hiltViewModel<SettingsViewModel>()
-            AppTheme(dynamicColor = SettingsSharedPref.dynamicColor) {
+            settingsViewModel = hiltViewModel<SettingsViewModel>()
+            AppTheme(dynamicColor = settingsViewModel.settings.value.dynamicColor) {
                 Scaffold(Modifier.fillMaxSize(),
                     bottomBar = {
                         BottomAppBar(
@@ -66,11 +67,9 @@ class MainActivity : ComponentActivity() {
                         }
                     },
                     floatingActionButton = {
-                        FloatingActionButton(onClick = {
+                        FloatingActionButton({
                             // Nothing
-                        }) {
-                            Icon(Icons.Default.Add, contentDescription = "Add")
-                        }
+                        }) { Icon(Icons.Default.Add, contentDescription = "Add") }
                     }
                 ) { innerPadding ->
                     AppNavHost(
@@ -107,7 +106,10 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Set media volume automatically: cancelled: BT headset connected")
                 } else {
                     Timber.i("Set media volume automatically")
-                    window.decorView.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
+                    window.decorView.autoSetMediaVolume(
+                        SettingsSharedPref.autoSetMediaVolume,
+                        settingsViewModel
+                    )
                 }
             }
         }

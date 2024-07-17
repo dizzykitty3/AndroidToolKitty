@@ -31,7 +31,7 @@ import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 @Composable
 fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
     val navController = rememberNavController()
-    val fadeAnimation = settingsViewModel.settings.value.fadeAnimation
+    val fadeAnimation = settingsViewModel.settings.value.switchToFadeAnimation
 
     NavHost(
         modifier = modifier,

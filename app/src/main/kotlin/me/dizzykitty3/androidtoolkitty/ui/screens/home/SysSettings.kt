@@ -32,13 +32,11 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.ui.components.Tip
+import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 
 @Composable
-fun SysSettings() {
-    Card(
-        icon = Icons.Outlined.Settings,
-        title = R.string.system_settings
-    ) {
+fun SysSettings(settingsViewModel: SettingsViewModel) {
+    Card(R.string.system_settings, Icons.Outlined.Settings) {
         val settingsSharedPref = remember { SettingsSharedPref }
 
         // TODO API requirement
@@ -70,17 +68,20 @@ fun SysSettings() {
             }
         }
 
-        val devMode = settingsSharedPref.devMode
+        val devMode = settingsViewModel.settings.value.devMode
 
-        if (!checkIsAutoTime() || devMode) Tip(message = R.string.set_time_automatically_is_off_tip)
+        if (!checkIsAutoTime() || devMode) Tip(
+            settingsViewModel,
+            R.string.set_time_automatically_is_off_tip
+        )
 
-        Column(modifier = Modifier.horizontalScroll(rememberScrollState())) {
+        Column(Modifier.horizontalScroll(rememberScrollState())) {
             Row {
                 settings.subList(0, 2).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
-                            settingType = setting.settingType,
-                            text = setting.text
+                            setting.settingType,
+                            setting.text
                         )
                     }
                 }
@@ -89,8 +90,8 @@ fun SysSettings() {
                 settings.subList(2, 4).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
-                            settingType = setting.settingType,
-                            text = setting.text
+                            setting.settingType,
+                            setting.text
                         )
                     }
                 }
@@ -99,8 +100,8 @@ fun SysSettings() {
                 settings.subList(4, 6).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
-                            settingType = setting.settingType,
-                            text = setting.text
+                            setting.settingType,
+                            setting.text
                         )
                     }
                 }
@@ -109,8 +110,8 @@ fun SysSettings() {
                 settings.subList(6, 8).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
-                            settingType = setting.settingType,
-                            text = setting.text
+                            setting.settingType,
+                            setting.text
                         )
                     }
                 }
@@ -119,8 +120,8 @@ fun SysSettings() {
                 settings.subList(8, 10).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
-                            settingType = setting.settingType,
-                            text = setting.text
+                            setting.settingType,
+                            setting.text
                         )
                     }
                 }
@@ -129,8 +130,8 @@ fun SysSettings() {
                 settings.subList(10, 12).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
-                            settingType = setting.settingType,
-                            text = setting.text
+                            setting.settingType,
+                            setting.text
                         )
                     }
                 }
@@ -139,8 +140,8 @@ fun SysSettings() {
                 settings.subList(12, 13).forEach { setting ->
                     if (isShowSetting[setting.settingType] == true) {
                         SystemSettingButton(
-                            settingType = setting.settingType,
-                            text = setting.text
+                            setting.settingType,
+                            setting.text
                         )
                     }
                 }

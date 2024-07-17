@@ -29,7 +29,6 @@ import me.dizzykitty3.androidtoolkitty.data.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openURL
-import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.domain.utils.ToastUtil.showToast
@@ -43,26 +42,31 @@ import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Screen {
-        Appearance()
+        Appearance(settingsViewModel)
         General(navController)
         Bottom(navController)
     }
 }
 
 @Composable
-private fun Appearance() {
+private fun Appearance(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
-    val settingsSharedPref = remember { SettingsSharedPref }
-    var dynamicColor by remember { mutableStateOf(settingsSharedPref.dynamicColor) }
+    var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
+    var fadeAnimation by remember { mutableStateOf(settingsViewModel.settings.value.switchToFadeAnimation) }
 
     Card(R.string.appearance) {
         if (OSVersion.a12()) {
-            CustomSwitchRow(text = R.string.material_you_dynamic_color, checked = dynamicColor) {
+            CustomSwitchRow(R.string.material_you_dynamic_color, dynamicColor) {
                 view.hapticFeedback()
                 dynamicColor = it
-                SettingsSharedPref.dynamicColor = it
-                view.context.restartApp()
+                settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
             }
+        }
+
+        CustomSwitchRow(R.string.switch_to_fade_animation, fadeAnimation) {
+            view.hapticFeedback()
+            fadeAnimation = it
+            settingsViewModel.update(settingsViewModel.settings.value.copy(switchToFadeAnimation = it))
         }
     }
 }
@@ -78,10 +82,7 @@ private fun General(navController: NavHostController) {
     var webpageShowMore by remember { mutableStateOf(settingsSharedPref.keepWebpageCardShowMore) }
 
     Card(R.string.general) {
-        CustomSwitchRow(
-            text = R.string.clear_clipboard_on_launch,
-            checked = autoClearClipboard
-        ) {
+        CustomSwitchRow(R.string.clear_clipboard_on_launch, autoClearClipboard) {
             view.hapticFeedback()
             autoClearClipboard = it
             // Automatically hide Clipboard Card when turning on Clear on Launch feature.
@@ -102,10 +103,7 @@ private fun General(navController: NavHostController) {
             settingsSharedPref.autoClearClipboard = autoClearClipboard
         }
 
-        CustomSwitchRow(
-            text = R.string.keep_showing_full_webpage_card,
-            checked = webpageShowMore
-        ) {
+        CustomSwitchRow(R.string.keep_showing_full_webpage_card, webpageShowMore) {
             view.hapticFeedback()
             webpageShowMore = it
             settingsSharedPref.keepWebpageCardShowMore = it

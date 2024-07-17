@@ -59,13 +59,11 @@ import timber.log.Timber
 @Composable
 fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val view = LocalView.current
-    val settingsSharedPref = remember { SettingsSharedPref }
-    var devMode by remember { mutableStateOf(settingsSharedPref.devMode) }
+    var devMode by remember { mutableStateOf(settingsViewModel.settings.value.devMode) }
     var showLocationDialog by remember { mutableStateOf(false) }
-    var fadeAnimation by remember { mutableStateOf(settingsViewModel.settings.value.fadeAnimation) }
 
     Screen {
-        Card(title = R.string.debugging, icon = Icons.Outlined.Terminal) {
+        Card(R.string.debugging, Icons.Outlined.Terminal) {
             Row(Modifier.fillMaxWidth()) {
                 Column(Modifier.weight(0.4f)) {
                     ScrollableText(stringResource(R.string.manufacturer))
@@ -88,16 +86,10 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
 
             GroupDivider()
 
-            CustomSwitchRow(text = R.string.dev_mode, checked = devMode) {
+            CustomSwitchRow(R.string.dev_mode, devMode) {
                 view.hapticFeedback()
                 devMode = it
-                settingsSharedPref.devMode = it
-            }
-
-            CustomSwitchRow(text = R.string.fade_animation, checked = fadeAnimation) {
-                view.hapticFeedback()
-                fadeAnimation = it
-                settingsViewModel.update(settingsViewModel.settings.value.copy(fadeAnimation = it))
+                settingsViewModel.update(settingsViewModel.settings.value.copy(devMode = it))
             }
 
             OutlinedButton({
@@ -139,17 +131,17 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                         Column {
                             WIPTip()
                             Row {
-                                Column(modifier = Modifier.weight(0.5f)) {
-                                    Text(text = "8:00 AM - 5:59 PM")
-                                    Text(text = "6:00 PM - 10:59 PM")
-                                    Text(text = "11:00 PM - 5:59 AM")
-                                    Text(text = "6:00 PM - 7:59 AM")
+                                Column(Modifier.weight(0.5f)) {
+                                    Text("8:00 AM - 5:59 PM")
+                                    Text("6:00 PM - 10:59 PM")
+                                    Text("11:00 PM - 5:59 AM")
+                                    Text("6:00 PM - 7:59 AM")
                                 }
-                                Column(modifier = Modifier.weight(0.5f)) {
-                                    Text(text = "mute")
-                                    Text(text = "40%/60%")
-                                    Text(text = "25%")
-                                    Text(text = "40%/60%")
+                                Column(Modifier.weight(0.5f)) {
+                                    Text("mute")
+                                    Text("40%/60%")
+                                    Text("25%")
+                                    Text("40%/60%")
                                 }
                             }
                             Text("set volume automatically (check location)")
@@ -209,7 +201,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                 view.hapticFeedback()
                 navController.navigate(PERMISSION_REQUEST_SCREEN)
             }) {
-                Text(text = stringResource(id = R.string.go_to_permission_request_screen))
+                Text(stringResource(R.string.go_to_permission_request_screen))
             }
 
             OutlinedButton(

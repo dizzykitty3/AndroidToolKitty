@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import timber.log.Timber
 
@@ -17,13 +16,11 @@ object SettingsSharedPref {
 
     // Booleans
     private const val AUTO_CLEAR_CLIPBOARD = "auto_clear_clipboard"
-    private const val DYNAMIC_COLOR = "dynamic_color"
     private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val KEEP_WEBPAGE_CARD_SHOW_MORE = "keep_webpage_card_show_more"
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
-    private const val DEV_MODE = "dev_mode"
 
     private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
@@ -64,10 +61,6 @@ object SettingsSharedPref {
         get() = getPreference(AUTO_CLEAR_CLIPBOARD, false)
         set(value) = setPreference(AUTO_CLEAR_CLIPBOARD, value)
 
-    var dynamicColor: Boolean
-        get() = getPreference(DYNAMIC_COLOR, true)
-        set(value) = setPreference(DYNAMIC_COLOR, value)
-
     var haveOpenedSettingsScreen: Boolean
         get() = getPreference(HAVE_OPENED_SETTINGS_SCREEN, false)
         set(value) = setPreference(HAVE_OPENED_SETTINGS_SCREEN, value)
@@ -90,10 +83,6 @@ object SettingsSharedPref {
     var haveTappedAddButton: Boolean
         get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
         set(value) = setPreference(HAVE_TAPPED_ADD_BUTTON, value)
-
-    var devMode: Boolean
-        get() = getPreference(DEV_MODE, BuildConfig.DEBUG)
-        set(value) = setPreference(DEV_MODE, value)
 
     var lastTimeSelectedSocialPlatform: Int
         get() = getPreference(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
