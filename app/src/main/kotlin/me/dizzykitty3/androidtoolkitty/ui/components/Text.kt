@@ -109,17 +109,6 @@ fun WIPTip() {
             contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
-        Column(
-            Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                stringResource(R.string.dev_mode),
-                fontSize = 6.sp,
-                lineHeight = 1.sp
-            )
-        }
-
         Row(
             Modifier
                 .padding(dimensionResource(R.dimen.padding_tip))
