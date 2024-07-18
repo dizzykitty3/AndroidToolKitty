@@ -15,13 +15,19 @@ object BluetoothUtil {
 
     @Suppress("DEPRECATION")
     val bluetoothAdapter: BluetoothAdapter?
-        get() = if (OSVersion.api31()) bluetoothManager.adapter else BluetoothAdapter.getDefaultAdapter()
+        get() =
+            if (OSVersion.api31())
+                bluetoothManager.adapter
+            else
+                BluetoothAdapter.getDefaultAdapter()
 
     @SuppressLint("MissingPermission")
     @CheckResult
     fun Context.isHeadsetConnected(): Boolean {
         if (this.noBluetoothPermission()) return false
-        return if (bluetoothAdapter == null) false
-        else bluetoothAdapter?.getProfileConnectionState(BluetoothProfile.HEADSET) == BluetoothAdapter.STATE_CONNECTED
+        return if (bluetoothAdapter == null)
+            false
+        else
+            bluetoothAdapter?.getProfileConnectionState(BluetoothProfile.HEADSET) == BluetoothAdapter.STATE_CONNECTED
     }
 }

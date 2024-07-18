@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.domain.utils
 
+import android.content.Context
 import androidx.annotation.CheckResult
 import java.time.LocalTime
 import java.util.Locale
@@ -71,4 +72,8 @@ object StringUtil {
     fun String.isValidUsername(): Boolean = this.matches(Regex("^[a-zA-Z0-9_]*$"))
 
     fun String.isInvalidUsername(): Boolean = !this.isValidUsername()
+
+    // BuildConfig.VERSION_NAME may not have the updated value at compile time. (I guess)
+    val Context.versionName: String
+        get() = this.packageManager.getPackageInfo(this.packageName, 0).versionName.toString()
 }

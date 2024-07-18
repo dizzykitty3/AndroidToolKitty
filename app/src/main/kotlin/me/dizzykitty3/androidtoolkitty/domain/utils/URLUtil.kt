@@ -35,8 +35,10 @@ object URLUtil {
     fun String.toFullURL(): String {
         val suffix = this.getSuffix()
         Timber.d(
-            if (suffix == COM) "suffix = com, input url: $this"
-            else "suffix = $suffix"
+            if (suffix == COM)
+                "suffix = com, input url: $this"
+            else
+                "suffix = $suffix"
         )
         return if (this.contains(HTTPS)) "$this$suffix"
         else "$HTTPS$this$suffix"

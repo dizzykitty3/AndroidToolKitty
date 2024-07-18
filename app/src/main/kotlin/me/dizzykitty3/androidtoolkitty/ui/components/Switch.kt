@@ -23,14 +23,14 @@ fun CustomHideCardSettingSwitch(
     val settingsSharedPref = remember { SettingsSharedPref }
 
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable {
+        Modifier.clickable {
             onCheckedChange(!isChecked)
             settingsSharedPref.saveCardShowedState(card, !isChecked)
-        }
+        },
+        verticalAlignment = Alignment.CenterVertically,
     ) {
-        Column(modifier = Modifier.weight(1f)) {
-            Text(text = stringResource(id = text))
+        Column(Modifier.weight(1f)) {
+            Text(stringResource(text))
         }
         Column {
             Switch(
@@ -42,19 +42,21 @@ fun CustomHideCardSettingSwitch(
 }
 
 @Composable
+fun CustomSwitchRow(@StringRes text: Int, checked: Boolean, onCheckedChange: (Boolean) -> Unit) =
+    CustomSwitchRow(stringResource(text), checked, onCheckedChange)
+
+@Composable
 fun CustomSwitchRow(
-    @StringRes text: Int,
+    text: String,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
     Row(
-        verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.clickable {
-            onCheckedChange(!checked)
-        }
+        Modifier.clickable { onCheckedChange(!checked) },
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(modifier = Modifier.weight(1f)) {
-            Text(text = stringResource(text))
+        Column(Modifier.weight(1f)) {
+            Text(text)
         }
         Column {
             Switch(

@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.CARD_3
 import me.dizzykitty3.androidtoolkitty.data.DEBUGGING_SCREEN
@@ -33,6 +34,7 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.domain.utils.ToastUtil.showToast
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
+import me.dizzykitty3.androidtoolkitty.ui.components.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.components.Screen
@@ -42,6 +44,10 @@ import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Screen {
+        if (BuildConfig.DEBUG) {
+            Debugging(settingsViewModel, navController)
+            CardSpacePadding()
+        }
         Appearance(settingsViewModel)
         General(settingsViewModel, navController)
         Bottom(navController)
@@ -52,7 +58,7 @@ fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostControl
 private fun Appearance(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
-    var fadeAnimation by remember { mutableStateOf(settingsViewModel.settings.value.switchToFadeAnimation) }
+    var fadeAnimation by remember { mutableStateOf(settingsViewModel.settings.value.fadeAnimation) }
 
     Card(R.string.appearance) {
         if (OSVersion.a12()) {
@@ -66,7 +72,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
         CustomSwitchRow(R.string.switch_to_fade_animation, fadeAnimation) {
             view.hapticFeedback()
             fadeAnimation = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(switchToFadeAnimation = it))
+            settingsViewModel.update(settingsViewModel.settings.value.copy(fadeAnimation = it))
         }
     }
 }
@@ -79,7 +85,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
-    var _fullWebapgeCard by remember { mutableStateOf(settingsViewModel.settings.value.fullWebpageCard) }
+    var fullWebpageCard by remember { mutableStateOf(settingsViewModel.settings.value.fullWebpageCard) }
 
     Card(R.string.general) {
         CustomSwitchRow(R.string.clear_clipboard_on_launch, autoClearClipboard) {
@@ -103,9 +109,9 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
             settingsSharedPref.autoClearClipboard = autoClearClipboard
         }
 
-        CustomSwitchRow(R.string.keep_showing_full_webpage_card, _fullWebapgeCard) {
+        CustomSwitchRow(R.string.keep_showing_full_webpage_card, fullWebpageCard) {
             view.hapticFeedback()
-            _fullWebapgeCard = it
+            fullWebpageCard = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(fullWebpageCard = it))
         }
 
@@ -148,9 +154,11 @@ private fun Bottom(navController: NavHostController) {
             view.hapticFeedback()
             navController.navigate(LICENSES_SCREEN)
         }) { Text(stringResource(R.string.licenses)) }
-        TextButton({
-            view.hapticFeedback()
-            navController.navigate(DEBUGGING_SCREEN)
-        }) { Text(stringResource(R.string.debugging)) }
+        if (!BuildConfig.DEBUG) {
+            TextButton({
+                view.hapticFeedback()
+                navController.navigate(DEBUGGING_SCREEN)
+            }) { Text(stringResource(R.string.debugging)) }
+        }
     }
 }

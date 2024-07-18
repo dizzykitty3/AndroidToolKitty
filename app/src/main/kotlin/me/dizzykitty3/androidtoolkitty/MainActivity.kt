@@ -58,34 +58,38 @@ class MainActivity : ComponentActivity() {
             settingsViewModel = hiltViewModel<SettingsViewModel>()
             val snackbarHostState = remember { SnackbarHostState() }
             val scope = rememberCoroutineScope()
+            val bottomAppBar = settingsViewModel.settings.value.bottomAppBar
 
             AppTheme(dynamicColor = settingsViewModel.settings.value.dynamicColor) {
                 Scaffold(Modifier.fillMaxSize(),
                     snackbarHost = {
-                        SnackbarHost(hostState = snackbarHostState)
+                        if (bottomAppBar)
+                            SnackbarHost(hostState = snackbarHostState)
                     },
                     bottomBar = {
-                        BottomAppBar(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer,
-                            contentColor = MaterialTheme.colorScheme.primary,
-                        ) {
-                            Text(
-                                modifier = Modifier.fillMaxWidth(),
-                                textAlign = TextAlign.Center,
-                                text = "Bottom app bar",
-                            )
-                        }
+                        if (bottomAppBar)
+                            BottomAppBar(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                contentColor = MaterialTheme.colorScheme.primary,
+                            ) {
+                                Text(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    textAlign = TextAlign.Center,
+                                    text = "Bottom app bar",
+                                )
+                            }
                     },
                     floatingActionButton = {
-                        ExtendedFloatingActionButton(
-                            text = { Text("Show snackbar") },
-                            icon = { Icon(Icons.Filled.Image, contentDescription = "") },
-                            onClick = {
-                                scope.launch {
-                                    snackbarHostState.showSnackbar("Snackbar")
+                        if (bottomAppBar)
+                            ExtendedFloatingActionButton(
+                                text = { Text("Show snackbar") },
+                                icon = { Icon(Icons.Filled.Image, contentDescription = "") },
+                                onClick = {
+                                    scope.launch {
+                                        snackbarHostState.showSnackbar("Snackbar")
+                                    }
                                 }
-                            }
-                        )
+                            )
                     }
                 ) { innerPadding ->
                     AppNavHost(

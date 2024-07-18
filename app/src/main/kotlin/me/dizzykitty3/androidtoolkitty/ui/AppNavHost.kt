@@ -22,7 +22,7 @@ import me.dizzykitty3.androidtoolkitty.data.SETTINGS_SCREEN
 import me.dizzykitty3.androidtoolkitty.ui.screens.PermissionRequest
 import me.dizzykitty3.androidtoolkitty.ui.screens.QRCodeGenerator
 import me.dizzykitty3.androidtoolkitty.ui.screens.home.Home
-import me.dizzykitty3.androidtoolkitty.ui.screens.settings.Debugging
+import me.dizzykitty3.androidtoolkitty.ui.screens.settings.DebuggingScreen
 import me.dizzykitty3.androidtoolkitty.ui.screens.settings.HomeEdit
 import me.dizzykitty3.androidtoolkitty.ui.screens.settings.Licenses
 import me.dizzykitty3.androidtoolkitty.ui.screens.settings.Settings
@@ -31,7 +31,7 @@ import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 @Composable
 fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
     val navController = rememberNavController()
-    val fadeAnimation = settingsViewModel.settings.value.switchToFadeAnimation
+    val fadeAnimation = settingsViewModel.settings.value.fadeAnimation
 
     NavHost(
         modifier = modifier,
@@ -80,7 +80,7 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
         composable(EDIT_HOME_SCREEN) { HomeEdit(settingsViewModel) }
         composable(PERMISSION_REQUEST_SCREEN) { PermissionRequest(settingsViewModel) }
         composable(QR_CODE_GENERATOR_SCREEN) { QRCodeGenerator(settingsViewModel) }
-        composable(DEBUGGING_SCREEN) { Debugging(settingsViewModel, navController) }
+        composable(DEBUGGING_SCREEN) { DebuggingScreen(settingsViewModel, navController) }
         composable(LICENSES_SCREEN) { Licenses() }
     }
 }

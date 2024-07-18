@@ -20,23 +20,37 @@ object PermissionUtil {
      */
     @CheckResult
     fun Context.noBluetoothPermission(): Boolean =
-        if (OSVersion.a12()) this.check(BT_CONNECT)
-        else this.check(BT) || this.check(BT_ADMIN)
+        if (OSVersion.a12())
+            this.check(BT_CONNECT)
+        else
+            this.check(BT) || this.check(BT_ADMIN)
 
     @CheckResult
     fun Context.noLocationPermission(): Boolean =
-        if (OSVersion.a12()) this.check(COARSE_LOCATION) && this.check(FINE_LOCATION)
-        else this.check(FINE_LOCATION)
+        if (OSVersion.a12())
+            this.check(COARSE_LOCATION) && this.check(FINE_LOCATION)
+        else
+            this.check(FINE_LOCATION)
 
     private fun Context.check(permission: String): Boolean =
         ActivityCompat.checkSelfPermission(this, permission) != GRANTED
 
     fun Context.requestBluetoothPermission() {
-        this.request(if (OSVersion.a12()) arrayOf(BT_CONNECT) else arrayOf(BT, BT_ADMIN))
+        this.request(
+            if (OSVersion.a12())
+                arrayOf(BT_CONNECT)
+            else
+                arrayOf(BT, BT_ADMIN)
+        )
     }
 
     fun Context.requestLocationPermission() {
-        this.request(if (OSVersion.a12()) arrayOf(COARSE_LOCATION) else arrayOf(FINE_LOCATION))
+        this.request(
+            if (OSVersion.a12())
+                arrayOf(COARSE_LOCATION)
+            else
+                arrayOf(FINE_LOCATION)
+        )
     }
 
     private fun Context.request(permission: Array<String>) =

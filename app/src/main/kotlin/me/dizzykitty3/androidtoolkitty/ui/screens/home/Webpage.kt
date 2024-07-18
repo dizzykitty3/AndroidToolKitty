@@ -57,23 +57,23 @@ fun Webpage(settingsViewModel: SettingsViewModel) {
     Card(R.string.webpage, Icons.Outlined.Link) {
         val view = LocalView.current
         val fullWebapgeCard = settingsViewModel.settings.value.fullWebpageCard
-        var _showMore by remember { mutableStateOf(false) }
+        var showMore by remember { mutableStateOf(false) }
 
-        if (fullWebapgeCard || _showMore) GroupTitle(R.string.search)
+        if (fullWebapgeCard || showMore) GroupTitle(R.string.search)
 
         Search()
 
-        if (fullWebapgeCard || _showMore) {
+        if (fullWebapgeCard || showMore) {
             GroupDivider()
             WebpageURL()
             GroupDivider()
             SocialMediaProfileIURL()
         }
 
-        if (!fullWebapgeCard && !_showMore) {
+        if (!fullWebapgeCard && !showMore) {
             TextButton({
                 view.hapticFeedback()
-                _showMore = !_showMore
+                showMore = !showMore
             }) { Text(stringResource(R.string.show_more)) }
         }
     }
@@ -83,11 +83,11 @@ fun Webpage(settingsViewModel: SettingsViewModel) {
 private fun Search() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
-    var _searchQuery by remember { mutableStateOf("") }
+    var searchQuery by remember { mutableStateOf("") }
 
     OutlinedTextField(
-        value = _searchQuery,
-        onValueChange = { _searchQuery = it },
+        value = searchQuery,
+        onValueChange = { searchQuery = it },
         label = { Text(stringResource(R.string.query)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -96,13 +96,13 @@ private fun Search() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onClickSearchButton(_searchQuery)
+                view.context.onClickSearchButton(searchQuery)
             }
         ),
         trailingIcon = {
-            ClearInput(text = _searchQuery) {
+            ClearInput(text = searchQuery) {
                 view.hapticFeedback()
-                _searchQuery = ""
+                searchQuery = ""
             }
         },
     )
@@ -114,7 +114,7 @@ private fun Search() {
         TextButton({
             view.hapticFeedback()
             focus.clearFocus()
-            view.context.onClickSearchButton(_searchQuery)
+            view.context.onClickSearchButton(searchQuery)
         }) {
             Text(text = stringResource(R.string.visit))
             Icon(
@@ -128,7 +128,7 @@ private fun Search() {
             onClick = {
                 view.hapticFeedback()
                 focus.clearFocus()
-                view.context.onCheckOnYouTube(_searchQuery)
+                view.context.onCheckOnYouTube(searchQuery)
             }
         ) {
             Text(text = stringResource(R.string.search_on_youtube))
@@ -145,15 +145,15 @@ private fun Search() {
 private fun WebpageURL() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
-    var _url by remember { mutableStateOf("") }
+    var url by remember { mutableStateOf("") }
     val fullWidthPeriod = "。"
     val halfWidthPeriod = "."
 
     GroupTitle(R.string.webpage)
 
     OutlinedTextField(
-        value = _url,
-        onValueChange = { _url = it.replace(fullWidthPeriod, halfWidthPeriod) },
+        value = url,
+        onValueChange = { url = it.replace(fullWidthPeriod, halfWidthPeriod) },
         label = { Text(stringResource(R.string.url)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -163,13 +163,13 @@ private fun WebpageURL() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onClickVisitURLButton(_url)
+                view.context.onClickVisitURLButton(url)
             }
         ),
         trailingIcon = {
-            ClearInput(_url) {
+            ClearInput(url) {
                 view.hapticFeedback()
-                _url = ""
+                url = ""
             }
         },
         supportingText = {
@@ -184,17 +184,17 @@ private fun WebpageURL() {
             })
         },
         prefix = {
-            if (!_url.contains(HTTPS)) {
+            if (!url.contains(HTTPS)) {
                 Text(HTTPS)
             }
         },
-        suffix = { Text(_url.getSuffix()) }
+        suffix = { Text(url.getSuffix()) }
     )
 
     TextButton({
         view.hapticFeedback()
         focus.clearFocus()
-        view.context.onClickVisitURLButton(_url)
+        view.context.onClickVisitURLButton(url)
     }) {
         Text(stringResource(R.string.visit))
         Icon(
@@ -209,22 +209,22 @@ private fun WebpageURL() {
 private fun SocialMediaProfileIURL() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
-    var _username by remember { mutableStateOf("") }
-    var _platformIndex by remember { mutableIntStateOf(SettingsSharedPref.lastTimeSelectedSocialPlatform) }
-    val platform = URLUtil.Platform.entries[_platformIndex]
+    var username by remember { mutableStateOf("") }
+    var platformIndex by remember { mutableIntStateOf(SettingsSharedPref.lastTimeSelectedSocialPlatform) }
+    val platform = URLUtil.Platform.entries[platformIndex]
     val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
 
     GroupTitle(R.string.social_media_profile)
 
     CustomDropdownMenu(
         items = platformList,
-        onItemSelected = { _platformIndex = it },
+        onItemSelected = { platformIndex = it },
         label = { Text(stringResource(R.string.platform)) }
     )
 
     OutlinedTextField(
-        value = _username,
-        onValueChange = { _username = it },
+        value = username,
+        onValueChange = { username = it },
         label = { Text(stringResource(R.string.username)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -233,25 +233,25 @@ private fun SocialMediaProfileIURL() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                if (isValid(platform, _username)) {
-                    view.context.onVisitProfileButton(_username, _platformIndex)
+                if (isValid(platform, username)) {
+                    view.context.onVisitProfileButton(username, platformIndex)
                 }
             }
         ),
         trailingIcon = {
-            ClearInput(text = _username) {
+            ClearInput(text = username) {
                 view.hapticFeedback()
-                _username = ""
+                username = ""
             }
         },
         supportingText = {
             Column {
                 Text(
-                    text = toSocialMediaFullURL(platform, _username),
+                    text = toSocialMediaFullURL(platform, username),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
-                if (isInvalid(platform, _username)) {
+                if (isInvalid(platform, username)) {
                     Text(
                         stringResource(R.string.invalid_username_input_tip, platform),
                         color = MaterialTheme.colorScheme.error
@@ -264,8 +264,8 @@ private fun SocialMediaProfileIURL() {
     TextButton({
         view.hapticFeedback()
         focus.clearFocus()
-        if (isValid(platform, _username)) {
-            view.context.onVisitProfileButton(_username, _platformIndex)
+        if (isValid(platform, username)) {
+            view.context.onVisitProfileButton(username, platformIndex)
         }
     }) {
         Text(stringResource(R.string.visit))

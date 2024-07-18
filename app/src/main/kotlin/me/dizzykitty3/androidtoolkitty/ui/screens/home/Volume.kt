@@ -50,6 +50,8 @@ import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 
 private const val ADD = "+ Add"
 
+// TODO Voice call volume
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Volume() {
@@ -59,7 +61,7 @@ fun Volume() {
     ) {
         val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
-        val maxVolume = AudioUtil.maxVolumeIndex
+        val maxVolume = AudioUtil.maxMediaVolumeIndex
         var morePreciseSlider by remember { mutableStateOf(false) }
         var mCustomVolume by remember { mutableIntStateOf(settingsSharedPref.customVolume) }
         var mCustomVolumeOptionLabel by remember { mutableStateOf(settingsSharedPref.customVolumeOptionLabel) }
@@ -76,7 +78,7 @@ fun Volume() {
 
         var selectedIndex by remember {
             mutableStateOf(
-                when (AudioUtil.volume) {
+                when (AudioUtil.mediaVolume) {
                     0 -> 0
                     (0.4 * maxVolume).toInt() -> 1
                     (0.6 * maxVolume).toInt() -> 2
@@ -173,7 +175,7 @@ fun Volume() {
                     onDismissRequest = {
                         if (!mHaveCustomLabel) mHaveCustomLabel = false
                         showVolumeDialog = false
-                        selectedIndex = when (AudioUtil.volume) {
+                        selectedIndex = when (AudioUtil.mediaVolume) {
                             0 -> 0
                             (0.4 * maxVolume).toInt() -> 1
                             (0.6 * maxVolume).toInt() -> 2
@@ -276,7 +278,7 @@ fun Volume() {
                                 view.hapticFeedback()
                                 if (!mHaveCustomLabel) mHaveCustomLabel = false
                                 showVolumeDialog = false
-                                selectedIndex = when (AudioUtil.volume) {
+                                selectedIndex = when (AudioUtil.mediaVolume) {
                                     0 -> 0
                                     (0.4 * maxVolume).toInt() -> 1
                                     (0.6 * maxVolume).toInt() -> 2
@@ -317,6 +319,6 @@ fun Volume() {
 }
 
 fun View.setVolume(volume: Number) {
-    AudioUtil.setVolume(volume.toInt())
+    AudioUtil.setMediaVolume(volume.toInt())
     this.showSnackbar(R.string.volume_changed)
 }

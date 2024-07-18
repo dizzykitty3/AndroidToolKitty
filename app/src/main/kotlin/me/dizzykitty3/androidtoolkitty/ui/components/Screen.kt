@@ -13,10 +13,9 @@ fun Screen(content: @Composable () -> Unit) {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
 
     LazyColumn(
-        modifier = Modifier
+        Modifier
             .fillMaxSize()
-            .padding(start = screenPadding, end = screenPadding)
-    ) {
+            .padding(start = screenPadding, end = screenPadding)) {
         item { content() }
     }
 }

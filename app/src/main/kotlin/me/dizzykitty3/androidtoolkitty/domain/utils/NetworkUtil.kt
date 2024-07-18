@@ -14,7 +14,7 @@ object NetworkUtil {
     const val STATE_CODE_WIFI = 1
     const val STATE_CODE_MOBILE = 2
     const val STATE_CODE_OFFLINE = 3
-    private var connectivityManager: ConnectivityManager =
+    private var connectivityManager =
         appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     @Suppress("DEPRECATION")

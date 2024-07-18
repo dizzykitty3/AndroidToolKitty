@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.settings
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.location.Location
 import android.os.Build
 import androidx.compose.foundation.layout.Column
@@ -32,7 +31,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.google.android.gms.location.LocationServices
-import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
 import me.dizzykitty3.androidtoolkitty.data.QR_CODE_GENERATOR_SCREEN
@@ -40,11 +38,12 @@ import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.restartApp
-import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
+import me.dizzykitty3.androidtoolkitty.domain.utils.LocationUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.PermissionUtil.noBluetoothPermission
 import me.dizzykitty3.androidtoolkitty.domain.utils.PermissionUtil.noLocationPermission
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil
+import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil.versionName
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
@@ -55,206 +54,196 @@ import me.dizzykitty3.androidtoolkitty.ui.components.WIPTip
 import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 import timber.log.Timber
 
+@Composable
+fun DebuggingScreen(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+    Screen {
+        Debugging(settingsViewModel, navController)
+    }
+}
+
 @SuppressLint("MissingPermission")
 @Composable
 fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val view = LocalView.current
     var devMode by remember { mutableStateOf(settingsViewModel.settings.value.devMode) }
+    var bottomAppBar by remember { mutableStateOf(settingsViewModel.settings.value.bottomAppBar) }
     var showLocationDialog by remember { mutableStateOf(false) }
 
-    Screen {
-        Card(R.string.debugging, Icons.Outlined.Terminal) {
-            Row(Modifier.fillMaxWidth()) {
-                Column(Modifier.weight(0.4f)) {
-                    ScrollableText(stringResource(R.string.manufacturer))
-                    ScrollableText(stringResource(R.string.device))
-                    ScrollableText(stringResource(R.string.os_version))
-                    ScrollableText(stringResource(R.string.locale))
-                    ScrollableText(stringResource(R.string.app_version))
-                }
-                Column(Modifier.weight(0.6f)) {
-                    ScrollableText(Build.MANUFACTURER)
-                    ScrollableText("${Build.MODEL} (${Build.DEVICE})")
-                    ScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
-                    ScrollableText(StringUtil.sysLocale)
-                    Row {
-                        Text("1.0.${view.context.versionCode()}")
-                        if (BuildConfig.DEBUG) Text(".dev")
-                    }
-                }
+    Card(R.string.debugging, Icons.Outlined.Terminal) {
+        Row(Modifier.fillMaxWidth()) {
+            Column(Modifier.weight(0.4f)) {
+                ScrollableText(stringResource(R.string.manufacturer))
+                ScrollableText(stringResource(R.string.device))
+                ScrollableText(stringResource(R.string.os_version))
+                ScrollableText(stringResource(R.string.locale))
+                ScrollableText(stringResource(R.string.app_version))
             }
-
-            GroupDivider()
-
-            CustomSwitchRow(R.string.dev_mode, devMode) {
-                view.hapticFeedback()
-                devMode = it
-                settingsViewModel.update(settingsViewModel.settings.value.copy(devMode = it))
+            Column(Modifier.weight(0.6f)) {
+                ScrollableText(Build.MANUFACTURER)
+                ScrollableText("${Build.MODEL} (${Build.DEVICE})")
+                ScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
+                ScrollableText(StringUtil.sysLocale)
+                Text(view.context.versionName)
             }
+        }
 
-            OutlinedButton({
-                view.hapticFeedback()
-                if (view.context.noLocationPermission()) {
-                    navController.navigate(PERMISSION_REQUEST_SCREEN)
-                    return@OutlinedButton
-                }
-                showLocationDialog = true
-            }) { Text(stringResource(R.string.auto_set_volume)) }
+        GroupDivider()
 
-            if (showLocationDialog) {
-                val fusedLocationClient =
-                    LocationServices.getFusedLocationProviderClient(view.context)
-                Timber.d("fusedLocationClient = $fusedLocationClient")
-                var mLocation: Location? = null
-                var mLoadingComplete by remember { mutableStateOf(false) }
-                var mLatitude by remember { mutableDoubleStateOf(0.0) }
-                var mLongitude by remember { mutableDoubleStateOf(0.0) }
-                fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                    if (location != null) {
-                        mLocation = location
-                        mLatitude = location.latitude
-                        mLongitude = location.longitude
-                        Timber.d("latitude = ${location.latitude}")
-                        Timber.d("longitude = ${location.longitude}")
-                        mLoadingComplete = true
-                    } else {
-                        Timber.w("location == null")
-                        view.showSnackbar("get location error")
-                        mLoadingComplete = true
-                    }
-                }
-                AlertDialog(
-                    onDismissRequest = { showLocationDialog = false },
-                    icon = { Icon(Icons.Outlined.WbSunny, null) },
-                    title = { Text(stringResource(R.string.auto_set_volume)) },
-                    text = {
-                        Column {
-                            WIPTip()
-                            Row {
-                                Column(Modifier.weight(0.5f)) {
-                                    Text("8:00 AM - 5:59 PM")
-                                    Text("6:00 PM - 10:59 PM")
-                                    Text("11:00 PM - 5:59 AM")
-                                    Text("6:00 PM - 7:59 AM")
-                                }
-                                Column(Modifier.weight(0.5f)) {
-                                    Text("mute")
-                                    Text("40%/60%")
-                                    Text("25%")
-                                    Text("40%/60%")
-                                }
-                            }
-                            Text("set volume automatically (check location)")
-                            Text("current location (places where you want to turn on phone volume)")
-                            if (mLoadingComplete) {
-                                if (mLocation != null) {
-                                    Text("latitude = $mLatitude")
-                                    Text("longitude = $mLongitude")
-                                } else {
-                                    Text("get location error")
-                                }
-                            } else {
-                                CircularProgressIndicator()
-                            }
-                        }
-                    },
-                    confirmButton = {
-                        Row {
-                            Button(
-                                enabled = (mLoadingComplete && (mLocation != null)), onClick = {
-                                    view.hapticFeedback()
-                                    showLocationDialog = false
-                                    if (view.context.noBluetoothPermission()) {
-                                        navController.navigate(PERMISSION_REQUEST_SCREEN)
-                                        return@Button
-                                    }
-                                    saveLocationToStorage(mLatitude, mLongitude)
-                                    SettingsSharedPref.autoSetMediaVolume = 40
-                                }, elevation = ButtonDefaults.buttonElevation(1.dp)
-                            ) { Text("40%") }
-                        }
-                        Row {
-                            Button(
-                                enabled = (mLoadingComplete && (mLocation != null)), onClick = {
-                                    view.hapticFeedback()
-                                    showLocationDialog = false
-                                    if (view.context.noBluetoothPermission()) {
-                                        navController.navigate(PERMISSION_REQUEST_SCREEN)
-                                        return@Button
-                                    }
-                                    saveLocationToStorage(mLatitude, mLongitude)
-                                    SettingsSharedPref.autoSetMediaVolume = 60
-                                }, elevation = ButtonDefaults.buttonElevation(1.dp)
-                            ) { Text("60%") }
-                        }
-                    },
-                    dismissButton = {
-                        TextButton({
-                            view.hapticFeedback()
-                            showLocationDialog = false
-                            SettingsSharedPref.autoSetMediaVolume = -1
-                        }) { Text(stringResource(R.string.turn_off)) }
-                    })
-            }
+        CustomSwitchRow(R.string.dev_mode, devMode) {
+            view.hapticFeedback()
+            devMode = it
+            settingsViewModel.update(settingsViewModel.settings.value.copy(devMode = it))
+        }
 
-            OutlinedButton({
-                view.hapticFeedback()
+        CustomSwitchRow("bottom app bar", bottomAppBar) {
+            view.hapticFeedback()
+            bottomAppBar = it
+            settingsViewModel.update(settingsViewModel.settings.value.copy(bottomAppBar = it))
+        }
+
+        OutlinedButton({
+            view.hapticFeedback()
+            if (view.context.noLocationPermission()) {
                 navController.navigate(PERMISSION_REQUEST_SCREEN)
-            }) {
-                Text(stringResource(R.string.go_to_permission_request_screen))
+                return@OutlinedButton
             }
+            showLocationDialog = true
+        }) { Text(stringResource(R.string.auto_set_volume)) }
 
-            OutlinedButton(
-                {
-                    view.hapticFeedback()
-                    navController.navigate(QR_CODE_GENERATOR_SCREEN)
+        if (showLocationDialog) {
+            val fusedLocationClient =
+                LocationServices.getFusedLocationProviderClient(view.context)
+            Timber.d("fusedLocationClient = $fusedLocationClient")
+            var mLocation: Location? = null
+            var mLoadingComplete by remember { mutableStateOf(false) }
+            var mLatitude by remember { mutableDoubleStateOf(0.0) }
+            var mLongitude by remember { mutableDoubleStateOf(0.0) }
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location != null) {
+                    mLocation = location
+                    mLatitude = location.latitude
+                    mLongitude = location.longitude
+                    Timber.d("latitude = ${location.latitude}")
+                    Timber.d("longitude = ${location.longitude}")
+                    mLoadingComplete = true
+                } else {
+                    Timber.w("location == null")
+                    view.showSnackbar("get location error")
+                    mLoadingComplete = true
                 }
-            ) {
-                Text(stringResource(R.string.qr_code_generator))
             }
+            AlertDialog(
+                onDismissRequest = { showLocationDialog = false },
+                icon = { Icon(Icons.Outlined.WbSunny, null) },
+                title = { Text(stringResource(R.string.auto_set_volume)) },
+                text = {
+                    Column {
+                        WIPTip()
+                        Row {
+                            Column(Modifier.weight(0.5f)) {
+                                Text("8:00 AM - 5:59 PM")
+                                Text("6:00 PM - 10:59 PM")
+                                Text("11:00 PM - 5:59 AM")
+                                Text("6:00 PM - 7:59 AM")
+                            }
+                            Column(Modifier.weight(0.5f)) {
+                                Text("mute")
+                                Text("40%/60%")
+                                Text("25%")
+                                Text("40%/60%")
+                            }
+                        }
+                        Text("set volume automatically (check location)")
+                        Text("current location (places where you want to turn on phone volume)")
+                        if (mLoadingComplete) {
+                            if (mLocation != null) {
+                                Text("latitude = $mLatitude")
+                                Text("longitude = $mLongitude")
+                            } else {
+                                Text("get location error")
+                            }
+                        } else {
+                            CircularProgressIndicator()
+                        }
+                    }
+                },
+                confirmButton = {
+                    Row {
+                        Button(
+                            enabled = (mLoadingComplete && (mLocation != null)), onClick = {
+                                view.hapticFeedback()
+                                showLocationDialog = false
+                                if (view.context.noBluetoothPermission()) {
+                                    navController.navigate(PERMISSION_REQUEST_SCREEN)
+                                    return@Button
+                                }
+                                LocationUtil.saveLocationToStorage(mLatitude, mLongitude)
+                                SettingsSharedPref.autoSetMediaVolume = 40
+                            }, elevation = ButtonDefaults.buttonElevation(1.dp)
+                        ) { Text("40%") }
+                    }
+                    Row {
+                        Button(
+                            enabled = (mLoadingComplete && (mLocation != null)), onClick = {
+                                view.hapticFeedback()
+                                showLocationDialog = false
+                                if (view.context.noBluetoothPermission()) {
+                                    navController.navigate(PERMISSION_REQUEST_SCREEN)
+                                    return@Button
+                                }
+                                LocationUtil.saveLocationToStorage(mLatitude, mLongitude)
+                                SettingsSharedPref.autoSetMediaVolume = 60
+                            }, elevation = ButtonDefaults.buttonElevation(1.dp)
+                        ) { Text("60%") }
+                    }
+                },
+                dismissButton = {
+                    TextButton({
+                        view.hapticFeedback()
+                        showLocationDialog = false
+                        SettingsSharedPref.autoSetMediaVolume = -1
+                    }) { Text(stringResource(R.string.turn_off)) }
+                })
         }
 
-        TextButton({
+        OutlinedButton({
             view.hapticFeedback()
-            view.context.openAppDetailSettings()
+            navController.navigate(PERMISSION_REQUEST_SCREEN)
         }) {
-            Icon(
-                imageVector = Icons.Outlined.SettingsApplications,
-                contentDescription = null
-            )
-            SpacerPadding()
-            Text(stringResource(R.string.open_app_detail_settings))
+            Text(stringResource(R.string.go_to_permission_request_screen))
         }
 
-        TextButton({
-            view.hapticFeedback()
-            view.context.restartApp()
-        }) {
-            Icon(
-                imageVector = Icons.Outlined.Refresh,
-                contentDescription = null
-            )
-            SpacerPadding()
-            Text(stringResource(R.string.restart_app))
+        OutlinedButton(
+            {
+                view.hapticFeedback()
+                navController.navigate(QR_CODE_GENERATOR_SCREEN)
+            }
+        ) {
+            Text(stringResource(R.string.qr_code_generator))
         }
     }
-}
 
-private fun saveLocationToStorage(latitude: Double, longitude: Double) {
-    Timber.d("saveLocationToStorage")
-    Timber.d("latitude = $latitude (double)")
-    Timber.d("save latitude = ${latitude.toFloat()} (float)")
-    Timber.d("longitude = $longitude (double)")
-    Timber.d("save longitude = ${longitude.toFloat()} (float)")
-    SettingsSharedPref.savedLatitude = latitude.toFloat()
-    SettingsSharedPref.savedLongitude = longitude.toFloat()
-}
+    TextButton({
+        view.hapticFeedback()
+        view.context.openAppDetailSettings()
+    }) {
+        Icon(
+            imageVector = Icons.Outlined.SettingsApplications,
+            contentDescription = null
+        )
+        SpacerPadding()
+        Text(stringResource(R.string.open_app_detail_settings))
+    }
 
-// BuildConfig.VERSION_NAME may not have the updated value at compile time. (I guess)
-@SuppressLint("NewApi")
-private fun Context.versionCode(): String {
-    return if (OSVersion.api28())
-        this.packageManager.getPackageInfo(this.packageName, 0).longVersionCode.toString()
-    else
-        BuildConfig.VERSION_CODE.toString() // TODO check on simulator
+    TextButton({
+        view.hapticFeedback()
+        view.context.restartApp()
+    }) {
+        Icon(
+            imageVector = Icons.Outlined.Refresh,
+            contentDescription = null
+        )
+        SpacerPadding()
+        Text(stringResource(R.string.restart_app))
+    }
 }
