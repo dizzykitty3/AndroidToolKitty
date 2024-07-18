@@ -34,7 +34,7 @@ android {
             isMinifyEnabled = false
             applicationIdSuffix = ".dev"
             versionNameSuffix = ".dev"
-            resValue("string", "app_name", "ToolKitty Dev")
+            resValue("string", "app_name", "ToolKitty dev")
         }
         release {
             isMinifyEnabled = true
