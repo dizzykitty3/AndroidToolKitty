@@ -37,7 +37,11 @@ fun Card(
     content: @Composable () -> Unit
 ) {
     ElevatedCard(Modifier.fillMaxWidth()) {
-        Column(Modifier.padding(dimensionResource(R.dimen.padding_card_content))) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(R.dimen.padding_card_content))
+        ) {
             if (icon == null) {
                 CardTitle(title)
             } else {

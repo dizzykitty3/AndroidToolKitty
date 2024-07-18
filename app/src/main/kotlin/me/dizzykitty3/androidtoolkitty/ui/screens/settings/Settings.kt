@@ -43,7 +43,7 @@ import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Screen {
         Appearance(settingsViewModel)
-        General(navController)
+        General(settingsViewModel, navController)
         Bottom(navController)
     }
 }
@@ -72,14 +72,14 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 }
 
 @Composable
-private fun General(navController: NavHostController) {
+private fun General(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
-    var webpageShowMore by remember { mutableStateOf(settingsSharedPref.keepWebpageCardShowMore) }
+    var _fullWebapgeCard by remember { mutableStateOf(settingsViewModel.settings.value.fullWebpageCard) }
 
     Card(R.string.general) {
         CustomSwitchRow(R.string.clear_clipboard_on_launch, autoClearClipboard) {
@@ -103,10 +103,10 @@ private fun General(navController: NavHostController) {
             settingsSharedPref.autoClearClipboard = autoClearClipboard
         }
 
-        CustomSwitchRow(R.string.keep_showing_full_webpage_card, webpageShowMore) {
+        CustomSwitchRow(R.string.keep_showing_full_webpage_card, _fullWebapgeCard) {
             view.hapticFeedback()
-            webpageShowMore = it
-            settingsSharedPref.keepWebpageCardShowMore = it
+            _fullWebapgeCard = it
+            settingsViewModel.update(settingsViewModel.settings.value.copy(fullWebpageCard = it))
         }
 
         GroupDivider()

@@ -5,5 +5,7 @@ import me.dizzykitty3.androidtoolkitty.BuildConfig
 data class Settings(
     var switchToFadeAnimation: Boolean = false,
     var dynamicColor: Boolean = true,
-    var devMode: Boolean = BuildConfig.DEBUG
+    var devMode: Boolean = BuildConfig.DEBUG,
+    var fullWebpageCard: Boolean = false,
+    var haveOpenedSettings: Boolean = false
 )

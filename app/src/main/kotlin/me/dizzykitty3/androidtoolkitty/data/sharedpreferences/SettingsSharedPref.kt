@@ -16,9 +16,7 @@ object SettingsSharedPref {
 
     // Booleans
     private const val AUTO_CLEAR_CLIPBOARD = "auto_clear_clipboard"
-    private const val HAVE_OPENED_SETTINGS_SCREEN = "have_opened_settings_screen"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
-    private const val KEEP_WEBPAGE_CARD_SHOW_MORE = "keep_webpage_card_show_more"
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
 
@@ -61,17 +59,9 @@ object SettingsSharedPref {
         get() = getPreference(AUTO_CLEAR_CLIPBOARD, false)
         set(value) = setPreference(AUTO_CLEAR_CLIPBOARD, value)
 
-    var haveOpenedSettingsScreen: Boolean
-        get() = getPreference(HAVE_OPENED_SETTINGS_SCREEN, false)
-        set(value) = setPreference(HAVE_OPENED_SETTINGS_SCREEN, value)
-
     var usingCustomVolumeOptionLabel: Boolean
         get() = getPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
         set(value) = setPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
-
-    var keepWebpageCardShowMore: Boolean
-        get() = getPreference(KEEP_WEBPAGE_CARD_SHOW_MORE, false)
-        set(value) = setPreference(KEEP_WEBPAGE_CARD_SHOW_MORE, value)
 
     var autoSetMediaVolume: Int
         get() = getPreference(AUTO_SET_MEDIA_VOLUME, -1)

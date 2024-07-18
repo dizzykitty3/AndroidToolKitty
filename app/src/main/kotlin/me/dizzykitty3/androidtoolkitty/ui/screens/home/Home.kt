@@ -126,15 +126,14 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
 private fun TopBar(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Box(Modifier.weight(1f)) { Status(settingsViewModel) }
-        SettingsButton(navController)
+        SettingsButton(settingsViewModel, navController)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SettingsButton(navController: NavHostController) {
+private fun SettingsButton(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val view = LocalView.current
-    val settingsSharedPref = remember { SettingsSharedPref }
 
     TooltipBox(
         positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
@@ -148,7 +147,7 @@ private fun SettingsButton(navController: NavHostController) {
             {
                 view.hapticFeedback()
                 navController.navigate(SETTINGS_SCREEN)
-                settingsSharedPref.haveOpenedSettingsScreen = true
+                settingsViewModel.update(settingsViewModel.settings.value.copy(haveOpenedSettings = true))
             },
             modifier = Modifier.size(40.dp)
         ) {
@@ -309,7 +308,7 @@ private fun CardContent(
         CARD_1 -> YearProgress()
         CARD_2 -> Volume()
         CARD_3 -> Clipboard(settingsViewModel)
-        CARD_4 -> Webpage()
+        CARD_4 -> Webpage(settingsViewModel)
         CARD_5 -> SysSettings(settingsViewModel)
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice(navController)

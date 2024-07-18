@@ -7,5 +7,8 @@ import android.view.View
 object HapticUtil {
     @SuppressLint("InlinedApi")
     fun View.hapticFeedback() =
-        this.performHapticFeedback(if (OSVersion.api23()) HapticFeedbackConstants.CONTEXT_CLICK else HapticFeedbackConstants.KEYBOARD_TAP)
+        this.performHapticFeedback(
+            if (OSVersion.api23()) HapticFeedbackConstants.CONTEXT_CLICK // requires API 23
+            else HapticFeedbackConstants.KEYBOARD_TAP
+        )
 }

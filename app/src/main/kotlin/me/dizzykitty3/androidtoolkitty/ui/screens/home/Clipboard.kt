@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
@@ -27,7 +26,7 @@ import timber.log.Timber
 fun Clipboard(settingsViewModel: SettingsViewModel) {
     Card(R.string.clipboard, Icons.Outlined.ContentPasteSearch) {
         val view = LocalView.current
-        val isShowHintText = !SettingsSharedPref.haveOpenedSettingsScreen
+        val isShowHintText = !settingsViewModel.settings.value.haveOpenedSettings
         val devMode = settingsViewModel.settings.value.devMode
         if (isShowHintText || devMode)
             Tip(

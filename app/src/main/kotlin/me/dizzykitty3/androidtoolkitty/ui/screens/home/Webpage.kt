@@ -49,37 +49,32 @@ import me.dizzykitty3.androidtoolkitty.ui.components.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupTitle
 import me.dizzykitty3.androidtoolkitty.ui.components.Italic
+import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 import timber.log.Timber
 
 @Composable
-fun Webpage() {
-    Card(
-        icon = Icons.Outlined.Link,
-        title = R.string.webpage
-    ) {
+fun Webpage(settingsViewModel: SettingsViewModel) {
+    Card(R.string.webpage, Icons.Outlined.Link) {
         val view = LocalView.current
-        val settingsSharedPref = remember { SettingsSharedPref }
-        val keepShowMore by remember { mutableStateOf(settingsSharedPref.keepWebpageCardShowMore) }
-        var mShowMore by remember { mutableStateOf(false) }
+        val fullWebapgeCard = settingsViewModel.settings.value.fullWebpageCard
+        var _showMore by remember { mutableStateOf(false) }
 
-        if (keepShowMore || mShowMore) GroupTitle(title = R.string.search)
+        if (fullWebapgeCard || _showMore) GroupTitle(R.string.search)
 
         Search()
 
-        if (keepShowMore || mShowMore) {
+        if (fullWebapgeCard || _showMore) {
             GroupDivider()
             WebpageURL()
             GroupDivider()
             SocialMediaProfileIURL()
         }
 
-        if (!keepShowMore && !mShowMore) {
-            TextButton(onClick = {
+        if (!fullWebapgeCard && !_showMore) {
+            TextButton({
                 view.hapticFeedback()
-                mShowMore = !mShowMore
-            }) {
-                Text(text = stringResource(id = R.string.show_more))
-            }
+                _showMore = !_showMore
+            }) { Text(stringResource(R.string.show_more)) }
         }
     }
 }
@@ -88,12 +83,12 @@ fun Webpage() {
 private fun Search() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
-    var searchQuery by remember { mutableStateOf("") }
+    var _searchQuery by remember { mutableStateOf("") }
 
     OutlinedTextField(
-        value = searchQuery,
-        onValueChange = { searchQuery = it },
-        label = { Text(text = stringResource(id = R.string.query)) },
+        value = _searchQuery,
+        onValueChange = { _searchQuery = it },
+        label = { Text(stringResource(R.string.query)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done
@@ -101,28 +96,26 @@ private fun Search() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onClickSearchButton(searchQuery)
+                view.context.onClickSearchButton(_searchQuery)
             }
         ),
         trailingIcon = {
-            ClearInput(text = searchQuery) {
+            ClearInput(text = _searchQuery) {
                 view.hapticFeedback()
-                searchQuery = ""
+                _searchQuery = ""
             }
         },
     )
 
     Row(
+        Modifier.horizontalScroll(rememberScrollState()),
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.horizontalScroll(rememberScrollState())
     ) {
-        TextButton(
-            onClick = {
-                view.hapticFeedback()
-                focus.clearFocus()
-                view.context.onClickSearchButton(searchQuery)
-            }
-        ) {
+        TextButton({
+            view.hapticFeedback()
+            focus.clearFocus()
+            view.context.onClickSearchButton(_searchQuery)
+        }) {
             Text(text = stringResource(R.string.visit))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
@@ -135,7 +128,7 @@ private fun Search() {
             onClick = {
                 view.hapticFeedback()
                 focus.clearFocus()
-                view.context.onCheckOnYouTube(searchQuery)
+                view.context.onCheckOnYouTube(_searchQuery)
             }
         ) {
             Text(text = stringResource(R.string.search_on_youtube))
@@ -150,15 +143,17 @@ private fun Search() {
 
 @Composable
 private fun WebpageURL() {
-    GroupTitle(title = R.string.webpage)
-
     val view = LocalView.current
     val focus = LocalFocusManager.current
-    var url by remember { mutableStateOf("") }
+    var _url by remember { mutableStateOf("") }
+    val fullWidthPeriod = "。"
+    val halfWidthPeriod = "."
+
+    GroupTitle(R.string.webpage)
 
     OutlinedTextField(
-        value = url,
-        onValueChange = { url = it },
+        value = _url,
+        onValueChange = { _url = it.replace(fullWidthPeriod, halfWidthPeriod) },
         label = { Text(stringResource(R.string.url)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -168,42 +163,40 @@ private fun WebpageURL() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onClickVisitURLButton(url)
+                view.context.onClickVisitURLButton(_url)
             }
         ),
         trailingIcon = {
-            ClearInput(text = url) {
+            ClearInput(_url) {
                 view.hapticFeedback()
-                url = ""
+                _url = ""
             }
         },
         supportingText = {
-            Text(
-                text = buildAnnotatedString {
-                    append(text = stringResource(R.string.url_input_hint_1))
-                    Italic(" www. ")
-                    append(text = stringResource(R.string.url_input_hint_2))
-                    Italic(" .com ")
-                    append(text = stringResource(R.string.url_input_hint_3))
-                    Italic(" .net ")
-                    append(text = stringResource(R.string.url_input_hint_4))
-                }
-            )
+            Text(buildAnnotatedString {
+                append(stringResource(R.string.url_input_hint_1))
+                Italic(" www. ")
+                append(stringResource(R.string.url_input_hint_2))
+                Italic(" .com ")
+                append(stringResource(R.string.url_input_hint_3))
+                Italic(" .net ")
+                append(stringResource(R.string.url_input_hint_4))
+            })
         },
         prefix = {
-            if (!url.contains(HTTPS)) {
-                Text(text = HTTPS)
+            if (!_url.contains(HTTPS)) {
+                Text(HTTPS)
             }
         },
-        suffix = { Text(text = url.getSuffix()) }
+        suffix = { Text(_url.getSuffix()) }
     )
 
-    TextButton(onClick = {
+    TextButton({
         view.hapticFeedback()
         focus.clearFocus()
-        view.context.onClickVisitURLButton(url)
+        view.context.onClickVisitURLButton(_url)
     }) {
-        Text(text = stringResource(R.string.visit))
+        Text(stringResource(R.string.visit))
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
             contentDescription = null,
@@ -216,22 +209,22 @@ private fun WebpageURL() {
 private fun SocialMediaProfileIURL() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
-    var username by remember { mutableStateOf("") }
-    var platformIndex by remember { mutableIntStateOf(SettingsSharedPref.lastTimeSelectedSocialPlatform) }
-    val platform = URLUtil.Platform.entries[platformIndex]
+    var _username by remember { mutableStateOf("") }
+    var _platformIndex by remember { mutableIntStateOf(SettingsSharedPref.lastTimeSelectedSocialPlatform) }
+    val platform = URLUtil.Platform.entries[_platformIndex]
     val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
 
-    GroupTitle(title = R.string.social_media_profile)
+    GroupTitle(R.string.social_media_profile)
 
     CustomDropdownMenu(
         items = platformList,
-        onItemSelected = { platformIndex = it },
+        onItemSelected = { _platformIndex = it },
         label = { Text(stringResource(R.string.platform)) }
     )
 
     OutlinedTextField(
-        value = username,
-        onValueChange = { username = it },
+        value = _username,
+        onValueChange = { _username = it },
         label = { Text(stringResource(R.string.username)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -240,25 +233,25 @@ private fun SocialMediaProfileIURL() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                if (isValid(platform, username)) {
-                    view.context.onVisitProfileButton(username, platformIndex)
+                if (isValid(platform, _username)) {
+                    view.context.onVisitProfileButton(_username, _platformIndex)
                 }
             }
         ),
         trailingIcon = {
-            ClearInput(text = username) {
+            ClearInput(text = _username) {
                 view.hapticFeedback()
-                username = ""
+                _username = ""
             }
         },
         supportingText = {
             Column {
                 Text(
-                    text = toSocialMediaFullURL(platform, username),
+                    text = toSocialMediaFullURL(platform, _username),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
-                if (isInvalid(platform, username)) {
+                if (isInvalid(platform, _username)) {
                     Text(
                         stringResource(R.string.invalid_username_input_tip, platform),
                         color = MaterialTheme.colorScheme.error
@@ -271,8 +264,8 @@ private fun SocialMediaProfileIURL() {
     TextButton({
         view.hapticFeedback()
         focus.clearFocus()
-        if (isValid(platform, username)) {
-            view.context.onVisitProfileButton(username, platformIndex)
+        if (isValid(platform, _username)) {
+            view.context.onVisitProfileButton(_username, _platformIndex)
         }
     }) {
         Text(stringResource(R.string.visit))
@@ -303,10 +296,7 @@ private fun Context.onClickVisitURLButton(url: String) {
     this.openURL(url.dropSpaces().lowercase().toFullURL())
 }
 
-private fun Context.onVisitProfileButton(
-    username: String,
-    platformIndex: Int,
-) {
+private fun Context.onVisitProfileButton(username: String, platformIndex: Int) {
     if (username.isBlank()) return
     Timber.d("onVisitProfile")
     val platform = URLUtil.Platform.entries.getOrNull(platformIndex) ?: return
