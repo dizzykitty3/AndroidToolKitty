@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.ui.screens.home
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.HourglassTop
 import androidx.compose.material3.Text
@@ -21,29 +20,21 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.DateUtil.yearProgress
 import me.dizzykitty3.androidtoolkitty.domain.utils.DateUtil.yearProgressPercentage
 import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
-import me.dizzykitty3.androidtoolkitty.ui.components.CustomAnimatedProgressIndicator
+import me.dizzykitty3.androidtoolkitty.ui.components.YearProgressIndicator
 
 @Composable
 fun YearProgress() {
-    Card(
-        icon = Icons.Outlined.HourglassTop,
-        title = R.string.year_progress
-    ) {
+    Card(R.string.year_progress, Icons.Outlined.HourglassTop) {
         val view = LocalView.current
-        var percentageOnly by remember { mutableStateOf(true) }
+        var state by remember { mutableStateOf(true) }
 
-        Column(
-            modifier = Modifier.clickable {
-                view.hapticFeedback()
-                percentageOnly = !percentageOnly
-            }
-        ) {
-            CustomAnimatedProgressIndicator()
-
-            Text(
-                text = if (percentageOnly) percentage() else percentageAndRemaining(),
-                modifier = Modifier.fillMaxWidth()
-            )
+        Column(Modifier.clickable {
+            view.hapticFeedback()
+            state = !state
+        }) {
+            YearProgressIndicator()
+            if (state) Text(percentage())
+            else Text(remainingDays())
         }
     }
 }
@@ -55,5 +46,3 @@ private fun remainingDays(): String = appContext.resources.getQuantityString(
     (totalDaysInYear - daysPassed).toInt(),
     totalDaysInYear - daysPassed
 )
-
-private fun percentageAndRemaining(): String = "${percentage()} · ${remainingDays()}"
