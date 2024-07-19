@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.screens.home
 
-import android.view.View
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,8 +36,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.data.ADD
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.AudioUtil
+import me.dizzykitty3.androidtoolkitty.domain.utils.AudioUtil.setVolume
 import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
@@ -48,17 +49,10 @@ import me.dizzykitty3.androidtoolkitty.ui.components.GradientSmall
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 
-private const val ADD = "+ Add"
-
-// TODO Voice call volume
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Volume() {
-    Card(
-        icon = Icons.AutoMirrored.Outlined.VolumeUp,
-        title = R.string.volume
-    ) {
+    Card(R.string.volume, Icons.AutoMirrored.Outlined.VolumeUp) {
         val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
         val maxVolume = AudioUtil.maxMediaVolumeIndex
@@ -88,7 +82,7 @@ fun Volume() {
             )
         }
 
-        Text(text = stringResource(R.string.media_volume))
+        Text(stringResource(R.string.media_volume))
 
         SpacerPadding()
 
@@ -133,9 +127,9 @@ fun Volume() {
                     )
                 ) {
                     if (label != ADD) {
-                        Text(text = label.toString())
+                        Text(label.toString())
                     } else if (mHaveTappedAddButton) {
-                        Text(text = label.toString())
+                        Text(label.toString())
                     } else {
                         GradientSmall(
                             textToDisplay = label.toString(),
@@ -185,9 +179,9 @@ fun Volume() {
                     },
                     title = {
                         if (settingsSharedPref.addedCustomVolume) {
-                            Text(text = stringResource(id = R.string.edit))
+                            Text(stringResource(R.string.edit))
                         } else {
-                            Text(text = stringResource(R.string.add_custom_volume))
+                            Text(stringResource(R.string.add_custom_volume))
                         }
                     },
                     text = {
@@ -202,7 +196,7 @@ fun Volume() {
                                 valueRange = 0f..100f,
                                 steps = if (morePreciseSlider) 0 else 9
                             )
-                            Text(text = "${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
+                            Text("${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
                             SpacerPadding()
                             OutlinedTextField(
                                 value = optionLabel,
@@ -210,7 +204,7 @@ fun Volume() {
                                     optionLabel = it
                                     mHaveCustomLabel = true
                                 },
-                                label = { Text(text = stringResource(R.string.label_optional)) },
+                                label = { Text(stringResource(R.string.label_optional)) },
                                 modifier = Modifier.fillMaxWidth(),
                                 keyboardOptions = KeyboardOptions.Default.copy(
                                     imeAction = ImeAction.Done
@@ -230,7 +224,7 @@ fun Volume() {
                                     }
                                 ),
                                 trailingIcon = {
-                                    ClearInput(text = optionLabel) {
+                                    ClearInput(optionLabel) {
                                         view.hapticFeedback()
                                         optionLabel = ""
                                         mHaveCustomLabel = true
@@ -238,10 +232,7 @@ fun Volume() {
                                 }
                             )
                             GroupDivider()
-                            CustomSwitchRow(
-                                text = R.string.more_precise_slider,
-                                checked = morePreciseSlider
-                            ) {
+                            CustomSwitchRow(R.string.more_precise_slider, morePreciseSlider) {
                                 view.hapticFeedback()
                                 morePreciseSlider = it
                             }
@@ -249,7 +240,7 @@ fun Volume() {
                     },
                     confirmButton = {
                         Button(
-                            onClick = {
+                            {
                                 view.hapticFeedback()
                                 if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
                                     if (newCustomVolume.toInt() != 0) view.showSnackbar(R.string.system_media_volume_levels_limited)
@@ -269,25 +260,23 @@ fun Volume() {
                             },
                             elevation = ButtonDefaults.buttonElevation(1.dp)
                         ) {
-                            Text(text = stringResource(id = android.R.string.ok))
+                            Text(stringResource(android.R.string.ok))
                         }
                     },
                     dismissButton = {
-                        TextButton(
-                            onClick = {
-                                view.hapticFeedback()
-                                if (!mHaveCustomLabel) mHaveCustomLabel = false
-                                showVolumeDialog = false
-                                selectedIndex = when (AudioUtil.mediaVolume) {
-                                    0 -> 0
-                                    (0.4 * maxVolume).toInt() -> 1
-                                    (0.6 * maxVolume).toInt() -> 2
-                                    (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
-                                    else -> null
-                                }
+                        TextButton({
+                            view.hapticFeedback()
+                            if (!mHaveCustomLabel) mHaveCustomLabel = false
+                            showVolumeDialog = false
+                            selectedIndex = when (AudioUtil.mediaVolume) {
+                                0 -> 0
+                                (0.4 * maxVolume).toInt() -> 1
+                                (0.6 * maxVolume).toInt() -> 2
+                                (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
+                                else -> null
                             }
-                        ) {
-                            Text(text = stringResource(android.R.string.cancel))
+                        }) {
+                            Text(stringResource(android.R.string.cancel))
                         }
                     }
                 )
@@ -296,29 +285,22 @@ fun Volume() {
 
         if (mCustomVolume > 0) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-                TextButton(
-                    onClick = {
-                        view.hapticFeedback()
-                        showVolumeDialog = true
-                    }
-                ) {
+                TextButton({
+                    view.hapticFeedback()
+                    showVolumeDialog = true
+                }) {
                     Icon(
                         imageVector = Icons.Outlined.Edit,
-                        contentDescription = stringResource(id = R.string.edit),
+                        contentDescription = stringResource(R.string.edit),
                         modifier = Modifier.align(Alignment.CenterVertically)
                     )
                     SpacerPadding()
-                    Text(text = stringResource(R.string.edit))
+                    Text(stringResource(R.string.edit))
                 }
             }
         }
     }
-}
-
-fun View.setVolume(volume: Number) {
-    AudioUtil.setMediaVolume(volume.toInt())
-    this.showSnackbar(R.string.volume_changed)
 }

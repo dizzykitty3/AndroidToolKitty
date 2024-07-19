@@ -12,13 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import me.dizzykitty3.androidtoolkitty.data.DEBUGGING_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.EDIT_HOME_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.HOME_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.LICENSES_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.QR_CODE_GENERATOR_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.SETTINGS_SCREEN
+import me.dizzykitty3.androidtoolkitty.data.SCR_DEBUGGING
+import me.dizzykitty3.androidtoolkitty.data.SCR_EDIT_HOME
+import me.dizzykitty3.androidtoolkitty.data.SCR_HOME
+import me.dizzykitty3.androidtoolkitty.data.SCR_LICENSES
+import me.dizzykitty3.androidtoolkitty.data.SCR_PERMISSION_REQUEST
+import me.dizzykitty3.androidtoolkitty.data.SCR_QR_CODE_GENERATOR
+import me.dizzykitty3.androidtoolkitty.data.SCR_SETTINGS
 import me.dizzykitty3.androidtoolkitty.ui.screens.PermissionRequest
 import me.dizzykitty3.androidtoolkitty.ui.screens.QRCodeGenerator
 import me.dizzykitty3.androidtoolkitty.ui.screens.home.Home
@@ -36,7 +36,7 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = HOME_SCREEN,
+        startDestination = SCR_HOME,
         enterTransition = {
             if (fadeAnimation)
                 fadeIn(animationSpec = tween(DEFAULT_FADE_DURATION)) +
@@ -75,13 +75,13 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
                         animationSpec = tween(DEFAULT_SCALE_DURATION)
                     )
         }) {
-        composable(HOME_SCREEN) { Home(settingsViewModel, navController) }
-        composable(SETTINGS_SCREEN) { Settings(settingsViewModel, navController) }
-        composable(EDIT_HOME_SCREEN) { HomeEdit(settingsViewModel) }
-        composable(PERMISSION_REQUEST_SCREEN) { PermissionRequest(settingsViewModel) }
-        composable(QR_CODE_GENERATOR_SCREEN) { QRCodeGenerator(settingsViewModel) }
-        composable(DEBUGGING_SCREEN) { DebuggingScreen(settingsViewModel, navController) }
-        composable(LICENSES_SCREEN) { Licenses() }
+        composable(SCR_HOME) { Home(settingsViewModel, navController) }
+        composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
+        composable(SCR_EDIT_HOME) { HomeEdit(settingsViewModel) }
+        composable(SCR_PERMISSION_REQUEST) { PermissionRequest(settingsViewModel) }
+        composable(SCR_QR_CODE_GENERATOR) { QRCodeGenerator(settingsViewModel) }
+        composable(SCR_DEBUGGING) { DebuggingScreen(settingsViewModel, navController) }
+        composable(SCR_LICENSES) { Licenses() }
     }
 }
 

@@ -46,7 +46,7 @@ fun QRCodeGenerator(settingsViewModel: SettingsViewModel) {
                 onValueChange = { input = it },
                 label = { Text(text = "Contents") },
                 trailingIcon = {
-                    ClearInput(text = input) {
+                    ClearInput(input) {
                         input = ""
                     }
                 }

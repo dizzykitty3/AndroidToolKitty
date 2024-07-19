@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openAppDetailSettings
-import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.domain.utils.PermissionUtil.noBluetoothPermission
 import me.dizzykitty3.androidtoolkitty.domain.utils.PermissionUtil.noLocationPermission
 import me.dizzykitty3.androidtoolkitty.domain.utils.PermissionUtil.requestBluetoothPermission
@@ -32,19 +31,17 @@ import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 @Composable
 fun PermissionRequest(settingsViewModel: SettingsViewModel) {
     Screen {
-        Card(
-            title = (R.string.request_permission),
-            icon = Icons.Outlined.Shield
-        ) {
+        Card(R.string.request_permission, Icons.Outlined.Shield) {
             var clickCount by remember { mutableIntStateOf(0) }
             var clickCount2 by remember { mutableIntStateOf(0) }
             val view = LocalView.current
 
-            if (OSVersion.a12()) Text(text = stringResource(id = R.string.bluetooth_connect))
-            else Text(text = stringResource(id = R.string.bluetooth_bluetooth_admin))
+            // TODO Split
+
+            Text(stringResource(R.string.bluetooth_connect))
 
             Button(
-                onClick = {
+                {
                     view.hapticFeedback()
                     if (view.context.noBluetoothPermission()) {
                         view.context.requestBluetoothPermission()
@@ -54,16 +51,14 @@ fun PermissionRequest(settingsViewModel: SettingsViewModel) {
                     view.showSnackbar(R.string.success_and_back)
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
-            ) {
-                Text(text = stringResource(id = R.string.request_permission))
-            }
+            ) { Text(stringResource(R.string.request_permission)) }
 
             GroupDivider()
 
             Text(stringResource(R.string.fine_location))
 
             Button(
-                onClick = {
+                {
                     view.hapticFeedback()
                     if (view.context.noLocationPermission()) {
                         view.context.requestLocationPermission()
@@ -87,15 +82,13 @@ fun PermissionRequest(settingsViewModel: SettingsViewModel) {
 fun ManuallyGrant() {
     val view = LocalView.current
 
-    Text(text = stringResource(id = R.string.missed_sys_popup))
-    TextButton(
-        onClick = {
-            view.hapticFeedback()
-            view.context.openAppDetailSettings()
-        }
-    ) {
+    Text(stringResource(R.string.missed_sys_popup))
+    TextButton({
+        view.hapticFeedback()
+        view.context.openAppDetailSettings()
+    }) {
         Text(
-            text = stringResource(id = R.string.go_to_settings),
+            stringResource(R.string.go_to_settings),
             color = MaterialTheme.colorScheme.primary
         )
     }

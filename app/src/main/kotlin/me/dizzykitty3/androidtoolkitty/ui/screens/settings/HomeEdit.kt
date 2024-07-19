@@ -46,9 +46,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
         val isShowCard5 = settingsSharedPref.getCardShowedState(CARD_5)
         var mIsShowCard5 by remember { mutableStateOf(isShowCard5) }
 
-        Card(
-            title = R.string.customize_my_home_page
-        ) {
+        Card(R.string.customize_my_home_page) {
             val view = LocalView.current
             var mIsShowCard1 by remember {
                 mutableStateOf(

@@ -131,7 +131,6 @@
     <string name="open_app_detail_settings">Open app detail settings</string>
     <string name="request_permission">権限をリクエスト</string>
     <string name="bluetooth_connect">ペアリングされた Bluetooth デバイスを確認するには、アプリに近くのデバイスの権限を付与してください。</string>
-    <string name="bluetooth_bluetooth_admin">ペアリングされた Bluetooth デバイスを確認するには、アプリに BLUETOOTH、BLUETOOTH_ADMIN の権限を付与してください。</string>
     <string name="missed_sys_popup">システム権限ポップアップを見逃しましたか？</string>
     <string name="query">クエリ</string>
     <string name="keep_showing_full_webpage_card">Keep showing full Webpage card</string>

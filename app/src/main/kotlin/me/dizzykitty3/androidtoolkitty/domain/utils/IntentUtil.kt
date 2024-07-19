@@ -18,22 +18,22 @@ import me.dizzykitty3.androidtoolkitty.data.GOOGLE_MAPS
 import me.dizzykitty3.androidtoolkitty.data.GOOGLE_PLAY
 import me.dizzykitty3.androidtoolkitty.data.HTTPS
 import me.dizzykitty3.androidtoolkitty.data.PACKAGE
-import me.dizzykitty3.androidtoolkitty.data.SETTING_ACCESSIBILITY
-import me.dizzykitty3.androidtoolkitty.data.SETTING_AUTO_ROTATE
-import me.dizzykitty3.androidtoolkitty.data.SETTING_BATTERY_OPTIMIZATION
-import me.dizzykitty3.androidtoolkitty.data.SETTING_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.data.SETTING_CAPTIONING
-import me.dizzykitty3.androidtoolkitty.data.SETTING_DATE
-import me.dizzykitty3.androidtoolkitty.data.SETTING_DEFAULT_APPS
-import me.dizzykitty3.androidtoolkitty.data.SETTING_DEVELOPER
-import me.dizzykitty3.androidtoolkitty.data.SETTING_DISPLAY
-import me.dizzykitty3.androidtoolkitty.data.SETTING_ENABLE_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.data.SETTING_LOCALE
-import me.dizzykitty3.androidtoolkitty.data.SETTING_OVERLAY
-import me.dizzykitty3.androidtoolkitty.data.SETTING_POWER_USAGE_SUMMARY
-import me.dizzykitty3.androidtoolkitty.data.SETTING_USAGE_ACCESS
-import me.dizzykitty3.androidtoolkitty.data.SETTING_WIFI
-import me.dizzykitty3.androidtoolkitty.data.SETTING_WRITE_SETTINGS
+import me.dizzykitty3.androidtoolkitty.data.S_ACCESSIBILITY
+import me.dizzykitty3.androidtoolkitty.data.S_AUTO_ROTATE
+import me.dizzykitty3.androidtoolkitty.data.S_BATTERY_OPTIMIZATION
+import me.dizzykitty3.androidtoolkitty.data.S_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.data.S_CAPTIONING
+import me.dizzykitty3.androidtoolkitty.data.S_DATE
+import me.dizzykitty3.androidtoolkitty.data.S_DEFAULT_APPS
+import me.dizzykitty3.androidtoolkitty.data.S_DEVELOPER
+import me.dizzykitty3.androidtoolkitty.data.S_DISPLAY
+import me.dizzykitty3.androidtoolkitty.data.S_ENABLE_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.data.S_LOCALE
+import me.dizzykitty3.androidtoolkitty.data.S_OVERLAY
+import me.dizzykitty3.androidtoolkitty.data.S_POWER_USAGE_SUMMARY
+import me.dizzykitty3.androidtoolkitty.data.S_USAGE_ACCESS
+import me.dizzykitty3.androidtoolkitty.data.S_WIFI
+import me.dizzykitty3.androidtoolkitty.data.S_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.domain.utils.ToastUtil.showToast
 import timber.log.Timber
@@ -120,32 +120,32 @@ object IntentUtil {
     @JvmStatic
     fun Context.openSystemSettings(settingType: String) {
         val intent: Intent = when (settingType) {
-            SETTING_DISPLAY -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
-            SETTING_AUTO_ROTATE -> @SuppressLint("InlinedApi") if (OSVersion.a12())
+            S_DISPLAY -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
+            S_AUTO_ROTATE -> @SuppressLint("InlinedApi") if (OSVersion.a12())
                 Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
 
-            SETTING_BLUETOOTH -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
-            SETTING_DEFAULT_APPS -> @SuppressLint("InlinedApi") if (OSVersion.api24())
+            S_BLUETOOTH -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
+            S_DEFAULT_APPS -> @SuppressLint("InlinedApi") if (OSVersion.api24())
                 Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS) else return
 
-            SETTING_BATTERY_OPTIMIZATION -> @SuppressLint("InlinedApi") if (OSVersion.api23())
+            S_BATTERY_OPTIMIZATION -> @SuppressLint("InlinedApi") if (OSVersion.api23())
                 Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS) else return
 
-            SETTING_CAPTIONING -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
-            SETTING_USAGE_ACCESS -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-            SETTING_OVERLAY -> @SuppressLint("InlinedApi") if (OSVersion.api23())
+            S_CAPTIONING -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
+            S_USAGE_ACCESS -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
+            S_OVERLAY -> @SuppressLint("InlinedApi") if (OSVersion.api23())
                 Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION) else return
 
-            SETTING_WRITE_SETTINGS -> @SuppressLint("InlinedApi") if (OSVersion.api23())
+            S_WRITE_SETTINGS -> @SuppressLint("InlinedApi") if (OSVersion.api23())
                 Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS) else return
 
-            SETTING_LOCALE -> Intent(Settings.ACTION_LOCALE_SETTINGS)
-            SETTING_DATE -> Intent(Settings.ACTION_DATE_SETTINGS)
-            SETTING_DEVELOPER -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
-            SETTING_ENABLE_BLUETOOTH -> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-            SETTING_WIFI -> Intent(Settings.ACTION_WIFI_SETTINGS)
-            SETTING_POWER_USAGE_SUMMARY -> Intent(ACTION_POWER_USAGE_SUMMARY)
-            SETTING_ACCESSIBILITY -> Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+            S_LOCALE -> Intent(Settings.ACTION_LOCALE_SETTINGS)
+            S_DATE -> Intent(Settings.ACTION_DATE_SETTINGS)
+            S_DEVELOPER -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
+            S_ENABLE_BLUETOOTH -> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            S_WIFI -> Intent(Settings.ACTION_WIFI_SETTINGS)
+            S_POWER_USAGE_SUMMARY -> Intent(ACTION_POWER_USAGE_SUMMARY)
+            S_ACCESSIBILITY -> Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             else -> return
         }
         Timber.d("onOpenSystemSettings: $settingType")

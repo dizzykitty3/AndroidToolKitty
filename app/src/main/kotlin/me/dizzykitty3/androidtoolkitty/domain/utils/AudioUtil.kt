@@ -36,6 +36,13 @@ object AudioUtil {
             if (isAutoSetVolume) AudioManager.FLAG_SHOW_UI else 0
         )
 
+    fun setVoiceCallVolume(volume: Int) =
+        audioManager.setStreamVolume(
+            AudioManager.STREAM_VOICE_CALL,
+            volume,
+            AudioManager.FLAG_SHOW_UI
+        )
+
     private fun View.setMediaVolumeByPercentage(percentage: Int) {
         val indexedVolume = (maxMediaVolumeIndex * 0.01 * percentage).toInt()
         Timber.d("current = $mediaVolume, target = $indexedVolume")
@@ -75,4 +82,9 @@ object AudioUtil {
     }
 
     private fun Float.isNotAtHome(): Boolean = this >= 50f
+
+    fun View.setVolume(volume: Number) {
+        setMediaVolume(volume.toInt())
+        this.showSnackbar(R.string.volume_changed)
+    }
 }

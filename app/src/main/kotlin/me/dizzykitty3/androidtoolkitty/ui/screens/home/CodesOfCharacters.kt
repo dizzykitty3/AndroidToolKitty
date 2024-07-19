@@ -80,7 +80,7 @@ fun CodesOfCharacters() {
                 }
             ),
             trailingIcon = {
-                ClearInput(text = unicode) {
+                ClearInput(unicode) {
                     view.hapticFeedback()
                     unicode = ""
                 }
@@ -109,7 +109,7 @@ fun CodesOfCharacters() {
                 }
             ),
             trailingIcon = {
-                ClearInput(text = characters) {
+                ClearInput(characters) {
                     view.hapticFeedback()
                     characters = ""
                 }
@@ -151,7 +151,7 @@ fun CodesOfCharacters() {
                 }
             ),
             trailingIcon = {
-                ClearInput(text = stringToASCII) {
+                ClearInput(stringToASCII) {
                     view.hapticFeedback()
                     stringToASCII = ""
                 }

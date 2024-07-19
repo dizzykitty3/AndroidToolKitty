@@ -58,10 +58,10 @@ import me.dizzykitty3.androidtoolkitty.data.CARD_6
 import me.dizzykitty3.androidtoolkitty.data.CARD_7
 import me.dizzykitty3.androidtoolkitty.data.CARD_8
 import me.dizzykitty3.androidtoolkitty.data.CARD_9
-import me.dizzykitty3.androidtoolkitty.data.SETTINGS_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.SETTING_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.data.SETTING_POWER_USAGE_SUMMARY
-import me.dizzykitty3.androidtoolkitty.data.SETTING_WIFI
+import me.dizzykitty3.androidtoolkitty.data.SCR_SETTINGS
+import me.dizzykitty3.androidtoolkitty.data.S_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.data.S_POWER_USAGE_SUMMARY
+import me.dizzykitty3.androidtoolkitty.data.S_WIFI
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.BluetoothUtil.isHeadsetConnected
@@ -146,7 +146,7 @@ private fun SettingsButton(settingsViewModel: SettingsViewModel, navController: 
         IconButton(
             {
                 view.hapticFeedback()
-                navController.navigate(SETTINGS_SCREEN)
+                navController.navigate(SCR_SETTINGS)
                 settingsViewModel.update(settingsViewModel.settings.value.copy(haveOpenedSettings = true))
             },
             modifier = Modifier.size(40.dp)
@@ -168,7 +168,7 @@ private fun Status(settingsViewModel: SettingsViewModel) {
     Row(Modifier.horizontalScroll(rememberScrollState())) {
         Row(Modifier.clickable {
             view.hapticFeedback()
-            view.context.openSystemSettings(SETTING_POWER_USAGE_SUMMARY)
+            view.context.openSystemSettings(S_POWER_USAGE_SUMMARY)
         }) {
             Icon(
                 imageVector = Icons.Outlined.BatteryStd,
@@ -189,7 +189,7 @@ private fun Status(settingsViewModel: SettingsViewModel) {
         if (view.context.isHeadsetConnected() || devMode) {
             Row(Modifier.clickable {
                 view.hapticFeedback()
-                view.context.openSystemSettings(SETTING_BLUETOOTH)
+                view.context.openSystemSettings(S_BLUETOOTH)
             }) {
                 Icon(
                     imageVector = Icons.Outlined.MediaBluetoothOn,
@@ -248,7 +248,7 @@ private fun NetworkStateIcon(
 
     Row(Modifier.clickable {
         view.hapticFeedback()
-        view.context.openSystemSettings(SETTING_WIFI)
+        view.context.openSystemSettings(S_WIFI)
     }
     ) {
         Icon(
@@ -313,7 +313,7 @@ private fun CardContent(
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice(navController)
         CARD_8 -> CodesOfCharacters()
-        CARD_9 -> AppMarket()
+        CARD_9 -> CheckAppOnMarket()
         CARD_10 -> Maps()
         CARD_11 -> AndroidVersions()
         CARD_12 -> FontWeight()

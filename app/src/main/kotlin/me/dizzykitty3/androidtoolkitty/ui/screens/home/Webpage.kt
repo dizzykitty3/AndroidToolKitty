@@ -100,7 +100,7 @@ private fun Search() {
             }
         ),
         trailingIcon = {
-            ClearInput(text = searchQuery) {
+            ClearInput(searchQuery) {
                 view.hapticFeedback()
                 searchQuery = ""
             }
@@ -239,7 +239,7 @@ private fun SocialMediaProfileIURL() {
             }
         ),
         trailingIcon = {
-            ClearInput(text = username) {
+            ClearInput(username) {
                 view.hapticFeedback()
                 username = ""
             }

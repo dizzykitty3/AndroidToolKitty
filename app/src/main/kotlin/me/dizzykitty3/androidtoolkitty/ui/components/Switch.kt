@@ -29,9 +29,7 @@ fun CustomHideCardSettingSwitch(
         },
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Column(Modifier.weight(1f)) {
-            Text(stringResource(text))
-        }
+        Column(Modifier.weight(1f)) { Text(stringResource(text)) }
         Column {
             Switch(
                 checked = isChecked,
@@ -55,9 +53,7 @@ fun CustomSwitchRow(
         Modifier.clickable { onCheckedChange(!checked) },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(Modifier.weight(1f)) {
-            Text(text)
-        }
+        Column(Modifier.weight(1f)) { Text(text) }
         Column {
             Switch(
                 checked = checked,

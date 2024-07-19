@@ -18,18 +18,19 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.SETTING_AUTO_ROTATE
-import me.dizzykitty3.androidtoolkitty.data.SETTING_BATTERY_OPTIMIZATION
-import me.dizzykitty3.androidtoolkitty.data.SETTING_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.data.SETTING_CAPTIONING
-import me.dizzykitty3.androidtoolkitty.data.SETTING_DATE
-import me.dizzykitty3.androidtoolkitty.data.SETTING_DEFAULT_APPS
-import me.dizzykitty3.androidtoolkitty.data.SETTING_DEVELOPER
-import me.dizzykitty3.androidtoolkitty.data.SETTING_DISPLAY
-import me.dizzykitty3.androidtoolkitty.data.SETTING_LOCALE
-import me.dizzykitty3.androidtoolkitty.data.SETTING_OVERLAY
-import me.dizzykitty3.androidtoolkitty.data.SETTING_USAGE_ACCESS
-import me.dizzykitty3.androidtoolkitty.data.SETTING_WRITE_SETTINGS
+import me.dizzykitty3.androidtoolkitty.data.S_ACCESSIBILITY
+import me.dizzykitty3.androidtoolkitty.data.S_AUTO_ROTATE
+import me.dizzykitty3.androidtoolkitty.data.S_BATTERY_OPTIMIZATION
+import me.dizzykitty3.androidtoolkitty.data.S_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.data.S_CAPTIONING
+import me.dizzykitty3.androidtoolkitty.data.S_DATE
+import me.dizzykitty3.androidtoolkitty.data.S_DEFAULT_APPS
+import me.dizzykitty3.androidtoolkitty.data.S_DEVELOPER
+import me.dizzykitty3.androidtoolkitty.data.S_DISPLAY
+import me.dizzykitty3.androidtoolkitty.data.S_LOCALE
+import me.dizzykitty3.androidtoolkitty.data.S_OVERLAY
+import me.dizzykitty3.androidtoolkitty.data.S_USAGE_ACCESS
+import me.dizzykitty3.androidtoolkitty.data.S_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
@@ -40,209 +41,225 @@ import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 
 @Composable
 fun SysSettingsCardEdit() {
-    Card(title = R.string.customize_system_settings_card) {
+    Card(R.string.customize_system_settings_card) {
         val view = LocalView.current
         val settingsSharedPref = remember { SettingsSharedPref }
         var mIsShowSetting1 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_DISPLAY
+                    S_DISPLAY
                 )
             )
         }
         var mIsShowSetting2 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_AUTO_ROTATE
+                    S_AUTO_ROTATE
                 )
             )
         }
         var mIsShowSetting3 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_BLUETOOTH
+                    S_BLUETOOTH
                 )
             )
         }
         var mIsShowSetting4 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_DEFAULT_APPS
+                    S_DEFAULT_APPS
                 )
             )
         }
         var mIsShowSetting5 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_BATTERY_OPTIMIZATION
+                    S_BATTERY_OPTIMIZATION
                 )
             )
         }
         var mIsShowSetting6 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_CAPTIONING
+                    S_CAPTIONING
                 )
             )
         }
         var mIsShowSetting7 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_USAGE_ACCESS
+                    S_USAGE_ACCESS
                 )
             )
         }
         var mIsShowSetting8 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_OVERLAY
+                    S_OVERLAY
                 )
             )
         }
         var mIsShowSetting9 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_WRITE_SETTINGS
+                    S_WRITE_SETTINGS
                 )
             )
         }
         var mIsShowSetting10 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_LOCALE
+                    S_ACCESSIBILITY
                 )
             )
         }
         var mIsShowSetting11 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_DATE
+                    S_LOCALE
                 )
             )
         }
         var mIsShowSetting12 by remember {
             mutableStateOf(
                 settingsSharedPref.getCardShowedState(
-                    SETTING_DEVELOPER
+                    S_DATE
+                )
+            )
+        }
+        var mIsShowSetting13 by remember {
+            mutableStateOf(
+                settingsSharedPref.getCardShowedState(
+                    S_DEVELOPER
                 )
             )
         }
 
         CustomHideCardSettingSwitch(
             text = R.string.open_display_settings,
-            card = SETTING_DISPLAY,
+            card = S_DISPLAY,
             isChecked = mIsShowSetting1
         ) { newState ->
             view.hapticFeedback()
             mIsShowSetting1 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_DISPLAY, newState)
+            settingsSharedPref.saveCardShowedState(S_DISPLAY, newState)
         }
         if (OSVersion.a12()) {
             CustomHideCardSettingSwitch(
                 text = R.string.open_auto_rotate_settings,
-                card = SETTING_AUTO_ROTATE,
+                card = S_AUTO_ROTATE,
                 isChecked = mIsShowSetting2
             ) { newState ->
                 view.hapticFeedback()
                 mIsShowSetting2 = newState
-                settingsSharedPref.saveCardShowedState(SETTING_AUTO_ROTATE, newState)
+                settingsSharedPref.saveCardShowedState(S_AUTO_ROTATE, newState)
             }
         }
         CustomHideCardSettingSwitch(
             text = R.string.open_bluetooth_settings,
-            card = SETTING_BLUETOOTH,
+            card = S_BLUETOOTH,
             isChecked = mIsShowSetting3
         ) { newState ->
             view.hapticFeedback()
             mIsShowSetting3 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_BLUETOOTH, newState)
+            settingsSharedPref.saveCardShowedState(S_BLUETOOTH, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.open_default_apps_settings,
-            card = SETTING_DEFAULT_APPS,
+            card = S_DEFAULT_APPS,
             isChecked = mIsShowSetting4
         ) { newState ->
             view.hapticFeedback()
             mIsShowSetting4 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_DEFAULT_APPS, newState)
+            settingsSharedPref.saveCardShowedState(S_DEFAULT_APPS, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.open_battery_optimization_settings,
-            card = SETTING_BATTERY_OPTIMIZATION,
+            card = S_BATTERY_OPTIMIZATION,
             isChecked = mIsShowSetting5
         ) { newState ->
             view.hapticFeedback()
             mIsShowSetting5 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_BATTERY_OPTIMIZATION, newState)
+            settingsSharedPref.saveCardShowedState(S_BATTERY_OPTIMIZATION, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.open_caption_preferences,
-            card = SETTING_CAPTIONING,
+            card = S_CAPTIONING,
             isChecked = mIsShowSetting6
         ) { newState ->
             view.hapticFeedback()
             mIsShowSetting6 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_CAPTIONING, newState)
+            settingsSharedPref.saveCardShowedState(S_CAPTIONING, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.open_usage_access_permission,
-            card = SETTING_USAGE_ACCESS,
+            card = S_USAGE_ACCESS,
             isChecked = mIsShowSetting7
         ) { newState ->
             view.hapticFeedback()
             mIsShowSetting7 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_USAGE_ACCESS, newState)
+            settingsSharedPref.saveCardShowedState(S_USAGE_ACCESS, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.open_overlay_permission,
-            card = SETTING_OVERLAY,
+            card = S_OVERLAY,
             isChecked = mIsShowSetting8
         ) { newState ->
             view.hapticFeedback()
             mIsShowSetting8 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_OVERLAY, newState)
+            settingsSharedPref.saveCardShowedState(S_OVERLAY, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.open_write_permission,
-            card = SETTING_WRITE_SETTINGS,
+            card = S_WRITE_SETTINGS,
             isChecked = mIsShowSetting9
         ) { newState ->
             view.hapticFeedback()
             mIsShowSetting9 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_WRITE_SETTINGS, newState)
+            settingsSharedPref.saveCardShowedState(S_WRITE_SETTINGS, newState)
         }
         CustomHideCardSettingSwitch(
-            text = R.string.open_language_settings,
-            card = SETTING_LOCALE,
+            text = R.string.open_accessibility_settings,
+            card = S_ACCESSIBILITY,
             isChecked = mIsShowSetting10
         ) { newState ->
             view.hapticFeedback()
             mIsShowSetting10 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_LOCALE, newState)
+            settingsSharedPref.saveCardShowedState(S_ACCESSIBILITY, newState)
         }
         CustomHideCardSettingSwitch(
-            text = R.string.open_date_and_time_settings,
-            card = SETTING_DATE,
+            text = R.string.open_language_settings,
+            card = S_LOCALE,
             isChecked = mIsShowSetting11
         ) { newState ->
             view.hapticFeedback()
             mIsShowSetting11 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_DATE, newState)
+            settingsSharedPref.saveCardShowedState(S_LOCALE, newState)
         }
         CustomHideCardSettingSwitch(
-            text = R.string.open_developer_options,
-            card = SETTING_DEVELOPER,
+            text = R.string.open_date_and_time_settings,
+            card = S_DATE,
             isChecked = mIsShowSetting12
         ) { newState ->
             view.hapticFeedback()
             mIsShowSetting12 = newState
-            settingsSharedPref.saveCardShowedState(SETTING_DEVELOPER, newState)
+            settingsSharedPref.saveCardShowedState(S_DATE, newState)
+        }
+        CustomHideCardSettingSwitch(
+            text = R.string.open_developer_options,
+            card = S_DEVELOPER,
+            isChecked = mIsShowSetting13
+        ) { newState ->
+            view.hapticFeedback()
+            mIsShowSetting13 = newState
+            settingsSharedPref.saveCardShowedState(S_DEVELOPER, newState)
         }
 
         GroupDivider()
 
         Button(
-            onClick = {
+            {
                 view.hapticFeedback()
                 onClickChangeAllCardsButton(false)
                 mIsShowSetting1 = false
@@ -257,20 +274,21 @@ fun SysSettingsCardEdit() {
                 mIsShowSetting10 = false
                 mIsShowSetting11 = false
                 mIsShowSetting12 = false
+                mIsShowSetting13 = false
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
             Icon(
                 imageVector = Icons.Outlined.VisibilityOff,
-                contentDescription = stringResource(id = R.string.hide_all_options),
+                contentDescription = stringResource(R.string.hide_all_options),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             SpacerPadding()
-            Text(text = stringResource(R.string.hide_all_options))
+            Text(stringResource(R.string.hide_all_options))
         }
 
         Button(
-            onClick = {
+            {
                 view.hapticFeedback()
                 onClickChangeAllCardsButton(true)
                 mIsShowSetting1 = true
@@ -285,34 +303,36 @@ fun SysSettingsCardEdit() {
                 mIsShowSetting10 = true
                 mIsShowSetting11 = true
                 mIsShowSetting12 = true
+                mIsShowSetting13 = true
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
             Icon(
                 imageVector = Icons.Outlined.Visibility,
-                contentDescription = stringResource(id = R.string.show_all_options),
+                contentDescription = stringResource(R.string.show_all_options),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             SpacerPadding()
-            Text(text = stringResource(R.string.show_all_options))
+            Text(stringResource(R.string.show_all_options))
         }
     }
 }
 
 private fun onClickChangeAllCardsButton(isShow: Boolean) {
     val settingList = listOf(
-        SETTING_DISPLAY,
-        SETTING_AUTO_ROTATE,
-        SETTING_BLUETOOTH,
-        SETTING_DEFAULT_APPS,
-        SETTING_BATTERY_OPTIMIZATION,
-        SETTING_CAPTIONING,
-        SETTING_USAGE_ACCESS,
-        SETTING_OVERLAY,
-        SETTING_WRITE_SETTINGS,
-        SETTING_LOCALE,
-        SETTING_DATE,
-        SETTING_DEVELOPER
+        S_DISPLAY,
+        S_AUTO_ROTATE,
+        S_BLUETOOTH,
+        S_DEFAULT_APPS,
+        S_BATTERY_OPTIMIZATION,
+        S_CAPTIONING,
+        S_USAGE_ACCESS,
+        S_OVERLAY,
+        S_WRITE_SETTINGS,
+        S_ACCESSIBILITY,
+        S_LOCALE,
+        S_DATE,
+        S_DEVELOPER
     )
     val settingsViewModel = SettingsSharedPref
 

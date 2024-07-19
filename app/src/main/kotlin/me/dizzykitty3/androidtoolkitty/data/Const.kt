@@ -4,14 +4,16 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 
-const val SETTINGS_SCREEN = "SettingsScreen"
-const val HOME_SCREEN = "HomeScreen"
-const val EDIT_HOME_SCREEN = "EditHomeScreen"
-const val PERMISSION_REQUEST_SCREEN = "PermissionRequestScreen"
-const val QR_CODE_GENERATOR_SCREEN = "QrCodeGeneratorScreen"
-const val DEBUGGING_SCREEN = "DebuggingScreen"
-const val LICENSES_SCREEN = "LicensesScreen"
+// App screens
+const val SCR_SETTINGS = "SettingsScreen"
+const val SCR_HOME = "HomeScreen"
+const val SCR_EDIT_HOME = "EditHomeScreen"
+const val SCR_PERMISSION_REQUEST = "PermissionRequestScreen"
+const val SCR_QR_CODE_GENERATOR = "QrCodeGeneratorScreen"
+const val SCR_DEBUGGING = "DebuggingScreen"
+const val SCR_LICENSES = "LicensesScreen"
 
+// App cards
 const val CARD_1 = "card_year_progress"
 const val CARD_2 = "card_volume"
 const val CARD_3 = "card_clipboard"
@@ -25,23 +27,28 @@ const val CARD_10 = "card_google_maps"
 const val CARD_11 = "card_android_version"
 const val CARD_12 = "card_font_weight"
 
-const val SETTING_DISPLAY = "setting_display"
-const val SETTING_AUTO_ROTATE = "setting_auto_rotate"
-const val SETTING_BLUETOOTH = "setting_bluetooth"
-const val SETTING_DEFAULT_APPS = "setting_default_apps"
-const val SETTING_BATTERY_OPTIMIZATION = "setting_battery_optimization"
-const val SETTING_CAPTIONING = "setting_captioning"
-const val SETTING_USAGE_ACCESS = "setting_usage_access"
-const val SETTING_OVERLAY = "setting_overlay"
-const val SETTING_WRITE_SETTINGS = "setting_write_settings"
-const val SETTING_LOCALE = "setting_locale"
-const val SETTING_DATE = "setting_date"
-const val SETTING_DEVELOPER = "setting_developer"
-const val SETTING_ENABLE_BLUETOOTH = "setting_enable_bluetooth"
-const val SETTING_WIFI = "setting_wifi"
-const val SETTING_POWER_USAGE_SUMMARY = "setting_power_usage_summary"
-const val SETTING_ACCESSIBILITY = "setting_accessibility"
+// App strings
+const val ADD = "+ Add"
 
+// Android intents
+const val S_DISPLAY = "setting_display"
+const val S_AUTO_ROTATE = "setting_auto_rotate"
+const val S_BLUETOOTH = "setting_bluetooth"
+const val S_DEFAULT_APPS = "setting_default_apps"
+const val S_BATTERY_OPTIMIZATION = "setting_battery_optimization"
+const val S_CAPTIONING = "setting_captioning"
+const val S_USAGE_ACCESS = "setting_usage_access"
+const val S_OVERLAY = "setting_overlay"
+const val S_WRITE_SETTINGS = "setting_write_settings"
+const val S_LOCALE = "setting_locale"
+const val S_DATE = "setting_date"
+const val S_DEVELOPER = "setting_developer"
+const val S_ENABLE_BLUETOOTH = "setting_enable_bluetooth"
+const val S_WIFI = "setting_wifi"
+const val S_POWER_USAGE_SUMMARY = "setting_power_usage_summary"
+const val S_ACCESSIBILITY = "setting_accessibility"
+
+// Android permissions
 @SuppressLint("InlinedApi")
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 const val BT = Manifest.permission.BLUETOOTH
@@ -50,10 +57,12 @@ const val FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
 const val COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION
 const val GRANTED = PackageManager.PERMISSION_GRANTED
 
+// Android package names
 const val PACKAGE = "package"
 const val GOOGLE_MAPS = "com.google.android.apps.maps"
 const val GOOGLE_PLAY = "com.android.vending"
 
+// URL
 const val HTTPS = "https://"
 const val BG = ".bg"
 const val CN = ".cn"
@@ -77,5 +86,4 @@ const val TO = ".to"
 const val TV = ".tv"
 const val US = ".us"
 const val WIKI = ".wiki"
-
-const val SOURCE_CODE_URL = "https://github.com/dizzykitty3/AndroidToolKitty"
+const val SOURCE_CODE = "https://github.com/dizzykitty3/AndroidToolKitty"

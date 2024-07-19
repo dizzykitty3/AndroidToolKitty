@@ -99,7 +99,6 @@
     <string name="no_paired_devices">没有已配对的设备</string>
     <string name="what_is_bt_ble_and_dual">什么是经典、低功耗、双模？</string>
     <string name="bluetooth_connect">要查看已配对的设备，请授予「附近设备」权限</string>
-    <string name="bluetooth_bluetooth_admin">要查看已配对的设备，请授予 BLUETOOTH, BLUETOOTH_ADMIN 权限</string>
     <string name="missed_sys_popup">错过了系统权限弹窗吗？</string>
     <string name="clear_input">清空输入</string>
     <string name="open_app_detail_settings">打开应用详情设置</string>

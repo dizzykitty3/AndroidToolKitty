@@ -1,13 +1,21 @@
 package me.dizzykitty3.androidtoolkitty.domain.utils
 
 import java.time.LocalDate
+import java.time.LocalTime
 import java.time.temporal.ChronoUnit
 
 object DateUtil {
-    val daysPassed: Long
+    fun greeting(): String = when (LocalTime.now().hour) {
+        in 6..11 -> "Good morning"
+        in 12..18 -> "Good afternoon"
+        in 19..22 -> "Good evening"
+        else -> "Good night"
+    }
+
+    private val daysPassed: Long
         get() = daysFromStartOfYear(LocalDate.now())
 
-    val totalDaysInYear: Long
+    private val totalDaysInYear: Long
         get() = daysFromStartOfYear(LocalDate.of(LocalDate.now().year, 12, 31)) + 1
 
     private fun daysFromStartOfYear(endDate: LocalDate): Long =
@@ -16,6 +24,6 @@ object DateUtil {
     val yearProgress: Float
         get() = daysPassed.toFloat() / totalDaysInYear.toFloat()
 
-    fun yearProgressPercentage(progress: Float): String =
-        (progress * 100).toString().substring(0, 4)
+    fun Float.toProgress(): String =
+        (this * 100).toString().substring(0, 4).plus("%")
 }

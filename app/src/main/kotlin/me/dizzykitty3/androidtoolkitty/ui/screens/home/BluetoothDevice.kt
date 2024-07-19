@@ -32,8 +32,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.SETTING_ENABLE_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.data.SCR_PERMISSION_REQUEST
+import me.dizzykitty3.androidtoolkitty.data.S_ENABLE_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.domain.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openSystemSettings
@@ -59,7 +59,7 @@ fun BluetoothDevice(navController: NavHostController) {
                 view.hapticFeedback()
                 // Check permission
                 if (view.context.noBluetoothPermission()) {
-                    navController.navigate(PERMISSION_REQUEST_SCREEN)
+                    navController.navigate(SCR_PERMISSION_REQUEST)
                     return@OutlinedButton
                 }
 
@@ -79,7 +79,7 @@ fun BluetoothDevice(navController: NavHostController) {
                 }
 
                 // When Bluetooth is OFF
-                view.context.openSystemSettings(SETTING_ENABLE_BLUETOOTH)
+                view.context.openSystemSettings(S_ENABLE_BLUETOOTH)
             }
         ) {
             Icon(

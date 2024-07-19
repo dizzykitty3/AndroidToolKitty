@@ -42,11 +42,8 @@ fun SystemSettingButton(
  * TrailingIcon param of a @Composable TextField, to clear the user input.
  */
 @Composable
-fun ClearInput(
-    text: String,
-    onClick: () -> Unit
-) {
-    if (text.isNotEmpty()) {
+fun ClearInput(input: String, onClick: () -> Unit) {
+    if (input.isNotEmpty()) {
         IconButton(onClick) {
             Icon(
                 imageVector = Icons.Outlined.Clear,

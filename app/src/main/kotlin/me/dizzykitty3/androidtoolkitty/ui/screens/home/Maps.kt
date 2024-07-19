@@ -73,7 +73,7 @@ fun Maps() {
                     }
                 ),
                 trailingIcon = {
-                    ClearInput(text = latitude) {
+                    ClearInput(latitude) {
                         view.hapticFeedback()
                         latitude = ""
                     }
@@ -104,7 +104,7 @@ fun Maps() {
                     }
                 ),
                 trailingIcon = {
-                    ClearInput(text = longitude) {
+                    ClearInput(longitude) {
                         view.hapticFeedback()
                         longitude = ""
                     }

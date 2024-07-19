@@ -32,9 +32,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.google.android.gms.location.LocationServices
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.data.PERMISSION_REQUEST_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.QR_CODE_GENERATOR_SCREEN
+import me.dizzykitty3.androidtoolkitty.data.SCR_PERMISSION_REQUEST
+import me.dizzykitty3.androidtoolkitty.data.SCR_QR_CODE_GENERATOR
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.domain.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.restartApp
@@ -104,7 +105,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
         OutlinedButton({
             view.hapticFeedback()
             if (view.context.noLocationPermission()) {
-                navController.navigate(PERMISSION_REQUEST_SCREEN)
+                navController.navigate(SCR_PERMISSION_REQUEST)
                 return@OutlinedButton
             }
             showLocationDialog = true
@@ -174,7 +175,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                                 view.hapticFeedback()
                                 showLocationDialog = false
                                 if (view.context.noBluetoothPermission()) {
-                                    navController.navigate(PERMISSION_REQUEST_SCREEN)
+                                    navController.navigate(SCR_PERMISSION_REQUEST)
                                     return@Button
                                 }
                                 LocationUtil.saveLocationToStorage(mLatitude, mLongitude)
@@ -188,7 +189,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                                 view.hapticFeedback()
                                 showLocationDialog = false
                                 if (view.context.noBluetoothPermission()) {
-                                    navController.navigate(PERMISSION_REQUEST_SCREEN)
+                                    navController.navigate(SCR_PERMISSION_REQUEST)
                                     return@Button
                                 }
                                 LocationUtil.saveLocationToStorage(mLatitude, mLongitude)
@@ -208,18 +209,26 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
 
         OutlinedButton({
             view.hapticFeedback()
-            navController.navigate(PERMISSION_REQUEST_SCREEN)
+            navController.navigate(SCR_PERMISSION_REQUEST)
         }) {
             Text(stringResource(R.string.go_to_permission_request_screen))
         }
 
-        OutlinedButton(
-            {
-                view.hapticFeedback()
-                navController.navigate(QR_CODE_GENERATOR_SCREEN)
-            }
-        ) {
+        OutlinedButton({
+            view.hapticFeedback()
+            navController.navigate(SCR_QR_CODE_GENERATOR)
+        }) {
             Text(stringResource(R.string.qr_code_generator))
+        }
+
+        OutlinedButton({
+            view.hapticFeedback()
+            val index = AudioUtil.maxVoiceCallVolumeIndex
+            AudioUtil.setVoiceCallVolume(index)
+            val volume = AudioUtil.voiceCallVolume
+            view.showSnackbar("voice call volume = $volume / $index now")
+        }) {
+            Text("max voice call volume")
         }
     }
 

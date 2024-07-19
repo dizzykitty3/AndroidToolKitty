@@ -2,17 +2,9 @@ package me.dizzykitty3.androidtoolkitty.domain.utils
 
 import android.content.Context
 import androidx.annotation.CheckResult
-import java.time.LocalTime
 import java.util.Locale
 
 object StringUtil {
-    fun greeting(): String = when (LocalTime.now().hour) {
-        in 6..11 -> "Good morning"
-        in 12..18 -> "Good afternoon"
-        in 19..22 -> "Good evening"
-        else -> "Good night"
-    }
-
     /**
      * Drop spaces, including full-width ones.
      */

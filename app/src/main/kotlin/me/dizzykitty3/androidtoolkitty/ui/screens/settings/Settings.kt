@@ -23,10 +23,10 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.data.CARD_3
-import me.dizzykitty3.androidtoolkitty.data.DEBUGGING_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.EDIT_HOME_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.LICENSES_SCREEN
-import me.dizzykitty3.androidtoolkitty.data.SOURCE_CODE_URL
+import me.dizzykitty3.androidtoolkitty.data.SCR_DEBUGGING
+import me.dizzykitty3.androidtoolkitty.data.SCR_EDIT_HOME
+import me.dizzykitty3.androidtoolkitty.data.SCR_LICENSES
+import me.dizzykitty3.androidtoolkitty.data.SOURCE_CODE
 import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.domain.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.domain.utils.IntentUtil.openURL
@@ -119,7 +119,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
 
         OutlinedButton({
             view.hapticFeedback()
-            navController.navigate(EDIT_HOME_SCREEN)
+            navController.navigate(SCR_EDIT_HOME)
         }
         ) {
             Icon(
@@ -141,7 +141,7 @@ private fun Bottom(navController: NavHostController) {
         TextButton({
             view.hapticFeedback()
             view.context.showToast(R.string.all_help_welcomed)
-            view.context.openURL(SOURCE_CODE_URL)
+            view.context.openURL(SOURCE_CODE)
         }) {
             Text(stringResource(R.string.view_source_code))
             Icon(
@@ -152,12 +152,12 @@ private fun Bottom(navController: NavHostController) {
         }
         TextButton({
             view.hapticFeedback()
-            navController.navigate(LICENSES_SCREEN)
+            navController.navigate(SCR_LICENSES)
         }) { Text(stringResource(R.string.licenses)) }
         if (!BuildConfig.DEBUG) {
             TextButton({
                 view.hapticFeedback()
-                navController.navigate(DEBUGGING_SCREEN)
+                navController.navigate(SCR_DEBUGGING)
             }) { Text(stringResource(R.string.debugging)) }
         }
     }
