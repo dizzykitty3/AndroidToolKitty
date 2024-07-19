@@ -37,10 +37,7 @@ import timber.log.Timber
 
 @Composable
 fun Maps() {
-    Card(
-        icon = Icons.Outlined.Place,
-        title = R.string.google_maps
-    ) {
+    Card(R.string.google_maps, Icons.Outlined.Place) {
         val view = LocalView.current
         val focus = LocalFocusManager.current
         val focusRequester1 = remember { FocusRequester() }

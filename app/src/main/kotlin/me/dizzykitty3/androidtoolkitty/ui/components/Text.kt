@@ -54,7 +54,7 @@ fun Gradient(
             ) { append(textToDisplay) }
         }
         Text(
-            text = text,
+            text,
             style = TextStyle.Default.copy(
                 fontFamily = FontFamily.Cursive,
                 fontWeight = FontWeight.Black,

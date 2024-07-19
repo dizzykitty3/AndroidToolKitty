@@ -125,4 +125,8 @@ object SettingsSharedPref {
     var savedLongitude: Float
         get() = getPreference(SAVED_LONGITUDE, 0f)
         set(value) = setPreference(SAVED_LONGITUDE, value)
+
+    var testLayout: Boolean
+        get() = getPreference("test_layout", false)
+        set(value) = setPreference("test_layout", value)
 }

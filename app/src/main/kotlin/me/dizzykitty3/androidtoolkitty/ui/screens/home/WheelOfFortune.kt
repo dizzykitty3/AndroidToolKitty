@@ -72,10 +72,7 @@ import kotlin.random.Random
 
 @Composable
 fun WheelOfFortune() {
-    Card(
-        icon = Icons.Outlined.Casino,
-        title = R.string.wheel_of_fortune
-    ) {
+    Card(R.string.wheel_of_fortune, Icons.Outlined.Casino) {
         val item = stringResource(R.string.item)
         var items by remember {
             mutableStateOf(

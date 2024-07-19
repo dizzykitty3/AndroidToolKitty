@@ -69,6 +69,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
     var devMode by remember { mutableStateOf(settingsViewModel.settings.value.devMode) }
     var bottomAppBar by remember { mutableStateOf(settingsViewModel.settings.value.bottomAppBar) }
     var showLocationDialog by remember { mutableStateOf(false) }
+    var testLayout by remember { mutableStateOf(SettingsSharedPref.testLayout) }
 
     Card(R.string.debugging, Icons.Outlined.Terminal) {
         Row(Modifier.fillMaxWidth()) {
@@ -100,6 +101,12 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             view.hapticFeedback()
             bottomAppBar = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(bottomAppBar = it))
+        }
+
+        CustomSwitchRow("test layout", testLayout) {
+            view.hapticFeedback()
+            testLayout = it
+            SettingsSharedPref.testLayout = it
         }
 
         OutlinedButton({

@@ -22,10 +22,7 @@ import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 
 @Composable
 fun FontWeight() {
-    Card(
-        icon = Icons.Outlined.FontDownload,
-        title = R.string.font_weight_test
-    ) {
+    Card(R.string.font_weight_test, Icons.Outlined.FontDownload) {
         val showCJK = StringUtil.sysLangCJK
 
         Thin(id = R.string.w1)

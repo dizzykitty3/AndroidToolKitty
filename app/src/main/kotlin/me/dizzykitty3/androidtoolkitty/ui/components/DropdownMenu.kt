@@ -56,7 +56,7 @@ fun CustomDropdownMenu(
         ) {
             items.forEachIndexed { index, item ->
                 DropdownMenuItem(
-                    text = { Text(text = item) },
+                    text = { Text(item) },
                     onClick = {
                         selectedPosition = index
                         onItemSelected(index)

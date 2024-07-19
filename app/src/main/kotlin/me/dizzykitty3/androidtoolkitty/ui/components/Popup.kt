@@ -78,7 +78,7 @@ fun CustomIconPopup(
                     shadowElevation = 1.dp
                 ) {
                     Text(
-                        text = ("$deviceType, $deviceAddress"),
+                        ("$deviceType, $deviceAddress"),
                         modifier = Modifier.padding(8.dp)
                     )
                 }

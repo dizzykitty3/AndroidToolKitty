@@ -41,7 +41,6 @@ fun SysSettings(settingsViewModel: SettingsViewModel) {
     Card(R.string.system_settings, Icons.Outlined.Settings) {
         val settingsSharedPref = remember { SettingsSharedPref }
 
-        // TODO API requirement
         val settings = mutableListOf(
             Setting(S_DISPLAY, R.string.open_display_settings),
             Setting(S_AUTO_ROTATE, R.string.open_auto_rotate_settings),

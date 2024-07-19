@@ -41,10 +41,7 @@ fun CodesOfCharacters() {
     var isUnicodeInput by remember { mutableStateOf(false) }
     var isCharacterInput by remember { mutableStateOf(false) }
 
-    Card(
-        icon = Icons.AutoMirrored.Outlined.Notes,
-        title = R.string.codes_of_characters
-    ) {
+    Card(R.string.codes_of_characters, Icons.AutoMirrored.Outlined.Notes) {
         val view = LocalView.current
         val focus = LocalFocusManager.current
 

@@ -34,7 +34,7 @@ import androidx.compose.ui.Alignment.Companion as Alignment1
 @Composable
 fun QRCodeGenerator(settingsViewModel: SettingsViewModel) {
     Screen {
-        Card(title = "QR Code generator") {
+        Card("QR Code generator") {
             var input by remember { mutableStateOf("") }
             var instantOption by remember { mutableStateOf(false) }
 
