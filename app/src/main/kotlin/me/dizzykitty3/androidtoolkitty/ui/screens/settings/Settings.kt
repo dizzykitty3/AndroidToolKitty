@@ -3,7 +3,10 @@ package me.dizzykitty3.androidtoolkitty.ui.screens.settings
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
+import androidx.compose.material.icons.outlined.Bookmarks
+import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -85,7 +88,6 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
-    var fullWebpageCard by remember { mutableStateOf(settingsViewModel.settings.value.fullWebpageCard) }
 
     Card(R.string.general) {
         CustomSwitchRow(R.string.clear_clipboard_on_launch, autoClearClipboard) {
@@ -107,12 +109,6 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
                 )
             }
             settingsSharedPref.autoClearClipboard = autoClearClipboard
-        }
-
-        CustomSwitchRow(R.string.keep_showing_full_webpage_card, fullWebpageCard) {
-            view.hapticFeedback()
-            fullWebpageCard = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(fullWebpageCard = it))
         }
 
         GroupDivider()
@@ -143,6 +139,8 @@ private fun Bottom(navController: NavHostController) {
             view.context.showToast(R.string.all_help_welcomed)
             view.context.openURL(SOURCE_CODE)
         }) {
+            Icon(imageVector = Icons.Outlined.Code, contentDescription = null)
+            SpacerPadding()
             Text(stringResource(R.string.view_source_code))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
@@ -150,15 +148,23 @@ private fun Bottom(navController: NavHostController) {
                 tint = MaterialTheme.colorScheme.primary
             )
         }
+
         TextButton({
             view.hapticFeedback()
             navController.navigate(SCR_LICENSES)
-        }) { Text(stringResource(R.string.licenses)) }
-        if (!BuildConfig.DEBUG) {
-            TextButton({
-                view.hapticFeedback()
-                navController.navigate(SCR_DEBUGGING)
-            }) { Text(stringResource(R.string.debugging)) }
+        }) {
+            Icon(imageVector = Icons.Outlined.Bookmarks, contentDescription = null)
+            SpacerPadding()
+            Text(stringResource(R.string.licenses))
+        }
+
+        TextButton({
+            view.hapticFeedback()
+            navController.navigate(SCR_DEBUGGING)
+        }) {
+            Icon(imageVector = Icons.Outlined.Terminal, contentDescription = null)
+            SpacerPadding()
+            Text(stringResource(R.string.debugging))
         }
     }
 }

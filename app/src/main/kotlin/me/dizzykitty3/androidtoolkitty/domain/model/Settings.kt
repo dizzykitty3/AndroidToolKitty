@@ -9,9 +9,6 @@ data class Settings(
     var dynamicColor: Boolean = true,
     var fadeAnimation: Boolean = false,
 
-    // Settings > General
-    var fullWebpageCard: Boolean = false,
-
     // Settings > Debugging
     var devMode: Boolean = dev,
     var bottomAppBar: Boolean = dev,

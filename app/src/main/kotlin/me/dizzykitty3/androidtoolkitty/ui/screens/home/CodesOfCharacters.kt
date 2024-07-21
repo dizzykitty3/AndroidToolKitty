@@ -28,10 +28,10 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil.toASCII
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
+import me.dizzykitty3.androidtoolkitty.ui.components.CardShowMore
 import me.dizzykitty3.androidtoolkitty.ui.components.ClearInput
-import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupTitle
-import me.dizzykitty3.androidtoolkitty.ui.components.Italic
+import me.dizzykitty3.androidtoolkitty.ui.components.ItalicText
 import timber.log.Timber
 
 @Composable
@@ -61,12 +61,10 @@ fun CodesOfCharacters() {
                 imeAction = ImeAction.Done
             ),
             supportingText = {
-                Text(
-                    text = buildAnnotatedString {
-                        append(stringResource(R.string.unicode_input_hint))
-                        Italic(" 00610062")
-                    }
-                )
+                Text(buildAnnotatedString {
+                    append(stringResource(R.string.unicode_input_hint))
+                    ItalicText(" 00610062")
+                })
             },
             keyboardActions = KeyboardActions(
                 onDone = {
@@ -124,44 +122,50 @@ fun CodesOfCharacters() {
                 }
             }
         ) {
-            Text(text = stringResource(R.string.convert))
+            Text(stringResource(R.string.convert))
         }
 
-        GroupDivider()
-        GroupTitle(R.string.ascii)
+        var showMore by remember { mutableStateOf(false) }
+        CardShowMore(
+            showMore = showMore,
+            onDismissRequest = { showMore = false },
+            onShowMoreClick = { showMore = true }
+        ) {
+            GroupTitle(R.string.ascii)
 
-        var stringToASCII by remember { mutableStateOf("") }
-        var toASCIIResult by remember { mutableStateOf("") }
+            var stringToASCII by remember { mutableStateOf("") }
+            var toASCIIResult by remember { mutableStateOf("") }
 
-        OutlinedTextField(
-            value = stringToASCII,
-            onValueChange = { stringToASCII = it },
-            label = { Text(stringResource(R.string.character)) },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    focus.clearFocus()
-                    toASCIIResult = stringToASCII.toASCII()
-                }
-            ),
-            trailingIcon = {
-                ClearInput(stringToASCII) {
-                    view.hapticFeedback()
-                    stringToASCII = ""
-                }
-            },
-        )
+            OutlinedTextField(
+                value = stringToASCII,
+                onValueChange = { stringToASCII = it },
+                label = { Text(stringResource(R.string.character)) },
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    imeAction = ImeAction.Done
+                ),
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        focus.clearFocus()
+                        toASCIIResult = stringToASCII.toASCII()
+                    }
+                ),
+                trailingIcon = {
+                    ClearInput(stringToASCII) {
+                        view.hapticFeedback()
+                        stringToASCII = ""
+                    }
+                },
+            )
 
-        if (toASCIIResult != "") Text("${stringResource(R.string.result)} $toASCIIResult")
+            if (toASCIIResult != "") Text("${stringResource(R.string.result)} $toASCIIResult")
 
-        TextButton({
-            view.hapticFeedback()
-            focus.clearFocus()
-            toASCIIResult = stringToASCII.toASCII()
-        }) { Text(stringResource(R.string.convert_to_ascii_values)) }
+            TextButton({
+                view.hapticFeedback()
+                focus.clearFocus()
+                toASCIIResult = stringToASCII.toASCII()
+            }) { Text(stringResource(R.string.convert_to_ascii_values)) }
+        }
     }
 }
 

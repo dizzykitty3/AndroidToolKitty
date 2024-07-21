@@ -7,21 +7,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Image
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -52,12 +46,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("onCreate")
-        installSplashScreen()
         enableEdgeToEdge()
         setContent {
             settingsViewModel = hiltViewModel<SettingsViewModel>()
             val snackbarHostState = remember { SnackbarHostState() }
-            val scope = rememberCoroutineScope()
             val bottomAppBar = settingsViewModel.settings.value.bottomAppBar
 
             AppTheme(dynamicColor = settingsViewModel.settings.value.dynamicColor) {
@@ -78,18 +70,6 @@ class MainActivity : ComponentActivity() {
                                     text = "Bottom app bar",
                                 )
                             }
-                    },
-                    floatingActionButton = {
-                        if (bottomAppBar)
-                            ExtendedFloatingActionButton(
-                                text = { Text("Show snackbar") },
-                                icon = { Icon(Icons.Filled.Image, contentDescription = "") },
-                                onClick = {
-                                    scope.launch {
-                                        snackbarHostState.showSnackbar("Snackbar")
-                                    }
-                                }
-                            )
                     }
                 ) { innerPadding ->
                     AppNavHost(

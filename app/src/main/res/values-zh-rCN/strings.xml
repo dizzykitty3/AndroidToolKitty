@@ -132,7 +132,6 @@
     <string name="turn_off">禁用</string>
     <string name="query">查询</string>
     <string name="copy">复制</string>
-    <string name="keep_showing_full_webpage_card">始终显示完整「网页」卡片</string>
     <string name="no_bluetooth_adapter_available">获取 Bluetooth Adapter 失败</string>
     <string name="start">开始</string>
     <string name="refresh">更新</string>

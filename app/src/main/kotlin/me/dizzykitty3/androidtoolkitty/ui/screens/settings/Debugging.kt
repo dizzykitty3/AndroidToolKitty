@@ -161,7 +161,9 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                                 Text("40%/60%")
                             }
                         }
+                        SpacerPadding()
                         Text("set volume automatically (check location)")
+                        SpacerPadding()
                         Text("current location (places where you want to turn on phone volume)")
                         if (mLoadingComplete) {
                             if (mLocation != null) {

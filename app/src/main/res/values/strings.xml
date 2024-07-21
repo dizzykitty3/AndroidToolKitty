@@ -263,7 +263,6 @@
     <!-- Settings > Appearance -->
     <string name="material_you_dynamic_color">Material You dynamic color</string>
     <string name="appearance">Appearance</string>
-    <string name="keep_showing_full_webpage_card">Keep showing full Webpage card</string>
     <string name="needs_restart">Needs restart, do it now?</string>
 
     <!-- Settings > General -->

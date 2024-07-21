@@ -44,37 +44,30 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.URLUtil
 import me.dizzykitty3.androidtoolkitty.domain.utils.URLUtil.getSuffix
 import me.dizzykitty3.androidtoolkitty.domain.utils.URLUtil.toFullURL
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
+import me.dizzykitty3.androidtoolkitty.ui.components.CardShowMore
 import me.dizzykitty3.androidtoolkitty.ui.components.ClearInput
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupTitle
-import me.dizzykitty3.androidtoolkitty.ui.components.Italic
+import me.dizzykitty3.androidtoolkitty.ui.components.ItalicText
 import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
 import timber.log.Timber
 
 @Composable
 fun Webpage(settingsViewModel: SettingsViewModel) {
     Card(R.string.webpage, Icons.Outlined.Link) {
-        val view = LocalView.current
-        val fullWebapgeCard = settingsViewModel.settings.value.fullWebpageCard
-        var showMore by remember { mutableStateOf(false) }
-
-        if (fullWebapgeCard || showMore) GroupTitle(R.string.search)
-
+        GroupTitle(R.string.search)
         Search()
 
-        if (fullWebapgeCard || showMore) {
-            GroupDivider()
+        var showMore by remember { mutableStateOf(false) }
+        CardShowMore(
+            showMore = showMore,
+            onDismissRequest = { showMore = false },
+            onShowMoreClick = { showMore = true }
+        ) {
             WebpageURL()
             GroupDivider()
             SocialMediaProfileIURL()
-        }
-
-        if (!fullWebapgeCard && !showMore) {
-            TextButton({
-                view.hapticFeedback()
-                showMore = !showMore
-            }) { Text(stringResource(R.string.show_more)) }
         }
     }
 }
@@ -175,11 +168,11 @@ private fun WebpageURL() {
         supportingText = {
             Text(buildAnnotatedString {
                 append(stringResource(R.string.url_input_hint_1))
-                Italic(" www. ")
+                ItalicText(" www. ")
                 append(stringResource(R.string.url_input_hint_2))
-                Italic(" .com ")
+                ItalicText(" .com ")
                 append(stringResource(R.string.url_input_hint_3))
-                Italic(" .net ")
+                ItalicText(" .net ")
                 append(stringResource(R.string.url_input_hint_4))
             })
         },

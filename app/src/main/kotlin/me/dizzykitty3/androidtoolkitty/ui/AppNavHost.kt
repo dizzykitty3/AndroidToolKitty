@@ -39,40 +39,40 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
         startDestination = SCR_HOME,
         enterTransition = {
             if (fadeAnimation)
-                fadeIn(animationSpec = tween(DEFAULT_FADE_DURATION)) +
+                fadeIn(animationSpec = tween(FADE_DURATION)) +
                         scaleIn(
-                            initialScale = DEFAULT_INITIAL_SCALE,
-                            animationSpec = tween(DEFAULT_SCALE_DURATION)
+                            initialScale = INITIAL_SCALE,
+                            animationSpec = tween(SCALE_DURATION)
                         )
             else slideInHorizontally(
                 initialOffsetX = { fullWidth -> fullWidth },
-                animationSpec = tween(DEFAULT_SLIDE_DURATION)
+                animationSpec = tween(SLIDE_DURATION)
             )
         },
         popExitTransition = {
             if (fadeAnimation)
-                fadeOut(animationSpec = tween(DEFAULT_FADE_DURATION)) +
+                fadeOut(animationSpec = tween(FADE_DURATION)) +
                         scaleOut(
-                            targetScale = DEFAULT_INITIAL_SCALE,
-                            animationSpec = tween(DEFAULT_SCALE_DURATION)
+                            targetScale = INITIAL_SCALE,
+                            animationSpec = tween(SCALE_DURATION)
                         )
             else slideOutHorizontally(
                 targetOffsetX = { fullWidth -> fullWidth },
-                animationSpec = tween(DEFAULT_SLIDE_DURATION)
+                animationSpec = tween(SLIDE_DURATION)
             )
         },
         popEnterTransition = {
-            fadeIn(animationSpec = tween(DEFAULT_FADE_DURATION)) +
+            fadeIn(animationSpec = tween(FADE_DURATION)) +
                     scaleIn(
-                        initialScale = DEFAULT_INITIAL_SCALE,
-                        animationSpec = tween(DEFAULT_SCALE_DURATION)
+                        initialScale = INITIAL_SCALE,
+                        animationSpec = tween(SCALE_DURATION)
                     )
         },
         exitTransition = {
-            fadeOut(animationSpec = tween(DEFAULT_FADE_DURATION)) +
+            fadeOut(animationSpec = tween(FADE_DURATION)) +
                     scaleOut(
-                        targetScale = DEFAULT_INITIAL_SCALE,
-                        animationSpec = tween(DEFAULT_SCALE_DURATION)
+                        targetScale = INITIAL_SCALE,
+                        animationSpec = tween(SCALE_DURATION)
                     )
         }) {
         composable(SCR_HOME) { Home(settingsViewModel, navController) }
@@ -85,7 +85,7 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
     }
 }
 
-private const val DEFAULT_FADE_DURATION = 300
-private const val DEFAULT_SCALE_DURATION = 400
-private const val DEFAULT_SLIDE_DURATION = 400
-private const val DEFAULT_INITIAL_SCALE = 0.9f
+private const val FADE_DURATION = 300
+private const val SCALE_DURATION = 400
+private const val SLIDE_DURATION = 400
+private const val INITIAL_SCALE = 0.9f

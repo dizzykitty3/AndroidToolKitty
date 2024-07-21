@@ -41,7 +41,7 @@ import me.dizzykitty3.androidtoolkitty.domain.utils.PermissionUtil.noBluetoothPe
 import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
 import me.dizzykitty3.androidtoolkitty.ui.components.CustomIconPopup
-import me.dizzykitty3.androidtoolkitty.ui.components.PrimaryColor
+import me.dizzykitty3.androidtoolkitty.ui.components.PrimaryColorText
 import me.dizzykitty3.androidtoolkitty.ui.components.SpacerPadding
 
 @SuppressLint("MissingPermission")
@@ -130,11 +130,11 @@ private fun BluetoothDeviceTypeDialog() {
             onDismissRequest = { showDialog = false },
             text = {
                 Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                    Text(text = buildAnnotatedString { PrimaryColor(id = R.string.bluetooth_devices_types_1) })
+                    Text(text = buildAnnotatedString { PrimaryColorText(id = R.string.bluetooth_devices_types_1) })
                     Text(text = stringResource(id = R.string.bluetooth_devices_types_2))
-                    Text(text = buildAnnotatedString { PrimaryColor(id = R.string.bluetooth_devices_types_3) })
+                    Text(text = buildAnnotatedString { PrimaryColorText(id = R.string.bluetooth_devices_types_3) })
                     Text(text = stringResource(id = R.string.bluetooth_devices_types_4))
-                    Text(text = buildAnnotatedString { PrimaryColor(id = R.string.bluetooth_devices_types_5) })
+                    Text(text = buildAnnotatedString { PrimaryColorText(id = R.string.bluetooth_devices_types_5) })
                     Text(text = stringResource(id = R.string.bluetooth_devices_types_6))
                 }
             },

@@ -20,7 +20,7 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
         targetSdk = compileSdk
-        versionCode = 952
+        versionCode = 953
         versionName = "1.0.${versionCode}"
 
         resValue("string", "app_name", "ToolKitty")
@@ -82,14 +82,8 @@ android {
 }
 
 dependencies {
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.compose.ui.test.junit4)
-    androidTestImplementation(libs.androidx.work.testing)
-
     coreLibraryDesugaring(libs.android.desugar.jdk.libs)
 
-    debugImplementation(libs.androidx.compose.ui.test.manifest)
-    debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.leakcanary)
 
     implementation(libs.about.libraries.compose.m3)
@@ -102,9 +96,7 @@ dependencies {
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.runtime.livedata)
-    implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.compose)

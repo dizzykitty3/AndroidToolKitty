@@ -29,7 +29,7 @@ object AudioUtil {
     val maxVoiceCallVolumeIndex: Int
         get() = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL)
 
-    fun setMediaVolume(volume: Int, isAutoSetVolume: Boolean = false) =
+    private fun setMediaVolume(volume: Int, isAutoSetVolume: Boolean = false) =
         audioManager.setStreamVolume(
             AudioManager.STREAM_MUSIC,
             volume,

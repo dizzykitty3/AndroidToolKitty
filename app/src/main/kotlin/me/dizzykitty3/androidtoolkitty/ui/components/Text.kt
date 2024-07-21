@@ -82,7 +82,7 @@ fun GradientSmall(textToDisplay: String, colors: List<Color>) {
 }
 
 @Composable
-fun AnnotatedString.Builder.Italic(text: String) {
+fun AnnotatedString.Builder.ItalicText(text: String) {
     val italicTextStyle = SpanStyle(
         fontStyle = FontStyle.Italic,
         fontWeight = FontWeight.Light
@@ -91,7 +91,7 @@ fun AnnotatedString.Builder.Italic(text: String) {
 }
 
 @Composable
-fun AnnotatedString.Builder.PrimaryColor(@StringRes id: Int) {
+fun AnnotatedString.Builder.PrimaryColorText(@StringRes id: Int) {
     val materialPrimaryColorStyle = SpanStyle(color = MaterialTheme.colorScheme.primary)
     withStyle(materialPrimaryColorStyle) { append(stringResource(id)) }
 }
@@ -221,3 +221,10 @@ fun ScrollableText(text: String) =
 
 @Composable
 fun ScrollableText(@StringRes text: Int) = ScrollableText(stringResource(text))
+
+@Composable
+fun ScrollableItalicText(@StringRes text: Int) {
+    Box(Modifier.horizontalScroll(rememberScrollState())) {
+        Text(buildAnnotatedString { ItalicText(stringResource(text)) })
+    }
+}

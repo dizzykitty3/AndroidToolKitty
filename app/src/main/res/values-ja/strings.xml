@@ -133,7 +133,6 @@
     <string name="bluetooth_connect">ペアリングされた Bluetooth デバイスを確認するには、アプリに近くのデバイスの権限を付与してください。</string>
     <string name="missed_sys_popup">システム権限ポップアップを見逃しましたか？</string>
     <string name="query">クエリ</string>
-    <string name="keep_showing_full_webpage_card">Keep showing full Webpage card</string>
     <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
     <string name="start">Start</string>
     <string name="refresh">Refresh</string>

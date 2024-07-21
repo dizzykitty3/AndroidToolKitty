@@ -6,10 +6,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FontDownload
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
@@ -18,195 +25,194 @@ import androidx.compose.ui.text.style.TextOverflow
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.domain.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.ui.components.Card
+import me.dizzykitty3.androidtoolkitty.ui.components.CardShowMore
 import me.dizzykitty3.androidtoolkitty.ui.components.GroupDivider
 
 @Composable
 fun FontWeight() {
     Card(R.string.font_weight_test, Icons.Outlined.FontDownload) {
-        val showCJK = StringUtil.sysLangCJK
+        FontWeightTest()
 
-        Thin(id = R.string.w1)
-        ExtraLight(id = R.string.w2)
-        Light(id = R.string.w3)
-        Normal(id = R.string.w4)
-        Medium(id = R.string.w5)
-        SemiBold(id = R.string.w6)
-        Bold(id = R.string.w7)
-        ExtraBold(id = R.string.w8)
-        Black(id = R.string.w9)
-        GroupDivider()
-        RowFontWeightTest(id = R.string.a)
-        if (showCJK) {
-            RowFontWeightTest(id = R.string.chinese_que)
-            RowFontWeightTest(id = R.string.japanese_ki)
-        }
-        GroupDivider()
-        Column(modifier = Modifier.fillMaxWidth()) {
-            Text(
-                text = "SansSerif SansSerif SansSerif SansSerif SansSerif SansSerif SansSerif SansSerif",
-                fontFamily = FontFamily.SansSerif,
-                overflow = TextOverflow.Clip,
-                maxLines = 1
-            )
-            Text(
-                text = "Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif",
-                fontFamily = FontFamily.Serif,
-                overflow = TextOverflow.Clip,
-                maxLines = 1
-            )
-            Text(
-                text = "Cursive Cursive Cursive Cursive Cursive Cursive Cursive Cursive Cursive Cursive",
-                fontFamily = FontFamily.Cursive,
-                overflow = TextOverflow.Clip,
-                maxLines = 1
-            )
-            Text(
-                text = "Monospace Monospace Monospace Monospace Monospace Monospace Monospace Monospace",
-                fontFamily = FontFamily.Monospace,
-                overflow = TextOverflow.Clip,
-                maxLines = 1
+        var showMore by remember { mutableStateOf(false) }
+        CardShowMore(
+            showMore = showMore,
+            onDismissRequest = { showMore = false },
+            onShowMoreClick = { showMore = true }
+        ) {
+            AlertDialog(
+                onDismissRequest = { showMore = false },
+                text = {
+                    Column(Modifier.verticalScroll(rememberScrollState())) {
+                        RowFontWeightTest()
+                        GroupDivider()
+                        FontFamilyTest()
+                    }
+                },
+                confirmButton = {
+                    Button({
+                        showMore = false
+                    }) { Text(stringResource(android.R.string.ok)) }
+                }
             )
         }
-        if (showCJK) {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(rememberScrollState())
-            ) {
-                Row {
-                    Text(
-                        text = stringResource(id = R.string.japanese_sentence),
-                        fontFamily = FontFamily.SansSerif
-                    )
-                    Text(text = " (SansSerif)")
-                }
-                Row {
-                    Text(
-                        text = stringResource(id = R.string.japanese_sentence),
-                        fontFamily = FontFamily.Serif
-                    )
-                    Text(text = " (Serif)")
-                }
-                Row {
-                    Text(
-                        text = stringResource(id = R.string.japanese_sentence),
-                        fontFamily = FontFamily.Cursive
-                    )
-                    Text(text = " (Cursive)")
-                }
-                Row {
-                    Text(
-                        text = stringResource(id = R.string.japanese_sentence),
-                        fontFamily = FontFamily.Monospace
-                    )
-                    Text(text = " (Monospace)")
-                }
+    }
+}
+
+@Composable
+private fun FontWeightTest() {
+    Thin(R.string.w1)
+    ExtraLight(R.string.w2)
+    Light(R.string.w3)
+    Normal(R.string.w4)
+    Medium(R.string.w5)
+    SemiBold(R.string.w6)
+    Bold(R.string.w7)
+    ExtraBold(R.string.w8)
+    Black(R.string.w9)
+}
+
+@Composable
+private fun RowFontWeightTest() {
+    val showCJK = StringUtil.sysLangCJK
+    RowFontWeightTestImpl(R.string.a)
+    if (showCJK) {
+        RowFontWeightTestImpl(R.string.chinese_que)
+        RowFontWeightTestImpl(R.string.japanese_ki)
+    }
+}
+
+@Composable
+private fun RowFontWeightTestImpl(@StringRes text: Int) {
+    Row {
+        Thin(text)
+        ExtraLight(text)
+        Light(text)
+        Normal(text)
+        Medium(text)
+        SemiBold(text)
+        Bold(text)
+        ExtraBold(text)
+        Black(text)
+    }
+}
+
+@Composable
+private fun FontFamilyTest() {
+    val showCJK = StringUtil.sysLangCJK
+    Column(Modifier.fillMaxWidth()) {
+        Text(
+            "SansSerif SansSerif SansSerif SansSerif SansSerif SansSerif SansSerif SansSerif",
+            fontFamily = FontFamily.SansSerif,
+            overflow = TextOverflow.Clip,
+            maxLines = 1
+        )
+        Text(
+            "Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif Serif",
+            fontFamily = FontFamily.Serif,
+            overflow = TextOverflow.Clip,
+            maxLines = 1
+        )
+        Text(
+            "Cursive Cursive Cursive Cursive Cursive Cursive Cursive Cursive Cursive Cursive",
+            fontFamily = FontFamily.Cursive,
+            overflow = TextOverflow.Clip,
+            maxLines = 1
+        )
+        Text(
+            "Monospace Monospace Monospace Monospace Monospace Monospace Monospace Monospace",
+            fontFamily = FontFamily.Monospace,
+            overflow = TextOverflow.Clip,
+            maxLines = 1
+        )
+    }
+    if (showCJK) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .horizontalScroll(rememberScrollState())
+        ) {
+            Row {
+                Text(
+                    stringResource(R.string.japanese_sentence),
+                    fontFamily = FontFamily.SansSerif
+                )
+                Text(" (SansSerif)")
+            }
+            Row {
+                Text(
+                    stringResource(R.string.japanese_sentence),
+                    fontFamily = FontFamily.Serif
+                )
+                Text(" (Serif)")
+            }
+            Row {
+                Text(
+                    stringResource(R.string.japanese_sentence),
+                    fontFamily = FontFamily.Cursive
+                )
+                Text(" (Cursive)")
+            }
+            Row {
+                Text(
+                    stringResource(R.string.japanese_sentence),
+                    fontFamily = FontFamily.Monospace
+                )
+                Text(" (Monospace)")
             }
         }
     }
 }
 
 @Composable
-private fun RowFontWeightTest(@StringRes id: Int) {
-    Row {
-        Thin(id = id)
-        ExtraLight(id = id)
-        Light(id = id)
-        Normal(id = id)
-        Medium(id = id)
-        SemiBold(id = id)
-        Bold(id = id)
-        ExtraBold(id = id)
-        Black(id = id)
-    }
-}
+private fun Thin(@StringRes id: Int) = W100(stringResource(id))
 
 @Composable
-private fun Thin(@StringRes id: Int) {
-    W100(text = stringResource(id = id))
-}
+private fun ExtraLight(@StringRes id: Int) = W200(stringResource(id))
 
 @Composable
-private fun ExtraLight(@StringRes id: Int) {
-    W200(text = stringResource(id = id))
-}
+private fun Light(@StringRes id: Int) = W300(stringResource(id))
 
 @Composable
-private fun Light(@StringRes id: Int) {
-    W300(text = stringResource(id = id))
-}
+private fun Normal(@StringRes id: Int) = W400(stringResource(id))
 
 @Composable
-private fun Normal(@StringRes id: Int) {
-    W400(text = stringResource(id = id))
-}
+private fun Medium(@StringRes id: Int) = W500(stringResource(id))
 
 @Composable
-private fun Medium(@StringRes id: Int) {
-    W500(text = stringResource(id = id))
-}
+private fun SemiBold(@StringRes id: Int) = W600(stringResource(id))
 
 @Composable
-private fun SemiBold(@StringRes id: Int) {
-    W600(text = stringResource(id = id))
-}
+private fun Bold(@StringRes id: Int) = W700(stringResource(id))
 
 @Composable
-private fun Bold(@StringRes id: Int) {
-    W700(text = stringResource(id = id))
-}
+private fun ExtraBold(@StringRes id: Int) = W800(stringResource(id))
 
 @Composable
-private fun ExtraBold(@StringRes id: Int) {
-    W800(text = stringResource(id = id))
-}
+private fun Black(@StringRes id: Int) = W900(stringResource(id))
 
 @Composable
-private fun Black(@StringRes id: Int) {
-    W900(text = stringResource(id = id))
-}
+private fun W100(text: String) = Text(text, fontWeight = FontWeight.W100)
 
 @Composable
-private fun W100(text: String) {
-    Text(text = text, fontWeight = FontWeight.W100)
-}
+private fun W200(text: String) = Text(text, fontWeight = FontWeight.W200)
 
 @Composable
-private fun W200(text: String) {
-    Text(text = text, fontWeight = FontWeight.W200)
-}
+private fun W300(text: String) = Text(text, fontWeight = FontWeight.W300)
 
 @Composable
-private fun W300(text: String) {
-    Text(text = text, fontWeight = FontWeight.W300)
-}
+private fun W400(text: String) = Text(text, fontWeight = FontWeight.W400)
 
 @Composable
-private fun W400(text: String) {
-    Text(text = text, fontWeight = FontWeight.W400)
-}
+private fun W500(text: String) = Text(text, fontWeight = FontWeight.W500)
 
 @Composable
-private fun W500(text: String) {
-    Text(text = text, fontWeight = FontWeight.W500)
-}
+private fun W600(text: String) = Text(text, fontWeight = FontWeight.W600)
 
 @Composable
-private fun W600(text: String) {
-    Text(text = text, fontWeight = FontWeight.W600)
-}
+private fun W700(text: String) = Text(text, fontWeight = FontWeight.W700)
 
 @Composable
-private fun W700(text: String) {
-    Text(text = text, fontWeight = FontWeight.W700)
-}
+private fun W800(text: String) = Text(text, fontWeight = FontWeight.W800)
 
 @Composable
-private fun W800(text: String) {
-    Text(text = text, fontWeight = FontWeight.W800)
-}
-
-@Composable
-private fun W900(text: String) {
-    Text(text = text, fontWeight = FontWeight.W900)
-}
+private fun W900(text: String) = Text(text, fontWeight = FontWeight.W900)
