@@ -26,6 +26,16 @@ fun AndroidVersions(navController: NavHostController) {
 }
 
 @Composable
+fun AndroidVersionHistoryScreen() {
+    Screen {
+        Card(R.string.android_versions, Icons.Outlined.Android) {
+            RecentVersions()
+            EarlyVersions()
+        }
+    }
+}
+
+@Composable
 private fun RecentVersions() {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.weight(0.4f)) {
@@ -102,16 +112,6 @@ private fun EarlyVersions() {
             ScrollableItalicText(R.string.api_9)
             ScrollableItalicText(R.string.api_8)
             ScrollableItalicText(R.string.api_7)
-        }
-    }
-}
-
-@Composable
-fun AndroidVersionHistoryScreen() {
-    Screen {
-        Card(R.string.android_versions, Icons.Outlined.Android) {
-            RecentVersions()
-            EarlyVersions()
         }
     }
 }

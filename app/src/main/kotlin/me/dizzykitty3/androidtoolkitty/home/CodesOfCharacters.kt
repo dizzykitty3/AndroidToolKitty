@@ -47,6 +47,18 @@ fun CodesOfCharacters(navController: NavHostController) {
 }
 
 @Composable
+fun CodesOfCharactersScreen() {
+    Screen {
+        Card(R.string.codes_of_characters, Icons.AutoMirrored.Outlined.Notes) {
+            GroupTitle(R.string.unicode)
+            Unicode()
+            GroupDivider()
+            ASCII()
+        }
+    }
+}
+
+@Composable
 private fun Unicode() {
     var unicode by remember { mutableStateOf("") }
     var characters by remember { mutableStateOf("") }
@@ -54,8 +66,6 @@ private fun Unicode() {
     var isCharacterInput by remember { mutableStateOf(false) }
     val view = LocalView.current
     val focus = LocalFocusManager.current
-
-    GroupTitle(R.string.unicode)
 
     OutlinedTextField(
         value = unicode,
@@ -192,16 +202,5 @@ private fun View.onClickConvertButton(
         this.showSnackbar("$result ${appContext.getString(R.string.copied)}")
     } catch (e: Exception) {
         this.showSnackbar(e.message ?: "Unknown error occurred")
-    }
-}
-
-@Composable
-fun CodesOfCharactersScreen() {
-    Screen {
-        Card(R.string.codes_of_characters, Icons.AutoMirrored.Outlined.Notes) {
-            Unicode()
-            GroupDivider()
-            ASCII()
-        }
     }
 }

@@ -65,12 +65,24 @@ fun Webpage(settingsViewModel: SettingsViewModel, navController: NavHostControll
 }
 
 @Composable
+fun WebpageScreen() {
+    Screen {
+        Card(R.string.webpage, Icons.Outlined.Link) {
+            GroupTitle(R.string.search)
+            Search()
+            GroupDivider()
+            WebpageURL()
+            GroupDivider()
+            SocialMediaProfileIURL()
+        }
+    }
+}
+
+@Composable
 private fun Search() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
     var searchQuery by remember { mutableStateOf("") }
-
-    GroupTitle(R.string.search)
 
     OutlinedTextField(
         value = searchQuery,
@@ -319,16 +331,3 @@ private fun isInvalid(platform: URLUtil.Platform, username: String): Boolean =
 
 private fun isValid(platform: URLUtil.Platform, username: String): Boolean =
     !isInvalid(platform, username)
-
-@Composable
-fun WebpageScreen() {
-    Screen {
-        Card(R.string.webpage, Icons.Outlined.Link) {
-            Search()
-            GroupDivider()
-            WebpageURL()
-            GroupDivider()
-            SocialMediaProfileIURL()
-        }
-    }
-}

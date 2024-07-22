@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material.icons.outlined.Terminal
@@ -16,6 +17,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -251,6 +253,11 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
         )
         SpacerPadding()
         Text(stringResource(R.string.open_app_detail_settings))
+        Icon(
+            imageVector = Icons.Outlined.ArrowOutward,
+            contentDescription = stringResource(R.string.open_app_detail_settings),
+            tint = MaterialTheme.colorScheme.primary
+        )
     }
 
     TextButton({
