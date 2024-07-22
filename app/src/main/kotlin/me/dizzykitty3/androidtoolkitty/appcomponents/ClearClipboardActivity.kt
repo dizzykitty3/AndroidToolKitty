@@ -4,7 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.widget.Toast
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.domain.utils.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import timber.log.Timber
 
 class ClearClipboardActivity : Activity() {

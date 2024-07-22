@@ -87,7 +87,7 @@
     <string name="wheel_of_fortune">幸运大转盘</string>
     <string name="info">信息</string>
     <string name="go_to_settings">前往系统设置</string>
-    <string name="show_more">更多</string>
+    <string name="show_more">更多></string>
     <string name="bluetooth_devices">蓝牙设备</string>
     <string name="show_paired_devices">查看已配对的设备</string>
     <string name="current_device">当前设备：</string>

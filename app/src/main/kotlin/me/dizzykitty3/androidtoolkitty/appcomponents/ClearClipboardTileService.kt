@@ -9,7 +9,7 @@ import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.widget.Toast
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.domain.utils.OSVersion
+import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import timber.log.Timber
 
 @SuppressLint("NewApi")
