@@ -151,4 +151,5 @@
     <string name="invalid_username_input_tip">username for %1$s should only contains letters, numbers, and underscores</string>
     <string name="search_and_webpage">Search / Webpage</string>
     <string name="force_dark_mode">Force dark mode</string>
+    <string name="change_app_language">Change app language</string>
 </resources>

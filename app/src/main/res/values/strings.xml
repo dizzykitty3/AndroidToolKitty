@@ -264,6 +264,7 @@
     <string name="material_you_dynamic_color">Material You dynamic color</string>
     <string name="appearance">Appearance</string>
     <string name="force_dark_mode">Force dark mode</string>
+    <string name="change_app_language">Change app language</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>

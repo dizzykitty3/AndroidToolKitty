@@ -34,6 +34,7 @@ object OSVersion {
     /**
      * 1. Photo picker
      * 2. Displays a standard visual confirmation when content is added to the clipboard
+     * 3. Per-app language preferences
      */
     fun a13(): Boolean = osVersion >= 33
     fun api33(): Boolean = a13()

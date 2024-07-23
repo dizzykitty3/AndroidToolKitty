@@ -6,6 +6,7 @@ import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Bookmarks
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -35,10 +36,10 @@ import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppLanguageSetting
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -77,6 +78,24 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             forceDarkMode = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(forceDarkMode = it))
         }
+
+        OutlinedButton({
+            view.hapticFeedback()
+            view.context.openAppLanguageSetting()
+        }) {
+            Icon(
+                imageVector = Icons.Outlined.Language,
+                contentDescription = stringResource(R.string.change_app_language),
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+            SpacerPadding()
+            Text(stringResource(R.string.change_app_language))
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = stringResource(R.string.change_app_language),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
     }
 }
 
@@ -110,8 +129,6 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
             }
             settingsSharedPref.autoClearClipboard = autoClearClipboard
         }
-
-        GroupDivider()
 
         OutlinedButton({
             view.hapticFeedback()

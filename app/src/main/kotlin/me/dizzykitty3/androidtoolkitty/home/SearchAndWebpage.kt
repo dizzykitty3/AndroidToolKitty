@@ -48,9 +48,9 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnMarket
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnYouTube
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSearch
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.searchOnYouTube
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.isInvalidUsername
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
@@ -290,7 +290,7 @@ private fun Context.onClickSearchButton(query: String) {
 private fun Context.onCheckOnYouTube(query: String) {
     if (query.isBlank()) return
     Timber.d("onCheckOnYouTube")
-    this.checkOnYouTube(query)
+    this.searchOnYouTube(query)
 }
 
 private fun Context.onClickVisitURLButton(url: String) {

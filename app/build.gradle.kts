@@ -20,7 +20,7 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
         targetSdk = compileSdk
-        versionCode = 956
+        versionCode = 957
         versionName = "1.0.${versionCode}"
 
         resValue("string", "app_name", "ToolKitty")
@@ -78,6 +78,11 @@ android {
     buildToolsVersion = "35.0.0"
     room {
         schemaDirectory("$projectDir/schemas")
+    }
+    androidResources {
+        // https://developer.android.com/guide/topics/resources/app-languages#auto-localeconfig
+        @Suppress("UnstableApiUsage")
+        generateLocaleConfig = true // Per-app language preferences
     }
 }
 

@@ -69,21 +69,29 @@ object IntentUtil {
         this.showToast(msg)
     }
 
+    fun Context.openSearch(query: String) {
+        if (query.isBlank()) return
+        Timber.d("openSearch")
+        val intent = Intent(Intent.ACTION_WEB_SEARCH)
+        intent.putExtra(SearchManager.QUERY, query)
+        this.launch(intent)
+    }
+
+    fun Context.searchOnYouTube(query: String) {
+        if (query.isBlank()) return
+        Timber.d("searchOnYouTube")
+        val intent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("https://youtube.com/results?search_query=$query")
+        )
+        this.launch(intent)
+    }
+
     fun Context.openURL(url: String) {
         if (url.isBlank()) return
         Timber.d("openURL")
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = Uri.parse(if (url.contains(HTTPS)) url else "$HTTPS$url")
-        this.launch(intent)
-    }
-
-    fun Context.checkOnYouTube(query: String) {
-        if (query.isBlank()) return
-        Timber.d("checkOnYouTube")
-        val intent = Intent(
-            Intent.ACTION_VIEW,
-            Uri.parse("https://youtube.com/results?search_query=$query")
-        )
         this.launch(intent)
     }
 
@@ -97,7 +105,7 @@ object IntentUtil {
                 "market://search?q=${packageName.trim()}"
             }
         )
-        Timber.d("openAppOnMarket")
+        Timber.d("checkOnMarket")
         val intent = Intent(Intent.ACTION_VIEW, marketUri)
         if (isGooglePlay) intent.setPackage(GOOGLE_PLAY)
         this.launch(intent)
@@ -105,19 +113,11 @@ object IntentUtil {
 
     fun Context.checkOnGoogleMaps(latitude: String, longitude: String) {
         if (latitude.isBlank() || longitude.isBlank()) return
-        Timber.d("openGoogleMaps")
+        Timber.d("checkOnGoogleMaps")
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
         val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         intent.setPackage(GOOGLE_MAPS)
-        this.launch(intent)
-    }
-
-    fun Context.openSearch(query: String) {
-        if (query.isBlank()) return
-        Timber.d("openSearch")
-        val intent = Intent(Intent.ACTION_WEB_SEARCH)
-        intent.putExtra(SearchManager.QUERY, query)
         this.launch(intent)
     }
 
@@ -152,15 +152,24 @@ object IntentUtil {
             S_ACCESSIBILITY -> Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             else -> return
         }
-        Timber.d("onOpenSystemSettings: $settingType")
+        Timber.d("openSystemSettings: $settingType")
         this.launch(intent)
     }
 
     fun Context.openAppDetailSettings() {
-        Timber.d("openPermissionPage")
+        Timber.d("openAppDetailSettings")
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
         val uri = Uri.fromParts(PACKAGE, appContext.packageName, null)
         intent.setData(uri)
+        this.launch(intent)
+    }
+
+    // TODO
+    fun Context.openAppLanguageSetting() {
+        Timber.d("openAppLanguageSetting")
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+            data = Uri.parse("package:${appContext.packageName}")
+        }
         this.launch(intent)
     }
 
