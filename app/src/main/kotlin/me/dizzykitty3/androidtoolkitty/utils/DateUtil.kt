@@ -26,4 +26,10 @@ object DateUtil {
 
     fun Float.toProgress(): String =
         (this * 100).toString().substring(0, 4).plus("%")
+
+    private val sysTimeMillis: Long
+        get() = System.currentTimeMillis()
+
+    val unixTimestamp: String
+        get() = (sysTimeMillis / 1000).toString()
 }

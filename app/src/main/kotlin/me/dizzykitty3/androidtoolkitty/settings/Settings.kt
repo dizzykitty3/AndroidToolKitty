@@ -29,7 +29,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_DEBUGGING
 import me.dizzykitty3.androidtoolkitty.SCR_EDIT_HOME
 import me.dizzykitty3.androidtoolkitty.SCR_LICENSES
-import me.dizzykitty3.androidtoolkitty.SOURCE_CODE
+import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
@@ -61,7 +61,7 @@ fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostControl
 private fun Appearance(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
-    var fadeAnimation by remember { mutableStateOf(settingsViewModel.settings.value.fadeAnimation) }
+    var forceDarkMode by remember { mutableStateOf(settingsViewModel.settings.value.forceDarkMode) }
 
     Card(R.string.appearance) {
         if (OSVersion.a12()) {
@@ -72,10 +72,10 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             }
         }
 
-        CustomSwitchRow(R.string.switch_to_fade_animation, fadeAnimation) {
+        CustomSwitchRow(R.string.force_dark_mode, forceDarkMode) {
             view.hapticFeedback()
-            fadeAnimation = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(fadeAnimation = it))
+            forceDarkMode = it
+            settingsViewModel.update(settingsViewModel.settings.value.copy(forceDarkMode = it))
         }
     }
 }
@@ -137,7 +137,7 @@ private fun Bottom(navController: NavHostController) {
         TextButton({
             view.hapticFeedback()
             view.context.showToast(R.string.all_help_welcomed)
-            view.context.openURL(SOURCE_CODE)
+            view.context.openURL(SOURCE_CODE_URL)
         }) {
             Icon(imageVector = Icons.Outlined.Code, contentDescription = null)
             SpacerPadding()

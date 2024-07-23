@@ -56,7 +56,6 @@ import me.dizzykitty3.androidtoolkitty.CARD_5
 import me.dizzykitty3.androidtoolkitty.CARD_6
 import me.dizzykitty3.androidtoolkitty.CARD_7
 import me.dizzykitty3.androidtoolkitty.CARD_8
-import me.dizzykitty3.androidtoolkitty.CARD_9
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_SETTINGS
 import me.dizzykitty3.androidtoolkitty.S_BLUETOOTH
@@ -87,6 +86,8 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
     val screenPadding = dimensionResource(R.dimen.padding_screen)
     val debug = BuildConfig.DEBUG
     val noTranslation = StringUtil.sysLangNotSupported || settingsViewModel.settings.value.devMode
+    val notFullyTranslated =
+        StringUtil.sysLangNotFullyTranslated || settingsViewModel.settings.value.devMode
 
     LazyColumn(Modifier.padding(start = screenPadding, end = screenPadding)) {
         item { TopBar(settingsViewModel, navController) }
@@ -97,7 +98,8 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
         item { CardSpacePadding() }
         if (debug) item { DevBuildTip() }
         if (noTranslation) item { NoTranslationTip(settingsViewModel) }
-        if (debug || noTranslation) item { CardSpacePadding() }
+        if (notFullyTranslated) item { NotFullyTranslated(settingsViewModel) }
+        if (debug || noTranslation || notFullyTranslated) item { CardSpacePadding() }
         item { HomeCards(settingsViewModel, navController) }
     }
 }
@@ -107,6 +109,8 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
     val largeScreenPadding = dimensionResource(R.dimen.padding_screen_large)
     val debug = BuildConfig.DEBUG
     val noTranslation = StringUtil.sysLangNotSupported || settingsViewModel.settings.value.devMode
+    val notFullyTranslated =
+        StringUtil.sysLangNotFullyTranslated || settingsViewModel.settings.value.devMode
 
     Column(Modifier.padding(start = largeScreenPadding, end = largeScreenPadding)) {
         Row(Modifier.fillMaxWidth()) {
@@ -114,10 +118,9 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
             Box(Modifier.weight(1f)) { TopBar(settingsViewModel, navController) }
         }
         SpacerPadding()
-        if (debug) {
-            DevBuildTip()
-        }
+        if (debug) DevBuildTip()
         if (noTranslation) NoTranslationTip(settingsViewModel)
+        if (notFullyTranslated) NotFullyTranslated(settingsViewModel)
         TwoColumnHomeCards(settingsViewModel, navController)
     }
 }
@@ -267,6 +270,11 @@ private fun NoTranslationTip(settingsViewModel: SettingsViewModel) {
 }
 
 @Composable
+private fun NotFullyTranslated(settingsViewModel: SettingsViewModel) {
+    Tip(settingsViewModel, stringResource(R.string.not_fully_translated, StringUtil.sysLocale))
+}
+
+@Composable
 private fun HomeCards(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     getCardMap(SettingsSharedPref).forEach { (cardName, isShow) ->
         if (isShow) CardContent(settingsViewModel, cardName, navController)
@@ -294,7 +302,7 @@ private fun TwoColumnHomeCards(
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> = listOf(
     CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
-    CARD_6, CARD_7, CARD_8, CARD_9, CARD_10,
+    CARD_6, CARD_7, CARD_8, CARD_10,
     CARD_11, CARD_12
 ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
 
@@ -308,12 +316,11 @@ private fun CardContent(
         CARD_1 -> YearProgress()
         CARD_2 -> Volume()
         CARD_3 -> Clipboard(settingsViewModel)
-        CARD_4 -> Webpage(settingsViewModel, navController)
+        CARD_4 -> SearchAndWebpage(settingsViewModel, navController)
         CARD_5 -> SysSettings(settingsViewModel)
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice(navController)
         CARD_8 -> CodesOfCharacters(navController)
-        CARD_9 -> CheckAppOnMarket()
         CARD_10 -> Maps()
         CARD_11 -> AndroidVersions(navController)
         CARD_12 -> FontWeight(navController)

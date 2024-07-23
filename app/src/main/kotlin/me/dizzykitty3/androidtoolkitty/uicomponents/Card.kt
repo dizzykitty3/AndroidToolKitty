@@ -7,10 +7,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -105,7 +105,7 @@ private fun CardTitle(title: String) {
 fun CardShowMore(onClick: () -> Unit) {
     Row(Modifier.fillMaxWidth()) {
         Spacer(Modifier.weight(1f))
-        TextButton(onClick) {
+        FilledTonalButton(onClick) {
             Text(
                 stringResource(R.string.show_more),
                 textAlign = TextAlign.End

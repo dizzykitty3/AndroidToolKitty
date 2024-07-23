@@ -7,7 +7,7 @@ private val dev = BuildConfig.DEBUG
 data class Settings(
     // Settings > Appearance
     var dynamicColor: Boolean = true,
-    var fadeAnimation: Boolean = false,
+    var forceDarkMode: Boolean = false,
 
     // Settings > Debugging
     var devMode: Boolean = dev,

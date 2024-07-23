@@ -10,7 +10,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
-import androidx.compose.material.icons.outlined.Link
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -35,6 +35,7 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_WEBPAGE
+import me.dizzykitty3.androidtoolkitty.WHAT_IS_PACKAGE_NAME_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
@@ -46,6 +47,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnMarket
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnYouTube
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSearch
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
@@ -57,8 +59,8 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil.toFullURL
 import timber.log.Timber
 
 @Composable
-fun Webpage(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    Card(R.string.webpage, Icons.Outlined.Link) {
+fun SearchAndWebpage(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+    Card(R.string.search_and_webpage, Icons.Outlined.Search) {
         Search()
         CardShowMore { navController.navigate(SCR_WEBPAGE) }
     }
@@ -67,13 +69,15 @@ fun Webpage(settingsViewModel: SettingsViewModel, navController: NavHostControll
 @Composable
 fun WebpageScreen() {
     Screen {
-        Card(R.string.webpage, Icons.Outlined.Link) {
+        Card(R.string.search_and_webpage, Icons.Outlined.Search) {
             GroupTitle(R.string.search)
             Search()
             GroupDivider()
             WebpageURL()
             GroupDivider()
             SocialMediaProfileIURL()
+            GroupDivider()
+            CheckAppOnMarket()
         }
     }
 }
@@ -115,7 +119,7 @@ private fun Search() {
             focus.clearFocus()
             view.context.onClickSearchButton(searchQuery)
         }) {
-            Text(text = stringResource(R.string.visit))
+            Text(text = stringResource(R.string.search))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
@@ -331,3 +335,83 @@ private fun isInvalid(platform: URLUtil.Platform, username: String): Boolean =
 
 private fun isValid(platform: URLUtil.Platform, username: String): Boolean =
     !isInvalid(platform, username)
+
+@Composable
+private fun CheckAppOnMarket() {
+    GroupTitle(R.string.check_app_on_market)
+
+    val view = LocalView.current
+    val focus = LocalFocusManager.current
+    var packageName by remember { mutableStateOf("") }
+
+    OutlinedTextField(
+        value = packageName,
+        onValueChange = { packageName = it },
+        label = { Text(stringResource(R.string.package_name_or_search)) },
+        modifier = Modifier.fillMaxWidth(),
+        keyboardOptions = KeyboardOptions.Default.copy(
+            imeAction = ImeAction.Done
+        ),
+        keyboardActions = KeyboardActions(
+            onDone = {
+                focus.clearFocus()
+                view.context.checkOnMarket(packageName)
+            }
+        ),
+        trailingIcon = {
+            ClearInput(packageName) {
+                view.hapticFeedback()
+                packageName = ""
+            }
+        }
+    )
+    Row(
+        Modifier.horizontalScroll(rememberScrollState()),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        TextButton({
+            view.hapticFeedback()
+            focus.clearFocus()
+            view.context.checkOnMarket(packageName)
+        }
+        ) {
+            Text(stringResource(R.string.open_on_google_play))
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = stringResource(id = R.string.check_app_on_market),
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+        Text("|")
+        TextButton({
+            view.hapticFeedback()
+            focus.clearFocus()
+            view.context.checkOnMarket(packageName, false)
+        }
+        ) {
+            Text(stringResource(R.string.open_on_other_markets))
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = stringResource(id = R.string.open_on_other_markets),
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+    }
+    WhatIsPackageName()
+}
+
+@Composable
+private fun WhatIsPackageName() {
+    val view = LocalView.current
+
+    TextButton({
+        view.hapticFeedback()
+        view.context.openURL(WHAT_IS_PACKAGE_NAME_URL)
+    }) {
+        Text(stringResource(R.string.what_is_package_name))
+        Icon(
+            imageVector = Icons.Outlined.ArrowOutward,
+            contentDescription = stringResource(R.string.what_is_package_name)
+        )
+    }
+}

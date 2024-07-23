@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun GroupDivider() {
-    SpacerPadding()
+    CardSpacePadding()
     HorizontalDivider()
-    SpacerPadding()
+    CardSpacePadding()
 }

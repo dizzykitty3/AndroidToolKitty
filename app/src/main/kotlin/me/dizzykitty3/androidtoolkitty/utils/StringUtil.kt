@@ -52,6 +52,13 @@ object StringUtil {
     val sysLangNotSupported: Boolean
         @CheckResult get() = !sysLangSupported
 
+    @Suppress("MemberVisibilityCanBePrivate")
+    val sysLangFullyTranslated: Boolean
+        @CheckResult get() = sysLocale.contains(Regex("en"))
+
+    val sysLangNotFullyTranslated: Boolean
+        @CheckResult get() = !sysLangFullyTranslated
+
     val sysLangCJK: Boolean
         @CheckResult get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
 

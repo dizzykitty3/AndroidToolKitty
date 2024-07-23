@@ -12,13 +12,13 @@ import me.dizzykitty3.androidtoolkitty.R
 private fun Res(@DimenRes padding: Int) = Spacer(Modifier.padding(dimensionResource(padding)))
 
 @Composable
-fun CardSpacePadding() = Res(padding = R.dimen.padding_card_space)
+fun CardSpacePadding() = Res(R.dimen.padding_card_space)
 
 @Composable
-fun SpacerPadding() = Res(padding = R.dimen.padding_spacer)
+fun SpacerPadding() = Res(R.dimen.padding_spacer)
 
 /**
  * Note: Not for buttons.
  */
 @Composable
-fun IconAndTextPadding() = Res(padding = R.dimen.padding_icons_and_text)
+fun IconAndTextPadding() = Res(R.dimen.padding_icons_and_text)

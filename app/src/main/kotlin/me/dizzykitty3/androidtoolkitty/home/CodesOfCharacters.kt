@@ -32,6 +32,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
@@ -54,6 +55,8 @@ fun CodesOfCharactersScreen() {
             Unicode()
             GroupDivider()
             ASCII()
+            GroupDivider()
+            UnixTimestamp()
         }
     }
 }
@@ -187,6 +190,13 @@ private fun ASCII() {
     }) { Text(stringResource(R.string.convert_to_ascii_values)) }
 }
 
+@Composable
+private fun UnixTimestamp() {
+    GroupTitle("Unix Timestamp")
+    Text("current unix timestamp:")
+    Text(DateUtil.unixTimestamp)
+}
+
 private fun View.onClickConvertButton(
     input: String,
     updateResult: (String) -> Unit,
@@ -201,6 +211,6 @@ private fun View.onClickConvertButton(
         ClipboardUtil.copy(result)
         this.showSnackbar("$result ${appContext.getString(R.string.copied)}")
     } catch (e: Exception) {
-        this.showSnackbar(e.message ?: "Unknown error occurred")
+        e.message?.let { this.showSnackbar(it) }
     }
 }

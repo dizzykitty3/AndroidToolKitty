@@ -43,9 +43,7 @@
     <string name="open_google_maps">在 Google 地图上查看此坐标</string>
     <string name="check_app_on_market">在商店查看应用</string>
     <string name="package_name_or_search">输入包名或搜索</string>
-    <string name="whats">什么是</string>
-    <string name="package_name">包名</string>
-    <string name="content_description_link_icon_whats_package_name">网页链接图标：什么是包名</string>
+    <string name="what_is_package_name">什么是包名</string>
     <string name="social_media_profile">社交媒体主页</string>
     <string name="platform">社交平台</string>
     <string name="username">用户昵称</string>
@@ -87,7 +85,7 @@
     <string name="wheel_of_fortune">幸运大转盘</string>
     <string name="info">信息</string>
     <string name="go_to_settings">前往系统设置</string>
-    <string name="show_more">更多></string>
+    <string name="show_more">更多 ＞</string>
     <string name="bluetooth_devices">蓝牙设备</string>
     <string name="show_paired_devices">查看已配对的设备</string>
     <string name="current_device">当前设备：</string>
@@ -149,7 +147,7 @@
     <string name="codes_of_characters">字符编码</string>
     <string name="unifans">引力圈</string>
     <string name="debug_build_top_tip">此为调试版本。包含错误且性能较差。</string>
-    <string name="switch_to_fade_animation">选用淡入淡出动画</string>
     <string name="invalid_username_input_tip">%1$s 的用户名应仅包含字母、数字和下划线</string>
-    <string name="needs_restart">Needs restart, do it now?</string>
+    <string name="search_and_webpage">Search / Webpage</string>
+    <string name="force_dark_mode">Force dark mode</string>
 </resources>

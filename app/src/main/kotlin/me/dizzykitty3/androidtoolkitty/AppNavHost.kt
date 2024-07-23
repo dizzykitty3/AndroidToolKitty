@@ -28,32 +28,19 @@ import me.dizzykitty3.androidtoolkitty.settings.Settings
 @Composable
 fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
     val navController = rememberNavController()
-    val fadeAnimation = settingsViewModel.settings.value.fadeAnimation
 
     NavHost(
         modifier = modifier,
         navController = navController,
         startDestination = SCR_HOME,
         enterTransition = {
-            if (fadeAnimation)
-                fadeIn(animationSpec = tween(FADE_DURATION)) +
-                        scaleIn(
-                            initialScale = INITIAL_SCALE,
-                            animationSpec = tween(SCALE_DURATION)
-                        )
-            else slideInHorizontally(
+            slideInHorizontally(
                 initialOffsetX = { fullWidth -> fullWidth },
                 animationSpec = tween(SLIDE_DURATION)
             )
         },
         popExitTransition = {
-            if (fadeAnimation)
-                fadeOut(animationSpec = tween(FADE_DURATION)) +
-                        scaleOut(
-                            targetScale = INITIAL_SCALE,
-                            animationSpec = tween(SCALE_DURATION)
-                        )
-            else slideOutHorizontally(
+            slideOutHorizontally(
                 targetOffsetX = { fullWidth -> fullWidth },
                 animationSpec = tween(SLIDE_DURATION)
             )

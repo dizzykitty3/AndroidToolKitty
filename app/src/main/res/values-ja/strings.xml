@@ -4,7 +4,7 @@
     <string name="edit">編集</string>
     <string name="visit">訪問</string>
     <string name="debugging">デバッグ</string>
-    <string name="show_more">もっと見る></string>
+    <string name="show_more">もっと見る ＞</string>
     <string name="unknown">不明</string>
     <string name="clear_input">入力をクリア</string>
     <string name="info">情報</string>
@@ -71,9 +71,7 @@
     <string name="open_google_maps">Google マップを開く</string>
     <string name="check_app_on_market">マーケットでアプリを確認</string>
     <string name="package_name_or_search">パッケージ名または検索</string>
-    <string name="whats">何が</string>
-    <string name="package_name">パッケージ名</string>
-    <string name="content_description_link_icon_whats_package_name">リンクアイコン：パッケージ名とは</string>
+    <string name="what_is_package_name">何がパッケージ名</string>
     <string name="open_developer_options">開発者向けオプション</string>
     <string name="pixiv_artwork_id">pixiv（作品ID）</string>
     <string name="pixiv_user_id">pixiv（ユーザーID）</string>
@@ -150,7 +148,7 @@
     <string name="codes_of_characters">Codes of Characters</string>
     <string name="unifans">Unifans</string>
     <string name="debug_build_top_tip">This is a debug build. Expect some bugs and worse performance.</string>
-    <string name="switch_to_fade_animation">Switch to fade animation</string>
     <string name="invalid_username_input_tip">username for %1$s should only contains letters, numbers, and underscores</string>
-    <string name="needs_restart">Needs restart, do it now?</string>
+    <string name="search_and_webpage">Search / Webpage</string>
+    <string name="force_dark_mode">Force dark mode</string>
 </resources>

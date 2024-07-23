@@ -29,6 +29,7 @@
     <string name="no_translation" translatable="false">Sorry, %1$s translation haven\'t added yet.</string>
     <string name="connected">Connected</string>
     <string name="debug_build_top_tip">This is a debug build. Expect some bugs and worse performance.</string>
+    <string name="not_fully_translated" translatable="false">Sorry, %1$s not fully translated yet.</string>
 
     <!-- Home > Year progress -->
     <string name="year_progress">Year progress</string>
@@ -115,6 +116,7 @@
     <string name="unifans">Unifans</string>
     <string name="ko_fi" translatable="false">Ko-fi</string>
     <string name="invalid_username_input_tip">username for %1$s should only contains letters, numbers, and underscores</string>
+    <string name="search_and_webpage">Search / Webpage</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>
@@ -169,9 +171,7 @@
     <!-- Home > Check app on market -->
     <string name="check_app_on_market">Check app on market</string>
     <string name="package_name_or_search">Package name or search</string>
-    <string name="whats">What\'s</string>
-    <string name="package_name">package name</string>
-    <string name="content_description_link_icon_whats_package_name">link icon: what\'s package name</string>
+    <string name="what_is_package_name">What\'s package name</string>
     <string name="open_on_google_play" translatable="false">Google Play</string>
     <string name="open_on_other_markets">Other markets</string>
 
@@ -263,7 +263,7 @@
     <!-- Settings > Appearance -->
     <string name="material_you_dynamic_color">Material You dynamic color</string>
     <string name="appearance">Appearance</string>
-    <string name="needs_restart">Needs restart, do it now?</string>
+    <string name="force_dark_mode">Force dark mode</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
@@ -289,7 +289,6 @@
     <string name="qr_code_generator">QR Code generator</string>
     <string name="dev_mode_message" translatable="false">dev mode message:</string>
     <string name="distance">distance</string>
-    <string name="switch_to_fade_animation">Switch to fade animation</string>
     <string name="device" translatable="false">device</string>
     <string name="os_version" translatable="false">os_ver</string>
     <string name="locale" translatable="false">locale</string>

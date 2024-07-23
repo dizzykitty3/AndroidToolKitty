@@ -28,7 +28,6 @@ import me.dizzykitty3.androidtoolkitty.CARD_5
 import me.dizzykitty3.androidtoolkitty.CARD_6
 import me.dizzykitty3.androidtoolkitty.CARD_7
 import me.dizzykitty3.androidtoolkitty.CARD_8
-import me.dizzykitty3.androidtoolkitty.CARD_9
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
@@ -101,13 +100,6 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 mutableStateOf(
                     settingsSharedPref.getCardShowedState(
                         CARD_8
-                    )
-                )
-            }
-            var mIsShowCard10 by remember {
-                mutableStateOf(
-                    settingsSharedPref.getCardShowedState(
-                        CARD_9
                     )
                 )
             }
@@ -199,24 +191,6 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 settingsSharedPref.saveCardShowedState(CARD_8, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.check_app_on_market,
-                card = CARD_9,
-                isChecked = mIsShowCard9
-            ) { newState ->
-                view.hapticFeedback()
-                mIsShowCard9 = newState
-                settingsSharedPref.saveCardShowedState(CARD_9, newState)
-            }
-            CustomHideCardSettingSwitch(
-                text = R.string.google_maps,
-                card = CARD_10,
-                isChecked = mIsShowCard10
-            ) { newState ->
-                view.hapticFeedback()
-                mIsShowCard10 = newState
-                settingsSharedPref.saveCardShowedState(CARD_10, newState)
-            }
-            CustomHideCardSettingSwitch(
                 text = R.string.android_versions,
                 card = CARD_11,
                 isChecked = mIsShowCard11
@@ -250,7 +224,6 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                     mIsShowCard7 = false
                     mIsShowCard8 = false
                     mIsShowCard9 = false
-                    mIsShowCard10 = false
                     mIsShowCard11 = false
                     mIsShowCard12 = false
                 },
@@ -278,7 +251,6 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                     mIsShowCard7 = true
                     mIsShowCard8 = true
                     mIsShowCard9 = true
-                    mIsShowCard10 = true
                     mIsShowCard11 = true
                     mIsShowCard12 = true
                 },
@@ -308,7 +280,6 @@ private fun onClickChangeAllCardsButton(isShow: Boolean) {
         CARD_6,
         CARD_7,
         CARD_8,
-        CARD_9,
         CARD_10,
         CARD_11,
         CARD_12

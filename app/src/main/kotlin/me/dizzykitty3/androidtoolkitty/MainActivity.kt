@@ -50,8 +50,12 @@ class MainActivity : ComponentActivity() {
             settingsViewModel = hiltViewModel<SettingsViewModel>()
             val snackbarHostState = remember { SnackbarHostState() }
             val bottomAppBar = settingsViewModel.settings.value.bottomAppBar
+            val forceDarkMode = settingsViewModel.settings.value.forceDarkMode
 
-            AppTheme(dynamicColor = settingsViewModel.settings.value.dynamicColor) {
+            AppTheme(
+                forceDarkMode = forceDarkMode,
+                dynamicColor = settingsViewModel.settings.value.dynamicColor
+            ) {
                 Scaffold(Modifier.fillMaxSize(),
                     snackbarHost = {
                         if (bottomAppBar)
