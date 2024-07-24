@@ -16,6 +16,7 @@ const val SCR_WEBPAGE = "WebpageScreen"
 const val SCR_CODES_OF_CHARACTERS = "CodesOfCharactersScreen"
 const val SCR_ANDROID_VERSION_HISTORY = "AndroidVersionHistoryScreen"
 const val SCR_FONT_WEIGHT_TEST = "FontWeightTestScreen"
+const val SCR_SYS_SETTINGS = "SysSettingsScreen"
 
 // App cards
 const val CARD_1 = "card_year_progress"

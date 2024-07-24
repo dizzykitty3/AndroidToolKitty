@@ -9,6 +9,9 @@ data class Settings(
     var dynamicColor: Boolean = true,
     var forceDarkMode: Boolean = false,
 
+    // Settings > General
+    var autoClearClipboard: Boolean = false,
+
     // Settings > Debugging
     var devMode: Boolean = dev,
     var bottomAppBar: Boolean = dev,

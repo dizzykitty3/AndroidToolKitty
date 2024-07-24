@@ -18,6 +18,7 @@ import me.dizzykitty3.androidtoolkitty.home.CodesOfCharactersScreen
 import me.dizzykitty3.androidtoolkitty.home.FontWeightTestScreen
 import me.dizzykitty3.androidtoolkitty.home.Home
 import me.dizzykitty3.androidtoolkitty.home.PermissionRequest
+import me.dizzykitty3.androidtoolkitty.home.SysSettingsScreen
 import me.dizzykitty3.androidtoolkitty.home.WebpageScreen
 import me.dizzykitty3.androidtoolkitty.settings.DebuggingScreen
 import me.dizzykitty3.androidtoolkitty.settings.HomeEdit
@@ -70,6 +71,7 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
         composable(SCR_CODES_OF_CHARACTERS) { CodesOfCharactersScreen() }
         composable(SCR_ANDROID_VERSION_HISTORY) { AndroidVersionHistoryScreen() }
         composable(SCR_FONT_WEIGHT_TEST) { FontWeightTestScreen() }
+        composable(SCR_SYS_SETTINGS) { SysSettingsScreen(navController) }
     }
 }
 

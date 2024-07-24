@@ -79,22 +79,24 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             settingsViewModel.update(settingsViewModel.settings.value.copy(forceDarkMode = it))
         }
 
-        OutlinedButton({
-            view.hapticFeedback()
-            view.context.openAppLanguageSetting()
-        }) {
-            Icon(
-                imageVector = Icons.Outlined.Language,
-                contentDescription = stringResource(R.string.change_app_language),
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
-            SpacerPadding()
-            Text(stringResource(R.string.change_app_language))
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(R.string.change_app_language),
-                tint = MaterialTheme.colorScheme.primary
-            )
+        if (OSVersion.a13()) {
+            OutlinedButton({
+                view.hapticFeedback()
+                view.context.openAppLanguageSetting()
+            }) {
+                Icon(
+                    imageVector = Icons.Outlined.Language,
+                    contentDescription = stringResource(R.string.change_app_language),
+                    modifier = Modifier.align(Alignment.CenterVertically)
+                )
+                SpacerPadding()
+                Text(stringResource(R.string.change_app_language))
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = stringResource(R.string.change_app_language),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+            }
         }
     }
 }
@@ -103,7 +105,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 private fun General(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
-    var autoClearClipboard by remember { mutableStateOf(settingsSharedPref.autoClearClipboard) }
+    var autoClearClipboard by remember { mutableStateOf(settingsViewModel.settings.value.autoClearClipboard) }
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
@@ -127,14 +129,13 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
                     }
                 )
             }
-            settingsSharedPref.autoClearClipboard = autoClearClipboard
+            settingsViewModel.update(settingsViewModel.settings.value.copy(autoClearClipboard = it))
         }
 
         OutlinedButton({
             view.hapticFeedback()
             navController.navigate(SCR_EDIT_HOME)
-        }
-        ) {
+        }) {
             Icon(
                 imageVector = Icons.Outlined.Edit,
                 contentDescription = stringResource(R.string.customize_my_home_page),

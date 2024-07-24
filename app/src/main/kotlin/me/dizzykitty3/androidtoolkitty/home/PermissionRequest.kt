@@ -36,8 +36,6 @@ fun PermissionRequest(settingsViewModel: SettingsViewModel) {
             var clickCount2 by remember { mutableIntStateOf(0) }
             val view = LocalView.current
 
-            // TODO Split
-
             Text(stringResource(R.string.bluetooth_connect))
 
             Button(

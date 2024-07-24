@@ -22,7 +22,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.theme.AppTheme
@@ -48,9 +47,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             settingsViewModel = hiltViewModel<SettingsViewModel>()
-            val snackbarHostState = remember { SnackbarHostState() }
+            @Suppress("SpellCheckingInspection") val snackbarHostState =
+                remember { SnackbarHostState() }
             val bottomAppBar = settingsViewModel.settings.value.bottomAppBar
             val forceDarkMode = settingsViewModel.settings.value.forceDarkMode
+            isAutoClearClipboard = settingsViewModel.settings.value.autoClearClipboard
 
             AppTheme(
                 forceDarkMode = forceDarkMode,
@@ -92,9 +93,6 @@ class MainActivity : ComponentActivity() {
         Timber.d("onStart")
         continuationNotResumed.set(true)
         CoroutineScope(Dispatchers.Main).launch {
-            isAutoClearClipboard = withContext(Dispatchers.IO) {
-                SettingsSharedPref.autoClearClipboard
-            }
             suspendCancellableCoroutine { cont ->
                 continuation = cont
             }

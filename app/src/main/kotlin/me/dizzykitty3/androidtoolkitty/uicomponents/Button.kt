@@ -20,7 +20,7 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 @Composable
 fun SystemSettingButton(
     settingType: String,
-    @StringRes text: Int
+    @StringRes text: Int,
 ) {
     val view = LocalView.current
 

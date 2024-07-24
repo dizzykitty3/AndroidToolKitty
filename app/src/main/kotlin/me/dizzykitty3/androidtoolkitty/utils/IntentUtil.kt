@@ -158,18 +158,17 @@ object IntentUtil {
 
     fun Context.openAppDetailSettings() {
         Timber.d("openAppDetailSettings")
-        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-        val uri = Uri.fromParts(PACKAGE, appContext.packageName, null)
-        intent.setData(uri)
-        this.launch(intent)
-    }
-
-    // TODO
-    fun Context.openAppLanguageSetting() {
-        Timber.d("openAppLanguageSetting")
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             data = Uri.parse("package:${appContext.packageName}")
         }
+        this.launch(intent)
+    }
+
+    @SuppressLint("InlinedApi")
+    fun Context.openAppLanguageSetting() {
+        Timber.d("openAppLanguageSetting")
+        val intent = Intent(Settings.ACTION_APP_LOCALE_SETTINGS)
+        intent.data = Uri.fromParts(PACKAGE, this.packageName, null)
         this.launch(intent)
     }
 

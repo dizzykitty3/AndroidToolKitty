@@ -15,7 +15,6 @@ object SettingsSharedPref {
     private const val PREF_NAME = "Settings"
 
     // Booleans
-    private const val AUTO_CLEAR_CLIPBOARD = "auto_clear_clipboard"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
@@ -54,10 +53,6 @@ object SettingsSharedPref {
             apply()
         }
     }
-
-    var autoClearClipboard: Boolean
-        get() = getPreference(AUTO_CLEAR_CLIPBOARD, false)
-        set(value) = setPreference(AUTO_CLEAR_CLIPBOARD, value)
 
     var usingCustomVolumeOptionLabel: Boolean
         get() = getPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, false)

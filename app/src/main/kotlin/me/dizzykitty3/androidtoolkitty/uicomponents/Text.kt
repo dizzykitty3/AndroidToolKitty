@@ -82,6 +82,15 @@ fun GradientSmall(textToDisplay: String, colors: List<Color>) {
 }
 
 @Composable
+fun AnnotatedString.Builder.ItalicText(@StringRes text: Int) {
+    val italicTextStyle = SpanStyle(
+        fontStyle = FontStyle.Italic,
+        fontWeight = FontWeight.Light
+    )
+    withStyle(italicTextStyle) { append(stringResource(text)) }
+}
+
+@Composable
 fun AnnotatedString.Builder.ItalicText(text: String) {
     val italicTextStyle = SpanStyle(
         fontStyle = FontStyle.Italic,

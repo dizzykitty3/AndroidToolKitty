@@ -137,7 +137,7 @@ fun SysSettingsCardEdit() {
         }
 
         CustomHideCardSettingSwitch(
-            text = R.string.open_display_settings,
+            text = R.string.display_settings,
             card = S_DISPLAY,
             isChecked = mIsShowSetting1
         ) { newState ->
@@ -147,7 +147,7 @@ fun SysSettingsCardEdit() {
         }
         if (OSVersion.a12()) {
             CustomHideCardSettingSwitch(
-                text = R.string.open_auto_rotate_settings,
+                text = R.string.auto_rotate_settings,
                 card = S_AUTO_ROTATE,
                 isChecked = mIsShowSetting2
             ) { newState ->
@@ -157,7 +157,7 @@ fun SysSettingsCardEdit() {
             }
         }
         CustomHideCardSettingSwitch(
-            text = R.string.open_bluetooth_settings,
+            text = R.string.bluetooth_settings,
             card = S_BLUETOOTH,
             isChecked = mIsShowSetting3
         ) { newState ->
@@ -165,26 +165,30 @@ fun SysSettingsCardEdit() {
             mIsShowSetting3 = newState
             settingsSharedPref.saveCardShowedState(S_BLUETOOTH, newState)
         }
-        CustomHideCardSettingSwitch(
-            text = R.string.open_default_apps_settings,
-            card = S_DEFAULT_APPS,
-            isChecked = mIsShowSetting4
-        ) { newState ->
-            view.hapticFeedback()
-            mIsShowSetting4 = newState
-            settingsSharedPref.saveCardShowedState(S_DEFAULT_APPS, newState)
+        if (OSVersion.api24()) {
+            CustomHideCardSettingSwitch(
+                text = R.string.default_apps_settings,
+                card = S_DEFAULT_APPS,
+                isChecked = mIsShowSetting4
+            ) { newState ->
+                view.hapticFeedback()
+                mIsShowSetting4 = newState
+                settingsSharedPref.saveCardShowedState(S_DEFAULT_APPS, newState)
+            }
+        }
+        if (OSVersion.api23()) {
+            CustomHideCardSettingSwitch(
+                text = R.string.battery_optimization_settings,
+                card = S_BATTERY_OPTIMIZATION,
+                isChecked = mIsShowSetting5
+            ) { newState ->
+                view.hapticFeedback()
+                mIsShowSetting5 = newState
+                settingsSharedPref.saveCardShowedState(S_BATTERY_OPTIMIZATION, newState)
+            }
         }
         CustomHideCardSettingSwitch(
-            text = R.string.open_battery_optimization_settings,
-            card = S_BATTERY_OPTIMIZATION,
-            isChecked = mIsShowSetting5
-        ) { newState ->
-            view.hapticFeedback()
-            mIsShowSetting5 = newState
-            settingsSharedPref.saveCardShowedState(S_BATTERY_OPTIMIZATION, newState)
-        }
-        CustomHideCardSettingSwitch(
-            text = R.string.open_caption_preferences,
+            text = R.string.caption_preferences,
             card = S_CAPTIONING,
             isChecked = mIsShowSetting6
         ) { newState ->
@@ -193,7 +197,7 @@ fun SysSettingsCardEdit() {
             settingsSharedPref.saveCardShowedState(S_CAPTIONING, newState)
         }
         CustomHideCardSettingSwitch(
-            text = R.string.open_usage_access_permission,
+            text = R.string.usage_access_permission,
             card = S_USAGE_ACCESS,
             isChecked = mIsShowSetting7
         ) { newState ->
@@ -201,26 +205,30 @@ fun SysSettingsCardEdit() {
             mIsShowSetting7 = newState
             settingsSharedPref.saveCardShowedState(S_USAGE_ACCESS, newState)
         }
-        CustomHideCardSettingSwitch(
-            text = R.string.open_overlay_permission,
-            card = S_OVERLAY,
-            isChecked = mIsShowSetting8
-        ) { newState ->
-            view.hapticFeedback()
-            mIsShowSetting8 = newState
-            settingsSharedPref.saveCardShowedState(S_OVERLAY, newState)
+        if (OSVersion.api23()) {
+            CustomHideCardSettingSwitch(
+                text = R.string.overlay_permission,
+                card = S_OVERLAY,
+                isChecked = mIsShowSetting8
+            ) { newState ->
+                view.hapticFeedback()
+                mIsShowSetting8 = newState
+                settingsSharedPref.saveCardShowedState(S_OVERLAY, newState)
+            }
+        }
+        if (OSVersion.api23()) {
+            CustomHideCardSettingSwitch(
+                text = R.string.write_permission,
+                card = S_WRITE_SETTINGS,
+                isChecked = mIsShowSetting9
+            ) { newState ->
+                view.hapticFeedback()
+                mIsShowSetting9 = newState
+                settingsSharedPref.saveCardShowedState(S_WRITE_SETTINGS, newState)
+            }
         }
         CustomHideCardSettingSwitch(
-            text = R.string.open_write_permission,
-            card = S_WRITE_SETTINGS,
-            isChecked = mIsShowSetting9
-        ) { newState ->
-            view.hapticFeedback()
-            mIsShowSetting9 = newState
-            settingsSharedPref.saveCardShowedState(S_WRITE_SETTINGS, newState)
-        }
-        CustomHideCardSettingSwitch(
-            text = R.string.open_accessibility_settings,
+            text = R.string.accessibility_settings,
             card = S_ACCESSIBILITY,
             isChecked = mIsShowSetting10
         ) { newState ->
@@ -229,7 +237,7 @@ fun SysSettingsCardEdit() {
             settingsSharedPref.saveCardShowedState(S_ACCESSIBILITY, newState)
         }
         CustomHideCardSettingSwitch(
-            text = R.string.open_language_settings,
+            text = R.string.language_settings,
             card = S_LOCALE,
             isChecked = mIsShowSetting11
         ) { newState ->
@@ -238,7 +246,7 @@ fun SysSettingsCardEdit() {
             settingsSharedPref.saveCardShowedState(S_LOCALE, newState)
         }
         CustomHideCardSettingSwitch(
-            text = R.string.open_date_and_time_settings,
+            text = R.string.date_and_time_settings,
             card = S_DATE,
             isChecked = mIsShowSetting12
         ) { newState ->
@@ -247,7 +255,7 @@ fun SysSettingsCardEdit() {
             settingsSharedPref.saveCardShowedState(S_DATE, newState)
         }
         CustomHideCardSettingSwitch(
-            text = R.string.open_developer_options,
+            text = R.string.developer_options,
             card = S_DEVELOPER,
             isChecked = mIsShowSetting13
         ) { newState ->
