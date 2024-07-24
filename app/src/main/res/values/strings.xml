@@ -4,7 +4,7 @@
     <string name="edit">Edit</string>
     <string name="visit">Visit</string>
     <string name="debugging">Debugging</string>
-    <string name="show_more">show more</string>
+    <string name="show_more">show more ></string>
     <string name="unknown">Unknown</string>
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>
@@ -20,6 +20,8 @@
     <string name="settings">Settings</string>
     <string name="error">error</string>
     <string name="result">result =</string>
+    <string name="common">Common</string>
+    <string name="permission">Permission</string>
 
     <!-- Home > Top bar -->
     <string name="battery_level">Battery level</string>
@@ -29,6 +31,7 @@
     <string name="no_translation" translatable="false">Sorry, %1$s translation haven\'t added yet.</string>
     <string name="connected">Connected</string>
     <string name="debug_build_top_tip">This is a debug build. Expect some bugs and worse performance.</string>
+    <string name="not_fully_translated">Sorry, %1$s not fully translated yet.</string>
 
     <!-- Home > Year progress -->
     <string name="year_progress">Year progress</string>
@@ -54,7 +57,7 @@
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on Clear Clipboard on Launch in Settings Screen.</string>
     <string name="clipboard_is_empty">Clipboard is empty</string>
 
-    <!-- Home > Webpage -->
+    <!-- Home > Search / Webpage -->
     <string name="url" translatable="false">URL</string>
     <string name="url_input_hint_1">Visit webpage without inputting </string>
     <string name="url_input_hint_2">and </string>
@@ -115,23 +118,30 @@
     <string name="unifans">Unifans</string>
     <string name="ko_fi" translatable="false">Ko-fi</string>
     <string name="invalid_username_input_tip">username for %1$s should only contains letters, numbers, and underscores</string>
+    <string name="search_and_webpage">Search / Webpage</string>
+    <string name="check_app_on_market">Check app on market</string>
+    <string name="package_name_or_search">Package name or search</string>
+    <string name="what_is_package_name">What\'s package name</string>
+    <string name="open_on_google_play" translatable="false">Google Play</string>
+    <string name="open_on_other_markets">Other markets</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>
-    <string name="open_display_settings">Display</string>
-    <string name="open_auto_rotate_settings">Auto-rotate screen</string>
-    <string name="open_language_settings">Languages</string>
-    <string name="open_default_apps_settings">Default apps</string>
-    <string name="open_bluetooth_settings">Bluetooth</string>
-    <string name="open_date_and_time_settings">Date &amp; time</string>
-    <string name="open_battery_optimization_settings">Battery optimization</string>
-    <string name="open_developer_options">Developer options</string>
-    <string name="open_caption_preferences">Caption preferences</string>
+    <string name="display_settings">Display</string>
+    <string name="auto_rotate_settings">Auto-rotate screen</string>
+    <string name="language_settings">Languages</string>
+    <string name="default_apps_settings">Default apps</string>
+    <string name="bluetooth_settings">Bluetooth</string>
+    <string name="date_and_time_settings">Date &amp; time</string>
+    <string name="battery_optimization_settings">Battery optimization</string>
+    <string name="developer_options">Developer options</string>
+    <string name="caption_preferences">Caption preferences</string>
     <string name="set_time_automatically_is_off_tip">Set Time Automatically is now OFF. You may experience some unexpected behavior while using your phone.</string>
-    <string name="open_usage_access_permission">Usage access</string>
-    <string name="open_overlay_permission">Display over other apps</string>
-    <string name="open_write_permission">Modify system settings</string>
-    <string name="open_accessibility_settings">Accessibility</string>
+    <string name="usage_access_permission">Usage access</string>
+    <string name="overlay_permission">Display over other apps</string>
+    <string name="write_permission">Modify system settings</string>
+    <string name="accessibility_settings">Accessibility</string>
+    <string name="no_options_enabled">Enabled options will be shown here</string>
 
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
@@ -165,15 +175,6 @@
     <string name="codes_of_characters">Codes of Characters</string>
     <string name="ascii" translatable="false">ASCII</string>
     <string name="convert_to_ascii_values">Convert to ASCII values</string>
-
-    <!-- Home > Check app on market -->
-    <string name="check_app_on_market">Check app on market</string>
-    <string name="package_name_or_search">Package name or search</string>
-    <string name="whats">What\'s</string>
-    <string name="package_name">package name</string>
-    <string name="content_description_link_icon_whats_package_name">link icon: what\'s package name</string>
-    <string name="open_on_google_play" translatable="false">Google Play</string>
-    <string name="open_on_other_markets">Other markets</string>
 
     <!-- Home > Google Maps -->
     <string name="google_maps">Google Maps</string>
@@ -261,10 +262,10 @@
     <string name="japanese_sentence" translatable="false">闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。</string>
 
     <!-- Settings > Appearance -->
-    <string name="one_handed_mode">One-handed mode</string>
     <string name="material_you_dynamic_color">Material You dynamic color</string>
     <string name="appearance">Appearance</string>
-    <string name="keep_showing_full_webpage_card">Keep showing full Webpage card</string>
+    <string name="force_dark_mode">Force dark mode</string>
+    <string name="change_app_language">Change app language</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
@@ -273,14 +274,15 @@
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
     <string name="customize_my_home_page">Customize my home page</string>
-    <string name="customize_system_settings_card">Customize Android System Settings card options</string>
+    <string name="customize_system_settings_card">Customize options in the Android System Settings card</string>
     <string name="show_all_options">Show all options</string>
     <string name="hide_all_options">Hide all options</string>
+    <string name="scroll_down">Toggle on the "System settings" option, then scroll down to customize the options in the Android System Settings card</string>
 
     <!-- Settings > About -->
-    <string name="source_code">Source code</string>
+    <string name="view_source_code">View source code on GitHub</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
-    <string name="licenses">Licenses</string>
+    <string name="licenses">Open-source licenses</string>
 
     <!-- Settings > Debugging -->
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
@@ -290,17 +292,16 @@
     <string name="qr_code_generator">QR Code generator</string>
     <string name="dev_mode_message" translatable="false">dev mode message:</string>
     <string name="distance">distance</string>
-    <string name="new_animation">new transition animation</string>
     <string name="device" translatable="false">device</string>
     <string name="os_version" translatable="false">os_ver</string>
     <string name="locale" translatable="false">locale</string>
     <string name="app_version" translatable="false">app_ver</string>
     <string name="open_app_detail_settings">Open app detail settings</string>
+    <string name="manufacturer" translatable="false">manufacturer</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>
     <string name="bluetooth_connect">To check paired bluetooth devices, please grant the app Nearby Devices permission.</string>
-    <string name="bluetooth_bluetooth_admin">To check paired bluetooth devices, please grant the app BLUETOOTH, BLUETOOTH_ADMIN permissions.</string>
     <string name="missed_sys_popup">Missed the system permission popup?</string>
     <string name="fine_location">To check current location, please grant the app Location permission.</string>
 </resources>

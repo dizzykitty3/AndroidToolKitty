@@ -11,7 +11,7 @@ import kotlinx.coroutines.ExecutorCoroutineDispatcher
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.sync.Mutex
-import me.dizzykitty3.androidtoolkitty.data.repository.SettingsRepositoryImpl
+import me.dizzykitty3.androidtoolkitty.datastore.SettingsRepositoryImpl
 import java.util.concurrent.Executors
 import javax.inject.Singleton
 

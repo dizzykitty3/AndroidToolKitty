@@ -5,24 +5,30 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.Text
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.withContext
-import me.dizzykitty3.androidtoolkitty.data.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.domain.utils.AudioUtil.autoSetMediaVolume
-import me.dizzykitty3.androidtoolkitty.domain.utils.BluetoothUtil.isHeadsetConnected
-import me.dizzykitty3.androidtoolkitty.domain.utils.ClipboardUtil
-import me.dizzykitty3.androidtoolkitty.domain.utils.SnackbarUtil.showSnackbar
-import me.dizzykitty3.androidtoolkitty.ui.AppNavHost
-import me.dizzykitty3.androidtoolkitty.ui.theme.AppTheme
-import me.dizzykitty3.androidtoolkitty.ui.viewmodel.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.theme.AppTheme
+import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.autoSetMediaVolume
+import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.isHeadsetConnected
+import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.coroutines.Continuation
@@ -33,19 +39,48 @@ class MainActivity : ComponentActivity() {
     private var continuation: Continuation<Unit>? = null
     private var continuationNotResumed = AtomicBoolean(true)
     private var isAutoClearClipboard = false
+    private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("onCreate")
-//        installSplashScreen()
         enableEdgeToEdge()
         setContent {
-            val settingsViewModel = hiltViewModel<SettingsViewModel>()
+            settingsViewModel = hiltViewModel<SettingsViewModel>()
+            @Suppress("SpellCheckingInspection") val snackbarHostState =
+                remember { SnackbarHostState() }
+            val bottomAppBar = settingsViewModel.settings.value.bottomAppBar
+            val forceDarkMode = settingsViewModel.settings.value.forceDarkMode
+            isAutoClearClipboard = settingsViewModel.settings.value.autoClearClipboard
 
-            AppTheme(dynamicColor = SettingsSharedPref.dynamicColor) {
-                Scaffold(Modifier.fillMaxSize()) { innerPadding ->
+            AppTheme(
+                forceDarkMode = forceDarkMode,
+                dynamicColor = settingsViewModel.settings.value.dynamicColor
+            ) {
+                Scaffold(Modifier.fillMaxSize(),
+                    snackbarHost = {
+                        if (bottomAppBar)
+                            SnackbarHost(hostState = snackbarHostState)
+                    },
+                    bottomBar = {
+                        if (bottomAppBar)
+                            BottomAppBar(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                contentColor = MaterialTheme.colorScheme.primary,
+                            ) {
+                                Text(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    textAlign = TextAlign.Center,
+                                    text = "Bottom app bar",
+                                )
+                            }
+                    }
+                ) { innerPadding ->
                     AppNavHost(
-                        Modifier.padding(top = innerPadding.calculateTopPadding()),
+                        Modifier.padding(
+                            top = innerPadding.calculateTopPadding(),
+                            bottom = innerPadding.calculateBottomPadding()
+                        ),
                         settingsViewModel
                     )
                 }
@@ -58,9 +93,6 @@ class MainActivity : ComponentActivity() {
         Timber.d("onStart")
         continuationNotResumed.set(true)
         CoroutineScope(Dispatchers.Main).launch {
-            isAutoClearClipboard = withContext(Dispatchers.IO) {
-                SettingsSharedPref.autoClearClipboard
-            }
             suspendCancellableCoroutine { cont ->
                 continuation = cont
             }
@@ -75,7 +107,10 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Set media volume automatically: cancelled: BT headset connected")
                 } else {
                     Timber.i("Set media volume automatically")
-                    window.decorView.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
+                    window.decorView.autoSetMediaVolume(
+                        SettingsSharedPref.autoSetMediaVolume,
+                        settingsViewModel
+                    )
                 }
             }
         }
