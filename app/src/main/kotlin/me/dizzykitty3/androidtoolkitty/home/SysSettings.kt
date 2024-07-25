@@ -150,7 +150,7 @@ fun SysSettingsScreen(navController: NavHostController) {
             val i2 = settings.indexOf(Setting(S_ACCESSIBILITY, R.string.accessibility_settings)) + 1
             val i3 = settings.count()
 
-            GroupTitle(R.string.common)
+            GroupTitle(R.string.general)
             settings.subList(0, i1).forEach { setting ->
                 SystemSettingButton(
                     setting.settingType,

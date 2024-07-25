@@ -154,6 +154,5 @@
     <string name="change_app_language">更改 APP 语言</string>
     <string name="no_options_enabled">Enabled options will be shown here</string>
     <string name="scroll_down">Toggle on the "System settings" option, then scroll down to customize the options in the Android System Settings card</string>
-    <string name="common">Common</string>
-    <string name="permission">Permission</string>
+    <string name="permission">权限</string>
 </resources>
