@@ -98,7 +98,7 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
         item { CardSpacePadding() }
         if (debug) item { DevBuildTip() }
         if (noTranslation) item { NoTranslationTip(settingsViewModel) }
-        if (notFullyTranslated) item { NotFullyTranslated(settingsViewModel) }
+        if (notFullyTranslated && !noTranslation) item { NotFullyTranslated(settingsViewModel) }
         if (debug || noTranslation || notFullyTranslated) item { CardSpacePadding() }
         item { HomeCards(settingsViewModel, navController) }
     }
@@ -120,7 +120,7 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
         SpacerPadding()
         if (debug) DevBuildTip()
         if (noTranslation) NoTranslationTip(settingsViewModel)
-        if (notFullyTranslated) NotFullyTranslated(settingsViewModel)
+        if (notFullyTranslated && !noTranslation) NotFullyTranslated(settingsViewModel)
         TwoColumnHomeCards(settingsViewModel, navController)
     }
 }
