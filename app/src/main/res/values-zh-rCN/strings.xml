@@ -140,7 +140,6 @@
     <string name="auto_set_volume">自动调整音量</string>
     <string name="qr_code_generator">生成二维码</string>
     <string name="fine_location">为了请求当前的位置，请授予「位置」权限</string>
-    <string name="distance">距离</string>
     <string name="accessibility_settings">无障碍</string>
     <string name="result">结果为</string>
     <string name="convert_to_ascii_values">转换为 ASCII 值</string>

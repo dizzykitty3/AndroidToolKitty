@@ -141,7 +141,6 @@
     <string name="auto_set_volume">Set volume automatically</string>
     <string name="qr_code_generator">QR Code generator</string>
     <string name="fine_location">To check current location, please grant the app Location permission.</string>
-    <string name="distance">distance</string>
     <string name="accessibility_settings">Accessibility</string>
     <string name="result">result =</string>
     <string name="convert_to_ascii_values">Convert to ASCII values</string>
