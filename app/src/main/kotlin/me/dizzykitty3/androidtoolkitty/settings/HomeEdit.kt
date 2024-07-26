@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.CARD_1
 import me.dizzykitty3.androidtoolkitty.CARD_10
@@ -33,10 +32,8 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
-import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
@@ -46,9 +43,6 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
     Screen {
         val sp = remember { SettingsSharedPref }
         var mIsShowCard5 by remember { mutableStateOf(sp.getCardShowedState(CARD_5)) }
-
-        Text(buildAnnotatedString { ItalicText(R.string.scroll_down) })
-        CardSpacePadding()
 
         Card(R.string.customize_my_home_page) {
             val view = LocalView.current
@@ -91,7 +85,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 sp.saveCardShowedState(CARD_3, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.url,
+                text = R.string.search_and_webpage,
                 card = CARD_4,
                 isChecked = mIsShowCard4
             ) { newState ->
@@ -127,13 +121,22 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                 sp.saveCardShowedState(CARD_7, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.unicode,
+                text = R.string.codes_of_characters,
                 card = CARD_8,
                 isChecked = mIsShowCard8
             ) { newState ->
                 view.hapticFeedback()
                 mIsShowCard8 = newState
                 sp.saveCardShowedState(CARD_8, newState)
+            }
+            CustomHideCardSettingSwitch(
+                text = R.string.google_maps,
+                card = CARD_10,
+                isChecked = mIsShowCard8
+            ) { newState ->
+                view.hapticFeedback()
+                mIsShowCard10 = newState
+                sp.saveCardShowedState(CARD_10, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.android_versions,
@@ -176,11 +179,11 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
             ) {
                 Icon(
                     imageVector = Icons.Outlined.VisibilityOff,
-                    contentDescription = stringResource(id = R.string.hide_all_cards),
+                    contentDescription = stringResource(R.string.hide_all_cards),
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
                 SpacerPadding()
-                Text(text = stringResource(R.string.hide_all_cards))
+                Text(stringResource(R.string.hide_all_cards))
             }
 
             Button(
@@ -203,11 +206,11 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Visibility,
-                    contentDescription = stringResource(id = R.string.show_all_cards),
+                    contentDescription = stringResource(R.string.show_all_cards),
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
                 SpacerPadding()
-                Text(text = stringResource(R.string.show_all_cards))
+                Text(stringResource(R.string.show_all_cards))
             }
         }
 

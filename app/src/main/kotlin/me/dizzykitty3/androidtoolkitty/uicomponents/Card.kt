@@ -19,7 +19,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 
 @Composable
 fun Card(
@@ -40,11 +39,12 @@ fun Card(
     icon: ImageVector? = null,
     content: @Composable () -> Unit
 ) {
-    val testLayout = SettingsSharedPref.testLayout
-
-    // TODO
-    if (testLayout) {
-        Column(Modifier.fillMaxWidth()) {
+    ElevatedCard(Modifier.fillMaxWidth()) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(R.dimen.padding_card_content))
+        ) {
             if (icon == null) {
                 CardTitle(title)
             } else {
@@ -62,35 +62,8 @@ fun Card(
             SpacerPadding()
             content()
         }
-        CardSpacePadding()
-        CardSpacePadding()
-    } else {
-        ElevatedCard(Modifier.fillMaxWidth()) {
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .padding(dimensionResource(R.dimen.padding_card_content))
-            ) {
-                if (icon == null) {
-                    CardTitle(title)
-                } else {
-                    Row {
-                        Icon(
-                            imageVector = icon,
-                            contentDescription = title,
-                            modifier = Modifier.align(Alignment.CenterVertically)
-                        )
-                        IconAndTextPadding()
-                        CardTitle(title)
-                    }
-                }
-                SpacerPadding()
-                SpacerPadding()
-                content()
-            }
-        }
-        CardSpacePadding()
     }
+    CardSpacePadding()
 }
 
 @Composable

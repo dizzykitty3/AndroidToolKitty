@@ -15,6 +15,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
@@ -35,7 +36,6 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import me.dizzykitty3.androidtoolkitty.ADD
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
@@ -43,6 +43,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
+import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
@@ -64,10 +65,10 @@ fun Volume() {
         var mHaveTappedAddButton by remember { mutableStateOf(settingsSharedPref.haveTappedAddButton) }
 
         val options = listOf(
-            stringResource(id = R.string.off_all_cap),
+            stringResource(R.string.off_all_cap),
             "40%",
             "60%",
-            if (mCustomVolume < 0) ADD else mCustomVolumeOptionLabel
+            if (mCustomVolume < 0) stringResource(R.string.add) else mCustomVolumeOptionLabel
         )
 
         var selectedIndex by remember {
@@ -82,7 +83,7 @@ fun Volume() {
             )
         }
 
-        Text(stringResource(R.string.media_volume))
+        GroupTitle(R.string.media_volume)
 
         SpacerPadding()
 
@@ -126,7 +127,7 @@ fun Volume() {
                         count = options.size
                     )
                 ) {
-                    if (label != ADD) {
+                    if (label != stringResource(R.string.add)) {
                         Text(label.toString())
                     } else if (mHaveTappedAddButton) {
                         Text(label.toString())
@@ -301,6 +302,20 @@ fun Volume() {
                     Text(stringResource(R.string.edit))
                 }
             }
+        }
+
+        GroupDivider()
+        GroupTitle(R.string.voice_call_volume)
+
+        OutlinedButton({
+            view.hapticFeedback()
+            val index = AudioUtil.maxVoiceCallVolumeIndex
+            AudioUtil.setVoiceCallVolume(index)
+            if (AudioUtil.voiceCallVolume == index) {
+                view.showSnackbar(R.string.success)
+            }
+        }) {
+            Text(stringResource(R.string.max_out_voice_call_volume))
         }
     }
 }

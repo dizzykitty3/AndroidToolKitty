@@ -154,6 +154,8 @@
     <string name="force_dark_mode">Force dark mode</string>
     <string name="change_app_language">Change app language</string>
     <string name="no_options_enabled">Enabled options will be shown here</string>
-    <string name="scroll_down">Toggle on the "System settings" option, then scroll down to customize the options in the Android System Settings card</string>
     <string name="permission">Permission</string>
+    <string name="voice_call_volume">Voice call volume</string>
+    <string name="max_out_voice_call_volume">Max out voice call volume</string>
+    <string name="success">success</string>
 </resources>

@@ -31,9 +31,6 @@ const val CARD_10 = "card_google_maps"
 const val CARD_11 = "card_android_version"
 const val CARD_12 = "card_font_weight"
 
-// App strings
-const val ADD = "+ Add"
-
 // Android intents
 const val S_DISPLAY = "setting_display"
 const val S_AUTO_ROTATE = "setting_auto_rotate"

@@ -45,7 +45,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.WIPTip
-import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
@@ -69,9 +68,7 @@ fun DebuggingScreen(settingsViewModel: SettingsViewModel, navController: NavHost
 fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val view = LocalView.current
     var devMode by remember { mutableStateOf(settingsViewModel.settings.value.devMode) }
-    var bottomAppBar by remember { mutableStateOf(settingsViewModel.settings.value.bottomAppBar) }
     var showLocationDialog by remember { mutableStateOf(false) }
-    var testLayout by remember { mutableStateOf(SettingsSharedPref.testLayout) }
 
     Card(R.string.debugging, Icons.Outlined.Terminal) {
         Row(Modifier.fillMaxWidth()) {
@@ -87,7 +84,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                 ScrollableText("${Build.MODEL} (${Build.DEVICE})")
                 ScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
                 ScrollableText(StringUtil.sysLocale)
-                Text(view.context.versionName)
+                ScrollableText(view.context.versionName)
             }
         }
 
@@ -97,18 +94,6 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             view.hapticFeedback()
             devMode = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(devMode = it))
-        }
-
-        CustomSwitchRow("bottom app bar", bottomAppBar) {
-            view.hapticFeedback()
-            bottomAppBar = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(bottomAppBar = it))
-        }
-
-        CustomSwitchRow("test layout", testLayout) {
-            view.hapticFeedback()
-            testLayout = it
-            SettingsSharedPref.testLayout = it
         }
 
         OutlinedButton({
@@ -230,16 +215,6 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
             navController.navigate(SCR_QR_CODE_GENERATOR)
         }) {
             Text(stringResource(R.string.qr_code_generator))
-        }
-
-        OutlinedButton({
-            view.hapticFeedback()
-            val index = AudioUtil.maxVoiceCallVolumeIndex
-            AudioUtil.setVoiceCallVolume(index)
-            val volume = AudioUtil.voiceCallVolume
-            view.showSnackbar("voice call volume = $volume / $index now")
-        }) {
-            Text("max voice call volume")
         }
     }
 

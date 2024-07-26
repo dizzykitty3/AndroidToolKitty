@@ -43,8 +43,8 @@
     <string name="google_play_not_installed">未安装 Google Play</string>
     <string name="open_google_maps">在 Google 地图上查看此坐标</string>
     <string name="check_app_on_market">在商店查看应用</string>
-    <string name="package_name_or_search">输入包名或搜索</string>
-    <string name="what_is_package_name">什么是包名</string>
+    <string name="package_name_or_search">输入软件包名称或搜索</string>
+    <string name="what_is_package_name">什么是软件包名称</string>
     <string name="social_media_profile">社交媒体主页</string>
     <string name="platform">社交平台</string>
     <string name="username">用户昵称</string>
@@ -152,7 +152,9 @@
     <string name="search_and_webpage">搜索 · 网页</string>
     <string name="force_dark_mode">强制暗色模式</string>
     <string name="change_app_language">更改 APP 语言</string>
-    <string name="no_options_enabled">Enabled options will be shown here</string>
-    <string name="scroll_down">Toggle on the "System settings" option, then scroll down to customize the options in the Android System Settings card</string>
+    <string name="no_options_enabled">在设置页面中设定为展示的选项会在此显示</string>
     <string name="permission">权限</string>
+    <string name="voice_call_volume">通话音量</string>
+    <string name="max_out_voice_call_volume">将通话音量调整到最大值</string>
+    <string name="success">成功</string>
 </resources>
