@@ -42,7 +42,6 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.CARD_1
@@ -187,9 +186,7 @@ private fun Status(settingsViewModel: SettingsViewModel) {
         SpacerPadding()
         SpacerPadding()
 
-        val devMode = settingsViewModel.settings.value.devMode
-
-        if (view.context.isHeadsetConnected() || devMode) {
+        if (view.context.isHeadsetConnected()) {
             Row(Modifier.clickable {
                 view.hapticFeedback()
                 view.context.openSystemSettings(S_BLUETOOTH)
@@ -200,19 +197,7 @@ private fun Status(settingsViewModel: SettingsViewModel) {
                     tint = MaterialTheme.colorScheme.primary
                 )
                 SpacerPadding()
-                if (!devMode) {
-                    Text(stringResource(R.string.connected))
-                } else {
-                    Column {
-                        Text(
-                            stringResource(R.string.dev_mode),
-                            color = MaterialTheme.colorScheme.primary,
-                            fontSize = 6.sp,
-                            lineHeight = 1.sp
-                        )
-                        Text(stringResource(R.string.connected))
-                    }
-                }
+                Text(stringResource(R.string.connected))
             }
         }
     }

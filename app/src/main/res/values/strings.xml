@@ -290,11 +290,9 @@
     <!-- Settings > Debugging -->
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
     <string name="restart_app">Restart app</string>
-    <string name="dev_mode">dev mode</string>
     <string name="auto_set_volume">Set volume automatically</string>
     <string name="qr_code_generator">QR Code generator</string>
-    <string name="dev_mode_message" translatable="false">dev mode message:</string>
-    <string name="distance">distance</string>
+    <string name="distance_msg" translatable="false">dev mode message: distance = %d</string>
     <string name="device" translatable="false">device</string>
     <string name="os_version" translatable="false">os_ver</string>
     <string name="locale" translatable="false">locale</string>

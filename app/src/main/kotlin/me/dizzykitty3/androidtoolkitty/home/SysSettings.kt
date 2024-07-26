@@ -71,9 +71,7 @@ fun SysSettings(settingsViewModel: SettingsViewModel, navController: NavHostCont
             SettingsSharedPref.getCardShowedState(setting.settingType)
         }
 
-        val devMode = settingsViewModel.settings.value.devMode
-        if (!checkIsAutoTime() || devMode)
-            Tip(R.string.set_time_automatically_is_off_tip)
+        if (!checkIsAutoTime()) Tip(R.string.set_time_automatically_is_off_tip)
 
         val count = shownSettings.count()
         if (count == 0) {

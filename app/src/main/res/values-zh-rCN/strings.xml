@@ -54,7 +54,6 @@
     <string name="developer_options">开发者选项</string>
     <string name="show_all_options">显示所有选项</string>
     <string name="hide_all_options">隐藏所有选项</string>
-    <string name="dev_mode">开发者模式</string>
     <string name="view_source_code">前往 GitHub 查看源码</string>
     <plurals name="days_remaining">
         <item quantity="other">剩余 %1$d 天</item>

@@ -9,9 +9,6 @@ data class Settings(
     // Settings > General
     var autoClearClipboard: Boolean = false,
 
-    // Settings > Debugging
-    var devMode: Boolean = false,
-
     // Records
     var haveOpenedSettings: Boolean = false
 )

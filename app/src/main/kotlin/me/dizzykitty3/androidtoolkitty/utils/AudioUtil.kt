@@ -68,14 +68,7 @@ object AudioUtil {
                 distance = LocationUtil.getDistance(location.latitude, location.longitude)
                 val notAtHome = distance.isNotAtHome()
                 if (notAtHome) Timber.d("distance > 50 meters")
-                if (settingsViewModel.settings.value.devMode)
-                    this.showSnackbar(
-                        "${this.context.getString(R.string.dev_mode_message)} ${
-                            this.context.getString(
-                                R.string.distance
-                            )
-                        } = $distance"
-                    )
+                this.showSnackbar(this.context.getString(R.string.distance_msg, distance.toInt()))
                 this.setMediaVolumeByPercentage(if (notAtHome) 0 else if (LocalTime.now().hour !in 6..22) 20 else percentage)
             }
         }

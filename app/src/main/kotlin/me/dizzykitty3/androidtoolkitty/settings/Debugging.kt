@@ -39,7 +39,6 @@ import me.dizzykitty3.androidtoolkitty.SCR_QR_CODE_GENERATOR
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
@@ -67,7 +66,6 @@ fun DebuggingScreen(settingsViewModel: SettingsViewModel, navController: NavHost
 @Composable
 fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val view = LocalView.current
-    var devMode by remember { mutableStateOf(settingsViewModel.settings.value.devMode) }
     var showLocationDialog by remember { mutableStateOf(false) }
 
     Card(R.string.debugging, Icons.Outlined.Terminal) {
@@ -89,12 +87,6 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
         }
 
         GroupDivider()
-
-        CustomSwitchRow(R.string.dev_mode, devMode) {
-            view.hapticFeedback()
-            devMode = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(devMode = it))
-        }
 
         OutlinedButton({
             view.hapticFeedback()
