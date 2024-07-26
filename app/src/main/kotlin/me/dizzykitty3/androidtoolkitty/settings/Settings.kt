@@ -57,6 +57,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
     var forceDarkMode by remember { mutableStateOf(settingsViewModel.settings.value.forceDarkMode) }
+    var dismissLangTip by remember { mutableStateOf(settingsViewModel.settings.value.dismissLangTip) }
 
     Card(R.string.appearance) {
         if (OSVersion.a12()) {
@@ -71,6 +72,12 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             view.hapticFeedback()
             forceDarkMode = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(forceDarkMode = it))
+        }
+
+        CustomSwitchRow(R.string.dismiss_lang_tip, dismissLangTip) {
+            view.hapticFeedback()
+            dismissLangTip = it
+            settingsViewModel.update(settingsViewModel.settings.value.copy(dismissLangTip = it))
         }
 
         if (OSVersion.a13()) {

@@ -4,6 +4,7 @@ data class Settings(
     // Settings > Appearance
     var dynamicColor: Boolean = true,
     var forceDarkMode: Boolean = false,
+    var dismissLangTip: Boolean = false,
 
     // Settings > General
     var autoClearClipboard: Boolean = false,

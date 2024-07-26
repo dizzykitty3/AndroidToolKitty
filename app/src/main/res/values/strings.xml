@@ -269,6 +269,7 @@
     <string name="appearance">Appearance</string>
     <string name="force_dark_mode">Force dark mode</string>
     <string name="change_app_language">Change app language</string>
+    <string name="dismiss_lang_tip">Dismiss language not (fully) translated tip</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>

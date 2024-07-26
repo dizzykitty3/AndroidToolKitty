@@ -27,12 +27,7 @@ fun Clipboard(settingsViewModel: SettingsViewModel) {
     Card(R.string.clipboard, Icons.Outlined.ContentPasteSearch) {
         val view = LocalView.current
         val isShowHintText = !settingsViewModel.settings.value.haveOpenedSettings
-        val devMode = settingsViewModel.settings.value.devMode
-        if (isShowHintText || devMode)
-            Tip(
-                settingsViewModel,
-                R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen
-            )
+        if (isShowHintText) Tip(R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
         OutlinedButton({
             view.hapticFeedback()

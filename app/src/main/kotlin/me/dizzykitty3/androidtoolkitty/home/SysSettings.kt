@@ -73,7 +73,7 @@ fun SysSettings(settingsViewModel: SettingsViewModel, navController: NavHostCont
 
         val devMode = settingsViewModel.settings.value.devMode
         if (!checkIsAutoTime() || devMode)
-            Tip(settingsViewModel, R.string.set_time_automatically_is_off_tip)
+            Tip(R.string.set_time_automatically_is_off_tip)
 
         val count = shownSettings.count()
         if (count == 0) {
