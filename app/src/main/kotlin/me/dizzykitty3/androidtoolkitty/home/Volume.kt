@@ -60,7 +60,7 @@ fun Volume(navController: NavHostController) {
         Icons.AutoMirrored.Outlined.VolumeUp,
         true,
         { navController.navigate(SCR_VOLUME) }) {
-        MediaVolume()
+        MediaVolume(isHome = true)
     }
 }
 
@@ -68,7 +68,9 @@ fun Volume(navController: NavHostController) {
 fun VolumeScreen() {
     Screen {
         Card(R.string.volume, Icons.AutoMirrored.Outlined.VolumeUp) {
-            MediaVolume()
+            GroupTitle(R.string.media_volume)
+            SpacerPadding()
+            MediaVolume(isHome = false)
             GroupDivider()
             VoiceCallVolume()
         }
@@ -77,7 +79,7 @@ fun VolumeScreen() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MediaVolume() {
+private fun MediaVolume(isHome: Boolean) {
     val view = LocalView.current
     val settingsSharedPref = remember { SettingsSharedPref }
     val maxVolume = AudioUtil.maxMediaVolumeIndex
@@ -106,10 +108,6 @@ private fun MediaVolume() {
             }
         )
     }
-
-    GroupTitle(R.string.media_volume)
-
-    SpacerPadding()
 
     SingleChoiceSegmentedButtonRow(
         modifier = Modifier.fillMaxWidth(),
@@ -308,7 +306,7 @@ private fun MediaVolume() {
         }
     }
 
-    if (mCustomVolume > 0) {
+    if (mCustomVolume > 0 && !isHome) {
         Row(
             Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End
