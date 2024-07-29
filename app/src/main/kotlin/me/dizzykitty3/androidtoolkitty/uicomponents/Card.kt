@@ -48,10 +48,16 @@ fun Card(
         Column(
             Modifier
                 .fillMaxWidth()
-                .padding(dimensionResource(R.dimen.padding_card_content))
+                .padding(
+                    top = dimensionResource(R.dimen.padding_card_content_top),
+                    bottom = dimensionResource(R.dimen.padding_card_content),
+                    start = dimensionResource(R.dimen.padding_card_content),
+                    end = dimensionResource(R.dimen.padding_card_content)
+                )
         ) {
-            Row(Modifier.fillMaxWidth()) {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
+                    SpacerPadding()
                     Box {
                         if (icon == null) {
                             CardTitle(title)
@@ -68,7 +74,6 @@ fun Card(
                         }
                     }
                     SpacerPadding()
-                    SpacerPadding()
                 }
                 if (hasShowMore && onClick != null) {
                     FilledTonalButton(onClick) {
@@ -76,6 +81,7 @@ fun Card(
                     }
                 }
             }
+            SpacerPadding()
             content()
         }
     }
