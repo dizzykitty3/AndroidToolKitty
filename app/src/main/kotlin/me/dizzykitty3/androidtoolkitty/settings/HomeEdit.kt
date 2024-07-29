@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.CARD_1
 import me.dizzykitty3.androidtoolkitty.CARD_10
 import me.dizzykitty3.androidtoolkitty.CARD_11
-import me.dizzykitty3.androidtoolkitty.CARD_12
 import me.dizzykitty3.androidtoolkitty.CARD_2
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.CARD_4
@@ -28,6 +27,7 @@ import me.dizzykitty3.androidtoolkitty.CARD_5
 import me.dizzykitty3.androidtoolkitty.CARD_6
 import me.dizzykitty3.androidtoolkitty.CARD_7
 import me.dizzykitty3.androidtoolkitty.CARD_8
+import me.dizzykitty3.androidtoolkitty.CARD_9
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
@@ -53,9 +53,9 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
             var mIsShowCard6 by remember { mutableStateOf(sp.getCardShowedState(CARD_6)) }
             var mIsShowCard7 by remember { mutableStateOf(sp.getCardShowedState(CARD_7)) }
             var mIsShowCard8 by remember { mutableStateOf(sp.getCardShowedState(CARD_8)) }
+            var mIsShowCard9 by remember { mutableStateOf(sp.getCardShowedState(CARD_9)) }
             var mIsShowCard10 by remember { mutableStateOf(sp.getCardShowedState(CARD_10)) }
             var mIsShowCard11 by remember { mutableStateOf(sp.getCardShowedState(CARD_11)) }
-            var mIsShowCard12 by remember { mutableStateOf(sp.getCardShowedState(CARD_12)) }
 
             CustomHideCardSettingSwitch(
                 text = R.string.year_progress,
@@ -131,30 +131,30 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
             }
             CustomHideCardSettingSwitch(
                 text = R.string.google_maps,
-                card = CARD_10,
+                card = CARD_9,
                 isChecked = mIsShowCard8
+            ) { newState ->
+                view.hapticFeedback()
+                mIsShowCard9 = newState
+                sp.saveCardShowedState(CARD_9, newState)
+            }
+            CustomHideCardSettingSwitch(
+                text = R.string.android_versions,
+                card = CARD_10,
+                isChecked = mIsShowCard10
             ) { newState ->
                 view.hapticFeedback()
                 mIsShowCard10 = newState
                 sp.saveCardShowedState(CARD_10, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.android_versions,
+                text = R.string.font_weight_test,
                 card = CARD_11,
                 isChecked = mIsShowCard11
             ) { newState ->
                 view.hapticFeedback()
                 mIsShowCard11 = newState
                 sp.saveCardShowedState(CARD_11, newState)
-            }
-            CustomHideCardSettingSwitch(
-                text = R.string.font_weight_test,
-                card = CARD_12,
-                isChecked = mIsShowCard12
-            ) { newState ->
-                view.hapticFeedback()
-                mIsShowCard12 = newState
-                sp.saveCardShowedState(CARD_12, newState)
             }
 
             GroupDivider()
@@ -171,9 +171,9 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                     mIsShowCard6 = false
                     mIsShowCard7 = false
                     mIsShowCard8 = false
+                    mIsShowCard9 = false
                     mIsShowCard10 = false
                     mIsShowCard11 = false
-                    mIsShowCard12 = false
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {
@@ -198,9 +198,9 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
                     mIsShowCard6 = true
                     mIsShowCard7 = true
                     mIsShowCard8 = true
+                    mIsShowCard9 = true
                     mIsShowCard10 = true
                     mIsShowCard11 = true
-                    mIsShowCard12 = true
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {
@@ -221,7 +221,7 @@ fun HomeEdit(settingsViewModel: SettingsViewModel) {
 private fun onClickChangeAllCardsButton(isShow: Boolean) {
     val cardList = listOf(
         CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6,
-        CARD_7, CARD_8, CARD_10, CARD_11, CARD_12
+        CARD_7, CARD_8, CARD_9, CARD_10, CARD_11
     )
     cardList.forEach { card ->
         SettingsSharedPref.saveCardShowedState(card, isShow)

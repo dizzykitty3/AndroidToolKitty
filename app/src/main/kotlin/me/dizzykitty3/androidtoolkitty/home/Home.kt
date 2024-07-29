@@ -47,7 +47,6 @@ import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.CARD_1
 import me.dizzykitty3.androidtoolkitty.CARD_10
 import me.dizzykitty3.androidtoolkitty.CARD_11
-import me.dizzykitty3.androidtoolkitty.CARD_12
 import me.dizzykitty3.androidtoolkitty.CARD_2
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.CARD_4
@@ -55,6 +54,7 @@ import me.dizzykitty3.androidtoolkitty.CARD_5
 import me.dizzykitty3.androidtoolkitty.CARD_6
 import me.dizzykitty3.androidtoolkitty.CARD_7
 import me.dizzykitty3.androidtoolkitty.CARD_8
+import me.dizzykitty3.androidtoolkitty.CARD_9
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_SETTINGS
 import me.dizzykitty3.androidtoolkitty.S_BLUETOOTH
@@ -276,9 +276,7 @@ private fun TwoColumnHomeCards(
 
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> = listOf(
-    CARD_1, CARD_2, CARD_3, CARD_4, CARD_5,
-    CARD_6, CARD_7, CARD_8, CARD_10,
-    CARD_11, CARD_12
+    CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6, CARD_7, CARD_8, CARD_9, CARD_10, CARD_11
 ).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
 
 @Composable
@@ -289,15 +287,15 @@ private fun CardContent(
 ) {
     when (cardName) {
         CARD_1 -> YearProgress()
-        CARD_2 -> Volume()
+        CARD_2 -> Volume(navController)
         CARD_3 -> Clipboard(settingsViewModel)
         CARD_4 -> SearchAndWebpage(settingsViewModel, navController)
         CARD_5 -> SysSettings(settingsViewModel, navController)
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice(navController)
         CARD_8 -> CodesOfCharacters(navController)
-        CARD_10 -> Maps()
-        CARD_11 -> AndroidVersions(navController)
-        CARD_12 -> FontWeight(navController)
+        CARD_9 -> Maps()
+        CARD_10 -> AndroidVersions(navController)
+        CARD_11 -> FontWeight(navController)
     }
 }
