@@ -155,5 +155,5 @@
     <string name="voice_call_volume">通话音量</string>
     <string name="max_out_voice_call_volume">将通话音量调整到最大值</string>
     <string name="success">成功</string>
-    <string name="dismiss_lang_tip">Dismiss language not (fully) translated tip</string>
+    <string name="dismiss_lang_tip">不显示语言未翻译提示</string>
 </resources>
