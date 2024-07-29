@@ -19,16 +19,18 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_FONT_WEIGHT_TEST
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardShowMore
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
 fun FontWeight(navController: NavHostController) {
-    Card(R.string.font_weight_test, Icons.Outlined.FontDownload) {
+    Card(
+        R.string.font_weight_test,
+        Icons.Outlined.FontDownload,
+        true,
+        { navController.navigate(SCR_FONT_WEIGHT_TEST) }) {
         FontWeightTest()
-        CardShowMore { navController.navigate(SCR_FONT_WEIGHT_TEST) }
     }
 }
 

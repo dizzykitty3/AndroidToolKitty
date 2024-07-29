@@ -12,16 +12,18 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_ANDROID_VERSION_HISTORY
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardShowMore
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 
 @Composable
 fun AndroidVersions(navController: NavHostController) {
-    Card(R.string.android_versions, Icons.Outlined.Android) {
+    Card(
+        R.string.android_versions,
+        Icons.Outlined.Android,
+        true,
+        { navController.navigate(SCR_ANDROID_VERSION_HISTORY) }) {
         RecentVersions()
-        CardShowMore { navController.navigate(SCR_ANDROID_VERSION_HISTORY) }
     }
 }
 

@@ -41,7 +41,6 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_VOLUME
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardShowMore
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
@@ -56,9 +55,12 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @Composable
 fun Volume(navController: NavHostController) {
-    Card(R.string.volume, Icons.AutoMirrored.Outlined.VolumeUp) {
+    Card(
+        R.string.volume,
+        Icons.AutoMirrored.Outlined.VolumeUp,
+        true,
+        { navController.navigate(SCR_VOLUME) }) {
         MediaVolume()
-        CardShowMore { navController.navigate(SCR_VOLUME) }
     }
 }
 

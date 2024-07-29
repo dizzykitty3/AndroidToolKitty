@@ -29,7 +29,6 @@ import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardShowMore
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
@@ -40,7 +39,11 @@ import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 
 @Composable
 fun SysSettings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    Card(R.string.system_settings, Icons.Outlined.Settings) {
+    Card(
+        R.string.system_settings,
+        Icons.Outlined.Settings,
+        true,
+        { navController.navigate(SCR_SYS_SETTINGS) }) {
         val settings = mutableListOf(
             Setting(S_DISPLAY, R.string.display_settings),
             Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings),
@@ -103,8 +106,6 @@ fun SysSettings(settingsViewModel: SettingsViewModel, navController: NavHostCont
                 }
             }
         }
-
-        CardShowMore { navController.navigate(SCR_SYS_SETTINGS) }
     }
 }
 

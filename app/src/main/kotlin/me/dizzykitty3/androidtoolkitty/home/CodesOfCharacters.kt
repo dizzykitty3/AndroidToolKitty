@@ -25,7 +25,6 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_CODES_OF_CHARACTERS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardShowMore
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
@@ -41,9 +40,12 @@ import timber.log.Timber
 
 @Composable
 fun CodesOfCharacters(navController: NavHostController) {
-    Card(R.string.codes_of_characters, Icons.AutoMirrored.Outlined.Notes) {
+    Card(
+        R.string.codes_of_characters,
+        Icons.AutoMirrored.Outlined.Notes,
+        true,
+        { navController.navigate(SCR_CODES_OF_CHARACTERS) }) {
         Unicode()
-        CardShowMore { navController.navigate(SCR_CODES_OF_CHARACTERS) }
     }
 }
 

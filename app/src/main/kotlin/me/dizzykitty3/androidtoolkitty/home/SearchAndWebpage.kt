@@ -39,7 +39,6 @@ import me.dizzykitty3.androidtoolkitty.WHAT_IS_PACKAGE_NAME_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardShowMore
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
@@ -60,9 +59,12 @@ import timber.log.Timber
 
 @Composable
 fun SearchAndWebpage(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    Card(R.string.search_and_webpage, Icons.Outlined.Search) {
+    Card(
+        R.string.search_and_webpage,
+        Icons.Outlined.Search,
+        true,
+        { navController.navigate(SCR_WEBPAGE) }) {
         Search()
-        CardShowMore { navController.navigate(SCR_WEBPAGE) }
     }
 }
 
