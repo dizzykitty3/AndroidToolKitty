@@ -188,7 +188,7 @@
     <string name="open_google_maps">Open Google Maps</string>
 
     <!-- Home > Android version history -->
-    <string name="android_versions">Android version history</string>
+    <string name="android_versions">Android versions</string>
     <string name="android_15" translatable="false">Android 15</string>
     <string name="android_14" translatable="false">Android 14</string>
     <string name="android_13" translatable="false">Android 13</string>

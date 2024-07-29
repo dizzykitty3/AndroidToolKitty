@@ -86,6 +86,6 @@ fun Card(
 private fun CardTitle(title: String) {
     Text(
         text = title,
-        style = MaterialTheme.typography.headlineSmall
+        style = MaterialTheme.typography.titleLarge
     )
 }
