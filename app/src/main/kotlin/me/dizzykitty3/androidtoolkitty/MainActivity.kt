@@ -82,10 +82,7 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Set media volume automatically: cancelled: BT headset connected")
                 } else {
                     Timber.i("Set media volume automatically")
-                    window.decorView.autoSetMediaVolume(
-                        SettingsSharedPref.autoSetMediaVolume,
-                        settingsViewModel
-                    )
+                    window.decorView.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
                 }
             }
         }
