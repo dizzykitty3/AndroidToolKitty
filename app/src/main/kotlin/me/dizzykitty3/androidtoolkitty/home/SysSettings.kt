@@ -26,7 +26,6 @@ import me.dizzykitty3.androidtoolkitty.S_OVERLAY
 import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
 import me.dizzykitty3.androidtoolkitty.S_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
@@ -38,7 +37,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 
 @Composable
-fun SysSettings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+fun SysSettings(navController: NavHostController) {
     Card(
         R.string.system_settings,
         Icons.Outlined.Settings,
@@ -110,7 +109,7 @@ fun SysSettings(settingsViewModel: SettingsViewModel, navController: NavHostCont
 }
 
 @Composable
-fun SysSettingsScreen(navController: NavHostController) {
+fun SysSettingsScreen() {
     Screen {
         Card(R.string.system_settings, Icons.Outlined.Settings) {
             val settings = mutableListOf(

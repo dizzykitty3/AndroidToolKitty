@@ -127,7 +127,7 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
 @Composable
 private fun TopBar(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Box(Modifier.weight(1f)) { Status(settingsViewModel) }
+        Box(Modifier.weight(1f)) { Status() }
         SettingsButton(settingsViewModel, navController)
     }
 }
@@ -163,7 +163,7 @@ private fun SettingsButton(settingsViewModel: SettingsViewModel, navController: 
 }
 
 @Composable
-private fun Status(settingsViewModel: SettingsViewModel) {
+private fun Status() {
     val batteryLevel = BatteryUtil.batteryLevel()
     val view = LocalView.current
 
@@ -289,8 +289,8 @@ private fun CardContent(
         CARD_1 -> YearProgress()
         CARD_2 -> Volume(navController)
         CARD_3 -> Clipboard(settingsViewModel)
-        CARD_4 -> SearchAndWebpage(settingsViewModel, navController)
-        CARD_5 -> SysSettings(settingsViewModel, navController)
+        CARD_4 -> SearchAndWebpage(navController)
+        CARD_5 -> SysSettings(navController)
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice(navController)
         CARD_8 -> CodesOfCharacters(navController)

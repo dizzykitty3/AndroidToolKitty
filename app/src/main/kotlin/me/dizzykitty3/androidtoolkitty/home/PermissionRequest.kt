@@ -16,7 +16,6 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
@@ -29,7 +28,7 @@ import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.requestLocationPermi
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @Composable
-fun PermissionRequest(settingsViewModel: SettingsViewModel) {
+fun PermissionRequest() {
     Screen {
         Card(R.string.request_permission, Icons.Outlined.Shield) {
             var clickCount by remember { mutableIntStateOf(0) }

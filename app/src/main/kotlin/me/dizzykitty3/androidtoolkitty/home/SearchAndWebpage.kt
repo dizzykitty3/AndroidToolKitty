@@ -57,7 +57,7 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil.toFullURL
 import timber.log.Timber
 
 @Composable
-fun SearchAndWebpage(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+fun SearchAndWebpage(navController: NavHostController) {
     Card(
         R.string.search_and_webpage,
         Icons.Outlined.Search,

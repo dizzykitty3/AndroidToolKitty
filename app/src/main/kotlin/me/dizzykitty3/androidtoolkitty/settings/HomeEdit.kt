@@ -29,7 +29,6 @@ import me.dizzykitty3.androidtoolkitty.CARD_7
 import me.dizzykitty3.androidtoolkitty.CARD_8
 import me.dizzykitty3.androidtoolkitty.CARD_9
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomHideCardSettingSwitch
@@ -39,7 +38,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 
 @Composable
-fun HomeEdit(settingsViewModel: SettingsViewModel) {
+fun HomeEdit() {
     Screen {
         val sp = remember { SettingsSharedPref }
         var mIsShowCard5 by remember { mutableStateOf(sp.getCardShowedState(CARD_5)) }

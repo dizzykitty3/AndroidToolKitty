@@ -36,7 +36,6 @@ import com.google.android.gms.location.LocationServices
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_PERMISSION_REQUEST
 import me.dizzykitty3.androidtoolkitty.SCR_QR_CODE_GENERATOR
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
@@ -56,15 +55,15 @@ import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
 import timber.log.Timber
 
 @Composable
-fun DebuggingScreen(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+fun DebuggingScreen(navController: NavHostController) {
     Screen {
-        Debugging(settingsViewModel, navController)
+        Debugging(navController)
     }
 }
 
 @SuppressLint("MissingPermission")
 @Composable
-fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+fun Debugging(navController: NavHostController) {
     val view = LocalView.current
     var showLocationDialog by remember { mutableStateOf(false) }
 
@@ -98,8 +97,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
         }) { Text(stringResource(R.string.auto_set_volume)) }
 
         if (showLocationDialog) {
-            val fusedLocationClient =
-                LocationServices.getFusedLocationProviderClient(view.context)
+            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(view.context)
             Timber.d("fusedLocationClient = $fusedLocationClient")
             var mLocation: Location? = null
             var mLoadingComplete by remember { mutableStateOf(false) }
