@@ -34,7 +34,6 @@ import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
@@ -81,9 +80,9 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             settingsViewModel.update(settingsViewModel.settings.value.copy(dismissLangTip = it))
         }
 
-        GroupDivider()
-
         if (OSVersion.a13()) {
+            SpacerPadding()
+
             OutlinedButton({
                 view.hapticFeedback()
                 view.context.openAppLanguageSetting()
@@ -136,7 +135,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
             settingsViewModel.update(settingsViewModel.settings.value.copy(autoClearClipboard = it))
         }
 
-        GroupDivider()
+        SpacerPadding()
 
         OutlinedButton({
             view.hapticFeedback()
