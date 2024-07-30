@@ -10,5 +10,6 @@ data class Settings(
     var autoClearClipboard: Boolean = false,
 
     // Records
-    var haveOpenedSettings: Boolean = false
+    var haveOpenedSettings: Boolean = false,
+    var lastSelectedPlatformIndex: Int = 0
 )

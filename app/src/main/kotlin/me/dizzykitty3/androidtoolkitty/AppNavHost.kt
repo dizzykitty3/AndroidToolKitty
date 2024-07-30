@@ -68,7 +68,7 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
         composable(SCR_QR_CODE_GENERATOR) { QRCodeGenerator(settingsViewModel) }
         composable(SCR_DEBUGGING) { DebuggingScreen(settingsViewModel, navController) }
         composable(SCR_LICENSES) { Licenses() }
-        composable(SCR_WEBPAGE) { WebpageScreen() }
+        composable(SCR_WEBPAGE) { WebpageScreen(settingsViewModel) }
         composable(SCR_CODES_OF_CHARACTERS) { CodesOfCharactersScreen() }
         composable(SCR_ANDROID_VERSION_HISTORY) { AndroidVersionHistoryScreen() }
         composable(SCR_FONT_WEIGHT_TEST) { FontWeightTestScreen() }

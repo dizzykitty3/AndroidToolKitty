@@ -14,7 +14,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,6 +21,7 @@ fun CustomDropdownMenu(
     items: List<String>,
     onItemSelected: (Int) -> Unit,
     label: @Composable (() -> Unit)? = null,
+    selectedPlatformIndex: Int = 0
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -30,13 +30,10 @@ fun CustomDropdownMenu(
         onExpandedChange = { expanded = !expanded },
         modifier = Modifier.fillMaxWidth()
     ) {
-        val settingsSharedPref = remember { SettingsSharedPref }
-
-        val mSelectedPosition = settingsSharedPref.lastTimeSelectedSocialPlatform
-        var selectedPosition by remember { mutableIntStateOf(mSelectedPosition) }
+        var mSelectedPlatformIndex by remember { mutableIntStateOf(selectedPlatformIndex) }
 
         OutlinedTextField(
-            value = items[selectedPosition],
+            value = items[mSelectedPlatformIndex],
             onValueChange = {},
             readOnly = true,
             trailingIcon = {
@@ -58,9 +55,8 @@ fun CustomDropdownMenu(
                 DropdownMenuItem(
                     text = { Text(item) },
                     onClick = {
-                        selectedPosition = index
+                        mSelectedPlatformIndex = index
                         onItemSelected(index)
-                        settingsSharedPref.lastTimeSelectedSocialPlatform = index
                         expanded = false
                     }
                 )

@@ -37,7 +37,6 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_WEBPAGE
 import me.dizzykitty3.androidtoolkitty.WHAT_IS_PACKAGE_NAME_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
@@ -69,7 +68,7 @@ fun SearchAndWebpage(settingsViewModel: SettingsViewModel, navController: NavHos
 }
 
 @Composable
-fun WebpageScreen() {
+fun WebpageScreen(settingsViewModel: SettingsViewModel) {
     Screen {
         Card(R.string.search_and_webpage, Icons.Outlined.Search) {
             GroupTitle(R.string.search)
@@ -77,7 +76,7 @@ fun WebpageScreen() {
             GroupDivider()
             WebpageURL()
             GroupDivider()
-            SocialMediaProfileIURL()
+            SocialMediaProfileIURL(settingsViewModel)
             GroupDivider()
             CheckAppOnMarket()
         }
@@ -211,11 +210,11 @@ private fun WebpageURL() {
 }
 
 @Composable
-private fun SocialMediaProfileIURL() {
+private fun SocialMediaProfileIURL(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     val focus = LocalFocusManager.current
     var username by remember { mutableStateOf("") }
-    var platformIndex by remember { mutableIntStateOf(SettingsSharedPref.lastTimeSelectedSocialPlatform) }
+    var platformIndex by remember { mutableIntStateOf(settingsViewModel.settings.value.lastSelectedPlatformIndex) }
     val platform = URLUtil.Platform.entries[platformIndex]
     val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
 
@@ -224,7 +223,8 @@ private fun SocialMediaProfileIURL() {
     CustomDropdownMenu(
         items = platformList,
         onItemSelected = { platformIndex = it },
-        label = { Text(stringResource(R.string.platform)) }
+        label = { Text(stringResource(R.string.platform)) },
+        selectedPlatformIndex = platformIndex
     )
 
     OutlinedTextField(
@@ -240,6 +240,11 @@ private fun SocialMediaProfileIURL() {
                 focus.clearFocus()
                 if (isValid(platform, username)) {
                     view.context.onVisitProfileButton(username, platformIndex)
+                    settingsViewModel.update(
+                        settingsViewModel.settings.value.copy(
+                            lastSelectedPlatformIndex = platformIndex
+                        )
+                    )
                 }
             }
         ),
@@ -271,6 +276,7 @@ private fun SocialMediaProfileIURL() {
         focus.clearFocus()
         if (isValid(platform, username)) {
             view.context.onVisitProfileButton(username, platformIndex)
+            settingsViewModel.update(settingsViewModel.settings.value.copy(lastSelectedPlatformIndex = platformIndex))
         }
     }) {
         Text(stringResource(R.string.visit))

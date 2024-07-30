@@ -19,7 +19,6 @@ object SettingsSharedPref {
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
 
-    private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
     private const val SAVED_LATITUDE = "saved_latitude"
@@ -68,10 +67,6 @@ object SettingsSharedPref {
     var haveTappedAddButton: Boolean
         get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
         set(value) = setPreference(HAVE_TAPPED_ADD_BUTTON, value)
-
-    var lastTimeSelectedSocialPlatform: Int
-        get() = getPreference(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
-        set(value) = setPreference(LAST_TIME_SELECTED_PLATFORM_INDEX, value)
 
     var customVolume: Int
         get() = getPreference(CUSTOM_VOLUME, Int.MIN_VALUE)
