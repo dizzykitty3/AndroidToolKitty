@@ -1,7 +1,7 @@
 [versions]
 aboutLibraries = "11.2.2"
 activity = "1.9.1"
-agp = "8.5.1"
+agp = "8.7.0-alpha03"
 compose = "1.6.8"
 composeBOM = "2024.06.00"
 composeM3 = "1.2.1"
