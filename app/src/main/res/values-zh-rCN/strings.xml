@@ -156,4 +156,5 @@
     <string name="success">成功</string>
     <string name="dismiss_lang_tip">不显示语言未翻译提示</string>
     <string name="sys_settings_tip">仅前四项会显示在首页</string>
+    <string name="compose_catalog">Compose catalog</string>
 </resources>

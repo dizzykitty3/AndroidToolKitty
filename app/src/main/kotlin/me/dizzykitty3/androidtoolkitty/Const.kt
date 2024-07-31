@@ -18,6 +18,7 @@ const val SCR_ANDROID_VERSION_HISTORY = "AndroidVersionHistoryScreen"
 const val SCR_FONT_WEIGHT_TEST = "FontWeightTestScreen"
 const val SCR_SYS_SETTINGS = "SysSettingsScreen"
 const val SCR_VOLUME = "VolumeScreen"
+const val SCR_COMPOSE_CATALOG = "ComposeCatalogScreen"
 
 // App cards
 const val CARD_1 = "card_year_progress"
@@ -31,6 +32,7 @@ const val CARD_8 = "card_unicode"
 const val CARD_9 = "card_google_maps"
 const val CARD_10 = "card_android_version"
 const val CARD_11 = "card_font_weight"
+const val CARD_12 = "card_compose_catalog"
 
 // Android intents
 const val S_DISPLAY = "setting_display"

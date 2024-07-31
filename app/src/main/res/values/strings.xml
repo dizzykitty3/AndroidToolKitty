@@ -264,6 +264,9 @@
     <string name="japanese_ki" translatable="false">気</string>
     <string name="japanese_sentence" translatable="false">闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。</string>
 
+    <!-- Home > Font weight test -->
+    <string name="compose_catalog">Compose catalog</string>
+
     <!-- Settings > Appearance -->
     <string name="material_you_dynamic_color">Material You dynamic color</string>
     <string name="appearance">Appearance</string>

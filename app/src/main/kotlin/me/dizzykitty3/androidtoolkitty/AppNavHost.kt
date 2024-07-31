@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.home.AndroidVersionHistoryScreen
 import me.dizzykitty3.androidtoolkitty.home.CodesOfCharactersScreen
+import me.dizzykitty3.androidtoolkitty.home.ComposeCatalogScreen
 import me.dizzykitty3.androidtoolkitty.home.FontWeightTestScreen
 import me.dizzykitty3.androidtoolkitty.home.Home
 import me.dizzykitty3.androidtoolkitty.home.PermissionRequest
@@ -74,6 +75,7 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
         composable(SCR_FONT_WEIGHT_TEST) { FontWeightTestScreen() }
         composable(SCR_SYS_SETTINGS) { SysSettingsScreen() }
         composable(SCR_VOLUME) { VolumeScreen() }
+        composable(SCR_COMPOSE_CATALOG) { ComposeCatalogScreen() }
     }
 }
 
