@@ -14,7 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
@@ -36,114 +37,41 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 
 @Composable
 fun SysSettingsCardEdit() {
     Card(R.string.customize_system_settings_card) {
-        val view = LocalView.current
-        val settingsSharedPref = remember { SettingsSharedPref }
-        var mIsShowSetting1 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_DISPLAY
-                )
-            )
-        }
-        var mIsShowSetting2 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_AUTO_ROTATE
-                )
-            )
-        }
-        var mIsShowSetting3 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_BLUETOOTH
-                )
-            )
-        }
-        var mIsShowSetting4 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_DEFAULT_APPS
-                )
-            )
-        }
+        val haptic = LocalHapticFeedback.current
+        val sp = remember { SettingsSharedPref }
+        var mIsShowSetting1 by remember { mutableStateOf(sp.getCardShowedState(S_DISPLAY)) }
+        var mIsShowSetting2 by remember { mutableStateOf(sp.getCardShowedState(S_AUTO_ROTATE)) }
+        var mIsShowSetting3 by remember { mutableStateOf(sp.getCardShowedState(S_BLUETOOTH)) }
+        var mIsShowSetting4 by remember { mutableStateOf(sp.getCardShowedState(S_DEFAULT_APPS)) }
         var mIsShowSetting5 by remember {
             mutableStateOf(
-                settingsSharedPref.getCardShowedState(
+                sp.getCardShowedState(
                     S_BATTERY_OPTIMIZATION
                 )
             )
         }
-        var mIsShowSetting6 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_CAPTIONING
-                )
-            )
-        }
-        var mIsShowSetting7 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_USAGE_ACCESS
-                )
-            )
-        }
-        var mIsShowSetting8 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_OVERLAY
-                )
-            )
-        }
-        var mIsShowSetting9 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_WRITE_SETTINGS
-                )
-            )
-        }
-        var mIsShowSetting10 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_ACCESSIBILITY
-                )
-            )
-        }
-        var mIsShowSetting11 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_LOCALE
-                )
-            )
-        }
-        var mIsShowSetting12 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_DATE
-                )
-            )
-        }
-        var mIsShowSetting13 by remember {
-            mutableStateOf(
-                settingsSharedPref.getCardShowedState(
-                    S_DEVELOPER
-                )
-            )
-        }
+        var mIsShowSetting6 by remember { mutableStateOf(sp.getCardShowedState(S_CAPTIONING)) }
+        var mIsShowSetting7 by remember { mutableStateOf(sp.getCardShowedState(S_USAGE_ACCESS)) }
+        var mIsShowSetting8 by remember { mutableStateOf(sp.getCardShowedState(S_OVERLAY)) }
+        var mIsShowSetting9 by remember { mutableStateOf(sp.getCardShowedState(S_WRITE_SETTINGS)) }
+        var mIsShowSetting10 by remember { mutableStateOf(sp.getCardShowedState(S_ACCESSIBILITY)) }
+        var mIsShowSetting11 by remember { mutableStateOf(sp.getCardShowedState(S_LOCALE)) }
+        var mIsShowSetting12 by remember { mutableStateOf(sp.getCardShowedState(S_DATE)) }
+        var mIsShowSetting13 by remember { mutableStateOf(sp.getCardShowedState(S_DEVELOPER)) }
 
         CustomHideCardSettingSwitch(
             text = R.string.display_settings,
             card = S_DISPLAY,
             isChecked = mIsShowSetting1
         ) { newState ->
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting1 = newState
-            settingsSharedPref.saveCardShowedState(S_DISPLAY, newState)
+            sp.saveCardShowedState(S_DISPLAY, newState)
         }
         if (OSVersion.a12()) {
             CustomHideCardSettingSwitch(
@@ -151,9 +79,9 @@ fun SysSettingsCardEdit() {
                 card = S_AUTO_ROTATE,
                 isChecked = mIsShowSetting2
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowSetting2 = newState
-                settingsSharedPref.saveCardShowedState(S_AUTO_ROTATE, newState)
+                sp.saveCardShowedState(S_AUTO_ROTATE, newState)
             }
         }
         CustomHideCardSettingSwitch(
@@ -161,9 +89,9 @@ fun SysSettingsCardEdit() {
             card = S_BLUETOOTH,
             isChecked = mIsShowSetting3
         ) { newState ->
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting3 = newState
-            settingsSharedPref.saveCardShowedState(S_BLUETOOTH, newState)
+            sp.saveCardShowedState(S_BLUETOOTH, newState)
         }
         if (OSVersion.api24()) {
             CustomHideCardSettingSwitch(
@@ -171,9 +99,9 @@ fun SysSettingsCardEdit() {
                 card = S_DEFAULT_APPS,
                 isChecked = mIsShowSetting4
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowSetting4 = newState
-                settingsSharedPref.saveCardShowedState(S_DEFAULT_APPS, newState)
+                sp.saveCardShowedState(S_DEFAULT_APPS, newState)
             }
         }
         if (OSVersion.api23()) {
@@ -182,9 +110,9 @@ fun SysSettingsCardEdit() {
                 card = S_BATTERY_OPTIMIZATION,
                 isChecked = mIsShowSetting5
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowSetting5 = newState
-                settingsSharedPref.saveCardShowedState(S_BATTERY_OPTIMIZATION, newState)
+                sp.saveCardShowedState(S_BATTERY_OPTIMIZATION, newState)
             }
         }
         CustomHideCardSettingSwitch(
@@ -192,18 +120,18 @@ fun SysSettingsCardEdit() {
             card = S_CAPTIONING,
             isChecked = mIsShowSetting6
         ) { newState ->
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting6 = newState
-            settingsSharedPref.saveCardShowedState(S_CAPTIONING, newState)
+            sp.saveCardShowedState(S_CAPTIONING, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.usage_access_permission,
             card = S_USAGE_ACCESS,
             isChecked = mIsShowSetting7
         ) { newState ->
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting7 = newState
-            settingsSharedPref.saveCardShowedState(S_USAGE_ACCESS, newState)
+            sp.saveCardShowedState(S_USAGE_ACCESS, newState)
         }
         if (OSVersion.api23()) {
             CustomHideCardSettingSwitch(
@@ -211,9 +139,9 @@ fun SysSettingsCardEdit() {
                 card = S_OVERLAY,
                 isChecked = mIsShowSetting8
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowSetting8 = newState
-                settingsSharedPref.saveCardShowedState(S_OVERLAY, newState)
+                sp.saveCardShowedState(S_OVERLAY, newState)
             }
         }
         if (OSVersion.api23()) {
@@ -222,9 +150,9 @@ fun SysSettingsCardEdit() {
                 card = S_WRITE_SETTINGS,
                 isChecked = mIsShowSetting9
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowSetting9 = newState
-                settingsSharedPref.saveCardShowedState(S_WRITE_SETTINGS, newState)
+                sp.saveCardShowedState(S_WRITE_SETTINGS, newState)
             }
         }
         CustomHideCardSettingSwitch(
@@ -232,43 +160,43 @@ fun SysSettingsCardEdit() {
             card = S_ACCESSIBILITY,
             isChecked = mIsShowSetting10
         ) { newState ->
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting10 = newState
-            settingsSharedPref.saveCardShowedState(S_ACCESSIBILITY, newState)
+            sp.saveCardShowedState(S_ACCESSIBILITY, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.language_settings,
             card = S_LOCALE,
             isChecked = mIsShowSetting11
         ) { newState ->
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting11 = newState
-            settingsSharedPref.saveCardShowedState(S_LOCALE, newState)
+            sp.saveCardShowedState(S_LOCALE, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.date_and_time_settings,
             card = S_DATE,
             isChecked = mIsShowSetting12
         ) { newState ->
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting12 = newState
-            settingsSharedPref.saveCardShowedState(S_DATE, newState)
+            sp.saveCardShowedState(S_DATE, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.developer_options,
             card = S_DEVELOPER,
             isChecked = mIsShowSetting13
         ) { newState ->
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting13 = newState
-            settingsSharedPref.saveCardShowedState(S_DEVELOPER, newState)
+            sp.saveCardShowedState(S_DEVELOPER, newState)
         }
 
         GroupDivider()
 
         Button(
             {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 onClickChangeAllCardsButton(false)
                 mIsShowSetting1 = false
                 mIsShowSetting2 = false
@@ -297,7 +225,7 @@ fun SysSettingsCardEdit() {
 
         Button(
             {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 onClickChangeAllCardsButton(true)
                 mIsShowSetting1 = true
                 mIsShowSetting2 = true

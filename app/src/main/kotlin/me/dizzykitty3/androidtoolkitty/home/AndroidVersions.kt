@@ -8,6 +8,8 @@ import androidx.compose.material.icons.outlined.Android
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_ANDROID_VERSION_HISTORY
@@ -18,11 +20,15 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 
 @Composable
 fun AndroidVersions(navController: NavHostController) {
+    val haptic = LocalHapticFeedback.current
     Card(
         R.string.android_versions,
         Icons.Outlined.Android,
         true,
-        { navController.navigate(SCR_ANDROID_VERSION_HISTORY) }) {
+        {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            navController.navigate(SCR_ANDROID_VERSION_HISTORY)
+        }) {
         RecentVersions()
     }
 }

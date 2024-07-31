@@ -26,6 +26,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
@@ -39,7 +41,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.uicomponents.PrimaryColorText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noBluetoothPermission
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -49,6 +50,7 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 fun BluetoothDevice(navController: NavHostController) {
     Card(R.string.bluetooth_devices, Icons.Outlined.Bluetooth) {
         val view = LocalView.current
+        val haptic = LocalHapticFeedback.current
         var showResult by remember { mutableStateOf(false) }
         var bluetoothAdapter by remember { mutableStateOf<BluetoothAdapter?>(null) }
         var pairedDevices by remember { mutableStateOf<List<BluetoothDevice>>(emptyList()) }
@@ -56,7 +58,8 @@ fun BluetoothDevice(navController: NavHostController) {
 
         OutlinedButton(
             onClick = {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+
                 // Check permission
                 if (view.context.noBluetoothPermission()) {
                     navController.navigate(SCR_PERMISSION_REQUEST)
@@ -84,25 +87,20 @@ fun BluetoothDevice(navController: NavHostController) {
         ) {
             Icon(
                 imageVector = Icons.Outlined.BluetoothConnected,
-                contentDescription = stringResource(id = R.string.show_paired_devices),
+                contentDescription = stringResource(R.string.show_paired_devices),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             SpacerPadding()
-            Text(
-                text = if (showResult) stringResource(id = R.string.refresh)
-                else stringResource(id = R.string.show_paired_devices)
-            )
+            Text(stringResource(if (showResult) R.string.refresh else R.string.show_paired_devices))
         }
 
         if (showResult) {
-            Text(text = "${stringResource(id = R.string.current_device)} ${bluetoothAdapter?.name}\n")
-
-            if (size == 0) Text(text = stringResource(id = R.string.no_paired_devices))
-            else Text(text = stringResource(id = R.string.paired_devices))
+            Text("${stringResource(R.string.current_device)} ${bluetoothAdapter?.name}\n")
+            Text(stringResource(if (size == 0) R.string.no_paired_devices else R.string.paired_devices))
 
             pairedDevices.forEach { device ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(text = device.name ?: stringResource(id = R.string.unknown_device))
+                    Text(device.name ?: stringResource(R.string.unknown_device))
                     SpacerPadding()
                     CustomIconPopup(type(device.type), device.address)
                 }
@@ -115,33 +113,33 @@ fun BluetoothDevice(navController: NavHostController) {
 
 @Composable
 private fun BluetoothDeviceTypeDialog() {
-    val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
     var showDialog by remember { mutableStateOf(false) }
 
-    TextButton(onClick = {
-        view.hapticFeedback()
+    TextButton({
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         showDialog = true
     }) {
-        Text(text = stringResource(id = R.string.what_is_bt_ble_and_dual))
+        Text(stringResource(R.string.what_is_bt_ble_and_dual))
     }
 
     if (showDialog) {
         AlertDialog(
             onDismissRequest = { showDialog = false },
             text = {
-                Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-                    Text(text = buildAnnotatedString { PrimaryColorText(id = R.string.bluetooth_devices_types_1) })
-                    Text(text = stringResource(id = R.string.bluetooth_devices_types_2))
-                    Text(text = buildAnnotatedString { PrimaryColorText(id = R.string.bluetooth_devices_types_3) })
-                    Text(text = stringResource(id = R.string.bluetooth_devices_types_4))
-                    Text(text = buildAnnotatedString { PrimaryColorText(id = R.string.bluetooth_devices_types_5) })
-                    Text(text = stringResource(id = R.string.bluetooth_devices_types_6))
+                Column(Modifier.verticalScroll(rememberScrollState())) {
+                    Text(buildAnnotatedString { PrimaryColorText(R.string.bluetooth_devices_types_1) })
+                    Text(stringResource(R.string.bluetooth_devices_types_2))
+                    Text(buildAnnotatedString { PrimaryColorText(R.string.bluetooth_devices_types_3) })
+                    Text(stringResource(R.string.bluetooth_devices_types_4))
+                    Text(buildAnnotatedString { PrimaryColorText(R.string.bluetooth_devices_types_5) })
+                    Text(stringResource(R.string.bluetooth_devices_types_6))
                 }
             },
             confirmButton = {
                 Button(
                     onClick = {
-                        view.hapticFeedback()
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         showDialog = false
                     },
                     colors = ButtonDefaults.buttonColors(
@@ -150,7 +148,7 @@ private fun BluetoothDeviceTypeDialog() {
                     elevation = ButtonDefaults.buttonElevation(1.dp)
                 ) {
                     Text(
-                        text = stringResource(android.R.string.ok),
+                        stringResource(android.R.string.ok),
                         color = MaterialTheme.colorScheme.onPrimary
                     )
                 }
@@ -162,8 +160,8 @@ private fun BluetoothDeviceTypeDialog() {
 @Composable
 private fun type(type: Int): String =
     when (type) {
-        1 -> stringResource(id = R.string.bt)
-        2 -> stringResource(id = R.string.ble)
-        3 -> stringResource(id = R.string.dual)
-        else -> stringResource(id = R.string.unknown)
+        1 -> stringResource(R.string.bt)
+        2 -> stringResource(R.string.ble)
+        3 -> stringResource(R.string.dual)
+        else -> stringResource(R.string.unknown)
     }

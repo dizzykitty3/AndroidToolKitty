@@ -11,10 +11,11 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 
 @Composable
@@ -23,9 +24,10 @@ fun SystemSettingButton(
     @StringRes text: Int,
 ) {
     val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
 
     TextButton({
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         view.context.openSystemSettings(settingType)
     }) {
         Text(stringResource(text))

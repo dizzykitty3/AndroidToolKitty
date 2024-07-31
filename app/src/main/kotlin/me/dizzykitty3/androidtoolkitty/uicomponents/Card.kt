@@ -76,9 +76,7 @@ fun Card(
                     SpacerPadding()
                 }
                 if (hasShowMore && onClick != null) {
-                    FilledTonalButton(onClick) {
-                        Text(stringResource(R.string.show_more))
-                    }
+                    FilledTonalButton(onClick) { Text(stringResource(R.string.show_more)) }
                 }
             }
             SpacerPadding()

@@ -32,6 +32,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -50,16 +52,19 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @Composable
 fun Volume(navController: NavHostController) {
+    val haptic = LocalHapticFeedback.current
     Card(
         R.string.volume,
         Icons.AutoMirrored.Outlined.VolumeUp,
         true,
-        { navController.navigate(SCR_VOLUME) }) {
+        {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            navController.navigate(SCR_VOLUME)
+        }) {
         MediaVolume(isHome = true)
     }
 }
@@ -81,6 +86,7 @@ fun VolumeScreen() {
 @Composable
 private fun MediaVolume(isHome: Boolean) {
     val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
     val maxVolume = AudioUtil.maxMediaVolumeIndex
     var morePreciseSlider by remember { mutableStateOf(false) }
@@ -116,25 +122,22 @@ private fun MediaVolume(isHome: Boolean) {
         options.forEachIndexed { index, label ->
             SegmentedButton(
                 onClick = {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     selectedIndex = index
                     when (index) {
                         0 -> {
-                            view.hapticFeedback()
                             view.setVolume(0)
                         }
 
                         1 -> {
-                            view.hapticFeedback()
                             view.setVolume(0.4 * maxVolume)
                         }
 
                         2 -> {
-                            view.hapticFeedback()
                             view.setVolume(0.6 * maxVolume)
                         }
 
                         3 -> {
-                            view.hapticFeedback()
                             mHaveTappedAddButton = true
                             if (mCustomVolume > 0)
                                 view.setVolume(mCustomVolume * 0.01 * maxVolume)
@@ -200,18 +203,13 @@ private fun MediaVolume(isHome: Boolean) {
                         else -> null
                     }
                 },
-                title = {
-                    if (settingsSharedPref.addedCustomVolume) {
-                        Text(stringResource(R.string.edit))
-                    } else {
-                        Text(stringResource(R.string.add_custom_volume))
-                    }
-                },
+                title = { Text(stringResource(if (settingsSharedPref.addedCustomVolume) R.string.edit else R.string.add_custom_volume)) },
                 text = {
                     Column {
                         Slider(
                             value = newCustomVolume,
                             onValueChange = {
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 newCustomVolume = it
                                 if (mCustomVolume < 0 || (!mHaveCustomLabel))
                                     optionLabel = "${it.toInt()}%"
@@ -248,7 +246,7 @@ private fun MediaVolume(isHome: Boolean) {
                             ),
                             trailingIcon = {
                                 ClearInput(optionLabel) {
-                                    view.hapticFeedback()
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                     optionLabel = ""
                                     mHaveCustomLabel = true
                                 }
@@ -256,7 +254,7 @@ private fun MediaVolume(isHome: Boolean) {
                         )
                         GroupDivider()
                         CustomSwitchRow(R.string.more_precise_slider, morePreciseSlider) {
-                            view.hapticFeedback()
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             morePreciseSlider = it
                         }
                     }
@@ -264,7 +262,7 @@ private fun MediaVolume(isHome: Boolean) {
                 confirmButton = {
                     Button(
                         {
-                            view.hapticFeedback()
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
                                 if (newCustomVolume.toInt() != 0) view.showSnackbar(R.string.system_media_volume_levels_limited)
                                 return@Button
@@ -282,13 +280,11 @@ private fun MediaVolume(isHome: Boolean) {
                             }
                         },
                         elevation = ButtonDefaults.buttonElevation(1.dp)
-                    ) {
-                        Text(stringResource(android.R.string.ok))
-                    }
+                    ) { Text(stringResource(android.R.string.ok)) }
                 },
                 dismissButton = {
                     TextButton({
-                        view.hapticFeedback()
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         if (!mHaveCustomLabel) mHaveCustomLabel = false
                         showVolumeDialog = false
                         selectedIndex = when (AudioUtil.mediaVolume) {
@@ -298,9 +294,7 @@ private fun MediaVolume(isHome: Boolean) {
                             (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
                             else -> null
                         }
-                    }) {
-                        Text(stringResource(android.R.string.cancel))
-                    }
+                    }) { Text(stringResource(android.R.string.cancel)) }
                 }
             )
         }
@@ -312,7 +306,7 @@ private fun MediaVolume(isHome: Boolean) {
             horizontalArrangement = Arrangement.End
         ) {
             TextButton({
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 showVolumeDialog = true
             }) {
                 Icon(
@@ -330,9 +324,10 @@ private fun MediaVolume(isHome: Boolean) {
 @Composable
 private fun VoiceCallVolume() {
     val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
     GroupTitle(R.string.voice_call_volume)
     OutlinedButton({
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         val index = AudioUtil.maxVoiceCallVolumeIndex
         AudioUtil.setVoiceCallVolume(index)
         if (AudioUtil.voiceCallVolume == index) {

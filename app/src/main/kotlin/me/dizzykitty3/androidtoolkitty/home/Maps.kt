@@ -22,7 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -31,7 +33,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnGoogleMaps
 import timber.log.Timber
 
@@ -40,6 +41,7 @@ fun Maps() {
     Card(R.string.google_maps, Icons.Outlined.Place) {
         val view = LocalView.current
         val focus = LocalFocusManager.current
+        val haptic = LocalHapticFeedback.current
         val focusRequester1 = remember { FocusRequester() }
         val focusRequester2 = remember { FocusRequester() }
         var latitude by remember { mutableStateOf("") }
@@ -71,7 +73,7 @@ fun Maps() {
                 ),
                 trailingIcon = {
                     ClearInput(latitude) {
-                        view.hapticFeedback()
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         latitude = ""
                     }
                 },
@@ -102,25 +104,23 @@ fun Maps() {
                 ),
                 trailingIcon = {
                     ClearInput(longitude) {
-                        view.hapticFeedback()
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         longitude = ""
                     }
                 },
             )
         }
 
-        TextButton(
-            onClick = {
-                view.hapticFeedback()
-                focus.clearFocus()
-                view.context.onClickOpenGoogleMapsButton(latitude, longitude)
-            }
-        ) {
-            Text(text = stringResource(R.string.open_google_maps))
+        TextButton({
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            focus.clearFocus()
+            view.context.onClickOpenGoogleMapsButton(latitude, longitude)
+        }) {
+            Text(stringResource(R.string.open_google_maps))
 
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(id = R.string.open_google_maps),
+                contentDescription = stringResource(R.string.open_google_maps),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }

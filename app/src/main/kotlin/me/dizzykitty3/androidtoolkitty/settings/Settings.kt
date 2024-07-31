@@ -21,6 +21,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
@@ -36,7 +38,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppLanguageSetting
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
@@ -55,6 +56,7 @@ fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostControl
 @Composable
 private fun Appearance(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
     var forceDarkMode by remember { mutableStateOf(settingsViewModel.settings.value.forceDarkMode) }
     var dismissLangTip by remember { mutableStateOf(settingsViewModel.settings.value.dismissLangTip) }
@@ -62,20 +64,20 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     Card(R.string.appearance) {
         if (OSVersion.a12()) {
             CustomSwitchRow(R.string.material_you_dynamic_color, dynamicColor) {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 dynamicColor = it
                 settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
             }
         }
 
         CustomSwitchRow(R.string.force_dark_mode, forceDarkMode) {
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             forceDarkMode = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(forceDarkMode = it))
         }
 
         CustomSwitchRow(R.string.dismiss_lang_tip, dismissLangTip) {
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             dismissLangTip = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(dismissLangTip = it))
         }
@@ -84,7 +86,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             SpacerPadding()
 
             OutlinedButton({
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 view.context.openAppLanguageSetting()
             }) {
                 Icon(
@@ -107,6 +109,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 @Composable
 private fun General(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var autoClearClipboard by remember { mutableStateOf(settingsViewModel.settings.value.autoClearClipboard) }
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
@@ -115,7 +118,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
 
     Card(R.string.general) {
         CustomSwitchRow(R.string.clear_clipboard_on_launch, autoClearClipboard) {
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             autoClearClipboard = it
             // Automatically hide Clipboard Card when turning on Clear on Launch feature.
             if (autoClearClipboard && showClipboardCard) {
@@ -127,7 +130,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
                     textColor = inverseOnSurface,
                     buttonColor = inversePrimary,
                     buttonClickListener = {
-                        view.hapticFeedback()
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         settingsSharedPref.saveCardShowedState(CARD_3, true)
                     }
                 )
@@ -138,7 +141,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
         SpacerPadding()
 
         OutlinedButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_EDIT_HOME)
         }) {
             Icon(
@@ -155,10 +158,11 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
 @Composable
 private fun Bottom(navController: NavHostController) {
     val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
 
     Column {
         TextButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             view.context.showToast(R.string.all_help_welcomed)
             view.context.openURL(SOURCE_CODE_URL)
         }) {
@@ -173,7 +177,7 @@ private fun Bottom(navController: NavHostController) {
         }
 
         TextButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_LICENSES)
         }) {
             Icon(imageVector = Icons.Outlined.Bookmarks, contentDescription = null)
@@ -182,7 +186,7 @@ private fun Bottom(navController: NavHostController) {
         }
 
         TextButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_DEBUGGING)
         }) {
             Icon(imageVector = Icons.Outlined.Terminal, contentDescription = null)

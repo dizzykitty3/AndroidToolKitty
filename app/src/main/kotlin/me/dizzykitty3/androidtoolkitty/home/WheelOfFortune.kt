@@ -54,6 +54,8 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
@@ -64,7 +66,6 @@ import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.getW
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import kotlin.math.cos
 import kotlin.math.sin
@@ -188,9 +189,11 @@ fun WheelOfFortune() {
 
             SpacerPadding()
 
+            val haptic = LocalHapticFeedback.current
+
             OutlinedButton(
                 onClick = {
-                    view.hapticFeedback()
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     if (items.isNotEmpty() && !isSpinning) {
                         if (expanded) {
                             expanded = false
@@ -228,7 +231,6 @@ private fun ExpandableList(
     setExpanded: (Boolean) -> Unit,
     isSpinning: Boolean
 ) {
-    val view = LocalView.current
     var editingIndex by remember { mutableIntStateOf(-1) }
     val editingText =
         remember { mutableStateListOf<String>().also { list -> items.forEach { list.add(it) } } }
@@ -247,13 +249,15 @@ private fun ExpandableList(
         }
     }
 
+    val haptic = LocalHapticFeedback.current
+
     Column(modifier = Modifier.padding(16.dp)) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
                 .clickable(enabled = !isSpinning) {
-                    view.hapticFeedback()
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     setExpanded(!expanded)
                 }
                 .padding(8.dp)
@@ -299,7 +303,7 @@ private fun ExpandableList(
                                     imageVector = Icons.Default.Check,
                                     contentDescription = "Done",
                                     modifier = Modifier.clickable {
-                                        view.hapticFeedback()
+                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                         val updatedList = items.toMutableList()
                                             .also { it[index] = editingText[index] }
                                         onItemsChange(updatedList)
@@ -317,7 +321,7 @@ private fun ExpandableList(
                                     imageVector = Icons.Default.Remove,
                                     contentDescription = "Remove",
                                     modifier = Modifier.clickable {
-                                        view.hapticFeedback()
+                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                         val newList =
                                             items.toMutableList().apply { removeAt(index) }
                                         onItemsChange(newList)
@@ -341,7 +345,7 @@ private fun ExpandableList(
                         .clip(RoundedCornerShape(10.dp))
                         .background(MaterialTheme.colorScheme.surfaceVariant)
                         .clickable {
-                            view.hapticFeedback()
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             val newItem = "$item ${items.size + 1}"
                             val updatedItems = items + newItem
                             onItemsChange(updatedItems)

@@ -10,6 +10,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
@@ -18,7 +20,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
 
@@ -26,16 +27,17 @@ import timber.log.Timber
 fun Clipboard(settingsViewModel: SettingsViewModel) {
     Card(R.string.clipboard, Icons.Outlined.ContentPasteSearch) {
         val view = LocalView.current
+        val haptic = LocalHapticFeedback.current
         val isShowHintText = !settingsViewModel.settings.value.haveOpenedSettings
         if (isShowHintText) Tip(R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
         OutlinedButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             onClearClipboardButton(view)
         }) {
             Icon(
                 imageVector = Icons.Outlined.ClearAll,
-                contentDescription = stringResource(id = R.string.clear_clipboard),
+                contentDescription = stringResource(R.string.clear_clipboard),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
             SpacerPadding()

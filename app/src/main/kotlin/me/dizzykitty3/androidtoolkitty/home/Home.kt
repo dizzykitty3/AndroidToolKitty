@@ -37,7 +37,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
@@ -69,7 +71,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.NotFullyTranslated
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.isHeadsetConnected
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
@@ -135,19 +136,19 @@ private fun TopBar(settingsViewModel: SettingsViewModel, navController: NavHostC
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SettingsButton(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
 
     TooltipBox(
         positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
         tooltip = {
-            view.hapticFeedback()
-            PlainTooltip { Text(text = stringResource(R.string.settings)) }
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            PlainTooltip { Text(stringResource(R.string.settings)) }
         },
         state = rememberTooltipState(),
     ) {
         IconButton(
             {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 navController.navigate(SCR_SETTINGS)
                 settingsViewModel.update(settingsViewModel.settings.value.copy(haveOpenedSettings = true))
             },
@@ -166,10 +167,11 @@ private fun SettingsButton(settingsViewModel: SettingsViewModel, navController: 
 private fun Status() {
     val batteryLevel = BatteryUtil.batteryLevel()
     val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
 
     Row(Modifier.horizontalScroll(rememberScrollState())) {
         Row(Modifier.clickable {
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             view.context.openSystemSettings(S_POWER_USAGE_SUMMARY)
         }) {
             Icon(
@@ -188,7 +190,7 @@ private fun Status() {
 
         if (view.context.isHeadsetConnected()) {
             Row(Modifier.clickable {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 view.context.openSystemSettings(S_BLUETOOTH)
             }) {
                 Icon(
@@ -228,14 +230,12 @@ private fun NetworkState() {
 }
 
 @Composable
-private fun NetworkStateIcon(
-    imageVector: ImageVector,
-    @StringRes text: Int,
-) {
+private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
     val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
 
     Row(Modifier.clickable {
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         view.context.openSystemSettings(S_WIFI)
     }) {
         Icon(

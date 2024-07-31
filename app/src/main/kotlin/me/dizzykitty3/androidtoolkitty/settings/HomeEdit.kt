@@ -14,7 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.CARD_1
@@ -35,7 +36,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 
 @Composable
 fun HomeEdit() {
@@ -44,7 +44,7 @@ fun HomeEdit() {
         var mIsShowCard5 by remember { mutableStateOf(sp.getCardShowedState(CARD_5)) }
 
         Card(R.string.customize_my_home_page) {
-            val view = LocalView.current
+            val haptic = LocalHapticFeedback.current
             var mIsShowCard1 by remember { mutableStateOf(sp.getCardShowedState(CARD_1)) }
             var mIsShowCard2 by remember { mutableStateOf(sp.getCardShowedState(CARD_2)) }
             var mIsShowCard3 by remember { mutableStateOf(sp.getCardShowedState(CARD_3)) }
@@ -61,7 +61,7 @@ fun HomeEdit() {
                 card = CARD_1,
                 isChecked = mIsShowCard1
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard1 = newState
                 sp.saveCardShowedState(CARD_1, newState)
             }
@@ -70,7 +70,7 @@ fun HomeEdit() {
                 card = CARD_2,
                 isChecked = mIsShowCard2
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard2 = newState
                 sp.saveCardShowedState(CARD_2, newState)
             }
@@ -79,7 +79,7 @@ fun HomeEdit() {
                 card = CARD_3,
                 isChecked = mIsShowCard3
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard3 = newState
                 sp.saveCardShowedState(CARD_3, newState)
             }
@@ -88,7 +88,7 @@ fun HomeEdit() {
                 card = CARD_4,
                 isChecked = mIsShowCard4
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard4 = newState
                 sp.saveCardShowedState(CARD_4, newState)
             }
@@ -97,7 +97,7 @@ fun HomeEdit() {
                 card = CARD_5,
                 isChecked = mIsShowCard5
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard5 = newState
                 sp.saveCardShowedState(CARD_5, newState)
             }
@@ -106,7 +106,7 @@ fun HomeEdit() {
                 card = CARD_6,
                 isChecked = mIsShowCard6
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard6 = newState
                 sp.saveCardShowedState(CARD_6, newState)
             }
@@ -115,7 +115,7 @@ fun HomeEdit() {
                 card = CARD_7,
                 isChecked = mIsShowCard7
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard7 = newState
                 sp.saveCardShowedState(CARD_7, newState)
             }
@@ -124,7 +124,7 @@ fun HomeEdit() {
                 card = CARD_8,
                 isChecked = mIsShowCard8
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard8 = newState
                 sp.saveCardShowedState(CARD_8, newState)
             }
@@ -133,7 +133,7 @@ fun HomeEdit() {
                 card = CARD_9,
                 isChecked = mIsShowCard8
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard9 = newState
                 sp.saveCardShowedState(CARD_9, newState)
             }
@@ -142,7 +142,7 @@ fun HomeEdit() {
                 card = CARD_10,
                 isChecked = mIsShowCard10
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard10 = newState
                 sp.saveCardShowedState(CARD_10, newState)
             }
@@ -151,7 +151,7 @@ fun HomeEdit() {
                 card = CARD_11,
                 isChecked = mIsShowCard11
             ) { newState ->
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard11 = newState
                 sp.saveCardShowedState(CARD_11, newState)
             }
@@ -160,7 +160,7 @@ fun HomeEdit() {
 
             Button(
                 {
-                    view.hapticFeedback()
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     onClickChangeAllCardsButton(false)
                     mIsShowCard1 = false
                     mIsShowCard2 = false
@@ -187,7 +187,7 @@ fun HomeEdit() {
 
             Button(
                 {
-                    view.hapticFeedback()
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     onClickChangeAllCardsButton(true)
                     mIsShowCard1 = true
                     mIsShowCard2 = true

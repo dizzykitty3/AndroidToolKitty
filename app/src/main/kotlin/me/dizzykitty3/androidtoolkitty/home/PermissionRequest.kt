@@ -12,6 +12,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -19,7 +21,6 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noBluetoothPermission
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noLocationPermission
@@ -34,12 +35,13 @@ fun PermissionRequest() {
             var clickCount by remember { mutableIntStateOf(0) }
             var clickCount2 by remember { mutableIntStateOf(0) }
             val view = LocalView.current
+            val haptic = LocalHapticFeedback.current
 
             Text(stringResource(R.string.bluetooth_connect))
 
             Button(
                 {
-                    view.hapticFeedback()
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     if (view.context.noBluetoothPermission()) {
                         view.context.requestBluetoothPermission()
                         clickCount++
@@ -56,7 +58,7 @@ fun PermissionRequest() {
 
             Button(
                 {
-                    view.hapticFeedback()
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     if (view.context.noLocationPermission()) {
                         view.context.requestLocationPermission()
                         clickCount2++
@@ -78,10 +80,11 @@ fun PermissionRequest() {
 @Composable
 fun ManuallyGrant() {
     val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
 
     Text(stringResource(R.string.missed_sys_popup))
     TextButton({
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         view.context.openAppDetailSettings()
     }) {
         Text(

@@ -28,6 +28,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -43,7 +45,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.WIPTip
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.LocationUtil
@@ -65,6 +66,7 @@ fun DebuggingScreen(navController: NavHostController) {
 @Composable
 fun Debugging(navController: NavHostController) {
     val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
     var showLocationDialog by remember { mutableStateOf(false) }
 
     Card(R.string.debugging, Icons.Outlined.Terminal) {
@@ -88,7 +90,7 @@ fun Debugging(navController: NavHostController) {
         GroupDivider()
 
         OutlinedButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             if (view.context.noLocationPermission()) {
                 navController.navigate(SCR_PERMISSION_REQUEST)
                 return@OutlinedButton
@@ -158,7 +160,7 @@ fun Debugging(navController: NavHostController) {
                     Row {
                         Button(
                             enabled = (mLoadingComplete && (mLocation != null)), onClick = {
-                                view.hapticFeedback()
+                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                 showLocationDialog = false
                                 if (view.context.noBluetoothPermission()) {
                                     navController.navigate(SCR_PERMISSION_REQUEST)
@@ -172,7 +174,7 @@ fun Debugging(navController: NavHostController) {
                     Row {
                         Button(
                             enabled = (mLoadingComplete && (mLocation != null)), onClick = {
-                                view.hapticFeedback()
+                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                 showLocationDialog = false
                                 if (view.context.noBluetoothPermission()) {
                                     navController.navigate(SCR_PERMISSION_REQUEST)
@@ -186,7 +188,7 @@ fun Debugging(navController: NavHostController) {
                 },
                 dismissButton = {
                     TextButton({
-                        view.hapticFeedback()
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         showLocationDialog = false
                         SettingsSharedPref.autoSetMediaVolume = -1
                     }) { Text(stringResource(R.string.turn_off)) }
@@ -194,14 +196,14 @@ fun Debugging(navController: NavHostController) {
         }
 
         OutlinedButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_PERMISSION_REQUEST)
         }) {
             Text(stringResource(R.string.go_to_permission_request_screen))
         }
 
         OutlinedButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_QR_CODE_GENERATOR)
         }) {
             Text(stringResource(R.string.qr_code_generator))
@@ -209,7 +211,7 @@ fun Debugging(navController: NavHostController) {
     }
 
     TextButton({
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         view.context.openAppDetailSettings()
     }) {
         Icon(
@@ -226,7 +228,7 @@ fun Debugging(navController: NavHostController) {
     }
 
     TextButton({
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         view.context.restartApp()
     }) {
         Icon(

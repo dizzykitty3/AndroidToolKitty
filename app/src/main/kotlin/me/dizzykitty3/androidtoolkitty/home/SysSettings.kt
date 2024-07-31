@@ -8,6 +8,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
@@ -38,11 +40,15 @@ import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 
 @Composable
 fun SysSettings(navController: NavHostController) {
+    val haptic = LocalHapticFeedback.current
     Card(
         R.string.system_settings,
         Icons.Outlined.Settings,
         true,
-        { navController.navigate(SCR_SYS_SETTINGS) }) {
+        {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            navController.navigate(SCR_SYS_SETTINGS)
+        }) {
         val settings = mutableListOf(
             Setting(S_DISPLAY, R.string.display_settings),
             Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings),
