@@ -159,7 +159,7 @@
     <string name="max_out_voice_call_volume">将通话音量调整到最大值</string>
     <string name="success">成功</string>
     <string name="dismiss_lang_tip">不显示语言提示</string>
-    <string name="sys_settings_tip">仅启动的前四项会显示在首页</string>
+    <string name="sys_settings_tip">仅启用的前四项会显示在首页</string>
     <string name="compose_catalog">Compose 组件元素</string>
     <string name="force_dark_mode_description">强制启用暗色模式</string>
 </resources>
