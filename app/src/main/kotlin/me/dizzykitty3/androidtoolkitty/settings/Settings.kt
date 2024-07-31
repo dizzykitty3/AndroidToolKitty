@@ -63,20 +63,32 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 
     Card(R.string.appearance) {
         if (OSVersion.a12()) {
-            CustomSwitchRow(R.string.material_you_dynamic_color, dynamicColor) {
+            CustomSwitchRow(
+                R.string.dynamic_color,
+                R.string.material_you_dynamic_color_theme,
+                dynamicColor
+            ) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 dynamicColor = it
                 settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
             }
         }
 
-        CustomSwitchRow(R.string.force_dark_mode, forceDarkMode) {
+        CustomSwitchRow(
+            R.string.force_dark_mode,
+            R.string.force_dark_mode_description,
+            forceDarkMode
+        ) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             forceDarkMode = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(forceDarkMode = it))
         }
 
-        CustomSwitchRow(R.string.dismiss_lang_tip, dismissLangTip) {
+        CustomSwitchRow(
+            R.string.dismiss_lang_tip,
+            R.string.dismiss_lang_tip_description,
+            dismissLangTip
+        ) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             dismissLangTip = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(dismissLangTip = it))
@@ -117,7 +129,11 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
     Card(R.string.general) {
-        CustomSwitchRow(R.string.clear_clipboard_on_launch, autoClearClipboard) {
+        CustomSwitchRow(
+            R.string.clear_clipboard_automatically,
+            R.string.clear_clipboard_on_launch,
+            autoClearClipboard
+        ) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             autoClearClipboard = it
             // Automatically hide Clipboard Card when turning on Clear on Launch feature.

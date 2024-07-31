@@ -26,6 +26,7 @@
     <string name="media_volume">メディア音量</string>
     <string name="add_custom_volume">カスタム音量を追加</string>
     <string name="system_media_volume_levels_limited">システムの音量ステップは制限されています。操作に失敗しました。</string>
+    <string name="slider_increment_5_percent">Set slider increment to 5%</string>
     <string name="clipboard">クリップボード</string>
     <string name="clear_clipboard">クリップボードをクリア</string>
     <string name="clipboard_cleared">クリップボードがクリアされました</string>
@@ -108,12 +109,14 @@
     <string name="w8">800 ExtraBold</string>
     <string name="w9">900 Black</string>
     <string name="bluetooth_devices_types_6">一部のデバイスはクラシックBluetoothとBluetooth LEの両方をサポートしている場合があります。これらはデュアルモードデバイスと呼ばれ、必要に応じて異なる種類のデバイスに接続できる柔軟性を提供できます。たとえば、スマートウォッチは通知のために電話に接続するためにBLEを使用するかもしれませんが、音楽再生のためにクラシックBluetoothを持っているかもしれません。</string>
-    <string name="clear_clipboard_on_launch">アプリ起動時にクリップボードをクリア</string>
+    <string name="material_you_dynamic_color_theme">Enable Material You dynamic color theme on Android 12+</string>
+    <string name="dismiss_lang_tip_description">Dismiss \"not translated\" and \"not fully translated\" tip on Home screen</string>
+    <string name="clear_clipboard_automatically">アプリ起動時にクリップボードをクリア</string>
     <string name="settings">設定</string>
     <string name="hide_all_cards">すべてのカードを非表示</string>
     <string name="show_all_cards">すべてのカードを表示</string>
     <string name="customize_my_home_page">ホームページをカスタマイズ</string>
-    <string name="material_you_dynamic_color">Material You ダイナミックカラー</string>
+    <string name="dynamic_color">Material You ダイナミックカラー</string>
     <string name="customize_system_settings_card">Android システム設定カードオプションをカスタマイズ</string>
     <string name="general">一般</string>
     <string name="go_to_permission_request_screen">権限リクエスト画面に移動</string>
@@ -122,6 +125,7 @@
     <string name="hide_all_options">すべてのオプションを非表示</string>
     <string name="restart_app">アプリを再起動</string>
     <string name="appearance">外観</string>
+    <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
     <string name="view_source_code">ソースコード</string>
     <string name="all_help_welcomed">すべての助けは大歓迎です！ :D</string>
     <string name="licenses">ライセンス</string>
@@ -155,7 +159,8 @@
     <string name="voice_call_volume">Voice call volume</string>
     <string name="max_out_voice_call_volume">Max out voice call volume</string>
     <string name="success">success</string>
-    <string name="dismiss_lang_tip">Dismiss language not (fully) translated tip</string>
-    <string name="sys_settings_tip">Only the first four options appear on Home</string>
+    <string name="dismiss_lang_tip">Dismiss language tip</string>
+    <string name="sys_settings_tip">Only the first four options appear on Home screen</string>
     <string name="compose_catalog">Compose catalog</string>
+    <string name="force_dark_mode_description">Force enable dark mode</string>
 </resources>
