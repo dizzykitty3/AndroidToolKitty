@@ -237,8 +237,7 @@ private fun NetworkStateIcon(
     Row(Modifier.clickable {
         view.hapticFeedback()
         view.context.openSystemSettings(S_WIFI)
-    }
-    ) {
+    }) {
         Icon(
             imageVector = imageVector,
             contentDescription = stringResource(text),
