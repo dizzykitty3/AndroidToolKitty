@@ -24,7 +24,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
@@ -37,16 +39,13 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_WEBPAGE
 import me.dizzykitty3.androidtoolkitty.WHAT_IS_PACKAGE_NAME_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardShowMore
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnMarket
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSearch
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
@@ -59,15 +58,22 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil.toFullURL
 import timber.log.Timber
 
 @Composable
-fun SearchAndWebpage(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    Card(R.string.search_and_webpage, Icons.Outlined.Search) {
+fun SearchAndWebpage(navController: NavHostController) {
+    val haptic = LocalHapticFeedback.current
+    Card(
+        R.string.search_and_webpage,
+        Icons.Outlined.Search,
+        true,
+        {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            navController.navigate(SCR_WEBPAGE)
+        }) {
         Search()
-        CardShowMore { navController.navigate(SCR_WEBPAGE) }
     }
 }
 
 @Composable
-fun WebpageScreen() {
+fun WebpageScreen(settingsViewModel: SettingsViewModel) {
     Screen {
         Card(R.string.search_and_webpage, Icons.Outlined.Search) {
             GroupTitle(R.string.search)
@@ -75,7 +81,7 @@ fun WebpageScreen() {
             GroupDivider()
             WebpageURL()
             GroupDivider()
-            SocialMediaProfileIURL()
+            SocialMediaProfileIURL(settingsViewModel)
             GroupDivider()
             CheckAppOnMarket()
         }
@@ -86,6 +92,7 @@ fun WebpageScreen() {
 private fun Search() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
+    val haptic = LocalHapticFeedback.current
     var searchQuery by remember { mutableStateOf("") }
 
     OutlinedTextField(
@@ -104,7 +111,7 @@ private fun Search() {
         ),
         trailingIcon = {
             ClearInput(searchQuery) {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 searchQuery = ""
             }
         },
@@ -115,7 +122,7 @@ private fun Search() {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         TextButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
             view.context.onClickSearchButton(searchQuery)
         }) {
@@ -129,7 +136,7 @@ private fun Search() {
         Text("|")
         TextButton(
             onClick = {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 focus.clearFocus()
                 view.context.onCheckOnYouTube(searchQuery)
             }
@@ -148,6 +155,7 @@ private fun Search() {
 private fun WebpageURL() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
+    val haptic = LocalHapticFeedback.current
     var url by remember { mutableStateOf("") }
     val fullWidthPeriod = "。"
     val halfWidthPeriod = "."
@@ -171,7 +179,7 @@ private fun WebpageURL() {
         ),
         trailingIcon = {
             ClearInput(url) {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 url = ""
             }
         },
@@ -195,7 +203,7 @@ private fun WebpageURL() {
     )
 
     TextButton({
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         view.context.onClickVisitURLButton(url)
     }) {
@@ -209,11 +217,12 @@ private fun WebpageURL() {
 }
 
 @Composable
-private fun SocialMediaProfileIURL() {
+private fun SocialMediaProfileIURL(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     val focus = LocalFocusManager.current
+    val haptic = LocalHapticFeedback.current
     var username by remember { mutableStateOf("") }
-    var platformIndex by remember { mutableIntStateOf(SettingsSharedPref.lastTimeSelectedSocialPlatform) }
+    var platformIndex by remember { mutableIntStateOf(settingsViewModel.settings.value.lastSelectedPlatformIndex) }
     val platform = URLUtil.Platform.entries[platformIndex]
     val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
 
@@ -222,7 +231,8 @@ private fun SocialMediaProfileIURL() {
     CustomDropdownMenu(
         items = platformList,
         onItemSelected = { platformIndex = it },
-        label = { Text(stringResource(R.string.platform)) }
+        label = { Text(stringResource(R.string.platform)) },
+        selectedPlatformIndex = platformIndex
     )
 
     OutlinedTextField(
@@ -238,12 +248,17 @@ private fun SocialMediaProfileIURL() {
                 focus.clearFocus()
                 if (isValid(platform, username)) {
                     view.context.onVisitProfileButton(username, platformIndex)
+                    settingsViewModel.update(
+                        settingsViewModel.settings.value.copy(
+                            lastSelectedPlatformIndex = platformIndex
+                        )
+                    )
                 }
             }
         ),
         trailingIcon = {
             ClearInput(username) {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 username = ""
             }
         },
@@ -265,10 +280,11 @@ private fun SocialMediaProfileIURL() {
     )
 
     TextButton({
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         if (isValid(platform, username)) {
             view.context.onVisitProfileButton(username, platformIndex)
+            settingsViewModel.update(settingsViewModel.settings.value.copy(lastSelectedPlatformIndex = platformIndex))
         }
     }) {
         Text(stringResource(R.string.visit))
@@ -342,6 +358,7 @@ private fun CheckAppOnMarket() {
 
     val view = LocalView.current
     val focus = LocalFocusManager.current
+    val haptic = LocalHapticFeedback.current
     var packageName by remember { mutableStateOf("") }
 
     OutlinedTextField(
@@ -360,7 +377,7 @@ private fun CheckAppOnMarket() {
         ),
         trailingIcon = {
             ClearInput(packageName) {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 packageName = ""
             }
         }
@@ -370,7 +387,7 @@ private fun CheckAppOnMarket() {
         verticalAlignment = Alignment.CenterVertically
     ) {
         TextButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
             view.context.checkOnMarket(packageName)
         }
@@ -384,7 +401,7 @@ private fun CheckAppOnMarket() {
         }
         Text("|")
         TextButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
             view.context.checkOnMarket(packageName, false)
         }
@@ -403,9 +420,10 @@ private fun CheckAppOnMarket() {
 @Composable
 private fun WhatIsPackageName() {
     val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
 
     TextButton({
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         view.context.openURL(WHAT_IS_PACKAGE_NAME_URL)
     }) {
         Text(stringResource(R.string.what_is_package_name))

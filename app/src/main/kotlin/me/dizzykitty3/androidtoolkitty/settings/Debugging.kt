@@ -28,6 +28,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -36,17 +38,13 @@ import com.google.android.gms.location.LocationServices
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_PERMISSION_REQUEST
 import me.dizzykitty3.androidtoolkitty.SCR_QR_CODE_GENERATOR
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.WIPTip
-import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.LocationUtil
@@ -58,20 +56,18 @@ import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
 import timber.log.Timber
 
 @Composable
-fun DebuggingScreen(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+fun DebuggingScreen(navController: NavHostController) {
     Screen {
-        Debugging(settingsViewModel, navController)
+        Debugging(navController)
     }
 }
 
 @SuppressLint("MissingPermission")
 @Composable
-fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+fun Debugging(navController: NavHostController) {
     val view = LocalView.current
-    var devMode by remember { mutableStateOf(settingsViewModel.settings.value.devMode) }
-    var bottomAppBar by remember { mutableStateOf(settingsViewModel.settings.value.bottomAppBar) }
+    val haptic = LocalHapticFeedback.current
     var showLocationDialog by remember { mutableStateOf(false) }
-    var testLayout by remember { mutableStateOf(SettingsSharedPref.testLayout) }
 
     Card(R.string.debugging, Icons.Outlined.Terminal) {
         Row(Modifier.fillMaxWidth()) {
@@ -87,32 +83,14 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                 ScrollableText("${Build.MODEL} (${Build.DEVICE})")
                 ScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
                 ScrollableText(StringUtil.sysLocale)
-                Text(view.context.versionName)
+                ScrollableText(view.context.versionName)
             }
         }
 
         GroupDivider()
 
-        CustomSwitchRow(R.string.dev_mode, devMode) {
-            view.hapticFeedback()
-            devMode = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(devMode = it))
-        }
-
-        CustomSwitchRow("bottom app bar", bottomAppBar) {
-            view.hapticFeedback()
-            bottomAppBar = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(bottomAppBar = it))
-        }
-
-        CustomSwitchRow("test layout", testLayout) {
-            view.hapticFeedback()
-            testLayout = it
-            SettingsSharedPref.testLayout = it
-        }
-
         OutlinedButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             if (view.context.noLocationPermission()) {
                 navController.navigate(SCR_PERMISSION_REQUEST)
                 return@OutlinedButton
@@ -121,8 +99,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
         }) { Text(stringResource(R.string.auto_set_volume)) }
 
         if (showLocationDialog) {
-            val fusedLocationClient =
-                LocationServices.getFusedLocationProviderClient(view.context)
+            val fusedLocationClient = LocationServices.getFusedLocationProviderClient(view.context)
             Timber.d("fusedLocationClient = $fusedLocationClient")
             var mLocation: Location? = null
             var mLoadingComplete by remember { mutableStateOf(false) }
@@ -183,7 +160,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                     Row {
                         Button(
                             enabled = (mLoadingComplete && (mLocation != null)), onClick = {
-                                view.hapticFeedback()
+                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                 showLocationDialog = false
                                 if (view.context.noBluetoothPermission()) {
                                     navController.navigate(SCR_PERMISSION_REQUEST)
@@ -197,7 +174,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                     Row {
                         Button(
                             enabled = (mLoadingComplete && (mLocation != null)), onClick = {
-                                view.hapticFeedback()
+                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                 showLocationDialog = false
                                 if (view.context.noBluetoothPermission()) {
                                     navController.navigate(SCR_PERMISSION_REQUEST)
@@ -211,7 +188,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
                 },
                 dismissButton = {
                     TextButton({
-                        view.hapticFeedback()
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                         showLocationDialog = false
                         SettingsSharedPref.autoSetMediaVolume = -1
                     }) { Text(stringResource(R.string.turn_off)) }
@@ -219,32 +196,22 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
         }
 
         OutlinedButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_PERMISSION_REQUEST)
         }) {
             Text(stringResource(R.string.go_to_permission_request_screen))
         }
 
         OutlinedButton({
-            view.hapticFeedback()
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_QR_CODE_GENERATOR)
         }) {
             Text(stringResource(R.string.qr_code_generator))
         }
-
-        OutlinedButton({
-            view.hapticFeedback()
-            val index = AudioUtil.maxVoiceCallVolumeIndex
-            AudioUtil.setVoiceCallVolume(index)
-            val volume = AudioUtil.voiceCallVolume
-            view.showSnackbar("voice call volume = $volume / $index now")
-        }) {
-            Text("max voice call volume")
-        }
     }
 
     TextButton({
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         view.context.openAppDetailSettings()
     }) {
         Icon(
@@ -261,7 +228,7 @@ fun Debugging(settingsViewModel: SettingsViewModel, navController: NavHostContro
     }
 
     TextButton({
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         view.context.restartApp()
     }) {
         Icon(

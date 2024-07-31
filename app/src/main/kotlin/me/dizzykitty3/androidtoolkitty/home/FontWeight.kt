@@ -11,6 +11,8 @@ import androidx.compose.material.icons.outlined.FontDownload
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -19,16 +21,22 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_FONT_WEIGHT_TEST
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardShowMore
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
 fun FontWeight(navController: NavHostController) {
-    Card(R.string.font_weight_test, Icons.Outlined.FontDownload) {
+    val haptic = LocalHapticFeedback.current
+    Card(
+        R.string.font_weight_test,
+        Icons.Outlined.FontDownload,
+        true,
+        {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            navController.navigate(SCR_FONT_WEIGHT_TEST)
+        }) {
         FontWeightTest()
-        CardShowMore { navController.navigate(SCR_FONT_WEIGHT_TEST) }
     }
 }
 

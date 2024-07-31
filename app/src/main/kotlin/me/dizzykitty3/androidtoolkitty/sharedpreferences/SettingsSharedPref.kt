@@ -19,7 +19,6 @@ object SettingsSharedPref {
     private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
 
-    private const val LAST_TIME_SELECTED_PLATFORM_INDEX = "last_time_selected_platform_index"
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
     private const val SAVED_LATITUDE = "saved_latitude"
@@ -69,10 +68,6 @@ object SettingsSharedPref {
         get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
         set(value) = setPreference(HAVE_TAPPED_ADD_BUTTON, value)
 
-    var lastTimeSelectedSocialPlatform: Int
-        get() = getPreference(LAST_TIME_SELECTED_PLATFORM_INDEX, 0)
-        set(value) = setPreference(LAST_TIME_SELECTED_PLATFORM_INDEX, value)
-
     var customVolume: Int
         get() = getPreference(CUSTOM_VOLUME, Int.MIN_VALUE)
         set(value) = setPreference(CUSTOM_VOLUME, value)
@@ -101,14 +96,14 @@ object SettingsSharedPref {
         setPreference(WHEEL_OF_FORTUNE_ITEMS, itemsJson)
     }
 
-    fun getCardShowedState(card: String): Boolean {
+    fun getShownState(card: String): Boolean {
         return sharedPrefs.getBoolean(card, true)
     }
 
-    fun saveCardShowedState(card: String, isShowed: Boolean) {
-        Timber.d("$card is showed = $isShowed")
+    fun saveShownState(card: String, isShown: Boolean) {
+        Timber.d("$card is shown = $isShown")
         with(sharedPrefs.edit()) {
-            putBoolean(card, isShowed)
+            putBoolean(card, isShown)
             apply()
         }
     }
@@ -120,8 +115,4 @@ object SettingsSharedPref {
     var savedLongitude: Float
         get() = getPreference(SAVED_LONGITUDE, 0f)
         set(value) = setPreference(SAVED_LONGITUDE, value)
-
-    var testLayout: Boolean
-        get() = getPreference("test_layout", false)
-        set(value) = setPreference("test_layout", value)
 }

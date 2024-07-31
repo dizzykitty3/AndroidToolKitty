@@ -8,7 +8,6 @@ import android.view.View
 import com.google.android.gms.location.LocationServices
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noLocationPermission
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
@@ -56,7 +55,7 @@ object AudioUtil {
     }
 
     @SuppressLint("MissingPermission")
-    fun View.autoSetMediaVolume(percentage: Int, settingsViewModel: SettingsViewModel) {
+    fun View.autoSetMediaVolume(percentage: Int) {
         if (percentage !in 0..100) return
         if (this.context.noLocationPermission()) return
 
@@ -68,15 +67,10 @@ object AudioUtil {
                 distance = LocationUtil.getDistance(location.latitude, location.longitude)
                 val notAtHome = distance.isNotAtHome()
                 if (notAtHome) Timber.d("distance > 50 meters")
-                if (settingsViewModel.settings.value.devMode)
-                    this.showSnackbar(
-                        "${this.context.getString(R.string.dev_mode_message)} ${
-                            this.context.getString(
-                                R.string.distance
-                            )
-                        } = $distance"
-                    )
+                this.showSnackbar(this.context.getString(R.string.distance_msg, distance.toInt()))
                 this.setMediaVolumeByPercentage(if (notAtHome) 0 else if (LocalTime.now().hour !in 6..22) 20 else percentage)
+            } else {
+                this.showSnackbar("get location error")
             }
         }
     }

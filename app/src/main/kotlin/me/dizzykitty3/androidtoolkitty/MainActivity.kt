@@ -5,17 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -49,7 +43,6 @@ class MainActivity : ComponentActivity() {
             settingsViewModel = hiltViewModel<SettingsViewModel>()
             @Suppress("SpellCheckingInspection") val snackbarHostState =
                 remember { SnackbarHostState() }
-            val bottomAppBar = settingsViewModel.settings.value.bottomAppBar
             val forceDarkMode = settingsViewModel.settings.value.forceDarkMode
             isAutoClearClipboard = settingsViewModel.settings.value.autoClearClipboard
 
@@ -57,25 +50,7 @@ class MainActivity : ComponentActivity() {
                 forceDarkMode = forceDarkMode,
                 dynamicColor = settingsViewModel.settings.value.dynamicColor
             ) {
-                Scaffold(Modifier.fillMaxSize(),
-                    snackbarHost = {
-                        if (bottomAppBar)
-                            SnackbarHost(hostState = snackbarHostState)
-                    },
-                    bottomBar = {
-                        if (bottomAppBar)
-                            BottomAppBar(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer,
-                                contentColor = MaterialTheme.colorScheme.primary,
-                            ) {
-                                Text(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    textAlign = TextAlign.Center,
-                                    text = "Bottom app bar",
-                                )
-                            }
-                    }
-                ) { innerPadding ->
+                Scaffold(Modifier.fillMaxSize()) { innerPadding ->
                     AppNavHost(
                         Modifier.padding(
                             top = innerPadding.calculateTopPadding(),
@@ -107,10 +82,7 @@ class MainActivity : ComponentActivity() {
                     Timber.i("Set media volume automatically: cancelled: BT headset connected")
                 } else {
                     Timber.i("Set media volume automatically")
-                    window.decorView.autoSetMediaVolume(
-                        SettingsSharedPref.autoSetMediaVolume,
-                        settingsViewModel
-                    )
+                    window.decorView.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
                 }
             }
         }

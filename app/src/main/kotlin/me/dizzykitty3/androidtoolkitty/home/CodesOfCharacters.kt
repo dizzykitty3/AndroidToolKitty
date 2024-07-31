@@ -15,7 +15,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
@@ -25,7 +27,6 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_CODES_OF_CHARACTERS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardShowMore
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
@@ -33,7 +34,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
-import me.dizzykitty3.androidtoolkitty.utils.HapticUtil.hapticFeedback
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.toASCII
@@ -41,9 +41,16 @@ import timber.log.Timber
 
 @Composable
 fun CodesOfCharacters(navController: NavHostController) {
-    Card(R.string.codes_of_characters, Icons.AutoMirrored.Outlined.Notes) {
+    val haptic = LocalHapticFeedback.current
+    Card(
+        R.string.codes_of_characters,
+        Icons.AutoMirrored.Outlined.Notes,
+        true,
+        {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            navController.navigate(SCR_CODES_OF_CHARACTERS)
+        }) {
         Unicode()
-        CardShowMore { navController.navigate(SCR_CODES_OF_CHARACTERS) }
     }
 }
 
@@ -69,6 +76,7 @@ private fun Unicode() {
     var isCharacterInput by remember { mutableStateOf(false) }
     val view = LocalView.current
     val focus = LocalFocusManager.current
+    val haptic = LocalHapticFeedback.current
 
     OutlinedTextField(
         value = unicode,
@@ -99,7 +107,7 @@ private fun Unicode() {
         ),
         trailingIcon = {
             ClearInput(unicode) {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 unicode = ""
             }
         },
@@ -128,31 +136,29 @@ private fun Unicode() {
         ),
         trailingIcon = {
             ClearInput(characters) {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 characters = ""
             }
-        },
+        }
     )
 
-    TextButton(
-        onClick = {
-            view.hapticFeedback()
-            focus.clearFocus()
-            if (isUnicodeInput) {
-                view.onClickConvertButton(unicode, { characters = it }, true)
-            } else if (isCharacterInput) {
-                view.onClickConvertButton(characters, { unicode = it }, false)
-            }
+    TextButton({
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        focus.clearFocus()
+        if (isUnicodeInput) {
+            view.onClickConvertButton(unicode, { characters = it }, true)
+        } else if (isCharacterInput) {
+            view.onClickConvertButton(characters, { unicode = it }, false)
         }
-    ) {
+    }) {
         Text(stringResource(R.string.convert))
     }
 }
 
 @Composable
 private fun ASCII() {
-    val view = LocalView.current
     val focus = LocalFocusManager.current
+    val haptic = LocalHapticFeedback.current
 
     GroupTitle(R.string.ascii)
 
@@ -175,7 +181,7 @@ private fun ASCII() {
         ),
         trailingIcon = {
             ClearInput(stringToASCII) {
-                view.hapticFeedback()
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 stringToASCII = ""
             }
         },
@@ -184,7 +190,7 @@ private fun ASCII() {
     if (toASCIIResult != "") Text("${stringResource(R.string.result)} $toASCIIResult")
 
     TextButton({
-        view.hapticFeedback()
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         toASCIIResult = stringToASCII.toASCII()
     }) { Text(stringResource(R.string.convert_to_ascii_values)) }

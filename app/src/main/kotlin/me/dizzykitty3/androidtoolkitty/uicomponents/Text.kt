@@ -3,7 +3,6 @@ package me.dizzykitty3.androidtoolkitty.uicomponents
 import androidx.annotation.StringRes
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -36,7 +35,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
 fun Gradient(
@@ -106,16 +105,15 @@ fun AnnotatedString.Builder.PrimaryColorText(@StringRes id: Int) {
 }
 
 @Composable
-fun Tip(settingsViewModel: SettingsViewModel, @StringRes message: Int) =
-    Tip(settingsViewModel, stringResource(message))
+fun Tip(@StringRes message: Int, type: Int = 1) = Tip(stringResource(message), type)
 
 @Composable
-fun WIPTip() {
+fun Tip(msg: String, type: Int = 1) {
     Card(
         shape = RoundedCornerShape(dimensionResource(R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
+            containerColor = if (type == 1) MaterialTheme.colorScheme.tertiaryContainer else MaterialTheme.colorScheme.secondaryContainer,
+            contentColor = if (type == 1) MaterialTheme.colorScheme.onTertiaryContainer else MaterialTheme.colorScheme.onSecondaryContainer
         )
     ) {
         Row(
@@ -124,13 +122,13 @@ fun WIPTip() {
                 .fillMaxWidth()
         ) {
             Icon(
-                Icons.Outlined.Info,
+                if (type == 1) Icons.Outlined.Info else Icons.Outlined.BugReport,
                 contentDescription = stringResource(R.string.info),
                 modifier = Modifier.size(24.dp)
             )
             IconAndTextPadding()
             Text(
-                text = stringResource(R.string.wip),
+                text = msg,
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
@@ -140,79 +138,16 @@ fun WIPTip() {
 }
 
 @Composable
-fun Tip(settingsViewModel: SettingsViewModel, message: String) {
-    val devMode = settingsViewModel.settings.value.devMode
-
-    Card(
-        shape = RoundedCornerShape(dimensionResource(R.dimen.padding_tip)),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
-            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
-        )
-    ) {
-        if (devMode) {
-            Column(
-                Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    stringResource(R.string.dev_mode),
-                    fontSize = 6.sp,
-                    lineHeight = 1.sp
-                )
-            }
-        }
-
-        Row(
-            Modifier
-                .padding(dimensionResource(R.dimen.padding_tip))
-                .fillMaxWidth()
-        ) {
-            Icon(
-                Icons.Outlined.Info,
-                contentDescription = stringResource(R.string.info),
-                modifier = Modifier.size(24.dp)
-            )
-            IconAndTextPadding()
-            Text(
-                text = message,
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
-        }
-    }
-    SpacerPadding()
-}
+fun WIPTip() = Tip(R.string.wip)
 
 @Composable
-fun DevBuildTip() {
-    Card(
-        shape = RoundedCornerShape(dimensionResource(R.dimen.padding_tip)),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = MaterialTheme.colorScheme.onSecondaryContainer
-        )
-    ) {
-        Row(
-            Modifier
-                .padding(dimensionResource(R.dimen.padding_tip))
-                .fillMaxWidth()
-        ) {
-            Icon(
-                Icons.Outlined.BugReport,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
-            )
-            IconAndTextPadding()
-            Text(
-                text = stringResource(R.string.debug_build_top_tip),
-                style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
-        }
-    }
-    SpacerPadding()
-}
+fun DevBuildTip() = Tip(R.string.debug_build_top_tip, type = 2)
+
+@Composable
+fun NoTranslationTip() = Tip(stringResource(R.string.no_translation, StringUtil.sysLocale))
+
+@Composable
+fun NotFullyTranslated() = Tip(stringResource(R.string.not_fully_translated, StringUtil.sysLocale))
 
 @Composable
 fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))

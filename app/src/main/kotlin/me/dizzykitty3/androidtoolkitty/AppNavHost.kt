@@ -15,10 +15,12 @@ import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.home.AndroidVersionHistoryScreen
 import me.dizzykitty3.androidtoolkitty.home.CodesOfCharactersScreen
+import me.dizzykitty3.androidtoolkitty.home.ComposeCatalogScreen
 import me.dizzykitty3.androidtoolkitty.home.FontWeightTestScreen
 import me.dizzykitty3.androidtoolkitty.home.Home
 import me.dizzykitty3.androidtoolkitty.home.PermissionRequest
 import me.dizzykitty3.androidtoolkitty.home.SysSettingsScreen
+import me.dizzykitty3.androidtoolkitty.home.VolumeScreen
 import me.dizzykitty3.androidtoolkitty.home.WebpageScreen
 import me.dizzykitty3.androidtoolkitty.settings.DebuggingScreen
 import me.dizzykitty3.androidtoolkitty.settings.HomeEdit
@@ -62,16 +64,18 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
         }) {
         composable(SCR_HOME) { Home(settingsViewModel, navController) }
         composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
-        composable(SCR_EDIT_HOME) { HomeEdit(settingsViewModel) }
-        composable(SCR_PERMISSION_REQUEST) { PermissionRequest(settingsViewModel) }
-        composable(SCR_QR_CODE_GENERATOR) { QRCodeGenerator(settingsViewModel) }
-        composable(SCR_DEBUGGING) { DebuggingScreen(settingsViewModel, navController) }
+        composable(SCR_EDIT_HOME) { HomeEdit() }
+        composable(SCR_PERMISSION_REQUEST) { PermissionRequest() }
+        composable(SCR_QR_CODE_GENERATOR) { QRCodeGenerator() }
+        composable(SCR_DEBUGGING) { DebuggingScreen(navController) }
         composable(SCR_LICENSES) { Licenses() }
-        composable(SCR_WEBPAGE) { WebpageScreen() }
+        composable(SCR_WEBPAGE) { WebpageScreen(settingsViewModel) }
         composable(SCR_CODES_OF_CHARACTERS) { CodesOfCharactersScreen() }
         composable(SCR_ANDROID_VERSION_HISTORY) { AndroidVersionHistoryScreen() }
         composable(SCR_FONT_WEIGHT_TEST) { FontWeightTestScreen() }
-        composable(SCR_SYS_SETTINGS) { SysSettingsScreen(navController) }
+        composable(SCR_SYS_SETTINGS) { SysSettingsScreen() }
+        composable(SCR_VOLUME) { VolumeScreen() }
+        composable(SCR_COMPOSE_CATALOG) { ComposeCatalogScreen() }
     }
 }
 

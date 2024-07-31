@@ -22,7 +22,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
@@ -32,7 +31,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.WIPTip
 import androidx.compose.ui.Alignment.Companion as Alignment1
 
 @Composable
-fun QRCodeGenerator(settingsViewModel: SettingsViewModel) {
+fun QRCodeGenerator() {
     Screen {
         Card("QR Code generator") {
             var input by remember { mutableStateOf("") }

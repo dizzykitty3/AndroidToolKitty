@@ -17,6 +17,8 @@ const val SCR_CODES_OF_CHARACTERS = "CodesOfCharactersScreen"
 const val SCR_ANDROID_VERSION_HISTORY = "AndroidVersionHistoryScreen"
 const val SCR_FONT_WEIGHT_TEST = "FontWeightTestScreen"
 const val SCR_SYS_SETTINGS = "SysSettingsScreen"
+const val SCR_VOLUME = "VolumeScreen"
+const val SCR_COMPOSE_CATALOG = "ComposeCatalogScreen"
 
 // App cards
 const val CARD_1 = "card_year_progress"
@@ -27,12 +29,10 @@ const val CARD_5 = "card_sys_setting"
 const val CARD_6 = "card_wheel_of_fortune"
 const val CARD_7 = "card_bluetooth_device"
 const val CARD_8 = "card_unicode"
-const val CARD_10 = "card_google_maps"
-const val CARD_11 = "card_android_version"
-const val CARD_12 = "card_font_weight"
-
-// App strings
-const val ADD = "+ Add"
+const val CARD_9 = "card_google_maps"
+const val CARD_10 = "card_android_version"
+const val CARD_11 = "card_font_weight"
+const val CARD_12 = "card_compose_catalog"
 
 // Android intents
 const val S_DISPLAY = "setting_display"

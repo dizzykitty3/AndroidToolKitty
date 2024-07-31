@@ -8,6 +8,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
@@ -26,10 +28,8 @@ import me.dizzykitty3.androidtoolkitty.S_OVERLAY
 import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
 import me.dizzykitty3.androidtoolkitty.S_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardShowMore
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
@@ -39,8 +39,16 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 
 @Composable
-fun SysSettings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    Card(R.string.system_settings, Icons.Outlined.Settings) {
+fun SysSettings(navController: NavHostController) {
+    val haptic = LocalHapticFeedback.current
+    Card(
+        R.string.system_settings,
+        Icons.Outlined.Settings,
+        true,
+        {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            navController.navigate(SCR_SYS_SETTINGS)
+        }) {
         val settings = mutableListOf(
             Setting(S_DISPLAY, R.string.display_settings),
             Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings),
@@ -68,12 +76,10 @@ fun SysSettings(settingsViewModel: SettingsViewModel, navController: NavHostCont
             settings.remove(Setting(S_WRITE_SETTINGS, R.string.write_permission))
         }
         val shownSettings = settings.filter { setting ->
-            SettingsSharedPref.getCardShowedState(setting.settingType)
+            SettingsSharedPref.getShownState(setting.settingType)
         }
 
-        val devMode = settingsViewModel.settings.value.devMode
-        if (!checkIsAutoTime() || devMode)
-            Tip(settingsViewModel, R.string.set_time_automatically_is_off_tip)
+        if (!checkIsAutoTime()) Tip(R.string.set_time_automatically_is_off_tip)
 
         val count = shownSettings.count()
         if (count == 0) {
@@ -105,13 +111,11 @@ fun SysSettings(settingsViewModel: SettingsViewModel, navController: NavHostCont
                 }
             }
         }
-
-        CardShowMore { navController.navigate(SCR_SYS_SETTINGS) }
     }
 }
 
 @Composable
-fun SysSettingsScreen(navController: NavHostController) {
+fun SysSettingsScreen() {
     Screen {
         Card(R.string.system_settings, Icons.Outlined.Settings) {
             val settings = mutableListOf(
@@ -150,7 +154,7 @@ fun SysSettingsScreen(navController: NavHostController) {
             val i2 = settings.indexOf(Setting(S_ACCESSIBILITY, R.string.accessibility_settings)) + 1
             val i3 = settings.count()
 
-            GroupTitle(R.string.common)
+            GroupTitle(R.string.general)
             settings.subList(0, i1).forEach { setting ->
                 SystemSettingButton(
                     setting.settingType,

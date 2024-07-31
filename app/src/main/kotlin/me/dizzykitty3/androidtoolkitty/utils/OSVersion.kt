@@ -15,6 +15,7 @@ object OSVersion {
      * [beta-1](https://android-developers.googleblog.com/2024/04/the-first-beta-of-android-15.html)
      * [beta-2](https://android-developers.googleblog.com/2024/05/the-second-beta-of-android-15.html)
      * [beta-3](https://android-developers.googleblog.com/2024/06/the-third-beta-of-android-15.html)
+     * [beta-4](https://android-developers.googleblog.com/2024/07/the-fourth-beta-of-android-15.html)
      */
     fun a15(): Boolean = osVersion >= 35
     fun api35(): Boolean = a15()

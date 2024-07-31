@@ -4,7 +4,7 @@
     <string name="edit">Edit</string>
     <string name="visit">Visit</string>
     <string name="debugging">Debugging</string>
-    <string name="show_more">show more ></string>
+    <string name="show_more" translatable="false">···</string>
     <string name="unknown">Unknown</string>
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>
@@ -20,8 +20,8 @@
     <string name="settings">Settings</string>
     <string name="error">error</string>
     <string name="result">result =</string>
-    <string name="common">Common</string>
     <string name="permission">Permission</string>
+    <string name="success">success</string>
 
     <!-- Home > Top bar -->
     <string name="battery_level">Battery level</string>
@@ -48,6 +48,10 @@
     <string name="volume_changed">Volume changed.</string>
     <string name="volume_changed_auto">Volume changed automatically.</string>
     <string name="more_precise_slider">More precise slider</string>
+    <string name="add" translatable="false">+ Add</string>
+    <string name="voice_call_volume">Voice call volume</string>
+    <string name="max_out_voice_call_volume">Max out voice call volume</string>
+    <string name="slider_increment_1_percent">Set slider increment to 1%</string>
 
     <!-- Home > Clipboard -->
     <string name="clipboard">Clipboard</string>
@@ -185,7 +189,7 @@
     <string name="open_google_maps">Open Google Maps</string>
 
     <!-- Home > Android version history -->
-    <string name="android_versions">Android version history</string>
+    <string name="android_versions">Android versions</string>
     <string name="android_15" translatable="false">Android 15</string>
     <string name="android_14" translatable="false">Android 14</string>
     <string name="android_13" translatable="false">Android 13</string>
@@ -261,14 +265,21 @@
     <string name="japanese_ki" translatable="false">気</string>
     <string name="japanese_sentence" translatable="false">闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。</string>
 
+    <!-- Home > Compose catalog -->
+    <string name="compose_catalog">Compose catalog</string>
+
     <!-- Settings > Appearance -->
-    <string name="material_you_dynamic_color">Material You dynamic color</string>
+    <string name="dynamic_color">Dynamic color</string>
     <string name="appearance">Appearance</string>
     <string name="force_dark_mode">Force dark mode</string>
     <string name="change_app_language">Change app language</string>
+    <string name="dismiss_lang_tip">Dismiss language tip</string>
+    <string name="material_you_dynamic_color_theme">Enable Material You dynamic color theme on Android 12+</string>
+    <string name="dismiss_lang_tip_description">Dismiss \"not translated\" and \"not fully translated\" tip on Home screen</string>
+    <string name="force_dark_mode_description">Force enable dark mode</string>
 
     <!-- Settings > General -->
-    <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
+    <string name="clear_clipboard_automatically">Clear clipboard automatically</string>
     <string name="general">General</string>
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
     <string name="hide_all_cards">Hide all cards</string>
@@ -277,7 +288,8 @@
     <string name="customize_system_settings_card">Customize options in the Android System Settings card</string>
     <string name="show_all_options">Show all options</string>
     <string name="hide_all_options">Hide all options</string>
-    <string name="scroll_down">Toggle on the "System settings" option, then scroll down to customize the options in the Android System Settings card</string>
+    <string name="sys_settings_tip">Only the first four options enabled appear on Home screen</string>
+    <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
 
     <!-- Settings > About -->
     <string name="view_source_code">View source code on GitHub</string>
@@ -287,11 +299,9 @@
     <!-- Settings > Debugging -->
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
     <string name="restart_app">Restart app</string>
-    <string name="dev_mode">dev mode</string>
     <string name="auto_set_volume">Set volume automatically</string>
     <string name="qr_code_generator">QR Code generator</string>
-    <string name="dev_mode_message" translatable="false">dev mode message:</string>
-    <string name="distance">distance</string>
+    <string name="distance_msg" translatable="false">dev mode message: distance = %d</string>
     <string name="device" translatable="false">device</string>
     <string name="os_version" translatable="false">os_ver</string>
     <string name="locale" translatable="false">locale</string>
