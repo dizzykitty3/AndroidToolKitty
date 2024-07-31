@@ -3,7 +3,7 @@
     <string name="connected">已连接</string>
     <string name="not_fully_translated">抱歉，中文（简体）尚未完全翻译。</string>
     <string name="year_progress">今年已过</string>
-    <string name="slider_increment_5_percent">Set slider increment to 5%</string>
+    <string name="slider_increment_1_percent">将滑块增量调整为 1%</string>
     <string name="clipboard">剪贴板</string>
     <string name="clipboard_cleared">已清空剪贴板</string>
     <string name="clear_clipboard">清空剪贴板</string>
@@ -55,7 +55,7 @@
     <string name="developer_options">开发者选项</string>
     <string name="show_all_options">显示所有选项</string>
     <string name="hide_all_options">隐藏所有选项</string>
-    <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
+    <string name="clear_clipboard_on_launch">在启动时清除剪贴板</string>
     <string name="view_source_code">前往 GitHub 查看源码</string>
     <plurals name="days_remaining">
         <item quantity="other">剩余 %1$d 天</item>
@@ -66,9 +66,9 @@
     <string name="caption_preferences">字幕偏好</string>
     <string name="debugging">调试</string>
     <string name="bilibili_user_id">哔哩哔哩 (用户 UID)</string>
-    <string name="material_you_dynamic_color_theme">Enable Material You dynamic color theme on Android 12+</string>
-    <string name="dismiss_lang_tip_description">Dismiss \"not translated\" and \"not fully translated\" tip on Home screen</string>
-    <string name="clear_clipboard_automatically">在启动时清除剪贴板</string>
+    <string name="material_you_dynamic_color_theme">启用 Android 12+ 的 Material You 动态主题取色</string>
+    <string name="dismiss_lang_tip_description">不显示首页的「语言未翻译」和「未完全翻译」提示</string>
+    <string name="clear_clipboard_automatically">自动清除剪贴板</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开「启动时自动清空剪贴板」功能</string>
     <string name="settings">设置</string>
     <string name="hide_all_cards">隐藏所有卡片</string>
@@ -80,7 +80,7 @@
     <string name="android_versions">Android 版本历史</string>
     <string name="customize_my_home_page">自定义显示的卡片</string>
     <string name="add_custom_volume">添加自定义音量</string>
-    <string name="dynamic_color">Material You 莫奈取色</string>
+    <string name="dynamic_color">莫奈取色</string>
     <string name="system_media_volume_levels_limited">系统音量阶数较少，请重新调整</string>
     <string name="customize_system_settings_card">自定义「Android 系统设置」卡片的选项</string>
     <string name="label_optional">标签（可选）</string>
@@ -158,8 +158,8 @@
     <string name="voice_call_volume">通话音量</string>
     <string name="max_out_voice_call_volume">将通话音量调整到最大值</string>
     <string name="success">成功</string>
-    <string name="dismiss_lang_tip">不显示语言未翻译提示</string>
-    <string name="sys_settings_tip">仅前四项会显示在首页</string>
-    <string name="compose_catalog">Compose catalog</string>
-    <string name="force_dark_mode_description">Force enable dark mode</string>
+    <string name="dismiss_lang_tip">不显示语言提示</string>
+    <string name="sys_settings_tip">仅启动的前四项会显示在首页</string>
+    <string name="compose_catalog">Compose 组件元素</string>
+    <string name="force_dark_mode_description">强制启用暗色模式</string>
 </resources>

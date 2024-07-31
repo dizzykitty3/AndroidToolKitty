@@ -255,7 +255,7 @@ private fun MediaVolume(isHome: Boolean) {
                         GroupDivider()
                         CustomSwitchRow(
                             R.string.more_precise_slider,
-                            R.string.slider_increment_5_percent,
+                            R.string.slider_increment_1_percent,
                             morePreciseSlider
                         ) {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)

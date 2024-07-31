@@ -26,7 +26,7 @@
     <string name="media_volume">メディア音量</string>
     <string name="add_custom_volume">カスタム音量を追加</string>
     <string name="system_media_volume_levels_limited">システムの音量ステップは制限されています。操作に失敗しました。</string>
-    <string name="slider_increment_5_percent">Set slider increment to 5%</string>
+    <string name="slider_increment_1_percent">Set slider increment to 1%</string>
     <string name="clipboard">クリップボード</string>
     <string name="clear_clipboard">クリップボードをクリア</string>
     <string name="clipboard_cleared">クリップボードがクリアされました</string>
