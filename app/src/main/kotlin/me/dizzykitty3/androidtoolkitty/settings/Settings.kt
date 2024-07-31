@@ -112,7 +112,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var autoClearClipboard by remember { mutableStateOf(settingsViewModel.settings.value.autoClearClipboard) }
-    var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getCardShowedState(CARD_3)) }
+    var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getShownState(CARD_3)) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
@@ -123,7 +123,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
             // Automatically hide Clipboard Card when turning on Clear on Launch feature.
             if (autoClearClipboard && showClipboardCard) {
                 showClipboardCard = false
-                settingsSharedPref.saveCardShowedState(CARD_3, false)
+                settingsSharedPref.saveShownState(CARD_3, false)
                 view.showSnackbar(
                     message = R.string.clipboard_card_hidden,
                     buttonText = R.string.undo,
@@ -131,7 +131,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
                     buttonColor = inversePrimary,
                     buttonClickListener = {
                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        settingsSharedPref.saveCardShowedState(CARD_3, true)
+                        settingsSharedPref.saveShownState(CARD_3, true)
                     }
                 )
             }

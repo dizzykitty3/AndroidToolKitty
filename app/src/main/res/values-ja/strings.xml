@@ -156,4 +156,5 @@
     <string name="max_out_voice_call_volume">Max out voice call volume</string>
     <string name="success">success</string>
     <string name="dismiss_lang_tip">Dismiss language not (fully) translated tip</string>
+    <string name="sys_settings_tip">Only the first four options appear on Home</string>
 </resources>

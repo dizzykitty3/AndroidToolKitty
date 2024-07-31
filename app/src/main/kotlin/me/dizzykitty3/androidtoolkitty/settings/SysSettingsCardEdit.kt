@@ -37,6 +37,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 
 @Composable
@@ -44,25 +45,21 @@ fun SysSettingsCardEdit() {
     Card(R.string.customize_system_settings_card) {
         val haptic = LocalHapticFeedback.current
         val sp = remember { SettingsSharedPref }
-        var mIsShowSetting1 by remember { mutableStateOf(sp.getCardShowedState(S_DISPLAY)) }
-        var mIsShowSetting2 by remember { mutableStateOf(sp.getCardShowedState(S_AUTO_ROTATE)) }
-        var mIsShowSetting3 by remember { mutableStateOf(sp.getCardShowedState(S_BLUETOOTH)) }
-        var mIsShowSetting4 by remember { mutableStateOf(sp.getCardShowedState(S_DEFAULT_APPS)) }
-        var mIsShowSetting5 by remember {
-            mutableStateOf(
-                sp.getCardShowedState(
-                    S_BATTERY_OPTIMIZATION
-                )
-            )
-        }
-        var mIsShowSetting6 by remember { mutableStateOf(sp.getCardShowedState(S_CAPTIONING)) }
-        var mIsShowSetting7 by remember { mutableStateOf(sp.getCardShowedState(S_USAGE_ACCESS)) }
-        var mIsShowSetting8 by remember { mutableStateOf(sp.getCardShowedState(S_OVERLAY)) }
-        var mIsShowSetting9 by remember { mutableStateOf(sp.getCardShowedState(S_WRITE_SETTINGS)) }
-        var mIsShowSetting10 by remember { mutableStateOf(sp.getCardShowedState(S_ACCESSIBILITY)) }
-        var mIsShowSetting11 by remember { mutableStateOf(sp.getCardShowedState(S_LOCALE)) }
-        var mIsShowSetting12 by remember { mutableStateOf(sp.getCardShowedState(S_DATE)) }
-        var mIsShowSetting13 by remember { mutableStateOf(sp.getCardShowedState(S_DEVELOPER)) }
+        var mIsShowSetting1 by remember { mutableStateOf(sp.getShownState(S_DISPLAY)) }
+        var mIsShowSetting2 by remember { mutableStateOf(sp.getShownState(S_AUTO_ROTATE)) }
+        var mIsShowSetting3 by remember { mutableStateOf(sp.getShownState(S_BLUETOOTH)) }
+        var mIsShowSetting4 by remember { mutableStateOf(sp.getShownState(S_DEFAULT_APPS)) }
+        var mIsShowSetting5 by remember { mutableStateOf(sp.getShownState(S_BATTERY_OPTIMIZATION)) }
+        var mIsShowSetting6 by remember { mutableStateOf(sp.getShownState(S_CAPTIONING)) }
+        var mIsShowSetting7 by remember { mutableStateOf(sp.getShownState(S_USAGE_ACCESS)) }
+        var mIsShowSetting8 by remember { mutableStateOf(sp.getShownState(S_OVERLAY)) }
+        var mIsShowSetting9 by remember { mutableStateOf(sp.getShownState(S_WRITE_SETTINGS)) }
+        var mIsShowSetting10 by remember { mutableStateOf(sp.getShownState(S_ACCESSIBILITY)) }
+        var mIsShowSetting11 by remember { mutableStateOf(sp.getShownState(S_LOCALE)) }
+        var mIsShowSetting12 by remember { mutableStateOf(sp.getShownState(S_DATE)) }
+        var mIsShowSetting13 by remember { mutableStateOf(sp.getShownState(S_DEVELOPER)) }
+
+        Tip(R.string.sys_settings_tip)
 
         CustomHideCardSettingSwitch(
             text = R.string.display_settings,
@@ -71,7 +68,7 @@ fun SysSettingsCardEdit() {
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting1 = newState
-            sp.saveCardShowedState(S_DISPLAY, newState)
+            sp.saveShownState(S_DISPLAY, newState)
         }
         if (OSVersion.a12()) {
             CustomHideCardSettingSwitch(
@@ -81,7 +78,7 @@ fun SysSettingsCardEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowSetting2 = newState
-                sp.saveCardShowedState(S_AUTO_ROTATE, newState)
+                sp.saveShownState(S_AUTO_ROTATE, newState)
             }
         }
         CustomHideCardSettingSwitch(
@@ -91,7 +88,7 @@ fun SysSettingsCardEdit() {
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting3 = newState
-            sp.saveCardShowedState(S_BLUETOOTH, newState)
+            sp.saveShownState(S_BLUETOOTH, newState)
         }
         if (OSVersion.api24()) {
             CustomHideCardSettingSwitch(
@@ -101,7 +98,7 @@ fun SysSettingsCardEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowSetting4 = newState
-                sp.saveCardShowedState(S_DEFAULT_APPS, newState)
+                sp.saveShownState(S_DEFAULT_APPS, newState)
             }
         }
         if (OSVersion.api23()) {
@@ -112,7 +109,7 @@ fun SysSettingsCardEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowSetting5 = newState
-                sp.saveCardShowedState(S_BATTERY_OPTIMIZATION, newState)
+                sp.saveShownState(S_BATTERY_OPTIMIZATION, newState)
             }
         }
         CustomHideCardSettingSwitch(
@@ -122,7 +119,7 @@ fun SysSettingsCardEdit() {
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting6 = newState
-            sp.saveCardShowedState(S_CAPTIONING, newState)
+            sp.saveShownState(S_CAPTIONING, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.usage_access_permission,
@@ -131,7 +128,7 @@ fun SysSettingsCardEdit() {
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting7 = newState
-            sp.saveCardShowedState(S_USAGE_ACCESS, newState)
+            sp.saveShownState(S_USAGE_ACCESS, newState)
         }
         if (OSVersion.api23()) {
             CustomHideCardSettingSwitch(
@@ -141,7 +138,7 @@ fun SysSettingsCardEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowSetting8 = newState
-                sp.saveCardShowedState(S_OVERLAY, newState)
+                sp.saveShownState(S_OVERLAY, newState)
             }
         }
         if (OSVersion.api23()) {
@@ -152,7 +149,7 @@ fun SysSettingsCardEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowSetting9 = newState
-                sp.saveCardShowedState(S_WRITE_SETTINGS, newState)
+                sp.saveShownState(S_WRITE_SETTINGS, newState)
             }
         }
         CustomHideCardSettingSwitch(
@@ -162,7 +159,7 @@ fun SysSettingsCardEdit() {
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting10 = newState
-            sp.saveCardShowedState(S_ACCESSIBILITY, newState)
+            sp.saveShownState(S_ACCESSIBILITY, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.language_settings,
@@ -171,7 +168,7 @@ fun SysSettingsCardEdit() {
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting11 = newState
-            sp.saveCardShowedState(S_LOCALE, newState)
+            sp.saveShownState(S_LOCALE, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.date_and_time_settings,
@@ -180,7 +177,7 @@ fun SysSettingsCardEdit() {
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting12 = newState
-            sp.saveCardShowedState(S_DATE, newState)
+            sp.saveShownState(S_DATE, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.developer_options,
@@ -189,7 +186,7 @@ fun SysSettingsCardEdit() {
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting13 = newState
-            sp.saveCardShowedState(S_DEVELOPER, newState)
+            sp.saveShownState(S_DEVELOPER, newState)
         }
 
         GroupDivider()
@@ -273,6 +270,6 @@ private fun onClickChangeAllCardsButton(isShow: Boolean) {
     val settingsViewModel = SettingsSharedPref
 
     for (setting in settingList) {
-        settingsViewModel.saveCardShowedState(setting, isShow)
+        settingsViewModel.saveShownState(setting, isShow)
     }
 }

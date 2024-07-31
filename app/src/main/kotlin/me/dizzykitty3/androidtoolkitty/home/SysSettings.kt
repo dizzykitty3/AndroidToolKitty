@@ -76,7 +76,7 @@ fun SysSettings(navController: NavHostController) {
             settings.remove(Setting(S_WRITE_SETTINGS, R.string.write_permission))
         }
         val shownSettings = settings.filter { setting ->
-            SettingsSharedPref.getCardShowedState(setting.settingType)
+            SettingsSharedPref.getShownState(setting.settingType)
         }
 
         if (!checkIsAutoTime()) Tip(R.string.set_time_automatically_is_off_tip)

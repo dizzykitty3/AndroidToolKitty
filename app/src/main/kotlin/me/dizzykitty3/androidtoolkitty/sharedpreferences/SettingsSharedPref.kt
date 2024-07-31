@@ -96,14 +96,14 @@ object SettingsSharedPref {
         setPreference(WHEEL_OF_FORTUNE_ITEMS, itemsJson)
     }
 
-    fun getCardShowedState(card: String): Boolean {
+    fun getShownState(card: String): Boolean {
         return sharedPrefs.getBoolean(card, true)
     }
 
-    fun saveCardShowedState(card: String, isShowed: Boolean) {
-        Timber.d("$card is showed = $isShowed")
+    fun saveShownState(card: String, isShown: Boolean) {
+        Timber.d("$card is shown = $isShown")
         with(sharedPrefs.edit()) {
-            putBoolean(card, isShowed)
+            putBoolean(card, isShown)
             apply()
         }
     }

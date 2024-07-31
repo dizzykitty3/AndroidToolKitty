@@ -276,7 +276,7 @@ private fun TwoColumnHomeCards(
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> = listOf(
     CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6, CARD_7, CARD_8, CARD_9, CARD_10, CARD_11
-).associateWith { card -> settingsSharedPref.getCardShowedState(card) }
+).associateWith { card -> settingsSharedPref.getShownState(card) }
 
 @Composable
 private fun CardContent(

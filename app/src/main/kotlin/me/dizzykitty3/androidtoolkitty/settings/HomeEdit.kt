@@ -41,20 +41,20 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 fun HomeEdit() {
     Screen {
         val sp = remember { SettingsSharedPref }
-        var mIsShowCard5 by remember { mutableStateOf(sp.getCardShowedState(CARD_5)) }
+        var mIsShowCard5 by remember { mutableStateOf(sp.getShownState(CARD_5)) }
 
         Card(R.string.customize_my_home_page) {
             val haptic = LocalHapticFeedback.current
-            var mIsShowCard1 by remember { mutableStateOf(sp.getCardShowedState(CARD_1)) }
-            var mIsShowCard2 by remember { mutableStateOf(sp.getCardShowedState(CARD_2)) }
-            var mIsShowCard3 by remember { mutableStateOf(sp.getCardShowedState(CARD_3)) }
-            var mIsShowCard4 by remember { mutableStateOf(sp.getCardShowedState(CARD_4)) }
-            var mIsShowCard6 by remember { mutableStateOf(sp.getCardShowedState(CARD_6)) }
-            var mIsShowCard7 by remember { mutableStateOf(sp.getCardShowedState(CARD_7)) }
-            var mIsShowCard8 by remember { mutableStateOf(sp.getCardShowedState(CARD_8)) }
-            var mIsShowCard9 by remember { mutableStateOf(sp.getCardShowedState(CARD_9)) }
-            var mIsShowCard10 by remember { mutableStateOf(sp.getCardShowedState(CARD_10)) }
-            var mIsShowCard11 by remember { mutableStateOf(sp.getCardShowedState(CARD_11)) }
+            var mIsShowCard1 by remember { mutableStateOf(sp.getShownState(CARD_1)) }
+            var mIsShowCard2 by remember { mutableStateOf(sp.getShownState(CARD_2)) }
+            var mIsShowCard3 by remember { mutableStateOf(sp.getShownState(CARD_3)) }
+            var mIsShowCard4 by remember { mutableStateOf(sp.getShownState(CARD_4)) }
+            var mIsShowCard6 by remember { mutableStateOf(sp.getShownState(CARD_6)) }
+            var mIsShowCard7 by remember { mutableStateOf(sp.getShownState(CARD_7)) }
+            var mIsShowCard8 by remember { mutableStateOf(sp.getShownState(CARD_8)) }
+            var mIsShowCard9 by remember { mutableStateOf(sp.getShownState(CARD_9)) }
+            var mIsShowCard10 by remember { mutableStateOf(sp.getShownState(CARD_10)) }
+            var mIsShowCard11 by remember { mutableStateOf(sp.getShownState(CARD_11)) }
 
             CustomHideCardSettingSwitch(
                 text = R.string.year_progress,
@@ -63,7 +63,7 @@ fun HomeEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard1 = newState
-                sp.saveCardShowedState(CARD_1, newState)
+                sp.saveShownState(CARD_1, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.volume,
@@ -72,7 +72,7 @@ fun HomeEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard2 = newState
-                sp.saveCardShowedState(CARD_2, newState)
+                sp.saveShownState(CARD_2, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.clipboard,
@@ -81,7 +81,7 @@ fun HomeEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard3 = newState
-                sp.saveCardShowedState(CARD_3, newState)
+                sp.saveShownState(CARD_3, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.search_and_webpage,
@@ -90,7 +90,7 @@ fun HomeEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard4 = newState
-                sp.saveCardShowedState(CARD_4, newState)
+                sp.saveShownState(CARD_4, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.system_settings,
@@ -99,7 +99,7 @@ fun HomeEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard5 = newState
-                sp.saveCardShowedState(CARD_5, newState)
+                sp.saveShownState(CARD_5, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.wheel_of_fortune,
@@ -108,7 +108,7 @@ fun HomeEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard6 = newState
-                sp.saveCardShowedState(CARD_6, newState)
+                sp.saveShownState(CARD_6, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.bluetooth_devices,
@@ -117,7 +117,7 @@ fun HomeEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard7 = newState
-                sp.saveCardShowedState(CARD_7, newState)
+                sp.saveShownState(CARD_7, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.codes_of_characters,
@@ -126,16 +126,16 @@ fun HomeEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard8 = newState
-                sp.saveCardShowedState(CARD_8, newState)
+                sp.saveShownState(CARD_8, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.google_maps,
                 card = CARD_9,
-                isChecked = mIsShowCard8
+                isChecked = mIsShowCard9
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard9 = newState
-                sp.saveCardShowedState(CARD_9, newState)
+                sp.saveShownState(CARD_9, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.android_versions,
@@ -144,7 +144,7 @@ fun HomeEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard10 = newState
-                sp.saveCardShowedState(CARD_10, newState)
+                sp.saveShownState(CARD_10, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.font_weight_test,
@@ -153,7 +153,7 @@ fun HomeEdit() {
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowCard11 = newState
-                sp.saveCardShowedState(CARD_11, newState)
+                sp.saveShownState(CARD_11, newState)
             }
 
             GroupDivider()
@@ -223,6 +223,6 @@ private fun onClickChangeAllCardsButton(isShow: Boolean) {
         CARD_7, CARD_8, CARD_9, CARD_10, CARD_11
     )
     cardList.forEach { card ->
-        SettingsSharedPref.saveCardShowedState(card, isShow)
+        SettingsSharedPref.saveShownState(card, isShow)
     }
 }

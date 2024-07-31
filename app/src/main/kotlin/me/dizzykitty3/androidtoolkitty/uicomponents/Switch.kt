@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -20,14 +19,12 @@ fun CustomHideCardSettingSwitch(
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
-    val settingsSharedPref = remember { SettingsSharedPref }
-
     Row(
         Modifier.clickable {
             onCheckedChange(!isChecked)
-            settingsSharedPref.saveCardShowedState(card, !isChecked)
+            SettingsSharedPref.saveShownState(card, !isChecked)
         },
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Column(Modifier.weight(1f)) { Text(stringResource(text)) }
         Column {
