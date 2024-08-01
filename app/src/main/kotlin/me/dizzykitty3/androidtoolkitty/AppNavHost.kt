@@ -29,7 +29,7 @@ import me.dizzykitty3.androidtoolkitty.settings.QRCodeGenerator
 import me.dizzykitty3.androidtoolkitty.settings.Settings
 
 @Composable
-fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
+fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel, widthType: Int) {
     val navController = rememberNavController()
 
     NavHost(
@@ -62,7 +62,7 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
                         animationSpec = tween(SCALE_DURATION)
                     )
         }) {
-        composable(SCR_HOME) { Home(settingsViewModel, navController) }
+        composable(SCR_HOME) { Home(settingsViewModel, navController, widthType) }
         composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
         composable(SCR_EDIT_HOME) { HomeEdit() }
         composable(SCR_PERMISSION_REQUEST) { PermissionRequest() }

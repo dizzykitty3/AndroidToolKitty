@@ -7,8 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SnackbarHostState
-import androidx.compose.runtime.remember
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,16 +36,18 @@ class MainActivity : ComponentActivity() {
     private var isAutoClearClipboard = false
     private lateinit var settingsViewModel: SettingsViewModel
 
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("onCreate")
         enableEdgeToEdge()
         setContent {
             settingsViewModel = hiltViewModel<SettingsViewModel>()
-            @Suppress("SpellCheckingInspection") val snackbarHostState =
-                remember { SnackbarHostState() }
             val forceDarkMode = settingsViewModel.settings.value.forceDarkMode
             isAutoClearClipboard = settingsViewModel.settings.value.autoClearClipboard
+
+            val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
+            val widthType: Int = if (widthSizeClass == WindowWidthSizeClass.Compact) 1 else 2
 
             AppTheme(
                 forceDarkMode = forceDarkMode,
@@ -56,7 +59,8 @@ class MainActivity : ComponentActivity() {
                             top = innerPadding.calculateTopPadding(),
                             bottom = innerPadding.calculateBottomPadding()
                         ),
-                        settingsViewModel
+                        settingsViewModel,
+                        widthType
                     )
                 }
             }

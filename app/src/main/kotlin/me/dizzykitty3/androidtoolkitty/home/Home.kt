@@ -38,7 +38,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
@@ -77,9 +76,8 @@ import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
-fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    val screenWidth = LocalConfiguration.current.screenWidthDp
-    if (screenWidth < 600) MobileLayout(settingsViewModel, navController)
+fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController, widthType: Int) {
+    if (widthType == 0 || widthType == 1) MobileLayout(settingsViewModel, navController)
     else TabletLayout(settingsViewModel, navController)
 }
 
