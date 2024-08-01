@@ -341,6 +341,8 @@ private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): 
         URLUtil.Platform.TUMBLR,
         URLUtil.Platform.CARRD -> "${username.dropSpaces().lowercase()}${platform.prefix}"
 
+        URLUtil.Platform.YOUTUBE_SEARCH -> "${platform.prefix}${username.trim()}"
+
         else -> "${platform.prefix}${username.dropSpaces().lowercase()}"
     }
 

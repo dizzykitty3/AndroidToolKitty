@@ -115,6 +115,7 @@ object URLUtil {
         WAVEBOX("wavebox.me/wave/", R.string.wavebox),
         WEIBO("weibo.com/n/", R.string.weibo),
         X("x.com/", R.string.x),
-        YOUTUBE("youtube.com/@", R.string.youtube_id)
+        YOUTUBE_SEARCH("youtube.com/results?search_query=", R.string.youtube_serach),
+        YOUTUBE_USER_ID("youtube.com/@", R.string.youtube_id)
     }
 }

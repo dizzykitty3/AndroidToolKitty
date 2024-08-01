@@ -128,6 +128,7 @@
     <string name="what_is_package_name">What\'s package name</string>
     <string name="open_on_google_play" translatable="false">Google Play</string>
     <string name="open_on_other_markets">Other markets</string>
+    <string name="youtube_serach">YouTube (Search)</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>

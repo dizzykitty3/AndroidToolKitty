@@ -82,6 +82,8 @@
     <string name="package_name_or_search">パッケージ名または検索</string>
     <string name="what_is_package_name">パッケージ名とは何ですか</string>
     <string name="open_on_other_markets">他のマーケット</string>
+    <string name="twitcasting">ツイキャス</string>
+    <string name="unifans">Unifans</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">システム設定</string>
@@ -198,4 +200,5 @@
     <string name="bluetooth_connect">ペアリングされた Bluetooth デバイスを確認するには、アプリに近くのデバイスの権限を付与してください。</string>
     <string name="missed_sys_popup">システム権限ポップアップを見逃しましたか？</string>
     <string name="fine_location">現在の位置を確認するには、アプリに「位置情報」権限を付与してください。</string>
+    <string name="youtube_serach">YouTube (Search)</string>
 </resources>
