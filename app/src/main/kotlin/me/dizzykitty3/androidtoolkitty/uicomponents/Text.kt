@@ -44,13 +44,9 @@ fun Gradient(
 ) {
     Row {
         val text = buildAnnotatedString {
-            withStyle(
-                style = SpanStyle(
-                    brush = Brush.horizontalGradient(
-                        colors = colors
-                    )
-                )
-            ) { append(textToDisplay) }
+            withStyle(SpanStyle(Brush.horizontalGradient(colors))) {
+                append(textToDisplay)
+            }
         }
         Text(
             text,
@@ -70,8 +66,8 @@ fun GradientSmall(textToDisplay: String, colors: List<Color>) {
     Row {
         val text = buildAnnotatedString {
             withStyle(
-                style = SpanStyle(
-                    brush = Brush.horizontalGradient(colors = colors),
+                SpanStyle(
+                    Brush.horizontalGradient(colors),
                     fontWeight = FontWeight.Black
                 )
             ) { append(textToDisplay) }
@@ -167,8 +163,7 @@ fun ScrollableText(text: String) =
 fun ScrollableText(@StringRes text: Int) = ScrollableText(stringResource(text))
 
 @Composable
-fun ScrollableItalicText(@StringRes text: Int) {
+fun ScrollableItalicText(@StringRes text: Int) =
     Box(Modifier.horizontalScroll(rememberScrollState())) {
         Text(buildAnnotatedString { ItalicText(stringResource(text)) })
     }
-}

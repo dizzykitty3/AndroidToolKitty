@@ -40,7 +40,7 @@ fun CustomIconPopup(
     Row {
         Icon(
             imageVector = Icons.Outlined.Info,
-            contentDescription = stringResource(id = R.string.info),
+            contentDescription = stringResource(R.string.info),
             modifier = Modifier
                 .size(16.dp)
                 .clickable {

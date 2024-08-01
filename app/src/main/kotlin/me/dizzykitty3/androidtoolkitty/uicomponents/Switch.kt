@@ -43,8 +43,7 @@ fun CustomSwitchRow(
     text: String? = null,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
-) =
-    CustomSwitchRow(stringResource(title), text, checked, onCheckedChange)
+) = CustomSwitchRow(stringResource(title), text, checked, onCheckedChange)
 
 @Composable
 fun CustomSwitchRow(
@@ -52,8 +51,7 @@ fun CustomSwitchRow(
     @StringRes text: Int,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
-) =
-    CustomSwitchRow(
+) = CustomSwitchRow(
         stringResource(title),
         stringResource(text),
         checked,
