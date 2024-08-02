@@ -2,6 +2,8 @@ package me.dizzykitty3.androidtoolkitty.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.DashboardCustomize
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,6 +23,7 @@ fun ComposeCatalog(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
     Card(
         R.string.compose_catalog,
+        Icons.Outlined.DashboardCustomize,
         hasShowMore = true,
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)

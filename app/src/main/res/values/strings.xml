@@ -4,7 +4,6 @@
     <string name="edit">Edit</string>
     <string name="visit">Visit</string>
     <string name="debugging">Debugging</string>
-    <string name="show_more" translatable="false">···</string>
     <string name="unknown">Unknown</string>
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>

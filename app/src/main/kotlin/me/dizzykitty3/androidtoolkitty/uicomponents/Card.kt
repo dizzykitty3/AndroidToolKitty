@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.HorizontalDivider
@@ -78,7 +80,12 @@ fun Card(
                     }
                 }
                 if (hasShowMore && onClick != null) {
-                    FilledTonalButton(onClick) { Text(stringResource(R.string.show_more)) }
+                    FilledTonalButton(onClick) {
+                        Icon(
+                            imageVector = Icons.Outlined.MoreHoriz,
+                            contentDescription = null
+                        )
+                    }
                 }
             }
             SpacerPadding()
