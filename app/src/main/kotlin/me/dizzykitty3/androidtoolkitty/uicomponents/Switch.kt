@@ -52,11 +52,11 @@ fun CustomSwitchRow(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) = CustomSwitchRow(
-        stringResource(title),
-        stringResource(text),
-        checked,
-        onCheckedChange
-    )
+    stringResource(title),
+    stringResource(text),
+    checked,
+    onCheckedChange
+)
 
 @Composable
 private fun CustomSwitchRow(
@@ -65,25 +65,25 @@ private fun CustomSwitchRow(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
-    Row(
-        Modifier.clickable { onCheckedChange(!checked) },
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Column(Modifier.weight(1f)) {
-            Text(title)
-            if (text != null) {
-                Text(
-                    text,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
-                )
+    Column(Modifier.clickable { onCheckedChange(!checked) }) {
+        SpacerPadding()
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text(title)
+                if (text != null) {
+                    Text(
+                        text,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                    )
+                }
             }
+            CardSpacePadding()
+            Switch(
+                checked = checked,
+                onCheckedChange = { onCheckedChange(it) }
+            )
         }
-        CardSpacePadding()
-        Switch(
-            checked = checked,
-            onCheckedChange = { onCheckedChange(it) }
-        )
+        SpacerPadding()
     }
-    SpacerPadding()
 }

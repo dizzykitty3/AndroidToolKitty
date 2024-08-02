@@ -1,13 +1,13 @@
 package me.dizzykitty3.androidtoolkitty.uicomponents
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -58,9 +58,11 @@ fun Card(
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     SpacerPadding()
-                    Box {
+                    Column {
                         if (icon == null) {
                             CardTitle(title)
+                            SpacerPadding()
+                            HorizontalDivider()
                         } else {
                             Row {
                                 Icon(
@@ -71,9 +73,9 @@ fun Card(
                                 IconAndTextPadding()
                                 CardTitle(title)
                             }
+                            SpacerPadding()
                         }
                     }
-                    SpacerPadding()
                 }
                 if (hasShowMore && onClick != null) {
                     FilledTonalButton(onClick) { Text(stringResource(R.string.show_more)) }

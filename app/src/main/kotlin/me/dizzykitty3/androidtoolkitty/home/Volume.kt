@@ -252,7 +252,6 @@ private fun MediaVolume(isHome: Boolean) {
                                 }
                             }
                         )
-                        GroupDivider()
                         CustomSwitchRow(
                             R.string.more_precise_slider,
                             R.string.slider_increment_1_percent,
