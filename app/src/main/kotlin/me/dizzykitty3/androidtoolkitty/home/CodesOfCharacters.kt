@@ -27,8 +27,8 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_CODES_OF_CHARACTERS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
@@ -60,9 +60,9 @@ fun CodesOfCharactersScreen() {
         Card(R.string.codes_of_characters, Icons.AutoMirrored.Outlined.Notes) {
             GroupTitle(R.string.unicode)
             Unicode()
-            GroupDivider()
+            CardSpacePadding()
             ASCII()
-            GroupDivider()
+            CardSpacePadding()
             UnixTimestamp()
         }
     }

@@ -30,7 +30,7 @@ import me.dizzykitty3.androidtoolkitty.S_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
+import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
@@ -161,7 +161,7 @@ fun SysSettingsScreen() {
                     setting.text
                 )
             }
-            GroupDivider()
+            CardSpacePadding()
             GroupTitle(R.string.permission)
             settings.subList(i1, i2).forEach { setting ->
                 SystemSettingButton(
@@ -169,7 +169,7 @@ fun SysSettingsScreen() {
                     setting.text
                 )
             }
-            GroupDivider()
+            CardSpacePadding()
             GroupTitle(R.string.debugging)
             settings.subList(i2, i3).forEach { setting ->
                 SystemSettingButton(

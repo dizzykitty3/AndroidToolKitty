@@ -35,7 +35,6 @@ import me.dizzykitty3.androidtoolkitty.S_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomHideCardSettingSwitch
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
@@ -189,7 +188,7 @@ fun SysSettingsCardEdit() {
             sp.saveShownState(S_DEVELOPER, newState)
         }
 
-        GroupDivider()
+        SpacerPadding()
 
         Button(
             {

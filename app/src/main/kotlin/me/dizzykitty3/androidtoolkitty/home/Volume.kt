@@ -43,10 +43,10 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_VOLUME
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
@@ -74,9 +74,8 @@ fun VolumeScreen() {
     Screen {
         Card(R.string.volume, Icons.AutoMirrored.Outlined.VolumeUp) {
             GroupTitle(R.string.media_volume)
-            SpacerPadding()
             MediaVolume(isHome = false)
-            GroupDivider()
+            CardSpacePadding()
             VoiceCallVolume()
         }
     }

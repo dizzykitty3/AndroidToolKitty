@@ -40,7 +40,6 @@ import me.dizzykitty3.androidtoolkitty.SCR_PERMISSION_REQUEST
 import me.dizzykitty3.androidtoolkitty.SCR_QR_CODE_GENERATOR
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
@@ -87,7 +86,7 @@ fun Debugging(navController: NavHostController) {
             }
         }
 
-        GroupDivider()
+        SpacerPadding()
 
         OutlinedButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)

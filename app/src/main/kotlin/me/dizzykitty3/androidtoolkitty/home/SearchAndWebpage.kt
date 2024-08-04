@@ -39,10 +39,11 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_WEBPAGE
 import me.dizzykitty3.androidtoolkitty.WHAT_IS_PACKAGE_NAME_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
@@ -78,11 +79,11 @@ fun WebpageScreen(settingsViewModel: SettingsViewModel) {
         Card(R.string.search_and_webpage, Icons.Outlined.Search) {
             GroupTitle(R.string.search)
             Search()
-            GroupDivider()
+            CardSpacePadding()
             WebpageURL()
-            GroupDivider()
+            CardSpacePadding()
             SocialMediaProfileIURL(settingsViewModel)
-            GroupDivider()
+            CardSpacePadding()
             CheckAppOnMarket()
         }
     }
@@ -133,7 +134,7 @@ private fun Search() {
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
-        Text("|")
+        ButtonDivider()
         TextButton(
             onClick = {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -401,7 +402,7 @@ private fun CheckAppOnMarket() {
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
-        Text("|")
+        ButtonDivider()
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()

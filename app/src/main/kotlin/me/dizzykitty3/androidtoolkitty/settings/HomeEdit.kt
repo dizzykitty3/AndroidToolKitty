@@ -34,7 +34,6 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomHideCardSettingSwitch
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 
@@ -167,7 +166,7 @@ fun HomeEdit() {
                 sp.saveShownState(CARD_12, newState)
             }
 
-            GroupDivider()
+            SpacerPadding()
 
             Button(
                 {

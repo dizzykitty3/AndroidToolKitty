@@ -150,7 +150,7 @@ fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))
 
 @Composable
 fun GroupTitle(title: String) {
-    Text(title, style = MaterialTheme.typography.titleMedium)
+    Text("> $title", style = MaterialTheme.typography.titleMedium)
     SpacerPadding()
 }
 
