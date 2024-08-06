@@ -70,6 +70,7 @@ object URLUtil {
      */
     enum class Platform(val prefix: String, @StringRes val platform: Int) {
         ARTSTATION("artstation.com/", R.string.artstation),
+        BAHAMUT("gamer.com.tw/home/home.php?owner=", R.string.bahamut),
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
         BLUESKY("bsky.app/profile/", R.string.bluesky),

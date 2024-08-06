@@ -86,6 +86,7 @@
     <string name="unifans">Unifans</string>
 
     <!-- Home > System settings -->
+    <string name="bahamut">Bahamut</string>
     <string name="system_settings">システム設定</string>
     <string name="display_settings">ディスプレイ</string>
     <string name="auto_rotate_settings">画面の自動回転</string>
