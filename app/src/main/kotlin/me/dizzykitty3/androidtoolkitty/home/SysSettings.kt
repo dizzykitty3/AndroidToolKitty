@@ -1,15 +1,21 @@
 package me.dizzykitty3.androidtoolkitty.home
 
 import android.content.ContentResolver
+import android.os.Build
 import android.provider.Settings
 import androidx.annotation.StringRes
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
@@ -34,9 +40,12 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
+import me.dizzykitty3.androidtoolkitty.utils.StringUtil
+import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
 
 @Composable
 fun SysSettings(navController: NavHostController) {
@@ -118,6 +127,8 @@ fun SysSettings(navController: NavHostController) {
 fun SysSettingsScreen() {
     Screen {
         Card(R.string.system_settings, Icons.Outlined.Settings) {
+            val view = LocalView.current
+
             val settings = mutableListOf(
                 Setting(S_DISPLAY, R.string.display_settings),
                 Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings),
@@ -154,6 +165,24 @@ fun SysSettingsScreen() {
             val i2 = settings.indexOf(Setting(S_ACCESSIBILITY, R.string.accessibility_settings)) + 1
             val i3 = settings.count()
 
+            GroupTitle(R.string.device_info)
+            Row(Modifier.fillMaxWidth()) {
+                Column(Modifier.weight(0.4f)) {
+                    ScrollableText(stringResource(R.string.manufacturer))
+                    ScrollableText(stringResource(R.string.device))
+                    ScrollableText(stringResource(R.string.os_version))
+                    ScrollableText(stringResource(R.string.locale))
+                    ScrollableText(stringResource(R.string.app_version))
+                }
+                Column(Modifier.weight(0.6f)) {
+                    ScrollableText(Build.MANUFACTURER)
+                    ScrollableText("${Build.MODEL} (${Build.DEVICE})")
+                    ScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
+                    ScrollableText(StringUtil.sysLocale)
+                    ScrollableText(view.context.versionName)
+                }
+            }
+            CardSpacePadding()
             GroupTitle(R.string.general)
             settings.subList(0, i1).forEach { setting ->
                 SystemSettingButton(

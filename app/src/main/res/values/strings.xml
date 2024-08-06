@@ -21,6 +21,7 @@
     <string name="result">result =</string>
     <string name="permission">Permission</string>
     <string name="success">success</string>
+    <string name="general">General</string>
 
     <!-- Home > Top bar -->
     <string name="battery_level">Battery level</string>
@@ -147,6 +148,7 @@
     <string name="write_permission">Modify system settings</string>
     <string name="accessibility_settings">Accessibility</string>
     <string name="no_options_enabled">Enabled options will be shown here</string>
+    <string name="device_info">Device info</string>
 
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
@@ -281,7 +283,6 @@
 
     <!-- Settings > General -->
     <string name="clear_clipboard_automatically">Clear clipboard automatically</string>
-    <string name="general">General</string>
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>

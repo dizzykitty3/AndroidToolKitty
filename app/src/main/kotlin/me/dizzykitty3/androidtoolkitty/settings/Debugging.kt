@@ -2,10 +2,8 @@ package me.dizzykitty3.androidtoolkitty.settings
 
 import android.annotation.SuppressLint
 import android.location.Location
-import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Refresh
@@ -41,7 +39,6 @@ import me.dizzykitty3.androidtoolkitty.SCR_QR_CODE_GENERATOR
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.WIPTip
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
@@ -50,8 +47,6 @@ import me.dizzykitty3.androidtoolkitty.utils.LocationUtil
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noBluetoothPermission
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noLocationPermission
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
-import me.dizzykitty3.androidtoolkitty.utils.StringUtil
-import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
 import timber.log.Timber
 
 @Composable
@@ -69,25 +64,6 @@ fun Debugging(navController: NavHostController) {
     var showLocationDialog by remember { mutableStateOf(false) }
 
     Card(R.string.debugging, Icons.Outlined.Terminal) {
-        Row(Modifier.fillMaxWidth()) {
-            Column(Modifier.weight(0.4f)) {
-                ScrollableText(stringResource(R.string.manufacturer))
-                ScrollableText(stringResource(R.string.device))
-                ScrollableText(stringResource(R.string.os_version))
-                ScrollableText(stringResource(R.string.locale))
-                ScrollableText(stringResource(R.string.app_version))
-            }
-            Column(Modifier.weight(0.6f)) {
-                ScrollableText(Build.MANUFACTURER)
-                ScrollableText("${Build.MODEL} (${Build.DEVICE})")
-                ScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
-                ScrollableText(StringUtil.sysLocale)
-                ScrollableText(view.context.versionName)
-            }
-        }
-
-        SpacerPadding()
-
         OutlinedButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             if (view.context.noLocationPermission()) {

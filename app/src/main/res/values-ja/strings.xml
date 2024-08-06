@@ -202,4 +202,5 @@
     <string name="missed_sys_popup">システム権限ポップアップを見逃しましたか？</string>
     <string name="fine_location">現在の位置を確認するには、アプリに「位置情報」権限を付与してください。</string>
     <string name="youtube_serach">YouTube (Search)</string>
+    <string name="device_info">Device info</string>
 </resources>
