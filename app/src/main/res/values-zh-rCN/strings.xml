@@ -124,7 +124,6 @@
     <string name="w8">800 特粗 ExtraBold</string>
     <string name="w9">900 浓体 Black</string>
     <string name="clipboard_card_hidden">已为您隐藏首页的剪贴板卡片</string>
-    <string name="wip">-- WORK IN PROGRESS --</string>
     <string name="undo">撤销</string>
     <string name="pixiv_user_custom_url">Pixiv (用户自定义 URL)</string>
     <string name="steam_user_custom_url">Steam (用户自定义 URL)</string>

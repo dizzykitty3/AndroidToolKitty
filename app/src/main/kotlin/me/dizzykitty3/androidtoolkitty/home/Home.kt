@@ -49,6 +49,7 @@ import me.dizzykitty3.androidtoolkitty.CARD_1
 import me.dizzykitty3.androidtoolkitty.CARD_10
 import me.dizzykitty3.androidtoolkitty.CARD_11
 import me.dizzykitty3.androidtoolkitty.CARD_12
+import me.dizzykitty3.androidtoolkitty.CARD_13
 import me.dizzykitty3.androidtoolkitty.CARD_2
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.CARD_4
@@ -275,7 +276,7 @@ private fun TwoColumnHomeCards(
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> = listOf(
     CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6,
-    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12
+    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12, CARD_13
 ).associateWith { card -> settingsSharedPref.getShownState(card) }
 
 @Composable
@@ -297,5 +298,6 @@ private fun CardContent(
         CARD_10 -> AndroidVersions(navController)
         CARD_11 -> FontWeight(navController)
         CARD_12 -> ComposeCatalog(navController)
+        CARD_13 -> FeaturesWorkInProgress(navController)
     }
 }

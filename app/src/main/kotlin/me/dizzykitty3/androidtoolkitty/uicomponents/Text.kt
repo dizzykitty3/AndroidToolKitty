@@ -134,7 +134,7 @@ fun Tip(msg: String, type: Int = 1) {
 }
 
 @Composable
-fun WIPTip() = Tip(R.string.wip)
+fun WIPTip() = Tip(R.string.wip_long)
 
 @Composable
 fun DevBuildTip() = Tip(R.string.debug_build_top_tip, type = 2)

@@ -10,7 +10,6 @@
     <string name="info">情報</string>
     <string name="go_to_settings">設定に移動</string>
     <string name="success_and_back">成功！前の画面に戻れます</string>
-    <string name="wip">-- 作業中 --</string>
     <string name="undo">元に戻す</string>
     <string name="turn_off">オフにする</string>
     <string name="copy">コピー</string>

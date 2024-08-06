@@ -9,7 +9,7 @@
     <string name="info">Info</string>
     <string name="go_to_settings">Go to settings</string>
     <string name="success_and_back">Success! Now you can back to the previous screen</string>
-    <string name="wip">-- WORK IN PROGRESS --</string>
+    <string name="wip_long" translatable="false">-- WORK IN PROGRESS --</string>
     <string name="undo">Undo</string>
     <string name="turn_off">Turn off</string>
     <string name="copy">Copy</string>
@@ -22,6 +22,7 @@
     <string name="permission">Permission</string>
     <string name="success">success</string>
     <string name="general">General</string>
+    <string name="wip" translatable="false">Work in progress</string>
 
     <!-- Home > Top bar -->
     <string name="battery_level">Battery level</string>

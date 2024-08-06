@@ -7,7 +7,8 @@ import androidx.compose.material.icons.outlined.Bookmarks
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.Language
-import androidx.compose.material.icons.outlined.Terminal
+import androidx.compose.material.icons.outlined.Refresh
+import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -28,7 +29,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_DEBUGGING
 import me.dizzykitty3.androidtoolkitty.SCR_EDIT_HOME
 import me.dizzykitty3.androidtoolkitty.SCR_LICENSES
 import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
@@ -38,8 +38,10 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppLanguageSetting
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
@@ -203,11 +205,31 @@ private fun Bottom(navController: NavHostController) {
 
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            navController.navigate(SCR_DEBUGGING)
+            view.context.openAppDetailSettings()
         }) {
-            Icon(imageVector = Icons.Outlined.Terminal, contentDescription = null)
+            Icon(
+                imageVector = Icons.Outlined.SettingsApplications,
+                contentDescription = null
+            )
             SpacerPadding()
-            Text(stringResource(R.string.debugging))
+            Text(stringResource(R.string.open_app_detail_settings))
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = stringResource(R.string.open_app_detail_settings),
+                tint = MaterialTheme.colorScheme.primary
+            )
+        }
+
+        TextButton({
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            view.context.restartApp()
+        }) {
+            Icon(
+                imageVector = Icons.Outlined.Refresh,
+                contentDescription = null
+            )
+            SpacerPadding()
+            Text(stringResource(R.string.restart_app))
         }
     }
 }
