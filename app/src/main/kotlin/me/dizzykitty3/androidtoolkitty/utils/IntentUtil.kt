@@ -100,7 +100,7 @@ object IntentUtil {
             if (packageName.isBlank()) {
                 return
             } else if (packageName.contains(".")) {
-                "market://details?id=${packageName.dropSpaces().lowercase()}"
+                "market://details?id=${packageName.dropSpaces()}"
             } else {
                 "market://search?q=${packageName.trim()}"
             }

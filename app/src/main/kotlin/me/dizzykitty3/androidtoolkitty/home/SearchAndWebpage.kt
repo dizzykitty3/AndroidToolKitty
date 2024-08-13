@@ -120,7 +120,7 @@ private fun Search() {
 
     Row(
         Modifier.horizontalScroll(rememberScrollState()),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -313,7 +313,7 @@ private fun Context.onCheckOnYouTube(query: String) {
 private fun Context.onClickVisitURLButton(url: String) {
     if (url.isBlank()) return
     Timber.d("onClickVisitButton")
-    this.openURL(url.dropSpaces().lowercase().toFullURL())
+    this.openURL(url.dropSpaces().toFullURL())
 }
 
 private fun Context.onVisitProfileButton(username: String, platformIndex: Int) {
@@ -333,18 +333,18 @@ private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): 
             if (username.contains("."))
                 "${platform.prefix}$username" // user custom
             else if (username.isNotBlank())
-                "${platform.prefix}${username.dropSpaces().lowercase()}.bsky.social" // default
+                "${platform.prefix}${username.dropSpaces()}.bsky.social" // default
             else
                 platform.prefix // for app UI display
 
         URLUtil.Platform.FANBOX,
         URLUtil.Platform.BOOTH,
         URLUtil.Platform.TUMBLR,
-        URLUtil.Platform.CARRD -> "${username.dropSpaces().lowercase()}${platform.prefix}"
+        URLUtil.Platform.CARRD -> "${username.dropSpaces()}${platform.prefix}"
 
         URLUtil.Platform.YOUTUBE_SEARCH -> "${platform.prefix}${username.trim()}"
 
-        else -> "${platform.prefix}${username.dropSpaces().lowercase()}"
+        else -> "${platform.prefix}${username.dropSpaces()}"
     }
 
 private fun isInvalid(platform: URLUtil.Platform, username: String): Boolean =
@@ -398,7 +398,7 @@ private fun CheckAppOnMarket() {
             Text(stringResource(R.string.open_on_google_play))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(id = R.string.check_app_on_market),
+                contentDescription = stringResource(R.string.check_app_on_market),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
@@ -412,7 +412,7 @@ private fun CheckAppOnMarket() {
             Text(stringResource(R.string.open_on_other_markets))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(id = R.string.open_on_other_markets),
+                contentDescription = stringResource(R.string.open_on_other_markets),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
