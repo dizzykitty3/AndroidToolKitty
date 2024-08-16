@@ -96,17 +96,19 @@ fun BluetoothDevice(navController: NavHostController) {
 
         if (showResult) {
             Text("${stringResource(R.string.current_device)} ${bluetoothAdapter?.name}\n")
-            Text(stringResource(if (size == 0) R.string.no_paired_devices else R.string.paired_devices))
-
-            pairedDevices.forEach { device ->
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(device.name ?: stringResource(R.string.unknown_device))
-                    SpacerPadding()
-                    CustomIconPopup(type(device.type), device.address)
+            if (size == 0) {
+                Text(stringResource(R.string.no_paired_devices))
+            } else {
+                Text(stringResource(R.string.paired_devices))
+                pairedDevices.forEach { device ->
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Text(device.name ?: stringResource(R.string.unknown_device))
+                        SpacerPadding()
+                        CustomIconPopup(type(device.type), device.address)
+                    }
                 }
+                BluetoothDeviceTypeDialog()
             }
-
-            BluetoothDeviceTypeDialog()
         }
     }
 }
