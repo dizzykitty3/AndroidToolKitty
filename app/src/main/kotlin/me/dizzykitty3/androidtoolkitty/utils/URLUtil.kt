@@ -69,6 +69,7 @@ object URLUtil {
      * @see me.dizzykitty3.androidtoolkitty.home.toSocialMediaFullURL
      */
     enum class Platform(val prefix: String, @StringRes val platform: Int) {
+        AFDIAN("afdian.com/a/", R.string.afdian),
         ARTSTATION("artstation.com/", R.string.artstation),
         BAHAMUT("gamer.com.tw/home/home.php?owner=", R.string.bahamut),
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
