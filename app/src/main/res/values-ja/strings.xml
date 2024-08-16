@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Common -->
     <string name="label_optional">ラベル（任意）</string>
     <string name="edit">編集</string>
     <string name="visit">訪問</string>
@@ -20,22 +19,16 @@
     <string name="result">結果：</string>
     <string name="permission">権限</string>
     <string name="success">成功</string>
-
-    <!-- Home > Top bar -->
     <string name="battery_level">バッテリー残量</string>
     <string name="cellular">セルラー</string>
     <string name="offline">オフライン</string>
     <string name="connected">接続済み</string>
     <string name="debug_build_top_tip">これはデバッグビルドです。バグや性能の低下が予想されます。</string>
     <string name="not_fully_translated">申し訳ありませんが、%1$s はまだ完全に翻訳されていません。</string>
-
-    <!-- Home > Year progress -->
     <string name="year_progress">年の進捗</string>
     <plurals name="days_remaining">
         <item quantity="other">%1$d 日残り</item>
     </plurals>
-
-    <!-- Home > Volume -->
     <string name="volume">音量</string>
     <string name="media_volume">メディア音量</string>
     <string name="add_custom_volume">カスタム音量を追加</string>
@@ -46,16 +39,12 @@
     <string name="voice_call_volume">通話音量</string>
     <string name="max_out_voice_call_volume">音声通話の音量を最大にする</string>
     <string name="slider_increment_1_percent">スライダーの増分を 1% に設定</string>
-
-    <!-- Home > Clipboard -->
     <string name="clipboard">クリップボード</string>
     <string name="clear_clipboard">クリップボードをクリア</string>
     <string name="clipboard_cleared">クリップボードがクリアされました</string>
     <string name="clipboard_cleared_automatically">クリップボードが自動的にクリアされました</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">設定画面で起動時にクリップボードをクリアすることができます。</string>
     <string name="clipboard_is_empty">クリップボードは空です</string>
-
-    <!-- Home > Search / Webpage -->
     <string name="url_input_hint_1">入力せずに</string>
     <string name="url_input_hint_2">および</string>
     <string name="url_input_hint_3">(または</string>
@@ -83,8 +72,6 @@
     <string name="open_on_other_markets">他のマーケット</string>
     <string name="twitcasting">ツイキャス</string>
     <string name="unifans">Unifans</string>
-
-    <!-- Home > System settings -->
     <string name="bahamut">Bahamut</string>
     <string name="afdian">Afdian</string>
     <string name="system_settings">システム設定</string>
@@ -103,12 +90,8 @@
     <string name="write_permission">システム設定の変更</string>
     <string name="accessibility_settings">アクセシビリティ</string>
     <string name="no_options_enabled">有効なオプションがここに表示されます</string>
-
-    <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">運命の輪</string>
     <string name="item">アイテム</string>
-
-    <!-- Home > Bluetooth devices -->
     <string name="bluetooth_devices">Bluetooth デバイス</string>
     <string name="show_paired_devices">ペアリングされたデバイスを表示</string>
     <string name="current_device">現在のデバイス：</string>
@@ -126,27 +109,19 @@
     <string name="bluetooth_devices_types_5">デュアル</string>
     <string name="bluetooth_devices_types_6">一部のデバイスはクラシック Bluetooth と Bluetooth LE の両方をサポートしている場合があります。これらはデュアルモードデバイスと呼ばれ、必要に応じて異なる種類のデバイスに接続できる柔軟性を提供できます。たとえば、スマートウォッチは通知のために電話に接続するために BLE を使用するかもしれませんが、音楽再生のためにクラシック Bluetooth を持っているかもしれません。</string>
     <string name="no_bluetooth_adapter_available">Bluetooth アダプタが利用できません。</string>
-
-    <!-- Home > Codes of Characters -->
     <string name="unicode_input_hint">それぞれの最後の4桁、例：</string>
     <string name="character">文字</string>
     <string name="copied">コピーされました</string>
     <string name="convert">変換</string>
     <string name="codes_of_characters">文字コード</string>
     <string name="convert_to_ascii_values">ASCII 値に変換</string>
-
-    <!-- Home > Google Maps -->
     <string name="google_maps">Google マップ</string>
     <string name="latitude">緯度</string>
     <string name="longitude">経度</string>
     <string name="google_maps_not_installed">Google マップがインストールされていません</string>
     <string name="google_play_not_installed">Google Play がインストールされていません</string>
     <string name="open_google_maps">Google マップを開く</string>
-
-    <!-- Home > Android version history -->
     <string name="android_versions">Android のバージョン</string>
-
-    <!-- Home > Font weight test -->
     <string name="font_weight_test">フォントウェイトテスト</string>
     <string name="w1">100 Thin</string>
     <string name="w2">200 ExtraLight</string>
@@ -157,11 +132,7 @@
     <string name="w7">700 Bold</string>
     <string name="w8">800 ExtraBold</string>
     <string name="w9">900 Black</string>
-
-    <!-- Home > Compose catalog -->
     <string name="compose_catalog">Compose コンポーネント</string>
-
-    <!-- Settings > Appearance -->
     <string name="dynamic_color">ダイナミックカラー</string>
     <string name="appearance">外観</string>
     <string name="force_dark_mode">ダークモードを強制</string>
@@ -170,8 +141,6 @@
     <string name="material_you_dynamic_color_theme">Android 12 以上の Material You ダイナミックカラーテーマを有効にする</string>
     <string name="dismiss_lang_tip_description">ホーム画面で「翻訳されていない」と「完全に翻訳されていない」というヒントを無視</string>
     <string name="force_dark_mode_description">ダークモードを強制的に有効にする</string>
-
-    <!-- Settings > General -->
     <string name="clear_clipboard_automatically">クリップボードを自動的にクリア</string>
     <string name="general">一般</string>
     <string name="clipboard_card_hidden">ホーム画面のクリップボードカードが隠されています。</string>
@@ -183,20 +152,14 @@
     <string name="hide_all_options">すべてのオプションを非表示</string>
     <string name="sys_settings_tip">最初の4つの有効なオプションのみがホーム画面に表示されます</string>
     <string name="clear_clipboard_on_launch">アプリ起動時にクリップボードをクリア</string>
-
-    <!-- Settings > About -->
     <string name="view_source_code">ソースコード</string>
     <string name="all_help_welcomed">すべての助けは大歓迎です！ :D</string>
     <string name="licenses">オープンソースライセンス</string>
-
-    <!-- Settings > Debugging -->
     <string name="go_to_permission_request_screen">権限リクエスト画面に移動</string>
     <string name="restart_app">アプリを再起動</string>
     <string name="auto_set_volume">音量を自動的に設定</string>
     <string name="qr_code_generator">QR コードジェネレーター</string>
     <string name="open_app_detail_settings">アプリの詳細設定を開く</string>
-
-    <!-- Permission request -->
     <string name="request_permission">権限をリクエスト</string>
     <string name="bluetooth_connect">ペアリングされた Bluetooth デバイスを確認するには、アプリに近くのデバイスの権限を付与してください。</string>
     <string name="missed_sys_popup">システム権限ポップアップを見逃しましたか？</string>
