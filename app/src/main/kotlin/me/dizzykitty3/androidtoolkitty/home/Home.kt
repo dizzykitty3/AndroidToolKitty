@@ -89,12 +89,15 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
     val noTranslation = StringUtil.sysLangNotSupported
     val notFullyTranslated = StringUtil.sysLangNotFullyTranslated
     val dismissLangTip = settingsViewModel.settings.value.dismissLangTip
+    val hideGreetings = settingsViewModel.settings.value.hideGreetings
     LazyColumn(Modifier.padding(start = screenPadding, end = screenPadding)) {
         item { TopBar(settingsViewModel, navController) }
-        item { CardSpacePadding() }
-        item { CardSpacePadding() }
-        item { Greeting() }
-        item { CardSpacePadding() }
+        if (!hideGreetings) {
+            item { CardSpacePadding() }
+            item { CardSpacePadding() }
+            item { Greeting() }
+            item { CardSpacePadding() }
+        }
         item { CardSpacePadding() }
         if (debug) item { DevBuildTip() }
         if (noTranslation && !dismissLangTip) item { NoTranslationTip() }

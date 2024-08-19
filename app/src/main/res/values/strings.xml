@@ -282,6 +282,8 @@
     <string name="material_you_dynamic_color_theme">Enable Material You dynamic color theme on Android 12+</string>
     <string name="dismiss_lang_tip_description">Dismiss \"not translated\" and \"not fully translated\" tip on Home screen</string>
     <string name="force_dark_mode_description">Force enable dark mode</string>
+    <string name="hide_greetings">Hide greetings</string>
+    <string name="hide_greetings_description">Hide gradient greeting text on Home screen (portrait mode only)</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_automatically">Clear clipboard automatically</string>

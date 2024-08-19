@@ -141,6 +141,7 @@
     <string name="material_you_dynamic_color_theme">Android 12 以上の Material You ダイナミックカラーテーマを有効にする</string>
     <string name="dismiss_lang_tip_description">ホーム画面で「翻訳されていない」と「完全に翻訳されていない」というヒントを無視</string>
     <string name="force_dark_mode_description">ダークモードを強制的に有効にする</string>
+    <string name="hide_greetings_description">Hide gradient greeting text on Home screen (portrait mode only)</string>
     <string name="clear_clipboard_automatically">クリップボードを自動的にクリア</string>
     <string name="general">一般</string>
     <string name="clipboard_card_hidden">ホーム画面のクリップボードカードが隠されています。</string>
@@ -166,4 +167,5 @@
     <string name="fine_location">現在の位置を確認するには、アプリに「位置情報」権限を付与してください。</string>
     <string name="youtube_serach">YouTube (Search)</string>
     <string name="device_info">Device info</string>
+    <string name="hide_greetings">Hide greetings</string>
 </resources>

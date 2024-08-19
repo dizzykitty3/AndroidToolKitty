@@ -62,6 +62,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
     var forceDarkMode by remember { mutableStateOf(settingsViewModel.settings.value.forceDarkMode) }
     var dismissLangTip by remember { mutableStateOf(settingsViewModel.settings.value.dismissLangTip) }
+    var hideGreetings by remember { mutableStateOf(settingsViewModel.settings.value.hideGreetings) }
 
     Card(R.string.appearance) {
         if (OSVersion.a12()) {
@@ -94,6 +95,16 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             dismissLangTip = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(dismissLangTip = it))
+        }
+
+        CustomSwitchRow(
+            R.string.hide_greetings,
+            R.string.hide_greetings_description,
+            hideGreetings
+        ) {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            hideGreetings = it
+            settingsViewModel.update(settingsViewModel.settings.value.copy(hideGreetings = it))
         }
 
         if (OSVersion.a13()) {

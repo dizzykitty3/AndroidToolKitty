@@ -70,6 +70,7 @@
     <string name="bilibili_user_id">哔哩哔哩 (用户 UID)</string>
     <string name="material_you_dynamic_color_theme">启用 Android 12+ 的 Material You 动态主题取色</string>
     <string name="dismiss_lang_tip_description">不显示首页的「语言未翻译」和「未完全翻译」提示</string>
+    <string name="hide_greetings_description">Hide gradient greeting text on Home screen (portrait mode only)</string>
     <string name="clear_clipboard_automatically">自动清除剪贴板</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开「启动时自动清空剪贴板」功能</string>
     <string name="settings">设置</string>
@@ -165,4 +166,5 @@
     <string name="force_dark_mode_description">强制启用暗色模式</string>
     <string name="youtube_serach">YouTube (搜索)</string>
     <string name="device_info">Device info</string>
+    <string name="hide_greetings">Hide greetings</string>
 </resources>
