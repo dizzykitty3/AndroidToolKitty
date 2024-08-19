@@ -75,6 +75,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
                 dynamicColor = it
                 settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
             }
+            SpacerPadding()
         }
 
         CustomSwitchRow(
@@ -86,6 +87,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             forceDarkMode = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(forceDarkMode = it))
         }
+        SpacerPadding()
 
         CustomSwitchRow(
             R.string.dismiss_lang_tip,
@@ -96,6 +98,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             dismissLangTip = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(dismissLangTip = it))
         }
+        SpacerPadding()
 
         CustomSwitchRow(
             R.string.hide_greetings,
@@ -109,7 +112,6 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 
         if (OSVersion.a13()) {
             SpacerPadding()
-
             OutlinedButton({
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 view.context.openAppLanguageSetting()
@@ -166,7 +168,6 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
             }
             settingsViewModel.update(settingsViewModel.settings.value.copy(autoClearClipboard = it))
         }
-
         SpacerPadding()
 
         OutlinedButton({
