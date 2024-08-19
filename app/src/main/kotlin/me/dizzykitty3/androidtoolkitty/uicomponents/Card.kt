@@ -9,7 +9,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -51,8 +50,8 @@ fun Card(
             Modifier
                 .fillMaxWidth()
                 .padding(
-                    top = dimensionResource(R.dimen.padding_card_content_top),
-                    bottom = dimensionResource(R.dimen.padding_card_content),
+                    top = dimensionResource(R.dimen.padding_card_content_top_and_bottom),
+                    bottom = dimensionResource(R.dimen.padding_card_content_top_and_bottom),
                     start = dimensionResource(R.dimen.padding_card_content),
                     end = dimensionResource(R.dimen.padding_card_content)
                 )
@@ -63,8 +62,6 @@ fun Card(
                     Column {
                         if (icon == null) {
                             CardTitle(title)
-                            SpacerPadding()
-                            HorizontalDivider()
                         } else {
                             Row {
                                 Icon(
@@ -75,8 +72,8 @@ fun Card(
                                 IconAndTextPadding()
                                 CardTitle(title)
                             }
-                            SpacerPadding()
                         }
+                        SpacerPadding()
                     }
                 }
                 if (hasShowMore && onClick != null) {

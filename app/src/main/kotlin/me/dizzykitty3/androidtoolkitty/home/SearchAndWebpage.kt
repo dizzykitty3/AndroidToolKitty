@@ -41,10 +41,8 @@ import me.dizzykitty3.androidtoolkitty.WHAT_IS_PACKAGE_NAME_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnMarket
@@ -76,16 +74,10 @@ fun SearchAndWebpage(navController: NavHostController) {
 @Composable
 fun WebpageScreen(settingsViewModel: SettingsViewModel) {
     Screen {
-        Card(R.string.search_and_webpage, Icons.Outlined.Search) {
-            GroupTitle(R.string.search)
-            Search()
-            CardSpacePadding()
-            WebpageURL()
-            CardSpacePadding()
-            SocialMediaProfileIURL(settingsViewModel)
-            CardSpacePadding()
-            CheckAppOnMarket()
-        }
+        Card(R.string.search) { Search() }
+        Card(R.string.webpage) { WebpageURL() }
+        Card(R.string.social_media_profile) { SocialMediaProfileIURL(settingsViewModel) }
+        Card(R.string.check_app_on_market) { CheckAppOnMarket() }
     }
 }
 
@@ -161,8 +153,6 @@ private fun WebpageURL() {
     val fullWidthPeriod = "。"
     val halfWidthPeriod = "."
 
-    GroupTitle(R.string.webpage)
-
     OutlinedTextField(
         value = url,
         onValueChange = { url = it.replace(fullWidthPeriod, halfWidthPeriod) },
@@ -226,8 +216,6 @@ private fun SocialMediaProfileIURL(settingsViewModel: SettingsViewModel) {
     var platformIndex by remember { mutableIntStateOf(settingsViewModel.settings.value.lastSelectedPlatformIndex) }
     val platform = URLUtil.Platform.entries[platformIndex]
     val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
-
-    GroupTitle(R.string.social_media_profile)
 
     CustomDropdownMenu(
         items = platformList,
@@ -357,8 +345,6 @@ private fun isValid(platform: URLUtil.Platform, username: String): Boolean =
 
 @Composable
 private fun CheckAppOnMarket() {
-    GroupTitle(R.string.check_app_on_market)
-
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
