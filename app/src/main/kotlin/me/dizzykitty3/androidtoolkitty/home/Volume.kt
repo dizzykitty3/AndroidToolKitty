@@ -43,11 +43,9 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_VOLUME
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
@@ -72,12 +70,8 @@ fun Volume(navController: NavHostController) {
 @Composable
 fun VolumeScreen() {
     Screen {
-        Card(R.string.volume, Icons.AutoMirrored.Outlined.VolumeUp) {
-            GroupTitle(R.string.media_volume)
-            MediaVolume(isHome = false)
-            CardSpacePadding()
-            VoiceCallVolume()
-        }
+        Card(R.string.media_volume) { MediaVolume(isHome = false) }
+        Card(R.string.voice_call_volume) { VoiceCallVolume() }
     }
 }
 
@@ -327,7 +321,6 @@ private fun MediaVolume(isHome: Boolean) {
 private fun VoiceCallVolume() {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
-    GroupTitle(R.string.voice_call_volume)
     OutlinedButton({
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         val index = AudioUtil.maxVoiceCallVolumeIndex

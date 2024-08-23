@@ -36,8 +36,6 @@ import me.dizzykitty3.androidtoolkitty.S_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
@@ -126,46 +124,45 @@ fun SysSettings(navController: NavHostController) {
 @Composable
 fun SysSettingsScreen() {
     Screen {
-        Card(R.string.system_settings, Icons.Outlined.Settings) {
-            val view = LocalView.current
+        val view = LocalView.current
 
-            val settings = mutableListOf(
-                Setting(S_DISPLAY, R.string.display_settings),
-                Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings),
-                Setting(S_BLUETOOTH, R.string.bluetooth_settings),
-                Setting(S_DEFAULT_APPS, R.string.default_apps_settings),
-                Setting(S_BATTERY_OPTIMIZATION, R.string.battery_optimization_settings),
-                Setting(S_CAPTIONING, R.string.caption_preferences),
-                Setting(S_USAGE_ACCESS, R.string.usage_access_permission),
-                Setting(S_OVERLAY, R.string.overlay_permission),
-                Setting(S_WRITE_SETTINGS, R.string.write_permission),
-                Setting(S_ACCESSIBILITY, R.string.accessibility_settings),
-                Setting(S_LOCALE, R.string.language_settings),
-                Setting(S_DATE, R.string.date_and_time_settings),
-                Setting(S_DEVELOPER, R.string.developer_options)
-            )
-            if (!OSVersion.android12()) {
-                settings.remove(Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings))
-            }
-            if (!OSVersion.android7()) {
-                settings.remove(Setting(S_DEFAULT_APPS, R.string.default_apps_settings))
-            }
-            if (!OSVersion.android6()) {
-                settings.remove(
-                    Setting(
-                        S_BATTERY_OPTIMIZATION,
-                        R.string.battery_optimization_settings
-                    )
+        val settings = mutableListOf(
+            Setting(S_DISPLAY, R.string.display_settings),
+            Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings),
+            Setting(S_BLUETOOTH, R.string.bluetooth_settings),
+            Setting(S_DEFAULT_APPS, R.string.default_apps_settings),
+            Setting(S_BATTERY_OPTIMIZATION, R.string.battery_optimization_settings),
+            Setting(S_CAPTIONING, R.string.caption_preferences),
+            Setting(S_USAGE_ACCESS, R.string.usage_access_permission),
+            Setting(S_OVERLAY, R.string.overlay_permission),
+            Setting(S_WRITE_SETTINGS, R.string.write_permission),
+            Setting(S_ACCESSIBILITY, R.string.accessibility_settings),
+            Setting(S_LOCALE, R.string.language_settings),
+            Setting(S_DATE, R.string.date_and_time_settings),
+            Setting(S_DEVELOPER, R.string.developer_options)
+        )
+        if (!OSVersion.android12()) {
+            settings.remove(Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings))
+        }
+        if (!OSVersion.android7()) {
+            settings.remove(Setting(S_DEFAULT_APPS, R.string.default_apps_settings))
+        }
+        if (!OSVersion.android6()) {
+            settings.remove(
+                Setting(
+                    S_BATTERY_OPTIMIZATION,
+                    R.string.battery_optimization_settings
                 )
-                settings.remove(Setting(S_OVERLAY, R.string.overlay_permission))
-                settings.remove(Setting(S_WRITE_SETTINGS, R.string.write_permission))
-            }
+            )
+            settings.remove(Setting(S_OVERLAY, R.string.overlay_permission))
+            settings.remove(Setting(S_WRITE_SETTINGS, R.string.write_permission))
+        }
 
-            val i1 = settings.indexOf(Setting(S_CAPTIONING, R.string.caption_preferences)) + 1
-            val i2 = settings.indexOf(Setting(S_ACCESSIBILITY, R.string.accessibility_settings)) + 1
-            val i3 = settings.count()
+        val i1 = settings.indexOf(Setting(S_CAPTIONING, R.string.caption_preferences)) + 1
+        val i2 = settings.indexOf(Setting(S_ACCESSIBILITY, R.string.accessibility_settings)) + 1
+        val i3 = settings.count()
 
-            GroupTitle(R.string.device_info)
+        Card(R.string.device_info) {
             Row(Modifier.fillMaxWidth()) {
                 Column(Modifier.weight(0.4f)) {
                     ScrollableText(stringResource(R.string.manufacturer))
@@ -182,24 +179,24 @@ fun SysSettingsScreen() {
                     ScrollableText(view.context.versionName)
                 }
             }
-            CardSpacePadding()
-            GroupTitle(R.string.general)
+        }
+        Card(R.string.general) {
             settings.subList(0, i1).forEach { setting ->
                 SystemSettingButton(
                     setting.settingType,
                     setting.text
                 )
             }
-            CardSpacePadding()
-            GroupTitle(R.string.permission)
+        }
+        Card(R.string.permission) {
             settings.subList(i1, i2).forEach { setting ->
                 SystemSettingButton(
                     setting.settingType,
                     setting.text
                 )
             }
-            CardSpacePadding()
-            GroupTitle(R.string.debugging)
+        }
+        Card(R.string.debugging) {
             settings.subList(i2, i3).forEach { setting ->
                 SystemSettingButton(
                     setting.settingType,
