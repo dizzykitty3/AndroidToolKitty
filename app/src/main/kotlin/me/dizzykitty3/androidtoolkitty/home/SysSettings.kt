@@ -73,13 +73,13 @@ fun SysSettings(navController: NavHostController) {
             Setting(S_DATE, R.string.date_and_time_settings),
             Setting(S_DEVELOPER, R.string.developer_options)
         )
-        if (!OSVersion.a12()) {
+        if (!OSVersion.android12()) {
             settings.remove(Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings))
         }
-        if (!OSVersion.api24()) {
+        if (!OSVersion.android7()) {
             settings.remove(Setting(S_DEFAULT_APPS, R.string.default_apps_settings))
         }
-        if (!OSVersion.api23()) {
+        if (!OSVersion.android6()) {
             settings.remove(Setting(S_BATTERY_OPTIMIZATION, R.string.battery_optimization_settings))
             settings.remove(Setting(S_OVERLAY, R.string.overlay_permission))
             settings.remove(Setting(S_WRITE_SETTINGS, R.string.write_permission))
@@ -144,13 +144,13 @@ fun SysSettingsScreen() {
                 Setting(S_DATE, R.string.date_and_time_settings),
                 Setting(S_DEVELOPER, R.string.developer_options)
             )
-            if (!OSVersion.a12()) {
+            if (!OSVersion.android12()) {
                 settings.remove(Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings))
             }
-            if (!OSVersion.api24()) {
+            if (!OSVersion.android7()) {
                 settings.remove(Setting(S_DEFAULT_APPS, R.string.default_apps_settings))
             }
-            if (!OSVersion.api23()) {
+            if (!OSVersion.android6()) {
                 settings.remove(
                     Setting(
                         S_BATTERY_OPTIMIZATION,

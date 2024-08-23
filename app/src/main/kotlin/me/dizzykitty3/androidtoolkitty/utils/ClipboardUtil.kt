@@ -15,7 +15,7 @@ object ClipboardUtil {
     @CheckResult
     fun clear(): Boolean {
         if (!clipboard.hasPrimaryClip()) return false
-        if (OSVersion.a9()) {
+        if (OSVersion.android9()) {
             clipboard.clearPrimaryClip()
             return true
         }

@@ -21,7 +21,7 @@ object NetworkUtil {
     @SuppressLint("NewApi")
     @CheckResult
     fun networkState(): Int {
-        if (!OSVersion.api23()) {
+        if (!OSVersion.android6()) {
             val activeNetwork = connectivityManager.activeNetworkInfo ?: return STATE_CODE_OFFLINE
             return when (activeNetwork.type) {
                 TYPE_WIFI -> STATE_CODE_WIFI

@@ -65,7 +65,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     var hideGreetings by remember { mutableStateOf(settingsViewModel.settings.value.hideGreetings) }
 
     Card(R.string.appearance) {
-        if (OSVersion.a12()) {
+        if (OSVersion.android12()) {
             CustomSwitchRow(
                 R.string.dynamic_color,
                 R.string.material_you_dynamic_color_theme,
@@ -110,7 +110,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             settingsViewModel.update(settingsViewModel.settings.value.copy(hideGreetings = it))
         }
 
-        if (OSVersion.a13()) {
+        if (OSVersion.android13()) {
             SpacerPadding()
             OutlinedButton({
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)

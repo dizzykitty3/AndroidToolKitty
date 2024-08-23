@@ -69,7 +69,7 @@ fun SysSettingsCardEdit() {
             mIsShowSetting1 = newState
             sp.saveShownState(S_DISPLAY, newState)
         }
-        if (OSVersion.a12()) {
+        if (OSVersion.android12()) {
             CustomHideCardSettingSwitch(
                 text = R.string.auto_rotate_settings,
                 card = S_AUTO_ROTATE,
@@ -89,7 +89,7 @@ fun SysSettingsCardEdit() {
             mIsShowSetting3 = newState
             sp.saveShownState(S_BLUETOOTH, newState)
         }
-        if (OSVersion.api24()) {
+        if (OSVersion.android7()) {
             CustomHideCardSettingSwitch(
                 text = R.string.default_apps_settings,
                 card = S_DEFAULT_APPS,
@@ -100,7 +100,7 @@ fun SysSettingsCardEdit() {
                 sp.saveShownState(S_DEFAULT_APPS, newState)
             }
         }
-        if (OSVersion.api23()) {
+        if (OSVersion.android6()) {
             CustomHideCardSettingSwitch(
                 text = R.string.battery_optimization_settings,
                 card = S_BATTERY_OPTIMIZATION,
@@ -129,7 +129,7 @@ fun SysSettingsCardEdit() {
             mIsShowSetting7 = newState
             sp.saveShownState(S_USAGE_ACCESS, newState)
         }
-        if (OSVersion.api23()) {
+        if (OSVersion.android6()) {
             CustomHideCardSettingSwitch(
                 text = R.string.overlay_permission,
                 card = S_OVERLAY,
@@ -140,7 +140,7 @@ fun SysSettingsCardEdit() {
                 sp.saveShownState(S_OVERLAY, newState)
             }
         }
-        if (OSVersion.api23()) {
+        if (OSVersion.android6()) {
             CustomHideCardSettingSwitch(
                 text = R.string.write_permission,
                 card = S_WRITE_SETTINGS,

@@ -125,22 +125,22 @@ object IntentUtil {
     fun Context.openSystemSettings(settingType: String) {
         val intent: Intent = when (settingType) {
             S_DISPLAY -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
-            S_AUTO_ROTATE -> @SuppressLint("InlinedApi") if (OSVersion.a12())
+            S_AUTO_ROTATE -> @SuppressLint("InlinedApi") if (OSVersion.android12())
                 Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
 
             S_BLUETOOTH -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
-            S_DEFAULT_APPS -> @SuppressLint("InlinedApi") if (OSVersion.api24())
+            S_DEFAULT_APPS -> @SuppressLint("InlinedApi") if (OSVersion.android7())
                 Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS) else return
 
-            S_BATTERY_OPTIMIZATION -> @SuppressLint("InlinedApi") if (OSVersion.api23())
+            S_BATTERY_OPTIMIZATION -> @SuppressLint("InlinedApi") if (OSVersion.android6())
                 Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS) else return
 
             S_CAPTIONING -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
             S_USAGE_ACCESS -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-            S_OVERLAY -> @SuppressLint("InlinedApi") if (OSVersion.api23())
+            S_OVERLAY -> @SuppressLint("InlinedApi") if (OSVersion.android6())
                 Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION) else return
 
-            S_WRITE_SETTINGS -> @SuppressLint("InlinedApi") if (OSVersion.api23())
+            S_WRITE_SETTINGS -> @SuppressLint("InlinedApi") if (OSVersion.android6())
                 Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS) else return
 
             S_LOCALE -> Intent(Settings.ACTION_LOCALE_SETTINGS)
