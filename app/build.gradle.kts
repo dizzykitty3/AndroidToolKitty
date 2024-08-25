@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.room)
 }
 
 android {
@@ -76,9 +75,6 @@ android {
         }
     }
     buildToolsVersion = "35.0.0"
-    room {
-        schemaDirectory("$projectDir/schemas")
-    }
     androidResources {
         // https://developer.android.com/guide/topics/resources/app-languages#auto-localeconfig
         @Suppress("UnstableApiUsage")
@@ -105,15 +101,11 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.runtime)
     implementation(libs.google.hilt.android)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization)
     implementation(libs.timber)
 
     ksp(libs.google.hilt.compiler)
-    ksp(libs.androidx.room.compiler)
 }
