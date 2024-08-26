@@ -292,7 +292,7 @@ private fun CardContent(
         CARD_1 -> YearProgress()
         CARD_2 -> Volume(navController)
         CARD_3 -> Clipboard(settingsViewModel)
-        CARD_4 -> SearchAndWebpage(navController)
+        CARD_4 -> Search(navController)
         CARD_5 -> SysSettings(navController)
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice(navController)

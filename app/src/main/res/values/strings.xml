@@ -123,7 +123,6 @@
     <string name="unifans">Unifans</string>
     <string name="ko_fi" translatable="false">Ko-fi</string>
     <string name="invalid_username_input_tip">username for %1$s should only contains letters, numbers, and underscores</string>
-    <string name="search_and_webpage">Search / Webpage</string>
     <string name="check_app_on_market">Check app on market</string>
     <string name="package_name_or_search">Package name or search</string>
     <string name="what_is_package_name">What\'s package name</string>

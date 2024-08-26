@@ -65,7 +65,6 @@
     <string name="query">クエリ</string>
     <string name="search_on_youtube">YouTube で検索</string>
     <string name="invalid_username_input_tip">%1$s のユーザー名は文字、数字、アンダースコアのみを含む必要があります。</string>
-    <string name="search_and_webpage">検索・ウェブページ</string>
     <string name="check_app_on_market">マーケットでアプリを開く</string>
     <string name="package_name_or_search">パッケージ名または検索</string>
     <string name="what_is_package_name">パッケージ名とは何ですか</string>

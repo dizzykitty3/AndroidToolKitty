@@ -36,7 +36,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_WEBPAGE
+import me.dizzykitty3.androidtoolkitty.SCR_SEARCH
 import me.dizzykitty3.androidtoolkitty.WHAT_IS_PACKAGE_NAME_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
@@ -57,26 +57,26 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil.toFullURL
 import timber.log.Timber
 
 @Composable
-fun SearchAndWebpage(navController: NavHostController) {
+fun Search(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
     Card(
-        R.string.search_and_webpage,
+        R.string.search,
         Icons.Outlined.Search,
         true,
         {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            navController.navigate(SCR_WEBPAGE)
+            navController.navigate(SCR_SEARCH)
         }) {
         Search()
     }
 }
 
 @Composable
-fun WebpageScreen(settingsViewModel: SettingsViewModel) {
+fun SearchScreen(settingsViewModel: SettingsViewModel) {
     Screen {
         Card(R.string.search) { Search() }
-        Card(R.string.webpage) { WebpageURL() }
-        Card(R.string.social_media_profile) { SocialMediaProfileIURL(settingsViewModel) }
+        Card(R.string.webpage) { Webpage() }
+        Card(R.string.social_media_profile) { SocialMediaProfile(settingsViewModel) }
         Card(R.string.check_app_on_market) { CheckAppOnMarket() }
     }
 }
@@ -119,7 +119,7 @@ private fun Search() {
             focus.clearFocus()
             view.context.onClickSearchButton(searchQuery)
         }) {
-            Text(text = stringResource(R.string.search))
+            Text(stringResource(R.string.search))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
@@ -127,14 +127,12 @@ private fun Search() {
             )
         }
         ButtonDivider()
-        TextButton(
-            onClick = {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                focus.clearFocus()
-                view.context.onCheckOnYouTube(searchQuery)
-            }
-        ) {
-            Text(text = stringResource(R.string.search_on_youtube))
+        TextButton({
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            focus.clearFocus()
+            view.context.onCheckOnYouTube(searchQuery)
+        }) {
+            Text(stringResource(R.string.search_on_youtube))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
@@ -145,7 +143,7 @@ private fun Search() {
 }
 
 @Composable
-private fun WebpageURL() {
+private fun Webpage() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
@@ -208,7 +206,7 @@ private fun WebpageURL() {
 }
 
 @Composable
-private fun SocialMediaProfileIURL(settingsViewModel: SettingsViewModel) {
+private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
@@ -254,7 +252,7 @@ private fun SocialMediaProfileIURL(settingsViewModel: SettingsViewModel) {
         supportingText = {
             Column {
                 Text(
-                    text = toSocialMediaFullURL(platform, username),
+                    toSocialMediaFullURL(platform, username),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )

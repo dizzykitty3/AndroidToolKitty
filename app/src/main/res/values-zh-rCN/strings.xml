@@ -152,7 +152,6 @@
     <string name="unifans">引力圈</string>
     <string name="debug_build_top_tip">此为调试版本。包含错误且性能较差。</string>
     <string name="invalid_username_input_tip">%1$s 的用户名应仅包含字母、数字和下划线</string>
-    <string name="search_and_webpage">搜索 · 网页</string>
     <string name="force_dark_mode">强制暗色模式</string>
     <string name="change_app_language">更改 APP 语言</string>
     <string name="no_options_enabled">在设置页面中设定为展示的选项会在此显示</string>

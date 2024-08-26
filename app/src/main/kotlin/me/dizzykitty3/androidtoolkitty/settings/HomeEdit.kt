@@ -87,7 +87,7 @@ fun HomeEdit() {
                 sp.saveShownState(CARD_3, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.search_and_webpage,
+                text = R.string.search,
                 card = CARD_4,
                 isChecked = mIsShowCard4
             ) { newState ->
