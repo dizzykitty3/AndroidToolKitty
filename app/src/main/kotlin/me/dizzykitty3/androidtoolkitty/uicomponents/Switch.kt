@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -25,19 +24,21 @@ fun CustomHideCardSettingSwitch(
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
-    Row(
-        Modifier.clickable {
-            onCheckedChange(!isChecked)
-            SettingsSharedPref.saveShownState(card, !isChecked)
-        },
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Column(Modifier.weight(1f)) { Text(stringResource(text)) }
-        Column {
-            Switch(
-                checked = isChecked,
-                onCheckedChange = onCheckedChange
-            )
+    Surface(shape = RoundedCornerShape(8.dp)) {
+        Row(
+            Modifier.clickable {
+                onCheckedChange(!isChecked)
+                SettingsSharedPref.saveShownState(card, !isChecked)
+            },
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(Modifier.weight(1f)) { Text(stringResource(text)) }
+            Column {
+                Switch(
+                    checked = isChecked,
+                    onCheckedChange = onCheckedChange
+                )
+            }
         }
     }
 }
@@ -72,27 +73,25 @@ private fun CustomSwitchRow(
 ) {
     Surface(shape = RoundedCornerShape(8.dp)) {
         Box(Modifier.clickable { onCheckedChange(!checked) }) {
-            Box(Modifier.padding(end = 8.dp)) {
-                SpacerPadding()
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Column(Modifier.weight(1f)) {
-                        Text(title)
-                        if (text != null) {
-                            Text(
-                                text,
-                                style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
-                            )
-                        }
+            SpacerPadding()
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(Modifier.weight(1f)) {
+                    Text(title)
+                    if (text != null) {
+                        Text(
+                            text,
+                            style = MaterialTheme.typography.labelMedium,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                        )
                     }
-                    CardSpacePadding()
-                    Switch(
-                        checked = checked,
-                        onCheckedChange = { onCheckedChange(it) }
-                    )
                 }
-                SpacerPadding()
+                CardSpacePadding()
+                Switch(
+                    checked = checked,
+                    onCheckedChange = { onCheckedChange(it) }
+                )
             }
+            SpacerPadding()
         }
     }
 }

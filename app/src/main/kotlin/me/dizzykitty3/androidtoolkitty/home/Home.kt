@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.BatteryStd
@@ -28,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PlainTooltip
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipBox
 import androidx.compose.material3.TooltipDefaults
@@ -173,17 +175,19 @@ private fun Status() {
     val haptic = LocalHapticFeedback.current
 
     Row(Modifier.horizontalScroll(rememberScrollState())) {
-        Row(Modifier.clickable {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            view.context.openSystemSettings(S_POWER_USAGE_SUMMARY)
-        }) {
-            Icon(
-                imageVector = Icons.Outlined.BatteryStd,
-                contentDescription = stringResource(R.string.battery_level),
-                tint = MaterialTheme.colorScheme.primary
-            )
-            SpacerPadding()
-            Text("$batteryLevel%")
+        Surface(shape = RoundedCornerShape(8.dp)) {
+            Row(Modifier.clickable {
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                view.context.openSystemSettings(S_POWER_USAGE_SUMMARY)
+            }) {
+                Icon(
+                    imageVector = Icons.Outlined.BatteryStd,
+                    contentDescription = stringResource(R.string.battery_level),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                SpacerPadding()
+                Text("$batteryLevel%")
+            }
         }
         SpacerPadding()
         SpacerPadding()
@@ -192,17 +196,19 @@ private fun Status() {
         SpacerPadding()
 
         if (view.context.isHeadsetConnected()) {
-            Row(Modifier.clickable {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                view.context.openSystemSettings(S_BLUETOOTH)
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.MediaBluetoothOn,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
-                SpacerPadding()
-                Text(stringResource(R.string.connected))
+            Surface(shape = RoundedCornerShape(8.dp)) {
+                Row(Modifier.clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.openSystemSettings(S_BLUETOOTH)
+                }) {
+                    Icon(
+                        imageVector = Icons.Outlined.MediaBluetoothOn,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    SpacerPadding()
+                    Text(stringResource(R.string.connected))
+                }
             }
         }
     }
@@ -236,18 +242,19 @@ private fun NetworkState() {
 private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
-
-    Row(Modifier.clickable {
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        view.context.openSystemSettings(S_WIFI)
-    }) {
-        Icon(
-            imageVector = imageVector,
-            contentDescription = stringResource(text),
-            tint = MaterialTheme.colorScheme.primary
-        )
-        SpacerPadding()
-        Text(stringResource(text))
+    Surface(shape = RoundedCornerShape(8.dp)) {
+        Row(Modifier.clickable {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            view.context.openSystemSettings(S_WIFI)
+        }) {
+            Icon(
+                imageVector = imageVector,
+                contentDescription = stringResource(text),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            SpacerPadding()
+            Text(stringResource(text))
+        }
     }
 }
 

@@ -38,18 +38,19 @@ fun CustomIconPopup(
     var showPopup by remember { mutableStateOf(false) }
 
     Row {
-        Icon(
-            imageVector = Icons.Outlined.Info,
-            contentDescription = stringResource(R.string.info),
-            modifier = Modifier
-                .size(16.dp)
-                .clickable {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    showPopup = true
-                },
-            tint = MaterialTheme.colorScheme.secondary
-        )
-
+        Surface(shape = RoundedCornerShape(8.dp)) {
+            Icon(
+                imageVector = Icons.Outlined.Info,
+                contentDescription = stringResource(R.string.info),
+                modifier = Modifier
+                    .size(16.dp)
+                    .clickable {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        showPopup = true
+                    },
+                tint = MaterialTheme.colorScheme.secondary
+            )
+        }
         if (showPopup) {
             Popup(
                 onDismissRequest = { showPopup = false },
