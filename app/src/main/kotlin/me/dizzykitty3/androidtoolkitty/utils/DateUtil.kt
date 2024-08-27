@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.utils
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
+import java.util.TimeZone
 
 object DateUtil {
     fun greeting(): String = when (LocalTime.now().hour) {
@@ -32,4 +33,7 @@ object DateUtil {
 
     val unixTimestamp: String
         get() = (sysTimeMillis / 1000).toString()
+
+    val sysTimeZone: String
+        get() = TimeZone.getDefault().id
 }

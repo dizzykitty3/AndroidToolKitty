@@ -41,6 +41,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
+import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
@@ -170,6 +171,7 @@ fun SysSettingsScreen() {
                     ScrollableText(stringResource(R.string.os_version))
                     ScrollableText(stringResource(R.string.locale))
                     ScrollableText(stringResource(R.string.app_version))
+                    ScrollableText(stringResource(R.string.time_zone))
                 }
                 Column(Modifier.weight(0.6f)) {
                     ScrollableText(Build.MANUFACTURER)
@@ -177,6 +179,7 @@ fun SysSettingsScreen() {
                     ScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
                     ScrollableText(StringUtil.sysLocale)
                     ScrollableText(view.context.versionName)
+                    ScrollableText(DateUtil.sysTimeZone)
                 }
             }
         }

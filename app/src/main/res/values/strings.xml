@@ -313,6 +313,7 @@
     <string name="app_version" translatable="false">app_ver</string>
     <string name="open_app_detail_settings">Open app detail settings</string>
     <string name="manufacturer" translatable="false">manufacturer</string>
+    <string name="time_zone" translatable="false">time_zone</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>
