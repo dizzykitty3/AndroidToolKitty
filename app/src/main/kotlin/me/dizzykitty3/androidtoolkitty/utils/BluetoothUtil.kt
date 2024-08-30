@@ -16,7 +16,7 @@ object BluetoothUtil {
     @Suppress("DEPRECATION")
     val bluetoothAdapter: BluetoothAdapter?
         get() =
-            if (OSVersion.api31())
+            if (OSVersion.android12())
                 bluetoothManager.adapter
             else
                 BluetoothAdapter.getDefaultAdapter()

@@ -16,6 +16,8 @@
     <string name="webpage">网页</string>
     <string name="search_on_youtube">在 YouTube 上搜索</string>
     <string name="twitcasting">TwitCasting</string>
+    <string name="bahamut">巴哈姆特</string>
+    <string name="afdian">爱发电</string>
     <string name="system_settings">系统设置</string>
     <string name="display_settings">显示设置</string>
     <string name="auto_rotate_settings">屏幕自动旋转设置</string>
@@ -46,12 +48,12 @@
     <string name="check_app_on_market">在商店查看应用</string>
     <string name="package_name_or_search">输入软件包名称或搜索</string>
     <string name="what_is_package_name">什么是软件包名称</string>
-    <string name="social_media_profile">社交媒体主页</string>
+    <string name="social_profile">社媒主页</string>
     <string name="platform">社交平台</string>
     <string name="username">用户昵称</string>
     <string name="bilibili_search">哔哩哔哩 (搜索)</string>
     <string name="weibo">微博</string>
-    <string name="youtube_id">YouTube (UID)</string>
+    <string name="youtube_handle">YouTube (UID)</string>
     <string name="developer_options">开发者选项</string>
     <string name="show_all_options">显示所有选项</string>
     <string name="hide_all_options">隐藏所有选项</string>
@@ -62,12 +64,13 @@
     </plurals>
     <string name="all_help_welcomed">欢迎建议意见和 PR！</string>
     <string name="pixiv_artwork_id">pixiv (作品 ID)</string>
-    <string name="pixiv_user_id">pixiv (用户 ID)</string>
+    <string name="pixiv_uuid">pixiv (用户 ID)</string>
     <string name="caption_preferences">字幕偏好</string>
     <string name="debugging">调试</string>
-    <string name="bilibili_user_id">哔哩哔哩 (用户 UID)</string>
+    <string name="bilibili_uuid">哔哩哔哩 (用户 UID)</string>
     <string name="material_you_dynamic_color_theme">启用 Android 12+ 的 Material You 动态主题取色</string>
     <string name="dismiss_lang_tip_description">不显示首页的「语言未翻译」和「未完全翻译」提示</string>
+    <string name="hide_greetings_description">隐藏竖屏模式下首页的问候语</string>
     <string name="clear_clipboard_automatically">自动清除剪贴板</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开「启动时自动清空剪贴板」功能</string>
     <string name="settings">设置</string>
@@ -123,7 +126,6 @@
     <string name="w8">800 特粗 ExtraBold</string>
     <string name="w9">900 浓体 Black</string>
     <string name="clipboard_card_hidden">已为您隐藏首页的剪贴板卡片</string>
-    <string name="wip">-- WORK IN PROGRESS --</string>
     <string name="undo">撤销</string>
     <string name="pixiv_user_custom_url">Pixiv (用户自定义 URL)</string>
     <string name="steam_user_custom_url">Steam (用户自定义 URL)</string>
@@ -150,7 +152,6 @@
     <string name="unifans">引力圈</string>
     <string name="debug_build_top_tip">此为调试版本。包含错误且性能较差。</string>
     <string name="invalid_username_input_tip">%1$s 的用户名应仅包含字母、数字和下划线</string>
-    <string name="search_and_webpage">搜索 · 网页</string>
     <string name="force_dark_mode">强制暗色模式</string>
     <string name="change_app_language">更改 APP 语言</string>
     <string name="no_options_enabled">在设置页面中设定为展示的选项会在此显示</string>
@@ -159,7 +160,10 @@
     <string name="max_out_voice_call_volume">将通话音量调整到最大值</string>
     <string name="success">成功</string>
     <string name="dismiss_lang_tip">不显示语言提示</string>
-    <string name="sys_settings_tip">仅启动的前四项会显示在首页</string>
+    <string name="sys_settings_tip">仅启用的前四项会显示在首页</string>
     <string name="compose_catalog">Compose 组件元素</string>
     <string name="force_dark_mode_description">强制启用暗色模式</string>
+    <string name="youtube_serach">YouTube (搜索)</string>
+    <string name="device_info">设备信息</string>
+    <string name="hide_greetings">隐藏问候语</string>
 </resources>

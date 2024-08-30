@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="padding_card_content_top">15dp</dimen>
+    <dimen name="padding_card_content_top_and_bottom">15dp</dimen>
     <dimen name="padding_card_content">20dp</dimen>
     <dimen name="padding_screen">20dp</dimen>
     <dimen name="padding_screen_large">30dp</dimen>

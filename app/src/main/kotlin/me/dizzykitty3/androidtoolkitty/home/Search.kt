@@ -36,14 +36,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_WEBPAGE
+import me.dizzykitty3.androidtoolkitty.SCR_SEARCH
 import me.dizzykitty3.androidtoolkitty.WHAT_IS_PACKAGE_NAME_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnMarket
@@ -58,33 +57,27 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil.toFullURL
 import timber.log.Timber
 
 @Composable
-fun SearchAndWebpage(navController: NavHostController) {
+fun Search(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
     Card(
-        R.string.search_and_webpage,
+        R.string.search,
         Icons.Outlined.Search,
         true,
         {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            navController.navigate(SCR_WEBPAGE)
+            navController.navigate(SCR_SEARCH)
         }) {
         Search()
     }
 }
 
 @Composable
-fun WebpageScreen(settingsViewModel: SettingsViewModel) {
+fun SearchScreen(settingsViewModel: SettingsViewModel) {
     Screen {
-        Card(R.string.search_and_webpage, Icons.Outlined.Search) {
-            GroupTitle(R.string.search)
-            Search()
-            GroupDivider()
-            WebpageURL()
-            GroupDivider()
-            SocialMediaProfileIURL(settingsViewModel)
-            GroupDivider()
-            CheckAppOnMarket()
-        }
+        Card(R.string.search) { Search() }
+        Card(R.string.webpage) { Webpage() }
+        Card(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }
+        Card(R.string.check_app_on_market) { CheckAppOnMarket() }
     }
 }
 
@@ -106,7 +99,7 @@ private fun Search() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onClickSearchButton(searchQuery)
+                view.context.onTapSearchButton(searchQuery)
             }
         ),
         trailingIcon = {
@@ -119,29 +112,27 @@ private fun Search() {
 
     Row(
         Modifier.horizontalScroll(rememberScrollState()),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalAlignment = Alignment.CenterVertically
     ) {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.onClickSearchButton(searchQuery)
+            view.context.onTapSearchButton(searchQuery)
         }) {
-            Text(text = stringResource(R.string.search))
+            Text(stringResource(R.string.search))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
-        Text("|")
-        TextButton(
-            onClick = {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                focus.clearFocus()
-                view.context.onCheckOnYouTube(searchQuery)
-            }
-        ) {
-            Text(text = stringResource(R.string.search_on_youtube))
+        ButtonDivider()
+        TextButton({
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            focus.clearFocus()
+            view.context.onTapCheckOnYouTubeButton(searchQuery)
+        }) {
+            Text(stringResource(R.string.search_on_youtube))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
@@ -152,15 +143,13 @@ private fun Search() {
 }
 
 @Composable
-private fun WebpageURL() {
+private fun Webpage() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
     var url by remember { mutableStateOf("") }
     val fullWidthPeriod = "。"
     val halfWidthPeriod = "."
-
-    GroupTitle(R.string.webpage)
 
     OutlinedTextField(
         value = url,
@@ -174,7 +163,7 @@ private fun WebpageURL() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onClickVisitURLButton(url)
+                view.context.onTapVisitURLButton(url)
             }
         ),
         trailingIcon = {
@@ -205,7 +194,7 @@ private fun WebpageURL() {
     TextButton({
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
-        view.context.onClickVisitURLButton(url)
+        view.context.onTapVisitURLButton(url)
     }) {
         Text(stringResource(R.string.visit))
         Icon(
@@ -217,7 +206,7 @@ private fun WebpageURL() {
 }
 
 @Composable
-private fun SocialMediaProfileIURL(settingsViewModel: SettingsViewModel) {
+private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
@@ -225,8 +214,6 @@ private fun SocialMediaProfileIURL(settingsViewModel: SettingsViewModel) {
     var platformIndex by remember { mutableIntStateOf(settingsViewModel.settings.value.lastSelectedPlatformIndex) }
     val platform = URLUtil.Platform.entries[platformIndex]
     val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
-
-    GroupTitle(R.string.social_media_profile)
 
     CustomDropdownMenu(
         items = platformList,
@@ -247,7 +234,7 @@ private fun SocialMediaProfileIURL(settingsViewModel: SettingsViewModel) {
             onDone = {
                 focus.clearFocus()
                 if (isValid(platform, username)) {
-                    view.context.onVisitProfileButton(username, platformIndex)
+                    view.context.onTapVisitProfileButton(username, platformIndex)
                     settingsViewModel.update(
                         settingsViewModel.settings.value.copy(
                             lastSelectedPlatformIndex = platformIndex
@@ -265,7 +252,7 @@ private fun SocialMediaProfileIURL(settingsViewModel: SettingsViewModel) {
         supportingText = {
             Column {
                 Text(
-                    text = toSocialMediaFullURL(platform, username),
+                    toProfileFullURL(platform, username),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
@@ -283,7 +270,7 @@ private fun SocialMediaProfileIURL(settingsViewModel: SettingsViewModel) {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         if (isValid(platform, username)) {
-            view.context.onVisitProfileButton(username, platformIndex)
+            view.context.onTapVisitProfileButton(username, platformIndex)
             settingsViewModel.update(settingsViewModel.settings.value.copy(lastSelectedPlatformIndex = platformIndex))
         }
     }) {
@@ -297,51 +284,53 @@ private fun SocialMediaProfileIURL(settingsViewModel: SettingsViewModel) {
     }
 }
 
-private fun Context.onClickSearchButton(query: String) {
+private fun Context.onTapSearchButton(query: String) {
     if (query.isBlank()) return
-    Timber.d("onClickSearchButton")
+    Timber.d("onTapSearchButton")
     this.openSearch(query)
 }
 
-private fun Context.onCheckOnYouTube(query: String) {
+private fun Context.onTapCheckOnYouTubeButton(query: String) {
     if (query.isBlank()) return
-    Timber.d("onCheckOnYouTube")
+    Timber.d("onTapCheckOnYouTubeButton")
     this.searchOnYouTube(query)
 }
 
-private fun Context.onClickVisitURLButton(url: String) {
+private fun Context.onTapVisitURLButton(url: String) {
     if (url.isBlank()) return
-    Timber.d("onClickVisitButton")
-    this.openURL(url.dropSpaces().lowercase().toFullURL())
+    Timber.d("onTapVisitURLButton")
+    this.openURL(url.dropSpaces().toFullURL())
 }
 
-private fun Context.onVisitProfileButton(username: String, platformIndex: Int) {
+private fun Context.onTapVisitProfileButton(username: String, platformIndex: Int) {
     if (username.isBlank()) return
-    Timber.d("onVisitProfile")
+    Timber.d("onTapVisitProfileButton")
     val platform = URLUtil.Platform.entries.getOrNull(platformIndex) ?: return
-    val url = toSocialMediaFullURL(platform, username)
+    val url = toProfileFullURL(platform, username)
     this.openURL(url)
 }
 
 /**
  * @see me.dizzykitty3.androidtoolkitty.utils.URLUtil.Platform
  */
-private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String =
+private fun toProfileFullURL(platform: URLUtil.Platform, username: String): String =
     when (platform) {
         URLUtil.Platform.BLUESKY ->
             if (username.contains("."))
                 "${platform.prefix}$username" // user custom
             else if (username.isNotBlank())
-                "${platform.prefix}${username.dropSpaces().lowercase()}.bsky.social" // default
+                "${platform.prefix}${username.dropSpaces()}.bsky.social" // default
             else
                 platform.prefix // for app UI display
 
         URLUtil.Platform.FANBOX,
         URLUtil.Platform.BOOTH,
         URLUtil.Platform.TUMBLR,
-        URLUtil.Platform.CARRD -> "${username.dropSpaces().lowercase()}${platform.prefix}"
+        URLUtil.Platform.CARRD -> "${username.dropSpaces()}${platform.prefix}"
 
-        else -> "${platform.prefix}${username.dropSpaces().lowercase()}"
+        URLUtil.Platform.YOUTUBE_SEARCH -> "${platform.prefix}${username.trim()}"
+
+        else -> "${platform.prefix}${username.dropSpaces()}"
     }
 
 private fun isInvalid(platform: URLUtil.Platform, username: String): Boolean =
@@ -354,8 +343,6 @@ private fun isValid(platform: URLUtil.Platform, username: String): Boolean =
 
 @Composable
 private fun CheckAppOnMarket() {
-    GroupTitle(R.string.check_app_on_market)
-
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
@@ -395,11 +382,11 @@ private fun CheckAppOnMarket() {
             Text(stringResource(R.string.open_on_google_play))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(id = R.string.check_app_on_market),
+                contentDescription = stringResource(R.string.check_app_on_market),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }
-        Text("|")
+        ButtonDivider()
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
@@ -409,7 +396,7 @@ private fun CheckAppOnMarket() {
             Text(stringResource(R.string.open_on_other_markets))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(id = R.string.open_on_other_markets),
+                contentDescription = stringResource(R.string.open_on_other_markets),
                 modifier = Modifier.align(Alignment.CenterVertically)
             )
         }

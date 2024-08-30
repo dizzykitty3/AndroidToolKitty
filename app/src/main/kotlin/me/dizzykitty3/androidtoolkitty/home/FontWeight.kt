@@ -21,7 +21,6 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_FONT_WEIGHT_TEST
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
@@ -43,13 +42,9 @@ fun FontWeight(navController: NavHostController) {
 @Composable
 fun FontWeightTestScreen() {
     Screen {
-        Card(R.string.font_weight_test, Icons.Outlined.FontDownload) {
-            FontWeightTest()
-            GroupDivider()
-            RowFontWeightTest()
-            GroupDivider()
-            FontFamilyTest()
-        }
+        Card("Font weight test 1") { FontWeightTest() }
+        Card("Font weight test 2") { RowFontWeightTest() }
+        Card("Font family test") { FontFamilyTest() }
     }
 }
 

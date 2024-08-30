@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 
 // App screens
@@ -10,9 +9,8 @@ const val SCR_HOME = "HomeScreen"
 const val SCR_EDIT_HOME = "EditHomeScreen"
 const val SCR_PERMISSION_REQUEST = "PermissionRequestScreen"
 const val SCR_QR_CODE_GENERATOR = "QrCodeGeneratorScreen"
-const val SCR_DEBUGGING = "DebuggingScreen"
 const val SCR_LICENSES = "LicensesScreen"
-const val SCR_WEBPAGE = "WebpageScreen"
+const val SCR_SEARCH = "SearchScreen"
 const val SCR_CODES_OF_CHARACTERS = "CodesOfCharactersScreen"
 const val SCR_ANDROID_VERSION_HISTORY = "AndroidVersionHistoryScreen"
 const val SCR_FONT_WEIGHT_TEST = "FontWeightTestScreen"
@@ -33,6 +31,7 @@ const val CARD_9 = "card_google_maps"
 const val CARD_10 = "card_android_version"
 const val CARD_11 = "card_font_weight"
 const val CARD_12 = "card_compose_catalog"
+const val CARD_13 = "card_work_in_progress"
 
 // Android intents
 const val S_DISPLAY = "setting_display"
@@ -53,7 +52,6 @@ const val S_POWER_USAGE_SUMMARY = "setting_power_usage_summary"
 const val S_ACCESSIBILITY = "setting_accessibility"
 
 // Android permissions
-@SuppressLint("InlinedApi")
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 const val BT = Manifest.permission.BLUETOOTH
 const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN

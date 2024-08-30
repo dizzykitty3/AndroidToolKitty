@@ -4,13 +4,12 @@
     <string name="edit">Edit</string>
     <string name="visit">Visit</string>
     <string name="debugging">Debugging</string>
-    <string name="show_more" translatable="false">···</string>
     <string name="unknown">Unknown</string>
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>
     <string name="go_to_settings">Go to settings</string>
     <string name="success_and_back">Success! Now you can back to the previous screen</string>
-    <string name="wip">-- WORK IN PROGRESS --</string>
+    <string name="wip_long" translatable="false">-- WORK IN PROGRESS --</string>
     <string name="undo">Undo</string>
     <string name="turn_off">Turn off</string>
     <string name="copy">Copy</string>
@@ -22,6 +21,8 @@
     <string name="result">result =</string>
     <string name="permission">Permission</string>
     <string name="success">success</string>
+    <string name="general">General</string>
+    <string name="wip" translatable="false">Work in progress</string>
 
     <!-- Home > Top bar -->
     <string name="battery_level">Battery level</string>
@@ -67,18 +68,18 @@
     <string name="url_input_hint_2">and </string>
     <string name="url_input_hint_3">(or</string>
     <string name="url_input_hint_4">, etc.)</string>
-    <string name="social_media_profile">Social media profile</string>
+    <string name="social_profile">Social profile</string>
     <string name="platform">Platform</string>
     <string name="username">Username</string>
     <string name="bilibili_search">bilibili (Search)</string>
     <string name="github" translatable="false">GitHub</string>
     <string name="x" translatable="false">X</string>
     <string name="weibo">Weibo</string>
-    <string name="youtube_id">YouTube (User ID)</string>
+    <string name="youtube_handle">YouTube (User custom URL)</string>
     <string name="pixiv_artwork_id">pixiv (Artwork ID)</string>
-    <string name="pixiv_user_id">pixiv (User ID)</string>
+    <string name="pixiv_uuid">pixiv (UUID)</string>
     <string name="v2ex" translatable="false">V2EX</string>
-    <string name="bilibili_user_id">bilibili (User ID)</string>
+    <string name="bilibili_uuid">bilibili (UUID)</string>
     <string name="webpage">Webpage</string>
     <string name="instagram" translatable="false">Instagram</string>
     <string name="facebook" translatable="false">Facebook</string>
@@ -122,12 +123,16 @@
     <string name="unifans">Unifans</string>
     <string name="ko_fi" translatable="false">Ko-fi</string>
     <string name="invalid_username_input_tip">username for %1$s should only contains letters, numbers, and underscores</string>
-    <string name="search_and_webpage">Search / Webpage</string>
     <string name="check_app_on_market">Check app on market</string>
     <string name="package_name_or_search">Package name or search</string>
     <string name="what_is_package_name">What\'s package name</string>
     <string name="open_on_google_play" translatable="false">Google Play</string>
     <string name="open_on_other_markets">Other markets</string>
+    <string name="youtube_serach">YouTube (Search)</string>
+    <string name="bahamut">Bahamut</string>
+    <string name="afdian">Afdian</string>
+    <string name="steam_uuid" translatable="false">Steam (steamID64)</string>
+    <string name="instabio" translatable="false">Instabio</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>
@@ -146,6 +151,7 @@
     <string name="write_permission">Modify system settings</string>
     <string name="accessibility_settings">Accessibility</string>
     <string name="no_options_enabled">Enabled options will be shown here</string>
+    <string name="device_info">Device info</string>
 
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
@@ -277,10 +283,11 @@
     <string name="material_you_dynamic_color_theme">Enable Material You dynamic color theme on Android 12+</string>
     <string name="dismiss_lang_tip_description">Dismiss \"not translated\" and \"not fully translated\" tip on Home screen</string>
     <string name="force_dark_mode_description">Force enable dark mode</string>
+    <string name="hide_greetings">Hide greetings</string>
+    <string name="hide_greetings_description">Hide gradient greeting text on Home screen (portrait mode only)</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_automatically">Clear clipboard automatically</string>
-    <string name="general">General</string>
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
@@ -308,6 +315,7 @@
     <string name="app_version" translatable="false">app_ver</string>
     <string name="open_app_detail_settings">Open app detail settings</string>
     <string name="manufacturer" translatable="false">manufacturer</string>
+    <string name="time_zone" translatable="false">time_zone</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>

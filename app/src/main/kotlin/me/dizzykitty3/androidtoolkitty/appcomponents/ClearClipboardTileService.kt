@@ -15,7 +15,7 @@ import timber.log.Timber
 @SuppressLint("NewApi")
 class ClearClipboardTileService : TileService() {
     override fun onBind(intent: Intent?): IBinder? {
-        if (!OSVersion.api24()) {
+        if (!OSVersion.android7()) {
             Timber.w("TileService unsupported")
             return null
         }
@@ -25,7 +25,7 @@ class ClearClipboardTileService : TileService() {
     }
 
     override fun onStartListening() {
-        if (!OSVersion.api24()) {
+        if (!OSVersion.android7()) {
             Timber.w("TileService unsupported")
             return
         }
@@ -42,7 +42,7 @@ class ClearClipboardTileService : TileService() {
     @Suppress("DEPRECATION")
     @SuppressLint("StartActivityAndCollapseDeprecated")
     override fun onClick() {
-        if (!OSVersion.api24()) {
+        if (!OSVersion.android7()) {
             Timber.w("TileService unsupported")
             return
         }
@@ -53,7 +53,7 @@ class ClearClipboardTileService : TileService() {
             val intent = Intent(this@ClearClipboardTileService, ClearClipboardActivity::class.java)
             intent.flags =
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
-            if (OSVersion.a14()) {
+            if (OSVersion.android14()) {
                 Timber.i("Android 14")
                 val pendingIntent = PendingIntent.getActivity(
                     this@ClearClipboardTileService,

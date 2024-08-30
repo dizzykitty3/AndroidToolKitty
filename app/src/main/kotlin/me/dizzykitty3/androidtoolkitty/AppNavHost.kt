@@ -19,17 +19,16 @@ import me.dizzykitty3.androidtoolkitty.home.ComposeCatalogScreen
 import me.dizzykitty3.androidtoolkitty.home.FontWeightTestScreen
 import me.dizzykitty3.androidtoolkitty.home.Home
 import me.dizzykitty3.androidtoolkitty.home.PermissionRequest
+import me.dizzykitty3.androidtoolkitty.home.SearchScreen
 import me.dizzykitty3.androidtoolkitty.home.SysSettingsScreen
 import me.dizzykitty3.androidtoolkitty.home.VolumeScreen
-import me.dizzykitty3.androidtoolkitty.home.WebpageScreen
-import me.dizzykitty3.androidtoolkitty.settings.DebuggingScreen
 import me.dizzykitty3.androidtoolkitty.settings.HomeEdit
 import me.dizzykitty3.androidtoolkitty.settings.Licenses
 import me.dizzykitty3.androidtoolkitty.settings.QRCodeGenerator
 import me.dizzykitty3.androidtoolkitty.settings.Settings
 
 @Composable
-fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
+fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel, widthType: Int) {
     val navController = rememberNavController()
 
     NavHost(
@@ -62,14 +61,13 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel) {
                         animationSpec = tween(SCALE_DURATION)
                     )
         }) {
-        composable(SCR_HOME) { Home(settingsViewModel, navController) }
+        composable(SCR_HOME) { Home(settingsViewModel, navController, widthType) }
         composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
         composable(SCR_EDIT_HOME) { HomeEdit() }
         composable(SCR_PERMISSION_REQUEST) { PermissionRequest() }
         composable(SCR_QR_CODE_GENERATOR) { QRCodeGenerator() }
-        composable(SCR_DEBUGGING) { DebuggingScreen(navController) }
         composable(SCR_LICENSES) { Licenses() }
-        composable(SCR_WEBPAGE) { WebpageScreen(settingsViewModel) }
+        composable(SCR_SEARCH) { SearchScreen(settingsViewModel) }
         composable(SCR_CODES_OF_CHARACTERS) { CodesOfCharactersScreen() }
         composable(SCR_ANDROID_VERSION_HISTORY) { AndroidVersionHistoryScreen() }
         composable(SCR_FONT_WEIGHT_TEST) { FontWeightTestScreen() }

@@ -1,15 +1,10 @@
-package me.dizzykitty3.androidtoolkitty.settings
+package me.dizzykitty3.androidtoolkitty.home
 
 import android.annotation.SuppressLint
 import android.location.Location
-import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowOutward
-import androidx.compose.material.icons.outlined.Refresh
-import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material.icons.outlined.Terminal
 import androidx.compose.material.icons.outlined.WbSunny
 import androidx.compose.material3.AlertDialog
@@ -17,7 +12,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -40,55 +34,22 @@ import me.dizzykitty3.androidtoolkitty.SCR_PERMISSION_REQUEST
 import me.dizzykitty3.androidtoolkitty.SCR_QR_CODE_GENERATOR
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
-import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.WIPTip
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.LocationUtil
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noBluetoothPermission
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noLocationPermission
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
-import me.dizzykitty3.androidtoolkitty.utils.StringUtil
-import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
 import timber.log.Timber
-
-@Composable
-fun DebuggingScreen(navController: NavHostController) {
-    Screen {
-        Debugging(navController)
-    }
-}
 
 @SuppressLint("MissingPermission")
 @Composable
-fun Debugging(navController: NavHostController) {
+fun FeaturesWorkInProgress(navController: NavHostController) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     var showLocationDialog by remember { mutableStateOf(false) }
 
-    Card(R.string.debugging, Icons.Outlined.Terminal) {
-        Row(Modifier.fillMaxWidth()) {
-            Column(Modifier.weight(0.4f)) {
-                ScrollableText(stringResource(R.string.manufacturer))
-                ScrollableText(stringResource(R.string.device))
-                ScrollableText(stringResource(R.string.os_version))
-                ScrollableText(stringResource(R.string.locale))
-                ScrollableText(stringResource(R.string.app_version))
-            }
-            Column(Modifier.weight(0.6f)) {
-                ScrollableText(Build.MANUFACTURER)
-                ScrollableText("${Build.MODEL} (${Build.DEVICE})")
-                ScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
-                ScrollableText(StringUtil.sysLocale)
-                ScrollableText(view.context.versionName)
-            }
-        }
-
-        GroupDivider()
-
+    Card(R.string.wip, Icons.Outlined.Terminal) {
         OutlinedButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             if (view.context.noLocationPermission()) {
@@ -208,34 +169,5 @@ fun Debugging(navController: NavHostController) {
         }) {
             Text(stringResource(R.string.qr_code_generator))
         }
-    }
-
-    TextButton({
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        view.context.openAppDetailSettings()
-    }) {
-        Icon(
-            imageVector = Icons.Outlined.SettingsApplications,
-            contentDescription = null
-        )
-        SpacerPadding()
-        Text(stringResource(R.string.open_app_detail_settings))
-        Icon(
-            imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = stringResource(R.string.open_app_detail_settings),
-            tint = MaterialTheme.colorScheme.primary
-        )
-    }
-
-    TextButton({
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        view.context.restartApp()
-    }) {
-        Icon(
-            imageVector = Icons.Outlined.Refresh,
-            contentDescription = null
-        )
-        SpacerPadding()
-        Text(stringResource(R.string.restart_app))
     }
 }

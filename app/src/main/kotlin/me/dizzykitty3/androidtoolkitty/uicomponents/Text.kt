@@ -44,13 +44,9 @@ fun Gradient(
 ) {
     Row {
         val text = buildAnnotatedString {
-            withStyle(
-                style = SpanStyle(
-                    brush = Brush.horizontalGradient(
-                        colors = colors
-                    )
-                )
-            ) { append(textToDisplay) }
+            withStyle(SpanStyle(Brush.horizontalGradient(colors))) {
+                append(textToDisplay)
+            }
         }
         Text(
             text,
@@ -70,8 +66,8 @@ fun GradientSmall(textToDisplay: String, colors: List<Color>) {
     Row {
         val text = buildAnnotatedString {
             withStyle(
-                style = SpanStyle(
-                    brush = Brush.horizontalGradient(colors = colors),
+                SpanStyle(
+                    Brush.horizontalGradient(colors),
                     fontWeight = FontWeight.Black
                 )
             ) { append(textToDisplay) }
@@ -138,7 +134,7 @@ fun Tip(msg: String, type: Int = 1) {
 }
 
 @Composable
-fun WIPTip() = Tip(R.string.wip)
+fun WIPTip() = Tip(R.string.wip_long)
 
 @Composable
 fun DevBuildTip() = Tip(R.string.debug_build_top_tip, type = 2)
@@ -154,7 +150,7 @@ fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))
 
 @Composable
 fun GroupTitle(title: String) {
-    Text(title, style = MaterialTheme.typography.titleMedium)
+    Text(">  $title", style = MaterialTheme.typography.titleMedium)
     SpacerPadding()
 }
 
@@ -167,8 +163,7 @@ fun ScrollableText(text: String) =
 fun ScrollableText(@StringRes text: Int) = ScrollableText(stringResource(text))
 
 @Composable
-fun ScrollableItalicText(@StringRes text: Int) {
+fun ScrollableItalicText(@StringRes text: Int) =
     Box(Modifier.horizontalScroll(rememberScrollState())) {
         Text(buildAnnotatedString { ItalicText(stringResource(text)) })
     }
-}

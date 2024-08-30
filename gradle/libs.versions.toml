@@ -1,26 +1,24 @@
 [versions]
-aboutLibraries = "11.2.2"
+aboutLibraries = "11.2.3"
 activity = "1.9.1"
-agp = "8.7.0-alpha03"
+agp = "8.5.2"
 compose = "1.6.8"
-composeBOM = "2024.06.00"
+composeBOM = "2024.08.00"
 composeM3 = "1.2.1"
 core = "1.13.1"
 coroutines = "1.8.1"
-dagger = "2.51.1"
+dagger = "2.52"
 dataStore = "1.1.1"
-desugar = "2.0.4"
+desugar = "2.1.1"
 gmsLocation = "21.3.0"
 gmsMaps = "19.0.0"
 hiltNavigationCompose = "1.2.0"
-kotlin = "2.0.0"
-ksp = "2.0.0-1.0.24"
-leakCanary = "3.0-alpha-8"
-lifecycle = "2.8.4"
+kotlin = "2.0.20"
+ksp = "2.0.20-1.0.24"
+leakCanary = "2.14"
 material = "1.12.0"
 navigation = "2.7.7"
-room = "2.6.1"
-serialization = "1.7.1"
+serialization = "1.7.2"
 timber = "5.0.1"
 
 [libraries]
@@ -34,15 +32,12 @@ androidx-activity-compose = { module = "androidx.activity:activity-compose", ver
 androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "composeBOM" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "composeM3" }
+androidx-compose-material3-window-size = { module = "androidx.compose.material3:material3-window-size-class-android", version.ref = "composeM3" }
 androidx-compose-runtime-livedata = { module = "androidx.compose.runtime:runtime-livedata", version.ref = "compose" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "core" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStore" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
-androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
-androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
-androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
-androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 google-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 google-hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "dagger" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
@@ -58,4 +53,3 @@ hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
-room = { id = "androidx.room", version.ref = "room" }

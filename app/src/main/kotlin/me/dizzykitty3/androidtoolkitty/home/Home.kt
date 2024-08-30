@@ -15,6 +15,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.BatteryStd
@@ -28,6 +29,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.PlainTooltip
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TooltipBox
 import androidx.compose.material3.TooltipDefaults
@@ -38,7 +40,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
@@ -50,6 +51,7 @@ import me.dizzykitty3.androidtoolkitty.CARD_1
 import me.dizzykitty3.androidtoolkitty.CARD_10
 import me.dizzykitty3.androidtoolkitty.CARD_11
 import me.dizzykitty3.androidtoolkitty.CARD_12
+import me.dizzykitty3.androidtoolkitty.CARD_13
 import me.dizzykitty3.androidtoolkitty.CARD_2
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.CARD_4
@@ -77,9 +79,8 @@ import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
-fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    val screenWidth = LocalConfiguration.current.screenWidthDp
-    if (screenWidth < 600) MobileLayout(settingsViewModel, navController)
+fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController, widthType: Int) {
+    if (widthType == 0 || widthType == 1) MobileLayout(settingsViewModel, navController)
     else TabletLayout(settingsViewModel, navController)
 }
 
@@ -90,12 +91,15 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
     val noTranslation = StringUtil.sysLangNotSupported
     val notFullyTranslated = StringUtil.sysLangNotFullyTranslated
     val dismissLangTip = settingsViewModel.settings.value.dismissLangTip
+    val hideGreetings = settingsViewModel.settings.value.hideGreetings
     LazyColumn(Modifier.padding(start = screenPadding, end = screenPadding)) {
         item { TopBar(settingsViewModel, navController) }
-        item { CardSpacePadding() }
-        item { CardSpacePadding() }
-        item { Greeting() }
-        item { CardSpacePadding() }
+        if (!hideGreetings) {
+            item { CardSpacePadding() }
+            item { CardSpacePadding() }
+            item { Greeting() }
+            item { CardSpacePadding() }
+        }
         item { CardSpacePadding() }
         if (debug) item { DevBuildTip() }
         if (noTranslation && !dismissLangTip) item { NoTranslationTip() }
@@ -171,17 +175,19 @@ private fun Status() {
     val haptic = LocalHapticFeedback.current
 
     Row(Modifier.horizontalScroll(rememberScrollState())) {
-        Row(Modifier.clickable {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            view.context.openSystemSettings(S_POWER_USAGE_SUMMARY)
-        }) {
-            Icon(
-                imageVector = Icons.Outlined.BatteryStd,
-                contentDescription = stringResource(R.string.battery_level),
-                tint = MaterialTheme.colorScheme.primary
-            )
-            SpacerPadding()
-            Text("$batteryLevel%")
+        Surface(shape = RoundedCornerShape(8.dp)) {
+            Row(Modifier.clickable {
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                view.context.openSystemSettings(S_POWER_USAGE_SUMMARY)
+            }) {
+                Icon(
+                    imageVector = Icons.Outlined.BatteryStd,
+                    contentDescription = stringResource(R.string.battery_level),
+                    tint = MaterialTheme.colorScheme.primary
+                )
+                SpacerPadding()
+                Text("$batteryLevel%")
+            }
         }
         SpacerPadding()
         SpacerPadding()
@@ -190,17 +196,19 @@ private fun Status() {
         SpacerPadding()
 
         if (view.context.isHeadsetConnected()) {
-            Row(Modifier.clickable {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                view.context.openSystemSettings(S_BLUETOOTH)
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.MediaBluetoothOn,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                )
-                SpacerPadding()
-                Text(stringResource(R.string.connected))
+            Surface(shape = RoundedCornerShape(8.dp)) {
+                Row(Modifier.clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.openSystemSettings(S_BLUETOOTH)
+                }) {
+                    Icon(
+                        imageVector = Icons.Outlined.MediaBluetoothOn,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                    SpacerPadding()
+                    Text(stringResource(R.string.connected))
+                }
             }
         }
     }
@@ -234,18 +242,19 @@ private fun NetworkState() {
 private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
-
-    Row(Modifier.clickable {
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        view.context.openSystemSettings(S_WIFI)
-    }) {
-        Icon(
-            imageVector = imageVector,
-            contentDescription = stringResource(text),
-            tint = MaterialTheme.colorScheme.primary
-        )
-        SpacerPadding()
-        Text(stringResource(text))
+    Surface(shape = RoundedCornerShape(8.dp)) {
+        Row(Modifier.clickable {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            view.context.openSystemSettings(S_WIFI)
+        }) {
+            Icon(
+                imageVector = imageVector,
+                contentDescription = stringResource(text),
+                tint = MaterialTheme.colorScheme.primary
+            )
+            SpacerPadding()
+            Text(stringResource(text))
+        }
     }
 }
 
@@ -277,7 +286,7 @@ private fun TwoColumnHomeCards(
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> = listOf(
     CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6,
-    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12
+    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12, CARD_13
 ).associateWith { card -> settingsSharedPref.getShownState(card) }
 
 @Composable
@@ -290,7 +299,7 @@ private fun CardContent(
         CARD_1 -> YearProgress()
         CARD_2 -> Volume(navController)
         CARD_3 -> Clipboard(settingsViewModel)
-        CARD_4 -> SearchAndWebpage(navController)
+        CARD_4 -> Search(navController)
         CARD_5 -> SysSettings(navController)
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice(navController)
@@ -299,5 +308,6 @@ private fun CardContent(
         CARD_10 -> AndroidVersions(navController)
         CARD_11 -> FontWeight(navController)
         CARD_12 -> ComposeCatalog(navController)
+        CARD_13 -> FeaturesWorkInProgress(navController)
     }
 }

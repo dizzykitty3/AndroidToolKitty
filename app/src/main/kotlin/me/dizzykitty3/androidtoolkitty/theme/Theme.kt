@@ -269,7 +269,7 @@ fun AppTheme(
     @Composable
     fun OSVersion.colorScheme(darkTheme: Boolean, dynamicColor: Boolean): ColorScheme {
         return when {
-            this.a12() && dynamicColor ->
+            this.android12() && dynamicColor ->
                 if (darkTheme) dynamicDarkColorScheme(appContext)
                 else dynamicLightColorScheme(appContext)
 

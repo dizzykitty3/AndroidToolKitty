@@ -66,12 +66,14 @@ object URLUtil {
     }
 
     /**
-     * @see me.dizzykitty3.androidtoolkitty.home.toSocialMediaFullURL
+     * @see me.dizzykitty3.androidtoolkitty.home.toProfileFullURL
      */
     enum class Platform(val prefix: String, @StringRes val platform: Int) {
+        AFDIAN("afdian.com/a/", R.string.afdian),
         ARTSTATION("artstation.com/", R.string.artstation),
+        BAHAMUT("gamer.com.tw/home/home.php?owner=", R.string.bahamut),
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
-        BILIBILI_USER("space.bilibili.com/", R.string.bilibili_user_id),
+        BILIBILI_UUID("space.bilibili.com/", R.string.bilibili_uuid),
         BLUESKY("bsky.app/profile/", R.string.bluesky),
         BOOTH(".booth.pm", R.string.booth),
         CARRD(".carrd.co", R.string.carrd),
@@ -80,6 +82,7 @@ object URLUtil {
         FANSLY("fansly.com/", R.string.fansly),
         FANTIA("fantia.jp/", R.string.fantia),
         GITHUB("github.com/", R.string.github),
+        INSTABIO("linkbio.co/", R.string.instabio),
         INSTAGRAM("instagram.com/", R.string.instagram),
         KO_FI("ko-fi.com/", R.string.ko_fi),
         LINKEDIN_COMPANY("linkedin.com/company/", R.string.linkedin_company),
@@ -94,8 +97,8 @@ object URLUtil {
         PAYPAL("paypal.me/", R.string.paypal),
         PINTEREST("pinterest.com/", R.string.pinterest),
         PIXIV_ARTWORK("pixiv.net/artworks/", R.string.pixiv_artwork_id),
-        PIXIV_USER("pixiv.net/users/", R.string.pixiv_user_id),
         PIXIV_USER_CUSTOM_URL("pixiv.me/", R.string.pixiv_user_custom_url),
+        PIXIV_UUID("pixiv.net/users/", R.string.pixiv_uuid),
         PLURK("plurk.com/", R.string.plurk),
         POTOFU("potofu.me/", R.string.potofu),
         PROFCARD("profcard.info/u/", R.string.profcard),
@@ -103,6 +106,7 @@ object URLUtil {
         SKEB("skeb.jp/@", R.string.skeb),
         SNAPCHAT("snapchat.com/add/", R.string.snapchat),
         STEAM_USER_CUSTOM_URL("steamcommunity.com/id/", R.string.steam_user_custom_url),
+        STEAM_UUID("steamcommunity.com/profiles/", R.string.steam_uuid),
         TELEGRAM("t.me/", R.string.telegram),
         THREADS("threads.net/@", R.string.threads),
         TIKTOK("tiktok.com/@", R.string.tiktok),
@@ -115,6 +119,7 @@ object URLUtil {
         WAVEBOX("wavebox.me/wave/", R.string.wavebox),
         WEIBO("weibo.com/n/", R.string.weibo),
         X("x.com/", R.string.x),
-        YOUTUBE("youtube.com/@", R.string.youtube_id)
+        YOUTUBE_SEARCH("youtube.com/results?search_query=", R.string.youtube_serach),
+        YOUTUBE_USER_CUSTOM_URL("youtube.com/@", R.string.youtube_handle)
     }
 }

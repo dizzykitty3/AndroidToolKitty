@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    val settingsUseCase: SettingsUseCase
+    private val settingsUseCase: SettingsUseCase
 ) : ViewModel() {
     private val _settings = mutableStateOf(Settings())
     var settings: State<Settings> = _settings
@@ -23,7 +23,7 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
-    private suspend fun loadSettings() {
+    private fun loadSettings() {
         val loadedSettings = runBlocking(Dispatchers.IO) {
             settingsUseCase.loadSettingsFromRepository()
         }
