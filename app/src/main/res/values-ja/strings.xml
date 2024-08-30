@@ -54,10 +54,10 @@
     <string name="username">ユーザー名</string>
     <string name="bilibili_search">bilibili（検索）</string>
     <string name="weibo">Weibo</string>
-    <string name="youtube_id">YouTube（ユーザーID）</string>
+    <string name="youtube_handle">YouTube（ユーザーID）</string>
     <string name="pixiv_artwork_id">pixiv（作品ID）</string>
-    <string name="pixiv_user_id">pixiv（ユーザーID）</string>
-    <string name="bilibili_user_id">bilibili（ユーザーID）</string>
+    <string name="pixiv_uuid">pixiv（ユーザーID）</string>
+    <string name="bilibili_uuid">bilibili（ユーザーID）</string>
     <string name="webpage">ウェブページ</string>
     <string name="search">検索</string>
     <string name="pixiv_user_custom_url">pixiv（ユーザーのカスタムURL）</string>

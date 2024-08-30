@@ -53,7 +53,7 @@
     <string name="username">用户昵称</string>
     <string name="bilibili_search">哔哩哔哩 (搜索)</string>
     <string name="weibo">微博</string>
-    <string name="youtube_id">YouTube (UID)</string>
+    <string name="youtube_handle">YouTube (UID)</string>
     <string name="developer_options">开发者选项</string>
     <string name="show_all_options">显示所有选项</string>
     <string name="hide_all_options">隐藏所有选项</string>
@@ -64,10 +64,10 @@
     </plurals>
     <string name="all_help_welcomed">欢迎建议意见和 PR！</string>
     <string name="pixiv_artwork_id">pixiv (作品 ID)</string>
-    <string name="pixiv_user_id">pixiv (用户 ID)</string>
+    <string name="pixiv_uuid">pixiv (用户 ID)</string>
     <string name="caption_preferences">字幕偏好</string>
     <string name="debugging">调试</string>
-    <string name="bilibili_user_id">哔哩哔哩 (用户 UID)</string>
+    <string name="bilibili_uuid">哔哩哔哩 (用户 UID)</string>
     <string name="material_you_dynamic_color_theme">启用 Android 12+ 的 Material You 动态主题取色</string>
     <string name="dismiss_lang_tip_description">不显示首页的「语言未翻译」和「未完全翻译」提示</string>
     <string name="hide_greetings_description">隐藏竖屏模式下首页的问候语</string>

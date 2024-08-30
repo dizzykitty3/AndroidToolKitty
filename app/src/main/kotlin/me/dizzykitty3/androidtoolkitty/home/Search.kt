@@ -99,7 +99,7 @@ private fun Search() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onClickSearchButton(searchQuery)
+                view.context.onTapSearchButton(searchQuery)
             }
         ),
         trailingIcon = {
@@ -117,7 +117,7 @@ private fun Search() {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.onClickSearchButton(searchQuery)
+            view.context.onTapSearchButton(searchQuery)
         }) {
             Text(stringResource(R.string.search))
             Icon(
@@ -130,7 +130,7 @@ private fun Search() {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.onCheckOnYouTube(searchQuery)
+            view.context.onTapCheckOnYouTubeButton(searchQuery)
         }) {
             Text(stringResource(R.string.search_on_youtube))
             Icon(
@@ -163,7 +163,7 @@ private fun Webpage() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onClickVisitURLButton(url)
+                view.context.onTapVisitURLButton(url)
             }
         ),
         trailingIcon = {
@@ -194,7 +194,7 @@ private fun Webpage() {
     TextButton({
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
-        view.context.onClickVisitURLButton(url)
+        view.context.onTapVisitURLButton(url)
     }) {
         Text(stringResource(R.string.visit))
         Icon(
@@ -234,7 +234,7 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
             onDone = {
                 focus.clearFocus()
                 if (isValid(platform, username)) {
-                    view.context.onVisitProfileButton(username, platformIndex)
+                    view.context.onTapVisitProfileButton(username, platformIndex)
                     settingsViewModel.update(
                         settingsViewModel.settings.value.copy(
                             lastSelectedPlatformIndex = platformIndex
@@ -252,7 +252,7 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
         supportingText = {
             Column {
                 Text(
-                    toSocialMediaFullURL(platform, username),
+                    toProfileFullURL(platform, username),
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
@@ -270,7 +270,7 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         if (isValid(platform, username)) {
-            view.context.onVisitProfileButton(username, platformIndex)
+            view.context.onTapVisitProfileButton(username, platformIndex)
             settingsViewModel.update(settingsViewModel.settings.value.copy(lastSelectedPlatformIndex = platformIndex))
         }
     }) {
@@ -284,36 +284,36 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
     }
 }
 
-private fun Context.onClickSearchButton(query: String) {
+private fun Context.onTapSearchButton(query: String) {
     if (query.isBlank()) return
-    Timber.d("onClickSearchButton")
+    Timber.d("onTapSearchButton")
     this.openSearch(query)
 }
 
-private fun Context.onCheckOnYouTube(query: String) {
+private fun Context.onTapCheckOnYouTubeButton(query: String) {
     if (query.isBlank()) return
-    Timber.d("onCheckOnYouTube")
+    Timber.d("onTapCheckOnYouTubeButton")
     this.searchOnYouTube(query)
 }
 
-private fun Context.onClickVisitURLButton(url: String) {
+private fun Context.onTapVisitURLButton(url: String) {
     if (url.isBlank()) return
-    Timber.d("onClickVisitButton")
+    Timber.d("onTapVisitURLButton")
     this.openURL(url.dropSpaces().toFullURL())
 }
 
-private fun Context.onVisitProfileButton(username: String, platformIndex: Int) {
+private fun Context.onTapVisitProfileButton(username: String, platformIndex: Int) {
     if (username.isBlank()) return
-    Timber.d("onVisitProfile")
+    Timber.d("onTapVisitProfileButton")
     val platform = URLUtil.Platform.entries.getOrNull(platformIndex) ?: return
-    val url = toSocialMediaFullURL(platform, username)
+    val url = toProfileFullURL(platform, username)
     this.openURL(url)
 }
 
 /**
  * @see me.dizzykitty3.androidtoolkitty.utils.URLUtil.Platform
  */
-private fun toSocialMediaFullURL(platform: URLUtil.Platform, username: String): String =
+private fun toProfileFullURL(platform: URLUtil.Platform, username: String): String =
     when (platform) {
         URLUtil.Platform.BLUESKY ->
             if (username.contains("."))

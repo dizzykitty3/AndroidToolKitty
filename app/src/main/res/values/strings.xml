@@ -75,11 +75,11 @@
     <string name="github" translatable="false">GitHub</string>
     <string name="x" translatable="false">X</string>
     <string name="weibo">Weibo</string>
-    <string name="youtube_id">YouTube (User ID)</string>
+    <string name="youtube_handle">YouTube (User custom URL)</string>
     <string name="pixiv_artwork_id">pixiv (Artwork ID)</string>
-    <string name="pixiv_user_id">pixiv (User ID)</string>
+    <string name="pixiv_uuid">pixiv (UUID)</string>
     <string name="v2ex" translatable="false">V2EX</string>
-    <string name="bilibili_user_id">bilibili (User ID)</string>
+    <string name="bilibili_uuid">bilibili (UUID)</string>
     <string name="webpage">Webpage</string>
     <string name="instagram" translatable="false">Instagram</string>
     <string name="facebook" translatable="false">Facebook</string>
@@ -131,6 +131,8 @@
     <string name="youtube_serach">YouTube (Search)</string>
     <string name="bahamut">Bahamut</string>
     <string name="afdian">Afdian</string>
+    <string name="steam_uuid" translatable="false">Steam (steamID64)</string>
+    <string name="instabio" translatable="false">Instabio</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>
