@@ -68,7 +68,7 @@
     <string name="url_input_hint_2">and </string>
     <string name="url_input_hint_3">(or</string>
     <string name="url_input_hint_4">, etc.)</string>
-    <string name="social_media_profile">Social media profile</string>
+    <string name="social_profile">Social profile</string>
     <string name="platform">Platform</string>
     <string name="username">Username</string>
     <string name="bilibili_search">bilibili (Search)</string>

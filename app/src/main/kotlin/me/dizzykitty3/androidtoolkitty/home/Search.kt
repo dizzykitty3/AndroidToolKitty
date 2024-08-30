@@ -76,7 +76,7 @@ fun SearchScreen(settingsViewModel: SettingsViewModel) {
     Screen {
         Card(R.string.search) { Search() }
         Card(R.string.webpage) { Webpage() }
-        Card(R.string.social_media_profile) { SocialMediaProfile(settingsViewModel) }
+        Card(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }
         Card(R.string.check_app_on_market) { CheckAppOnMarket() }
     }
 }
