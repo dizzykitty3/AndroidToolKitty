@@ -183,10 +183,12 @@ private fun Status() {
                 Icon(
                     imageVector = Icons.Outlined.BatteryStd,
                     contentDescription = stringResource(R.string.battery_level),
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
                 )
                 SpacerPadding()
-                Text("$batteryLevel%")
+                Text(
+                    "$batteryLevel%", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                )
             }
         }
         SpacerPadding()
@@ -204,10 +206,13 @@ private fun Status() {
                     Icon(
                         imageVector = Icons.Outlined.MediaBluetoothOn,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
                     )
                     SpacerPadding()
-                    Text(stringResource(R.string.connected))
+                    Text(
+                        stringResource(R.string.connected),
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                    )
                 }
             }
         }
@@ -250,10 +255,12 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
             Icon(
                 imageVector = imageVector,
                 contentDescription = stringResource(text),
-                tint = MaterialTheme.colorScheme.primary
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
             )
             SpacerPadding()
-            Text(stringResource(text))
+            Text(
+                stringResource(text), color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            )
         }
     }
 }
