@@ -39,7 +39,6 @@ import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
@@ -49,7 +48,6 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
-import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 
 @Composable
@@ -197,11 +195,6 @@ private fun Bottom(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
 
     Column {
-        Text(
-            "Android ToolKitty ${view.context.versionName}",
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-        )
-        CardSpacePadding()
         Surface(shape = RoundedCornerShape(8.dp)) {
             Row(Modifier.clickable {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -225,7 +218,8 @@ private fun Bottom(navController: NavHostController) {
                 )
             }
         }
-        CardSpacePadding()
+        SpacerPadding()
+        SpacerPadding()
         Surface(shape = RoundedCornerShape(8.dp)) {
             Row(Modifier.clickable {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -243,7 +237,8 @@ private fun Bottom(navController: NavHostController) {
                 )
             }
         }
-        CardSpacePadding()
+        SpacerPadding()
+        SpacerPadding()
         Surface(shape = RoundedCornerShape(8.dp)) {
             Row(Modifier.clickable {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -266,7 +261,8 @@ private fun Bottom(navController: NavHostController) {
                 )
             }
         }
-        CardSpacePadding()
+        SpacerPadding()
+        SpacerPadding()
         Surface(shape = RoundedCornerShape(8.dp)) {
             Row(Modifier.clickable {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)

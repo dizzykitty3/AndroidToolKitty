@@ -73,7 +73,6 @@ private fun CustomSwitchRow(
 ) {
     Surface(shape = RoundedCornerShape(8.dp)) {
         Box(Modifier.clickable { onCheckedChange(!checked) }) {
-            SpacerPadding()
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
                     Text(title)
@@ -91,7 +90,6 @@ private fun CustomSwitchRow(
                     onCheckedChange = { onCheckedChange(it) }
                 )
             }
-            SpacerPadding()
         }
     }
 }
