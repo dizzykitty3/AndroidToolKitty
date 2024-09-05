@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
             ) {
                 Scaffold(Modifier.fillMaxSize()) { innerPadding ->
                     AppNavHost(
-                        Modifier.padding(innerPadding),
+                        Modifier.padding(top = innerPadding.calculateTopPadding()),
                         settingsViewModel,
                         widthType
                     )
