@@ -150,14 +150,17 @@ fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))
 
 @Composable
 fun GroupTitle(title: String) {
-    Text(">  $title", style = MaterialTheme.typography.titleMedium)
+    Text(
+        title,
+        style = MaterialTheme.typography.titleMedium,
+        color = MaterialTheme.colorScheme.primary
+    )
     SpacerPadding()
 }
 
 @Composable
 fun ScrollableText(text: String) =
     Box(Modifier.horizontalScroll(rememberScrollState())) { Text(text) }
-
 
 @Composable
 fun ScrollableText(@StringRes text: Int) = ScrollableText(stringResource(text))

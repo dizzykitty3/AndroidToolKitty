@@ -3,6 +3,7 @@ package me.dizzykitty3.androidtoolkitty.settings
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
@@ -38,8 +39,9 @@ import me.dizzykitty3.androidtoolkitty.SCR_LICENSES
 import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
+import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
+import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
@@ -53,10 +55,22 @@ import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Screen {
+        SettingsTitle()
         Appearance(settingsViewModel)
         General(settingsViewModel, navController)
         Bottom(navController)
     }
+}
+
+@Composable
+private fun SettingsTitle() {
+    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            stringResource(R.string.settings),
+            style = MaterialTheme.typography.headlineSmall
+        )
+    }
+    SpacerPadding()
 }
 
 @Composable
@@ -68,7 +82,9 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     var dismissLangTip by remember { mutableStateOf(settingsViewModel.settings.value.dismissLangTip) }
     var hideGreetings by remember { mutableStateOf(settingsViewModel.settings.value.hideGreetings) }
 
-    Card(R.string.appearance) {
+    Column {
+        GroupTitle(R.string.appearance)
+
         if (OSVersion.android12()) {
             CustomSwitchRow(
                 R.string.dynamic_color,
@@ -134,6 +150,8 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
                 )
             }
         }
+
+        GroupDivider()
     }
 }
 
@@ -147,7 +165,9 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
-    Card(R.string.general) {
+    Column {
+        GroupTitle(R.string.general)
+
         CustomSwitchRow(
             R.string.clear_clipboard_automatically,
             R.string.clear_clipboard_on_launch,
@@ -186,6 +206,8 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
             SpacerPadding()
             Text(stringResource(R.string.customize_my_home_page))
         }
+
+        GroupDivider()
     }
 }
 
@@ -195,6 +217,8 @@ private fun Bottom(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
 
     Column {
+        GroupTitle("Others")
+
         Surface(shape = RoundedCornerShape(8.dp)) {
             Row(Modifier.clickable {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
