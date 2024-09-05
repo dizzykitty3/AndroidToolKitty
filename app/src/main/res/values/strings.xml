@@ -30,7 +30,7 @@
     <string name="cellular">Cellular</string>
     <string name="offline">Offline</string>
     <string name="no_translation" translatable="false">Sorry, %1$s translation haven\'t added yet.</string>
-    <string name="connected">Connected</string>
+    <string name="audio_devices_connected">Audio devices connected</string>
     <string name="debug_build_top_tip">This is a debug build. Expect some bugs and worse performance.</string>
     <string name="not_fully_translated">Sorry, %1$s not fully translated yet.</string>
 

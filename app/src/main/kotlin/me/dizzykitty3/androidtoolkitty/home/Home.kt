@@ -175,28 +175,6 @@ private fun Status() {
     val haptic = LocalHapticFeedback.current
 
     Row(Modifier.horizontalScroll(rememberScrollState())) {
-        Surface(shape = RoundedCornerShape(8.dp)) {
-            Row(Modifier.clickable {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                view.context.openSystemSettings(S_POWER_USAGE_SUMMARY)
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.BatteryStd,
-                    contentDescription = stringResource(R.string.battery_level),
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-                SpacerPadding()
-                Text(
-                    "$batteryLevel%", color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-            }
-        }
-        SpacerPadding()
-        SpacerPadding()
-        NetworkState()
-        SpacerPadding()
-        SpacerPadding()
-
         if (view.context.isHeadsetConnected()) {
             Surface(shape = RoundedCornerShape(8.dp)) {
                 Row(Modifier.clickable {
@@ -210,11 +188,32 @@ private fun Status() {
                     )
                     SpacerPadding()
                     Text(
-                        stringResource(R.string.connected),
+                        stringResource(R.string.audio_devices_connected),
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
                     )
                 }
             }
+        } else {
+            Surface(shape = RoundedCornerShape(8.dp)) {
+                Row(Modifier.clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.openSystemSettings(S_POWER_USAGE_SUMMARY)
+                }) {
+                    Icon(
+                        imageVector = Icons.Outlined.BatteryStd,
+                        contentDescription = stringResource(R.string.battery_level),
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                    )
+                    SpacerPadding()
+                    Text(
+                        "$batteryLevel%",
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                    )
+                }
+            }
+            SpacerPadding()
+            SpacerPadding()
+            NetworkState()
         }
     }
     CardSpacePadding()

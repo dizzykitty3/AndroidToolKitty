@@ -22,7 +22,7 @@
     <string name="battery_level">バッテリー残量</string>
     <string name="cellular">セルラー</string>
     <string name="offline">オフライン</string>
-    <string name="connected">接続済み</string>
+    <string name="audio_devices_connected">Audio devices connected</string>
     <string name="debug_build_top_tip">これはデバッグビルドです。バグや性能の低下が予想されます。</string>
     <string name="not_fully_translated">申し訳ありませんが、%1$s はまだ完全に翻訳されていません。</string>
     <string name="year_progress">年の進捗</string>
