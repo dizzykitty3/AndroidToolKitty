@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 
 // App screens
@@ -52,6 +53,7 @@ const val S_POWER_USAGE_SUMMARY = "setting_power_usage_summary"
 const val S_ACCESSIBILITY = "setting_accessibility"
 
 // Android permissions
+@SuppressLint("InlinedApi")
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 const val BT = Manifest.permission.BLUETOOTH
 const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN

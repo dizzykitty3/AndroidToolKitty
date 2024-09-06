@@ -143,7 +143,7 @@ fun DevBuildTip() = Tip(R.string.debug_build_top_tip, type = 2)
 fun NoTranslationTip() = Tip(stringResource(R.string.no_translation, StringUtil.sysLocale))
 
 @Composable
-fun NotFullyTranslated() = Tip(stringResource(R.string.not_fully_translated, StringUtil.sysLocale))
+fun NotFullyTranslated() = Tip(R.string.not_fully_translated)
 
 @Composable
 fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))

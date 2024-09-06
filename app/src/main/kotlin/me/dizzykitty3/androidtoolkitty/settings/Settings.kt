@@ -4,7 +4,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Bookmarks
@@ -16,7 +15,6 @@ import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -30,7 +28,6 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.R
@@ -218,91 +215,82 @@ private fun Bottom(navController: NavHostController) {
 
     Column {
         GroupTitle("Others")
-
-        Surface(shape = RoundedCornerShape(8.dp)) {
-            Row(Modifier.clickable {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                view.context.showToast(R.string.all_help_welcomed)
-                view.context.openURL(SOURCE_CODE_URL)
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.Code,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-                SpacerPadding()
-                Text(
-                    stringResource(R.string.view_source_code),
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-                Icon(
-                    imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = stringResource(R.string.view_source_code),
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-            }
+        Row(Modifier.clickable {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            view.context.showToast(R.string.all_help_welcomed)
+            view.context.openURL(SOURCE_CODE_URL)
+        }) {
+            Icon(
+                imageVector = Icons.Outlined.Code,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            )
+            SpacerPadding()
+            Text(
+                stringResource(R.string.view_source_code),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            )
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = stringResource(R.string.view_source_code),
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            )
         }
         SpacerPadding()
         SpacerPadding()
-        Surface(shape = RoundedCornerShape(8.dp)) {
-            Row(Modifier.clickable {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                navController.navigate(SCR_LICENSES)
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.Bookmarks,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-                SpacerPadding()
-                Text(
-                    stringResource(R.string.licenses),
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-            }
+        Row(Modifier.clickable {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            navController.navigate(SCR_LICENSES)
+        }) {
+            Icon(
+                imageVector = Icons.Outlined.Bookmarks,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            )
+            SpacerPadding()
+            Text(
+                stringResource(R.string.licenses),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            )
         }
         SpacerPadding()
         SpacerPadding()
-        Surface(shape = RoundedCornerShape(8.dp)) {
-            Row(Modifier.clickable {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                view.context.openAppDetailSettings()
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.SettingsApplications,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-                SpacerPadding()
-                Text(
-                    stringResource(R.string.open_app_detail_settings),
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-                Icon(
-                    imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = stringResource(R.string.open_app_detail_settings),
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-            }
+        Row(Modifier.clickable {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            view.context.openAppDetailSettings()
+        }) {
+            Icon(
+                imageVector = Icons.Outlined.SettingsApplications,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            )
+            SpacerPadding()
+            Text(
+                stringResource(R.string.open_app_detail_settings),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            )
+            Icon(
+                imageVector = Icons.Outlined.ArrowOutward,
+                contentDescription = stringResource(R.string.open_app_detail_settings),
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            )
         }
         SpacerPadding()
         SpacerPadding()
-        Surface(shape = RoundedCornerShape(8.dp)) {
-            Row(Modifier.clickable {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                view.context.restartApp()
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.Refresh,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-                SpacerPadding()
-                Text(
-                    stringResource(R.string.restart_app),
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-                )
-            }
+        Row(Modifier.clickable {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            view.context.restartApp()
+        }) {
+            Icon(
+                imageVector = Icons.Outlined.Refresh,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            )
+            SpacerPadding()
+            Text(
+                stringResource(R.string.restart_app),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            )
         }
     }
 }
