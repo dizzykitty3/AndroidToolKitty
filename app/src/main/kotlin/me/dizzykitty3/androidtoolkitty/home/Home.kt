@@ -184,12 +184,12 @@ private fun Status() {
                     Icon(
                         imageVector = Icons.Outlined.MediaBluetoothOn,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
                     )
                     SpacerPadding()
                     Text(
                         stringResource(R.string.audio_devices_connected),
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
                     )
                 }
             }
@@ -202,12 +202,12 @@ private fun Status() {
                     Icon(
                         imageVector = Icons.Outlined.BatteryStd,
                         contentDescription = stringResource(R.string.battery_level),
-                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
                     )
                     SpacerPadding()
                     Text(
                         "$batteryLevel%",
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
                     )
                 }
             }
@@ -254,11 +254,11 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
             Icon(
                 imageVector = imageVector,
                 contentDescription = stringResource(text),
-                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
             )
             SpacerPadding()
             Text(
-                stringResource(text), color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                stringResource(text), color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
             )
         }
     }
