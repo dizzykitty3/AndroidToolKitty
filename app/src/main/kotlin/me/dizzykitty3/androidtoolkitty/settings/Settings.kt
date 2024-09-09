@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Bookmarks
 import androidx.compose.material.icons.outlined.Code
@@ -36,6 +37,7 @@ import me.dizzykitty3.androidtoolkitty.SCR_LICENSES
 import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
@@ -215,82 +217,82 @@ private fun Bottom(navController: NavHostController) {
 
     Column {
         GroupTitle("Others")
-        Row(Modifier.clickable {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            view.context.showToast(R.string.all_help_welcomed)
-            view.context.openURL(SOURCE_CODE_URL)
-        }) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.showToast(R.string.all_help_welcomed)
+                    view.context.openURL(SOURCE_CODE_URL)
+                }) {
+            Row(Modifier.weight(1F)) {
+                Icon(
+                    imageVector = Icons.Outlined.Code,
+                    contentDescription = null
+                )
+                SpacerPadding()
+                Text(stringResource(R.string.view_source_code))
+            }
+            CardSpacePadding()
             Icon(
-                imageVector = Icons.Outlined.Code,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-            )
-            SpacerPadding()
-            Text(
-                stringResource(R.string.view_source_code),
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-            )
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(R.string.view_source_code),
-                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
+                contentDescription = stringResource(R.string.view_source_code)
             )
         }
         SpacerPadding()
         SpacerPadding()
-        Row(Modifier.clickable {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            navController.navigate(SCR_LICENSES)
-        }) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    navController.navigate(SCR_LICENSES)
+                }) {
             Icon(
                 imageVector = Icons.Outlined.Bookmarks,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                contentDescription = null
             )
             SpacerPadding()
-            Text(
-                stringResource(R.string.licenses),
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+            Text(stringResource(R.string.licenses))
+        }
+        SpacerPadding()
+        SpacerPadding()
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.openAppDetailSettings()
+                }) {
+            Row(Modifier.weight(1F)) {
+                Icon(
+                    imageVector = Icons.Outlined.SettingsApplications,
+                    contentDescription = null
+                )
+                SpacerPadding()
+                Text(stringResource(R.string.open_app_detail_settings))
+            }
+            SpacerPadding()
+            Icon(
+                imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
+                contentDescription = stringResource(R.string.open_app_detail_settings)
             )
         }
         SpacerPadding()
         SpacerPadding()
-        Row(Modifier.clickable {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            view.context.openAppDetailSettings()
-        }) {
-            Icon(
-                imageVector = Icons.Outlined.SettingsApplications,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-            )
-            SpacerPadding()
-            Text(
-                stringResource(R.string.open_app_detail_settings),
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-            )
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(R.string.open_app_detail_settings),
-                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-            )
-        }
-        SpacerPadding()
-        SpacerPadding()
-        Row(Modifier.clickable {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            view.context.restartApp()
-        }) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.restartApp()
+                }) {
             Icon(
                 imageVector = Icons.Outlined.Refresh,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
+                contentDescription = null
             )
             SpacerPadding()
-            Text(
-                stringResource(R.string.restart_app),
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7F)
-            )
+            Text(stringResource(R.string.restart_app))
         }
     }
 }
