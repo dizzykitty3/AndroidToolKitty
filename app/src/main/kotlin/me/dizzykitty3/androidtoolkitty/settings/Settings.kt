@@ -288,7 +288,7 @@ private fun Bottom(navController: NavHostController) {
                 SpacerPadding()
                 Column {
                     Text(stringResource(R.string.open_app_detail_settings))
-                    Description("Clear storage, manage permission, and so on")
+                    Description("Clear storage, manage permissions, and so on")
                 }
             }
             SpacerPadding()
