@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.BugReport
+import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -121,7 +122,37 @@ fun Tip(msg: String, type: Int = 1) {
         ) {
             Icon(
                 if (type == 1) Icons.Outlined.Info else Icons.Outlined.BugReport,
-                contentDescription = stringResource(R.string.info),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
+            )
+            IconAndTextPadding()
+            Text(
+                text = msg,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+    }
+    SpacerPadding()
+}
+
+@Composable
+fun ErrorTip(msg: String) {
+    Card(
+        shape = RoundedCornerShape(dimensionResource(R.dimen.padding_tip)),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.errorContainer,
+            contentColor = MaterialTheme.colorScheme.onErrorContainer
+        )
+    ) {
+        Row(
+            Modifier
+                .padding(dimensionResource(R.dimen.padding_tip))
+                .fillMaxWidth()
+        ) {
+            Icon(
+                Icons.Outlined.ErrorOutline,
+                contentDescription = null,
                 modifier = Modifier.size(24.dp)
             )
             IconAndTextPadding()

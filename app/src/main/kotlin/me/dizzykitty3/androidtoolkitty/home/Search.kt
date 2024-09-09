@@ -12,7 +12,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -43,12 +42,16 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
+import me.dizzykitty3.androidtoolkitty.uicomponents.ErrorTip
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnMarket
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSearch
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.searchOnYouTube
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.isInvalidUsername
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
@@ -240,6 +243,13 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
                             lastSelectedPlatformIndex = platformIndex
                         )
                     )
+                } else {
+                    view.showSnackbar(
+                        view.context.getString(
+                            R.string.invalid_username_input_tip,
+                            platform
+                        )
+                    )
                 }
             }
         ),
@@ -256,20 +266,17 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
-                if (isCaseSensitive(platform)) {
-                    Text(
-                        "Please note that usernames on this platform are case sensitive",
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                } else if (isInvalid(platform, username)) {
-                    Text(
-                        stringResource(R.string.invalid_username_input_tip, platform),
-                        color = MaterialTheme.colorScheme.error
-                    )
-                }
             }
         }
     )
+
+    if (isCaseSensitive(platform)) {
+        SpacerPadding()
+        Tip("Please note that usernames on this platform are case sensitive")
+    } else if (isInvalid(platform, username)) {
+        SpacerPadding()
+        ErrorTip(stringResource(R.string.invalid_username_input_tip, platform))
+    }
 
     TextButton({
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -277,6 +284,8 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
         if (isValid(platform, username)) {
             view.context.onTapVisitProfileButton(username, platformIndex)
             settingsViewModel.update(settingsViewModel.settings.value.copy(lastSelectedPlatformIndex = platformIndex))
+        } else {
+            view.showSnackbar(view.context.getString(R.string.invalid_username_input_tip, platform))
         }
     }) {
         Text(stringResource(R.string.visit))
