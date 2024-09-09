@@ -42,7 +42,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 fun HomeEdit() {
     Screen {
         val sp = remember { SettingsSharedPref }
-        var mIsShowCard5 by remember { mutableStateOf(sp.getShownState(CARD_5)) }
 
         Card(R.string.customize_my_home_page) {
             val haptic = LocalHapticFeedback.current
@@ -50,6 +49,7 @@ fun HomeEdit() {
             var mIsShowCard2 by remember { mutableStateOf(sp.getShownState(CARD_2)) }
             var mIsShowCard3 by remember { mutableStateOf(sp.getShownState(CARD_3)) }
             var mIsShowCard4 by remember { mutableStateOf(sp.getShownState(CARD_4)) }
+            var mIsShowCard5 by remember { mutableStateOf(sp.getShownState(CARD_5)) }
             var mIsShowCard6 by remember { mutableStateOf(sp.getShownState(CARD_6)) }
             var mIsShowCard7 by remember { mutableStateOf(sp.getShownState(CARD_7)) }
             var mIsShowCard8 by remember { mutableStateOf(sp.getShownState(CARD_8)) }
@@ -160,7 +160,7 @@ fun HomeEdit() {
             }
             CustomHideCardSettingSwitch(
                 text = R.string.compose_catalog,
-                card = CARD_11,
+                card = CARD_12,
                 isChecked = mIsShowCard12
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -237,8 +237,6 @@ fun HomeEdit() {
                 Text(stringResource(R.string.show_all_cards))
             }
         }
-
-        if (mIsShowCard5) SysSettingsCardEdit()
     }
 }
 

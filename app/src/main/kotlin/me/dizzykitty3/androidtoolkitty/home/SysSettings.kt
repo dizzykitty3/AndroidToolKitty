@@ -34,6 +34,7 @@ import me.dizzykitty3.androidtoolkitty.S_OVERLAY
 import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
 import me.dizzykitty3.androidtoolkitty.S_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.settings.SysSettingsCardEdit
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
@@ -207,6 +208,9 @@ fun SysSettingsScreen() {
                 )
             }
         }
+
+        // edit
+        SysSettingsCardEdit()
     }
 }
 
