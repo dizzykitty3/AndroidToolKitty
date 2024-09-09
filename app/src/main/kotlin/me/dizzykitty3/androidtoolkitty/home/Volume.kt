@@ -50,6 +50,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
+import kotlin.math.roundToInt
 
 @Composable
 fun Volume(navController: NavHostController) {
@@ -203,12 +204,12 @@ private fun MediaVolume(isHome: Boolean) {
                                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 newCustomVolume = it
                                 if (mCustomVolume < 0 || (!mHaveCustomLabel))
-                                    optionLabel = "${it.toInt()}%"
+                                    optionLabel = "${it.roundToInt()}%"
                             },
                             valueRange = 0f..100f,
                             steps = if (morePreciseSlider) 0 else 9
                         )
-                        Text("${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
+                        Text("${newCustomVolume.roundToInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
                         SpacerPadding()
                         OutlinedTextField(
                             value = optionLabel,
