@@ -170,3 +170,13 @@ fun ScrollableItalicText(@StringRes text: Int) =
     Box(Modifier.horizontalScroll(rememberScrollState())) {
         Text(buildAnnotatedString { ItalicText(stringResource(text)) })
     }
+
+@Composable
+fun Description(@StringRes text: Int) = Description(stringResource(text))
+
+@Composable
+fun Description(text: String) = Text(
+    text,
+    style = MaterialTheme.typography.labelMedium,
+    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+)

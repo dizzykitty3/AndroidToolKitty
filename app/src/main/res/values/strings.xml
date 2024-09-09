@@ -299,9 +299,10 @@
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
 
     <!-- Settings > About -->
-    <string name="view_source_code">View source code on GitHub</string>
+    <string name="view_source_code">Source code</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="licenses">Open-source licenses</string>
+    <string name="view_source_code_description" translatable="false">View source code on GitHub</string>
 
     <!-- Settings > Debugging -->
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
