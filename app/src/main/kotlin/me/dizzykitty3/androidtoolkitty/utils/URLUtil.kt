@@ -91,7 +91,7 @@ object URLUtil {
         LIT_LINK("lit.link/", R.string.lit_link),
         MARSHMALLOW_QA("marshmallow-qa.com/", R.string.marshmallow_qa),
         MASTODON("mastodon.social/@", R.string.mastodon),
-        MISSKEY("misskey.io/@", R.string.misskeyio),
+        MISSKEY("misskey.io/@", R.string.misskey),
         NOTE("note.com/", R.string.note),
         PATREON("patreon.com/", R.string.patreon),
         PAYPAL("paypal.me/", R.string.paypal),

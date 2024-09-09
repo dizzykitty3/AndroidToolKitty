@@ -167,4 +167,5 @@
     <string name="youtube_serach">YouTube (Search)</string>
     <string name="device_info">Device info</string>
     <string name="hide_greetings">Hide greetings</string>
+    <string name="misskey">ミスキー</string>
 </resources>
