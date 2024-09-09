@@ -23,7 +23,7 @@ fun Screen(content: @Composable () -> Unit) {
         LazyColumn(
             Modifier
                 .fillMaxSize()
-                .padding(start = screenPadding, end = screenPadding, bottom = screenPadding)
+                .padding(start = screenPadding, end = screenPadding)
         ) {
             item { content() }
         }

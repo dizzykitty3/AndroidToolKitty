@@ -59,6 +59,7 @@ fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostControl
         Appearance(settingsViewModel)
         General(settingsViewModel, navController)
         Bottom(navController)
+        CardSpacePadding()
     }
 }
 
