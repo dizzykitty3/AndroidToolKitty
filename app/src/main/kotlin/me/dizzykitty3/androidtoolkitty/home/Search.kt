@@ -256,7 +256,12 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
-                if (isInvalid(platform, username)) {
+                if (isCaseSensitive(platform)) {
+                    Text(
+                        "Please note that usernames on this platform are case sensitive",
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                } else if (isInvalid(platform, username)) {
                     Text(
                         stringResource(R.string.invalid_username_input_tip, platform),
                         color = MaterialTheme.colorScheme.error
@@ -340,6 +345,9 @@ private fun isInvalid(platform: URLUtil.Platform, username: String): Boolean =
 
 private fun isValid(platform: URLUtil.Platform, username: String): Boolean =
     !isInvalid(platform, username)
+
+private fun isCaseSensitive(platform: URLUtil.Platform): Boolean =
+    platform == URLUtil.Platform.LIT_LINK
 
 @Composable
 private fun CheckAppOnMarket() {
