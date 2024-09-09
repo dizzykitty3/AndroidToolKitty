@@ -224,8 +224,8 @@ private fun MediaVolume(isHome: Boolean) {
                             ),
                             keyboardActions = KeyboardActions(
                                 onDone = {
-                                    settingsSharedPref.customVolume = newCustomVolume.toInt()
-                                    mCustomVolume = newCustomVolume.toInt()
+                                    settingsSharedPref.customVolume = newCustomVolume.roundToInt()
+                                    mCustomVolume = newCustomVolume.roundToInt()
                                     if (mHaveCustomLabel) {
                                         settingsSharedPref.usingCustomVolumeOptionLabel = true
                                     }
@@ -260,11 +260,11 @@ private fun MediaVolume(isHome: Boolean) {
                         {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
-                                if (newCustomVolume.toInt() != 0) view.showSnackbar(R.string.system_media_volume_levels_limited)
+                                if (newCustomVolume.roundToInt() != 0) view.showSnackbar(R.string.system_media_volume_levels_limited)
                                 return@Button
                             } else {
-                                settingsSharedPref.customVolume = newCustomVolume.toInt()
-                                mCustomVolume = newCustomVolume.toInt()
+                                settingsSharedPref.customVolume = newCustomVolume.roundToInt()
+                                mCustomVolume = newCustomVolume.roundToInt()
                                 if (mHaveCustomLabel) {
                                     settingsSharedPref.usingCustomVolumeOptionLabel = true
                                 }
