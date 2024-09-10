@@ -43,7 +43,7 @@ fun HomeEdit() {
     Screen {
         val sp = remember { SettingsSharedPref }
 
-        Card(R.string.customize_my_home_page) {
+        Card(R.string.customize_home_page) {
             val haptic = LocalHapticFeedback.current
             var mIsShowCard1 by remember { mutableStateOf(sp.getShownState(CARD_1)) }
             var mIsShowCard2 by remember { mutableStateOf(sp.getShownState(CARD_2)) }

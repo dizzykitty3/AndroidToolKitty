@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.OpenInNew
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Bookmarks
 import androidx.compose.material.icons.outlined.Code
@@ -15,7 +14,6 @@ import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -42,6 +40,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.Description
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
+import me.dizzykitty3.androidtoolkitty.uicomponents.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
@@ -131,24 +130,31 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             settingsViewModel.update(settingsViewModel.settings.value.copy(hideGreetings = it))
         }
 
+        // change app lang
         if (OSVersion.android13()) {
             SpacerPadding()
-            OutlinedButton({
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                view.context.openAppLanguageSetting()
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.Language,
-                    contentDescription = stringResource(R.string.change_app_language),
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        view.context.openAppLanguageSetting()
+                    }) {
                 SpacerPadding()
-                Text(stringResource(R.string.change_app_language))
-                Icon(
-                    imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = stringResource(R.string.change_app_language),
-                    tint = MaterialTheme.colorScheme.primary
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Outlined.Language,
+                            contentDescription = stringResource(R.string.change_app_language)
+                        )
+                        IconAndTextPadding()
+                        Column {
+                            Text(stringResource(R.string.change_app_language))
+                            Description(stringResource(R.string.change_app_language_description))
+                        }
+                    }
+                }
+                SpacerPadding()
             }
         }
 
@@ -195,17 +201,29 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
         }
         SpacerPadding()
 
-        OutlinedButton({
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            navController.navigate(SCR_EDIT_HOME)
-        }) {
-            Icon(
-                imageVector = Icons.Outlined.Edit,
-                contentDescription = stringResource(R.string.customize_my_home_page),
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
+        // edit home
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    navController.navigate(SCR_EDIT_HOME)
+                }) {
             SpacerPadding()
-            Text(stringResource(R.string.customize_my_home_page))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Outlined.Edit,
+                        contentDescription = stringResource(R.string.customize_home_page)
+                    )
+                    IconAndTextPadding()
+                    Column {
+                        Text(stringResource(R.string.customize_home_page))
+                        Description(stringResource(R.string.customize_home_page_description))
+                    }
+                }
+            }
+            SpacerPadding()
         }
 
         GroupDivider()
@@ -236,7 +254,7 @@ private fun Bottom(navController: NavHostController) {
                         imageVector = Icons.Outlined.Code,
                         contentDescription = null
                     )
-                    SpacerPadding()
+                    IconAndTextPadding()
                     Column {
                         Text(stringResource(R.string.view_source_code))
                         Description(stringResource(R.string.view_source_code_description))
@@ -244,7 +262,7 @@ private fun Bottom(navController: NavHostController) {
                 }
                 CardSpacePadding()
                 Icon(
-                    imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
+                    imageVector = Icons.Outlined.ArrowOutward,
                     contentDescription = stringResource(R.string.view_source_code)
                 )
             }
@@ -265,7 +283,7 @@ private fun Bottom(navController: NavHostController) {
                     imageVector = Icons.Outlined.Bookmarks,
                     contentDescription = null
                 )
-                SpacerPadding()
+                IconAndTextPadding()
                 Column {
                     Text(stringResource(R.string.licenses))
                     Description("Auto-generated by AboutLibraries")
@@ -289,7 +307,7 @@ private fun Bottom(navController: NavHostController) {
                         imageVector = Icons.Outlined.SettingsApplications,
                         contentDescription = null
                     )
-                    SpacerPadding()
+                    IconAndTextPadding()
                     Column {
                         Text(stringResource(R.string.open_app_detail_settings))
                         Description("Clear storage, manage permissions, and so on")
@@ -297,7 +315,7 @@ private fun Bottom(navController: NavHostController) {
                 }
                 SpacerPadding()
                 Icon(
-                    imageVector = Icons.AutoMirrored.Outlined.OpenInNew,
+                    imageVector = Icons.Outlined.ArrowOutward,
                     contentDescription = stringResource(R.string.open_app_detail_settings)
                 )
             }
@@ -318,7 +336,7 @@ private fun Bottom(navController: NavHostController) {
                     imageVector = Icons.Outlined.Refresh,
                     contentDescription = null
                 )
-                SpacerPadding()
+                IconAndTextPadding()
                 Column {
                     Text(stringResource(R.string.restart_app))
                     Description("For testing")

@@ -285,24 +285,26 @@
     <string name="force_dark_mode_description">Force enable dark mode</string>
     <string name="hide_greetings">Hide greetings</string>
     <string name="hide_greetings_description">Hide gradient greeting text on Home screen (portrait mode only)</string>
+    <string name="change_app_language_description">Set language preference for ToolKitty on Android 13+</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_automatically">Clear clipboard automatically</string>
     <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
-    <string name="customize_my_home_page">Customize my home page</string>
+    <string name="customize_home_page">Customize home page</string>
     <string name="customize_system_settings_card">Customize options in the Android System Settings card</string>
     <string name="show_all_options">Show all options</string>
     <string name="hide_all_options">Hide all options</string>
     <string name="sys_settings_tip">Only the first four options enabled appear on Home screen</string>
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
+    <string name="customize_home_page_description">Hide cards on home page and vice versa</string>
 
     <!-- Settings > About -->
     <string name="view_source_code">Source code</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="licenses">Open-source licenses</string>
-    <string name="view_source_code_description" translatable="false">View source code on GitHub</string>
+    <string name="view_source_code_description">View source code on GitHub</string>
 
     <!-- Settings > Debugging -->
     <string name="go_to_permission_request_screen">Go to permission request screen</string>
