@@ -153,6 +153,11 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
                             Description(stringResource(R.string.change_app_language_description))
                         }
                     }
+                    CardSpacePadding()
+                    Icon(
+                        imageVector = Icons.Outlined.ArrowOutward,
+                        contentDescription = stringResource(R.string.change_app_language)
+                    )
                 }
                 SpacerPadding()
             }
