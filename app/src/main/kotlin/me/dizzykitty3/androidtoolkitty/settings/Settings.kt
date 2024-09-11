@@ -6,12 +6,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
-import androidx.compose.material.icons.outlined.Bookmarks
+import androidx.compose.material.icons.outlined.ClearAll
 import androidx.compose.material.icons.outlined.Code
+import androidx.compose.material.icons.outlined.ColorLens
+import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.FileCopy
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.SettingsApplications
+import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -77,6 +81,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 
         if (OSVersion.android12()) {
             CustomSwitchRow(
+                Icons.Outlined.ColorLens,
                 R.string.dynamic_color,
                 R.string.material_you_dynamic_color_theme,
                 dynamicColor
@@ -85,10 +90,10 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
                 dynamicColor = it
                 settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
             }
-            SpacerPadding()
         }
 
         CustomSwitchRow(
+            Icons.Outlined.DarkMode,
             R.string.force_dark_mode,
             R.string.force_dark_mode_description,
             forceDarkMode
@@ -97,9 +102,9 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             forceDarkMode = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(forceDarkMode = it))
         }
-        SpacerPadding()
 
         CustomSwitchRow(
+            Icons.Outlined.VisibilityOff,
             R.string.dismiss_lang_tip,
             R.string.dismiss_lang_tip_description,
             dismissLangTip
@@ -108,9 +113,9 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             dismissLangTip = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(dismissLangTip = it))
         }
-        SpacerPadding()
 
         CustomSwitchRow(
+            Icons.Outlined.VisibilityOff,
             R.string.hide_greetings,
             R.string.hide_greetings_description,
             hideGreetings
@@ -122,7 +127,6 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 
         // change app lang
         if (OSVersion.android13()) {
-            SpacerPadding()
             Column(
                 Modifier
                     .fillMaxWidth()
@@ -170,6 +174,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
         GroupTitle(R.string.general)
 
         CustomSwitchRow(
+            Icons.Outlined.ClearAll,
             R.string.clear_clipboard_automatically,
             R.string.clear_clipboard_on_launch,
             autoClearClipboard
@@ -193,7 +198,6 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
             }
             settingsViewModel.update(settingsViewModel.settings.value.copy(autoClearClipboard = it))
         }
-        SpacerPadding()
 
         // edit home
         Column(
@@ -273,7 +277,7 @@ private fun Bottom(navController: NavHostController) {
             SpacerPadding()
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
-                    imageVector = Icons.Outlined.Bookmarks,
+                    imageVector = Icons.Outlined.FileCopy,
                     contentDescription = null
                 )
                 IconAndTextPadding()

@@ -6,12 +6,15 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 
 @Composable
@@ -40,19 +43,22 @@ fun CustomHideCardSettingSwitch(
 
 @Composable
 fun CustomSwitchRow(
+    icon: ImageVector? = null,
     @StringRes title: Int,
     text: String? = null,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
-) = CustomSwitchRow(stringResource(title), text, checked, onCheckedChange)
+) = CustomSwitchRow(icon, stringResource(title), text, checked, onCheckedChange)
 
 @Composable
 fun CustomSwitchRow(
+    icon: ImageVector? = null,
     @StringRes title: Int,
     @StringRes text: Int,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) = CustomSwitchRow(
+    icon,
     stringResource(title),
     stringResource(text),
     checked,
@@ -61,17 +67,28 @@ fun CustomSwitchRow(
 
 @Composable
 private fun CustomSwitchRow(
+    icon: ImageVector? = null,
     title: String,
     text: String? = null,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) {
     Column(Modifier.clickable { onCheckedChange(!checked) }) {
+        SpacerPadding()
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Column(Modifier.weight(1f)) {
-                Text(title)
-                if (text != null) {
-                    Description(text)
+            Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
+                if (icon != null) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = stringResource(R.string.customize_home_page)
+                    )
+                    IconAndTextPadding()
+                }
+                Column {
+                    Text(title)
+                    if (text != null) {
+                        Description(text)
+                    }
                 }
             }
             Switch(
@@ -79,5 +96,6 @@ private fun CustomSwitchRow(
                 onCheckedChange = { onCheckedChange(it) }
             )
         }
+        SpacerPadding()
     }
 }

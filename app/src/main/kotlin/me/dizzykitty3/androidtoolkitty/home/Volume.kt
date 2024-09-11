@@ -246,8 +246,8 @@ private fun MediaVolume(isHome: Boolean) {
                                 }
                             }
                         )
-                        SpacerPadding()
                         CustomSwitchRow(
+                            null,
                             R.string.more_precise_slider,
                             R.string.slider_increment_1_percent,
                             morePreciseSlider
