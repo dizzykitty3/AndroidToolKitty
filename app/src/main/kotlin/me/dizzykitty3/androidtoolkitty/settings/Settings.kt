@@ -42,6 +42,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppLanguageSetting
@@ -54,23 +55,12 @@ import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Screen {
-        SettingsTitle()
+        ScreenTitle(R.string.settings)
         Appearance(settingsViewModel)
         General(settingsViewModel, navController)
         Bottom(navController)
         CardSpacePadding()
     }
-}
-
-@Composable
-private fun SettingsTitle() {
-    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            stringResource(R.string.settings),
-            style = MaterialTheme.typography.headlineSmall
-        )
-    }
-    SpacerPadding()
 }
 
 @Composable
@@ -153,7 +143,6 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
                             Description(stringResource(R.string.change_app_language_description))
                         }
                     }
-                    CardSpacePadding()
                     Icon(
                         imageVector = Icons.Outlined.ArrowOutward,
                         contentDescription = stringResource(R.string.change_app_language)
@@ -265,7 +254,6 @@ private fun Bottom(navController: NavHostController) {
                         Description(stringResource(R.string.view_source_code_description))
                     }
                 }
-                CardSpacePadding()
                 Icon(
                     imageVector = Icons.Outlined.ArrowOutward,
                     contentDescription = stringResource(R.string.view_source_code)
@@ -318,7 +306,6 @@ private fun Bottom(navController: NavHostController) {
                         Description("Clear storage, manage permissions, and so on")
                     }
                 }
-                SpacerPadding()
                 Icon(
                     imageVector = Icons.Outlined.ArrowOutward,
                     contentDescription = stringResource(R.string.open_app_detail_settings)

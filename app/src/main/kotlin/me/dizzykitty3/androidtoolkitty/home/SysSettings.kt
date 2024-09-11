@@ -39,6 +39,7 @@ import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
@@ -126,6 +127,8 @@ fun SysSettings(navController: NavHostController) {
 @Composable
 fun SysSettingsScreen() {
     Screen {
+        ScreenTitle(R.string.system_settings)
+
         val view = LocalView.current
 
         val settings = mutableListOf(

@@ -45,6 +45,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.uicomponents.ErrorTip
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnMarket
@@ -77,6 +78,7 @@ fun Search(navController: NavHostController) {
 @Composable
 fun SearchScreen(settingsViewModel: SettingsViewModel) {
     Screen {
+        ScreenTitle(R.string.search)
         Card(R.string.search) { Search() }
         Card(R.string.webpage) { Webpage() }
         Card(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }

@@ -58,11 +58,11 @@ fun Card(
         ) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.weight(1f)) {
-                    SpacerPadding()
                     Column {
                         if (icon == null) {
-                            CardTitle(title)
+                            GroupTitleNoColor(title)
                         } else {
+                            SpacerPadding()
                             Row {
                                 Icon(
                                     imageVector = icon,
@@ -72,8 +72,8 @@ fun Card(
                                 IconAndTextPadding()
                                 CardTitle(title)
                             }
+                            SpacerPadding()
                         }
-                        SpacerPadding()
                     }
                 }
                 if (hasShowMore && onClick != null) {

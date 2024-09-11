@@ -74,7 +74,6 @@ private fun CustomSwitchRow(
                     Description(text)
                 }
             }
-            CardSpacePadding()
             Switch(
                 checked = checked,
                 onCheckedChange = { onCheckedChange(it) }

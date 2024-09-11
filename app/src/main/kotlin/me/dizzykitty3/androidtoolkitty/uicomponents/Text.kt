@@ -5,6 +5,7 @@ package me.dizzykitty3.androidtoolkitty.uicomponents
 import androidx.annotation.StringRes
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -185,10 +186,18 @@ fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))
 fun GroupTitle(title: String) {
     Text(
         title,
-        style = MaterialTheme.typography.titleMedium,
+        style = MaterialTheme.typography.titleLarge,
         color = MaterialTheme.colorScheme.primary
     )
     SpacerPadding()
+}
+
+@Composable
+fun GroupTitleNoColor(title: String) {
+    Text(
+        title,
+        style = MaterialTheme.typography.titleMedium
+    )
 }
 
 @Composable
@@ -213,3 +222,17 @@ fun Description(text: String) = Text(
     style = MaterialTheme.typography.labelMedium,
     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
 )
+
+@Composable
+fun ScreenTitle(@StringRes text: Int) = ScreenTitle(stringResource(text))
+
+@Composable
+fun ScreenTitle(text: String) {
+    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text,
+            style = MaterialTheme.typography.headlineMedium
+        )
+    }
+    SpacerPadding()
+}

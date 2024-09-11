@@ -46,6 +46,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
@@ -70,6 +71,7 @@ fun Volume(navController: NavHostController) {
 @Composable
 fun VolumeScreen() {
     Screen {
+        ScreenTitle(R.string.volume)
         Card(R.string.media_volume) { MediaVolume(isHome = false) }
         Card(R.string.voice_call_volume) { VoiceCallVolume() }
     }
