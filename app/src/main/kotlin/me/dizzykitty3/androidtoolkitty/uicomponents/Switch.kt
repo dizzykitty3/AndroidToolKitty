@@ -91,6 +91,7 @@ private fun CustomSwitchRow(
                     }
                 }
             }
+            SpacerPadding()
             Switch(
                 checked = checked,
                 onCheckedChange = { onCheckedChange(it) }

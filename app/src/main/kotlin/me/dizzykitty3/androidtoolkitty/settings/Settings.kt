@@ -147,6 +147,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
                             Description(stringResource(R.string.change_app_language_description))
                         }
                     }
+                    SpacerPadding()
                     Icon(
                         imageVector = Icons.Outlined.ArrowOutward,
                         contentDescription = stringResource(R.string.change_app_language)
@@ -258,6 +259,7 @@ private fun Bottom(navController: NavHostController) {
                         Description(stringResource(R.string.view_source_code_description))
                     }
                 }
+                SpacerPadding()
                 Icon(
                     imageVector = Icons.Outlined.ArrowOutward,
                     contentDescription = stringResource(R.string.view_source_code)
@@ -310,6 +312,7 @@ private fun Bottom(navController: NavHostController) {
                         Description("Clear storage, manage permissions, and so on")
                     }
                 }
+                SpacerPadding()
                 Icon(
                     imageVector = Icons.Outlined.ArrowOutward,
                     contentDescription = stringResource(R.string.open_app_detail_settings)
