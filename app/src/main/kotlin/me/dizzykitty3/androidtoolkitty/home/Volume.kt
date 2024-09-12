@@ -101,9 +101,9 @@ private fun MediaVolume(isHome: Boolean) {
         mutableStateOf(
             when (AudioUtil.mediaVolume) {
                 0 -> 0
-                (0.4 * maxVolume).toInt() -> 1
-                (0.6 * maxVolume).toInt() -> 2
-                (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
+                (0.4 * maxVolume).roundToInt() -> 1
+                (0.6 * maxVolume).roundToInt() -> 2
+                (mCustomVolume * 0.01 * maxVolume).roundToInt() -> 3
                 else -> null
             }
         )
@@ -191,9 +191,9 @@ private fun MediaVolume(isHome: Boolean) {
                     showVolumeDialog = false
                     selectedIndex = when (AudioUtil.mediaVolume) {
                         0 -> 0
-                        (0.4 * maxVolume).toInt() -> 1
-                        (0.6 * maxVolume).toInt() -> 2
-                        (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
+                        (0.4 * maxVolume).roundToInt() -> 1
+                        (0.6 * maxVolume).roundToInt() -> 2
+                        (mCustomVolume * 0.01 * maxVolume).roundToInt() -> 3
                         else -> null
                     }
                 },
@@ -211,7 +211,7 @@ private fun MediaVolume(isHome: Boolean) {
                             valueRange = 0f..100f,
                             steps = if (morePreciseSlider) 0 else 9
                         )
-                        Text("${newCustomVolume.roundToInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
+                        Text("${newCustomVolume.roundToInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).roundToInt()}/$maxVolume")
                         SpacerPadding()
                         OutlinedTextField(
                             value = optionLabel,
@@ -261,7 +261,7 @@ private fun MediaVolume(isHome: Boolean) {
                     Button(
                         {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                            if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
+                            if ((newCustomVolume * 0.01 * maxVolume).roundToInt() == 0) {
                                 if (newCustomVolume.roundToInt() != 0) view.showSnackbar(R.string.system_media_volume_levels_limited)
                                 return@Button
                             } else {
@@ -287,9 +287,9 @@ private fun MediaVolume(isHome: Boolean) {
                         showVolumeDialog = false
                         selectedIndex = when (AudioUtil.mediaVolume) {
                             0 -> 0
-                            (0.4 * maxVolume).toInt() -> 1
-                            (0.6 * maxVolume).toInt() -> 2
-                            (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
+                            (0.4 * maxVolume).roundToInt() -> 1
+                            (0.6 * maxVolume).roundToInt() -> 2
+                            (mCustomVolume * 0.01 * maxVolume).roundToInt() -> 3
                             else -> null
                         }
                     }) { Text(stringResource(android.R.string.cancel)) }
