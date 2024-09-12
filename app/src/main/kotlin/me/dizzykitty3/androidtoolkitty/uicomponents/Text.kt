@@ -186,7 +186,6 @@ fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))
 fun GroupTitle(title: String) {
     Text(
         title,
-        style = MaterialTheme.typography.titleLarge,
         color = MaterialTheme.colorScheme.primary
     )
     SpacerPadding()
@@ -231,7 +230,7 @@ fun ScreenTitle(text: String) {
     Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text,
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.titleLarge
         )
     }
     SpacerPadding()
