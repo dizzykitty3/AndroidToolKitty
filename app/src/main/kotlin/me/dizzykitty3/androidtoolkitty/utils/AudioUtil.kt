@@ -12,6 +12,7 @@ import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noLocationPermission
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
 import java.time.LocalTime
+import kotlin.math.roundToInt
 
 object AudioUtil {
     private var audioManager = appContext.getSystemService(Context.AUDIO_SERVICE) as AudioManager
@@ -43,7 +44,7 @@ object AudioUtil {
         )
 
     private fun View.setMediaVolumeByPercentage(percentage: Int) {
-        val indexedVolume = (maxMediaVolumeIndex * 0.01 * percentage).toInt()
+        val indexedVolume = (maxMediaVolumeIndex * 0.01 * percentage).roundToInt()
         Timber.d("current = $mediaVolume, target = $indexedVolume")
 
         if (percentage in 0..100 && (mediaVolume != indexedVolume)) {
@@ -77,8 +78,13 @@ object AudioUtil {
 
     private fun Float.isNotAtHome(): Boolean = this >= 50f
 
-    fun View.setVolume(volume: Number) {
-        setMediaVolume(volume.toInt())
+    fun View.setVolume(volume: Int) {
+        setMediaVolume(volume)
+        this.showSnackbar(R.string.volume_changed)
+    }
+
+    fun View.setVolume(volume: Double) {
+        setMediaVolume(volume.roundToInt())
         this.showSnackbar(R.string.volume_changed)
     }
 }
