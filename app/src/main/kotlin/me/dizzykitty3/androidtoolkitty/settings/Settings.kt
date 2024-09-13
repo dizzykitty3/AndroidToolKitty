@@ -151,7 +151,8 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
                     SpacerPadding()
                     Icon(
                         imageVector = Icons.Outlined.ArrowOutward,
-                        contentDescription = stringResource(R.string.change_app_language)
+                        contentDescription = stringResource(R.string.change_app_language),
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
                     )
                 }
                 SpacerPadding()
@@ -225,7 +226,8 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
                 SpacerPadding()
                 Icon(
                     imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
                 )
             }
             SpacerPadding()
@@ -268,7 +270,8 @@ private fun Bottom(navController: NavHostController) {
                 SpacerPadding()
                 Icon(
                     imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = stringResource(R.string.view_source_code)
+                    contentDescription = stringResource(R.string.view_source_code),
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
                 )
             }
             SpacerPadding()
@@ -298,7 +301,8 @@ private fun Bottom(navController: NavHostController) {
                 SpacerPadding()
                 Icon(
                     imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
-                    contentDescription = null
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
                 )
             }
             SpacerPadding()
@@ -328,7 +332,8 @@ private fun Bottom(navController: NavHostController) {
                 SpacerPadding()
                 Icon(
                     imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = stringResource(R.string.open_app_detail_settings)
+                    contentDescription = stringResource(R.string.open_app_detail_settings),
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
                 )
             }
             SpacerPadding()
