@@ -29,13 +29,13 @@ android {
         }
     }
     buildTypes {
-        debug {
+        getByName("debug") {
             isMinifyEnabled = false
             applicationIdSuffix = ".dev"
             versionNameSuffix = ".dev"
             resValue("string", "app_name", "ToolKitty dev")
         }
-        release {
+        getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
