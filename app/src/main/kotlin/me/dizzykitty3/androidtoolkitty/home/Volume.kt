@@ -328,7 +328,7 @@ private fun VoiceCallVolume() {
         val index = AudioUtil.maxVoiceCallVolumeIndex
         AudioUtil.setVoiceCallVolume(index)
         if (AudioUtil.voiceCallVolume == index) {
-            view.showSnackbar(R.string.success)
+            view.showSnackbar(R.string.volume_changed)
         }
     }) { Text(stringResource(R.string.max_out_voice_call_volume)) }
 }
