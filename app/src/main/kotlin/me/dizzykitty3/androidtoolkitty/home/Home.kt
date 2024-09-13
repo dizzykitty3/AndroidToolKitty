@@ -120,7 +120,7 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
     Column(Modifier.padding(start = largeScreenPadding, end = largeScreenPadding)) {
         Row(Modifier.fillMaxWidth()) {
             Box(Modifier.weight(1f)) { Greeting() }
-            Box(Modifier.weight(1f)) { TopBar(settingsViewModel, navController) }
+            Box(Modifier.weight(1f)) { TopBar(settingsViewModel, navController, isTablet = true) }
         }
         SpacerPadding()
         if (debug) DevBuildTip()
@@ -131,9 +131,13 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
 }
 
 @Composable
-private fun TopBar(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun TopBar(
+    settingsViewModel: SettingsViewModel,
+    navController: NavHostController,
+    isTablet: Boolean = false
+) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Box(Modifier.weight(1f)) { Status() }
+        Box(Modifier.weight(1f)) { Status(isTablet) }
         SettingsButton(settingsViewModel, navController)
     }
 }
@@ -169,31 +173,13 @@ private fun SettingsButton(settingsViewModel: SettingsViewModel, navController: 
 }
 
 @Composable
-private fun Status() {
+private fun Status(isTablet: Boolean = false) {
     val batteryLevel = BatteryUtil.batteryLevel()
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
 
     Row(Modifier.horizontalScroll(rememberScrollState())) {
-        if (view.context.isHeadsetConnected()) {
-            Surface(shape = RoundedCornerShape(8.dp)) {
-                Row(Modifier.clickable {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    view.context.openSystemSettings(S_BLUETOOTH)
-                }) {
-                    Icon(
-                        imageVector = Icons.Outlined.MediaBluetoothOn,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
-                    )
-                    SpacerPadding()
-                    Text(
-                        stringResource(R.string.audio_devices_connected),
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
-                    )
-                }
-            }
-        } else {
+        if (isTablet || !view.context.isHeadsetConnected()) {
             Surface(shape = RoundedCornerShape(8.dp)) {
                 Row(Modifier.clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -214,6 +200,29 @@ private fun Status() {
             SpacerPadding()
             SpacerPadding()
             NetworkState()
+        }
+        if (view.context.isHeadsetConnected()) {
+            if (isTablet) {
+                SpacerPadding()
+                SpacerPadding()
+            }
+            Surface(shape = RoundedCornerShape(8.dp)) {
+                Row(Modifier.clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.openSystemSettings(S_BLUETOOTH)
+                }) {
+                    Icon(
+                        imageVector = Icons.Outlined.MediaBluetoothOn,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
+                    )
+                    SpacerPadding()
+                    Text(
+                        stringResource(R.string.audio_devices_connected),
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
+                    )
+                }
+            }
         }
     }
     CardSpacePadding()
