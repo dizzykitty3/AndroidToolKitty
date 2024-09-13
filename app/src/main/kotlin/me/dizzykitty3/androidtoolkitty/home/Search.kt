@@ -278,7 +278,7 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
 
     if (isCaseSensitive(platform)) {
         SpacerPadding()
-        Tip("Please note that usernames on this platform are case sensitive")
+        Tip(R.string.tip_case_sensitive)
     } else if (isInvalid(platform, username)) {
         SpacerPadding()
         ErrorTip(stringResource(R.string.invalid_username_input_tip, platform))

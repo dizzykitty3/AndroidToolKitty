@@ -18,6 +18,7 @@
     <string name="twitcasting">TwitCasting</string>
     <string name="bahamut">巴哈姆特</string>
     <string name="afdian">爱发电</string>
+    <string name="tip_case_sensitive">此平台区分大小写，请留意。</string>
     <string name="system_settings">系统设置</string>
     <string name="display_settings">显示设置</string>
     <string name="auto_rotate_settings">屏幕自动旋转设置</string>
@@ -26,6 +27,7 @@
     <string name="bluetooth_settings">蓝牙设置</string>
     <string name="date_and_time_settings">时间与日期设置</string>
     <string name="battery_optimization_settings">电池优化设置</string>
+    <string name="others">其他</string>
     <string name="battery_level">电量</string>
     <string name="usage_access_permission">查看使用情况权限</string>
     <string name="overlay_permission">显示在其他应用上层权限</string>
@@ -58,7 +60,7 @@
     <string name="show_all_options">显示所有选项</string>
     <string name="hide_all_options">隐藏所有选项</string>
     <string name="clear_clipboard_on_launch">在启动时清除剪贴板</string>
-    <string name="customize_home_page_description">Customize shown cards on home page</string>
+    <string name="customize_home_page_description">编辑主页显示的卡片</string>
     <string name="view_source_code">前往 GitHub 查看源码</string>
     <plurals name="days_remaining">
         <item quantity="other">剩余 %1$d 天</item>
@@ -72,7 +74,7 @@
     <string name="material_you_dynamic_color_theme">启用 Android 12+ 的 Material You 动态主题取色</string>
     <string name="dismiss_lang_tip_description">不显示首页的「语言未翻译」和「未完全翻译」提示</string>
     <string name="hide_greetings_description">隐藏竖屏模式下首页的问候语</string>
-    <string name="change_app_language_description">Set language preference for ToolKitty on Android 13+</string>
+    <string name="change_app_language_description">设定偏好语言</string>
     <string name="clear_clipboard_automatically">自动清除剪贴板</string>
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">你可以在设置界面中打开「启动时自动清空剪贴板」功能</string>
     <string name="settings">设置</string>
@@ -108,6 +110,8 @@
     <string name="missed_sys_popup">错过了系统权限弹窗吗？</string>
     <string name="clear_input">清空输入</string>
     <string name="open_app_detail_settings">打开应用详情设置</string>
+    <string name="open_app_detail_settings_description">清除数据、管理权限等</string>
+    <string name="restart_app_description">测试用</string>
     <string name="request_permission">授予权限</string>
     <string name="cellular">移动数据</string>
     <string name="offline">无网络</string>
@@ -116,7 +120,7 @@
     <string name="success_and_back">已获得权限！返回上一界面吧</string>
     <string name="search">搜索</string>
     <string name="licenses">开源许可证</string>
-    <string name="view_source_code_description">View source code on GitHub</string>
+    <string name="view_source_code_description">前往 GitHub 查看源码</string>
     <string name="go_to_permission_request_screen">前往权限申请画面</string>
     <string name="font_weight_test">字重测试</string>
     <string name="w1">100 淡体 Thin</string>
@@ -170,4 +174,5 @@
     <string name="device_info">设备信息</string>
     <string name="hide_greetings">隐藏问候语</string>
     <string name="misskey">Misskey</string>
+    <string name="licenses_description">由库 AboutLibraries 自动生成</string>
 </resources>
