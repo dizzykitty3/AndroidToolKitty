@@ -79,10 +79,10 @@ fun Search(navController: NavHostController) {
 fun SearchScreen(settingsViewModel: SettingsViewModel) {
     Screen {
         ScreenTitle(R.string.search)
-        Card(R.string.search) { Search() }
         Card(R.string.webpage) { Webpage() }
         Card(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }
         Card(R.string.check_app_on_market) { CheckAppOnMarket() }
+        Card(R.string.search) { Search() }
     }
 }
 
