@@ -6,6 +6,7 @@ import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -35,7 +36,8 @@ fun SystemSettingButton(
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
             contentDescription = stringResource(text),
-            modifier = Modifier.align(Alignment.CenterVertically)
+            modifier = Modifier.align(Alignment.CenterVertically),
+            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
         )
     }
 }

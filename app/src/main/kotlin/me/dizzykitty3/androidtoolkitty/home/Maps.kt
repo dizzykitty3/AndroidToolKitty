@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Place
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -121,7 +122,8 @@ fun Maps() {
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = stringResource(R.string.open_google_maps),
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
             )
         }
     }

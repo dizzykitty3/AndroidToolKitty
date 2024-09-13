@@ -12,6 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -128,7 +129,8 @@ private fun Search() {
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
             )
         }
         ButtonDivider()
@@ -141,7 +143,8 @@ private fun Search() {
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
             )
         }
     }
@@ -205,7 +208,8 @@ private fun Webpage() {
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
             contentDescription = null,
-            modifier = Modifier.align(Alignment.CenterVertically)
+            modifier = Modifier.align(Alignment.CenterVertically),
+            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
         )
     }
 }
@@ -295,7 +299,8 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
             contentDescription = null,
-            modifier = Modifier.align(Alignment.CenterVertically)
+            modifier = Modifier.align(Alignment.CenterVertically),
+            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
         )
     }
 }
@@ -402,7 +407,8 @@ private fun CheckAppOnMarket() {
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = stringResource(R.string.check_app_on_market),
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
             )
         }
         ButtonDivider()
@@ -416,7 +422,8 @@ private fun CheckAppOnMarket() {
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = stringResource(R.string.open_on_other_markets),
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
             )
         }
     }
@@ -435,7 +442,8 @@ private fun WhatIsPackageName() {
         Text(stringResource(R.string.what_is_package_name))
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = stringResource(R.string.what_is_package_name)
+            contentDescription = stringResource(R.string.what_is_package_name),
+            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
         )
     }
 }

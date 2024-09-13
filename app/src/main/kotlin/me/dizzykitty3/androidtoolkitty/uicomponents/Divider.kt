@@ -16,6 +16,6 @@ fun GroupDivider() {
 fun ButtonDivider() {
     Text(
         "|",
-        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6F)
+        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
     )
 }
