@@ -192,12 +192,7 @@ fun GroupTitle(title: String) {
 }
 
 @Composable
-fun GroupTitleNoColor(title: String) {
-    Text(
-        title,
-        style = MaterialTheme.typography.titleMedium
-    )
-}
+fun GroupTitleNoColor(title: String) = Text(title, style = MaterialTheme.typography.titleMedium)
 
 @Composable
 fun ScrollableText(text: String) =
@@ -235,3 +230,23 @@ fun ScreenTitle(text: String) {
     }
     SpacerPadding()
 }
+
+@Composable
+fun LabelText(text: String) = Text(text, style = MaterialTheme.typography.labelMedium)
+
+@Composable
+fun LabelText(@StringRes text: Int) = LabelText(stringResource(text))
+
+@Composable
+fun LabelAndValueTextRow(label: String, text: String) =
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(0.3F)) { LabelText(label) }
+        Column(Modifier.weight(0.7F)) { ScrollableText(text) }
+    }
+
+@Composable
+fun LabelAndValueTextRow(@StringRes label: Int, text: String) =
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(0.3F)) { LabelText(stringResource(label)) }
+        Column(Modifier.weight(0.7F)) { ScrollableText(text) }
+    }

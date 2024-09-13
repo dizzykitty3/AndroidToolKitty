@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
@@ -38,15 +37,14 @@ import me.dizzykitty3.androidtoolkitty.settings.SysSettingsCardEdit
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
+import me.dizzykitty3.androidtoolkitty.uicomponents.LabelAndValueTextRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
-import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
 
 @Composable
 fun SysSettings(navController: NavHostController) {
@@ -129,7 +127,7 @@ fun SysSettingsScreen() {
     Screen {
         ScreenTitle(R.string.system_settings)
 
-        val view = LocalView.current
+        LocalView.current
 
         val settings = mutableListOf(
             Setting(S_DISPLAY, R.string.display_settings),
@@ -168,23 +166,15 @@ fun SysSettingsScreen() {
         val i3 = settings.count()
 
         Card(R.string.device_info) {
-            Row(Modifier.fillMaxWidth()) {
-                Column(Modifier.weight(0.4f)) {
-                    ScrollableText(stringResource(R.string.manufacturer))
-                    ScrollableText(stringResource(R.string.device))
-                    ScrollableText(stringResource(R.string.os_version))
-                    ScrollableText(stringResource(R.string.locale))
-                    ScrollableText(stringResource(R.string.app_version))
-                    ScrollableText(stringResource(R.string.time_zone))
-                }
-                Column(Modifier.weight(0.6f)) {
-                    ScrollableText(Build.MANUFACTURER)
-                    ScrollableText("${Build.MODEL} (${Build.DEVICE})")
-                    ScrollableText("Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})")
-                    ScrollableText(StringUtil.sysLocale)
-                    ScrollableText(view.context.versionName)
-                    ScrollableText(DateUtil.sysTimeZone)
-                }
+            Column(Modifier.fillMaxWidth()) {
+                LabelAndValueTextRow(R.string.manufacturer, Build.MANUFACTURER)
+                LabelAndValueTextRow(R.string.device, "${Build.MODEL} (${Build.DEVICE})")
+                LabelAndValueTextRow(
+                    R.string.os_version,
+                    "Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})"
+                )
+                LabelAndValueTextRow(R.string.locale, StringUtil.sysLocale)
+                LabelAndValueTextRow(R.string.time_zone, DateUtil.sysTimeZone)
             }
         }
         Card(R.string.general) {
