@@ -165,7 +165,6 @@
     <string name="permission">权限</string>
     <string name="voice_call_volume">通话音量</string>
     <string name="max_out_voice_call_volume">将通话音量调整到最大值</string>
-    <string name="success">成功</string>
     <string name="dismiss_lang_tip">不显示语言适配提示</string>
     <string name="sys_settings_tip">仅启用的前四项会显示在首页</string>
     <string name="compose_catalog">Compose 组件元素</string>

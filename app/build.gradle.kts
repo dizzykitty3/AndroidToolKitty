@@ -76,6 +76,7 @@ android {
     buildToolsVersion = "35.0.0"
     androidResources {
         // https://developer.android.com/guide/topics/resources/app-languages#auto-localeconfig
+        @Suppress("UnstableApiUsage")
         generateLocaleConfig = true // Per-app language preferences
     }
 }

@@ -73,6 +73,7 @@ object StringUtil {
     fun String.isInvalidUsername(): Boolean = !this.isValidUsername()
 
     // BuildConfig.VERSION_NAME may not have the updated value at compile time. (I guess)
+    @Suppress("unused")
     val Context.versionName: String
         get() = this.packageManager.getPackageInfo(this.packageName, 0).versionName.toString()
 }

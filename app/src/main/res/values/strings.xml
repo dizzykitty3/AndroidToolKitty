@@ -20,7 +20,6 @@
     <string name="error">error</string>
     <string name="result">result =</string>
     <string name="permission">Permission</string>
-    <string name="success">success</string>
     <string name="general">General</string>
     <string name="wip" translatable="false">Work in progress</string>
     <string name="others">Others</string>
@@ -157,7 +156,6 @@
     <string name="device" translatable="false">device</string>
     <string name="os_version" translatable="false">os_ver</string>
     <string name="locale" translatable="false">locale</string>
-    <string name="app_version" translatable="false">app_ver</string>
     <string name="manufacturer" translatable="false">manufacturer</string>
     <string name="time_zone" translatable="false">time_zone</string>
 
