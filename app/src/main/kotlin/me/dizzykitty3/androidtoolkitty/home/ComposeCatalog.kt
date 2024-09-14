@@ -1,21 +1,26 @@
 package me.dizzykitty3.androidtoolkitty.home
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DashboardCustomize
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_COMPOSE_CATALOG
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
+import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 
 @Composable
@@ -36,6 +41,7 @@ fun ComposeCatalog(navController: NavHostController) {
 fun ComposeCatalogScreen() {
     Screen {
         Column(Modifier.fillMaxWidth()) {
+            GroupTitle("Typography")
             Text("Display Large", style = MaterialTheme.typography.displayLarge)
             HorizontalDivider()
             Text("Display Medium", style = MaterialTheme.typography.displayMedium)
@@ -65,6 +71,92 @@ fun ComposeCatalogScreen() {
             Text("Label Medium", style = MaterialTheme.typography.labelMedium)
             HorizontalDivider()
             Text("Label Small", style = MaterialTheme.typography.labelSmall)
+
+            CardSpacePadding()
+            GroupTitle("Color Scheme")
+            Row(Modifier.fillMaxWidth()) {
+                Row(Modifier.weight(0.5F)) {
+                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.primary) {
+                        Text(
+                            "Primary",
+                            style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+                Row(Modifier.weight(0.5F)) {
+                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onPrimary) {
+                        Text(
+                            "OnPrimary",
+                            style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            }
+            Row(Modifier.fillMaxWidth()) {
+                Row(Modifier.weight(0.5F)) {
+                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.secondary) {
+                        Text(
+                            "Secondary",
+                            style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+                Row(Modifier.weight(0.5F)) {
+                    Surface(
+                        Modifier.fillMaxWidth(),
+                        color = MaterialTheme.colorScheme.onSecondary
+                    ) {
+                        Text(
+                            "OnSecondary",
+                            style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            }
+            Row(Modifier.fillMaxWidth()) {
+                Row(Modifier.weight(0.5F)) {
+                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.tertiary) {
+                        Text(
+                            "Tertiary",
+                            style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+                Row(Modifier.weight(0.5F)) {
+                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onTertiary) {
+                        Text(
+                            "OnTertiary",
+                            style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            }
+            Row(Modifier.fillMaxWidth()) {
+                Row(Modifier.weight(0.5F)) {
+                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.error) {
+                        Text(
+                            "Error",
+                            style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+                Row(Modifier.weight(0.5F)) {
+                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onError) {
+                        Text(
+                            "OnError",
+                            style = MaterialTheme.typography.titleLarge,
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                }
+            }
         }
     }
 }
