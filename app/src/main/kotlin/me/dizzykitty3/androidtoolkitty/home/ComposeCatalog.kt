@@ -24,7 +24,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_COMPOSE_CATALOG
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
+import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitleNoColor
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 
 @Composable
@@ -45,7 +45,7 @@ fun ComposeCatalog(navController: NavHostController) {
 fun ComposeCatalogScreen() {
     Screen {
         Column(Modifier.fillMaxWidth()) {
-            GroupTitle("Typography")
+            GroupTitleNoColor("Typography")
             Text("Display Large", style = MaterialTheme.typography.displayLarge)
             HorizontalDivider()
             Text("Display Medium", style = MaterialTheme.typography.displayMedium)
@@ -77,7 +77,7 @@ fun ComposeCatalogScreen() {
             Text("Label Small", style = MaterialTheme.typography.labelSmall)
 
             CardSpacePadding()
-            GroupTitle("Color Scheme")
+            GroupTitleNoColor("Color Scheme")
             ColorRow(MaterialTheme.colorScheme.primary, "Primary")
             ColorRow(MaterialTheme.colorScheme.primaryContainer, "PrimaryContainer")
             ColorRow(MaterialTheme.colorScheme.secondary, "Secondary")
