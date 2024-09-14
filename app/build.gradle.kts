@@ -52,7 +52,6 @@ android {
         }
     }
     composeCompiler {
-        enableStrongSkippingMode = true
         reportsDestination = layout.buildDirectory.dir("compose_compiler")
         // https://developer.android.com/develop/ui/compose/compiler#configuration-options
 //        stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
