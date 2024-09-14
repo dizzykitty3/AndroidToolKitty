@@ -2,7 +2,9 @@ package me.dizzykitty3.androidtoolkitty.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DashboardCustomize
 import androidx.compose.material3.HorizontalDivider
@@ -11,10 +13,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_COMPOSE_CATALOG
@@ -74,89 +78,32 @@ fun ComposeCatalogScreen() {
 
             CardSpacePadding()
             GroupTitle("Color Scheme")
-            Row(Modifier.fillMaxWidth()) {
-                Row(Modifier.weight(0.5F)) {
-                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.primary) {
-                        Text(
-                            "Primary",
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-                Row(Modifier.weight(0.5F)) {
-                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onPrimary) {
-                        Text(
-                            "OnPrimary",
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-            }
-            Row(Modifier.fillMaxWidth()) {
-                Row(Modifier.weight(0.5F)) {
-                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.secondary) {
-                        Text(
-                            "Secondary",
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-                Row(Modifier.weight(0.5F)) {
-                    Surface(
-                        Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colorScheme.onSecondary
-                    ) {
-                        Text(
-                            "OnSecondary",
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-            }
-            Row(Modifier.fillMaxWidth()) {
-                Row(Modifier.weight(0.5F)) {
-                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.tertiary) {
-                        Text(
-                            "Tertiary",
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-                Row(Modifier.weight(0.5F)) {
-                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onTertiary) {
-                        Text(
-                            "OnTertiary",
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-            }
-            Row(Modifier.fillMaxWidth()) {
-                Row(Modifier.weight(0.5F)) {
-                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.error) {
-                        Text(
-                            "Error",
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-                Row(Modifier.weight(0.5F)) {
-                    Surface(Modifier.fillMaxWidth(), color = MaterialTheme.colorScheme.onError) {
-                        Text(
-                            "OnError",
-                            style = MaterialTheme.typography.titleLarge,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-            }
+            ColorRow(MaterialTheme.colorScheme.primary, "Primary")
+            ColorRow(MaterialTheme.colorScheme.primaryContainer, "PrimaryContainer")
+            ColorRow(MaterialTheme.colorScheme.secondary, "Secondary")
+            ColorRow(MaterialTheme.colorScheme.secondaryContainer, "SecondaryContainer")
+            ColorRow(MaterialTheme.colorScheme.tertiary, "Tertiary")
+            ColorRow(MaterialTheme.colorScheme.tertiaryContainer, "TertiaryContainer")
+            ColorRow(MaterialTheme.colorScheme.error, "Error")
+            ColorRow(MaterialTheme.colorScheme.errorContainer, "ErrorContainer")
+            ColorRow(MaterialTheme.colorScheme.background, "Background")
+            ColorRow(MaterialTheme.colorScheme.surface, "Surface")
+            ColorRow(MaterialTheme.colorScheme.surfaceVariant, "SurfaceVariant")
+            ColorRow(MaterialTheme.colorScheme.surfaceBright, "SurfaceBright")
+            ColorRow(MaterialTheme.colorScheme.surfaceDim, "SurfaceDim")
+            ColorRow(MaterialTheme.colorScheme.surfaceContainer, "SurfaceContainer")
+
+            CardSpacePadding()
         }
     }
 }
+
+@Composable
+private fun ColorRow(color: Color, text: String) =
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .height(45.dp)
+    ) {
+        Surface(Modifier.fillMaxSize(), color = color) { Text(text, textAlign = TextAlign.Center) }
+    }
