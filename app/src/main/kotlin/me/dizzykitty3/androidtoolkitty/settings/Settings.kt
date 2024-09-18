@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.ArrowOutward
@@ -19,6 +20,7 @@ import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,6 +34,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.R
@@ -128,34 +131,36 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 
         // change app lang
         if (OSVersion.android13()) {
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        view.context.openAppLanguageSetting()
-                    }) {
-                SpacerPadding()
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            imageVector = Icons.Outlined.Language,
-                            contentDescription = stringResource(R.string.change_app_language)
-                        )
-                        IconAndTextPadding()
-                        Column {
-                            Text(stringResource(R.string.change_app_language))
-                            Description(stringResource(R.string.change_app_language_description))
+            Surface(shape = RoundedCornerShape(8.dp)) {
+                Column(
+                    Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            view.context.openAppLanguageSetting()
+                        }) {
+                    SpacerPadding()
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Outlined.Language,
+                                contentDescription = stringResource(R.string.change_app_language)
+                            )
+                            IconAndTextPadding()
+                            Column {
+                                Text(stringResource(R.string.change_app_language))
+                                Description(stringResource(R.string.change_app_language_description))
+                            }
                         }
+                        SpacerPadding()
+                        Icon(
+                            imageVector = Icons.Outlined.ArrowOutward,
+                            contentDescription = stringResource(R.string.change_app_language),
+                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                        )
                     }
                     SpacerPadding()
-                    Icon(
-                        imageVector = Icons.Outlined.ArrowOutward,
-                        contentDescription = stringResource(R.string.change_app_language),
-                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
-                    )
                 }
-                SpacerPadding()
             }
         }
 
@@ -203,36 +208,37 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
         }
 
         // edit home
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .clickable {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    navController.navigate(SCR_EDIT_HOME)
-                }) {
-            SpacerPadding()
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Outlined.Edit,
-                        contentDescription = stringResource(R.string.customize_home_page)
-                    )
-                    IconAndTextPadding()
-                    Column {
-                        Text(stringResource(R.string.customize_home_page))
-                        Description(stringResource(R.string.customize_home_page_description))
+        Surface(shape = RoundedCornerShape(8.dp)) {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        navController.navigate(SCR_EDIT_HOME)
+                    }) {
+                SpacerPadding()
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Outlined.Edit,
+                            contentDescription = stringResource(R.string.customize_home_page)
+                        )
+                        IconAndTextPadding()
+                        Column {
+                            Text(stringResource(R.string.customize_home_page))
+                            Description(stringResource(R.string.customize_home_page_description))
+                        }
                     }
+                    SpacerPadding()
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                    )
                 }
                 SpacerPadding()
-                Icon(
-                    imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
-                )
             }
-            SpacerPadding()
         }
-
         GroupDivider()
     }
 }
@@ -246,120 +252,128 @@ private fun Bottom(navController: NavHostController) {
         GroupTitle(R.string.others)
 
         // source code
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .clickable {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    view.context.showToast(R.string.all_help_welcomed)
-                    view.context.openURL(SOURCE_CODE_URL)
-                }) {
-            SpacerPadding()
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Outlined.Code,
-                        contentDescription = null
-                    )
-                    IconAndTextPadding()
-                    Column {
-                        Text(stringResource(R.string.view_source_code))
-                        Description(stringResource(R.string.view_source_code_description))
+        Surface(shape = RoundedCornerShape(8.dp)) {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        view.context.showToast(R.string.all_help_welcomed)
+                        view.context.openURL(SOURCE_CODE_URL)
+                    }) {
+                SpacerPadding()
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Outlined.Code,
+                            contentDescription = null
+                        )
+                        IconAndTextPadding()
+                        Column {
+                            Text(stringResource(R.string.view_source_code))
+                            Description(stringResource(R.string.view_source_code_description))
+                        }
                     }
+                    SpacerPadding()
+                    Icon(
+                        imageVector = Icons.Outlined.ArrowOutward,
+                        contentDescription = stringResource(R.string.view_source_code),
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                    )
                 }
                 SpacerPadding()
-                Icon(
-                    imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = stringResource(R.string.view_source_code),
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
-                )
             }
-            SpacerPadding()
         }
 
         // licenses
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .clickable {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    navController.navigate(SCR_LICENSES)
-                }) {
-            SpacerPadding()
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Outlined.FileCopy,
-                        contentDescription = null
-                    )
-                    IconAndTextPadding()
-                    Column {
-                        Text(stringResource(R.string.licenses))
-                        Description(R.string.licenses_description)
+        Surface(shape = RoundedCornerShape(8.dp)) {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        navController.navigate(SCR_LICENSES)
+                    }) {
+                SpacerPadding()
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Outlined.FileCopy,
+                            contentDescription = null
+                        )
+                        IconAndTextPadding()
+                        Column {
+                            Text(stringResource(R.string.licenses))
+                            Description(R.string.licenses_description)
+                        }
                     }
+                    SpacerPadding()
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                    )
                 }
                 SpacerPadding()
-                Icon(
-                    imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
-                )
             }
-            SpacerPadding()
         }
 
         // android app settings
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .clickable {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    view.context.openAppDetailSettings()
-                }) {
-            SpacerPadding()
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+        Surface(shape = RoundedCornerShape(8.dp)) {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        view.context.openAppDetailSettings()
+                    }) {
+                SpacerPadding()
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Outlined.SettingsApplications,
+                            contentDescription = null
+                        )
+                        IconAndTextPadding()
+                        Column {
+                            Text(stringResource(R.string.open_app_detail_settings))
+                            Description(R.string.open_app_detail_settings_description)
+                        }
+                    }
+                    SpacerPadding()
                     Icon(
-                        imageVector = Icons.Outlined.SettingsApplications,
+                        imageVector = Icons.Outlined.ArrowOutward,
+                        contentDescription = stringResource(R.string.open_app_detail_settings),
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                    )
+                }
+                SpacerPadding()
+            }
+        }
+
+        // relaunch
+        Surface(shape = RoundedCornerShape(8.dp)) {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        view.context.restartApp()
+                    }) {
+                SpacerPadding()
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Outlined.Refresh,
                         contentDescription = null
                     )
                     IconAndTextPadding()
                     Column {
-                        Text(stringResource(R.string.open_app_detail_settings))
-                        Description(R.string.open_app_detail_settings_description)
+                        Text(stringResource(R.string.restart_app))
+                        Description(R.string.restart_app_description)
                     }
                 }
                 SpacerPadding()
-                Icon(
-                    imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = stringResource(R.string.open_app_detail_settings),
-                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
-                )
             }
-            SpacerPadding()
-        }
-
-        // relaunch
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .clickable {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    view.context.restartApp()
-                }) {
-            SpacerPadding()
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    imageVector = Icons.Outlined.Refresh,
-                    contentDescription = null
-                )
-                IconAndTextPadding()
-                Column {
-                    Text(stringResource(R.string.restart_app))
-                    Description(R.string.restart_app_description)
-                }
-            }
-            SpacerPadding()
         }
     }
 }
