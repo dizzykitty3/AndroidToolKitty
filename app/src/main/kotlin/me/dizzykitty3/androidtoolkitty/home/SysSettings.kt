@@ -30,7 +30,9 @@ import me.dizzykitty3.androidtoolkitty.S_DEVELOPER
 import me.dizzykitty3.androidtoolkitty.S_DISPLAY
 import me.dizzykitty3.androidtoolkitty.S_LOCALE
 import me.dizzykitty3.androidtoolkitty.S_OVERLAY
+import me.dizzykitty3.androidtoolkitty.S_POWER_USAGE_SUMMARY
 import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
+import me.dizzykitty3.androidtoolkitty.S_WIFI
 import me.dizzykitty3.androidtoolkitty.S_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.settings.SysSettingsCardEdit
@@ -58,6 +60,8 @@ fun SysSettings(navController: NavHostController) {
             navController.navigate(SCR_SYS_SETTINGS)
         }) {
         val settings = mutableListOf(
+            Setting(S_WIFI, R.string.wifi),
+            Setting(S_POWER_USAGE_SUMMARY, R.string.battery_level),
             Setting(S_DISPLAY, R.string.display_settings),
             Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings),
             Setting(S_BLUETOOTH, R.string.bluetooth_settings),
@@ -130,6 +134,8 @@ fun SysSettingsScreen() {
         LocalView.current
 
         val settings = mutableListOf(
+            Setting(S_WIFI, R.string.wifi),
+            Setting(S_POWER_USAGE_SUMMARY, R.string.battery_level),
             Setting(S_DISPLAY, R.string.display_settings),
             Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings),
             Setting(S_BLUETOOTH, R.string.bluetooth_settings),

@@ -30,7 +30,9 @@ import me.dizzykitty3.androidtoolkitty.S_DEVELOPER
 import me.dizzykitty3.androidtoolkitty.S_DISPLAY
 import me.dizzykitty3.androidtoolkitty.S_LOCALE
 import me.dizzykitty3.androidtoolkitty.S_OVERLAY
+import me.dizzykitty3.androidtoolkitty.S_POWER_USAGE_SUMMARY
 import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
+import me.dizzykitty3.androidtoolkitty.S_WIFI
 import me.dizzykitty3.androidtoolkitty.S_WRITE_SETTINGS
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
@@ -44,6 +46,8 @@ fun SysSettingsCardEdit() {
     Card(R.string.customize_system_settings_card) {
         val haptic = LocalHapticFeedback.current
         val sp = remember { SettingsSharedPref }
+        var mIsShowSetting by remember { mutableStateOf(sp.getShownState(S_WIFI)) }
+        var mIsShowSetting0 by remember { mutableStateOf(sp.getShownState(S_POWER_USAGE_SUMMARY)) }
         var mIsShowSetting1 by remember { mutableStateOf(sp.getShownState(S_DISPLAY)) }
         var mIsShowSetting2 by remember { mutableStateOf(sp.getShownState(S_AUTO_ROTATE)) }
         var mIsShowSetting3 by remember { mutableStateOf(sp.getShownState(S_BLUETOOTH)) }
@@ -60,6 +64,24 @@ fun SysSettingsCardEdit() {
 
         Tip(R.string.sys_settings_tip)
 
+        CustomHideCardSettingSwitch(
+            text = R.string.wifi,
+            card = S_WIFI,
+            isChecked = mIsShowSetting
+        ) { newState ->
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            mIsShowSetting = newState
+            sp.saveShownState(S_WIFI, newState)
+        }
+        CustomHideCardSettingSwitch(
+            text = R.string.battery_level,
+            card = S_POWER_USAGE_SUMMARY,
+            isChecked = mIsShowSetting0
+        ) { newState ->
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            mIsShowSetting0 = newState
+            sp.saveShownState(S_POWER_USAGE_SUMMARY, newState)
+        }
         CustomHideCardSettingSwitch(
             text = R.string.display_settings,
             card = S_DISPLAY,
@@ -194,6 +216,8 @@ fun SysSettingsCardEdit() {
             {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 onClickChangeAllCardsButton(false)
+                mIsShowSetting = false
+                mIsShowSetting0 = false
                 mIsShowSetting1 = false
                 mIsShowSetting2 = false
                 mIsShowSetting3 = false
@@ -223,6 +247,8 @@ fun SysSettingsCardEdit() {
             {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 onClickChangeAllCardsButton(true)
+                mIsShowSetting = true
+                mIsShowSetting0 = true
                 mIsShowSetting1 = true
                 mIsShowSetting2 = true
                 mIsShowSetting3 = true
@@ -252,6 +278,8 @@ fun SysSettingsCardEdit() {
 
 private fun onClickChangeAllCardsButton(isShow: Boolean) {
     val settingList = listOf(
+        S_WIFI,
+        S_POWER_USAGE_SUMMARY,
         S_DISPLAY,
         S_AUTO_ROTATE,
         S_BLUETOOTH,
