@@ -137,6 +137,7 @@ private fun MediaVolume(isHome: Boolean) {
 
                         3 -> {
                             mHaveTappedAddButton = true
+                            settingsSharedPref.haveTappedAddButton = true
                             if (mCustomVolume > 0)
                                 view.setVolume(mCustomVolume * 0.01 * maxVolume)
                             else
