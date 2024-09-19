@@ -26,6 +26,7 @@ fun Screen(content: @Composable () -> Unit) {
                 .padding(start = screenPadding, end = screenPadding)
         ) {
             item { content() }
+            item { ScreenPadding() }
         }
     }
 }

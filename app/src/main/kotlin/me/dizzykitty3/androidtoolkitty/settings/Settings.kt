@@ -43,7 +43,6 @@ import me.dizzykitty3.androidtoolkitty.SCR_LICENSES
 import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.Description
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
@@ -67,7 +66,6 @@ fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostControl
         Appearance(settingsViewModel)
         General(settingsViewModel, navController)
         Bottom(navController)
-        CardSpacePadding()
     }
 }
 
