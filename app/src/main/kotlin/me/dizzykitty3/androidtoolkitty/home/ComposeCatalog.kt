@@ -78,20 +78,25 @@ fun ComposeCatalogScreen() {
 
             CardSpacePadding()
             GroupTitleNoColor("Color Scheme")
-            ColorRow(MaterialTheme.colorScheme.primary, "Primary")
-            ColorRow(MaterialTheme.colorScheme.primaryContainer, "PrimaryContainer")
-            ColorRow(MaterialTheme.colorScheme.secondary, "Secondary")
-            ColorRow(MaterialTheme.colorScheme.secondaryContainer, "SecondaryContainer")
-            ColorRow(MaterialTheme.colorScheme.tertiary, "Tertiary")
-            ColorRow(MaterialTheme.colorScheme.tertiaryContainer, "TertiaryContainer")
-            ColorRow(MaterialTheme.colorScheme.error, "Error")
-            ColorRow(MaterialTheme.colorScheme.errorContainer, "ErrorContainer")
-            ColorRow(MaterialTheme.colorScheme.background, "Background")
-            ColorRow(MaterialTheme.colorScheme.surface, "Surface")
-            ColorRow(MaterialTheme.colorScheme.surfaceVariant, "SurfaceVariant")
-            ColorRow(MaterialTheme.colorScheme.surfaceBright, "SurfaceBright")
-            ColorRow(MaterialTheme.colorScheme.surfaceDim, "SurfaceDim")
-            ColorRow(MaterialTheme.colorScheme.surfaceContainer, "SurfaceContainer")
+            Color(MaterialTheme.colorScheme.primary, "Primary")
+            Color(MaterialTheme.colorScheme.primaryContainer, "PrimaryContainer")
+            Color(MaterialTheme.colorScheme.secondary, "Secondary")
+            Color(MaterialTheme.colorScheme.secondaryContainer, "SecondaryContainer")
+            Color(MaterialTheme.colorScheme.tertiary, "Tertiary")
+            Color(MaterialTheme.colorScheme.tertiaryContainer, "TertiaryContainer")
+            Color(MaterialTheme.colorScheme.error, "Error")
+            Color(MaterialTheme.colorScheme.errorContainer, "ErrorContainer")
+            Color(MaterialTheme.colorScheme.background, "Background")
+            Color(MaterialTheme.colorScheme.surface, "Surface")
+            Color(MaterialTheme.colorScheme.surfaceVariant, "SurfaceVariant")
+            Color(MaterialTheme.colorScheme.surfaceBright, "SurfaceBright")
+            Color(MaterialTheme.colorScheme.surfaceDim, "SurfaceDim")
+            Color(MaterialTheme.colorScheme.surfaceTint, "SurfaceTint")
+            Color(MaterialTheme.colorScheme.surfaceContainer, "SurfaceContainer")
+            Color(MaterialTheme.colorScheme.surfaceContainerHigh, "SurfaceContainerHigh (Dialog)")
+            Color(MaterialTheme.colorScheme.surfaceContainerHighest, "SurfaceContainerHighest")
+            Color(MaterialTheme.colorScheme.surfaceContainerLow, "SurfaceContainerLow (Card)")
+            Color(MaterialTheme.colorScheme.surfaceContainerLowest, "SurfaceContainerLowest")
 
             CardSpacePadding()
         }
@@ -99,7 +104,7 @@ fun ComposeCatalogScreen() {
 }
 
 @Composable
-private fun ColorRow(color: Color, text: String) =
+private fun Color(color: Color, text: String) =
     Row(
         Modifier
             .fillMaxWidth()
