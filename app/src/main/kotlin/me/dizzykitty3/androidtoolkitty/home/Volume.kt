@@ -1,9 +1,11 @@
 package me.dizzykitty3.androidtoolkitty.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -20,6 +22,8 @@ import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Slider
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -43,7 +47,7 @@ import me.dizzykitty3.androidtoolkitty.SCR_VOLUME
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
-import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
+import me.dizzykitty3.androidtoolkitty.uicomponents.Description
 import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
@@ -144,7 +148,9 @@ private fun MediaVolume(isHome: Boolean) {
                 shape = SegmentedButtonDefaults.itemShape(
                     index = index,
                     count = options.size
-                )
+                ),
+                colors = SegmentedButtonDefaults.colors()
+                    .copy(activeContainerColor = MaterialTheme.colorScheme.surfaceContainerLow)
             ) {
                 if (label != stringResource(R.string.add)) {
                     Text(label.toString())
@@ -246,14 +252,34 @@ private fun MediaVolume(isHome: Boolean) {
                                 }
                             }
                         )
-                        CustomSwitchRow(
-                            null,
-                            R.string.more_precise_slider,
-                            R.string.slider_increment_1_percent,
-                            morePreciseSlider
+
+                        Surface(
+                            shape = RoundedCornerShape(8.dp),
+                            color = MaterialTheme.colorScheme.surfaceContainerHigh
                         ) {
-                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                            morePreciseSlider = it
+                            Column(Modifier.clickable {
+                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                morePreciseSlider = !morePreciseSlider
+                            }) {
+                                SpacerPadding()
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Row(
+                                        Modifier.weight(1f),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Column {
+                                            Text(stringResource(R.string.more_precise_slider))
+                                            Description(R.string.slider_increment_1_percent)
+                                        }
+                                    }
+                                    SpacerPadding()
+                                    Switch(
+                                        checked = morePreciseSlider,
+                                        onCheckedChange = { morePreciseSlider = it }
+                                    )
+                                }
+                                SpacerPadding()
+                            }
                         }
                     }
                 },

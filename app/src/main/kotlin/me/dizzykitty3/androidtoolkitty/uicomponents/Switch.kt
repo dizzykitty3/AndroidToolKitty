@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
@@ -26,19 +27,24 @@ fun CustomHideCardSettingSwitch(
     card: String,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
-) = Row(
-    Modifier.clickable {
-        onCheckedChange(!isChecked)
-        SettingsSharedPref.saveShownState(card, !isChecked)
-    },
-    verticalAlignment = Alignment.CenterVertically
+) = Surface(
+    shape = RoundedCornerShape(8.dp),
+    color = MaterialTheme.colorScheme.surfaceContainerLow
 ) {
-    Column(Modifier.weight(1f)) { Text(stringResource(text)) }
-    Column {
-        Switch(
-            checked = isChecked,
-            onCheckedChange = onCheckedChange
-        )
+    Row(
+        Modifier.clickable {
+            onCheckedChange(!isChecked)
+            SettingsSharedPref.saveShownState(card, !isChecked)
+        },
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Column(Modifier.weight(1f)) { Text(stringResource(text)) }
+        Column {
+            Switch(
+                checked = isChecked,
+                onCheckedChange = onCheckedChange
+            )
+        }
     }
 }
 
