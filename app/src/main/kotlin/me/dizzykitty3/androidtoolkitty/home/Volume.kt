@@ -150,7 +150,7 @@ private fun MediaVolume(isHome: Boolean) {
                     count = options.size
                 ),
                 colors = SegmentedButtonDefaults.colors()
-                    .copy(activeContainerColor = MaterialTheme.colorScheme.surfaceContainerLow)
+                    .copy(inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainerLow)
             ) {
                 if (label != stringResource(R.string.add)) {
                     Text(label.toString())

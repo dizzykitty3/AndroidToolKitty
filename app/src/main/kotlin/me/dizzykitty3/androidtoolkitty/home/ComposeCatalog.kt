@@ -93,9 +93,15 @@ fun ComposeCatalogScreen() {
             Color(MaterialTheme.colorScheme.surfaceDim, "SurfaceDim")
             Color(MaterialTheme.colorScheme.surfaceTint, "SurfaceTint")
             Color(MaterialTheme.colorScheme.surfaceContainer, "SurfaceContainer")
-            Color(MaterialTheme.colorScheme.surfaceContainerHigh, "SurfaceContainerHigh (Dialog)")
+            Color(
+                MaterialTheme.colorScheme.surfaceContainerHigh,
+                "SurfaceContainerHigh (AlertDialog)"
+            )
             Color(MaterialTheme.colorScheme.surfaceContainerHighest, "SurfaceContainerHighest")
-            Color(MaterialTheme.colorScheme.surfaceContainerLow, "SurfaceContainerLow (Card)")
+            Color(
+                MaterialTheme.colorScheme.surfaceContainerLow,
+                "SurfaceContainerLow (ElevatedCard)"
+            )
             Color(MaterialTheme.colorScheme.surfaceContainerLowest, "SurfaceContainerLowest")
 
             CardSpacePadding()
