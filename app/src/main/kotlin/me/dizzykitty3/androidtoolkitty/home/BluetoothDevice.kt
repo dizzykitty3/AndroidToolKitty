@@ -48,7 +48,7 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 @SuppressLint("MissingPermission")
 @Composable
 fun BluetoothDevice(navController: NavHostController) {
-    Card(R.string.bluetooth_devices, Icons.Outlined.Bluetooth) {
+    Card(title = R.string.bluetooth_devices, icon = Icons.Outlined.Bluetooth) {
         val view = LocalView.current
         val haptic = LocalHapticFeedback.current
         var showResult by remember { mutableStateOf(false) }
@@ -56,35 +56,33 @@ fun BluetoothDevice(navController: NavHostController) {
         var pairedDevices by remember { mutableStateOf<List<BluetoothDevice>>(emptyList()) }
         var size by remember { mutableIntStateOf(0) }
 
-        OutlinedButton(
-            onClick = {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        OutlinedButton(onClick = {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
 
-                // Check permission
-                if (view.context.noBluetoothPermission()) {
-                    navController.navigate(SCR_PERMISSION_REQUEST)
-                    return@OutlinedButton
-                }
-
-                // Get system service
-                bluetoothAdapter = BluetoothUtil.bluetoothAdapter
-                if (bluetoothAdapter == null) {
-                    view.showSnackbar(R.string.no_bluetooth_adapter_available)
-                    return@OutlinedButton
-                }
-
-                // Show current device name, paired devices' name and MAC address
-                if (bluetoothAdapter!!.isEnabled) {
-                    pairedDevices = bluetoothAdapter!!.bondedDevices.sortedBy { it.name }
-                    size = pairedDevices.size
-                    showResult = true
-                    return@OutlinedButton
-                }
-
-                // When Bluetooth is OFF
-                view.context.openSystemSettings(S_ENABLE_BLUETOOTH)
+            // Check permission
+            if (view.context.noBluetoothPermission()) {
+                navController.navigate(SCR_PERMISSION_REQUEST)
+                return@OutlinedButton
             }
-        ) {
+
+            // Get system service
+            bluetoothAdapter = BluetoothUtil.bluetoothAdapter
+            if (bluetoothAdapter == null) {
+                view.showSnackbar(R.string.no_bluetooth_adapter_available)
+                return@OutlinedButton
+            }
+
+            // Show current device name, paired devices' name and MAC address
+            if (bluetoothAdapter!!.isEnabled) {
+                pairedDevices = bluetoothAdapter!!.bondedDevices.sortedBy { it.name }
+                size = pairedDevices.size
+                showResult = true
+                return@OutlinedButton
+            }
+
+            // When Bluetooth is OFF
+            view.context.openSystemSettings(S_ENABLE_BLUETOOTH)
+        }) {
             Icon(
                 imageVector = Icons.Outlined.BluetoothConnected,
                 contentDescription = stringResource(R.string.show_paired_devices),
@@ -96,34 +94,35 @@ fun BluetoothDevice(navController: NavHostController) {
 
         if (showResult) {
             Text("${stringResource(R.string.current_device)} ${bluetoothAdapter?.name}\n")
+
             if (size == 0) {
                 Text(stringResource(R.string.no_paired_devices))
             } else {
                 Text(stringResource(R.string.paired_devices))
+
                 pairedDevices.forEach { device ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(device.name ?: stringResource(R.string.unknown_device))
                         SpacerPadding()
-                        CustomIconPopup(type(device.type), device.address)
+                        CustomIconPopup(device.type.toTypeName(), device.address)
                     }
                 }
-                BluetoothDeviceTypeDialog()
+
+                BluetoothDeviceTypeDialogButton()
             }
         }
     }
 }
 
 @Composable
-private fun BluetoothDeviceTypeDialog() {
+private fun BluetoothDeviceTypeDialogButton() {
     val haptic = LocalHapticFeedback.current
     var showDialog by remember { mutableStateOf(false) }
 
-    TextButton({
+    TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         showDialog = true
-    }) {
-        Text(stringResource(R.string.what_is_bt_ble_and_dual))
-    }
+    }) { Text(stringResource(R.string.what_is_bt_ble_and_dual)) }
 
     if (showDialog) {
         AlertDialog(
@@ -159,11 +158,10 @@ private fun BluetoothDeviceTypeDialog() {
     }
 }
 
-@Composable
-private fun type(type: Int): String =
-    when (type) {
-        1 -> stringResource(R.string.bt)
-        2 -> stringResource(R.string.ble)
-        3 -> stringResource(R.string.dual)
-        else -> stringResource(R.string.unknown)
+private fun Int.toTypeName(): String =
+    when (this) {
+        1 -> "BT"
+        2 -> "BLE"
+        3 -> "Dual"
+        else -> "Unknown"
     }

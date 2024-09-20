@@ -31,8 +31,8 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 fun ComposeCatalog(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
     Card(
-        R.string.compose_catalog,
-        Icons.Outlined.DashboardCustomize,
+        title = R.string.compose_catalog,
+        icon = Icons.Outlined.DashboardCustomize,
         hasShowMore = true,
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -116,5 +116,8 @@ private fun Color(color: Color, text: String) =
             .fillMaxWidth()
             .height(45.dp)
     ) {
-        Surface(Modifier.fillMaxSize(), color = color) { Text(text, textAlign = TextAlign.Center) }
+        Surface(
+            Modifier.fillMaxSize(),
+            color = color
+        ) { Text(text, textAlign = TextAlign.Center) }
     }

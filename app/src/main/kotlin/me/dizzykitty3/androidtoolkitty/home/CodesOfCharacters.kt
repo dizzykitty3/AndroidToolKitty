@@ -41,16 +41,15 @@ import timber.log.Timber
 @Composable
 fun CodesOfCharacters(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
+
     Card(
-        R.string.codes_of_characters,
-        Icons.AutoMirrored.Outlined.Notes,
-        true,
-        {
+        title = R.string.codes_of_characters,
+        icon = Icons.AutoMirrored.Outlined.Notes,
+        hasShowMore = true,
+        onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_CODES_OF_CHARACTERS)
-        }) {
-        Unicode()
-    }
+        }) { Unicode() }
 }
 
 @Composable
@@ -137,7 +136,7 @@ private fun Unicode() {
         }
     )
 
-    TextButton({
+    TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         if (isUnicodeInput) {
@@ -145,9 +144,7 @@ private fun Unicode() {
         } else if (isCharacterInput) {
             view.onClickConvertButton(characters, { unicode = it }, false)
         }
-    }) {
-        Text(stringResource(R.string.convert))
-    }
+    }) { Text(stringResource(R.string.convert)) }
 }
 
 @Composable
@@ -181,7 +178,7 @@ private fun ASCII() {
 
     if (toASCIIResult != "") Text("${stringResource(R.string.result)} $toASCIIResult")
 
-    TextButton({
+    TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         toASCIIResult = stringToASCII.toASCII()

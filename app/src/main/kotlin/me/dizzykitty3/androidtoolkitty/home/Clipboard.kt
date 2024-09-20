@@ -25,15 +25,16 @@ import timber.log.Timber
 
 @Composable
 fun Clipboard(settingsViewModel: SettingsViewModel) {
-    Card(R.string.clipboard, Icons.Outlined.ContentPasteSearch) {
+    Card(title = R.string.clipboard, icon = Icons.Outlined.ContentPasteSearch) {
         val view = LocalView.current
         val haptic = LocalHapticFeedback.current
         val isShowHintText = !settingsViewModel.settings.value.haveOpenedSettings
+
         if (isShowHintText) Tip(R.string.you_can_turn_on_clear_clipboard_on_launch_in_settings_screen)
 
-        OutlinedButton({
+        OutlinedButton(onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            onClearClipboardButton(view)
+            view.onClearClipboardButton()
         }) {
             Icon(
                 imageVector = Icons.Outlined.ClearAll,
@@ -46,8 +47,8 @@ fun Clipboard(settingsViewModel: SettingsViewModel) {
     }
 }
 
-private fun onClearClipboardButton(view: View) {
+private fun View.onClearClipboardButton() {
     val cleared = ClipboardUtil.clear()
     Timber.i("Clipboard cleared")
-    view.showSnackbar(if (cleared) R.string.clipboard_cleared else R.string.clipboard_is_empty)
+    this.showSnackbar(if (cleared) R.string.clipboard_cleared else R.string.clipboard_is_empty)
 }
