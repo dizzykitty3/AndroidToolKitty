@@ -84,7 +84,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             CustomSwitchRow(
                 Icons.Outlined.ColorLens,
                 R.string.dynamic_color,
-                R.string.material_you_dynamic_color_theme,
+                R.string.dynamic_color_description,
                 dynamicColor
             ) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -95,8 +95,8 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 
         CustomSwitchRow(
             Icons.Outlined.DarkMode,
-            R.string.force_dark_mode,
-            R.string.force_dark_mode_description,
+            R.string.dark_mode,
+            R.string.dark_mode_description,
             forceDarkMode
         ) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)

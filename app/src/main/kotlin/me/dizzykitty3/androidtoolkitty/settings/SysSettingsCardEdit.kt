@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.settings
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Visibility
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -213,7 +212,7 @@ fun SysSettingsCardEdit() {
         SpacerPadding()
 
         Button(
-            {
+            onClick = {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 onClickChangeAllCardsButton(false)
                 mIsShowSetting = false
@@ -241,37 +240,6 @@ fun SysSettingsCardEdit() {
             )
             SpacerPadding()
             Text(stringResource(R.string.hide_all_options))
-        }
-
-        Button(
-            {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                onClickChangeAllCardsButton(true)
-                mIsShowSetting = true
-                mIsShowSetting0 = true
-                mIsShowSetting1 = true
-                mIsShowSetting2 = true
-                mIsShowSetting3 = true
-                mIsShowSetting4 = true
-                mIsShowSetting5 = true
-                mIsShowSetting6 = true
-                mIsShowSetting7 = true
-                mIsShowSetting8 = true
-                mIsShowSetting9 = true
-                mIsShowSetting10 = true
-                mIsShowSetting11 = true
-                mIsShowSetting12 = true
-                mIsShowSetting13 = true
-            },
-            elevation = ButtonDefaults.buttonElevation(1.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Outlined.Visibility,
-                contentDescription = stringResource(R.string.show_all_options),
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
-            SpacerPadding()
-            Text(stringResource(R.string.show_all_options))
         }
     }
 }

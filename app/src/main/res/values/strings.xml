@@ -150,7 +150,7 @@
     <string name="overlay_permission">Display over other apps</string>
     <string name="write_permission">Modify system settings</string>
     <string name="accessibility_settings">Accessibility</string>
-    <string name="no_options_enabled">Enabled options will be shown here</string>
+    <string name="no_options_enabled">Pinned options will be shown here</string>
     <string name="device_info">Device info</string>
     <string name="device" translatable="false">device</string>
     <string name="os_version" translatable="false">os_ver</string>
@@ -228,15 +228,15 @@
     <string name="distance_msg" translatable="false">dev mode message: distance = %d</string>
 
     <!-- Settings > Appearance -->
-    <string name="dynamic_color">Dynamic color</string>
     <string name="appearance">Appearance</string>
-    <string name="force_dark_mode">Force dark mode</string>
-    <string name="change_app_language">Change app language</string>
-    <string name="material_you_dynamic_color_theme">Enable Material You dynamic color theme on Android 12+</string>
-    <string name="force_dark_mode_description">Force enable dark mode</string>
+    <string name="dynamic_color">Dynamic color</string>
+    <string name="dynamic_color_description">Material You dynamic color</string>
+    <string name="dark_mode">Dark mode</string>
+    <string name="dark_mode_description">Overrides system theme setting</string>
     <string name="hide_greetings">Hide greetings</string>
     <string name="hide_greetings_description">Hide gradient greeting text on Home screen (portrait mode only)</string>
-    <string name="change_app_language_description">Set language preference for ToolKitty on Android 13+</string>
+    <string name="change_app_language">Change app language</string>
+    <string name="change_app_language_description">Set language preference for ToolKitty</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_automatically">Clear clipboard automatically</string>
@@ -244,17 +244,16 @@
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
     <string name="customize_home_page">Customize home page</string>
-    <string name="customize_system_settings_card">Customize options in the Android System Settings card</string>
-    <string name="show_all_options">Show all options</string>
+    <string name="customize_system_settings_card">Pin options that appear on Home screen</string>
     <string name="hide_all_options">Hide all options</string>
-    <string name="sys_settings_tip">Only the first four options enabled appear on Home screen</string>
+    <string name="sys_settings_tip">Up to 4 options you can pin on Home screen</string>
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
     <string name="customize_home_page_description">Hide cards on home page and vice versa</string>
 
     <!-- Settings > Others -->
     <string name="view_source_code">Source code</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
-    <string name="licenses">Open-source licenses</string>
+    <string name="licenses">licenses</string>
     <string name="view_source_code_description">View source code on GitHub</string>
     <string name="open_app_detail_settings">Open app detail settings</string>
     <string name="restart_app">Restart app</string>
