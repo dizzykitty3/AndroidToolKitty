@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Android
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -21,11 +20,12 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 @Composable
 fun AndroidVersions(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
+
     Card(
-        R.string.android_versions,
-        Icons.Outlined.Android,
-        true,
-        {
+        title = R.string.android_versions,
+        icon = Icons.Outlined.Android,
+        hasShowMore = true,
+        onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_ANDROID_VERSION_HISTORY)
         }) {
@@ -36,7 +36,7 @@ fun AndroidVersions(navController: NavHostController) {
 @Composable
 fun AndroidVersionHistoryScreen() {
     Screen {
-        Card(R.string.android_versions, Icons.Outlined.Android) {
+        Card(title = R.string.android_versions, icon = Icons.Outlined.Android) {
             RecentVersions()
             EarlyVersions()
         }
@@ -47,19 +47,19 @@ fun AndroidVersionHistoryScreen() {
 private fun RecentVersions() {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.weight(0.4f)) {
-            ScrollableText(R.string.android_15)
-            ScrollableText(R.string.android_14)
-            ScrollableText(R.string.android_13)
-            ScrollableText(R.string.android_12_l)
-            ScrollableText(R.string.android_12)
+            ScrollableText("Android 15")
+            ScrollableText("Android 14")
+            ScrollableText("Android 13")
+            ScrollableText("Android 12L")
+            ScrollableText("Android 12")
         }
 
         Column(Modifier.weight(0.6f)) {
-            ScrollableItalicText(R.string.api_35)
-            ScrollableItalicText(R.string.api_34)
-            ScrollableItalicText(R.string.api_33)
-            ScrollableItalicText(R.string.api_32)
-            ScrollableItalicText(R.string.api_31)
+            ScrollableItalicText("API 35, VanillaIceCream")
+            ScrollableItalicText("API 34, UpsideDownCake")
+            ScrollableItalicText("API 33, Tiramisu")
+            ScrollableItalicText("API 32, Sv2")
+            ScrollableItalicText("API 31, S")
         }
     }
 }
@@ -68,58 +68,58 @@ private fun RecentVersions() {
 private fun EarlyVersions() {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.weight(0.4f)) {
-            ScrollableText(R.string.android_11)
-            ScrollableText(R.string.android_10)
-            ScrollableText(R.string.android_9)
-            ScrollableText(R.string.android_8_1)
-            ScrollableText(R.string.android_8)
-            ScrollableText(R.string.android_7_1_1)
-            ScrollableText(R.string.android_7)
-            ScrollableText(R.string.android_6)
-            ScrollableText(R.string.android_5_1)
-            ScrollableText(R.string.android_5)
-            ScrollableText(R.string.android_4_4_w)
-            ScrollableText(R.string.android_4_4)
-            ScrollableText(R.string.android_4_3)
-            ScrollableText(R.string.android_4_2)
-            ScrollableText(R.string.android_4_1)
-            ScrollableText(R.string.android_4_0_3)
-            ScrollableText(R.string.android_4_0)
-            ScrollableText(R.string.android_3_2)
-            ScrollableText(R.string.android_3_1)
-            ScrollableText(R.string.android_3_0)
-            ScrollableText(R.string.android_2_3_3)
-            ScrollableText(R.string.android_2_3)
-            ScrollableText(R.string.android_2_2)
-            ScrollableText(R.string.android_2_1)
-            Text("...")
+            ScrollableText("Android 11")
+            ScrollableText("Android 10")
+            ScrollableText("Android 9")
+            ScrollableText("Android 8.1")
+            ScrollableText("Android 8")
+            ScrollableText("Android 7.1.1")
+            ScrollableText("Android 7")
+            ScrollableText("Android 6")
+            ScrollableText("Android 5.1")
+            ScrollableText("Android 5")
+            ScrollableText("Android 4.4W")
+            ScrollableText("Android 4.4")
+            ScrollableText("Android 4.3")
+            ScrollableText("Android 4.2")
+            ScrollableText("Android 4.1")
+            ScrollableText("Android 4.0.3")
+            ScrollableText("Android 4.0")
+            ScrollableText("Android 3.2")
+            ScrollableText("Android 3.1")
+            ScrollableText("Android 3.0")
+            ScrollableText("Android 2.3.3")
+            ScrollableText("Android 2.3")
+            ScrollableText("Android 2.2")
+            ScrollableText("Android 2.1")
+            ScrollableText("...")
         }
 
         Column(Modifier.weight(0.6f)) {
-            ScrollableItalicText(R.string.api_30)
-            ScrollableItalicText(R.string.api_29)
-            ScrollableItalicText(R.string.api_28)
-            ScrollableItalicText(R.string.api_27)
-            ScrollableItalicText(R.string.api_26)
-            ScrollableItalicText(R.string.api_25)
-            ScrollableItalicText(R.string.api_24)
-            ScrollableItalicText(R.string.api_23)
-            ScrollableItalicText(R.string.api_22)
-            ScrollableItalicText(R.string.api_21)
-            ScrollableItalicText(R.string.api_20)
-            ScrollableItalicText(R.string.api_19)
-            ScrollableItalicText(R.string.api_18)
-            ScrollableItalicText(R.string.api_17)
-            ScrollableItalicText(R.string.api_16)
-            ScrollableItalicText(R.string.api_15)
-            ScrollableItalicText(R.string.api_14)
-            ScrollableItalicText(R.string.api_13)
-            ScrollableItalicText(R.string.api_12)
-            ScrollableItalicText(R.string.api_11)
-            ScrollableItalicText(R.string.api_10)
-            ScrollableItalicText(R.string.api_9)
-            ScrollableItalicText(R.string.api_8)
-            ScrollableItalicText(R.string.api_7)
+            ScrollableItalicText("API 30, R")
+            ScrollableItalicText("API 29, Q")
+            ScrollableItalicText("API 28, Pie")
+            ScrollableItalicText("API 27, Oreo")
+            ScrollableItalicText("API 26, Oreo")
+            ScrollableItalicText("API 25, Nougat")
+            ScrollableItalicText("API 24, Nougat")
+            ScrollableItalicText("API 23, Marshmallow")
+            ScrollableItalicText("API 22, Lollipop")
+            ScrollableItalicText("API 21, Lollipop")
+            ScrollableItalicText("API 20, KitKat Wear")
+            ScrollableItalicText("API 19, KitKat")
+            ScrollableItalicText("API 18, Jelly Bean")
+            ScrollableItalicText("API 17, Jelly Bean")
+            ScrollableItalicText("API 16, Jelly Bean")
+            ScrollableItalicText("API 15, IceCreamSandwich")
+            ScrollableItalicText("API 14, IceCreamSandwich")
+            ScrollableItalicText("API 13, Honeycomb")
+            ScrollableItalicText("API 12, Honeycomb")
+            ScrollableItalicText("API 11, Honeycomb")
+            ScrollableItalicText("API 10, Gingerbread")
+            ScrollableItalicText("API 9, Gingerbread")
+            ScrollableItalicText("API 8, Froyo")
+            ScrollableItalicText("API 7, Eclair")
         }
     }
 }

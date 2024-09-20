@@ -202,64 +202,6 @@
 
     <!-- Home > Android version history -->
     <string name="android_versions">Android versions</string>
-    <string name="android_15" translatable="false">Android 15</string>
-    <string name="android_14" translatable="false">Android 14</string>
-    <string name="android_13" translatable="false">Android 13</string>
-    <string name="android_12_l" translatable="false">Android 12L</string>
-    <string name="android_12" translatable="false">Android 12</string>
-    <string name="android_11" translatable="false">Android 11</string>
-    <string name="android_10" translatable="false">Android 10</string>
-    <string name="android_9" translatable="false">Android 9</string>
-    <string name="android_8_1" translatable="false">Android 8.1</string>
-    <string name="android_8" translatable="false">Android 8</string>
-    <string name="android_7_1_1" translatable="false">Android 7.1.1</string>
-    <string name="android_7" translatable="false">Android 7</string>
-    <string name="android_6" translatable="false">Android 6</string>
-    <string name="android_5_1" translatable="false">Android 5.1</string>
-    <string name="android_5" translatable="false">Android 5</string>
-    <string name="android_4_4_w" translatable="false">Android 4.4W</string>
-    <string name="android_4_4" translatable="false">Android 4.4</string>
-    <string name="android_4_3" translatable="false">Android 4.3</string>
-    <string name="android_4_2" translatable="false">Android 4.2</string>
-    <string name="android_4_1" translatable="false">Android 4.1</string>
-    <string name="android_4_0_3" translatable="false">Android 4.0.3</string>
-    <string name="android_4_0" translatable="false">Android 4.0</string>
-    <string name="android_3_2" translatable="false">Android 3.2</string>
-    <string name="android_3_1" translatable="false">Android 3.1</string>
-    <string name="android_3_0" translatable="false">Android 3.0</string>
-    <string name="android_2_3_3" translatable="false">Android 2.3.3</string>
-    <string name="android_2_3" translatable="false">Android 2.3</string>
-    <string name="android_2_2" translatable="false">Android 2.2</string>
-    <string name="android_2_1" translatable="false">Android 2.1</string>
-    <string name="api_35" translatable="false">API 35, VanillaIceCream</string>
-    <string name="api_34" translatable="false">API 34, UpsideDownCake</string>
-    <string name="api_33" translatable="false">API 33, Tiramisu</string>
-    <string name="api_32" translatable="false">API 32, Sv2</string>
-    <string name="api_31" translatable="false">API 31, S</string>
-    <string name="api_30" translatable="false">API 30, R</string>
-    <string name="api_29" translatable="false">API 29, Q</string>
-    <string name="api_28" translatable="false">API 28, Pie</string>
-    <string name="api_27" translatable="false">API 27, Oreo</string>
-    <string name="api_26" translatable="false">API 26, Oreo</string>
-    <string name="api_25" translatable="false">API 25, Nougat</string>
-    <string name="api_24" translatable="false">API 24, Nougat</string>
-    <string name="api_23" translatable="false">API 23, Marshmallow</string>
-    <string name="api_22" translatable="false">API 22, Lollipop</string>
-    <string name="api_21" translatable="false">API 21, Lollipop</string>
-    <string name="api_20" translatable="false">API 20, KitKat Wear</string>
-    <string name="api_19" translatable="false">API 19, KitKat</string>
-    <string name="api_18" translatable="false">API 18, Jelly Bean</string>
-    <string name="api_17" translatable="false">API 17, Jelly Bean</string>
-    <string name="api_16" translatable="false">API 16, Jelly Bean</string>
-    <string name="api_15" translatable="false">API 15, IceCreamSandwich</string>
-    <string name="api_14" translatable="false">API 14, IceCreamSandwich</string>
-    <string name="api_13" translatable="false">API 13, Honeycomb</string>
-    <string name="api_12" translatable="false">API 12, Honeycomb</string>
-    <string name="api_11" translatable="false">API 11, Honeycomb</string>
-    <string name="api_10" translatable="false">API 10, Gingerbread</string>
-    <string name="api_9" translatable="false">API 9, Gingerbread</string>
-    <string name="api_8" translatable="false">API 8, Froyo</string>
-    <string name="api_7" translatable="false">API 7, Eclair</string>
 
     <!-- Home > Font weight test -->
     <string name="font_weight_test">Font weight test</string>
