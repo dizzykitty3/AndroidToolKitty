@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.BugReport
 import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
@@ -105,15 +104,15 @@ fun AnnotatedString.Builder.PrimaryColorText(@StringRes id: Int) {
 }
 
 @Composable
-fun Tip(@StringRes message: Int, type: Int = 1) = Tip(stringResource(message), type)
+fun Tip(@StringRes message: Int) = Tip(stringResource(message))
 
 @Composable
-fun Tip(msg: String, type: Int = 1) {
+fun Tip(msg: String) {
     Card(
         shape = RoundedCornerShape(dimensionResource(R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
-            containerColor = if (type == 1) MaterialTheme.colorScheme.tertiaryContainer else MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = if (type == 1) MaterialTheme.colorScheme.onTertiaryContainer else MaterialTheme.colorScheme.onSecondaryContainer
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
         Row(
@@ -122,7 +121,7 @@ fun Tip(msg: String, type: Int = 1) {
                 .fillMaxWidth()
         ) {
             Icon(
-                if (type == 1) Icons.Outlined.Info else Icons.Outlined.BugReport,
+                Icons.Outlined.Info,
                 contentDescription = null,
                 modifier = Modifier.size(24.dp)
             )
@@ -171,7 +170,7 @@ fun ErrorTip(msg: String) {
 fun WIPTip() = Tip(R.string.wip_long)
 
 @Composable
-fun DevBuildTip() = Tip(R.string.debug_build_top_tip, type = 2)
+fun DevBuildTip() = Tip(R.string.debug_build_top_tip)
 
 @Composable
 fun NoTranslationTip() = Tip(stringResource(R.string.no_translation, StringUtil.sysLocale))
