@@ -167,9 +167,6 @@
     <string name="show_paired_devices">Show paired devices</string>
     <string name="current_device">Current device:</string>
     <string name="paired_devices">Paired devices:</string>
-    <string name="bt">BT</string>
-    <string name="ble">BLE</string>
-    <string name="dual">Dual</string>
     <string name="no_paired_devices">No paired devices</string>
     <string name="what_is_bt_ble_and_dual">What is BT, BLE, and Dual?</string>
     <string name="unknown_device">Unknown device</string>
