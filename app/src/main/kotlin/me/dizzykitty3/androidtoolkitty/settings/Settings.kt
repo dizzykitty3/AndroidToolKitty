@@ -75,7 +75,6 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     val haptic = LocalHapticFeedback.current
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
     var forceDarkMode by remember { mutableStateOf(settingsViewModel.settings.value.forceDarkMode) }
-    var dismissLangTip by remember { mutableStateOf(settingsViewModel.settings.value.dismissLangTip) }
     var hideGreetings by remember { mutableStateOf(settingsViewModel.settings.value.hideGreetings) }
 
     Column {
@@ -103,17 +102,6 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             forceDarkMode = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(forceDarkMode = it))
-        }
-
-        CustomSwitchRow(
-            Icons.Outlined.VisibilityOff,
-            R.string.dismiss_lang_tip,
-            R.string.dismiss_lang_tip_description,
-            dismissLangTip
-        ) {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            dismissLangTip = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(dismissLangTip = it))
         }
 
         CustomSwitchRow(

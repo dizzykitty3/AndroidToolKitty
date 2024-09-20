@@ -69,14 +69,11 @@ import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.DevBuildTip
-import me.dizzykitty3.androidtoolkitty.uicomponents.NoTranslationTip
-import me.dizzykitty3.androidtoolkitty.uicomponents.NotFullyTranslated
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.isHeadsetConnected
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
-import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
 fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController, widthType: Int) {
@@ -88,10 +85,8 @@ fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController,
 private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
     val debug = BuildConfig.DEBUG
-    val noTranslation = StringUtil.sysLangNotSupported
-    val notFullyTranslated = StringUtil.sysLangNotFullyTranslated
-    val dismissLangTip = settingsViewModel.settings.value.dismissLangTip
     val hideGreetings = settingsViewModel.settings.value.hideGreetings
+
     LazyColumn(Modifier.padding(start = screenPadding, end = screenPadding)) {
         item { TopBar(settingsViewModel, navController) }
         if (!hideGreetings) {
@@ -101,10 +96,10 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
             item { CardSpacePadding() }
         }
         item { CardSpacePadding() }
-        if (debug) item { DevBuildTip() }
-        if (noTranslation && !dismissLangTip) item { NoTranslationTip() }
-        if (notFullyTranslated && !noTranslation && !dismissLangTip) item { NotFullyTranslated() }
-        if (debug || ((noTranslation || notFullyTranslated) && !dismissLangTip)) item { CardSpacePadding() }
+        if (debug) item {
+            DevBuildTip()
+            CardSpacePadding()
+        }
         item { HomeCards(settingsViewModel, navController) }
     }
 }
@@ -113,9 +108,6 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
 private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val largeScreenPadding = dimensionResource(R.dimen.padding_screen_large)
     val debug = BuildConfig.DEBUG
-    val noTranslation = StringUtil.sysLangNotSupported
-    val notFullyTranslated = StringUtil.sysLangNotFullyTranslated
-    val dismissLangTip = settingsViewModel.settings.value.dismissLangTip
 
     Column(Modifier.padding(start = largeScreenPadding, end = largeScreenPadding)) {
         Row(Modifier.fillMaxWidth()) {
@@ -124,8 +116,6 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
         }
         SpacerPadding()
         if (debug) DevBuildTip()
-        if (noTranslation && !dismissLangTip) NoTranslationTip()
-        if (notFullyTranslated && !noTranslation && !dismissLangTip) NotFullyTranslated()
         TwoColumnHomeCards(settingsViewModel, navController)
     }
 }

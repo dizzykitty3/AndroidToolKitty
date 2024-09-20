@@ -4,7 +4,6 @@ data class Settings(
     // Settings > Appearance
     var dynamicColor: Boolean = true,
     var forceDarkMode: Boolean = false,
-    var dismissLangTip: Boolean = false,
     var hideGreetings: Boolean = false,
 
     // Settings > General
