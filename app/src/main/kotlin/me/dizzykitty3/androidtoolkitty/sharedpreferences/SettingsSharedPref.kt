@@ -16,13 +16,10 @@ object SettingsSharedPref {
 
     // Booleans
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
-    private const val AUTO_SET_MEDIA_VOLUME = "auto_set_media_volume"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
 
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
-    private const val SAVED_LATITUDE = "saved_latitude"
-    private const val SAVED_LONGITUDE = "saved_longitude"
 
     private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
 
@@ -56,13 +53,6 @@ object SettingsSharedPref {
     var usingCustomVolumeOptionLabel: Boolean
         get() = getPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
         set(value) = setPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
-
-    var autoSetMediaVolume: Int
-        get() = getPreference(AUTO_SET_MEDIA_VOLUME, -1)
-        set(value) = setPreference(AUTO_SET_MEDIA_VOLUME, value)
-
-    val enabledAutoSetMediaVolume: Boolean
-        get() = autoSetMediaVolume != -1
 
     var haveTappedAddButton: Boolean
         get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
@@ -107,12 +97,4 @@ object SettingsSharedPref {
             apply()
         }
     }
-
-    var savedLatitude: Float
-        get() = getPreference(SAVED_LATITUDE, 0f)
-        set(value) = setPreference(SAVED_LATITUDE, value)
-
-    var savedLongitude: Float
-        get() = getPreference(SAVED_LONGITUDE, 0f)
-        set(value) = setPreference(SAVED_LONGITUDE, value)
 }

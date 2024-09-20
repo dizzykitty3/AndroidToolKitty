@@ -51,7 +51,6 @@ import me.dizzykitty3.androidtoolkitty.CARD_1
 import me.dizzykitty3.androidtoolkitty.CARD_10
 import me.dizzykitty3.androidtoolkitty.CARD_11
 import me.dizzykitty3.androidtoolkitty.CARD_12
-import me.dizzykitty3.androidtoolkitty.CARD_13
 import me.dizzykitty3.androidtoolkitty.CARD_2
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.CARD_4
@@ -71,6 +70,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.DevBuildTip
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
+import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.headsetNotConnected
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.isHeadsetConnected
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
@@ -146,7 +146,7 @@ private fun SettingsButton(settingsViewModel: SettingsViewModel, navController: 
         state = rememberTooltipState(),
     ) {
         IconButton(
-            {
+            onClick = {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 navController.navigate(SCR_SETTINGS)
                 settingsViewModel.update(settingsViewModel.settings.value.copy(haveOpenedSettings = true))
@@ -169,7 +169,7 @@ private fun Status(isTablet: Boolean = false) {
     val haptic = LocalHapticFeedback.current
 
     Row(Modifier.horizontalScroll(rememberScrollState())) {
-        if (isTablet || !view.context.isHeadsetConnected()) {
+        if (isTablet || view.context.headsetNotConnected()) {
             Surface(shape = RoundedCornerShape(8.dp)) {
                 Row(Modifier.clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -191,6 +191,7 @@ private fun Status(isTablet: Boolean = false) {
             SpacerPadding()
             NetworkState()
         }
+
         if (view.context.isHeadsetConnected()) {
             if (isTablet) {
                 SpacerPadding()
@@ -245,6 +246,7 @@ private fun NetworkState() {
 private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
+
     Surface(shape = RoundedCornerShape(8.dp)) {
         Row(Modifier.clickable {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -291,7 +293,7 @@ private fun TwoColumnHomeCards(
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> = listOf(
     CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6,
-    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12, CARD_13
+    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12
 ).associateWith { card -> settingsSharedPref.getShownState(card) }
 
 @Composable
@@ -313,6 +315,5 @@ private fun CardContent(
         CARD_10 -> AndroidVersions(navController)
         CARD_11 -> FontWeight(navController)
         CARD_12 -> ComposeCatalog(navController)
-        CARD_13 -> FeaturesWorkInProgress(navController)
     }
 }

@@ -18,10 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.theme.AppTheme
-import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.autoSetMediaVolume
-import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.isHeadsetConnected
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
@@ -76,14 +73,6 @@ class MainActivity : ComponentActivity() {
                 if (ClipboardUtil.clear()) {
                     window.decorView.showSnackbar(R.string.clipboard_cleared_automatically)
                     Timber.i("Clipboard cleared automatically")
-                }
-            }
-            if (SettingsSharedPref.enabledAutoSetMediaVolume) {
-                if (this@MainActivity.isHeadsetConnected()) {
-                    Timber.i("Set media volume automatically: cancelled: BT headset connected")
-                } else {
-                    Timber.i("Set media volume automatically")
-                    window.decorView.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
                 }
             }
         }

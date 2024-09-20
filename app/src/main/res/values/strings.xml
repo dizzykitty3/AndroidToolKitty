@@ -11,7 +11,6 @@
     <string name="success_and_back">Success! Now you can back to the previous screen</string>
     <string name="wip_long" translatable="false">-- WORK IN PROGRESS --</string>
     <string name="undo">Undo</string>
-    <string name="turn_off">Turn off</string>
     <string name="copy">Copy</string>
     <string name="start">Start</string>
     <string name="off_all_cap" translatable="false">OFF</string>
@@ -217,12 +216,6 @@
 
     <!-- Home > Compose catalog -->
     <string name="compose_catalog">Compose catalog</string>
-
-    <!-- Home > Work in progress -->
-    <string name="go_to_permission_request_screen">Go to permission request screen</string>
-    <string name="auto_set_volume">Set volume automatically</string>
-    <string name="qr_code_generator">QR Code generator</string>
-    <string name="distance_msg" translatable="false">dev mode message: distance = %d</string>
 
     <!-- Settings > Appearance -->
     <string name="appearance">Appearance</string>

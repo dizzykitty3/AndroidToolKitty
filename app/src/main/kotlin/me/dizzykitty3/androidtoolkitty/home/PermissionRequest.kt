@@ -23,9 +23,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noBluetoothPermission
-import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noLocationPermission
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.requestBluetoothPermission
-import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.requestLocationPermission
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @Composable
@@ -33,14 +31,13 @@ fun PermissionRequest() {
     Screen {
         Card(R.string.request_permission, Icons.Outlined.Shield) {
             var clickCount by remember { mutableIntStateOf(0) }
-            var clickCount2 by remember { mutableIntStateOf(0) }
             val view = LocalView.current
             val haptic = LocalHapticFeedback.current
 
             Text(stringResource(R.string.bluetooth_connect))
 
             Button(
-                {
+                onClick = {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     if (view.context.noBluetoothPermission()) {
                         view.context.requestBluetoothPermission()
@@ -52,24 +49,7 @@ fun PermissionRequest() {
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) { Text(stringResource(R.string.request_permission)) }
 
-            GroupDivider()
-
-            Text(stringResource(R.string.fine_location))
-
-            Button(
-                {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    if (view.context.noLocationPermission()) {
-                        view.context.requestLocationPermission()
-                        clickCount2++
-                        return@Button
-                    }
-                    view.showSnackbar(R.string.success_and_back)
-                },
-                elevation = ButtonDefaults.buttonElevation(1.dp)
-            ) { Text(stringResource(R.string.request_permission)) }
-
-            if (clickCount >= 2 || clickCount2 >= 2) {
+            if (clickCount >= 2) {
                 GroupDivider()
                 ManuallyGrant()
             }
