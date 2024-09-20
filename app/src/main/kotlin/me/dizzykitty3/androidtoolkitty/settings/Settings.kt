@@ -14,7 +14,6 @@ import androidx.compose.material.icons.outlined.ColorLens
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.FileCopy
 import androidx.compose.material.icons.outlined.Language
-import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Icon
@@ -53,7 +52,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppLanguageSetting
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
@@ -319,31 +317,6 @@ private fun Bottom(navController: NavHostController) {
                         contentDescription = stringResource(R.string.open_app_detail_settings),
                         tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
                     )
-                }
-                SpacerPadding()
-            }
-        }
-
-        // relaunch
-        Surface(shape = RoundedCornerShape(8.dp)) {
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        view.context.restartApp()
-                    }) {
-                SpacerPadding()
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Outlined.Refresh,
-                        contentDescription = null
-                    )
-                    IconAndTextPadding()
-                    Column {
-                        Text(stringResource(R.string.restart_app))
-                        Description(R.string.restart_app_description)
-                    }
                 }
                 SpacerPadding()
             }
