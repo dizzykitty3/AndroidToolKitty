@@ -221,8 +221,6 @@
     <string name="appearance">Appearance</string>
     <string name="dynamic_color">Dynamic color</string>
     <string name="dynamic_color_description">Material You dynamic color</string>
-    <string name="dark_mode">Dark mode</string>
-    <string name="dark_mode_description">Overrides system theme setting</string>
     <string name="hide_greetings">Hide greetings</string>
     <string name="hide_greetings_description">Hide gradient greeting text on Home screen (portrait mode only)</string>
     <string name="change_app_language">Change app language</string>

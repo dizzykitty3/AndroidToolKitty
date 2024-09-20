@@ -40,16 +40,12 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             settingsViewModel = hiltViewModel<SettingsViewModel>()
-            val forceDarkMode = settingsViewModel.settings.value.forceDarkMode
             isAutoClearClipboard = settingsViewModel.settings.value.autoClearClipboard
 
             val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
             val widthType: Int = if (widthSizeClass == WindowWidthSizeClass.Compact) 1 else 2
 
-            AppTheme(
-                forceDarkMode = forceDarkMode,
-                dynamicColor = settingsViewModel.settings.value.dynamicColor
-            ) {
+            AppTheme(dynamicColor = settingsViewModel.settings.value.dynamicColor) {
                 Scaffold(Modifier.fillMaxSize()) { innerPadding ->
                     AppNavHost(
                         Modifier.padding(top = innerPadding.calculateTopPadding()),

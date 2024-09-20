@@ -11,7 +11,6 @@ import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.ClearAll
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.ColorLens
-import androidx.compose.material.icons.outlined.DarkMode
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.FileCopy
 import androidx.compose.material.icons.outlined.Language
@@ -74,7 +73,6 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
-    var forceDarkMode by remember { mutableStateOf(settingsViewModel.settings.value.forceDarkMode) }
     var hideGreetings by remember { mutableStateOf(settingsViewModel.settings.value.hideGreetings) }
 
     Column {
@@ -91,17 +89,6 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
                 dynamicColor = it
                 settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
             }
-        }
-
-        CustomSwitchRow(
-            Icons.Outlined.DarkMode,
-            R.string.dark_mode,
-            R.string.dark_mode_description,
-            forceDarkMode
-        ) {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            forceDarkMode = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(forceDarkMode = it))
         }
 
         CustomSwitchRow(
