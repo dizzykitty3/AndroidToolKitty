@@ -240,7 +240,7 @@
 
     <!-- Settings > General -->
     <string name="clear_clipboard_automatically">Clear clipboard automatically</string>
-    <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
+    <string name="clipboard_card_hidden">Clipboard card on home screen now hidden.</string>
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
     <string name="customize_home_page">Customize home page</string>
