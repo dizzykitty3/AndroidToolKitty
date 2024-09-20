@@ -79,7 +79,10 @@ private fun CustomSwitchRow(
     text: String? = null,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
-) = Surface(shape = RoundedCornerShape(8.dp)) {
+) = Surface(
+    shape = RoundedCornerShape(8.dp),
+    color = MaterialTheme.colorScheme.surfaceContainerLow
+) {
     Column(Modifier.clickable { onCheckedChange(!checked) }) {
         SpacerPadding()
         Row(verticalAlignment = Alignment.CenterVertically) {

@@ -41,10 +41,9 @@ import me.dizzykitty3.androidtoolkitty.SCR_LICENSES
 import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.Description
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupDivider
-import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
@@ -60,9 +59,9 @@ import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Screen {
         ScreenTitle(R.string.settings)
-        Appearance(settingsViewModel)
-        General(settingsViewModel, navController)
-        Bottom(navController)
+        Card(R.string.appearance) { Appearance(settingsViewModel) }
+        Card(R.string.general) { General(settingsViewModel, navController) }
+        Card(R.string.others) { Bottom(navController) }
     }
 }
 
@@ -73,69 +72,66 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
     var hideGreetings by remember { mutableStateOf(settingsViewModel.settings.value.hideGreetings) }
 
-    Column {
-        GroupTitle(R.string.appearance)
-
-        if (OSVersion.android12()) {
-            CustomSwitchRow(
-                Icons.Outlined.ColorLens,
-                R.string.dynamic_color,
-                R.string.dynamic_color_description,
-                dynamicColor
-            ) {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                dynamicColor = it
-                settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
-            }
-        }
-
+    if (OSVersion.android12()) {
         CustomSwitchRow(
-            Icons.Outlined.VisibilityOff,
-            R.string.hide_greetings,
-            R.string.hide_greetings_description,
-            hideGreetings
+            Icons.Outlined.ColorLens,
+            R.string.dynamic_color,
+            R.string.dynamic_color_description,
+            dynamicColor
         ) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            hideGreetings = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(hideGreetings = it))
+            dynamicColor = it
+            settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
         }
+    }
 
-        // change app lang
-        if (OSVersion.android13()) {
-            Surface(shape = RoundedCornerShape(8.dp)) {
-                Column(
-                    Modifier
-                        .fillMaxWidth()
-                        .clickable {
-                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                            view.context.openAppLanguageSetting()
-                        }) {
-                    SpacerPadding()
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                imageVector = Icons.Outlined.Language,
-                                contentDescription = stringResource(R.string.change_app_language)
-                            )
-                            IconAndTextPadding()
-                            Column {
-                                Text(stringResource(R.string.change_app_language))
-                                Description(stringResource(R.string.change_app_language_description))
-                            }
-                        }
-                        SpacerPadding()
+    CustomSwitchRow(
+        Icons.Outlined.VisibilityOff,
+        R.string.hide_greetings,
+        R.string.hide_greetings_description,
+        hideGreetings
+    ) {
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        hideGreetings = it
+        settingsViewModel.update(settingsViewModel.settings.value.copy(hideGreetings = it))
+    }
+
+    // change app lang
+    if (OSVersion.android13()) {
+        Surface(
+            shape = RoundedCornerShape(8.dp),
+            color = MaterialTheme.colorScheme.surfaceContainerLow
+        ) {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        view.context.openAppLanguageSetting()
+                    }) {
+                SpacerPadding()
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
                         Icon(
-                            imageVector = Icons.Outlined.ArrowOutward,
-                            contentDescription = stringResource(R.string.change_app_language),
-                            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                            imageVector = Icons.Outlined.Language,
+                            contentDescription = stringResource(R.string.change_app_language)
                         )
+                        IconAndTextPadding()
+                        Column {
+                            Text(stringResource(R.string.change_app_language))
+                            Description(stringResource(R.string.change_app_language_description))
+                        }
                     }
                     SpacerPadding()
+                    Icon(
+                        imageVector = Icons.Outlined.ArrowOutward,
+                        contentDescription = stringResource(R.string.change_app_language),
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                    )
                 }
+                SpacerPadding()
             }
         }
-
-        GroupDivider()
     }
 }
 
@@ -149,68 +145,66 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
-    Column {
-        GroupTitle(R.string.general)
-
-        CustomSwitchRow(
-            Icons.Outlined.ClearAll,
-            R.string.clear_clipboard_automatically,
-            R.string.clear_clipboard_on_launch,
-            autoClearClipboard
-        ) {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            autoClearClipboard = it
-            // Automatically hide Clipboard Card when turning on Clear on Launch feature.
-            if (autoClearClipboard && showClipboardCard) {
-                showClipboardCard = false
-                settingsSharedPref.saveShownState(CARD_3, false)
-                view.showSnackbar(
-                    message = R.string.clipboard_card_hidden,
-                    buttonText = R.string.undo,
-                    textColor = inverseOnSurface,
-                    buttonColor = inversePrimary,
-                    buttonClickListener = {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        settingsSharedPref.saveShownState(CARD_3, true)
-                    }
-                )
-            }
-            settingsViewModel.update(settingsViewModel.settings.value.copy(autoClearClipboard = it))
+    CustomSwitchRow(
+        Icons.Outlined.ClearAll,
+        R.string.clear_clipboard_automatically,
+        R.string.clear_clipboard_on_launch,
+        autoClearClipboard
+    ) {
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        autoClearClipboard = it
+        // Automatically hide Clipboard Card when turning on Clear on Launch feature.
+        if (autoClearClipboard && showClipboardCard) {
+            showClipboardCard = false
+            settingsSharedPref.saveShownState(CARD_3, false)
+            view.showSnackbar(
+                message = R.string.clipboard_card_hidden,
+                buttonText = R.string.undo,
+                textColor = inverseOnSurface,
+                buttonColor = inversePrimary,
+                buttonClickListener = {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    settingsSharedPref.saveShownState(CARD_3, true)
+                }
+            )
         }
+        settingsViewModel.update(settingsViewModel.settings.value.copy(autoClearClipboard = it))
+    }
 
-        // edit home
-        Surface(shape = RoundedCornerShape(8.dp)) {
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        navController.navigate(SCR_EDIT_HOME)
-                    }) {
-                SpacerPadding()
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            imageVector = Icons.Outlined.Edit,
-                            contentDescription = stringResource(R.string.customize_home_page)
-                        )
-                        IconAndTextPadding()
-                        Column {
-                            Text(stringResource(R.string.customize_home_page))
-                            Description(stringResource(R.string.customize_home_page_description))
-                        }
-                    }
-                    SpacerPadding()
+    // edit home
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerLow
+    ) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    navController.navigate(SCR_EDIT_HOME)
+                }) {
+            SpacerPadding()
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                        imageVector = Icons.Outlined.Edit,
+                        contentDescription = stringResource(R.string.customize_home_page)
                     )
+                    IconAndTextPadding()
+                    Column {
+                        Text(stringResource(R.string.customize_home_page))
+                        Description(stringResource(R.string.customize_home_page_description))
+                    }
                 }
                 SpacerPadding()
+                Icon(
+                    imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                )
             }
+            SpacerPadding()
         }
-        GroupDivider()
     }
 }
 
@@ -219,107 +213,112 @@ private fun Bottom(navController: NavHostController) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
 
-    Column {
-        GroupTitle(R.string.others)
-
-        // source code
-        Surface(shape = RoundedCornerShape(8.dp)) {
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        view.context.showToast(R.string.all_help_welcomed)
-                        view.context.openURL(SOURCE_CODE_URL)
-                    }) {
-                SpacerPadding()
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            imageVector = Icons.Outlined.Code,
-                            contentDescription = null
-                        )
-                        IconAndTextPadding()
-                        Column {
-                            Text(stringResource(R.string.view_source_code))
-                            Description(stringResource(R.string.view_source_code_description))
-                        }
-                    }
-                    SpacerPadding()
+    // source code
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerLow
+    ) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.showToast(R.string.all_help_welcomed)
+                    view.context.openURL(SOURCE_CODE_URL)
+                }) {
+            SpacerPadding()
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = Icons.Outlined.ArrowOutward,
-                        contentDescription = stringResource(R.string.view_source_code),
-                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                        imageVector = Icons.Outlined.Code,
+                        contentDescription = null
                     )
+                    IconAndTextPadding()
+                    Column {
+                        Text(stringResource(R.string.view_source_code))
+                        Description(stringResource(R.string.view_source_code_description))
+                    }
                 }
                 SpacerPadding()
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = stringResource(R.string.view_source_code),
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                )
             }
+            SpacerPadding()
         }
+    }
 
-        // licenses
-        Surface(shape = RoundedCornerShape(8.dp)) {
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        navController.navigate(SCR_LICENSES)
-                    }) {
-                SpacerPadding()
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            imageVector = Icons.Outlined.FileCopy,
-                            contentDescription = null
-                        )
-                        IconAndTextPadding()
-                        Column {
-                            Text(stringResource(R.string.licenses))
-                            Description(R.string.licenses_description)
-                        }
-                    }
-                    SpacerPadding()
+    // licenses
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerLow
+    ) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    navController.navigate(SCR_LICENSES)
+                }) {
+            SpacerPadding()
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                        imageVector = Icons.Outlined.FileCopy,
+                        contentDescription = null
                     )
+                    IconAndTextPadding()
+                    Column {
+                        Text(stringResource(R.string.licenses))
+                        Description(R.string.licenses_description)
+                    }
                 }
                 SpacerPadding()
+                Icon(
+                    imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                )
             }
+            SpacerPadding()
         }
+    }
 
-        // android app settings
-        Surface(shape = RoundedCornerShape(8.dp)) {
-            Column(
-                Modifier
-                    .fillMaxWidth()
-                    .clickable {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        view.context.openAppDetailSettings()
-                    }) {
-                SpacerPadding()
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            imageVector = Icons.Outlined.SettingsApplications,
-                            contentDescription = null
-                        )
-                        IconAndTextPadding()
-                        Column {
-                            Text(stringResource(R.string.open_app_detail_settings))
-                            Description(R.string.open_app_detail_settings_description)
-                        }
-                    }
-                    SpacerPadding()
+    // android app settings
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerLow
+    ) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.openAppDetailSettings()
+                }) {
+            SpacerPadding()
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = Icons.Outlined.ArrowOutward,
-                        contentDescription = stringResource(R.string.open_app_detail_settings),
-                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                        imageVector = Icons.Outlined.SettingsApplications,
+                        contentDescription = null
                     )
+                    IconAndTextPadding()
+                    Column {
+                        Text(stringResource(R.string.open_app_detail_settings))
+                        Description(R.string.open_app_detail_settings_description)
+                    }
                 }
                 SpacerPadding()
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = stringResource(R.string.open_app_detail_settings),
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                )
             }
+            SpacerPadding()
         }
     }
 }
