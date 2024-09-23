@@ -12,6 +12,8 @@ object StringUtil {
      */
     fun String.dropSpaces(): String = this.replace(Regex("\\s"), "")
 
+    fun String.removeTrailingPeriod(): String = this.removeSuffix(".")
+
     @Throws(IllegalArgumentException::class)
     fun unicodeToCharacter(unicode: String): String {
         val length = unicode.length

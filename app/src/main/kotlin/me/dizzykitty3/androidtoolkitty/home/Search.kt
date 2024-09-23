@@ -56,6 +56,7 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.searchOnYouTube
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.isInvalidUsername
+import me.dizzykitty3.androidtoolkitty.utils.StringUtil.removeTrailingPeriod
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil.getSuffix
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil.toFullURL
@@ -324,7 +325,7 @@ private fun Context.onTapCheckOnYouTubeButton(query: String) {
 private fun Context.onTapVisitURLButton(url: String) {
     if (url.isBlank()) return
     Timber.d("onTapVisitURLButton")
-    this.openURL(url.dropSpaces().toFullURL())
+    this.openURL(url.dropSpaces().removeTrailingPeriod().toFullURL())
 }
 
 private fun Context.onTapVisitProfileButton(username: String, platformIndex: Int) {
