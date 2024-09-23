@@ -163,7 +163,8 @@ private fun Webpage() {
     OutlinedTextField(
         value = url,
         onValueChange = {
-            url = it.replace(fullWidthPeriod, halfWidthPeriod)
+            url = it
+                .replace(fullWidthPeriod, halfWidthPeriod)
                 .replace(halfWidthSpace, halfWidthPeriod)
                 .replace(fullWidthSpace, halfWidthPeriod)
         },
@@ -201,7 +202,7 @@ private fun Webpage() {
                 Text(HTTPS)
             }
         },
-        suffix = { Text(url.getSuffix()) }
+        suffix = { Text(url.removeTrailingPeriod().getSuffix()) }
     )
 
     TextButton(onClick = {
