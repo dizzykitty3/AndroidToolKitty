@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
@@ -131,8 +130,6 @@ fun SysSettingsScreen() {
     Screen {
         ScreenTitle(R.string.system_settings)
 
-        LocalView.current
-
         val settings = mutableListOf(
             Setting(S_WIFI, R.string.wifi),
             Setting(S_POWER_USAGE_SUMMARY, R.string.battery_level),
@@ -174,7 +171,8 @@ fun SysSettingsScreen() {
         Card(R.string.device_info) {
             Column(Modifier.fillMaxWidth()) {
                 LabelAndValueTextRow(R.string.manufacturer, Build.MANUFACTURER)
-                LabelAndValueTextRow(R.string.device, "${Build.MODEL} (${Build.DEVICE})")
+                LabelAndValueTextRow(R.string.device, Build.MODEL)
+                LabelAndValueTextRow("", Build.DEVICE)
                 LabelAndValueTextRow(
                     R.string.os_version,
                     "Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})"
