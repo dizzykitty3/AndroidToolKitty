@@ -242,13 +242,13 @@ fun LabelText(@StringRes text: Int) = LabelText(stringResource(text))
 @Composable
 fun LabelAndValueTextRow(label: String, text: String) =
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Column(Modifier.weight(0.3F)) { LabelText(label) }
-        Column(Modifier.weight(0.7F)) { ScrollableText(text) }
+        Column(Modifier.weight(0.4F)) { LabelText(label) }
+        Column(Modifier.weight(0.6F)) { ScrollableText(text) }
     }
 
 @Composable
 fun LabelAndValueTextRow(@StringRes label: Int, text: String) =
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Column(Modifier.weight(0.3F)) { LabelText(stringResource(label)) }
-        Column(Modifier.weight(0.7F)) { ScrollableText(text) }
+        Column(Modifier.weight(0.4F)) { LabelText(stringResource(label)) }
+        Column(Modifier.weight(0.6F)) { ScrollableText(text) }
     }
