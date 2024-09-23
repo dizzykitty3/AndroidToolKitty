@@ -52,7 +52,7 @@ fun Maps() {
             OutlinedTextField(
                 value = latitude,
                 onValueChange = { latitude = it },
-                label = { Text(stringResource(R.string.latitude)) },
+                label = { Text(stringResource(R.string.lat)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -83,7 +83,7 @@ fun Maps() {
             OutlinedTextField(
                 value = longitude,
                 onValueChange = { longitude = it },
-                label = { Text(stringResource(R.string.longitude)) },
+                label = { Text(stringResource(R.string.lng)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)

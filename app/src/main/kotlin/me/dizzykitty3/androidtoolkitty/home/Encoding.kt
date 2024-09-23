@@ -43,7 +43,7 @@ fun CodesOfCharacters(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
 
     Card(
-        title = R.string.codes_of_characters,
+        title = R.string.encoding,
         icon = Icons.AutoMirrored.Outlined.Notes,
         hasShowMore = true,
         onClick = {
@@ -55,7 +55,7 @@ fun CodesOfCharacters(navController: NavHostController) {
 @Composable
 fun CodesOfCharactersScreen() {
     Screen {
-        ScreenTitle(R.string.codes_of_characters)
+        ScreenTitle(R.string.encoding)
         Card(R.string.unicode) { Unicode() }
         Card(R.string.ascii) { ASCII() }
         Card("Unix Timestamp") { UnixTimestamp() }
