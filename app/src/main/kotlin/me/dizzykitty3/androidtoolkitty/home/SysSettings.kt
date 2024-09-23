@@ -170,15 +170,15 @@ fun SysSettingsScreen() {
 
         Card(R.string.device_info) {
             Column(Modifier.fillMaxWidth()) {
-                LabelAndValueTextRow(R.string.manufacturer, Build.MANUFACTURER)
-                LabelAndValueTextRow(R.string.device, Build.MODEL)
-                LabelAndValueTextRow("", Build.DEVICE)
+                LabelAndValueTextRow("manufacturer", Build.MANUFACTURER)
+                LabelAndValueTextRow("model", Build.MODEL)
+                LabelAndValueTextRow("device", Build.DEVICE)
                 LabelAndValueTextRow(
-                    R.string.os_version,
+                    "os_ver",
                     "Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})"
                 )
-                LabelAndValueTextRow(R.string.locale, StringUtil.sysLocale)
-                LabelAndValueTextRow(R.string.time_zone, DateUtil.sysTimeZone)
+                LabelAndValueTextRow("locale", StringUtil.sysLocale)
+                LabelAndValueTextRow("time_zone", DateUtil.sysTimeZone)
             }
         }
         Card(R.string.general) {

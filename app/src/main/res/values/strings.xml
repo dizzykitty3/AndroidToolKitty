@@ -151,11 +151,6 @@
     <string name="accessibility_settings">Accessibility</string>
     <string name="no_options_enabled">Pinned options will be shown here</string>
     <string name="device_info">Device info</string>
-    <string name="device" translatable="false">device</string>
-    <string name="os_version" translatable="false">os_ver</string>
-    <string name="locale" translatable="false">locale</string>
-    <string name="manufacturer" translatable="false">manufacturer</string>
-    <string name="time_zone" translatable="false">time_zone</string>
 
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
