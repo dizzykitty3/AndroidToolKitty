@@ -25,7 +25,6 @@ import me.dizzykitty3.androidtoolkitty.TO
 import me.dizzykitty3.androidtoolkitty.TV
 import me.dizzykitty3.androidtoolkitty.US
 import me.dizzykitty3.androidtoolkitty.WIKI
-import me.dizzykitty3.androidtoolkitty.utils.StringUtil.dropSpaces
 import timber.log.Timber
 
 object URLUtil {
@@ -62,7 +61,7 @@ object URLUtil {
             "notion" to SO, "zoro" to TO, "1337x" to TO, "twitch" to TV, "jable" to TV,
             "zoom" to US, "namu" to WIKI
         )
-        return suffixMap[this.dropSpaces().lowercase()] ?: COM
+        return suffixMap[this.lowercase()] ?: COM
     }
 
     /**

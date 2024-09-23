@@ -12,7 +12,13 @@ object StringUtil {
      */
     fun String.dropSpaces(): String = this.replace(Regex("\\s"), "")
 
-    fun String.removeTrailingPeriod(): String = this.removeSuffix(".")
+    fun String.removeTrailingPeriod(): String {
+        var temp = this
+        while (temp.last() == '.') {
+            temp = temp.removeSuffix(".")
+        }
+        return temp
+    }
 
     @Throws(IllegalArgumentException::class)
     fun unicodeToCharacter(unicode: String): String {

@@ -202,7 +202,16 @@ private fun Webpage() {
                 Text(HTTPS)
             }
         },
-        suffix = { Text(url.removeTrailingPeriod().getSuffix()) }
+        suffix = {
+            Text(
+                if (url.isEmpty())
+                    ""
+                else if (url.last() == '.')
+                    url.removeTrailingPeriod().getSuffix().removePrefix(".")
+                else
+                    url.removeTrailingPeriod().getSuffix()
+            )
+        }
     )
 
     TextButton(onClick = {
@@ -326,7 +335,7 @@ private fun Context.onTapCheckOnYouTubeButton(query: String) {
 private fun Context.onTapVisitURLButton(url: String) {
     if (url.isBlank()) return
     Timber.d("onTapVisitURLButton")
-    this.openURL(url.dropSpaces().removeTrailingPeriod().toFullURL())
+    this.openURL(url.removeTrailingPeriod().toFullURL())
 }
 
 private fun Context.onTapVisitProfileButton(username: String, platformIndex: Int) {
