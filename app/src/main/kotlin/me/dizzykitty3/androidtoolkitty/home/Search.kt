@@ -64,20 +64,19 @@ import timber.log.Timber
 @Composable
 fun Search(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
+
     Card(
-        R.string.search,
-        Icons.Outlined.Search,
-        true,
-        {
+        title = R.string.search,
+        icon = Icons.Outlined.Search,
+        hasShowMore = true,
+        onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_SEARCH)
-        }) {
-        Search()
-    }
+        }) { Search() }
 }
 
 @Composable
-fun SearchScreen(settingsViewModel: SettingsViewModel) {
+fun SearchScreen(settingsViewModel: SettingsViewModel) =
     Screen {
         ScreenTitle(R.string.search)
         Card(R.string.webpage) { Webpage() }
@@ -85,7 +84,6 @@ fun SearchScreen(settingsViewModel: SettingsViewModel) {
         Card(R.string.check_app_on_market) { CheckAppOnMarket() }
         Card(R.string.search) { Search() }
     }
-}
 
 @Composable
 private fun Search() {
@@ -158,10 +156,16 @@ private fun Webpage() {
     var url by remember { mutableStateOf("") }
     val fullWidthPeriod = "。"
     val halfWidthPeriod = "."
+    val fullWidthSpace = "　"
+    val halfWidthSpace = " "
 
     OutlinedTextField(
         value = url,
-        onValueChange = { url = it.replace(fullWidthPeriod, halfWidthPeriod) },
+        onValueChange = {
+            url = it.replace(fullWidthPeriod, halfWidthPeriod)
+                .replace(halfWidthSpace, halfWidthPeriod)
+                .replace(fullWidthSpace, halfWidthPeriod)
+        },
         label = { Text(stringResource(R.string.url)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -199,7 +203,7 @@ private fun Webpage() {
         suffix = { Text(url.getSuffix()) }
     )
 
-    TextButton({
+    TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         view.context.onTapVisitURLButton(url)
