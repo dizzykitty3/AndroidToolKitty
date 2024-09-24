@@ -5,6 +5,7 @@ data class Settings(
     var dynamicColor: Boolean = true,
     var forceDarkMode: Boolean = false,
     var hideGreetings: Boolean = false,
+    var customFont: Boolean = false,
 
     // Settings > General
     var autoClearClipboard: Boolean = false,

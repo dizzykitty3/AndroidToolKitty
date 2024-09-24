@@ -64,16 +64,10 @@ fun CustomSwitchRow(
     @StringRes text: Int,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
-) = CustomSwitchRow(
-    icon,
-    stringResource(title),
-    stringResource(text),
-    checked,
-    onCheckedChange
-)
+) = CustomSwitchRow(icon, stringResource(title), stringResource(text), checked, onCheckedChange)
 
 @Composable
-private fun CustomSwitchRow(
+fun CustomSwitchRow(
     icon: ImageVector? = null,
     title: String,
     text: String? = null,

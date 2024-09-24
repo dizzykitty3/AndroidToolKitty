@@ -5,6 +5,7 @@ import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -261,6 +262,7 @@ val unspecified_scheme = ColorFamily(
 @SuppressLint("NewApi")
 @Composable
 fun AppTheme(
+    customFont: Boolean = false,
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
@@ -290,7 +292,7 @@ fun AppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = typography(view.context),
+        typography = if (customFont) typography(view.context) else Typography(),
         content = content
     )
 }

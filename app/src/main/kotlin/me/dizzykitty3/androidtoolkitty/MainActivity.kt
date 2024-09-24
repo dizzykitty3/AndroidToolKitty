@@ -45,7 +45,10 @@ class MainActivity : ComponentActivity() {
             val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
             val widthType: Int = if (widthSizeClass == WindowWidthSizeClass.Compact) 1 else 2
 
-            AppTheme(dynamicColor = settingsViewModel.settings.value.dynamicColor) {
+            AppTheme(
+                customFont = settingsViewModel.settings.value.customFont,
+                dynamicColor = settingsViewModel.settings.value.dynamicColor
+            ) {
                 Scaffold(Modifier.fillMaxSize()) { innerPadding ->
                     AppNavHost(
                         Modifier.padding(top = innerPadding.calculateTopPadding()),

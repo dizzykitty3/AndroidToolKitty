@@ -13,6 +13,7 @@ import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.ColorLens
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.FileCopy
+import androidx.compose.material.icons.outlined.FontDownload
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material.icons.outlined.VisibilityOff
@@ -71,6 +72,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     val haptic = LocalHapticFeedback.current
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
     var hideGreetings by remember { mutableStateOf(settingsViewModel.settings.value.hideGreetings) }
+    var customFont by remember { mutableStateOf(settingsViewModel.settings.value.customFont) }
 
     if (OSVersion.android12()) {
         CustomSwitchRow(
@@ -94,6 +96,17 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         hideGreetings = it
         settingsViewModel.update(settingsViewModel.settings.value.copy(hideGreetings = it))
+    }
+
+    CustomSwitchRow(
+        Icons.Outlined.FontDownload,
+        "Custom font",
+        "[TEST] Switch to manrope.ttf",
+        customFont
+    ) {
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        customFont = it
+        settingsViewModel.update(settingsViewModel.settings.value.copy(customFont = it))
     }
 
     // change app lang
