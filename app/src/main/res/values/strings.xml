@@ -70,7 +70,7 @@
     <string name="username">Username</string>
     <string name="bilibili_search">bilibili (Search)</string>
     <string name="github" translatable="false">GitHub</string>
-    <string name="x" translatable="false">X (formerly Twitter)</string>
+    <string name="x" translatable="false">X</string>
     <string name="weibo">Weibo</string>
     <string name="youtube_handle">YouTube (User custom URL)</string>
     <string name="pixiv_artwork_id">pixiv (Artwork ID)</string>
@@ -119,7 +119,7 @@
     <string name="note" translatable="false">note</string>
     <string name="unifans">Unifans</string>
     <string name="ko_fi" translatable="false">Ko-fi</string>
-    <string name="invalid_username_input_tip">username for %1$s should only contains letters, numbers, and underscores</string>
+    <string name="invalid_username_input_tip">Username for %1$s should only contains letters, numbers, and underscores.</string>
     <string name="check_app_on_market">Check app on market</string>
     <string name="package_name_or_search">Package name or search</string>
     <string name="what_is_package_name">What\'s package name</string>
@@ -130,7 +130,7 @@
     <string name="afdian">Afdian</string>
     <string name="steam_uuid" translatable="false">Steam (steamID64)</string>
     <string name="instabio" translatable="false">Instabio (linkbio.co)</string>
-    <string name="tip_case_sensitive">Please note that usernames on this platform are case sensitive</string>
+    <string name="tip_case_sensitive">Please note that usernames on this platform are case sensitive.</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>
