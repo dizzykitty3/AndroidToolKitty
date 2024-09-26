@@ -75,10 +75,10 @@ object URLUtil {
         BILIBILI_UUID("space.bilibili.com/", R.string.bilibili_uuid),
         BILIBILI_AV("bilibili.com/video/av", R.string.bilibili_av_id),
         BLUESKY("bsky.app/profile/", R.string.bluesky),
-        BOOTH(".booth.pm", R.string.booth),
-        CARRD(".carrd.co", R.string.carrd),
+        BOOTH(".booth.pm", R.string.booth), // Prefix
+        CARRD(".carrd.co", R.string.carrd), // Prefix
         FACEBOOK("facebook.com/", R.string.facebook),
-        FANBOX(".fanbox.cc", R.string.fanbox),
+        FANBOX(".fanbox.cc", R.string.fanbox), // Prefix
         FANSLY("fansly.com/", R.string.fansly),
         FANTIA("fantia.jp/", R.string.fantia),
         GITHUB("github.com/", R.string.github),
@@ -110,7 +110,7 @@ object URLUtil {
         TELEGRAM("t.me/", R.string.telegram),
         THREADS("threads.net/@", R.string.threads),
         TIKTOK("tiktok.com/@", R.string.tiktok),
-        TUMBLR(".tumblr.com", R.string.tumblr),
+        TUMBLR(".tumblr.com", R.string.tumblr), // Prefix
         TWITCASTING("twitcasting.tv/c:", R.string.twitcasting),
         TWITCH("twitch.tv/", R.string.twitch),
         UNIFANS("app.unifans.io/c/", R.string.unifans),
