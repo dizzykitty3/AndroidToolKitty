@@ -68,6 +68,7 @@ import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.DevBuildTip
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.headsetNotConnected
@@ -101,6 +102,7 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
             CardSpacePadding()
         }
         item { HomeCards(settingsViewModel, navController) }
+        item { ScreenPadding() }
     }
 }
 
