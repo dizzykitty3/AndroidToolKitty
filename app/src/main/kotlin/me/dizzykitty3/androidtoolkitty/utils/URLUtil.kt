@@ -105,6 +105,7 @@ object URLUtil {
         REDDIT_SUBREDDIT("reddit.com/r/", R.string.reddit_subreddit),
         SKEB("skeb.jp/@", R.string.skeb),
         SNAPCHAT("snapchat.com/add/", R.string.snapchat),
+        STEAM_SEARCH_STORE("store.steampowered.com/search/?term=", R.string.steam_search_store),
         STEAM_USER_CUSTOM_URL("steamcommunity.com/id/", R.string.steam_user_custom_url),
         STEAM_UUID("steamcommunity.com/profiles/", R.string.steam_uuid),
         TELEGRAM("t.me/", R.string.telegram),
@@ -117,7 +118,9 @@ object URLUtil {
         UNSPLASH("unsplash.com/@", R.string.unsplash),
         V2EX("v2ex.com/member/", R.string.v2ex),
         WAVEBOX("wavebox.me/wave/", R.string.wavebox),
-        WEIBO("weibo.com/n/", R.string.weibo),
+        WEIBO_USERNAME("weibo.com/n/", R.string.weibo_username),
+        WEIBO_USER_CUSTOM_URL("weibo.com/", R.string.weibo_user_custom_url),
+        WEIBO_UUID("weibo.com/u/", R.string.weibo_uuid),
         X("x.com/", R.string.x),
         YOUTUBE_SEARCH("youtube.com/results?search_query=", R.string.youtube_serach),
         YOUTUBE_USER_CUSTOM_URL("youtube.com/@", R.string.youtube_handle)

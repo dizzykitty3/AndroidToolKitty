@@ -364,7 +364,8 @@ private fun toProfileFullURL(platform: URLUtil.Platform, username: String): Stri
         URLUtil.Platform.TUMBLR,
         URLUtil.Platform.CARRD -> "${username.dropSpaces()}${platform.prefix}"
 
-        URLUtil.Platform.YOUTUBE_SEARCH -> "${platform.prefix}${username.trim()}"
+        URLUtil.Platform.YOUTUBE_SEARCH,
+        URLUtil.Platform.STEAM_SEARCH_STORE -> "${platform.prefix}${username.trim()}"
 
         else -> "${platform.prefix}${username.dropSpaces()}"
     }

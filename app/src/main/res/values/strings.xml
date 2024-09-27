@@ -71,7 +71,7 @@
     <string name="bilibili_search">bilibili (Search)</string>
     <string name="github" translatable="false">GitHub</string>
     <string name="x" translatable="false">X</string>
-    <string name="weibo">Weibo</string>
+    <string name="weibo_username">Weibo (Username)</string>
     <string name="youtube_handle">YouTube (User custom URL)</string>
     <string name="pixiv_artwork_id">pixiv (Artwork ID)</string>
     <string name="pixiv_uuid">pixiv (UUID)</string>
@@ -132,6 +132,9 @@
     <string name="instabio" translatable="false">Instabio (linkbio.co)</string>
     <string name="tip_case_sensitive">Please note that usernames on this platform are case sensitive.</string>
     <string name="bilibili_av_id">bilibili (av id)</string>
+    <string name="weibo_user_custom_url">Weibo (User custom URL)</string>
+    <string name="weibo_uuid">Weibo (UUID)</string>
+    <string name="steam_search_store">Steam (Search store)</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>
