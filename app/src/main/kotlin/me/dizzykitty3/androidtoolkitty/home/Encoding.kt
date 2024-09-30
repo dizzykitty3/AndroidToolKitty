@@ -30,6 +30,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -40,21 +41,21 @@ import timber.log.Timber
 @Composable
 fun CodesOfCharacters(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
+
     Card(
-        R.string.codes_of_characters,
-        Icons.AutoMirrored.Outlined.Notes,
-        true,
-        {
+        title = R.string.encoding,
+        icon = Icons.AutoMirrored.Outlined.Notes,
+        hasShowMore = true,
+        onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_CODES_OF_CHARACTERS)
-        }) {
-        Unicode()
-    }
+        }) { Unicode() }
 }
 
 @Composable
 fun CodesOfCharactersScreen() {
     Screen {
+        ScreenTitle(R.string.encoding)
         Card(R.string.unicode) { Unicode() }
         Card(R.string.ascii) { ASCII() }
         Card("Unix Timestamp") { UnixTimestamp() }
@@ -135,7 +136,7 @@ private fun Unicode() {
         }
     )
 
-    TextButton({
+    TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         if (isUnicodeInput) {
@@ -143,9 +144,7 @@ private fun Unicode() {
         } else if (isCharacterInput) {
             view.onClickConvertButton(characters, { unicode = it }, false)
         }
-    }) {
-        Text(stringResource(R.string.convert))
-    }
+    }) { Text(stringResource(R.string.convert)) }
 }
 
 @Composable
@@ -179,7 +178,7 @@ private fun ASCII() {
 
     if (toASCIIResult != "") Text("${stringResource(R.string.result)} $toASCIIResult")
 
-    TextButton({
+    TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         toASCIIResult = stringToASCII.toASCII()

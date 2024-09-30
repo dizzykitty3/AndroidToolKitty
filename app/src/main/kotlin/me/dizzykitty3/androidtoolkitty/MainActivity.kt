@@ -18,10 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.theme.AppTheme
-import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.autoSetMediaVolume
-import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.isHeadsetConnected
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
@@ -43,19 +40,18 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             settingsViewModel = hiltViewModel<SettingsViewModel>()
-            val forceDarkMode = settingsViewModel.settings.value.forceDarkMode
             isAutoClearClipboard = settingsViewModel.settings.value.autoClearClipboard
 
             val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
             val widthType: Int = if (widthSizeClass == WindowWidthSizeClass.Compact) 1 else 2
 
             AppTheme(
-                forceDarkMode = forceDarkMode,
+                customFont = settingsViewModel.settings.value.customFont,
                 dynamicColor = settingsViewModel.settings.value.dynamicColor
             ) {
                 Scaffold(Modifier.fillMaxSize()) { innerPadding ->
                     AppNavHost(
-                        Modifier.padding(innerPadding),
+                        Modifier.padding(top = innerPadding.calculateTopPadding()),
                         settingsViewModel,
                         widthType
                     )
@@ -76,14 +72,6 @@ class MainActivity : ComponentActivity() {
                 if (ClipboardUtil.clear()) {
                     window.decorView.showSnackbar(R.string.clipboard_cleared_automatically)
                     Timber.i("Clipboard cleared automatically")
-                }
-            }
-            if (SettingsSharedPref.enabledAutoSetMediaVolume) {
-                if (this@MainActivity.isHeadsetConnected()) {
-                    Timber.i("Set media volume automatically: cancelled: BT headset connected")
-                } else {
-                    Timber.i("Set media volume automatically")
-                    window.decorView.autoSetMediaVolume(SettingsSharedPref.autoSetMediaVolume)
                 }
             }
         }

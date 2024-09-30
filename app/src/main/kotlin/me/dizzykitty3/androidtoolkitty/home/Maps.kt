@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Place
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -51,7 +52,7 @@ fun Maps() {
             OutlinedTextField(
                 value = latitude,
                 onValueChange = { latitude = it },
-                label = { Text(stringResource(R.string.latitude)) },
+                label = { Text(stringResource(R.string.lat)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -82,7 +83,7 @@ fun Maps() {
             OutlinedTextField(
                 value = longitude,
                 onValueChange = { longitude = it },
-                label = { Text(stringResource(R.string.longitude)) },
+                label = { Text(stringResource(R.string.lng)) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -121,7 +122,8 @@ fun Maps() {
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = stringResource(R.string.open_google_maps),
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
             )
         }
     }

@@ -1,19 +1,26 @@
 package me.dizzykitty3.androidtoolkitty.settings
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.ArrowOutward
-import androidx.compose.material.icons.outlined.Bookmarks
+import androidx.compose.material.icons.outlined.ClearAll
 import androidx.compose.material.icons.outlined.Code
+import androidx.compose.material.icons.outlined.ColorLens
 import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.FileCopy
+import androidx.compose.material.icons.outlined.FontDownload
 import androidx.compose.material.icons.outlined.Language
-import androidx.compose.material.icons.outlined.Refresh
 import androidx.compose.material.icons.outlined.SettingsApplications
+import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,6 +33,7 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.R
@@ -36,12 +44,14 @@ import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
+import me.dizzykitty3.androidtoolkitty.uicomponents.Description
+import me.dizzykitty3.androidtoolkitty.uicomponents.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppLanguageSetting
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
-import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.restartApp
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
@@ -49,9 +59,10 @@ import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Screen {
-        Appearance(settingsViewModel)
-        General(settingsViewModel, navController)
-        Bottom(navController)
+        ScreenTitle(R.string.settings)
+        Card(R.string.appearance) { Appearance(settingsViewModel) }
+        Card(R.string.general) { General(settingsViewModel, navController) }
+        Card(R.string.others) { Bottom(navController) }
     }
 }
 
@@ -60,74 +71,78 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
-    var forceDarkMode by remember { mutableStateOf(settingsViewModel.settings.value.forceDarkMode) }
-    var dismissLangTip by remember { mutableStateOf(settingsViewModel.settings.value.dismissLangTip) }
     var hideGreetings by remember { mutableStateOf(settingsViewModel.settings.value.hideGreetings) }
+    var customFont by remember { mutableStateOf(settingsViewModel.settings.value.customFont) }
 
-    Card(R.string.appearance) {
-        if (OSVersion.android12()) {
-            CustomSwitchRow(
-                R.string.dynamic_color,
-                R.string.material_you_dynamic_color_theme,
-                dynamicColor
-            ) {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                dynamicColor = it
-                settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
-            }
-            SpacerPadding()
-        }
-
+    if (OSVersion.android12()) {
         CustomSwitchRow(
-            R.string.force_dark_mode,
-            R.string.force_dark_mode_description,
-            forceDarkMode
+            Icons.Outlined.ColorLens,
+            R.string.dynamic_color,
+            R.string.dynamic_color_description,
+            dynamicColor
         ) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            forceDarkMode = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(forceDarkMode = it))
+            dynamicColor = it
+            settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
         }
-        SpacerPadding()
+    }
 
-        CustomSwitchRow(
-            R.string.dismiss_lang_tip,
-            R.string.dismiss_lang_tip_description,
-            dismissLangTip
+    CustomSwitchRow(
+        Icons.Outlined.VisibilityOff,
+        R.string.hide_greetings,
+        R.string.hide_greetings_description,
+        hideGreetings
+    ) {
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        hideGreetings = it
+        settingsViewModel.update(settingsViewModel.settings.value.copy(hideGreetings = it))
+    }
+
+    CustomSwitchRow(
+        Icons.Outlined.FontDownload,
+        "Custom font",
+        "[TEST] Switch to manrope.ttf",
+        customFont
+    ) {
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        customFont = it
+        settingsViewModel.update(settingsViewModel.settings.value.copy(customFont = it))
+    }
+
+    // change app lang
+    if (OSVersion.android13()) {
+        Surface(
+            shape = RoundedCornerShape(8.dp),
+            color = MaterialTheme.colorScheme.surfaceContainerLow
         ) {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            dismissLangTip = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(dismissLangTip = it))
-        }
-        SpacerPadding()
-
-        CustomSwitchRow(
-            R.string.hide_greetings,
-            R.string.hide_greetings_description,
-            hideGreetings
-        ) {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            hideGreetings = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(hideGreetings = it))
-        }
-
-        if (OSVersion.android13()) {
-            SpacerPadding()
-            OutlinedButton({
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                view.context.openAppLanguageSetting()
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.Language,
-                    contentDescription = stringResource(R.string.change_app_language),
-                    modifier = Modifier.align(Alignment.CenterVertically)
-                )
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .clickable {
+                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                        view.context.openAppLanguageSetting()
+                    }) {
                 SpacerPadding()
-                Text(stringResource(R.string.change_app_language))
-                Icon(
-                    imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = stringResource(R.string.change_app_language),
-                    tint = MaterialTheme.colorScheme.primary
-                )
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            imageVector = Icons.Outlined.Language,
+                            contentDescription = stringResource(R.string.change_app_language)
+                        )
+                        IconAndTextPadding()
+                        Column {
+                            Text(stringResource(R.string.change_app_language))
+                            Description(stringResource(R.string.change_app_language_description))
+                        }
+                    }
+                    SpacerPadding()
+                    Icon(
+                        imageVector = Icons.Outlined.ArrowOutward,
+                        contentDescription = stringResource(R.string.change_app_language),
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                    )
+                }
+                SpacerPadding()
             }
         }
     }
@@ -143,44 +158,65 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
-    Card(R.string.general) {
-        CustomSwitchRow(
-            R.string.clear_clipboard_automatically,
-            R.string.clear_clipboard_on_launch,
-            autoClearClipboard
-        ) {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            autoClearClipboard = it
-            // Automatically hide Clipboard Card when turning on Clear on Launch feature.
-            if (autoClearClipboard && showClipboardCard) {
-                showClipboardCard = false
-                settingsSharedPref.saveShownState(CARD_3, false)
-                view.showSnackbar(
-                    message = R.string.clipboard_card_hidden,
-                    buttonText = R.string.undo,
-                    textColor = inverseOnSurface,
-                    buttonColor = inversePrimary,
-                    buttonClickListener = {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        settingsSharedPref.saveShownState(CARD_3, true)
+    CustomSwitchRow(
+        Icons.Outlined.ClearAll,
+        R.string.clear_clipboard_automatically,
+        R.string.clear_clipboard_on_launch,
+        autoClearClipboard
+    ) {
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        autoClearClipboard = it
+        // Automatically hide Clipboard Card when turning on Clear on Launch feature.
+        if (autoClearClipboard && showClipboardCard) {
+            showClipboardCard = false
+            settingsSharedPref.saveShownState(CARD_3, false)
+            view.showSnackbar(
+                message = R.string.clipboard_card_hidden,
+                buttonText = R.string.undo,
+                textColor = inverseOnSurface,
+                buttonColor = inversePrimary,
+                buttonClickListener = {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    settingsSharedPref.saveShownState(CARD_3, true)
+                }
+            )
+        }
+        settingsViewModel.update(settingsViewModel.settings.value.copy(autoClearClipboard = it))
+    }
+
+    // edit home
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerLow
+    ) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    navController.navigate(SCR_EDIT_HOME)
+                }) {
+            SpacerPadding()
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Outlined.Edit,
+                        contentDescription = stringResource(R.string.customize_home_page)
+                    )
+                    IconAndTextPadding()
+                    Column {
+                        Text(stringResource(R.string.customize_home_page))
+                        Description(stringResource(R.string.customize_home_page_description))
                     }
+                }
+                SpacerPadding()
+                Icon(
+                    imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
                 )
             }
-            settingsViewModel.update(settingsViewModel.settings.value.copy(autoClearClipboard = it))
-        }
-        SpacerPadding()
-
-        OutlinedButton({
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            navController.navigate(SCR_EDIT_HOME)
-        }) {
-            Icon(
-                imageVector = Icons.Outlined.Edit,
-                contentDescription = stringResource(R.string.customize_my_home_page),
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
             SpacerPadding()
-            Text(stringResource(R.string.customize_my_home_page))
         }
     }
 }
@@ -190,58 +226,112 @@ private fun Bottom(navController: NavHostController) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
 
-    Column {
-        TextButton({
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            view.context.showToast(R.string.all_help_welcomed)
-            view.context.openURL(SOURCE_CODE_URL)
-        }) {
-            Icon(imageVector = Icons.Outlined.Code, contentDescription = null)
+    // source code
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerLow
+    ) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.showToast(R.string.all_help_welcomed)
+                    view.context.openURL(SOURCE_CODE_URL)
+                }) {
             SpacerPadding()
-            Text(stringResource(R.string.view_source_code))
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(R.string.view_source_code),
-                tint = MaterialTheme.colorScheme.primary
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Outlined.Code,
+                        contentDescription = null
+                    )
+                    IconAndTextPadding()
+                    Column {
+                        Text(stringResource(R.string.view_source_code))
+                        Description(stringResource(R.string.view_source_code_description))
+                    }
+                }
+                SpacerPadding()
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = stringResource(R.string.view_source_code),
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                )
+            }
+            SpacerPadding()
         }
+    }
 
-        TextButton({
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            navController.navigate(SCR_LICENSES)
-        }) {
-            Icon(imageVector = Icons.Outlined.Bookmarks, contentDescription = null)
+    // licenses
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerLow
+    ) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    navController.navigate(SCR_LICENSES)
+                }) {
             SpacerPadding()
-            Text(stringResource(R.string.licenses))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Outlined.FileCopy,
+                        contentDescription = null
+                    )
+                    IconAndTextPadding()
+                    Column {
+                        Text(stringResource(R.string.licenses))
+                        Description(R.string.licenses_description)
+                    }
+                }
+                SpacerPadding()
+                Icon(
+                    imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                )
+            }
+            SpacerPadding()
         }
+    }
 
-        TextButton({
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            view.context.openAppDetailSettings()
-        }) {
-            Icon(
-                imageVector = Icons.Outlined.SettingsApplications,
-                contentDescription = null
-            )
+    // android app settings
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        color = MaterialTheme.colorScheme.surfaceContainerLow
+    ) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.openAppDetailSettings()
+                }) {
             SpacerPadding()
-            Text(stringResource(R.string.open_app_detail_settings))
-            Icon(
-                imageVector = Icons.Outlined.ArrowOutward,
-                contentDescription = stringResource(R.string.open_app_detail_settings),
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
-
-        TextButton({
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            view.context.restartApp()
-        }) {
-            Icon(
-                imageVector = Icons.Outlined.Refresh,
-                contentDescription = null
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Outlined.SettingsApplications,
+                        contentDescription = null
+                    )
+                    IconAndTextPadding()
+                    Column {
+                        Text(stringResource(R.string.open_app_detail_settings))
+                        Description(R.string.open_app_detail_settings_description)
+                    }
+                }
+                SpacerPadding()
+                Icon(
+                    imageVector = Icons.Outlined.ArrowOutward,
+                    contentDescription = stringResource(R.string.open_app_detail_settings),
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+                )
+            }
             SpacerPadding()
-            Text(stringResource(R.string.restart_app))
         }
     }
 }

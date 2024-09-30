@@ -29,13 +29,13 @@ android {
         }
     }
     buildTypes {
-        debug {
+        getByName("debug") {
             isMinifyEnabled = false
             applicationIdSuffix = ".dev"
             versionNameSuffix = ".dev"
             resValue("string", "app_name", "ToolKitty dev")
         }
-        release {
+        getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -52,7 +52,6 @@ android {
         }
     }
     composeCompiler {
-        enableStrongSkippingMode = true
         reportsDestination = layout.buildDirectory.dir("compose_compiler")
         // https://developer.android.com/develop/ui/compose/compiler#configuration-options
 //        stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
@@ -77,6 +76,7 @@ android {
     buildToolsVersion = "35.0.0"
     androidResources {
         // https://developer.android.com/guide/topics/resources/app-languages#auto-localeconfig
+        @Suppress("UnstableApiUsage")
         generateLocaleConfig = true // Per-app language preferences
     }
 }
@@ -88,7 +88,6 @@ dependencies {
 
     implementation(libs.about.libraries.compose.m3)
     implementation(libs.about.libraries.core)
-    implementation(libs.android.gms.play.services.location)
     implementation(libs.android.gms.play.services.maps)
     implementation(libs.android.material)
     implementation(libs.androidx.activity.compose)
@@ -96,7 +95,6 @@ dependencies {
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.window.size)
-    implementation(libs.androidx.compose.runtime.livedata)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.hilt.navigation.compose)

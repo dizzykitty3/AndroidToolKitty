@@ -25,7 +25,6 @@ import me.dizzykitty3.androidtoolkitty.TO
 import me.dizzykitty3.androidtoolkitty.TV
 import me.dizzykitty3.androidtoolkitty.US
 import me.dizzykitty3.androidtoolkitty.WIKI
-import me.dizzykitty3.androidtoolkitty.utils.StringUtil.dropSpaces
 import timber.log.Timber
 
 object URLUtil {
@@ -62,7 +61,7 @@ object URLUtil {
             "notion" to SO, "zoro" to TO, "1337x" to TO, "twitch" to TV, "jable" to TV,
             "zoom" to US, "namu" to WIKI
         )
-        return suffixMap[this.dropSpaces().lowercase()] ?: COM
+        return suffixMap[this.lowercase()] ?: COM
     }
 
     /**
@@ -74,11 +73,12 @@ object URLUtil {
         BAHAMUT("gamer.com.tw/home/home.php?owner=", R.string.bahamut),
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_UUID("space.bilibili.com/", R.string.bilibili_uuid),
+        BILIBILI_AV("bilibili.com/video/av", R.string.bilibili_av_id),
         BLUESKY("bsky.app/profile/", R.string.bluesky),
-        BOOTH(".booth.pm", R.string.booth),
-        CARRD(".carrd.co", R.string.carrd),
+        BOOTH(".booth.pm", R.string.booth), // Prefix
+        CARRD(".carrd.co", R.string.carrd), // Prefix
         FACEBOOK("facebook.com/", R.string.facebook),
-        FANBOX(".fanbox.cc", R.string.fanbox),
+        FANBOX(".fanbox.cc", R.string.fanbox), // Prefix
         FANSLY("fansly.com/", R.string.fansly),
         FANTIA("fantia.jp/", R.string.fantia),
         GITHUB("github.com/", R.string.github),
@@ -91,7 +91,7 @@ object URLUtil {
         LIT_LINK("lit.link/", R.string.lit_link),
         MARSHMALLOW_QA("marshmallow-qa.com/", R.string.marshmallow_qa),
         MASTODON("mastodon.social/@", R.string.mastodon),
-        MISSKEY("misskey.io/@", R.string.misskeyio),
+        MISSKEY("misskey.io/@", R.string.misskey),
         NOTE("note.com/", R.string.note),
         PATREON("patreon.com/", R.string.patreon),
         PAYPAL("paypal.me/", R.string.paypal),
@@ -105,19 +105,22 @@ object URLUtil {
         REDDIT_SUBREDDIT("reddit.com/r/", R.string.reddit_subreddit),
         SKEB("skeb.jp/@", R.string.skeb),
         SNAPCHAT("snapchat.com/add/", R.string.snapchat),
+        STEAM_SEARCH_STORE("store.steampowered.com/search/?term=", R.string.steam_search_store),
         STEAM_USER_CUSTOM_URL("steamcommunity.com/id/", R.string.steam_user_custom_url),
         STEAM_UUID("steamcommunity.com/profiles/", R.string.steam_uuid),
         TELEGRAM("t.me/", R.string.telegram),
         THREADS("threads.net/@", R.string.threads),
         TIKTOK("tiktok.com/@", R.string.tiktok),
-        TUMBLR(".tumblr.com", R.string.tumblr),
+        TUMBLR(".tumblr.com", R.string.tumblr), // Prefix
         TWITCASTING("twitcasting.tv/c:", R.string.twitcasting),
         TWITCH("twitch.tv/", R.string.twitch),
         UNIFANS("app.unifans.io/c/", R.string.unifans),
         UNSPLASH("unsplash.com/@", R.string.unsplash),
         V2EX("v2ex.com/member/", R.string.v2ex),
         WAVEBOX("wavebox.me/wave/", R.string.wavebox),
-        WEIBO("weibo.com/n/", R.string.weibo),
+        WEIBO_USERNAME("weibo.com/n/", R.string.weibo_username),
+        WEIBO_USER_CUSTOM_URL("weibo.com/", R.string.weibo_user_custom_url),
+        WEIBO_UUID("weibo.com/u/", R.string.weibo_uuid),
         X("x.com/", R.string.x),
         YOUTUBE_SEARCH("youtube.com/results?search_query=", R.string.youtube_serach),
         YOUTUBE_USER_CUSTOM_URL("youtube.com/@", R.string.youtube_handle)

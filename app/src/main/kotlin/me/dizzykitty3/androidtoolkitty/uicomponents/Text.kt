@@ -1,8 +1,11 @@
+@file:Suppress("unused")
+
 package me.dizzykitty3.androidtoolkitty.uicomponents
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,7 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.BugReport
+import androidx.compose.material.icons.outlined.ErrorOutline
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -101,15 +104,15 @@ fun AnnotatedString.Builder.PrimaryColorText(@StringRes id: Int) {
 }
 
 @Composable
-fun Tip(@StringRes message: Int, type: Int = 1) = Tip(stringResource(message), type)
+fun Tip(@StringRes message: Int) = Tip(stringResource(message))
 
 @Composable
-fun Tip(msg: String, type: Int = 1) {
+fun Tip(msg: String) {
     Card(
         shape = RoundedCornerShape(dimensionResource(R.dimen.padding_tip)),
         colors = CardDefaults.cardColors(
-            containerColor = if (type == 1) MaterialTheme.colorScheme.tertiaryContainer else MaterialTheme.colorScheme.secondaryContainer,
-            contentColor = if (type == 1) MaterialTheme.colorScheme.onTertiaryContainer else MaterialTheme.colorScheme.onSecondaryContainer
+            containerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            contentColor = MaterialTheme.colorScheme.onTertiaryContainer
         )
     ) {
         Row(
@@ -118,8 +121,38 @@ fun Tip(msg: String, type: Int = 1) {
                 .fillMaxWidth()
         ) {
             Icon(
-                if (type == 1) Icons.Outlined.Info else Icons.Outlined.BugReport,
-                contentDescription = stringResource(R.string.info),
+                Icons.Outlined.Info,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
+            )
+            IconAndTextPadding()
+            Text(
+                text = msg,
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.align(Alignment.CenterVertically)
+            )
+        }
+    }
+    SpacerPadding()
+}
+
+@Composable
+fun ErrorTip(msg: String) {
+    Card(
+        shape = RoundedCornerShape(dimensionResource(R.dimen.padding_tip)),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.errorContainer,
+            contentColor = MaterialTheme.colorScheme.onErrorContainer
+        )
+    ) {
+        Row(
+            Modifier
+                .padding(dimensionResource(R.dimen.padding_tip))
+                .fillMaxWidth()
+        ) {
+            Icon(
+                Icons.Outlined.ErrorOutline,
+                contentDescription = null,
                 modifier = Modifier.size(24.dp)
             )
             IconAndTextPadding()
@@ -137,27 +170,29 @@ fun Tip(msg: String, type: Int = 1) {
 fun WIPTip() = Tip(R.string.wip_long)
 
 @Composable
-fun DevBuildTip() = Tip(R.string.debug_build_top_tip, type = 2)
+fun DevBuildTip() = Tip(R.string.debug_build_top_tip)
 
 @Composable
 fun NoTranslationTip() = Tip(stringResource(R.string.no_translation, StringUtil.sysLocale))
-
-@Composable
-fun NotFullyTranslated() = Tip(stringResource(R.string.not_fully_translated, StringUtil.sysLocale))
 
 @Composable
 fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))
 
 @Composable
 fun GroupTitle(title: String) {
-    Text(">  $title", style = MaterialTheme.typography.titleMedium)
+    Text(
+        title,
+        color = MaterialTheme.colorScheme.primary
+    )
     SpacerPadding()
 }
 
 @Composable
+fun GroupTitleNoColor(title: String) = Text(title, style = MaterialTheme.typography.titleMedium)
+
+@Composable
 fun ScrollableText(text: String) =
     Box(Modifier.horizontalScroll(rememberScrollState())) { Text(text) }
-
 
 @Composable
 fun ScrollableText(@StringRes text: Int) = ScrollableText(stringResource(text))
@@ -166,4 +201,54 @@ fun ScrollableText(@StringRes text: Int) = ScrollableText(stringResource(text))
 fun ScrollableItalicText(@StringRes text: Int) =
     Box(Modifier.horizontalScroll(rememberScrollState())) {
         Text(buildAnnotatedString { ItalicText(stringResource(text)) })
+    }
+
+@Composable
+fun ScrollableItalicText(text: String) =
+    Box(Modifier.horizontalScroll(rememberScrollState())) {
+        Text(buildAnnotatedString { ItalicText(text) })
+    }
+
+@Composable
+fun Description(@StringRes text: Int) = Description(stringResource(text))
+
+@Composable
+fun Description(text: String) = Text(
+    text,
+    style = MaterialTheme.typography.labelMedium,
+    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
+)
+
+@Composable
+fun ScreenTitle(@StringRes text: Int) = ScreenTitle(stringResource(text))
+
+@Composable
+fun ScreenTitle(text: String) {
+    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        Text(
+            text,
+            style = MaterialTheme.typography.titleLarge
+        )
+    }
+    SpacerPadding()
+}
+
+@Composable
+fun LabelText(text: String) = Text(text, style = MaterialTheme.typography.labelMedium)
+
+@Composable
+fun LabelText(@StringRes text: Int) = LabelText(stringResource(text))
+
+@Composable
+fun LabelAndValueTextRow(label: String, text: String) =
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(0.4F)) { LabelText(label) }
+        Column(Modifier.weight(0.6F)) { ScrollableText(text) }
+    }
+
+@Composable
+fun LabelAndValueTextRow(@StringRes label: Int, text: String) =
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(0.4F)) { LabelText(stringResource(label)) }
+        Column(Modifier.weight(0.6F)) { ScrollableText(text) }
     }

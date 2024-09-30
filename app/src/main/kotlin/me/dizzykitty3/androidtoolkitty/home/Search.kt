@@ -43,14 +43,20 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
+import me.dizzykitty3.androidtoolkitty.uicomponents.ErrorTip
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
+import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnMarket
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSearch
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.searchOnYouTube
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.isInvalidUsername
+import me.dizzykitty3.androidtoolkitty.utils.StringUtil.removeTrailingPeriod
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil.getSuffix
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil.toFullURL
@@ -59,27 +65,26 @@ import timber.log.Timber
 @Composable
 fun Search(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
+
     Card(
-        R.string.search,
-        Icons.Outlined.Search,
-        true,
-        {
+        title = R.string.search,
+        icon = Icons.Outlined.Search,
+        hasShowMore = true,
+        onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_SEARCH)
-        }) {
-        Search()
-    }
+        }) { Search() }
 }
 
 @Composable
-fun SearchScreen(settingsViewModel: SettingsViewModel) {
+fun SearchScreen(settingsViewModel: SettingsViewModel) =
     Screen {
-        Card(R.string.search) { Search() }
+        ScreenTitle(R.string.search)
         Card(R.string.webpage) { Webpage() }
         Card(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }
         Card(R.string.check_app_on_market) { CheckAppOnMarket() }
+        Card(R.string.search) { Search() }
     }
-}
 
 @Composable
 private fun Search() {
@@ -123,7 +128,8 @@ private fun Search() {
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
             )
         }
         ButtonDivider()
@@ -136,7 +142,8 @@ private fun Search() {
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
             )
         }
     }
@@ -150,10 +157,17 @@ private fun Webpage() {
     var url by remember { mutableStateOf("") }
     val fullWidthPeriod = "。"
     val halfWidthPeriod = "."
+    val fullWidthSpace = "　"
+    val halfWidthSpace = " "
 
     OutlinedTextField(
         value = url,
-        onValueChange = { url = it.replace(fullWidthPeriod, halfWidthPeriod) },
+        onValueChange = {
+            url = it
+                .replace(fullWidthPeriod, halfWidthPeriod)
+                .replace(halfWidthSpace, halfWidthPeriod)
+                .replace(fullWidthSpace, halfWidthPeriod)
+        },
         label = { Text(stringResource(R.string.url)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -188,10 +202,19 @@ private fun Webpage() {
                 Text(HTTPS)
             }
         },
-        suffix = { Text(url.getSuffix()) }
+        suffix = {
+            Text(
+                if (url.isEmpty())
+                    ""
+                else if (url.last() == '.')
+                    url.removeTrailingPeriod().getSuffix().removePrefix(".")
+                else
+                    url.removeTrailingPeriod().getSuffix()
+            )
+        }
     )
 
-    TextButton({
+    TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         view.context.onTapVisitURLButton(url)
@@ -200,7 +223,8 @@ private fun Webpage() {
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
             contentDescription = null,
-            modifier = Modifier.align(Alignment.CenterVertically)
+            modifier = Modifier.align(Alignment.CenterVertically),
+            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
         )
     }
 }
@@ -240,6 +264,13 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
                             lastSelectedPlatformIndex = platformIndex
                         )
                     )
+                } else {
+                    view.showSnackbar(
+                        view.context.getString(
+                            R.string.invalid_username_input_tip,
+                            platform
+                        )
+                    )
                 }
             }
         ),
@@ -256,15 +287,17 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1
                 )
-                if (isInvalid(platform, username)) {
-                    Text(
-                        stringResource(R.string.invalid_username_input_tip, platform),
-                        color = MaterialTheme.colorScheme.error
-                    )
-                }
             }
         }
     )
+
+    if (isCaseSensitive(platform)) {
+        SpacerPadding()
+        Tip(R.string.tip_case_sensitive)
+    } else if (isInvalid(platform, username)) {
+        SpacerPadding()
+        ErrorTip(stringResource(R.string.invalid_username_input_tip, platform))
+    }
 
     TextButton({
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -272,6 +305,8 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
         if (isValid(platform, username)) {
             view.context.onTapVisitProfileButton(username, platformIndex)
             settingsViewModel.update(settingsViewModel.settings.value.copy(lastSelectedPlatformIndex = platformIndex))
+        } else {
+            view.showSnackbar(view.context.getString(R.string.invalid_username_input_tip, platform))
         }
     }) {
         Text(stringResource(R.string.visit))
@@ -279,7 +314,8 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
             contentDescription = null,
-            modifier = Modifier.align(Alignment.CenterVertically)
+            modifier = Modifier.align(Alignment.CenterVertically),
+            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
         )
     }
 }
@@ -299,7 +335,7 @@ private fun Context.onTapCheckOnYouTubeButton(query: String) {
 private fun Context.onTapVisitURLButton(url: String) {
     if (url.isBlank()) return
     Timber.d("onTapVisitURLButton")
-    this.openURL(url.dropSpaces().toFullURL())
+    this.openURL(url.removeTrailingPeriod().toFullURL())
 }
 
 private fun Context.onTapVisitProfileButton(username: String, platformIndex: Int) {
@@ -328,7 +364,8 @@ private fun toProfileFullURL(platform: URLUtil.Platform, username: String): Stri
         URLUtil.Platform.TUMBLR,
         URLUtil.Platform.CARRD -> "${username.dropSpaces()}${platform.prefix}"
 
-        URLUtil.Platform.YOUTUBE_SEARCH -> "${platform.prefix}${username.trim()}"
+        URLUtil.Platform.YOUTUBE_SEARCH,
+        URLUtil.Platform.STEAM_SEARCH_STORE -> "${platform.prefix}${username.trim()}"
 
         else -> "${platform.prefix}${username.dropSpaces()}"
     }
@@ -340,6 +377,9 @@ private fun isInvalid(platform: URLUtil.Platform, username: String): Boolean =
 
 private fun isValid(platform: URLUtil.Platform, username: String): Boolean =
     !isInvalid(platform, username)
+
+private fun isCaseSensitive(platform: URLUtil.Platform): Boolean =
+    platform == URLUtil.Platform.LIT_LINK
 
 @Composable
 private fun CheckAppOnMarket() {
@@ -383,7 +423,8 @@ private fun CheckAppOnMarket() {
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = stringResource(R.string.check_app_on_market),
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
             )
         }
         ButtonDivider()
@@ -397,7 +438,8 @@ private fun CheckAppOnMarket() {
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = stringResource(R.string.open_on_other_markets),
-                modifier = Modifier.align(Alignment.CenterVertically)
+                modifier = Modifier.align(Alignment.CenterVertically),
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
             )
         }
     }
@@ -416,7 +458,8 @@ private fun WhatIsPackageName() {
         Text(stringResource(R.string.what_is_package_name))
         Icon(
             imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = stringResource(R.string.what_is_package_name)
+            contentDescription = stringResource(R.string.what_is_package_name),
+            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
         )
     }
 }

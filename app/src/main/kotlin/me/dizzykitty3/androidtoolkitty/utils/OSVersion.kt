@@ -5,7 +5,7 @@ import android.os.Build
 /**
  * [Android Developers Blog](https://android-developers.googleblog.com/)
  */
-@Suppress("unused", "MemberVisibilityCanBePrivate")
+@Suppress("unused")
 object OSVersion {
     private val osVersion = Build.VERSION.SDK_INT
 
@@ -17,6 +17,7 @@ object OSVersion {
      * [beta-2](https://android-developers.googleblog.com/2024/05/the-second-beta-of-android-15.html)
      * [beta-3](https://android-developers.googleblog.com/2024/06/the-third-beta-of-android-15.html)
      * [beta-4](https://android-developers.googleblog.com/2024/07/the-fourth-beta-of-android-15.html)
+     * [AOSP release](https://android-developers.googleblog.com/2024/09/android-15-is-released-to-aosp.html)
      */
     fun android15(): Boolean = osVersion >= Build.VERSION_CODES.VANILLA_ICE_CREAM
 

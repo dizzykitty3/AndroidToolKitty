@@ -166,6 +166,7 @@ object IntentUtil {
 
     @SuppressLint("InlinedApi")
     fun Context.openAppLanguageSetting() {
+        if (!OSVersion.android13()) return
         Timber.d("openAppLanguageSetting")
         val intent = Intent(Settings.ACTION_APP_LOCALE_SETTINGS)
         intent.data = Uri.fromParts(PACKAGE, this.packageName, null)

@@ -1,9 +1,11 @@
 package me.dizzykitty3.androidtoolkitty.home
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -12,7 +14,6 @@ import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -21,6 +22,8 @@ import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Slider
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -44,13 +47,15 @@ import me.dizzykitty3.androidtoolkitty.SCR_VOLUME
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
-import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
+import me.dizzykitty3.androidtoolkitty.uicomponents.Description
 import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
+import kotlin.math.roundToInt
 
 @Composable
 fun Volume(navController: NavHostController) {
@@ -70,12 +75,12 @@ fun Volume(navController: NavHostController) {
 @Composable
 fun VolumeScreen() {
     Screen {
+        ScreenTitle(R.string.volume)
         Card(R.string.media_volume) { MediaVolume(isHome = false) }
         Card(R.string.voice_call_volume) { VoiceCallVolume() }
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MediaVolume(isHome: Boolean) {
     val view = LocalView.current
@@ -100,9 +105,9 @@ private fun MediaVolume(isHome: Boolean) {
         mutableStateOf(
             when (AudioUtil.mediaVolume) {
                 0 -> 0
-                (0.4 * maxVolume).toInt() -> 1
-                (0.6 * maxVolume).toInt() -> 2
-                (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
+                (0.4 * maxVolume).roundToInt() -> 1
+                (0.6 * maxVolume).roundToInt() -> 2
+                (mCustomVolume * 0.01 * maxVolume).roundToInt() -> 3
                 else -> null
             }
         )
@@ -132,6 +137,7 @@ private fun MediaVolume(isHome: Boolean) {
 
                         3 -> {
                             mHaveTappedAddButton = true
+                            settingsSharedPref.haveTappedAddButton = true
                             if (mCustomVolume > 0)
                                 view.setVolume(mCustomVolume * 0.01 * maxVolume)
                             else
@@ -143,7 +149,9 @@ private fun MediaVolume(isHome: Boolean) {
                 shape = SegmentedButtonDefaults.itemShape(
                     index = index,
                     count = options.size
-                )
+                ),
+                colors = SegmentedButtonDefaults.colors()
+                    .copy(inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainerLow)
             ) {
                 if (label != stringResource(R.string.add)) {
                     Text(label.toString())
@@ -190,9 +198,9 @@ private fun MediaVolume(isHome: Boolean) {
                     showVolumeDialog = false
                     selectedIndex = when (AudioUtil.mediaVolume) {
                         0 -> 0
-                        (0.4 * maxVolume).toInt() -> 1
-                        (0.6 * maxVolume).toInt() -> 2
-                        (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
+                        (0.4 * maxVolume).roundToInt() -> 1
+                        (0.6 * maxVolume).roundToInt() -> 2
+                        (mCustomVolume * 0.01 * maxVolume).roundToInt() -> 3
                         else -> null
                     }
                 },
@@ -205,12 +213,12 @@ private fun MediaVolume(isHome: Boolean) {
                                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 newCustomVolume = it
                                 if (mCustomVolume < 0 || (!mHaveCustomLabel))
-                                    optionLabel = "${it.toInt()}%"
+                                    optionLabel = "${it.roundToInt()}%"
                             },
                             valueRange = 0f..100f,
                             steps = if (morePreciseSlider) 0 else 9
                         )
-                        Text("${newCustomVolume.toInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).toInt()}/$maxVolume")
+                        Text("${newCustomVolume.roundToInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).roundToInt()}/$maxVolume")
                         SpacerPadding()
                         OutlinedTextField(
                             value = optionLabel,
@@ -225,8 +233,8 @@ private fun MediaVolume(isHome: Boolean) {
                             ),
                             keyboardActions = KeyboardActions(
                                 onDone = {
-                                    settingsSharedPref.customVolume = newCustomVolume.toInt()
-                                    mCustomVolume = newCustomVolume.toInt()
+                                    settingsSharedPref.customVolume = newCustomVolume.roundToInt()
+                                    mCustomVolume = newCustomVolume.roundToInt()
                                     if (mHaveCustomLabel) {
                                         settingsSharedPref.usingCustomVolumeOptionLabel = true
                                     }
@@ -245,13 +253,34 @@ private fun MediaVolume(isHome: Boolean) {
                                 }
                             }
                         )
-                        CustomSwitchRow(
-                            R.string.more_precise_slider,
-                            R.string.slider_increment_1_percent,
-                            morePreciseSlider
+
+                        Surface(
+                            shape = RoundedCornerShape(8.dp),
+                            color = MaterialTheme.colorScheme.surfaceContainerHigh
                         ) {
-                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                            morePreciseSlider = it
+                            Column(Modifier.clickable {
+                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                morePreciseSlider = !morePreciseSlider
+                            }) {
+                                SpacerPadding()
+                                Row(verticalAlignment = Alignment.CenterVertically) {
+                                    Row(
+                                        Modifier.weight(1f),
+                                        verticalAlignment = Alignment.CenterVertically
+                                    ) {
+                                        Column {
+                                            Text(stringResource(R.string.more_precise_slider))
+                                            Description(R.string.slider_increment_1_percent)
+                                        }
+                                    }
+                                    SpacerPadding()
+                                    Switch(
+                                        checked = morePreciseSlider,
+                                        onCheckedChange = { morePreciseSlider = it }
+                                    )
+                                }
+                                SpacerPadding()
+                            }
                         }
                     }
                 },
@@ -259,12 +288,12 @@ private fun MediaVolume(isHome: Boolean) {
                     Button(
                         {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                            if ((newCustomVolume * 0.01 * maxVolume).toInt() == 0) {
-                                if (newCustomVolume.toInt() != 0) view.showSnackbar(R.string.system_media_volume_levels_limited)
+                            if ((newCustomVolume * 0.01 * maxVolume).roundToInt() == 0) {
+                                if (newCustomVolume.roundToInt() != 0) view.showSnackbar(R.string.system_media_volume_levels_limited)
                                 return@Button
                             } else {
-                                settingsSharedPref.customVolume = newCustomVolume.toInt()
-                                mCustomVolume = newCustomVolume.toInt()
+                                settingsSharedPref.customVolume = newCustomVolume.roundToInt()
+                                mCustomVolume = newCustomVolume.roundToInt()
                                 if (mHaveCustomLabel) {
                                     settingsSharedPref.usingCustomVolumeOptionLabel = true
                                 }
@@ -285,9 +314,9 @@ private fun MediaVolume(isHome: Boolean) {
                         showVolumeDialog = false
                         selectedIndex = when (AudioUtil.mediaVolume) {
                             0 -> 0
-                            (0.4 * maxVolume).toInt() -> 1
-                            (0.6 * maxVolume).toInt() -> 2
-                            (mCustomVolume * 0.01 * maxVolume).toInt() -> 3
+                            (0.4 * maxVolume).roundToInt() -> 1
+                            (0.6 * maxVolume).roundToInt() -> 2
+                            (mCustomVolume * 0.01 * maxVolume).roundToInt() -> 3
                             else -> null
                         }
                     }) { Text(stringResource(android.R.string.cancel)) }
@@ -326,7 +355,7 @@ private fun VoiceCallVolume() {
         val index = AudioUtil.maxVoiceCallVolumeIndex
         AudioUtil.setVoiceCallVolume(index)
         if (AudioUtil.voiceCallVolume == index) {
-            view.showSnackbar(R.string.success)
+            view.showSnackbar(R.string.volume_changed)
         }
     }) { Text(stringResource(R.string.max_out_voice_call_volume)) }
 }

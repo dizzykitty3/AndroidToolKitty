@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package me.dizzykitty3.androidtoolkitty.utils
 
 import android.content.Context
@@ -9,6 +11,14 @@ object StringUtil {
      * Drop spaces, including full-width ones.
      */
     fun String.dropSpaces(): String = this.replace(Regex("\\s"), "")
+
+    fun String.removeTrailingPeriod(): String {
+        var temp = this
+        while (temp.last() == '.') {
+            temp = temp.removeSuffix(".")
+        }
+        return temp
+    }
 
     @Throws(IllegalArgumentException::class)
     fun unicodeToCharacter(unicode: String): String {
@@ -42,32 +52,23 @@ object StringUtil {
         return stringBuilder.toString()
     }
 
-    val sysLocale: String
-        @CheckResult get() = Locale.getDefault().toString()
+    val sysLocale: String @CheckResult get() = Locale.getDefault().toString()
 
-    @Suppress("MemberVisibilityCanBePrivate")
-    val sysLangSupported: Boolean
-        @CheckResult get() = sysLocale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
+    val sysLangSupported: Boolean @CheckResult get() = sysLocale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
 
-    val sysLangNotSupported: Boolean
-        @CheckResult get() = !sysLangSupported
+    val sysLangNotSupported: Boolean @CheckResult get() = !sysLangSupported
 
-    @Suppress("MemberVisibilityCanBePrivate")
-    val sysLangFullyTranslated: Boolean
-        @CheckResult get() = sysLocale.contains(Regex("en"))
+    val sysLangFullyTranslated: Boolean @CheckResult get() = sysLocale.contains(Regex("en"))
 
-    val sysLangNotFullyTranslated: Boolean
-        @CheckResult get() = !sysLangFullyTranslated
+    val sysLangNotFullyTranslated: Boolean @CheckResult get() = !sysLangFullyTranslated
 
-    val sysLangCJK: Boolean
-        @CheckResult get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
+    val sysLangCJK: Boolean @CheckResult get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
 
     fun String.toASCII(): String = this.map { it.code }.joinToString(", ")
 
     /**
      * Allows for letters, numbers, or underscores.
      */
-    @Suppress("MemberVisibilityCanBePrivate")
     fun String.isValidUsername(): Boolean = this.matches(Regex("^[a-zA-Z0-9_]*$"))
 
     fun String.isInvalidUsername(): Boolean = !this.isValidUsername()

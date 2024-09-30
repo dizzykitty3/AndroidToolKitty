@@ -51,7 +51,6 @@ import me.dizzykitty3.androidtoolkitty.CARD_1
 import me.dizzykitty3.androidtoolkitty.CARD_10
 import me.dizzykitty3.androidtoolkitty.CARD_11
 import me.dizzykitty3.androidtoolkitty.CARD_12
-import me.dizzykitty3.androidtoolkitty.CARD_13
 import me.dizzykitty3.androidtoolkitty.CARD_2
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.CARD_4
@@ -69,14 +68,13 @@ import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.DevBuildTip
-import me.dizzykitty3.androidtoolkitty.uicomponents.NoTranslationTip
-import me.dizzykitty3.androidtoolkitty.uicomponents.NotFullyTranslated
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
+import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.headsetNotConnected
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.isHeadsetConnected
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
-import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
 fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController, widthType: Int) {
@@ -88,10 +86,8 @@ fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController,
 private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
     val debug = BuildConfig.DEBUG
-    val noTranslation = StringUtil.sysLangNotSupported
-    val notFullyTranslated = StringUtil.sysLangNotFullyTranslated
-    val dismissLangTip = settingsViewModel.settings.value.dismissLangTip
     val hideGreetings = settingsViewModel.settings.value.hideGreetings
+
     LazyColumn(Modifier.padding(start = screenPadding, end = screenPadding)) {
         item { TopBar(settingsViewModel, navController) }
         if (!hideGreetings) {
@@ -101,11 +97,12 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
             item { CardSpacePadding() }
         }
         item { CardSpacePadding() }
-        if (debug) item { DevBuildTip() }
-        if (noTranslation && !dismissLangTip) item { NoTranslationTip() }
-        if (notFullyTranslated && !noTranslation && !dismissLangTip) item { NotFullyTranslated() }
-        if (debug || ((noTranslation || notFullyTranslated) && !dismissLangTip)) item { CardSpacePadding() }
+        if (debug) item {
+            DevBuildTip()
+            CardSpacePadding()
+        }
         item { HomeCards(settingsViewModel, navController) }
+        item { ScreenPadding() }
     }
 }
 
@@ -113,27 +110,26 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
 private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val largeScreenPadding = dimensionResource(R.dimen.padding_screen_large)
     val debug = BuildConfig.DEBUG
-    val noTranslation = StringUtil.sysLangNotSupported
-    val notFullyTranslated = StringUtil.sysLangNotFullyTranslated
-    val dismissLangTip = settingsViewModel.settings.value.dismissLangTip
 
     Column(Modifier.padding(start = largeScreenPadding, end = largeScreenPadding)) {
         Row(Modifier.fillMaxWidth()) {
             Box(Modifier.weight(1f)) { Greeting() }
-            Box(Modifier.weight(1f)) { TopBar(settingsViewModel, navController) }
+            Box(Modifier.weight(1f)) { TopBar(settingsViewModel, navController, isTablet = true) }
         }
         SpacerPadding()
         if (debug) DevBuildTip()
-        if (noTranslation && !dismissLangTip) NoTranslationTip()
-        if (notFullyTranslated && !noTranslation && !dismissLangTip) NotFullyTranslated()
         TwoColumnHomeCards(settingsViewModel, navController)
     }
 }
 
 @Composable
-private fun TopBar(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun TopBar(
+    settingsViewModel: SettingsViewModel,
+    navController: NavHostController,
+    isTablet: Boolean = false
+) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Box(Modifier.weight(1f)) { Status() }
+        Box(Modifier.weight(1f)) { Status(isTablet) }
         SettingsButton(settingsViewModel, navController)
     }
 }
@@ -152,7 +148,7 @@ private fun SettingsButton(settingsViewModel: SettingsViewModel, navController: 
         state = rememberTooltipState(),
     ) {
         IconButton(
-            {
+            onClick = {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 navController.navigate(SCR_SETTINGS)
                 settingsViewModel.update(settingsViewModel.settings.value.copy(haveOpenedSettings = true))
@@ -169,33 +165,40 @@ private fun SettingsButton(settingsViewModel: SettingsViewModel, navController: 
 }
 
 @Composable
-private fun Status() {
+private fun Status(isTablet: Boolean = false) {
     val batteryLevel = BatteryUtil.batteryLevel()
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
 
     Row(Modifier.horizontalScroll(rememberScrollState())) {
-        Surface(shape = RoundedCornerShape(8.dp)) {
-            Row(Modifier.clickable {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                view.context.openSystemSettings(S_POWER_USAGE_SUMMARY)
-            }) {
-                Icon(
-                    imageVector = Icons.Outlined.BatteryStd,
-                    contentDescription = stringResource(R.string.battery_level),
-                    tint = MaterialTheme.colorScheme.primary
-                )
-                SpacerPadding()
-                Text("$batteryLevel%")
+        if (isTablet || view.context.headsetNotConnected()) {
+            Surface(shape = RoundedCornerShape(8.dp)) {
+                Row(Modifier.clickable {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    view.context.openSystemSettings(S_POWER_USAGE_SUMMARY)
+                }) {
+                    Icon(
+                        imageVector = Icons.Outlined.BatteryStd,
+                        contentDescription = stringResource(R.string.battery_level),
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
+                    )
+                    SpacerPadding()
+                    Text(
+                        "$batteryLevel%",
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
+                    )
+                }
             }
+            SpacerPadding()
+            SpacerPadding()
+            NetworkState()
         }
-        SpacerPadding()
-        SpacerPadding()
-        NetworkState()
-        SpacerPadding()
-        SpacerPadding()
 
         if (view.context.isHeadsetConnected()) {
+            if (isTablet) {
+                SpacerPadding()
+                SpacerPadding()
+            }
             Surface(shape = RoundedCornerShape(8.dp)) {
                 Row(Modifier.clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -204,10 +207,13 @@ private fun Status() {
                     Icon(
                         imageVector = Icons.Outlined.MediaBluetoothOn,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary
+                        tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
                     )
                     SpacerPadding()
-                    Text(stringResource(R.string.connected))
+                    Text(
+                        stringResource(R.string.audio_devices_connected),
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
+                    )
                 }
             }
         }
@@ -242,6 +248,7 @@ private fun NetworkState() {
 private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
+
     Surface(shape = RoundedCornerShape(8.dp)) {
         Row(Modifier.clickable {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -250,10 +257,12 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
             Icon(
                 imageVector = imageVector,
                 contentDescription = stringResource(text),
-                tint = MaterialTheme.colorScheme.primary
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
             )
             SpacerPadding()
-            Text(stringResource(text))
+            Text(
+                stringResource(text), color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
+            )
         }
     }
 }
@@ -286,7 +295,7 @@ private fun TwoColumnHomeCards(
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> = listOf(
     CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6,
-    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12, CARD_13
+    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12
 ).associateWith { card -> settingsSharedPref.getShownState(card) }
 
 @Composable
@@ -308,6 +317,5 @@ private fun CardContent(
         CARD_10 -> AndroidVersions(navController)
         CARD_11 -> FontWeight(navController)
         CARD_12 -> ComposeCatalog(navController)
-        CARD_13 -> FeaturesWorkInProgress(navController)
     }
 }

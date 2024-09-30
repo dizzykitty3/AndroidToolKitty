@@ -11,7 +11,6 @@
     <string name="success_and_back">Success! Now you can back to the previous screen</string>
     <string name="wip_long" translatable="false">-- WORK IN PROGRESS --</string>
     <string name="undo">Undo</string>
-    <string name="turn_off">Turn off</string>
     <string name="copy">Copy</string>
     <string name="start">Start</string>
     <string name="off_all_cap" translatable="false">OFF</string>
@@ -20,9 +19,8 @@
     <string name="error">error</string>
     <string name="result">result =</string>
     <string name="permission">Permission</string>
-    <string name="success">success</string>
     <string name="general">General</string>
-    <string name="wip" translatable="false">Work in progress</string>
+    <string name="others">Others</string>
 
     <!-- Home > Top bar -->
     <string name="battery_level">Battery level</string>
@@ -30,9 +28,8 @@
     <string name="cellular">Cellular</string>
     <string name="offline">Offline</string>
     <string name="no_translation" translatable="false">Sorry, %1$s translation haven\'t added yet.</string>
-    <string name="connected">Connected</string>
+    <string name="audio_devices_connected">Audio devices connected</string>
     <string name="debug_build_top_tip">This is a debug build. Expect some bugs and worse performance.</string>
-    <string name="not_fully_translated">Sorry, %1$s not fully translated yet.</string>
 
     <!-- Home > Year progress -->
     <string name="year_progress">Year progress</string>
@@ -62,7 +59,7 @@
     <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on Clear Clipboard on Launch in Settings Screen.</string>
     <string name="clipboard_is_empty">Clipboard is empty</string>
 
-    <!-- Home > Search / Webpage -->
+    <!-- Home > Search -->
     <string name="url" translatable="false">URL</string>
     <string name="url_input_hint_1">Visit webpage without inputting </string>
     <string name="url_input_hint_2">and </string>
@@ -74,7 +71,7 @@
     <string name="bilibili_search">bilibili (Search)</string>
     <string name="github" translatable="false">GitHub</string>
     <string name="x" translatable="false">X</string>
-    <string name="weibo">Weibo</string>
+    <string name="weibo_username">Weibo (Username)</string>
     <string name="youtube_handle">YouTube (User custom URL)</string>
     <string name="pixiv_artwork_id">pixiv (Artwork ID)</string>
     <string name="pixiv_uuid">pixiv (UUID)</string>
@@ -108,7 +105,7 @@
     <string name="carrd" translatable="false">Carrd</string>
     <string name="search_on_youtube">Search on YouTube</string>
     <string name="linktree" translatable="false">Linktree</string>
-    <string name="misskeyio" translatable="false">Misskey.io</string>
+    <string name="misskey">Misskey</string>
     <string name="reddit_subreddit" translatable="false">Reddit (subreddit)</string>
     <string name="linkedin_company" translatable="false">LinkedIn (company)</string>
     <string name="linkedin_user" translatable="false">LinkedIn (user)</string>
@@ -122,7 +119,7 @@
     <string name="note" translatable="false">note</string>
     <string name="unifans">Unifans</string>
     <string name="ko_fi" translatable="false">Ko-fi</string>
-    <string name="invalid_username_input_tip">username for %1$s should only contains letters, numbers, and underscores</string>
+    <string name="invalid_username_input_tip">Username for %1$s should only contains letters, numbers, and underscores.</string>
     <string name="check_app_on_market">Check app on market</string>
     <string name="package_name_or_search">Package name or search</string>
     <string name="what_is_package_name">What\'s package name</string>
@@ -132,7 +129,12 @@
     <string name="bahamut">Bahamut</string>
     <string name="afdian">Afdian</string>
     <string name="steam_uuid" translatable="false">Steam (steamID64)</string>
-    <string name="instabio" translatable="false">Instabio</string>
+    <string name="instabio" translatable="false">Instabio (linkbio.co)</string>
+    <string name="tip_case_sensitive">Please note that usernames on this platform are case sensitive.</string>
+    <string name="bilibili_av_id">bilibili (av id)</string>
+    <string name="weibo_user_custom_url">Weibo (User custom URL)</string>
+    <string name="weibo_uuid">Weibo (UUID)</string>
+    <string name="steam_search_store">Steam (Search store)</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>
@@ -150,8 +152,11 @@
     <string name="overlay_permission">Display over other apps</string>
     <string name="write_permission">Modify system settings</string>
     <string name="accessibility_settings">Accessibility</string>
-    <string name="no_options_enabled">Enabled options will be shown here</string>
+    <string name="no_options_enabled">Pinned options will be shown here</string>
     <string name="device_info">Device info</string>
+    <string name="customize_system_settings_card">Pin options that appear on Home screen</string>
+    <string name="hide_all_options">Hide all options</string>
+    <string name="sys_settings_tip">Up to 4 options you can pin on Home screen</string>
 
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
@@ -162,9 +167,6 @@
     <string name="show_paired_devices">Show paired devices</string>
     <string name="current_device">Current device:</string>
     <string name="paired_devices">Paired devices:</string>
-    <string name="bt">BT</string>
-    <string name="ble">BLE</string>
-    <string name="dual">Dual</string>
     <string name="no_paired_devices">No paired devices</string>
     <string name="what_is_bt_ble_and_dual">What is BT, BLE, and Dual?</string>
     <string name="unknown_device">Unknown device</string>
@@ -176,84 +178,26 @@
     <string name="bluetooth_devices_types_6">Some devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
     <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
 
-    <!-- Home > Codes of Characters -->
+    <!-- Home > Encoding -->
     <string name="unicode" translatable="false">Unicode</string>
     <string name="unicode_input_hint">Last 4 digits of each, e.g.</string>
     <string name="character">Character</string>
     <string name="copied">copied</string>
     <string name="convert">Convert</string>
-    <string name="codes_of_characters">Codes of Characters</string>
+    <string name="encoding">Encoding</string>
     <string name="ascii" translatable="false">ASCII</string>
     <string name="convert_to_ascii_values">Convert to ASCII values</string>
 
     <!-- Home > Google Maps -->
     <string name="google_maps">Google Maps</string>
-    <string name="latitude">latitude</string>
-    <string name="longitude">longitude</string>
+    <string name="lat">lat</string>
+    <string name="lng">lng</string>
     <string name="google_maps_not_installed">Google Maps is not installed</string>
     <string name="google_play_not_installed">Google Play is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>
 
-    <!-- Home > Android version history -->
+    <!-- Home > Android versions -->
     <string name="android_versions">Android versions</string>
-    <string name="android_15" translatable="false">Android 15</string>
-    <string name="android_14" translatable="false">Android 14</string>
-    <string name="android_13" translatable="false">Android 13</string>
-    <string name="android_12_l" translatable="false">Android 12L</string>
-    <string name="android_12" translatable="false">Android 12</string>
-    <string name="android_11" translatable="false">Android 11</string>
-    <string name="android_10" translatable="false">Android 10</string>
-    <string name="android_9" translatable="false">Android 9</string>
-    <string name="android_8_1" translatable="false">Android 8.1</string>
-    <string name="android_8" translatable="false">Android 8</string>
-    <string name="android_7_1_1" translatable="false">Android 7.1.1</string>
-    <string name="android_7" translatable="false">Android 7</string>
-    <string name="android_6" translatable="false">Android 6</string>
-    <string name="android_5_1" translatable="false">Android 5.1</string>
-    <string name="android_5" translatable="false">Android 5</string>
-    <string name="android_4_4_w" translatable="false">Android 4.4W</string>
-    <string name="android_4_4" translatable="false">Android 4.4</string>
-    <string name="android_4_3" translatable="false">Android 4.3</string>
-    <string name="android_4_2" translatable="false">Android 4.2</string>
-    <string name="android_4_1" translatable="false">Android 4.1</string>
-    <string name="android_4_0_3" translatable="false">Android 4.0.3</string>
-    <string name="android_4_0" translatable="false">Android 4.0</string>
-    <string name="android_3_2" translatable="false">Android 3.2</string>
-    <string name="android_3_1" translatable="false">Android 3.1</string>
-    <string name="android_3_0" translatable="false">Android 3.0</string>
-    <string name="android_2_3_3" translatable="false">Android 2.3.3</string>
-    <string name="android_2_3" translatable="false">Android 2.3</string>
-    <string name="android_2_2" translatable="false">Android 2.2</string>
-    <string name="android_2_1" translatable="false">Android 2.1</string>
-    <string name="api_35" translatable="false">API 35, VanillaIceCream</string>
-    <string name="api_34" translatable="false">API 34, UpsideDownCake</string>
-    <string name="api_33" translatable="false">API 33, Tiramisu</string>
-    <string name="api_32" translatable="false">API 32, Sv2</string>
-    <string name="api_31" translatable="false">API 31, S</string>
-    <string name="api_30" translatable="false">API 30, R</string>
-    <string name="api_29" translatable="false">API 29, Q</string>
-    <string name="api_28" translatable="false">API 28, Pie</string>
-    <string name="api_27" translatable="false">API 27, Oreo</string>
-    <string name="api_26" translatable="false">API 26, Oreo</string>
-    <string name="api_25" translatable="false">API 25, Nougat</string>
-    <string name="api_24" translatable="false">API 24, Nougat</string>
-    <string name="api_23" translatable="false">API 23, Marshmallow</string>
-    <string name="api_22" translatable="false">API 22, Lollipop</string>
-    <string name="api_21" translatable="false">API 21, Lollipop</string>
-    <string name="api_20" translatable="false">API 20, KitKat Wear</string>
-    <string name="api_19" translatable="false">API 19, KitKat</string>
-    <string name="api_18" translatable="false">API 18, Jelly Bean</string>
-    <string name="api_17" translatable="false">API 17, Jelly Bean</string>
-    <string name="api_16" translatable="false">API 16, Jelly Bean</string>
-    <string name="api_15" translatable="false">API 15, IceCreamSandwich</string>
-    <string name="api_14" translatable="false">API 14, IceCreamSandwich</string>
-    <string name="api_13" translatable="false">API 13, Honeycomb</string>
-    <string name="api_12" translatable="false">API 12, Honeycomb</string>
-    <string name="api_11" translatable="false">API 11, Honeycomb</string>
-    <string name="api_10" translatable="false">API 10, Gingerbread</string>
-    <string name="api_9" translatable="false">API 9, Gingerbread</string>
-    <string name="api_8" translatable="false">API 8, Froyo</string>
-    <string name="api_7" translatable="false">API 7, Eclair</string>
 
     <!-- Home > Font weight test -->
     <string name="font_weight_test">Font weight test</string>
@@ -275,51 +219,34 @@
     <string name="compose_catalog">Compose catalog</string>
 
     <!-- Settings > Appearance -->
-    <string name="dynamic_color">Dynamic color</string>
     <string name="appearance">Appearance</string>
-    <string name="force_dark_mode">Force dark mode</string>
-    <string name="change_app_language">Change app language</string>
-    <string name="dismiss_lang_tip">Dismiss language tip</string>
-    <string name="material_you_dynamic_color_theme">Enable Material You dynamic color theme on Android 12+</string>
-    <string name="dismiss_lang_tip_description">Dismiss \"not translated\" and \"not fully translated\" tip on Home screen</string>
-    <string name="force_dark_mode_description">Force enable dark mode</string>
+    <string name="dynamic_color">Dynamic color</string>
+    <string name="dynamic_color_description">Material You dynamic color</string>
     <string name="hide_greetings">Hide greetings</string>
     <string name="hide_greetings_description">Hide gradient greeting text on Home screen (portrait mode only)</string>
+    <string name="change_app_language">Change app language</string>
+    <string name="change_app_language_description">Set language preference for ToolKitty</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_automatically">Clear clipboard automatically</string>
-    <string name="clipboard_card_hidden">Clipboard card of home screen hidden.</string>
+    <string name="clipboard_card_hidden">Clipboard card on Home screen now hidden.</string>
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
-    <string name="customize_my_home_page">Customize my home page</string>
-    <string name="customize_system_settings_card">Customize options in the Android System Settings card</string>
-    <string name="show_all_options">Show all options</string>
-    <string name="hide_all_options">Hide all options</string>
-    <string name="sys_settings_tip">Only the first four options enabled appear on Home screen</string>
+    <string name="customize_home_page">Customize home page</string>
     <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
+    <string name="customize_home_page_description">Hide cards on home page and vice versa</string>
 
-    <!-- Settings > About -->
-    <string name="view_source_code">View source code on GitHub</string>
+    <!-- Settings > Others -->
+    <string name="view_source_code">Source code</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
-    <string name="licenses">Open-source licenses</string>
-
-    <!-- Settings > Debugging -->
-    <string name="go_to_permission_request_screen">Go to permission request screen</string>
-    <string name="restart_app">Restart app</string>
-    <string name="auto_set_volume">Set volume automatically</string>
-    <string name="qr_code_generator">QR Code generator</string>
-    <string name="distance_msg" translatable="false">dev mode message: distance = %d</string>
-    <string name="device" translatable="false">device</string>
-    <string name="os_version" translatable="false">os_ver</string>
-    <string name="locale" translatable="false">locale</string>
-    <string name="app_version" translatable="false">app_ver</string>
+    <string name="licenses">Licenses</string>
+    <string name="view_source_code_description">View source code on GitHub</string>
     <string name="open_app_detail_settings">Open app detail settings</string>
-    <string name="manufacturer" translatable="false">manufacturer</string>
-    <string name="time_zone" translatable="false">time_zone</string>
+    <string name="licenses_description">Auto-generated by AboutLibraries</string>
+    <string name="open_app_detail_settings_description">Clear storage, manage permissions, and so on</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>
     <string name="bluetooth_connect">To check paired bluetooth devices, please grant the app Nearby Devices permission.</string>
     <string name="missed_sys_popup">Missed the system permission popup?</string>
-    <string name="fine_location">To check current location, please grant the app Location permission.</string>
 </resources>

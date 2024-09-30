@@ -262,7 +262,7 @@ val unspecified_scheme = ColorFamily(
 @SuppressLint("NewApi")
 @Composable
 fun AppTheme(
-    forceDarkMode: Boolean = false,
+    customFont: Boolean = false,
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
@@ -278,7 +278,7 @@ fun AppTheme(
         }
     }
 
-    val darkTheme = if (forceDarkMode) true else isSystemInDarkTheme()
+    val darkTheme = isSystemInDarkTheme()
 
     val colorScheme = OSVersion.colorScheme(darkTheme, dynamicColor)
 
@@ -292,7 +292,7 @@ fun AppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography(),
+        typography = if (customFont) typography(view.context) else Typography(),
         content = content
     )
 }
