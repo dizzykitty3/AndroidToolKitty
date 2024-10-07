@@ -26,7 +26,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitleNoColor
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.uicomponents.WIPTip
 
 @Composable
 fun ComposeCatalog(navController: NavHostController) {
@@ -47,7 +46,6 @@ fun ComposeCatalogScreen() {
         Column(Modifier.fillMaxWidth()) {
             GroupTitleNoColor("Typography")
             SpacerPadding()
-            WIPTip()
             Text("Display Large", style = MaterialTheme.typography.displayLarge)
             HorizontalDivider()
             Text("Display Medium", style = MaterialTheme.typography.displayMedium)
