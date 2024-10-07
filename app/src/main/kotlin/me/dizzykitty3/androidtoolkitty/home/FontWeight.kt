@@ -36,7 +36,7 @@ fun FontWeight(navController: NavHostController) {
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_FONT_WEIGHT_TEST)
-        }) { Text(stringResource(R.string.font_weight_test)) }
+        }) { }
 }
 
 @Composable

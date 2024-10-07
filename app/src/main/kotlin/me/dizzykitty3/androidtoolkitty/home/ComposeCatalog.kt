@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -39,8 +38,7 @@ fun ComposeCatalog(navController: NavHostController) {
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_COMPOSE_CATALOG)
-        }
-    ) { Text(stringResource(R.string.compose_catalog)) }
+        }) { }
 }
 
 @Composable
