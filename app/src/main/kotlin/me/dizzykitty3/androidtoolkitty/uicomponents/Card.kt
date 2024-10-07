@@ -93,9 +93,8 @@ fun Card(
 }
 
 @Composable
-private fun CardTitle(title: String) {
+private fun CardTitle(title: String) =
     Text(
         text = title,
         style = MaterialTheme.typography.titleLarge
     )
-}

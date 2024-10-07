@@ -23,7 +23,6 @@ import me.dizzykitty3.androidtoolkitty.SCR_FONT_WEIGHT_TEST
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
-import me.dizzykitty3.androidtoolkitty.uicomponents.WIPTip
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
@@ -36,14 +35,13 @@ fun FontWeight(navController: NavHostController) {
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_FONT_WEIGHT_TEST)
-        }) { Text(stringResource(R.string.font_weight_test)) }
+        }) { }
 }
 
 @Composable
 fun FontWeightTestScreen() {
     Screen {
         ScreenTitle(R.string.font_weight_test)
-        WIPTip()
         Card("Font weight test 1") { FontWeightTest() }
         Card("Font weight test 2") { RowFontWeightTest() }
         Card("Font family test") { FontFamilyTest() }

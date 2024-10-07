@@ -6,7 +6,6 @@ import android.view.View
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
-import timber.log.Timber
 import kotlin.math.roundToInt
 
 object AudioUtil {
@@ -24,11 +23,11 @@ object AudioUtil {
     val maxVoiceCallVolumeIndex: Int
         get() = audioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL)
 
-    private fun setMediaVolume(volume: Int, isAutoSetVolume: Boolean = false) =
+    private fun setMediaVolume(volume: Int) =
         audioManager.setStreamVolume(
             AudioManager.STREAM_MUSIC,
             volume,
-            if (isAutoSetVolume) AudioManager.FLAG_SHOW_UI else 0
+            AudioManager.FLAG_SHOW_UI
         )
 
     fun setVoiceCallVolume(volume: Int) =
@@ -37,20 +36,6 @@ object AudioUtil {
             volume,
             AudioManager.FLAG_SHOW_UI
         )
-
-    private fun View.setMediaVolumeByPercentage(percentage: Int) {
-        val indexedVolume = (maxMediaVolumeIndex * 0.01 * percentage).roundToInt()
-        Timber.d("current = $mediaVolume, target = $indexedVolume")
-
-        if (percentage in 0..100 && (mediaVolume != indexedVolume)) {
-            setMediaVolume(indexedVolume, true)
-            Timber.d("setVolumeAutomatically true")
-            this.showSnackbar(R.string.volume_changed_auto)
-        }
-        Timber.d("setVolumeAutomatically false, current == target")
-    }
-
-    private fun Float.isNotAtHome(): Boolean = this >= 50f
 
     fun View.setVolume(volume: Int) {
         setMediaVolume(volume)
