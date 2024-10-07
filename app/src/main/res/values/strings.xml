@@ -226,6 +226,8 @@
     <string name="hide_greetings_description">Hide gradient greeting text on Home screen (portrait mode only)</string>
     <string name="change_app_language">Change app language</string>
     <string name="change_app_language_description">Set language preference for ToolKitty</string>
+    <string name="custom_font">Custom font</string>
+    <string name="switch_to_manrope_ttf">Switch to manrope.ttf</string>
 
     <!-- Settings > General -->
     <string name="clear_clipboard_automatically">Clear clipboard automatically</string>

@@ -100,8 +100,8 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 
     CustomSwitchRow(
         Icons.Outlined.FontDownload,
-        "Custom font",
-        "[TEST] Switch to manrope.ttf",
+        R.string.custom_font,
+        R.string.switch_to_manrope_ttf,
         customFont
     ) {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
