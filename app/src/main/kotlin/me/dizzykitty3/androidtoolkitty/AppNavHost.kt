@@ -24,7 +24,6 @@ import me.dizzykitty3.androidtoolkitty.home.SysSettingsScreen
 import me.dizzykitty3.androidtoolkitty.home.VolumeScreen
 import me.dizzykitty3.androidtoolkitty.settings.HomeEdit
 import me.dizzykitty3.androidtoolkitty.settings.Licenses
-import me.dizzykitty3.androidtoolkitty.settings.QRCodeGenerator
 import me.dizzykitty3.androidtoolkitty.settings.Settings
 
 @Composable
@@ -65,7 +64,6 @@ fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel, widthTy
         composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
         composable(SCR_EDIT_HOME) { HomeEdit() }
         composable(SCR_PERMISSION_REQUEST) { PermissionRequest() }
-        composable(SCR_QR_CODE_GENERATOR) { QRCodeGenerator() }
         composable(SCR_LICENSES) { Licenses() }
         composable(SCR_SEARCH) { SearchScreen(settingsViewModel) }
         composable(SCR_CODES_OF_CHARACTERS) { CodesOfCharactersScreen() }
