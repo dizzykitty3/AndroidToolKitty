@@ -39,6 +39,7 @@ import me.dizzykitty3.androidtoolkitty.S_ENABLE_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.uicomponents.PrimaryColorText
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
@@ -93,7 +94,8 @@ fun BluetoothDevice(navController: NavHostController) {
         }
 
         if (showResult) {
-            Text("${stringResource(R.string.current_device)} ${bluetoothAdapter?.name}\n")
+            Text(stringResource(R.string.current_device))
+            ScrollableText("${bluetoothAdapter?.name}\n")
 
             if (size == 0) {
                 Text(stringResource(R.string.no_paired_devices))
@@ -102,7 +104,7 @@ fun BluetoothDevice(navController: NavHostController) {
 
                 pairedDevices.forEach { device ->
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(device.name ?: stringResource(R.string.unknown_device))
+                        ScrollableText(device.name ?: stringResource(R.string.unknown_device))
                         SpacerPadding()
                         CustomIconPopup(device.type.toTypeName(), device.address)
                     }
