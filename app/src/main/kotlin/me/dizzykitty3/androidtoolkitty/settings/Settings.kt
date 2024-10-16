@@ -137,8 +137,8 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
                     }
                     SpacerPadding()
                     Icon(
-                        imageVector = Icons.Outlined.ArrowOutward,
-                        contentDescription = stringResource(R.string.change_app_language),
+                        imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                        contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
                     )
                 }
@@ -326,8 +326,8 @@ private fun Bottom(navController: NavHostController) {
                 }
                 SpacerPadding()
                 Icon(
-                    imageVector = Icons.Outlined.ArrowOutward,
-                    contentDescription = stringResource(R.string.open_app_detail_settings),
+                    imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+                    contentDescription = null,
                     tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
                 )
             }

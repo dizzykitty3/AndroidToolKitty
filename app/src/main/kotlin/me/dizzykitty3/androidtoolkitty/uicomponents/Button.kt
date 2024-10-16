@@ -2,7 +2,7 @@ package me.dizzykitty3.androidtoolkitty.uicomponents
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ArrowOutward
+import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,8 +34,8 @@ fun SystemSettingButton(
         Text(stringResource(text))
 
         Icon(
-            imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = stringResource(text),
+            imageVector = Icons.AutoMirrored.Outlined.KeyboardArrowRight,
+            contentDescription = null,
             modifier = Modifier.align(Alignment.CenterVertically),
             tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
         )
