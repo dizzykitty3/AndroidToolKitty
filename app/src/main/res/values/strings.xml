@@ -122,7 +122,7 @@
     <string name="invalid_username_input_tip">Username for %1$s should only contains letters, numbers, and underscores.</string>
     <string name="check_app_on_market">Check app on market</string>
     <string name="package_name_or_search">Package name or search</string>
-    <string name="what_is_package_name">What\'s package name</string>
+    <string name="what_is_package_name">What\'s package name (website)</string>
     <string name="open_on_google_play" translatable="false">Google Play</string>
     <string name="open_on_other_markets">Other markets</string>
     <string name="youtube_serach">YouTube (Search)</string>
