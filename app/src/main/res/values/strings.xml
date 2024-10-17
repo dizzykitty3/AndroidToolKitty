@@ -33,10 +33,6 @@
 
     <!-- Home > Year progress -->
     <string name="year_progress">Year progress</string>
-    <plurals name="days_remaining">
-        <item quantity="one">%1$d day remaining</item>
-        <item quantity="other">%1$d days remaining</item>
-    </plurals>
 
     <!-- Home > Volume -->
     <string name="volume">Volume</string>
@@ -44,7 +40,6 @@
     <string name="add_custom_volume">Add custom volume</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
     <string name="volume_changed">Volume changed.</string>
-    <string name="volume_changed_auto">Volume changed automatically.</string>
     <string name="more_precise_slider">More precise slider</string>
     <string name="add" translatable="false">+ Add</string>
     <string name="voice_call_volume">Voice call volume</string>

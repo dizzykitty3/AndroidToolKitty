@@ -214,7 +214,7 @@ fun SysSettingsCardEdit() {
         Button(
             onClick = {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                onClickChangeAllCardsButton(false)
+                onClickChangeAllCardsButton()
                 mIsShowSetting = false
                 mIsShowSetting0 = false
                 mIsShowSetting1 = false
@@ -244,7 +244,7 @@ fun SysSettingsCardEdit() {
     }
 }
 
-private fun onClickChangeAllCardsButton(isShow: Boolean) {
+private fun onClickChangeAllCardsButton() {
     val settingList = listOf(
         S_WIFI,
         S_POWER_USAGE_SUMMARY,
@@ -265,6 +265,6 @@ private fun onClickChangeAllCardsButton(isShow: Boolean) {
     val settingsViewModel = SettingsSharedPref
 
     for (setting in settingList) {
-        settingsViewModel.saveShownState(setting, isShow)
+        settingsViewModel.saveShownState(setting, false)
     }
 }

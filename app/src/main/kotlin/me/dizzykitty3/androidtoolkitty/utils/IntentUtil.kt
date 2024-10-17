@@ -176,6 +176,7 @@ object IntentUtil {
     /**
      * Remember to use Activity Context to restart app.
      */
+    @Suppress("unused")
     fun Context.restartApp() {
         Timber.d("restartApp")
         val intent = Intent(this, MainActivity::class.java)
