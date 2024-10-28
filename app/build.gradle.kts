@@ -11,6 +11,8 @@ plugins {
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
     compileSdk = 35
+    buildToolsVersion = "35.0.0"
+
     buildFeatures {
         buildConfig = true
         compose = true
@@ -73,7 +75,6 @@ android {
             excludes += "DebugProbesKt.bin"
         }
     }
-    buildToolsVersion = "35.0.0"
     androidResources {
         // https://developer.android.com/guide/topics/resources/app-languages#auto-localeconfig
         @Suppress("UnstableApiUsage")
