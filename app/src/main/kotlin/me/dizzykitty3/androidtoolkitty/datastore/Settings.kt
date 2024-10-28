@@ -6,6 +6,7 @@ data class Settings(
     var forceDarkMode: Boolean = false,
     var hideGreetings: Boolean = false,
     var customFont: Boolean = false,
+    var customAnimation: Boolean = false,
 
     // Settings > General
     var autoClearClipboard: Boolean = false,

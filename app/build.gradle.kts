@@ -11,6 +11,8 @@ plugins {
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
     compileSdk = 35
+    buildToolsVersion = "35.0.0"
+
     buildFeatures {
         buildConfig = true
         compose = true
@@ -19,8 +21,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
         targetSdk = compileSdk
-        versionCode = 1320
-        versionName = "1.3.2"
+        versionCode = 1330
+        versionName = "1.3.3"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -73,7 +75,6 @@ android {
             excludes += "DebugProbesKt.bin"
         }
     }
-    buildToolsVersion = "35.0.0"
     androidResources {
         // https://developer.android.com/guide/topics/resources/app-languages#auto-localeconfig
         @Suppress("UnstableApiUsage")

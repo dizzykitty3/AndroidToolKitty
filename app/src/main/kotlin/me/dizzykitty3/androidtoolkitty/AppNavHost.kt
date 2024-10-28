@@ -27,51 +27,77 @@ import me.dizzykitty3.androidtoolkitty.settings.Licenses
 import me.dizzykitty3.androidtoolkitty.settings.Settings
 
 @Composable
-fun AppNavHost(modifier: Modifier, settingsViewModel: SettingsViewModel, widthType: Int) {
+fun AppNavHost(
+    modifier: Modifier,
+    settingsViewModel: SettingsViewModel,
+    widthType: Int,
+    customAnimation: Boolean = false
+) {
     val navController = rememberNavController()
 
-    NavHost(
-        modifier = modifier,
-        navController = navController,
-        startDestination = SCR_HOME,
-        enterTransition = {
-            slideInHorizontally(
-                initialOffsetX = { fullWidth -> fullWidth },
-                animationSpec = tween(SLIDE_DURATION)
-            )
-        },
-        popExitTransition = {
-            slideOutHorizontally(
-                targetOffsetX = { fullWidth -> fullWidth },
-                animationSpec = tween(SLIDE_DURATION)
-            )
-        },
-        popEnterTransition = {
-            fadeIn(animationSpec = tween(FADE_DURATION)) +
-                    scaleIn(
-                        initialScale = INITIAL_SCALE,
-                        animationSpec = tween(SCALE_DURATION)
-                    )
-        },
-        exitTransition = {
-            fadeOut(animationSpec = tween(FADE_DURATION)) +
-                    scaleOut(
-                        targetScale = INITIAL_SCALE,
-                        animationSpec = tween(SCALE_DURATION)
-                    )
-        }) {
-        composable(SCR_HOME) { Home(settingsViewModel, navController, widthType) }
-        composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
-        composable(SCR_EDIT_HOME) { HomeEdit() }
-        composable(SCR_PERMISSION_REQUEST) { PermissionRequest() }
-        composable(SCR_LICENSES) { Licenses() }
-        composable(SCR_SEARCH) { SearchScreen(settingsViewModel) }
-        composable(SCR_CODES_OF_CHARACTERS) { CodesOfCharactersScreen() }
-        composable(SCR_ANDROID_VERSION_HISTORY) { AndroidVersionHistoryScreen() }
-        composable(SCR_FONT_WEIGHT_TEST) { FontWeightTestScreen() }
-        composable(SCR_SYS_SETTINGS) { SysSettingsScreen() }
-        composable(SCR_VOLUME) { VolumeScreen() }
-        composable(SCR_COMPOSE_CATALOG) { ComposeCatalogScreen() }
+    if (customAnimation) {
+        NavHost(
+            modifier = modifier,
+            navController = navController,
+            startDestination = SCR_HOME,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { fullWidth -> fullWidth },
+                    animationSpec = tween(SLIDE_DURATION)
+                )
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { fullWidth -> fullWidth },
+                    animationSpec = tween(SLIDE_DURATION)
+                )
+            },
+            popEnterTransition = {
+                fadeIn(animationSpec = tween(FADE_DURATION)) +
+                        scaleIn(
+                            initialScale = INITIAL_SCALE,
+                            animationSpec = tween(SCALE_DURATION)
+                        )
+            },
+            exitTransition = {
+                fadeOut(animationSpec = tween(FADE_DURATION)) +
+                        scaleOut(
+                            targetScale = INITIAL_SCALE,
+                            animationSpec = tween(SCALE_DURATION)
+                        )
+            }) {
+            composable(SCR_HOME) { Home(settingsViewModel, navController, widthType) }
+            composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
+            composable(SCR_EDIT_HOME) { HomeEdit() }
+            composable(SCR_PERMISSION_REQUEST) { PermissionRequest() }
+            composable(SCR_LICENSES) { Licenses() }
+            composable(SCR_SEARCH) { SearchScreen(settingsViewModel) }
+            composable(SCR_CODES_OF_CHARACTERS) { CodesOfCharactersScreen() }
+            composable(SCR_ANDROID_VERSION_HISTORY) { AndroidVersionHistoryScreen() }
+            composable(SCR_FONT_WEIGHT_TEST) { FontWeightTestScreen() }
+            composable(SCR_SYS_SETTINGS) { SysSettingsScreen() }
+            composable(SCR_VOLUME) { VolumeScreen() }
+            composable(SCR_COMPOSE_CATALOG) { ComposeCatalogScreen() }
+        }
+    } else {
+        NavHost(
+            modifier = modifier,
+            navController = navController,
+            startDestination = SCR_HOME
+        ) {
+            composable(SCR_HOME) { Home(settingsViewModel, navController, widthType) }
+            composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
+            composable(SCR_EDIT_HOME) { HomeEdit() }
+            composable(SCR_PERMISSION_REQUEST) { PermissionRequest() }
+            composable(SCR_LICENSES) { Licenses() }
+            composable(SCR_SEARCH) { SearchScreen(settingsViewModel) }
+            composable(SCR_CODES_OF_CHARACTERS) { CodesOfCharactersScreen() }
+            composable(SCR_ANDROID_VERSION_HISTORY) { AndroidVersionHistoryScreen() }
+            composable(SCR_FONT_WEIGHT_TEST) { FontWeightTestScreen() }
+            composable(SCR_SYS_SETTINGS) { SysSettingsScreen() }
+            composable(SCR_VOLUME) { VolumeScreen() }
+            composable(SCR_COMPOSE_CATALOG) { ComposeCatalogScreen() }
+        }
     }
 }
 

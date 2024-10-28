@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
+import androidx.compose.material.icons.outlined.Animation
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.ClearAll
 import androidx.compose.material.icons.outlined.Code
@@ -73,6 +74,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
     var hideGreetings by remember { mutableStateOf(settingsViewModel.settings.value.hideGreetings) }
     var customFont by remember { mutableStateOf(settingsViewModel.settings.value.customFont) }
+    var customAnimation by remember { mutableStateOf(settingsViewModel.settings.value.customAnimation) }
 
     if (OSVersion.android12()) {
         CustomSwitchRow(
@@ -107,6 +109,17 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         customFont = it
         settingsViewModel.update(settingsViewModel.settings.value.copy(customFont = it))
+    }
+
+    CustomSwitchRow(
+        Icons.Outlined.Animation,
+        R.string.custom_animation,
+        R.string.switch_to_custom_animation,
+        customAnimation
+    ) {
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        customAnimation = it
+        settingsViewModel.update(settingsViewModel.settings.value.copy(customAnimation = it))
     }
 
     // change app lang

@@ -53,7 +53,8 @@ class MainActivity : ComponentActivity() {
                     AppNavHost(
                         Modifier.padding(top = innerPadding.calculateTopPadding()),
                         settingsViewModel,
-                        widthType
+                        widthType,
+                        customAnimation = settingsViewModel.settings.value.customAnimation
                     )
                 }
             }
