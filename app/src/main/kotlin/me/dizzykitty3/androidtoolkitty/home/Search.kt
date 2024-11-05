@@ -33,6 +33,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
@@ -265,12 +266,7 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
                         )
                     )
                 } else {
-                    view.showSnackbar(
-                        view.context.getString(
-                            R.string.invalid_username_input_tip,
-                            platform
-                        )
-                    )
+                    view.showSnackbar(R.string.invalid_username_tip)
                 }
             }
         ),
@@ -294,19 +290,32 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
     if (isCaseSensitive(platform)) {
         SpacerPadding()
         Tip(R.string.tip_case_sensitive)
-    } else if (isInvalid(platform, username)) {
+    } else if (isInvalidCommonRule(platform, username)) {
         SpacerPadding()
-        ErrorTip(stringResource(R.string.invalid_username_input_tip, platform))
+        ErrorTip(
+            stringResource(
+                R.string.invalid_username_common_rule,
+                stringResource(platform.platform)
+            )
+        )
+    } else if (isInvalidNotNumbersOnly(platform, username)) {
+        SpacerPadding()
+        ErrorTip(
+            stringResource(
+                R.string.invalid_username_numbers_only,
+                stringResource(platform.platform)
+            )
+        )
     }
 
-    TextButton({
+    TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         if (isValid(platform, username)) {
             view.context.onTapVisitProfileButton(username, platformIndex)
             settingsViewModel.update(settingsViewModel.settings.value.copy(lastSelectedPlatformIndex = platformIndex))
         } else {
-            view.showSnackbar(view.context.getString(R.string.invalid_username_input_tip, platform))
+            view.showSnackbar(R.string.invalid_username_tip)
         }
     }) {
         Text(stringResource(R.string.visit))
@@ -364,19 +373,45 @@ private fun toProfileFullURL(platform: URLUtil.Platform, username: String): Stri
         URLUtil.Platform.TUMBLR,
         URLUtil.Platform.CARRD -> "${username.dropSpaces()}${platform.prefix}"
 
+        URLUtil.Platform.BILIBILI_AV ->
+            if (username.lowercase().startsWith("av"))
+                "${platform.prefix}${username.dropSpaces()}"
+            else
+                "${platform.prefix}av${username.dropSpaces()}"
+
+        URLUtil.Platform.BILIBILI_BV ->
+            if (username.lowercase().startsWith("bv"))
+                "${platform.prefix}${username.dropSpaces()}"
+            else
+                "${platform.prefix}BV${username.dropSpaces()}"
+
         URLUtil.Platform.YOUTUBE_SEARCH,
         URLUtil.Platform.STEAM_SEARCH_STORE -> "${platform.prefix}${username.trim()}"
 
         else -> "${platform.prefix}${username.dropSpaces()}"
     }
 
-private fun isInvalid(platform: URLUtil.Platform, username: String): Boolean =
+private fun numbersOnlyPlatforms(platform: URLUtil.Platform): Boolean =
+    platform == URLUtil.Platform.BILIBILI_UUID
+            || platform == URLUtil.Platform.BILIBILI_AV
+            || platform == URLUtil.Platform.PIXIV_ARTWORK
+            || platform == URLUtil.Platform.PIXIV_UUID
+            || platform == URLUtil.Platform.STEAM_UUID
+            || platform == URLUtil.Platform.WEIBO_UUID
+
+private fun isInvalidNotNumbersOnly(platform: URLUtil.Platform, username: String): Boolean =
+    numbersOnlyPlatforms(platform) && username.isNotBlank()
+            && !username.dropSpaces().isDigitsOnly()
+
+private fun commonRulePlatforms(platform: URLUtil.Platform): Boolean =
     platform == URLUtil.Platform.X
-            && username.isNotBlank()
+
+private fun isInvalidCommonRule(platform: URLUtil.Platform, username: String): Boolean =
+    commonRulePlatforms(platform) && username.isNotBlank()
             && username.dropSpaces().isInvalidUsername()
 
 private fun isValid(platform: URLUtil.Platform, username: String): Boolean =
-    !isInvalid(platform, username)
+    !isInvalidCommonRule(platform, username) && !isInvalidNotNumbersOnly(platform, username)
 
 private fun isCaseSensitive(platform: URLUtil.Platform): Boolean =
     platform == URLUtil.Platform.LIT_LINK

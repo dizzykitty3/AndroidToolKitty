@@ -73,7 +73,8 @@ object URLUtil {
         BAHAMUT("gamer.com.tw/home/home.php?owner=", R.string.bahamut),
         BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
         BILIBILI_UUID("space.bilibili.com/", R.string.bilibili_uuid),
-        BILIBILI_AV("bilibili.com/video/av", R.string.bilibili_av_id),
+        BILIBILI_AV("bilibili.com/video/", R.string.bilibili_av_id),
+        BILIBILI_BV("bilibili.com/video/", R.string.bilibili_bv_id),
         BLUESKY("bsky.app/profile/", R.string.bluesky),
         BOOTH(".booth.pm", R.string.booth), // Prefix
         CARRD(".carrd.co", R.string.carrd), // Prefix
