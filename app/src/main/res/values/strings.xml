@@ -37,7 +37,7 @@
     <!-- Home > Volume -->
     <string name="volume">Volume</string>
     <string name="media_volume">Media volume</string>
-    <string name="add_custom_volume">Add custom volume</string>
+    <string name="save_custom_volume">Save custom volume</string>
     <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
     <string name="volume_changed">Volume changed.</string>
     <string name="more_precise_slider">More precise slider</string>
@@ -45,6 +45,7 @@
     <string name="voice_call_volume">Voice call volume</string>
     <string name="max_out_voice_call_volume">Max out voice call volume</string>
     <string name="slider_increment_1_percent">Set slider increment to 1%</string>
+    <string name="edit_custom_volume">Edit custom volume</string>
 
     <!-- Home > Clipboard -->
     <string name="clipboard">Clipboard</string>
@@ -114,7 +115,7 @@
     <string name="note" translatable="false">note</string>
     <string name="unifans">Unifans</string>
     <string name="ko_fi" translatable="false">Ko-fi</string>
-    <string name="invalid_username_input_tip">Username for %1$s should only contains letters, numbers, and underscores.</string>
+    <string name="invalid_username_common_rule">Username for %1$s should only contains letters, numbers, and underscores.</string>
     <string name="check_app_on_market">Check app on market</string>
     <string name="package_name_or_search">Package name or search</string>
     <string name="what_is_package_name">What\'s package name (website)</string>
@@ -130,6 +131,9 @@
     <string name="weibo_user_custom_url">Weibo (User custom URL)</string>
     <string name="weibo_uuid">Weibo (UUID)</string>
     <string name="steam_search_store">Steam (Search store)</string>
+    <string name="bilibili_bv_id">bilibili (bv id)</string>
+    <string name="invalid_username_numbers_only">Username for %1$s should only contains numbers.</string>
+    <string name="invalid_username_tip">Invalid username.</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>

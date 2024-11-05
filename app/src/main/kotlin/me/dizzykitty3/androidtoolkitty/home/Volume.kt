@@ -204,7 +204,7 @@ private fun MediaVolume(isHome: Boolean) {
                         else -> null
                     }
                 },
-                title = { Text(stringResource(if (settingsSharedPref.addedCustomVolume) R.string.edit else R.string.add_custom_volume)) },
+                title = { Text(stringResource(if (settingsSharedPref.addedCustomVolume) R.string.edit_custom_volume else R.string.save_custom_volume)) },
                 text = {
                     Column {
                         Slider(
