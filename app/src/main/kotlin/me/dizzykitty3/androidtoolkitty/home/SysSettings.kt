@@ -4,9 +4,11 @@ import android.content.ContentResolver
 import android.os.Build
 import android.provider.Settings
 import androidx.annotation.StringRes
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Text
@@ -28,6 +30,7 @@ import me.dizzykitty3.androidtoolkitty.S_DEFAULT_APPS
 import me.dizzykitty3.androidtoolkitty.S_DEVELOPER
 import me.dizzykitty3.androidtoolkitty.S_DISPLAY
 import me.dizzykitty3.androidtoolkitty.S_LOCALE
+import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_LISTENER
 import me.dizzykitty3.androidtoolkitty.S_OVERLAY
 import me.dizzykitty3.androidtoolkitty.S_POWER_USAGE_SUMMARY
 import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
@@ -51,10 +54,10 @@ import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 fun SysSettings(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
     Card(
-        R.string.system_settings,
-        Icons.Outlined.Settings,
-        true,
-        {
+        title = R.string.system_settings,
+        icon = Icons.Outlined.Settings,
+        hasShowMore = true,
+        onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_SYS_SETTINGS)
         }) {
@@ -70,6 +73,7 @@ fun SysSettings(navController: NavHostController) {
             Setting(S_USAGE_ACCESS, R.string.usage_access_permission),
             Setting(S_OVERLAY, R.string.overlay_permission),
             Setting(S_WRITE_SETTINGS, R.string.write_permission),
+            Setting(S_NOTIFICATION_LISTENER, R.string.device_and_app_notifications),
             Setting(S_ACCESSIBILITY, R.string.accessibility_settings),
             Setting(S_LOCALE, R.string.language_settings),
             Setting(S_DATE, R.string.date_and_time_settings),
@@ -96,7 +100,7 @@ fun SysSettings(navController: NavHostController) {
         if (count == 0) {
             Text(buildAnnotatedString { ItalicText(R.string.no_options_enabled) })
         } else if (count <= 2) {
-            Row {
+            Row(Modifier.horizontalScroll(rememberScrollState())) {
                 shownSettings.subList(0, count).forEach { setting ->
                     SystemSettingButton(
                         setting.settingType,
@@ -105,20 +109,22 @@ fun SysSettings(navController: NavHostController) {
                 }
             }
         } else {
-            Row {
-                shownSettings.subList(0, 2).forEach { setting ->
-                    SystemSettingButton(
-                        setting.settingType,
-                        setting.text
-                    )
+            Column(Modifier.horizontalScroll(rememberScrollState())) {
+                Row {
+                    shownSettings.subList(0, 2).forEach { setting ->
+                        SystemSettingButton(
+                            setting.settingType,
+                            setting.text
+                        )
+                    }
                 }
-            }
-            Row {
-                shownSettings.subList(2, minOf(4, count)).forEach { setting ->
-                    SystemSettingButton(
-                        setting.settingType,
-                        setting.text
-                    )
+                Row {
+                    shownSettings.subList(2, minOf(4, count)).forEach { setting ->
+                        SystemSettingButton(
+                            setting.settingType,
+                            setting.text
+                        )
+                    }
                 }
             }
         }
@@ -142,6 +148,7 @@ fun SysSettingsScreen() {
             Setting(S_USAGE_ACCESS, R.string.usage_access_permission),
             Setting(S_OVERLAY, R.string.overlay_permission),
             Setting(S_WRITE_SETTINGS, R.string.write_permission),
+            Setting(S_NOTIFICATION_LISTENER, R.string.device_and_app_notifications),
             Setting(S_ACCESSIBILITY, R.string.accessibility_settings),
             Setting(S_LOCALE, R.string.language_settings),
             Setting(S_DATE, R.string.date_and_time_settings),

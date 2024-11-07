@@ -28,6 +28,7 @@ import me.dizzykitty3.androidtoolkitty.S_DEVELOPER
 import me.dizzykitty3.androidtoolkitty.S_DISPLAY
 import me.dizzykitty3.androidtoolkitty.S_ENABLE_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.S_LOCALE
+import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_LISTENER
 import me.dizzykitty3.androidtoolkitty.S_OVERLAY
 import me.dizzykitty3.androidtoolkitty.S_POWER_USAGE_SUMMARY
 import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
@@ -150,6 +151,9 @@ object IntentUtil {
             S_WIFI -> Intent(Settings.ACTION_WIFI_SETTINGS)
             S_POWER_USAGE_SUMMARY -> Intent(ACTION_POWER_USAGE_SUMMARY)
             S_ACCESSIBILITY -> Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
+            S_NOTIFICATION_LISTENER -> @SuppressLint("InlinedApi") if (OSVersion.android5Point1())
+                Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) else return
+
             else -> return
         }
         Timber.d("openSystemSettings: $settingType")

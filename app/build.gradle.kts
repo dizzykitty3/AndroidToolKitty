@@ -21,8 +21,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
         targetSdk = compileSdk
-        versionCode = 1350
-        versionName = "1.3.5"
+        versionCode = 1360
+        versionName = "1.3.6"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -63,6 +63,7 @@ android {
         isCoreLibraryDesugaringEnabled = true // Java 8+ API desugaring support
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        encoding = "UTF-8"
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()

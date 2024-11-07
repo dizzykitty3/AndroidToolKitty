@@ -156,6 +156,7 @@
     <string name="customize_system_settings_card">Pin options that appear on Home screen</string>
     <string name="hide_all_options">Hide all options</string>
     <string name="sys_settings_tip">Up to 4 options you can pin on Home screen</string>
+    <string name="device_and_app_notifications">Device &amp; app notifications</string>
 
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
