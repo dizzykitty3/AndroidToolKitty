@@ -63,6 +63,7 @@ android {
         isCoreLibraryDesugaringEnabled = true // Java 8+ API desugaring support
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        encoding = "UTF-8"
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
