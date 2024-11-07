@@ -97,6 +97,12 @@ object OSVersion {
     fun android6(): Boolean = osVersion >= Build.VERSION_CODES.M
 
     /**
+     * 22
+     * 1. Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS)
+     */
+    fun android5Point1(): Boolean = osVersion >= Build.VERSION_CODES.LOLLIPOP_MR1
+
+    /**
      * 21
      * 1. Jetpack Compose support
      */

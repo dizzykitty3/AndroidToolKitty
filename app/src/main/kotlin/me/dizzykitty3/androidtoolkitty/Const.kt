@@ -49,6 +49,7 @@ const val S_ENABLE_BLUETOOTH = "setting_enable_bluetooth"
 const val S_WIFI = "setting_wifi"
 const val S_POWER_USAGE_SUMMARY = "setting_power_usage_summary"
 const val S_ACCESSIBILITY = "setting_accessibility"
+const val S_NOTIFICATION_LISTENER = "setting_notification_listener"
 
 // Android permissions
 @SuppressLint("InlinedApi")
