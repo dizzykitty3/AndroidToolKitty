@@ -17,6 +17,7 @@ const val SCR_FONT_WEIGHT_TEST = "FontWeightTestScreen"
 const val SCR_SYS_SETTINGS = "SysSettingsScreen"
 const val SCR_VOLUME = "VolumeScreen"
 const val SCR_COMPOSE_CATALOG = "ComposeCatalogScreen"
+const val SCR_WHEEL_OF_FORTUNE = "WheelOfFortuneScreen"
 
 // App cards
 const val CARD_1 = "card_year_progress"
@@ -50,6 +51,7 @@ const val S_WIFI = "setting_wifi"
 const val S_POWER_USAGE_SUMMARY = "setting_power_usage_summary"
 const val S_ACCESSIBILITY = "setting_accessibility"
 const val S_NOTIFICATION_LISTENER = "setting_notification_listener"
+const val S_NOTIFICATION_POLICY_ACCESS = "setting_notification_policy_access"
 
 // Android permissions
 @SuppressLint("InlinedApi")

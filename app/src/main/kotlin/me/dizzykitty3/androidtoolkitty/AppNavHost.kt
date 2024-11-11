@@ -22,6 +22,7 @@ import me.dizzykitty3.androidtoolkitty.home.PermissionRequest
 import me.dizzykitty3.androidtoolkitty.home.SearchScreen
 import me.dizzykitty3.androidtoolkitty.home.SysSettingsScreen
 import me.dizzykitty3.androidtoolkitty.home.VolumeScreen
+import me.dizzykitty3.androidtoolkitty.home.WheelOfFortuneScreen
 import me.dizzykitty3.androidtoolkitty.settings.HomeEdit
 import me.dizzykitty3.androidtoolkitty.settings.Licenses
 import me.dizzykitty3.androidtoolkitty.settings.Settings
@@ -78,6 +79,7 @@ fun AppNavHost(
             composable(SCR_SYS_SETTINGS) { SysSettingsScreen() }
             composable(SCR_VOLUME) { VolumeScreen() }
             composable(SCR_COMPOSE_CATALOG) { ComposeCatalogScreen() }
+            composable(SCR_WHEEL_OF_FORTUNE) { WheelOfFortuneScreen() }
         }
     } else {
         NavHost(
@@ -97,6 +99,7 @@ fun AppNavHost(
             composable(SCR_SYS_SETTINGS) { SysSettingsScreen() }
             composable(SCR_VOLUME) { VolumeScreen() }
             composable(SCR_COMPOSE_CATALOG) { ComposeCatalogScreen() }
+            composable(SCR_WHEEL_OF_FORTUNE) { WheelOfFortuneScreen() }
         }
     }
 }

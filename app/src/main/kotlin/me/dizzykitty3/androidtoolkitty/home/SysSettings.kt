@@ -31,6 +31,7 @@ import me.dizzykitty3.androidtoolkitty.S_DEVELOPER
 import me.dizzykitty3.androidtoolkitty.S_DISPLAY
 import me.dizzykitty3.androidtoolkitty.S_LOCALE
 import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_LISTENER
+import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_POLICY_ACCESS
 import me.dizzykitty3.androidtoolkitty.S_OVERLAY
 import me.dizzykitty3.androidtoolkitty.S_POWER_USAGE_SUMMARY
 import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
@@ -74,6 +75,7 @@ fun SysSettings(navController: NavHostController) {
             Setting(S_OVERLAY, R.string.overlay_permission),
             Setting(S_WRITE_SETTINGS, R.string.write_permission),
             Setting(S_NOTIFICATION_LISTENER, R.string.device_and_app_notifications),
+            Setting(S_NOTIFICATION_POLICY_ACCESS, R.string.do_not_disturb_access),
             Setting(S_ACCESSIBILITY, R.string.accessibility_settings),
             Setting(S_LOCALE, R.string.language_settings),
             Setting(S_DATE, R.string.date_and_time_settings),
@@ -149,6 +151,7 @@ fun SysSettingsScreen() {
             Setting(S_OVERLAY, R.string.overlay_permission),
             Setting(S_WRITE_SETTINGS, R.string.write_permission),
             Setting(S_NOTIFICATION_LISTENER, R.string.device_and_app_notifications),
+            Setting(S_NOTIFICATION_POLICY_ACCESS, R.string.do_not_disturb_access),
             Setting(S_ACCESSIBILITY, R.string.accessibility_settings),
             Setting(S_LOCALE, R.string.language_settings),
             Setting(S_DATE, R.string.date_and_time_settings),

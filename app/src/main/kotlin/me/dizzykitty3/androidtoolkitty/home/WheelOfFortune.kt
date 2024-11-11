@@ -61,10 +61,14 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.SCR_WHEEL_OF_FORTUNE
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.getWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import kotlin.math.cos
@@ -72,143 +76,170 @@ import kotlin.math.sin
 import kotlin.random.Random
 
 @Composable
-fun WheelOfFortune() {
-    Card(R.string.wheel_of_fortune, Icons.Outlined.Casino) {
-        val item = stringResource(R.string.item)
-        var items by remember {
-            mutableStateOf(
-                getWheelOfFortuneItems() ?: List(4) { index -> "$item ${index + 1}" }
-            )
-        }
-        val textColor = MaterialTheme.colorScheme.onSecondaryContainer.toArgb()
-        val paint = remember {
-            Paint().apply {
-                color = textColor // onSecondaryContainer
-                textAlign = Paint.Align.CENTER
-                textSize = 40f
-            }
-        }
-        var hasRotated by remember { mutableStateOf(false) }
-        var isSpinning by remember { mutableStateOf(false) }
-        var expanded by remember { mutableStateOf(false) }
-        val colors = List(2) { index ->
-            when (index) {
-                0 -> MaterialTheme.colorScheme.secondaryContainer
-                else -> MaterialTheme.colorScheme.surface
-            }
-        }
-        var rotationDegrees by remember { mutableFloatStateOf(0f) }
-        var targetRotationDegrees by remember { mutableFloatStateOf(0f) }
-        val currentRotationDegrees by animateFloatAsState(
-            targetValue = targetRotationDegrees,
-            animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = "",
+fun WheelOfFortune(navController: NavHostController) {
+    val haptic = LocalHapticFeedback.current
+    Card(title = R.string.wheel_of_fortune,
+        icon = Icons.Outlined.Casino,
+        hasShowMore = true,
+        onClick = {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            navController.navigate(SCR_WHEEL_OF_FORTUNE)
+        }) {
+        TheWheel()
+    }
+}
+
+@Composable
+fun WheelOfFortuneScreen() {
+    Screen {
+        ScreenTitle(R.string.wheel_of_fortune)
+        Card(R.string.edit) { TheWheelWithEditableList() }
+    }
+}
+
+@Composable
+private fun TheWheelWithEditableList() {
+    TheWheel(true)
+}
+
+@Composable
+private fun TheWheel(withEditableList: Boolean? = false) {
+    val item = stringResource(R.string.item)
+    var items by remember {
+        mutableStateOf(
+            getWheelOfFortuneItems() ?: List(4) { index -> "$item ${index + 1}" }
         )
-        val view = LocalView.current
-
-        LaunchedEffect(currentRotationDegrees) {
-            if (currentRotationDegrees == targetRotationDegrees && hasRotated) {
-                isSpinning = false
-                val normalizedRotationDegrees = targetRotationDegrees % 360
-                val itemsCount = items.size
-                val anglePerItem = 360f / itemsCount
-                val selectedIndex =
-                    (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
-                val selected = items[selectedIndex]
-
-                view.showSnackbar(selected)
-                rotationDegrees = targetRotationDegrees % 360
-            }
+    }
+    val textColor = MaterialTheme.colorScheme.onSecondaryContainer.toArgb()
+    val paint = remember {
+        Paint().apply {
+            color = textColor // onSecondaryContainer
+            textAlign = Paint.Align.CENTER
+            textSize = 40f
         }
+    }
+    var hasRotated by remember { mutableStateOf(false) }
+    var isSpinning by remember { mutableStateOf(false) }
+    var expanded by remember { mutableStateOf(false) }
+    val colors = List(2) { index ->
+        when (index) {
+            0 -> MaterialTheme.colorScheme.secondaryContainer
+            else -> MaterialTheme.colorScheme.surface
+        }
+    }
+    var rotationDegrees by remember { mutableFloatStateOf(0f) }
+    var targetRotationDegrees by remember { mutableFloatStateOf(0f) }
+    val currentRotationDegrees by animateFloatAsState(
+        targetValue = targetRotationDegrees,
+        animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = "",
+    )
+    val view = LocalView.current
 
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+    LaunchedEffect(currentRotationDegrees) {
+        if (currentRotationDegrees == targetRotationDegrees && hasRotated) {
+            isSpinning = false
+            val normalizedRotationDegrees = targetRotationDegrees % 360
+            val itemsCount = items.size
+            val anglePerItem = 360f / itemsCount
+            val selectedIndex =
+                (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
+            val selected = items[selectedIndex]
+
+            view.showSnackbar(selected)
+            rotationDegrees = targetRotationDegrees % 360
+        }
+    }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        val primary = MaterialTheme.colorScheme.primary
+        SpacerPadding()
+        SpacerPadding()
+
+        Canvas(
+            modifier = Modifier
+                .size(250.dp)
+                .aspectRatio(1f)
         ) {
-            val primary = MaterialTheme.colorScheme.primary
-            SpacerPadding()
-            SpacerPadding()
-
-            Canvas(
-                modifier = Modifier
-                    .size(250.dp)
-                    .aspectRatio(1f)
-            ) {
-                val center = Offset(size.width / 2, size.height / 2)
-                val radius = size.minDimension / 2
-                items.indices.forEach { index ->
-                    val startAngle = (360f / items.size * index + currentRotationDegrees) % 360
-                    val sweepAngle = 360f / items.size
-                    val color = colors[index % colors.size]
-                    drawArc(
-                        color = color,
-                        startAngle = startAngle,
-                        sweepAngle = sweepAngle,
-                        useCenter = true,
-                        size = Size(radius * 2, radius * 2),
-                        topLeft = Offset(center.x - radius, center.y - radius)
-                    )
-                    val endAngleRad = Math.toRadians((startAngle + sweepAngle).toDouble()).toFloat()
-                    val lineEnd = Offset(
-                        center.x + radius * cos(endAngleRad),
-                        center.y + radius * sin(endAngleRad)
-                    )
-                    drawLine(
-                        color = Color.Black,
-                        start = center,
-                        end = lineEnd,
-                        strokeWidth = 2f
-                    )
-                }
-                items.forEachIndexed { index, item ->
-                    val textAngleRad =
-                        Math.toRadians((360f / items.size * index + currentRotationDegrees + 360f / items.size / 2) % 360.toDouble())
-                            .toFloat()
-                    val textRadius = radius * 0.7f
-                    drawContext.canvas.nativeCanvas.drawText(
-                        item,
-                        center.x + textRadius * cos(textAngleRad),
-                        center.y + textRadius * sin(textAngleRad),
-                        paint
-                    )
-                }
-                val arrowPath = Path().apply {
-                    moveTo(center.x, center.y - radius - 15)
-                    lineTo(center.x - 10, center.y - radius - 30)
-                    lineTo(center.x + 10, center.y - radius - 30)
-                    close()
-                }
-                drawPath(arrowPath, primary)
-                drawCircle(
+            val center = Offset(size.width / 2, size.height / 2)
+            val radius = size.minDimension / 2
+            items.indices.forEach { index ->
+                val startAngle = (360f / items.size * index + currentRotationDegrees) % 360
+                val sweepAngle = 360f / items.size
+                val color = colors[index % colors.size]
+                drawArc(
+                    color = color,
+                    startAngle = startAngle,
+                    sweepAngle = sweepAngle,
+                    useCenter = true,
+                    size = Size(radius * 2, radius * 2),
+                    topLeft = Offset(center.x - radius, center.y - radius)
+                )
+                val endAngleRad = Math.toRadians((startAngle + sweepAngle).toDouble()).toFloat()
+                val lineEnd = Offset(
+                    center.x + radius * cos(endAngleRad),
+                    center.y + radius * sin(endAngleRad)
+                )
+                drawLine(
                     color = Color.Black,
-                    radius = radius,
-                    center = center,
-                    style = Stroke(width = 4f)
+                    start = center,
+                    end = lineEnd,
+                    strokeWidth = 2f
                 )
             }
-
-            SpacerPadding()
-
-            val haptic = LocalHapticFeedback.current
-
-            OutlinedButton(
-                onClick = {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    if (items.isNotEmpty() && !isSpinning) {
-                        if (expanded) {
-                            expanded = false
-                        }
-                        isSpinning = true
-                        hasRotated = true
-                        val randomBaseCircles = 3
-                        val fineTunedAngle = Random.nextInt(360)
-                        targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
-                    }
-                }
-            ) {
-                Text(text = stringResource(R.string.start))
+            items.forEachIndexed { index, item ->
+                val textAngleRad =
+                    Math.toRadians((360f / items.size * index + currentRotationDegrees + 360f / items.size / 2) % 360.toDouble())
+                        .toFloat()
+                val textRadius = radius * 0.7f
+                drawContext.canvas.nativeCanvas.drawText(
+                    item,
+                    center.x + textRadius * cos(textAngleRad),
+                    center.y + textRadius * sin(textAngleRad),
+                    paint
+                )
             }
+            val arrowPath = Path().apply {
+                moveTo(center.x, center.y - radius - 15)
+                lineTo(center.x - 10, center.y - radius - 30)
+                lineTo(center.x + 10, center.y - radius - 30)
+                close()
+            }
+            drawPath(arrowPath, primary)
+            drawCircle(
+                color = Color.Black,
+                radius = radius,
+                center = center,
+                style = Stroke(width = 4f)
+            )
+        }
 
+        SpacerPadding()
+
+        val haptic = LocalHapticFeedback.current
+
+        OutlinedButton(
+            onClick = {
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                if (items.isNotEmpty() && !isSpinning) {
+                    if (expanded) {
+                        expanded = false
+                    }
+                    isSpinning = true
+                    hasRotated = true
+                    val randomBaseCircles = 3
+                    val fineTunedAngle = Random.nextInt(360)
+                    targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
+                }
+            }
+        ) {
+            Text(text = stringResource(R.string.start))
+        }
+
+        if (withEditableList == true) {
             ExpandableList(
                 items = items,
                 onItemsChange = { updatedItems ->
@@ -251,7 +282,7 @@ private fun ExpandableList(
 
     val haptic = LocalHapticFeedback.current
 
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier

@@ -310,7 +310,7 @@ private fun CardContent(
         CARD_3 -> Clipboard(settingsViewModel)
         CARD_4 -> Search(navController)
         CARD_5 -> SysSettings(navController)
-        CARD_6 -> WheelOfFortune()
+        CARD_6 -> WheelOfFortune(navController)
         CARD_7 -> BluetoothDevice(navController)
         CARD_8 -> CodesOfCharacters(navController)
         CARD_9 -> Maps()

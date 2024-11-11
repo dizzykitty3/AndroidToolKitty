@@ -93,6 +93,7 @@ object OSVersion {
      * 4. Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS)
      * 5. Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
      * 6. Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+     * 7. Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
      */
     fun android6(): Boolean = osVersion >= Build.VERSION_CODES.M
 
