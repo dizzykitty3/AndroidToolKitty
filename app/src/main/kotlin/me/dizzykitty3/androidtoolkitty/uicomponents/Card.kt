@@ -16,9 +16,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @Composable
 fun Card(
@@ -45,6 +49,9 @@ fun Card(
     onClick: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
+    val view = LocalView.current
+    val haptic = LocalHapticFeedback.current
+
     ElevatedCard(Modifier.fillMaxWidth()) {
         Column(
             Modifier
@@ -76,12 +83,24 @@ fun Card(
                         }
                     }
                 }
-                if (hasShowMore && onClick != null) {
-                    FilledTonalButton(onClick) {
-                        Icon(
-                            imageVector = Icons.Outlined.MoreHoriz,
-                            contentDescription = null
-                        )
+                if (hasShowMore == true) {
+                    if (onClick != null) {
+                        FilledTonalButton(onClick = onClick) {
+                            Icon(
+                                imageVector = Icons.Outlined.MoreHoriz,
+                                contentDescription = null
+                            )
+                        }
+                    } else { // onClick == null. (for development)
+                        FilledTonalButton(onClick = {
+                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                            view.showSnackbar("haven't set up")
+                        }) {
+                            Icon(
+                                imageVector = Icons.Outlined.MoreHoriz,
+                                contentDescription = null
+                            )
+                        }
                     }
                 }
             }
