@@ -29,6 +29,7 @@ import me.dizzykitty3.androidtoolkitty.S_DEVELOPER
 import me.dizzykitty3.androidtoolkitty.S_DISPLAY
 import me.dizzykitty3.androidtoolkitty.S_LOCALE
 import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_LISTENER
+import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_POLICY_ACCESS
 import me.dizzykitty3.androidtoolkitty.S_OVERLAY
 import me.dizzykitty3.androidtoolkitty.S_POWER_USAGE_SUMMARY
 import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
@@ -58,10 +59,17 @@ fun SysSettingsCardEdit() {
         var mIsShowSetting8 by remember { mutableStateOf(sp.getShownState(S_OVERLAY)) }
         var mIsShowSetting9 by remember { mutableStateOf(sp.getShownState(S_WRITE_SETTINGS)) }
         var mIsShowSetting10 by remember { mutableStateOf(sp.getShownState(S_NOTIFICATION_LISTENER)) }
-        var mIsShowSetting11 by remember { mutableStateOf(sp.getShownState(S_ACCESSIBILITY)) }
-        var mIsShowSetting12 by remember { mutableStateOf(sp.getShownState(S_LOCALE)) }
-        var mIsShowSetting13 by remember { mutableStateOf(sp.getShownState(S_DATE)) }
-        var mIsShowSetting14 by remember { mutableStateOf(sp.getShownState(S_DEVELOPER)) }
+        var mIsShowSetting11 by remember {
+            mutableStateOf(
+                sp.getShownState(
+                    S_NOTIFICATION_POLICY_ACCESS
+                )
+            )
+        }
+        var mIsShowSetting12 by remember { mutableStateOf(sp.getShownState(S_ACCESSIBILITY)) }
+        var mIsShowSetting13 by remember { mutableStateOf(sp.getShownState(S_LOCALE)) }
+        var mIsShowSetting14 by remember { mutableStateOf(sp.getShownState(S_DATE)) }
+        var mIsShowSetting15 by remember { mutableStateOf(sp.getShownState(S_DEVELOPER)) }
 
         Tip(R.string.sys_settings_tip)
 
@@ -174,49 +182,62 @@ fun SysSettingsCardEdit() {
                 sp.saveShownState(S_WRITE_SETTINGS, newState)
             }
         }
-        CustomHideCardSettingSwitch(
-            text = R.string.device_and_app_notifications,
-            card = S_NOTIFICATION_LISTENER,
-            isChecked = mIsShowSetting10
-        ) { newState ->
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            mIsShowSetting10 = newState
-            sp.saveShownState(S_NOTIFICATION_LISTENER, newState)
+        if (OSVersion.android5Point1()) {
+            CustomHideCardSettingSwitch(
+                text = R.string.device_and_app_notifications,
+                card = S_NOTIFICATION_LISTENER,
+                isChecked = mIsShowSetting10
+            ) { newState ->
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                mIsShowSetting10 = newState
+                sp.saveShownState(S_NOTIFICATION_LISTENER, newState)
+            }
+        }
+        if (OSVersion.android6()) {
+            CustomHideCardSettingSwitch(
+                text = R.string.do_not_disturb_access,
+                card = S_NOTIFICATION_POLICY_ACCESS,
+                isChecked = mIsShowSetting11
+            ) { newState ->
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                mIsShowSetting11 = newState
+                sp.saveShownState(S_NOTIFICATION_POLICY_ACCESS, newState)
+            }
         }
         CustomHideCardSettingSwitch(
             text = R.string.accessibility_settings,
             card = S_ACCESSIBILITY,
-            isChecked = mIsShowSetting11
+            isChecked = mIsShowSetting12
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            mIsShowSetting11 = newState
+            mIsShowSetting12 = newState
             sp.saveShownState(S_ACCESSIBILITY, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.language_settings,
             card = S_LOCALE,
-            isChecked = mIsShowSetting12
+            isChecked = mIsShowSetting13
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            mIsShowSetting12 = newState
+            mIsShowSetting13 = newState
             sp.saveShownState(S_LOCALE, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.date_and_time_settings,
             card = S_DATE,
-            isChecked = mIsShowSetting13
+            isChecked = mIsShowSetting14
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            mIsShowSetting13 = newState
+            mIsShowSetting14 = newState
             sp.saveShownState(S_DATE, newState)
         }
         CustomHideCardSettingSwitch(
             text = R.string.developer_options,
             card = S_DEVELOPER,
-            isChecked = mIsShowSetting14
+            isChecked = mIsShowSetting15
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            mIsShowSetting14 = newState
+            mIsShowSetting15 = newState
             sp.saveShownState(S_DEVELOPER, newState)
         }
 
@@ -242,6 +263,7 @@ fun SysSettingsCardEdit() {
                 mIsShowSetting12 = false
                 mIsShowSetting13 = false
                 mIsShowSetting14 = false
+                mIsShowSetting15 = false
             },
             elevation = ButtonDefaults.buttonElevation(1.dp)
         ) {
@@ -270,6 +292,7 @@ private fun onClickChangeAllCardsButton() {
         S_OVERLAY,
         S_WRITE_SETTINGS,
         S_NOTIFICATION_LISTENER,
+        S_NOTIFICATION_POLICY_ACCESS,
         S_ACCESSIBILITY,
         S_LOCALE,
         S_DATE,

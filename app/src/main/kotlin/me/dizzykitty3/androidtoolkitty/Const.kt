@@ -50,6 +50,7 @@ const val S_WIFI = "setting_wifi"
 const val S_POWER_USAGE_SUMMARY = "setting_power_usage_summary"
 const val S_ACCESSIBILITY = "setting_accessibility"
 const val S_NOTIFICATION_LISTENER = "setting_notification_listener"
+const val S_NOTIFICATION_POLICY_ACCESS = "setting_notification_policy_access"
 
 // Android permissions
 @SuppressLint("InlinedApi")
