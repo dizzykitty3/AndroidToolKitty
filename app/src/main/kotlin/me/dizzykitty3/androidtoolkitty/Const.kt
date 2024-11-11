@@ -17,6 +17,7 @@ const val SCR_FONT_WEIGHT_TEST = "FontWeightTestScreen"
 const val SCR_SYS_SETTINGS = "SysSettingsScreen"
 const val SCR_VOLUME = "VolumeScreen"
 const val SCR_COMPOSE_CATALOG = "ComposeCatalogScreen"
+const val SCR_WHEEL_OF_FORTUNE = "WheelOfFortuneScreen"
 
 // App cards
 const val CARD_1 = "card_year_progress"
