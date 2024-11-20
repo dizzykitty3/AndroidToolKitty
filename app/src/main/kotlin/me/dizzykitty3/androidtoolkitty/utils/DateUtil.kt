@@ -31,7 +31,7 @@ object DateUtil {
     private val sysTimeMillis: Long
         get() = System.currentTimeMillis()
 
-    val unixTimestamp: String
+    val unixTimestampInSeconds: String
         get() = (sysTimeMillis / 1000).toString()
 
     val sysTimeZone: String
