@@ -8,6 +8,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +23,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowRight
@@ -78,7 +80,8 @@ import kotlin.random.Random
 @Composable
 fun WheelOfFortune(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
-    Card(title = R.string.wheel_of_fortune,
+    Card(
+        title = R.string.wheel_of_fortune,
         icon = Icons.Outlined.Casino,
         hasShowMore = true,
         onClick = {
@@ -134,6 +137,7 @@ private fun TheWheel(withEditableList: Boolean? = false) {
         animationSpec = tween(durationMillis = 3000, easing = FastOutSlowInEasing), label = "",
     )
     val view = LocalView.current
+    var selected by remember { mutableStateOf("none") }
 
     LaunchedEffect(currentRotationDegrees) {
         if (currentRotationDegrees == targetRotationDegrees && hasRotated) {
@@ -143,7 +147,7 @@ private fun TheWheel(withEditableList: Boolean? = false) {
             val anglePerItem = 360f / itemsCount
             val selectedIndex =
                 (((360 - normalizedRotationDegrees + 270) % 360) / anglePerItem).toInt() % itemsCount
-            val selected = items[selectedIndex]
+            selected = items[selectedIndex]
 
             view.showSnackbar(selected)
             rotationDegrees = targetRotationDegrees % 360
@@ -239,6 +243,14 @@ private fun TheWheel(withEditableList: Boolean? = false) {
             Text(text = stringResource(R.string.start))
         }
 
+        SpacerPadding()
+
+        Column(Modifier.horizontalScroll(rememberScrollState())) {
+            Text("result: $selected")
+        }
+
+        SpacerPadding()
+
         if (withEditableList == true) {
             ExpandableList(
                 items = items,
@@ -282,7 +294,7 @@ private fun ExpandableList(
 
     val haptic = LocalHapticFeedback.current
 
-    Column(modifier = Modifier.padding(top = 16.dp, start = 16.dp, end = 16.dp)) {
+    Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
