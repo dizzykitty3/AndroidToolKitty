@@ -187,8 +187,8 @@ private fun ASCII() {
 
 @Composable
 private fun UnixTimestamp() {
-    Text("current unix timestamp:")
-    Text(DateUtil.unixTimestamp)
+    Text("current unix timestamp in seconds:")
+    Text(DateUtil.unixTimestampInSeconds)
 }
 
 private fun View.onClickConvertButton(

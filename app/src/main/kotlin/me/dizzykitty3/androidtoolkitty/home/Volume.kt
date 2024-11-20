@@ -210,7 +210,9 @@ private fun MediaVolume(isHome: Boolean) {
                         Slider(
                             value = newCustomVolume,
                             onValueChange = {
-                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                if (morePreciseSlider)
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                else haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 newCustomVolume = it
                                 if (mCustomVolume < 0 || (!mHaveCustomLabel))
                                     optionLabel = "${it.roundToInt()}%"
