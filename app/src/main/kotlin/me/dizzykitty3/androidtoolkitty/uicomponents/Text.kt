@@ -200,13 +200,13 @@ fun ScrollableText(@StringRes text: Int) = ScrollableText(stringResource(text))
 @Composable
 fun ScrollableItalicText(@StringRes text: Int) =
     Box(Modifier.horizontalScroll(rememberScrollState())) {
-        Text(buildAnnotatedString { ItalicText(stringResource(text)) })
+        Text(buildAnnotatedString { ItalicText(stringResource(text)) }, maxLines = 1)
     }
 
 @Composable
 fun ScrollableItalicText(text: String) =
     Box(Modifier.horizontalScroll(rememberScrollState())) {
-        Text(buildAnnotatedString { ItalicText(text) })
+        Text(buildAnnotatedString { ItalicText(text) }, maxLines = 1)
     }
 
 @Composable
