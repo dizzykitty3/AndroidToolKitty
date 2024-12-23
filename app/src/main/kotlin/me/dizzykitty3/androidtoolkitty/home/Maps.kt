@@ -8,7 +8,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
-import androidx.compose.material.icons.outlined.Place
+import androidx.compose.material.icons.outlined.Map
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -39,7 +39,7 @@ import timber.log.Timber
 
 @Composable
 fun Maps() {
-    Card(R.string.google_maps, Icons.Outlined.Place) {
+    Card(title = R.string.google_maps, icon = Icons.Outlined.Map) {
         val view = LocalView.current
         val focus = LocalFocusManager.current
         val haptic = LocalHapticFeedback.current

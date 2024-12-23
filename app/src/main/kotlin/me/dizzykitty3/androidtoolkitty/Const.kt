@@ -58,6 +58,7 @@ const val S_NOTIFICATION_POLICY_ACCESS = "setting_notification_policy_access"
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 const val BT = Manifest.permission.BLUETOOTH
 const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
+const val FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
 const val GRANTED = PackageManager.PERMISSION_GRANTED
 
 // Android package names
