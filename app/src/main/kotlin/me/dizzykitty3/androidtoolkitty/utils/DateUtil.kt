@@ -1,5 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
+import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.temporal.ChronoUnit
@@ -26,7 +28,11 @@ object DateUtil {
         get() = daysPassed.toFloat() / totalDaysInYear.toFloat()
 
     fun Float.toProgress(): String =
-        (this * 100).toString().substring(0, 4).plus("%")
+        if (this == 0f) {
+            appContext.getString(R.string.happy_new_year)
+        } else {
+            (this * 100).toString().substring(0, 4).plus("%")
+        }
 
     private val sysTimeMillis: Long
         get() = System.currentTimeMillis()

@@ -21,8 +21,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
         targetSdk = compileSdk
-        versionCode = 1390
-        versionName = "1.3.9"
+        versionCode = 1400
+        versionName = "1.4.0"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -31,13 +31,13 @@ android {
         }
     }
     buildTypes {
-        getByName("debug") {
+        debug {
             isMinifyEnabled = false
             applicationIdSuffix = ".dev"
             versionNameSuffix = ".dev"
             resValue("string", "app_name", "ToolKitty dev")
         }
-        getByName("release") {
+        release {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -47,10 +47,9 @@ android {
         }
     }
     applicationVariants.all {
-        val outputFileName = "android-toolkitty-${versionName}.apk"
         outputs.all {
             (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl)
-                .outputFileName = outputFileName
+                .outputFileName = "android-toolkitty-${versionName}.apk"
         }
     }
     composeCompiler {

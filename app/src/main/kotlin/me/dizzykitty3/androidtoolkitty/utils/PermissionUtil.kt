@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat
 import me.dizzykitty3.androidtoolkitty.BT
 import me.dizzykitty3.androidtoolkitty.BT_ADMIN
 import me.dizzykitty3.androidtoolkitty.BT_CONNECT
+import me.dizzykitty3.androidtoolkitty.FINE_LOCATION
 import me.dizzykitty3.androidtoolkitty.GRANTED
 
 /**
@@ -18,22 +19,27 @@ object PermissionUtil {
      */
     @CheckResult
     fun Context.noBluetoothPermission(): Boolean =
-        if (OSVersion.android12())
-            this.check(BT_CONNECT)
-        else
-            this.check(BT) || this.check(BT_ADMIN)
+        if (OSVersion.android12()) this.check(BT_CONNECT)
+        else this.check(BT) || this.check(BT_ADMIN)
+
+    /**
+     * @return true if the app does NOT have the required permissions, false otherwise.
+     */
+    @CheckResult
+    fun Context.noLocationPermission(): Boolean =
+        this.check(FINE_LOCATION)
 
     private fun Context.check(permission: String): Boolean =
         ActivityCompat.checkSelfPermission(this, permission) != GRANTED
 
-    fun Context.requestBluetoothPermission() {
+    fun Context.requestBluetoothPermission() =
         this.request(
-            if (OSVersion.android12())
-                arrayOf(BT_CONNECT)
-            else
-                arrayOf(BT, BT_ADMIN)
+            if (OSVersion.android12()) arrayOf(BT_CONNECT)
+            else arrayOf(BT, BT_ADMIN)
         )
-    }
+
+    fun Context.requestLocationPermission() =
+        this.request(arrayOf(FINE_LOCATION))
 
     private fun Context.request(permission: Array<String>) =
         ActivityCompat.requestPermissions(this as Activity, permission, 1)

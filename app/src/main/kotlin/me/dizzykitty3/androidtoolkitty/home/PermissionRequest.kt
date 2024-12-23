@@ -29,7 +29,7 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 @Composable
 fun PermissionRequest() {
     Screen {
-        Card(R.string.request_permission, Icons.Outlined.Shield) {
+        Card(title = R.string.request_permission, icon = Icons.Outlined.Shield) {
             var clickCount by remember { mutableIntStateOf(0) }
             val view = LocalView.current
             val haptic = LocalHapticFeedback.current

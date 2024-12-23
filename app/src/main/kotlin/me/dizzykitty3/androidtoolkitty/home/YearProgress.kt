@@ -12,7 +12,7 @@ import me.dizzykitty3.androidtoolkitty.utils.DateUtil.toProgress
 
 @Composable
 fun YearProgress() {
-    Card(R.string.year_progress, Icons.Outlined.HourglassTop) {
+    Card(title = R.string.year_progress, icon = Icons.Outlined.HourglassTop) {
         YearProgressIndicator()
         Text(DateUtil.yearProgress.toProgress())
     }
