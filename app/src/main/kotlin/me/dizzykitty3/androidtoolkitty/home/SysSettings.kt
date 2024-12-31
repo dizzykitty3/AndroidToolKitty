@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.home
 
 import android.content.ContentResolver
-import android.os.Build
 import android.provider.Settings
 import androidx.annotation.StringRes
 import androidx.compose.foundation.horizontalScroll
@@ -180,13 +179,10 @@ fun SysSettingsScreen() {
 
         Card(R.string.device_info) {
             Column(Modifier.fillMaxWidth()) {
-                LabelAndValueTextRow("manufacturer", Build.MANUFACTURER)
-                LabelAndValueTextRow("model", Build.MODEL)
-                LabelAndValueTextRow("device", Build.DEVICE)
-                LabelAndValueTextRow(
-                    "os_ver",
-                    "Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})"
-                )
+                LabelAndValueTextRow("manufacturer", StringUtil.manufacturer)
+                LabelAndValueTextRow("model", StringUtil.model)
+                LabelAndValueTextRow("device", StringUtil.device)
+                LabelAndValueTextRow("os_ver", StringUtil.osVer)
                 LabelAndValueTextRow("locale", StringUtil.sysLocale)
                 LabelAndValueTextRow("time_zone", DateUtil.sysTimeZone)
             }

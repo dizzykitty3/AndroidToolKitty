@@ -3,14 +3,25 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
 import android.content.Context
+import android.os.Build
 import androidx.annotation.CheckResult
 import java.util.Locale
 
 object StringUtil {
+
+    // ----- string processing -----//
+
     /**
      * Drop spaces, including full-width ones.
      */
     fun String.dropSpaces(): String = this.replace(Regex("\\s"), "")
+
+    /**
+     * Allows for letters, numbers, or underscores.
+     */
+    fun String.isValidUsername(): Boolean = this.matches(Regex("^[a-zA-Z0-9_]*$"))
+
+    fun String.isInvalidUsername(): Boolean = !this.isValidUsername()
 
     fun String.removeTrailingPeriod(): String {
         var temp = this
@@ -19,6 +30,8 @@ object StringUtil {
         }
         return temp
     }
+
+    fun String.toASCII(): String = this.map { it.code }.joinToString(", ")
 
     @Throws(IllegalArgumentException::class)
     fun unicodeToCharacter(unicode: String): String {
@@ -52,6 +65,8 @@ object StringUtil {
         return stringBuilder.toString()
     }
 
+    // ----- system language setting ----- //
+
     val sysLocale: String @CheckResult get() = Locale.getDefault().toString()
 
     val sysLangSupported: Boolean @CheckResult get() = sysLocale.contains(Regex("en|Hans|zh_CN|zh_SG|ja"))
@@ -64,14 +79,19 @@ object StringUtil {
 
     val sysLangCJK: Boolean @CheckResult get() = sysLocale.contains(Regex("Hans|Hant|zh|ja|ko"))
 
-    fun String.toASCII(): String = this.map { it.code }.joinToString(", ")
+    // ----- device and app info ----- //
 
-    /**
-     * Allows for letters, numbers, or underscores.
-     */
-    fun String.isValidUsername(): Boolean = this.matches(Regex("^[a-zA-Z0-9_]*$"))
+    val manufacturer: String
+        get() = Build.MANUFACTURER
 
-    fun String.isInvalidUsername(): Boolean = !this.isValidUsername()
+    val model: String
+        get() = Build.MODEL
+
+    val device: String
+        get() = Build.DEVICE
+
+    val osVer: String
+        get() = "Android ${Build.VERSION.RELEASE} (${Build.VERSION.SDK_INT})"
 
     // BuildConfig.VERSION_NAME may not have the updated value at compile time. (I guess)
     val Context.versionName: String

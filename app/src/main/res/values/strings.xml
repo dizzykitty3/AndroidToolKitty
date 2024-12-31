@@ -159,7 +159,8 @@
     <string name="sys_settings_tip">Up to 4 options you can pin on Home screen</string>
     <string name="device_and_app_notifications">Device &amp; app notifications</string>
     <string name="do_not_disturb_access">Do Not Disturb access</string>
-
+    <string name="oem_removed">The OEM (%s) hsa removed this page</string>
+    87
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
     <string name="item">item</string>
