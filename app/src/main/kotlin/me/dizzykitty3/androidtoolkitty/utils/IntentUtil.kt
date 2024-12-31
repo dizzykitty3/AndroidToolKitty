@@ -51,8 +51,8 @@ object IntentUtil {
             this.startActivity(intent)
             return
         } catch (e: ActivityNotFoundException) {
-            Timber.e(e)
-            msg = e.message.toString()
+            Timber.e("brand = ${StringUtil.manufacturer}\nintent = ${intent}\n$e")
+            msg = this.getString(R.string.oem_removed, StringUtil.manufacturer)
         }
 
         when (intent.`package`) {
