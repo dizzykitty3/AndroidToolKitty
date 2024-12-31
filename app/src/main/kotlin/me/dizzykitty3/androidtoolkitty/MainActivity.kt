@@ -78,6 +78,11 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        Timber.d("onResume")
+    }
+
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         Timber.d("onWindowFocusChanged")
@@ -92,5 +97,20 @@ class MainActivity : ComponentActivity() {
                 continuationNotResumed.set(false)
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.d("onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Timber.d("onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Timber.d("onDestroy")
     }
 }
