@@ -160,8 +160,22 @@ private fun TheWheel(withEditableList: Boolean? = false) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val primary = MaterialTheme.colorScheme.primary
-        SpacerPadding()
-        SpacerPadding()
+
+        if (withEditableList == true) {
+            ExpandableList(
+                items = items,
+                onItemsChange = { updatedItems ->
+                    items = updatedItems
+                    setWheelOfFortuneItems(updatedItems)
+                },
+                expanded = expanded,
+                setExpanded = { value -> expanded = value },
+                isSpinning = isSpinning
+            )
+            SpacerPadding()
+            SpacerPadding()
+            SpacerPadding()
+        }
 
         Canvas(
             modifier = Modifier
@@ -247,21 +261,6 @@ private fun TheWheel(withEditableList: Boolean? = false) {
 
         Column(Modifier.horizontalScroll(rememberScrollState())) {
             Text("result: $selected")
-        }
-
-        SpacerPadding()
-
-        if (withEditableList == true) {
-            ExpandableList(
-                items = items,
-                onItemsChange = { updatedItems ->
-                    items = updatedItems
-                    setWheelOfFortuneItems(updatedItems)
-                },
-                expanded = expanded,
-                setExpanded = { value -> expanded = value },
-                isSpinning = isSpinning
-            )
         }
     }
 }
