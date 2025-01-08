@@ -70,7 +70,6 @@ import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.getW
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import kotlin.math.cos
@@ -95,7 +94,6 @@ fun WheelOfFortune(navController: NavHostController) {
 @Composable
 fun WheelOfFortuneScreen() {
     Screen {
-        ScreenTitle(R.string.wheel_of_fortune)
         Card(R.string.edit) { TheWheelWithEditableList() }
     }
 }
@@ -160,8 +158,22 @@ private fun TheWheel(withEditableList: Boolean? = false) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         val primary = MaterialTheme.colorScheme.primary
-        SpacerPadding()
-        SpacerPadding()
+
+        if (withEditableList == true) {
+            ExpandableList(
+                items = items,
+                onItemsChange = { updatedItems ->
+                    items = updatedItems
+                    setWheelOfFortuneItems(updatedItems)
+                },
+                expanded = expanded,
+                setExpanded = { value -> expanded = value },
+                isSpinning = isSpinning
+            )
+            SpacerPadding()
+            SpacerPadding()
+            SpacerPadding()
+        }
 
         Canvas(
             modifier = Modifier
@@ -247,21 +259,6 @@ private fun TheWheel(withEditableList: Boolean? = false) {
 
         Column(Modifier.horizontalScroll(rememberScrollState())) {
             Text("result: $selected")
-        }
-
-        SpacerPadding()
-
-        if (withEditableList == true) {
-            ExpandableList(
-                items = items,
-                onItemsChange = { updatedItems ->
-                    items = updatedItems
-                    setWheelOfFortuneItems(updatedItems)
-                },
-                expanded = expanded,
-                setExpanded = { value -> expanded = value },
-                isSpinning = isSpinning
-            )
         }
     }
 }
