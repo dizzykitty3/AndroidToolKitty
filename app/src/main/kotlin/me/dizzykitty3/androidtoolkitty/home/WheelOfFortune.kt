@@ -70,7 +70,6 @@ import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.getW
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import kotlin.math.cos
@@ -95,7 +94,6 @@ fun WheelOfFortune(navController: NavHostController) {
 @Composable
 fun WheelOfFortuneScreen() {
     Screen {
-        ScreenTitle(R.string.wheel_of_fortune)
         Card(R.string.edit) { TheWheelWithEditableList() }
     }
 }
