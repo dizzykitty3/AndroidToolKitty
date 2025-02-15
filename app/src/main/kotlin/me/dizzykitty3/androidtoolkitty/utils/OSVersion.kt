@@ -10,6 +10,15 @@ object OSVersion {
     private val osVersion = Build.VERSION.SDK_INT
 
     /**
+     * 36
+     * [developer-preview-1](https://android-developers.googleblog.com/2024/11/the-first-developer-preview-android16.html)
+     * [developer-preview-2](https://android-developers.googleblog.com/2024/12/second-developer-preview-android16.html)
+     * [beta-1](https://android-developers.googleblog.com/2025/01/first-beta-android16.html)
+     * [beta-2](https://android-developers.googleblog.com/2025/02/second-beta-android16.html)
+     */
+    fun android16(): Boolean = false
+
+    /**
      * 35
      * [developer-preview-1](https://android-developers.googleblog.com/2024/02/first-developer-preview-android15.html)
      * [developer-preview-2](https://android-developers.googleblog.com/2024/03/the-second-developer-preview-of-android-15.html)
