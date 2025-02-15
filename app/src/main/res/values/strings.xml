@@ -135,6 +135,7 @@
     <string name="bilibili_bv_id">bilibili (bv id)</string>
     <string name="invalid_username_numbers_only">Username for %1$s should only contains numbers.</string>
     <string name="invalid_username_tip">Invalid username.</string>
+    <string name="google_issue_tracker">Google Issue Tracker</string>
 
     <!-- Home > System settings -->
     <string name="system_settings">System settings</string>

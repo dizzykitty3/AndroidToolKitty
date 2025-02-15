@@ -398,6 +398,7 @@ private fun numbersOnlyPlatforms(platform: URLUtil.Platform): Boolean =
             || platform == URLUtil.Platform.PIXIV_UUID
             || platform == URLUtil.Platform.STEAM_UUID
             || platform == URLUtil.Platform.WEIBO_UUID
+            || platform == URLUtil.Platform.GOOGLE_ISSUE_TRACKER
 
 private fun isInvalidNotNumbersOnly(platform: URLUtil.Platform, username: String): Boolean =
     numbersOnlyPlatforms(platform) && username.isNotBlank()

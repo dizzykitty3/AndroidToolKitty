@@ -83,6 +83,7 @@ object URLUtil {
         FANSLY("fansly.com/", R.string.fansly),
         FANTIA("fantia.jp/", R.string.fantia),
         GITHUB("github.com/", R.string.github),
+        GOOGLE_ISSUE_TRACKER("issuetracker.google.com/issues/", R.string.google_issue_tracker),
         INSTABIO("linkbio.co/", R.string.instabio),
         INSTAGRAM("instagram.com/", R.string.instagram),
         KO_FI("ko-fi.com/", R.string.ko_fi),
