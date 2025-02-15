@@ -94,7 +94,7 @@ fun HomeEdit() {
                 sp.saveShownState(CARD_4, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.system_settings,
+                text = R.string.system,
                 card = CARD_5,
                 isChecked = mIsShowCard5
             ) { newState ->
@@ -130,7 +130,7 @@ fun HomeEdit() {
                 sp.saveShownState(CARD_8, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.google_maps,
+                text = R.string.maps,
                 card = CARD_9,
                 isChecked = mIsShowCard9
             ) { newState ->
@@ -139,7 +139,7 @@ fun HomeEdit() {
                 sp.saveShownState(CARD_9, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.android_versions,
+                text = R.string.android,
                 card = CARD_10,
                 isChecked = mIsShowCard10
             ) { newState ->
@@ -148,7 +148,7 @@ fun HomeEdit() {
                 sp.saveShownState(CARD_10, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.font_weight_test,
+                text = R.string.font_weight,
                 card = CARD_11,
                 isChecked = mIsShowCard11
             ) { newState ->
@@ -157,7 +157,7 @@ fun HomeEdit() {
                 sp.saveShownState(CARD_11, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.compose_catalog,
+                text = R.string.compose,
                 card = CARD_12,
                 isChecked = mIsShowCard12
             ) { newState ->

@@ -70,6 +70,7 @@ import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.getW
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import kotlin.math.cos
@@ -80,7 +81,7 @@ import kotlin.random.Random
 fun WheelOfFortune(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
     Card(
-        title = R.string.wheel_of_fortune,
+        title = R.string.wheel_of_fortune_short,
         icon = Icons.Outlined.Casino,
         hasShowMore = true,
         onClick = {
@@ -94,6 +95,7 @@ fun WheelOfFortune(navController: NavHostController) {
 @Composable
 fun WheelOfFortuneScreen() {
     Screen {
+        ScreenTitle(R.string.wheel_of_fortune)
         Card(R.string.edit) { TheWheelWithEditableList() }
     }
 }

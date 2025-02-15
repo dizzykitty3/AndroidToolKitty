@@ -39,7 +39,7 @@ import timber.log.Timber
 
 @Composable
 fun Maps() {
-    Card(title = R.string.google_maps, icon = Icons.Outlined.Map) {
+    Card(title = R.string.maps, icon = Icons.Outlined.Map) {
         val view = LocalView.current
         val focus = LocalFocusManager.current
         val haptic = LocalHapticFeedback.current

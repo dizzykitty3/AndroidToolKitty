@@ -29,7 +29,7 @@ import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 fun FontWeight(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
     Card(
-        title = R.string.font_weight_test,
+        title = R.string.font_weight,
         icon = Icons.Outlined.FontDownload,
         hasShowMore = true,
         onClick = {
@@ -41,7 +41,7 @@ fun FontWeight(navController: NavHostController) {
 @Composable
 fun FontWeightTestScreen() {
     Screen {
-        ScreenTitle(R.string.font_weight_test)
+        ScreenTitle(R.string.font_weight)
         Card("Font weight test 1") { FontWeightTest() }
         Card("Font weight test 2") { RowFontWeightTest() }
         Card("Font family test") { FontFamilyTest() }

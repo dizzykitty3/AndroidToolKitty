@@ -31,7 +31,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 fun ComposeCatalog(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
     Card(
-        title = R.string.compose_catalog,
+        title = R.string.compose,
         icon = Icons.Outlined.DashboardCustomize,
         hasShowMore = true,
         onClick = {
