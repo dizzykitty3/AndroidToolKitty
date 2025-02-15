@@ -135,9 +135,10 @@
     <string name="bilibili_bv_id">bilibili (bv id)</string>
     <string name="invalid_username_numbers_only">Username for %1$s should only contains numbers.</string>
     <string name="invalid_username_tip">Invalid username.</string>
+    <string name="google_issue_tracker">Google Issue Tracker</string>
 
-    <!-- Home > System settings -->
-    <string name="system_settings">System settings</string>
+    <!-- Home > System -->
+    <string name="system">System</string>
     <string name="display_settings">Display</string>
     <string name="auto_rotate_settings">Auto-rotate screen</string>
     <string name="language_settings">Languages</string>
@@ -164,9 +165,10 @@
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
     <string name="item">item</string>
+    <string name="wheel_of_fortune_short">WoF</string>
 
-    <!-- Home > Bluetooth devices -->
-    <string name="bluetooth_devices">Bluetooth devices</string>
+    <!-- Home > BT devices -->
+    <string name="bluetooth_devices">BT devices</string>
     <string name="show_paired_devices">Show paired devices</string>
     <string name="current_device">Current device:</string>
     <string name="paired_devices">Paired devices:</string>
@@ -191,19 +193,19 @@
     <string name="ascii" translatable="false">ASCII</string>
     <string name="convert_to_ascii_values">Convert to ASCII values</string>
 
-    <!-- Home > Google Maps -->
-    <string name="google_maps">Google Maps</string>
+    <!-- Home > Maps -->
+    <string name="maps">Maps</string>
     <string name="lat">lat</string>
     <string name="lng">lng</string>
     <string name="google_maps_not_installed">Google Maps is not installed</string>
     <string name="google_play_not_installed">Google Play is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>
 
-    <!-- Home > Android versions -->
-    <string name="android_versions">Android versions</string>
+    <!-- Home > Android -->
+    <string name="android">Android</string>
 
-    <!-- Home > Font weight test -->
-    <string name="font_weight_test">Font weight test</string>
+    <!-- Home > Font weight -->
+    <string name="font_weight">Font weight</string>
     <string name="w1">100 Thin</string>
     <string name="w2">200 ExtraLight</string>
     <string name="w3">300 Light</string>
@@ -218,8 +220,8 @@
     <string name="japanese_ki" translatable="false">気</string>
     <string name="japanese_sentence" translatable="false">闇があるから光がある。そして闇から出てきた人こそ、一番本当に光のありがたさがわかるんだ。</string>
 
-    <!-- Home > Compose catalog -->
-    <string name="compose_catalog">Compose catalog</string>
+    <!-- Home > Compose -->
+    <string name="compose">Compose</string>
 
     <!-- Settings > Appearance -->
     <string name="appearance">Appearance</string>

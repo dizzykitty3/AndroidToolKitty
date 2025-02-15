@@ -269,8 +269,8 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
 
 @Composable
 private fun HomeCards(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    getCardMap(SettingsSharedPref).forEach { (cardName, isShow) ->
-        if (isShow) CardContent(settingsViewModel, cardName, navController)
+    getCardMap(SettingsSharedPref).forEach { cardName ->
+        CardContent(settingsViewModel, cardName, navController)
     }
 }
 
@@ -279,24 +279,25 @@ private fun TwoColumnHomeCards(
     settingsViewModel: SettingsViewModel,
     navController: NavHostController
 ) {
+    val cardPadding = dimensionResource(R.dimen.padding_card_space)
     val largeCardPadding = dimensionResource(R.dimen.padding_card_space_large)
     val cardMap = getCardMap(SettingsSharedPref)
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
-        verticalItemSpacing = largeCardPadding,
+        verticalItemSpacing = cardPadding,
         horizontalArrangement = Arrangement.spacedBy(largeCardPadding),
     ) {
-        items(cardMap.toList()) { (cardName, isShow) ->
-            if (isShow) CardContent(settingsViewModel, cardName, navController)
+        items(cardMap) { cardName ->
+            CardContent(settingsViewModel, cardName, navController)
         }
     }
 }
 
 @Composable
-private fun getCardMap(settingsSharedPref: SettingsSharedPref): Map<String, Boolean> = listOf(
+private fun getCardMap(settingsSharedPref: SettingsSharedPref): List<String> = listOf(
     CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6,
     CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12
-).associateWith { card -> settingsSharedPref.getShownState(card) }
+).associateWith { card -> settingsSharedPref.getShownState(card) }.filter { it.value }.keys.toList()
 
 @Composable
 private fun CardContent(

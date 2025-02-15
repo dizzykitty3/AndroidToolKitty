@@ -54,7 +54,7 @@ import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 fun SysSettings(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
     Card(
-        title = R.string.system_settings,
+        title = R.string.system,
         icon = Icons.Outlined.Settings,
         hasShowMore = true,
         onClick = {
@@ -135,7 +135,7 @@ fun SysSettings(navController: NavHostController) {
 @Composable
 fun SysSettingsScreen() {
     Screen {
-        ScreenTitle(R.string.system_settings)
+        ScreenTitle(R.string.system)
 
         val settings = mutableListOf(
             Setting(S_WIFI, R.string.wifi),
