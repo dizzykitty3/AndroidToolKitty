@@ -15,6 +15,7 @@ object OSVersion {
      * [developer-preview-2](https://android-developers.googleblog.com/2024/12/second-developer-preview-android16.html)
      * [beta-1](https://android-developers.googleblog.com/2025/01/first-beta-android16.html)
      * [beta-2](https://android-developers.googleblog.com/2025/02/second-beta-android16.html)
+     * [beta-3](https://android-developers.googleblog.com/2025/03/the-third-beta-of-android-16.html)
      */
     fun android16(): Boolean = false
 

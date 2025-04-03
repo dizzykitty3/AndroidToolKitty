@@ -47,19 +47,19 @@ fun AndroidVersionHistoryScreen() {
 private fun RecentVersions() {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.weight(0.4f)) {
+            ScrollableText("Android 16")
             ScrollableText("Android 15")
             ScrollableText("Android 14")
             ScrollableText("Android 13")
             ScrollableText("Android 12L")
-            ScrollableText("Android 12")
         }
 
         Column(Modifier.weight(0.6f)) {
+            ScrollableItalicText("API 36, Baklava")
             ScrollableItalicText("API 35, VanillaIceCream")
             ScrollableItalicText("API 34, UpsideDownCake")
             ScrollableItalicText("API 33, Tiramisu")
             ScrollableItalicText("API 32, Sv2")
-            ScrollableItalicText("API 31, S")
         }
     }
 }
@@ -68,6 +68,7 @@ private fun RecentVersions() {
 private fun EarlyVersions() {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.weight(0.4f)) {
+            ScrollableText("Android 12")
             ScrollableText("Android 11")
             ScrollableText("Android 10")
             ScrollableText("Android 9")
@@ -96,6 +97,7 @@ private fun EarlyVersions() {
         }
 
         Column(Modifier.weight(0.6f)) {
+            ScrollableItalicText("API 31, S")
             ScrollableItalicText("API 30, R")
             ScrollableItalicText("API 29, Q")
             ScrollableItalicText("API 28, Pie")
