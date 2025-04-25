@@ -10,8 +10,8 @@ plugins {
 
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
-    compileSdk = 35
-    buildToolsVersion = "35.0.0"
+    compileSdk = 36
+    buildToolsVersion = "36.0.0"
 
     buildFeatures {
         buildConfig = true
@@ -21,8 +21,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
         targetSdk = compileSdk
-        versionCode = 1700
-        versionName = "1.7.0"
+        versionCode = 1800
+        versionName = "1.8.0"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -32,12 +32,14 @@ android {
     }
     buildTypes {
         debug {
+            isDebuggable = true
             isMinifyEnabled = false
             applicationIdSuffix = ".dev"
             versionNameSuffix = ".dev"
             resValue("string", "app_name", "ToolKitty dev")
         }
         release {
+            isDebuggable = false
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
