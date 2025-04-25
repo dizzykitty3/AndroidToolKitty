@@ -78,6 +78,7 @@ object URLUtil {
         BLUESKY("bsky.app/profile/", R.string.bluesky),
         BOOTH(".booth.pm", R.string.booth), // Prefix
         CARRD(".carrd.co", R.string.carrd), // Prefix
+        CHROMIUM_ISSUE_TRACKER("issues.chromium.org/issues/", R.string.chromium_issue_tracker),
         FACEBOOK("facebook.com/", R.string.facebook),
         FANBOX(".fanbox.cc", R.string.fanbox), // Prefix
         FANSLY("fansly.com/", R.string.fansly),
@@ -107,6 +108,7 @@ object URLUtil {
         REDDIT_SUBREDDIT("reddit.com/r/", R.string.reddit_subreddit),
         SKEB("skeb.jp/@", R.string.skeb),
         SNAPCHAT("snapchat.com/add/", R.string.snapchat),
+        STACK_OVERFLOW("stackoverflow.com/questions/", R.string.stack_overflow),
         STEAM_SEARCH_STORE("store.steampowered.com/search/?term=", R.string.steam_search_store),
         STEAM_USER_CUSTOM_URL("steamcommunity.com/id/", R.string.steam_user_custom_url),
         STEAM_UUID("steamcommunity.com/profiles/", R.string.steam_uuid),
