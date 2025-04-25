@@ -136,6 +136,8 @@
     <string name="invalid_username_numbers_only">Username for %1$s should only contains numbers.</string>
     <string name="invalid_username_tip">Invalid username.</string>
     <string name="google_issue_tracker">Google Issue Tracker</string>
+    <string name="chromium_issue_tracker">Chromium Issue Tracker</string>
+    <string name="stack_overflow">Stack Overflow</string>
 
     <!-- Home > System -->
     <string name="system">System</string>
