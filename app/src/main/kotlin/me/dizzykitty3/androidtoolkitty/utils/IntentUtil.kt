@@ -39,6 +39,7 @@ import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 import timber.log.Timber
+import androidx.core.net.toUri
 
 object IntentUtil {
     // Didn't use StartActivity as the name because a custom extension function is needed.
@@ -84,7 +85,7 @@ object IntentUtil {
         Timber.d("searchOnYouTube")
         val intent = Intent(
             Intent.ACTION_VIEW,
-            Uri.parse("https://youtube.com/results?search_query=$query")
+            "https://youtube.com/results?search_query=$query".toUri()
         )
         this.launch(intent)
     }
@@ -93,20 +94,18 @@ object IntentUtil {
         if (url.isBlank()) return
         Timber.d("openURL")
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = Uri.parse(if (url.contains(HTTPS)) url else "$HTTPS$url")
+        intent.data = (if (url.contains(HTTPS)) url else "$HTTPS$url").toUri()
         this.launch(intent)
     }
 
     fun Context.checkOnMarket(packageName: String, isGooglePlay: Boolean = true) {
-        val marketUri: Uri = Uri.parse(
-            if (packageName.isBlank()) {
-                return
-            } else if (packageName.contains(".")) {
-                "market://details?id=${packageName.dropSpaces()}"
-            } else {
-                "market://search?q=${packageName.trim()}"
-            }
-        )
+        val marketUri: Uri = if (packageName.isBlank()) {
+            return
+        } else if (packageName.contains(".")) {
+            "market://details?id=${packageName.dropSpaces()}"
+        } else {
+            "market://search?q=${packageName.trim()}"
+        }.toUri()
         Timber.d("checkOnMarket")
         val intent = Intent(Intent.ACTION_VIEW, marketUri)
         if (isGooglePlay) intent.setPackage(GOOGLE_PLAY)
@@ -117,7 +116,7 @@ object IntentUtil {
         if (latitude.isBlank() || longitude.isBlank()) return
         Timber.d("checkOnGoogleMaps")
         val coordinates = "$latitude,$longitude"
-        val googleMapsIntentUri = Uri.parse("geo:$coordinates?q=$coordinates")
+        val googleMapsIntentUri = "geo:$coordinates?q=$coordinates".toUri()
         val intent = Intent(Intent.ACTION_VIEW, googleMapsIntentUri)
         intent.setPackage(GOOGLE_MAPS)
         this.launch(intent)
@@ -167,7 +166,7 @@ object IntentUtil {
     fun Context.openAppDetailSettings() {
         Timber.d("openAppDetailSettings")
         val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
-            data = Uri.parse("package:${appContext.packageName}")
+            data = "package:${appContext.packageName}".toUri()
         }
         this.launch(intent)
     }
