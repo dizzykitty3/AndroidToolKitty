@@ -3,18 +3,11 @@ package me.dizzykitty3.androidtoolkitty.home
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Bluetooth
 import androidx.compose.material.icons.outlined.BluetoothConnected
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -30,15 +23,15 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.SCR_BT_TYPES
 import me.dizzykitty3.androidtoolkitty.SCR_PERMISSION_REQUEST
 import me.dizzykitty3.androidtoolkitty.S_ENABLE_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomIconPopup
-import me.dizzykitty3.androidtoolkitty.uicomponents.PrimaryColorText
+import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
@@ -110,53 +103,12 @@ fun BluetoothDevice(navController: NavHostController) {
                     }
                 }
 
-                BluetoothDeviceTypeDialogButton()
+                TextButton(onClick = {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    navController.navigate(SCR_BT_TYPES)
+                }) { Text(stringResource(R.string.what_is_bt_ble_and_dual)) }
             }
         }
-    }
-}
-
-@Composable
-private fun BluetoothDeviceTypeDialogButton() {
-    val haptic = LocalHapticFeedback.current
-    var showDialog by remember { mutableStateOf(false) }
-
-    TextButton(onClick = {
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        showDialog = true
-    }) { Text(stringResource(R.string.what_is_bt_ble_and_dual)) }
-
-    if (showDialog) {
-        AlertDialog(
-            onDismissRequest = { showDialog = false },
-            text = {
-                Column(Modifier.verticalScroll(rememberScrollState())) {
-                    Text(buildAnnotatedString { PrimaryColorText(R.string.bluetooth_devices_types_1) })
-                    Text(stringResource(R.string.bluetooth_devices_types_2))
-                    Text(buildAnnotatedString { PrimaryColorText(R.string.bluetooth_devices_types_3) })
-                    Text(stringResource(R.string.bluetooth_devices_types_4))
-                    Text(buildAnnotatedString { PrimaryColorText(R.string.bluetooth_devices_types_5) })
-                    Text(stringResource(R.string.bluetooth_devices_types_6))
-                }
-            },
-            confirmButton = {
-                Button(
-                    onClick = {
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        showDialog = false
-                    },
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = MaterialTheme.colorScheme.primary
-                    ),
-                    elevation = ButtonDefaults.buttonElevation(1.dp)
-                ) {
-                    Text(
-                        stringResource(android.R.string.ok),
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-            }
-        )
     }
 }
 
@@ -167,3 +119,13 @@ private fun Int.toTypeName(): String =
         3 -> "Dual"
         else -> "Unknown"
     }
+
+@Composable
+fun BTTypesScreen() {
+    Screen {
+        ScreenTitle(R.string.what_is_bt_ble_and_dual)
+        Card(R.string.bluetooth_devices_types_1) { Text(stringResource(R.string.bluetooth_devices_types_2)) }
+        Card(R.string.bluetooth_devices_types_3) { Text(stringResource(R.string.bluetooth_devices_types_4)) }
+        Card(R.string.bluetooth_devices_types_5) { Text(stringResource(R.string.bluetooth_devices_types_6)) }
+    }
+}

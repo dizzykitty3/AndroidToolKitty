@@ -7,17 +7,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
-import androidx.compose.material.icons.outlined.Animation
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.ClearAll
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.ColorLens
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.FileCopy
-import androidx.compose.material.icons.outlined.FontDownload
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.SettingsApplications
-import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -57,11 +54,16 @@ import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 
+/**
+ * TODO
+ * Change UI: Split every single row
+ */
+
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Screen {
         ScreenTitle(R.string.settings)
-        Card(R.string.appearance) { Appearance(settingsViewModel) }
+        if (OSVersion.android12()) Card(R.string.appearance) { Appearance(settingsViewModel) }
         Card(R.string.general) { General(settingsViewModel, navController) }
         Card(R.string.others) { Bottom(navController) }
     }
@@ -72,9 +74,6 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
-    var hideGreetings by remember { mutableStateOf(settingsViewModel.settings.value.hideGreetings) }
-    var customFont by remember { mutableStateOf(settingsViewModel.settings.value.customFont) }
-    var customAnimation by remember { mutableStateOf(settingsViewModel.settings.value.customAnimation) }
 
     if (OSVersion.android12()) {
         CustomSwitchRow(
@@ -87,39 +86,6 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
             dynamicColor = it
             settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
         }
-    }
-
-    CustomSwitchRow(
-        Icons.Outlined.VisibilityOff,
-        R.string.hide_greetings,
-        R.string.hide_greetings_description,
-        hideGreetings
-    ) {
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        hideGreetings = it
-        settingsViewModel.update(settingsViewModel.settings.value.copy(hideGreetings = it))
-    }
-
-    CustomSwitchRow(
-        Icons.Outlined.FontDownload,
-        R.string.custom_font,
-        R.string.switch_to_manrope_ttf,
-        customFont
-    ) {
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        customFont = it
-        settingsViewModel.update(settingsViewModel.settings.value.copy(customFont = it))
-    }
-
-    CustomSwitchRow(
-        Icons.Outlined.Animation,
-        R.string.custom_animation,
-        R.string.switch_to_custom_animation,
-        customAnimation
-    ) {
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        customAnimation = it
-        settingsViewModel.update(settingsViewModel.settings.value.copy(customAnimation = it))
     }
 
     // change app lang

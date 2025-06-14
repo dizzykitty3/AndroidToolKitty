@@ -86,16 +86,13 @@ fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController,
 private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
     val debug = BuildConfig.DEBUG
-    val hideGreetings = settingsViewModel.settings.value.hideGreetings
 
     LazyColumn(Modifier.padding(start = screenPadding, end = screenPadding)) {
         item { TopBar(settingsViewModel, navController) }
-        if (!hideGreetings) {
-            item { CardSpacePadding() }
-            item { CardSpacePadding() }
-            item { Greeting() }
-            item { CardSpacePadding() }
-        }
+        item { CardSpacePadding() }
+        item { CardSpacePadding() }
+        item { Greeting() }
+        item { CardSpacePadding() }
         item { CardSpacePadding() }
         if (debug) item {
             DevBuildTip()
@@ -112,7 +109,7 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
     val debug = BuildConfig.DEBUG
 
     Column(Modifier.padding(start = largeScreenPadding, end = largeScreenPadding)) {
-        Row(Modifier.fillMaxWidth()) {
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Box(Modifier.weight(1f)) { Greeting() }
             Box(Modifier.weight(1f)) { TopBar(settingsViewModel, navController, isTablet = true) }
         }
@@ -290,6 +287,8 @@ private fun TwoColumnHomeCards(
         items(cardMap) { cardName ->
             CardContent(settingsViewModel, cardName, navController)
         }
+        item { ScreenPadding() }
+        item { ScreenPadding() }
     }
 }
 
