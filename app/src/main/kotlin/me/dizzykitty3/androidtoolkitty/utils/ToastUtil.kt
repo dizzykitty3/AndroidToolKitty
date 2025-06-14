@@ -4,7 +4,6 @@ import android.content.Context
 import android.widget.Toast
 import androidx.annotation.StringRes
 
-@Suppress("unused")
 object ToastUtil {
     /**
      * [NOT RECOMMENDED. Use Snackbar instead.](https://developer.android.com/guide/topics/ui/notifiers/toasts#alternatives_to_using_toasts)

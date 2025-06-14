@@ -27,7 +27,6 @@ object DateUtil {
     val yearProgress: Float
         get() = daysPassed.toFloat() / totalDaysInYear.toFloat()
 
-    @Suppress("KotlinConstantConditions")
     fun Float.toProgress(): String =
         if (this == 0f) appContext.getString(R.string.happy_new_year)
         else (this * 100).toString().substring(0, 4).plus("%")

@@ -156,10 +156,10 @@ private fun MediaVolume(isHome: Boolean) {
                 if (label != stringResource(R.string.add)) {
                     Text(label.toString())
                 } else if (mHaveTappedAddButton) {
-                    Text(label.toString())
+                    Text(label)
                 } else {
                     GradientSmall(
-                        textToDisplay = label.toString(),
+                        textToDisplay = label,
                         colors = listOf(
                             MaterialTheme.colorScheme.primary,
                             MaterialTheme.colorScheme.tertiary
@@ -186,6 +186,12 @@ private fun MediaVolume(isHome: Boolean) {
                 }
             }
 
+            /**
+             * TODO
+             * For apps targeting Android 16 (API level 36) or higher and running on an Android 16 or higher device,
+             * the predictive back system animations (back-to-home, cross-task, and cross-activity) are enabled by default.
+             * Additionally, onBackPressed is not called and KeyEvent.KEYCODE_BACK is not dispatched anymore.
+             */
             AlertDialog(
                 icon = {
                     Icon(

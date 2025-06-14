@@ -130,7 +130,6 @@ private fun TheWheel(withEditableList: Boolean? = false) {
             else -> MaterialTheme.colorScheme.surface
         }
     }
-    var rotationDegrees by remember { mutableFloatStateOf(0f) }
     var targetRotationDegrees by remember { mutableFloatStateOf(0f) }
     val currentRotationDegrees by animateFloatAsState(
         targetValue = targetRotationDegrees,
@@ -150,7 +149,6 @@ private fun TheWheel(withEditableList: Boolean? = false) {
             selected = items[selectedIndex]
 
             view.showSnackbar(selected)
-            rotationDegrees = targetRotationDegrees % 360
         }
     }
 

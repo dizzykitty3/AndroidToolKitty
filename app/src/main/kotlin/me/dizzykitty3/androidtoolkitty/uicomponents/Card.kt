@@ -83,7 +83,7 @@ fun Card(
                         }
                     }
                 }
-                if (hasShowMore == true) {
+                if (hasShowMore) {
                     if (onClick != null) {
                         FilledTonalButton(onClick = onClick) {
                             Icon(
