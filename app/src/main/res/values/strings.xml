@@ -241,7 +241,7 @@
     <string name="view_source_code">Source code</string>
     <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
     <string name="licenses">Licenses</string>
-    <string name="app_detail_settings">App detail settings</string>
+    <string name="app_info">App info</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>

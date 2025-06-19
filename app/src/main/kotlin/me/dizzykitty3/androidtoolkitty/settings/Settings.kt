@@ -268,7 +268,7 @@ private fun Bottom(navController: NavHostController) {
                         contentDescription = null
                     )
                     IconAndTextPadding()
-                    Text(stringResource(R.string.app_detail_settings))
+                    Text(stringResource(R.string.app_info))
                 }
                 SpacerPadding()
                 Icon(
