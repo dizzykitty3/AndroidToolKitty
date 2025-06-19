@@ -22,7 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.*
-import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.*
@@ -32,11 +31,6 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
-
-/**
- * TODO
- * Change UI: Split every single row
- */
 
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
