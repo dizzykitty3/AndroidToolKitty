@@ -6,10 +6,6 @@ data class Settings(
 
     // Settings > Appearance
     var dynamicColor: Boolean = true,
-    var forceDarkMode: Boolean = false, // removed
-    var hideGreetings: Boolean = false, // removed
-    var customFont: Boolean = false, // removed
-    var customAnimation: Boolean = false, // removed
 
     // Settings > General
     var autoClearClipboard: Boolean = false,
