@@ -6,10 +6,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun GroupDivider() {
-    CardSpacePadding()
-    HorizontalDivider()
-    CardSpacePadding()
+fun RowDivider() {
+    SpacerPadding()
+    HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1F))
+    SpacerPadding()
 }
 
 @Composable
