@@ -13,11 +13,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_ANDROID_VERSION_HISTORY
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableBoldText
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableItalicText
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
+import me.dizzykitty3.androidtoolkitty.uicomponents.*
 
 val v = Build.VERSION.SDK_INT
 
@@ -38,8 +34,8 @@ fun AndroidVersions(navController: NavHostController) {
 }
 
 @Composable
-fun AndroidVersionHistoryScreen() {
-    Screen {
+fun AndroidVersionHistoryScreen(navController: NavHostController) {
+    Screen(navController) {
         Card(title = R.string.android, icon = Icons.Outlined.Android) {
             RecentVersions()
             EarlyVersions()

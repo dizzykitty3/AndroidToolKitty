@@ -9,10 +9,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
-fun Screen(content: @Composable () -> Unit) {
+fun Screen(navController: NavHostController, content: @Composable () -> Unit) {
     Box(
         Modifier
             .fillMaxSize()
@@ -25,6 +26,7 @@ fun Screen(content: @Composable () -> Unit) {
                 .fillMaxSize()
                 .padding(start = screenPadding, end = screenPadding)
         ) {
+            item { NavBackButton(navController) }
             item { content() }
             item { ScreenPadding() }
         }

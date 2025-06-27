@@ -35,7 +35,7 @@ import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    Screen {
+    Screen(navController) {
         ScreenTitle(R.string.settings)
         if (OSVersion.android12()) Card(R.string.appearance) { Appearance(settingsViewModel) }
         Card(R.string.general) { General(settingsViewModel, navController) }

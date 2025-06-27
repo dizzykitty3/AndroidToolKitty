@@ -11,28 +11,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.VolumeUp
 import androidx.compose.material.icons.outlined.Edit
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.SegmentedButton
-import androidx.compose.material3.SegmentedButtonDefaults
-import androidx.compose.material3.SingleChoiceSegmentedButtonRow
-import androidx.compose.material3.Slider
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Switch
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -45,13 +25,7 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_VOLUME
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
-import me.dizzykitty3.androidtoolkitty.uicomponents.Description
-import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
-import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
-import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.uicomponents.*
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -73,8 +47,8 @@ fun Volume(navController: NavHostController) {
 }
 
 @Composable
-fun VolumeScreen() {
-    Screen {
+fun VolumeScreen(navController: NavHostController) {
+    Screen(navController) {
         ScreenTitle(R.string.volume)
         Card(R.string.media_volume) { MediaVolume(isHome = false) }
         Card(R.string.voice_call_volume) { VoiceCallVolume() }

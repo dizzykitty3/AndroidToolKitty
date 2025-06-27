@@ -59,8 +59,8 @@ fun Search(navController: NavHostController) {
 }
 
 @Composable
-fun SearchScreen(settingsViewModel: SettingsViewModel) =
-    Screen {
+fun SearchScreen(settingsViewModel: SettingsViewModel, navController: NavHostController) =
+    Screen(navController) {
         ScreenTitle(R.string.search)
         Card(R.string.webpage) { Webpage() }
         Card(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }

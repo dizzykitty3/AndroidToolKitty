@@ -20,6 +20,7 @@
     <string name="general">General</string>
     <string name="others">Others</string>
     <string name="granted">granted</string>
+    <string name="back">back</string>
 
     <!-- Home > Top bar -->
     <string name="battery_level">Battery level</string>
