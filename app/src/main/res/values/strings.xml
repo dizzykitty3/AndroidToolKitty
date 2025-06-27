@@ -8,7 +8,6 @@
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>
     <string name="go_to_settings">Go to settings</string>
-    <string name="wip_long" translatable="false">-- WORK IN PROGRESS --</string>
     <string name="undo">Undo</string>
     <string name="copy">Copy</string>
     <string name="start">Start</string>
