@@ -1,29 +1,14 @@
 package me.dizzykitty3.androidtoolkitty
 
+import androidx.compose.animation.*
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.scaleIn
-import androidx.compose.animation.scaleOut
-import androidx.compose.animation.slideInHorizontally
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.home.AndroidVersionHistoryScreen
-import me.dizzykitty3.androidtoolkitty.home.BTTypesScreen
-import me.dizzykitty3.androidtoolkitty.home.CodesOfCharactersScreen
-import me.dizzykitty3.androidtoolkitty.home.ComposeCatalogScreen
-import me.dizzykitty3.androidtoolkitty.home.FontWeightTestScreen
-import me.dizzykitty3.androidtoolkitty.home.Home
-import me.dizzykitty3.androidtoolkitty.home.PermissionRequest
-import me.dizzykitty3.androidtoolkitty.home.SearchScreen
-import me.dizzykitty3.androidtoolkitty.home.SysSettingsScreen
-import me.dizzykitty3.androidtoolkitty.home.VolumeScreen
-import me.dizzykitty3.androidtoolkitty.home.WheelOfFortuneScreen
+import me.dizzykitty3.androidtoolkitty.home.*
 import me.dizzykitty3.androidtoolkitty.settings.HomeEdit
 import me.dizzykitty3.androidtoolkitty.settings.Licenses
 import me.dizzykitty3.androidtoolkitty.settings.Settings
@@ -69,7 +54,7 @@ fun AppNavHost(
         composable(SCR_HOME) { Home(settingsViewModel, navController, widthType) }
         composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
         composable(SCR_EDIT_HOME) { HomeEdit() }
-        composable(SCR_PERMISSION_REQUEST) { PermissionRequest() }
+        composable(SCR_PERMISSION_REQUEST) { PermissionRequest(navController) }
         composable(SCR_LICENSES) { Licenses() }
         composable(SCR_SEARCH) { SearchScreen(settingsViewModel) }
         composable(SCR_CODES_OF_CHARACTERS) { CodesOfCharactersScreen() }

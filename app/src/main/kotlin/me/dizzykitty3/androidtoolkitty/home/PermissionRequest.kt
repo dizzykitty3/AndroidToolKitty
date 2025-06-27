@@ -9,6 +9,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.RowDivider
@@ -19,7 +20,7 @@ import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.requestBluetoothPerm
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @Composable
-fun PermissionRequest() {
+fun PermissionRequest(navController: NavHostController) {
     Screen {
         Card(title = R.string.request_permission, icon = Icons.Outlined.Shield) {
             var clickCount by remember { mutableIntStateOf(0) }
@@ -36,7 +37,8 @@ fun PermissionRequest() {
                         clickCount++
                         return@Button
                     }
-                    view.showSnackbar(R.string.success_and_back)
+                    view.showSnackbar(R.string.granted)
+                    navController.popBackStack()
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) { Text(stringResource(R.string.request_permission)) }
