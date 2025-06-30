@@ -7,29 +7,15 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import me.dizzykitty3.androidtoolkitty.CARD_1
-import me.dizzykitty3.androidtoolkitty.CARD_10
-import me.dizzykitty3.androidtoolkitty.CARD_11
-import me.dizzykitty3.androidtoolkitty.CARD_12
-import me.dizzykitty3.androidtoolkitty.CARD_2
-import me.dizzykitty3.androidtoolkitty.CARD_3
-import me.dizzykitty3.androidtoolkitty.CARD_4
-import me.dizzykitty3.androidtoolkitty.CARD_5
-import me.dizzykitty3.androidtoolkitty.CARD_6
-import me.dizzykitty3.androidtoolkitty.CARD_7
-import me.dizzykitty3.androidtoolkitty.CARD_8
-import me.dizzykitty3.androidtoolkitty.CARD_9
+import androidx.navigation.NavHostController
+import me.dizzykitty3.androidtoolkitty.*
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
@@ -38,8 +24,8 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 
 @Composable
-fun HomeEdit() {
-    Screen {
+fun HomeEdit(navController: NavHostController) {
+    Screen(navController) {
         val sp = remember { SettingsSharedPref }
 
         Card(R.string.customize_home_page) {
@@ -56,6 +42,7 @@ fun HomeEdit() {
             var mIsShowCard10 by remember { mutableStateOf(sp.getShownState(CARD_10)) }
             var mIsShowCard11 by remember { mutableStateOf(sp.getShownState(CARD_11)) }
             var mIsShowCard12 by remember { mutableStateOf(sp.getShownState(CARD_12)) }
+            var mIsShowCard13 by remember { mutableStateOf(sp.getShownState(CARD_13)) }
 
             CustomHideCardSettingSwitch(
                 text = R.string.year_progress,
@@ -165,6 +152,15 @@ fun HomeEdit() {
                 mIsShowCard12 = newState
                 sp.saveShownState(CARD_12, newState)
             }
+            CustomHideCardSettingSwitch(
+                text = R.string.haptic,
+                card = CARD_13,
+                isChecked = mIsShowCard13
+            ) { newState ->
+                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                mIsShowCard13 = newState
+                sp.saveShownState(CARD_13, newState)
+            }
 
             SpacerPadding()
 
@@ -184,6 +180,7 @@ fun HomeEdit() {
                     mIsShowCard10 = false
                     mIsShowCard11 = false
                     mIsShowCard12 = false
+                    mIsShowCard13 = false
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {
@@ -212,6 +209,7 @@ fun HomeEdit() {
                     mIsShowCard10 = true
                     mIsShowCard11 = true
                     mIsShowCard12 = true
+                    mIsShowCard13 = true
                 },
                 elevation = ButtonDefaults.buttonElevation(1.dp)
             ) {
@@ -230,7 +228,7 @@ fun HomeEdit() {
 private fun onClickChangeAllCardsButton(isShow: Boolean) {
     val cardList = listOf(
         CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6,
-        CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12
+        CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12, CARD_13
     )
     cardList.forEach { card ->
         SettingsSharedPref.saveShownState(card, isShow)

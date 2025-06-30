@@ -5,8 +5,9 @@
     <dimen name="padding_screen">20dp</dimen>
     <dimen name="padding_screen_large">30dp</dimen>
     <dimen name="padding_card_space">12dp</dimen>
-    <dimen name="padding_card_space_large">30dp</dimen>
+    <dimen name="padding_card_space_large">24dp</dimen>
     <dimen name="padding_spacer">5dp</dimen>
     <dimen name="padding_icons_and_text">6dp</dimen>
     <dimen name="padding_tip">8dp</dimen>
+    <dimen name="height_setting_row">60dp</dimen>
 </resources>

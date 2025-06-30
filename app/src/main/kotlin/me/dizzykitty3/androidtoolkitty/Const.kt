@@ -18,6 +18,9 @@ const val SCR_SYS_SETTINGS = "SysSettingsScreen"
 const val SCR_VOLUME = "VolumeScreen"
 const val SCR_COMPOSE_CATALOG = "ComposeCatalogScreen"
 const val SCR_WHEEL_OF_FORTUNE = "WheelOfFortuneScreen"
+const val SCR_PIN_OPTIONS = "PinOptionsScreen"
+const val SCR_CUSTOM_VOLUME = "CustomVolumeScreen"
+const val SCR_HAPTIC_FEEDBACK = "HapticFeedbackScreen"
 
 // App cards
 const val CARD_1 = "card_year_progress"
@@ -32,6 +35,7 @@ const val CARD_9 = "card_google_maps"
 const val CARD_10 = "card_android_version"
 const val CARD_11 = "card_font_weight"
 const val CARD_12 = "card_compose_catalog"
+const val CARD_13 = "card_haptic_feedback"
 
 // Android intents
 const val S_DISPLAY = "setting_display"
@@ -58,7 +62,6 @@ const val S_NOTIFICATION_POLICY_ACCESS = "setting_notification_policy_access"
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 const val BT = Manifest.permission.BLUETOOTH
 const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
-const val FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION
 const val GRANTED = PackageManager.PERMISSION_GRANTED
 
 // Android package names
@@ -91,4 +94,3 @@ const val TV = ".tv"
 const val US = ".us"
 const val WIKI = ".wiki"
 const val SOURCE_CODE_URL = "https://github.com/dizzykitty3/AndroidToolKitty"
-const val WHAT_IS_PACKAGE_NAME_URL = "https://support.google.com/admob/answer/9972781"

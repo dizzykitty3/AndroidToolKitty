@@ -9,11 +9,7 @@ import androidx.compose.material.icons.automirrored.outlined.Notes
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalFocusManager
@@ -26,11 +22,7 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_CODES_OF_CHARACTERS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
-import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
-import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
+import me.dizzykitty3.androidtoolkitty.uicomponents.*
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -53,8 +45,8 @@ fun CodesOfCharacters(navController: NavHostController) {
 }
 
 @Composable
-fun CodesOfCharactersScreen() {
-    Screen {
+fun CodesOfCharactersScreen(navController: NavHostController) {
+    Screen(navController) {
         ScreenTitle(R.string.encoding)
         Card(R.string.unicode) { Unicode() }
         Card(R.string.ascii) { ASCII() }

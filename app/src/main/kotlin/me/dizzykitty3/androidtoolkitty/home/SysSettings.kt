@@ -10,42 +10,19 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
-import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_SYS_SETTINGS
-import me.dizzykitty3.androidtoolkitty.S_ACCESSIBILITY
-import me.dizzykitty3.androidtoolkitty.S_AUTO_ROTATE
-import me.dizzykitty3.androidtoolkitty.S_BATTERY_OPTIMIZATION
-import me.dizzykitty3.androidtoolkitty.S_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.S_CAPTIONING
-import me.dizzykitty3.androidtoolkitty.S_DATE
-import me.dizzykitty3.androidtoolkitty.S_DEFAULT_APPS
-import me.dizzykitty3.androidtoolkitty.S_DEVELOPER
-import me.dizzykitty3.androidtoolkitty.S_DISPLAY
-import me.dizzykitty3.androidtoolkitty.S_LOCALE
-import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_LISTENER
-import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_POLICY_ACCESS
-import me.dizzykitty3.androidtoolkitty.S_OVERLAY
-import me.dizzykitty3.androidtoolkitty.S_POWER_USAGE_SUMMARY
-import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
-import me.dizzykitty3.androidtoolkitty.S_WIFI
-import me.dizzykitty3.androidtoolkitty.S_WRITE_SETTINGS
+import me.dizzykitty3.androidtoolkitty.*
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
-import me.dizzykitty3.androidtoolkitty.settings.SysSettingsCardEdit
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
-import me.dizzykitty3.androidtoolkitty.uicomponents.LabelAndValueTextRow
-import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
-import me.dizzykitty3.androidtoolkitty.uicomponents.SystemSettingButton
-import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
+import me.dizzykitty3.androidtoolkitty.uicomponents.*
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
@@ -133,8 +110,10 @@ fun SysSettings(navController: NavHostController) {
 }
 
 @Composable
-fun SysSettingsScreen() {
-    Screen {
+fun SysSettingsScreen(navController: NavHostController) {
+    Screen(navController) {
+        val haptic = LocalHapticFeedback.current
+
         ScreenTitle(R.string.system)
 
         val settings = mutableListOf(
@@ -213,7 +192,10 @@ fun SysSettingsScreen() {
         }
 
         // edit
-        SysSettingsCardEdit()
+        Button(onClick = {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            navController.navigate(SCR_PIN_OPTIONS)
+        }) { Text(stringResource(R.string.customize_system_settings_card)) }
     }
 }
 

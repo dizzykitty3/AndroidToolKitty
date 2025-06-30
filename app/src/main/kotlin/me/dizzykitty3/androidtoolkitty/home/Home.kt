@@ -3,13 +3,7 @@ package me.dizzykitty3.androidtoolkitty.home
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
@@ -18,22 +12,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.outlined.BatteryStd
-import androidx.compose.material.icons.outlined.MediaBluetoothOn
-import androidx.compose.material.icons.outlined.NetworkCell
-import androidx.compose.material.icons.outlined.QuestionMark
-import androidx.compose.material.icons.outlined.Wifi
-import androidx.compose.material.icons.outlined.WifiOff
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.PlainTooltip
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TooltipBox
-import androidx.compose.material3.TooltipDefaults
-import androidx.compose.material3.rememberTooltipState
+import androidx.compose.material.icons.outlined.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -46,25 +26,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import me.dizzykitty3.androidtoolkitty.BuildConfig
-import me.dizzykitty3.androidtoolkitty.CARD_1
-import me.dizzykitty3.androidtoolkitty.CARD_10
-import me.dizzykitty3.androidtoolkitty.CARD_11
-import me.dizzykitty3.androidtoolkitty.CARD_12
-import me.dizzykitty3.androidtoolkitty.CARD_2
-import me.dizzykitty3.androidtoolkitty.CARD_3
-import me.dizzykitty3.androidtoolkitty.CARD_4
-import me.dizzykitty3.androidtoolkitty.CARD_5
-import me.dizzykitty3.androidtoolkitty.CARD_6
-import me.dizzykitty3.androidtoolkitty.CARD_7
-import me.dizzykitty3.androidtoolkitty.CARD_8
-import me.dizzykitty3.androidtoolkitty.CARD_9
+import me.dizzykitty3.androidtoolkitty.*
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_SETTINGS
-import me.dizzykitty3.androidtoolkitty.S_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.S_POWER_USAGE_SUMMARY
-import me.dizzykitty3.androidtoolkitty.S_WIFI
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.DevBuildTip
@@ -77,66 +40,59 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 
 @Composable
-fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController, widthType: Int) {
-    if (widthType == 0 || widthType == 1) MobileLayout(settingsViewModel, navController)
-    else TabletLayout(settingsViewModel, navController)
+fun Home(navController: NavHostController, widthType: Int) {
+    if (widthType == 0 || widthType == 1) MobileLayout(navController)
+    else TabletLayout(navController)
 }
 
 @Composable
-private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun MobileLayout(navController: NavHostController) {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
     val debug = BuildConfig.DEBUG
-    val hideGreetings = settingsViewModel.settings.value.hideGreetings
 
     LazyColumn(Modifier.padding(start = screenPadding, end = screenPadding)) {
-        item { TopBar(settingsViewModel, navController) }
-        if (!hideGreetings) {
-            item { CardSpacePadding() }
-            item { CardSpacePadding() }
-            item { Greeting() }
-            item { CardSpacePadding() }
-        }
+        item { TopBar(navController) }
+        item { CardSpacePadding() }
+        item { CardSpacePadding() }
+        item { Greeting() }
+        item { CardSpacePadding() }
         item { CardSpacePadding() }
         if (debug) item {
             DevBuildTip()
             CardSpacePadding()
         }
-        item { HomeCards(settingsViewModel, navController) }
+        item { HomeCards(navController) }
         item { ScreenPadding() }
     }
 }
 
 @Composable
-private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun TabletLayout(navController: NavHostController) {
     val largeScreenPadding = dimensionResource(R.dimen.padding_screen_large)
     val debug = BuildConfig.DEBUG
 
     Column(Modifier.padding(start = largeScreenPadding, end = largeScreenPadding)) {
-        Row(Modifier.fillMaxWidth()) {
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Box(Modifier.weight(1f)) { Greeting() }
-            Box(Modifier.weight(1f)) { TopBar(settingsViewModel, navController, isTablet = true) }
+            Box(Modifier.weight(1f)) { TopBar(navController, isTablet = true) }
         }
         SpacerPadding()
         if (debug) DevBuildTip()
-        TwoColumnHomeCards(settingsViewModel, navController)
+        TwoColumnHomeCards(navController)
     }
 }
 
 @Composable
-private fun TopBar(
-    settingsViewModel: SettingsViewModel,
-    navController: NavHostController,
-    isTablet: Boolean = false
-) {
+private fun TopBar(navController: NavHostController, isTablet: Boolean = false) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Box(Modifier.weight(1f)) { Status(isTablet) }
-        SettingsButton(settingsViewModel, navController)
+        SettingsButton(navController)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun SettingsButton(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun SettingsButton(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
 
     TooltipBox(
@@ -151,7 +107,6 @@ private fun SettingsButton(settingsViewModel: SettingsViewModel, navController: 
             onClick = {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 navController.navigate(SCR_SETTINGS)
-                settingsViewModel.update(settingsViewModel.settings.value.copy(haveOpenedSettings = true))
             },
             modifier = Modifier.size(40.dp)
         ) {
@@ -268,17 +223,14 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
 }
 
 @Composable
-private fun HomeCards(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun HomeCards(navController: NavHostController) {
     getCardMap(SettingsSharedPref).forEach { cardName ->
-        CardContent(settingsViewModel, cardName, navController)
+        CardContent(cardName, navController)
     }
 }
 
 @Composable
-private fun TwoColumnHomeCards(
-    settingsViewModel: SettingsViewModel,
-    navController: NavHostController
-) {
+private fun TwoColumnHomeCards(navController: NavHostController) {
     val cardPadding = dimensionResource(R.dimen.padding_card_space)
     val largeCardPadding = dimensionResource(R.dimen.padding_card_space_large)
     val cardMap = getCardMap(SettingsSharedPref)
@@ -288,27 +240,25 @@ private fun TwoColumnHomeCards(
         horizontalArrangement = Arrangement.spacedBy(largeCardPadding),
     ) {
         items(cardMap) { cardName ->
-            CardContent(settingsViewModel, cardName, navController)
+            CardContent(cardName, navController)
         }
+        item { ScreenPadding() }
+        item { ScreenPadding() }
     }
 }
 
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): List<String> = listOf(
     CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6,
-    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12
+    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12, CARD_13
 ).associateWith { card -> settingsSharedPref.getShownState(card) }.filter { it.value }.keys.toList()
 
 @Composable
-private fun CardContent(
-    settingsViewModel: SettingsViewModel,
-    cardName: String,
-    navController: NavHostController
-) {
+private fun CardContent(cardName: String, navController: NavHostController) {
     when (cardName) {
         CARD_1 -> YearProgress()
         CARD_2 -> Volume(navController)
-        CARD_3 -> Clipboard(settingsViewModel)
+        CARD_3 -> Clipboard()
         CARD_4 -> Search(navController)
         CARD_5 -> SysSettings(navController)
         CARD_6 -> WheelOfFortune(navController)
@@ -318,5 +268,6 @@ private fun CardContent(
         CARD_10 -> AndroidVersions(navController)
         CARD_11 -> FontWeight(navController)
         CARD_12 -> ComposeCatalog(navController)
+        CARD_13 -> HapticFeedback(navController)
     }
 }

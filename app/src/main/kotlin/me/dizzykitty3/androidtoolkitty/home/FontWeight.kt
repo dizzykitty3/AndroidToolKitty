@@ -39,8 +39,8 @@ fun FontWeight(navController: NavHostController) {
 }
 
 @Composable
-fun FontWeightTestScreen() {
-    Screen {
+fun FontWeightTestScreen(navController: NavHostController) {
+    Screen(navController) {
         ScreenTitle(R.string.font_weight)
         Card("Font weight test 1") { FontWeightTest() }
         Card("Font weight test 2") { RowFontWeightTest() }

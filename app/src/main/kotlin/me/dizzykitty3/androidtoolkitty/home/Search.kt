@@ -11,17 +11,8 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -38,18 +29,8 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_SEARCH
-import me.dizzykitty3.androidtoolkitty.WHAT_IS_PACKAGE_NAME_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
-import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
-import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
-import me.dizzykitty3.androidtoolkitty.uicomponents.ErrorTip
-import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
-import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
-import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
-import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
+import me.dizzykitty3.androidtoolkitty.uicomponents.*
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnMarket
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSearch
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
@@ -78,8 +59,8 @@ fun Search(navController: NavHostController) {
 }
 
 @Composable
-fun SearchScreen(settingsViewModel: SettingsViewModel) =
-    Screen {
+fun SearchScreen(settingsViewModel: SettingsViewModel, navController: NavHostController) =
+    Screen(navController) {
         ScreenTitle(R.string.search)
         Card(R.string.webpage) { Webpage() }
         Card(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }
@@ -478,24 +459,5 @@ private fun CheckAppOnMarket() {
                 tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
             )
         }
-    }
-    WhatIsPackageName()
-}
-
-@Composable
-private fun WhatIsPackageName() {
-    val view = LocalView.current
-    val haptic = LocalHapticFeedback.current
-
-    TextButton({
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        view.context.openURL(WHAT_IS_PACKAGE_NAME_URL)
-    }) {
-        Text(stringResource(R.string.what_is_package_name))
-        Icon(
-            imageVector = Icons.Outlined.ArrowOutward,
-            contentDescription = stringResource(R.string.what_is_package_name),
-            tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.3F)
-        )
     }
 }

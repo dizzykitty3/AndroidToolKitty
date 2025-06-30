@@ -3,7 +3,6 @@ package me.dizzykitty3.androidtoolkitty.sharedpreferences
 import android.content.Context
 import android.content.SharedPreferences
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import timber.log.Timber

@@ -46,15 +46,13 @@ class MainActivity : ComponentActivity() {
             val widthType: Int = if (widthSizeClass == WindowWidthSizeClass.Compact) 1 else 2
 
             AppTheme(
-                customFont = settingsViewModel.settings.value.customFont,
                 dynamicColor = settingsViewModel.settings.value.dynamicColor
             ) {
                 Scaffold(Modifier.fillMaxSize()) { innerPadding ->
                     AppNavHost(
                         Modifier.padding(top = innerPadding.calculateTopPadding()),
                         settingsViewModel,
-                        widthType,
-                        customAnimation = settingsViewModel.settings.value.customAnimation
+                        widthType
                     )
                 }
             }

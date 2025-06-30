@@ -8,8 +8,6 @@
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>
     <string name="go_to_settings">Go to settings</string>
-    <string name="success_and_back">Success! Now you can back to the previous screen</string>
-    <string name="wip_long" translatable="false">-- WORK IN PROGRESS --</string>
     <string name="undo">Undo</string>
     <string name="copy">Copy</string>
     <string name="start">Start</string>
@@ -21,6 +19,8 @@
     <string name="permission">Permission</string>
     <string name="general">General</string>
     <string name="others">Others</string>
+    <string name="granted">granted</string>
+    <string name="back">back</string>
 
     <!-- Home > Top bar -->
     <string name="battery_level">Battery level</string>
@@ -29,7 +29,7 @@
     <string name="offline">Offline</string>
     <string name="no_translation" translatable="false">Sorry, %1$s translation haven\'t added yet.</string>
     <string name="audio_devices_connected">Audio devices connected</string>
-    <string name="debug_build_top_tip">This is a debug build. Expect some bugs and worse performance.</string>
+    <string name="debug_build_top_tip">Debug build. Expect some bugs and worse performance.</string>
 
     <!-- Home > Year progress -->
     <string name="year_progress">Year progress</string>
@@ -53,7 +53,6 @@
     <string name="clear_clipboard">Clear clipboard</string>
     <string name="clipboard_cleared">Clipboard cleared</string>
     <string name="clipboard_cleared_automatically">Clipboard cleared automatically</string>
-    <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on Clear Clipboard on Launch in Settings Screen.</string>
     <string name="clipboard_is_empty">Clipboard is empty</string>
 
     <!-- Home > Search -->
@@ -116,10 +115,11 @@
     <string name="note" translatable="false">note</string>
     <string name="unifans">Unifans</string>
     <string name="ko_fi" translatable="false">Ko-fi</string>
-    <string name="invalid_username_common_rule">Username for %1$s should only contains letters, numbers, and underscores.</string>
+    <string name="invalid_username_common_rule">Username for %1$s should only contain letters, numbers, and
+        underscores.
+    </string>
     <string name="check_app_on_market">Check app on market</string>
     <string name="package_name_or_search">Package name or search</string>
-    <string name="what_is_package_name">What\'s package name (website)</string>
     <string name="open_on_google_play" translatable="false">Google Play</string>
     <string name="open_on_other_markets">Other markets</string>
     <string name="youtube_serach">YouTube (Search)</string>
@@ -127,13 +127,13 @@
     <string name="afdian">Afdian</string>
     <string name="steam_uuid" translatable="false">Steam (steamID64)</string>
     <string name="instabio" translatable="false">Instabio (linkbio.co)</string>
-    <string name="tip_case_sensitive">Please note that usernames on this platform are case sensitive.</string>
+    <string name="tip_case_sensitive">Please note that usernames on this platform are case-sensitive.</string>
     <string name="bilibili_av_id">bilibili (av id)</string>
     <string name="weibo_user_custom_url">Weibo (User custom URL)</string>
     <string name="weibo_uuid">Weibo (UUID)</string>
     <string name="steam_search_store">Steam (Search store)</string>
     <string name="bilibili_bv_id">bilibili (bv id)</string>
-    <string name="invalid_username_numbers_only">Username for %1$s should only contains numbers.</string>
+    <string name="invalid_username_numbers_only">Username for %1$s should only contain numbers.</string>
     <string name="invalid_username_tip">Invalid username.</string>
     <string name="google_issue_tracker">Google Issue Tracker</string>
     <string name="chromium_issue_tracker">Chromium Issue Tracker</string>
@@ -162,8 +162,8 @@
     <string name="sys_settings_tip">Up to 4 options you can pin on Home screen</string>
     <string name="device_and_app_notifications">Device &amp; app notifications</string>
     <string name="do_not_disturb_access">Do Not Disturb access</string>
-    <string name="oem_removed">The OEM (%s) hsa removed this page</string>
-    87
+    <string name="oem_removed">The OEM (%s) has removed this page</string>
+
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
     <string name="item">item</string>
@@ -175,14 +175,7 @@
     <string name="current_device">Current device:</string>
     <string name="paired_devices">Paired devices:</string>
     <string name="no_paired_devices">No paired devices</string>
-    <string name="what_is_bt_ble_and_dual">What is BT, BLE, and Dual?</string>
     <string name="unknown_device">Unknown device</string>
-    <string name="bluetooth_devices_types_1">Classic Bluetooth (BT)</string>
-    <string name="bluetooth_devices_types_2">This is the familiar type used for things like headsets, speakers, and file transfers. It offers good range and speed but consumes more power.\nThis is the familiar type used for things like headsets, speakers, and file transfers. It offers good range and speed but consumes more power.\n</string>
-    <string name="bluetooth_devices_types_3">Bluetooth Low Energy (BLE)</string>
-    <string name="bluetooth_devices_types_4">This newer version is designed for lower power consumption and is ideal for devices that need long battery life, like fitness trackers and smart home sensors. It has a shorter range and slower data transfer rate compared to Classic Bluetooth.\n</string>
-    <string name="bluetooth_devices_types_5">Dual</string>
-    <string name="bluetooth_devices_types_6">Some devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
     <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
 
     <!-- Home > Encoding -->
@@ -225,36 +218,26 @@
     <!-- Home > Compose -->
     <string name="compose">Compose</string>
 
+    <!-- Home > Haptic -->
+    <string name="haptic">Haptic</string>
+
     <!-- Settings > Appearance -->
     <string name="appearance">Appearance</string>
     <string name="dynamic_color">Dynamic color</string>
-    <string name="dynamic_color_description">Material You dynamic color</string>
-    <string name="hide_greetings">Hide greetings</string>
-    <string name="hide_greetings_description">Hide gradient greeting text on Home screen (portrait mode only)</string>
-    <string name="change_app_language">Change app language</string>
-    <string name="change_app_language_description">Set language preference for ToolKitty</string>
-    <string name="custom_font">Custom font</string>
-    <string name="switch_to_manrope_ttf">Switch to manrope.ttf</string>
-    <string name="custom_animation">Custom animation</string>
-    <string name="switch_to_custom_animation">Switch to custom animation</string>
+    <string name="language">Language</string>
 
     <!-- Settings > General -->
-    <string name="clear_clipboard_automatically">Clear clipboard automatically</string>
     <string name="clipboard_card_hidden">Clipboard card on Home screen now hidden.</string>
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
     <string name="customize_home_page">Customize home page</string>
-    <string name="clear_clipboard_on_launch">Clear clipboard on app launch</string>
-    <string name="customize_home_page_description">Hide cards on home page and vice versa</string>
+    <string name="clear_clipboard_on_launch">Clear clipboard on launch</string>
 
     <!-- Settings > Others -->
     <string name="view_source_code">Source code</string>
-    <string name="all_help_welcomed">All help is greatly welcomed! :D</string>
+    <string name="all_help_welcomed">All help is greatly welcomed! /:D</string>
     <string name="licenses">Licenses</string>
-    <string name="view_source_code_description">View source code on GitHub</string>
-    <string name="open_app_detail_settings">Open app detail settings</string>
-    <string name="licenses_description">Auto-generated by AboutLibraries</string>
-    <string name="open_app_detail_settings_description">Clear storage, manage permissions, etc.</string>
+    <string name="app_info">App info</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>
