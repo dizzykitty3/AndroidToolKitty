@@ -51,7 +51,7 @@ fun AppNavHost(
                         animationSpec = tween(SCALE_DURATION)
                     )
         }) {
-        composable(SCR_HOME) { Home(settingsViewModel, navController, widthType) }
+        composable(SCR_HOME) { Home(navController, widthType) }
         composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
         composable(SCR_EDIT_HOME) { HomeEdit(navController) }
         composable(SCR_PERMISSION_REQUEST) { PermissionRequest(navController) }
@@ -64,7 +64,6 @@ fun AppNavHost(
         composable(SCR_VOLUME) { VolumeScreen(navController) }
         composable(SCR_COMPOSE_CATALOG) { ComposeCatalogScreen(navController) }
         composable(SCR_WHEEL_OF_FORTUNE) { WheelOfFortuneScreen(navController) }
-        composable(SCR_BT_TYPES) { BTTypesScreen(navController) }
         composable(SCR_PIN_OPTIONS) { SysSettingsCardEditScreen(navController) }
         composable(SCR_CUSTOM_VOLUME) { CustomVolumeScreen(navController) }
     }

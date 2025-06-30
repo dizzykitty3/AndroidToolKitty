@@ -10,7 +10,6 @@ import androidx.compose.material.icons.outlined.BluetoothConnected
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,10 +19,12 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_BT_TYPES
 import me.dizzykitty3.androidtoolkitty.SCR_PERMISSION_REQUEST
 import me.dizzykitty3.androidtoolkitty.S_ENABLE_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.uicomponents.*
+import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.CustomIconPopup
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
+import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noBluetoothPermission
@@ -92,11 +93,6 @@ fun BluetoothDevice(navController: NavHostController) {
                         CustomIconPopup(device.type.toTypeName(), device.address)
                     }
                 }
-
-                TextButton(onClick = {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    navController.navigate(SCR_BT_TYPES)
-                }) { Text(stringResource(R.string.what_is_bt_ble_and_dual)) }
             }
         }
     }
@@ -109,13 +105,3 @@ private fun Int.toTypeName(): String =
         3 -> "Dual"
         else -> "Unknown"
     }
-
-@Composable
-fun BTTypesScreen(navController: NavHostController) {
-    Screen(navController) {
-        ScreenTitle(R.string.what_is_bt_ble_and_dual)
-        Card(R.string.bluetooth_devices_types_1) { Text(stringResource(R.string.bluetooth_devices_types_2)) }
-        Card(R.string.bluetooth_devices_types_3) { Text(stringResource(R.string.bluetooth_devices_types_4)) }
-        Card(R.string.bluetooth_devices_types_5) { Text(stringResource(R.string.bluetooth_devices_types_6)) }
-    }
-}

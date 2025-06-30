@@ -53,7 +53,6 @@
     <string name="clear_clipboard">Clear clipboard</string>
     <string name="clipboard_cleared">Clipboard cleared</string>
     <string name="clipboard_cleared_automatically">Clipboard cleared automatically</string>
-    <string name="you_can_turn_on_clear_clipboard_on_launch_in_settings_screen">You can turn on Clear Clipboard on Launch in Settings Screen.</string>
     <string name="clipboard_is_empty">Clipboard is empty</string>
 
     <!-- Home > Search -->
@@ -176,14 +175,7 @@
     <string name="current_device">Current device:</string>
     <string name="paired_devices">Paired devices:</string>
     <string name="no_paired_devices">No paired devices</string>
-    <string name="what_is_bt_ble_and_dual">What is BT, BLE, and Dual?</string>
     <string name="unknown_device">Unknown device</string>
-    <string name="bluetooth_devices_types_1">Classic Bluetooth (BT)</string>
-    <string name="bluetooth_devices_types_2">This is the familiar type used for things like headsets, speakers, and file transfers. It offers good range and speed but consumes more power.\nThis is the familiar type used for things like headsets, speakers, and file transfers. It offers good range and speed but consumes more power.\n</string>
-    <string name="bluetooth_devices_types_3">Bluetooth Low Energy (BLE)</string>
-    <string name="bluetooth_devices_types_4">This newer version is designed for lower power consumption and is ideal for devices that need long battery life, like fitness trackers and smart home sensors. It has a shorter range and slower data transfer rate compared to Classic Bluetooth.\n</string>
-    <string name="bluetooth_devices_types_5">Dual</string>
-    <string name="bluetooth_devices_types_6">Some devices might support both Classic Bluetooth and Bluetooth LE. These are called Dual-mode devices and can offer the flexibility to connect with different types of devices depending on the need. For instance, a smartwatch might use BLE to connect to your phone for notifications but also have Classic Bluetooth for music playback.</string>
     <string name="no_bluetooth_adapter_available">No Bluetooth Adapter available.</string>
 
     <!-- Home > Encoding -->
