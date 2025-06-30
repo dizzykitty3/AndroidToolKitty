@@ -250,7 +250,7 @@ private fun TwoColumnHomeCards(navController: NavHostController) {
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): List<String> = listOf(
     CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6,
-    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12
+    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12, CARD_13
 ).associateWith { card -> settingsSharedPref.getShownState(card) }.filter { it.value }.keys.toList()
 
 @Composable
@@ -268,5 +268,6 @@ private fun CardContent(cardName: String, navController: NavHostController) {
         CARD_10 -> AndroidVersions(navController)
         CARD_11 -> FontWeight(navController)
         CARD_12 -> ComposeCatalog(navController)
+        CARD_13 -> HapticFeedback(navController)
     }
 }

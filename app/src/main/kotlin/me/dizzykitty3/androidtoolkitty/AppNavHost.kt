@@ -66,6 +66,7 @@ fun AppNavHost(
         composable(SCR_WHEEL_OF_FORTUNE) { WheelOfFortuneScreen(navController) }
         composable(SCR_PIN_OPTIONS) { SysSettingsCardEditScreen(navController) }
         composable(SCR_CUSTOM_VOLUME) { CustomVolumeScreen(navController) }
+        composable(SCR_HAPTIC_FEEDBACK) { HapticFeedbackScreen(navController) }
     }
 }
 

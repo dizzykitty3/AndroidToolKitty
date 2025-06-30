@@ -20,6 +20,7 @@ const val SCR_COMPOSE_CATALOG = "ComposeCatalogScreen"
 const val SCR_WHEEL_OF_FORTUNE = "WheelOfFortuneScreen"
 const val SCR_PIN_OPTIONS = "PinOptionsScreen"
 const val SCR_CUSTOM_VOLUME = "CustomVolumeScreen"
+const val SCR_HAPTIC_FEEDBACK = "HapticFeedbackScreen"
 
 // App cards
 const val CARD_1 = "card_year_progress"
@@ -34,6 +35,7 @@ const val CARD_9 = "card_google_maps"
 const val CARD_10 = "card_android_version"
 const val CARD_11 = "card_font_weight"
 const val CARD_12 = "card_compose_catalog"
+const val CARD_13 = "card_haptic_feedback"
 
 // Android intents
 const val S_DISPLAY = "setting_display"

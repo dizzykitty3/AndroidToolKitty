@@ -218,6 +218,9 @@
     <!-- Home > Compose -->
     <string name="compose">Compose</string>
 
+    <!-- Home > Haptic -->
+    <string name="haptic">Haptic</string>
+
     <!-- Settings > Appearance -->
     <string name="appearance">Appearance</string>
     <string name="dynamic_color">Dynamic color</string>
