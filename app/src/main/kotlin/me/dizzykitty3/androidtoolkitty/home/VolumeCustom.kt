@@ -133,12 +133,6 @@ fun CustomVolumeScreen(navController: NavHostController) {
 
             Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End) {
                 Row {
-                    TextButton({
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        if (!mHaveCustomLabel) mHaveCustomLabel = false
-                        navController.popBackStack()
-                    }) { Text(stringResource(android.R.string.cancel)) }
-
                     Button(
                         {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
