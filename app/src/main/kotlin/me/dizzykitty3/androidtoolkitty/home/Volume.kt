@@ -1,13 +1,8 @@
 package me.dizzykitty3.androidtoolkitty.home
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.VolumeUp
 import androidx.compose.material.icons.outlined.Edit
@@ -19,10 +14,9 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.SCR_CUSTOM_VOLUME
 import me.dizzykitty3.androidtoolkitty.SCR_VOLUME
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.*
@@ -42,7 +36,7 @@ fun Volume(navController: NavHostController) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_VOLUME)
         }) {
-        MediaVolume(isHome = true)
+        MediaVolume(navController, isHome = true)
     }
 }
 
@@ -50,22 +44,19 @@ fun Volume(navController: NavHostController) {
 fun VolumeScreen(navController: NavHostController) {
     Screen(navController) {
         ScreenTitle(R.string.volume)
-        Card(R.string.media_volume) { MediaVolume(isHome = false) }
+        Card(R.string.media_volume) { MediaVolume(navController, isHome = false) }
         Card(R.string.voice_call_volume) { VoiceCallVolume() }
     }
 }
 
 @Composable
-private fun MediaVolume(isHome: Boolean) {
+private fun MediaVolume(navController: NavHostController, isHome: Boolean) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
     val maxVolume = AudioUtil.maxMediaVolumeIndex
-    var morePreciseSlider by remember { mutableStateOf(false) }
     var mCustomVolume by remember { mutableIntStateOf(settingsSharedPref.customVolume) }
     var mCustomVolumeOptionLabel by remember { mutableStateOf(settingsSharedPref.customVolumeOptionLabel) }
-    var mHaveCustomLabel by remember { mutableStateOf(settingsSharedPref.usingCustomVolumeOptionLabel) }
-    var showVolumeDialog by remember { mutableStateOf(false) }
     var mHaveTappedAddButton by remember { mutableStateOf(settingsSharedPref.haveTappedAddButton) }
 
     val options = listOf(
@@ -115,7 +106,7 @@ private fun MediaVolume(isHome: Boolean) {
                             if (mCustomVolume > 0)
                                 view.setVolume(mCustomVolume * 0.01 * maxVolume)
                             else
-                                showVolumeDialog = true
+                                navController.navigate(SCR_CUSTOM_VOLUME)
                         }
                     }
                 },
@@ -142,169 +133,6 @@ private fun MediaVolume(isHome: Boolean) {
                 }
             }
         }
-
-        if (showVolumeDialog) {
-            var newCustomVolume by remember {
-                if (mCustomVolume < 0) {
-                    mutableFloatStateOf(0f)
-                } else {
-                    mutableFloatStateOf(mCustomVolume.toFloat())
-                }
-            }
-
-            var optionLabel by remember {
-                if (mCustomVolume < 0) {
-                    mutableStateOf("")
-                } else {
-                    mutableStateOf(mCustomVolumeOptionLabel.toString())
-                }
-            }
-
-            /**
-             * TODO
-             * For apps targeting Android 16 (API level 36) or higher and running on an Android 16 or higher device,
-             * the predictive back system animations (back-to-home, cross-task, and cross-activity) are enabled by default.
-             * Additionally, onBackPressed is not called and KeyEvent.KEYCODE_BACK is not dispatched anymore.
-             */
-            AlertDialog(
-                icon = {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Outlined.VolumeUp,
-                        contentDescription = null
-                    )
-                },
-                onDismissRequest = {
-                    if (!mHaveCustomLabel) mHaveCustomLabel = false
-                    showVolumeDialog = false
-                    selectedIndex = when (AudioUtil.mediaVolume) {
-                        0 -> 0
-                        (0.4 * maxVolume).roundToInt() -> 1
-                        (0.6 * maxVolume).roundToInt() -> 2
-                        (mCustomVolume * 0.01 * maxVolume).roundToInt() -> 3
-                        else -> null
-                    }
-                },
-                title = { Text(stringResource(if (settingsSharedPref.addedCustomVolume) R.string.edit_custom_volume else R.string.save_custom_volume)) },
-                text = {
-                    Column {
-                        Slider(
-                            value = newCustomVolume,
-                            onValueChange = {
-                                if (morePreciseSlider)
-                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                else haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                newCustomVolume = it
-                                if (mCustomVolume < 0 || (!mHaveCustomLabel))
-                                    optionLabel = "${it.roundToInt()}%"
-                            },
-                            valueRange = 0f..100f,
-                            steps = if (morePreciseSlider) 0 else 9
-                        )
-                        Text("${newCustomVolume.roundToInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).roundToInt()}/$maxVolume")
-                        SpacerPadding()
-                        OutlinedTextField(
-                            value = optionLabel,
-                            onValueChange = {
-                                optionLabel = it
-                                mHaveCustomLabel = true
-                            },
-                            label = { Text(stringResource(R.string.label_optional)) },
-                            modifier = Modifier.fillMaxWidth(),
-                            keyboardOptions = KeyboardOptions.Default.copy(
-                                imeAction = ImeAction.Done
-                            ),
-                            keyboardActions = KeyboardActions(
-                                onDone = {
-                                    settingsSharedPref.customVolume = newCustomVolume.roundToInt()
-                                    mCustomVolume = newCustomVolume.roundToInt()
-                                    if (mHaveCustomLabel) {
-                                        settingsSharedPref.usingCustomVolumeOptionLabel = true
-                                    }
-                                    settingsSharedPref.customVolumeOptionLabel = optionLabel
-                                    mCustomVolumeOptionLabel = optionLabel
-                                    selectedIndex = 3
-                                    view.setVolume(mCustomVolume * 0.01 * maxVolume)
-                                    showVolumeDialog = false
-                                }
-                            ),
-                            trailingIcon = {
-                                ClearInput(optionLabel) {
-                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                    optionLabel = ""
-                                    mHaveCustomLabel = true
-                                }
-                            }
-                        )
-
-                        Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = MaterialTheme.colorScheme.surfaceContainerHigh
-                        ) {
-                            Column(Modifier.clickable {
-                                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                morePreciseSlider = !morePreciseSlider
-                            }) {
-                                SpacerPadding()
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Row(
-                                        Modifier.weight(1f),
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Column {
-                                            Text(stringResource(R.string.more_precise_slider))
-                                            Description(R.string.slider_increment_1_percent)
-                                        }
-                                    }
-                                    SpacerPadding()
-                                    Switch(
-                                        checked = morePreciseSlider,
-                                        onCheckedChange = { morePreciseSlider = it }
-                                    )
-                                }
-                                SpacerPadding()
-                            }
-                        }
-                    }
-                },
-                confirmButton = {
-                    Button(
-                        {
-                            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                            if ((newCustomVolume * 0.01 * maxVolume).roundToInt() == 0) {
-                                if (newCustomVolume.roundToInt() != 0) view.showSnackbar(R.string.system_media_volume_levels_limited)
-                                return@Button
-                            } else {
-                                settingsSharedPref.customVolume = newCustomVolume.roundToInt()
-                                mCustomVolume = newCustomVolume.roundToInt()
-                                if (mHaveCustomLabel) {
-                                    settingsSharedPref.usingCustomVolumeOptionLabel = true
-                                }
-                                settingsSharedPref.customVolumeOptionLabel = optionLabel
-                                mCustomVolumeOptionLabel = optionLabel
-                                selectedIndex = 3
-                                view.setVolume(mCustomVolume * 0.01 * maxVolume)
-                                showVolumeDialog = false
-                            }
-                        },
-                        elevation = ButtonDefaults.buttonElevation(1.dp)
-                    ) { Text(stringResource(android.R.string.ok)) }
-                },
-                dismissButton = {
-                    TextButton({
-                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                        if (!mHaveCustomLabel) mHaveCustomLabel = false
-                        showVolumeDialog = false
-                        selectedIndex = when (AudioUtil.mediaVolume) {
-                            0 -> 0
-                            (0.4 * maxVolume).roundToInt() -> 1
-                            (0.6 * maxVolume).roundToInt() -> 2
-                            (mCustomVolume * 0.01 * maxVolume).roundToInt() -> 3
-                            else -> null
-                        }
-                    }) { Text(stringResource(android.R.string.cancel)) }
-                }
-            )
-        }
     }
 
     if (mCustomVolume > 0 && !isHome) {
@@ -314,7 +142,7 @@ private fun MediaVolume(isHome: Boolean) {
         ) {
             TextButton({
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                showVolumeDialog = true
+                navController.navigate(SCR_CUSTOM_VOLUME)
             }) {
                 Icon(
                     imageVector = Icons.Outlined.Edit,

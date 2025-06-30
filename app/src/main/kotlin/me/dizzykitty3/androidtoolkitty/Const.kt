@@ -20,6 +20,7 @@ const val SCR_COMPOSE_CATALOG = "ComposeCatalogScreen"
 const val SCR_WHEEL_OF_FORTUNE = "WheelOfFortuneScreen"
 const val SCR_BT_TYPES = "BTTypesScreen"
 const val SCR_PIN_OPTIONS = "PinOptionsScreen"
+const val SCR_CUSTOM_VOLUME = "CustomVolumeScreen"
 
 // App cards
 const val CARD_1 = "card_year_progress"

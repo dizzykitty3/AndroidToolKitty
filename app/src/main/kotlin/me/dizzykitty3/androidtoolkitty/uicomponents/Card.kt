@@ -7,11 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.MoreHoriz
-import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.FilledTonalButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -112,8 +108,4 @@ fun Card(
 }
 
 @Composable
-private fun CardTitle(title: String) =
-    Text(
-        text = title,
-        style = MaterialTheme.typography.titleLarge
-    )
+private fun CardTitle(title: String) = Text(text = title, style = MaterialTheme.typography.titleLarge)
