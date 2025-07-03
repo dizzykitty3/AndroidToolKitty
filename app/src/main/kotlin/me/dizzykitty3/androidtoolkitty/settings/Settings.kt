@@ -31,7 +31,6 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppLanguageSetting
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
-import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
@@ -184,7 +183,6 @@ private fun Bottom(navController: NavHostController) {
                 .fillMaxWidth()
                 .clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    view.context.showToast(R.string.all_help_welcomed)
                     view.context.openURL(SOURCE_CODE_URL)
                 }, verticalArrangement = Arrangement.Center
         ) {
