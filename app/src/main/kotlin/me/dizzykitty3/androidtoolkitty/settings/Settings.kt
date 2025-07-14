@@ -103,6 +103,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var autoClearClipboard by remember { mutableStateOf(settingsViewModel.settings.value.autoClearClipboard) }
+    var switchToBingSearch by remember { mutableStateOf(settingsViewModel.settings.value.switchToBingSearch) }
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getShownState(CARD_3)) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
@@ -130,6 +131,17 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
             )
         }
         settingsViewModel.update(settingsViewModel.settings.value.copy(autoClearClipboard = it))
+    }
+
+    // Switch to Bing Search
+    CustomSwitchRow(
+        icon = Icons.Outlined.Search,
+        title = R.string.switch_to_bing_search,
+        checked = switchToBingSearch
+    ) {
+        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        switchToBingSearch = it
+        settingsViewModel.update(settingsViewModel.settings.value.copy(switchToBingSearch = it))
     }
 
     // edit home

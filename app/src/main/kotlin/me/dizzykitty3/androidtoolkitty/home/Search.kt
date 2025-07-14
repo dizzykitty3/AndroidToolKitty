@@ -45,7 +45,7 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil.toFullURL
 import timber.log.Timber
 
 @Composable
-fun Search(navController: NavHostController) {
+fun Search(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
 
     Card(
@@ -55,7 +55,7 @@ fun Search(navController: NavHostController) {
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_SEARCH)
-        }) { Search() }
+        }) { Search(settingsViewModel) }
 }
 
 @Composable
@@ -65,15 +65,16 @@ fun SearchScreen(settingsViewModel: SettingsViewModel, navController: NavHostCon
         Card(R.string.webpage) { Webpage() }
         Card(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }
         Card(R.string.check_app_on_market) { CheckAppOnMarket() }
-        Card(R.string.search) { Search() }
+        Card(R.string.search) { Search(settingsViewModel) }
     }
 
 @Composable
-private fun Search() {
+private fun Search(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
     var searchQuery by remember { mutableStateOf("") }
+    var switchToBingSearch by remember { mutableStateOf(settingsViewModel.settings.value.switchToBingSearch) }
 
     OutlinedTextField(
         value = searchQuery,
@@ -86,7 +87,7 @@ private fun Search() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onTapSearchButton(searchQuery)
+                view.context.onTapSearchButton(searchQuery, switchToBingSearch)
             }
         ),
         trailingIcon = {
@@ -104,7 +105,7 @@ private fun Search() {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.onTapSearchButton(searchQuery)
+            view.context.onTapSearchButton(searchQuery, switchToBingSearch)
         }) {
             Text(stringResource(R.string.search))
             Icon(
@@ -310,10 +311,10 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
     }
 }
 
-private fun Context.onTapSearchButton(query: String) {
+private fun Context.onTapSearchButton(query: String, bingSearch: Boolean) {
     if (query.isBlank()) return
-    Timber.d("onTapSearchButton")
-    this.openSearch(query)
+    Timber.d("onTapSearchButton ${if (bingSearch) "Bing" else "Google"}")
+    this.openSearch(query, bingSearch)
 }
 
 private fun Context.onTapCheckOnYouTubeButton(query: String) {

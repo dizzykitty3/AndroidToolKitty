@@ -11,35 +11,12 @@ import android.content.Intent.ACTION_POWER_USAGE_SUMMARY
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.provider.Settings
-import me.dizzykitty3.androidtoolkitty.GOOGLE_MAPS
-import me.dizzykitty3.androidtoolkitty.GOOGLE_PLAY
-import me.dizzykitty3.androidtoolkitty.HTTPS
-import me.dizzykitty3.androidtoolkitty.MainActivity
-import me.dizzykitty3.androidtoolkitty.PACKAGE
-import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.S_ACCESSIBILITY
-import me.dizzykitty3.androidtoolkitty.S_AUTO_ROTATE
-import me.dizzykitty3.androidtoolkitty.S_BATTERY_OPTIMIZATION
-import me.dizzykitty3.androidtoolkitty.S_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.S_CAPTIONING
-import me.dizzykitty3.androidtoolkitty.S_DATE
-import me.dizzykitty3.androidtoolkitty.S_DEFAULT_APPS
-import me.dizzykitty3.androidtoolkitty.S_DEVELOPER
-import me.dizzykitty3.androidtoolkitty.S_DISPLAY
-import me.dizzykitty3.androidtoolkitty.S_ENABLE_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.S_LOCALE
-import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_LISTENER
-import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_POLICY_ACCESS
-import me.dizzykitty3.androidtoolkitty.S_OVERLAY
-import me.dizzykitty3.androidtoolkitty.S_POWER_USAGE_SUMMARY
-import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
-import me.dizzykitty3.androidtoolkitty.S_WIFI
-import me.dizzykitty3.androidtoolkitty.S_WRITE_SETTINGS
+import androidx.core.net.toUri
+import me.dizzykitty3.androidtoolkitty.*
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
 import timber.log.Timber
-import androidx.core.net.toUri
 
 object IntentUtil {
     // Didn't use StartActivity as the name because a custom extension function is needed.
@@ -72,12 +49,16 @@ object IntentUtil {
         this.showToast(msg)
     }
 
-    fun Context.openSearch(query: String) {
+    fun Context.openSearch(query: String, bingSearch: Boolean) {
         if (query.isBlank()) return
         Timber.d("openSearch")
-        val intent = Intent(Intent.ACTION_WEB_SEARCH)
-        intent.putExtra(SearchManager.QUERY, query)
-        this.launch(intent)
+        if (bingSearch) {
+            this.openURL("https://bing.com/search?q=$query")
+        } else {
+            val intent = Intent(Intent.ACTION_WEB_SEARCH)
+            intent.putExtra(SearchManager.QUERY, query)
+            this.launch(intent)
+        }
     }
 
     fun Context.searchOnYouTube(query: String) {

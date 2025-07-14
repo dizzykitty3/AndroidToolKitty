@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.*
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.DevBuildTip
@@ -40,13 +41,13 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 
 @Composable
-fun Home(navController: NavHostController, widthType: Int) {
-    if (widthType == 0 || widthType == 1) MobileLayout(navController)
-    else TabletLayout(navController)
+fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController, widthType: Int) {
+    if (widthType == 0 || widthType == 1) MobileLayout(settingsViewModel, navController)
+    else TabletLayout(settingsViewModel, navController)
 }
 
 @Composable
-private fun MobileLayout(navController: NavHostController) {
+private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
     val debug = BuildConfig.DEBUG
 
@@ -61,13 +62,13 @@ private fun MobileLayout(navController: NavHostController) {
             DevBuildTip()
             CardSpacePadding()
         }
-        item { HomeCards(navController) }
+        item { HomeCards(settingsViewModel, navController) }
         item { ScreenPadding() }
     }
 }
 
 @Composable
-private fun TabletLayout(navController: NavHostController) {
+private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val largeScreenPadding = dimensionResource(R.dimen.padding_screen_large)
     val debug = BuildConfig.DEBUG
 
@@ -78,7 +79,7 @@ private fun TabletLayout(navController: NavHostController) {
         }
         SpacerPadding()
         if (debug) DevBuildTip()
-        TwoColumnHomeCards(navController)
+        TwoColumnHomeCards(settingsViewModel, navController)
     }
 }
 
@@ -223,14 +224,14 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
 }
 
 @Composable
-private fun HomeCards(navController: NavHostController) {
+private fun HomeCards(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     getCardMap(SettingsSharedPref).forEach { cardName ->
-        CardContent(cardName, navController)
+        CardContent(cardName, settingsViewModel, navController)
     }
 }
 
 @Composable
-private fun TwoColumnHomeCards(navController: NavHostController) {
+private fun TwoColumnHomeCards(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val cardPadding = dimensionResource(R.dimen.padding_card_space)
     val largeCardPadding = dimensionResource(R.dimen.padding_card_space_large)
     val cardMap = getCardMap(SettingsSharedPref)
@@ -240,7 +241,7 @@ private fun TwoColumnHomeCards(navController: NavHostController) {
         horizontalArrangement = Arrangement.spacedBy(largeCardPadding),
     ) {
         items(cardMap) { cardName ->
-            CardContent(cardName, navController)
+            CardContent(cardName, settingsViewModel, navController)
         }
         item { ScreenPadding() }
         item { ScreenPadding() }
@@ -254,12 +255,12 @@ private fun getCardMap(settingsSharedPref: SettingsSharedPref): List<String> = l
 ).associateWith { card -> settingsSharedPref.getShownState(card) }.filter { it.value }.keys.toList()
 
 @Composable
-private fun CardContent(cardName: String, navController: NavHostController) {
+private fun CardContent(cardName: String, settingsViewModel: SettingsViewModel, navController: NavHostController) {
     when (cardName) {
         CARD_1 -> YearProgress()
         CARD_2 -> Volume(navController)
         CARD_3 -> Clipboard()
-        CARD_4 -> Search(navController)
+        CARD_4 -> Search(settingsViewModel, navController)
         CARD_5 -> SysSettings(navController)
         CARD_6 -> WheelOfFortune(navController)
         CARD_7 -> BluetoothDevice(navController)

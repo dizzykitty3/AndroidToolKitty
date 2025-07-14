@@ -51,7 +51,7 @@ fun AppNavHost(
                         animationSpec = tween(SCALE_DURATION)
                     )
         }) {
-        composable(SCR_HOME) { Home(navController, widthType) }
+        composable(SCR_HOME) { Home(settingsViewModel, navController, widthType) }
         composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
         composable(SCR_EDIT_HOME) { HomeEdit(navController) }
         composable(SCR_PERMISSION_REQUEST) { PermissionRequest(navController) }

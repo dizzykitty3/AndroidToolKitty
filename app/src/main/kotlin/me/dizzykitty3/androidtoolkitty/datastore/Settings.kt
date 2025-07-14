@@ -9,6 +9,7 @@ data class Settings(
 
     // Settings > General
     var autoClearClipboard: Boolean = false,
+    var switchToBingSearch: Boolean = false,
 
     // Records
     var lastSelectedPlatformIndex: Int = 0
