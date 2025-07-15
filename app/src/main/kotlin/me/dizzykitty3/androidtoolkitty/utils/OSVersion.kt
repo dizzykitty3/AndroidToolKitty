@@ -50,6 +50,7 @@ object OSVersion {
      * 1. Photo picker
      * 2. Displays a standard visual confirmation when content is added to the clipboard
      * 3. Per-app language preferences
+     * 4. Intent(Settings.ACTION_ALL_APPS_NOTIFICATION_SETTINGS)
      */
     fun android13(): Boolean = osVersion >= Build.VERSION_CODES.TIRAMISU
 
@@ -65,6 +66,8 @@ object OSVersion {
      * 3. Manifest.permission.BLUETOOTH_CONNECT
      * 4. BluetoothAdapter.getDefaultAdapter() -> BluetoothManager.getAdapter()
      * 5. Cannot use ACCESS_FINE_LOCATION without ACCESS_COARSE_LOCATION
+     * 6. Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM)
+     * 7. Intent(Settings.ACTION_REQUEST_MANAGE_MEDIA)
      */
     fun android12(): Boolean = osVersion >= Build.VERSION_CODES.S
 
@@ -76,6 +79,7 @@ object OSVersion {
     /**
      * Q 29
      * 1. Unless your app is the default input method editor (IME) or is the app that currently has focus, your app cannot access clipboard data.
+     * 2. Intent(Settings.ACTION_APP_SEARCH_SETTINGS)
      */
     fun android10(): Boolean = osVersion >= Build.VERSION_CODES.Q
 
@@ -91,6 +95,7 @@ object OSVersion {
      * Oreo 26
      * 1. Adaptive icons
      * 2. LocalTime.now()
+     * 3. Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
      */
     fun android8(): Boolean = osVersion >= Build.VERSION_CODES.O
 
@@ -98,6 +103,7 @@ object OSVersion {
      * Nougat 24
      * 1. Create a TileService
      * 2. Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
+     * 3. Intent(Settings.ACTION_VPN_SETTINGS)
      */
     fun android7(): Boolean = osVersion >= Build.VERSION_CODES.N
 
