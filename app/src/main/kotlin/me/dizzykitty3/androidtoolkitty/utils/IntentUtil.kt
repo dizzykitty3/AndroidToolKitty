@@ -117,12 +117,12 @@ object IntentUtil {
             S_BATTERY_OPTIMIZATION -> @SuppressLint("InlinedApi") if (OSVersion.android6())
                 Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS) else return
 
-            S_CAPTIONING -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
+            S_CAPTION -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
             S_USAGE_ACCESS -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
             S_OVERLAY -> @SuppressLint("InlinedApi") if (OSVersion.android6())
                 Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION) else return
 
-            S_WRITE_SETTINGS -> @SuppressLint("InlinedApi") if (OSVersion.android6())
+            S_MODIFY_SYSTEM -> @SuppressLint("InlinedApi") if (OSVersion.android6())
                 Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS) else return
 
             S_LOCALE -> Intent(Settings.ACTION_LOCALE_SETTINGS)
@@ -130,14 +130,25 @@ object IntentUtil {
             S_DEVELOPER -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
             S_ENABLE_BLUETOOTH -> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             S_WIFI -> Intent(Settings.ACTION_WIFI_SETTINGS)
-            S_POWER_USAGE_SUMMARY -> Intent(ACTION_POWER_USAGE_SUMMARY)
+            S_BATTERY_LEVEL -> Intent(ACTION_POWER_USAGE_SUMMARY)
             S_ACCESSIBILITY -> Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             S_NOTIFICATION_LISTENER -> @SuppressLint("InlinedApi") if (OSVersion.android5Point1())
                 Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) else return
 
-            S_NOTIFICATION_POLICY_ACCESS -> @SuppressLint("InlinedApi") if (OSVersion.android6())
+            S_DND_ACCESS -> @SuppressLint("InlinedApi") if (OSVersion.android6())
                 Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS) else return
 
+            S_UNKNOWN_APPS -> @SuppressLint("InlinedApi") if (OSVersion.android8()) Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES) else return
+            S_ALARMS -> @SuppressLint("InlinedApi") if (OSVersion.android12()) Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM) else return
+            S_MEDIA_MANAGEMENT -> @SuppressLint("InlinedApi") if (OSVersion.android12()) Intent(Settings.ACTION_REQUEST_MANAGE_MEDIA) else return
+            S_APP_NOTIFICATIONS -> @SuppressLint("InlinedApi") if (OSVersion.android13()) Intent(Settings.ACTION_ALL_APPS_NOTIFICATION_SETTINGS) else return
+            S_ACCOUNTS -> Intent(Settings.ACTION_SYNC_SETTINGS)
+            S_VPN -> @SuppressLint("InlinedApi") if (OSVersion.android7()) Intent(Settings.ACTION_VPN_SETTINGS) else return
+            S_SEARCH_SETTINGS -> @SuppressLint("InlinedApi") if (OSVersion.android10()) Intent(Settings.ACTION_APP_SEARCH_SETTINGS) else return
+            S_SOUND -> Intent(Settings.ACTION_SOUND_SETTINGS)
+            S_ABOUT_PHONE -> Intent(Settings.ACTION_DEVICE_INFO_SETTINGS)
+            S_KEYBOARD -> Intent(Settings.ACTION_INPUT_METHOD_SETTINGS)
+            S_NFC -> Intent((Settings.ACTION_NFC_SETTINGS))
             else -> return
         }
         Timber.d("openSystemSettings: $settingType")

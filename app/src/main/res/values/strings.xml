@@ -153,7 +153,7 @@
     <string name="set_time_automatically_is_off_tip">Set Time Automatically is now OFF. You may experience some unexpected behavior while using your phone.</string>
     <string name="usage_access_permission">Usage access</string>
     <string name="overlay_permission">Display over other apps</string>
-    <string name="write_permission">Modify system settings</string>
+    <string name="modify_system">Modify system settings</string>
     <string name="accessibility_settings">Accessibility</string>
     <string name="no_options_enabled">Pinned options will be shown here</string>
     <string name="device_info">Device info</string>
@@ -163,6 +163,17 @@
     <string name="device_and_app_notifications">Device &amp; app notifications</string>
     <string name="do_not_disturb_access">Do Not Disturb access</string>
     <string name="oem_removed">The OEM (%s) has removed this page</string>
+    <string name="install_unknown_apps">Install unknown apps</string>
+    <string name="alarms_n_reminders">Alarms &amp; reminders</string>
+    <string name="media_management">Media management</string>
+    <string name="app_notifications">App notifications</string>
+    <string name="accounts">Passwords &amp; accounts</string>
+    <string name="vpn">VPN</string>
+    <string name="search_settings">Search settings</string>
+    <string name="sound">Sound &amp; vibration</string>
+    <string name="keyboard">On-screen keyboard</string>
+    <string name="nfc">NFC</string>
+    <string name="about_phone">About phone</string>
 
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>

@@ -39,34 +39,60 @@ fun SysSettings(navController: NavHostController) {
             navController.navigate(SCR_SYS_SETTINGS)
         }) {
         val settings = mutableListOf(
+            Setting(S_ABOUT_PHONE, R.string.about_phone),
+            Setting(S_SEARCH_SETTINGS, R.string.search_settings),
+            // General
             Setting(S_WIFI, R.string.wifi),
-            Setting(S_POWER_USAGE_SUMMARY, R.string.battery_level),
+            Setting(S_BATTERY_LEVEL, R.string.battery_level),
             Setting(S_DISPLAY, R.string.display_settings),
             Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings),
+            Setting(S_SOUND, R.string.sound),
             Setting(S_BLUETOOTH, R.string.bluetooth_settings),
             Setting(S_DEFAULT_APPS, R.string.default_apps_settings),
+            Setting(S_KEYBOARD, R.string.keyboard),
             Setting(S_BATTERY_OPTIMIZATION, R.string.battery_optimization_settings),
-            Setting(S_CAPTIONING, R.string.caption_preferences),
+            Setting(S_CAPTION, R.string.caption_preferences),
+            Setting(S_ACCOUNTS, R.string.accounts),
+            Setting(S_VPN, R.string.vpn),
+            Setting(S_NFC, R.string.nfc),
+            // Permission
+            Setting(S_APP_NOTIFICATIONS, R.string.app_notifications),
+            Setting(S_UNKNOWN_APPS, R.string.install_unknown_apps),
+            Setting(S_MEDIA_MANAGEMENT, R.string.media_management),
             Setting(S_USAGE_ACCESS, R.string.usage_access_permission),
             Setting(S_OVERLAY, R.string.overlay_permission),
-            Setting(S_WRITE_SETTINGS, R.string.write_permission),
+            Setting(S_MODIFY_SYSTEM, R.string.modify_system),
             Setting(S_NOTIFICATION_LISTENER, R.string.device_and_app_notifications),
-            Setting(S_NOTIFICATION_POLICY_ACCESS, R.string.do_not_disturb_access),
+            Setting(S_DND_ACCESS, R.string.do_not_disturb_access),
+            Setting(S_ALARMS, R.string.alarms_n_reminders),
             Setting(S_ACCESSIBILITY, R.string.accessibility_settings),
+            // Debugging
             Setting(S_LOCALE, R.string.language_settings),
             Setting(S_DATE, R.string.date_and_time_settings),
             Setting(S_DEVELOPER, R.string.developer_options)
         )
+        if (!OSVersion.android13()) {
+            settings.remove(Setting(S_APP_NOTIFICATIONS, R.string.app_notifications))
+        }
         if (!OSVersion.android12()) {
             settings.remove(Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings))
+            settings.remove(Setting(S_ALARMS, R.string.alarms_n_reminders))
+            settings.remove(Setting(S_MEDIA_MANAGEMENT, R.string.media_management))
+        }
+        if (!OSVersion.android10()) {
+            settings.remove(Setting(S_SEARCH_SETTINGS, R.string.search_settings))
+        }
+        if (!OSVersion.android8()) {
+            settings.remove(Setting(S_UNKNOWN_APPS, R.string.install_unknown_apps))
         }
         if (!OSVersion.android7()) {
             settings.remove(Setting(S_DEFAULT_APPS, R.string.default_apps_settings))
+            settings.remove(Setting(S_VPN, R.string.vpn))
         }
         if (!OSVersion.android6()) {
             settings.remove(Setting(S_BATTERY_OPTIMIZATION, R.string.battery_optimization_settings))
             settings.remove(Setting(S_OVERLAY, R.string.overlay_permission))
-            settings.remove(Setting(S_WRITE_SETTINGS, R.string.write_permission))
+            settings.remove(Setting(S_MODIFY_SYSTEM, R.string.modify_system))
         }
         val shownSettings = settings.filter { setting ->
             SettingsSharedPref.getShownState(setting.settingType)
@@ -117,42 +143,63 @@ fun SysSettingsScreen(navController: NavHostController) {
         ScreenTitle(R.string.system)
 
         val settings = mutableListOf(
+            Setting(S_ABOUT_PHONE, R.string.about_phone),
+            Setting(S_SEARCH_SETTINGS, R.string.search_settings),
+            // General
             Setting(S_WIFI, R.string.wifi),
-            Setting(S_POWER_USAGE_SUMMARY, R.string.battery_level),
+            Setting(S_BATTERY_LEVEL, R.string.battery_level),
             Setting(S_DISPLAY, R.string.display_settings),
             Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings),
+            Setting(S_SOUND, R.string.sound),
             Setting(S_BLUETOOTH, R.string.bluetooth_settings),
             Setting(S_DEFAULT_APPS, R.string.default_apps_settings),
+            Setting(S_KEYBOARD, R.string.keyboard),
             Setting(S_BATTERY_OPTIMIZATION, R.string.battery_optimization_settings),
-            Setting(S_CAPTIONING, R.string.caption_preferences),
+            Setting(S_CAPTION, R.string.caption_preferences),
+            Setting(S_ACCOUNTS, R.string.accounts),
+            Setting(S_VPN, R.string.vpn),
+            Setting(S_NFC, R.string.nfc),
+            // Permission
+            Setting(S_APP_NOTIFICATIONS, R.string.app_notifications),
+            Setting(S_UNKNOWN_APPS, R.string.install_unknown_apps),
+            Setting(S_MEDIA_MANAGEMENT, R.string.media_management),
             Setting(S_USAGE_ACCESS, R.string.usage_access_permission),
             Setting(S_OVERLAY, R.string.overlay_permission),
-            Setting(S_WRITE_SETTINGS, R.string.write_permission),
+            Setting(S_MODIFY_SYSTEM, R.string.modify_system),
             Setting(S_NOTIFICATION_LISTENER, R.string.device_and_app_notifications),
-            Setting(S_NOTIFICATION_POLICY_ACCESS, R.string.do_not_disturb_access),
+            Setting(S_DND_ACCESS, R.string.do_not_disturb_access),
+            Setting(S_ALARMS, R.string.alarms_n_reminders),
             Setting(S_ACCESSIBILITY, R.string.accessibility_settings),
+            // Debugging
             Setting(S_LOCALE, R.string.language_settings),
             Setting(S_DATE, R.string.date_and_time_settings),
             Setting(S_DEVELOPER, R.string.developer_options)
         )
+        if (!OSVersion.android13()) {
+            settings.remove(Setting(S_APP_NOTIFICATIONS, R.string.app_notifications))
+        }
         if (!OSVersion.android12()) {
             settings.remove(Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings))
+            settings.remove(Setting(S_ALARMS, R.string.alarms_n_reminders))
+            settings.remove(Setting(S_MEDIA_MANAGEMENT, R.string.media_management))
+        }
+        if (!OSVersion.android10()) {
+            settings.remove(Setting(S_SEARCH_SETTINGS, R.string.search_settings))
+        }
+        if (!OSVersion.android8()) {
+            settings.remove(Setting(S_UNKNOWN_APPS, R.string.install_unknown_apps))
         }
         if (!OSVersion.android7()) {
             settings.remove(Setting(S_DEFAULT_APPS, R.string.default_apps_settings))
+            settings.remove(Setting(S_VPN, R.string.vpn))
         }
         if (!OSVersion.android6()) {
-            settings.remove(
-                Setting(
-                    S_BATTERY_OPTIMIZATION,
-                    R.string.battery_optimization_settings
-                )
-            )
+            settings.remove(Setting(S_BATTERY_OPTIMIZATION, R.string.battery_optimization_settings))
             settings.remove(Setting(S_OVERLAY, R.string.overlay_permission))
-            settings.remove(Setting(S_WRITE_SETTINGS, R.string.write_permission))
+            settings.remove(Setting(S_MODIFY_SYSTEM, R.string.modify_system))
         }
 
-        val i1 = settings.indexOf(Setting(S_CAPTIONING, R.string.caption_preferences)) + 1
+        val i1 = settings.indexOf(Setting(S_NFC, R.string.nfc)) + 1
         val i2 = settings.indexOf(Setting(S_ACCESSIBILITY, R.string.accessibility_settings)) + 1
         val i3 = settings.count()
 

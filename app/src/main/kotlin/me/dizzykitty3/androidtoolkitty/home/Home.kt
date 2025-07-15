@@ -131,7 +131,7 @@ private fun Status(isTablet: Boolean = false) {
             Surface(shape = RoundedCornerShape(8.dp)) {
                 Row(Modifier.clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    view.context.openSystemSettings(S_POWER_USAGE_SUMMARY)
+                    view.context.openSystemSettings(S_BATTERY_LEVEL)
                 }) {
                     Icon(
                         imageVector = Icons.Outlined.BatteryStd,
