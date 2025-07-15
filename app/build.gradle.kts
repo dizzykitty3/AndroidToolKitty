@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     alias(libs.plugins.about.libraries)
     alias(libs.plugins.android.application)
@@ -59,16 +61,20 @@ android {
         // https://developer.android.com/develop/ui/compose/compiler#configuration-options
 //        stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
     }
+    // Since Kotlin 2.2.0, https://kotlinlang.org/docs/gradle-compiler-options.html#migrate-from-kotlinoptions-to-compileroptions
+    kotlin {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
+            extraWarnings = true
+            allWarningsAsErrors = true
+        }
+    }
     compileOptions {
         // https://developer.android.com/studio/write/java8-support#library-desugaring
         isCoreLibraryDesugaringEnabled = true // Java 8+ API desugaring support
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
         encoding = "UTF-8"
-    }
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-        allWarningsAsErrors = true
     }
     packaging {
         resources {

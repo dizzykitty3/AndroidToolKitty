@@ -205,4 +205,4 @@ private fun checkIsAutoTime(): Boolean {
     return isAutoTime == 1
 }
 
-private data class Setting(val settingType: String, @StringRes val text: Int)
+private data class Setting(val settingType: String, @param:StringRes val text: Int)

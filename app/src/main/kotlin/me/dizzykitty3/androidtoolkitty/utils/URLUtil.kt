@@ -1,30 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
 import androidx.annotation.StringRes
-import me.dizzykitty3.androidtoolkitty.BG
-import me.dizzykitty3.androidtoolkitty.CN
-import me.dizzykitty3.androidtoolkitty.COM
-import me.dizzykitty3.androidtoolkitty.COM_CN
-import me.dizzykitty3.androidtoolkitty.CO_AR
-import me.dizzykitty3.androidtoolkitty.CO_JP
-import me.dizzykitty3.androidtoolkitty.CO_UK
-import me.dizzykitty3.androidtoolkitty.EE
-import me.dizzykitty3.androidtoolkitty.HTTPS
-import me.dizzykitty3.androidtoolkitty.IR
-import me.dizzykitty3.androidtoolkitty.JP
-import me.dizzykitty3.androidtoolkitty.LA
-import me.dizzykitty3.androidtoolkitty.ME
-import me.dizzykitty3.androidtoolkitty.MX
-import me.dizzykitty3.androidtoolkitty.NET
-import me.dizzykitty3.androidtoolkitty.NZ
-import me.dizzykitty3.androidtoolkitty.ORG
-import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.RU
-import me.dizzykitty3.androidtoolkitty.SO
-import me.dizzykitty3.androidtoolkitty.TO
-import me.dizzykitty3.androidtoolkitty.TV
-import me.dizzykitty3.androidtoolkitty.US
-import me.dizzykitty3.androidtoolkitty.WIKI
+import me.dizzykitty3.androidtoolkitty.*
 import timber.log.Timber
 
 object URLUtil {
@@ -67,7 +44,7 @@ object URLUtil {
     /**
      * @see me.dizzykitty3.androidtoolkitty.home.toProfileFullURL
      */
-    enum class Platform(val prefix: String, @StringRes val platform: Int) {
+    enum class Platform(val prefix: String, @param:StringRes val platform: Int) {
         AFDIAN("afdian.com/a/", R.string.afdian),
         ARTSTATION("artstation.com/", R.string.artstation),
         BAHAMUT("gamer.com.tw/home/home.php?owner=", R.string.bahamut),
