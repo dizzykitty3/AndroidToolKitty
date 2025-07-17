@@ -25,7 +25,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
 fun Gradient(
@@ -155,9 +154,6 @@ fun ErrorTip(msg: String) {
 
 @Composable
 fun DevBuildTip() = Tip(R.string.debug_build_top_tip)
-
-@Composable
-fun NoTranslationTip() = Tip(stringResource(R.string.no_translation, StringUtil.sysLocale))
 
 @Composable
 fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))

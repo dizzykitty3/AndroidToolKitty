@@ -117,7 +117,7 @@ fun CustomVolumeScreen(navController: NavHostController) {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Column {
-                                Text(stringResource(R.string.more_precise_slider))
+                                Text(stringResource(R.string.precise_slider))
                                 Description(R.string.slider_increment_1_percent)
                             }
                         }

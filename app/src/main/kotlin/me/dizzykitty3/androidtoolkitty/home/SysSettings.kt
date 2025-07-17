@@ -98,7 +98,7 @@ fun SysSettings(navController: NavHostController) {
             SettingsSharedPref.getShownState(setting.settingType)
         }
 
-        if (!checkIsAutoTime()) Tip(R.string.set_time_automatically_is_off_tip)
+        if (!checkIsAutoTime()) Tip(R.string.auto_set_time_is_off_tip)
 
         val count = shownSettings.count()
         if (count == 0) {

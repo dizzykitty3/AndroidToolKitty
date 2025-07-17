@@ -66,8 +66,8 @@ private fun RowFontWeightTest() {
     val showCJK = StringUtil.sysLangCJK
     RowFontWeightTestImpl(R.string.a)
     if (showCJK) {
-        RowFontWeightTestImpl(R.string.chinese_que)
-        RowFontWeightTestImpl(R.string.japanese_ki)
+        RowFontWeightTestImpl(R.string.c_que)
+        RowFontWeightTestImpl(R.string.j_ki)
     }
 }
 
@@ -123,28 +123,28 @@ private fun FontFamilyTest() {
         ) {
             Row {
                 Text(
-                    stringResource(R.string.japanese_sentence),
+                    stringResource(R.string.j_sentence),
                     fontFamily = FontFamily.SansSerif
                 )
                 Text(" (SansSerif)")
             }
             Row {
                 Text(
-                    stringResource(R.string.japanese_sentence),
+                    stringResource(R.string.j_sentence),
                     fontFamily = FontFamily.Serif
                 )
                 Text(" (Serif)")
             }
             Row {
                 Text(
-                    stringResource(R.string.japanese_sentence),
+                    stringResource(R.string.j_sentence),
                     fontFamily = FontFamily.Cursive
                 )
                 Text(" (Cursive)")
             }
             Row {
                 Text(
-                    stringResource(R.string.japanese_sentence),
+                    stringResource(R.string.j_sentence),
                     fontFamily = FontFamily.Monospace
                 )
                 Text(" (Monospace)")
