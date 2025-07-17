@@ -143,7 +143,6 @@ fun SysSettingsScreen(navController: NavHostController) {
         ScreenTitle(R.string.system)
 
         val settings = mutableListOf(
-            Setting(S_ABOUT_PHONE, R.string.about_phone),
             Setting(S_SEARCH_SETTINGS, R.string.search_settings),
             // General
             Setting(S_WIFI, R.string.wifi),
@@ -211,6 +210,7 @@ fun SysSettingsScreen(navController: NavHostController) {
                 LabelAndValueTextRow("os_ver", StringUtil.osVer)
                 LabelAndValueTextRow("locale", StringUtil.sysLocale)
                 LabelAndValueTextRow("time_zone", DateUtil.sysTimeZone)
+                SystemSettingButton(S_ABOUT_PHONE, R.string.about_phone)
             }
         }
         Card(R.string.general) {
