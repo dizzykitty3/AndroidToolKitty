@@ -243,6 +243,7 @@ fun SysSettingsScreen(navController: NavHostController) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_PIN_OPTIONS)
         }) { Text(stringResource(R.string.customize_system_settings_card)) }
+        CardSpacePadding()
     }
 }
 
