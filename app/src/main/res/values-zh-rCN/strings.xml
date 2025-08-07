@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nfc">NFC</string>
+    <string name="about_phone">关于本机</string>
+    <string name="vpn">VPN</string>
+    <string name="search_settings">搜索设置</string>
+    <string name="battery">电池</string>
+    <string name="display_settings">显示和触控</string>
+    <string name="auto_rotate_settings">自动旋转屏幕</string>
+    <string name="language_settings">语言</string>
+    <string name="default_apps_settings">默认应用</string>
+    <string name="bluetooth_settings">蓝牙</string>
+    <string name="date_and_time_settings">日期和时间</string>
+    <string name="battery_optimization_settings">电池优化</string>
+    <string name="developer_options">开发者选项</string>
+    <string name="caption_preferences">字幕偏好设置</string>
+    <string name="usage_access_permission">应用使用情况数据</string>
+    <string name="overlay_permission">显示在其他应用上层</string>
+    <string name="modify_system">修改系统设置</string>
+    <string name="accessibility_settings">无障碍功能</string>
+    <string name="install_unknown_apps">安装未知应用</string>
+    <string name="alarms_n_reminders">闹钟和提醒</string>
+    <string name="media_management">媒体管理应用</string>
+    <string name="app_notifications">应用通知</string>
+    <string name="accounts">密码、通行密钥和账号</string>
+    <string name="sound">提示音和振动</string>
+    <string name="wifi">Wi-Fi</string>
+    <string name="keyboard">屏幕键盘</string>
+    <string name="device_and_app_notifications">读取、回复和控制通知</string>
+    <string name="do_not_disturb_access">模式访问权限</string>
+</resources>

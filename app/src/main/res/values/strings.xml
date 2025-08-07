@@ -140,7 +140,7 @@
 
     <!-- Home > System -->
     <string name="system">System</string>
-    <string name="display_settings">Display</string>
+    <string name="display_settings">Display &amp; touch</string>
     <string name="auto_rotate_settings">Auto-rotate screen</string>
     <string name="language_settings">Languages</string>
     <string name="default_apps_settings">Default apps</string>
@@ -151,7 +151,7 @@
     <string name="caption_preferences">Caption preferences</string>
     <string name="auto_set_time_is_off_tip">Set Time Automatically is OFF. May experience some unexpected behavior.
     </string>
-    <string name="usage_access_permission">Usage access</string>
+    <string name="usage_access_permission">App usage data</string>
     <string name="overlay_permission">Display over other apps</string>
     <string name="modify_system">Modify system settings</string>
     <string name="accessibility_settings">Accessibility</string>
@@ -160,14 +160,14 @@
     <string name="customize_system_settings_card">Pin options that appear on Home screen</string>
     <string name="hide_all_options">Hide all options</string>
     <string name="sys_settings_tip">Up to 4 options you can pin on Home screen</string>
-    <string name="device_and_app_notifications">Device &amp; app notifications</string>
-    <string name="do_not_disturb_access">Do Not Disturb access</string>
+    <string name="device_and_app_notifications">Notification read, reply &amp; control</string>
+    <string name="do_not_disturb_access">Modes access</string>
     <string name="oem_removed">The OEM (%s) has removed this page</string>
     <string name="install_unknown_apps">Install unknown apps</string>
     <string name="alarms_n_reminders">Alarms &amp; reminders</string>
     <string name="media_management">Media management</string>
     <string name="app_notifications">App notifications</string>
-    <string name="accounts">Passwords &amp; accounts</string>
+    <string name="accounts">Passwords, passkeys &amp; accounts</string>
     <string name="vpn">VPN</string>
     <string name="search_settings">Search settings</string>
     <string name="sound">Sound &amp; vibration</string>
