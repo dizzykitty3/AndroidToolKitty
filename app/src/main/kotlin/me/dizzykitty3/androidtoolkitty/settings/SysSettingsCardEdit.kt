@@ -29,7 +29,7 @@ fun SysSettingsCardEditScreen(navController: NavHostController) {
             var mIsShowSetting by remember { mutableStateOf(sp.getShownState(S_ABOUT_PHONE)) }
             var mIsShowSetting0 by remember { mutableStateOf(sp.getShownState(S_SEARCH_SETTINGS)) }
             var mIsShowSetting1 by remember { mutableStateOf(sp.getShownState(S_WIFI)) }
-            var mIsShowSetting2 by remember { mutableStateOf(sp.getShownState(S_BATTERY_LEVEL)) }
+            var mIsShowSetting2 by remember { mutableStateOf(sp.getShownState(S_BATTERY)) }
             var mIsShowSetting3 by remember { mutableStateOf(sp.getShownState(S_DISPLAY)) }
             var mIsShowSetting4 by remember { mutableStateOf(sp.getShownState(S_AUTO_ROTATE)) }
             var mIsShowSetting5 by remember { mutableStateOf(sp.getShownState(S_SOUND)) }
@@ -87,13 +87,13 @@ fun SysSettingsCardEditScreen(navController: NavHostController) {
                 sp.saveShownState(S_WIFI, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.battery_level,
-                card = S_BATTERY_LEVEL,
+                text = R.string.battery,
+                card = S_BATTERY,
                 isChecked = mIsShowSetting2
             ) { newState ->
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 mIsShowSetting2 = newState
-                sp.saveShownState(S_BATTERY_LEVEL, newState)
+                sp.saveShownState(S_BATTERY, newState)
             }
             CustomHideCardSettingSwitch(
                 text = R.string.display_settings,
@@ -387,7 +387,7 @@ fun SysSettingsCardEditScreen(navController: NavHostController) {
 
 private fun onClickChangeAllCardsButton() {
     val settingList = listOf(
-        S_ABOUT_PHONE, S_SEARCH_SETTINGS, S_WIFI, S_BATTERY_LEVEL, S_DISPLAY, S_AUTO_ROTATE, S_SOUND, S_BLUETOOTH,
+        S_ABOUT_PHONE, S_SEARCH_SETTINGS, S_WIFI, S_BATTERY, S_DISPLAY, S_AUTO_ROTATE, S_SOUND, S_BLUETOOTH,
         S_DEFAULT_APPS, S_KEYBOARD, S_BATTERY_OPTIMIZATION, S_CAPTION, S_ACCOUNTS, S_VPN, S_NFC, S_APP_NOTIFICATIONS,
         S_UNKNOWN_APPS, S_MEDIA_MANAGEMENT, S_USAGE_ACCESS, S_OVERLAY, S_MODIFY_SYSTEM, S_NOTIFICATION_LISTENER,
         S_DND_ACCESS, S_ALARMS, S_ACCESSIBILITY, S_LOCALE, S_DATE, S_DEVELOPER

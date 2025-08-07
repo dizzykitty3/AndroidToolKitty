@@ -23,7 +23,7 @@
     <string name="back">back</string>
 
     <!-- Home > Top bar -->
-    <string name="battery_level">Battery level</string>
+    <string name="battery">Battery</string>
     <string name="wifi">Wi-Fi</string>
     <string name="cellular">Cellular</string>
     <string name="offline">Offline</string>

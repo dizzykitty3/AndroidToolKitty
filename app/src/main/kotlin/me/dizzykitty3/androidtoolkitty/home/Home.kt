@@ -131,11 +131,11 @@ private fun Status(isTablet: Boolean = false) {
             Surface(shape = RoundedCornerShape(8.dp)) {
                 Row(Modifier.clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    view.context.openSystemSettings(S_BATTERY_LEVEL)
+                    view.context.openSystemSettings(S_BATTERY)
                 }) {
                     Icon(
                         imageVector = Icons.Outlined.BatteryStd,
-                        contentDescription = stringResource(R.string.battery_level),
+                        contentDescription = stringResource(R.string.battery),
                         tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8F)
                     )
                     SpacerPadding()

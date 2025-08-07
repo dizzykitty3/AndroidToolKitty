@@ -130,7 +130,7 @@ object IntentUtil {
             S_DEVELOPER -> Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
             S_ENABLE_BLUETOOTH -> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
             S_WIFI -> Intent(Settings.ACTION_WIFI_SETTINGS)
-            S_BATTERY_LEVEL -> Intent(ACTION_POWER_USAGE_SUMMARY)
+            S_BATTERY -> Intent(ACTION_POWER_USAGE_SUMMARY)
             S_ACCESSIBILITY -> Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             S_NOTIFICATION_LISTENER -> @SuppressLint("InlinedApi") if (OSVersion.android5Point1())
                 Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) else return
