@@ -81,7 +81,7 @@ fun HomeEdit(navController: NavHostController) {
                 sp.saveShownState(CARD_4, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.system,
+                text = R.string.system_settings,
                 card = CARD_5,
                 isChecked = mIsShowCard5
             ) { newState ->
@@ -126,7 +126,7 @@ fun HomeEdit(navController: NavHostController) {
                 sp.saveShownState(CARD_9, newState)
             }
             CustomHideCardSettingSwitch(
-                text = R.string.android,
+                text = R.string.android_versions,
                 card = CARD_10,
                 isChecked = mIsShowCard10
             ) { newState ->

@@ -22,7 +22,7 @@ fun AndroidVersions(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
 
     Card(
-        title = R.string.android,
+        title = R.string.android_versions,
         icon = Icons.Outlined.Android,
         hasShowMore = true,
         onClick = {
@@ -36,7 +36,7 @@ fun AndroidVersions(navController: NavHostController) {
 @Composable
 fun AndroidVersionHistoryScreen(navController: NavHostController) {
     Screen(navController) {
-        Card(title = R.string.android, icon = Icons.Outlined.Android) {
+        Card(title = R.string.android_versions, icon = Icons.Outlined.Android) {
             RecentVersions()
             EarlyVersions()
         }

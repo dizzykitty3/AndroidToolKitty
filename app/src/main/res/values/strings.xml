@@ -138,8 +138,8 @@
     <string name="chromium_issue_tracker">Chromium Issue Tracker</string>
     <string name="stack_overflow">Stack Overflow</string>
 
-    <!-- Home > System -->
-    <string name="system">System</string>
+    <!-- Home > System settings-->
+    <string name="system_settings">System settings</string>
     <string name="display_settings">Display &amp; touch</string>
     <string name="auto_rotate_settings">Auto-rotate screen</string>
     <string name="language_settings">Languages</string>
@@ -178,10 +178,9 @@
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
     <string name="item">item</string>
-    <string name="wheel_of_fortune_short">WoF</string>
 
-    <!-- Home > BT devices -->
-    <string name="bluetooth_devices">BT devices</string>
+    <!-- Home > Bluetooth devices -->
+    <string name="bluetooth_devices">Bluetooth devices</string>
     <string name="show_paired_devices">Show paired devices</string>
     <string name="current_device">Current device:</string>
     <string name="paired_devices">Paired devices:</string>
@@ -207,8 +206,8 @@
     <string name="google_play_not_installed">Google Play is not installed</string>
     <string name="open_google_maps">Open Google Maps</string>
 
-    <!-- Home > Android -->
-    <string name="android">Android</string>
+    <!-- Home > Android versions-->
+    <string name="android_versions">Android versions</string>
 
     <!-- Home > Font weight -->
     <string name="font_weight">Font weight</string>

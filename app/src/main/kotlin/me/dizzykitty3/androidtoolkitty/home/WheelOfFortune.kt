@@ -55,7 +55,7 @@ import kotlin.random.Random
 fun WheelOfFortune(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
     Card(
-        title = R.string.wheel_of_fortune_short,
+        title = R.string.wheel_of_fortune,
         icon = Icons.Outlined.Casino,
         hasShowMore = true,
         onClick = {
