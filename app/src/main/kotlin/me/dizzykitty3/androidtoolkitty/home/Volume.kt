@@ -19,7 +19,10 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_CUSTOM_VOLUME
 import me.dizzykitty3.androidtoolkitty.SCR_VOLUME
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.*
+import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
+import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -42,8 +45,7 @@ fun Volume(navController: NavHostController) {
 
 @Composable
 fun VolumeScreen(navController: NavHostController) {
-    Screen(navController) {
-        ScreenTitle(R.string.volume)
+    Screen(R.string.volume, navController) {
         Card(R.string.media_volume) { MediaVolume(navController, isHome = false) }
         Card(R.string.voice_call_volume) { VoiceCallVolume() }
     }

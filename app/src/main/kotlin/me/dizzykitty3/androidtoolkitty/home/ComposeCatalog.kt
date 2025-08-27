@@ -34,7 +34,7 @@ fun ComposeCatalog(navController: NavHostController) {
 
 @Composable
 fun ComposeCatalogScreen(navController: NavHostController) {
-    Screen(navController) {
+    Screen(navController = navController) {
         Column(Modifier.fillMaxWidth()) {
             GroupTitleNoColor("Typography")
             SpacerPadding()

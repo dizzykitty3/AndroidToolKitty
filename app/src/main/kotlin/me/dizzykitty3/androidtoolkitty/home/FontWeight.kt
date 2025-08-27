@@ -22,7 +22,6 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_FONT_WEIGHT_TEST
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenTitle
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
@@ -40,8 +39,7 @@ fun FontWeight(navController: NavHostController) {
 
 @Composable
 fun FontWeightTestScreen(navController: NavHostController) {
-    Screen(navController) {
-        ScreenTitle(R.string.font_weight)
+    Screen(R.string.font_weight, navController) {
         Card("Font weight test 1") { FontWeightTest() }
         Card("Font weight test 2") { RowFontWeightTest() }
         Card("Font family test") { FontFamilyTest() }

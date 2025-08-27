@@ -22,7 +22,10 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_CODES_OF_CHARACTERS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
-import me.dizzykitty3.androidtoolkitty.uicomponents.*
+import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
+import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
+import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -46,8 +49,7 @@ fun CodesOfCharacters(navController: NavHostController) {
 
 @Composable
 fun CodesOfCharactersScreen(navController: NavHostController) {
-    Screen(navController) {
-        ScreenTitle(R.string.encoding)
+    Screen(R.string.encoding, navController) {
         Card(R.string.unicode) { Unicode() }
         Card(R.string.ascii) { ASCII() }
         Card("Unix Timestamp") { UnixTimestamp() }

@@ -28,7 +28,7 @@ fun HapticFeedback(navController: NavHostController) {
 
 @Composable
 fun HapticFeedbackScreen(navController: NavHostController) {
-    Screen(navController) {
+    Screen(navController = navController) {
         Card(R.string.haptic) {
             val haptic = LocalHapticFeedback.current
             TextButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.Confirm) }) { Text("Confirm") }

@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.uicomponents
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.*
@@ -13,7 +12,6 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 
@@ -52,20 +50,5 @@ fun ClearInput(input: String, onClick: () -> Unit) {
                 contentDescription = stringResource(R.string.clear_input),
             )
         }
-    }
-}
-
-@Composable
-fun NavBackButton(navController: NavHostController) {
-    val haptic = LocalHapticFeedback.current
-    IconButton(onClick = {
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        navController.popBackStack()
-    }) {
-        Icon(
-            imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-            contentDescription = stringResource(R.string.back),
-            tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5F)
-        )
     }
 }

@@ -35,7 +35,7 @@ fun AndroidVersions(navController: NavHostController) {
 
 @Composable
 fun AndroidVersionHistoryScreen(navController: NavHostController) {
-    Screen(navController) {
+    Screen(navController = navController) {
         Card(title = R.string.android_versions, icon = Icons.Outlined.Android) {
             RecentVersions()
             EarlyVersions()

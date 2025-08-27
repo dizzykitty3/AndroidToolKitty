@@ -15,14 +15,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.*
-import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.*
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 
 @Composable
 fun SysSettingsCardEditScreen(navController: NavHostController) {
-    Screen(navController) {
+    Screen(navController = navController) {
         Card(R.string.customize_system_settings_card) {
             val haptic = LocalHapticFeedback.current
             val sp = remember { SettingsSharedPref }

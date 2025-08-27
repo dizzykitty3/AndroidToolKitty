@@ -53,7 +53,7 @@ fun CustomVolumeScreen(navController: NavHostController) {
         }
     }
 
-    Screen(navController) {
+    Screen(navController = navController) {
         Card(stringResource(if (settingsSharedPref.addedCustomVolume) R.string.edit_custom_volume else R.string.save_custom_volume)) {
             Slider(
                 value = newCustomVolume,

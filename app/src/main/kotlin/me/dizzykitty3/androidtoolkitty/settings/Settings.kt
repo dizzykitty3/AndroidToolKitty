@@ -22,7 +22,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.*
-import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.*
@@ -34,8 +33,7 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    Screen(navController) {
-        ScreenTitle(R.string.settings)
+    Screen(R.string.settings, navController) {
         if (OSVersion.android12()) Card(R.string.appearance) { Appearance(settingsViewModel) }
         Card(R.string.general) { General(settingsViewModel, navController) }
         Card(R.string.others) { Bottom(navController) }

@@ -16,7 +16,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.*
-import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomHideCardSettingSwitch
@@ -25,7 +24,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 
 @Composable
 fun HomeEdit(navController: NavHostController) {
-    Screen(navController) {
+    Screen(navController = navController) {
         val sp = remember { SettingsSharedPref }
 
         Card(R.string.customize_home_page) {

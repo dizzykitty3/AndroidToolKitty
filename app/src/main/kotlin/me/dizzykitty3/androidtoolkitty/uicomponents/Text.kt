@@ -207,20 +207,6 @@ fun Description(text: String) = Text(
 )
 
 @Composable
-fun ScreenTitle(@StringRes text: Int) = ScreenTitle(stringResource(text))
-
-@Composable
-fun ScreenTitle(text: String) {
-    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            text,
-            style = MaterialTheme.typography.titleLarge
-        )
-    }
-    SpacerPadding()
-}
-
-@Composable
 fun LabelText(text: String) = Text(text, style = MaterialTheme.typography.labelMedium)
 
 @Composable

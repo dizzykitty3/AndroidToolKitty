@@ -137,11 +137,8 @@ fun SysSettings(navController: NavHostController) {
 
 @Composable
 fun SysSettingsScreen(navController: NavHostController) {
-    Screen(navController) {
+    Screen(R.string.system_settings, navController) {
         val haptic = LocalHapticFeedback.current
-
-        ScreenTitle(R.string.system_settings)
-
         val settings = mutableListOf(
             Setting(S_SEARCH_SETTINGS, R.string.search_settings),
             // General

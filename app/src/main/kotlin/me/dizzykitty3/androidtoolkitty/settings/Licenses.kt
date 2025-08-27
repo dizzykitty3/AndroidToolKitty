@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.mikepenz.aboutlibraries.ui.compose.android.rememberLibraries
 import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
-import me.dizzykitty3.androidtoolkitty.uicomponents.NavBackButton
+import me.dizzykitty3.androidtoolkitty.uicomponents.TopBar
 
 @Composable
 fun Licenses(navController: NavHostController) {
@@ -20,7 +20,7 @@ fun Licenses(navController: NavHostController) {
             .background(MaterialTheme.colorScheme.background)
     ) {
         Column {
-            NavBackButton(navController)
+            TopBar(navController = navController)
             LibrariesContainer(libraries = rememberLibraries().value)
         }
     }

@@ -21,7 +21,7 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @Composable
 fun PermissionRequest(navController: NavHostController) {
-    Screen(navController) {
+    Screen(navController = navController) {
         Card(title = R.string.request_permission, icon = Icons.Outlined.Shield) {
             var clickCount by remember { mutableIntStateOf(0) }
             val view = LocalView.current
