@@ -3,7 +3,9 @@ package me.dizzykitty3.androidtoolkitty.home
 import android.content.ContentResolver
 import android.provider.Settings
 import androidx.annotation.StringRes
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,18 +13,58 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
-import me.dizzykitty3.androidtoolkitty.*
+import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.SCR_ANDROID_VERSION_HISTORY
+import me.dizzykitty3.androidtoolkitty.SCR_PIN_OPTIONS
+import me.dizzykitty3.androidtoolkitty.SCR_SYS_SETTINGS
+import me.dizzykitty3.androidtoolkitty.S_ABOUT_PHONE
+import me.dizzykitty3.androidtoolkitty.S_ACCESSIBILITY
+import me.dizzykitty3.androidtoolkitty.S_ACCOUNTS
+import me.dizzykitty3.androidtoolkitty.S_ALARMS
+import me.dizzykitty3.androidtoolkitty.S_APP_NOTIFICATIONS
+import me.dizzykitty3.androidtoolkitty.S_AUTO_ROTATE
+import me.dizzykitty3.androidtoolkitty.S_BATTERY
+import me.dizzykitty3.androidtoolkitty.S_BATTERY_OPTIMIZATION
+import me.dizzykitty3.androidtoolkitty.S_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.S_CAPTION
+import me.dizzykitty3.androidtoolkitty.S_DATE
+import me.dizzykitty3.androidtoolkitty.S_DEFAULT_APPS
+import me.dizzykitty3.androidtoolkitty.S_DEVELOPER
+import me.dizzykitty3.androidtoolkitty.S_DISPLAY
+import me.dizzykitty3.androidtoolkitty.S_DND_ACCESS
+import me.dizzykitty3.androidtoolkitty.S_KEYBOARD
+import me.dizzykitty3.androidtoolkitty.S_LOCALE
+import me.dizzykitty3.androidtoolkitty.S_MEDIA_MANAGEMENT
+import me.dizzykitty3.androidtoolkitty.S_MODIFY_SYSTEM
+import me.dizzykitty3.androidtoolkitty.S_NFC
+import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_LISTENER
+import me.dizzykitty3.androidtoolkitty.S_OVERLAY
+import me.dizzykitty3.androidtoolkitty.S_SEARCH_SETTINGS
+import me.dizzykitty3.androidtoolkitty.S_SOUND
+import me.dizzykitty3.androidtoolkitty.S_UNKNOWN_APPS
+import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
+import me.dizzykitty3.androidtoolkitty.S_VPN
+import me.dizzykitty3.androidtoolkitty.S_WIFI
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.*
+import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
+import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
+import me.dizzykitty3.androidtoolkitty.uicomponents.LabelAndValueTextRow
+import me.dizzykitty3.androidtoolkitty.uicomponents.LabelText
+import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.SystemSettingButton
+import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
@@ -204,7 +246,23 @@ fun SysSettingsScreen(navController: NavHostController) {
                 LabelAndValueTextRow("manufacturer", StringUtil.manufacturer)
                 LabelAndValueTextRow("model", StringUtil.model)
                 LabelAndValueTextRow("device", StringUtil.device)
-                LabelAndValueTextRow("os_ver", StringUtil.osVer)
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Column(Modifier.weight(0.4F)) {
+                        LabelText("os_ver")
+                    }
+                    Row(Modifier.weight(0.6F)) {
+                        Box(Modifier.horizontalScroll(rememberScrollState())) {
+                            Text(
+                                text = StringUtil.osVer,
+                                modifier = Modifier.clickable {
+                                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                    navController.navigate(SCR_ANDROID_VERSION_HISTORY)
+                                },
+                                color = MaterialTheme.colorScheme.primary
+                            )
+                        }
+                    }
+                }
                 LabelAndValueTextRow("locale", StringUtil.sysLocale)
                 LabelAndValueTextRow("time_zone", DateUtil.sysTimeZone)
                 SystemSettingButton(S_ABOUT_PHONE, R.string.about_phone)
