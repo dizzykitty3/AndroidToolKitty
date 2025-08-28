@@ -8,30 +8,15 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Android
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.hapticfeedback.HapticFeedbackType
-import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_ANDROID_VERSION_HISTORY
-import me.dizzykitty3.androidtoolkitty.uicomponents.*
+import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableBoldText
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableItalicText
+import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 
 val v = Build.VERSION.SDK_INT
-
-@Composable
-fun AndroidVersions(navController: NavHostController) {
-    val haptic = LocalHapticFeedback.current
-
-    Card(
-        title = R.string.android_versions,
-        icon = Icons.Outlined.Android,
-        hasShowMore = true,
-        onClick = {
-            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            navController.navigate(SCR_ANDROID_VERSION_HISTORY)
-        }) {
-        RecentVersions()
-    }
-}
 
 @Composable
 fun AndroidVersionHistoryScreen(navController: NavHostController) {
