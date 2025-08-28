@@ -19,6 +19,7 @@ object OSVersion {
      * [beta-3](https://android-developers.googleblog.com/2025/03/the-third-beta-of-android-16.html)
      * [beta-4](https://android-developers.googleblog.com/2025/04/the-fourth-beta-of-android-16.html)
      * [AOSP release](https://android-developers.googleblog.com/2025/06/android-16-is-here.html)
+     * [QPR2 Beta 1](https://android-developers.googleblog.com/2025/08/android-16-qpr2-beta-1-is-here.html)
      * [Behavior changes: all apps](https://developer.android.com/about/versions/16/behavior-changes-all)
      * [Behavior changes: Apps targeting Android 16 or higher](https://developer.android.com/about/versions/16/behavior-changes-16)
      * [Features and APIs](https://developer.android.com/about/versions/16/features)
