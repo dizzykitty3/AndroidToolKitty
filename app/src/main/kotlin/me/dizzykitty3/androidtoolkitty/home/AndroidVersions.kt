@@ -4,8 +4,6 @@ import android.os.Build
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Android
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -20,39 +18,37 @@ val v = Build.VERSION.SDK_INT
 
 @Composable
 fun AndroidVersionHistoryScreen(navController: NavHostController) {
-    Screen(navController = navController) {
-        Card(title = R.string.android_versions, icon = Icons.Outlined.Android) {
-            RecentVersions()
-            EarlyVersions()
+    Screen(screenTitle = R.string.android_versions, navController = navController) {
+        Card(title = R.string.beta_version) {
+            BetaVersion()
+        }
+        Card(title = R.string.stable_versions) {
+            StableVersions()
         }
     }
 }
 
 @Composable
-private fun RecentVersions() {
+private fun BetaVersion() {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.weight(0.4f)) {
             if (v == 36) ScrollableBoldText("Android 16") else ScrollableText("Android 16")
-            if (v == 35) ScrollableBoldText("Android 15") else ScrollableText("Android 15")
-            if (v == 34) ScrollableBoldText("Android 14") else ScrollableText("Android 14")
-            if (v == 33) ScrollableBoldText("Android 13") else ScrollableText("Android 13")
-            if (v == 32) ScrollableBoldText("Android 12L") else ScrollableText("Android 12L")
         }
 
         Column(Modifier.weight(0.6f)) {
             ScrollableItalicText("API 36, Baklava")
-            ScrollableItalicText("API 35, VanillaIceCream")
-            ScrollableItalicText("API 34, UpsideDownCake")
-            ScrollableItalicText("API 33, Tiramisu")
-            ScrollableItalicText("API 32, Sv2")
         }
     }
 }
 
 @Composable
-private fun EarlyVersions() {
+private fun StableVersions() {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.weight(0.4f)) {
+            if (v == 35) ScrollableBoldText("Android 15") else ScrollableText("Android 15")
+            if (v == 34) ScrollableBoldText("Android 14") else ScrollableText("Android 14")
+            if (v == 33) ScrollableBoldText("Android 13") else ScrollableText("Android 13")
+            if (v == 32) ScrollableBoldText("Android 12L") else ScrollableText("Android 12L")
             if (v == 31) ScrollableBoldText("Android 12") else ScrollableText("Android 12")
             if (v == 30) ScrollableBoldText("Android 11") else ScrollableText("Android 11")
             if (v == 29) ScrollableBoldText("Android 10") else ScrollableText("Android 10")
@@ -82,6 +78,10 @@ private fun EarlyVersions() {
         }
 
         Column(Modifier.weight(0.6f)) {
+            ScrollableItalicText("API 35, VanillaIceCream")
+            ScrollableItalicText("API 34, UpsideDownCake")
+            ScrollableItalicText("API 33, Tiramisu")
+            ScrollableItalicText("API 32, Sv2")
             ScrollableItalicText("API 31, S")
             ScrollableItalicText("API 30, R")
             ScrollableItalicText("API 29, Q")
