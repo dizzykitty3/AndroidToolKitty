@@ -19,10 +19,10 @@ val v = Build.VERSION.SDK_INT
 @Composable
 fun AndroidVersionHistoryScreen(navController: NavHostController) {
     Screen(screenTitle = R.string.android_versions, navController = navController) {
-        Card(title = R.string.beta_version) {
+        Card(title = R.string.latest_version) {
             BetaVersion()
         }
-        Card(title = R.string.stable_versions) {
+        Card(title = R.string.older_releases) {
             StableVersions()
         }
     }

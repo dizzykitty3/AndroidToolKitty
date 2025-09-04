@@ -175,8 +175,8 @@
     <string name="nfc">NFC</string>
     <string name="about_phone">About phone</string>
     <string name="android_versions">Android versions</string>
-    <string name="beta_version">Beta version</string>
-    <string name="stable_versions">Stable versions</string>
+    <string name="latest_version">Latest version</string>
+    <string name="older_releases">Older releases</string>
 
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
