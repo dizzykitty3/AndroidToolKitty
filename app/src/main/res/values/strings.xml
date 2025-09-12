@@ -21,6 +21,7 @@
     <string name="others">Others</string>
     <string name="granted">granted</string>
     <string name="back">back</string>
+    <string name="save">Save</string>
 
     <!-- Home > Top bar -->
     <string name="battery">Battery</string>
@@ -38,14 +39,13 @@
     <string name="volume">Volume</string>
     <string name="media_volume">Media volume</string>
     <string name="save_custom_volume">Save custom volume</string>
-    <string name="system_media_volume_levels_limited">System volume steps are limited, operation failed.</string>
+    <string name="volume_steps_limited">System volume steps are limited, canceled.</string>
     <string name="volume_changed">Volume changed.</string>
-    <string name="precise_slider">Precise slider</string>
     <string name="add">+ Add</string>
     <string name="voice_call_volume">Voice call volume</string>
     <string name="max_out_voice_call_volume">Max out voice call volume</string>
-    <string name="slider_increment_1_percent">Set slider increment to 1%</string>
     <string name="edit_custom_volume">Edit custom volume</string>
+    <string name="precise_switch">Precise on/off</string>
 
     <!-- Home > Clipboard -->
     <string name="clipboard">Clipboard</string>

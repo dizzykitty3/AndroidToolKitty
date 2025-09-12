@@ -1,15 +1,23 @@
 package me.dizzykitty3.androidtoolkitty.home
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Slider
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -20,7 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.*
+import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
+import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -53,8 +64,11 @@ fun CustomVolumeScreen(navController: NavHostController) {
         }
     }
 
-    Screen(navController = navController) {
-        Card(stringResource(if (settingsSharedPref.addedCustomVolume) R.string.edit_custom_volume else R.string.save_custom_volume)) {
+    Screen(
+        screenTitle = if (settingsSharedPref.addedCustomVolume) R.string.edit_custom_volume else R.string.save_custom_volume,
+        navController = navController
+    ) {
+        Card(R.string.edit) {
             Slider(
                 value = newCustomVolume,
                 onValueChange = {
@@ -102,42 +116,24 @@ fun CustomVolumeScreen(navController: NavHostController) {
                 }
             )
 
-            Surface(
-                shape = RoundedCornerShape(8.dp),
-                color = MaterialTheme.colorScheme.surfaceContainerLow
-            ) {
-                Column(Modifier.clickable {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    morePreciseSlider = !morePreciseSlider
-                }) {
-                    SpacerPadding()
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Row(
-                            Modifier.weight(1f),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Column {
-                                Text(stringResource(R.string.precise_slider))
-                                Description(R.string.slider_increment_1_percent)
-                            }
-                        }
-                        SpacerPadding()
-                        Switch(
-                            checked = morePreciseSlider,
-                            onCheckedChange = { morePreciseSlider = it }
+            SpacerPadding()
+            SpacerPadding()
+
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Row(Modifier.weight(1F)) {
+                    TextButton(onClick = { morePreciseSlider = !morePreciseSlider }) {
+                        Text(
+                            text = stringResource(R.string.precise_switch),
+                            color = MaterialTheme.colorScheme.primary
                         )
                     }
-                    SpacerPadding()
                 }
-            }
-
-            Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.End) {
                 Row {
                     Button(
                         {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             if ((newCustomVolume * 0.01 * maxVolume).roundToInt() == 0) {
-                                if (newCustomVolume.roundToInt() != 0) view.showSnackbar(R.string.system_media_volume_levels_limited)
+                                if (newCustomVolume.roundToInt() != 0) view.showSnackbar(R.string.volume_steps_limited)
                                 return@Button
                             } else {
                                 settingsSharedPref.customVolume = newCustomVolume.roundToInt()
@@ -152,7 +148,7 @@ fun CustomVolumeScreen(navController: NavHostController) {
                             }
                         },
                         elevation = ButtonDefaults.buttonElevation(1.dp)
-                    ) { Text(stringResource(android.R.string.ok)) }
+                    ) { Text(stringResource(R.string.save)) }
                 }
             }
         }
