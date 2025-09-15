@@ -11,8 +11,17 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.Search
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -30,7 +39,15 @@ import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_SEARCH
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.uicomponents.*
+import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
+import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
+import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
+import me.dizzykitty3.androidtoolkitty.uicomponents.ErrorTip
+import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
+import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnMarket
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSearch
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
@@ -310,7 +327,7 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
     }
 }
 
-private fun Context.onTapSearchButton(query: String, bingSearch: Boolean) {
+private fun Context.onTapSearchButton(query: String, bingSearch: Boolean = false) {
     if (query.isBlank()) return
     Timber.d("onTapSearchButton ${if (bingSearch) "Bing" else "Google"}")
     this.openSearch(query, bingSearch)

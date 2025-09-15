@@ -12,7 +12,41 @@ import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.Uri
 import android.provider.Settings
 import androidx.core.net.toUri
-import me.dizzykitty3.androidtoolkitty.*
+import me.dizzykitty3.androidtoolkitty.GOOGLE_MAPS
+import me.dizzykitty3.androidtoolkitty.GOOGLE_PLAY
+import me.dizzykitty3.androidtoolkitty.HTTPS
+import me.dizzykitty3.androidtoolkitty.MainActivity
+import me.dizzykitty3.androidtoolkitty.PACKAGE
+import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.S_ABOUT_PHONE
+import me.dizzykitty3.androidtoolkitty.S_ACCESSIBILITY
+import me.dizzykitty3.androidtoolkitty.S_ACCOUNTS
+import me.dizzykitty3.androidtoolkitty.S_ALARMS
+import me.dizzykitty3.androidtoolkitty.S_APP_NOTIFICATIONS
+import me.dizzykitty3.androidtoolkitty.S_AUTO_ROTATE
+import me.dizzykitty3.androidtoolkitty.S_BATTERY
+import me.dizzykitty3.androidtoolkitty.S_BATTERY_OPTIMIZATION
+import me.dizzykitty3.androidtoolkitty.S_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.S_CAPTION
+import me.dizzykitty3.androidtoolkitty.S_DATE
+import me.dizzykitty3.androidtoolkitty.S_DEFAULT_APPS
+import me.dizzykitty3.androidtoolkitty.S_DEVELOPER
+import me.dizzykitty3.androidtoolkitty.S_DISPLAY
+import me.dizzykitty3.androidtoolkitty.S_DND_ACCESS
+import me.dizzykitty3.androidtoolkitty.S_ENABLE_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.S_KEYBOARD
+import me.dizzykitty3.androidtoolkitty.S_LOCALE
+import me.dizzykitty3.androidtoolkitty.S_MEDIA_MANAGEMENT
+import me.dizzykitty3.androidtoolkitty.S_MODIFY_SYSTEM
+import me.dizzykitty3.androidtoolkitty.S_NFC
+import me.dizzykitty3.androidtoolkitty.S_NOTIFICATION_LISTENER
+import me.dizzykitty3.androidtoolkitty.S_OVERLAY
+import me.dizzykitty3.androidtoolkitty.S_SEARCH_SETTINGS
+import me.dizzykitty3.androidtoolkitty.S_SOUND
+import me.dizzykitty3.androidtoolkitty.S_UNKNOWN_APPS
+import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
+import me.dizzykitty3.androidtoolkitty.S_VPN
+import me.dizzykitty3.androidtoolkitty.S_WIFI
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
@@ -49,7 +83,7 @@ object IntentUtil {
         this.showToast(msg)
     }
 
-    fun Context.openSearch(query: String, bingSearch: Boolean) {
+    fun Context.openSearch(query: String, bingSearch: Boolean = false) {
         if (query.isBlank()) return
         Timber.d("openSearch")
         if (bingSearch) {
