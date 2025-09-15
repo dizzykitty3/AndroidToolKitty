@@ -1,14 +1,39 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
 import androidx.annotation.StringRes
-import me.dizzykitty3.androidtoolkitty.*
+import me.dizzykitty3.androidtoolkitty.BG
+import me.dizzykitty3.androidtoolkitty.CN
+import me.dizzykitty3.androidtoolkitty.COM
+import me.dizzykitty3.androidtoolkitty.COM_CN
+import me.dizzykitty3.androidtoolkitty.CO_AR
+import me.dizzykitty3.androidtoolkitty.CO_JP
+import me.dizzykitty3.androidtoolkitty.CO_UK
+import me.dizzykitty3.androidtoolkitty.EE
+import me.dizzykitty3.androidtoolkitty.HTTPS
+import me.dizzykitty3.androidtoolkitty.IR
+import me.dizzykitty3.androidtoolkitty.JP
+import me.dizzykitty3.androidtoolkitty.LA
+import me.dizzykitty3.androidtoolkitty.ME
+import me.dizzykitty3.androidtoolkitty.MX
+import me.dizzykitty3.androidtoolkitty.NET
+import me.dizzykitty3.androidtoolkitty.NZ
+import me.dizzykitty3.androidtoolkitty.ORG
+import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.RU
+import me.dizzykitty3.androidtoolkitty.SO
+import me.dizzykitty3.androidtoolkitty.TO
+import me.dizzykitty3.androidtoolkitty.TV
+import me.dizzykitty3.androidtoolkitty.US
+import me.dizzykitty3.androidtoolkitty.WIKI
 import timber.log.Timber
 
 object URLUtil {
+    fun String.addURLScheme(): String = if (this.contains("://")) this else "$HTTPS$this"
+
     /**
      * Adding the appropriate suffix and returning the full URL.
      */
-    fun String.toFullURL(): String {
+    fun String.addSuffix(): String {
         val suffix = this.getSuffix()
         Timber.d(
             if (suffix == COM)
@@ -16,8 +41,7 @@ object URLUtil {
             else
                 "suffix = $suffix"
         )
-        return if (this.contains(HTTPS)) "$this$suffix"
-        else "$HTTPS$this$suffix"
+        return "${this.addURLScheme()}$suffix"
     }
 
     fun String.getSuffix(): String {
@@ -48,7 +72,7 @@ object URLUtil {
         AFDIAN("afdian.com/a/", R.string.afdian),
         ARTSTATION("artstation.com/", R.string.artstation),
         BAHAMUT("gamer.com.tw/home/home.php?owner=", R.string.bahamut),
-        BILIBILI_SEARCH("m.bilibili.com/search?keyword=", R.string.bilibili_search),
+        BILIBILI_SEARCH("bilibili://search?keyword=", R.string.bilibili_search),
         BILIBILI_UUID("space.bilibili.com/", R.string.bilibili_uuid),
         BILIBILI_AV("bilibili.com/video/", R.string.bilibili_av_id),
         BILIBILI_BV("bilibili.com/video/", R.string.bilibili_bv_id),

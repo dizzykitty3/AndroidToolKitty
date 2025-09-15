@@ -57,8 +57,8 @@ import me.dizzykitty3.androidtoolkitty.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.isInvalidUsername
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.removeTrailingPeriod
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil
+import me.dizzykitty3.androidtoolkitty.utils.URLUtil.addSuffix
 import me.dizzykitty3.androidtoolkitty.utils.URLUtil.getSuffix
-import me.dizzykitty3.androidtoolkitty.utils.URLUtil.toFullURL
 import timber.log.Timber
 
 @Composable
@@ -342,7 +342,7 @@ private fun Context.onTapCheckOnYouTubeButton(query: String) {
 private fun Context.onTapVisitURLButton(url: String) {
     if (url.isBlank()) return
     Timber.d("onTapVisitURLButton")
-    this.openURL(url.removeTrailingPeriod().toFullURL())
+    this.openURL(url.removeTrailingPeriod().addSuffix())
 }
 
 private fun Context.onTapVisitProfileButton(username: String, platformIndex: Int) {

@@ -14,7 +14,6 @@ import android.provider.Settings
 import androidx.core.net.toUri
 import me.dizzykitty3.androidtoolkitty.GOOGLE_MAPS
 import me.dizzykitty3.androidtoolkitty.GOOGLE_PLAY
-import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.PACKAGE
 import me.dizzykitty3.androidtoolkitty.R
@@ -50,6 +49,7 @@ import me.dizzykitty3.androidtoolkitty.S_WIFI
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.dropSpaces
 import me.dizzykitty3.androidtoolkitty.utils.ToastUtil.showToast
+import me.dizzykitty3.androidtoolkitty.utils.URLUtil.addURLScheme
 import timber.log.Timber
 
 object IntentUtil {
@@ -109,7 +109,7 @@ object IntentUtil {
         if (url.isBlank()) return
         Timber.d("openURL")
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = (if (url.contains(HTTPS)) url else "$HTTPS$url").toUri()
+        intent.data = url.addURLScheme().toUri()
         this.launch(intent)
     }
 
