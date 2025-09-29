@@ -63,8 +63,18 @@ object IntentUtil {
             this.startActivity(intent)
             return
         } catch (e: ActivityNotFoundException) {
-            Timber.e("brand = ${StringUtil.manufacturer}\nintent = ${intent}\n$e")
-            msg = this.getString(R.string.oem_removed, StringUtil.manufacturer)
+            if (intent.data.toString().startsWith("bilibili://search?keyword=")) {
+                // Handle bilibili search
+                this.openURL(
+                    "m.bilibili.com/search?keyword=${
+                        intent.data.toString().removePrefix("bilibili://search?keyword=")
+                    }"
+                )
+                return
+            } else {
+                Timber.e("brand = ${StringUtil.manufacturer}\nintent = ${intent}\n$e")
+                msg = this.getString(R.string.oem_removed, StringUtil.manufacturer)
+            }
         }
 
         when (intent.`package`) {
@@ -174,11 +184,20 @@ object IntentUtil {
 
             S_UNKNOWN_APPS -> @SuppressLint("InlinedApi") if (OSVersion.android8()) Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES) else return
             S_ALARMS -> @SuppressLint("InlinedApi") if (OSVersion.android12()) Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM) else return
-            S_MEDIA_MANAGEMENT -> @SuppressLint("InlinedApi") if (OSVersion.android12()) Intent(Settings.ACTION_REQUEST_MANAGE_MEDIA) else return
-            S_APP_NOTIFICATIONS -> @SuppressLint("InlinedApi") if (OSVersion.android13()) Intent(Settings.ACTION_ALL_APPS_NOTIFICATION_SETTINGS) else return
+            S_MEDIA_MANAGEMENT -> @SuppressLint("InlinedApi") if (OSVersion.android12()) Intent(
+                Settings.ACTION_REQUEST_MANAGE_MEDIA
+            ) else return
+
+            S_APP_NOTIFICATIONS -> @SuppressLint("InlinedApi") if (OSVersion.android13()) Intent(
+                Settings.ACTION_ALL_APPS_NOTIFICATION_SETTINGS
+            ) else return
+
             S_ACCOUNTS -> Intent(Settings.ACTION_SYNC_SETTINGS)
             S_VPN -> @SuppressLint("InlinedApi") if (OSVersion.android7()) Intent(Settings.ACTION_VPN_SETTINGS) else return
-            S_SEARCH_SETTINGS -> @SuppressLint("InlinedApi") if (OSVersion.android10()) Intent(Settings.ACTION_APP_SEARCH_SETTINGS) else return
+            S_SEARCH_SETTINGS -> @SuppressLint("InlinedApi") if (OSVersion.android10()) Intent(
+                Settings.ACTION_APP_SEARCH_SETTINGS
+            ) else return
+
             S_SOUND -> Intent(Settings.ACTION_SOUND_SETTINGS)
             S_ABOUT_PHONE -> Intent(Settings.ACTION_DEVICE_INFO_SETTINGS)
             S_KEYBOARD -> Intent(Settings.ACTION_INPUT_METHOD_SETTINGS)
