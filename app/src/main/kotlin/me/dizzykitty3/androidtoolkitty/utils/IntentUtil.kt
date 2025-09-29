@@ -95,7 +95,7 @@ object IntentUtil {
 
     fun Context.openSearch(query: String, bingSearch: Boolean = false) {
         if (query.isBlank()) return
-        Timber.d("openSearch")
+        Timber.d("openSearch, bingSearch = $bingSearch")
         if (bingSearch) {
             this.openURL("https://bing.com/search?q=$query")
         } else {
@@ -105,12 +105,12 @@ object IntentUtil {
         }
     }
 
-    fun Context.searchOnYouTube(query: String) {
+    fun Context.searchOnYouTube(query: String, bingSearch: Boolean = false) {
         if (query.isBlank()) return
-        Timber.d("searchOnYouTube")
+        Timber.d("searchOnYouTube, bingSearch = $bingSearch")
         val intent = Intent(
             Intent.ACTION_VIEW,
-            "https://youtube.com/results?search_query=$query".toUri()
+            if (bingSearch) "https://youtube.com/results?search_query=$query".toUri() else "bilibili://search?keyword=$query".toUri()
         )
         this.launch(intent)
     }

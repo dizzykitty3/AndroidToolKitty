@@ -99,6 +99,7 @@
     <string name="wavebox">Wavebox</string>
     <string name="carrd">Carrd</string>
     <string name="search_on_youtube">Search on YouTube</string>
+    <string name="search_on_bilibili">Search on bilibili</string>
     <string name="linktree">Linktree</string>
     <string name="misskey">Misskey</string>
     <string name="reddit_subreddit">Reddit (subreddit)</string>

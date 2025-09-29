@@ -137,7 +137,7 @@ private fun Search(settingsViewModel: SettingsViewModel) {
             focus.clearFocus()
             view.context.onTapCheckOnYouTubeButton(searchQuery)
         }) {
-            Text(stringResource(R.string.search_on_youtube))
+            Text(stringResource(if (switchToBingSearch) R.string.search_on_bilibili else R.string.search_on_youtube))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,
