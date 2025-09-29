@@ -110,7 +110,7 @@ object IntentUtil {
         Timber.d("searchOnYouTube, bingSearch = $bingSearch")
         val intent = Intent(
             Intent.ACTION_VIEW,
-            if (bingSearch) "https://youtube.com/results?search_query=$query".toUri() else "bilibili://search?keyword=$query".toUri()
+            if (bingSearch) "bilibili://search?keyword=$query".toUri() else "https://youtube.com/results?search_query=$query".toUri()
         )
         this.launch(intent)
     }

@@ -135,7 +135,7 @@ private fun Search(settingsViewModel: SettingsViewModel) {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.onTapCheckOnYouTubeButton(searchQuery)
+            view.context.onTapCheckOnYouTubeButton(searchQuery, switchToBingSearch)
         }) {
             Text(stringResource(if (switchToBingSearch) R.string.search_on_bilibili else R.string.search_on_youtube))
             Icon(
@@ -333,10 +333,10 @@ private fun Context.onTapSearchButton(query: String, bingSearch: Boolean = false
     this.openSearch(query, bingSearch)
 }
 
-private fun Context.onTapCheckOnYouTubeButton(query: String) {
+private fun Context.onTapCheckOnYouTubeButton(query: String, bingSearch: Boolean = false) {
     if (query.isBlank()) return
     Timber.d("onTapCheckOnYouTubeButton")
-    this.searchOnYouTube(query)
+    this.searchOnYouTube(query, bingSearch)
 }
 
 private fun Context.onTapVisitURLButton(url: String) {
