@@ -28,13 +28,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TooltipAnchorPosition
-import androidx.compose.material3.TooltipBox
-import androidx.compose.material3.TooltipDefaults
-import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -133,27 +128,18 @@ private fun TopBar(navController: NavHostController, isTablet: Boolean = false) 
 private fun SettingsButton(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
 
-    TooltipBox(
-        positionProvider = TooltipDefaults.rememberTooltipPositionProvider(TooltipAnchorPosition.Above),
-        tooltip = {
+    IconButton(
+        onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            PlainTooltip { Text(stringResource(R.string.settings)) }
+            navController.navigate(SCR_SETTINGS)
         },
-        state = rememberTooltipState(),
+        modifier = Modifier.size(40.dp)
     ) {
-        IconButton(
-            onClick = {
-                haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                navController.navigate(SCR_SETTINGS)
-            },
-            modifier = Modifier.size(40.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Default.Settings,
-                contentDescription = stringResource(R.string.settings),
-                tint = MaterialTheme.colorScheme.primary
-            )
-        }
+        Icon(
+            imageVector = Icons.Default.Settings,
+            contentDescription = stringResource(R.string.settings),
+            tint = MaterialTheme.colorScheme.primary
+        )
     }
 }
 
@@ -268,7 +254,10 @@ private fun HomeCards(settingsViewModel: SettingsViewModel, navController: NavHo
 }
 
 @Composable
-private fun TwoColumnHomeCards(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun TwoColumnHomeCards(
+    settingsViewModel: SettingsViewModel,
+    navController: NavHostController
+) {
     val cardPadding = dimensionResource(R.dimen.padding_card_space)
     val largeCardPadding = dimensionResource(R.dimen.padding_card_space_large)
     val cardMap = getCardMap(SettingsSharedPref)
@@ -292,7 +281,11 @@ private fun getCardMap(settingsSharedPref: SettingsSharedPref): List<String> = l
 ).associateWith { card -> settingsSharedPref.getShownState(card) }.filter { it.value }.keys.toList()
 
 @Composable
-private fun CardContent(cardName: String, settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun CardContent(
+    cardName: String,
+    settingsViewModel: SettingsViewModel,
+    navController: NavHostController
+) {
     when (cardName) {
         CARD_1 -> YearProgress()
         CARD_2 -> Volume(navController)
