@@ -8,8 +8,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
-import com.mikepenz.aboutlibraries.ui.compose.android.rememberLibraries
+import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.ui.compose.m3.LibrariesContainer
+import com.mikepenz.aboutlibraries.util.withContext
+import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.uicomponents.TopBar
 
 @Composable
@@ -21,7 +23,7 @@ fun Licenses(navController: NavHostController) {
     ) {
         Column {
             TopBar(navController = navController)
-            LibrariesContainer(libraries = rememberLibraries().value)
+            LibrariesContainer(libraries = Libs.Builder().withContext(appContext).build())
         }
     }
 }
