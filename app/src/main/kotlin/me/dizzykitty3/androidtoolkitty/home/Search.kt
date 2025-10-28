@@ -81,7 +81,6 @@ fun SearchScreen(settingsViewModel: SettingsViewModel, navController: NavHostCon
         Card(R.string.webpage) { Webpage() }
         Card(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }
         Card(R.string.check_app_on_market) { CheckAppOnMarket() }
-        Card(R.string.search) { Search(settingsViewModel) }
     }
 
 @Composable
