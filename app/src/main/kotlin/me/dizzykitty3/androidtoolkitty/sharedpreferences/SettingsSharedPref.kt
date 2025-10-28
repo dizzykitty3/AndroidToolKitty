@@ -21,6 +21,7 @@ object SettingsSharedPref {
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
 
     private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
+    private const val TYPING_CONTENTS = "typing_contents"
 
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -67,6 +68,10 @@ object SettingsSharedPref {
     var customVolumeOptionLabel: String?
         get() = getPreference(VOLUME_OPTION_LABEL, "")
         set(value) = setPreference(VOLUME_OPTION_LABEL, value)
+
+    var typingContents: String
+        get() = getPreference(TYPING_CONTENTS, "")
+        set(value) = setPreference(TYPING_CONTENTS, value)
 
     fun getWheelOfFortuneItems(): List<String>? {
         val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null

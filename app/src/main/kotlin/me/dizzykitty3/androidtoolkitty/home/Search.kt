@@ -39,6 +39,7 @@ import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_SEARCH
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
@@ -88,12 +89,16 @@ private fun Search(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
-    var searchQuery by remember { mutableStateOf("") }
+    val settingsSharedPref = remember { SettingsSharedPref }
+    var searchQuery by remember { mutableStateOf(settingsSharedPref.typingContents) }
     var switchToBingSearch by remember { mutableStateOf(settingsViewModel.settings.value.switchToBingSearch) }
 
     OutlinedTextField(
         value = searchQuery,
-        onValueChange = { searchQuery = it },
+        onValueChange = {
+            searchQuery = it
+            settingsSharedPref.typingContents = it
+        },
         label = { Text(stringResource(R.string.query)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -109,6 +114,7 @@ private fun Search(settingsViewModel: SettingsViewModel) {
             ClearInput(searchQuery) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 searchQuery = ""
+                settingsSharedPref.typingContents = ""
             }
         },
     )
@@ -152,7 +158,8 @@ private fun Webpage() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
-    var url by remember { mutableStateOf("") }
+    val settingsSharedPref = remember { SettingsSharedPref }
+    var url by remember { mutableStateOf(settingsSharedPref.typingContents) }
     val fullWidthPeriod = "。"
     val halfWidthPeriod = "."
     val fullWidthSpace = "　"
@@ -165,6 +172,7 @@ private fun Webpage() {
                 .replace(fullWidthPeriod, halfWidthPeriod)
                 .replace(halfWidthSpace, halfWidthPeriod)
                 .replace(fullWidthSpace, halfWidthPeriod)
+            settingsSharedPref.typingContents = url
         },
         label = { Text(stringResource(R.string.url)) },
         modifier = Modifier.fillMaxWidth(),
@@ -182,6 +190,7 @@ private fun Webpage() {
             ClearInput(url) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 url = ""
+                settingsSharedPref.typingContents = ""
             }
         },
         supportingText = {
@@ -232,7 +241,8 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
-    var username by remember { mutableStateOf("") }
+    val settingsSharedPref = remember { SettingsSharedPref }
+    var username by remember { mutableStateOf(settingsSharedPref.typingContents) }
     var platformIndex by remember { mutableIntStateOf(settingsViewModel.settings.value.lastSelectedPlatformIndex) }
     val platform = URLUtil.Platform.entries[platformIndex]
     val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
@@ -246,7 +256,10 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
 
     OutlinedTextField(
         value = username,
-        onValueChange = { username = it },
+        onValueChange = {
+            username = it
+            settingsSharedPref.typingContents = it
+        },
         label = { Text(stringResource(R.string.username)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -271,6 +284,7 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
             ClearInput(username) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 username = ""
+                settingsSharedPref.typingContents = ""
             }
         },
         supportingText = {
@@ -419,11 +433,15 @@ private fun CheckAppOnMarket() {
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
-    var packageName by remember { mutableStateOf("") }
+    val settingsSharedPref = remember { SettingsSharedPref }
+    var packageName by remember { mutableStateOf(settingsSharedPref.typingContents) }
 
     OutlinedTextField(
         value = packageName,
-        onValueChange = { packageName = it },
+        onValueChange = {
+            packageName = it
+            settingsSharedPref.typingContents = it
+        },
         label = { Text(stringResource(R.string.package_name_or_search)) },
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
@@ -439,6 +457,7 @@ private fun CheckAppOnMarket() {
             ClearInput(packageName) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 packageName = ""
+                settingsSharedPref.typingContents = ""
             }
         }
     )
