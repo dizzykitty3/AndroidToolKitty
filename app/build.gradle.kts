@@ -24,8 +24,8 @@ android {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 21
         targetSdk = compileSdk
-        versionCode = 11400
-        versionName = "1.14.0"
+        versionCode = 11500
+        versionName = "1.15.0"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
