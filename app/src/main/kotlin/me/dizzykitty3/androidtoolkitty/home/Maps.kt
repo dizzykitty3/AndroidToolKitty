@@ -29,6 +29,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnGoogleMaps
@@ -43,12 +44,16 @@ fun Maps() {
         val haptic = LocalHapticFeedback.current
         val focusRequester1 = remember { FocusRequester() }
         val focusRequester2 = remember { FocusRequester() }
-        var latitude by remember { mutableStateOf("") }
-        var longitude by remember { mutableStateOf("") }
+        val settingsSharedPref = remember { SettingsSharedPref }
+        var latitude by remember { mutableStateOf(settingsSharedPref.latitude) }
+        var longitude by remember { mutableStateOf(settingsSharedPref.longitude) }
 
         OutlinedTextField(
             value = latitude,
-            onValueChange = { latitude = it },
+            onValueChange = {
+                latitude = it
+                settingsSharedPref.latitude = it
+            },
             suffix = {
                 Text(
                     latitude.getLatitudeSuffix(),
@@ -78,13 +83,17 @@ fun Maps() {
                 ClearInput(latitude) {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     latitude = ""
+                    settingsSharedPref.latitude = ""
                 }
             },
         )
 
         OutlinedTextField(
             value = longitude,
-            onValueChange = { longitude = it },
+            onValueChange = {
+                longitude = it
+                settingsSharedPref.longitude = it
+            },
             suffix = {
                 Text(
                     longitude.getLongitudeSuffix(),
@@ -114,6 +123,7 @@ fun Maps() {
                 ClearInput(longitude) {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     longitude = ""
+                    settingsSharedPref.longitude = ""
                 }
             },
         )
