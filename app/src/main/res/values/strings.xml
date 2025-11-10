@@ -204,11 +204,13 @@
 
     <!-- Home > Maps -->
     <string name="maps">Maps</string>
-    <string name="lat">lat</string>
-    <string name="lng">lng</string>
+    <string name="latitude">latitude</string>
+    <string name="longitude">longitude</string>
     <string name="google_maps_not_installed">Google Maps is not installed</string>
     <string name="google_play_not_installed">Google Play is not installed</string>
-    <string name="open_google_maps">Open Google Maps</string>
+    <string name="latitude_description">-90° to +90°</string>
+    <string name="longitude_description">-180° to +180°</string>
+    <string name="google_maps">Google Maps</string>
 
     <!-- Home > Font weight -->
     <string name="font_weight">Font weight</string>
