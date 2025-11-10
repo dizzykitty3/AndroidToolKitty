@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.home
 
 import android.content.Context
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
@@ -288,13 +287,11 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
             }
         },
         supportingText = {
-            Column {
-                Text(
-                    toProfileFullURL(platform, username),
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
-                )
-            }
+            Text(
+                toProfileFullURL(platform, username),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
+            )
         }
     )
 
