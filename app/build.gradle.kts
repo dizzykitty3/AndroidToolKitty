@@ -22,7 +22,8 @@ android {
     }
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
-        minSdk = 21
+        // minSdkVersion 21 cannot be smaller than version 23 declared in library [androidx.navigationevent:navigationevent-android:1.0.0]
+        minSdk = 23
         targetSdk = compileSdk
         versionCode = 11500
         versionName = "1.15.0"
@@ -109,6 +110,8 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.google.hilt.android)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.serialization)
