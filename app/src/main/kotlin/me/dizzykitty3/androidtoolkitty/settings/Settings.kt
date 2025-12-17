@@ -38,6 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.CARD_3
+import me.dizzykitty3.androidtoolkitty.CARD_4
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_EDIT_HOME
 import me.dizzykitty3.androidtoolkitty.SCR_LICENSES
@@ -127,6 +128,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     var autoClearClipboard by remember { mutableStateOf(settingsViewModel.settings.value.autoClearClipboard) }
     var switchToBingSearch by remember { mutableStateOf(settingsViewModel.settings.value.switchToBingSearch) }
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getShownState(CARD_3)) }
+    var showSearchCard by remember { mutableStateOf(settingsSharedPref.getShownState(CARD_4)) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
 
@@ -156,14 +158,16 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     }
 
     // Switch to Bing Search
-    CustomSwitchRow(
-        icon = Icons.Outlined.Search,
-        title = R.string.switch_to_bing_search,
-        checked = switchToBingSearch
-    ) {
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        switchToBingSearch = it
-        settingsViewModel.update(settingsViewModel.settings.value.copy(switchToBingSearch = it))
+    if (showSearchCard) {
+        CustomSwitchRow(
+            icon = Icons.Outlined.Search,
+            title = R.string.switch_to_bing_search,
+            checked = switchToBingSearch
+        ) {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            switchToBingSearch = it
+            settingsViewModel.update(settingsViewModel.settings.value.copy(switchToBingSearch = it))
+        }
     }
 
     // edit home
