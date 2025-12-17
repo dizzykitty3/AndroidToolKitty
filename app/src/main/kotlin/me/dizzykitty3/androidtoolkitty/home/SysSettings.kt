@@ -146,32 +146,24 @@ fun SysSettings(navController: NavHostController) {
         if (count == 0) {
             Text(buildAnnotatedString { ItalicText(R.string.no_options_enabled) })
         } else if (count <= 2) {
-            Row(Modifier.horizontalScroll(rememberScrollState())) {
-                shownSettings.subList(0, count).forEach { setting ->
-                    SystemSettingButton(
-                        setting.settingType,
-                        setting.text
-                    )
-                }
+            shownSettings.subList(0, count).forEach { setting ->
+                SystemSettingButton(
+                    setting.settingType,
+                    setting.text
+                )
             }
         } else {
-            Column(Modifier.horizontalScroll(rememberScrollState())) {
-                Row {
-                    shownSettings.subList(0, 2).forEach { setting ->
-                        SystemSettingButton(
-                            setting.settingType,
-                            setting.text
-                        )
-                    }
-                }
-                Row {
-                    shownSettings.subList(2, minOf(4, count)).forEach { setting ->
-                        SystemSettingButton(
-                            setting.settingType,
-                            setting.text
-                        )
-                    }
-                }
+            shownSettings.subList(0, 2).forEach { setting ->
+                SystemSettingButton(
+                    setting.settingType,
+                    setting.text
+                )
+            }
+            shownSettings.subList(2, minOf(4, count)).forEach { setting ->
+                SystemSettingButton(
+                    setting.settingType,
+                    setting.text
+                )
             }
         }
     }

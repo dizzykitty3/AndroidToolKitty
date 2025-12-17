@@ -135,8 +135,7 @@ private fun SettingsButton(navController: NavHostController) {
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_SETTINGS)
-        },
-        modifier = Modifier.size(40.dp)
+        }
     ) {
         Icon(
             imageVector = Icons.Default.Settings,
