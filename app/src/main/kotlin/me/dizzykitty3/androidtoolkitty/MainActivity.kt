@@ -8,8 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
-import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
-import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,17 +40,13 @@ class MainActivity : ComponentActivity() {
             settingsViewModel = hiltViewModel<SettingsViewModel>()
             isAutoClearClipboard = settingsViewModel.settings.value.autoClearClipboard
 
-            val widthSizeClass = calculateWindowSizeClass(this).widthSizeClass
-            val widthType: Int = if (widthSizeClass == WindowWidthSizeClass.Compact) 1 else 2
-
             AppTheme(
                 dynamicColor = settingsViewModel.settings.value.dynamicColor
             ) {
                 Scaffold(Modifier.fillMaxSize()) { innerPadding ->
                     AppNavHost(
                         Modifier.padding(top = innerPadding.calculateTopPadding()),
-                        settingsViewModel,
-                        widthType
+                        settingsViewModel
                     )
                 }
             }
