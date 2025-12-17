@@ -97,7 +97,7 @@ fun SysSettings(navController: NavHostController) {
             Setting(S_ACCOUNTS, R.string.accounts),
             Setting(S_VPN, R.string.vpn),
             Setting(S_NFC, R.string.nfc),
-            // Permission
+            // Permissions
             Setting(S_APP_NOTIFICATIONS, R.string.app_notifications),
             Setting(S_UNKNOWN_APPS, R.string.install_unknown_apps),
             Setting(S_MEDIA_MANAGEMENT, R.string.media_management),
@@ -189,7 +189,7 @@ fun SysSettingsScreen(navController: NavHostController) {
             Setting(S_ACCOUNTS, R.string.accounts),
             Setting(S_VPN, R.string.vpn),
             Setting(S_NFC, R.string.nfc),
-            // Permission
+            // Permissions
             Setting(S_APP_NOTIFICATIONS, R.string.app_notifications),
             Setting(S_UNKNOWN_APPS, R.string.install_unknown_apps),
             Setting(S_MEDIA_MANAGEMENT, R.string.media_management),
@@ -268,7 +268,7 @@ fun SysSettingsScreen(navController: NavHostController) {
                 )
             }
         }
-        Card(R.string.permission) {
+        Card(R.string.permissions) {
             settings.subList(i1, i2).forEach { setting ->
                 SystemSettingButton(
                     setting.settingType,
