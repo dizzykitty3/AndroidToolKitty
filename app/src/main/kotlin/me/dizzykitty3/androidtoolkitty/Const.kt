@@ -72,6 +72,9 @@ const val S_NFC = "setting_nfc"
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 const val BT = Manifest.permission.BLUETOOTH
 const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
+
+@SuppressLint("InlinedApi")
+const val POST_NOTIFICATIONS = Manifest.permission.POST_NOTIFICATIONS
 const val GRANTED = PackageManager.PERMISSION_GRANTED
 
 // Android package names
