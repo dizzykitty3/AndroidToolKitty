@@ -22,7 +22,6 @@ android {
     }
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
-        // minSdkVersion 21 cannot be smaller than version 23 declared in library [androidx.navigationevent:navigationevent-android:1.0.0]
         minSdk = 23
         targetSdk = compileSdk
         versionCode = 11500

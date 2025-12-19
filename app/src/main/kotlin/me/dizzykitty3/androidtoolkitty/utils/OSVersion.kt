@@ -57,7 +57,7 @@ object OSVersion {
     fun android13(): Boolean = osVersion >= Build.VERSION_CODES.TIRAMISU
 
     /**
-     * S V2 32
+     * Sv2 32
      */
     fun android12L(): Boolean = osVersion >= Build.VERSION_CODES.S_V2
 
@@ -98,6 +98,7 @@ object OSVersion {
      * 1. Adaptive icons
      * 2. LocalTime.now()
      * 3. Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES)
+     * 4. Create a Notification Channel
      */
     fun android8(): Boolean = osVersion >= Build.VERSION_CODES.O
 
@@ -118,6 +119,7 @@ object OSVersion {
      * 5. Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
      * 6. Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
      * 7. Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+     * 8. minSdkVersion 23 declared in library [androidx.navigationevent:navigationevent-android:1.0.0]
      */
     fun android6(): Boolean = osVersion >= Build.VERSION_CODES.M
 
