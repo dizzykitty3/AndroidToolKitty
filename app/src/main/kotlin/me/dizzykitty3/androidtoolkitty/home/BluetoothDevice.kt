@@ -10,7 +10,12 @@ import androidx.compose.material.icons.outlined.BluetoothConnected
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -44,7 +49,7 @@ fun BluetoothDevice(navController: NavHostController) {
         OutlinedButton(onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
 
-            // Check permission
+            // Check permissions
             if (view.context.noBluetoothPermission()) {
                 navController.navigate(SCR_PERMISSION_REQUEST)
                 return@OutlinedButton

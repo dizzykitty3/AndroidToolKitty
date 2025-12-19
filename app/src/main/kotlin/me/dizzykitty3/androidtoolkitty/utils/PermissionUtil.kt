@@ -20,7 +20,7 @@ object PermissionUtil {
 
     /**
      * Remember to use Activity Context to check/request permissions.
-     * DO NOT use AppContext.check(_) which will cause a ClassCastException.
+     * DO NOT use AppContext.request(_) which will cause a ClassCastException.
      */
     private fun Context.request(permission: Array<String>) =
         ActivityCompat.requestPermissions(this as Activity, permission, 1)
