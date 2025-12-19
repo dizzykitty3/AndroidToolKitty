@@ -96,6 +96,7 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
         if (debug) item {
             DevBuildTip()
             CardSpacePadding()
+            Test()
         }
         item { HomeCards(settingsViewModel, navController) }
         item { ScreenPadding() }
