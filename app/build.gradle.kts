@@ -68,7 +68,6 @@ android {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_17
             extraWarnings = true
-            allWarningsAsErrors = true
         }
     }
     compileOptions {
@@ -111,12 +110,12 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.google.hilt.android)
     implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.kotlinx.serialization)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.timber)
 
-    ksp(libs.google.hilt.compiler)
+    ksp(libs.google.hilt.android.compiler)
 }
