@@ -1,5 +1,5 @@
 [versions]
-aboutLibraries = "13.1.0" # https://github.com/mikepenz/AboutLibraries/releases
+aboutLibraries = "13.2.1" # https://github.com/mikepenz/AboutLibraries/releases
 activity = "1.12.2"
 agp = "8.13.2"
 compose = "1.7.8"
