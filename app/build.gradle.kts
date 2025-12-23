@@ -13,7 +13,9 @@ plugins {
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
     // remember to change the target api in manifest xml file
-    compileSdk = 36
+    compileSdk {
+        version = release(36)
+    }
     buildToolsVersion = "36.0.0"
 
     buildFeatures {
