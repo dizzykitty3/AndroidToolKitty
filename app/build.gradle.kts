@@ -12,7 +12,7 @@ plugins {
 
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
-    // remember to change the target api in manifest xml file
+    // remember to change the target api in manifest XML file
     compileSdk {
         version = release(36)
     }
