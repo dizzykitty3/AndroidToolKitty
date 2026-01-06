@@ -61,7 +61,7 @@ fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostControl
     Screen(R.string.settings, navController) {
         if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance(settingsViewModel) }
         BaseCard(R.string.general) { General(settingsViewModel, navController) }
-        BaseCard(R.string.others) { Bottom(navController) }
+        BaseCard(R.string.others) { OtherSettings(navController) }
     }
 }
 
@@ -206,7 +206,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
 }
 
 @Composable
-private fun Bottom(navController: NavHostController) {
+private fun OtherSettings(navController: NavHostController) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
 
