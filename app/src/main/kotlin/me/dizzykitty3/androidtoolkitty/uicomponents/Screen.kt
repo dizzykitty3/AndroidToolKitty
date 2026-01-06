@@ -49,7 +49,7 @@ fun Screen(
         ) {
             item { TopBar(screenTitle, navController) }
             item { content() }
-            item { ScreenPadding() }
+            item { BottomPadding() }
         }
     }
 }

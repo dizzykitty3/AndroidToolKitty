@@ -24,6 +24,7 @@ object SettingsSharedPref {
     private const val TYPING_CONTENTS = "typing_contents"
     private const val LATITUDE = "latitude"
     private const val LONGITUDE = "longitude"
+    private const val BOTTOM_PADDING_DP = "bottom_padding_dp"
 
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -82,6 +83,10 @@ object SettingsSharedPref {
     var longitude: String
         get() = getPreference(LONGITUDE, "")
         set(value) = setPreference(LONGITUDE, value)
+
+    var buttonPaddingDp: Float
+        get() = getPreference(BOTTOM_PADDING_DP, 0F)
+        set(value) = setPreference(BOTTOM_PADDING_DP, value)
 
     fun getWheelOfFortuneItems(): List<String>? {
         val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null

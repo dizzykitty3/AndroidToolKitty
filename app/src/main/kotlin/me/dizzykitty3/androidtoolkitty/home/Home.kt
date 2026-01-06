@@ -63,9 +63,9 @@ import me.dizzykitty3.androidtoolkitty.S_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.S_WIFI
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.uicomponents.BottomPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.DevBuildTip
-import me.dizzykitty3.androidtoolkitty.uicomponents.ScreenPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.headsetNotConnected
@@ -99,7 +99,7 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
             Test()
         }
         item { HomeCards(settingsViewModel, navController) }
-        item { ScreenPadding() }
+        item { BottomPadding() }
     }
 }
 
@@ -114,7 +114,10 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
             Box(Modifier.weight(1f)) { TopBar(navController, isTablet = true) }
         }
         SpacerPadding()
-        if (debug) DevBuildTip()
+        if (debug) {
+            DevBuildTip()
+            Text("bottom padding dp: ${SettingsSharedPref.buttonPaddingDp}")
+        }
         TwoColumnHomeCards(settingsViewModel, navController)
     }
 }
@@ -281,8 +284,7 @@ private fun TwoColumnHomeCards(
         items(cardMap) { cardName ->
             CardContent(cardName, settingsViewModel, navController)
         }
-        item { ScreenPadding() }
-        item { ScreenPadding() }
+        item { BottomPadding() }
     }
 }
 

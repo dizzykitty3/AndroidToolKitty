@@ -4,11 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -16,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
+import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -46,8 +50,13 @@ class MainActivity : ComponentActivity() {
                     Modifier.fillMaxSize(),
                     containerColor = MaterialTheme.colorScheme.surfaceContainer
                 ) { innerPadding ->
+                    SettingsSharedPref.buttonPaddingDp = innerPadding.calculateBottomPadding().value
                     AppNavHost(
-                        Modifier.padding(top = innerPadding.calculateTopPadding()),
+                        Modifier.padding(
+                            top = innerPadding.calculateTopPadding(),
+                            start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
+                            end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
+                        ),
                         settingsViewModel
                     )
                 }

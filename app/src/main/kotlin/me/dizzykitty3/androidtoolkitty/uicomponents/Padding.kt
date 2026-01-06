@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 
 @Composable
 private fun Res(@DimenRes padding: Int) = Spacer(Modifier.padding(dimensionResource(padding)))
@@ -24,4 +26,4 @@ fun SpacerPadding() = Res(R.dimen.padding_spacer)
 fun IconAndTextPadding() = Res(R.dimen.padding_icons_and_text)
 
 @Composable
-fun ScreenPadding() = Res(R.dimen.padding_screen)
+fun BottomPadding() = Spacer(Modifier.padding(SettingsSharedPref.buttonPaddingDp.dp))
