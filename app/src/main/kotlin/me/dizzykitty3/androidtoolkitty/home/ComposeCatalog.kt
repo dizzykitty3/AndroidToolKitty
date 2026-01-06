@@ -90,9 +90,9 @@ fun ComposeCatalogScreen(navController: NavHostController) {
             Color(MaterialTheme.colorScheme.surfaceBright, "surfaceBright")
             Color(MaterialTheme.colorScheme.surfaceDim, "surfaceDim")
             Color(MaterialTheme.colorScheme.surfaceContainer, "surfaceContainer")
-            Color(MaterialTheme.colorScheme.surfaceContainerHigh, "surfaceContainerHigh (AlertDialog)")
+            Color(MaterialTheme.colorScheme.surfaceContainerHigh, "surfaceContainerHigh")
             Color(MaterialTheme.colorScheme.surfaceContainerHighest, "surfaceContainerHighest")
-            Color(MaterialTheme.colorScheme.surfaceContainerLow, "surfaceContainerLow (ElevatedCard)")
+            Color(MaterialTheme.colorScheme.surfaceContainerLow, "surfaceContainerLow")
             Color(MaterialTheme.colorScheme.surfaceContainerLowest, "surfaceContainerLowest")
 
             CardSpacePadding()
