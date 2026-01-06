@@ -174,7 +174,9 @@ private fun ASCII() {
         },
     )
 
-    if (toASCIIResult != "") Text("${stringResource(R.string.result)} $toASCIIResult")
+    if (toASCIIResult != "") {
+        Text("${stringResource(R.string.result)} $toASCIIResult")
+    }
 
     TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -195,10 +197,15 @@ private fun View.onClickConvertButton(
     isUnicodeToChar: Boolean
 ) {
     if (input.isBlank()) return
+
     Timber.d("onClickConvertButton")
+
     try {
-        val result = if (isUnicodeToChar) StringUtil.unicodeToCharacter(input)
-        else StringUtil.characterToUnicode(input)
+        val result = if (isUnicodeToChar)
+            StringUtil.unicodeToCharacter(input)
+        else
+            StringUtil.characterToUnicode(input)
+
         updateResult(result)
         ClipboardUtil.copy(result)
         this.showSnackbar("$result ${appContext.getString(R.string.copied)}")

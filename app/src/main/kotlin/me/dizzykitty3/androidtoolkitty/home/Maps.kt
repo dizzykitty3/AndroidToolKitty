@@ -145,7 +145,11 @@ fun Maps() {
 }
 
 private fun Context.onClickOpenGoogleMapsButton(latitude: String, longitude: String) {
-    if (latitude.isBlank() || longitude.isBlank() || latitude.toValidFloat().absoluteValue > 90 || longitude.toValidFloat().absoluteValue > 180) return
+    if (latitude.isBlank() || longitude.isBlank()
+        || latitude.toValidFloat().absoluteValue > 90
+        || longitude.toValidFloat().absoluteValue > 180
+    ) return
+
     Timber.d("onClickOpenGoogleMapsButton")
     this.checkOnGoogleMaps(latitude, longitude)
 }

@@ -31,6 +31,7 @@ object NotificationUtil {
                 appContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
+
         if (context.noNotificationPermission()) {
             context.requestNotificationPermission()
         }

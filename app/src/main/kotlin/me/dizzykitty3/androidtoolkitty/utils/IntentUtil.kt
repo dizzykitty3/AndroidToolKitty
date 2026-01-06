@@ -95,6 +95,7 @@ object IntentUtil {
 
     fun Context.openSearch(query: String, bingSearch: Boolean = false) {
         if (query.isBlank()) return
+
         Timber.d("openSearch, bingSearch = $bingSearch")
         if (bingSearch) {
             this.openURL("https://bing.com/search?q=$query")
@@ -107,6 +108,7 @@ object IntentUtil {
 
     fun Context.searchOnYouTube(query: String, bingSearch: Boolean = false) {
         if (query.isBlank()) return
+
         Timber.d("searchOnYouTube, bingSearch = $bingSearch")
         val intent = Intent(
             Intent.ACTION_VIEW,
@@ -117,6 +119,7 @@ object IntentUtil {
 
     fun Context.openURL(url: String) {
         if (url.isBlank()) return
+
         Timber.d("openURL")
         val intent = Intent(Intent.ACTION_VIEW)
         intent.data = url.addURLScheme().toUri()
@@ -145,6 +148,7 @@ object IntentUtil {
 
     fun Context.checkOnGoogleMaps(latitude: String, longitude: String) {
         if (latitude.isBlank() || longitude.isBlank()) return
+
         Timber.d("checkOnGoogleMaps")
         val coordinates = "$latitude,$longitude"
         val googleMapsIntentUri = "geo:$coordinates?q=$coordinates".toUri()
@@ -225,6 +229,7 @@ object IntentUtil {
     @SuppressLint("InlinedApi")
     fun Context.openAppLanguageSetting() {
         if (!OSVersion.android13()) return
+
         Timber.d("openAppLanguageSetting")
         val intent = Intent(Settings.ACTION_APP_LOCALE_SETTINGS)
         intent.data = Uri.fromParts(PACKAGE, this.packageName, null)

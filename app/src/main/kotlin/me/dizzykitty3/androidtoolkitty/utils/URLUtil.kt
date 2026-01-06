@@ -41,11 +41,13 @@ object URLUtil {
             else
                 "suffix = $suffix"
         )
+
         return "${this.addURLScheme()}$suffix"
     }
 
     fun String.getSuffix(): String {
         if (this.contains(".")) return ""
+
         val suffixMap = mapOf(
             "remove" to BG, "feishu" to CN, "52pojie" to CN, "360" to CN, "mercadolibre" to CO_AR,
             "rakuten" to CO_JP, "dmm" to CO_JP, "autohome" to COM_CN, "zol" to COM_CN,
@@ -62,6 +64,7 @@ object URLUtil {
             "notion" to SO, "zoro" to TO, "1337x" to TO, "twitch" to TV, "jable" to TV,
             "zoom" to US, "namu" to WIKI
         )
+
         return suffixMap[this.lowercase()] ?: COM
     }
 

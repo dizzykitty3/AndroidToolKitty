@@ -11,7 +11,11 @@ import me.dizzykitty3.androidtoolkitty.utils.NotificationUtil
 fun Test() {
     Card(title = "test") {
         val view = LocalView.current
-        Button(onClick = { NotificationUtil.createNotificationChannel(view.context) }) { Text("create notification channel") }
+        Button(
+            onClick = { NotificationUtil.createNotificationChannel(view.context) }
+        ) {
+            Text("create notification channel")
+        }
         Button(onClick = { NotificationUtil.sendNotification() }) { Text("post notification") }
     }
 }

@@ -30,13 +30,17 @@ object PermissionUtil {
      */
     @CheckResult
     fun Context.noBluetoothPermission(): Boolean =
-        if (OSVersion.android12()) this.check(BT_CONNECT)
-        else this.check(BT) || this.check(BT_ADMIN)
+        if (OSVersion.android12())
+            this.check(BT_CONNECT)
+        else
+            this.check(BT) || this.check(BT_ADMIN)
 
     fun Context.requestBluetoothPermission() =
         this.request(
-            if (OSVersion.android12()) arrayOf(BT_CONNECT)
-            else arrayOf(BT, BT_ADMIN)
+            if (OSVersion.android12())
+                arrayOf(BT_CONNECT)
+            else
+                arrayOf(BT, BT_ADMIN)
         )
 
     /**

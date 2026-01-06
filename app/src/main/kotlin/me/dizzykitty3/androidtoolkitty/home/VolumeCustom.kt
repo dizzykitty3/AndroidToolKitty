@@ -74,10 +74,13 @@ fun CustomVolumeScreen(navController: NavHostController) {
                 onValueChange = {
                     if (morePreciseSlider)
                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    else haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                    else
+                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+
                     newCustomVolume = it
-                    if (mCustomVolume < 0 || (!mHaveCustomLabel))
+                    if (mCustomVolume < 0 || (!mHaveCustomLabel)) {
                         optionLabel = "${it.roundToInt()}%"
+                    }
                 },
                 valueRange = 0f..100f,
                 steps = if (morePreciseSlider) 0 else 9
@@ -133,7 +136,9 @@ fun CustomVolumeScreen(navController: NavHostController) {
                         {
                             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                             if ((newCustomVolume * 0.01 * maxVolume).roundToInt() == 0) {
-                                if (newCustomVolume.roundToInt() != 0) view.showSnackbar(R.string.volume_steps_limited)
+                                if (newCustomVolume.roundToInt() != 0) {
+                                    view.showSnackbar(R.string.volume_steps_limited)
+                                }
                                 return@Button
                             } else {
                                 settingsSharedPref.customVolume = newCustomVolume.roundToInt()
