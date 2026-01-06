@@ -33,7 +33,7 @@ import me.dizzykitty3.androidtoolkitty.CARD_8
 import me.dizzykitty3.androidtoolkitty.CARD_9
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
@@ -43,7 +43,7 @@ fun HomeEdit(navController: NavHostController) {
     Screen(navController = navController) {
         val sp = remember { SettingsSharedPref }
 
-        Card(R.string.customize_home_page) {
+        BaseCard(R.string.customize_home_page) {
             val haptic = LocalHapticFeedback.current
             var mIsShowCard1 by remember { mutableStateOf(sp.getShownState(CARD_1)) }
             var mIsShowCard2 by remember { mutableStateOf(sp.getShownState(CARD_2)) }

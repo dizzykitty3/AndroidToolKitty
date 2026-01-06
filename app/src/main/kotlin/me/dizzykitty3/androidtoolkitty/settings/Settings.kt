@@ -45,7 +45,7 @@ import me.dizzykitty3.androidtoolkitty.SCR_LICENSES
 import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.IconAndTextPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
@@ -59,9 +59,9 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Screen(R.string.settings, navController) {
-        if (OSVersion.android12()) Card(R.string.appearance) { Appearance(settingsViewModel) }
-        Card(R.string.general) { General(settingsViewModel, navController) }
-        Card(R.string.others) { Bottom(navController) }
+        if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance(settingsViewModel) }
+        BaseCard(R.string.general) { General(settingsViewModel, navController) }
+        BaseCard(R.string.others) { Bottom(navController) }
     }
 }
 
@@ -87,7 +87,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     if (OSVersion.android13()) {
         Surface(
             shape = RoundedCornerShape(8.dp),
-            color = MaterialTheme.colorScheme.surfaceContainerLow
+            color = MaterialTheme.colorScheme.surfaceBright
         ) {
             Column(
                 Modifier
@@ -173,7 +173,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     // edit home
     Surface(
         shape = RoundedCornerShape(8.dp),
-        color = MaterialTheme.colorScheme.surfaceContainerLow
+        color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
             Modifier
@@ -213,7 +213,7 @@ private fun Bottom(navController: NavHostController) {
     // source code
     Surface(
         shape = RoundedCornerShape(8.dp),
-        color = MaterialTheme.colorScheme.surfaceContainerLow
+        color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
             Modifier
@@ -247,7 +247,7 @@ private fun Bottom(navController: NavHostController) {
     // licenses
     Surface(
         shape = RoundedCornerShape(8.dp),
-        color = MaterialTheme.colorScheme.surfaceContainerLow
+        color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
             Modifier
@@ -281,7 +281,7 @@ private fun Bottom(navController: NavHostController) {
     // android app settings
     Surface(
         shape = RoundedCornerShape(8.dp),
-        color = MaterialTheme.colorScheme.surfaceContainerLow
+        color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
             Modifier

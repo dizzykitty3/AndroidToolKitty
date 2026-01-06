@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -41,7 +42,10 @@ class MainActivity : ComponentActivity() {
             AppTheme(
                 dynamicColor = settingsViewModel.settings.value.dynamicColor
             ) {
-                Scaffold(Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(
+                    Modifier.fillMaxSize(),
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer
+                ) { innerPadding ->
                     AppNavHost(
                         Modifier.padding(top = innerPadding.calculateTopPadding()),
                         settingsViewModel

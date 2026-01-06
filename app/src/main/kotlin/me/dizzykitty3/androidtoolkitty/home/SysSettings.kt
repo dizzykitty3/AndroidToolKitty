@@ -57,7 +57,7 @@ import me.dizzykitty3.androidtoolkitty.S_VPN
 import me.dizzykitty3.androidtoolkitty.S_WIFI
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.LabelAndValueTextRow
@@ -72,7 +72,7 @@ import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 @Composable
 fun SysSettings(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
-    Card(
+    BaseCard(
         title = R.string.system_settings,
         icon = Icons.Outlined.Settings,
         hasShowMore = true,
@@ -233,7 +233,7 @@ fun SysSettingsScreen(navController: NavHostController) {
         val i2 = settings.indexOf(Setting(S_ACCESSIBILITY, R.string.accessibility_settings)) + 1
         val i3 = settings.count()
 
-        Card(R.string.device_info) {
+        BaseCard(R.string.device_info) {
             Column(Modifier.fillMaxWidth()) {
                 LabelAndValueTextRow("manufacturer", StringUtil.manufacturer)
                 LabelAndValueTextRow("model", StringUtil.model)
@@ -260,7 +260,7 @@ fun SysSettingsScreen(navController: NavHostController) {
                 SystemSettingButton(S_ABOUT_PHONE, R.string.about_phone)
             }
         }
-        Card(R.string.general) {
+        BaseCard(R.string.general) {
             settings.subList(0, i1).forEach { setting ->
                 SystemSettingButton(
                     setting.settingType,
@@ -268,7 +268,7 @@ fun SysSettingsScreen(navController: NavHostController) {
                 )
             }
         }
-        Card(R.string.permissions) {
+        BaseCard(R.string.permissions) {
             settings.subList(i1, i2).forEach { setting ->
                 SystemSettingButton(
                     setting.settingType,
@@ -276,7 +276,7 @@ fun SysSettingsScreen(navController: NavHostController) {
                 )
             }
         }
-        Card(R.string.debugging) {
+        BaseCard(R.string.debugging) {
             settings.subList(i2, i3).forEach { setting ->
                 SystemSettingButton(
                     setting.settingType,

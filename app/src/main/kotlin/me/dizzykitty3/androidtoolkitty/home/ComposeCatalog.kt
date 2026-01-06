@@ -1,6 +1,10 @@
 package me.dizzykitty3.androidtoolkitty.home
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.DashboardCustomize
 import androidx.compose.material3.HorizontalDivider
@@ -17,12 +21,16 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_COMPOSE_CATALOG
-import me.dizzykitty3.androidtoolkitty.uicomponents.*
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
+import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
+import me.dizzykitty3.androidtoolkitty.uicomponents.GroupTitleNoColor
+import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 
 @Composable
 fun ComposeCatalog(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
-    Card(
+    BaseCard(
         title = R.string.compose,
         icon = Icons.Outlined.DashboardCustomize,
         hasShowMore = true,

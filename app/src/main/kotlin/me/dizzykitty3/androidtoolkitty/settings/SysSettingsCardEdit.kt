@@ -48,7 +48,7 @@ import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
 import me.dizzykitty3.androidtoolkitty.S_VPN
 import me.dizzykitty3.androidtoolkitty.S_WIFI
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomHideCardSettingSwitch
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
@@ -58,7 +58,7 @@ import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 @Composable
 fun SysSettingsCardEditScreen(navController: NavHostController) {
     Screen(navController = navController) {
-        Card(R.string.customize_system_settings_card) {
+        BaseCard(R.string.customize_system_settings_card) {
             val haptic = LocalHapticFeedback.current
             val sp = remember { SettingsSharedPref }
             var mIsShowSetting by remember { mutableStateOf(sp.getShownState(S_ABOUT_PHONE)) }

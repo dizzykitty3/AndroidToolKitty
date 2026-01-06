@@ -10,13 +10,13 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_HAPTIC_FEEDBACK
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 
 @Composable
 fun HapticFeedback(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
-    Card(
+    BaseCard(
         title = R.string.haptic,
         icon = Icons.Outlined.Vibration,
         hasShowMore = true,
@@ -29,7 +29,7 @@ fun HapticFeedback(navController: NavHostController) {
 @Composable
 fun HapticFeedbackScreen(navController: NavHostController) {
     Screen(navController = navController) {
-        Card(R.string.haptic) {
+        BaseCard(R.string.haptic) {
             val haptic = LocalHapticFeedback.current
             TextButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.Confirm) }) { Text("Confirm") }
             TextButton(onClick = { haptic.performHapticFeedback(HapticFeedbackType.ContextClick) }) { Text("ContextClick") }

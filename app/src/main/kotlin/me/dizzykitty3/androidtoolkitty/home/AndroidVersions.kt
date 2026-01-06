@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableBoldText
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableItalicText
@@ -19,10 +19,10 @@ val v = Build.VERSION.SDK_INT
 @Composable
 fun AndroidVersionHistoryScreen(navController: NavHostController) {
     Screen(screenTitle = R.string.android_versions, navController = navController) {
-        Card(title = R.string.latest_version) {
+        BaseCard(title = R.string.latest_version) {
             BetaVersion()
         }
-        Card(title = R.string.older_releases) {
+        BaseCard(title = R.string.older_releases) {
             StableVersions()
         }
     }

@@ -26,7 +26,7 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_PERMISSION_REQUEST
 import me.dizzykitty3.androidtoolkitty.S_ENABLE_BLUETOOTH
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
@@ -38,7 +38,7 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 @SuppressLint("MissingPermission")
 @Composable
 fun BluetoothDevice(navController: NavHostController) {
-    Card(title = R.string.bluetooth_devices, icon = Icons.Outlined.Bluetooth) {
+    BaseCard(title = R.string.bluetooth_devices, icon = Icons.Outlined.Bluetooth) {
         val view = LocalView.current
         val haptic = LocalHapticFeedback.current
         var showResult by remember { mutableStateOf(false) }

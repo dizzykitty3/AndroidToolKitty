@@ -26,7 +26,7 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_CODES_OF_CHARACTERS
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
@@ -41,7 +41,7 @@ import timber.log.Timber
 fun CodesOfCharacters(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
 
-    Card(
+    BaseCard(
         title = R.string.encoding,
         icon = Icons.AutoMirrored.Outlined.Notes,
         hasShowMore = true,
@@ -54,9 +54,9 @@ fun CodesOfCharacters(navController: NavHostController) {
 @Composable
 fun CodesOfCharactersScreen(navController: NavHostController) {
     Screen(R.string.encoding, navController) {
-        Card(R.string.unicode) { Unicode() }
-        Card(R.string.ascii) { ASCII() }
-        Card("Unix Timestamp") { UnixTimestamp() }
+        BaseCard(R.string.unicode) { Unicode() }
+        BaseCard(R.string.ascii) { ASCII() }
+        BaseCard("Unix Timestamp") { UnixTimestamp() }
     }
 }
 

@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.uicomponents
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,16 +26,20 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
-fun Screen(@StringRes screenTitle: Int, navController: NavHostController, content: @Composable () -> Unit) =
+fun Screen(
+    @StringRes screenTitle: Int,
+    navController: NavHostController,
+    content: @Composable () -> Unit
+) =
     Screen(stringResource(screenTitle), navController, content)
 
 @Composable
-fun Screen(screenTitle: String = "", navController: NavHostController, content: @Composable () -> Unit) {
-    Box(
-        Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
+fun Screen(
+    screenTitle: String = "",
+    navController: NavHostController,
+    content: @Composable () -> Unit
+) {
+    Box(Modifier.fillMaxSize()) {
         val screenPadding = dimensionResource(R.dimen.padding_screen)
 
         LazyColumn(

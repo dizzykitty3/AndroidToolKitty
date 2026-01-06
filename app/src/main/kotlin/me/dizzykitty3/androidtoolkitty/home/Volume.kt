@@ -31,7 +31,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_CUSTOM_VOLUME
 import me.dizzykitty3.androidtoolkitty.SCR_VOLUME
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
@@ -43,7 +43,7 @@ import kotlin.math.roundToInt
 @Composable
 fun Volume(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
-    Card(
+    BaseCard(
         R.string.volume,
         Icons.AutoMirrored.Outlined.VolumeUp,
         true,
@@ -58,8 +58,8 @@ fun Volume(navController: NavHostController) {
 @Composable
 fun VolumeScreen(navController: NavHostController) {
     Screen(R.string.volume, navController) {
-        Card(R.string.media_volume) { MediaVolume(navController, isHome = false) }
-        Card(R.string.voice_call_volume) { VoiceCallVolume() }
+        BaseCard(R.string.media_volume) { MediaVolume(navController, isHome = false) }
+        BaseCard(R.string.voice_call_volume) { VoiceCallVolume() }
     }
 }
 

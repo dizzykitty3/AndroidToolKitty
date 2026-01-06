@@ -5,9 +5,15 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.MoreHoriz
-import androidx.compose.material3.*
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,18 +23,19 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @Composable
-fun Card(
+fun BaseCard(
     @StringRes title: Int,
     icon: ImageVector? = null,
     hasShowMore: Boolean = false,
     onClick: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
-    Card(
+    BaseCard(
         title = stringResource(title),
         icon = icon,
         hasShowMore = hasShowMore,
@@ -38,7 +45,7 @@ fun Card(
 }
 
 @Composable
-fun Card(
+fun BaseCard(
     title: String,
     icon: ImageVector? = null,
     hasShowMore: Boolean = false,
@@ -48,7 +55,14 @@ fun Card(
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
 
-    ElevatedCard(Modifier.fillMaxWidth()) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors().copy(
+            containerColor = MaterialTheme.colorScheme.surfaceBright,
+            contentColor = MaterialTheme.colorScheme.onSurface
+        )
+    ) {
         Column(
             Modifier
                 .fillMaxWidth()
@@ -108,4 +122,5 @@ fun Card(
 }
 
 @Composable
-private fun CardTitle(title: String) = Text(text = title, style = MaterialTheme.typography.titleLarge)
+private fun CardTitle(title: String) =
+    Text(text = title, style = MaterialTheme.typography.titleLarge)

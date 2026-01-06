@@ -15,7 +15,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -23,7 +23,7 @@ import timber.log.Timber
 
 @Composable
 fun Clipboard() {
-    Card(title = R.string.clipboard, icon = Icons.Outlined.ContentPasteSearch) {
+    BaseCard(title = R.string.clipboard, icon = Icons.Outlined.ContentPasteSearch) {
         val view = LocalView.current
         val haptic = LocalHapticFeedback.current
 

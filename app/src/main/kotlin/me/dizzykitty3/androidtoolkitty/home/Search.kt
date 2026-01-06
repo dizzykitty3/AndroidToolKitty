@@ -39,8 +39,8 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_SEARCH
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomDropdownMenu
 import me.dizzykitty3.androidtoolkitty.uicomponents.ErrorTip
@@ -65,7 +65,7 @@ import timber.log.Timber
 fun Search(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
 
-    Card(
+    BaseCard(
         title = R.string.search,
         icon = Icons.Outlined.Search,
         hasShowMore = true,
@@ -78,9 +78,9 @@ fun Search(settingsViewModel: SettingsViewModel, navController: NavHostControlle
 @Composable
 fun SearchScreen(settingsViewModel: SettingsViewModel, navController: NavHostController) =
     Screen(R.string.search, navController) {
-        Card(R.string.webpage) { Webpage() }
-        Card(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }
-        Card(R.string.check_app_on_market) { CheckAppOnMarket() }
+        BaseCard(R.string.webpage) { Webpage() }
+        BaseCard(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }
+        BaseCard(R.string.check_app_on_market) { CheckAppOnMarket() }
     }
 
 @Composable

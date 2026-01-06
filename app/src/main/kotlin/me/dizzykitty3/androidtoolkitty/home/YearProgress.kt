@@ -5,14 +5,14 @@ import androidx.compose.material.icons.outlined.HourglassTop
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.YearProgressIndicator
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil.toProgress
 
 @Composable
 fun YearProgress() {
-    Card(title = R.string.year_progress, icon = Icons.Outlined.HourglassTop) {
+    BaseCard(title = R.string.year_progress, icon = Icons.Outlined.HourglassTop) {
         YearProgressIndicator()
         Text(DateUtil.yearProgress.toProgress())
     }

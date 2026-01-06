@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
@@ -68,7 +68,7 @@ fun CustomVolumeScreen(navController: NavHostController) {
         screenTitle = if (settingsSharedPref.addedCustomVolume) R.string.edit_custom_volume else R.string.save_custom_volume,
         navController = navController
     ) {
-        Card(R.string.edit) {
+        BaseCard(R.string.edit) {
             Slider(
                 value = newCustomVolume,
                 onValueChange = {

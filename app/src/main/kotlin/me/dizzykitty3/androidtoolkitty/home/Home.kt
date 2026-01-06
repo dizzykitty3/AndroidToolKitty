@@ -154,7 +154,10 @@ private fun Status(isTablet: Boolean = false) {
 
     Row(Modifier.horizontalScroll(rememberScrollState())) {
         if (isTablet || view.context.headsetNotConnected()) {
-            Surface(shape = RoundedCornerShape(8.dp)) {
+            Surface(
+                shape = RoundedCornerShape(8.dp),
+                color = MaterialTheme.colorScheme.surfaceContainer
+            ) {
                 Row(Modifier.clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     view.context.openSystemSettings(S_BATTERY)
@@ -181,7 +184,10 @@ private fun Status(isTablet: Boolean = false) {
                 SpacerPadding()
                 SpacerPadding()
             }
-            Surface(shape = RoundedCornerShape(8.dp)) {
+            Surface(
+                shape = RoundedCornerShape(8.dp),
+                color = MaterialTheme.colorScheme.surfaceContainer
+            ) {
                 Row(Modifier.clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     view.context.openSystemSettings(S_BLUETOOTH)
@@ -231,7 +237,10 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
 
-    Surface(shape = RoundedCornerShape(8.dp)) {
+    Surface(
+        shape = RoundedCornerShape(8.dp),
+        color = MaterialTheme.colorScheme.surfaceContainer
+    ) {
         Row(Modifier.clickable {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             view.context.openSystemSettings(S_WIFI)

@@ -20,14 +20,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_FONT_WEIGHT_TEST
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
 @Composable
 fun FontWeight(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
-    Card(
+    BaseCard(
         title = R.string.font_weight,
         icon = Icons.Outlined.FontDownload,
         hasShowMore = true,
@@ -40,9 +40,9 @@ fun FontWeight(navController: NavHostController) {
 @Composable
 fun FontWeightTestScreen(navController: NavHostController) {
     Screen(R.string.font_weight, navController) {
-        Card("Font weight test 1") { FontWeightTest() }
-        Card("Font weight test 2") { RowFontWeightTest() }
-        Card("Font family test") { FontFamilyTest() }
+        BaseCard("Font weight test 1") { FontWeightTest() }
+        BaseCard("Font weight test 2") { RowFontWeightTest() }
+        BaseCard("Font family test") { FontFamilyTest() }
     }
 }
 

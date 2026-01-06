@@ -30,7 +30,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.uicomponents.Card
+import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnGoogleMaps
 import timber.log.Timber
@@ -38,7 +38,7 @@ import kotlin.math.absoluteValue
 
 @Composable
 fun Maps() {
-    Card(title = R.string.maps, icon = Icons.Outlined.Map) {
+    BaseCard(title = R.string.maps, icon = Icons.Outlined.Map) {
         val view = LocalView.current
         val focus = LocalFocusManager.current
         val haptic = LocalHapticFeedback.current
