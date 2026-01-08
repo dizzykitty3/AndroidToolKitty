@@ -40,7 +40,6 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.window.core.layout.WindowSizeClass
 import me.dizzykitty3.androidtoolkitty.BuildConfig
@@ -158,7 +157,7 @@ private fun Status(isTablet: Boolean = false) {
     Row(Modifier.horizontalScroll(rememberScrollState())) {
         if (isTablet || view.context.headsetNotConnected()) {
             Surface(
-                shape = RoundedCornerShape(8.dp),
+                shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
                 color = MaterialTheme.colorScheme.surfaceContainer
             ) {
                 Row(Modifier.clickable {
@@ -188,7 +187,7 @@ private fun Status(isTablet: Boolean = false) {
                 SpacerPadding()
             }
             Surface(
-                shape = RoundedCornerShape(8.dp),
+                shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
                 color = MaterialTheme.colorScheme.surfaceContainer
             ) {
                 Row(Modifier.clickable {
@@ -241,7 +240,7 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
     val haptic = LocalHapticFeedback.current
 
     Surface(
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
         color = MaterialTheme.colorScheme.surfaceContainer
     ) {
         Row(Modifier.clickable {

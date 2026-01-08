@@ -19,6 +19,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntRect
@@ -38,7 +39,7 @@ fun CustomIconPopup(
     var showPopup by remember { mutableStateOf(false) }
 
     Row {
-        Surface(shape = RoundedCornerShape(8.dp)) {
+        Surface(shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape))) {
             Icon(
                 imageVector = Icons.Outlined.Info,
                 contentDescription = stringResource(R.string.info),
@@ -72,7 +73,7 @@ fun CustomIconPopup(
                 }
             ) {
                 Surface(
-                    shape = RoundedCornerShape(4.dp),
+                    shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
                     color = MaterialTheme.colorScheme.surfaceVariant,
                     contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(4.dp),

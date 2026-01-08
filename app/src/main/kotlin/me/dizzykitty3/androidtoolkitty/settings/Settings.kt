@@ -86,7 +86,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     // change app lang
     if (OSVersion.android13()) {
         Surface(
-            shape = RoundedCornerShape(8.dp),
+            shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
             color = MaterialTheme.colorScheme.surfaceBright
         ) {
             Column(
@@ -172,7 +172,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
 
     // edit home
     Surface(
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
         color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
@@ -212,7 +212,7 @@ private fun OtherSettings(navController: NavHostController) {
 
     // source code
     Surface(
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
         color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
@@ -246,7 +246,7 @@ private fun OtherSettings(navController: NavHostController) {
 
     // licenses
     Surface(
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
         color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
@@ -280,7 +280,7 @@ private fun OtherSettings(navController: NavHostController) {
 
     // android app settings
     Surface(
-        shape = RoundedCornerShape(8.dp),
+        shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
         color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(

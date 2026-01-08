@@ -29,7 +29,7 @@ fun CustomHideCardSettingSwitch(
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) = Surface(
-    shape = RoundedCornerShape(8.dp),
+    shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
     color = MaterialTheme.colorScheme.surfaceBright
 ) {
     Row(
@@ -64,7 +64,7 @@ fun CustomSwitchRow(
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) = Surface(
-    shape = RoundedCornerShape(8.dp),
+    shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
     color = MaterialTheme.colorScheme.surfaceBright
 ) {
     Column(
