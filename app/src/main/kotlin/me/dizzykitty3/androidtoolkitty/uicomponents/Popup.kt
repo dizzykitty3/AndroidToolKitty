@@ -77,7 +77,6 @@ fun CustomIconPopup(
                     color = MaterialTheme.colorScheme.surfaceVariant,
                     contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(4.dp),
-                    shadowElevation = 1.dp
                 ) {
                     Text(
                         ("$deviceType, $deviceAddress"),

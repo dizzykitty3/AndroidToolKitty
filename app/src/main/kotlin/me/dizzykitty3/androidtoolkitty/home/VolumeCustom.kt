@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
@@ -24,7 +23,6 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
@@ -151,8 +149,7 @@ fun CustomVolumeScreen(navController: NavHostController) {
                                 view.setVolume(mCustomVolume * 0.01 * maxVolume)
                                 navController.popBackStack()
                             }
-                        },
-                        elevation = ButtonDefaults.buttonElevation(1.dp)
+                        }
                     ) { Text(stringResource(R.string.save)) }
                 }
             }

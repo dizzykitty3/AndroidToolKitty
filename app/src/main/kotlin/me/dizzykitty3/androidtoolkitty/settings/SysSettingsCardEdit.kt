@@ -3,7 +3,6 @@ package me.dizzykitty3.androidtoolkitty.settings
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.VisibilityOff
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.S_ABOUT_PHONE
@@ -405,8 +403,7 @@ fun SysSettingsCardEditScreen(navController: NavHostController) {
                     mIsShowSetting24 = false
                     mIsShowSetting25 = false
                     mIsShowSetting26 = false
-                },
-                elevation = ButtonDefaults.buttonElevation(1.dp)
+                }
             ) {
                 Icon(
                     imageVector = Icons.Outlined.VisibilityOff,

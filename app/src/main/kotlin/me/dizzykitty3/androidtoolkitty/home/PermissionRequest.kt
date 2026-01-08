@@ -3,7 +3,6 @@ package me.dizzykitty3.androidtoolkitty.home
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Shield
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -16,7 +15,6 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
@@ -47,8 +45,7 @@ fun PermissionRequest(navController: NavHostController) {
                     }
                     view.showSnackbar(R.string.granted)
                     navController.popBackStack()
-                },
-                elevation = ButtonDefaults.buttonElevation(1.dp)
+                }
             ) { Text(stringResource(R.string.request_permission)) }
 
             if (clickCount >= 2) {
