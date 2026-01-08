@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
@@ -35,7 +35,6 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.CARD_4
@@ -91,7 +90,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
         ) {
             Column(
                 Modifier
-                    .height(dimensionResource(R.dimen.height_setting_row))
+                    .requiredHeightIn(min = dimensionResource(R.dimen.height_setting_row))
                     .fillMaxWidth()
                     .clickable {
                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -177,7 +176,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
     ) {
         Column(
             Modifier
-                .height(dimensionResource(R.dimen.height_setting_row))
+                .requiredHeightIn(min = dimensionResource(R.dimen.height_setting_row))
                 .fillMaxWidth()
                 .clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -217,7 +216,7 @@ private fun OtherSettings(navController: NavHostController) {
     ) {
         Column(
             Modifier
-                .height(dimensionResource(R.dimen.height_setting_row))
+                .requiredHeightIn(min = dimensionResource(R.dimen.height_setting_row))
                 .fillMaxWidth()
                 .clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -251,7 +250,7 @@ private fun OtherSettings(navController: NavHostController) {
     ) {
         Column(
             Modifier
-                .height(dimensionResource(R.dimen.height_setting_row))
+                .requiredHeightIn(min = dimensionResource(R.dimen.height_setting_row))
                 .fillMaxWidth()
                 .clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -285,7 +284,7 @@ private fun OtherSettings(navController: NavHostController) {
     ) {
         Column(
             Modifier
-                .height(dimensionResource(R.dimen.height_setting_row))
+                .requiredHeightIn(min = dimensionResource(R.dimen.height_setting_row))
                 .fillMaxWidth()
                 .clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
