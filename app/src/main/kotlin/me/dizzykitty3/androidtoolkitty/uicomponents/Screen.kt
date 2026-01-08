@@ -2,7 +2,6 @@ package me.dizzykitty3.androidtoolkitty.uicomponents
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,32 +26,50 @@ import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun Screen(
-    @StringRes screenTitle: Int,
-    navController: NavHostController,
-    content: @Composable () -> Unit
-) =
-    Screen(stringResource(screenTitle), navController, content)
+    @StringRes screenTitle: Int, navController: NavHostController, content: @Composable () -> Unit
+) = Screen(stringResource(screenTitle), navController, content)
 
 @Composable
 fun Screen(
-    screenTitle: String = "",
-    navController: NavHostController,
-    content: @Composable () -> Unit
+    screenTitle: String = "", navController: NavHostController, content: @Composable () -> Unit
 ) {
-    Box(Modifier.fillMaxSize()) {
-        val screenPadding = dimensionResource(R.dimen.padding_screen)
+    val screenPadding = dimensionResource(R.dimen.padding_screen)
 
-        LazyColumn(
-            Modifier
-                .fillMaxSize()
-                .padding(start = screenPadding, end = screenPadding)
-        ) {
-            item { TopBar(screenTitle, navController) }
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(start = screenPadding, end = screenPadding)
+    ) {
+        Column { TopBar(screenTitle, navController) }
+        LazyColumn {
             item { content() }
             item { BottomPadding() }
         }
     }
 }
+
+@Composable
+fun LicenseScreen(
+    @StringRes screenTitle: Int, navController: NavHostController, content: @Composable () -> Unit
+) {
+    val screenPadding = dimensionResource(R.dimen.padding_screen)
+
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(start = screenPadding, end = screenPadding)
+    ) {
+        Column { TopBar(screenTitle, navController) }
+        Column {
+            content()
+            BottomPadding()
+        }
+    }
+}
+
+@Composable
+fun TopBar(@StringRes screenTitle: Int, navController: NavHostController) =
+    TopBar(stringResource(screenTitle), navController)
 
 @Composable
 fun TopBar(screenTitle: String = "", navController: NavHostController) {
@@ -74,12 +91,10 @@ fun TopBar(screenTitle: String = "", navController: NavHostController) {
         }
         IconAndTextPadding()
         Column(
-            Modifier.weight(1F),
-            verticalArrangement = Arrangement.Center
+            Modifier.weight(1F), verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = screenTitle,
-                style = MaterialTheme.typography.titleLarge
+                text = screenTitle, style = MaterialTheme.typography.titleLarge
             )
         }
     }
