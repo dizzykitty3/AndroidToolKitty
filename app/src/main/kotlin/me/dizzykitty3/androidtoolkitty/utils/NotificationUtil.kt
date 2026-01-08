@@ -39,15 +39,12 @@ object NotificationUtil {
 
     fun sendNotification() {
         val builder = NotificationCompat.Builder(appContext, CHANNEL_ID)
-            .setSmallIcon(android.R.drawable.ic_dialog_info)
-            .setContentTitle("text_title")
-            .setContentText("text_content")
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setSmallIcon(android.R.drawable.ic_dialog_info).setContentTitle("text_title_$count")
+            .setContentText("text_content_$count").setPriority(NotificationCompat.PRIORITY_DEFAULT)
 
         with(NotificationManagerCompat.from(appContext)) {
             if (ActivityCompat.checkSelfPermission(
-                    appContext,
-                    Manifest.permission.POST_NOTIFICATIONS
+                    appContext, Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
                 return@with
