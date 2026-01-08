@@ -17,7 +17,7 @@ import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 
 @Composable
 fun YearProgressIndicator() {
-    var progress by remember { mutableFloatStateOf(0.1f) }
+    var progress by remember { mutableFloatStateOf(0f) }
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
