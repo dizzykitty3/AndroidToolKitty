@@ -109,8 +109,8 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
 
     Column(Modifier.padding(start = largeScreenPadding, end = largeScreenPadding)) {
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Box(Modifier.weight(1f)) { Greeting() }
-            Box(Modifier.weight(1f)) { TopBar(navController, isTablet = true) }
+            Box(Modifier.weight(1F)) { Greeting() }
+            Box(Modifier.weight(1F)) { TopBar(navController, isTablet = true) }
         }
         SpacerPadding()
         if (debug) {
@@ -123,7 +123,7 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
 @Composable
 private fun TopBar(navController: NavHostController, isTablet: Boolean = false) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Box(Modifier.weight(1f)) { Status(isTablet) }
+        Box(Modifier.weight(1F)) { Status(isTablet) }
         SettingsButton(navController)
     }
 }

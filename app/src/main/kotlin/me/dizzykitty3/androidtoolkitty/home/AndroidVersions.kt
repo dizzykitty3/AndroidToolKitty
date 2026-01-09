@@ -31,11 +31,11 @@ fun AndroidVersionHistoryScreen(navController: NavHostController) {
 @Composable
 private fun BetaVersion() {
     Row(Modifier.fillMaxWidth()) {
-        Column(Modifier.weight(0.4f)) {
+        Column(Modifier.weight(0.4F)) {
             if (v == 36) ScrollableBoldText("Android 16") else ScrollableText("Android 16")
         }
 
-        Column(Modifier.weight(0.6f)) {
+        Column(Modifier.weight(0.6F)) {
             ScrollableItalicText("API 36, Baklava")
         }
     }

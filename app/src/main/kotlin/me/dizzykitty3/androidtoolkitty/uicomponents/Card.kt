@@ -73,7 +73,7 @@ fun BaseCard(
                 )
         ) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.weight(1f)) {
+                Column(Modifier.weight(1F)) {
                     Column {
                         if (icon == null) {
                             GroupTitleNoColor(title)

@@ -38,7 +38,7 @@ fun CustomHideCardSettingSwitch(
         },
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column(Modifier.weight(1f)) { Text(stringResource(text)) }
+        Column(Modifier.weight(1F)) { Text(stringResource(text)) }
         Column {
             Switch(
                 checked = isChecked,
@@ -73,7 +73,7 @@ fun CustomSwitchRow(
         verticalArrangement = Arrangement.Center
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Row(Modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
+            Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
                 if (icon != null) {
                     Icon(
                         imageVector = icon,

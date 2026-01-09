@@ -176,7 +176,7 @@ private fun TheWheel(withEditableList: Boolean? = false) {
         Canvas(
             modifier = Modifier
                 .size(250.dp)
-                .aspectRatio(1f)
+                .aspectRatio(1F)
         ) {
             val center = Offset(size.width / 2, size.height / 2)
             val radius = size.minDimension / 2
@@ -208,7 +208,7 @@ private fun TheWheel(withEditableList: Boolean? = false) {
                 val textAngleRad =
                     Math.toRadians((360f / items.size * index + currentRotationDegrees + 360f / items.size / 2) % 360.toDouble())
                         .toFloat()
-                val textRadius = radius * 0.7f
+                val textRadius = radius * 0.7F
                 drawContext.canvas.nativeCanvas.drawText(
                     item,
                     center.x + textRadius * cos(textAngleRad),
@@ -307,7 +307,7 @@ private fun ExpandableList(
                 text = items.joinToString(", "),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier.weight(1F)
             )
             Icon(
                 imageVector = if (expanded) Icons.Default.ArrowDropDown else Icons.AutoMirrored.Filled.ArrowRight,
@@ -334,7 +334,7 @@ private fun ExpandableList(
                                 TextField(
                                     value = editingText[index],
                                     onValueChange = { editingText[index] = it },
-                                    modifier = Modifier.weight(1f),
+                                    modifier = Modifier.weight(1F),
                                     singleLine = true
                                 )
                                 Icon(
@@ -352,7 +352,7 @@ private fun ExpandableList(
                                 Text(
                                     text = item,
                                     modifier = Modifier
-                                        .weight(1f)
+                                        .weight(1F)
                                         .clickable { editingIndex = index }
                                 )
                                 Icon(

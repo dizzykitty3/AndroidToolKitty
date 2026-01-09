@@ -88,4 +88,4 @@ fun AppNavHost(
 private const val FADE_DURATION = 300
 private const val SCALE_DURATION = 400
 private const val SLIDE_DURATION = 400
-private const val INITIAL_SCALE = 0.9f
+private const val INITIAL_SCALE = 0.9F
