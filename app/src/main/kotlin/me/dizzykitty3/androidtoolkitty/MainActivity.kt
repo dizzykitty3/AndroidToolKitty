@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
                 dynamicColor = settingsViewModel.settings.value.dynamicColor
             ) {
                 Scaffold(
-                    Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxSize(),
                     containerColor = MaterialTheme.colorScheme.surfaceContainer
                 ) { innerPadding ->
                     SettingsSharedPref.buttonPaddingDp = innerPadding.calculateBottomPadding().value
@@ -56,8 +56,7 @@ class MainActivity : ComponentActivity() {
                             top = innerPadding.calculateTopPadding(),
                             start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
                             end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
-                        ),
-                        settingsViewModel
+                        ), settingsViewModel
                     )
                 }
             }

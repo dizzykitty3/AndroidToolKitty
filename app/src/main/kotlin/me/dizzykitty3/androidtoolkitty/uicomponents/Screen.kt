@@ -1,7 +1,9 @@
 package me.dizzykitty3.androidtoolkitty.uicomponents
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,15 +37,19 @@ fun Screen(
 ) {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
 
-    Column(
+    Box(
         Modifier
             .fillMaxSize()
-            .padding(start = screenPadding, end = screenPadding)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
     ) {
-        Column { TopBar(screenTitle, navController) }
-        LazyColumn {
-            item { content() }
-            item { BottomPadding() }
+        Column(
+            Modifier.padding(start = screenPadding, end = screenPadding)
+        ) {
+            TopBar(screenTitle, navController)
+            LazyColumn {
+                item { content() }
+                item { BottomPadding() }
+            }
         }
     }
 }
@@ -54,15 +60,19 @@ fun LicenseScreen(
 ) {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
 
-    Column(
+    Box(
         Modifier
             .fillMaxSize()
-            .padding(start = screenPadding, end = screenPadding)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
     ) {
-        Column { TopBar(screenTitle, navController) }
-        Column {
-            content()
-            BottomPadding()
+        Column(
+            Modifier.padding(start = screenPadding, end = screenPadding)
+        ) {
+            TopBar(screenTitle, navController)
+            Column {
+                content()
+                BottomPadding()
+            }
         }
     }
 }
