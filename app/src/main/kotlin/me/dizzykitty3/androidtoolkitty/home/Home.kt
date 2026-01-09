@@ -115,7 +115,6 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
         SpacerPadding()
         if (debug) {
             DevBuildTip()
-            Text("bottom padding dp: ${SettingsSharedPref.buttonPaddingDp}")
         }
         TwoColumnHomeCards(settingsViewModel, navController)
     }
