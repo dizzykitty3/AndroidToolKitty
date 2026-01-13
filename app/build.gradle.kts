@@ -12,8 +12,8 @@ plugins {
 
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
-    // remember to change the target api in manifest XML file
     compileSdk {
+        // remember to change the target api in manifest XML file
         version = release(36)
     }
     buildToolsVersion = "36.0.0"
@@ -48,23 +48,22 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
     }
     applicationVariants.all {
         outputs.all {
-            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl)
-                .outputFileName = "android-toolkitty-${versionName}.apk"
+            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
+                "android-toolkitty-${versionName}.apk"
         }
     }
     composeCompiler {
         reportsDestination = layout.buildDirectory.dir("compose_compiler")
-        // https://developer.android.com/develop/ui/compose/compiler#configuration-options
-//        stabilityConfigurationFile = rootProject.layout.projectDirectory.file("stability_config.conf")
+        stabilityConfigurationFiles.addAll(
+            rootProject.layout.projectDirectory.file("stability_config.conf"),
+        )
     }
-    // Since Kotlin 2.2.0, https://kotlinlang.org/docs/gradle-compiler-options.html#migrate-from-kotlinoptions-to-compileroptions
     kotlin {
         compilerOptions {
             jvmTarget = JvmTarget.JVM_17
@@ -72,8 +71,7 @@ android {
         }
     }
     compileOptions {
-        // https://developer.android.com/studio/write/java8-support#library-desugaring
-        isCoreLibraryDesugaringEnabled = true // Java 8+ API desugaring support
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
         encoding = "UTF-8"
@@ -81,14 +79,11 @@ android {
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
-            // https://github.com/Kotlin/kotlinx.coroutines#avoiding-including-the-debug-infrastructure-in-the-resulting-apk
             excludes += "DebugProbesKt.bin"
         }
     }
     androidResources {
-        // https://developer.android.com/guide/topics/resources/app-languages#auto-localeconfig
-        @Suppress("UnstableApiUsage")
-        generateLocaleConfig = true // Per-app language preferences
+        generateLocaleConfig = true
     }
 }
 
