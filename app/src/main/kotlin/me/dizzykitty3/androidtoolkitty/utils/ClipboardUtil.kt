@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
-import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -11,7 +10,6 @@ object ClipboardUtil {
     private var clipboard =
         appContext.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
 
-    @SuppressLint("NewApi")
     @CheckResult
     fun clear(): Boolean {
         if (!clipboard.hasPrimaryClip()) return false

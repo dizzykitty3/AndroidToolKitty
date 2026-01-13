@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.home
 
-import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import androidx.compose.foundation.layout.Row
@@ -35,7 +34,6 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noBluetoothPermission
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
-@SuppressLint("MissingPermission")
 @Composable
 fun BluetoothDevice(navController: NavHostController) {
     BaseCard(title = R.string.bluetooth_devices, icon = Icons.Outlined.Bluetooth) {

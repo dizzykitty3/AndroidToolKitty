@@ -5,7 +5,6 @@ import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 
-@Suppress("SpellCheckingInspection")
 object SnackbarUtil {
     fun View.showSnackbar(message: String) =
         Snackbar.make(this, message, Snackbar.LENGTH_SHORT).show()

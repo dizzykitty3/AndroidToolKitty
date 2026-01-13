@@ -5,7 +5,6 @@ import android.os.Build
 /**
  * [Android Developers Blog](https://android-developers.googleblog.com/)
  */
-@Suppress("unused")
 object OSVersion {
     private val osVersion = Build.VERSION.SDK_INT
     private val osVersionFull = Build.VERSION.SDK_INT_FULL // Android 16 added

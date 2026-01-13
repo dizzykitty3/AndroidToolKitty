@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.theme
 
-import android.annotation.SuppressLint
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
@@ -93,7 +92,6 @@ private val darkScheme = darkColorScheme(
     surfaceContainerHighest = surfaceContainerHighestDark,
 )
 
-@SuppressLint("NewApi")
 @Composable
 fun AppTheme(
     dynamicColor: Boolean = true,

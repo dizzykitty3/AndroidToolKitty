@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.ConnectivityManager.TYPE_MOBILE
@@ -17,8 +16,6 @@ object NetworkUtil {
     private var connectivityManager =
         appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-    @Suppress("DEPRECATION")
-    @SuppressLint("NewApi")
     @CheckResult
     fun networkState(): Int {
         if (!OSVersion.android6()) {

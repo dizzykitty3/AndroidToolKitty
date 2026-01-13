@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
-import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
 import android.bluetooth.BluetoothProfile
@@ -13,14 +12,12 @@ object BluetoothUtil {
     private var bluetoothManager =
         appContext.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
 
-    @Suppress("DEPRECATION")
     val bluetoothAdapter: BluetoothAdapter?
         get() = if (OSVersion.android12())
             bluetoothManager.adapter
         else
             BluetoothAdapter.getDefaultAdapter()
 
-    @SuppressLint("MissingPermission")
     @CheckResult
     fun Context.isHeadsetConnected(): Boolean {
         if (this.noBluetoothPermission()) return false

@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.appcomponents
 
-import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Intent
 import android.graphics.drawable.Icon
@@ -12,7 +11,6 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import timber.log.Timber
 
-@SuppressLint("NewApi")
 class ClearClipboardTileService : TileService() {
     override fun onBind(intent: Intent?): IBinder? {
         if (!OSVersion.android7()) {
@@ -39,8 +37,6 @@ class ClearClipboardTileService : TileService() {
         cleanTitle.updateTile()
     }
 
-    @Suppress("DEPRECATION")
-    @SuppressLint("StartActivityAndCollapseDeprecated")
     override fun onClick() {
         if (!OSVersion.android7()) {
             Timber.w("TileService unsupported")

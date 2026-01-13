@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 
 // App screens
@@ -68,12 +67,10 @@ const val S_KEYBOARD = "setting_keyboard"
 const val S_NFC = "setting_nfc"
 
 // Android permissions
-@SuppressLint("InlinedApi")
 const val BT_CONNECT = Manifest.permission.BLUETOOTH_CONNECT
 const val BT = Manifest.permission.BLUETOOTH
 const val BT_ADMIN = Manifest.permission.BLUETOOTH_ADMIN
 
-@SuppressLint("InlinedApi")
 const val POST_NOTIFICATIONS = Manifest.permission.POST_NOTIFICATIONS
 const val GRANTED = PackageManager.PERMISSION_GRANTED
 

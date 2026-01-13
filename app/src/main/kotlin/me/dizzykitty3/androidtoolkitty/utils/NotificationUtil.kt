@@ -1,7 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -18,7 +17,6 @@ object NotificationUtil {
     private const val CHANNEL_ID = "test_channel"
     private var count = 1
 
-    @SuppressLint("NewApi")
     fun createNotificationChannel(context: Context) {
         if (OSVersion.android8()) {
             val name = "channel_name"
