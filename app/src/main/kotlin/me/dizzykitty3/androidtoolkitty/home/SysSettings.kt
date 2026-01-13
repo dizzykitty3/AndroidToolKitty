@@ -62,6 +62,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.LabelAndValueTextRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.LabelText
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
+import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
@@ -289,6 +290,8 @@ fun SysSettingsScreen(navController: NavHostController) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_PIN_OPTIONS)
         }) { Text(stringResource(R.string.customize_system_settings_card)) }
+
+        SpacerPadding()
     }
 }
 
