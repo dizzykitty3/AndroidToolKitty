@@ -29,4 +29,4 @@ fun IconAndTextPadding() = Res(R.dimen.padding_icons_and_text)
 fun TopPadding() = Spacer(Modifier.padding(top = SettingsSharedPref.topPaddingDp.dp))
 
 @Composable
-fun BottomPadding() = Spacer(Modifier.padding(bottom = SettingsSharedPref.buttonPaddingDp.dp))
+fun BottomPadding() = Spacer(Modifier.padding(bottom = SettingsSharedPref.bottomPaddingDp.dp))

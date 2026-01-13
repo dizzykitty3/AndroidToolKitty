@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                     containerColor = MaterialTheme.colorScheme.surfaceContainer
                 ) { innerPadding ->
                     SettingsSharedPref.topPaddingDp = innerPadding.calculateTopPadding().value
-                    SettingsSharedPref.buttonPaddingDp = innerPadding.calculateBottomPadding().value
+                    SettingsSharedPref.bottomPaddingDp = innerPadding.calculateBottomPadding().value
                     AppNavHost(
                         Modifier.padding(
                             start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),

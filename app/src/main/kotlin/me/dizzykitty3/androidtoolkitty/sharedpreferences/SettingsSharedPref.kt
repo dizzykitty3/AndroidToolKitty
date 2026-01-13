@@ -12,20 +12,16 @@ data class WheelOfFortuneItems(val items: List<String>)
 
 object SettingsSharedPref {
     private const val PREF_NAME = "Settings"
-
-    // Booleans
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
-
     private const val CUSTOM_VOLUME = "custom_volume"
+    private const val TOP_PADDING_DP = "top_padding_dp"
+    private const val BOTTOM_PADDING_DP = "bottom_padding_dp"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
-
     private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
     private const val TYPING_CONTENTS = "typing_contents"
     private const val LATITUDE = "latitude"
     private const val LONGITUDE = "longitude"
-    private const val TOP_PADDING_DP = "top_padding_dp"
-    private const val BOTTOM_PADDING_DP = "bottom_padding_dp"
 
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -62,12 +58,32 @@ object SettingsSharedPref {
         get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
         set(value) = setPreference(HAVE_TAPPED_ADD_BUTTON, value)
 
+    val addedCustomVolume: Boolean
+        get() = customVolume > 0
+
+    fun getShownState(card: String): Boolean {
+        return sharedPrefs.getBoolean(card, true)
+    }
+
+    fun saveShownState(card: String, isShown: Boolean) {
+        Timber.d("$card is shown = $isShown")
+        with(sharedPrefs.edit()) {
+            putBoolean(card, isShown)
+            apply()
+        }
+    }
+
     var customVolume: Int
         get() = getPreference(CUSTOM_VOLUME, Int.MIN_VALUE)
         set(value) = setPreference(CUSTOM_VOLUME, value)
 
-    val addedCustomVolume: Boolean
-        get() = customVolume > 0
+    var topPaddingDp: Float
+        get() = getPreference(TOP_PADDING_DP, 0F)
+        set(value) = setPreference(TOP_PADDING_DP, value)
+
+    var bottomPaddingDp: Float
+        get() = getPreference(BOTTOM_PADDING_DP, 0F)
+        set(value) = setPreference(BOTTOM_PADDING_DP, value)
 
     var customVolumeOptionLabel: String?
         get() = getPreference(VOLUME_OPTION_LABEL, "")
@@ -85,14 +101,6 @@ object SettingsSharedPref {
         get() = getPreference(LONGITUDE, "")
         set(value) = setPreference(LONGITUDE, value)
 
-    var topPaddingDp: Float
-        get() = getPreference(TOP_PADDING_DP, 0F)
-        set(value) = setPreference(TOP_PADDING_DP, value)
-
-    var buttonPaddingDp: Float
-        get() = getPreference(BOTTOM_PADDING_DP, 0F)
-        set(value) = setPreference(BOTTOM_PADDING_DP, value)
-
     fun getWheelOfFortuneItems(): List<String>? {
         val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null
         return try {
@@ -108,17 +116,5 @@ object SettingsSharedPref {
         val itemsJson = Json.encodeToString(WheelOfFortuneItems(items))
         Timber.d("wheel of fortune items = $itemsJson")
         setPreference(WHEEL_OF_FORTUNE_ITEMS, itemsJson)
-    }
-
-    fun getShownState(card: String): Boolean {
-        return sharedPrefs.getBoolean(card, true)
-    }
-
-    fun saveShownState(card: String, isShown: Boolean) {
-        Timber.d("$card is shown = $isShown")
-        with(sharedPrefs.edit()) {
-            putBoolean(card, isShown)
-            apply()
-        }
     }
 }
