@@ -66,6 +66,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.BottomPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.DevBuildTip
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.uicomponents.TopPadding
 import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.headsetNotConnected
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.isHeadsetConnected
@@ -74,10 +75,10 @@ import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 
 @Composable
 fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    if (currentWindowAdaptiveInfo().windowSizeClass.minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND)
-        TabletLayout(settingsViewModel, navController)
-    else
-        MobileLayout(settingsViewModel, navController)
+    if (currentWindowAdaptiveInfo().windowSizeClass.minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) TabletLayout(
+        settingsViewModel, navController
+    )
+    else MobileLayout(settingsViewModel, navController)
 }
 
 @Composable
@@ -85,20 +86,23 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
     val screenPadding = dimensionResource(R.dimen.padding_screen)
     val debug = BuildConfig.DEBUG
 
-    LazyColumn(Modifier.padding(start = screenPadding, end = screenPadding)) {
-        item { TopBar(navController) }
-        item { CardSpacePadding() }
-        item { CardSpacePadding() }
-        item { Greeting() }
-        item { CardSpacePadding() }
-        item { CardSpacePadding() }
-        if (debug) item {
-            DevBuildTip()
-            CardSpacePadding()
-            Test()
+    Column {
+        TopPadding()
+        LazyColumn(Modifier.padding(start = screenPadding, end = screenPadding)) {
+            item { TopBar(navController) }
+            item { CardSpacePadding() }
+            item { CardSpacePadding() }
+            item { Greeting() }
+            item { CardSpacePadding() }
+            item { CardSpacePadding() }
+            if (debug) item {
+                DevBuildTip()
+                CardSpacePadding()
+                Test()
+            }
+            item { HomeCards(settingsViewModel, navController) }
+            item { BottomPadding() }
         }
-        item { HomeCards(settingsViewModel, navController) }
-        item { BottomPadding() }
     }
 }
 
@@ -107,16 +111,19 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
     val largeScreenPadding = dimensionResource(R.dimen.padding_screen_large)
     val debug = BuildConfig.DEBUG
 
-    Column(Modifier.padding(start = largeScreenPadding, end = largeScreenPadding)) {
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-            Box(Modifier.weight(1F)) { Greeting() }
-            Box(Modifier.weight(1F)) { TopBar(navController, isTablet = true) }
+    Column {
+        TopPadding()
+        Column(Modifier.padding(start = largeScreenPadding, end = largeScreenPadding)) {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+                Box(Modifier.weight(1F)) { Greeting() }
+                Box(Modifier.weight(1F)) { TopBar(navController, isTablet = true) }
+            }
+            SpacerPadding()
+            if (debug) {
+                DevBuildTip()
+            }
+            TwoColumnHomeCards(settingsViewModel, navController)
         }
-        SpacerPadding()
-        if (debug) {
-            DevBuildTip()
-        }
-        TwoColumnHomeCards(settingsViewModel, navController)
     }
 }
 
@@ -137,8 +144,7 @@ private fun SettingsButton(navController: NavHostController) {
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             navController.navigate(SCR_SETTINGS)
-        }
-    ) {
+        }) {
         Icon(
             imageVector = Icons.Default.Settings,
             contentDescription = stringResource(R.string.settings),
@@ -268,8 +274,7 @@ private fun HomeCards(settingsViewModel: SettingsViewModel, navController: NavHo
 
 @Composable
 private fun TwoColumnHomeCards(
-    settingsViewModel: SettingsViewModel,
-    navController: NavHostController
+    settingsViewModel: SettingsViewModel, navController: NavHostController
 ) {
     val cardPadding = dimensionResource(R.dimen.padding_card_space)
     val largeCardPadding = dimensionResource(R.dimen.padding_card_space_large)
@@ -288,15 +293,23 @@ private fun TwoColumnHomeCards(
 
 @Composable
 private fun getCardMap(settingsSharedPref: SettingsSharedPref): List<String> = listOf(
-    CARD_1, CARD_2, CARD_3, CARD_4, CARD_5, CARD_6,
-    CARD_7, CARD_8, CARD_9, CARD_10, CARD_11, CARD_12
+    CARD_1,
+    CARD_2,
+    CARD_3,
+    CARD_4,
+    CARD_5,
+    CARD_6,
+    CARD_7,
+    CARD_8,
+    CARD_9,
+    CARD_10,
+    CARD_11,
+    CARD_12
 ).associateWith { card -> settingsSharedPref.getShownState(card) }.filter { it.value }.keys.toList()
 
 @Composable
 private fun CardContent(
-    cardName: String,
-    settingsViewModel: SettingsViewModel,
-    navController: NavHostController
+    cardName: String, settingsViewModel: SettingsViewModel, navController: NavHostController
 ) {
     when (cardName) {
         CARD_1 -> YearProgress()

@@ -50,10 +50,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     containerColor = MaterialTheme.colorScheme.surfaceContainer
                 ) { innerPadding ->
+                    SettingsSharedPref.topPaddingDp = innerPadding.calculateTopPadding().value
                     SettingsSharedPref.buttonPaddingDp = innerPadding.calculateBottomPadding().value
                     AppNavHost(
                         Modifier.padding(
-                            top = innerPadding.calculateTopPadding(),
                             start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
                             end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
                         ), settingsViewModel

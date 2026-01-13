@@ -45,6 +45,7 @@ fun Screen(
         Column(
             Modifier.padding(start = screenPadding, end = screenPadding)
         ) {
+            TopPadding()
             TopBar(screenTitle, navController)
             LazyColumn {
                 item { content() }
@@ -68,6 +69,7 @@ fun LicenseScreen(
         Column(
             Modifier.padding(start = screenPadding, end = screenPadding)
         ) {
+            TopPadding()
             TopBar(screenTitle, navController)
             Column {
                 content()

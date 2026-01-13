@@ -24,6 +24,7 @@ object SettingsSharedPref {
     private const val TYPING_CONTENTS = "typing_contents"
     private const val LATITUDE = "latitude"
     private const val LONGITUDE = "longitude"
+    private const val TOP_PADDING_DP = "top_padding_dp"
     private const val BOTTOM_PADDING_DP = "bottom_padding_dp"
 
     private val sharedPrefs: SharedPreferences
@@ -83,6 +84,10 @@ object SettingsSharedPref {
     var longitude: String
         get() = getPreference(LONGITUDE, "")
         set(value) = setPreference(LONGITUDE, value)
+
+    var topPaddingDp: Float
+        get() = getPreference(TOP_PADDING_DP, 0F)
+        set(value) = setPreference(TOP_PADDING_DP, value)
 
     var buttonPaddingDp: Float
         get() = getPreference(BOTTOM_PADDING_DP, 0F)
