@@ -18,10 +18,10 @@ object SettingsSharedPref {
     private const val TOP_PADDING_DP = "top_padding_dp"
     private const val BOTTOM_PADDING_DP = "bottom_padding_dp"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
-    private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
     private const val TYPING_CONTENTS = "typing_contents"
     private const val LATITUDE = "latitude"
     private const val LONGITUDE = "longitude"
+    private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
 
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -30,8 +30,8 @@ object SettingsSharedPref {
         return when (T::class) {
             Boolean::class -> sharedPrefs.getBoolean(key, defaultValue as Boolean) as T
             Int::class -> sharedPrefs.getInt(key, defaultValue as Int) as T
-            String::class -> sharedPrefs.getString(key, defaultValue as String) as T
             Float::class -> sharedPrefs.getFloat(key, defaultValue as Float) as T
+            String::class -> sharedPrefs.getString(key, defaultValue as String) as T
             else -> throw IllegalArgumentException("Unsupported type")
         }
     }
@@ -42,8 +42,8 @@ object SettingsSharedPref {
             when (value) {
                 is Boolean -> putBoolean(key, value)
                 is Int -> putInt(key, value)
-                is String -> putString(key, value)
                 is Float -> putFloat(key, value)
+                is String -> putString(key, value)
                 else -> throw IllegalArgumentException("Unsupported type")
             }
             apply()
