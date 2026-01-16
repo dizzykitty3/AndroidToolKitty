@@ -19,3 +19,4 @@ gradle/wrapper/gradle-wrapper.jar
 /app/release
 /app/schemas
 .kotlin
+gradle/gradle-daemon-jvm.properties
