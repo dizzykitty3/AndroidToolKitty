@@ -15,6 +15,7 @@ import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.ColorLens
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material.icons.outlined.FileCopy
+import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.SettingsApplications
@@ -42,6 +43,7 @@ import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_EDIT_HOME
 import me.dizzykitty3.androidtoolkitty.SCR_LICENSES
 import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
+import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
@@ -54,6 +56,7 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppLanguageSetting
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
+import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
 
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
@@ -209,7 +212,28 @@ private fun OtherSettings(navController: NavHostController) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
 
-    // source code
+    Surface(
+        shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
+        color = MaterialTheme.colorScheme.surfaceBright
+    ) {
+        Column(
+            Modifier
+                .requiredHeightIn(min = dimensionResource(R.dimen.height_setting_row))
+                .fillMaxWidth(), verticalArrangement = Arrangement.Center
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Outlined.Info,
+                        contentDescription = null
+                    )
+                    IconAndTextPadding()
+                    Text(appContext.versionName)
+                }
+            }
+        }
+    }
+
     Surface(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
         color = MaterialTheme.colorScheme.surfaceBright
@@ -243,7 +267,6 @@ private fun OtherSettings(navController: NavHostController) {
         }
     }
 
-    // licenses
     Surface(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
         color = MaterialTheme.colorScheme.surfaceBright
@@ -277,7 +300,6 @@ private fun OtherSettings(navController: NavHostController) {
         }
     }
 
-    // android app settings
     Surface(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
         color = MaterialTheme.colorScheme.surfaceBright
