@@ -288,6 +288,7 @@ private fun TwoColumnHomeCards(
             CardContent(cardName, settingsViewModel, navController)
         }
         item { BottomPadding() }
+        item { BottomPadding() }
     }
 }
 
