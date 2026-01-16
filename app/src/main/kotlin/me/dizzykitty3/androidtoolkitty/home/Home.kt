@@ -39,6 +39,7 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.window.core.layout.WindowSizeClass
 import me.dizzykitty3.androidtoolkitty.BuildConfig
@@ -281,14 +282,13 @@ private fun TwoColumnHomeCards(
     val cardMap = getCardMap(SettingsSharedPref)
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
+        modifier = Modifier.padding(bottom = SettingsSharedPref.bottomPaddingDp.dp),
         verticalItemSpacing = cardPadding,
         horizontalArrangement = Arrangement.spacedBy(largeCardPadding),
     ) {
         items(cardMap) { cardName ->
             CardContent(cardName, settingsViewModel, navController)
         }
-        item { BottomPadding() }
-        item { BottomPadding() }
     }
 }
 
