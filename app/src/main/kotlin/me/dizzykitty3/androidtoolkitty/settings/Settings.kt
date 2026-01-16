@@ -63,7 +63,7 @@ fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostControl
     Screen(R.string.settings, navController) {
         if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance(settingsViewModel) }
         BaseCard(R.string.general) { General(settingsViewModel, navController) }
-        BaseCard(R.string.others) { OtherSettings(navController) }
+        BaseCard(R.string.app_info) { OtherSettings(navController) }
     }
 }
 
@@ -320,7 +320,7 @@ private fun OtherSettings(navController: NavHostController) {
                         contentDescription = null
                     )
                     IconAndTextPadding()
-                    Text(stringResource(R.string.app_info))
+                    Text(stringResource(R.string.app_settings))
                 }
                 SpacerPadding()
                 Icon(

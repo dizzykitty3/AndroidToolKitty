@@ -18,7 +18,6 @@
     <string name="result">result =</string>
     <string name="permissions">Permissions</string>
     <string name="general">General</string>
-    <string name="others">Others</string>
     <string name="granted">granted</string>
     <string name="back">back</string>
     <string name="save">Save</string>
@@ -248,10 +247,11 @@
     <string name="clear_clipboard_on_launch">Clear clipboard on launch</string>
     <string name="switch_to_bing_search">Switch to Bing Search</string>
 
-    <!-- Settings > Others -->
+    <!-- Settings > App info -->
     <string name="view_source_code">Source code</string>
     <string name="licenses">Licenses</string>
     <string name="app_info">App info</string>
+    <string name="app_settings">App settings</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>
