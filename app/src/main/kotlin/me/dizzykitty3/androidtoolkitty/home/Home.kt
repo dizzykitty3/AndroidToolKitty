@@ -23,7 +23,6 @@ import androidx.compose.material.icons.outlined.NetworkCell
 import androidx.compose.material.icons.outlined.QuestionMark
 import androidx.compose.material.icons.outlined.Wifi
 import androidx.compose.material.icons.outlined.WifiOff
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -75,10 +74,12 @@ import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 
 @Composable
 fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController) {
-    if (currentWindowAdaptiveInfo().windowSizeClass.minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND) TabletLayout(
-        settingsViewModel, navController
-    )
-    else MobileLayout(settingsViewModel, navController)
+    val largeScreen =
+        currentWindowAdaptiveInfo().windowSizeClass.minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
+    if (largeScreen)
+        TabletLayout(settingsViewModel, navController)
+    else
+        MobileLayout(settingsViewModel, navController)
 }
 
 @Composable
@@ -135,7 +136,6 @@ private fun TopBar(navController: NavHostController, isTablet: Boolean = false) 
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SettingsButton(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
