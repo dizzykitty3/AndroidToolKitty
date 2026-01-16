@@ -1,15 +1,22 @@
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     alias(libs.plugins.about.libraries)
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt.android)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
 }
 
+kotlin {
+    compilerOptions {
+        languageVersion = org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_3
+        // maybe don't need
+//        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
+        extraWarnings = true
+    }
+}
+
+// TODO agp 9
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
     compileSdk {
@@ -21,11 +28,11 @@ android {
     buildFeatures {
         buildConfig = true
         compose = true
+        resValues = true
     }
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 23
-        targetSdk = compileSdk
         versionCode = 11800
         versionName = "1.18.0"
 
@@ -63,12 +70,6 @@ android {
         stabilityConfigurationFiles.addAll(
             rootProject.layout.projectDirectory.file("stability_config.conf"),
         )
-    }
-    kotlin {
-        compilerOptions {
-            jvmTarget = JvmTarget.JVM_17
-            extraWarnings = true
-        }
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
