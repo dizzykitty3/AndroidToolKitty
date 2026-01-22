@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty
 
+import android.view.View
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -11,6 +12,7 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.unveilIn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -38,6 +40,7 @@ fun AppNavHost(
     modifier: Modifier, settingsViewModel: SettingsViewModel
 ) {
     val navController = rememberNavController()
+    val isRTL = LocalConfiguration.current.layoutDirection == View.LAYOUT_DIRECTION_RTL
 
     NavHost(
         modifier = modifier,
@@ -45,13 +48,13 @@ fun AppNavHost(
         startDestination = SCR_HOME,
         enterTransition = {
             slideInHorizontally(
-                initialOffsetX = { fullWidth -> fullWidth },
+                initialOffsetX = { fullWidth -> if (isRTL) -fullWidth else fullWidth },
                 animationSpec = tween(SLIDE_DURATION),
             )
         },
         popExitTransition = {
             slideOutHorizontally(
-                targetOffsetX = { fullWidth -> fullWidth },
+                targetOffsetX = { fullWidth -> if (isRTL) -fullWidth else fullWidth },
                 animationSpec = tween(SLIDE_DURATION),
             )
         },
@@ -86,8 +89,10 @@ fun AppNavHost(
     }
 }
 
-private const val SLIDE_DURATION = 400
-private const val FADE_DURATION = 300
-private const val UNVEIL_DURATION = 400
-private const val SCALE_DURATION = 400
+private const val SHORT_DURATION = 300
+private const val REGULAR_DURATION = 400
+private const val SLIDE_DURATION = REGULAR_DURATION
+private const val FADE_DURATION = SHORT_DURATION
+private const val UNVEIL_DURATION = REGULAR_DURATION
+private const val SCALE_DURATION = REGULAR_DURATION
 private const val INITIAL_SCALE = 0.9F
