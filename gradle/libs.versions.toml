@@ -8,7 +8,7 @@ composeBOM = "2026.01.00" # https://developer.android.com/develop/ui/compose/bom
 composeM3 = "1.5.0-alpha12" # https://developer.android.com/jetpack/androidx/releases/compose-material3
 core = "1.17.0"
 coroutines = "1.10.2"
-dagger = "2.58" # https://github.com/google/dagger/releases
+dagger = "2.59" # https://github.com/google/dagger/releases
 dataStore = "1.2.0"
 desugar = "2.1.5"
 gmsMaps = "20.0.0" # https://developers.google.com/android/guides/releases
@@ -19,7 +19,7 @@ leakCanary = "2.14" # https://github.com/square/leakcanary/releases
 lifecycle = "2.10.0"
 material = "1.13.0"
 navigation = "2.9.6"
-serialization = "1.9.0"
+serialization = "1.10.0" # https://github.com/Kotlin/kotlinx.serialization/releases
 timber = "5.0.1" # https://github.com/JakeWharton/timber/releases
 
 [libraries]
