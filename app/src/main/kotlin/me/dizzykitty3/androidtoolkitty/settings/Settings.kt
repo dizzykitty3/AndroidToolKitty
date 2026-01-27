@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.EventNote
 import androidx.compose.material.icons.automirrored.outlined.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.ArrowOutward
 import androidx.compose.material.icons.outlined.ClearAll
@@ -37,6 +38,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.CARD_4
 import me.dizzykitty3.androidtoolkitty.R
@@ -211,6 +213,8 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
 private fun OtherSettings(navController: NavHostController) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
+    val settingsSharedPref = remember { SettingsSharedPref }
+    var logOutput by remember { mutableStateOf(settingsSharedPref.logOutputs) }
 
     Surface(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
@@ -231,6 +235,27 @@ private fun OtherSettings(navController: NavHostController) {
                     Text(appContext.versionName)
                 }
             }
+        }
+    }
+
+    if (BuildConfig.DEBUG) {
+        CustomSwitchRow(
+            icon = Icons.AutoMirrored.Outlined.EventNote,
+            title = R.string.log_outputs,
+            checked = true,
+            enabled = false,
+        ) {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+        }
+    } else {
+        CustomSwitchRow(
+            icon = Icons.AutoMirrored.Outlined.EventNote,
+            title = R.string.log_outputs,
+            checked = logOutput
+        ) {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            logOutput = it
+            settingsSharedPref.logOutputs = it
         }
     }
 

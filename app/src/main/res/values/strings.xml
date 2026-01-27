@@ -252,6 +252,7 @@
     <string name="licenses">Licenses</string>
     <string name="app_info">App info</string>
     <string name="app_settings">App settings</string>
+    <string name="log_outputs">Log outputs</string>
 
     <!-- Permission request -->
     <string name="request_permission">Request permission</string>

@@ -13,7 +13,11 @@ class ToolKitty : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+        if (BuildConfig.DEBUG || this.getSharedPreferences("Settings", MODE_PRIVATE)
+                .getBoolean("log_outputs", false)
+        ) {
+            Timber.plant(Timber.DebugTree())
+        }
         Timber.d("onCreate")
         appContext = applicationContext
     }

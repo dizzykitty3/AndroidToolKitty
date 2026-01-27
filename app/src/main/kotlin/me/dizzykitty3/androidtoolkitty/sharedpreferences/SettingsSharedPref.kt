@@ -14,6 +14,7 @@ object SettingsSharedPref {
     private const val PREF_NAME = "Settings"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
+    private const val LOG_OUTPUTS = "log_outputs"
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val TOP_PADDING_DP = "top_padding_dp"
     private const val BOTTOM_PADDING_DP = "bottom_padding_dp"
@@ -50,6 +51,9 @@ object SettingsSharedPref {
         }
     }
 
+    val addedCustomVolume: Boolean
+        get() = customVolume > 0
+
     var usingCustomVolumeOptionLabel: Boolean
         get() = getPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
         set(value) = setPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
@@ -58,8 +62,9 @@ object SettingsSharedPref {
         get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
         set(value) = setPreference(HAVE_TAPPED_ADD_BUTTON, value)
 
-    val addedCustomVolume: Boolean
-        get() = customVolume > 0
+    var logOutputs: Boolean
+        get() = getPreference(LOG_OUTPUTS, false)
+        set(value) = setPreference(LOG_OUTPUTS, value)
 
     fun getShownState(card: String): Boolean {
         return sharedPrefs.getBoolean(card, true)

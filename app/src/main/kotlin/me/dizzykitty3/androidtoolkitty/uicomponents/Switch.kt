@@ -53,14 +53,16 @@ fun CustomSwitchRow(
     icon: ImageVector? = null,
     @StringRes title: Int,
     checked: Boolean,
+    enabled: Boolean = true,
     onCheckedChange: (Boolean) -> Unit
-) = CustomSwitchRow(icon, stringResource(title), checked, onCheckedChange)
+) = CustomSwitchRow(icon, stringResource(title), checked, enabled, onCheckedChange)
 
 @Composable
 fun CustomSwitchRow(
     icon: ImageVector? = null,
     title: String,
     checked: Boolean,
+    enabled: Boolean = true,
     onCheckedChange: (Boolean) -> Unit
 ) = Surface(
     shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
@@ -86,7 +88,8 @@ fun CustomSwitchRow(
             SpacerPadding()
             Switch(
                 checked = checked,
-                onCheckedChange = { onCheckedChange(it) }
+                onCheckedChange = { onCheckedChange(it) },
+                enabled = enabled,
             )
         }
     }
