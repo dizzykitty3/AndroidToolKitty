@@ -16,7 +16,6 @@ kotlin {
     }
 }
 
-// TODO agp 9
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
     compileSdk {
@@ -61,18 +60,6 @@ android {
             )
         }
     }
-    applicationVariants.all {
-        outputs.all {
-            (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
-                "android-toolkitty-${versionName}.apk"
-        }
-    }
-    composeCompiler {
-        reportsDestination = layout.buildDirectory.dir("compose_compiler")
-        stabilityConfigurationFiles.addAll(
-            rootProject.layout.projectDirectory.file("stability_config.conf"),
-        )
-    }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
@@ -88,6 +75,21 @@ android {
     androidResources {
         generateLocaleConfig = true
     }
+}
+
+androidComponents {
+    // TODO
+//    outputs.all {
+//        (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
+//            "android-toolkitty-${versionName}.apk"
+//    }
+}
+
+composeCompiler {
+    reportsDestination = layout.buildDirectory.dir("compose_compiler")
+    stabilityConfigurationFiles.addAll(
+        rootProject.layout.projectDirectory.file("stability_config.conf"),
+    )
 }
 
 dependencies {
