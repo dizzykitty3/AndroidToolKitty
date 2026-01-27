@@ -1,5 +1,5 @@
 [versions]
-aboutLibraries = "13.2.1" # https://github.com/mikepenz/AboutLibraries/releases
+aboutLibraries = "14.0.0-b02" # https://github.com/mikepenz/AboutLibraries/releases
 activity = "1.12.2" # https://developer.android.com/jetpack/androidx/releases/activity
 agp = "9.0.0" # https://developer.android.com/build/releases/about-agp
 compose = "1.7.8"
