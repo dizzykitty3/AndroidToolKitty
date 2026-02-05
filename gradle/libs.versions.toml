@@ -6,6 +6,7 @@ compose = "1.7.8"
 composeBOM = "2026.01.01" # https://developer.android.com/develop/ui/compose/bom/bom-mapping
 composeM3 = "1.5.0-alpha13" # https://developer.android.com/jetpack/androidx/releases/compose-material3
 composeM3Adaptive = "1.2.0" # https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive
+composeUI = "1.10.2" # https://developer.android.com/jetpack/androidx/releases/compose-ui
 core = "1.17.0" # https://developer.android.com/jetpack/androidx/releases/core
 coroutines = "1.10.2"
 dagger = "2.59.1" # https://github.com/google/dagger/releases
@@ -34,6 +35,8 @@ androidx-compose-material-icons-extended = { group = "androidx.compose.material"
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "composeM3" }
 androidx-compose-material3-adaptive = { group = "androidx.compose.material3.adaptive", name = "adaptive", version.ref = "composeM3Adaptive" }
 androidx-compose-material3-window-size = { group = "androidx.compose.material3", name = "material3-window-size-class-android", version.ref = "composeM3" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "composeUI" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview", version.ref = "composeUI" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core" }
 androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "dataStore" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt" }

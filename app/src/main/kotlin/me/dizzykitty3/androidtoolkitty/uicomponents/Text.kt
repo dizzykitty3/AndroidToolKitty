@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package me.dizzykitty3.androidtoolkitty.uicomponents
 
 import androidx.annotation.StringRes
@@ -35,14 +33,14 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import me.dizzykitty3.androidtoolkitty.R
 
 @Composable
 fun Gradient(
-    textToDisplay: String,
-    colors: List<Color>
+    textToDisplay: String, colors: List<Color>
 ) {
     Row {
         val text = buildAnnotatedString {
@@ -51,8 +49,7 @@ fun Gradient(
             }
         }
         Text(
-            text,
-            style = TextStyle.Default.copy(
+            text, style = TextStyle.Default.copy(
                 fontFamily = FontFamily.Cursive,
                 fontWeight = FontWeight.Black,
                 fontSize = 40.sp,
@@ -63,14 +60,23 @@ fun Gradient(
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+private fun GradientPreview() {
+    Gradient(
+        "hello world", listOf(
+            MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.secondary
+        )
+    )
+}
+
 @Composable
 fun GradientSmall(textToDisplay: String, colors: List<Color>) {
     Row {
         val text = buildAnnotatedString {
             withStyle(
                 SpanStyle(
-                    Brush.horizontalGradient(colors),
-                    fontWeight = FontWeight.Black
+                    Brush.horizontalGradient(colors), fontWeight = FontWeight.Black
                 )
             ) { append(textToDisplay) }
         }
@@ -78,11 +84,19 @@ fun GradientSmall(textToDisplay: String, colors: List<Color>) {
     }
 }
 
+@Preview(showBackground = true)
+@Composable
+private fun GradientSmallPreview() {
+    GradientSmall(
+        "hello world",
+        listOf(MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.secondary)
+    )
+}
+
 @Composable
 fun AnnotatedString.Builder.ItalicText(@StringRes text: Int) {
     val italicTextStyle = SpanStyle(
-        fontStyle = FontStyle.Italic,
-        fontWeight = FontWeight.Light
+        fontStyle = FontStyle.Italic, fontWeight = FontWeight.Light
     )
     withStyle(italicTextStyle) { append(stringResource(text)) }
 }
@@ -90,16 +104,27 @@ fun AnnotatedString.Builder.ItalicText(@StringRes text: Int) {
 @Composable
 fun AnnotatedString.Builder.ItalicText(text: String) {
     val italicTextStyle = SpanStyle(
-        fontStyle = FontStyle.Italic,
-        fontWeight = FontWeight.Light
+        fontStyle = FontStyle.Italic, fontWeight = FontWeight.Light
     )
     withStyle(italicTextStyle) { append(text) }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ItalicTextPreview(){
+    Text(buildAnnotatedString { ItalicText("hello world") })
 }
 
 @Composable
 fun AnnotatedString.Builder.PrimaryColorText(@StringRes id: Int) {
     val materialPrimaryColorStyle = SpanStyle(color = MaterialTheme.colorScheme.primary)
     withStyle(materialPrimaryColorStyle) { append(stringResource(id)) }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun PrimaryColorTextPreview(){
+    Text(buildAnnotatedString { PrimaryColorText(android.R.string.ok) })
 }
 
 @Composable
@@ -120,9 +145,7 @@ fun Tip(msg: String) {
                 .fillMaxWidth()
         ) {
             Icon(
-                Icons.Outlined.Info,
-                contentDescription = null,
-                modifier = Modifier.size(24.dp)
+                Icons.Outlined.Info, contentDescription = null, modifier = Modifier.size(24.dp)
             )
             IconAndTextPadding()
             Text(
@@ -133,6 +156,12 @@ fun Tip(msg: String) {
         }
     }
     SpacerPadding()
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun TipPreview(){
+    Tip("hello world")
 }
 
 @Composable
@@ -174,14 +203,25 @@ fun GroupTitle(@StringRes title: Int) = GroupTitle(stringResource(title))
 @Composable
 fun GroupTitle(title: String) {
     Text(
-        title,
-        color = MaterialTheme.colorScheme.primary
+        title, color = MaterialTheme.colorScheme.primary
     )
     SpacerPadding()
 }
 
+@Preview(showBackground = true)
+@Composable
+private fun GroupTitlePreview(){
+    GroupTitle("hello world")
+}
+
 @Composable
 fun GroupTitleNoColor(title: String) = Text(title, style = MaterialTheme.typography.titleMedium)
+
+@Preview(showBackground = true)
+@Composable
+private fun GroupTitleNoColorPreview(){
+    GroupTitleNoColor("hello world")
+}
 
 @Composable
 fun ScrollableText(text: String) =
@@ -190,12 +230,23 @@ fun ScrollableText(text: String) =
 @Composable
 fun ScrollableText(@StringRes text: Int) = ScrollableText(stringResource(text))
 
+@Preview(showBackground = true)
 @Composable
-fun ScrollableBoldText(text: String) =
-    Box(Modifier.horizontalScroll(rememberScrollState())) { Text(text, fontWeight = FontWeight.Bold) }
+private fun ScrollableTextPreview(){
+    ScrollableText("hello world")
+}
+
+@Composable
+fun ScrollableBoldText(text: String) = Box(Modifier.horizontalScroll(rememberScrollState())) {
+    Text(
+        text, fontWeight = FontWeight.Bold
+    )
+}
 
 @Composable
 fun ScrollableBoldText(@StringRes text: Int) = ScrollableBoldText(stringResource(text))
+
+// TODO preview composables
 
 @Composable
 fun ScrollableItalicText(@StringRes text: Int) =
@@ -204,10 +255,9 @@ fun ScrollableItalicText(@StringRes text: Int) =
     }
 
 @Composable
-fun ScrollableItalicText(text: String) =
-    Box(Modifier.horizontalScroll(rememberScrollState())) {
-        Text(buildAnnotatedString { ItalicText(text) }, maxLines = 1)
-    }
+fun ScrollableItalicText(text: String) = Box(Modifier.horizontalScroll(rememberScrollState())) {
+    Text(buildAnnotatedString { ItalicText(text) }, maxLines = 1)
+}
 
 @Composable
 fun Description(@StringRes text: Int) = Description(stringResource(text))
