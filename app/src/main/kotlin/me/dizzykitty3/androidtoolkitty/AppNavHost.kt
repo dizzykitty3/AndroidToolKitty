@@ -89,8 +89,8 @@ fun AppNavHost(
     }
 }
 
-private const val SHORT_DURATION = 300
-private const val REGULAR_DURATION = 400
+private const val SHORT_DURATION = 400
+private const val REGULAR_DURATION = 700
 private const val SLIDE_DURATION = REGULAR_DURATION
 private const val FADE_DURATION = SHORT_DURATION
 private const val UNVEIL_DURATION = REGULAR_DURATION
