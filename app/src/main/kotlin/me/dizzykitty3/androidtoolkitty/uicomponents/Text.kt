@@ -111,7 +111,7 @@ fun AnnotatedString.Builder.ItalicText(text: String) {
 
 @Preview(showBackground = true)
 @Composable
-private fun ItalicTextPreview(){
+private fun ItalicTextPreview() {
     Text(buildAnnotatedString { ItalicText("hello world") })
 }
 
@@ -123,7 +123,7 @@ fun AnnotatedString.Builder.PrimaryColorText(@StringRes id: Int) {
 
 @Preview(showBackground = true)
 @Composable
-private fun PrimaryColorTextPreview(){
+private fun PrimaryColorTextPreview() {
     Text(buildAnnotatedString { PrimaryColorText(android.R.string.ok) })
 }
 
@@ -160,7 +160,7 @@ fun Tip(msg: String) {
 
 @Preview(showBackground = true)
 @Composable
-private fun TipPreview(){
+private fun TipPreview() {
     Tip("hello world")
 }
 
@@ -210,7 +210,7 @@ fun GroupTitle(title: String) {
 
 @Preview(showBackground = true)
 @Composable
-private fun GroupTitlePreview(){
+private fun GroupTitlePreview() {
     GroupTitle("hello world")
 }
 
@@ -219,7 +219,7 @@ fun GroupTitleNoColor(title: String) = Text(title, style = MaterialTheme.typogra
 
 @Preview(showBackground = true)
 @Composable
-private fun GroupTitleNoColorPreview(){
+private fun GroupTitleNoColorPreview() {
     GroupTitleNoColor("hello world")
 }
 
@@ -232,7 +232,7 @@ fun ScrollableText(@StringRes text: Int) = ScrollableText(stringResource(text))
 
 @Preview(showBackground = true)
 @Composable
-private fun ScrollableTextPreview(){
+private fun ScrollableTextPreview() {
     ScrollableText("hello world")
 }
 
@@ -246,7 +246,11 @@ fun ScrollableBoldText(text: String) = Box(Modifier.horizontalScroll(rememberScr
 @Composable
 fun ScrollableBoldText(@StringRes text: Int) = ScrollableBoldText(stringResource(text))
 
-// TODO preview composables
+@Preview(showBackground = true)
+@Composable
+private fun ScrollableBoldTextPreview() {
+    ScrollableBoldText("hello world")
+}
 
 @Composable
 fun ScrollableItalicText(@StringRes text: Int) =
@@ -259,6 +263,12 @@ fun ScrollableItalicText(text: String) = Box(Modifier.horizontalScroll(rememberS
     Text(buildAnnotatedString { ItalicText(text) }, maxLines = 1)
 }
 
+@Preview(showBackground = true)
+@Composable
+private fun ScrollableItalicTextPreview() {
+    ScrollableItalicText("hello world")
+}
+
 @Composable
 fun Description(@StringRes text: Int) = Description(stringResource(text))
 
@@ -269,11 +279,23 @@ fun Description(text: String) = Text(
     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
 )
 
+@Preview(showBackground = true)
+@Composable
+private fun DescriptionPreview() {
+    Description("hello world")
+}
+
 @Composable
 fun LabelText(text: String) = Text(text, style = MaterialTheme.typography.labelMedium)
 
 @Composable
 fun LabelText(@StringRes text: Int) = LabelText(stringResource(text))
+
+@Preview(showBackground = true)
+@Composable
+private fun LabelTextPreview() {
+    LabelText("hello world")
+}
 
 @Composable
 fun LabelAndValueTextRow(label: String, text: String) =
@@ -288,3 +310,9 @@ fun LabelAndValueTextRow(@StringRes label: Int, text: String) =
         Column(Modifier.weight(0.4F)) { LabelText(stringResource(label)) }
         Column(Modifier.weight(0.6F)) { ScrollableText(text) }
     }
+
+@Preview(showBackground = true)
+@Composable
+private fun LabelAndValueTextRowPreview() {
+    LabelAndValueTextRow(label = "hello world", text = "hello world")
+}
