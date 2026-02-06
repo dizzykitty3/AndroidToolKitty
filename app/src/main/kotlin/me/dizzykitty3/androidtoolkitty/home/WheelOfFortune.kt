@@ -111,10 +111,10 @@ private fun TheWheel(withEditableList: Boolean? = false) {
             getWheelOfFortuneItems() ?: List(4) { index -> "$item ${index + 1}" }
         )
     }
-    val textColor = MaterialTheme.colorScheme.onSecondaryContainer.toArgb()
+    val textColor = MaterialTheme.colorScheme.onSurface.toArgb()
     val paint = remember {
         Paint().apply {
-            color = textColor // onSecondaryContainer
+            color = textColor
             textAlign = Paint.Align.CENTER
             textSize = 40f
         }
