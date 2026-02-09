@@ -13,18 +13,25 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
 
 @Composable
 fun YearProgressIndicator() {
+    YearProgressContent(targetProgress = DateUtil.yearProgress)
+}
+
+@Composable
+private fun YearProgressContent(targetProgress: Float) {
     var progress by remember { mutableFloatStateOf(0f) }
     val animatedProgress by animateFloatAsState(
         targetValue = progress,
         animationSpec = ProgressIndicatorDefaults.ProgressAnimationSpec,
+        label = "year progress animation"
     )
 
-    LaunchedEffect(true) {
-        progress = DateUtil.yearProgress
+    LaunchedEffect(targetProgress) {
+        progress = targetProgress
     }
 
     Column(Modifier.fillMaxWidth()) {
@@ -36,4 +43,16 @@ fun YearProgressIndicator() {
         )
         SpacerPadding()
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun YearProgressPreview30() {
+    YearProgressContent(targetProgress = 0.3f)
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun YearProgressPreview80() {
+    YearProgressContent(targetProgress = 0.8f)
 }
