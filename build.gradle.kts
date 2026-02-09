@@ -1,10 +1,3 @@
-// TODO agp 9
-//buildscript {
-//    dependencies {
-//        classpath("com.google.devtoolsksp:symbol-processing-gradle-plugin:2.3.4")
-//    }
-//}
-
 plugins {
     alias(libs.plugins.about.libraries) apply false
     alias(libs.plugins.android.application) apply false
