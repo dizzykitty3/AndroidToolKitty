@@ -59,6 +59,7 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
+import timber.log.Timber
 
 @Composable
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
@@ -214,7 +215,7 @@ private fun OtherSettings(navController: NavHostController) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
-    var logOutput by remember { mutableStateOf(settingsSharedPref.logOutputs) }
+    var isLoggingEnabled by remember { mutableStateOf(settingsSharedPref.isLoggingEnabled) }
 
     Surface(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
@@ -251,11 +252,16 @@ private fun OtherSettings(navController: NavHostController) {
         CustomSwitchRow(
             icon = Icons.AutoMirrored.Outlined.EventNote,
             title = R.string.log_outputs,
-            checked = logOutput
+            checked = isLoggingEnabled
         ) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            logOutput = it
-            settingsSharedPref.logOutputs = it
+            isLoggingEnabled = it
+            settingsSharedPref.isLoggingEnabled = it
+            if (it) {
+                Timber.plant(Timber.DebugTree())
+            } else {
+                Timber.uprootAll()
+            }
         }
     }
 
