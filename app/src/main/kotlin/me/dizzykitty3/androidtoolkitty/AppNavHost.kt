@@ -49,24 +49,27 @@ fun AppNavHost(
         enterTransition = {
             slideInHorizontally(
                 initialOffsetX = { fullWidth -> if (isRTL) -fullWidth else fullWidth },
-                animationSpec = tween(SLIDE_DURATION),
+                animationSpec = tween(DURATION_TIME),
             )
         },
         popExitTransition = {
             slideOutHorizontally(
                 targetOffsetX = { fullWidth -> if (isRTL) -fullWidth else fullWidth },
-                animationSpec = tween(SLIDE_DURATION),
+                animationSpec = tween(DURATION_TIME),
             )
         },
         popEnterTransition = {
-            fadeIn(animationSpec = tween(FADE_DURATION)) + unveilIn(
-                animationSpec = tween(UNVEIL_DURATION),
+            fadeIn(animationSpec = tween(DURATION_TIME)) + unveilIn(
+                animationSpec = tween(
+                    DURATION_TIME
+                ),
                 matchParentSize = true,
-            ) + scaleIn(initialScale = INITIAL_SCALE, animationSpec = tween(SCALE_DURATION))
+            ) + scaleIn(initialScale = INITIAL_SCALE, animationSpec = tween(DURATION_TIME))
         },
         exitTransition = {
-            fadeOut(animationSpec = tween(FADE_DURATION)) + scaleOut(
-                targetScale = INITIAL_SCALE, animationSpec = tween(SCALE_DURATION)
+            fadeOut(animationSpec = tween(DURATION_TIME)) + scaleOut(
+                targetScale = INITIAL_SCALE,
+                animationSpec = tween(DURATION_TIME)
             )
         },
     ) {
@@ -89,10 +92,5 @@ fun AppNavHost(
     }
 }
 
-private const val SHORT_DURATION = 400
-private const val REGULAR_DURATION = 700
-private const val SLIDE_DURATION = REGULAR_DURATION
-private const val FADE_DURATION = SHORT_DURATION
-private const val UNVEIL_DURATION = REGULAR_DURATION
-private const val SCALE_DURATION = REGULAR_DURATION
+private const val DURATION_TIME = 300
 private const val INITIAL_SCALE = 0.9F
