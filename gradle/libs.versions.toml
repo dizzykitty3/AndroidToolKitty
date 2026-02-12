@@ -1,12 +1,12 @@
 [versions]
 aboutLibraries = "14.0.0-b02" # https://github.com/mikepenz/AboutLibraries/releases
-activity = "1.12.3" # https://developer.android.com/jetpack/androidx/releases/activity
+activity = "1.12.4" # https://developer.android.com/jetpack/androidx/releases/activity
 agp = "9.0.0" # https://developer.android.com/build/releases/about-agp
 compose = "1.7.8"
-composeBOM = "2026.01.01" # https://developer.android.com/develop/ui/compose/bom/bom-mapping
-composeM3 = "1.5.0-alpha13" # https://developer.android.com/jetpack/androidx/releases/compose-material3
+composeBOM = "2026.02.00" # https://developer.android.com/develop/ui/compose/bom/bom-mapping
+composeM3 = "1.5.0-alpha14" # https://developer.android.com/jetpack/androidx/releases/compose-material3
 composeM3Adaptive = "1.2.0" # https://developer.android.com/jetpack/androidx/releases/compose-material3-adaptive
-composeUI = "1.10.2" # https://developer.android.com/jetpack/androidx/releases/compose-ui
+composeUI = "1.10.3" # https://developer.android.com/jetpack/androidx/releases/compose-ui
 core = "1.17.0" # https://developer.android.com/jetpack/androidx/releases/core
 coroutines = "1.10.2"
 dagger = "2.59.1" # https://github.com/google/dagger/releases
