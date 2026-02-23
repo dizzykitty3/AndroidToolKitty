@@ -232,7 +232,7 @@
     <string name="compose">Compose</string>
 
     <!-- Home > Haptic -->
-    <string name="haptic">Haptic</string>
+    <string name="haptic_test">Haptic Test</string>
 
     <!-- Settings > Appearance -->
     <string name="appearance">Appearance</string>
@@ -243,7 +243,7 @@
     <string name="clipboard_card_hidden">Clipboard card on Home screen now hidden.</string>
     <string name="hide_all_cards">Hide all cards</string>
     <string name="show_all_cards">Show all cards</string>
-    <string name="customize_home_page">Customize home page</string>
+    <string name="customize_home">Customize Home</string>
     <string name="clear_clipboard_on_launch">Clear clipboard on launch</string>
     <string name="switch_to_bing_search">Switch to Bing Search</string>
 

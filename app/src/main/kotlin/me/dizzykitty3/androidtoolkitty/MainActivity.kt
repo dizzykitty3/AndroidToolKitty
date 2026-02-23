@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -47,8 +46,7 @@ class MainActivity : ComponentActivity() {
                 dynamicColor = settingsViewModel.settings.value.dynamicColor
             ) {
                 Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
                 ) { innerPadding ->
                     SettingsSharedPref.topPaddingDp = innerPadding.calculateTopPadding().value
                     SettingsSharedPref.bottomPaddingDp = innerPadding.calculateBottomPadding().value

@@ -323,7 +323,7 @@ private fun CardContent(
         CARD_8 -> CodesOfCharacters(navController)
         CARD_9 -> Maps()
         CARD_10 -> FontWeight(navController)
-        CARD_11 -> ComposeCatalog(navController)
-        CARD_12 -> HapticFeedback(navController)
+        CARD_11 -> ComposeCatalog()
+        CARD_12 -> HapticFeedback()
     }
 }

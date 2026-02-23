@@ -1,5 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.settings
 
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -42,12 +44,12 @@ import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.CARD_4
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_EDIT_HOME
-import me.dizzykitty3.androidtoolkitty.SCR_LICENSES
 import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.ui.settings.CustomizeHomeActivity
+import me.dizzykitty3.androidtoolkitty.ui.settings.LicensesActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.IconAndTextPadding
@@ -65,8 +67,8 @@ import timber.log.Timber
 fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
     Screen(R.string.settings, navController) {
         if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance(settingsViewModel) }
-        BaseCard(R.string.general) { General(settingsViewModel, navController) }
-        BaseCard(R.string.app_info) { OtherSettings(navController) }
+        BaseCard(R.string.general) { General(settingsViewModel) }
+        BaseCard(R.string.app_info) { OtherSettings() }
     }
 }
 
@@ -126,7 +128,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 }
 
 @Composable
-private fun General(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun General(settingsViewModel: SettingsViewModel) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
@@ -186,17 +188,19 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
                 .fillMaxWidth()
                 .clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    navController.navigate(SCR_EDIT_HOME)
+                    val intent = Intent(appContext, CustomizeHomeActivity::class.java)
+                    intent.setFlags(FLAG_ACTIVITY_NEW_TASK)
+                    appContext.startActivity(intent)
                 }, verticalArrangement = Arrangement.Center
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
                     Icon(
                         imageVector = Icons.Outlined.Edit,
-                        contentDescription = stringResource(R.string.customize_home_page)
+                        contentDescription = stringResource(R.string.customize_home)
                     )
                     IconAndTextPadding()
-                    Text(stringResource(R.string.customize_home_page))
+                    Text(stringResource(R.string.customize_home))
                 }
                 SpacerPadding()
                 Icon(
@@ -211,7 +215,7 @@ private fun General(settingsViewModel: SettingsViewModel, navController: NavHost
 }
 
 @Composable
-private fun OtherSettings(navController: NavHostController) {
+private fun OtherSettings() {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
@@ -308,7 +312,9 @@ private fun OtherSettings(navController: NavHostController) {
                 .fillMaxWidth()
                 .clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    navController.navigate(SCR_LICENSES)
+                    val intent = Intent(appContext, LicensesActivity::class.java)
+                    intent.flags = FLAG_ACTIVITY_NEW_TASK
+                    appContext.startActivity(intent)
                 }, verticalArrangement = Arrangement.Center
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {

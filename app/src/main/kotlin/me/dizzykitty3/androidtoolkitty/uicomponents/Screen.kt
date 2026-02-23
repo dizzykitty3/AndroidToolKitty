@@ -58,8 +58,31 @@ fun Screen(
 }
 
 @Composable
+fun Screen(
+    @StringRes screenTitle: Int, content: @Composable () -> Unit
+) = Screen(stringResource(screenTitle), content)
+
+@Composable
+fun Screen(
+    screenTitle: String = "", content: @Composable () -> Unit
+) {
+    val screenPadding = dimensionResource(R.dimen.padding_screen)
+
+    Column(
+        Modifier.padding(start = screenPadding, end = screenPadding)
+    ) {
+        TopPadding()
+        TopBar(screenTitle)
+        LazyColumn {
+            item { content() }
+            item { BottomPadding() }
+        }
+    }
+}
+
+@Composable
 fun LicenseScreen(
-    @StringRes screenTitle: Int, navController: NavHostController, content: @Composable () -> Unit
+    @StringRes screenTitle: Int, content: @Composable () -> Unit
 ) {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
 
@@ -72,7 +95,7 @@ fun LicenseScreen(
             Modifier.padding(start = screenPadding, end = screenPadding)
         ) {
             TopPadding()
-            TopBar(screenTitle, navController)
+            TopBar(screenTitle)
             Column(Modifier.padding(bottom = SettingsSharedPref.bottomPaddingDp.dp)) {
                 content()
             }
@@ -105,6 +128,28 @@ fun TopBar(screenTitle: String = "", navController: NavHostController) {
         IconAndTextPadding()
         Column(
             Modifier.weight(1F), verticalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = screenTitle, style = MaterialTheme.typography.titleLarge
+            )
+        }
+    }
+    SpacerPadding()
+}
+
+@Composable
+fun TopBar(@StringRes screenTitle: Int) = TopBar(stringResource(screenTitle))
+
+@Composable
+fun TopBar(screenTitle: String = "") {
+    LocalHapticFeedback.current
+
+    Row(
+        Modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Row(
+            Modifier.weight(1F), horizontalArrangement = Arrangement.Center
         ) {
             Text(
                 text = screenTitle, style = MaterialTheme.typography.titleLarge

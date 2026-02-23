@@ -6,20 +6,16 @@ import android.content.pm.PackageManager
 // App screens
 const val SCR_SETTINGS = "SettingsScreen"
 const val SCR_HOME = "HomeScreen"
-const val SCR_EDIT_HOME = "EditHomeScreen"
 const val SCR_PERMISSION_REQUEST = "PermissionRequestScreen"
-const val SCR_LICENSES = "LicensesScreen"
 const val SCR_SEARCH = "SearchScreen"
 const val SCR_CODES_OF_CHARACTERS = "CodesOfCharactersScreen"
 const val SCR_ANDROID_VERSION_HISTORY = "AndroidVersionHistoryScreen"
 const val SCR_FONT_WEIGHT_TEST = "FontWeightTestScreen"
 const val SCR_SYS_SETTINGS = "SysSettingsScreen"
 const val SCR_VOLUME = "VolumeScreen"
-const val SCR_COMPOSE_CATALOG = "ComposeCatalogScreen"
 const val SCR_WHEEL_OF_FORTUNE = "WheelOfFortuneScreen"
 const val SCR_PIN_OPTIONS = "PinOptionsScreen"
 const val SCR_CUSTOM_VOLUME = "CustomVolumeScreen"
-const val SCR_HAPTIC_FEEDBACK = "HapticFeedbackScreen"
 
 // App cards
 const val CARD_1 = "card_year_progress"
