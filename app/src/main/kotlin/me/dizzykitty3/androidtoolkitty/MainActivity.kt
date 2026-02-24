@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
                 dynamicColor = settingsViewModel.settings.value.dynamicColor
             ) {
                 Scaffold(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    containerColor = MaterialTheme.colorScheme.surfaceBright,
                 ) { innerPadding ->
                     SettingsSharedPref.topPaddingDp = innerPadding.calculateTopPadding().value
                     SettingsSharedPref.bottomPaddingDp = innerPadding.calculateBottomPadding().value

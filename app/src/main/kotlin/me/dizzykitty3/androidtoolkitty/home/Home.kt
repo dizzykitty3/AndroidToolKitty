@@ -164,7 +164,7 @@ private fun Status(isTablet: Boolean = false) {
         if (isTablet || view.context.headsetNotConnected()) {
             Surface(
                 shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
-                color = MaterialTheme.colorScheme.surfaceContainer
+                color = MaterialTheme.colorScheme.surfaceBright
             ) {
                 Row(Modifier.clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -194,7 +194,7 @@ private fun Status(isTablet: Boolean = false) {
             }
             Surface(
                 shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
-                color = MaterialTheme.colorScheme.surfaceContainer
+                color = MaterialTheme.colorScheme.surfaceBright
             ) {
                 Row(Modifier.clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -247,7 +247,7 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
 
     Surface(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
-        color = MaterialTheme.colorScheme.surfaceContainer
+        color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Row(Modifier.clickable {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)

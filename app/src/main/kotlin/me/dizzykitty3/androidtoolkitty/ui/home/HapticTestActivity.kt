@@ -31,7 +31,7 @@ class HapticTestActivity : ComponentActivity() {
         setContent {
             AppTheme {
                 Scaffold(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    containerColor = MaterialTheme.colorScheme.surfaceBright,
                 ) { innerPadding ->
                     Box(
                         Modifier.padding(
