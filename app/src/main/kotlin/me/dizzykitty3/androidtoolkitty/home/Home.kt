@@ -322,7 +322,7 @@ private fun CardContent(
         CARD_7 -> BluetoothDevice(navController)
         CARD_8 -> CodesOfCharacters(navController)
         CARD_9 -> Maps()
-        CARD_10 -> FontWeight(navController)
+        CARD_10 -> FontWeight()
         CARD_11 -> ComposeCatalog()
         CARD_12 -> HapticFeedback()
     }

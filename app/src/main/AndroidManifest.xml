@@ -45,6 +45,14 @@
         </activity>
 
         <activity
+            android:name=".ui.home.FontWeightTestActivity"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".ui.home.HapticTestActivity"
             android:exported="true">
             <intent-filter>

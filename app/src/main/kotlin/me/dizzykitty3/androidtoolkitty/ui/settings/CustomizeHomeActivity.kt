@@ -175,7 +175,7 @@ private fun CustomizeHomeComposable() {
             sp.saveShownState(CARD_9, newState)
         }
         CustomHideCardSettingSwitch(
-            text = R.string.font_weight,
+            text = R.string.font_weight_test,
             card = CARD_10,
             isChecked = mIsShowCard10
         ) { newState ->

@@ -212,7 +212,7 @@
     <string name="google_maps">Google Maps</string>
 
     <!-- Home > Font weight -->
-    <string name="font_weight">Font weight</string>
+    <string name="font_weight_test">Font Weight Test</string>
     <string name="w1">100 Thin</string>
     <string name="w2">200 ExtraLight</string>
     <string name="w3">300 Light</string>
