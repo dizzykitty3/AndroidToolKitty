@@ -1,6 +1,8 @@
 package me.dizzykitty3.androidtoolkitty.home
 
 import android.content.ContentResolver
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.provider.Settings
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
@@ -24,7 +26,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_ANDROID_VERSION_HISTORY
 import me.dizzykitty3.androidtoolkitty.SCR_PIN_OPTIONS
 import me.dizzykitty3.androidtoolkitty.SCR_SYS_SETTINGS
 import me.dizzykitty3.androidtoolkitty.S_ABOUT_PHONE
@@ -57,6 +58,7 @@ import me.dizzykitty3.androidtoolkitty.S_VPN
 import me.dizzykitty3.androidtoolkitty.S_WIFI
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.ui.home.AndroidVersionsActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.LabelAndValueTextRow
@@ -248,7 +250,10 @@ fun SysSettingsScreen(navController: NavHostController) {
                                 text = StringUtil.osVer,
                                 modifier = Modifier.clickable {
                                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                    navController.navigate(SCR_ANDROID_VERSION_HISTORY)
+                                    val intent =
+                                        Intent(appContext, AndroidVersionsActivity::class.java)
+                                    intent.flags = FLAG_ACTIVITY_NEW_TASK
+                                    appContext.startActivity(intent)
                                 },
                                 color = MaterialTheme.colorScheme.primary
                             )

@@ -37,6 +37,14 @@
         </activity>
 
         <activity
+            android:name=".ui.home.AndroidVersionsActivity"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".ui.home.ComposeCatalogActivity"
             android:exported="true">
             <intent-filter>
