@@ -58,7 +58,7 @@ fun BaseCard(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
         colors = CardDefaults.cardColors().copy(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
+            containerColor = MaterialTheme.colorScheme.surfaceBright,
             contentColor = MaterialTheme.colorScheme.onSurface
         )
     ) {

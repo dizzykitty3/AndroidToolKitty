@@ -94,7 +94,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
     if (OSVersion.android13()) {
         Surface(
             shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
-            color = MaterialTheme.colorScheme.surfaceContainerLowest
+            color = MaterialTheme.colorScheme.surfaceBright
         ) {
             Column(
                 Modifier
@@ -180,7 +180,7 @@ private fun General(settingsViewModel: SettingsViewModel) {
     // edit home
     Surface(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
-        color = MaterialTheme.colorScheme.surfaceContainerLowest
+        color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
             Modifier
@@ -223,7 +223,7 @@ private fun OtherSettings() {
 
     Surface(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
-        color = MaterialTheme.colorScheme.surfaceContainerLowest
+        color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
             Modifier
@@ -271,7 +271,7 @@ private fun OtherSettings() {
 
     Surface(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
-        color = MaterialTheme.colorScheme.surfaceContainerLowest
+        color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
             Modifier
@@ -304,7 +304,7 @@ private fun OtherSettings() {
 
     Surface(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
-        color = MaterialTheme.colorScheme.surfaceContainerLowest
+        color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
             Modifier
@@ -339,7 +339,7 @@ private fun OtherSettings() {
 
     Surface(
         shape = RoundedCornerShape(dimensionResource(R.dimen.rounded_corner_shape)),
-        color = MaterialTheme.colorScheme.surfaceContainerLowest
+        color = MaterialTheme.colorScheme.surfaceBright
     ) {
         Column(
             Modifier

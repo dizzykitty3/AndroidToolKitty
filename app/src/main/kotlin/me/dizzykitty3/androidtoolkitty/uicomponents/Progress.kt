@@ -38,7 +38,7 @@ private fun YearProgressContent(targetProgress: Float) {
         SpacerPadding()
         LinearProgressIndicator(
             progress = { animatedProgress },
-            trackColor = MaterialTheme.colorScheme.surfaceBright,
+            trackColor = MaterialTheme.colorScheme.surfaceContainer,
             modifier = Modifier.fillMaxWidth()
         )
         SpacerPadding()

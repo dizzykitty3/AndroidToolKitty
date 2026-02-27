@@ -42,7 +42,7 @@ fun Screen(
     Box(
         Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surfaceBright)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
     ) {
         Column(
             Modifier.padding(start = screenPadding, end = screenPadding)
@@ -89,7 +89,7 @@ fun LicenseScreen(
     Box(
         Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.surfaceBright)
+            .background(MaterialTheme.colorScheme.surfaceContainer)
     ) {
         Column(
             Modifier.padding(start = screenPadding, end = screenPadding)
