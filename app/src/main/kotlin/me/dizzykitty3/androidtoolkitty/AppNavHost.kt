@@ -12,7 +12,6 @@ import me.dizzykitty3.androidtoolkitty.home.Home
 import me.dizzykitty3.androidtoolkitty.home.SearchScreen
 import me.dizzykitty3.androidtoolkitty.home.SysSettingsScreen
 import me.dizzykitty3.androidtoolkitty.home.VolumeScreen
-import me.dizzykitty3.androidtoolkitty.home.WheelOfFortuneScreen
 import me.dizzykitty3.androidtoolkitty.settings.Settings
 import me.dizzykitty3.androidtoolkitty.settings.SysSettingsCardEditScreen
 
@@ -33,7 +32,6 @@ fun AppNavHost(
         composable(SCR_SEARCH) { SearchScreen(settingsViewModel, navController) }
         composable(SCR_SYS_SETTINGS) { SysSettingsScreen(navController) }
         composable(SCR_VOLUME) { VolumeScreen(navController) }
-        composable(SCR_WHEEL_OF_FORTUNE) { WheelOfFortuneScreen(navController) }
         composable(SCR_PIN_OPTIONS) { SysSettingsCardEditScreen(navController) }
         composable(SCR_CUSTOM_VOLUME) { CustomVolumeScreen(navController) }
     }

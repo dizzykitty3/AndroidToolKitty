@@ -9,7 +9,6 @@ const val SCR_HOME = "HomeScreen"
 const val SCR_SEARCH = "SearchScreen"
 const val SCR_SYS_SETTINGS = "SysSettingsScreen"
 const val SCR_VOLUME = "VolumeScreen"
-const val SCR_WHEEL_OF_FORTUNE = "WheelOfFortuneScreen"
 const val SCR_PIN_OPTIONS = "PinOptionsScreen"
 const val SCR_CUSTOM_VOLUME = "CustomVolumeScreen"
 
