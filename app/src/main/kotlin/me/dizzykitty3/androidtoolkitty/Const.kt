@@ -7,9 +7,7 @@ import android.content.pm.PackageManager
 const val SCR_SETTINGS = "SettingsScreen"
 const val SCR_HOME = "HomeScreen"
 const val SCR_SEARCH = "SearchScreen"
-const val SCR_SYS_SETTINGS = "SysSettingsScreen"
 const val SCR_VOLUME = "VolumeScreen"
-const val SCR_PIN_OPTIONS = "PinOptionsScreen"
 const val SCR_CUSTOM_VOLUME = "CustomVolumeScreen"
 
 // App cards

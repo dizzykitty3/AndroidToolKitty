@@ -10,10 +10,8 @@ import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.home.CustomVolumeScreen
 import me.dizzykitty3.androidtoolkitty.home.Home
 import me.dizzykitty3.androidtoolkitty.home.SearchScreen
-import me.dizzykitty3.androidtoolkitty.home.SysSettingsScreen
 import me.dizzykitty3.androidtoolkitty.home.VolumeScreen
 import me.dizzykitty3.androidtoolkitty.settings.Settings
-import me.dizzykitty3.androidtoolkitty.settings.SysSettingsCardEditScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -30,9 +28,7 @@ fun AppNavHost(
         composable(SCR_HOME) { Home(settingsViewModel, navController) }
         composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
         composable(SCR_SEARCH) { SearchScreen(settingsViewModel, navController) }
-        composable(SCR_SYS_SETTINGS) { SysSettingsScreen(navController) }
         composable(SCR_VOLUME) { VolumeScreen(navController) }
-        composable(SCR_PIN_OPTIONS) { SysSettingsCardEditScreen(navController) }
         composable(SCR_CUSTOM_VOLUME) { CustomVolumeScreen(navController) }
     }
 }

@@ -317,7 +317,7 @@ private fun CardContent(
         CARD_2 -> Volume(navController)
         CARD_3 -> Clipboard()
         CARD_4 -> Search(settingsViewModel, navController)
-        CARD_5 -> SysSettings(navController)
+        CARD_5 -> SysSettings()
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice()
         CARD_8 -> CodesOfCharacters()

@@ -177,6 +177,7 @@
     <string name="android_versions">Android versions</string>
     <string name="latest_version">Latest version</string>
     <string name="older_releases">Older releases</string>
+    <string name="system_shortcuts">System Shortcuts</string>
 
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>
