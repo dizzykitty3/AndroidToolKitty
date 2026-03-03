@@ -320,7 +320,7 @@ private fun CardContent(
         CARD_5 -> SysSettings(navController)
         CARD_6 -> WheelOfFortune(navController)
         CARD_7 -> BluetoothDevice(navController)
-        CARD_8 -> CodesOfCharacters(navController)
+        CARD_8 -> CodesOfCharacters()
         CARD_9 -> Maps()
         CARD_10 -> FontWeight()
         CARD_11 -> ComposeCatalog()

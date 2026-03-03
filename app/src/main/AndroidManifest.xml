@@ -45,7 +45,7 @@
         </activity>
 
         <activity
-            android:name=".ui.home.ComposeCatalogActivity"
+            android:name=".ui.home.CodesOfCharactersActivity"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -54,6 +54,14 @@
 
         <activity
             android:name=".ui.home.FontWeightTestActivity"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.home.ComposeCatalogActivity"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -97,10 +105,10 @@
         </activity>
 
         <activity
-                android:name=".appcomponents.ShareToSearchActivity"
-                android:exported="true"
-                android:label="@string/search"
-                android:theme="@android:style/Theme.NoDisplay">
+            android:name=".appcomponents.ShareToSearchActivity"
+            android:exported="true"
+            android:label="@string/search"
+            android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />

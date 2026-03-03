@@ -200,6 +200,7 @@
     <string name="encoding">Encoding</string>
     <string name="ascii">ASCII</string>
     <string name="convert_to_ascii_values">Convert to ASCII values</string>
+    <string name="codes_of_characters">Codes of Characters</string>
 
     <!-- Home > Maps -->
     <string name="maps">Maps</string>

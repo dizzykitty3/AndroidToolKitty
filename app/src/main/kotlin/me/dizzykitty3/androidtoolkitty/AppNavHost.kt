@@ -7,7 +7,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.home.CodesOfCharactersScreen
 import me.dizzykitty3.androidtoolkitty.home.CustomVolumeScreen
 import me.dizzykitty3.androidtoolkitty.home.Home
 import me.dizzykitty3.androidtoolkitty.home.PermissionRequest
@@ -34,7 +33,6 @@ fun AppNavHost(
         composable(SCR_SETTINGS) { Settings(settingsViewModel, navController) }
         composable(SCR_PERMISSION_REQUEST) { PermissionRequest(navController) }
         composable(SCR_SEARCH) { SearchScreen(settingsViewModel, navController) }
-        composable(SCR_CODES_OF_CHARACTERS) { CodesOfCharactersScreen(navController) }
         composable(SCR_SYS_SETTINGS) { SysSettingsScreen(navController) }
         composable(SCR_VOLUME) { VolumeScreen(navController) }
         composable(SCR_WHEEL_OF_FORTUNE) { WheelOfFortuneScreen(navController) }
