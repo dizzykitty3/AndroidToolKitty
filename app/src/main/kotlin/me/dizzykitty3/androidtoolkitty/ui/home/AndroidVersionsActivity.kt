@@ -17,6 +17,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
+import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
@@ -25,6 +26,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableBoldText
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 
+@AndroidEntryPoint
 class AndroidVersionsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
