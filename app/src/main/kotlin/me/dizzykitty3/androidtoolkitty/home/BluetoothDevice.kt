@@ -2,6 +2,8 @@ package me.dizzykitty3.androidtoolkitty.home
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Bluetooth
@@ -21,10 +23,10 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_PERMISSION_REQUEST
 import me.dizzykitty3.androidtoolkitty.S_ENABLE_BLUETOOTH
+import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.ui.other.RequestPermissionActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomIconPopup
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
@@ -35,7 +37,7 @@ import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noBluetoothPermissio
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @Composable
-fun BluetoothDevice(navController: NavHostController) {
+fun BluetoothDevice() {
     BaseCard(title = R.string.bluetooth_devices, icon = Icons.Outlined.Bluetooth) {
         val view = LocalView.current
         val haptic = LocalHapticFeedback.current
@@ -49,7 +51,9 @@ fun BluetoothDevice(navController: NavHostController) {
 
             // Check permissions
             if (view.context.noBluetoothPermission()) {
-                navController.navigate(SCR_PERMISSION_REQUEST)
+                val intent = Intent(appContext, RequestPermissionActivity::class.java)
+                intent.flags = FLAG_ACTIVITY_NEW_TASK
+                appContext.startActivity(intent)
                 return@OutlinedButton
             }
 
@@ -101,10 +105,9 @@ fun BluetoothDevice(navController: NavHostController) {
     }
 }
 
-private fun Int.toTypeName(): String =
-    when (this) {
-        1 -> "BT"
-        2 -> "BLE"
-        3 -> "Dual"
-        else -> "Unknown"
-    }
+private fun Int.toTypeName(): String = when (this) {
+    1 -> "BT"
+    2 -> "BLE"
+    3 -> "Dual"
+    else -> "Unknown"
+}
