@@ -1,5 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.home
 
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,7 +10,6 @@ import androidx.compose.material.icons.automirrored.outlined.VolumeUp
 import androidx.compose.material.icons.outlined.Edit
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.SegmentedButton
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
@@ -26,45 +27,34 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_CUSTOM_VOLUME
-import me.dizzykitty3.androidtoolkitty.SCR_VOLUME
+import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.ui.home.VolumeActivity
+import me.dizzykitty3.androidtoolkitty.ui.home.VolumeCustomizeActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
-import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import kotlin.math.roundToInt
 
 @Composable
-fun Volume(navController: NavHostController) {
+fun Volume() {
     val haptic = LocalHapticFeedback.current
     BaseCard(
-        R.string.volume,
-        Icons.AutoMirrored.Outlined.VolumeUp,
-        true,
-        {
+        R.string.volume, Icons.AutoMirrored.Outlined.VolumeUp, true, {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            navController.navigate(SCR_VOLUME)
+            val intent = Intent(appContext, VolumeActivity::class.java)
+            intent.flags = FLAG_ACTIVITY_NEW_TASK
+            appContext.startActivity(intent)
         }) {
-        MediaVolume(navController, isHome = true)
+        MediaVolume(isHome = true)
     }
 }
 
 @Composable
-fun VolumeScreen(navController: NavHostController) {
-    Screen(R.string.volume, navController) {
-        BaseCard(R.string.media_volume) { MediaVolume(navController, isHome = false) }
-        BaseCard(R.string.voice_call_volume) { VoiceCallVolume() }
-    }
-}
-
-@Composable
-private fun MediaVolume(navController: NavHostController, isHome: Boolean) {
+fun MediaVolume(isHome: Boolean) {
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
@@ -93,8 +83,7 @@ private fun MediaVolume(navController: NavHostController, isHome: Boolean) {
     }
 
     SingleChoiceSegmentedButtonRow(
-        modifier = Modifier.fillMaxWidth(),
-        space = SegmentedButtonDefaults.BorderWidth
+        modifier = Modifier.fillMaxWidth(), space = SegmentedButtonDefaults.BorderWidth
     ) {
         options.forEachIndexed { index, label ->
             SegmentedButton(
@@ -117,17 +106,19 @@ private fun MediaVolume(navController: NavHostController, isHome: Boolean) {
                         3 -> {
                             mHaveTappedAddButton = true
                             settingsSharedPref.haveTappedAddButton = true
-                            if (mCustomVolume > 0)
+                            if (mCustomVolume > 0) {
                                 view.setVolume(mCustomVolume * 0.01 * maxVolume)
-                            else
-                                navController.navigate(SCR_CUSTOM_VOLUME)
+                            } else {
+                                val intent = Intent(appContext, VolumeCustomizeActivity::class.java)
+                                intent.flags = FLAG_ACTIVITY_NEW_TASK
+                                appContext.startActivity(intent)
+                            }
                         }
                     }
                 },
                 selected = index == selectedIndex,
                 shape = SegmentedButtonDefaults.itemShape(
-                    index = index,
-                    count = options.size
+                    index = index, count = options.size
                 ),
                 colors = SegmentedButtonDefaults.colors()
                     .copy(inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainerLow)
@@ -138,10 +129,8 @@ private fun MediaVolume(navController: NavHostController, isHome: Boolean) {
                     Text(label)
                 } else {
                     GradientSmall(
-                        textToDisplay = label,
-                        colors = listOf(
-                            MaterialTheme.colorScheme.primary,
-                            MaterialTheme.colorScheme.tertiary
+                        textToDisplay = label, colors = listOf(
+                            MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.tertiary
                         )
                     )
                 }
@@ -151,12 +140,13 @@ private fun MediaVolume(navController: NavHostController, isHome: Boolean) {
 
     if (mCustomVolume > 0 && !isHome) {
         Row(
-            Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.End
+            Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End
         ) {
             TextButton({
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                navController.navigate(SCR_CUSTOM_VOLUME)
+                val intent = Intent(appContext, VolumeCustomizeActivity::class.java)
+                intent.flags = FLAG_ACTIVITY_NEW_TASK
+                appContext.startActivity(intent)
             }) {
                 Icon(
                     imageVector = Icons.Outlined.Edit,
@@ -168,18 +158,4 @@ private fun MediaVolume(navController: NavHostController, isHome: Boolean) {
             }
         }
     }
-}
-
-@Composable
-private fun VoiceCallVolume() {
-    val view = LocalView.current
-    val haptic = LocalHapticFeedback.current
-    OutlinedButton({
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        val index = AudioUtil.maxVoiceCallVolumeIndex
-        AudioUtil.setVoiceCallVolume(index)
-        if (AudioUtil.voiceCallVolume == index) {
-            view.showSnackbar(R.string.volume_changed)
-        }
-    }) { Text(stringResource(R.string.max_out_voice_call_volume)) }
 }

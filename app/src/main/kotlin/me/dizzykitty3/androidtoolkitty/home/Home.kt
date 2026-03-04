@@ -76,10 +76,8 @@ import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 fun Home(navController: NavHostController) {
     val largeScreen =
         currentWindowAdaptiveInfo().windowSizeClass.minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
-    if (largeScreen)
-        TabletLayout(navController)
-    else
-        MobileLayout(navController)
+    if (largeScreen) TabletLayout(navController)
+    else MobileLayout(navController)
 }
 
 @Composable
@@ -101,7 +99,7 @@ private fun MobileLayout(navController: NavHostController) {
                 CardSpacePadding()
                 Test()
             }
-            item { HomeCards(navController) }
+            item { HomeCards() }
             item { BottomPadding() }
         }
     }
@@ -123,7 +121,7 @@ private fun TabletLayout(navController: NavHostController) {
             if (debug) {
                 DevBuildTip()
             }
-            TwoColumnHomeCards(navController)
+            TwoColumnHomeCards()
         }
     }
 }
@@ -266,16 +264,14 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
 }
 
 @Composable
-private fun HomeCards(navController: NavHostController) {
+private fun HomeCards() {
     getCardMap(SettingsSharedPref).forEach { cardName ->
-        CardContent(cardName, navController)
+        CardContent(cardName)
     }
 }
 
 @Composable
-private fun TwoColumnHomeCards(
-    navController: NavHostController
-) {
+private fun TwoColumnHomeCards() {
     val cardPadding = dimensionResource(R.dimen.padding_card_space)
     val largeCardPadding = dimensionResource(R.dimen.padding_card_space_large)
     val cardMap = getCardMap(SettingsSharedPref)
@@ -286,7 +282,7 @@ private fun TwoColumnHomeCards(
         horizontalArrangement = Arrangement.spacedBy(largeCardPadding),
     ) {
         items(cardMap) { cardName ->
-            CardContent(cardName, navController)
+            CardContent(cardName)
         }
     }
 }
@@ -308,12 +304,10 @@ private fun getCardMap(settingsSharedPref: SettingsSharedPref): List<String> = l
 ).associateWith { card -> settingsSharedPref.getShownState(card) }.filter { it.value }.keys.toList()
 
 @Composable
-private fun CardContent(
-    cardName: String, navController: NavHostController
-) {
+private fun CardContent(cardName: String) {
     when (cardName) {
         CARD_1 -> YearProgress()
-        CARD_2 -> Volume(navController)
+        CARD_2 -> Volume()
         CARD_3 -> Clipboard()
         CARD_4 -> Search()
         CARD_5 -> SysSettings()

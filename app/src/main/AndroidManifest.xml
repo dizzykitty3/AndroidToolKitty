@@ -37,6 +37,22 @@
         </activity>
 
         <activity
+            android:name=".ui.home.VolumeActivity"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.home.VolumeCustomizeActivity"
+            android:exported="true">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".ui.home.SearchActivity"
             android:exported="true">
             <intent-filter>

@@ -6,8 +6,6 @@ import android.content.pm.PackageManager
 // App screens
 const val SCR_SETTINGS = "SettingsScreen"
 const val SCR_HOME = "HomeScreen"
-const val SCR_VOLUME = "VolumeScreen"
-const val SCR_CUSTOM_VOLUME = "CustomVolumeScreen"
 
 // App cards
 const val CARD_1 = "card_year_progress"
