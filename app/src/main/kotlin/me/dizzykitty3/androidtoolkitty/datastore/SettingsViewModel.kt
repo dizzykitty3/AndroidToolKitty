@@ -1,6 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.datastore
 
 import androidx.compose.runtime.State
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -36,4 +37,8 @@ class SettingsViewModel @Inject constructor(
             settingsUseCase.saveSettingsToRepository(newSettings)
         }
     }
+}
+
+val LocalSettingsViewModel = compositionLocalOf<SettingsViewModel> {
+    error("No SettingsViewModel provided")
 }

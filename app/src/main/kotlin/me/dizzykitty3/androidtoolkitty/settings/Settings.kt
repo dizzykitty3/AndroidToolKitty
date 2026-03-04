@@ -46,6 +46,7 @@ import me.dizzykitty3.androidtoolkitty.CARD_4
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
+import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.settings.CustomizeHomeActivity
@@ -64,7 +65,9 @@ import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
 import timber.log.Timber
 
 @Composable
-fun Settings(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+fun Settings(navController: NavHostController) {
+    val settingsViewModel = LocalSettingsViewModel.current
+
     Screen(R.string.settings, navController) {
         if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance(settingsViewModel) }
         BaseCard(R.string.general) { General(settingsViewModel) }

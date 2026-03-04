@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -17,6 +18,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
+import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.theme.AppTheme
@@ -42,20 +44,23 @@ class MainActivity : ComponentActivity() {
             settingsViewModel = hiltViewModel<SettingsViewModel>()
             isAutoClearClipboard = settingsViewModel.settings.value.autoClearClipboard
 
-            AppTheme(
-                dynamicColor = settingsViewModel.settings.value.dynamicColor
-            ) {
-                Scaffold(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                ) { innerPadding ->
-                    SettingsSharedPref.topPaddingDp = innerPadding.calculateTopPadding().value
-                    SettingsSharedPref.bottomPaddingDp = innerPadding.calculateBottomPadding().value
-                    AppNavHost(
-                        Modifier.padding(
-                            start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
-                            end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
-                        ), settingsViewModel
-                    )
+            CompositionLocalProvider(LocalSettingsViewModel provides settingsViewModel) {
+                AppTheme(
+                    dynamicColor = settingsViewModel.settings.value.dynamicColor
+                ) {
+                    Scaffold(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    ) { innerPadding ->
+                        SettingsSharedPref.topPaddingDp = innerPadding.calculateTopPadding().value
+                        SettingsSharedPref.bottomPaddingDp =
+                            innerPadding.calculateBottomPadding().value
+                        AppNavHost(
+                            Modifier.padding(
+                                start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
+                                end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
+                            )
+                        )
+                    }
                 }
             }
         }

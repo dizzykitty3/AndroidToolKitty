@@ -60,7 +60,6 @@ import me.dizzykitty3.androidtoolkitty.SCR_SETTINGS
 import me.dizzykitty3.androidtoolkitty.S_BATTERY
 import me.dizzykitty3.androidtoolkitty.S_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.S_WIFI
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.BottomPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
@@ -74,17 +73,17 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 
 @Composable
-fun Home(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+fun Home(navController: NavHostController) {
     val largeScreen =
         currentWindowAdaptiveInfo().windowSizeClass.minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
     if (largeScreen)
-        TabletLayout(settingsViewModel, navController)
+        TabletLayout(navController)
     else
-        MobileLayout(settingsViewModel, navController)
+        MobileLayout(navController)
 }
 
 @Composable
-private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun MobileLayout(navController: NavHostController) {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
     val debug = BuildConfig.DEBUG
 
@@ -102,14 +101,14 @@ private fun MobileLayout(settingsViewModel: SettingsViewModel, navController: Na
                 CardSpacePadding()
                 Test()
             }
-            item { HomeCards(settingsViewModel, navController) }
+            item { HomeCards(navController) }
             item { BottomPadding() }
         }
     }
 }
 
 @Composable
-private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun TabletLayout(navController: NavHostController) {
     val largeScreenPadding = dimensionResource(R.dimen.padding_screen_large)
     val debug = BuildConfig.DEBUG
 
@@ -124,7 +123,7 @@ private fun TabletLayout(settingsViewModel: SettingsViewModel, navController: Na
             if (debug) {
                 DevBuildTip()
             }
-            TwoColumnHomeCards(settingsViewModel, navController)
+            TwoColumnHomeCards(navController)
         }
     }
 }
@@ -267,15 +266,15 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
 }
 
 @Composable
-private fun HomeCards(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+private fun HomeCards(navController: NavHostController) {
     getCardMap(SettingsSharedPref).forEach { cardName ->
-        CardContent(cardName, settingsViewModel, navController)
+        CardContent(cardName, navController)
     }
 }
 
 @Composable
 private fun TwoColumnHomeCards(
-    settingsViewModel: SettingsViewModel, navController: NavHostController
+    navController: NavHostController
 ) {
     val cardPadding = dimensionResource(R.dimen.padding_card_space)
     val largeCardPadding = dimensionResource(R.dimen.padding_card_space_large)
@@ -287,7 +286,7 @@ private fun TwoColumnHomeCards(
         horizontalArrangement = Arrangement.spacedBy(largeCardPadding),
     ) {
         items(cardMap) { cardName ->
-            CardContent(cardName, settingsViewModel, navController)
+            CardContent(cardName, navController)
         }
     }
 }
@@ -310,13 +309,13 @@ private fun getCardMap(settingsSharedPref: SettingsSharedPref): List<String> = l
 
 @Composable
 private fun CardContent(
-    cardName: String, settingsViewModel: SettingsViewModel, navController: NavHostController
+    cardName: String, navController: NavHostController
 ) {
     when (cardName) {
         CARD_1 -> YearProgress()
         CARD_2 -> Volume(navController)
         CARD_3 -> Clipboard()
-        CARD_4 -> Search(settingsViewModel, navController)
+        CARD_4 -> Search(navController)
         CARD_5 -> SysSettings()
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice()

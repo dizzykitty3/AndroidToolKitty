@@ -37,6 +37,7 @@ import androidx.navigation.NavHostController
 import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SCR_SEARCH
+import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
@@ -62,8 +63,9 @@ import me.dizzykitty3.androidtoolkitty.utils.URLUtil.getSuffix
 import timber.log.Timber
 
 @Composable
-fun Search(settingsViewModel: SettingsViewModel, navController: NavHostController) {
+fun Search(navController: NavHostController) {
     val haptic = LocalHapticFeedback.current
+    val settingsViewModel = LocalSettingsViewModel.current
 
     BaseCard(
         title = R.string.search,
@@ -76,12 +78,15 @@ fun Search(settingsViewModel: SettingsViewModel, navController: NavHostControlle
 }
 
 @Composable
-fun SearchScreen(settingsViewModel: SettingsViewModel, navController: NavHostController) =
-    Screen(R.string.search, navController) {
+fun SearchScreen() {
+    val settingsViewModel = LocalSettingsViewModel.current
+
+    Screen(R.string.search) {
         BaseCard(R.string.webpage) { Webpage() }
         BaseCard(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }
         BaseCard(R.string.check_app_on_market) { CheckAppOnMarket() }
     }
+}
 
 @Composable
 private fun Search(settingsViewModel: SettingsViewModel) {
