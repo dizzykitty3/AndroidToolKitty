@@ -192,7 +192,7 @@ private fun General(settingsViewModel: SettingsViewModel) {
                 .clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     val intent = Intent(appContext, CustomizeHomeActivity::class.java)
-                    intent.setFlags(FLAG_ACTIVITY_NEW_TASK)
+                    intent.flags = FLAG_ACTIVITY_NEW_TASK
                     appContext.startActivity(intent)
                 }, verticalArrangement = Arrangement.Center
         ) {

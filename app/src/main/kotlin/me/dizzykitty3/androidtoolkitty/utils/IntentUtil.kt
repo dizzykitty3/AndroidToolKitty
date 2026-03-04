@@ -58,7 +58,7 @@ object IntentUtil {
 
         try {
             Timber.d("startActivity")
-            intent.setFlags(FLAG_ACTIVITY_NEW_TASK)
+            intent.flags = FLAG_ACTIVITY_NEW_TASK
             this.startActivity(intent)
             return
         } catch (e: ActivityNotFoundException) {
