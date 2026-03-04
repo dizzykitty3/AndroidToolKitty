@@ -11,6 +11,8 @@ object OSVersion {
 
     /**
      * Cinnamon Bun 37
+     * [beta-2](https://android-developers.googleblog.com/2026/02/the-second-beta-of-android-17.html)
+     * [beta-1](https://android-developers.googleblog.com/2026/02/the-first-beta-of-android-17.html)
      */
 //    fun android17(): Boolean = osVersion >= Build.VERSION_CODES.CINNAMON_BUN
 
