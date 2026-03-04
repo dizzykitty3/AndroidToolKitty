@@ -1,12 +1,20 @@
-package me.dizzykitty3.androidtoolkitty.settings
+package me.dizzykitty3.androidtoolkitty.ui.settings
 
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeightIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -24,9 +32,11 @@ import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.SettingsApplications
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,10 +46,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavHostController
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.CARD_4
@@ -49,8 +61,7 @@ import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
-import me.dizzykitty3.androidtoolkitty.ui.settings.CustomizeHomeActivity
-import me.dizzykitty3.androidtoolkitty.ui.settings.LicensesActivity
+import me.dizzykitty3.androidtoolkitty.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.CustomSwitchRow
 import me.dizzykitty3.androidtoolkitty.uicomponents.IconAndTextPadding
@@ -64,15 +75,45 @@ import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
 import timber.log.Timber
 
+@AndroidEntryPoint
+class SettingsActivity : ComponentActivity() {
+    private lateinit var settingsViewModel: SettingsViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            settingsViewModel = hiltViewModel<SettingsViewModel>()
+
+            CompositionLocalProvider(LocalSettingsViewModel provides settingsViewModel) {
+                AppTheme {
+                    Scaffold(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    ) { innerPadding ->
+                        Box(
+                            Modifier.padding(
+                                start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
+                                end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
+                            )
+                        ) {
+                            Screen(screenTitle = R.string.settings) {
+                                SettingsComposable()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 @Composable
-fun Settings(navController: NavHostController) {
+private fun SettingsComposable() {
     val settingsViewModel = LocalSettingsViewModel.current
 
-    Screen(R.string.settings, navController) {
-        if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance(settingsViewModel) }
-        BaseCard(R.string.general) { General(settingsViewModel) }
-        BaseCard(R.string.app_info) { OtherSettings() }
-    }
+    if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance(settingsViewModel) }
+    BaseCard(R.string.general) { General(settingsViewModel) }
+    BaseCard(R.string.app_info) { OtherSettings() }
 }
 
 @Composable
@@ -83,9 +124,7 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 
     if (OSVersion.android12()) {
         CustomSwitchRow(
-            icon = Icons.Outlined.ColorLens,
-            title = R.string.dynamic_color,
-            checked = dynamicColor
+            icon = Icons.Outlined.ColorLens, title = R.string.dynamic_color, checked = dynamicColor
         ) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             dynamicColor = it
@@ -161,8 +200,7 @@ private fun General(settingsViewModel: SettingsViewModel) {
                 buttonClickListener = {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     settingsSharedPref.saveShownState(CARD_3, true)
-                }
-            )
+                })
         }
         settingsViewModel.update(settingsViewModel.settings.value.copy(autoClearClipboard = it))
     }
@@ -236,8 +274,7 @@ private fun OtherSettings() {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = Icons.Outlined.Info,
-                        contentDescription = null
+                        imageVector = Icons.Outlined.Info, contentDescription = null
                     )
                     IconAndTextPadding()
                     Text(appContext.versionName)
@@ -288,8 +325,7 @@ private fun OtherSettings() {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = Icons.Outlined.Code,
-                        contentDescription = null
+                        imageVector = Icons.Outlined.Code, contentDescription = null
                     )
                     IconAndTextPadding()
                     Text(stringResource(R.string.view_source_code))
@@ -323,8 +359,7 @@ private fun OtherSettings() {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = Icons.Outlined.FileCopy,
-                        contentDescription = null
+                        imageVector = Icons.Outlined.FileCopy, contentDescription = null
                     )
                     IconAndTextPadding()
                     Text(stringResource(R.string.licenses))
@@ -356,8 +391,7 @@ private fun OtherSettings() {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Row(Modifier.weight(1F), verticalAlignment = Alignment.CenterVertically) {
                     Icon(
-                        imageVector = Icons.Outlined.SettingsApplications,
-                        contentDescription = null
+                        imageVector = Icons.Outlined.SettingsApplications, contentDescription = null
                     )
                     IconAndTextPadding()
                     Text(stringResource(R.string.app_settings))

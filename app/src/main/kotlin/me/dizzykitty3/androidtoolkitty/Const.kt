@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.pm.PackageManager
 
 // App screens
-const val SCR_SETTINGS = "SettingsScreen"
 const val SCR_HOME = "HomeScreen"
 
 // App cards

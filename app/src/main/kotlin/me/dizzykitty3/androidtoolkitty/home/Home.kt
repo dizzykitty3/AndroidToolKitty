@@ -1,5 +1,7 @@
 package me.dizzykitty3.androidtoolkitty.home
 
+import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
@@ -40,7 +42,6 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
 import androidx.window.core.layout.WindowSizeClass
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.CARD_1
@@ -56,11 +57,12 @@ import me.dizzykitty3.androidtoolkitty.CARD_7
 import me.dizzykitty3.androidtoolkitty.CARD_8
 import me.dizzykitty3.androidtoolkitty.CARD_9
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_SETTINGS
 import me.dizzykitty3.androidtoolkitty.S_BATTERY
 import me.dizzykitty3.androidtoolkitty.S_BLUETOOTH
 import me.dizzykitty3.androidtoolkitty.S_WIFI
+import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.ui.settings.SettingsActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BottomPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.CardSpacePadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.DevBuildTip
@@ -73,22 +75,22 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 
 @Composable
-fun Home(navController: NavHostController) {
+fun Home() {
     val largeScreen =
         currentWindowAdaptiveInfo().windowSizeClass.minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
-    if (largeScreen) TabletLayout(navController)
-    else MobileLayout(navController)
+    if (largeScreen) TabletLayout()
+    else MobileLayout()
 }
 
 @Composable
-private fun MobileLayout(navController: NavHostController) {
+private fun MobileLayout() {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
     val debug = BuildConfig.DEBUG
 
     Column {
         TopPadding()
         LazyColumn(Modifier.padding(start = screenPadding, end = screenPadding)) {
-            item { TopBar(navController) }
+            item { TopBar() }
             item { CardSpacePadding() }
             item { CardSpacePadding() }
             item { Greeting() }
@@ -106,7 +108,7 @@ private fun MobileLayout(navController: NavHostController) {
 }
 
 @Composable
-private fun TabletLayout(navController: NavHostController) {
+private fun TabletLayout() {
     val largeScreenPadding = dimensionResource(R.dimen.padding_screen_large)
     val debug = BuildConfig.DEBUG
 
@@ -115,7 +117,7 @@ private fun TabletLayout(navController: NavHostController) {
         Column(Modifier.padding(start = largeScreenPadding, end = largeScreenPadding)) {
             Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                 Box(Modifier.weight(1F)) { Greeting() }
-                Box(Modifier.weight(1F)) { TopBar(navController, isTablet = true) }
+                Box(Modifier.weight(1F)) { TopBar(isTablet = true) }
             }
             SpacerPadding()
             if (debug) {
@@ -127,21 +129,23 @@ private fun TabletLayout(navController: NavHostController) {
 }
 
 @Composable
-private fun TopBar(navController: NavHostController, isTablet: Boolean = false) {
+private fun TopBar(isTablet: Boolean = false) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         Box(Modifier.weight(1F)) { Status(isTablet) }
-        SettingsButton(navController)
+        SettingsButton()
     }
 }
 
 @Composable
-private fun SettingsButton(navController: NavHostController) {
+private fun SettingsButton() {
     val haptic = LocalHapticFeedback.current
 
     IconButton(
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            navController.navigate(SCR_SETTINGS)
+            val intent = Intent(appContext, SettingsActivity::class.java)
+            intent.flags = FLAG_ACTIVITY_NEW_TASK
+            appContext.startActivity(intent)
         }) {
         Icon(
             imageVector = Icons.Default.Settings,
