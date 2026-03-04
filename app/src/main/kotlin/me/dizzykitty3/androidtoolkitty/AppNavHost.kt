@@ -8,7 +8,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import me.dizzykitty3.androidtoolkitty.home.CustomVolumeScreen
 import me.dizzykitty3.androidtoolkitty.home.Home
-import me.dizzykitty3.androidtoolkitty.home.SearchScreen
 import me.dizzykitty3.androidtoolkitty.home.VolumeScreen
 import me.dizzykitty3.androidtoolkitty.settings.Settings
 
@@ -26,7 +25,6 @@ fun AppNavHost(
     ) {
         composable(SCR_HOME) { Home(navController) }
         composable(SCR_SETTINGS) { Settings(navController) }
-        composable(SCR_SEARCH) { SearchScreen() }
         composable(SCR_VOLUME) { VolumeScreen(navController) }
         composable(SCR_CUSTOM_VOLUME) { CustomVolumeScreen(navController) }
     }

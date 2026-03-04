@@ -315,7 +315,7 @@ private fun CardContent(
         CARD_1 -> YearProgress()
         CARD_2 -> Volume(navController)
         CARD_3 -> Clipboard()
-        CARD_4 -> Search(navController)
+        CARD_4 -> Search()
         CARD_5 -> SysSettings()
         CARD_6 -> WheelOfFortune()
         CARD_7 -> BluetoothDevice()
