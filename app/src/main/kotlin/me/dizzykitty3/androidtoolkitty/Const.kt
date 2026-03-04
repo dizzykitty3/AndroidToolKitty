@@ -3,9 +3,6 @@ package me.dizzykitty3.androidtoolkitty
 import android.Manifest
 import android.content.pm.PackageManager
 
-// App screens
-const val SCR_HOME = "HomeScreen"
-
 // App cards
 const val CARD_1 = "card_year_progress"
 const val CARD_2 = "card_volume"
