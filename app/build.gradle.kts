@@ -77,14 +77,6 @@ android {
     }
 }
 
-// TODO
-//androidComponents {
-//    outputs.all {
-//        (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
-//            "android-toolkitty-${versionName}.apk"
-//    }
-//}
-
 composeCompiler {
     reportsDestination = layout.buildDirectory.dir("compose_compiler")
     stabilityConfigurationFiles.addAll(
@@ -112,7 +104,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.google.hilt.android)
