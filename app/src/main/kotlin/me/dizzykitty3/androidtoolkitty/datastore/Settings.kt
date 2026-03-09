@@ -5,12 +5,12 @@ data class Settings(
     // the app to crash on launch if upgraded from an older version.
 
     // Settings > Appearance
-    var dynamicColor: Boolean = true,
+    val dynamicColor: Boolean = true,
 
     // Settings > General
-    var autoClearClipboard: Boolean = false,
-    var switchToBingSearch: Boolean = false,
+    val autoClearClipboard: Boolean = false,
+    val switchToBingSearch: Boolean = false,
 
     // Records
-    var lastSelectedPlatformIndex: Int = 0
+    val lastSelectedPlatformIndex: Int = 0
 )

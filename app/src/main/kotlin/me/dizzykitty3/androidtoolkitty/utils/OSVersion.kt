@@ -10,6 +10,13 @@ object OSVersion {
     private val osVersionFull = Build.VERSION.SDK_INT_FULL // Android 16 added
 
     /**
+     * Cinnamon Bun 37
+     * [beta-2](https://android-developers.googleblog.com/2026/02/the-second-beta-of-android-17.html)
+     * [beta-1](https://android-developers.googleblog.com/2026/02/the-first-beta-of-android-17.html)
+     */
+//    fun android17(): Boolean = osVersion >= Build.VERSION_CODES.CINNAMON_BUN
+
+    /**
      * Baklava 36
      * [developer-preview-1](https://android-developers.googleblog.com/2024/11/the-first-developer-preview-android16.html)
      * [developer-preview-2](https://android-developers.googleblog.com/2024/12/second-developer-preview-android16.html)

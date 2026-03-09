@@ -34,8 +34,8 @@ android {
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 23
-        versionCode = 11800
-        versionName = "1.18.0"
+        versionCode = 11900
+        versionName = "1.19.0"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -77,13 +77,13 @@ android {
     }
 }
 
-androidComponents {
-    // TODO
+// TODO
+//androidComponents {
 //    outputs.all {
 //        (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
 //            "android-toolkitty-${versionName}.apk"
 //    }
-}
+//}
 
 composeCompiler {
     reportsDestination = layout.buildDirectory.dir("compose_compiler")
