@@ -77,13 +77,13 @@ android {
     }
 }
 
-androidComponents {
-    // TODO
+// TODO
+//androidComponents {
 //    outputs.all {
 //        (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
 //            "android-toolkitty-${versionName}.apk"
 //    }
-}
+//}
 
 composeCompiler {
     reportsDestination = layout.buildDirectory.dir("compose_compiler")
