@@ -32,11 +32,11 @@ fun AndroidVersionHistoryScreen(navController: NavHostController) {
 private fun BetaVersion() {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.weight(0.4F)) {
-            if (v == 36) ScrollableBoldText("Android 16") else ScrollableText("Android 16")
+            if (v == 37) ScrollableBoldText("Android 17") else ScrollableText("Android 17")
         }
 
         Column(Modifier.weight(0.6F)) {
-            ScrollableItalicText("API 36, Baklava")
+            ScrollableItalicText("API 37, CinnamonBun")
         }
     }
 }
@@ -45,6 +45,7 @@ private fun BetaVersion() {
 private fun StableVersions() {
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.weight(0.4f)) {
+            if (v == 36) ScrollableBoldText("Android 16") else ScrollableText("Android 16")
             if (v == 35) ScrollableBoldText("Android 15") else ScrollableText("Android 15")
             if (v == 34) ScrollableBoldText("Android 14") else ScrollableText("Android 14")
             if (v == 33) ScrollableBoldText("Android 13") else ScrollableText("Android 13")
@@ -78,6 +79,7 @@ private fun StableVersions() {
         }
 
         Column(Modifier.weight(0.6f)) {
+            ScrollableItalicText("API 36, Baklava")
             ScrollableItalicText("API 35, VanillaIceCream")
             ScrollableItalicText("API 34, UpsideDownCake")
             ScrollableItalicText("API 33, Tiramisu")
