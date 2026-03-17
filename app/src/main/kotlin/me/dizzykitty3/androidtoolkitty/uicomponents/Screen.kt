@@ -1,5 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.uicomponents
 
+import androidx.activity.compose.LocalActivity
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -142,14 +143,26 @@ fun TopBar(@StringRes screenTitle: Int) = TopBar(stringResource(screenTitle))
 
 @Composable
 fun TopBar(screenTitle: String = "") {
-    LocalHapticFeedback.current
+    val haptic = LocalHapticFeedback.current
+    val activity = LocalActivity.current
 
     Row(
         Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Row(
-            Modifier.weight(1F), horizontalArrangement = Arrangement.Center
+        IconButton(onClick = {
+            haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+            activity?.finish()
+        }) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                contentDescription = stringResource(R.string.back),
+                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5F)
+            )
+        }
+        IconAndTextPadding()
+        Column(
+            Modifier.weight(1F), verticalArrangement = Arrangement.Center
         ) {
             Text(
                 text = screenTitle, style = MaterialTheme.typography.titleLarge
