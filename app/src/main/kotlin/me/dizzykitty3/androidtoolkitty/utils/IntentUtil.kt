@@ -1,6 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.utils
 
-import android.app.Activity
 import android.app.SearchManager
 import android.bluetooth.BluetoothAdapter
 import android.content.ActivityNotFoundException
@@ -13,7 +12,6 @@ import android.provider.Settings
 import androidx.core.net.toUri
 import me.dizzykitty3.androidtoolkitty.GOOGLE_MAPS
 import me.dizzykitty3.androidtoolkitty.GOOGLE_PLAY
-import me.dizzykitty3.androidtoolkitty.MainActivity
 import me.dizzykitty3.androidtoolkitty.PACKAGE
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.S_ABOUT_PHONE
@@ -166,23 +164,18 @@ object IntentUtil {
     fun Context.openSystemSettings(settingType: String) {
         val intent: Intent = when (settingType) {
             S_DISPLAY -> Intent(Settings.ACTION_DISPLAY_SETTINGS)
-            S_AUTO_ROTATE -> if (OSVersion.android12())
-                Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
+            S_AUTO_ROTATE -> if (OSVersion.android12()) Intent(Settings.ACTION_AUTO_ROTATE_SETTINGS) else return
 
             S_BLUETOOTH -> Intent(Settings.ACTION_BLUETOOTH_SETTINGS)
-            S_DEFAULT_APPS -> if (OSVersion.android7())
-                Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS) else return
+            S_DEFAULT_APPS -> if (OSVersion.android7()) Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS) else return
 
-            S_BATTERY_OPTIMIZATION -> if (OSVersion.android6())
-                Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS) else return
+            S_BATTERY_OPTIMIZATION -> if (OSVersion.android6()) Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS) else return
 
             S_CAPTION -> Intent(Settings.ACTION_CAPTIONING_SETTINGS)
             S_USAGE_ACCESS -> Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-            S_OVERLAY -> if (OSVersion.android6())
-                Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION) else return
+            S_OVERLAY -> if (OSVersion.android6()) Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION) else return
 
-            S_MODIFY_SYSTEM -> if (OSVersion.android6())
-                Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS) else return
+            S_MODIFY_SYSTEM -> if (OSVersion.android6()) Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS) else return
 
             S_LOCALE -> Intent(Settings.ACTION_LOCALE_SETTINGS)
             S_DATE -> Intent(Settings.ACTION_DATE_SETTINGS)
@@ -191,11 +184,9 @@ object IntentUtil {
             S_WIFI -> Intent(Settings.ACTION_WIFI_SETTINGS)
             S_BATTERY -> Intent(ACTION_POWER_USAGE_SUMMARY)
             S_ACCESSIBILITY -> Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
-            S_NOTIFICATION_LISTENER -> if (OSVersion.android5Point1())
-                Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) else return
+            S_NOTIFICATION_LISTENER -> if (OSVersion.android5Point1()) Intent(Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS) else return
 
-            S_DND_ACCESS -> if (OSVersion.android6())
-                Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS) else return
+            S_DND_ACCESS -> if (OSVersion.android6()) Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS) else return
 
             S_UNKNOWN_APPS -> if (OSVersion.android8()) Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES) else return
             S_ALARMS -> if (OSVersion.android12()) Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM) else return
@@ -238,24 +229,5 @@ object IntentUtil {
         val intent = Intent(Settings.ACTION_APP_LOCALE_SETTINGS)
         intent.data = Uri.fromParts(PACKAGE, this.packageName, null)
         this.launch(intent)
-    }
-
-    /**
-     * Remember to use Activity Context to restart app.
-     */
-    fun Context.restartApp() {
-        Timber.d("restartApp")
-        val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or FLAG_ACTIVITY_NEW_TASK)
-        this.launch(intent)
-        this.finishApp()
-    }
-
-    /**
-     * Remember to use Activity Context to finish app.
-     */
-    private fun Context.finishApp() {
-        Timber.d("finishApp")
-        (this as Activity).finish()
     }
 }
