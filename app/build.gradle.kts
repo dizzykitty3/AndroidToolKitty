@@ -19,7 +19,6 @@ kotlin {
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
     compileSdk {
-        // remember to change the target api in manifest XML file
         version = release(36) {
             minorApiLevel = 1
         }
@@ -76,14 +75,6 @@ android {
         generateLocaleConfig = true
     }
 }
-
-// TODO
-//androidComponents {
-//    outputs.all {
-//        (this as com.android.build.gradle.internal.api.BaseVariantOutputImpl).outputFileName =
-//            "android-toolkitty-${versionName}.apk"
-//    }
-//}
 
 composeCompiler {
     reportsDestination = layout.buildDirectory.dir("compose_compiler")
