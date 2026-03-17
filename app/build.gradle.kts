@@ -19,7 +19,6 @@ kotlin {
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
     compileSdk {
-        // remember to change the target api in manifest XML file
         version = release(36) {
             minorApiLevel = 1
         }
