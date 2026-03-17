@@ -1,8 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.home
 
 import android.content.Context
-import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,7 +29,6 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
@@ -39,6 +36,7 @@ import me.dizzykitty3.androidtoolkitty.ui.home.SearchActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openScreen
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSearch
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.searchOnYouTube
 import timber.log.Timber
@@ -51,9 +49,7 @@ fun Search() {
     BaseCard(
         title = R.string.search, icon = Icons.Outlined.Search, hasShowMore = true, onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            val intent = Intent(appContext, SearchActivity::class.java)
-            intent.flags = FLAG_ACTIVITY_NEW_TASK
-            appContext.startActivity(intent)
+            openScreen(SearchActivity::class.java)
         }) { Search(settingsViewModel) }
 }
 

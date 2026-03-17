@@ -1,7 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.home
 
-import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,7 +26,6 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.home.VolumeActivity
 import me.dizzykitty3.androidtoolkitty.ui.home.VolumeCustomizeActivity
@@ -37,6 +34,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.GradientSmall
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openScreen
 import kotlin.math.roundToInt
 
 @Composable
@@ -45,9 +43,7 @@ fun Volume() {
     BaseCard(
         R.string.volume, Icons.AutoMirrored.Outlined.VolumeUp, true, {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            val intent = Intent(appContext, VolumeActivity::class.java)
-            intent.flags = FLAG_ACTIVITY_NEW_TASK
-            appContext.startActivity(intent)
+            openScreen(VolumeActivity::class.java)
         }) {
         MediaVolume(isHome = true)
     }
@@ -109,9 +105,7 @@ fun MediaVolume(isHome: Boolean) {
                             if (mCustomVolume > 0) {
                                 view.setVolume(mCustomVolume * 0.01 * maxVolume)
                             } else {
-                                val intent = Intent(appContext, VolumeCustomizeActivity::class.java)
-                                intent.flags = FLAG_ACTIVITY_NEW_TASK
-                                appContext.startActivity(intent)
+                                openScreen(VolumeCustomizeActivity::class.java)
                             }
                         }
                     }
@@ -144,9 +138,7 @@ fun MediaVolume(isHome: Boolean) {
         ) {
             TextButton({
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                val intent = Intent(appContext, VolumeCustomizeActivity::class.java)
-                intent.flags = FLAG_ACTIVITY_NEW_TASK
-                appContext.startActivity(intent)
+                openScreen(VolumeCustomizeActivity::class.java)
             }) {
                 Icon(
                     imageVector = Icons.Outlined.Edit,

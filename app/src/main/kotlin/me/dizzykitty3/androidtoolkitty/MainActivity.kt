@@ -1,7 +1,5 @@
 package me.dizzykitty3.androidtoolkitty
 
-import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -58,7 +56,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
-import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.home.BluetoothDevice
@@ -87,6 +84,7 @@ import me.dizzykitty3.androidtoolkitty.utils.BatteryUtil
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.headsetNotConnected
 import me.dizzykitty3.androidtoolkitty.utils.BluetoothUtil.isHeadsetConnected
 import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openScreen
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -257,9 +255,7 @@ private fun SettingsButton() {
     IconButton(
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            val intent = Intent(appContext, SettingsActivity::class.java)
-            intent.flags = FLAG_ACTIVITY_NEW_TASK
-            appContext.startActivity(intent)
+            openScreen(SettingsActivity::class.java)
         }) {
         Icon(
             imageVector = Icons.Default.Settings,

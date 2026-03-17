@@ -1,7 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.home
 
-import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -57,7 +55,6 @@ import me.dizzykitty3.androidtoolkitty.S_UNKNOWN_APPS
 import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
 import me.dizzykitty3.androidtoolkitty.S_VPN
 import me.dizzykitty3.androidtoolkitty.S_WIFI
-import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import me.dizzykitty3.androidtoolkitty.home.Setting
 import me.dizzykitty3.androidtoolkitty.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
@@ -67,6 +64,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.uicomponents.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.utils.DateUtil
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openScreen
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil
 
@@ -173,9 +171,7 @@ private fun SystemShortcutsComposable() {
                         Text(
                             text = StringUtil.osVer, modifier = Modifier.clickable {
                                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                val intent = Intent(appContext, AndroidVersionsActivity::class.java)
-                                intent.flags = FLAG_ACTIVITY_NEW_TASK
-                                appContext.startActivity(intent)
+                                openScreen(AndroidVersionsActivity::class.java)
                             }, color = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -211,9 +207,7 @@ private fun SystemShortcutsComposable() {
     // edit
     Button(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        val intent = Intent(appContext, SystemShortcutsCustomizeActivity::class.java)
-        intent.flags = FLAG_ACTIVITY_NEW_TASK
-        appContext.startActivity(intent)
+        openScreen(SystemShortcutsCustomizeActivity::class.java)
     }) { Text(stringResource(R.string.customize_system_settings_card)) }
 
     SpacerPadding()

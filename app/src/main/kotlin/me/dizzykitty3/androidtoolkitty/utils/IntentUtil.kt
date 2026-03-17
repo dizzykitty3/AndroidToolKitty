@@ -92,6 +92,12 @@ object IntentUtil {
         this.showToast(msg)
     }
 
+    fun openScreen(screen: Class<*>) {
+        val intent = Intent(appContext, screen)
+        intent.flags = FLAG_ACTIVITY_NEW_TASK
+        appContext.startActivity(intent)
+    }
+
     fun Context.openSearch(query: String, bingSearch: Boolean = false) {
         if (query.isBlank()) return
 

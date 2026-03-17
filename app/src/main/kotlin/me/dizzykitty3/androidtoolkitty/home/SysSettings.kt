@@ -1,8 +1,6 @@
 package me.dizzykitty3.androidtoolkitty.home
 
 import android.content.ContentResolver
-import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.provider.Settings
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
@@ -48,6 +46,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.SystemSettingButton
 import me.dizzykitty3.androidtoolkitty.uicomponents.Tip
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openScreen
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 
 @Composable
@@ -59,9 +58,7 @@ fun SysSettings() {
         hasShowMore = true,
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            val intent = Intent(appContext, SystemShortcutsActivity::class.java)
-            intent.flags = FLAG_ACTIVITY_NEW_TASK
-            appContext.startActivity(intent)
+            openScreen(SystemShortcutsActivity::class.java)
         }) {
         val settings = mutableListOf(
             Setting(S_ABOUT_PHONE, R.string.about_phone),

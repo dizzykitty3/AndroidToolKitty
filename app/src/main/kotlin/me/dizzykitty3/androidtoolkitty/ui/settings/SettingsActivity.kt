@@ -1,7 +1,5 @@
 package me.dizzykitty3.androidtoolkitty.ui.settings
 
-import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -69,6 +67,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppLanguageSetting
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openScreen
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
@@ -229,9 +228,7 @@ private fun General(settingsViewModel: SettingsViewModel) {
                 .fillMaxWidth()
                 .clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    val intent = Intent(appContext, CustomizeHomeActivity::class.java)
-                    intent.flags = FLAG_ACTIVITY_NEW_TASK
-                    appContext.startActivity(intent)
+                    openScreen(CustomizeHomeActivity::class.java)
                 }, verticalArrangement = Arrangement.Center
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -351,9 +348,7 @@ private fun OtherSettings() {
                 .fillMaxWidth()
                 .clickable {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    val intent = Intent(appContext, LicensesActivity::class.java)
-                    intent.flags = FLAG_ACTIVITY_NEW_TASK
-                    appContext.startActivity(intent)
+                    openScreen(LicensesActivity::class.java)
                 }, verticalArrangement = Arrangement.Center
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
