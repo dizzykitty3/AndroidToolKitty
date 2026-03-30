@@ -11,8 +11,12 @@ object OSVersion {
 
     /**
      * Cinnamon Bun 37
-     * [beta-2](https://android-developers.googleblog.com/2026/02/the-second-beta-of-android-17.html)
      * [beta-1](https://android-developers.googleblog.com/2026/02/the-first-beta-of-android-17.html)
+     * [beta-2](https://android-developers.googleblog.com/2026/02/the-second-beta-of-android-17.html)
+     * [beta-3](https://android-developers.googleblog.com/2026/03/the-third-beta-of-android-17.html)
+     * [Behavior changes: all apps](https://developer.android.com/about/versions/17/behavior-changes-all)
+     * [Behavior changes: Apps targeting Android 17 or higher](https://developer.android.com/about/versions/17/behavior-changes-17)
+     * [Features and APIs](https://developer.android.com/about/versions/17/features)
      */
 //    fun android17(): Boolean = osVersion >= Build.VERSION_CODES.CINNAMON_BUN
 
