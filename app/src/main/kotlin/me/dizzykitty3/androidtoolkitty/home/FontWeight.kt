@@ -133,20 +133,6 @@ private fun FontFamilyTest() {
                 )
                 Text(" (Serif)")
             }
-            Row {
-                Text(
-                    stringResource(R.string.j_sentence),
-                    fontFamily = FontFamily.Cursive
-                )
-                Text(" (Cursive)")
-            }
-            Row {
-                Text(
-                    stringResource(R.string.j_sentence),
-                    fontFamily = FontFamily.Monospace
-                )
-                Text(" (Monospace)")
-            }
         }
     }
 }
