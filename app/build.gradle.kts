@@ -19,8 +19,8 @@ kotlin {
 android {
     namespace = "me.dizzykitty3.androidtoolkitty"
     compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
+        version = release(37) {
+            minorApiLevel = 0
         }
     }
     buildToolsVersion = "36.1.0"
