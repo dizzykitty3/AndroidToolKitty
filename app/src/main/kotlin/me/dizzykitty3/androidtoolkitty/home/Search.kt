@@ -28,9 +28,9 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
-import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.home.SearchActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
@@ -44,23 +44,23 @@ import timber.log.Timber
 @Composable
 fun Search() {
     val haptic = LocalHapticFeedback.current
-    val settingsViewModel = LocalSettingsViewModel.current
 
     BaseCard(
         title = R.string.search, icon = Icons.Outlined.Search, hasShowMore = true, onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             openScreen(SearchActivity::class.java)
-        }) { Search(settingsViewModel) }
+        }) { SearchComposable() }
 }
 
 @Composable
-private fun Search(settingsViewModel: SettingsViewModel) {
+private fun SearchComposable() {
+    val viewModel = LocalSettingsViewModel.current
+    val state by viewModel.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var searchQuery by remember { mutableStateOf(settingsSharedPref.typingContents) }
-    var switchToBingSearch by remember { mutableStateOf(settingsViewModel.settings.value.switchToBingSearch) }
 
     OutlinedTextField(
         value = searchQuery,
@@ -76,7 +76,7 @@ private fun Search(settingsViewModel: SettingsViewModel) {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onTapSearchButton(searchQuery, switchToBingSearch)
+                view.context.onTapSearchButton(searchQuery, state.switchToBingSearch)
             }),
         trailingIcon = {
             ClearInput(searchQuery) {
@@ -94,7 +94,7 @@ private fun Search(settingsViewModel: SettingsViewModel) {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.onTapSearchButton(searchQuery, switchToBingSearch)
+            view.context.onTapSearchButton(searchQuery, state.switchToBingSearch)
         }) {
             Text(stringResource(R.string.search))
             Icon(
@@ -108,9 +108,9 @@ private fun Search(settingsViewModel: SettingsViewModel) {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.onTapCheckOnYouTubeButton(searchQuery, switchToBingSearch)
+            view.context.onTapCheckOnYouTubeButton(searchQuery, state.switchToBingSearch)
         }) {
-            Text(stringResource(if (switchToBingSearch) R.string.search_on_bilibili else R.string.search_on_youtube))
+            Text(stringResource(if (state.switchToBingSearch) R.string.search_on_bilibili else R.string.search_on_youtube))
             Icon(
                 imageVector = Icons.Outlined.ArrowOutward,
                 contentDescription = null,

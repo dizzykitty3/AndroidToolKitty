@@ -49,6 +49,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.BuildConfig
 import me.dizzykitty3.androidtoolkitty.CARD_3
@@ -76,15 +77,13 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class SettingsActivity : ComponentActivity() {
-    private lateinit var settingsViewModel: SettingsViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            settingsViewModel = hiltViewModel<SettingsViewModel>()
+            val viewModel: SettingsViewModel = hiltViewModel()
 
-            CompositionLocalProvider(LocalSettingsViewModel provides settingsViewModel) {
+            CompositionLocalProvider(LocalSettingsViewModel provides viewModel) {
                 AppTheme {
                     Scaffold(
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
@@ -108,26 +107,26 @@ class SettingsActivity : ComponentActivity() {
 
 @Composable
 private fun SettingsComposable() {
-    val settingsViewModel = LocalSettingsViewModel.current
-
-    if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance(settingsViewModel) }
-    BaseCard(R.string.general) { General(settingsViewModel) }
+    if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance() }
+    BaseCard(R.string.general) { General() }
     BaseCard(R.string.app_info) { OtherSettings() }
 }
 
 @Composable
-private fun Appearance(settingsViewModel: SettingsViewModel) {
+private fun Appearance() {
+    val viewModel = LocalSettingsViewModel.current
+    val state by viewModel.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
-    var dynamicColor by remember { mutableStateOf(settingsViewModel.settings.value.dynamicColor) }
 
     if (OSVersion.android12()) {
         CustomSwitchRow(
-            icon = Icons.Outlined.ColorLens, title = R.string.dynamic_color, checked = dynamicColor
+            icon = Icons.Outlined.ColorLens,
+            title = R.string.dynamic_color,
+            checked = state.dynamicColor
         ) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            dynamicColor = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(dynamicColor = it))
+            viewModel.toggleDynamicColor(it)
         }
     }
 
@@ -169,12 +168,12 @@ private fun Appearance(settingsViewModel: SettingsViewModel) {
 }
 
 @Composable
-private fun General(settingsViewModel: SettingsViewModel) {
+private fun General() {
+    val viewModel = LocalSettingsViewModel.current
+    val state by viewModel.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
-    var autoClearClipboard by remember { mutableStateOf(settingsViewModel.settings.value.autoClearClipboard) }
-    var switchToBingSearch by remember { mutableStateOf(settingsViewModel.settings.value.switchToBingSearch) }
     var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getShownState(CARD_3)) }
     var showSearchCard by remember { mutableStateOf(settingsSharedPref.getShownState(CARD_4)) }
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
@@ -183,12 +182,11 @@ private fun General(settingsViewModel: SettingsViewModel) {
     CustomSwitchRow(
         icon = Icons.Outlined.ClearAll,
         title = R.string.clear_clipboard_on_launch,
-        checked = autoClearClipboard
+        checked = state.autoClearClipboard
     ) {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        autoClearClipboard = it
         // Automatically hide Clipboard Card when turning on Clear on Launch feature.
-        if (autoClearClipboard && showClipboardCard) {
+        if (state.autoClearClipboard && showClipboardCard) {
             showClipboardCard = false
             settingsSharedPref.saveShownState(CARD_3, false)
             view.showSnackbar(
@@ -201,7 +199,7 @@ private fun General(settingsViewModel: SettingsViewModel) {
                     settingsSharedPref.saveShownState(CARD_3, true)
                 })
         }
-        settingsViewModel.update(settingsViewModel.settings.value.copy(autoClearClipboard = it))
+        viewModel.toggleAutoClearClipboard(it)
     }
 
     // Switch to Bing Search
@@ -209,11 +207,10 @@ private fun General(settingsViewModel: SettingsViewModel) {
         CustomSwitchRow(
             icon = Icons.Outlined.Search,
             title = R.string.switch_to_bing_search,
-            checked = switchToBingSearch
+            checked = state.switchToBingSearch
         ) {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            switchToBingSearch = it
-            settingsViewModel.update(settingsViewModel.settings.value.copy(switchToBingSearch = it))
+            viewModel.toggleSwitchToBingSearch(it)
         }
     }
 

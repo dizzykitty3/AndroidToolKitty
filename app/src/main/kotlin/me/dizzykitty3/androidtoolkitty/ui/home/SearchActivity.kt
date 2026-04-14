@@ -26,7 +26,6 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -44,6 +43,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.core.text.isDigitsOnly
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
@@ -73,15 +73,13 @@ import timber.log.Timber
 
 @AndroidEntryPoint
 class SearchActivity : ComponentActivity() {
-    private lateinit var settingsViewModel: SettingsViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            settingsViewModel = hiltViewModel<SettingsViewModel>()
+            val viewModel: SettingsViewModel = hiltViewModel()
 
-            CompositionLocalProvider(LocalSettingsViewModel provides settingsViewModel) {
+            CompositionLocalProvider(LocalSettingsViewModel provides viewModel) {
                 AppTheme {
                     Scaffold(
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
@@ -105,10 +103,8 @@ class SearchActivity : ComponentActivity() {
 
 @Composable
 private fun SearchComposable() {
-    val settingsViewModel = LocalSettingsViewModel.current
-
     BaseCard(R.string.webpage) { Webpage() }
-    BaseCard(R.string.social_profile) { SocialMediaProfile(settingsViewModel) }
+    BaseCard(R.string.social_profile) { SocialMediaProfile() }
     BaseCard(R.string.check_app_on_market) { CheckAppOnMarket() }
 }
 
@@ -188,21 +184,24 @@ private fun Webpage() {
 }
 
 @Composable
-private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
+private fun SocialMediaProfile() {
+    val viewModel = LocalSettingsViewModel.current
+    val state by viewModel.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
     var username by remember { mutableStateOf(settingsSharedPref.typingContents) }
-    var platformIndex by remember { mutableIntStateOf(settingsViewModel.settings.value.lastSelectedPlatformIndex) }
-    val platform = URLUtil.Platform.entries[platformIndex]
+    val platform = URLUtil.Platform.entries[state.lastSelectedPlatformIndex]
     val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
 
     CustomDropdownMenu(
         items = platformList,
-        onItemSelected = { platformIndex = it },
+        onItemSelected = {
+            viewModel.updateLastSelectedPlatformIndex(it)
+        },
         label = { Text(stringResource(R.string.platform)) },
-        selectedPlatformIndex = platformIndex
+        selectedPlatformIndex = state.lastSelectedPlatformIndex
     )
 
     OutlinedTextField(
@@ -220,12 +219,8 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
             onDone = {
                 focus.clearFocus()
                 if (isValid(platform, username)) {
-                    view.context.onTapVisitProfileButton(username, platformIndex)
-                    settingsViewModel.update(
-                        settingsViewModel.settings.value.copy(
-                            lastSelectedPlatformIndex = platformIndex
-                        )
-                    )
+                    view.context.onTapVisitProfileButton(username, state.lastSelectedPlatformIndex)
+                    viewModel.updateLastSelectedPlatformIndex(state.lastSelectedPlatformIndex) // TODO
                 } else {
                     view.showSnackbar(R.string.invalid_username_tip)
                 }
@@ -266,8 +261,8 @@ private fun SocialMediaProfile(settingsViewModel: SettingsViewModel) {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
         if (isValid(platform, username)) {
-            view.context.onTapVisitProfileButton(username, platformIndex)
-            settingsViewModel.update(settingsViewModel.settings.value.copy(lastSelectedPlatformIndex = platformIndex))
+            view.context.onTapVisitProfileButton(username, state.lastSelectedPlatformIndex)
+            viewModel.updateLastSelectedPlatformIndex(state.lastSelectedPlatformIndex) // TODO
         } else {
             view.showSnackbar(R.string.invalid_username_tip)
         }

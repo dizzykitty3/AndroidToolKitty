@@ -1,44 +1,42 @@
 package me.dizzykitty3.androidtoolkitty.datastore
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
+
+val LocalSettingsViewModel = staticCompositionLocalOf<SettingsViewModel> {
+    error("No SettingsViewModel provided")
+}
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val settingsUseCase: SettingsUseCase
+    private val repository: SettingsRepository
 ) : ViewModel() {
-    private val _settings = mutableStateOf(Settings())
-    var settings: State<Settings> = _settings
 
-    init {
-        viewModelScope.launch {
-            loadSettings()
-        }
+    val settingsState = repository.settingsFlow.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = UserSettings(true, false, false, 0)
+    )
+
+    fun toggleDynamicColor(enabled: Boolean) {
+        viewModelScope.launch { repository.toggleDynamicColor(enabled) }
     }
 
-    private fun loadSettings() {
-        val loadedSettings = runBlocking(Dispatchers.IO) {
-            settingsUseCase.loadSettingsFromRepository()
-        }
-        _settings.value = loadedSettings
+    fun toggleAutoClearClipboard(enabled: Boolean) {
+        viewModelScope.launch { repository.toggleAutoClearClipboard(enabled) }
     }
 
-    fun update(newSettings: Settings) {
-        _settings.value = newSettings.copy()
-        viewModelScope.launch {
-            settingsUseCase.saveSettingsToRepository(newSettings)
-        }
+    fun toggleSwitchToBingSearch(enabled: Boolean) {
+        viewModelScope.launch { repository.toggleSwitchToBingSearch(enabled) }
     }
-}
 
-val LocalSettingsViewModel = compositionLocalOf<SettingsViewModel> {
-    error("No SettingsViewModel provided")
+    fun updateLastSelectedPlatformIndex(index: Int) {
+        viewModelScope.launch { repository.updateLastSelectedPlatformIndex(index) }
+    }
 }

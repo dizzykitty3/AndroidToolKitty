@@ -38,6 +38,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,6 +51,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -98,19 +100,20 @@ class MainActivity : ComponentActivity() {
     private var continuation: Continuation<Unit>? = null
     private var continuationNotResumed = AtomicBoolean(true)
     private var isAutoClearClipboard = false
-    private lateinit var settingsViewModel: SettingsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Timber.d("onCreate")
         enableEdgeToEdge()
         setContent {
-            settingsViewModel = hiltViewModel<SettingsViewModel>()
-            isAutoClearClipboard = settingsViewModel.settings.value.autoClearClipboard
+            val viewModel: SettingsViewModel = hiltViewModel()
+            val state by viewModel.settingsState.collectAsStateWithLifecycle()
 
-            CompositionLocalProvider(LocalSettingsViewModel provides settingsViewModel) {
+            isAutoClearClipboard = state.autoClearClipboard
+
+            CompositionLocalProvider(LocalSettingsViewModel provides viewModel) {
                 AppTheme(
-                    dynamicColor = settingsViewModel.settings.value.dynamicColor
+                    dynamicColor = state.dynamicColor
                 ) {
                     Scaffold(
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
