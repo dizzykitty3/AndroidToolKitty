@@ -1,10 +1,10 @@
 [versions]
-aboutLibraries = "14.0.0-b03"
+aboutLibraries = "14.0.1"
 activity = "1.13.0"
-agp = "9.1.0"
+agp = "9.1.1"
 compose = "1.7.8"
 composeBOM = "2026.03.01"
-composeM3 = "1.5.0-alpha16"
+composeM3 = "1.5.0-alpha17"
 composeM3Adaptive = "1.2.0"
 composeUI = "1.10.6"
 core = "1.18.0"
@@ -19,7 +19,7 @@ ksp = "2.3.6"
 leakCanary = "2.14"
 lifecycle = "2.10.0"
 material = "1.13.0"
-serialization = "1.10.0"
+serialization = "1.11.0"
 timber = "5.0.1"
 
 [libraries]
