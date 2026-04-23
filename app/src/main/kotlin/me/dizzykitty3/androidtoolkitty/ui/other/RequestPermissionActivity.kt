@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty.ui.other
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
@@ -68,6 +69,7 @@ private fun RequestPermissionComposable() {
     BaseCard(title = R.string.request_permission, icon = Icons.Outlined.Shield) {
         var clickCount by remember { mutableIntStateOf(0) }
         val view = LocalView.current
+        val activity = LocalActivity.current
         val haptic = LocalHapticFeedback.current
 
         Text(stringResource(R.string.bluetooth_connect))
@@ -81,6 +83,7 @@ private fun RequestPermissionComposable() {
                     return@Button
                 }
                 view.showSnackbar(R.string.granted)
+                activity?.finish()
             }
         ) { Text(stringResource(R.string.request_permission)) }
 
