@@ -7,9 +7,7 @@ import android.provider.ContactsContract
 object ContactUtil {
     private const val TEST = "test"
     private const val TEL_MOBILE = "+86 100 0000 00"
-    private const val TEL_WORK = "+86 200 0000 00"
     private const val MAIL_HOME = "@gmail.com"
-    private const val MAIL_WORK = "@example.com"
     private var count = 0
 
     fun createContact(activity: Activity?) {
@@ -34,26 +32,12 @@ object ContactUtil {
                 ContactsContract.Intents.Insert.PHONE_TYPE,
                 ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE
             )
-            if (number >= 10) {
-                putExtra(ContactsContract.Intents.Insert.PHONE, "$TEL_WORK$number")
-            } else {
-                putExtra(ContactsContract.Intents.Insert.PHONE, "${TEL_WORK}0$number")
-            }
-            putExtra(
-                ContactsContract.Intents.Insert.PHONE_TYPE,
-                ContactsContract.CommonDataKinds.Phone.TYPE_WORK
-            )
 
             // email
             putExtra(ContactsContract.Intents.Insert.EMAIL, "$TEST$count$MAIL_HOME")
             putExtra(
                 ContactsContract.Intents.Insert.EMAIL_TYPE,
                 ContactsContract.CommonDataKinds.Email.TYPE_HOME
-            )
-            putExtra(ContactsContract.Intents.Insert.EMAIL, "$TEST$count$MAIL_WORK")
-            putExtra(
-                ContactsContract.Intents.Insert.EMAIL_TYPE,
-                ContactsContract.CommonDataKinds.Email.TYPE_WORK
             )
         }
 
