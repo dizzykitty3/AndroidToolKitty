@@ -36,7 +36,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppDetailSettings
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.noBluetoothPermission
 import me.dizzykitty3.androidtoolkitty.utils.PermissionUtil.requestBluetoothPermission
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 
 @AndroidEntryPoint
 class RequestPermissionActivity : ComponentActivity() {
@@ -82,7 +81,6 @@ private fun RequestPermissionComposable() {
                     clickCount++
                     return@Button
                 }
-                view.showSnackbar(R.string.granted)
                 activity?.finish()
             }
         ) { Text(stringResource(R.string.request_permission)) }
