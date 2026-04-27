@@ -34,125 +34,35 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.home.VolumeActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.VolumeActivity"></activity>
 
-        <activity
-            android:name=".ui.home.VolumeCustomizeActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.VolumeCustomizeActivity"></activity>
 
-        <activity
-            android:name=".ui.home.SearchActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.SearchActivity"></activity>
 
-        <activity
-            android:name=".ui.home.SystemShortcutsActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.SystemShortcutsActivity"></activity>
 
-        <activity
-            android:name=".ui.home.SystemShortcutsCustomizeActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.SystemShortcutsCustomizeActivity"></activity>
 
-        <activity
-            android:name=".ui.home.AndroidVersionsActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.AndroidVersionsActivity"></activity>
 
-        <activity
-            android:name=".ui.home.WheelOfFortuneActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.WheelOfFortuneActivity"></activity>
 
-        <activity
-            android:name=".ui.home.CodesOfCharactersActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.CodesOfCharactersActivity"></activity>
 
-        <activity
-            android:name=".ui.home.FontWeightTestActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.FontWeightTestActivity"></activity>
 
-        <activity
-            android:name=".ui.home.ComposeCatalogActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.ComposeCatalogActivity"></activity>
 
-        <activity
-            android:name=".ui.home.HapticTestActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.home.HapticTestActivity"></activity>
 
-        <activity
-            android:name=".ui.settings.SettingsActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.settings.SettingsActivity"></activity>
 
-        <activity
-            android:name=".ui.settings.CustomizeHomeActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.settings.CustomizeHomeActivity"></activity>
 
-        <activity
-            android:name=".ui.settings.LicensesActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.settings.LicensesActivity"></activity>
 
-        <activity
-            android:name=".ui.other.RequestPermissionActivity"
-            android:exported="true">
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.other.RequestPermissionActivity"></activity>
 
         <activity
             android:name=".appcomponents.ShareToClipboardActivity"
