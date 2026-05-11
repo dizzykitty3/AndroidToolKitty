@@ -23,7 +23,7 @@ android {
             minorApiLevel = 0
         }
     }
-    buildToolsVersion = "37.0.0 rc2"
+    buildToolsVersion = "37.0.0"
 
     buildFeatures {
         buildConfig = true
