@@ -26,7 +26,9 @@ class SettingsViewModel @Inject constructor(
             autoClearClipboard = false,
             switchToBingSearch = false,
             lastSelectedPlatformIndex = 0,
-            typingContents = ""
+            typingContents = "",
+            latitude = "",
+            longitude = "",
         )
     )
 
@@ -48,5 +50,13 @@ class SettingsViewModel @Inject constructor(
 
     fun updateTypingContents(contents: String) {
         viewModelScope.launch { repository.updateTypingContents(contents) }
+    }
+
+    fun updateLatitude(latitude: String) {
+        viewModelScope.launch { repository.updateLatitude(latitude) }
+    }
+
+    fun updateLongitude(longitude: String) {
+        viewModelScope.launch { repository.updateLongitude(longitude) }
     }
 }

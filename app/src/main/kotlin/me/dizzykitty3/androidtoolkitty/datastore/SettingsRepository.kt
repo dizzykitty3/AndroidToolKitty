@@ -19,6 +19,8 @@ class SettingsRepository @Inject constructor(
         val SWITCH_TO_BING_SEARCH = booleanPreferencesKey("switch_to_bing_search")
         val LAST_SELECTED_PLATFORM_INDEX = intPreferencesKey("last_selected_platform_index")
         val TYPING_CONTENTS = stringPreferencesKey("typing_contents")
+        val LATITUDE = stringPreferencesKey("latitude")
+        val LONGITUDE = stringPreferencesKey("longitude")
     }
 
     val settingsFlow: Flow<UserSettings> = dataStore.data.map { preferences ->
@@ -28,6 +30,8 @@ class SettingsRepository @Inject constructor(
             switchToBingSearch = preferences[Keys.SWITCH_TO_BING_SEARCH] ?: false,
             lastSelectedPlatformIndex = preferences[Keys.LAST_SELECTED_PLATFORM_INDEX] ?: 0,
             typingContents = preferences[Keys.TYPING_CONTENTS] ?: "",
+            latitude = preferences[Keys.LATITUDE] ?: "",
+            longitude = preferences[Keys.LONGITUDE] ?: "",
         )
     }
 
@@ -50,6 +54,14 @@ class SettingsRepository @Inject constructor(
     suspend fun updateTypingContents(contents: String) {
         dataStore.edit { it[Keys.TYPING_CONTENTS] = contents }
     }
+
+    suspend fun updateLatitude(latitude: String) {
+        dataStore.edit { it[Keys.LATITUDE] = latitude }
+    }
+
+    suspend fun updateLongitude(longitude: String) {
+        dataStore.edit { it[Keys.LONGITUDE] = longitude }
+    }
 }
 
 data class UserSettings(
@@ -58,4 +70,6 @@ data class UserSettings(
     val switchToBingSearch: Boolean,
     val lastSelectedPlatformIndex: Int,
     val typingContents: String,
+    val latitude: String,
+    val longitude: String,
 )

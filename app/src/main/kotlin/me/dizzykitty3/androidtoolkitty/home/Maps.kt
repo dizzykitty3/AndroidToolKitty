@@ -13,6 +13,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,8 +29,9 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnGoogleMaps
@@ -38,20 +40,27 @@ import timber.log.Timber
 @Composable
 fun Maps() {
     BaseCard(title = R.string.maps, icon = Icons.Outlined.Map) {
+        val vm = LocalSettingsViewModel.current
+        val state by vm.settingsState.collectAsStateWithLifecycle()
         val view = LocalView.current
         val focus = LocalFocusManager.current
         val haptic = LocalHapticFeedback.current
         val focusRequester1 = remember { FocusRequester() }
         val focusRequester2 = remember { FocusRequester() }
-        val settingsSharedPref = remember { SettingsSharedPref }
-        var latitude by remember { mutableStateOf(settingsSharedPref.latitude) }
-        var longitude by remember { mutableStateOf(settingsSharedPref.longitude) }
+        var latitude by remember { mutableStateOf("") }
+        var longitude by remember { mutableStateOf("") }
+
+        LaunchedEffect(state.latitude) {
+            if (latitude != state.latitude) {
+                latitude = state.latitude
+            }
+        }
 
         OutlinedTextField(
             value = latitude,
             onValueChange = { input ->
                 latitude = sanitizeCoordinateInput(input)
-                settingsSharedPref.latitude = sanitizeCoordinateInput(input)
+                vm.updateLatitude(sanitizeCoordinateInput(input))
             },
             suffix = {
                 Text(
@@ -81,16 +90,22 @@ fun Maps() {
                 ClearInput(latitude) {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     latitude = ""
-                    settingsSharedPref.latitude = ""
+                    vm.updateLatitude("")
                 }
             },
         )
+
+        LaunchedEffect(state.longitude) {
+            if (longitude != state.longitude) {
+                longitude = state.longitude
+            }
+        }
 
         OutlinedTextField(
             value = longitude,
             onValueChange = { input ->
                 longitude = sanitizeCoordinateInput(input)
-                settingsSharedPref.longitude = sanitizeCoordinateInput(input)
+                vm.updateLongitude(sanitizeCoordinateInput(input))
             },
             suffix = {
                 Text(
@@ -120,7 +135,7 @@ fun Maps() {
                 ClearInput(longitude) {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                     longitude = ""
-                    settingsSharedPref.longitude = ""
+                    vm.updateLongitude("")
                 }
             },
         )
