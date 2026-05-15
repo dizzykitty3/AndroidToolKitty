@@ -52,7 +52,8 @@ class VolumeActivity : ComponentActivity() {
                             )
                         ) {
                             Screen(screenTitle = R.string.volume) {
-                                VolumeComposable()
+                                BaseCard(R.string.media_volume) { MediaVolume(isHome = false) }
+                                BaseCard(R.string.voice_call_volume) { VoiceCallVolume() }
                             }
                         }
                     }
@@ -60,14 +61,6 @@ class VolumeActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-private fun VolumeComposable() {
-    val viewModel = LocalSettingsViewModel.current // prevents crash
-
-    BaseCard(R.string.media_volume) { MediaVolume(isHome = false) }
-    BaseCard(R.string.voice_call_volume) { VoiceCallVolume() }
 }
 
 @Composable
