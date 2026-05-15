@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -17,6 +18,7 @@ class SettingsRepository @Inject constructor(
         val AUTO_CLEAR_CLIPBOARD = booleanPreferencesKey("auto_clear_clipboard")
         val SWITCH_TO_BING_SEARCH = booleanPreferencesKey("switch_to_bing_search")
         val LAST_SELECTED_PLATFORM_INDEX = intPreferencesKey("last_selected_platform_index")
+        val TYPING_CONTENTS = stringPreferencesKey("typing_contents")
     }
 
     val settingsFlow: Flow<UserSettings> = dataStore.data.map { preferences ->
@@ -25,6 +27,7 @@ class SettingsRepository @Inject constructor(
             autoClearClipboard = preferences[Keys.AUTO_CLEAR_CLIPBOARD] ?: false,
             switchToBingSearch = preferences[Keys.SWITCH_TO_BING_SEARCH] ?: false,
             lastSelectedPlatformIndex = preferences[Keys.LAST_SELECTED_PLATFORM_INDEX] ?: 0,
+            typingContents = preferences[Keys.TYPING_CONTENTS] ?: "",
         )
     }
 
@@ -43,6 +46,10 @@ class SettingsRepository @Inject constructor(
     suspend fun updateLastSelectedPlatformIndex(index: Int) {
         dataStore.edit { it[Keys.LAST_SELECTED_PLATFORM_INDEX] = index }
     }
+
+    suspend fun updateTypingContents(contents: String) {
+        dataStore.edit { it[Keys.TYPING_CONTENTS] = contents }
+    }
 }
 
 data class UserSettings(
@@ -50,4 +57,5 @@ data class UserSettings(
     val autoClearClipboard: Boolean,
     val switchToBingSearch: Boolean,
     val lastSelectedPlatformIndex: Int,
+    val typingContents: String,
 )

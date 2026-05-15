@@ -16,6 +16,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -31,7 +32,6 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.home.SearchActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
@@ -54,19 +54,24 @@ fun Search() {
 
 @Composable
 private fun SearchComposable() {
-    val viewModel = LocalSettingsViewModel.current
-    val state by viewModel.settingsState.collectAsStateWithLifecycle()
+    val vm = LocalSettingsViewModel.current
+    val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
-    val settingsSharedPref = remember { SettingsSharedPref }
-    var searchQuery by remember { mutableStateOf(settingsSharedPref.typingContents) }
+    var query by remember { mutableStateOf("") }
+
+    LaunchedEffect(state.typingContents) {
+        if (query != state.typingContents) {
+            query = state.typingContents
+        }
+    }
 
     OutlinedTextField(
-        value = searchQuery,
+        value = query,
         onValueChange = {
-            searchQuery = it
-            settingsSharedPref.typingContents = it
+            query = it
+            vm.updateTypingContents(it)
         },
         label = { Text(stringResource(R.string.query)) },
         modifier = Modifier.fillMaxWidth(),
@@ -76,13 +81,13 @@ private fun SearchComposable() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onTapSearchButton(searchQuery, state.switchToBingSearch)
+                view.context.onTapSearchButton(state.typingContents, state.switchToBingSearch)
             }),
         trailingIcon = {
-            ClearInput(searchQuery) {
+            ClearInput(state.typingContents) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                searchQuery = ""
-                settingsSharedPref.typingContents = ""
+                query = ""
+                vm.updateTypingContents("")
             }
         },
     )
@@ -94,7 +99,7 @@ private fun SearchComposable() {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.onTapSearchButton(searchQuery, state.switchToBingSearch)
+            view.context.onTapSearchButton(state.typingContents, state.switchToBingSearch)
         }) {
             Text(stringResource(R.string.search))
             Icon(
@@ -108,7 +113,7 @@ private fun SearchComposable() {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.onTapCheckOnYouTubeButton(searchQuery, state.switchToBingSearch)
+            view.context.onTapCheckOnYouTubeButton(state.typingContents, state.switchToBingSearch)
         }) {
             Text(stringResource(if (state.switchToBingSearch) R.string.search_on_bilibili else R.string.search_on_youtube))
             Icon(

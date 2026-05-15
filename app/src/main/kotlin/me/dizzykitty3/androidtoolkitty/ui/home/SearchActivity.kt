@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,7 +50,6 @@ import me.dizzykitty3.androidtoolkitty.HTTPS
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ButtonDivider
@@ -110,22 +110,32 @@ private fun SearchComposable() {
 
 @Composable
 private fun Webpage() {
+    val vm = LocalSettingsViewModel.current
+    val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
-    val settingsSharedPref = remember { SettingsSharedPref }
-    var url by remember { mutableStateOf(settingsSharedPref.typingContents) }
+    var url by remember { mutableStateOf("") }
     val fullWidthPeriod = "。"
     val halfWidthPeriod = "."
     val fullWidthSpace = "　"
     val halfWidthSpace = " "
 
+    LaunchedEffect(state.typingContents) {
+        if (url != state.typingContents) {
+            url = state.typingContents
+        }
+    }
+
     OutlinedTextField(
         value = url,
         onValueChange = {
-            url = it.replace(fullWidthPeriod, halfWidthPeriod)
-                .replace(halfWidthSpace, halfWidthPeriod).replace(fullWidthSpace, halfWidthPeriod)
-            settingsSharedPref.typingContents = url
+            url = it
+            vm.updateTypingContents(
+                it.replace(fullWidthPeriod, halfWidthPeriod)
+                    .replace(halfWidthSpace, halfWidthPeriod)
+                    .replace(fullWidthSpace, halfWidthPeriod)
+            )
         },
         label = { Text(stringResource(R.string.url)) },
         modifier = Modifier.fillMaxWidth(),
@@ -135,13 +145,13 @@ private fun Webpage() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onTapVisitURLButton(url)
+                view.context.onTapVisitURLButton(state.typingContents)
             }),
         trailingIcon = {
-            ClearInput(url) {
+            ClearInput(state.typingContents) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 url = ""
-                settingsSharedPref.typingContents = ""
+                vm.updateTypingContents("")
             }
         },
         supportingText = {
@@ -156,22 +166,23 @@ private fun Webpage() {
             })
         },
         prefix = {
-            if (!url.contains(HTTPS)) {
+            if (!state.typingContents.contains(HTTPS)) {
                 Text(HTTPS)
             }
         },
         suffix = {
             Text(
-                if (url.isEmpty()) ""
-                else if (url.last() == '.') url.removeTrailingPeriod().getSuffix().removePrefix(".")
-                else url.removeTrailingPeriod().getSuffix()
+                if (state.typingContents.isEmpty()) ""
+                else if (state.typingContents.last() == '.') state.typingContents.removeTrailingPeriod()
+                    .getSuffix().removePrefix(".")
+                else state.typingContents.removeTrailingPeriod().getSuffix()
             )
         })
 
     TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
-        view.context.onTapVisitURLButton(url)
+        view.context.onTapVisitURLButton(state.typingContents)
     }) {
         Text(stringResource(R.string.visit))
         Icon(
@@ -185,20 +196,25 @@ private fun Webpage() {
 
 @Composable
 private fun SocialMediaProfile() {
-    val viewModel = LocalSettingsViewModel.current
-    val state by viewModel.settingsState.collectAsStateWithLifecycle()
+    val vm = LocalSettingsViewModel.current
+    val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
-    val settingsSharedPref = remember { SettingsSharedPref }
-    var username by remember { mutableStateOf(settingsSharedPref.typingContents) }
+    var username by remember { mutableStateOf("") }
     val platform = URLUtil.Platform.entries[state.lastSelectedPlatformIndex]
     val platformList = URLUtil.Platform.entries.map { stringResource(it.platform) }
+
+    LaunchedEffect(state.typingContents) {
+        if (username != state.typingContents) {
+            username = state.typingContents
+        }
+    }
 
     CustomDropdownMenu(
         items = platformList,
         onItemSelected = {
-            viewModel.updateLastSelectedPlatformIndex(it)
+            vm.updateLastSelectedPlatformIndex(it)
         },
         label = { Text(stringResource(R.string.platform)) },
         selectedPlatformIndex = state.lastSelectedPlatformIndex
@@ -208,7 +224,7 @@ private fun SocialMediaProfile() {
         value = username,
         onValueChange = {
             username = it
-            settingsSharedPref.typingContents = it
+            vm.updateTypingContents(it)
         },
         label = { Text(stringResource(R.string.username)) },
         modifier = Modifier.fillMaxWidth(),
@@ -218,37 +234,41 @@ private fun SocialMediaProfile() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                if (isValid(platform, username)) {
-                    view.context.onTapVisitProfileButton(username, state.lastSelectedPlatformIndex)
-                    viewModel.updateLastSelectedPlatformIndex(state.lastSelectedPlatformIndex) // TODO
+                if (isValid(platform, state.typingContents)) {
+                    view.context.onTapVisitProfileButton(
+                        state.typingContents, state.lastSelectedPlatformIndex
+                    )
+                    vm.updateLastSelectedPlatformIndex(state.lastSelectedPlatformIndex) // TODO
                 } else {
                     view.showSnackbar(R.string.invalid_username_tip)
                 }
             }),
         trailingIcon = {
-            ClearInput(username) {
+            ClearInput(state.typingContents) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 username = ""
-                settingsSharedPref.typingContents = ""
+                vm.updateTypingContents("")
             }
         },
         supportingText = {
             Text(
-                toProfileFullURL(platform, username), overflow = TextOverflow.Ellipsis, maxLines = 1
+                toProfileFullURL(platform, state.typingContents),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
             )
         })
 
     if (isCaseSensitive(platform)) {
         SpacerPadding()
         Tip(R.string.tip_case_sensitive)
-    } else if (isInvalidCommonRule(platform, username)) {
+    } else if (isInvalidCommonRule(platform, state.typingContents)) {
         SpacerPadding()
         ErrorTip(
             stringResource(
                 R.string.invalid_username_common_rule, stringResource(platform.platform)
             )
         )
-    } else if (isInvalidNotNumbersOnly(platform, username)) {
+    } else if (isInvalidNotNumbersOnly(platform, state.typingContents)) {
         SpacerPadding()
         ErrorTip(
             stringResource(
@@ -260,9 +280,11 @@ private fun SocialMediaProfile() {
     TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
-        if (isValid(platform, username)) {
-            view.context.onTapVisitProfileButton(username, state.lastSelectedPlatformIndex)
-            viewModel.updateLastSelectedPlatformIndex(state.lastSelectedPlatformIndex) // TODO
+        if (isValid(platform, state.typingContents)) {
+            view.context.onTapVisitProfileButton(
+                state.typingContents, state.lastSelectedPlatformIndex
+            )
+            vm.updateLastSelectedPlatformIndex(state.lastSelectedPlatformIndex) // TODO
         } else {
             view.showSnackbar(R.string.invalid_username_tip)
         }
@@ -339,17 +361,24 @@ private fun isCaseSensitive(platform: URLUtil.Platform): Boolean =
 
 @Composable
 private fun CheckAppOnMarket() {
+    val vm = LocalSettingsViewModel.current
+    val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val focus = LocalFocusManager.current
     val haptic = LocalHapticFeedback.current
-    val settingsSharedPref = remember { SettingsSharedPref }
-    var packageName by remember { mutableStateOf(settingsSharedPref.typingContents) }
+    var packageName by remember { mutableStateOf("") }
+
+    LaunchedEffect(state.typingContents) {
+        if (packageName != state.typingContents) {
+            packageName = state.typingContents
+        }
+    }
 
     OutlinedTextField(
         value = packageName,
         onValueChange = {
             packageName = it
-            settingsSharedPref.typingContents = it
+            vm.updateTypingContents(it)
         },
         label = { Text(stringResource(R.string.package_name_or_search)) },
         modifier = Modifier.fillMaxWidth(),
@@ -359,13 +388,13 @@ private fun CheckAppOnMarket() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.checkOnMarket(packageName)
+                view.context.checkOnMarket(state.typingContents)
             }),
         trailingIcon = {
-            ClearInput(packageName) {
+            ClearInput(state.typingContents) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 packageName = ""
-                settingsSharedPref.typingContents = ""
+                vm.updateTypingContents("")
             }
         })
     Row(
@@ -375,7 +404,7 @@ private fun CheckAppOnMarket() {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.checkOnMarket(packageName)
+            view.context.checkOnMarket(state.typingContents)
         }) {
             Text(stringResource(R.string.open_on_google_play))
             Icon(
@@ -389,7 +418,7 @@ private fun CheckAppOnMarket() {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.checkOnMarket(packageName, false)
+            view.context.checkOnMarket(state.typingContents, false)
         }) {
             Text(stringResource(R.string.open_on_other_markets))
             Icon(

@@ -21,7 +21,13 @@ class SettingsViewModel @Inject constructor(
     val settingsState = repository.settingsFlow.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
-        initialValue = UserSettings(true, false, false, 0)
+        initialValue = UserSettings(
+            dynamicColor = true,
+            autoClearClipboard = false,
+            switchToBingSearch = false,
+            lastSelectedPlatformIndex = 0,
+            typingContents = ""
+        )
     )
 
     fun toggleDynamicColor(enabled: Boolean) {
@@ -38,5 +44,9 @@ class SettingsViewModel @Inject constructor(
 
     fun updateLastSelectedPlatformIndex(index: Int) {
         viewModelScope.launch { repository.updateLastSelectedPlatformIndex(index) }
+    }
+
+    fun updateTypingContents(contents: String) {
+        viewModelScope.launch { repository.updateTypingContents(contents) }
     }
 }

@@ -19,7 +19,6 @@ object SettingsSharedPref {
     private const val TOP_PADDING_DP = "top_padding_dp"
     private const val BOTTOM_PADDING_DP = "bottom_padding_dp"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
-    private const val TYPING_CONTENTS = "typing_contents"
     private const val LATITUDE = "latitude"
     private const val LONGITUDE = "longitude"
     private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
@@ -93,10 +92,6 @@ object SettingsSharedPref {
     var customVolumeOptionLabel: String?
         get() = getPreference(VOLUME_OPTION_LABEL, "")
         set(value) = setPreference(VOLUME_OPTION_LABEL, value)
-
-    var typingContents: String
-        get() = getPreference(TYPING_CONTENTS, "")
-        set(value) = setPreference(TYPING_CONTENTS, value)
 
     var latitude: String
         get() = getPreference(LATITUDE, "")
