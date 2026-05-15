@@ -34,7 +34,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.checkOnGoogleMaps
 import timber.log.Timber
-import kotlin.math.absoluteValue
 
 @Composable
 fun Maps() {
@@ -50,9 +49,9 @@ fun Maps() {
 
         OutlinedTextField(
             value = latitude,
-            onValueChange = {
-                latitude = it
-                settingsSharedPref.latitude = it
+            onValueChange = { input ->
+                latitude = sanitizeCoordinateInput(input)
+                settingsSharedPref.latitude = sanitizeCoordinateInput(input)
             },
             suffix = {
                 Text(
@@ -61,13 +60,13 @@ fun Maps() {
                 )
             },
             label = { Text(stringResource(R.string.latitude)) },
+            isError = latitude.errorLatitude(),
             supportingText = { Text(stringResource(R.string.latitude_description)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(focusRequester1),
             keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Done
+                keyboardType = KeyboardType.Decimal, imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
@@ -77,8 +76,7 @@ fun Maps() {
                         focus.clearFocus()
                         view.context.onClickOpenGoogleMapsButton(latitude, longitude)
                     }
-                }
-            ),
+                }),
             trailingIcon = {
                 ClearInput(latitude) {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -90,9 +88,9 @@ fun Maps() {
 
         OutlinedTextField(
             value = longitude,
-            onValueChange = {
-                longitude = it
-                settingsSharedPref.longitude = it
+            onValueChange = { input ->
+                longitude = sanitizeCoordinateInput(input)
+                settingsSharedPref.longitude = sanitizeCoordinateInput(input)
             },
             suffix = {
                 Text(
@@ -100,14 +98,14 @@ fun Maps() {
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.3F)
                 )
             },
+            isError = longitude.errorLongitude(),
             label = { Text(stringResource(R.string.longitude)) },
             supportingText = { Text(stringResource(R.string.longitude_description)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .focusRequester(focusRequester2),
             keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Number,
-                imeAction = ImeAction.Done
+                keyboardType = KeyboardType.Decimal, imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
@@ -117,8 +115,7 @@ fun Maps() {
                         focus.clearFocus()
                         view.context.onClickOpenGoogleMapsButton(latitude, longitude)
                     }
-                }
-            ),
+                }),
             trailingIcon = {
                 ClearInput(longitude) {
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
@@ -145,31 +142,58 @@ fun Maps() {
 }
 
 private fun Context.onClickOpenGoogleMapsButton(latitude: String, longitude: String) {
-    if (latitude.isBlank() || longitude.isBlank()
-        || latitude.toValidFloat().absoluteValue > 90
-        || longitude.toValidFloat().absoluteValue > 180
-    ) return
+    if (latitude.errorLatitude() || longitude.errorLongitude()) return
 
     Timber.d("onClickOpenGoogleMapsButton")
     this.checkOnGoogleMaps(latitude, longitude)
 }
 
 private fun String.getLatitudeSuffix(): String {
-    val input = this.toValidFloat()
-    if (input > 0F && input <= 90F) return "N"
-    if (input < 0F && input >= -90F) return "S"
+    try {
+        val input = this.toFloat()
+        if (input > 0F && input <= 90F) return "N"
+        if (input < 0F && input >= -90F) return "S"
+    } catch (_: NumberFormatException) {
+    }
     return ""
 }
 
 private fun String.getLongitudeSuffix(): String {
-    val input = this.toValidFloat()
-    if (input > 0F && input <= 180F) return "E"
-    if (input < 0F && input >= -180F) return "W"
+    try {
+        val input = this.toFloat()
+        if (input > 0F && input <= 180F) return "E"
+        if (input < 0F && input >= -180F) return "W"
+    } catch (_: NumberFormatException) {
+    }
     return ""
 }
 
-private fun String.toValidFloat(): Float = try {
-    this.substringAfter("-").toFloat()
-} catch (_: NumberFormatException) {
-    -999F // error input
+private fun String.errorLatitude(): Boolean {
+    return !(this.isBlank() || this.getLatitudeSuffix() == "N" || this.getLatitudeSuffix() == "S")
+}
+
+private fun String.errorLongitude(): Boolean {
+    return !(this.isBlank() || this.getLongitudeSuffix() == "E" || this.getLongitudeSuffix() == "W")
+}
+
+private fun sanitizeCoordinateInput(input: String): String {
+    return buildString {
+        var hasMinus = false
+        var hasDot = false
+
+        input.forEachIndexed { index, c ->
+            when {
+                c.isDigit() -> append(c)
+                c == '-' && index == 0 && !hasMinus -> {
+                    append(c)
+                    hasMinus = true
+                }
+
+                c == '.' && !hasDot -> {
+                    append(c)
+                    hasDot = true
+                }
+            }
+        }
+    }
 }

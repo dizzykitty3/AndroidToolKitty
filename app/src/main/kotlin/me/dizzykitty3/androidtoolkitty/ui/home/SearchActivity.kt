@@ -227,6 +227,7 @@ private fun SocialMediaProfile() {
             vm.updateTypingContents(it)
         },
         label = { Text(stringResource(R.string.username)) },
+        isError = !isValid(platform, username),
         modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done
