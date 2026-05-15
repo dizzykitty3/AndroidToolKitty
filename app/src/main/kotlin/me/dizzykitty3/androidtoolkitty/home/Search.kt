@@ -81,10 +81,10 @@ private fun SearchComposable() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onTapSearchButton(state.typingContents, state.switchToBingSearch)
+                view.context.onTapSearchButton(query, state.switchToBingSearch)
             }),
         trailingIcon = {
-            ClearInput(state.typingContents) {
+            ClearInput(query) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 query = ""
                 vm.updateTypingContents("")
@@ -99,7 +99,7 @@ private fun SearchComposable() {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.onTapSearchButton(state.typingContents, state.switchToBingSearch)
+            view.context.onTapSearchButton(query, state.switchToBingSearch)
         }) {
             Text(stringResource(R.string.search))
             Icon(
@@ -113,7 +113,7 @@ private fun SearchComposable() {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.onTapCheckOnYouTubeButton(state.typingContents, state.switchToBingSearch)
+            view.context.onTapCheckOnYouTubeButton(query, state.switchToBingSearch)
         }) {
             Text(stringResource(if (state.switchToBingSearch) R.string.search_on_bilibili else R.string.search_on_youtube))
             Icon(

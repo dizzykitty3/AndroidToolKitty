@@ -145,10 +145,10 @@ private fun Webpage() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.onTapVisitURLButton(state.typingContents)
+                view.context.onTapVisitURLButton(url)
             }),
         trailingIcon = {
-            ClearInput(state.typingContents) {
+            ClearInput(url) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 url = ""
                 vm.updateTypingContents("")
@@ -166,23 +166,23 @@ private fun Webpage() {
             })
         },
         prefix = {
-            if (!state.typingContents.contains(HTTPS)) {
+            if (!url.contains(HTTPS)) {
                 Text(HTTPS)
             }
         },
         suffix = {
             Text(
-                if (state.typingContents.isEmpty()) ""
-                else if (state.typingContents.last() == '.') state.typingContents.removeTrailingPeriod()
+                if (url.isEmpty()) ""
+                else if (url.last() == '.') url.removeTrailingPeriod()
                     .getSuffix().removePrefix(".")
-                else state.typingContents.removeTrailingPeriod().getSuffix()
+                else url.removeTrailingPeriod().getSuffix()
             )
         })
 
     TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
-        view.context.onTapVisitURLButton(state.typingContents)
+        view.context.onTapVisitURLButton(url)
     }) {
         Text(stringResource(R.string.visit))
         Icon(
@@ -235,9 +235,9 @@ private fun SocialMediaProfile() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                if (isValid(platform, state.typingContents)) {
+                if (isValid(platform, username)) {
                     view.context.onTapVisitProfileButton(
-                        state.typingContents, state.lastSelectedPlatformIndex
+                        username, state.lastSelectedPlatformIndex
                     )
                     vm.updateLastSelectedPlatformIndex(state.lastSelectedPlatformIndex) // TODO
                 } else {
@@ -245,7 +245,7 @@ private fun SocialMediaProfile() {
                 }
             }),
         trailingIcon = {
-            ClearInput(state.typingContents) {
+            ClearInput(username) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 username = ""
                 vm.updateTypingContents("")
@@ -253,7 +253,7 @@ private fun SocialMediaProfile() {
         },
         supportingText = {
             Text(
-                toProfileFullURL(platform, state.typingContents),
+                toProfileFullURL(platform, username),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
             )
@@ -262,14 +262,14 @@ private fun SocialMediaProfile() {
     if (isCaseSensitive(platform)) {
         SpacerPadding()
         Tip(R.string.tip_case_sensitive)
-    } else if (isInvalidCommonRule(platform, state.typingContents)) {
+    } else if (isInvalidCommonRule(platform, username)) {
         SpacerPadding()
         ErrorTip(
             stringResource(
                 R.string.invalid_username_common_rule, stringResource(platform.platform)
             )
         )
-    } else if (isInvalidNotNumbersOnly(platform, state.typingContents)) {
+    } else if (isInvalidNotNumbersOnly(platform, username)) {
         SpacerPadding()
         ErrorTip(
             stringResource(
@@ -281,9 +281,9 @@ private fun SocialMediaProfile() {
     TextButton(onClick = {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
         focus.clearFocus()
-        if (isValid(platform, state.typingContents)) {
+        if (isValid(platform, username)) {
             view.context.onTapVisitProfileButton(
-                state.typingContents, state.lastSelectedPlatformIndex
+                username, state.lastSelectedPlatformIndex
             )
             vm.updateLastSelectedPlatformIndex(state.lastSelectedPlatformIndex) // TODO
         } else {
@@ -389,10 +389,10 @@ private fun CheckAppOnMarket() {
         keyboardActions = KeyboardActions(
             onDone = {
                 focus.clearFocus()
-                view.context.checkOnMarket(state.typingContents)
+                view.context.checkOnMarket(packageName)
             }),
         trailingIcon = {
-            ClearInput(state.typingContents) {
+            ClearInput(packageName) {
                 haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 packageName = ""
                 vm.updateTypingContents("")
@@ -405,7 +405,7 @@ private fun CheckAppOnMarket() {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.checkOnMarket(state.typingContents)
+            view.context.checkOnMarket(packageName)
         }) {
             Text(stringResource(R.string.open_on_google_play))
             Icon(
@@ -419,7 +419,7 @@ private fun CheckAppOnMarket() {
         TextButton({
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             focus.clearFocus()
-            view.context.checkOnMarket(state.typingContents, false)
+            view.context.checkOnMarket(packageName, false)
         }) {
             Text(stringResource(R.string.open_on_other_markets))
             Icon(
