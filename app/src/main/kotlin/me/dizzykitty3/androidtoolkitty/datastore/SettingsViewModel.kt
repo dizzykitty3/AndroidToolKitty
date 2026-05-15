@@ -29,6 +29,7 @@ class SettingsViewModel @Inject constructor(
             typingContents = "",
             latitude = "",
             longitude = "",
+            haveTappedAddButton = false,
         )
     )
 
@@ -58,5 +59,9 @@ class SettingsViewModel @Inject constructor(
 
     fun updateLongitude(longitude: String) {
         viewModelScope.launch { repository.updateLongitude(longitude) }
+    }
+
+    fun toggleHaveTappedAddButton(haveTapped: Boolean) {
+        viewModelScope.launch { repository.toggleHaveTappedAddButton(haveTapped) }
     }
 }

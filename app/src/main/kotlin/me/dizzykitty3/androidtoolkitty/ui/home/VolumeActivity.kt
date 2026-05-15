@@ -13,14 +13,18 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
+import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.home.MediaVolume
 import me.dizzykitty3.androidtoolkitty.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
@@ -34,18 +38,22 @@ class VolumeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AppTheme {
-                Scaffold(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                ) { innerPadding ->
-                    Box(
-                        Modifier.padding(
-                            start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
-                            end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
-                        )
-                    ) {
-                        Screen(screenTitle = R.string.volume) {
-                            VolumeComposable()
+            val viewModel: SettingsViewModel = hiltViewModel()
+
+            CompositionLocalProvider(LocalSettingsViewModel provides viewModel) {
+                AppTheme {
+                    Scaffold(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    ) { innerPadding ->
+                        Box(
+                            Modifier.padding(
+                                start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
+                                end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
+                            )
+                        ) {
+                            Screen(screenTitle = R.string.volume) {
+                                VolumeComposable()
+                            }
                         }
                     }
                 }
@@ -56,6 +64,8 @@ class VolumeActivity : ComponentActivity() {
 
 @Composable
 private fun VolumeComposable() {
+    val viewModel = LocalSettingsViewModel.current // prevents crash
+
     BaseCard(R.string.media_volume) { MediaVolume(isHome = false) }
     BaseCard(R.string.voice_call_volume) { VoiceCallVolume() }
 }

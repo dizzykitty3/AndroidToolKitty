@@ -25,7 +25,9 @@ import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.home.VolumeActivity
 import me.dizzykitty3.androidtoolkitty.ui.home.VolumeCustomizeActivity
@@ -51,13 +53,14 @@ fun Volume() {
 
 @Composable
 fun MediaVolume(isHome: Boolean) {
+    val vm = LocalSettingsViewModel.current
+    val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
     val maxVolume = AudioUtil.maxMediaVolumeIndex
     var mCustomVolume by remember { mutableIntStateOf(settingsSharedPref.customVolume) }
     var mCustomVolumeOptionLabel by remember { mutableStateOf(settingsSharedPref.customVolumeOptionLabel) }
-    var mHaveTappedAddButton by remember { mutableStateOf(settingsSharedPref.haveTappedAddButton) }
 
     val options = listOf(
         stringResource(R.string.off_all_cap),
@@ -100,8 +103,7 @@ fun MediaVolume(isHome: Boolean) {
                         }
 
                         3 -> {
-                            mHaveTappedAddButton = true
-                            settingsSharedPref.haveTappedAddButton = true
+                            vm.toggleHaveTappedAddButton(true)
                             if (mCustomVolume > 0) {
                                 view.setVolume(mCustomVolume * 0.01 * maxVolume)
                             } else {
@@ -119,7 +121,7 @@ fun MediaVolume(isHome: Boolean) {
             ) {
                 if (label != stringResource(R.string.add)) {
                     Text(label.toString())
-                } else if (mHaveTappedAddButton) {
+                } else if (state.haveTappedAddButton) {
                     Text(label)
                 } else {
                     GradientSmall(

@@ -13,7 +13,6 @@ data class WheelOfFortuneItems(val items: List<String>)
 object SettingsSharedPref {
     private const val PREF_NAME = "Settings"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
-    private const val HAVE_TAPPED_ADD_BUTTON = "have_tapped_add_button"
     private const val IS_LOGGING_ENABLED = "is_logging_enabled"
     private const val CUSTOM_VOLUME = "custom_volume"
     private const val TOP_PADDING_DP = "top_padding_dp"
@@ -54,10 +53,6 @@ object SettingsSharedPref {
     var usingCustomVolumeOptionLabel: Boolean
         get() = getPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
         set(value) = setPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
-
-    var haveTappedAddButton: Boolean
-        get() = getPreference(HAVE_TAPPED_ADD_BUTTON, false)
-        set(value) = setPreference(HAVE_TAPPED_ADD_BUTTON, value)
 
     var isLoggingEnabled: Boolean
         get() = getPreference(IS_LOGGING_ENABLED, false)
