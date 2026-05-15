@@ -48,20 +48,15 @@ class FontWeightTestActivity : ComponentActivity() {
                         )
                     ) {
                         Screen(screenTitle = R.string.font_weight_test) {
-                            FontWeightTestComposable()
+                            BaseCard("Font weight test 1") { FontWeightTest() }
+                            BaseCard("Font weight test 2") { RowFontWeightTest() }
+                            BaseCard("Font family test") { FontFamilyTest() }
                         }
                     }
                 }
             }
         }
     }
-}
-
-@Composable
-private fun FontWeightTestComposable() {
-    BaseCard("Font weight test 1") { FontWeightTest() }
-    BaseCard("Font weight test 2") { RowFontWeightTest() }
-    BaseCard("Font family test") { FontFamilyTest() }
 }
 
 @Composable

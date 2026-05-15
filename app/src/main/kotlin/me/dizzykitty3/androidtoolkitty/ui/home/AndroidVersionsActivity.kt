@@ -43,22 +43,17 @@ class AndroidVersionsActivity : ComponentActivity() {
                         )
                     ) {
                         Screen(screenTitle = R.string.android_versions) {
-                            AndroidVersionsComposable()
+                            BaseCard(title = R.string.latest_version) {
+                                LatestVersion()
+                            }
+                            BaseCard(title = R.string.older_releases) {
+                                OlderReleases()
+                            }
                         }
                     }
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun AndroidVersionsComposable() {
-    BaseCard(title = R.string.latest_version) {
-        LatestVersion()
-    }
-    BaseCard(title = R.string.older_releases) {
-        OlderReleases()
     }
 }
 

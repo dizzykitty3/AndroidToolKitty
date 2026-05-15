@@ -55,20 +55,15 @@ class CodesOfCharactersActivity : ComponentActivity() {
                         )
                     ) {
                         Screen(screenTitle = R.string.codes_of_characters) {
-                            EncodingComposable()
+                            BaseCard(R.string.unicode) { Unicode() }
+                            BaseCard(R.string.ascii) { ASCII() }
+                            BaseCard("Unix Timestamp") { UnixTimestamp() }
                         }
                     }
                 }
             }
         }
     }
-}
-
-@Composable
-private fun EncodingComposable() {
-    BaseCard(R.string.unicode) { Unicode() }
-    BaseCard(R.string.ascii) { ASCII() }
-    BaseCard("Unix Timestamp") { UnixTimestamp() }
 }
 
 @Composable

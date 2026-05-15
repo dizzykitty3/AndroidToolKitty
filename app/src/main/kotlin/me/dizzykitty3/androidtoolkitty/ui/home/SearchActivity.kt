@@ -91,7 +91,9 @@ class SearchActivity : ComponentActivity() {
                             )
                         ) {
                             Screen(screenTitle = R.string.search) {
-                                SearchComposable()
+                                BaseCard(R.string.webpage) { Webpage() }
+                                BaseCard(R.string.social_profile) { SocialMediaProfile() }
+                                BaseCard(R.string.check_app_on_market) { CheckAppOnMarket() }
                             }
                         }
                     }
@@ -99,13 +101,6 @@ class SearchActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-private fun SearchComposable() {
-    BaseCard(R.string.webpage) { Webpage() }
-    BaseCard(R.string.social_profile) { SocialMediaProfile() }
-    BaseCard(R.string.check_app_on_market) { CheckAppOnMarket() }
 }
 
 @Composable

@@ -127,7 +127,13 @@ class MainActivity : ComponentActivity() {
                                 end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
                             )
                         ) {
-                            Home()
+                            val largeScreen =
+                                currentWindowAdaptiveInfo().windowSizeClass.minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
+                            if (largeScreen) {
+                                TabletLayout()
+                            } else {
+                                MobileLayout()
+                            }
                         }
                     }
                 }
@@ -187,14 +193,6 @@ class MainActivity : ComponentActivity() {
         super.onDestroy()
         Timber.d("onDestroy")
     }
-}
-
-@Composable
-fun Home() {
-    val largeScreen =
-        currentWindowAdaptiveInfo().windowSizeClass.minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
-    if (largeScreen) TabletLayout()
-    else MobileLayout()
 }
 
 @Composable

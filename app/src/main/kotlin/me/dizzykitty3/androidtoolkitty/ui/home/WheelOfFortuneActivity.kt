@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,21 +36,11 @@ class WheelOfFortuneActivity : ComponentActivity() {
                         )
                     ) {
                         Screen(screenTitle = R.string.wheel_of_fortune) {
-                            WheelOfFortuneComposable()
+                            BaseCard(R.string.edit) { TheWheel(true) }
                         }
                     }
                 }
             }
         }
     }
-}
-
-@Composable
-private fun WheelOfFortuneComposable() {
-    BaseCard(R.string.edit) { TheWheelWithEditableList() }
-}
-
-@Composable
-private fun TheWheelWithEditableList() {
-    TheWheel(true)
 }

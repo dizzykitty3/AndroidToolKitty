@@ -95,7 +95,9 @@ class SettingsActivity : ComponentActivity() {
                             )
                         ) {
                             Screen(screenTitle = R.string.settings) {
-                                SettingsComposable()
+                                if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance() }
+                                BaseCard(R.string.general) { General() }
+                                BaseCard(R.string.app_info) { OtherSettings() }
                             }
                         }
                     }
@@ -103,13 +105,6 @@ class SettingsActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-private fun SettingsComposable() {
-    if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance() }
-    BaseCard(R.string.general) { General() }
-    BaseCard(R.string.app_info) { OtherSettings() }
 }
 
 @Composable
