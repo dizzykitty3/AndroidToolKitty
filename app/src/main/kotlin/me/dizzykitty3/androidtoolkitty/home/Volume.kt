@@ -83,7 +83,7 @@ fun MediaVolume(isHome: Boolean) {
     }
 
     LaunchedEffect(state.customVolume) {
-        if (state.customVolume != Int.MIN_VALUE) {
+        if (mCustomVolume != state.customVolume) {
             mCustomVolume = state.customVolume
             if (mCustomVolume > 0) {
                 options[3] = "${mCustomVolume}%"
