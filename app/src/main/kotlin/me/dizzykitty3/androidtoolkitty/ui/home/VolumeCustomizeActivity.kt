@@ -10,11 +10,8 @@ import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
@@ -32,17 +29,14 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.ImeAction
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
 import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
-import me.dizzykitty3.androidtoolkitty.uicomponents.ClearInput
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
@@ -86,11 +80,8 @@ private fun VolumeCustomizeComposable() {
     val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
-    val settingsSharedPref = remember { SettingsSharedPref }
     val maxVolume = AudioUtil.maxMediaVolumeIndex
     var morePreciseSlider by remember { mutableStateOf(false) }
-    var mCustomVolumeOptionLabel by remember { mutableStateOf(settingsSharedPref.customVolumeOptionLabel) }
-    var mHaveCustomLabel by remember { mutableStateOf(settingsSharedPref.usingCustomVolumeOptionLabel) }
 
     var newCustomVolume by remember {
         if (state.customVolume < 0) {
@@ -100,57 +91,22 @@ private fun VolumeCustomizeComposable() {
         }
     }
 
-    var optionLabel by remember {
-        if (state.customVolume < 0) {
-            mutableStateOf("")
-        } else {
-            mutableStateOf(mCustomVolumeOptionLabel.toString())
-        }
-    }
-
-
     BaseCard(R.string.edit) {
         Slider(
             value = newCustomVolume, onValueChange = {
-                if (morePreciseSlider) haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                else haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-
-                newCustomVolume = it
-                if (state.customVolume < 0 || (!mHaveCustomLabel)) {
-                    optionLabel = "${it.roundToInt()}%"
+                if (morePreciseSlider) {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                } else {
+                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                 }
-            }, valueRange = 0f..100f, steps = if (morePreciseSlider) 0 else 9
+                newCustomVolume = it
+            }, valueRange = 0f..100f, steps = if (morePreciseSlider) {
+                0
+            } else {
+                9
+            }
         )
         Text("${newCustomVolume.roundToInt()}% -> ${(newCustomVolume * 0.01 * maxVolume).roundToInt()}/$maxVolume")
-        SpacerPadding()
-        OutlinedTextField(
-            value = optionLabel,
-            onValueChange = {
-                optionLabel = it
-                mHaveCustomLabel = true
-            },
-            label = { Text(stringResource(R.string.label_optional)) },
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(
-                onDone = {
-                    vm.updateCustomVolume(newCustomVolume.roundToInt())
-                    if (mHaveCustomLabel) {
-                        settingsSharedPref.usingCustomVolumeOptionLabel = true
-                    }
-                    settingsSharedPref.customVolumeOptionLabel = optionLabel
-                    mCustomVolumeOptionLabel = optionLabel
-                    view.setVolume(state.customVolume * 0.01 * maxVolume)
-                }),
-            trailingIcon = {
-                ClearInput(optionLabel) {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    optionLabel = ""
-                    mHaveCustomLabel = true
-                }
-            })
 
         SpacerPadding()
         SpacerPadding()
@@ -175,11 +131,6 @@ private fun VolumeCustomizeComposable() {
                             return@Button
                         } else {
                             vm.updateCustomVolume(newCustomVolume.roundToInt())
-                            if (mHaveCustomLabel) {
-                                settingsSharedPref.usingCustomVolumeOptionLabel = true
-                            }
-                            settingsSharedPref.customVolumeOptionLabel = optionLabel
-                            mCustomVolumeOptionLabel = optionLabel
                             view.setVolume(state.customVolume * 0.01 * maxVolume)
                         }
                     }) { Text(stringResource(R.string.save)) }

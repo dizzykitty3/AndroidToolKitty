@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -29,7 +30,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.ui.home.VolumeActivity
 import me.dizzykitty3.androidtoolkitty.ui.home.VolumeCustomizeActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
@@ -58,17 +58,18 @@ fun MediaVolume(isHome: Boolean) {
     val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
-    val settingsSharedPref = remember { SettingsSharedPref }
     val maxVolume = AudioUtil.maxMediaVolumeIndex
     var mCustomVolume by remember { mutableIntStateOf(Int.MIN_VALUE) }
-    var mCustomVolumeOptionLabel by remember { mutableStateOf(settingsSharedPref.customVolumeOptionLabel) }
-
-    val options = mutableListOf(
-        stringResource(R.string.off_all_cap),
-        "40%",
-        "60%",
-        stringResource(R.string.add)
-    )
+    val offAllCap = stringResource(R.string.off_all_cap)
+    val addLabel = stringResource(R.string.add)
+    val options = remember(offAllCap, addLabel) {
+        mutableStateListOf(
+            offAllCap,
+            "40%",
+            "60%",
+            addLabel
+        )
+    }
 
     var selectedIndex by remember {
         mutableStateOf(
@@ -82,9 +83,13 @@ fun MediaVolume(isHome: Boolean) {
     }
 
     LaunchedEffect(state.customVolume) {
-        if (mCustomVolume != state.customVolume) {
+        if (state.customVolume != Int.MIN_VALUE) {
             mCustomVolume = state.customVolume
-            options[3] = mCustomVolumeOptionLabel ?: ""
+            if (mCustomVolume > 0) {
+                options[3] = "${mCustomVolume}%"
+            } else {
+                options[3] = addLabel
+            }
             if (AudioUtil.mediaVolume == (mCustomVolume * 0.01 * maxVolume).roundToInt()) {
                 selectedIndex = 3
             }

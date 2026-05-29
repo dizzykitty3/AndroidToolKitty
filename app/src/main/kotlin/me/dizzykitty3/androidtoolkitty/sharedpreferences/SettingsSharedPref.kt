@@ -12,11 +12,9 @@ data class WheelOfFortuneItems(val items: List<String>)
 
 object SettingsSharedPref {
     private const val PREF_NAME = "Settings"
-    private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val IS_LOGGING_ENABLED = "is_logging_enabled"
     private const val TOP_PADDING_DP = "top_padding_dp"
     private const val BOTTOM_PADDING_DP = "bottom_padding_dp"
-    private const val VOLUME_OPTION_LABEL = "volume_option_label"
     private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
 
     private val sharedPrefs: SharedPreferences
@@ -45,11 +43,6 @@ object SettingsSharedPref {
             apply()
         }
     }
-
-    var usingCustomVolumeOptionLabel: Boolean
-        get() = getPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
-        set(value) = setPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
-
     var isLoggingEnabled: Boolean
         get() = getPreference(IS_LOGGING_ENABLED, false)
         set(value) = setPreference(IS_LOGGING_ENABLED, value)
@@ -73,10 +66,6 @@ object SettingsSharedPref {
     var bottomPaddingDp: Float
         get() = getPreference(BOTTOM_PADDING_DP, 0F)
         set(value) = setPreference(BOTTOM_PADDING_DP, value)
-
-    var customVolumeOptionLabel: String?
-        get() = getPreference(VOLUME_OPTION_LABEL, "")
-        set(value) = setPreference(VOLUME_OPTION_LABEL, value)
 
     fun getWheelOfFortuneItems(): List<String>? {
         val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null
