@@ -19,7 +19,7 @@ object OSVersion {
      * [Behavior changes: Apps targeting Android 17 or higher](https://developer.android.com/about/versions/17/behavior-changes-17)
      * [Features and APIs](https://developer.android.com/about/versions/17/features)
      */
-//    fun android17(): Boolean = osVersion >= Build.VERSION_CODES.CINNAMON_BUN
+    fun android17(): Boolean = osVersion >= Build.VERSION_CODES.CINNAMON_BUN
 
     /**
      * Baklava 36
