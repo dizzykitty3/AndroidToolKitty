@@ -14,6 +14,7 @@ import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -59,14 +60,14 @@ fun MediaVolume(isHome: Boolean) {
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
     val maxVolume = AudioUtil.maxMediaVolumeIndex
-    var mCustomVolume by remember { mutableIntStateOf(settingsSharedPref.customVolume) }
+    var mCustomVolume by remember { mutableIntStateOf(Int.MIN_VALUE) }
     var mCustomVolumeOptionLabel by remember { mutableStateOf(settingsSharedPref.customVolumeOptionLabel) }
 
-    val options = listOf(
+    val options = mutableListOf(
         stringResource(R.string.off_all_cap),
         "40%",
         "60%",
-        if (mCustomVolume < 0) stringResource(R.string.add) else mCustomVolumeOptionLabel
+        stringResource(R.string.add)
     )
 
     var selectedIndex by remember {
@@ -75,10 +76,19 @@ fun MediaVolume(isHome: Boolean) {
                 0 -> 0
                 (0.4 * maxVolume).roundToInt() -> 1
                 (0.6 * maxVolume).roundToInt() -> 2
-                (mCustomVolume * 0.01 * maxVolume).roundToInt() -> 3
                 else -> null
             }
         )
+    }
+
+    LaunchedEffect(state.customVolume) {
+        if (mCustomVolume != state.customVolume) {
+            mCustomVolume = state.customVolume
+            options[3] = mCustomVolumeOptionLabel ?: ""
+            if (AudioUtil.mediaVolume == (mCustomVolume * 0.01 * maxVolume).roundToInt()) {
+                selectedIndex = 3
+            }
+        }
     }
 
     SingleChoiceSegmentedButtonRow(
@@ -120,7 +130,7 @@ fun MediaVolume(isHome: Boolean) {
                     .copy(inactiveContainerColor = MaterialTheme.colorScheme.surfaceContainerLow)
             ) {
                 if (label != stringResource(R.string.add)) {
-                    Text(label.toString())
+                    Text(label)
                 } else if (state.haveTappedAddButton) {
                     Text(label)
                 } else {

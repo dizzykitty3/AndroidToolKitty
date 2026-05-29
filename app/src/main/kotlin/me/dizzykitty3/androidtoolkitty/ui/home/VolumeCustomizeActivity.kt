@@ -20,9 +20,9 @@ import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -33,8 +33,12 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
+import me.dizzykitty3.androidtoolkitty.datastore.SettingsViewModel
 import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 import me.dizzykitty3.androidtoolkitty.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
@@ -52,18 +56,22 @@ class VolumeCustomizeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            AppTheme {
-                Scaffold(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
-                ) { innerPadding ->
-                    Box(
-                        Modifier.padding(
-                            start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
-                            end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
-                        )
-                    ) {
-                        Screen(screenTitle = R.string.edit_custom_volume) {
-                            VolumeCustomizeComposable()
+            val viewModel: SettingsViewModel = hiltViewModel()
+
+            CompositionLocalProvider(LocalSettingsViewModel provides viewModel) {
+                AppTheme {
+                    Scaffold(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                    ) { innerPadding ->
+                        Box(
+                            Modifier.padding(
+                                start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
+                                end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
+                            )
+                        ) {
+                            Screen(screenTitle = R.string.edit_custom_volume) {
+                                VolumeCustomizeComposable()
+                            }
                         }
                     }
                 }
@@ -74,25 +82,26 @@ class VolumeCustomizeActivity : ComponentActivity() {
 
 @Composable
 private fun VolumeCustomizeComposable() {
+    val vm = LocalSettingsViewModel.current
+    val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
     val settingsSharedPref = remember { SettingsSharedPref }
     val maxVolume = AudioUtil.maxMediaVolumeIndex
     var morePreciseSlider by remember { mutableStateOf(false) }
-    var mCustomVolume by remember { mutableIntStateOf(settingsSharedPref.customVolume) }
     var mCustomVolumeOptionLabel by remember { mutableStateOf(settingsSharedPref.customVolumeOptionLabel) }
     var mHaveCustomLabel by remember { mutableStateOf(settingsSharedPref.usingCustomVolumeOptionLabel) }
 
     var newCustomVolume by remember {
-        if (mCustomVolume < 0) {
+        if (state.customVolume < 0) {
             mutableFloatStateOf(0f)
         } else {
-            mutableFloatStateOf(mCustomVolume.toFloat())
+            mutableFloatStateOf(state.customVolume.toFloat())
         }
     }
 
     var optionLabel by remember {
-        if (mCustomVolume < 0) {
+        if (state.customVolume < 0) {
             mutableStateOf("")
         } else {
             mutableStateOf(mCustomVolumeOptionLabel.toString())
@@ -107,7 +116,7 @@ private fun VolumeCustomizeComposable() {
                 else haptic.performHapticFeedback(HapticFeedbackType.LongPress)
 
                 newCustomVolume = it
-                if (mCustomVolume < 0 || (!mHaveCustomLabel)) {
+                if (state.customVolume < 0 || (!mHaveCustomLabel)) {
                     optionLabel = "${it.roundToInt()}%"
                 }
             }, valueRange = 0f..100f, steps = if (morePreciseSlider) 0 else 9
@@ -127,14 +136,13 @@ private fun VolumeCustomizeComposable() {
             ),
             keyboardActions = KeyboardActions(
                 onDone = {
-                    settingsSharedPref.customVolume = newCustomVolume.roundToInt()
-                    mCustomVolume = newCustomVolume.roundToInt()
+                    vm.updateCustomVolume(newCustomVolume.roundToInt())
                     if (mHaveCustomLabel) {
                         settingsSharedPref.usingCustomVolumeOptionLabel = true
                     }
                     settingsSharedPref.customVolumeOptionLabel = optionLabel
                     mCustomVolumeOptionLabel = optionLabel
-                    view.setVolume(mCustomVolume * 0.01 * maxVolume)
+                    view.setVolume(state.customVolume * 0.01 * maxVolume)
                 }),
             trailingIcon = {
                 ClearInput(optionLabel) {
@@ -166,14 +174,13 @@ private fun VolumeCustomizeComposable() {
                             }
                             return@Button
                         } else {
-                            settingsSharedPref.customVolume = newCustomVolume.roundToInt()
-                            mCustomVolume = newCustomVolume.roundToInt()
+                            vm.updateCustomVolume(newCustomVolume.roundToInt())
                             if (mHaveCustomLabel) {
                                 settingsSharedPref.usingCustomVolumeOptionLabel = true
                             }
                             settingsSharedPref.customVolumeOptionLabel = optionLabel
                             mCustomVolumeOptionLabel = optionLabel
-                            view.setVolume(mCustomVolume * 0.01 * maxVolume)
+                            view.setVolume(state.customVolume * 0.01 * maxVolume)
                         }
                     }) { Text(stringResource(R.string.save)) }
             }

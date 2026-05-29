@@ -22,6 +22,7 @@ class SettingsRepository @Inject constructor(
         val LATITUDE = stringPreferencesKey("latitude")
         val LONGITUDE = stringPreferencesKey("longitude")
         val HAVE_TAPPED_ADD_BUTTON = booleanPreferencesKey("have_tapped_add_button")
+        val CUSTOM_VOLUME = intPreferencesKey("custom_volume")
     }
 
     val settingsFlow: Flow<UserSettings> = dataStore.data.map { preferences ->
@@ -34,6 +35,7 @@ class SettingsRepository @Inject constructor(
             latitude = preferences[Keys.LATITUDE] ?: "",
             longitude = preferences[Keys.LONGITUDE] ?: "",
             haveTappedAddButton = preferences[Keys.HAVE_TAPPED_ADD_BUTTON] ?: false,
+            customVolume = preferences[Keys.CUSTOM_VOLUME] ?: Int.MIN_VALUE,
         )
     }
 
@@ -68,6 +70,10 @@ class SettingsRepository @Inject constructor(
     suspend fun toggleHaveTappedAddButton(haveTapped: Boolean) {
         dataStore.edit { it[Keys.HAVE_TAPPED_ADD_BUTTON] = haveTapped }
     }
+
+    suspend fun updateCustomVolume(value: Int) {
+        dataStore.edit { it[Keys.CUSTOM_VOLUME] = value }
+    }
 }
 
 data class UserSettings(
@@ -79,4 +85,5 @@ data class UserSettings(
     val latitude: String,
     val longitude: String,
     val haveTappedAddButton: Boolean,
+    val customVolume: Int,
 )

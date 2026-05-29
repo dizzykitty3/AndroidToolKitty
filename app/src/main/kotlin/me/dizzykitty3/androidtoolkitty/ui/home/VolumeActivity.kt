@@ -12,7 +12,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
@@ -52,8 +51,20 @@ class VolumeActivity : ComponentActivity() {
                             )
                         ) {
                             Screen(screenTitle = R.string.volume) {
+                                val view = LocalView.current
+                                val haptic = LocalHapticFeedback.current
+
                                 BaseCard(R.string.media_volume) { MediaVolume(isHome = false) }
-                                BaseCard(R.string.voice_call_volume) { VoiceCallVolume() }
+                                BaseCard(R.string.voice_call_volume) {
+                                    OutlinedButton({
+                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                                        val index = AudioUtil.maxVoiceCallVolumeIndex
+                                        AudioUtil.setVoiceCallVolume(index)
+                                        if (AudioUtil.voiceCallVolume == index) {
+                                            view.showSnackbar(R.string.volume_changed)
+                                        }
+                                    }) { Text(stringResource(R.string.max_out_voice_call_volume)) }
+                                }
                             }
                         }
                     }
@@ -61,18 +72,4 @@ class VolumeActivity : ComponentActivity() {
             }
         }
     }
-}
-
-@Composable
-private fun VoiceCallVolume() {
-    val view = LocalView.current
-    val haptic = LocalHapticFeedback.current
-    OutlinedButton({
-        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        val index = AudioUtil.maxVoiceCallVolumeIndex
-        AudioUtil.setVoiceCallVolume(index)
-        if (AudioUtil.voiceCallVolume == index) {
-            view.showSnackbar(R.string.volume_changed)
-        }
-    }) { Text(stringResource(R.string.max_out_voice_call_volume)) }
 }

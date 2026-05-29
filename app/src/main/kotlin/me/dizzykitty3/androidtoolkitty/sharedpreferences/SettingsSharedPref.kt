@@ -14,7 +14,6 @@ object SettingsSharedPref {
     private const val PREF_NAME = "Settings"
     private const val USING_CUSTOM_VOLUME_OPTION_LABEL = "using_custom_volume_option_label"
     private const val IS_LOGGING_ENABLED = "is_logging_enabled"
-    private const val CUSTOM_VOLUME = "custom_volume"
     private const val TOP_PADDING_DP = "top_padding_dp"
     private const val BOTTOM_PADDING_DP = "bottom_padding_dp"
     private const val VOLUME_OPTION_LABEL = "volume_option_label"
@@ -47,9 +46,6 @@ object SettingsSharedPref {
         }
     }
 
-    val addedCustomVolume: Boolean
-        get() = customVolume > 0
-
     var usingCustomVolumeOptionLabel: Boolean
         get() = getPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, false)
         set(value) = setPreference(USING_CUSTOM_VOLUME_OPTION_LABEL, value)
@@ -69,10 +65,6 @@ object SettingsSharedPref {
             apply()
         }
     }
-
-    var customVolume: Int
-        get() = getPreference(CUSTOM_VOLUME, Int.MIN_VALUE)
-        set(value) = setPreference(CUSTOM_VOLUME, value)
 
     var topPaddingDp: Float
         get() = getPreference(TOP_PADDING_DP, 0F)

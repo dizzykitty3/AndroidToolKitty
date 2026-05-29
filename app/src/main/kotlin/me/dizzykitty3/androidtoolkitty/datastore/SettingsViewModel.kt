@@ -30,6 +30,7 @@ class SettingsViewModel @Inject constructor(
             latitude = "",
             longitude = "",
             haveTappedAddButton = false,
+            customVolume = Int.MIN_VALUE,
         )
     )
 
@@ -63,5 +64,9 @@ class SettingsViewModel @Inject constructor(
 
     fun toggleHaveTappedAddButton(haveTapped: Boolean) {
         viewModelScope.launch { repository.toggleHaveTappedAddButton(haveTapped) }
+    }
+
+    fun updateCustomVolume(value: Int) {
+        viewModelScope.launch { repository.updateCustomVolume(value) }
     }
 }
