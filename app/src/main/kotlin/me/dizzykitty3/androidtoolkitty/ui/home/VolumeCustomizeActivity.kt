@@ -2,6 +2,7 @@ package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
@@ -40,7 +41,6 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
-import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import kotlin.math.roundToInt
 
@@ -80,6 +80,7 @@ private fun VolumeCustomizeComposable() {
     val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
+    val activity = LocalActivity.current
     val maxVolume = AudioUtil.maxMediaVolumeIndex
     var morePreciseSlider by remember { mutableStateOf(false) }
 
@@ -131,7 +132,7 @@ private fun VolumeCustomizeComposable() {
                             return@Button
                         } else {
                             vm.updateCustomVolume(newCustomVolume.roundToInt())
-                            view.setVolume(state.customVolume * 0.01 * maxVolume)
+                            activity?.finish()
                         }
                     }) { Text(stringResource(R.string.save)) }
             }
