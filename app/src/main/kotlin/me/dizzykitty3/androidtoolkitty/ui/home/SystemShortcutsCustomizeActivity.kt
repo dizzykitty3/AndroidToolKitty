@@ -146,7 +146,7 @@ private fun SystemShortcutsPinOptionsComposable() {
             }
         }
         CustomHideCardSettingSwitch(
-            text = R.string.wifi, card = S_WIFI, isChecked = mIsShowSetting1
+            text = R.string.internet, card = S_WIFI, isChecked = mIsShowSetting1
         ) { newState ->
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
             mIsShowSetting1 = newState

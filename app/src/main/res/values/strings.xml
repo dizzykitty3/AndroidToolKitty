@@ -142,11 +142,11 @@
     <string name="system_settings">System settings</string>
     <string name="display_settings">Display &amp; touch</string>
     <string name="auto_rotate_settings">Auto-rotate screen</string>
-    <string name="language_settings">Languages</string>
+    <string name="language_settings">Language &amp; region</string>
     <string name="default_apps_settings">Default apps</string>
-    <string name="bluetooth_settings">Bluetooth</string>
+    <string name="bluetooth_settings">Connected devices</string>
     <string name="date_and_time_settings">Date &amp; time</string>
-    <string name="battery_optimization_settings">Battery optimization</string>
+    <string name="battery_optimization_settings">App battery usage</string>
     <string name="developer_options">Developer options</string>
     <string name="caption_preferences">Caption preferences</string>
     <string name="auto_set_time_is_off_tip">Set Time Automatically is OFF. May experience some unexpected behavior.
@@ -165,19 +165,20 @@
     <string name="oem_removed">The OEM (%s) has removed this page</string>
     <string name="install_unknown_apps">Install unknown apps</string>
     <string name="alarms_n_reminders">Alarms &amp; reminders</string>
-    <string name="media_management">Media management</string>
+    <string name="media_management">Media management apps</string>
     <string name="app_notifications">App notifications</string>
-    <string name="accounts">Passwords, passkeys &amp; accounts</string>
+    <string name="accounts">Manage accounts</string>
     <string name="vpn">VPN</string>
     <string name="search_settings">Search settings</string>
     <string name="sound">Sound &amp; vibration</string>
-    <string name="keyboard">On-screen keyboard</string>
+    <string name="keyboard">Keyboard apps</string>
     <string name="nfc">NFC</string>
     <string name="about_phone">About phone</string>
     <string name="android_versions">Android versions</string>
     <string name="latest_version">Latest version</string>
     <string name="older_releases">Older releases</string>
     <string name="system_shortcuts">System Shortcuts</string>
+    <string name="internet">Internet</string>
 
     <!-- Home > Wheel of fortune -->
     <string name="wheel_of_fortune">Wheel of Fortune</string>

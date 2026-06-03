@@ -100,7 +100,7 @@ private fun SystemShortcutsComposable() {
     val settings = mutableListOf(
         Setting(S_SEARCH_SETTINGS, R.string.search_settings),
         // General
-        Setting(S_WIFI, R.string.wifi),
+        Setting(S_WIFI, R.string.internet),
         Setting(S_BATTERY, R.string.battery),
         Setting(S_DISPLAY, R.string.display_settings),
         Setting(S_AUTO_ROTATE, R.string.auto_rotate_settings),
