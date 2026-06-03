@@ -31,6 +31,7 @@ class SettingsViewModel @Inject constructor(
             longitude = "",
             haveTappedAddButton = false,
             customVolume = Int.MIN_VALUE,
+            haveTappedVolumeButton = 0,
         )
     )
 
@@ -68,5 +69,9 @@ class SettingsViewModel @Inject constructor(
 
     fun updateCustomVolume(value: Int) {
         viewModelScope.launch { repository.updateCustomVolume(value) }
+    }
+
+    fun increaseHaveTappedVolumeButton() {
+        viewModelScope.launch { repository.increaseHaveTappedVolumeButton() }
     }
 }

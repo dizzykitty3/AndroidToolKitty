@@ -18,7 +18,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -38,6 +37,7 @@ import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil
 import me.dizzykitty3.androidtoolkitty.utils.AudioUtil.setVolume
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openScreen
+import timber.log.Timber
 import kotlin.math.roundToInt
 
 @Composable
@@ -71,26 +71,25 @@ fun MediaVolume(isHome: Boolean) {
         )
     }
 
-    var selectedIndex by remember {
-        mutableStateOf(
-            when (AudioUtil.mediaVolume) {
-                0 -> 0
-                (0.4 * maxVolume).roundToInt() -> 1
-                (0.6 * maxVolume).roundToInt() -> 2
-                else -> null
-            }
-        )
-    }
+    var selectedIndex by remember { mutableIntStateOf(-1) }
 
-    LaunchedEffect(state.customVolume) {
+    LaunchedEffect(state.customVolume, state.haveTappedVolumeButton) {
+        Timber.i("launched effect")
+
         mCustomVolume = state.customVolume
+
         if (mCustomVolume > 0) {
             options[3] = "${mCustomVolume}%"
         } else {
             options[3] = addLabel
         }
-        if (AudioUtil.mediaVolume == (mCustomVolume * 0.01 * maxVolume).roundToInt()) {
-            selectedIndex = 3
+
+        selectedIndex = when (AudioUtil.mediaVolume) {
+            0 -> 0
+            (0.4 * maxVolume).roundToInt() -> 1
+            (0.6 * maxVolume).roundToInt() -> 2
+            (mCustomVolume * 0.01 * maxVolume).roundToInt() -> 3
+            else -> -1
         }
     }
 
@@ -105,20 +104,24 @@ fun MediaVolume(isHome: Boolean) {
                     when (index) {
                         0 -> {
                             view.setVolume(0)
+                            vm.increaseHaveTappedVolumeButton()
                         }
 
                         1 -> {
                             view.setVolume(0.4 * maxVolume)
+                            vm.increaseHaveTappedVolumeButton()
                         }
 
                         2 -> {
                             view.setVolume(0.6 * maxVolume)
+                            vm.increaseHaveTappedVolumeButton()
                         }
 
                         3 -> {
                             vm.toggleHaveTappedAddButton(true)
                             if (mCustomVolume > 0) {
                                 view.setVolume(mCustomVolume * 0.01 * maxVolume)
+                                vm.increaseHaveTappedVolumeButton()
                             } else {
                                 openScreen(VolumeCustomizeActivity::class.java)
                             }
