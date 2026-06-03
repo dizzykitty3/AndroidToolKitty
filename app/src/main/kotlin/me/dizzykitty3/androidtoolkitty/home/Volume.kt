@@ -83,16 +83,14 @@ fun MediaVolume(isHome: Boolean) {
     }
 
     LaunchedEffect(state.customVolume) {
-        if (mCustomVolume != state.customVolume) {
-            mCustomVolume = state.customVolume
-            if (mCustomVolume > 0) {
-                options[3] = "${mCustomVolume}%"
-            } else {
-                options[3] = addLabel
-            }
-            if (AudioUtil.mediaVolume == (mCustomVolume * 0.01 * maxVolume).roundToInt()) {
-                selectedIndex = 3
-            }
+        mCustomVolume = state.customVolume
+        if (mCustomVolume > 0) {
+            options[3] = "${mCustomVolume}%"
+        } else {
+            options[3] = addLabel
+        }
+        if (AudioUtil.mediaVolume == (mCustomVolume * 0.01 * maxVolume).roundToInt()) {
+            selectedIndex = 3
         }
     }
 
