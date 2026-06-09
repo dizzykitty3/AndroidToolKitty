@@ -32,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -90,10 +91,33 @@ class SearchActivity : ComponentActivity() {
                                 end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
                             )
                         ) {
+                            var focusState by remember { mutableStateOf(FocusSection.NONE) }
+
                             Screen(screenTitle = R.string.search) {
-                                BaseCard(R.string.webpage) { Webpage() }
-                                BaseCard(R.string.social_profile) { SocialMediaProfile() }
-                                BaseCard(R.string.check_app_on_market) { CheckAppOnMarket() }
+                                if (focusState == FocusSection.NONE || focusState == FocusSection.WEBPAGE) {
+                                    BaseCard(R.string.webpage) {
+                                        Webpage {
+                                            focusState =
+                                                if (it) FocusSection.WEBPAGE else FocusSection.NONE
+                                        }
+                                    }
+                                }
+                                if (focusState == FocusSection.NONE || focusState == FocusSection.SOCIAL) {
+                                    BaseCard(R.string.social_profile) {
+                                        SocialMediaProfile {
+                                            focusState =
+                                                if (it) FocusSection.SOCIAL else FocusSection.NONE
+                                        }
+                                    }
+                                }
+                                if (focusState == FocusSection.NONE || focusState == FocusSection.MARKET) {
+                                    BaseCard(R.string.check_app_on_market) {
+                                        CheckAppOnMarket {
+                                            focusState =
+                                                if (it) FocusSection.MARKET else FocusSection.NONE
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -104,7 +128,7 @@ class SearchActivity : ComponentActivity() {
 }
 
 @Composable
-private fun Webpage() {
+private fun Webpage(onFocus: (Boolean) -> Unit) {
     val vm = LocalSettingsViewModel.current
     val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
@@ -133,7 +157,9 @@ private fun Webpage() {
             )
         },
         label = { Text(stringResource(R.string.url)) },
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .onFocusChanged { onFocus(it.isFocused) },
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done, keyboardType = KeyboardType.Ascii
         ),
@@ -190,7 +216,7 @@ private fun Webpage() {
 }
 
 @Composable
-private fun SocialMediaProfile() {
+private fun SocialMediaProfile(onFocus: (Boolean) -> Unit) {
     val vm = LocalSettingsViewModel.current
     val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
@@ -223,7 +249,9 @@ private fun SocialMediaProfile() {
         },
         label = { Text(stringResource(R.string.username)) },
         isError = !isValid(platform, username),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .onFocusChanged { onFocus(it.isFocused) },
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done
         ),
@@ -356,7 +384,7 @@ private fun isCaseSensitive(platform: URLUtil.Platform): Boolean =
     platform == URLUtil.Platform.LIT_LINK
 
 @Composable
-private fun CheckAppOnMarket() {
+private fun CheckAppOnMarket(onFocus: (Boolean) -> Unit) {
     val vm = LocalSettingsViewModel.current
     val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
@@ -377,7 +405,9 @@ private fun CheckAppOnMarket() {
             vm.updateTypingContents(it)
         },
         label = { Text(stringResource(R.string.package_name_or_search)) },
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .onFocusChanged { onFocus(it.isFocused) },
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done
         ),
@@ -425,4 +455,8 @@ private fun CheckAppOnMarket() {
             )
         }
     }
+}
+
+private enum class FocusSection {
+    NONE, WEBPAGE, SOCIAL, MARKET
 }
