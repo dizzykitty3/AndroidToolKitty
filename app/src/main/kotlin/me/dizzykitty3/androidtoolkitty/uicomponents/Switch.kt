@@ -19,12 +19,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
 
 @Composable
 fun CustomHideCardSettingSwitch(
     @StringRes text: Int,
-    card: String,
     isChecked: Boolean,
     onCheckedChange: (Boolean) -> Unit
 ) = Surface(
@@ -32,10 +30,7 @@ fun CustomHideCardSettingSwitch(
     color = MaterialTheme.colorScheme.surfaceBright
 ) {
     Row(
-        Modifier.clickable {
-            onCheckedChange(!isChecked)
-            SettingsSharedPref.saveShownState(card, !isChecked)
-        },
+        Modifier.clickable { onCheckedChange(!isChecked) },
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(Modifier.weight(1F)) { Text(stringResource(text)) }

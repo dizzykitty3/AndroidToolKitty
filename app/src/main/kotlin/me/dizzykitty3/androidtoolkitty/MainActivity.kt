@@ -199,6 +199,7 @@ class MainActivity : ComponentActivity() {
 private fun MobileLayout() {
     val screenPadding = dimensionResource(R.dimen.padding_screen)
     val debug = BuildConfig.DEBUG
+    val viewModel = LocalSettingsViewModel.current
 
     Column {
         TopPadding()
@@ -214,7 +215,7 @@ private fun MobileLayout() {
                 CardSpacePadding()
                 Test()
             }
-            item { HomeCards() }
+            item { HomeCards(viewModel) }
             item { BottomPadding() }
         }
     }
@@ -224,6 +225,7 @@ private fun MobileLayout() {
 private fun TabletLayout() {
     val largeScreenPadding = dimensionResource(R.dimen.padding_screen_large)
     val debug = BuildConfig.DEBUG
+    val viewModel = LocalSettingsViewModel.current
 
     Column {
         TopPadding()
@@ -236,7 +238,7 @@ private fun TabletLayout() {
             if (debug) {
                 DevBuildTip()
             }
-            TwoColumnHomeCards()
+            TwoColumnHomeCards(viewModel)
         }
     }
 }
@@ -379,17 +381,18 @@ private fun NetworkStateIcon(imageVector: ImageVector, @StringRes text: Int) {
 }
 
 @Composable
-private fun HomeCards() {
-    getCardMap(SettingsSharedPref).forEach { cardName ->
+private fun HomeCards(viewModel: SettingsViewModel) {
+    val cardMap = getCardMap(viewModel)
+    cardMap.forEach { cardName ->
         CardContent(cardName)
     }
 }
 
 @Composable
-private fun TwoColumnHomeCards() {
+private fun TwoColumnHomeCards(viewModel: SettingsViewModel) {
     val cardPadding = dimensionResource(R.dimen.padding_card_space)
     val largeCardPadding = dimensionResource(R.dimen.padding_card_space_large)
-    val cardMap = getCardMap(SettingsSharedPref)
+    val cardMap = getCardMap(viewModel)
     LazyVerticalStaggeredGrid(
         columns = StaggeredGridCells.Fixed(2),
         modifier = Modifier.padding(bottom = SettingsSharedPref.bottomPaddingDp.dp),
@@ -403,20 +406,23 @@ private fun TwoColumnHomeCards() {
 }
 
 @Composable
-private fun getCardMap(settingsSharedPref: SettingsSharedPref): List<String> = listOf(
-    CARD_1,
-    CARD_2,
-    CARD_3,
-    CARD_4,
-    CARD_5,
-    CARD_6,
-    CARD_7,
-    CARD_8,
-    CARD_9,
-    CARD_10,
-    CARD_11,
-    CARD_12
-).associateWith { card -> settingsSharedPref.getShownState(card) }.filter { it.value }.keys.toList()
+private fun getCardMap(viewModel: SettingsViewModel): List<String> {
+    val state by viewModel.settingsState.collectAsStateWithLifecycle()
+    return listOf(
+        CARD_1,
+        CARD_2,
+        CARD_3,
+        CARD_4,
+        CARD_5,
+        CARD_6,
+        CARD_7,
+        CARD_8,
+        CARD_9,
+        CARD_10,
+        CARD_11,
+        CARD_12
+    ).filter { card -> state.cardShownStates[card] ?: true }
+}
 
 @Composable
 private fun CardContent(cardName: String) {

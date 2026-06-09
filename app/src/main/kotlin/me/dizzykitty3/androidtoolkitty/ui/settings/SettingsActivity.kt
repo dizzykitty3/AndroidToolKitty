@@ -35,6 +35,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -168,11 +169,28 @@ private fun General() {
     val state by viewModel.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
-    val settingsSharedPref = remember { SettingsSharedPref }
-    var showClipboardCard by remember { mutableStateOf(settingsSharedPref.getShownState(CARD_3)) }
-    var showSearchCard by remember { mutableStateOf(settingsSharedPref.getShownState(CARD_4)) }
+    val showClipboardCard = state.cardShownStates[CARD_3] ?: true
+    val showSearchCard = state.cardShownStates[CARD_4] ?: true
     val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
     val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
+    var previousAutoClearClipboard by remember { mutableStateOf(state.autoClearClipboard) }
+
+    // Automatically hide Clipboard Card when turning on Clear on Launch feature.
+    LaunchedEffect(state.autoClearClipboard) {
+        if (state.autoClearClipboard && !previousAutoClearClipboard && showClipboardCard) {
+            viewModel.saveShownState(CARD_3, false)
+            view.showSnackbar(
+                message = R.string.clipboard_card_hidden,
+                buttonText = R.string.keep_showing,
+                textColor = inverseOnSurface,
+                buttonColor = inversePrimary,
+                buttonClickListener = {
+                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
+                    viewModel.saveShownState(CARD_3, true)
+                })
+        }
+        previousAutoClearClipboard = state.autoClearClipboard
+    }
 
     CustomSwitchRow(
         icon = Icons.Outlined.ClearAll,
@@ -180,20 +198,6 @@ private fun General() {
         checked = state.autoClearClipboard
     ) {
         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-        // Automatically hide Clipboard Card when turning on Clear on Launch feature.
-        if (state.autoClearClipboard && showClipboardCard) {
-            showClipboardCard = false
-            settingsSharedPref.saveShownState(CARD_3, false)
-            view.showSnackbar(
-                message = R.string.clipboard_card_hidden,
-                buttonText = R.string.undo,
-                textColor = inverseOnSurface,
-                buttonColor = inversePrimary,
-                buttonClickListener = {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    settingsSharedPref.saveShownState(CARD_3, true)
-                })
-        }
         viewModel.toggleAutoClearClipboard(it)
     }
 

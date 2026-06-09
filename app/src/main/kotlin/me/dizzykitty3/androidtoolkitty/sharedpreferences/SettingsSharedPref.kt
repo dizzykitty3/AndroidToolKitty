@@ -47,18 +47,6 @@ object SettingsSharedPref {
         get() = getPreference(IS_LOGGING_ENABLED, false)
         set(value) = setPreference(IS_LOGGING_ENABLED, value)
 
-    fun getShownState(card: String): Boolean {
-        return sharedPrefs.getBoolean(card, true)
-    }
-
-    fun saveShownState(card: String, isShown: Boolean) {
-        Timber.d("$card is shown = $isShown")
-        with(sharedPrefs.edit()) {
-            putBoolean(card, isShown)
-            apply()
-        }
-    }
-
     var topPaddingDp: Float
         get() = getPreference(TOP_PADDING_DP, 0F)
         set(value) = setPreference(TOP_PADDING_DP, value)

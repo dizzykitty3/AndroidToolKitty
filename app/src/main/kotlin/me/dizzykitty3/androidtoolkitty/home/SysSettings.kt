@@ -7,9 +7,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.S_ABOUT_PHONE
 import me.dizzykitty3.androidtoolkitty.S_ACCESSIBILITY
@@ -40,7 +42,7 @@ import me.dizzykitty3.androidtoolkitty.S_USAGE_ACCESS
 import me.dizzykitty3.androidtoolkitty.S_VPN
 import me.dizzykitty3.androidtoolkitty.S_WIFI
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref
+import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
 import me.dizzykitty3.androidtoolkitty.ui.home.SystemShortcutsActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.ItalicText
@@ -52,6 +54,9 @@ import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 @Composable
 fun SysSettings() {
     val haptic = LocalHapticFeedback.current
+    val vm = LocalSettingsViewModel.current
+    val state by vm.settingsState.collectAsStateWithLifecycle()
+
     BaseCard(
         title = R.string.system_settings,
         icon = Icons.Outlined.Settings,
@@ -117,7 +122,7 @@ fun SysSettings() {
             settings.remove(Setting(S_MODIFY_SYSTEM, R.string.modify_system))
         }
         val shownSettings = settings.filter { setting ->
-            SettingsSharedPref.getShownState(setting.settingType)
+            state.cardShownStates[setting.settingType] ?: true
         }
 
         if (!checkIsAutoTime()) Tip(R.string.auto_set_time_is_off_tip)

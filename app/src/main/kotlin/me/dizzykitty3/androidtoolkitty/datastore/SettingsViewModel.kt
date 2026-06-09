@@ -32,8 +32,17 @@ class SettingsViewModel @Inject constructor(
             haveTappedAddButton = false,
             customVolume = Int.MIN_VALUE,
             haveTappedVolumeButton = 0,
+            cardShownStates = emptyMap(),
         )
     )
+
+    fun getShownState(card: String): Boolean {
+        return settingsState.value.cardShownStates[card] ?: true
+    }
+
+    fun saveShownState(card: String, isShown: Boolean) {
+        viewModelScope.launch { repository.saveShownState(card, isShown) }
+    }
 
     fun toggleDynamicColor(enabled: Boolean) {
         viewModelScope.launch { repository.toggleDynamicColor(enabled) }

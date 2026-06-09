@@ -27,6 +27,11 @@ class SettingsRepository @Inject constructor(
     }
 
     val settingsFlow: Flow<UserSettings> = dataStore.data.map { preferences ->
+        val allPrefs = preferences.asMap()
+        val cardShownStates = allPrefs.filterKeys {
+            it.name.startsWith("card_") || it.name.startsWith("setting_")
+        }.mapKeys { it.key.name }.mapValues { it.value as Boolean }
+
         UserSettings(
             dynamicColor = preferences[Keys.DYNAMIC_COLOR] ?: true,
             autoClearClipboard = preferences[Keys.AUTO_CLEAR_CLIPBOARD] ?: false,
@@ -38,7 +43,12 @@ class SettingsRepository @Inject constructor(
             haveTappedAddButton = preferences[Keys.HAVE_TAPPED_ADD_BUTTON] ?: false,
             customVolume = preferences[Keys.CUSTOM_VOLUME] ?: Int.MIN_VALUE,
             haveTappedVolumeButton = preferences[Keys.HAVE_TAPPED_VOLUME_BUTTON] ?: 0,
+            cardShownStates = cardShownStates,
         )
+    }
+
+    suspend fun saveShownState(card: String, isShown: Boolean) {
+        dataStore.edit { it[booleanPreferencesKey(card)] = isShown }
     }
 
     suspend fun toggleDynamicColor(enabled: Boolean) {
@@ -96,4 +106,5 @@ data class UserSettings(
     val haveTappedAddButton: Boolean,
     val customVolume: Int,
     val haveTappedVolumeButton: Int,
+    val cardShownStates: Map<String, Boolean>,
 )
