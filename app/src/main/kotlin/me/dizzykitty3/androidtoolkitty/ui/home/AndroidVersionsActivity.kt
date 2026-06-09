@@ -1,35 +1,66 @@
-package me.dizzykitty3.androidtoolkitty.home
+package me.dizzykitty3.androidtoolkitty.ui.home
 
 import android.os.Build
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
+import androidx.compose.ui.platform.LocalLayoutDirection
+import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.R
+import me.dizzykitty3.androidtoolkitty.theme.AppTheme
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableBoldText
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableItalicText
 import me.dizzykitty3.androidtoolkitty.uicomponents.ScrollableText
 
-val v = Build.VERSION.SDK_INT
-
-@Composable
-fun AndroidVersionHistoryScreen(navController: NavHostController) {
-    Screen(screenTitle = R.string.android_versions, navController = navController) {
-        BaseCard(title = R.string.latest_version) {
-            BetaVersion()
-        }
-        BaseCard(title = R.string.older_releases) {
-            StableVersions()
+@AndroidEntryPoint
+class AndroidVersionsActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            AppTheme {
+                Scaffold(
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                ) { innerPadding ->
+                    Box(
+                        Modifier.padding(
+                            start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
+                            end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
+                        )
+                    ) {
+                        Screen(screenTitle = R.string.android_versions) {
+                            BaseCard(title = R.string.latest_version) {
+                                LatestVersion()
+                            }
+                            BaseCard(title = R.string.older_releases) {
+                                OlderReleases()
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
 @Composable
-private fun BetaVersion() {
+private fun LatestVersion() {
+    val v = Build.VERSION.SDK_INT
+
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.weight(0.4F)) {
             if (v == 37) ScrollableBoldText("Android 17") else ScrollableText("Android 17")
@@ -42,7 +73,9 @@ private fun BetaVersion() {
 }
 
 @Composable
-private fun StableVersions() {
+private fun OlderReleases() {
+    val v = Build.VERSION.SDK_INT
+
     Row(Modifier.fillMaxWidth()) {
         Column(Modifier.weight(0.4f)) {
             if (v == 36) ScrollableBoldText("Android 16") else ScrollableText("Android 16")

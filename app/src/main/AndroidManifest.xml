@@ -34,6 +34,36 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.home.VolumeActivity"></activity>
+
+        <activity android:name=".ui.home.VolumeCustomizeActivity"></activity>
+
+        <activity android:name=".ui.home.SearchActivity"></activity>
+
+        <activity android:name=".ui.home.SystemShortcutsActivity"></activity>
+
+        <activity android:name=".ui.home.SystemShortcutsCustomizeActivity"></activity>
+
+        <activity android:name=".ui.home.AndroidVersionsActivity"></activity>
+
+        <activity android:name=".ui.home.WheelOfFortuneActivity"></activity>
+
+        <activity android:name=".ui.home.CodesOfCharactersActivity"></activity>
+
+        <activity android:name=".ui.home.FontWeightTestActivity"></activity>
+
+        <activity android:name=".ui.home.ComposeCatalogActivity"></activity>
+
+        <activity android:name=".ui.home.HapticTestActivity"></activity>
+
+        <activity android:name=".ui.settings.SettingsActivity"></activity>
+
+        <activity android:name=".ui.settings.CustomizeHomeActivity"></activity>
+
+        <activity android:name=".ui.settings.LicensesActivity"></activity>
+
+        <activity android:name=".ui.other.RequestPermissionActivity"></activity>
+
         <activity
             android:name=".appcomponents.ShareToClipboardActivity"
             android:exported="true"

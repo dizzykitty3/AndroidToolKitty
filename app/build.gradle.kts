@@ -9,6 +9,7 @@ plugins {
 
 kotlin {
     compilerOptions {
+        // TODO kotlin 2.4.0
         languageVersion = org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_3
         // maybe don't need
 //        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
@@ -23,7 +24,7 @@ android {
             minorApiLevel = 0
         }
     }
-    buildToolsVersion = "37.0.0 rc2"
+    buildToolsVersion = "37.0.0"
 
     buildFeatures {
         buildConfig = true
@@ -33,8 +34,8 @@ android {
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 23
-        versionCode = 11901
-        versionName = "1.19.1"
+        versionCode = 12000
+        versionName = "1.20.0"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -103,7 +104,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.hilt.navigation.compose)
-    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.google.hilt.android)

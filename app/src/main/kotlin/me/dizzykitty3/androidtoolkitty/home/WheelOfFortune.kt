@@ -63,21 +63,23 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.SCR_WHEEL_OF_FORTUNE
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.getWheelOfFortuneItems
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
+import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
+import me.dizzykitty3.androidtoolkitty.datastore.WheelOfFortuneItems
+import me.dizzykitty3.androidtoolkitty.ui.home.WheelOfFortuneActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
-import me.dizzykitty3.androidtoolkitty.uicomponents.Screen
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
+import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openScreen
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
+import timber.log.Timber
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
 
 @Composable
-fun WheelOfFortune(navController: NavHostController) {
+fun WheelOfFortune() {
     val haptic = LocalHapticFeedback.current
     BaseCard(
         title = R.string.wheel_of_fortune,
@@ -85,32 +87,33 @@ fun WheelOfFortune(navController: NavHostController) {
         hasShowMore = true,
         onClick = {
             haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-            navController.navigate(SCR_WHEEL_OF_FORTUNE)
+            openScreen(WheelOfFortuneActivity::class.java)
         }) {
         TheWheel()
     }
 }
 
 @Composable
-fun WheelOfFortuneScreen(navController: NavHostController) {
-    Screen(R.string.wheel_of_fortune, navController) {
-        BaseCard(R.string.edit) { TheWheelWithEditableList() }
-    }
-}
-
-@Composable
-private fun TheWheelWithEditableList() {
-    TheWheel(true)
-}
-
-@Composable
-private fun TheWheel(withEditableList: Boolean? = false) {
+fun TheWheel(withEditableList: Boolean? = false) {
+    val viewModel = LocalSettingsViewModel.current
+    val settingsState by viewModel.settingsState.collectAsStateWithLifecycle()
     val item = stringResource(R.string.item)
-    var items by remember {
-        mutableStateOf(
-            getWheelOfFortuneItems() ?: List(4) { index -> "$item ${index + 1}" }
-        )
+
+    val items = remember(settingsState.wheelOfFortuneItems) {
+        val itemsJson = settingsState.wheelOfFortuneItems
+        if (itemsJson.isNullOrEmpty()) {
+            List(4) { index -> "$item ${index + 1}" }
+        } else {
+            try {
+                val data: WheelOfFortuneItems = Json.decodeFromString(itemsJson)
+                data.items
+            } catch (e: Exception) {
+                Timber.e(e)
+                List(4) { index -> "$item ${index + 1}" }
+            }
+        }
     }
+
     val textColor = MaterialTheme.colorScheme.onSurface.toArgb()
     val paint = remember {
         Paint().apply {
@@ -161,8 +164,8 @@ private fun TheWheel(withEditableList: Boolean? = false) {
             ExpandableList(
                 items = items,
                 onItemsChange = { updatedItems ->
-                    items = updatedItems
-                    setWheelOfFortuneItems(updatedItems)
+                    val itemsJson = Json.encodeToString(WheelOfFortuneItems(updatedItems))
+                    viewModel.updateWheelOfFortuneItems(itemsJson)
                 },
                 expanded = expanded,
                 setExpanded = { value -> expanded = value },
@@ -194,14 +197,10 @@ private fun TheWheel(withEditableList: Boolean? = false) {
                 )
                 val endAngleRad = Math.toRadians((startAngle + sweepAngle).toDouble()).toFloat()
                 val lineEnd = Offset(
-                    center.x + radius * cos(endAngleRad),
-                    center.y + radius * sin(endAngleRad)
+                    center.x + radius * cos(endAngleRad), center.y + radius * sin(endAngleRad)
                 )
                 drawLine(
-                    color = Color.Black,
-                    start = center,
-                    end = lineEnd,
-                    strokeWidth = 2f
+                    color = Color.Black, start = center, end = lineEnd, strokeWidth = 2f
                 )
             }
             items.forEachIndexed { index, item ->
@@ -224,10 +223,7 @@ private fun TheWheel(withEditableList: Boolean? = false) {
             }
             drawPath(arrowPath, primary)
             drawCircle(
-                color = Color.Black,
-                radius = radius,
-                center = center,
-                style = Stroke(width = 4f)
+                color = Color.Black, radius = radius, center = center, style = Stroke(width = 4f)
             )
         }
 
@@ -248,8 +244,7 @@ private fun TheWheel(withEditableList: Boolean? = false) {
                     val fineTunedAngle = Random.nextInt(360)
                     targetRotationDegrees += (360 * randomBaseCircles) + fineTunedAngle
                 }
-            }
-        ) {
+            }) {
             Text(text = stringResource(R.string.start))
         }
 
@@ -301,8 +296,7 @@ private fun ExpandableList(
                 .padding(8.dp)
                 .clip(RoundedCornerShape(10.dp))
                 .background(MaterialTheme.colorScheme.surfaceVariant)
-                .padding(8.dp)
-        ) {
+                .padding(8.dp)) {
             Text(
                 text = items.joinToString(", "),
                 maxLines = 1,
@@ -346,15 +340,13 @@ private fun ExpandableList(
                                             .also { it[index] = editingText[index] }
                                         onItemsChange(updatedList)
                                         editingIndex = -1
-                                    }
-                                )
+                                    })
                             } else {
                                 Text(
                                     text = item,
                                     modifier = Modifier
                                         .weight(1F)
-                                        .clickable { editingIndex = index }
-                                )
+                                        .clickable { editingIndex = index })
                                 Icon(
                                     imageVector = Icons.Default.Remove,
                                     contentDescription = "Remove",
@@ -368,8 +360,7 @@ private fun ExpandableList(
                                         } else if (index < editingIndex) {
                                             editingIndex -= 1
                                         }
-                                    }
-                                )
+                                    })
                             }
                         }
                     }
@@ -392,8 +383,7 @@ private fun ExpandableList(
                         }
                         .padding(8.dp),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
+                    horizontalArrangement = Arrangement.Center) {
                     Icon(
                         imageVector = Icons.Default.Add,
                         contentDescription = "Add",

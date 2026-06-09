@@ -1,39 +1,91 @@
 package me.dizzykitty3.androidtoolkitty.datastore
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
+
+val LocalSettingsViewModel = staticCompositionLocalOf<SettingsViewModel> {
+    error("No SettingsViewModel provided")
+}
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
-    private val settingsUseCase: SettingsUseCase
+    private val repository: SettingsRepository
 ) : ViewModel() {
-    private val _settings = mutableStateOf(Settings())
-    var settings: State<Settings> = _settings
 
-    init {
-        viewModelScope.launch {
-            loadSettings()
-        }
+    val settingsState = repository.settingsFlow.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = UserSettings(
+            dynamicColor = true,
+            autoClearClipboard = false,
+            switchToBingSearch = false,
+            lastSelectedPlatformIndex = 0,
+            typingContents = "",
+            latitude = "",
+            longitude = "",
+            haveTappedAddButton = false,
+            customVolume = Int.MIN_VALUE,
+            haveTappedVolumeButton = 0,
+            wheelOfFortuneItems = null,
+            cardShownStates = emptyMap(),
+        )
+    )
+
+    fun getShownState(card: String): Boolean {
+        return settingsState.value.cardShownStates[card] ?: true
     }
 
-    private fun loadSettings() {
-        val loadedSettings = runBlocking(Dispatchers.IO) {
-            settingsUseCase.loadSettingsFromRepository()
-        }
-        _settings.value = loadedSettings
+    fun saveShownState(card: String, isShown: Boolean) {
+        viewModelScope.launch { repository.saveShownState(card, isShown) }
     }
 
-    fun update(newSettings: Settings) {
-        _settings.value = newSettings.copy()
-        viewModelScope.launch {
-            settingsUseCase.saveSettingsToRepository(newSettings)
-        }
+    fun toggleDynamicColor(enabled: Boolean) {
+        viewModelScope.launch { repository.toggleDynamicColor(enabled) }
+    }
+
+    fun toggleAutoClearClipboard(enabled: Boolean) {
+        viewModelScope.launch { repository.toggleAutoClearClipboard(enabled) }
+    }
+
+    fun toggleSwitchToBingSearch(enabled: Boolean) {
+        viewModelScope.launch { repository.toggleSwitchToBingSearch(enabled) }
+    }
+
+    fun updateLastSelectedPlatformIndex(index: Int) {
+        viewModelScope.launch { repository.updateLastSelectedPlatformIndex(index) }
+    }
+
+    fun updateTypingContents(contents: String) {
+        viewModelScope.launch { repository.updateTypingContents(contents) }
+    }
+
+    fun updateLatitude(latitude: String) {
+        viewModelScope.launch { repository.updateLatitude(latitude) }
+    }
+
+    fun updateLongitude(longitude: String) {
+        viewModelScope.launch { repository.updateLongitude(longitude) }
+    }
+
+    fun toggleHaveTappedAddButton(haveTapped: Boolean) {
+        viewModelScope.launch { repository.toggleHaveTappedAddButton(haveTapped) }
+    }
+
+    fun updateCustomVolume(value: Int) {
+        viewModelScope.launch { repository.updateCustomVolume(value) }
+    }
+
+    fun increaseHaveTappedVolumeButton() {
+        viewModelScope.launch { repository.increaseHaveTappedVolumeButton() }
+    }
+
+    fun updateWheelOfFortuneItems(items: String) {
+        viewModelScope.launch { repository.updateWheelOfFortuneItems(items) }
     }
 }
