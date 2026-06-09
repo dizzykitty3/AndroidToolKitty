@@ -1,5 +1,12 @@
 package me.dizzykitty3.androidtoolkitty
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -38,12 +45,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalView
@@ -56,6 +67,7 @@ import androidx.window.core.layout.WindowSizeClass
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
@@ -89,6 +101,7 @@ import me.dizzykitty3.androidtoolkitty.utils.ClipboardUtil
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openScreen
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openSystemSettings
 import me.dizzykitty3.androidtoolkitty.utils.NetworkUtil
+import me.dizzykitty3.androidtoolkitty.utils.OSVersion
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
@@ -270,7 +283,23 @@ private fun SettingsButton() {
 
 @Composable
 private fun Status(isTablet: Boolean = false) {
-    val batteryLevel = BatteryUtil.batteryLevel()
+    val context = LocalContext.current
+    var batteryLevel by remember { mutableIntStateOf(BatteryUtil.batteryLevel()) }
+
+    LaunchedEffect(Unit) {
+        val receiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                batteryLevel = BatteryUtil.batteryLevel()
+            }
+        }
+        context.registerReceiver(receiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        try {
+            awaitCancellation()
+        } finally {
+            context.unregisterReceiver(receiver)
+        }
+    }
+
     val view = LocalView.current
     val haptic = LocalHapticFeedback.current
 
@@ -333,7 +362,57 @@ private fun Status(isTablet: Boolean = false) {
 
 @Composable
 private fun NetworkState() {
-    val networkState = remember { NetworkUtil.networkState() }
+    val context = LocalContext.current
+    var networkState by remember { mutableIntStateOf(NetworkUtil.networkState()) }
+
+    LaunchedEffect(Unit) {
+        if (OSVersion.android7()) {
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val callback = object : ConnectivityManager.NetworkCallback() {
+                override fun onAvailable(network: Network) {
+                    Timber.d("Network onAvailable: $network")
+                    networkState = NetworkUtil.networkState()
+                }
+
+                override fun onLost(network: Network) {
+                    Timber.d("Network onLost: $network")
+                    // When the default network is lost, we set it to OFFLINE immediately
+                    // to avoid potential race conditions with NetworkUtil.networkState()
+                    networkState = NetworkUtil.STATE_CODE_OFFLINE
+                }
+
+                override fun onCapabilitiesChanged(
+                    network: Network,
+                    networkCapabilities: NetworkCapabilities
+                ) {
+                    Timber.d("Network onCapabilitiesChanged: $network")
+                    networkState = NetworkUtil.networkState()
+                }
+            }
+            connectivityManager.registerDefaultNetworkCallback(callback)
+            try {
+                awaitCancellation()
+            } finally {
+                connectivityManager.unregisterNetworkCallback(callback)
+            }
+        } else {
+            val receiver = object : BroadcastReceiver() {
+                override fun onReceive(context: Context, intent: Intent) {
+                    networkState = NetworkUtil.networkState()
+                }
+            }
+            context.registerReceiver(
+                receiver,
+                IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
+            )
+            try {
+                awaitCancellation()
+            } finally {
+                context.unregisterReceiver(receiver)
+            }
+        }
+    }
 
     when (networkState) {
         NetworkUtil.STATE_CODE_WIFI -> {
