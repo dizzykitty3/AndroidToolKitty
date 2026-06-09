@@ -39,7 +39,7 @@ fun CodesOfCharacters() {
     val haptic = LocalHapticFeedback.current
 
     BaseCard(
-        title = R.string.encoding,
+        title = R.string.codes_of_characters,
         icon = Icons.AutoMirrored.Outlined.Notes,
         hasShowMore = true,
         onClick = {

@@ -58,7 +58,7 @@ fun SysSettings() {
     val state by vm.settingsState.collectAsStateWithLifecycle()
 
     BaseCard(
-        title = R.string.system_settings,
+        title = R.string.system_shortcuts,
         icon = Icons.Outlined.Settings,
         hasShowMore = true,
         onClick = {
