@@ -32,6 +32,7 @@ class SettingsViewModel @Inject constructor(
             haveTappedAddButton = false,
             customVolume = Int.MIN_VALUE,
             haveTappedVolumeButton = 0,
+            wheelOfFortuneItems = null,
             cardShownStates = emptyMap(),
         )
     )
@@ -82,5 +83,9 @@ class SettingsViewModel @Inject constructor(
 
     fun increaseHaveTappedVolumeButton() {
         viewModelScope.launch { repository.increaseHaveTappedVolumeButton() }
+    }
+
+    fun updateWheelOfFortuneItems(items: String) {
+        viewModelScope.launch { repository.updateWheelOfFortuneItems(items) }
     }
 }

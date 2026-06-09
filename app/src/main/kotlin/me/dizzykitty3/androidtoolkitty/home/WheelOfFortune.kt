@@ -63,14 +63,17 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.R
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.getWheelOfFortuneItems
-import me.dizzykitty3.androidtoolkitty.sharedpreferences.SettingsSharedPref.setWheelOfFortuneItems
+import me.dizzykitty3.androidtoolkitty.datastore.LocalSettingsViewModel
+import me.dizzykitty3.androidtoolkitty.datastore.WheelOfFortuneItems
 import me.dizzykitty3.androidtoolkitty.ui.home.WheelOfFortuneActivity
 import me.dizzykitty3.androidtoolkitty.uicomponents.BaseCard
 import me.dizzykitty3.androidtoolkitty.uicomponents.SpacerPadding
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openScreen
 import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
+import timber.log.Timber
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
@@ -92,11 +95,25 @@ fun WheelOfFortune() {
 
 @Composable
 fun TheWheel(withEditableList: Boolean? = false) {
+    val viewModel = LocalSettingsViewModel.current
+    val settingsState by viewModel.settingsState.collectAsStateWithLifecycle()
     val item = stringResource(R.string.item)
-    var items by remember {
-        mutableStateOf(
-            getWheelOfFortuneItems() ?: List(4) { index -> "$item ${index + 1}" })
+
+    val items = remember(settingsState.wheelOfFortuneItems) {
+        val itemsJson = settingsState.wheelOfFortuneItems
+        if (itemsJson.isNullOrEmpty()) {
+            List(4) { index -> "$item ${index + 1}" }
+        } else {
+            try {
+                val data: WheelOfFortuneItems = Json.decodeFromString(itemsJson)
+                data.items
+            } catch (e: Exception) {
+                Timber.e(e)
+                List(4) { index -> "$item ${index + 1}" }
+            }
+        }
     }
+
     val textColor = MaterialTheme.colorScheme.onSurface.toArgb()
     val paint = remember {
         Paint().apply {
@@ -147,8 +164,8 @@ fun TheWheel(withEditableList: Boolean? = false) {
             ExpandableList(
                 items = items,
                 onItemsChange = { updatedItems ->
-                    items = updatedItems
-                    setWheelOfFortuneItems(updatedItems)
+                    val itemsJson = Json.encodeToString(WheelOfFortuneItems(updatedItems))
+                    viewModel.updateWheelOfFortuneItems(itemsJson)
                 },
                 expanded = expanded,
                 setExpanded = { value -> expanded = value },

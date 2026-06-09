@@ -8,7 +8,11 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.serialization.Serializable
 import javax.inject.Inject
+
+@Serializable
+data class WheelOfFortuneItems(val items: List<String>)
 
 class SettingsRepository @Inject constructor(
     private val dataStore: DataStore<Preferences>
@@ -24,6 +28,7 @@ class SettingsRepository @Inject constructor(
         val HAVE_TAPPED_ADD_BUTTON = booleanPreferencesKey("have_tapped_add_button")
         val CUSTOM_VOLUME = intPreferencesKey("custom_volume")
         val HAVE_TAPPED_VOLUME_BUTTON = intPreferencesKey("have_tapped_volume_button")
+        val WHEEL_OF_FORTUNE_ITEMS = stringPreferencesKey("wheel_of_fortune_items")
     }
 
     val settingsFlow: Flow<UserSettings> = dataStore.data.map { preferences ->
@@ -43,6 +48,7 @@ class SettingsRepository @Inject constructor(
             haveTappedAddButton = preferences[Keys.HAVE_TAPPED_ADD_BUTTON] ?: false,
             customVolume = preferences[Keys.CUSTOM_VOLUME] ?: Int.MIN_VALUE,
             haveTappedVolumeButton = preferences[Keys.HAVE_TAPPED_VOLUME_BUTTON] ?: 0,
+            wheelOfFortuneItems = preferences[Keys.WHEEL_OF_FORTUNE_ITEMS],
             cardShownStates = cardShownStates,
         )
     }
@@ -93,6 +99,10 @@ class SettingsRepository @Inject constructor(
             preferences[Keys.HAVE_TAPPED_VOLUME_BUTTON] = currentCount + 1
         }
     }
+
+    suspend fun updateWheelOfFortuneItems(items: String) {
+        dataStore.edit { it[Keys.WHEEL_OF_FORTUNE_ITEMS] = items }
+    }
 }
 
 data class UserSettings(
@@ -106,5 +116,6 @@ data class UserSettings(
     val haveTappedAddButton: Boolean,
     val customVolume: Int,
     val haveTappedVolumeButton: Int,
+    val wheelOfFortuneItems: String?,
     val cardShownStates: Map<String, Boolean>,
 )

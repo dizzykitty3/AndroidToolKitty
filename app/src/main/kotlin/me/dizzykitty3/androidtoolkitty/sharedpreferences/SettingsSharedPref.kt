@@ -2,20 +2,14 @@ package me.dizzykitty3.androidtoolkitty.sharedpreferences
 
 import android.content.Context
 import android.content.SharedPreferences
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import me.dizzykitty3.androidtoolkitty.ToolKitty.Companion.appContext
 import timber.log.Timber
-
-@Serializable
-data class WheelOfFortuneItems(val items: List<String>)
 
 object SettingsSharedPref {
     private const val PREF_NAME = "Settings"
     private const val IS_LOGGING_ENABLED = "is_logging_enabled"
     private const val TOP_PADDING_DP = "top_padding_dp"
     private const val BOTTOM_PADDING_DP = "bottom_padding_dp"
-    private const val WHEEL_OF_FORTUNE_ITEMS = "wheel_of_fortune_items"
 
     private val sharedPrefs: SharedPreferences
         get() = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -54,21 +48,4 @@ object SettingsSharedPref {
     var bottomPaddingDp: Float
         get() = getPreference(BOTTOM_PADDING_DP, 0F)
         set(value) = setPreference(BOTTOM_PADDING_DP, value)
-
-    fun getWheelOfFortuneItems(): List<String>? {
-        val itemsJson = sharedPrefs.getString(WHEEL_OF_FORTUNE_ITEMS, null) ?: return null
-        return try {
-            val items: WheelOfFortuneItems = Json.decodeFromString(itemsJson)
-            items.items
-        } catch (e: Exception) {
-            Timber.e(e)
-            null
-        }
-    }
-
-    fun setWheelOfFortuneItems(items: List<String>) {
-        val itemsJson = Json.encodeToString(WheelOfFortuneItems(items))
-        Timber.d("wheel of fortune items = $itemsJson")
-        setPreference(WHEEL_OF_FORTUNE_ITEMS, itemsJson)
-    }
 }
