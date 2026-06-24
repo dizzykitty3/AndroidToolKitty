@@ -103,7 +103,7 @@ class SearchActivity : ComponentActivity() {
                                     }
                                 }
                                 if (focusState == FocusSection.NONE || focusState == FocusSection.SOCIAL) {
-                                    BaseCard(R.string.social_profile) {
+                                    BaseCard(R.string.social_finder) {
                                         SocialMediaProfile {
                                             focusState =
                                                 if (it) FocusSection.SOCIAL else FocusSection.NONE

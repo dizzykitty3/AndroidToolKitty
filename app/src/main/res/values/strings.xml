@@ -59,7 +59,7 @@
     <string name="url_input_hint_2">and</string>
     <string name="url_input_hint_3">(or</string>
     <string name="url_input_hint_4">, etc.)</string>
-    <string name="social_profile">Social profile</string>
+    <string name="social_finder">Social finder</string>
     <string name="platform">Platform</string>
     <string name="username">Username</string>
     <string name="bilibili_search">bilibili (Search)</string>
@@ -139,7 +139,6 @@
     <string name="stack_overflow">Stack Overflow</string>
 
     <!-- Home > System settings-->
-    <string name="system_settings">System settings</string>
     <string name="display_settings">Display &amp; touch</string>
     <string name="auto_rotate_settings">Auto-rotate screen</string>
     <string name="language_settings">Language &amp; region</string>
