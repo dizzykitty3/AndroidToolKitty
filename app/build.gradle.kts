@@ -9,8 +9,7 @@ plugins {
 
 kotlin {
     compilerOptions {
-        // TODO kotlin 2.4.0
-        languageVersion = org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_3
+        languageVersion = org.jetbrains.kotlin.gradle.dsl.KotlinVersion.KOTLIN_2_4
         // maybe don't need
 //        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
         extraWarnings = true
