@@ -15,6 +15,7 @@ object OSVersion {
      * [beta-2](https://android-developers.googleblog.com/2026/02/the-second-beta-of-android-17.html)
      * [beta-3](https://android-developers.googleblog.com/2026/03/the-third-beta-of-android-17.html)
      * [beta-4](https://android-developers.googleblog.com/2026/04/the-fourth-beta-of-android-17.html)
+     * [AOSP release](https://android-developers.googleblog.com/2026/06/Android-17.html)
      * [Behavior changes: all apps](https://developer.android.com/about/versions/17/behavior-changes-all)
      * [Behavior changes: Apps targeting Android 17 or higher](https://developer.android.com/about/versions/17/behavior-changes-17)
      * [Features and APIs](https://developer.android.com/about/versions/17/features)
