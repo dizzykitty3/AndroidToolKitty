@@ -32,8 +32,8 @@ android {
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
         minSdk = 23
-        versionCode = 12000
-        versionName = "1.20.0"
+        versionCode = 12001
+        versionName = "1.20.1"
 
         resValue("string", "app_name", "ToolKitty")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
