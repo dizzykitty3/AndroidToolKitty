@@ -82,9 +82,12 @@ class SearchActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val viewModel: SettingsViewModel = hiltViewModel()
+            val state by viewModel.settingsState.collectAsStateWithLifecycle()
 
             CompositionLocalProvider(LocalSettingsViewModel provides viewModel) {
-                AppTheme {
+                AppTheme(
+                    dynamicColor = state.dynamicColor
+                ) {
                     Scaffold(
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
                     ) { innerPadding ->
@@ -197,8 +200,7 @@ private fun Webpage(onFocus: (Boolean) -> Unit) {
         suffix = {
             Text(
                 if (url.isEmpty()) ""
-                else if (url.last() == '.') url.removeTrailingPeriod()
-                    .getSuffix().removePrefix(".")
+                else if (url.last() == '.') url.removeTrailingPeriod().getSuffix().removePrefix(".")
                 else url.removeTrailingPeriod().getSuffix()
             )
         })
@@ -309,8 +311,7 @@ private fun SocialMediaProfile(onFocus: (Boolean) -> Unit) {
             )
         )
     } else if (isInvalidNotNumbersOnly(
-            URLUtil.Platform.entries[lastSelectedPlatformIndex],
-            username
+            URLUtil.Platform.entries[lastSelectedPlatformIndex], username
         )
     ) {
         SpacerPadding()

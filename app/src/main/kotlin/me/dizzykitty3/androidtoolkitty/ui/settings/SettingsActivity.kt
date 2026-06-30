@@ -83,9 +83,12 @@ class SettingsActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val viewModel: SettingsViewModel = hiltViewModel()
+            val state by viewModel.settingsState.collectAsStateWithLifecycle()
 
             CompositionLocalProvider(LocalSettingsViewModel provides viewModel) {
-                AppTheme {
+                AppTheme(
+                    dynamicColor = state.dynamicColor
+                ) {
                     Scaffold(
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
                     ) { innerPadding ->
