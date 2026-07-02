@@ -85,6 +85,7 @@ class SearchActivity : ComponentActivity() {
             val viewModel: SettingsViewModel = hiltViewModel()
             val state by viewModel.settingsState.collectAsStateWithLifecycle()
             val focus = LocalFocusManager.current
+            val haptic = LocalHapticFeedback.current
 
             CompositionLocalProvider(LocalSettingsViewModel provides viewModel) {
                 AppTheme(
@@ -130,6 +131,7 @@ class SearchActivity : ComponentActivity() {
                                 }
                                 if (focusState != FocusSection.NONE) {
                                     TextButton(onClick = {
+                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                         focusState = FocusSection.NONE
                                         focus.clearFocus()
                                     }) {
