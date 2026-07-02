@@ -101,6 +101,9 @@ fun BluetoothDevice() {
     }
 }
 
+/**
+ * @see android.bluetooth.BluetoothDevice.DEVICE_TYPE_CLASSIC
+ */
 private fun Int.toTypeName(): String = when (this) {
     1 -> "BT"
     2 -> "BLE"
