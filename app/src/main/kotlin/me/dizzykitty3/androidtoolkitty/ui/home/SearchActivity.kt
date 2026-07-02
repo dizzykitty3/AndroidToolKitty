@@ -83,6 +83,7 @@ class SearchActivity : ComponentActivity() {
         setContent {
             val viewModel: SettingsViewModel = hiltViewModel()
             val state by viewModel.settingsState.collectAsStateWithLifecycle()
+            val focus = LocalFocusManager.current
 
             CompositionLocalProvider(LocalSettingsViewModel provides viewModel) {
                 AppTheme(
@@ -122,6 +123,14 @@ class SearchActivity : ComponentActivity() {
                                             focusState =
                                                 if (it) FocusSection.MARKET else FocusSection.NONE
                                         }
+                                    }
+                                }
+                                if (focusState != FocusSection.NONE) {
+                                    TextButton(onClick = {
+                                        focusState = FocusSection.NONE
+                                        focus.clearFocus()
+                                    }) {
+                                        Text("back")
                                     }
                                 }
                             }
