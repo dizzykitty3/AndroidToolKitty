@@ -90,6 +90,7 @@ dependencies {
 
     implementation(libs.about.libraries.compose.m3)
     implementation(libs.about.libraries.core)
+    implementation(libs.accompanist.permissions)
     implementation(libs.android.gms.play.services.maps)
     implementation(libs.android.material)
     implementation(libs.androidx.activity.compose)
