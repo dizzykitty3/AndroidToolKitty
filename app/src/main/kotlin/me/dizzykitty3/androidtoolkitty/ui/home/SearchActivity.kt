@@ -133,7 +133,7 @@ class SearchActivity : ComponentActivity() {
                                         focusState = FocusSection.NONE
                                         focus.clearFocus()
                                     }) {
-                                        Text("back")
+                                        Text(stringResource(R.string.back))
                                     }
                                 }
                             }
