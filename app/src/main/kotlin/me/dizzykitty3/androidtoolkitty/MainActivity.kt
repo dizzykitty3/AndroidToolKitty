@@ -12,6 +12,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.StringRes
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
@@ -131,6 +132,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Scaffold(
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
+                        contentColor = MaterialTheme.colorScheme.surfaceContainer,
                     ) { innerPadding ->
                         SettingsSharedPref.topPaddingDp = innerPadding.calculateTopPadding().value
                         SettingsSharedPref.bottomPaddingDp =
@@ -142,6 +144,7 @@ class MainActivity : ComponentActivity() {
                                     start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
                                     end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
                                 )
+                                .background(MaterialTheme.colorScheme.surfaceContainer)
                         ) {
                             val largeScreen =
                                 currentWindowAdaptiveInfo().windowSizeClass.minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND

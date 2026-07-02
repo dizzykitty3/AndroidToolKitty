@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Visibility
@@ -66,10 +67,12 @@ class CustomizeHomeActivity : ComponentActivity() {
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
                     ) { innerPadding ->
                         Box(
-                            Modifier.padding(
-                                start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
-                                end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
-                            )
+                            Modifier
+                                .fillMaxSize()
+                                .padding(
+                                    start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
+                                    end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
+                                )
                         ) {
                             Screen(screenTitle = R.string.customize_home) {
                                 CustomizeHomeComposable()

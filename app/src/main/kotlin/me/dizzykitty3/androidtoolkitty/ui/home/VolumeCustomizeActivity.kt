@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -61,10 +62,12 @@ class VolumeCustomizeActivity : ComponentActivity() {
                         containerColor = MaterialTheme.colorScheme.surfaceContainer,
                     ) { innerPadding ->
                         Box(
-                            Modifier.padding(
-                                start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
-                                end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
-                            )
+                            Modifier
+                                .fillMaxSize()
+                                .padding(
+                                    start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
+                                    end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
+                                )
                         ) {
                             Screen(screenTitle = R.string.edit_custom_volume) {
                                 VolumeCustomizeComposable()

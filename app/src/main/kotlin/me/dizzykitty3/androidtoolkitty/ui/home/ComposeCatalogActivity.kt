@@ -52,10 +52,12 @@ class ComposeCatalogActivity : ComponentActivity() {
                     containerColor = MaterialTheme.colorScheme.surfaceContainer,
                 ) { innerPadding ->
                     Box(
-                        Modifier.padding(
-                            start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
-                            end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
-                        )
+                        Modifier
+                            .fillMaxSize()
+                            .padding(
+                                start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
+                                end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
+                            )
                     ) {
                         Screen(screenTitle = R.string.compose) {
                             ComposeCatalogComposable()
