@@ -28,10 +28,11 @@ object DateUtil {
         get() = daysPassed.toFloat() / totalDaysInYear.toFloat()
 
     fun Float.toProgress(): String =
-        if (this == 0f)
+        if (this == 0f) {
             appContext.getString(R.string.happy_new_year)
-        else
+        } else {
             (this * 100).toString().substring(0, 4).plus("%")
+        }
 
     private val sysTimeMillis: Long
         get() = System.currentTimeMillis()

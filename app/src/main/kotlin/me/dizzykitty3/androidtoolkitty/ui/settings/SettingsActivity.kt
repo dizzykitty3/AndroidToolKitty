@@ -99,7 +99,9 @@ class SettingsActivity : ComponentActivity() {
                             )
                         ) {
                             Screen(screenTitle = R.string.settings) {
-                                if (OSVersion.android12()) BaseCard(R.string.appearance) { Appearance() }
+                                if (OSVersion.android12()) {
+                                    BaseCard(R.string.appearance) { Appearance() }
+                                }
                                 BaseCard(R.string.general) { General() }
                                 BaseCard(R.string.app_info) { OtherSettings() }
                             }
