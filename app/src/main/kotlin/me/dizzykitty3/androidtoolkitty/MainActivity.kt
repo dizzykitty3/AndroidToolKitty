@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -135,10 +136,12 @@ class MainActivity : ComponentActivity() {
                         SettingsSharedPref.bottomPaddingDp =
                             innerPadding.calculateBottomPadding().value
                         Box(
-                            Modifier.padding(
-                                start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
-                                end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
-                            )
+                            Modifier
+                                .fillMaxSize()
+                                .padding(
+                                    start = innerPadding.calculateStartPadding(LocalLayoutDirection.current),
+                                    end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
+                                )
                         ) {
                             val largeScreen =
                                 currentWindowAdaptiveInfo().windowSizeClass.minWidthDp >= WindowSizeClass.WIDTH_DP_MEDIUM_LOWER_BOUND
