@@ -26,9 +26,10 @@ Supports Material You dynamic theming, edge-to-edge display, and other modern An
 
 Built with the help of these libraries:
 1. Android Jetpack
-2. AboutLibraries
-3. LeakCanary
-4. Timber
+2. Accompanist
+3. AboutLibraries
+4. LeakCanary
+5. Timber
 
 ## Installation
 
