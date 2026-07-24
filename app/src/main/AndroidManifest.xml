@@ -62,8 +62,6 @@
 
         <activity android:name=".ui.settings.LicensesActivity"></activity>
 
-        <activity android:name=".ui.other.RequestPermissionActivity"></activity>
-
         <activity
             android:name=".appcomponents.ShareToClipboardActivity"
             android:exported="true"
