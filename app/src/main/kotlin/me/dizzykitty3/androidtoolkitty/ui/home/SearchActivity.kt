@@ -35,7 +35,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalHapticFeedback
@@ -84,8 +83,6 @@ class SearchActivity : ComponentActivity() {
         setContent {
             val viewModel: SettingsViewModel = hiltViewModel()
             val state by viewModel.settingsState.collectAsStateWithLifecycle()
-            val focus = LocalFocusManager.current
-            val haptic = LocalHapticFeedback.current
 
             CompositionLocalProvider(LocalSettingsViewModel provides viewModel) {
                 AppTheme(
@@ -102,42 +99,10 @@ class SearchActivity : ComponentActivity() {
                                     end = innerPadding.calculateEndPadding(LocalLayoutDirection.current),
                                 )
                         ) {
-                            var focusState by remember { mutableStateOf(FocusSection.NONE) }
-
                             Screen(screenTitle = R.string.search) {
-                                if (focusState == FocusSection.NONE || focusState == FocusSection.WEBPAGE) {
-                                    BaseCard(R.string.webpage) {
-                                        Webpage {
-                                            focusState =
-                                                if (it) FocusSection.WEBPAGE else FocusSection.NONE
-                                        }
-                                    }
-                                }
-                                if (focusState == FocusSection.NONE || focusState == FocusSection.SOCIAL) {
-                                    BaseCard(R.string.social_finder) {
-                                        SocialMediaProfile {
-                                            focusState =
-                                                if (it) FocusSection.SOCIAL else FocusSection.NONE
-                                        }
-                                    }
-                                }
-                                if (focusState == FocusSection.NONE || focusState == FocusSection.MARKET) {
-                                    BaseCard(R.string.check_app_on_market) {
-                                        CheckAppOnMarket {
-                                            focusState =
-                                                if (it) FocusSection.MARKET else FocusSection.NONE
-                                        }
-                                    }
-                                }
-                                if (focusState != FocusSection.NONE) {
-                                    TextButton(onClick = {
-                                        haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                                        focusState = FocusSection.NONE
-                                        focus.clearFocus()
-                                    }) {
-                                        Text(stringResource(R.string.back))
-                                    }
-                                }
+                                BaseCard(R.string.webpage) { Webpage() }
+                                BaseCard(R.string.social_finder) { SocialMediaProfile() }
+                                BaseCard(R.string.check_app_on_market) { CheckAppOnMarket() }
                             }
                         }
                     }
@@ -148,7 +113,7 @@ class SearchActivity : ComponentActivity() {
 }
 
 @Composable
-private fun Webpage(onFocus: (Boolean) -> Unit) {
+private fun Webpage() {
     val vm = LocalSettingsViewModel.current
     val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
@@ -177,9 +142,7 @@ private fun Webpage(onFocus: (Boolean) -> Unit) {
             )
         },
         label = { Text(stringResource(R.string.url)) },
-        modifier = Modifier
-            .fillMaxWidth()
-            .onFocusChanged { onFocus(it.isFocused) },
+        modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done, keyboardType = KeyboardType.Ascii
         ),
@@ -235,7 +198,7 @@ private fun Webpage(onFocus: (Boolean) -> Unit) {
 }
 
 @Composable
-private fun SocialMediaProfile(onFocus: (Boolean) -> Unit) {
+private fun SocialMediaProfile() {
     val vm = LocalSettingsViewModel.current
     val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
@@ -280,9 +243,7 @@ private fun SocialMediaProfile(onFocus: (Boolean) -> Unit) {
         },
         label = { Text(stringResource(R.string.username)) },
         isError = !isValid(URLUtil.Platform.entries[lastSelectedPlatformIndex], username),
-        modifier = Modifier
-            .fillMaxWidth()
-            .onFocusChanged { onFocus(it.isFocused) },
+        modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done
         ),
@@ -420,7 +381,7 @@ private fun isCaseSensitive(platform: URLUtil.Platform): Boolean =
     platform == URLUtil.Platform.LIT_LINK
 
 @Composable
-private fun CheckAppOnMarket(onFocus: (Boolean) -> Unit) {
+private fun CheckAppOnMarket() {
     val vm = LocalSettingsViewModel.current
     val state by vm.settingsState.collectAsStateWithLifecycle()
     val view = LocalView.current
@@ -441,9 +402,7 @@ private fun CheckAppOnMarket(onFocus: (Boolean) -> Unit) {
             vm.updateTypingContents(it)
         },
         label = { Text(stringResource(R.string.package_name_or_search)) },
-        modifier = Modifier
-            .fillMaxWidth()
-            .onFocusChanged { onFocus(it.isFocused) },
+        modifier = Modifier.fillMaxWidth(),
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Done
         ),
@@ -491,8 +450,4 @@ private fun CheckAppOnMarket(onFocus: (Boolean) -> Unit) {
             )
         }
     }
-}
-
-private enum class FocusSection {
-    NONE, WEBPAGE, SOCIAL, MARKET
 }
