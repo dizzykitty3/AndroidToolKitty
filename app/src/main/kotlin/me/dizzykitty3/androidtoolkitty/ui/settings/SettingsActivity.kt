@@ -36,14 +36,12 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -54,7 +52,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import me.dizzykitty3.androidtoolkitty.BuildConfig
-import me.dizzykitty3.androidtoolkitty.CARD_3
 import me.dizzykitty3.androidtoolkitty.CARD_4
 import me.dizzykitty3.androidtoolkitty.R
 import me.dizzykitty3.androidtoolkitty.SOURCE_CODE_URL
@@ -73,7 +70,6 @@ import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openAppLanguageSetting
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openScreen
 import me.dizzykitty3.androidtoolkitty.utils.IntentUtil.openURL
 import me.dizzykitty3.androidtoolkitty.utils.OSVersion
-import me.dizzykitty3.androidtoolkitty.utils.SnackbarUtil.showSnackbar
 import me.dizzykitty3.androidtoolkitty.utils.StringUtil.versionName
 import timber.log.Timber
 
@@ -175,30 +171,8 @@ private fun Appearance() {
 private fun General() {
     val viewModel = LocalSettingsViewModel.current
     val state by viewModel.settingsState.collectAsStateWithLifecycle()
-    val view = LocalView.current
     val haptic = LocalHapticFeedback.current
-    val showClipboardCard = state.cardShownStates[CARD_3] ?: true
     val showSearchCard = state.cardShownStates[CARD_4] ?: true
-    val inversePrimary = MaterialTheme.colorScheme.inversePrimary.toArgb()
-    val inverseOnSurface = MaterialTheme.colorScheme.inverseOnSurface.toArgb()
-    var previousAutoClearClipboard by remember { mutableStateOf(state.autoClearClipboard) }
-
-    // Automatically hide Clipboard Card when turning on Clear on Launch feature.
-    LaunchedEffect(state.autoClearClipboard) {
-        if (state.autoClearClipboard && !previousAutoClearClipboard && showClipboardCard) {
-            viewModel.saveShownState(CARD_3, false)
-            view.showSnackbar(
-                message = R.string.clipboard_card_hidden,
-                buttonText = R.string.keep_showing,
-                textColor = inverseOnSurface,
-                buttonColor = inversePrimary,
-                buttonClickListener = {
-                    haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
-                    viewModel.saveShownState(CARD_3, true)
-                })
-        }
-        previousAutoClearClipboard = state.autoClearClipboard
-    }
 
     CustomSwitchRow(
         icon = Icons.Outlined.ClearAll,
