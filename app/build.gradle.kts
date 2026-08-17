@@ -31,7 +31,7 @@ android {
     }
     defaultConfig {
         applicationId = "me.dizzykitty3.androidtoolkitty"
-        minSdk = 23
+        minSdk = 24
         versionCode = 12200
         versionName = "1.22.0"
 

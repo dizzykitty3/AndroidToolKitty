@@ -120,6 +120,7 @@ object OSVersion {
      * 1. Create a TileService
      * 2. Intent(Settings.ACTION_MANAGE_DEFAULT_APPS_SETTINGS)
      * 3. Intent(Settings.ACTION_VPN_SETTINGS)
+     * 4. minSdkVersion 24 declared in library [androidx.compose.material3:material3-window-size-class-android:1.5.0-alpha26]
      */
     fun android7(): Boolean = osVersion >= Build.VERSION_CODES.N
 
