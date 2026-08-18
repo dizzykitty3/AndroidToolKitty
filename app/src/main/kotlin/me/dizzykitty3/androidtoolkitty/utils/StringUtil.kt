@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package me.dizzykitty3.androidtoolkitty.utils
 
 import android.content.Context
