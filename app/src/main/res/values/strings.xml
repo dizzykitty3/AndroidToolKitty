@@ -1,6 +1,5 @@
 <resources>
     <!-- Common -->
-    <string name="label_optional">Label (optional)</string>
     <string name="edit">Edit</string>
     <string name="visit">Visit</string>
     <string name="debugging">Debugging</string>
@@ -8,7 +7,6 @@
     <string name="clear_input">Clear input</string>
     <string name="info">Info</string>
     <string name="go_to_settings">Go to settings</string>
-    <string name="undo">Undo</string>
     <string name="copy">Copy</string>
     <string name="start">Start</string>
     <string name="off_all_cap">OFF</string>
@@ -18,7 +16,6 @@
     <string name="result">result =</string>
     <string name="permissions">Permissions</string>
     <string name="general">General</string>
-    <string name="granted">granted</string>
     <string name="back">back</string>
     <string name="save">Save</string>
 
@@ -37,7 +34,6 @@
     <!-- Home > Volume -->
     <string name="volume">Volume</string>
     <string name="media_volume">Media volume</string>
-    <string name="save_custom_volume">Save custom volume</string>
     <string name="volume_steps_limited">System volume steps are limited, canceled.</string>
     <string name="volume_changed">Volume changed.</string>
     <string name="add">+ Add</string>
@@ -198,7 +194,6 @@
     <string name="character">Character</string>
     <string name="copied">copied</string>
     <string name="convert">Convert</string>
-    <string name="encoding">Encoding</string>
     <string name="ascii">ASCII</string>
     <string name="convert_to_ascii_values">Convert to ASCII values</string>
     <string name="codes_of_characters">Codes of Characters</string>
